@@ -10,11 +10,12 @@ import {
   Rocket,
   Zap,
   Atom,
+  GraduationCap,
 } from "lucide-react";
 
 const items = [
   { to: "/", label: "Home", icon: Home },
-  { to: "/ai-generator", label: "AI Generator", icon: Zap, badge: "NEW" },
+  { to: "/tutor", label: "Tutor", icon: GraduationCap, badge: "NEW" },
   { to: "/my-simulations", label: "My Simulations", icon: Rocket },
   { to: "/library", label: "Library", icon: Library },
   { to: "/favorites", label: "Favorites", icon: Heart },

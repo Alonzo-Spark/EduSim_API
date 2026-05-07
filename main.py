@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.src.api.simulation_router import simulation_router
 from app.src.api.rag_router import rag_router
+from app.src.api.tutor_router import tutor_router
 
 
 app = FastAPI(
@@ -44,4 +45,9 @@ app.include_router(
 app.include_router(
     rag_router,
     prefix="/api/rag"
+)
+
+app.include_router(
+    tutor_router,
+    prefix="/api/tutor"
 )

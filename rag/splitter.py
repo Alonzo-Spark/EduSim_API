@@ -7,8 +7,12 @@ def split_docs(docs):
         chunk_overlap=400,
         separators=[
             "\n\n",
+            "\nFormula:",
+            "\nDerivation:",
+            "\n=",
             "\n",
             ". ",
+            "=",
             " ",
             ""
         ]

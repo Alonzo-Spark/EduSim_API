@@ -9,13 +9,13 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TutorRouteImport } from './routes/tutor'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as MySimulationsRouteImport } from './routes/my-simulations'
 import { Route as LibraryRouteImport } from './routes/library'
 import { Route as FavoritesRouteImport } from './routes/favorites'
-import { Route as AiGeneratorRouteImport } from './routes/ai-generator'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SubjectsClassIdRouteImport } from './routes/subjects.$classId'
 import { Route as SimulationTopicRouteImport } from './routes/simulation.$topic'
@@ -24,6 +24,11 @@ import { Route as TopicsClassIdSubjectChapterRouteImport } from './routes/topics
 import { Route as SimulationClass9PhysicsLawsOfMotionRouteImport } from './routes/simulation.class9.physics.laws-of-motion'
 import { Route as SimulationClass9PhysicsLawsOfMotionProjectileMotionRouteImport } from './routes/simulation.class9.physics.laws-of-motion.projectile-motion'
 
+const TutorRoute = TutorRouteImport.update({
+  id: '/tutor',
+  path: '/tutor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -52,11 +57,6 @@ const LibraryRoute = LibraryRouteImport.update({
 const FavoritesRoute = FavoritesRouteImport.update({
   id: '/favorites',
   path: '/favorites',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AiGeneratorRoute = AiGeneratorRouteImport.update({
-  id: '/ai-generator',
-  path: '/ai-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -100,13 +100,13 @@ const SimulationClass9PhysicsLawsOfMotionProjectileMotionRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/ai-generator': typeof AiGeneratorRoute
   '/favorites': typeof FavoritesRoute
   '/library': typeof LibraryRoute
   '/my-simulations': typeof MySimulationsRoute
   '/profile': typeof ProfileRoute
   '/progress': typeof ProgressRoute
   '/settings': typeof SettingsRoute
+  '/tutor': typeof TutorRoute
   '/simulation/$topic': typeof SimulationTopicRoute
   '/subjects/$classId': typeof SubjectsClassIdRoute
   '/chapters/$classId/$subject': typeof ChaptersClassIdSubjectRoute
@@ -116,13 +116,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/ai-generator': typeof AiGeneratorRoute
   '/favorites': typeof FavoritesRoute
   '/library': typeof LibraryRoute
   '/my-simulations': typeof MySimulationsRoute
   '/profile': typeof ProfileRoute
   '/progress': typeof ProgressRoute
   '/settings': typeof SettingsRoute
+  '/tutor': typeof TutorRoute
   '/simulation/$topic': typeof SimulationTopicRoute
   '/subjects/$classId': typeof SubjectsClassIdRoute
   '/chapters/$classId/$subject': typeof ChaptersClassIdSubjectRoute
@@ -133,13 +133,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/ai-generator': typeof AiGeneratorRoute
   '/favorites': typeof FavoritesRoute
   '/library': typeof LibraryRoute
   '/my-simulations': typeof MySimulationsRoute
   '/profile': typeof ProfileRoute
   '/progress': typeof ProgressRoute
   '/settings': typeof SettingsRoute
+  '/tutor': typeof TutorRoute
   '/simulation/$topic': typeof SimulationTopicRoute
   '/subjects/$classId': typeof SubjectsClassIdRoute
   '/chapters/$classId/$subject': typeof ChaptersClassIdSubjectRoute
@@ -151,13 +151,13 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/ai-generator'
     | '/favorites'
     | '/library'
     | '/my-simulations'
     | '/profile'
     | '/progress'
     | '/settings'
+    | '/tutor'
     | '/simulation/$topic'
     | '/subjects/$classId'
     | '/chapters/$classId/$subject'
@@ -167,13 +167,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/ai-generator'
     | '/favorites'
     | '/library'
     | '/my-simulations'
     | '/profile'
     | '/progress'
     | '/settings'
+    | '/tutor'
     | '/simulation/$topic'
     | '/subjects/$classId'
     | '/chapters/$classId/$subject'
@@ -183,13 +183,13 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/ai-generator'
     | '/favorites'
     | '/library'
     | '/my-simulations'
     | '/profile'
     | '/progress'
     | '/settings'
+    | '/tutor'
     | '/simulation/$topic'
     | '/subjects/$classId'
     | '/chapters/$classId/$subject'
@@ -200,13 +200,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AiGeneratorRoute: typeof AiGeneratorRoute
   FavoritesRoute: typeof FavoritesRoute
   LibraryRoute: typeof LibraryRoute
   MySimulationsRoute: typeof MySimulationsRoute
   ProfileRoute: typeof ProfileRoute
   ProgressRoute: typeof ProgressRoute
   SettingsRoute: typeof SettingsRoute
+  TutorRoute: typeof TutorRoute
   SimulationTopicRoute: typeof SimulationTopicRoute
   SubjectsClassIdRoute: typeof SubjectsClassIdRoute
   ChaptersClassIdSubjectRoute: typeof ChaptersClassIdSubjectRoute
@@ -216,6 +216,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tutor': {
+      id: '/tutor'
+      path: '/tutor'
+      fullPath: '/tutor'
+      preLoaderRoute: typeof TutorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/settings': {
       id: '/settings'
       path: '/settings'
@@ -256,13 +263,6 @@ declare module '@tanstack/react-router' {
       path: '/favorites'
       fullPath: '/favorites'
       preLoaderRoute: typeof FavoritesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ai-generator': {
-      id: '/ai-generator'
-      path: '/ai-generator'
-      fullPath: '/ai-generator'
-      preLoaderRoute: typeof AiGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -334,13 +334,13 @@ const SimulationClass9PhysicsLawsOfMotionRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AiGeneratorRoute: AiGeneratorRoute,
   FavoritesRoute: FavoritesRoute,
   LibraryRoute: LibraryRoute,
   MySimulationsRoute: MySimulationsRoute,
   ProfileRoute: ProfileRoute,
   ProgressRoute: ProgressRoute,
   SettingsRoute: SettingsRoute,
+  TutorRoute: TutorRoute,
   SimulationTopicRoute: SimulationTopicRoute,
   SubjectsClassIdRoute: SubjectsClassIdRoute,
   ChaptersClassIdSubjectRoute: ChaptersClassIdSubjectRoute,
