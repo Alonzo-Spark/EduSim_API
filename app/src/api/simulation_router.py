@@ -6,6 +6,12 @@ from app.src.modules.physics.Motion.actionReaction.controller import (
     SimulationRequest
 )
 
+# Momentum
+from app.src.modules.physics.Motion.Momentum.controller import (
+    momentum_controller,
+    SimulationRequest as MomentumRequest
+)
+
 # Projectile Motion
 from app.src.modules.physics.Motion.projectileMotion.controller import (
     projectile_controller,
@@ -65,6 +71,17 @@ async def simulate_action_reaction(
 ):
 
     return await action_reaction_controller(
+        request
+    )
+
+
+# Momentum
+@simulation_router.post("/momentum")
+async def simulate_momentum(
+    request: MomentumRequest
+):
+
+    return await momentum_controller(
         request
     )
 

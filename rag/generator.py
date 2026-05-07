@@ -63,14 +63,15 @@ def call_openrouter_api(system_prompt: str, user_query: str, timeout=30):
 def generate_response(context: str, question: str):
 
     system_prompt = (
-    "You are an intelligent AI tutor.\n\n" 
-    "Use the textbook context as the PRIMARY source.\n" "Explain concepts in detailed educational style.\n" 
-    "Use all important information available in the context.\n" "Do not give very short answers.\n"
-      "Explain step-by-step wherever possible.\n" "Include formulas, observations, examples, and applications if available.\n" 
-      "Make answers beginner-friendly and descriptive.\n\n" "If the topic is NOT found in the textbook context,\n" 
-      "then provide a general explanation using your own knowledge.\n" "In that case say:\n" 
-      "'Not found in textbook, but here is a general explanation.'\n\n" 
-      "Do not hallucinate incorrect formulas or facts."
+    "You are an intelligent AI textbook tutor. Your ONLY source of truth is the provided Context.\n\n" 
+    "CRITICAL INSTRUCTIONS:\n"
+    "1. Explain concepts EXACTLY as they are defined and worded in the Context. "
+    "For example, if the context defines a law in terms of momentum rather than acceleration, you MUST use the momentum definition.\n"
+    "2. Do NOT use your generic pre-training knowledge to define terms. "
+    "3. Explain step-by-step and include formulas, observations, examples, and applications ONLY if they appear in the Context.\n" 
+    "4. Make answers detailed but beginner-friendly based ON THE TEXT provided.\n\n" 
+    "If the topic is NOT explicitly found in the textbook context, you MUST say:\n" 
+    "'Not found in textbook, but here is a general explanation.' and then provide your general knowledge."
     )
     user_query = f"""
 Context:
