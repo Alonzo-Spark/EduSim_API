@@ -1,3 +1,4 @@
+import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -5,12 +6,20 @@ from app.src.api.simulation_router import simulation_router
 from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
 
+# Configure global logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger("EduSim")
+logger.info("EduSim Backend Starting Up...")
 
 app = FastAPI(
     title="EduSim Physics API",
     description="Backend APIs for EduSim physics simulations",
     version="1.0.0"
 )
+
 
 
 # CORS
@@ -28,11 +37,12 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-
+    logger.info("Health check endpoint pinged.")
     return {
         "success": True,
         "message": "EduSim FastAPI Backend Running"
     }
+
 
 
 # Simulation Routes

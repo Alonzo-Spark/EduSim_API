@@ -1,72 +1,42 @@
 #!/usr/bin/env python3
 """
-Test script to verify OpenRouter API connectivity.
+Test script to verify Gemini API connectivity.
 Run this before using the full RAG system.
 """
 
 import os
-import requests
 import json
 from dotenv import load_dotenv
+import google.generativeai as genai
 
 load_dotenv()
 
 def test_api_connection():
-    """Test OpenRouter API connectivity."""
+    """Test Gemini API connectivity."""
     
-    OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
     
-    if not OPENROUTER_API_KEY:
-        print("❌ OPENROUTER_API_KEY not found in .env")
+    if not GOOGLE_API_KEY:
+        print("❌ GOOGLE_API_KEY not found in .env")
         return False
     
-    if "your_actual_key_here" in OPENROUTER_API_KEY.lower():
-        print("❌ OPENROUTER_API_KEY appears to be placeholder")
+    if "your_actual_key_here" in GOOGLE_API_KEY.lower():
+        print("❌ GOOGLE_API_KEY appears to be placeholder")
         return False
     
-    print("🔧 Testing OpenRouter API connection...")
-    
-    headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "HTTP-Referer": "http://localhost",
-        "X-Title": "RAG-Test",
-        "Content-Type": "application/json",
-    }
-    
-    payload = {
-        "model": "microsoft/phi-3.5-mini-instruct",
-        "messages": [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": "Say 'API is working!' in one sentence."},
-        ],
-        "temperature": 0.3,
-        "max_tokens": 50,
-    }
+    print("🔧 Testing Gemini API connection...")
     
     try:
-        response = requests.post(
-            "https://openrouter.ai/api/v1/chat/completions",
-            json=payload,
-            headers=headers,
-            timeout=30
-        )
-        
-        if response.status_code == 200:
-            result = response.json()
-            message = result["choices"][0]["message"]["content"]
-            print(f"✅ API Connection Successful!")
-            print(f"📝 Response: {message}")
+        genai.configure(api_key=GOOGLE_API_KEY)
+        model = genai.GenerativeModel("gemini-1.5-flash")
+        response = model.generate_content("Say 'API is working!' in one sentence.")
+
+        if response and getattr(response, "text", None):
+            print("✅ API Connection Successful!")
+            print(f"📝 Response: {response.text}")
             return True
-        else:
-            print(f"❌ API Error: {response.status_code}")
-            print(f"Details: {response.text}")
-            return False
-            
-    except requests.exceptions.Timeout:
-        print("❌ Request timed out")
-        return False
-    except requests.exceptions.ConnectionError:
-        print("❌ Failed to connect to OpenRouter API")
+
+        print("❌ Gemini returned an empty response")
         return False
     except json.JSONDecodeError:
         print("❌ Failed to parse API response")
@@ -119,7 +89,7 @@ def main():
     print("=" * 60 + "\n")
     
     results = {
-        "OpenRouter API": test_api_connection(),
+        "Gemini API": test_api_connection(),
         "Embeddings Model": test_embeddings(),
         "FAISS": test_faiss(),
     }

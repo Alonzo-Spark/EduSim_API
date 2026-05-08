@@ -1,13 +1,13 @@
-# RAG System - OpenRouter API
+# RAG System - Gemini API
 
-A clean, lightweight Retrieval-Augmented Generation (RAG) system using OpenRouter API for LLM inference.
+A clean, lightweight Retrieval-Augmented Generation (RAG) system using Gemini API for LLM inference.
 
 ## Features
 
 - **PDF Processing**: Load and chunk PDF documents
 - **Lightweight Embeddings**: Uses sentence-transformers `all-MiniLM-L6-v2` (25MB, very fast)
 - **FAISS Vector Database**: Fast similarity search with persistence
-- **OpenRouter API**: Uses `microsoft/phi-3.5-mini-instruct` model (can be changed)
+- **Gemini API**: Uses `gemini-1.5-flash` model
 - **Error Handling**: Graceful error handling for API failures
 - **No Large Model Downloads**: No need to download large LLMs locally
 
@@ -21,7 +21,7 @@ rag_app.py             - Main application
 │   ├── embedder.py    - Embeddings (sentence-transformers)
 │   ├── vector_store.py - FAISS vector database
 │   ├── retriever.py   - Document retriever (top 3 chunks)
-│   └── generator.py   - OpenRouter API calls (requests library)
+│   └── generator.py   - Gemini API calls (google.generativeai)
 ├── .env               - Configuration (API keys)
 └── requirements.txt   - Dependencies
 ```
@@ -42,13 +42,13 @@ venv\Scripts\activate  # On Windows
 pip install -r requirements.txt
 ```
 
-### 3. Configure OpenRouter API
+### 3. Configure Gemini API
 
-1. Get your API key from [OpenRouter.ai](https://openrouter.ai)
+1. Get your API key from Google AI Studio or your Gemini provider setup
 2. Edit `.env` file:
 
 ```env
-OPENROUTER_API_KEY=your_api_key_here
+GOOGLE_API_KEY=your_api_key_here
 PDF_PATH=data/Projectile Motion.pdf
 ```
 
@@ -87,7 +87,7 @@ Type `exit` or `quit` to exit the application.
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `OPENROUTER_API_KEY` | Your OpenRouter API key | Yes |
+| `GOOGLE_API_KEY` | Your Gemini API key | Yes |
 | `PDF_PATH` | Path to PDF file | Yes |
 | `FORCE_REBUILD` | Force rebuild of FAISS index | No |
 
@@ -98,10 +98,8 @@ Type `exit` or `quit` to exit the application.
 Edit `rag/generator.py`:
 
 ```python
-MODEL = "microsoft/phi-3.5-mini-instruct"  # Change this
+GEMINI_MODEL = "gemini-1.5-flash"  # Change this if needed
 ```
-
-Available models: https://openrouter.ai/models
 
 #### Change Number of Retrieved Chunks
 
@@ -124,17 +122,11 @@ RecursiveCharacterTextSplitter(
 
 ## API Response Parsing
 
-The system correctly handles OpenRouter API responses:
+The system correctly handles Gemini API responses:
 
 ```json
 {
-  "choices": [
-    {
-      "message": {
-        "content": "Generated response..."
-      }
-    }
-  ]
+  "text": "Generated response..."
 }
 ```
 
@@ -171,7 +163,7 @@ The system handles:
 pip install faiss-cpu
 ```
 
-### "OPENROUTER_API_KEY not found"
+### "GOOGLE_API_KEY not found"
 
 Make sure `.env` exists in the project root and contains your API key.
 
@@ -184,7 +176,7 @@ Update `PDF_PATH` in `.env` to the correct path.
 Check:
 - API key is valid and has credits
 - Model name is correct
-- Request format matches OpenRouter specification
+- Request format matches Gemini generation expectations
 
 ## Example Files
 
@@ -205,7 +197,7 @@ Check:
 
 ## Next Steps
 
-1. Set up OpenRouter API key
+1. Set up Gemini API key
 2. Place a PDF in `data/` folder
 3. Update `.env` with PDF path
 4. Run `python rag_app.py`

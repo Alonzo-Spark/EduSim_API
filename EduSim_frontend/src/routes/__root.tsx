@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Sidebar } from "@/components/Sidebar";
 import { Navbar } from "@/components/Navbar";
+import { DebugDashboard } from "@/components/DebugDashboard";
 
 import appCss from "../styles.css?url";
 
@@ -56,12 +57,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <div className="flex min-h-screen w-full">
+    <div className="flex min-h-screen w-full relative">
       <Sidebar />
       <main className="flex-1 p-4 md:p-6 max-w-full overflow-x-hidden">
         <Navbar />
         <Outlet />
       </main>
+      <DebugDashboard />
     </div>
   );
 }

@@ -61,6 +61,31 @@ from app.src.modules.physics.Sounds.VisualizingWaves.controller import (
     WaveVisualizationRequest
 )
 
+from app.src.modules.simulation_synthesis.controller import (
+    SynthesisGenerateRequest,
+    synthesis_generate_controller,
+    synthesis_list_controller,
+    synthesis_get_controller,
+    synthesis_export_controller,
+    synthesis_generate_stream_controller,
+)
+
+from app.src.modules.simulation_agent.controller import (
+    agent_generate_controller,
+    agent_generate_stream_controller,
+)
+from app.src.modules.simulation_agent.models import AgentGenerateRequest
+from app.src.modules.simulation_agent.controller import report_runtime_error_controller
+from app.src.modules.simulation_agent.controller_v2 import (
+    agentic_generate_controller,
+    agentic_regenerate_controller,
+    marketplace_list_controller,
+)
+from app.src.modules.simulation_agent.agentic_models import (
+    AgenticGenerateRequest,
+    AgenticRegenerateRequest,
+)
+
 simulation_router = APIRouter()
 
 
@@ -169,3 +194,116 @@ async def simulate_visualizing_waves(
     return await wave_visualization_controller(
         request
     )
+
+
+@simulation_router.post("/synthesis/generate")
+async def generate_synthesized_simulation(
+    request: SynthesisGenerateRequest,
+):
+    return await synthesis_generate_controller(request)
+
+
+@simulation_router.get("/synthesis/list")
+async def list_synthesized_simulations(limit: int = 30):
+    return await synthesis_list_controller(limit=limit)
+
+
+@simulation_router.get("/synthesis/{simulation_id}")
+async def get_synthesized_simulation(simulation_id: str):
+    return await synthesis_get_controller(simulation_id=simulation_id)
+
+
+@simulation_router.get("/synthesis/{simulation_id}/export")
+async def export_synthesized_simulation(simulation_id: str):
+    return await synthesis_export_controller(simulation_id=simulation_id)
+
+
+@simulation_router.post("/synthesis/generate-stream")
+async def generate_synthesized_simulation_stream(
+    request: SynthesisGenerateRequest,
+):
+    return await synthesis_generate_stream_controller(request)
+
+
+# ============================================================================
+# AUTONOMOUS AI SIMULATION AGENT ENDPOINTS
+# ============================================================================
+
+@simulation_router.post("/agent/generate")
+async def generate_with_agent(request: AgentGenerateRequest):
+    """
+    Generate an interactive simulation using autonomous AI agent.
+    
+    The agent performs:
+    1. Prompt analysis (topic, subject, complexity)
+    2. RAG context retrieval (formulas, laws, definitions)
+    3. Enhanced prompt building
+    4. HTML generation with Gemini
+    5. Security validation and sanitization
+    6. Metadata extraction
+    
+    Args:
+        request: AgentGenerateRequest with prompt and optional overrides
+        
+    Returns:
+        AgentGenerateResponse with complete simulation and metadata
+    """
+    return await agent_generate_controller(request)
+
+
+@simulation_router.post("/agent/generate-stream")
+async def generate_with_agent_stream(request: AgentGenerateRequest):
+    """
+    Generate an interactive simulation with streaming progress updates.
+    
+    Returns Server-Sent Events (SSE) stream with progress at each stage:
+    - Analyzing prompt
+    - Retrieving textbook context
+    - Generating simulation logic
+    - Synthesizing interactive visuals
+    - Validating and sanitizing HTML
+    - Rendering simulation
+    
+    Args:
+        request: AgentGenerateRequest with prompt and optional overrides
+        
+    Returns:
+        StreamingResponse with SSE events
+    """
+    return await agent_generate_stream_controller(request)
+
+
+@simulation_router.post("/agent/error-report")
+async def report_agent_error(simulation_id: str | None = None, payload: dict | None = None):
+    """Receive runtime error reports forwarded from frontend iframes."""
+    if payload is None:
+        return {"success": False, "detail": "Missing payload"}
+    return await report_runtime_error_controller(simulation_id, payload)
+
+
+@simulation_router.post("/agent/v2/generate")
+async def generate_with_multi_agent_platform(request: AgenticGenerateRequest):
+    """Generate simulation with planner-led multi-agent educational intelligence pipeline."""
+    return await agentic_generate_controller(request)
+
+
+@simulation_router.post("/agent/v2/regenerate")
+async def regenerate_with_multi_agent_platform(request: AgenticRegenerateRequest):
+    """Regenerate an existing simulation with improvement instructions."""
+    return await agentic_regenerate_controller(request)
+
+
+@simulation_router.get("/agent/v2/marketplace")
+async def list_multi_agent_marketplace(limit: int = 30):
+    """List generated simulations for marketplace-style sharing and version visibility."""
+    return await marketplace_list_controller(limit)
+
+
+@simulation_router.post("/runtime/report")
+async def report_runtime_intelligence(report_data: dict):
+    """
+    Endpoint for simulations to report runtime intelligence data.
+    Triggers autonomous analysis and potential self-repair.
+    """
+    from app.src.modules.simulation_agent.controller_v2 import runtime_report_controller
+    return await runtime_report_controller(report_data)

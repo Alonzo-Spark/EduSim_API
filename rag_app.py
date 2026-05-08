@@ -27,7 +27,7 @@ def main():
         return
 
     print("=" * 60)
-    print("RAG System - OpenRouter API")
+    print("RAG System - Gemini API")
     print("=" * 60)
     print(f"\n📄 Loading PDF: {pdf_path}")
 

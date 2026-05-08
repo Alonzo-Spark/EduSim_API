@@ -15,7 +15,8 @@ import {
 
 const items = [
   { to: "/", label: "Home", icon: Home },
-  { to: "/tutor", label: "Tutor", icon: GraduationCap, badge: "NEW" },
+  { to: "/ai-agent", label: "AI Agent", icon: Sparkles, badge: "NEW" },
+  { to: "/tutor", label: "Tutor", icon: GraduationCap },
   { to: "/my-simulations", label: "My Simulations", icon: Rocket },
   { to: "/library", label: "Library", icon: Library },
   { to: "/favorites", label: "Favorites", icon: Heart },
