@@ -23,14 +23,16 @@ export interface UseAgentSimulationActions {
 
 // DSL pipeline stage → progress percentage mapping
 const DSL_STAGE_PROGRESS: Record<string, number> = {
-  "Initializing": 5,
-  "Detecting simulation intent": 12,
-  "Retrieving textbook context": 24,
-  "Retrieved": 34,
-  "Selecting canonical formulas": 46,
-  "Building reusable physics DSL": 64,
-  "Validating simulation DSL": 82,
-  "Persisting generated simulation": 92,
+  "Initializing":               5,
+  "Detecting subject":         10,
+  "Retrieving textbook":       20,
+  "Retrieved":                 30,
+  "Extracting formulas":       40,
+  "Extracted":                 50,
+  "Synthesizing Physics DSL":  60,
+  "Sanitizing":                72,
+  "Validating DSL":            82,
+  "Saving simulation":         92,
 };
 
 /**
@@ -153,3 +155,4 @@ export function useAgentSimulation(): UseAgentSimulationState & UseAgentSimulati
     clearError,
   };
 }
+

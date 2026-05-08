@@ -1,0 +1,30 @@
+import os
+import httpx
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def test_openrouter():
+    api_key = os.getenv("OPENROUTER_API_KEY")
+    print(f"Key found: {api_key[:10]}...")
+    
+    try:
+        with httpx.Client(timeout=10.0) as client:
+            response = client.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": "google/gemini-2.0-flash-001",
+                    "messages": [{"role": "user", "content": "say hi"}],
+                },
+            )
+            print(f"Status: {response.status_code}")
+            print(f"Response: {response.text}")
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    test_openrouter()

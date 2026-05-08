@@ -12,68 +12,38 @@
 // Physics DSL Types
 // =========================================================
 
-export type PhysicsDSL = {
-  simulation: string;
-  prompt: string;
-  title: string;
-  world: {
-    width: number;
-    height: number;
-    gravity: number;
-    friction: number;
-    airResistance: number;
-    background: "space" | "lab" | "earth" | "road" | "ice" | "mountain";
-    timeScale: number;
-  };
-  objects: Array<{
-    id: string;
-    shape: string;
-    position: [number, number];
-    velocity: [number, number];
-    mass?: number;
-    radius?: number;
-    size?: [number, number];
-    angle?: number;
-    angularVelocity?: number;
-    anchor?: [number, number];
-    length?: number;
-    fixed?: boolean;
-    color?: string;
-    label?: string;
-    trail?: boolean;
-  }>;
-  forces: Array<{
-    type: string;
-    target?: string;
-    value?: [number, number];
-    magnitude?: number;
-    angle?: number;
-    anchor?: [number, number];
-    stiffness?: number;
-  }>;
-  constraints: Array<{
-    type: string;
-    bodyId?: string;
-    targetId?: string;
-    anchor?: [number, number];
-    length?: number;
-    angle?: number;
-    restitution?: number;
-  }>;
-  controls: Array<{
-    key: "mass" | "force" | "gravity" | "angle" | "velocity" | "length" | "restitution";
-    label: string;
-    min: number;
-    max: number;
-    step: number;
-    value: number;
-    unit: string;
-  }>;
-  formula: string;
-  formulas: Array<{ label: string; equation: string; meaning: string }>;
-  educationalContext: string[];
-  notes: string[];
-};
+export interface DSLEnvironment {
+  gravity: number;
+  friction: number;
+  air_resistance: number;
+}
+
+export interface DSLEntity {
+  id: string;
+  type: string;
+  mass: number | null;
+  properties: Record<string, unknown>;
+}
+
+export interface DSLInteraction {
+  type: string;
+  target: string;
+  parameters: Record<string, unknown>;
+}
+
+export interface DSLVisualization {
+  type: string;
+}
+
+export interface PhysicsDSL {
+  simulation_type: string;
+  topic: string;
+  environment: DSLEnvironment;
+  entities: DSLEntity[];
+  interactions: DSLInteraction[];
+  visualizations: DSLVisualization[];
+  equations: string[];
+}
 
 // =========================================================
 // Simulation Response Types

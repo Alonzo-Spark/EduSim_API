@@ -157,7 +157,10 @@ def _build_sources(chunks: list[dict[str, Any]]):
     seen = set()
 
     for chunk in chunks:
-        source = os.path.basename(chunk.get("source", "Textbook"))
+        # Handle both Windows and Linux paths correctly
+        raw_source = chunk.get("source", "Textbook")
+        source = os.path.basename(raw_source.replace("\\", "/"))
+        
         page = chunk.get("page", "?")
         key = f"{source}:{page}"
         if key in seen:
