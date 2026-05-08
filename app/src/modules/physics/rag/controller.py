@@ -7,11 +7,11 @@ class RagQueryRequest(BaseModel):
 
 async def rag_query_controller(request: RagQueryRequest):
     try:
-        answer = query_rag(query=request.query)
+        result = query_rag(query=request.query)
         
         return {
             "success": True,
-            "answer": answer
+            **result
         }
     except Exception as e:
         raise HTTPException(

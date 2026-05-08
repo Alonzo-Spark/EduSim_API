@@ -19,11 +19,12 @@ def _initialize_rag():
     _retriever = get_retriever(index, metadata, _embeddings_model, k=8)
     print("RAG System Initialized")
 
-def query_rag(query: str) -> str:
+def query_rag(query: str) -> dict:
     _initialize_rag()
     
     print(f"RAG searching for: {query}")
     results = _retriever(query)
+    retrieval_time = time.time() - retrieval_start
     
     if not results:
         context = ""

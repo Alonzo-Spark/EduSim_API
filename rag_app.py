@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from rag.loader import load_pdf
+from rag.loader import load_all_pdfs
 from rag.splitter import split_docs
 from rag.embedder import get_embeddings
 from rag.vector_store import create_vector_store
@@ -16,32 +16,33 @@ load_dotenv()
 # MAIN APPLICATION
 # =========================================================
 def main():
-    """Main RAG application loop."""
 
-    # Load PDF
-    pdf_path = os.getenv("PDF_PATH", "data/physics.pdf")
+    print("=" * 60)
+    print("RAG System - OpenRouter API")
+    print("=" * 60)
 
-    if not os.path.exists(pdf_path):
-        print(f"❌ PDF file not found: {pdf_path}")
-        print("Please update PDF_PATH in .env or ensure the file exists.")
+    # =====================================================
+    # LOAD ALL PDFs
+    # =====================================================
+    data_path = "data"
+
+    print(f"\n[RAG] Loading PDFs from: {data_path}")
+
+    docs = load_all_pdfs(data_path)
+
+    if not docs:
+        print("❌ No PDFs found in data folder")
         return
 
-    print("=" * 60)
-    print("RAG System - Gemini API")
-    print("=" * 60)
-    print(f"\n📄 Loading PDF: {pdf_path}")
+    print(f"✓ Total pages loaded: {len(docs)}")
 
     try:
 
         # =====================================================
-        # LOAD PDF
-        # =====================================================
-        docs = load_pdf(pdf_path)
-
-        # =====================================================
         # SPLIT DOCUMENTS
         # =====================================================
-        print(f"\n📑 Splitting into chunks...")
+        print(f"\n[RAG] Splitting into chunks...")
+
         chunks = split_docs(docs)
 
         print(f"✓ Total chunks created: {len(chunks)}")
@@ -50,16 +51,17 @@ def main():
         # LOAD EMBEDDINGS
         # =====================================================
         print("\n🔗 Loading embeddings model...")
+
         embeddings_model = get_embeddings()
 
         # =====================================================
-        # CREATE / LOAD VECTOR STORE
+        # VECTOR STORE
         # =====================================================
         force_rebuild = (
             os.getenv("FORCE_REBUILD", "false").lower() == "true"
         )
 
-        print("\n🗂️ Setting up vector store...")
+        print("\n[RAG] Setting up vector store...")
 
         index, metadata = create_vector_store(
             chunks,
@@ -70,7 +72,7 @@ def main():
         print(f"✓ Vector DB ready with {len(metadata)} chunks")
 
         # =====================================================
-        # CREATE RETRIEVER
+        # RETRIEVER
         # =====================================================
         retriever = get_retriever(
             index,
@@ -83,32 +85,24 @@ def main():
         # READY
         # =====================================================
         print("\n" + "=" * 60)
-        print("✅ RAG System Ready!")
+        print("✅ EduSim RAG Ready!")
         print("=" * 60)
-        print("Commands:")
-        print("  - Ask any question")
-        print("  - Type 'exit' or 'quit' to exit")
-        print("=" * 60 + "\n")
 
-        # =====================================================
-        # CHAT LOOP
-        # =====================================================
         while True:
 
             try:
 
-                query = input("❓ Question: ").strip()
+                query = input("\n[?] Question: ").strip()
 
                 if not query:
                     continue
 
-                # Exit command
                 if query.lower() in ["exit", "quit"]:
                     print("\n👋 Goodbye!")
                     break
 
                 # =================================================
-                # RETRIEVE CONTEXT
+                # RETRIEVE DOCUMENTS
                 # =================================================
                 print("\n🔍 Retrieving context...")
 
@@ -118,14 +112,38 @@ def main():
                     print("⚠️ No relevant documents found.")
                     continue
 
-                print(f"✓ Found {len(results)} relevant chunks")
+                # =================================================
+                # DEBUG RETRIEVAL
+                # =================================================
+                print("\n===== RETRIEVED DOCUMENTS =====")
+
+                for r in results:
+
+                    print(f"Source  : {r.get('source')}")
+                    print(f"Page    : {r.get('page')}")
+                    print(f"Score   : {r.get('score')}")
+                    print("-" * 40)
+
+                # =================================================
+                # FILTER LOW SCORES
+                # =================================================
+                results = [
+                    r for r in results
+                    if r["score"] > 0.35
+                ]
 
                 # =================================================
                 # BUILD CONTEXT
                 # =================================================
                 context = "\n\n".join([
-                    f"[Page {doc['page']}]\n{doc['text']}"
-                    for doc in results
+                    f"""
+[SUBJECT]: {r.get('subject', 'unknown')}
+[SOURCE]: {r.get('source', 'unknown')}
+[PAGE]: {r.get('page', 0)}
+
+{r['text']}
+"""
+                    for r in results
                 ])
 
                 # =================================================
@@ -141,7 +159,7 @@ def main():
                 # =================================================
                 # PRINT RESPONSE
                 # =================================================
-                print(f"\n📝 Answer:\n")
+                print("\n📝 Answer:\n")
 
                 print(response)
 
@@ -155,15 +173,13 @@ def main():
             except Exception as e:
 
                 print(f"\n❌ Error: {str(e)}")
-                print("Please check your API key and try again.\n")
 
     except Exception as e:
 
         print(f"\n❌ Fatal error: {str(e)}")
-        return
 
 
-# =========================================================
+# =====================================================
 # ENTRY POINT
 # =====================================================
 if __name__ == "__main__":
