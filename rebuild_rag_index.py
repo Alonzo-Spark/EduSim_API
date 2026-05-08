@@ -29,7 +29,7 @@ def rebuild():
     print("\n4. Rebuilding vector store (Force Rebuild)...")
     index, metadata = create_vector_store(chunks, embeddings_model, force_rebuild=True)
     
-    print("\n✅ Rebuild complete!")
+    print("\n[REBUILD] Rebuild complete!")
 
 if __name__ == "__main__":
     rebuild()

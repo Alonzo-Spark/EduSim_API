@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from rag.loader import load_all_pdfs
 from app.src.api.simulation_router import simulation_router
 from app.src.api.rag_router import rag_router
 
 
 app = FastAPI(
     title="EduSim Physics API",
-    description="Backend APIs for EduSim physics simulations",
+    description="Backend APIs for EduSim  simulations",
     version="1.0.0"
 )
 

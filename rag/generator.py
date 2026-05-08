@@ -1,86 +1,163 @@
 import os
-import requests
+from pathlib import Path
+
+import google.generativeai as genai
 from dotenv import load_dotenv
 
-load_dotenv()
+# =========================================================
+# LOAD ENV
+# =========================================================
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+# =========================================================
+# GEMINI MODELS
+# =========================================================
+GEMINI_MODEL = "gemini-1.5-flash"
 
-# ✅ Use working model
-MODEL = "openai/gpt-3.5-turbo"
-# fallback if needed:
-# MODEL = "mistralai/mistral-7b-instruct"
+GEMINI_FALLBACK_MODEL = "gemini-flash-latest"
 
-def call_openrouter_api(system_prompt: str, user_query: str, timeout=30):
-    
-    if not OPENROUTER_API_KEY:
-        raise ValueError("❌ OPENROUTER_API_KEY not found in .env file")
 
-    headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "HTTP-Referer": "http://localhost",
-        "X-Title": "RAG-System",
-        "Content-Type": "application/json",
-    }
+# =========================================================
+# CONFIGURE GEMINI
+# =========================================================
+def _configure_gemini(model_name: str = GEMINI_MODEL):
 
-    payload = {
-        "model": MODEL,
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_query},
-        ],
-        "temperature": 0.3,
-        "max_tokens": 800,
-    }
+    api_key = os.getenv("GOOGLE_API_KEY")
 
-    try:
-        print(f"📡 Calling OpenRouter API ({MODEL})...")
-        response = requests.post(
-            OPENROUTER_URL,
-            headers=headers,
-            json=payload,
-            timeout=timeout
+    if not api_key:
+        raise ValueError(
+            "❌ GOOGLE_API_KEY missing in .env"
         )
 
-        # 🔥 DEBUG (very important)
-        print("DEBUG STATUS:", response.status_code)
-        print("DEBUG RESPONSE:", response.text[:500])
+    genai.configure(api_key=api_key)
 
-        response.raise_for_status()
-
-        result = response.json()
-
-        # ✅ Correct parsing (NO .content mistake)
-        return result["choices"][0]["message"]["content"].strip()
-
-    except requests.exceptions.HTTPError:
-        raise Exception(f"❌ API error: {response.text}")
-    except Exception as e:
-        raise Exception(f"❌ Unexpected error: {str(e)}")
+    return genai.GenerativeModel(model_name)
 
 
-def generate_response(context: str, question: str):
+# =========================================================
+# GENERATE RAW TEXT
+# =========================================================
+def generate_gemini_text(
+    final_prompt: str,
+    temperature: float = 0.3,
+    max_output_tokens: int = 2048
+):
 
-    system_prompt = (
-    "You are an intelligent AI textbook tutor. Your ONLY source of truth is the provided Context.\n\n" 
-    "CRITICAL INSTRUCTIONS:\n"
-    "1. Explain concepts EXACTLY as they are defined and worded in the Context. "
-    "For example, if the context defines a law in terms of momentum rather than acceleration, you MUST use the momentum definition.\n"
-    "2. Do NOT use your generic pre-training knowledge to define terms. "
-    "3. Explain step-by-step and include formulas, observations, examples, and applications ONLY if they appear in the Context.\n" 
-    "4. Make answers detailed but beginner-friendly based ON THE TEXT provided.\n\n" 
-    "If the topic is NOT explicitly found in the textbook context, you MUST say:\n" 
-    "'Not found in textbook, but here is a general explanation.' and then provide your general knowledge."
-    )
-    user_query = f"""
-Context:
+    last_error = None
+
+    for model_name in (
+        GEMINI_MODEL,
+        GEMINI_FALLBACK_MODEL
+    ):
+
+        try:
+
+            model = _configure_gemini(model_name)
+
+            response = model.generate_content(
+
+                final_prompt,
+
+                generation_config={
+
+                    "temperature": temperature,
+
+                    "max_output_tokens": max_output_tokens,
+
+                },
+            )
+
+            generated_text = getattr(
+                response,
+                "text",
+                None
+            )
+
+            if not generated_text:
+                raise ValueError(
+                    "Gemini returned empty response"
+                )
+
+            return generated_text.strip()
+
+        except Exception as e:
+
+            last_error = e
+
+            print(
+                f"⚠ Gemini model failed ({model_name}): {e}"
+            )
+
+    print(f"\n❌ Gemini generation failed: {last_error}")
+
+    return "Unable to generate response."
+
+
+# =========================================================
+# MAIN EDUCATIONAL RESPONSE
+# =========================================================
+def generate_response(
+    context: str,
+    question: str,
+    user_preference: str = "standard"
+):
+
+    final_prompt = f"""
+You are EduSim, an advanced AI Educational Tutor and Intelligent Learning Assistant.
+
+Your responsibilities:
+- explain educational concepts clearly
+- use the provided textbook context as the primary source
+- stay accurate and educational
+- simplify difficult topics
+- generate structured and beginner-friendly answers
+- adapt explanations for students
+- improve conceptual understanding
+
+RULES:
+1. Prioritize textbook/RAG context first.
+2. Do not generate unrelated information.
+3. If the textbook context is insufficient, clearly mention:
+   "The textbook does not fully cover this topic, but here is a general explanation."
+4. Keep explanations educational and easy to understand.
+5. Avoid hallucinating facts not supported by the context.
+6. Explain formulas and variables clearly.
+7. Use examples when useful.
+8. Keep formatting clean and readable.
+
+WHEN RELEVANT:
+- include formulas
+- include definitions
+- include examples
+- include real-world applications
+- include step-by-step explanations
+
+USER PREFERENCE:
+{user_preference}
+
+TEXTBOOK CONTEXT:
 {context}
 
-Question:
+QUESTION:
 {question}
 
-Answer:
+Return response in this format:
+
+## Topic Name
+
+## Core Concept
+
+## Important Formulas / Definitions
+
+## Key Points
+
+## Example / Working
+
+## Real-World Applications
 """
 
-    return call_openrouter_api(system_prompt, user_query)
+    return generate_gemini_text(
+        final_prompt,
+        temperature=0.2,
+        max_output_tokens=1500
+    )
