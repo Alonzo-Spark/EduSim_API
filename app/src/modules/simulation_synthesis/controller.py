@@ -10,12 +10,15 @@ from .service import (
 )
 
 
-class SynthesisGenerateRequest(BaseModel):
+class AgentGenerateRequest(BaseModel):
     prompt: str = Field(..., min_length=4, description="User prompt for simulation generation")
     topic: str | None = Field(default=None, description="Optional topic override")
+    complexity: str | None = Field(default=None, description="Complexity level")
+    include_answers: bool = Field(default=True, description="Whether to include answers")
+    streaming: bool = Field(default=False, description="Whether to stream the response")
 
 
-async def synthesis_generate_controller(request: SynthesisGenerateRequest):
+async def synthesis_generate_controller(request: AgentGenerateRequest):
     try:
         data = generate_simulation_synthesis(prompt=request.prompt, topic=request.topic)
         return {
@@ -72,7 +75,7 @@ async def synthesis_export_controller(simulation_id: str):
         raise HTTPException(status_code=500, detail=f"Failed to export simulation: {str(e)}")
 
 
-async def synthesis_generate_stream_controller(request: SynthesisGenerateRequest):
+async def synthesis_generate_stream_controller(request: AgentGenerateRequest):
     """
     Streaming version of synthesis generation.
     Returns Server-Sent Events (SSE) stream showing progress updates.

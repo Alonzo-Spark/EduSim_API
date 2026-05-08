@@ -285,17 +285,35 @@ def generate_simulation_synthesis(prompt: str, topic: str | None = None):
     description = f"AI-synthesized interactive simulation for: {prompt.strip()}"
     sources = _build_sources(chunks)
 
+    topic_info = {
+        "topic": title,
+        "subject": subject,
+        "complexity": "medium"
+    }
+
+    context_info = {
+        "topic": title,
+        "formulas": extracted.get("formulas", []),
+        "constants": extracted.get("constants", []),
+        "laws": extracted.get("laws", []),
+        "definitions": extracted.get("definitions", []),
+        "sources": sources
+    }
+
     item = {
         "id": str(uuid4()),
         "title": title,
         "description": description,
-        "formula": formula,
-        "sources": sources,
-        "topic": title,
-        "prompt": prompt,
-        "subject": subject,
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "topic": topic_info,
         "html": html,
+        "formula": formula,
+        "formulas": extracted.get("formulas", []),
+        "learning_objectives": [],
+        "related_concepts": [],
+        "interactions": [],
+        "context": context_info,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "generation_stages": ["Started", "Retrieved", "Synthesized", "Complete"]
     }
 
     with _store_lock:
@@ -420,17 +438,35 @@ def generate_simulation_synthesis_stream(prompt: str, topic: str | None = None):
         description = f"AI-synthesized interactive simulation for: {prompt.strip()}"
         sources = _build_sources(chunks)
 
+        topic_info = {
+            "topic": title,
+            "subject": subject,
+            "complexity": "medium"
+        }
+
+        context_info = {
+            "topic": title,
+            "formulas": extracted.get("formulas", []),
+            "constants": extracted.get("constants", []),
+            "laws": extracted.get("laws", []),
+            "definitions": extracted.get("definitions", []),
+            "sources": sources
+        }
+
         item = {
             "id": simulation_id,
             "title": title,
             "description": description,
-            "formula": formula,
-            "sources": sources,
-            "topic": title,
-            "prompt": prompt,
-            "subject": subject,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "topic": topic_info,
             "html": html,
+            "formula": formula,
+            "formulas": extracted.get("formulas", []),
+            "learning_objectives": [],
+            "related_concepts": [],
+            "interactions": [],
+            "context": context_info,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "generation_stages": ["Started", "Retrieved", "Synthesized", "Complete"]
         }
 
         with _store_lock:
