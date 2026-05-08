@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useMemo, useEffect } from "react";
+import { useState } from "react";
 import { PageWrapper } from "@/components/Card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,13 +8,19 @@ import {
   PlayCircle,
   Link2,
   Download,
-  Zap,
   BookOpen,
   Lightbulb,
   Settings2,
+  Cpu,
+  Zap,
+  Box,
+  GitBranch,
+  BarChart2,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { useAgentSimulation } from "@/hooks/useAgentSimulation";
-import { agentSimulationService } from "@/services/agentSimulationService";
+import type { PhysicsDSL, DSLEntity, DSLInteraction, DSLVisualization } from "@/services/agentSimulationService";
 
 export const Route = createFileRoute("/ai-agent")({
   component: AIAgentPage,
@@ -26,8 +32,8 @@ const EXAMPLE_PROMPTS = [
     prompt: "Create a projectile motion simulation showing trajectory with adjustable angle and velocity",
   },
   {
-    title: "Newton's Third Law",
-    prompt: "Visualize Newton's Third Law of Motion with interactive force demonstrations",
+    title: "Newton's Second Law",
+    prompt: "Visualize Newton's Second Law with a block on a surface and adjustable force",
   },
   {
     title: "Pendulum Oscillation",
@@ -39,18 +45,21 @@ const EXAMPLE_PROMPTS = [
   },
 ];
 
-const GENERATION_STAGES = [
-  "Analyzing prompt",
-  "Detecting subject",
-  "Retrieving textbook context",
-  "Extracting formulas",
-  "Generating simulation logic",
-  "Synthesizing interactive visuals",
-  "Validating HTML safety",
-  "Sanitizing content",
-  "Injecting security policy",
-  "Rendering simulation",
+const DSL_STAGES = [
+  "Analyzing",
+  "Detecting",
+  "Retrieving",
+  "Extracting",
+  "Synthesizing",
+  "Sanitizing",
+  "Validating",
+  "Saving",
+  "Rendering",
 ];
+
+// =========================================================
+// Sub-components
+// =========================================================
 
 function ProgressBar({ percentage, stage }: { percentage: number; stage: string | null }) {
   return (
@@ -74,24 +83,18 @@ function StageIndicator({ stages, currentStage }: { stages: string[]; currentSta
     <div className="space-y-2">
       <p className="text-xs text-muted-foreground">Generation Pipeline</p>
       <div className="flex flex-wrap gap-1">
-        {stages.map((stage, index) => {
-          const isActive = currentStage?.includes(stage);
-          const isCompleted = currentStage
-            ? stages.indexOf(stage) < stages.indexOf(stage)
-            : false;
-
+        {stages.map((stage) => {
+          const isActive = currentStage?.toLowerCase().includes(stage.toLowerCase());
           return (
             <div
               key={stage}
               className={`px-2 py-1 rounded-full text-xs transition-colors whitespace-nowrap ${
                 isActive
                   ? "bg-[var(--neon-cyan)] text-black font-semibold"
-                  : isCompleted
-                    ? "bg-[var(--neon-purple)]/50 text-white"
-                    : "bg-slate-900/50 text-muted-foreground border border-white/10"
+                  : "bg-slate-900/50 text-muted-foreground border border-white/10"
               }`}
             >
-              {stage.split(" ")[0]}
+              {stage}
             </div>
           );
         })}
@@ -99,6 +102,140 @@ function StageIndicator({ stages, currentStage }: { stages: string[]; currentSta
     </div>
   );
 }
+
+// DSL Panel sub-sections
+function EntityCard({ entity }: { entity: DSLEntity }) {
+  return (
+    <div className="rounded-xl border border-white/10 bg-white/5 p-3 space-y-1">
+      <div className="flex items-center gap-2">
+        <Box className="w-3.5 h-3.5 text-[var(--neon-cyan)]" />
+        <span className="font-mono text-xs font-semibold text-white">{entity.id}</span>
+        <span className="px-1.5 py-0.5 rounded bg-[var(--neon-purple)]/30 text-[10px] text-[var(--neon-purple)]">{entity.type}</span>
+      </div>
+      {entity.mass !== null && (
+        <p className="text-xs text-muted-foreground">mass: {entity.mass} kg</p>
+      )}
+    </div>
+  );
+}
+
+function InteractionCard({ interaction }: { interaction: DSLInteraction }) {
+  return (
+    <div className="rounded-xl border border-white/10 bg-white/5 p-3 space-y-1">
+      <div className="flex items-center gap-2">
+        <GitBranch className="w-3.5 h-3.5 text-[var(--neon-purple)]" />
+        <span className="font-mono text-xs font-semibold text-white">{interaction.type}</span>
+        <span className="text-xs text-muted-foreground">→ {interaction.target}</span>
+      </div>
+      {Object.keys(interaction.parameters).length > 0 && (
+        <pre className="text-[10px] text-muted-foreground/70 font-mono">
+          {JSON.stringify(interaction.parameters, null, 2)}
+        </pre>
+      )}
+    </div>
+  );
+}
+
+function VisualizationBadge({ viz }: { viz: DSLVisualization }) {
+  return (
+    <span className="px-2 py-1 rounded-full bg-[var(--neon-cyan)]/10 border border-[var(--neon-cyan)]/30 text-[var(--neon-cyan)] text-xs font-mono">
+      {viz.type}
+    </span>
+  );
+}
+
+function DSLInspector({ dsl }: { dsl: PhysicsDSL }) {
+  const [showRaw, setShowRaw] = useState(false);
+
+  return (
+    <div className="space-y-4">
+      {/* Header row */}
+      <div className="flex items-center gap-3">
+        <div className="flex-1">
+          <div className="flex items-center gap-2">
+            <Cpu className="w-4 h-4 text-[var(--neon-cyan)]" />
+            <span className="text-sm font-semibold text-white font-mono">{dsl.simulation_type}</span>
+          </div>
+          <p className="text-xs text-muted-foreground mt-0.5">{dsl.topic}</p>
+        </div>
+        <div className="text-right text-xs text-muted-foreground space-y-0.5">
+          <p>g = {dsl.environment.gravity} m/s²</p>
+          <p>μ = {dsl.environment.friction}</p>
+        </div>
+      </div>
+
+      {/* Entities */}
+      <div>
+        <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1.5">
+          <Box className="w-3.5 h-3.5" /> Entities ({dsl.entities.length})
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {dsl.entities.map((e) => <EntityCard key={e.id} entity={e} />)}
+        </div>
+      </div>
+
+      {/* Interactions */}
+      <div>
+        <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1.5">
+          <GitBranch className="w-3.5 h-3.5" /> Interactions ({dsl.interactions.length})
+        </p>
+        <div className="space-y-2">
+          {dsl.interactions.map((inter, i) => <InteractionCard key={i} interaction={inter} />)}
+        </div>
+      </div>
+
+      {/* Visualizations */}
+      <div>
+        <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1.5">
+          <BarChart2 className="w-3.5 h-3.5" /> Visualizations
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {dsl.visualizations.map((v, i) => <VisualizationBadge key={i} viz={v} />)}
+        </div>
+      </div>
+
+      {/* Equations */}
+      {dsl.equations.length > 0 && (
+        <div>
+          <p className="text-xs text-muted-foreground mb-2">Equations</p>
+          <div className="space-y-1">
+            {dsl.equations.map((eq, i) => (
+              <p key={i} className="font-mono text-xs text-[var(--neon-purple)] bg-[var(--neon-purple)]/5 px-3 py-1.5 rounded-lg border border-[var(--neon-purple)]/20">
+                {eq}
+              </p>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Raw JSON toggle */}
+      <button
+        onClick={() => setShowRaw(!showRaw)}
+        className="w-full text-left text-xs p-2 rounded-xl border border-white/10 hover:border-white/20 flex items-center justify-between text-muted-foreground"
+      >
+        <span>Raw DSL JSON</span>
+        {showRaw ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+      </button>
+      {showRaw && (
+        <pre className="text-[10px] font-mono text-muted-foreground/70 bg-black/30 rounded-xl p-3 border border-white/10 overflow-auto max-h-64">
+          {JSON.stringify(dsl, null, 2)}
+        </pre>
+      )}
+
+      {/* Runtime Integration Notice */}
+      <div className="rounded-xl border border-[var(--neon-cyan)]/20 bg-[var(--neon-cyan)]/5 p-3">
+        <p className="text-xs text-[var(--neon-cyan)]/80 flex items-center gap-2">
+          <Zap className="w-3.5 h-3.5 flex-shrink-0" />
+          Physics DSL compiled successfully. Runtime interpreter will execute interactions and render the simulation.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// =========================================================
+// Main Page
+// =========================================================
 
 function AIAgentPage() {
   const {
@@ -117,14 +254,8 @@ function AIAgentPage() {
   const [useStreaming, setUseStreaming] = useState(true);
   const [complexity, setComplexity] = useState<"beginner" | "medium" | "advanced">("medium");
 
-  const simulationHtml = useMemo(() => {
-    if (!simulation?.html) return "";
-    return simulation.html;
-  }, [simulation?.html]);
-
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
-
     if (useStreaming) {
       await generateStream(prompt, complexity);
     } else {
@@ -134,7 +265,6 @@ function AIAgentPage() {
 
   const handleShare = async () => {
     if (!simulation?.id) return;
-
     const shareUrl = `${window.location.origin}/ai-agent?sim=${simulation.id}`;
     try {
       await navigator.clipboard.writeText(shareUrl);
@@ -144,23 +274,16 @@ function AIAgentPage() {
     }
   };
 
-  // Listen for runtime error messages posted from the iframe and forward to backend
-  useEffect(() => {
-    function handleMessage(e: MessageEvent) {
-      try {
-        const data = e.data || {};
-        if (data?.type === "sim_error") {
-          // Forward to backend for auto-repair and logging
-          agentSimulationService.reportRuntimeError(simulation?.id || null, data);
-        }
-      } catch (err) {
-        console.error("Failed to handle iframe message", err);
-      }
-    }
-
-    window.addEventListener("message", handleMessage);
-    return () => window.removeEventListener("message", handleMessage);
-  }, [simulation?.id]);
+  const handleExportDSL = () => {
+    if (!simulation?.dsl) return;
+    const blob = new Blob([JSON.stringify(simulation.dsl, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${simulation.id ?? "simulation"}.dsl.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <PageWrapper>
@@ -174,8 +297,8 @@ function AIAgentPage() {
               </h1>
               <p className="text-sm text-muted-foreground max-w-2xl">
                 Generate interactive physics, chemistry, and mathematics simulations from natural
-                language. The agent analyzes your prompt, retrieves textbook context, and creates
-                complete educational simulations.
+                language. The agent analyzes your prompt, retrieves textbook context, and compiles
+                a validated Physics DSL for runtime execution.
               </p>
             </div>
             <Sparkles className="w-8 h-8 text-[var(--neon-purple)] flex-shrink-0" />
@@ -229,7 +352,7 @@ function AIAgentPage() {
               <Sparkles className="w-4 h-4 mr-2" />
               {loading
                 ? streaming
-                  ? "Generating..."
+                  ? "Compiling DSL..."
                   : "Processing..."
                 : "Generate Simulation"}
             </Button>
@@ -241,11 +364,7 @@ function AIAgentPage() {
             >
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Streaming Mode</span>
-                <span
-                  className={`font-semibold ${
-                    useStreaming ? "text-[var(--neon-cyan)]" : "text-muted-foreground"
-                  }`}
-                >
+                <span className={`font-semibold ${useStreaming ? "text-[var(--neon-cyan)]" : "text-muted-foreground"}`}>
                   {useStreaming ? "ON" : "OFF"}
                 </span>
               </div>
@@ -259,22 +378,17 @@ function AIAgentPage() {
               {EXAMPLE_PROMPTS.map((example) => (
                 <button
                   key={example.title}
-                  onClick={() => {
-                    setPrompt(example.prompt);
-                    clearError();
-                  }}
+                  onClick={() => { setPrompt(example.prompt); clearError(); }}
                   className="w-full text-left p-2 rounded-xl border border-white/10 hover:border-[var(--neon-cyan)]/50 hover:bg-white/5 transition-colors text-xs"
                 >
                   <div className="font-semibold text-white">{example.title}</div>
-                  <div className="text-muted-foreground text-xs line-clamp-1">
-                    {example.prompt}
-                  </div>
+                  <div className="text-muted-foreground text-xs line-clamp-1">{example.prompt}</div>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Right Panel: Simulation */}
+          {/* Right Panel: DSL Output */}
           <div className="glass-strong rounded-3xl p-4 space-y-3">
             {/* Title and Actions */}
             <div className="flex items-start justify-between gap-3 flex-wrap">
@@ -291,6 +405,9 @@ function AIAgentPage() {
                   <Button size="sm" variant="outline" onClick={handleShare}>
                     <Link2 className="w-4 h-4 mr-1" /> Share
                   </Button>
+                  <Button size="sm" variant="outline" onClick={handleExportDSL}>
+                    <Download className="w-4 h-4 mr-1" /> Export DSL
+                  </Button>
                 </div>
               )}
             </div>
@@ -299,10 +416,7 @@ function AIAgentPage() {
             {(loading || streaming || progress) && (
               <div className="rounded-2xl border border-[var(--neon-purple)]/30 bg-[var(--neon-purple)]/10 p-4 space-y-3">
                 <ProgressBar percentage={progressPercentage} stage={progress?.stage || null} />
-                <StageIndicator stages={GENERATION_STAGES} currentStage={progress?.stage || null} />
-                {progress?.message && (
-                  <p className="text-xs text-muted-foreground italic">{progress.message}</p>
-                )}
+                <StageIndicator stages={DSL_STAGES} currentStage={progress?.stage || null} />
               </div>
             )}
 
@@ -313,77 +427,22 @@ function AIAgentPage() {
                   <span className="text-red-400 mt-0.5">⚠</span>
                   <span>{error}</span>
                 </p>
-                <button
-                  onClick={clearError}
-                  className="text-xs text-red-300 hover:text-red-200 mt-2 underline"
-                >
+                <button onClick={clearError} className="text-xs text-red-300 hover:text-red-200 mt-2 underline">
                   Dismiss
                 </button>
               </div>
             )}
 
-            {/* Metadata Display */}
-            {simulation && (
-              <>
-                {/* Learning Objectives */}
-                {simulation.learning_objectives.length > 0 && (
-                  <div className="rounded-2xl border border-[var(--neon-cyan)]/30 bg-[var(--neon-cyan)]/10 p-3">
-                    <h3 className="text-xs font-semibold text-[var(--neon-cyan)] mb-2 flex items-center gap-2">
-                      <Lightbulb className="w-4 h-4" /> Learning Objectives
-                    </h3>
-                    <ul className="text-xs text-muted-foreground space-y-1">
-                      {simulation.learning_objectives.slice(0, 3).map((obj, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-[var(--neon-cyan)]">•</span>
-                          <span>{obj}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Formula Display */}
-                {simulation.formula && (
-                  <div className="rounded-2xl border border-[var(--neon-purple)]/30 bg-[var(--neon-purple)]/10 p-3">
-                    <p className="text-xs text-muted-foreground mb-1">Key Formula</p>
-                    <p className="font-mono text-sm text-[var(--neon-purple)]">{simulation.formula}</p>
-                  </div>
-                )}
-
-                {/* Related Concepts */}
-                {simulation.related_concepts.length > 0 && (
-                  <div className="rounded-2xl border border-white/10 p-3">
-                    <p className="text-xs text-muted-foreground mb-2">Related Concepts</p>
-                    <div className="flex flex-wrap gap-2">
-                      {simulation.related_concepts.slice(0, 5).map((concept, i) => (
-                        <span
-                          key={i}
-                          className="px-2 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-muted-foreground"
-                        >
-                          {concept}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
-
-            {/* Simulation Canvas */}
-            <div className="rounded-2xl border border-white/10 overflow-hidden min-h-[500px] bg-black/50">
-              {simulationHtml ? (
-                <iframe
-                  title={simulation?.title || "Generated Simulation"}
-                  sandbox="allow-scripts"
-                  srcDoc={simulationHtml}
-                  className="w-full min-h-[500px] border-0 bg-black"
-                />
+            {/* DSL Inspector or Empty State */}
+            <div className="rounded-2xl border border-white/10 overflow-hidden min-h-[500px] bg-black/30 p-4">
+              {simulation?.dsl ? (
+                <DSLInspector dsl={simulation.dsl} />
               ) : (
                 <div className="h-[500px] flex flex-col items-center justify-center text-center p-6">
                   <PlayCircle className="w-12 h-12 text-muted-foreground/30 mb-3" />
                   <p className="text-muted-foreground mb-2">
                     {loading || streaming
-                      ? "Your simulation is being generated..."
+                      ? "Compiling Physics DSL..."
                       : "Generated simulation will appear here"}
                   </p>
                   {!loading && !streaming && (
@@ -395,7 +454,7 @@ function AIAgentPage() {
               )}
             </div>
 
-            {/* Sources and Metadata */}
+            {/* Textbook Sources */}
             {simulation?.context?.sources && simulation.context.sources.length > 0 && (
               <div className="rounded-2xl border border-white/10 p-3">
                 <p className="text-xs text-muted-foreground mb-2">Textbook Sources</p>
@@ -408,9 +467,18 @@ function AIAgentPage() {
                 </div>
               </div>
             )}
+
+            {/* Formula */}
+            {simulation?.formula && (
+              <div className="rounded-2xl border border-[var(--neon-purple)]/30 bg-[var(--neon-purple)]/10 p-3">
+                <p className="text-xs text-muted-foreground mb-1">Key Formula</p>
+                <p className="font-mono text-sm text-[var(--neon-purple)]">{simulation.formula}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </PageWrapper>
   );
 }
+

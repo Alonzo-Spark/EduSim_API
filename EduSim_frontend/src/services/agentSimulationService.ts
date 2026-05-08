@@ -1,29 +1,59 @@
 /**
  * Autonomous AI Simulation Generation Agent Service
- * 
+ *
  * Handles communication with the backend agent endpoints for:
  * - Prompt analysis and topic detection
  * - Context retrieval from RAG system
- * - AI-powered HTML generation
+ * - AI-powered Physics DSL generation
  * - Streaming generation with progress updates
  */
+
+// =========================================================
+// Physics DSL Types
+// =========================================================
+
+export interface DSLEnvironment {
+  gravity: number;
+  friction: number;
+  air_resistance: number;
+}
+
+export interface DSLEntity {
+  id: string;
+  type: string;
+  mass: number | null;
+  properties: Record<string, unknown>;
+}
+
+export interface DSLInteraction {
+  type: string;
+  target: string;
+  parameters: Record<string, unknown>;
+}
+
+export interface DSLVisualization {
+  type: string;
+}
+
+export interface PhysicsDSL {
+  simulation_type: string;
+  topic: string;
+  environment: DSLEnvironment;
+  entities: DSLEntity[];
+  interactions: DSLInteraction[];
+  visualizations: DSLVisualization[];
+  equations: string[];
+}
+
+// =========================================================
+// Simulation Response Types
+// =========================================================
 
 export interface SimulationTopicInfo {
   topic: string;
   subject: "physics" | "chemistry" | "astronomy" | "biology" | "mathematics";
   subtopic?: string;
   complexity: "beginner" | "medium" | "advanced";
-  grade_level?: string;
-}
-
-export interface SimulationInteractionInfo {
-  name: string;
-  label: string;
-  type: "slider" | "button" | "input" | "toggle";
-  min?: number;
-  max?: number;
-  default?: number;
-  unit?: string;
 }
 
 export interface SimulationContextInfo {
@@ -32,11 +62,9 @@ export interface SimulationContextInfo {
   constants: string[];
   laws: string[];
   definitions: string[];
-  worked_examples: string[];
   sources: Array<{
     source: string;
     page: string | number;
-    text_snippet?: string;
   }>;
 }
 
@@ -45,14 +73,13 @@ export interface AgentGeneratedSimulation {
   title: string;
   description: string;
   topic: SimulationTopicInfo;
-  html: string;
+  /** Physics DSL JSON — the core output of the compiler pipeline */
+  dsl: PhysicsDSL;
   formula?: string;
   formulas: string[];
   learning_objectives: string[];
   related_concepts: string[];
-  interactions: SimulationInteractionInfo[];
   context: SimulationContextInfo;
-  html_path?: string;
   timestamp: string;
   generation_stages: string[];
 }
@@ -77,6 +104,10 @@ export interface AgentStreamProgress {
 type AgentProgressCallback = (progress: AgentStreamProgress) => void;
 type AgentCompleteCallback = (simulation: AgentGeneratedSimulation) => void;
 
+// =========================================================
+// Service Class
+// =========================================================
+
 class AgentSimulationService {
   private apiBaseUrl: string;
 
@@ -86,14 +117,7 @@ class AgentSimulationService {
 
   /**
    * Generate a simulation using the autonomous agent (non-streaming).
-   * 
-   * Args:
-   *   prompt: Natural language prompt (e.g., "Create a projectile motion simulation")
-   *   complexity: Optional complexity override (beginner, medium, advanced)
-   *   topic: Optional topic override
-   * 
-   * Returns:
-   *   AgentGeneratedSimulation with complete metadata and HTML
+   * Returns a Physics DSL JSON object — not HTML.
    */
   async generate(
     prompt: string,
@@ -102,9 +126,7 @@ class AgentSimulationService {
   ): Promise<AgentGeneratedSimulation> {
     const response = await fetch(`${this.apiBaseUrl}/api/simulations/agent/generate`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         prompt,
         topic,
@@ -124,19 +146,12 @@ class AgentSimulationService {
 
   /**
    * Generate a simulation with streaming progress updates.
-   * 
+   *
    * Emits SSE events at each stage:
-   * - started: Initial event with simulation ID
-   * - progress: Stage updates (10%, 25%, 35%, 50%, 70%, 80%, 90%, 95%)
-   * - complete: Final event with complete simulation
-   * - error: Error event if generation fails
-   * 
-   * Args:
-   *   prompt: Natural language prompt
-   *   onProgress: Callback for progress updates
-   *   onComplete: Callback when generation completes
-   *   complexity: Optional complexity override
-   *   topic: Optional topic override
+   * - started:  Initial event with simulation ID
+   * - progress: Stage updates
+   * - complete: Final event with full simulation (DSL)
+   * - error:    Error event if generation fails
    */
   async generateStream(
     prompt: string,
@@ -149,9 +164,7 @@ class AgentSimulationService {
       `${this.apiBaseUrl}/api/simulations/agent/generate-stream`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           prompt,
           topic,
@@ -186,7 +199,7 @@ class AgentSimulationService {
           if (line.startsWith("event:")) {
             const eventType = line.replace("event:", "").trim();
             const dataLine = lines[++i];
-            
+
             if (dataLine?.startsWith("data:")) {
               const dataStr = dataLine.replace("data:", "").trim();
               try {
@@ -199,7 +212,6 @@ class AgentSimulationService {
                 } else if (eventType === "error") {
                   onProgress(data as AgentStreamProgress);
                 } else if (eventType === "done") {
-                  // Streaming complete
                   break;
                 }
               } catch (e) {
@@ -214,16 +226,11 @@ class AgentSimulationService {
     }
   }
 
-  /**
-   * Analyze a prompt to detect topic and subject.
-   * 
-   * This is a client-side helper that mimics the backend analysis.
-   */
+  /** Client-side subject detection for UI labelling */
   analyzePrompt(prompt: string): SimulationTopicInfo {
     const promptLower = prompt.toLowerCase();
-    
-    // Simple topic detection
-    const subjects = {
+
+    const subjects: Record<string, string[]> = {
       physics: ["motion", "force", "velocity", "gravity", "wave", "light", "projectile", "pendulum"],
       chemistry: ["molecule", "atom", "bond", "reaction", "element"],
       astronomy: ["planet", "star", "galaxy", "orbit", "space"],
@@ -233,78 +240,33 @@ class AgentSimulationService {
 
     let subject: SimulationTopicInfo["subject"] = "physics";
     for (const [subj, keywords] of Object.entries(subjects)) {
-      if (keywords.some(kw => promptLower.includes(kw))) {
+      if (keywords.some((kw) => promptLower.includes(kw))) {
         subject = subj as SimulationTopicInfo["subject"];
-        break;
-      }
-    }
-
-    const complexityKeywords = {
-      beginner: ["simple", "basic", "easy"],
-      medium: ["explain", "show", "visualize"],
-      advanced: ["complex", "detailed", "mathematical"],
-    };
-
-    let complexity: SimulationTopicInfo["complexity"] = "medium";
-    for (const [level, keywords] of Object.entries(complexityKeywords)) {
-      if (keywords.some(kw => promptLower.includes(kw))) {
-        complexity = level as SimulationTopicInfo["complexity"];
         break;
       }
     }
 
     return {
       topic: `${subject.charAt(0).toUpperCase() + subject.slice(1)} Simulation`,
-      subject: subject as SimulationTopicInfo["subject"],
-      complexity,
+      subject,
+      complexity: "medium",
     };
   }
 
-  /**
-   * Get safe HTML for rendering in iframe.
-   * Performs additional validation on client side.
-   */
-  isSafeHtml(html: string): boolean {
-    const blockedPatterns = [
-      /<script[^>]+src\s*=/i,
-      /https?:\/\//i,
-      /\bfetch\s*\(/i,
-      /XMLHttpRequest/i,
-      /WebSocket/i,
-      /window\.open/i,
-      /\btop\./i,
-      /\bparent\./i,
-      /\beval\s*\(/i,
-      /new\s+Function\s*\(/i,
-    ];
-
-    return !blockedPatterns.some(pattern => pattern.test(html));
-  }
-
-  async reportRuntimeError(simulationId: string | null, payload: any): Promise<void> {
+  async reportRuntimeError(simulationId: string | null, payload: unknown): Promise<void> {
     try {
-      await fetch(`${this.apiBaseUrl}/api/simulations/agent/error-report${simulationId ? `?simulation_id=${encodeURIComponent(simulationId)}` : ""}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      await fetch(
+        `${this.apiBaseUrl}/api/simulations/agent/error-report${simulationId ? `?simulation_id=${encodeURIComponent(simulationId)}` : ""}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
     } catch (e) {
       console.error("Failed to report runtime error", e);
-    }
-  }
-
-  async reportRuntimeIntelligence(report: any): Promise<void> {
-    try {
-      await fetch(`${this.apiBaseUrl}/api/simulations/runtime/report`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(report),
-      });
-    } catch (e) {
-      console.error("Failed to report runtime intelligence", e);
     }
   }
 }
 
 export const agentSimulationService = new AgentSimulationService();
-

@@ -13,8 +13,10 @@ from sentence_transformers import SentenceTransformer
 
 from rag.retriever import get_retriever
 from rag.generator import generate_gemini_text
-from .templates import detect_subject, get_system_prompt, get_user_content_enhancement, SubjectType
-from .sanitizer import sanitize_html, validate_html_safety_beautifulsoup
+from .templates import detect_subject
+from .prompt_builder import build_dsl_prompt
+from .sanitizer import sanitize_json
+from .validator import validate_simulation
 
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -94,93 +96,7 @@ def _build_context_block(chunks: list[dict[str, Any]]):
     return "\n\n".join(lines)
 
 
-def _call_gemini_for_html(user_prompt: str, context: str, extracted: dict[str, list[str]], subject: SubjectType = "physics"):
-    if not GOOGLE_API_KEY:
-        raise ValueError("GOOGLE_API_KEY is missing. Add it to .env to enable synthesis.")
-
-    print("Gemini request started: simulation synthesis")
-    system_prompt = get_system_prompt(subject)
-    subject_enhancement = get_user_content_enhancement(subject, extracted)
-    final_prompt = (
-        f"{system_prompt}\n\n"
-        f"User intent: {user_prompt}\n\n"
-        f"{subject_enhancement}\n\n"
-        f"Retrieved textbook context:\n{context}\n\n"
-        f"Extracted formulas: {extracted.get('formulas', [])}\n"
-        f"Extracted constants: {extracted.get('constants', [])}\n"
-        f"Extracted laws: {extracted.get('laws', [])}\n"
-        f"Extracted definitions: {extracted.get('definitions', [])}\n\n"
-        "Return only a complete HTML document starting with <!DOCTYPE html>."
-    )
-
-    generated = generate_gemini_text(final_prompt, temperature=0.2, max_output_tokens=3500)
-    print("Gemini generation completed: simulation synthesis")
-    return generated
-
-
-def _extract_html_document(raw_output: str):
-    cleaned = raw_output.strip()
-
-    fenced = re.search(r"```(?:html)?\s*(.*?)```", cleaned, flags=re.IGNORECASE | re.DOTALL)
-    if fenced:
-        cleaned = fenced.group(1).strip()
-
-    if "<!DOCTYPE html" in cleaned:
-        idx = cleaned.find("<!DOCTYPE html")
-        cleaned = cleaned[idx:]
-
-    if not cleaned.lower().startswith("<!doctype html"):
-        raise ValueError("Model output is not a complete HTML document.")
-
-    return cleaned
-
-
-def _inject_csp(html: str):
-    csp_meta = (
-        '<meta http-equiv="Content-Security-Policy" '
-        "content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
-        "img-src data:; font-src data:; connect-src 'none'; media-src 'none'; frame-src 'none'; "
-        "object-src 'none'; base-uri 'none'; form-action 'none'\">"
-    )
-
-    if re.search(r"http-equiv\s*=\s*['\"]Content-Security-Policy['\"]", html, flags=re.IGNORECASE):
-        return html
-
-    if "<head>" in html:
-        return html.replace("<head>", f"<head>\n  {csp_meta}", 1)
-
-    if "<html" in html:
-        return re.sub(r"(<html[^>]*>)", rf"\1\n<head>\n  {csp_meta}\n</head>", html, count=1)
-
-    return html
-
-
-def _validate_generated_html(html: str):
-    blocked_patterns = [
-        r"<script[^>]+src\s*=",
-        r"https?://",
-        r"\bfetch\s*\(",
-        r"XMLHttpRequest",
-        r"WebSocket",
-        r"navigator\.sendBeacon",
-        r"window\.open",
-        r"document\.cookie",
-        r"localStorage",
-        r"sessionStorage",
-        r"\btop\.",
-        r"\bparent\.",
-        r"<iframe",
-        r"<object",
-        r"<embed",
-        r"<form",
-        r"<link[^>]+href",
-        r"\beval\s*\(",
-        r"new\s+Function\s*\(",
-    ]
-
-    for pattern in blocked_patterns:
-        if re.search(pattern, html, flags=re.IGNORECASE):
-            raise ValueError(f"Generated HTML contains blocked content pattern: {pattern}")
+# HTML generation functions removed in favor of JSON DSL
 
 
 def _read_store():
@@ -264,21 +180,20 @@ def generate_simulation_synthesis(prompt: str, topic: str | None = None):
     context = _build_context_block(chunks)
     extracted = _extract_context_features(chunks)
     
-    # Call Gemini with subject-specific template
-    generated = _call_gemini_for_html(prompt, context, extracted, subject=subject)
-    html = _extract_html_document(generated)
+    print("Gemini request started: DSL synthesis")
+    dsl_prompt = build_dsl_prompt(prompt, context, extracted)
+    raw_generated = generate_gemini_text(dsl_prompt, temperature=0.2, max_output_tokens=3500)
+    print("Gemini generation completed: DSL synthesis")
     
-    # Regex-based validation (first layer)
-    _validate_generated_html(html)
+    # Sanitize and parse JSON
+    dsl_json = sanitize_json(raw_generated)
     
-    # BeautifulSoup-based sanitization (second layer - defense-in-depth)
-    html = sanitize_html(html)
+    # Validate DSL
+    validation_result = validate_simulation(dsl_json)
+    if not validation_result["success"]:
+        raise ValueError(f"DSL validation failed: {validation_result['errors']}")
     
-    # Additional BeautifulSoup validation (third layer)
-    validate_html_safety_beautifulsoup(html)
-    
-    # CSP injection (fourth layer)
-    html = _inject_csp(html)
+    valid_dsl = validation_result["data"]
 
     title = topic or _guess_topic(prompt)
     formula = extracted.get("formulas", [""])[0] if extracted.get("formulas") else ""
@@ -305,7 +220,7 @@ def generate_simulation_synthesis(prompt: str, topic: str | None = None):
         "title": title,
         "description": description,
         "topic": topic_info,
-        "html": html,
+        "dsl": valid_dsl,
         "formula": formula,
         "formulas": extracted.get("formulas", []),
         "learning_objectives": [],
@@ -407,29 +322,22 @@ def generate_simulation_synthesis_stream(prompt: str, topic: str | None = None):
             "stage": f"Extracted {len(extracted.get('formulas', []))} formulas, {len(extracted.get('constants', []))} constants"
         })
 
-        # Event 4: Calling LLM for synthesis
-        yield _format_sse_event("progress", {"stage": "Synthesizing simulation with AI..."})
-        generated = _call_gemini_for_html(prompt, context, extracted, subject=subject)
+        # Event 4: Calling LLM for DSL synthesis
+        yield _format_sse_event("progress", {"stage": "Synthesizing Physics DSL with AI..."})
+        dsl_prompt = build_dsl_prompt(prompt, context, extracted)
+        raw_generated = generate_gemini_text(dsl_prompt, temperature=0.2, max_output_tokens=3500)
         
-        # Event 5: Extracting HTML
-        yield _format_sse_event("progress", {"stage": "Extracting HTML document..."})
-        html = _extract_html_document(generated)
+        # Event 5: Sanitizing JSON
+        yield _format_sse_event("progress", {"stage": "Sanitizing and parsing JSON..."})
+        dsl_json = sanitize_json(raw_generated)
 
-        # Event 6: Validating
-        yield _format_sse_event("progress", {"stage": "Validating HTML safety (regex)..."})
-        _validate_generated_html(html)
+        # Event 6: Validating DSL Schema
+        yield _format_sse_event("progress", {"stage": "Validating DSL schema..."})
+        validation_result = validate_simulation(dsl_json)
+        if not validation_result["success"]:
+            raise ValueError(f"DSL validation failed: {validation_result['errors']}")
         
-        # Event 7: Sanitizing
-        yield _format_sse_event("progress", {"stage": "Sanitizing HTML with BeautifulSoup..."})
-        html = sanitize_html(html)
-        
-        # Event 8: Additional validation
-        yield _format_sse_event("progress", {"stage": "Running final safety checks..."})
-        validate_html_safety_beautifulsoup(html)
-        
-        # Event 9: CSP injection
-        yield _format_sse_event("progress", {"stage": "Injecting Content-Security-Policy..."})
-        html = _inject_csp(html)
+        valid_dsl = validation_result["data"]
 
         # Event 10: Saving
         yield _format_sse_event("progress", {"stage": "Saving simulation to store..."})
@@ -458,7 +366,7 @@ def generate_simulation_synthesis_stream(prompt: str, topic: str | None = None):
             "title": title,
             "description": description,
             "topic": topic_info,
-            "html": html,
+            "dsl": valid_dsl,
             "formula": formula,
             "formulas": extracted.get("formulas", []),
             "learning_objectives": [],

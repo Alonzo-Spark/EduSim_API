@@ -58,15 +58,16 @@ async def synthesis_get_controller(simulation_id: str):
 
 
 async def synthesis_export_controller(simulation_id: str):
+    import json as _json
     try:
         item = get_simulation_synthesis(simulation_id=simulation_id)
         if item is None:
             raise HTTPException(status_code=404, detail="Simulation not found")
 
-        filename = f"{simulation_id}.html"
+        filename = f"{simulation_id}.json"
         return Response(
-            content=item["html"],
-            media_type="text/html",
+            content=_json.dumps(item.get("dsl", {}), indent=2),
+            media_type="application/json",
             headers={"Content-Disposition": f'attachment; filename="{filename}"'},
         )
     except HTTPException:
