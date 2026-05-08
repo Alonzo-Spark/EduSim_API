@@ -1,0 +1,853 @@
+[
+  {
+    "id": "9c5c62ed-5628-478b-bcf2-4b1a8a482bed",
+    "title": "Chemistry Visualization",
+    "description": "AI-synthesized interactive simulation for: explain colliosion with two trains colliing",
+    "topic": {
+      "topic": "Chemistry Visualization",
+      "subject": "chemistry",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "train_collision",
+      "topic": "Momentum and Collision",
+      "environment": {
+        "gravity": 9.8,
+        "friction": 0.05,
+        "air_resistance": 0.01
+      },
+      "entities": [
+        {
+          "id": "locomotive_a",
+          "type": "block",
+          "mass": 120000.0,
+          "properties": {}
+        },
+        {
+          "id": "locomotive_b",
+          "type": "block",
+          "mass": 120000.0,
+          "properties": {}
+        }
+      ],
+      "interactions": [
+        {
+          "type": "apply_force",
+          "target": "locomotive_a",
+          "parameters": {
+            "force": [
+              500000,
+              0
+            ]
+          }
+        },
+        {
+          "type": "apply_force",
+          "target": "locomotive_b",
+          "parameters": {
+            "force": [
+              -500000,
+              0
+            ]
+          }
+        },
+        {
+          "type": "collision",
+          "target": "locomotive_a",
+          "parameters": {
+            "with_entity": "locomotive_b",
+            "restitution": 0.05
+          }
+        },
+        {
+          "type": "friction",
+          "target": "locomotive_a",
+          "parameters": {
+            "mu_kinetic": 0.05,
+            "mu_static": 0.1
+          }
+        },
+        {
+          "type": "friction",
+          "target": "locomotive_b",
+          "parameters": {
+            "mu_kinetic": 0.05,
+            "mu_static": 0.1
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "velocity_graph"
+        },
+        {
+          "type": "energy_bar"
+        },
+        {
+          "type": "force_vectors"
+        },
+        {
+          "type": "motion_trace"
+        }
+      ],
+      "equations": [
+        "p_total = m1*v1 + m2*v2",
+        "m1*v1 + m2*v2 = (m1 + m2)*v_final",
+        "KE = 0.5 * m * v^2",
+        "Impulse = F * delta_t = delta_p"
+      ]
+    },
+    "formula": "",
+    "formulas": [],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Chemistry Visualization",
+      "formulas": [],
+      "constants": [],
+      "laws": [],
+      "definitions": [],
+      "sources": []
+    },
+    "timestamp": "2026-05-08T17:16:38.909740+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "2d7f9c22-942c-48f3-bd9f-d1e264dfbe3b",
+    "title": "Pendulum",
+    "description": "AI-synthesized interactive simulation for: explain pendulum taking palnet mars as an example",
+    "topic": {
+      "topic": "Pendulum",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "pendulum_mars_gravity",
+      "topic": "Simple Harmonic Motion on Mars",
+      "environment": {
+        "gravity": 3.71,
+        "friction": 0.0,
+        "air_resistance": 0.01
+      },
+      "entities": [
+        {
+          "id": "mars_pendulum_bob",
+          "type": "pendulum",
+          "mass": 1.0,
+          "properties": {
+            "length": 2.0,
+            "initial_angle_deg": 20.0
+          }
+        }
+      ],
+      "interactions": [
+        {
+          "type": "gravity",
+          "target": "mars_pendulum_bob",
+          "parameters": {
+            "g": 3.71
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "energy_bar"
+        },
+        {
+          "type": "velocity_graph"
+        },
+        {
+          "type": "motion_trace"
+        }
+      ],
+      "equations": [
+        "T = 2 * pi * sqrt(L / g_mars)",
+        "omega = sqrt(g_mars / L)",
+        "PE = m * g_mars * h",
+        "KE = 0.5 * m * v^2"
+      ]
+    },
+    "formula": "dt = 0).",
+    "formulas": [
+      "dt = 0).",
+      "In circular orbit T 2 = 4",
+      "a = d2x",
+      "T = 2",
+      "x =A sin(",
+      "v =A",
+      "U = 1",
+      "Kinetic energy K = 1",
+      "E =U +K",
+      "Torsional Pendulum T = 2"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Pendulum",
+      "formulas": [
+        "dt = 0).",
+        "In circular orbit T 2 = 4",
+        "a = d2x",
+        "T = 2",
+        "x =A sin(",
+        "v =A",
+        "U = 1",
+        "Kinetic energy K = 1",
+        "E =U +K",
+        "Torsional Pendulum T = 2"
+      ],
+      "constants": [
+        "r = 2S/R",
+        "h = 2S",
+        "c = \n2v",
+        "c = \n2mv",
+        "C = \n2Mv",
+        "G=6.67x10"
+      ],
+      "laws": [
+        "Kepler\u2019s laws:",
+        "Hooke\u2019s law: F =\u2212kx (for small elongation x",
+        "Stoke\u2019s law: F = 6\u03c0\u03b7rv",
+        "You know that from Newton\u2019s law, the net force on it is",
+        "From Newton's  laws we get",
+        "Explain universal law of gravitation",
+        "This is called law of conservation of",
+        "2 Universal law of gravitation"
+      ],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "Physics-Formulas.pdf",
+          "page": 2
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 149
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 84
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 76
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 87
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 40
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 188
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        }
+      ]
+    },
+    "timestamp": "2026-05-08T17:00:45.859294+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "bfb77802-48f6-40d7-ad0a-38e822322227",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: explain newtons second law",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "newtons_second_law",
+      "topic": "Newton's Second Law of Motion",
+      "environment": {
+        "gravity": 9.8,
+        "friction": 0.1,
+        "air_resistance": 0.05
+      },
+      "entities": [
+        {
+          "id": "subject_block",
+          "type": "block",
+          "mass": 10.0,
+          "properties": {
+            "initial_velocity": [
+              0,
+              0
+            ]
+          }
+        }
+      ],
+      "interactions": [
+        {
+          "type": "apply_force",
+          "target": "subject_block",
+          "parameters": {
+            "force": [
+              50.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "type": "friction",
+          "target": "subject_block",
+          "parameters": {
+            "mu_kinetic": 0.1,
+            "mu_static": 0.2
+          }
+        },
+        {
+          "type": "gravity",
+          "target": "subject_block",
+          "parameters": {
+            "g": 9.8
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "force_vectors"
+        },
+        {
+          "type": "acceleration_graph"
+        },
+        {
+          "type": "velocity_graph"
+        },
+        {
+          "type": "motion_trace"
+        }
+      ],
+      "equations": [
+        "F_net = m * a",
+        "a = F_net / m",
+        "p = m * v",
+        "F = dp / dt",
+        "F_friction = mu * N"
+      ]
+    },
+    "formula": "D= D  (k is constrant)",
+    "formulas": [
+      "D= D  (k is constrant)",
+      "D= D",
+      "We know p=mv",
+      "Dp   = D(mv)",
+      "Dp = mDv",
+      "GM MF d=\nG is a proportionality constant",
+      "to be  G=6.67x10",
+      "duct of its mass and velocity p = mv.",
+      "W = Fnet S",
+      "u2  = 2 a s   or   s"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "D= D  (k is constrant)",
+        "D= D",
+        "We know p=mv",
+        "Dp   = D(mv)",
+        "Dp = mDv",
+        "GM MF d=\nG is a proportionality constant",
+        "to be  G=6.67x10",
+        "duct of its mass and velocity p = mv.",
+        "W = Fnet S",
+        "u2  = 2 a s   or   s"
+      ],
+      "constants": [
+        "G=6.67x10",
+        "g = 0.25 kg"
+      ],
+      "laws": [
+        "fundamental laws which explain the",
+        "These three laws are popularly",
+        "known as Newton's laws of motion",
+        "1 First law of motion",
+        "The first law of motion can be stated",
+        "Newton\u2019s first law explains what",
+        "The law of inertia tells us",
+        "the first law of motion as:"
+      ],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 40
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 42
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 45
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 54
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 53
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 183
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 47
+        }
+      ]
+    },
+    "timestamp": "2026-05-08T16:59:29.566223+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "0fb351c8-b931-4efa-9791-05eafa670cbd",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: explain newtons second law of motion",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "newtons_second_law",
+      "topic": "Newton's Second Law of Motion",
+      "environment": {
+        "gravity": 9.8,
+        "friction": 0.1,
+        "air_resistance": 0.0
+      },
+      "entities": [
+        {
+          "id": "mass_object",
+          "type": "block",
+          "mass": 10.0,
+          "properties": {}
+        }
+      ],
+      "interactions": [
+        {
+          "type": "apply_force",
+          "target": "mass_object",
+          "parameters": {
+            "force": [
+              50.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "type": "friction",
+          "target": "mass_object",
+          "parameters": {
+            "mu_kinetic": 0.1,
+            "mu_static": 0.2
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "force_vectors"
+        },
+        {
+          "type": "acceleration_graph"
+        },
+        {
+          "type": "velocity_graph"
+        }
+      ],
+      "equations": [
+        "F_net = m * a",
+        "a = F_net / m",
+        "p = m * v",
+        "F_net = dp / dt"
+      ]
+    },
+    "formula": "duct of its mass and velocity p = mv.",
+    "formulas": [
+      "duct of its mass and velocity p = mv.",
+      "W = Fnet S",
+      "u2  = 2 a s   or   s",
+      "Fnet= ma",
+      "W = ( )22",
+      "W =",
+      "its initial velocity u = o",
+      "m = 250g",
+      "v = 40 cm / s",
+      "We know that Fnet x = 0"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "duct of its mass and velocity p = mv.",
+        "W = Fnet S",
+        "u2  = 2 a s   or   s",
+        "Fnet= ma",
+        "W = ( )22",
+        "W =",
+        "its initial velocity u = o",
+        "m = 250g",
+        "v = 40 cm / s",
+        "We know that Fnet x = 0"
+      ],
+      "constants": [
+        "g = 0.25 kg",
+        "G=6.67x10"
+      ],
+      "laws": [
+        "fundamental laws which explain the",
+        "These three laws are popularly",
+        "known as Newton's laws of motion",
+        "1 First law of motion",
+        "The first law of motion can be stated",
+        "Newton\u2019s first law explains what",
+        "The law of inertia tells us",
+        "the first law of motion as:"
+      ],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 40
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 42
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 54
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 53
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 183
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 44
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 45
+        }
+      ]
+    },
+    "timestamp": "2026-05-08T16:36:38.026558+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "466e3c17-ad0b-4c60-b5da-202cc0d32fa5",
+    "title": "Projectile Motion",
+    "description": "AI-synthesized interactive simulation for: Explain projectile motion with simulation",
+    "topic": {
+      "topic": "Projectile Motion",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "projectile_motion",
+      "topic": "Projectile Motion",
+      "environment": {
+        "gravity": 9.8,
+        "friction": 0.0,
+        "air_resistance": 0.0
+      },
+      "entities": [
+        {
+          "id": "projectile_1",
+          "type": "projectile",
+          "mass": 1.0,
+          "properties": {}
+        }
+      ],
+      "interactions": [
+        {
+          "type": "projectile_launch",
+          "target": "projectile_1",
+          "parameters": {
+            "angle_deg": 45.0,
+            "initial_speed": 20.0
+          }
+        },
+        {
+          "type": "gravity",
+          "target": "projectile_1",
+          "parameters": {
+            "g": 9.8
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "trajectory_path"
+        },
+        {
+          "type": "velocity_graph"
+        },
+        {
+          "type": "motion_trace"
+        }
+      ],
+      "equations": [
+        "x = v0 * cos(theta) * t",
+        "y = v0 * sin(theta) * t - 0.5 * g * t^2",
+        "v_y = v0 * sin(theta) - g * t",
+        "R = (v0^2 * sin(2 * theta)) / g"
+      ]
+    },
+    "formula": "he final momentum of the system\n= m1v1+m2v2",
+    "formulas": [
+      "he final momentum of the system\n= m1v1+m2v2",
+      "m2v2 = 0",
+      "m1v1 = - m2v2",
+      "v1 = - m2v2 /m1",
+      "v1 = - (300kg) x (400m/s)",
+      "kg\n= -10 m/s.",
+      "A cannon of mass m 1 = 12000 kg",
+      "fires a shell of mass m 2 = 3 0 0 k g i n",
+      "v2 = 400m/s. Find the velocity of the",
+      "s = +ve"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Projectile Motion",
+      "formulas": [
+        "he final momentum of the system\n= m1v1+m2v2",
+        "m2v2 = 0",
+        "m1v1 = - m2v2",
+        "v1 = - m2v2 /m1",
+        "v1 = - (300kg) x (400m/s)",
+        "kg\n= -10 m/s.",
+        "A cannon of mass m 1 = 12000 kg",
+        "fires a shell of mass m 2 = 3 0 0 k g i n",
+        "v2 = 400m/s. Find the velocity of the",
+        "s = +ve"
+      ],
+      "constants": [
+        "g\n= -10 m/s"
+      ],
+      "laws": [
+        "l First Law of Motion: A body continues its state of rest or of uniform motion unless a",
+        "l Second Law of Motion: The rate of change of momentum of a body is directly",
+        "l Third Law of Motion: If one object exerts a force on other object, the second object",
+        "2) Illustrate an example of each of the three laws of motion"
+      ],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 52
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 48
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 32
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 26
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 31
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 30
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 53
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 28
+        }
+      ]
+    },
+    "timestamp": "2026-05-08T16:35:42.390858+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "15612214-2fae-4e4d-90be-8267acb6bdd3",
+    "title": "Projectile Motion",
+    "description": "AI-synthesized interactive simulation for: Show projectile motion with adjustable launch angle and velocity",
+    "topic": {
+      "topic": "Projectile Motion",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "projectile_motion",
+      "topic": "Projectile Motion",
+      "environment": {
+        "gravity": 9.8,
+        "friction": 0.0,
+        "air_resistance": 0.0
+      },
+      "entities": [
+        {
+          "id": "projectile_1",
+          "type": "projectile",
+          "mass": 1.0,
+          "properties": {}
+        }
+      ],
+      "interactions": [
+        {
+          "type": "projectile_launch",
+          "target": "projectile_1",
+          "parameters": {
+            "angle_deg": 45.0,
+            "initial_speed": 20.0
+          }
+        },
+        {
+          "type": "gravity",
+          "target": "projectile_1",
+          "parameters": {
+            "g": 9.8
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "trajectory_path"
+        },
+        {
+          "type": "velocity_graph"
+        },
+        {
+          "type": "motion_trace"
+        }
+      ],
+      "equations": [
+        "x = v0 * cos(theta) * t",
+        "y = v0 * sin(theta) * t - 0.5 * g * t^2",
+        "R = (v0^2 * sin(2*theta)) / g"
+      ]
+    },
+    "formula": "t=0s",
+    "formulas": [
+      "t=0s",
+      "t=1s",
+      "t=2s",
+      "times t=0s",
+      "aw velocity vectors at times  t=0s",
+      "s = +ve",
+      "s =",
+      "s = 0",
+      "v = +ve",
+      "v ="
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Projectile Motion",
+      "formulas": [
+        "t=0s",
+        "t=1s",
+        "t=2s",
+        "times t=0s",
+        "aw velocity vectors at times  t=0s",
+        "s = +ve",
+        "s =",
+        "s = 0",
+        "v = +ve",
+        "v ="
+      ],
+      "constants": [
+        "g\n= -10 m/s"
+      ],
+      "laws": [
+        "l First Law of Motion: A body continues its state of rest or of uniform motion unless a",
+        "l Second Law of Motion: The rate of change of momentum of a body is directly"
+      ],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 28
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 32
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 52
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 29
+        }
+      ]
+    },
+    "timestamp": "2026-05-08T16:34:59.491934+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  }
+]
