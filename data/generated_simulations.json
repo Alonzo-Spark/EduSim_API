@@ -1,5 +1,274 @@
 [
   {
+    "id": "37d6c5be-41d0-4df3-b5e1-6ed167edb86e",
+    "title": "Chemistry Visualization",
+    "description": "AI-synthesized interactive simulation for: exaplain colliosion with two cars colliding",
+    "topic": {
+      "topic": "Chemistry Visualization",
+      "subject": "chemistry",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "two_car_collision",
+      "topic": "Momentum and Collisions",
+      "environment": {
+        "gravity": 9.8,
+        "friction": 0.1,
+        "air_resistance": 0.05
+      },
+      "entities": [
+        {
+          "id": "car_1",
+          "type": "block",
+          "mass": 1200.0,
+          "properties": {
+            "initial_velocity": [
+              15.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "id": "car_2",
+          "type": "block",
+          "mass": 1500.0,
+          "properties": {
+            "initial_velocity": [
+              0.0,
+              0.0
+            ]
+          }
+        }
+      ],
+      "interactions": [
+        {
+          "type": "collision",
+          "target": "car_1",
+          "parameters": {
+            "with_entity": "car_2",
+            "restitution": 0.6
+          }
+        },
+        {
+          "type": "friction",
+          "target": "car_1",
+          "parameters": {
+            "mu_kinetic": 0.1,
+            "mu_static": 0.2
+          }
+        },
+        {
+          "type": "friction",
+          "target": "car_2",
+          "parameters": {
+            "mu_kinetic": 0.1,
+            "mu_static": 0.2
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "velocity_graph"
+        },
+        {
+          "type": "energy_bar"
+        },
+        {
+          "type": "force_vectors"
+        },
+        {
+          "type": "motion_trace"
+        }
+      ],
+      "equations": [
+        "p = m * v",
+        "m1*u1 + m2*u2 = m1*v1 + m2*v2",
+        "KE = 0.5 * m * v^2",
+        "Impulse = F * delta_t = delta_p"
+      ]
+    },
+    "formula": "",
+    "formulas": [],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Chemistry Visualization",
+      "formulas": [],
+      "constants": [],
+      "laws": [],
+      "definitions": [],
+      "sources": []
+    },
+    "timestamp": "2026-05-09T07:38:05.629642+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "479982b4-4915-427d-8db0-86c740d89715",
+    "title": "Orbital Mechanics",
+    "description": "AI-synthesized interactive simulation for: explain gravity with mars planet",
+    "topic": {
+      "topic": "Orbital Mechanics",
+      "subject": "astronomy",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "mars_gravity_comparison",
+      "topic": "Gravitation on Mars",
+      "environment": {
+        "gravity": 3.71,
+        "friction": 0.1,
+        "air_resistance": 0.01
+      },
+      "entities": [
+        {
+          "id": "mars_surface",
+          "type": "plane",
+          "mass": null,
+          "properties": {
+            "angle_deg": 0.0
+          }
+        },
+        {
+          "id": "falling_object",
+          "type": "sphere",
+          "mass": 5.0,
+          "properties": {
+            "initial_height": 20.0
+          }
+        }
+      ],
+      "interactions": [
+        {
+          "type": "gravity",
+          "target": "falling_object",
+          "parameters": {
+            "g": 3.71
+          }
+        },
+        {
+          "type": "collision",
+          "target": "falling_object",
+          "parameters": {
+            "with_entity": "mars_surface",
+            "restitution": 0.4
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "velocity_graph"
+        },
+        {
+          "type": "acceleration_graph"
+        },
+        {
+          "type": "motion_trace"
+        }
+      ],
+      "equations": [
+        "g_mars = G * M_mars / R_mars^2",
+        "W = m * g_mars",
+        "v = u + g_mars * t",
+        "s = u*t + 0.5 * g_mars * t^2"
+      ]
+    },
+    "formula": "F = 2",
+    "formulas": [
+      "F = 2",
+      "m  =  2",
+      "g = \n2",
+      "FC = \n2Mv",
+      "W = mg",
+      "GM MF d=\nG is a proportionality constant",
+      "to be  G=6.67x10",
+      "We get g = 9.8  m/s2 (approximately)",
+      "v = u + at",
+      "s = ut +"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Orbital Mechanics",
+      "formulas": [
+        "F = 2",
+        "m  =  2",
+        "g = \n2",
+        "FC = \n2Mv",
+        "W = mg",
+        "GM MF d=\nG is a proportionality constant",
+        "to be  G=6.67x10",
+        "We get g = 9.8  m/s2 (approximately)",
+        "v = u + at",
+        "s = ut +"
+      ],
+      "constants": [
+        "g = \n2\nGM",
+        "C = \n2Mv",
+        "G=6.67x10",
+        "g = 9.8  m/s2",
+        "g = 10 m/s2"
+      ],
+      "laws": [
+        "From Newton's second law, F/m is equal",
+        "Explain universal law of gravitation",
+        "2 Universal law of gravitation",
+        "generalised law of gravitation as stated by",
+        "You know that from Newton\u2019s law, the net force on it is",
+        "From Newton's  laws we get",
+        "of gravity, law of gravitation, gravity weight, weightlessness, stability, free fall"
+      ],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 80
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 87
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 81
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 149
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 89
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 86
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 79
+        }
+      ]
+    },
+    "timestamp": "2026-05-09T07:37:05.521314+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
     "id": "2d94783d-8ea6-4b14-8691-bc541dd6d28f",
     "title": "Chemistry Visualization",
     "description": "AI-synthesized interactive simulation for: explain gravitaion by taking rocket as an example",
