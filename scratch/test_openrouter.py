@@ -9,13 +9,15 @@ def test_openrouter():
     print(f"Key found: {api_key[:10]}...")
     
     try:
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        }
+        print(f"Headers: {headers}")
         with httpx.Client(timeout=10.0) as client:
             response = client.post(
                 "https://openrouter.ai/api/v1/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {api_key}",
-                    "Content-Type": "application/json",
-                },
+                headers=headers,
                 json={
                     "model": "google/gemini-2.0-flash-001",
                     "messages": [{"role": "user", "content": "say hi"}],

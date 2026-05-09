@@ -14,13 +14,13 @@ load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 # =========================================================
 # LLM MODELS
 # =========================================================
-# Gemini Models
-GEMINI_MODEL = "gemini-2.5flash" # More modern and likely more available
-GEMINI_FALLBACK_MODEL = "gemini-flash-latest"
-
-# OpenRouter Models (Fallback)
+# OpenRouter Models (Primary)
 OPENROUTER_MODEL = "google/gemini-2.0-flash-001" # Very fast and reliable fallback
 OPENROUTER_FALLBACK = "anthropic/claude-3-haiku"
+
+# Gemini Models (Fallback)
+GEMINI_MODEL = "gemini-1.5-flash-latest"
+GEMINI_FALLBACK_MODEL = "gemini-1.5-pro-latest"
 
 
 # =========================================================
@@ -74,15 +74,26 @@ def _generate_openrouter_text(prompt: str, model_name: str, temperature: float, 
 # =========================================================
 # GENERATE RAW TEXT
 # =========================================================
-def generate_gemini_text(
+def generate_llm_text(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 2048
 ):
+    """
+    Unified text generation with OpenRouter as primary and Gemini as fallback.
+    """
     last_error = None
 
-    # 1. Try Gemini (Native)
-    for model_name in (GEMINI_MODEL, GEMINI_FALLBACK_MODEL, "gemini-2.5flash"):
+    # 1. Try OpenRouter (Primary)
+    print("🔄 Attempting OpenRouter primary...")
+    for model_name in (OPENROUTER_MODEL, OPENROUTER_FALLBACK):
+        result = _generate_openrouter_text(final_prompt, model_name, temperature, max_output_tokens)
+        if result:
+            return result
+
+    # 2. Try Gemini (Fallback)
+    print("🔄 Switching to Gemini fallback...")
+    for model_name in (GEMINI_MODEL, GEMINI_FALLBACK_MODEL, "gemini-1.5-flash-latest"):
         try:
             model = _configure_gemini(model_name)
             if not model:
@@ -106,17 +117,7 @@ def generate_gemini_text(
             last_error = e
             print(f"⚠ Gemini model failed ({model_name}): {e}")
 
-    # 2. Try OpenRouter (Fallback)
-    print("🔄 Switching to OpenRouter fallback...")
-    for model_name in (OPENROUTER_MODEL, OPENROUTER_FALLBACK):
-        result = _generate_openrouter_text(final_prompt, model_name, temperature, max_output_tokens)
-        if result:
-            return result
-
     print(f"\n❌ All LLM generation paths failed. Last error: {last_error}")
-    # Return a minimal valid JSON if we are in synthesis mode, 
-    # but since this function is generic, we return the error message.
-    # The caller (service.py) should handle non-JSON better or we should fix it here.
     return "Error: Unable to generate response after multiple attempts."
 
 
@@ -183,7 +184,7 @@ Return response in this format:
 ## Real-World Applications
 """
 
-    return generate_gemini_text(
+    return generate_llm_text(
         final_prompt,
         temperature=0.2,
         max_output_tokens=1500

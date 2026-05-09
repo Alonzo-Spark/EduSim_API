@@ -12,15 +12,14 @@ import faiss
 from sentence_transformers import SentenceTransformer
 
 from rag.retriever import get_retriever
-from rag.generator import generate_gemini_text
+from rag.generator import generate_llm_text
 from .templates import detect_subject
 from .prompt_builder import build_dsl_prompt
 from .sanitizer import sanitize_json
 from .validator import validate_simulation
 
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-GEMINI_MODEL = "gemini-1.5-flash"
+
 
 INDEX_FILE = Path("faiss_index/index.faiss")
 METADATA_FILE = Path("faiss_index/metadata.pkl")
@@ -185,7 +184,7 @@ def generate_simulation_synthesis(prompt: str, topic: str | None = None):
     
     print("Gemini request started: DSL synthesis")
     dsl_prompt = build_dsl_prompt(prompt, context, extracted)
-    raw_generated = generate_gemini_text(dsl_prompt, temperature=0.2, max_output_tokens=3500)
+    raw_generated = generate_llm_text(dsl_prompt, temperature=0.2, max_output_tokens=3500)
     print("Gemini generation completed: DSL synthesis")
     
     # Sanitize and parse JSON
@@ -328,7 +327,7 @@ def generate_simulation_synthesis_stream(prompt: str, topic: str | None = None):
         # Event 4: Calling LLM for DSL synthesis
         yield _format_sse_event("progress", {"stage": "Synthesizing Physics DSL with AI..."})
         dsl_prompt = build_dsl_prompt(prompt, context, extracted)
-        raw_generated = generate_gemini_text(dsl_prompt, temperature=0.2, max_output_tokens=3500)
+        raw_generated = generate_llm_text(dsl_prompt, temperature=0.2, max_output_tokens=3500)
         
         # Event 5: Sanitizing JSON
         yield _format_sse_event("progress", {"stage": "Sanitizing and parsing JSON..."})
