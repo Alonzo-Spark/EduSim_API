@@ -1,111 +1,6228 @@
 {
-  "physics": {
-    "class_8": {
-      "boards": ["CBSE", "AP", "IB"],
-      "chapters": {
-        "Force and Pressure": {
-          "outcomes": [
-            "Explain contact and non-contact forces",
-            "Relate force to change in motion"
-          ],
-          "prerequisites": ["Motion basics", "SI units"],
-          "topics": ["Force", "Pressure", "Newton's laws"]
+  "classes": [
+    {
+      "id": 1,
+      "name": "Class 1",
+      "description": "Foundations of numbers and counting",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Math",
+          "icon": "Calculator",
+          "description": "Numbers, shapes & basic operations",
+          "chapters": 10
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Class 2",
+      "description": "Building early arithmetic skills",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Math",
+          "icon": "Calculator",
+          "description": "Addition, subtraction & patterns",
+          "chapters": 12
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Class 3",
+      "description": "Curiosity meets early science",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Math",
+          "icon": "Calculator",
+          "description": "Multiplication, division, fractions",
+          "chapters": 14
         },
-        "Light": {
-          "outcomes": [
-            "Differentiate reflection and refraction",
-            "Predict ray paths in different media"
-          ],
-          "prerequisites": ["Ray diagrams", "Angles"],
-          "topics": ["Reflection", "Refraction", "Lenses"]
+        {
+          "id": "evs",
+          "name": "EVS",
+          "icon": "Leaf",
+          "description": "Explore the world around you",
+          "chapters": 14
         }
-      }
+      ]
     },
-    "class_9": {
-      "boards": ["CBSE", "AP", "IB"],
-      "chapters": {
-        "Motion": {
-          "outcomes": [
-            "Interpret velocity-time graphs",
-            "Apply equations of motion"
-          ],
-          "prerequisites": ["Measurement", "Graphs"],
-          "topics": ["Uniform motion", "Acceleration", "Kinematics"]
+    {
+      "id": 4,
+      "name": "Class 4",
+      "description": "Sharpen logic and observation",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Math",
+          "icon": "Calculator",
+          "description": "Decimals, geometry, measurement",
+          "chapters": 15
+        },
+        {
+          "id": "evs",
+          "name": "EVS",
+          "icon": "Leaf",
+          "description": "Plants, animals & environment",
+          "chapters": 15
         }
-      }
+      ]
     },
-    "class_11": {
-      "boards": ["CBSE", "AP", "IB"],
-      "chapters": {
-        "Kinematics": {
-          "outcomes": [
-            "Model projectile motion in 2D",
-            "Decompose vectors in component form"
-          ],
-          "prerequisites": ["Vectors", "Trigonometry"],
-          "topics": ["Projectile motion", "Relative motion", "Vector resolution"]
+    {
+      "id": 5,
+      "name": "Class 5",
+      "description": "Bridging primary to middle school",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Math",
+          "icon": "Calculator",
+          "description": "Advanced arithmetic & geometry",
+          "chapters": 16
+        },
+        {
+          "id": "evs",
+          "name": "EVS",
+          "icon": "Leaf",
+          "description": "General science foundations",
+          "chapters": 16
         }
-      }
-    }
-  },
-  "chemistry": {
-    "class_9": {
-      "boards": ["CBSE", "AP", "IB"],
-      "chapters": {
-        "Atoms and Molecules": {
-          "outcomes": [
-            "Describe atomic models",
-            "Explain molecular composition"
-          ],
-          "prerequisites": ["Elements and compounds"],
-          "topics": ["Atoms", "Molecules", "Valency"]
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Class 6",
+      "description": "Step into structured science",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Mathematics",
+          "icon": "Calculator",
+          "description": "Foundation concepts and early geometry",
+          "chapters": [
+            {
+              "name": "Knowing Our Numbers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Estimating and Comparing Numbers"
+                },
+                {
+                  "name": "Estimation and Rounding Off Numbers"
+                },
+                {
+                  "name": "Revision of Place Value"
+                },
+                {
+                  "name": "Introduction to Large Numbers"
+                },
+                {
+                  "name": "Place value of larger numbers"
+                },
+                {
+                  "name": "Usage of commas"
+                },
+                {
+                  "name": "International System of Numeration"
+                },
+                {
+                  "name": "Large Numbers Used in Daily Life Situations"
+                }
+              ]
+            },
+            {
+              "name": "Whole Numbers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Whole Numbers"
+                },
+                {
+                  "name": "Representation of Whole Numbers on Number Line"
+                },
+                {
+                  "name": "Properties of Whole Numbers"
+                },
+                {
+                  "name": "Patterns in Whole Numbers"
+                }
+              ]
+            },
+            {
+              "name": "Playing with Numbers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Divisibility Rule"
+                },
+                {
+                  "name": "Divisibility by 2"
+                },
+                {
+                  "name": "Divisibility by 3"
+                },
+                {
+                  "name": "Divisibility by 6"
+                },
+                {
+                  "name": "Divisibility by 9"
+                },
+                {
+                  "name": "Divisibility by 5"
+                },
+                {
+                  "name": "Divisibility by 10"
+                },
+                {
+                  "name": "Factors"
+                },
+                {
+                  "name": "Prime and Composite Numbers"
+                },
+                {
+                  "name": "Co-prime or relative prime"
+                },
+                {
+                  "name": "Twin primes"
+                },
+                {
+                  "name": "Prime Factorization"
+                },
+                {
+                  "name": "Methods of Prime Factorization"
+                },
+                {
+                  "name": "Common Factors"
+                },
+                {
+                  "name": "Highest Common Factor (HCF)"
+                },
+                {
+                  "name": "Method of finding HCF"
+                },
+                {
+                  "name": "Common Multiples"
+                },
+                {
+                  "name": "Least common Multiple (LCM)"
+                },
+                {
+                  "name": "Methods of Finding LCM"
+                },
+                {
+                  "name": "Relationship between LCM and HCF"
+                },
+                {
+                  "name": "Divisibility Rules for 4, 8 and 11"
+                },
+                {
+                  "name": "Divisibility Rule for 4"
+                },
+                {
+                  "name": "Divisibility Rule for 8"
+                },
+                {
+                  "name": "Divisibility Rule for 11"
+                }
+              ]
+            },
+            {
+              "name": "Basic Geometrical Ideas",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Point"
+                },
+                {
+                  "name": "A Line Segment"
+                },
+                {
+                  "name": "A Line"
+                },
+                {
+                  "name": "A Ray"
+                },
+                {
+                  "name": "Curve"
+                },
+                {
+                  "name": "Angle"
+                },
+                {
+                  "name": "Triangle"
+                },
+                {
+                  "name": "Quadrilateral"
+                },
+                {
+                  "name": "Circle"
+                }
+              ]
+            },
+            {
+              "name": "Measures of Lines and Angles",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Measure of a Line Segment"
+                },
+                {
+                  "name": "Comparing by Using Instruments"
+                },
+                {
+                  "name": "Measure of an Angle"
+                },
+                {
+                  "name": "The Protractor"
+                },
+                {
+                  "name": "Intersecting Lines, Perpendicular Lines and Parallel Lines"
+                },
+                {
+                  "name": "Intersecting Lines"
+                },
+                {
+                  "name": "Perpendicular Lines"
+                },
+                {
+                  "name": "Parallel Lines"
+                }
+              ]
+            },
+            {
+              "name": "Integers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "How Negative Number's Arise?"
+                },
+                {
+                  "name": "Some Examples of Negative Numbers"
+                },
+                {
+                  "name": "Representation of Integers on a Number Line"
+                },
+                {
+                  "name": "Ordering of Integers"
+                },
+                {
+                  "name": "Addition and Subtraction of Integers"
+                },
+                {
+                  "name": "Addition of integers on the number line"
+                },
+                {
+                  "name": "Subtraction of integers"
+                }
+              ]
+            },
+            {
+              "name": "Fractions and Decimals",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "A Fraction"
+                },
+                {
+                  "name": "Improper Fractions"
+                },
+                {
+                  "name": "Mixed Fractions"
+                },
+                {
+                  "name": "Numerator and Denominator"
+                },
+                {
+                  "name": "Fractional Numbers on the Number Line"
+                },
+                {
+                  "name": "Equivalent Fractions"
+                },
+                {
+                  "name": "Standard Form of a Fraction"
+                },
+                {
+                  "name": "Like and Unlike Fractions"
+                },
+                {
+                  "name": "Ascending and Descending Order of Fractions"
+                },
+                {
+                  "name": "Comparing Unlike Fractions"
+                },
+                {
+                  "name": "Ascending and Descending Order"
+                },
+                {
+                  "name": "Addition of Fractions"
+                },
+                {
+                  "name": "Adding unlike fractions"
+                },
+                {
+                  "name": "Addition of mixed fractions"
+                },
+                {
+                  "name": "Subtraction"
+                },
+                {
+                  "name": "Decimals"
+                },
+                {
+                  "name": "Place Value in Decimal Number"
+                },
+                {
+                  "name": "Addition and Subtractions of Decimal Fractions"
+                }
+              ]
+            },
+            {
+              "name": "Data Handling",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Collection and Recording of Data"
+                },
+                {
+                  "name": "Organisation of Data"
+                },
+                {
+                  "name": "Representation of Data"
+                },
+                {
+                  "name": "Pictographs"
+                },
+                {
+                  "name": "Bar Graph"
+                }
+              ]
+            },
+            {
+              "name": "Introduction to Algebra",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Patterns - Making Rules"
+                },
+                {
+                  "name": "Pattern-1"
+                },
+                {
+                  "name": "Pattern-2"
+                },
+                {
+                  "name": "Pattern 3"
+                },
+                {
+                  "name": "Variable"
+                },
+                {
+                  "name": "More Patterns"
+                },
+                {
+                  "name": "Expressions with Variables"
+                },
+                {
+                  "name": "Rules from Geometry/Mensuration"
+                },
+                {
+                  "name": "Rule from Arithmetic"
+                },
+                {
+                  "name": "Simple Equations"
+                },
+                {
+                  "name": "L.H.S & R.H.S of an Equation"
+                },
+                {
+                  "name": "Solution of an equation (Root of the equation)- Trial & Error Method"
+                }
+              ]
+            },
+            {
+              "name": "Perimeter and Area",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Perimeter"
+                },
+                {
+                  "name": "Perimeter of a Rectangle"
+                },
+                {
+                  "name": "Perimeter of Regular shapes"
+                },
+                {
+                  "name": "Area"
+                },
+                {
+                  "name": "Area of the rectangle"
+                },
+                {
+                  "name": "Area of the Square"
+                }
+              ]
+            },
+            {
+              "name": "Ratio and Proportion",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Comparing quantities with different units"
+                },
+                {
+                  "name": "Ratio in different situation"
+                },
+                {
+                  "name": "Same ratio in different situations"
+                },
+                {
+                  "name": "Division of a given quantity in a given ratio"
+                },
+                {
+                  "name": "Proportion"
+                },
+                {
+                  "name": "Unitary Method"
+                }
+              ]
+            },
+            {
+              "name": "Symmetry",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Line Symmetry"
+                },
+                {
+                  "name": "Multiple Lines of Symmetry"
+                }
+              ]
+            },
+            {
+              "name": "Practical Geometry",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "A Line Segment"
+                },
+                {
+                  "name": "Construction of a Line Segment of a given Length"
+                },
+                {
+                  "name": "Construction of a Circle"
+                },
+                {
+                  "name": "Perpendiculars"
+                },
+                {
+                  "name": "Constructing Perpendicular Bisector of the given Line Segment"
+                },
+                {
+                  "name": "Perpendicular to a Line, through a Point which is not on it"
+                },
+                {
+                  "name": "Drawing Angles Using Protractor"
+                },
+                {
+                  "name": "Constructing a Copy of an Angle of Unknown Measure"
+                },
+                {
+                  "name": "Construction to Bisect a Given Angle"
+                },
+                {
+                  "name": "Constructing Angles of Special Measures"
+                },
+                {
+                  "name": "Construction of 60° Angle"
+                },
+                {
+                  "name": "Construction of 120° Angle"
+                },
+                {
+                  "name": "Construction of 30° Angle"
+                },
+                {
+                  "name": "Construction of 90° Angle"
+                }
+              ]
+            },
+            {
+              "name": "Understanding 3D and 2D Shapes",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "3D-Shapes"
+                },
+                {
+                  "name": "Cuboid"
+                },
+                {
+                  "name": "Cube"
+                },
+                {
+                  "name": "Cylinder"
+                },
+                {
+                  "name": "Cone"
+                },
+                {
+                  "name": "Sphere"
+                },
+                {
+                  "name": "Prism"
+                },
+                {
+                  "name": "Pyramid"
+                },
+                {
+                  "name": "Polygons"
+                },
+                {
+                  "name": "Regular Polygon"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "science",
+          "name": "General Science",
+          "icon": "Atom",
+          "description": "Foundational science topics",
+          "chapters": [
+            {
+              "name": "Our food",
+              "topics": [
+                {
+                  "name": "Our Food"
+                },
+                {
+                  "name": "Finding varieties in our food"
+                },
+                {
+                  "name": "Food ingredients"
+                },
+                {
+                  "name": "Many ingredients are needed to prepare food"
+                },
+                {
+                  "name": "Condiments and dry fruits"
+                },
+                {
+                  "name": "How people develop food habits?"
+                },
+                {
+                  "name": "Different methods of preparing food"
+                },
+                {
+                  "name": "Tasty Food"
+                },
+                {
+                  "name": "Let us cook"
+                },
+                {
+                  "name": "Preservation of food"
+                },
+                {
+                  "name": "Let us store food"
+                },
+                {
+                  "name": "Vegetable carving"
+                }
+              ]
+            },
+            {
+              "name": "Playing with magnets",
+              "topics": [
+                {
+                  "name": "Magnets"
+                },
+                {
+                  "name": "Finding objects that get stuck to the cap of the pin holder"
+                },
+                {
+                  "name": "Story of Magnet"
+                },
+                {
+                  "name": "Magnets of different shapes"
+                },
+                {
+                  "name": "Which materials are attracted by magnets?"
+                },
+                {
+                  "name": "Can we separate iron filings from soil?"
+                },
+                {
+                  "name": "Poles of a Bar Magnet"
+                },
+                {
+                  "name": "Finding directions with a bar magnet"
+                },
+                {
+                  "name": "Magnetic Compass"
+                },
+                {
+                  "name": "Attraction and Repulsion between two Magnets"
+                },
+                {
+                  "name": "Earth as a Magnet"
+                },
+                {
+                  "name": "Finding out whether the given object is a magnet or not"
+                },
+                {
+                  "name": "Make your own magnet"
+                },
+                {
+                  "name": "Make your own magnetic compass"
+                },
+                {
+                  "name": "Magnetic induction"
+                }
+              ]
+            },
+            {
+              "name": "Rain: where does it come from?",
+              "topics": [
+                {
+                  "name": "Forms of Water"
+                },
+                {
+                  "name": "Solid Form"
+                },
+                {
+                  "name": "Liquid Form"
+                },
+                {
+                  "name": "Gaseous Form"
+                },
+                {
+                  "name": "Evaporation and formation of clouds"
+                },
+                {
+                  "name": "Condensation"
+                },
+                {
+                  "name": "Clouds and rain"
+                },
+                {
+                  "name": "Rain"
+                },
+                {
+                  "name": "Monsoons"
+                },
+                {
+                  "name": "Water cycle"
+                }
+              ]
+            },
+            {
+              "name": "What do animals eat?",
+              "topics": [
+                {
+                  "name": "Food intake"
+                },
+                {
+                  "name": "Herbivores, carnivores, and omnivores"
+                },
+                {
+                  "name": "Search for food"
+                },
+                {
+                  "name": "Tracking down food"
+                },
+                {
+                  "name": "Collecting food"
+                },
+                {
+                  "name": "Picking food with beak"
+                },
+                {
+                  "name": "Picture Collection"
+                },
+                {
+                  "name": "Natural scavengers"
+                },
+                {
+                  "name": "How does a frog get its food?"
+                },
+                {
+                  "name": "How does a cow get its food?"
+                },
+                {
+                  "name": "Rumination"
+                },
+                {
+                  "name": "How much and how little?"
+                },
+                {
+                  "name": "How a dog gets its food"
+                },
+                {
+                  "name": "Using the tongue"
+                },
+                {
+                  "name": "Getting food without hunting"
+                },
+                {
+                  "name": "How leeches get their food?"
+                },
+                {
+                  "name": "Modes of collecting food"
+                },
+                {
+                  "name": "Nocturnals"
+                },
+                {
+                  "name": "Food Chain"
+                },
+                {
+                  "name": "Animal colonies and food"
+                },
+                {
+                  "name": "The wonder world of ants"
+                }
+              ]
+            },
+            {
+              "name": "Materials Objects",
+              "topics": [
+                {
+                  "name": "Materials and Objects"
+                },
+                {
+                  "name": "Finding the materials used to make different objects"
+                },
+                {
+                  "name": "Finding the objects made from diffrent materials"
+                },
+                {
+                  "name": "Properties of Materials"
+                },
+                {
+                  "name": "Transparency"
+                },
+                {
+                  "name": "Identifying transparent and opaque materials"
+                },
+                {
+                  "name": "Are we able to See through a paper"
+                },
+                {
+                  "name": "Translucent"
+                },
+                {
+                  "name": "State of the materials"
+                },
+                {
+                  "name": "Light a candle"
+                },
+                {
+                  "name": "Classification of Materials"
+                },
+                {
+                  "name": "Sinking or floating in water"
+                },
+                {
+                  "name": "Do iron objects float?"
+                },
+                {
+                  "name": "Soluble or insoluble in water"
+                }
+              ]
+            },
+            {
+              "name": "Habitat",
+              "topics": [
+                {
+                  "name": "Habitat"
+                },
+                {
+                  "name": "Who lives where"
+                },
+                {
+                  "name": "Pond as a habitat"
+                },
+                {
+                  "name": "Organisms that live in different levels of a pond"
+                },
+                {
+                  "name": "Aquatic habitat"
+                },
+                {
+                  "name": "Tree as a habitat"
+                },
+                {
+                  "name": "Our house as a habitat"
+                },
+                {
+                  "name": "Garden: A wonderful place"
+                },
+                {
+                  "name": "Terrestrial habitat"
+                },
+                {
+                  "name": "Compare water plants with land plants"
+                },
+                {
+                  "name": "Diversity of habitats in Telugu States"
+                },
+                {
+                  "name": "Desert habitats"
+                },
+                {
+                  "name": "Good habitat - good life!"
+                }
+              ]
+            },
+            {
+              "name": "Separation of Substances",
+              "topics": [
+                {
+                  "name": "Separation of Substances"
+                },
+                {
+                  "name": "Mixtures"
+                },
+                {
+                  "name": "Use of water in separation"
+                },
+                {
+                  "name": "Methods of Separation"
+                },
+                {
+                  "name": "Hand Picking"
+                },
+                {
+                  "name": "Winnowing"
+                },
+                {
+                  "name": "Sedimentation and decantation"
+                },
+                {
+                  "name": "Sieving and filtration"
+                },
+                {
+                  "name": "Filter paper"
+                },
+                {
+                  "name": "Why can't we filter salt from salt water"
+                },
+                {
+                  "name": "Crystallization"
+                },
+                {
+                  "name": "Distillation"
+                },
+                {
+                  "name": "Get your own distilled water"
+                },
+                {
+                  "name": "Sublimation"
+                },
+                {
+                  "name": "Sublimation of camphor"
+                },
+                {
+                  "name": "Chromatography"
+                },
+                {
+                  "name": "A chalk with diffrent colours"
+                },
+                {
+                  "name": "Separation using more than one method"
+                },
+                {
+                  "name": "Separation of diffrent materials from the mixture"
+                }
+              ]
+            },
+            {
+              "name": "Fibre to Fabric",
+              "topics": [
+                {
+                  "name": "Types of Fabrics"
+                },
+                {
+                  "name": "Things made up of fabric"
+                },
+                {
+                  "name": "How are fabrics made?"
+                },
+                {
+                  "name": "Threads in the fabric"
+                },
+                {
+                  "name": "Types of fibres"
+                },
+                {
+                  "name": "Characterstics of fabrics"
+                },
+                {
+                  "name": "Natural Fibres"
+                },
+                {
+                  "name": "Making cotton yarn"
+                },
+                {
+                  "name": "Ginning"
+                },
+                {
+                  "name": "Making yarn from cotton fibre"
+                },
+                {
+                  "name": "Spinning yarn"
+                },
+                {
+                  "name": "Spinning"
+                },
+                {
+                  "name": "Jute yarn"
+                },
+                {
+                  "name": "Making of Jute Yarn"
+                },
+                {
+                  "name": "How is jute yarn?"
+                },
+                {
+                  "name": "Yarn to fabric"
+                },
+                {
+                  "name": "Weaving"
+                },
+                {
+                  "name": "Knitting of mats"
+                },
+                {
+                  "name": "Handlooms and power looms"
+                },
+                {
+                  "name": "THE STORY OF JUTE"
+                }
+              ]
+            },
+            {
+              "name": "Plants: parts and functions",
+              "topics": [
+                {
+                  "name": "Parts of plant"
+                },
+                {
+                  "name": "Identification of plant parts"
+                },
+                {
+                  "name": "Different types of roots"
+                },
+                {
+                  "name": "Tap root and lateral roots"
+                },
+                {
+                  "name": "Fibrous roots"
+                },
+                {
+                  "name": "Functions of roots"
+                },
+                {
+                  "name": "Absorption of Water"
+                },
+                {
+                  "name": "Tuberous roots"
+                },
+                {
+                  "name": "Parts of a leaf"
+                },
+                {
+                  "name": "Are all leaves same?"
+                },
+                {
+                  "name": "Venation"
+                },
+                {
+                  "name": "Types of Venation (Reticulate and Parallel)"
+                },
+                {
+                  "name": "Functions of a leaf"
+                },
+                {
+                  "name": "Observation of Stomata"
+                },
+                {
+                  "name": "Transpiration"
+                },
+                {
+                  "name": "Stem provides support to the plant"
+                },
+                {
+                  "name": "Carrying food material"
+                },
+                {
+                  "name": "Modified stems"
+                },
+                {
+                  "name": "Bonsai"
+                }
+              ]
+            },
+            {
+              "name": "Changes around us",
+              "topics": [
+                {
+                  "name": "Changes Around Us"
+                },
+                {
+                  "name": "Changing of milk into curd"
+                },
+                {
+                  "name": "Comparing milk and curd"
+                },
+                {
+                  "name": "Finding the conditions for making curd"
+                },
+                {
+                  "name": "Changing seasons"
+                },
+                {
+                  "name": "Comparing duration of day in December and May"
+                },
+                {
+                  "name": "Does the sun rise exactly in the east in all seasons?"
+                },
+                {
+                  "name": "Indicators and causes for change"
+                },
+                {
+                  "name": "Slow or fast, natural or man-made and temporary or permanent changes"
+                },
+                {
+                  "name": "Categorizing changes"
+                }
+              ]
+            },
+            {
+              "name": "Water in our life",
+              "topics": [
+                {
+                  "name": "Water in Our Life"
+                },
+                {
+                  "name": "Water and its uses"
+                },
+                {
+                  "name": "Measuring the volume of water"
+                },
+                {
+                  "name": "Quantity of water"
+                },
+                {
+                  "name": "How much water do we use daily?"
+                },
+                {
+                  "name": "Where do we get water from?"
+                },
+                {
+                  "name": "Water on the earth"
+                },
+                {
+                  "name": "Safe drinking water stages"
+                },
+                {
+                  "name": "Stages of safe drinking water supply"
+                },
+                {
+                  "name": "How the well was dug?"
+                },
+                {
+                  "name": "Droughts - water scarcity"
+                },
+                {
+                  "name": "Letter about drought impact"
+                },
+                {
+                  "name": "How much water do we waste?"
+                },
+                {
+                  "name": "Floods a natural hazard"
+                },
+                {
+                  "name": "Dangerous plastic bags"
+                }
+              ]
+            },
+            {
+              "name": "Simple electric circuits",
+              "topics": [
+                {
+                  "name": "Cell"
+                },
+                {
+                  "name": "Observe the cell"
+                },
+                {
+                  "name": "Bulb"
+                },
+                {
+                  "name": "Simple electric circuits"
+                },
+                {
+                  "name": "What is a circuit?"
+                },
+                {
+                  "name": "Switch"
+                },
+                {
+                  "name": "Electric Switch Activity"
+                },
+                {
+                  "name": "Current"
+                },
+                {
+                  "name": "Torch-light"
+                },
+                {
+                  "name": "Inside view of a torch-light"
+                },
+                {
+                  "name": "Electric Conductors and insulators"
+                },
+                {
+                  "name": "Identifying conductors and insulators"
+                },
+                {
+                  "name": "The story of bulb"
+                }
+              ]
+            },
+            {
+              "name": "Learning how to measure",
+              "topics": [
+                {
+                  "name": "Measurement"
+                },
+                {
+                  "name": "Measuring Lengths"
+                },
+                {
+                  "name": "Standard units of length (metre, centimetre, millimetre)"
+                },
+                {
+                  "name": "The story of the scale"
+                },
+                {
+                  "name": "How do we measure?"
+                },
+                {
+                  "name": "How to measure length accurately with a metre scale?"
+                },
+                {
+                  "name": "Precautions while using a metre scale"
+                },
+                {
+                  "name": "How can we measure a small thickness?"
+                },
+                {
+                  "name": "Measuring thickness of a coin"
+                },
+                {
+                  "name": "Measuring the length of a curved path"
+                },
+                {
+                  "name": "Measurement of area"
+                },
+                {
+                  "name": "Standard unit to measure area"
+                },
+                {
+                  "name": "Measuring the area of a regular surface"
+                },
+                {
+                  "name": "Measurement of the area of an irregular plane surface"
+                },
+                {
+                  "name": "Measurement of volume"
+                },
+                {
+                  "name": "Measurement of volume of liquids"
+                },
+                {
+                  "name": "Measuring cylinder"
+                },
+                {
+                  "name": "Standard unit for measurement of volume of solids"
+                },
+                {
+                  "name": "Measurement of volume of irregular solids using a measuring cylinder"
+                }
+              ]
+            },
+            {
+              "name": "Movements in animals",
+              "topics": [
+                {
+                  "name": "Human body and its movement"
+                },
+                {
+                  "name": "Muscles"
+                },
+                {
+                  "name": "How do Muscles work?"
+                },
+                {
+                  "name": "Tendons"
+                },
+                {
+                  "name": "Bones"
+                },
+                {
+                  "name": "Skeleton"
+                },
+                {
+                  "name": "Ligaments"
+                },
+                {
+                  "name": "Jaw bone"
+                },
+                {
+                  "name": "The clavicle"
+                },
+                {
+                  "name": "Shoulder blade"
+                },
+                {
+                  "name": "The ribs"
+                },
+                {
+                  "name": "Backbone"
+                },
+                {
+                  "name": "Pelvic girdle"
+                },
+                {
+                  "name": "Skull"
+                },
+                {
+                  "name": "Cartilage"
+                },
+                {
+                  "name": "Different types of joints"
+                },
+                {
+                  "name": "Ball and socket joint"
+                },
+                {
+                  "name": "Hinge joint"
+                },
+                {
+                  "name": "Spine"
+                },
+                {
+                  "name": "Neck joint (pivotal joint)"
+                },
+                {
+                  "name": "Fixed joints"
+                },
+                {
+                  "name": "Movements in other animals"
+                },
+                {
+                  "name": "Locomotion"
+                },
+                {
+                  "name": "Locomotion in fish"
+                },
+                {
+                  "name": "Locomotion in birds"
+                },
+                {
+                  "name": "Locomotion in snake"
+                },
+                {
+                  "name": "Locomotion in snail"
+                }
+              ]
+            },
+            {
+              "name": "Light, Shadows and Images",
+              "topics": [
+                {
+                  "name": "Light, Shadows and Images"
+                },
+                {
+                  "name": "How can we see objects?"
+                },
+                {
+                  "name": "Sources of light"
+                },
+                {
+                  "name": "Do all objects form shadows?"
+                },
+                {
+                  "name": "Opaque, transparent, and translucent substances"
+                },
+                {
+                  "name": "Screen requirement for shadows"
+                },
+                {
+                  "name": "Shadow puppetry"
+                },
+                {
+                  "name": "Can we guess the object by observing its shadow?"
+                },
+                {
+                  "name": "Colour of a shadow"
+                },
+                {
+                  "name": "Shape of a shadow"
+                },
+                {
+                  "name": "Different shapes of shadows of a single object"
+                },
+                {
+                  "name": "Making a pinhole camera"
+                },
+                {
+                  "name": "Inverted image formation"
+                },
+                {
+                  "name": "Image with a magnifying lens"
+                },
+                {
+                  "name": "Differences between Image and Shadow"
+                },
+                {
+                  "name": "Reflection"
+                }
+              ]
+            },
+            {
+              "name": "Living and non living",
+              "topics": [
+                {
+                  "name": "Living and Non-Living"
+                },
+                {
+                  "name": "Comparison of living and non-living characteristics"
+                },
+                {
+                  "name": "Movement in living beings"
+                },
+                {
+                  "name": "Seed dispersal"
+                },
+                {
+                  "name": "Food and living beings"
+                },
+                {
+                  "name": "Photosynthesis"
+                },
+                {
+                  "name": "Parasitic Plants"
+                },
+                {
+                  "name": "Growth in living beings"
+                },
+                {
+                  "name": "Do all living things breath?"
+                },
+                {
+                  "name": "Stomata"
+                },
+                {
+                  "name": "Do all living things get rid of their waste?"
+                },
+                {
+                  "name": "Excretion"
+                },
+                {
+                  "name": "Living things give birth to young ones"
+                },
+                {
+                  "name": "Oviparous and viviparous"
+                },
+                {
+                  "name": "Response to stimulus"
+                },
+                {
+                  "name": "Response to light by earthworms"
+                },
+                {
+                  "name": "Seeds - Living or not"
+                },
+                {
+                  "name": "Living things under a microscope"
+                },
+                {
+                  "name": "Micro-organisms"
+                },
+                {
+                  "name": "What is a microscope?"
+                },
+                {
+                  "name": "Bread Mould"
+                },
+                {
+                  "name": "Bacteria"
+                },
+                {
+                  "name": "Are bacteria harmful?"
+                },
+                {
+                  "name": "Micro organisms in water"
+                }
+              ]
+            }
+          ]
         }
-      }
-    }
-  },
-  "biology": {
-    "class_8": {
-      "boards": ["CBSE", "AP", "IB"],
-      "chapters": {
-        "Cell Structure": {
-          "outcomes": [
-            "Identify organelles and functions",
-            "Compare plant and animal cells"
-          ],
-          "prerequisites": ["Microscopy basics"],
-          "topics": ["Nucleus", "Membrane", "Cytoplasm"]
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Class 7",
+      "description": "Deepen scientific reasoning",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Mathematics",
+          "icon": "Calculator",
+          "description": "Integers, fractions, equations and geometry",
+          "chapters": [
+            {
+              "name": "Integers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Operations of integers"
+                },
+                {
+                  "name": "Addition of integers"
+                },
+                {
+                  "name": "Subtraction of integers"
+                },
+                {
+                  "name": "Multiplication of integers"
+                },
+                {
+                  "name": "Multiplication of two negative integers"
+                },
+                {
+                  "name": "Multiplication of more than two negative integers"
+                },
+                {
+                  "name": "Division of integers"
+                },
+                {
+                  "name": "Properties of integers"
+                },
+                {
+                  "name": "Properties of integers under addition"
+                },
+                {
+                  "name": "Properties of integers under multiplication"
+                },
+                {
+                  "name": "Properties of integers under subtraction"
+                },
+                {
+                  "name": "Properties of integers under division"
+                },
+                {
+                  "name": "Some problems using negative Integers"
+                }
+              ]
+            },
+            {
+              "name": "Fractions, Decimals and Rational Numbers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Proper and Improper fractions"
+                },
+                {
+                  "name": "Comparison of fractions"
+                },
+                {
+                  "name": "Multiplication of fractions"
+                },
+                {
+                  "name": "Multiplication of a fraction by a whole number"
+                },
+                {
+                  "name": "Multiplication of a fraction with a fraction"
+                },
+                {
+                  "name": "Division of fractions"
+                },
+                {
+                  "name": "Division of whole number by a fraction"
+                },
+                {
+                  "name": "Reciprocal of a fraction (Multiplicative Inverse)"
+                },
+                {
+                  "name": "Division of a fraction by a whole number"
+                },
+                {
+                  "name": "Division of a fraction by another fraction"
+                },
+                {
+                  "name": "Decimal numbers or Fractional decimals"
+                },
+                {
+                  "name": "Comparison of decimal numbers"
+                },
+                {
+                  "name": "Addition and subtraction of decimals"
+                },
+                {
+                  "name": "Multiplication of decimal numbers"
+                },
+                {
+                  "name": "Multiplication of decimal number by 10, 100, 1000 etc."
+                },
+                {
+                  "name": "Division of decimal numbers"
+                },
+                {
+                  "name": "Division by numbers like 10, 100, 1000 ......"
+                },
+                {
+                  "name": "Division of a decimal number by a whole number"
+                },
+                {
+                  "name": "Division of a decimal number by another decimal number"
+                },
+                {
+                  "name": "Introduction to Rational numbers"
+                },
+                {
+                  "name": "Positive fractional numbers"
+                },
+                {
+                  "name": "Negative fractional numbers"
+                },
+                {
+                  "name": "Rational Numbers"
+                },
+                {
+                  "name": "Comparing rational numbers"
+                },
+                {
+                  "name": "Addition and Subtraction of Rational Numbers"
+                },
+                {
+                  "name": "Addition of Rational Numbers"
+                },
+                {
+                  "name": "Subtracting Rational Numbers"
+                }
+              ]
+            },
+            {
+              "name": "Simple Equations",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Equation - Weighing balance"
+                },
+                {
+                  "name": "Solving equations"
+                },
+                {
+                  "name": "Using simple equations for solving day to day problems"
+                }
+              ]
+            },
+            {
+              "name": "Lines and Angles",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Learning about Pairs of Angles"
+                },
+                {
+                  "name": "Complementary Angles"
+                },
+                {
+                  "name": "Supplementary Angles"
+                },
+                {
+                  "name": "Adjacent Angles"
+                },
+                {
+                  "name": "Linear Pair"
+                },
+                {
+                  "name": "Vertically Opposite Angles"
+                },
+                {
+                  "name": "Transversal"
+                },
+                {
+                  "name": "Angles made by a transversal"
+                },
+                {
+                  "name": "Corresponding Angles"
+                },
+                {
+                  "name": "Interior and Exterior Alternate Angles"
+                },
+                {
+                  "name": "Interior Angles on the same side of the transversal"
+                },
+                {
+                  "name": "Transversal on parallel lines"
+                }
+              ]
+            },
+            {
+              "name": "Triangle and its Properties",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Classification of triangles"
+                },
+                {
+                  "name": "Relationship between the sides of a triangle"
+                },
+                {
+                  "name": "Sum of the lengths of two sides of a triangle"
+                },
+                {
+                  "name": "Difference between the lengths of two sides of a triangle"
+                },
+                {
+                  "name": "Altitudes of a triangle"
+                },
+                {
+                  "name": "Medians of a triangle"
+                },
+                {
+                  "name": "Properties of triangles"
+                },
+                {
+                  "name": "Angle-sum property of a triangle"
+                },
+                {
+                  "name": "Exterior angle of a triangle"
+                }
+              ]
+            },
+            {
+              "name": "Ratio - Applications",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Ratio"
+                },
+                {
+                  "name": "Proportion"
+                },
+                {
+                  "name": "Rate"
+                },
+                {
+                  "name": "Unitary Method"
+                },
+                {
+                  "name": "Direct Proportion"
+                },
+                {
+                  "name": "Percentages"
+                },
+                {
+                  "name": "Some situations in which we use percentages"
+                },
+                {
+                  "name": "Profit and Loss"
+                },
+                {
+                  "name": "Discount"
+                },
+                {
+                  "name": "Simple Interest"
+                }
+              ]
+            },
+            {
+              "name": "Data Handling",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Organising data"
+                },
+                {
+                  "name": "Representative Values"
+                },
+                {
+                  "name": "Arithmetic Mean or Average"
+                },
+                {
+                  "name": "Where does the mean lie?"
+                },
+                {
+                  "name": "A property of mean"
+                },
+                {
+                  "name": "Mode"
+                },
+                {
+                  "name": "Median"
+                },
+                {
+                  "name": "Presentation of data"
+                },
+                {
+                  "name": "Bar Graph"
+                },
+                {
+                  "name": "Double Bar Graph"
+                },
+                {
+                  "name": "Pie Charts"
+                },
+                {
+                  "name": "Drawing a pie chart"
+                }
+              ]
+            },
+            {
+              "name": "Congruency of Triangles",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Congruency of line segments"
+                },
+                {
+                  "name": "Congruency of triangles"
+                },
+                {
+                  "name": "Criterion for congruency of triangles"
+                },
+                {
+                  "name": "Side-Side-Side congruency (SSS)"
+                },
+                {
+                  "name": "Side-Angle-Side congruence (SAS)"
+                },
+                {
+                  "name": "Angle-Side-Angle congruency (ASA)"
+                },
+                {
+                  "name": "Right-Angle Hypotenuse Side congruence (RHS criterion)"
+                }
+              ]
+            },
+            {
+              "name": "Construction of Triangles",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Construction of a triangle when measurements of the three sides are given"
+                },
+                {
+                  "name": "Construction of a triangle with two given sides and the included angle"
+                },
+                {
+                  "name": "Construction of a triangle when two angles and the side between the angles is given"
+                },
+                {
+                  "name": "Construction of right-angled triangle when the hypotenuse and a side are given"
+                },
+                {
+                  "name": "Construction of triangle when two sides and the non-included angle are given"
+                }
+              ]
+            },
+            {
+              "name": "Algebraic Expressions",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Algebraic Term and Numeric term"
+                },
+                {
+                  "name": "Like and unlike terms"
+                },
+                {
+                  "name": "Coefficient"
+                },
+                {
+                  "name": "Expressions"
+                },
+                {
+                  "name": "Numerical expressions and algebraic expressions"
+                },
+                {
+                  "name": "Types of algebraic expressions"
+                },
+                {
+                  "name": "Degree of algebraic expressions"
+                },
+                {
+                  "name": "Degree of a monomial"
+                },
+                {
+                  "name": "Degree of constant terms"
+                },
+                {
+                  "name": "Degree of algebraic expressions"
+                },
+                {
+                  "name": "Addition and subtraction of like terms"
+                },
+                {
+                  "name": "Addition and subtraction of unlike terms"
+                },
+                {
+                  "name": "Simplification of an algebraic expression"
+                },
+                {
+                  "name": "Standard form of an expression"
+                },
+                {
+                  "name": "Finding the value of an expression"
+                },
+                {
+                  "name": "Addition of algebraic expressions"
+                },
+                {
+                  "name": "Addition of Expressions"
+                },
+                {
+                  "name": "Subtraction of algebraic expressions"
+                }
+              ]
+            },
+            {
+              "name": "Powers and Exponents",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Exponential Form"
+                },
+                {
+                  "name": "Exponents with other bases"
+                },
+                {
+                  "name": "Writing a number in exponential form through prime factorization"
+                },
+                {
+                  "name": "Laws of exponents"
+                },
+                {
+                  "name": "Multiplying terms with the same base"
+                },
+                {
+                  "name": "Exponent of exponent"
+                },
+                {
+                  "name": "Exponent of a product"
+                },
+                {
+                  "name": "Division of exponents"
+                },
+                {
+                  "name": "Terms with negative base"
+                },
+                {
+                  "name": "Expressing large numbers in standard form"
+                }
+              ]
+            },
+            {
+              "name": "Quadrilaterals",
+              "topics": [
+                {
+                  "name": "Quadrilateral"
+                },
+                {
+                  "name": "Interior-Exterior points of a quadrilateral"
+                },
+                {
+                  "name": "Convex and Concave quadrilateral"
+                },
+                {
+                  "name": "Angle-sum property of a quadrilateral"
+                },
+                {
+                  "name": "Types of quadrilaterals"
+                },
+                {
+                  "name": "Trapezium"
+                },
+                {
+                  "name": "Kite"
+                },
+                {
+                  "name": "Parallelogram"
+                },
+                {
+                  "name": "Rhombus"
+                },
+                {
+                  "name": "Rectangle"
+                },
+                {
+                  "name": "Square"
+                },
+                {
+                  "name": "Making figures with a tangram"
+                }
+              ]
+            },
+            {
+              "name": "Area and Perimeter",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Area of a parallelogram"
+                },
+                {
+                  "name": "Area of triangle"
+                },
+                {
+                  "name": "Triangles are parts of rectangles"
+                },
+                {
+                  "name": "Triangles are parts of parallelograms"
+                },
+                {
+                  "name": "Area of a rhombus"
+                },
+                {
+                  "name": "Circumference of a circle"
+                },
+                {
+                  "name": "Rectangular Paths"
+                }
+              ]
+            },
+            {
+              "name": "Understanding 3D and 2D Shapes",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Nets of 3-D shapes"
+                },
+                {
+                  "name": "Drawing solids on a flat surface"
+                },
+                {
+                  "name": "Oblique Sketches"
+                },
+                {
+                  "name": "Isometric Sketches"
+                },
+                {
+                  "name": "Visualising solid objects"
+                },
+                {
+                  "name": "Viewing different sections of a solid"
+                }
+              ]
+            },
+            {
+              "name": "Symmetry",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Line Symmetry"
+                },
+                {
+                  "name": "Lines of symmetry for regular polygons"
+                },
+                {
+                  "name": "Rotational Symmetry"
+                },
+                {
+                  "name": "Angle of Rotational Symmetry"
+                },
+                {
+                  "name": "Order of rotational symmetry"
+                },
+                {
+                  "name": "Line symmetry and rotational symmetry"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "science",
+          "name": "Science",
+          "icon": "Atom",
+          "description": "Physics, chemistry & biology",
+          "chapters": 17
         }
-      }
-    }
-  },
-  "astronomy": {
-    "class_10": {
-      "boards": ["CBSE", "AP", "IB"],
-      "chapters": {
-        "Solar System": {
-          "outcomes": [
-            "Explain orbital motion",
-            "Relate gravity to planetary trajectories"
-          ],
-          "prerequisites": ["Gravity", "Circular motion"],
-          "topics": ["Orbits", "Planets", "Kepler's laws"]
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Class 8",
+      "description": "Specialized science begins",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Mathematics",
+          "icon": "Calculator",
+          "description": "Advanced algebra, geometry and mensuration",
+          "chapters": [
+            {
+              "name": "Rational Numbers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Operations on Rational numbers"
+                },
+                {
+                  "name": "Multiplication of Rational Numbers"
+                },
+                {
+                  "name": "Division of Rational Numbers"
+                },
+                {
+                  "name": "Properties of Rational numbers"
+                },
+                {
+                  "name": "Closure property"
+                },
+                {
+                  "name": "Commutative Property"
+                },
+                {
+                  "name": "Associative Property"
+                },
+                {
+                  "name": "The Role of Zero"
+                },
+                {
+                  "name": "The Role of 1"
+                },
+                {
+                  "name": "Existence of Inverse"
+                },
+                {
+                  "name": "Distributivity of multiplication over addition"
+                },
+                {
+                  "name": "Representation of Rational numbers on Number line"
+                },
+                {
+                  "name": "Rational Number between Two Rational Numbers"
+                },
+                {
+                  "name": "Decimal representation of Rational numbers"
+                },
+                {
+                  "name": "Conversion of decimal form into rational form"
+                },
+                {
+                  "name": "Converting terminating decimal into rational form"
+                },
+                {
+                  "name": "Converting a non-terminating recurring decimal into rational form"
+                }
+              ]
+            },
+            {
+              "name": "Linear Equations in One Variable",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Linear Equations"
+                },
+                {
+                  "name": "Simple equations or Linear equations in one variable"
+                },
+                {
+                  "name": "Solving Simple equation having the variable on one side"
+                },
+                {
+                  "name": "Some Applications"
+                },
+                {
+                  "name": "Solving equation that has variables on both the sides"
+                },
+                {
+                  "name": "Some more applications"
+                },
+                {
+                  "name": "Reducing Equations"
+                }
+              ]
+            },
+            {
+              "name": "Construction of Quadrilaterals",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Quadrilaterals and their Properties"
+                },
+                {
+                  "name": "Constructing a Quadrilateral"
+                },
+                {
+                  "name": "Construction: When the lengths of four sides and one angle are given (S.S.S.S.A)"
+                },
+                {
+                  "name": "Construction: When the lengths of four sides and a diagonal is given (S.S.S.S.D)"
+                },
+                {
+                  "name": "Construction: When the lengths of three sides and two diagonals are given (S.S.S.D.D)"
+                },
+                {
+                  "name": "Construction: When the lengths of two adjacent sides and three angles are known (S.A.S.A.A)"
+                },
+                {
+                  "name": "Construction: When the lengths of three sides and two included angles are given (S.A.S.A.S)"
+                },
+                {
+                  "name": "Construction of Special types Quadrilaterals"
+                },
+                {
+                  "name": "Construction of a Rhombus"
+                }
+              ]
+            },
+            {
+              "name": "Exponents and Powers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Powers with Negative Exponents"
+                },
+                {
+                  "name": "Laws of Exponents"
+                },
+                {
+                  "name": "Application of Exponents to Express numbers in Standard Form"
+                },
+                {
+                  "name": "Comparing very large and very small numbers"
+                }
+              ]
+            },
+            {
+              "name": "Comparing quantities using Proportion",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Compound Ratio"
+                },
+                {
+                  "name": "Percentage"
+                },
+                {
+                  "name": "Finding the increase or decrease percent"
+                },
+                {
+                  "name": "Finding discounts"
+                },
+                {
+                  "name": "Estimation in percentages"
+                },
+                {
+                  "name": "Profit and Loss"
+                },
+                {
+                  "name": "Sales Tax / Value Added Tax (VAT)"
+                },
+                {
+                  "name": "Goods and Service Tax (GST)"
+                },
+                {
+                  "name": "Compound Interest"
+                },
+                {
+                  "name": "Deducing a formula for Compound interest"
+                },
+                {
+                  "name": "Interest compounded annually or Half yearly (Semi Annually)"
+                },
+                {
+                  "name": "Application of Compound"
+                }
+              ]
+            },
+            {
+              "name": "Square Roots and Cube Roots",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Properties of square numbers"
+                },
+                {
+                  "name": "Interesting patterns in square"
+                },
+                {
+                  "name": "Integers between successive square numbers"
+                },
+                {
+                  "name": "Pythagorean triplets"
+                },
+                {
+                  "name": "Square Roots"
+                },
+                {
+                  "name": "Finding the Square root through subtraction of successive odd numbers"
+                },
+                {
+                  "name": "Finding the Square Root Through Prime Factorisation Method"
+                },
+                {
+                  "name": "Finding square root by division method"
+                },
+                {
+                  "name": "Square root of decimal numbers using division method"
+                },
+                {
+                  "name": "Estimating square roots of non perfect square numbers"
+                },
+                {
+                  "name": "Cubes and Cube Roots"
+                },
+                {
+                  "name": "Cubic Numbers"
+                },
+                {
+                  "name": "Some interesting patterns"
+                },
+                {
+                  "name": "Cubes and their Prime Factors"
+                },
+                {
+                  "name": "Cube roots"
+                },
+                {
+                  "name": "Finding cube root through Prime Factorization method"
+                },
+                {
+                  "name": "Estimating the cube root of a number"
+                }
+              ]
+            },
+            {
+              "name": "Frequency Distribution Tables and Graphs",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Basic measures of central tendency"
+                },
+                {
+                  "name": "Arithmetic Mean"
+                },
+                {
+                  "name": "Arithmetic Mean by Deviation Method"
+                },
+                {
+                  "name": "Median"
+                },
+                {
+                  "name": "Mode"
+                },
+                {
+                  "name": "Organisation of Grouped Data"
+                },
+                {
+                  "name": "Interpretation of Grouped frequency distribution"
+                },
+                {
+                  "name": "Limits and Boundaries"
+                },
+                {
+                  "name": "Construction of grouped frequency Distribution"
+                },
+                {
+                  "name": "Characteristics of Grouped Frequency Distribution"
+                },
+                {
+                  "name": "Cumulative Frequency"
+                },
+                {
+                  "name": "Graphical Representation of Data"
+                },
+                {
+                  "name": "Bar Graph"
+                },
+                {
+                  "name": "Graphical Representation of Grouped Frequency Distribution"
+                },
+                {
+                  "name": "Histogram"
+                },
+                {
+                  "name": "Interpretation of Histogram"
+                },
+                {
+                  "name": "Construction of a Histogram"
+                },
+                {
+                  "name": "Histogram with Varying Base Widths"
+                },
+                {
+                  "name": "Histogram for grouped frequency distribution with class marks"
+                },
+                {
+                  "name": "Frequency Polygon"
+                },
+                {
+                  "name": "Interpretation of Frequency Polygon"
+                },
+                {
+                  "name": "Construction of a Frequency Polygon"
+                },
+                {
+                  "name": "Characteristics of a Frequency Polygon"
+                },
+                {
+                  "name": "Construction of a Frequency Polygon for a grouped frequency distribution (without using histogram)"
+                },
+                {
+                  "name": "Frequency Curve for a grouped frequency distribution"
+                },
+                {
+                  "name": "Graph of a Cumulative Frequency Distribution"
+                },
+                {
+                  "name": "Less than Cummulative frequency curve"
+                }
+              ]
+            },
+            {
+              "name": "Exploring Geometrical Figures",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Congruency"
+                },
+                {
+                  "name": "Congruency of shapes"
+                },
+                {
+                  "name": "Similar shapes"
+                },
+                {
+                  "name": "Where do we find the application of similarity?"
+                },
+                {
+                  "name": "Dilations"
+                },
+                {
+                  "name": "Constructing a Dilation"
+                },
+                {
+                  "name": "Symmetry"
+                },
+                {
+                  "name": "Rotational symmetry"
+                },
+                {
+                  "name": "Point symmetry"
+                },
+                {
+                  "name": "Applications of symmetry"
+                }
+              ]
+            },
+            {
+              "name": "Area of Plane Figures",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Area of a Trapezium"
+                },
+                {
+                  "name": "Area of a Quadrilateral"
+                },
+                {
+                  "name": "Area of Rhombus"
+                },
+                {
+                  "name": "Surveying the field"
+                },
+                {
+                  "name": "Area of a Polygon"
+                },
+                {
+                  "name": "Area of circle"
+                },
+                {
+                  "name": "Area of a Circular Path or Area of a ring"
+                },
+                {
+                  "name": "Length of the arc"
+                },
+                {
+                  "name": "Area of Sector"
+                }
+              ]
+            },
+            {
+              "name": "Direct and Inverse Proportions",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Direct Proportion"
+                },
+                {
+                  "name": "Inverse Proportion"
+                },
+                {
+                  "name": "Compound Proportion"
+                }
+              ]
+            },
+            {
+              "name": "Algebraic Expressions",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Like and unlike terms"
+                },
+                {
+                  "name": "Addition and subtraction of algebraic expressions"
+                },
+                {
+                  "name": "Multiplication of Algebraic Expressions"
+                },
+                {
+                  "name": "Multiplying a monomial by a monomial"
+                },
+                {
+                  "name": "Multiplying two monomials"
+                },
+                {
+                  "name": "Multiplying three or more monomials"
+                },
+                {
+                  "name": "Multiplying a binomial or trinomial by a monomial"
+                },
+                {
+                  "name": "Multiplying a binomial by a monomial"
+                },
+                {
+                  "name": "Multiplying a trinomial by a monomial"
+                },
+                {
+                  "name": "Multiplying a binomial by a binomial or trinomial"
+                },
+                {
+                  "name": "Multiplying a binomial by a binomial"
+                },
+                {
+                  "name": "Multiplying a binomial by a trinomial"
+                },
+                {
+                  "name": "What is an identity?"
+                },
+                {
+                  "name": "Some important Identities"
+                },
+                {
+                  "name": "Application of Identities"
+                },
+                {
+                  "name": "Geometrical Verification of the identities"
+                },
+                {
+                  "name": "Geometrical Verification of the identity (a+b)² ≡ a² + 2ab + b²"
+                },
+                {
+                  "name": "Geometrical Verification of the identity"
+                },
+                {
+                  "name": "Geometrical Verification of the identity (a+b)(a-b) ≡ a² - b²"
+                }
+              ]
+            },
+            {
+              "name": "Factorisation",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Factors of algebraic expressions"
+                },
+                {
+                  "name": "Need of factorisation"
+                },
+                {
+                  "name": "Method of common factors"
+                },
+                {
+                  "name": "Factorisation by grouping the terms"
+                },
+                {
+                  "name": "Factorisation using identities"
+                },
+                {
+                  "name": "Factors of the expression in the form of ( x+a)(x+b)=x² + (a+b)x + ab"
+                },
+                {
+                  "name": "Division of algebraic expressions"
+                },
+                {
+                  "name": "Division of a monomial by another monomial"
+                },
+                {
+                  "name": "Division of an expression by a monomial"
+                },
+                {
+                  "name": "Division of Expression by Expression"
+                }
+              ]
+            },
+            {
+              "name": "Visualising 3-D in 2-D",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "3-D Objects made with cubes"
+                },
+                {
+                  "name": "Representation of 3-D figures on 2-D"
+                },
+                {
+                  "name": "Various Geometrical Solids"
+                },
+                {
+                  "name": "Faces, Edges and Vertices of 3D-Objects"
+                },
+                {
+                  "name": "Regular Polyhedron"
+                },
+                {
+                  "name": "Prism and Pyramid"
+                },
+                {
+                  "name": "Number of Edges, Faces and Vertices of polyhedrons"
+                },
+                {
+                  "name": "Net Diagrams"
+                }
+              ]
+            },
+            {
+              "name": "Surface Areas And Volume (Cube and Cuboid)",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Cuboid"
+                },
+                {
+                  "name": "Lateral Surface Area"
+                },
+                {
+                  "name": "Cube"
+                },
+                {
+                  "name": "Volume of Cube and Cuboid"
+                },
+                {
+                  "name": "Volume of a Cuboid"
+                },
+                {
+                  "name": "Vollume of a Cube"
+                }
+              ]
+            },
+            {
+              "name": "Playing with Numbers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Divisibility Rules"
+                },
+                {
+                  "name": "Place value of a digit"
+                },
+                {
+                  "name": "Expanded form of numbers"
+                },
+                {
+                  "name": "Factors and Multiples of numbers"
+                },
+                {
+                  "name": "Divisibility by 10"
+                },
+                {
+                  "name": "Divisibility by 5"
+                },
+                {
+                  "name": "Divisibility by 2"
+                },
+                {
+                  "name": "Divisibility by 3 and 9"
+                },
+                {
+                  "name": "Divisibility by 6"
+                },
+                {
+                  "name": "Divisibility by 4 and 8"
+                },
+                {
+                  "name": "Divisibility by 7"
+                },
+                {
+                  "name": "Divisibility by 11"
+                },
+                {
+                  "name": "Some More Divisibility Rules"
+                },
+                {
+                  "name": "Puzzles based on divisibility rules"
+                },
+                {
+                  "name": "Fun with 3- Digit Numbers"
+                },
+                {
+                  "name": "Puzzles with missing digits"
+                },
+                {
+                  "name": "Finding of divisibility by taking remainders of place values"
+                },
+                {
+                  "name": "Finding Sum of Consecutive numbers"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "physics",
+          "name": "Physics",
+          "icon": "Zap",
+          "description": "Force, motion, sound & light",
+          "chapters": 12
+        },
+        {
+          "id": "biology",
+          "name": "Biology",
+          "icon": "Dna",
+          "description": "Life sciences and health",
+          "chapters": 11
         }
-      }
-    }
-  },
-  "mathematics": {
-    "class_9": {
-      "boards": ["CBSE", "AP", "IB"],
-      "chapters": {
-        "Linear Equations": {
-          "outcomes": [
-            "Interpret slope and intercept",
-            "Build equations from data"
-          ],
-          "prerequisites": ["Algebra basics"],
-          "topics": ["Slope", "Graphing", "Equation solving"]
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Class 9",
+      "description": "Conceptual depth & problem solving",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Math",
+          "icon": "Calculator",
+          "description": "Real numbers, polynomials & coordinate geometry",
+          "chapters": [
+            {
+              "name": "Real Numbers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Irrational Numbers"
+                },
+                {
+                  "name": "Representing irrational numbers on Number line"
+                },
+                {
+                  "name": "Real Numbers"
+                },
+                {
+                  "name": "Representing Real Numbers on the Number Line Through Successive Magnification"
+                },
+                {
+                  "name": "Operations on Real Numbers"
+                },
+                {
+                  "name": "Rationalising the Denominator"
+                },
+                {
+                  "name": "Law of Exponents for real numbers"
+                },
+                {
+                  "name": "Surd"
+                }
+              ]
+            },
+            {
+              "name": "Polynomials and Factorisation",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Polynomials in One Variable"
+                },
+                {
+                  "name": "Degree of the Polynomial"
+                },
+                {
+                  "name": "Zeroes of a Polynomial"
+                },
+                {
+                  "name": "Zero of the Linear Polynomial in One Variable"
+                },
+                {
+                  "name": "Dividing Polynomials"
+                },
+                {
+                  "name": "Remainder Theorem"
+                },
+                {
+                  "name": "Factorising a Polynomial"
+                },
+                {
+                  "name": "Factor Theorem"
+                },
+                {
+                  "name": "Algebraic Identities"
+                }
+              ]
+            },
+            {
+              "name": "The Elements of Geometry",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "History"
+                },
+                {
+                  "name": "Euclid's Elements of Geometry"
+                },
+                {
+                  "name": "Axioms and Postulates"
+                },
+                {
+                  "name": "Equivalent version of fifth postulate or equivalents of fifth postulate"
+                },
+                {
+                  "name": "Non-Euclidian Geometry"
+                }
+              ]
+            },
+            {
+              "name": "Lines and Angles",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Basic Terms in Geometry"
+                },
+                {
+                  "name": "Intersecting Lines and Non-intersecting Lines"
+                },
+                {
+                  "name": "Concurrent Lines"
+                },
+                {
+                  "name": "Pairs of Angles"
+                },
+                {
+                  "name": "Linear pair of angles axiom"
+                },
+                {
+                  "name": "Angles in intersecting lines"
+                },
+                {
+                  "name": "Lines and a Transversal"
+                },
+                {
+                  "name": "Lines Parallel to the Same Line"
+                },
+                {
+                  "name": "Angle Sum Property of a Triangle"
+                }
+              ]
+            },
+            {
+              "name": "Co-Ordinate Geometry",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Cartesian System"
+                },
+                {
+                  "name": "Locating a Point"
+                },
+                {
+                  "name": "Origin"
+                },
+                {
+                  "name": "Coordinates of Origin"
+                },
+                {
+                  "name": "Plotting a Point on the Cartesian Plane (When Its Co-ordinates are Given)"
+                }
+              ]
+            },
+            {
+              "name": "Linear Equations in Two Variables",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Linear Equations in Two Variables"
+                },
+                {
+                  "name": "Solution of a Linear Equation in Two Variables"
+                },
+                {
+                  "name": "Graph of a Linear Equation in Two Variables"
+                },
+                {
+                  "name": "How to draw the graph of a linear equation"
+                },
+                {
+                  "name": "Equation of Lines Parallel to X-Axis and Y-Axis"
+                },
+                {
+                  "name": "Equation of the X-axis and the Y-axis"
+                }
+              ]
+            },
+            {
+              "name": "Triangles",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Criteria for Congruence of Triangles"
+                },
+                {
+                  "name": "Congruence of Triangles"
+                },
+                {
+                  "name": "Other Congruence Rules"
+                },
+                {
+                  "name": "Some Properties of a Triangle"
+                },
+                {
+                  "name": "Some More Criteria for Congruency of Triangles"
+                },
+                {
+                  "name": "Inequalities in a Triangle"
+                }
+              ]
+            },
+            {
+              "name": "Quadrilaterals",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Properties of a Quadrilateral"
+                },
+                {
+                  "name": "Different Types of Quadrilaterals"
+                },
+                {
+                  "name": "Parallelogram and Their Properties"
+                },
+                {
+                  "name": "Diagonals of a Parallelogram"
+                },
+                {
+                  "name": "More geometrical statements"
+                },
+                {
+                  "name": "The Midpoint Theorem of Triangle"
+                }
+              ]
+            },
+            {
+              "name": "Statistics",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Collection of Data"
+                },
+                {
+                  "name": "Presentation of Data"
+                },
+                {
+                  "name": "Measures of Central Tendency"
+                },
+                {
+                  "name": "Arithmetic Mean / Average"
+                },
+                {
+                  "name": "Median"
+                },
+                {
+                  "name": "Mode"
+                },
+                {
+                  "name": "Deviation in Values of Central Tendency"
+                }
+              ]
+            },
+            {
+              "name": "Surface Areas and Volumes",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Surface Area of Cuboid"
+                },
+                {
+                  "name": "Volume"
+                },
+                {
+                  "name": "Capacity of the container"
+                },
+                {
+                  "name": "Right Circular Cylinder"
+                },
+                {
+                  "name": "Curved Surface area of a cylinder"
+                },
+                {
+                  "name": "Total Surface area of a Cylinder"
+                },
+                {
+                  "name": "Volume of a cylinder"
+                },
+                {
+                  "name": "Right Circular Cone"
+                },
+                {
+                  "name": "Slant Height of the Cone"
+                },
+                {
+                  "name": "Curved Surface area of a cone"
+                },
+                {
+                  "name": "Total surface area of the cone"
+                },
+                {
+                  "name": "Volume of a right circular cone"
+                },
+                {
+                  "name": "Sphere"
+                },
+                {
+                  "name": "Surface area of a sphere"
+                },
+                {
+                  "name": "Hemisphere"
+                },
+                {
+                  "name": "Volume of Sphere"
+                }
+              ]
+            },
+            {
+              "name": "Areas",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Area of Planar Regions"
+                },
+                {
+                  "name": "Area of Rectangle"
+                },
+                {
+                  "name": "Figures on the Same Base and Between the Same Parallels"
+                },
+                {
+                  "name": "Parallelograms on the Same Base and Between the Same Parallels"
+                },
+                {
+                  "name": "Triangles on the Same Base and Between the Same Parallels"
+                }
+              ]
+            },
+            {
+              "name": "Circles",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Angle Subtended by a Chord at a Point on the Circle"
+                },
+                {
+                  "name": "Perpendicular from the Centre to a Chord"
+                },
+                {
+                  "name": "The three points that describe a circle"
+                },
+                {
+                  "name": "Chords and their distance from the centre of the circle"
+                },
+                {
+                  "name": "Angle Subtended by an Arc of a Circle"
+                },
+                {
+                  "name": "Angle subtended by an arc at a point on the remaining part of circle"
+                },
+                {
+                  "name": "Angles in the same segment"
+                },
+                {
+                  "name": "Cyclic Quadrilateral"
+                }
+              ]
+            },
+            {
+              "name": "Geometrical Constructions",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Basic Constructions"
+                },
+                {
+                  "name": "Construction of Triangles (Special Cases)"
+                }
+              ]
+            },
+            {
+              "name": "Probability",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Probability"
+                },
+                {
+                  "name": "Random experiment and outcomes"
+                },
+                {
+                  "name": "Equally likely outcomes"
+                },
+                {
+                  "name": "Trials and Events"
+                },
+                {
+                  "name": "Linking the chance to Probability"
+                },
+                {
+                  "name": "Conduct Your Own Experiments"
+                },
+                {
+                  "name": "Uses of Probability in Real Life"
+                }
+              ]
+            },
+            {
+              "name": "Proofs in Mathematics",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Mathematical Statements"
+                },
+                {
+                  "name": "Verifying the Statements"
+                },
+                {
+                  "name": "Reasoning in Mathematics"
+                },
+                {
+                  "name": "Using deductive reasoning in hypothesis testing"
+                },
+                {
+                  "name": "Deductive Reasoning"
+                },
+                {
+                  "name": "Theorems, Conjectures and Axioms"
+                },
+                {
+                  "name": "What is a Mathematical Proof?"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "physics",
+          "name": "Physics",
+          "icon": "Zap",
+          "description": "Motion, energy & waves",
+          "chapters": [
+            {
+              "name": "MATTER AROUND US",
+              "topics": [
+                {
+                  "name": "States of matter"
+                },
+                {
+                  "name": "Properties of solids, liquids and gases"
+                },
+                {
+                  "name": "Shape and volume"
+                },
+                {
+                  "name": "Compressibility"
+                },
+                {
+                  "name": "Diffusion"
+                },
+                {
+                  "name": "Diffusion of gases"
+                },
+                {
+                  "name": "Can matter change its state?"
+                },
+                {
+                  "name": "How small are the particles of matter?"
+                },
+                {
+                  "name": "There exists space between particles"
+                },
+                {
+                  "name": "Particles of matter attract each other"
+                },
+                {
+                  "name": "How diffusion takes place?"
+                }
+              ]
+            },
+            {
+              "name": "MOTION",
+              "topics": [
+                {
+                  "name": "What is relative?"
+                },
+                {
+                  "name": "Right and Left"
+                },
+                {
+                  "name": "Up and down"
+                },
+                {
+                  "name": "Motion is relative"
+                },
+                {
+                  "name": "Distance and displacement"
+                },
+                {
+                  "name": "Average speed and average velocity"
+                },
+                {
+                  "name": "Speed and Velocity"
+                },
+                {
+                  "name": "Measuring the average velocity"
+                },
+                {
+                  "name": "Uniform motion"
+                },
+                {
+                  "name": "Non uniform motion"
+                },
+                {
+                  "name": "Acceleration"
+                },
+                {
+                  "name": "Equations of uniform accelerated motion"
+                },
+                {
+                  "name": "Sign Convention Rules"
+                }
+              ]
+            },
+            {
+              "name": "LAWS OF MOTION",
+              "topics": [
+                {
+                  "name": "Newton's law of motion"
+                },
+                {
+                  "name": "Inertia and mass"
+                },
+                {
+                  "name": "Linear momentum"
+                },
+                {
+                  "name": "Atwood machine"
+                },
+                {
+                  "name": "Law of conservation of momentum"
+                },
+                {
+                  "name": "Impulse"
+                }
+              ]
+            },
+            {
+              "name": "Refraction of Light at Plane Surfaces",
+              "topics": [
+                {
+                  "name": "Refraction"
+                },
+                {
+                  "name": "Refractive index"
+                },
+                {
+                  "name": "Relative refractive index"
+                },
+                {
+                  "name": "Snell's law"
+                },
+                {
+                  "name": "Total Internal Reflection"
+                },
+                {
+                  "name": "Mirages"
+                },
+                {
+                  "name": "Applications of total internal reflection"
+                },
+                {
+                  "name": "Refraction Through a Glass Slab"
+                }
+              ]
+            },
+            {
+              "name": "GRAVITATION",
+              "topics": [
+                {
+                  "name": "Uniform circular motion"
+                },
+                {
+                  "name": "Universal law of gravitation"
+                },
+                {
+                  "name": "Free fall"
+                },
+                {
+                  "name": "Weight"
+                },
+                {
+                  "name": "Centre of gravity"
+                },
+                {
+                  "name": "Balancing a ladder"
+                },
+                {
+                  "name": "Locating centre of gravity"
+                },
+                {
+                  "name": "Stability"
+                }
+              ]
+            },
+            {
+              "name": "IS MATTER PURE?",
+              "topics": [
+                {
+                  "name": "Is full cream milk pure?"
+                },
+                {
+                  "name": "What is a mixture?"
+                },
+                {
+                  "name": "Types of mixtures"
+                },
+                {
+                  "name": "Solutions"
+                },
+                {
+                  "name": "Concentration of a solution"
+                },
+                {
+                  "name": "Suspensions and Colloidal Solutions"
+                },
+                {
+                  "name": "Separating the components of a mixture"
+                },
+                {
+                  "name": "Sublimation"
+                },
+                {
+                  "name": "Evaporation"
+                },
+                {
+                  "name": "Paper Chromatography"
+                },
+                {
+                  "name": "Separation of immiscible and miscible liquids"
+                },
+                {
+                  "name": "Separation of immiscible liquids"
+                },
+                {
+                  "name": "Separation of a mixture of two miscible liquids"
+                },
+                {
+                  "name": "Distillation"
+                },
+                {
+                  "name": "Fractional distillation"
+                },
+                {
+                  "name": "Types of pure substances"
+                },
+                {
+                  "name": "Elements"
+                }
+              ]
+            },
+            {
+              "name": "ATOMS, MOLECULES AND CHEMICAL REACTIONS",
+              "topics": [
+                {
+                  "name": "Law of conservation of mass"
+                },
+                {
+                  "name": "Law of constant proportions"
+                },
+                {
+                  "name": "Dalton's atomic theory"
+                },
+                {
+                  "name": "Atoms and molecules"
+                },
+                {
+                  "name": "Symbols of elements"
+                },
+                {
+                  "name": "Some unusual symbols"
+                },
+                {
+                  "name": "Elements with more than one atom in their molecules"
+                },
+                {
+                  "name": "Atomicity"
+                },
+                {
+                  "name": "Valency"
+                },
+                {
+                  "name": "What is an ion?"
+                },
+                {
+                  "name": "Atomic mass"
+                },
+                {
+                  "name": "Molecules of compounds"
+                },
+                {
+                  "name": "Chemical formulae of compounds"
+                },
+                {
+                  "name": "Molecular mass"
+                },
+                {
+                  "name": "Formula unit mass"
+                },
+                {
+                  "name": "Mole concept"
+                },
+                {
+                  "name": "Molar mass"
+                },
+                {
+                  "name": "Chemical Reactions"
+                },
+                {
+                  "name": "Types of Chemical Reactions"
+                },
+                {
+                  "name": "Chemical Combination"
+                },
+                {
+                  "name": "Decomposition Reaction"
+                },
+                {
+                  "name": "Displacement reaction"
+                },
+                {
+                  "name": "Double displacement reaction"
+                },
+                {
+                  "name": "Oxidation and Reduction"
+                },
+                {
+                  "name": "Corrosion"
+                },
+                {
+                  "name": "Effects of oxidation on everyday life"
+                }
+              ]
+            },
+            {
+              "name": "FLOATING BODIES",
+              "topics": [
+                {
+                  "name": "Comparing density – relative density"
+                },
+                {
+                  "name": "Relative density of liquids"
+                },
+                {
+                  "name": "When do objects float on water?"
+                },
+                {
+                  "name": "Upward force in liquids"
+                },
+                {
+                  "name": "Pressure of Air"
+                },
+                {
+                  "name": "Atmospheric pressure"
+                },
+                {
+                  "name": "Measuring atmospheric pressure"
+                },
+                {
+                  "name": "Pressure at a depth “h” in a liquid"
+                },
+                {
+                  "name": "Pressure difference at different levels of depth in fluids"
+                },
+                {
+                  "name": "Buoyancy"
+                },
+                {
+                  "name": "Measuring the force of buoyancy"
+                },
+                {
+                  "name": "Archimedes' principle"
+                },
+                {
+                  "name": "Pascal's principle"
+                }
+              ]
+            },
+            {
+              "name": "WHAT IS INSIDE THE ATOM?",
+              "topics": [
+                {
+                  "name": "Sub-atomic Particles"
+                },
+                {
+                  "name": "Electron, Proton and Neutron"
+                },
+                {
+                  "name": "Structure of an Atom"
+                },
+                {
+                  "name": "Thomson's Model of the Atom"
+                },
+                {
+                  "name": "Rutherford's alpha particles scattering experiment"
+                },
+                {
+                  "name": "Limitations of Rutherford's atomic model"
+                },
+                {
+                  "name": "Bohr's Model of the Atom"
+                },
+                {
+                  "name": "Distribution of electrons in different orbits (Shells)"
+                },
+                {
+                  "name": "Valency"
+                },
+                {
+                  "name": "Importance of valency"
+                },
+                {
+                  "name": "Atomic number"
+                },
+                {
+                  "name": "Atomic mass number"
+                },
+                {
+                  "name": "Writing symbols of atoms"
+                },
+                {
+                  "name": "Isotopes"
+                },
+                {
+                  "name": "Applications of isotopes"
+                }
+              ]
+            },
+            {
+              "name": "WORK AND ENERGY",
+              "topics": [
+                {
+                  "name": "Work"
+                },
+                {
+                  "name": "Scientific meaning of the work"
+                },
+                {
+                  "name": "Definition of work in science"
+                },
+                {
+                  "name": "Idea of Energy"
+                },
+                {
+                  "name": "Energy transfer and the work"
+                },
+                {
+                  "name": "Kinetic energy"
+                },
+                {
+                  "name": "Potential energy"
+                },
+                {
+                  "name": "Mechanical energy"
+                },
+                {
+                  "name": "Conservation of energy"
+                },
+                {
+                  "name": "Power"
+                },
+                {
+                  "name": "SOURCES OF ENERGY"
+                },
+                {
+                  "name": "Solar Energy"
+                },
+                {
+                  "name": "Bio mass energy"
+                },
+                {
+                  "name": "Bio gas"
+                },
+                {
+                  "name": "Energy from Sea"
+                },
+                {
+                  "name": "Tidal Energy"
+                },
+                {
+                  "name": "Geo Thermal Energy"
+                },
+                {
+                  "name": "Wind energy"
+                },
+                {
+                  "name": "Atomic Energy"
+                },
+                {
+                  "name": "Nuclear fusion"
+                }
+              ]
+            },
+            {
+              "name": "HEAT",
+              "topics": [
+                {
+                  "name": "Thermal equilibrium-heat and temperature"
+                },
+                {
+                  "name": "Heat"
+                },
+                {
+                  "name": "Temperature and Kinetic energy"
+                },
+                {
+                  "name": "Specific Heat"
+                },
+                {
+                  "name": "Applications of Specific heat capacity"
+                },
+                {
+                  "name": "Method of mixtures"
+                },
+                {
+                  "name": "Determination of Specific heat of a solid"
+                },
+                {
+                  "name": "Evaporation"
+                },
+                {
+                  "name": "Condensation"
+                },
+                {
+                  "name": "Humidity"
+                },
+                {
+                  "name": "Dew and Fog"
+                },
+                {
+                  "name": "Boiling"
+                },
+                {
+                  "name": "Melting"
+                },
+                {
+                  "name": "Freezing"
+                }
+              ]
+            },
+            {
+              "name": "SOUND",
+              "topics": [
+                {
+                  "name": "Sound is a form of energy"
+                },
+                {
+                  "name": "Production of sound"
+                },
+                {
+                  "name": "How does sound travel?"
+                },
+                {
+                  "name": "Propagation of Sound"
+                },
+                {
+                  "name": "Types of waves"
+                },
+                {
+                  "name": "Sound waves are longitudinal"
+                },
+                {
+                  "name": "Characteristics of the sound wave"
+                },
+                {
+                  "name": "Wave length"
+                },
+                {
+                  "name": "Amplitude"
+                },
+                {
+                  "name": "Time period and frequency"
+                },
+                {
+                  "name": "Speed of Sound wave"
+                },
+                {
+                  "name": "Pitch"
+                },
+                {
+                  "name": "Loudness"
+                },
+                {
+                  "name": "Quality"
+                },
+                {
+                  "name": "Reflection of sound"
+                },
+                {
+                  "name": "Echo"
+                },
+                {
+                  "name": "Reverberation"
+                },
+                {
+                  "name": "Uses of multiple reflection of sound"
+                },
+                {
+                  "name": "Range of hearing"
+                },
+                {
+                  "name": "Applications of ultrasound"
+                },
+                {
+                  "name": "SONAR"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "biology",
+          "name": "Biology",
+          "icon": "Dna",
+          "description": "Cells, tissues & heredity",
+          "chapters": [
+            {
+              "name": "Cell - Structure and Functions",
+              "topics": [
+                {
+                  "name": "Typical Cell"
+                },
+                {
+                  "name": "Cell membrane (or) Plasma membrane"
+                },
+                {
+                  "name": "Cell wall"
+                },
+                {
+                  "name": "Nucleus"
+                },
+                {
+                  "name": "Cytoplasm"
+                },
+                {
+                  "name": "Protoplasm vs. cytoplasm"
+                },
+                {
+                  "name": "Cell organelles"
+                },
+                {
+                  "name": "Endoplasmic Reticulum (ER)"
+                },
+                {
+                  "name": "Golgi body or Golgi complex"
+                },
+                {
+                  "name": "Lysosome"
+                },
+                {
+                  "name": "Mitochondria"
+                },
+                {
+                  "name": "Ribosomes"
+                },
+                {
+                  "name": "Plastids"
+                },
+                {
+                  "name": "Vacuoles"
+                },
+                {
+                  "name": "Are the cells flat?"
+                },
+                {
+                  "name": "Where do cells come from?"
+                }
+              ]
+            },
+            {
+              "name": "Plant Tissues",
+              "topics": [
+                {
+                  "name": "Parts of the plant and their functions"
+                },
+                {
+                  "name": "Types of plant tissues"
+                },
+                {
+                  "name": "Meristematic tissues"
+                },
+                {
+                  "name": "Dermal Tissue"
+                },
+                {
+                  "name": "Ground Tissue"
+                },
+                {
+                  "name": "Vascular Tissue"
+                }
+              ]
+            },
+            {
+              "name": "Animal Tissues",
+              "topics": [
+                {
+                  "name": "Animal Tissues"
+                },
+                {
+                  "name": "Epithelial Tissue"
+                },
+                {
+                  "name": "Connective tissue"
+                },
+                {
+                  "name": "Areolar tissue"
+                },
+                {
+                  "name": "Adipose tissue"
+                },
+                {
+                  "name": "Bone"
+                },
+                {
+                  "name": "Cartilage"
+                },
+                {
+                  "name": "Ligament"
+                },
+                {
+                  "name": "Tendon"
+                },
+                {
+                  "name": "Blood"
+                },
+                {
+                  "name": "Muscle Tissue"
+                },
+                {
+                  "name": "Nervous Tissue"
+                }
+              ]
+            },
+            {
+              "name": "Transportation of materials through Plasma Membrane",
+              "topics": [
+                {
+                  "name": "Osmosis"
+                },
+                {
+                  "name": "Functions of plasma membrane"
+                },
+                {
+                  "name": "Transport across the plasma membrane"
+                },
+                {
+                  "name": "Diffusion"
+                }
+              ]
+            },
+            {
+              "name": "Diversity in Living Organisms - Classification",
+              "topics": [
+                {
+                  "name": "Diversity in plants"
+                },
+                {
+                  "name": "Diversity in animals"
+                },
+                {
+                  "name": "Variations in humans"
+                },
+                {
+                  "name": "Variations in plants"
+                },
+                {
+                  "name": "Classification and evolution"
+                },
+                {
+                  "name": "History of classification"
+                },
+                {
+                  "name": "The hierarchy of classification"
+                },
+                {
+                  "name": "Monera"
+                },
+                {
+                  "name": "Protista"
+                },
+                {
+                  "name": "Fungi"
+                },
+                {
+                  "name": "Plantae"
+                },
+                {
+                  "name": "Classification of Animals"
+                },
+                {
+                  "name": "Porifera"
+                },
+                {
+                  "name": "Coelenterata/Cnidarians"
+                },
+                {
+                  "name": "Platyhelminthes"
+                },
+                {
+                  "name": "Nematoda"
+                },
+                {
+                  "name": "Annelida"
+                },
+                {
+                  "name": "Arthropoda"
+                },
+                {
+                  "name": "Mollusca"
+                },
+                {
+                  "name": "Echinodermata"
+                },
+                {
+                  "name": "Chordata"
+                },
+                {
+                  "name": "Protochordata"
+                },
+                {
+                  "name": "Vertebrata"
+                },
+                {
+                  "name": "Nomenclature"
+                }
+              ]
+            },
+            {
+              "name": "Sense Organs",
+              "topics": [
+                {
+                  "name": "What do our senses do?"
+                },
+                {
+                  "name": "Stimulation to Sensation"
+                },
+                {
+                  "name": "Our Sense Organs"
+                },
+                {
+                  "name": "Eye"
+                },
+                {
+                  "name": "Ear"
+                },
+                {
+                  "name": "Nose"
+                },
+                {
+                  "name": "Tongue"
+                },
+                {
+                  "name": "Skin"
+                }
+              ]
+            },
+            {
+              "name": "Animal Behaviour",
+              "topics": [
+                {
+                  "name": "What do we mean by Animal Behaviour?"
+                },
+                {
+                  "name": "Different types of Animal Behaviour"
+                },
+                {
+                  "name": "Instinct"
+                },
+                {
+                  "name": "Imprinting"
+                },
+                {
+                  "name": "Conditioning"
+                },
+                {
+                  "name": "Imitation"
+                },
+                {
+                  "name": "Human behaviour"
+                },
+                {
+                  "name": "Investigating behaviour"
+                },
+                {
+                  "name": "Tagging"
+                },
+                {
+                  "name": "Investigation in Lab"
+                },
+                {
+                  "name": "Some experiments towards animal intelligence"
+                }
+              ]
+            },
+            {
+              "name": "Challenges in Improving Agricultural Production",
+              "topics": [
+                {
+                  "name": "Crop production"
+                },
+                {
+                  "name": "How to increase the food production?"
+                },
+                {
+                  "name": "Improving high yielding crop varieties"
+                },
+                {
+                  "name": "High yielding crop management methods"
+                },
+                {
+                  "name": "What does a plant do with water?"
+                },
+                {
+                  "name": "The relationship between water and crop yields"
+                },
+                {
+                  "name": "Plant nutrients"
+                },
+                {
+                  "name": "Soil Nutrients"
+                },
+                {
+                  "name": "Crop rotation"
+                },
+                {
+                  "name": "Cultivating mixed crops"
+                },
+                {
+                  "name": "Root nodules in legume plants"
+                },
+                {
+                  "name": "Organic manure"
+                },
+                {
+                  "name": "Green Manure crops"
+                },
+                {
+                  "name": "Soil testing"
+                },
+                {
+                  "name": "Vermicompost"
+                },
+                {
+                  "name": "Panchgavya"
+                },
+                {
+                  "name": "Organic farming"
+                },
+                {
+                  "name": "Chemical Fertilizers"
+                },
+                {
+                  "name": "Amount of fertilizers - Effect"
+                },
+                {
+                  "name": "Crop protection"
+                },
+                {
+                  "name": "Weeds"
+                },
+                {
+                  "name": "Insects and plant diseases"
+                },
+                {
+                  "name": "Natural pest controlling methods"
+                }
+              ]
+            },
+            {
+              "name": "Adaptations in Different Ecosystems",
+              "topics": [
+                {
+                  "name": "Adaptations"
+                },
+                {
+                  "name": "Adaptations in some more desert animals"
+                },
+                {
+                  "name": "Adaptations in Aquatic ecosystems"
+                },
+                {
+                  "name": "Marine ecosystem"
+                },
+                {
+                  "name": "Secret of swimming"
+                },
+                {
+                  "name": "Oceanic Zones"
+                },
+                {
+                  "name": "Adaptations on the basis of light penetration"
+                },
+                {
+                  "name": "Fresh water Ecosystems"
+                },
+                {
+                  "name": "Littoral zone"
+                },
+                {
+                  "name": "Limnetic zone"
+                },
+                {
+                  "name": "Profundal zone"
+                },
+                {
+                  "name": "Other organisms found in lake"
+                },
+                {
+                  "name": "Water salinity and fish adaptations"
+                },
+                {
+                  "name": "Adaptations in some aquatic plants"
+                },
+                {
+                  "name": "Adaptation to temperature in animals"
+                },
+                {
+                  "name": "Adaptation as a response to adverse situations"
+                },
+                {
+                  "name": "Lichens"
+                },
+                {
+                  "name": "Story of Darwin's Finches"
+                },
+                {
+                  "name": "Adaption in Galapagos Finches"
+                }
+              ]
+            },
+            {
+              "name": "Soil Pollution",
+              "topics": [
+                {
+                  "name": "What is soil?"
+                },
+                {
+                  "name": "Soil formation"
+                },
+                {
+                  "name": "Soil properties"
+                },
+                {
+                  "name": "Soil Fertility"
+                },
+                {
+                  "name": "Dumping and decomposing"
+                },
+                {
+                  "name": "Causes of land pollution"
+                },
+                {
+                  "name": "Indiscriminate use of fertilizers"
+                },
+                {
+                  "name": "Indiscriminate use of pesticides, insecticides and herbicides"
+                },
+                {
+                  "name": "Biomagnification"
+                },
+                {
+                  "name": "Dumping of solid wastes"
+                },
+                {
+                  "name": "Deforestation"
+                },
+                {
+                  "name": "Pollution due to urbanization"
+                },
+                {
+                  "name": "Pollution of underground Soil"
+                },
+                {
+                  "name": "Effects of soil pollution"
+                },
+                {
+                  "name": "Long term effects of soil pollution on the Environment"
+                },
+                {
+                  "name": "Control of soil pollution"
+                },
+                {
+                  "name": "Reducing chemical fertilizers and pesticide use"
+                },
+                {
+                  "name": "Reusing of materials"
+                },
+                {
+                  "name": "Recycling and recovery of materials"
+                },
+                {
+                  "name": "Re-forestlation"
+                },
+                {
+                  "name": "Solid waste management"
+                },
+                {
+                  "name": "Bioremediation"
+                },
+                {
+                  "name": "Natural land pollution"
+                },
+                {
+                  "name": "Soil conservation"
+                },
+                {
+                  "name": "Planting trees"
+                },
+                {
+                  "name": "Terraces"
+                },
+                {
+                  "name": "No-till farming"
+                },
+                {
+                  "name": "Contour ploughing"
+                },
+                {
+                  "name": "Crop rotation"
+                },
+                {
+                  "name": "Soil pH"
+                },
+                {
+                  "name": "Watering the soil"
+                },
+                {
+                  "name": "Salinity management"
+                },
+                {
+                  "name": "Soil organisms"
+                },
+                {
+                  "name": "Indigenous Crops"
+                }
+              ]
+            },
+            {
+              "name": "Biogeochemical cycles",
+              "topics": [
+                {
+                  "name": "Biogeochemical cycles"
+                },
+                {
+                  "name": "The water cycle"
+                },
+                {
+                  "name": "The Nitrogen cycle"
+                },
+                {
+                  "name": "Nitrogen fixation"
+                },
+                {
+                  "name": "Nitrification"
+                },
+                {
+                  "name": "Assimilation"
+                },
+                {
+                  "name": "Ammonification"
+                },
+                {
+                  "name": "Denitrification"
+                },
+                {
+                  "name": "Human intervention and nitrogen cycle"
+                },
+                {
+                  "name": "The Carbon cycle"
+                },
+                {
+                  "name": "Cycling and storage"
+                },
+                {
+                  "name": "Carbon cycle and human intervention"
+                },
+                {
+                  "name": "The Green house effect"
+                },
+                {
+                  "name": "Oxygen cycle"
+                },
+                {
+                  "name": "Oxygen cycle and storage"
+                },
+                {
+                  "name": "Ozone layer"
+                },
+                {
+                  "name": "Ozone depletion"
+                }
+              ]
+            }
+          ]
         }
-      }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Class 10",
+      "description": "Mastery for board excellence",
+      "subjects": [
+        {
+          "id": "math",
+          "name": "Math",
+          "icon": "Calculator",
+          "description": "Trigonometry & advanced algebra",
+          "chapters": [
+            {
+              "name": "Real Numbers",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Division Algorithm"
+                },
+                {
+                  "name": "The Fundamental theorem of Arithmetic"
+                },
+                {
+                  "name": "Rational numbers and their decimal expansions"
+                },
+                {
+                  "name": "Non-terminating, recurring decimals in rational numbers"
+                },
+                {
+                  "name": "Irrational numbers"
+                },
+                {
+                  "name": "Exponentials Revision"
+                },
+                {
+                  "name": "Exponentials and Logarithms"
+                },
+                {
+                  "name": "Graph of exponential 2^x"
+                },
+                {
+                  "name": "Properties of Logarithms"
+                }
+              ]
+            },
+            {
+              "name": "Sets",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Dental Formula"
+                },
+                {
+                  "name": "SET"
+                },
+                {
+                  "name": "Roster form and Set builder form"
+                },
+                {
+                  "name": "Empty Set"
+                },
+                {
+                  "name": "Universal Set"
+                },
+                {
+                  "name": "Subset"
+                },
+                {
+                  "name": "Venn diagrams"
+                },
+                {
+                  "name": "Basic Operations on Sets"
+                },
+                {
+                  "name": "Union of Sets"
+                },
+                {
+                  "name": "Intersection of Sets"
+                },
+                {
+                  "name": "Disjoint Sets"
+                },
+                {
+                  "name": "Difference of Sets"
+                },
+                {
+                  "name": "Equal Sets"
+                },
+                {
+                  "name": "Finite and Infinite sets"
+                },
+                {
+                  "name": "Cardinality of a finite set"
+                }
+              ]
+            },
+            {
+              "name": "Polynomials",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "What are Polynomials?"
+                },
+                {
+                  "name": "Degree of a Polynomial"
+                },
+                {
+                  "name": "Value of a Polynomial"
+                },
+                {
+                  "name": "Zeroes of a Polynomial"
+                },
+                {
+                  "name": "Working with Polynomials"
+                },
+                {
+                  "name": "Geometrical Meaning of the Zeroes of a Polynomial"
+                },
+                {
+                  "name": "Graphical representation of a linear polynomial"
+                },
+                {
+                  "name": "Graphical Representation of a Quadratic Polynomial"
+                },
+                {
+                  "name": "Geometrical Meaning of Zeroes of a Cubic Polynomial"
+                },
+                {
+                  "name": "Relationship between Zeroes and Coefficients of a Polynomial"
+                },
+                {
+                  "name": "Cubic Polynomials"
+                },
+                {
+                  "name": "Division Algorithm for Polynomials"
+                }
+              ]
+            },
+            {
+              "name": "Pair of Linear Equations in Two Variables",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "How Do We Find Unknown Quantities?"
+                },
+                {
+                  "name": "Using Both Equations Together"
+                },
+                {
+                  "name": "Solutions of Pairs of Linear Equations in Two Variables"
+                },
+                {
+                  "name": "Graphical Method of Finding Solution of a Pair of Linear Equations"
+                },
+                {
+                  "name": "Relation Between Coefficients and Nature of System of Equations"
+                },
+                {
+                  "name": "Algebraic Methods of Finding the Solutions for a Pair of Linear Equations"
+                },
+                {
+                  "name": "Substitution Method"
+                },
+                {
+                  "name": "Elimination Method"
+                },
+                {
+                  "name": "Equations Reducible to a Pair of Linear Equations in Two Variables"
+                }
+              ]
+            },
+            {
+              "name": "Quadratic Equations",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Quadratic Equations"
+                },
+                {
+                  "name": "Solution of a Quadratic Equation by Factorisation"
+                },
+                {
+                  "name": "Solution of a Quadratic Equation by Completing the Square"
+                },
+                {
+                  "name": "Nature of Roots"
+                }
+              ]
+            },
+            {
+              "name": "Progressions",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Arithmetic Progressions"
+                },
+                {
+                  "name": "What is an Arithmetic Progression?"
+                },
+                {
+                  "name": "Parameters of Arithmetic Progressions"
+                },
+                {
+                  "name": "nth Term of an Arithmetic Progression"
+                },
+                {
+                  "name": "Sum of First n Terms in Arithmetic Progression"
+                },
+                {
+                  "name": "How 'Gauss' found the sum of terms"
+                },
+                {
+                  "name": "Sum of n terms of an A.P.."
+                },
+                {
+                  "name": "Geometric Progressions"
+                },
+                {
+                  "name": "nth term of a G.P."
+                }
+              ]
+            },
+            {
+              "name": "Coordinate Geometry",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Distance Between Two Points"
+                },
+                {
+                  "name": "Distance Between Two Points on a Line Parallel to the Coordinate Axes"
+                },
+                {
+                  "name": "Distance Between Any Two Points in the plane"
+                },
+                {
+                  "name": "Section Formula"
+                },
+                {
+                  "name": "Trisectional Points of a Line segment"
+                },
+                {
+                  "name": "Centroid of a Triangle"
+                },
+                {
+                  "name": "Area of the Triangle"
+                },
+                {
+                  "name": "Collinearity"
+                },
+                {
+                  "name": "Area of a Triangle- 'Heron's Formula'"
+                },
+                {
+                  "name": "Straight Lines"
+                },
+                {
+                  "name": "Slope of the straight line"
+                },
+                {
+                  "name": "Slope of a line joining Two Points"
+                }
+              ]
+            },
+            {
+              "name": "Similar Triangles",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Similar Figures"
+                },
+                {
+                  "name": "Similarity of Triangles"
+                },
+                {
+                  "name": "Basic Proportionality Theorem (Thales Theorem)"
+                },
+                {
+                  "name": "Criteria for Similarity of Triangles"
+                },
+                {
+                  "name": "AAA Criterion for Similarity of Triangles"
+                },
+                {
+                  "name": "SSS Criterion for Similarity of Triangles"
+                },
+                {
+                  "name": "SAS Criterion for Similarity of Triangles"
+                },
+                {
+                  "name": "Areas of Similar Triangles"
+                },
+                {
+                  "name": "Pythagoras Theorem"
+                },
+                {
+                  "name": "Baudhayana Theorem (Pythagoras Theorem)"
+                },
+                {
+                  "name": "Different forms of theoretical statements"
+                }
+              ]
+            },
+            {
+              "name": "Tangents and Secants to a Circle",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "A Line and A Circle"
+                },
+                {
+                  "name": "Tangents of a Circle"
+                },
+                {
+                  "name": "Construction of Tangent to a Circle"
+                },
+                {
+                  "name": "Finding Length of the Tangent"
+                },
+                {
+                  "name": "Number of tangents to a circle from any point"
+                },
+                {
+                  "name": "Construction of Tangents to a Circle from an External point"
+                },
+                {
+                  "name": "Segment of a circle formed by a secant"
+                },
+                {
+                  "name": "Finding the Area of Segment of a Circle"
+                }
+              ]
+            },
+            {
+              "name": "Mensuration",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Surface Area of the Combination of Solids"
+                },
+                {
+                  "name": "Volume of Combination of Solids"
+                },
+                {
+                  "name": "Conversion of Solid from One Shape to Another"
+                }
+              ]
+            },
+            {
+              "name": "Trigonometry",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Naming The Sides in a Right Triangle"
+                },
+                {
+                  "name": "Trigonometric Ratios"
+                },
+                {
+                  "name": "Defining Trigonometric Ratios"
+                },
+                {
+                  "name": "Trigonometric Ratios of 45°"
+                },
+                {
+                  "name": "Trigonometric Ratios of 30° and 60°"
+                },
+                {
+                  "name": "Trigonometric Ratios of 0° and 90°"
+                },
+                {
+                  "name": "Trigonometric Ratios of Complementary angles"
+                },
+                {
+                  "name": "Trigonometric identities"
+                }
+              ]
+            },
+            {
+              "name": "Applications of Trigonometry",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Drawing Figures to Solve Problems"
+                },
+                {
+                  "name": "Problems with Two right-angled Triangles"
+                }
+              ]
+            },
+            {
+              "name": "Probability",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "What is Probability"
+                },
+                {
+                  "name": "Probability - A Theoretical Approach"
+                },
+                {
+                  "name": "Probability and Modelling"
+                },
+                {
+                  "name": "Mutually Exclusive Events"
+                },
+                {
+                  "name": "Finding Probability"
+                },
+                {
+                  "name": "Complementary Events and Probability"
+                },
+                {
+                  "name": "Impossible and Certain Events"
+                },
+                {
+                  "name": "Deck of Cards and Probability"
+                },
+                {
+                  "name": "Use of Probability"
+                },
+                {
+                  "name": "More Applications of Probability"
+                }
+              ]
+            },
+            {
+              "name": "Statistics",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Mean of Ungrouped Data"
+                },
+                {
+                  "name": "Mode"
+                },
+                {
+                  "name": "Median of Grouped Data"
+                },
+                {
+                  "name": "Which value of Central Tendency?"
+                },
+                {
+                  "name": "Graphical Representation of Cumulative Frequency Distribution"
+                },
+                {
+                  "name": "Obtaining Median from a given curve"
+                },
+                {
+                  "name": "Another way of obtaining the median"
+                }
+              ]
+            },
+            {
+              "name": "Appendix: Mathematical Modelling",
+              "topics": [
+                {
+                  "name": "Introduction"
+                },
+                {
+                  "name": "Mathematical Models"
+                },
+                {
+                  "name": "Mathematical Modelling"
+                },
+                {
+                  "name": "Advantages of Mathematics Modelling"
+                },
+                {
+                  "name": "Limitations of Mathematical modelling"
+                },
+                {
+                  "name": "To What Extent We Should Try To Improve Our Model?"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "physics",
+          "name": "Physics",
+          "icon": "Zap",
+          "description": "Electricity, magnetism & optics",
+          "chapters": [
+            {
+              "name": "Reflection of light at curved surfaces",
+              "topics": [
+                {
+                  "name": "Reflection of light by spherical mirrors"
+                },
+                {
+                  "name": "Verifying your drawing with experiment"
+                },
+                {
+                  "name": "Ray diagrams (Image formation by concave mirror)"
+                },
+                {
+                  "name": "Ray Diagrams: (Image formation by convex mirror)"
+                },
+                {
+                  "name": "Derivation of mirror formula for spherical mirrors"
+                },
+                {
+                  "name": "Sign convention for the parameters related to the mirror equation"
+                },
+                {
+                  "name": "Magnification (m)"
+                },
+                {
+                  "name": "Making of solar cooker"
+                }
+              ]
+            },
+            {
+              "name": "Chemical Equations",
+              "topics": [
+                {
+                  "name": "Writing a Chemical Equation"
+                },
+                {
+                  "name": "Balancing Chemical Equations"
+                },
+                {
+                  "name": "Making Chemical Equations more informative"
+                },
+                {
+                  "name": "Expressing the physical state"
+                },
+                {
+                  "name": "Expressing the heat changes"
+                },
+                {
+                  "name": "Expressing the gas evolved"
+                },
+                {
+                  "name": "Expressing precipitate formed"
+                },
+                {
+                  "name": "Interpreting a balanced chemical equation"
+                }
+              ]
+            },
+            {
+              "name": "Acids, Bases and Salts",
+              "topics": [
+                {
+                  "name": "Chemical properties of Acids and Bases"
+                },
+                {
+                  "name": "Reaction of Acids and Bases with Metals"
+                },
+                {
+                  "name": "Reaction of acids with carbonates and metal hydrogen carbonates"
+                },
+                {
+                  "name": "Neutralization reaction"
+                },
+                {
+                  "name": "Reaction of Acids with metal oxides"
+                },
+                {
+                  "name": "Reaction of base with non-metal oxide"
+                },
+                {
+                  "name": "Common properties of Acids"
+                },
+                {
+                  "name": "Properties of Bases"
+                },
+                {
+                  "name": "Do acids produce ions only in aqueous solution?"
+                },
+                {
+                  "name": "Reaction of Acids - bases with water"
+                },
+                {
+                  "name": "Strength of acids or bases"
+                },
+                {
+                  "name": "pH scale"
+                },
+                {
+                  "name": "Importance of pH in everyday life"
+                },
+                {
+                  "name": "Self defense by animals and plants through chemical war fare?"
+                },
+                {
+                  "name": "Salts"
+                },
+                {
+                  "name": "Family of salts"
+                },
+                {
+                  "name": "pH of Salts"
+                },
+                {
+                  "name": "Chemicals from common salt"
+                },
+                {
+                  "name": "Common salt - A raw material for chemicals"
+                },
+                {
+                  "name": "Sodium hydroxide from common salt"
+                },
+                {
+                  "name": "Bleaching Powder"
+                },
+                {
+                  "name": "Baking soda"
+                },
+                {
+                  "name": "Washing soda (sodium carbonate)"
+                },
+                {
+                  "name": "Removing water of crystallisation"
+                },
+                {
+                  "name": "Plaster of paris"
+                }
+              ]
+            },
+            {
+              "name": "Refraction of Light at Curved Surfaces",
+              "topics": [
+                {
+                  "name": "Refraction of light at a curved surface"
+                },
+                {
+                  "name": "Image formation"
+                },
+                {
+                  "name": "Derivation of curved surface formula"
+                },
+                {
+                  "name": "Lenses"
+                },
+                {
+                  "name": "Focal length of the lens"
+                },
+                {
+                  "name": "Behaviour of certain light rays when they are incident on a lens"
+                },
+                {
+                  "name": "Rules to draw ray diagrams for image formation by lenses"
+                },
+                {
+                  "name": "Lens formula"
+                },
+                {
+                  "name": "Magnification"
+                },
+                {
+                  "name": "Lens maker's formula"
+                }
+              ]
+            },
+            {
+              "name": "Human Eye and Colourful world",
+              "topics": [
+                {
+                  "name": "Least distance of distinct vision"
+                },
+                {
+                  "name": "Structure of human eye"
+                },
+                {
+                  "name": "Defects of Vision"
+                },
+                {
+                  "name": "Myopia"
+                },
+                {
+                  "name": "Hypermetropia"
+                },
+                {
+                  "name": "Presbyopia"
+                },
+                {
+                  "name": "Power of lens"
+                },
+                {
+                  "name": "Dispersion and Scattering of Light"
+                },
+                {
+                  "name": "Prism"
+                },
+                {
+                  "name": "Derivation of formula for refractive index of a prism"
+                },
+                {
+                  "name": "Dispersion of Light"
+                },
+                {
+                  "name": "Scattering of Light"
+                }
+              ]
+            },
+            {
+              "name": "Structure of Atom",
+              "topics": [
+                {
+                  "name": "Spectrum"
+                },
+                {
+                  "name": "Characterstics of electromagnetic wave"
+                },
+                {
+                  "name": "Electromagnetic spectrum"
+                },
+                {
+                  "name": "Bohr's model of hydrogen atom and its limitations"
+                },
+                {
+                  "name": "Bohr-Sommerfeld model of an atom"
+                },
+                {
+                  "name": "Quantum mechanical model of an atom"
+                },
+                {
+                  "name": "Quantum numbers"
+                },
+                {
+                  "name": "Principal Quantum Number (n)"
+                },
+                {
+                  "name": "The angular - momentum quantum number (l)"
+                },
+                {
+                  "name": "The magnetic quantum number (ml)"
+                },
+                {
+                  "name": "Spin Quantum Number (ms)"
+                },
+                {
+                  "name": "Electronic Configuration"
+                },
+                {
+                  "name": "The Pauli Exclusion Principle"
+                },
+                {
+                  "name": "Aufbau Principle"
+                },
+                {
+                  "name": "Hund's Rule"
+                }
+              ]
+            },
+            {
+              "name": "Classification of Elements- The Periodic Table",
+              "topics": [
+                {
+                  "name": "What is the Need for the arrangement of elements in an organised manner?"
+                },
+                {
+                  "name": "Dobereiner's law of Triads"
+                },
+                {
+                  "name": "Newlands' law of Octaves"
+                },
+                {
+                  "name": "Mendeleeff's Periodic Table"
+                },
+                {
+                  "name": "The Periodic Law"
+                },
+                {
+                  "name": "Salient features of the Mendeleeff's periodic table"
+                },
+                {
+                  "name": "Limitations of Mendeleeff's periodic table"
+                },
+                {
+                  "name": "Modern Periodic Table"
+                },
+                {
+                  "name": "Positions of elements in the Modern Periodic Table"
+                },
+                {
+                  "name": "Groups"
+                },
+                {
+                  "name": "Periods"
+                },
+                {
+                  "name": "Metals and Non metals"
+                },
+                {
+                  "name": "Periodic properties of the elements in the modern table"
+                },
+                {
+                  "name": "Properties of elements and their trends in Groups and in Periods"
+                },
+                {
+                  "name": "Valence"
+                },
+                {
+                  "name": "Atomic radius"
+                },
+                {
+                  "name": "Ionization Energy or Ionization Potential"
+                },
+                {
+                  "name": "Electron affinity - Electron gain enthalpy"
+                },
+                {
+                  "name": "Electronegativity"
+                },
+                {
+                  "name": "Metallic and Non-Metallic Properties"
+                }
+              ]
+            },
+            {
+              "name": "Chemical Bonding",
+              "topics": [
+                {
+                  "name": "Lewis symbols (or) Lewis dot structures"
+                },
+                {
+                  "name": "Electronic theory of valence by Lewis and Kossel"
+                },
+                {
+                  "name": "Octet rule"
+                },
+                {
+                  "name": "Ionic and Covalent bonds"
+                },
+                {
+                  "name": "Ionic bond"
+                },
+                {
+                  "name": "Formation of ionic bond"
+                },
+                {
+                  "name": "The arrangement of ions in ionic compounds"
+                },
+                {
+                  "name": "Factors affecting the formation of cation and anion"
+                },
+                {
+                  "name": "Covalent bond"
+                },
+                {
+                  "name": "The Bond lengths and Bond energies of covalent bonds"
+                },
+                {
+                  "name": "Draw backs of electronic theory of valence"
+                },
+                {
+                  "name": "Valence shell electron pair repulsion theory"
+                },
+                {
+                  "name": "Valence bond theory"
+                },
+                {
+                  "name": "Valence bond theory-Hybridisation"
+                },
+                {
+                  "name": "Formation of BeCl2 (Beryllium chloride) molecule"
+                },
+                {
+                  "name": "Formation of BF3 molecule"
+                },
+                {
+                  "name": "Formation of NH3 molecule"
+                },
+                {
+                  "name": "Shape of water molecule"
+                },
+                {
+                  "name": "Properties of ionic and covalent compounds"
+                }
+              ]
+            },
+            {
+              "name": "Electric Current",
+              "topics": [
+                {
+                  "name": "Electric current"
+                },
+                {
+                  "name": "Why do electrons move in specified direction?"
+                },
+                {
+                  "name": "Potential Difference"
+                },
+                {
+                  "name": "Electromotive force (emf)"
+                },
+                {
+                  "name": "Ohm's law"
+                },
+                {
+                  "name": "Limitations of Ohm's Law"
+                },
+                {
+                  "name": "Electric shock"
+                },
+                {
+                  "name": "Factors affecting the resistance of a material"
+                },
+                {
+                  "name": "Temperature and resistance"
+                },
+                {
+                  "name": "Nature of material and resistance"
+                },
+                {
+                  "name": "Length of the conductor and resistance"
+                },
+                {
+                  "name": "Crosssection area and resistance"
+                },
+                {
+                  "name": "Electric Circuits"
+                },
+                {
+                  "name": "Series connection of resistors"
+                },
+                {
+                  "name": "Parallel Connection of resistors"
+                },
+                {
+                  "name": "Kirchhoff's laws"
+                },
+                {
+                  "name": "Junction Law"
+                },
+                {
+                  "name": "Loop Law"
+                },
+                {
+                  "name": "Electric power"
+                },
+                {
+                  "name": "Overload"
+                }
+              ]
+            },
+            {
+              "name": "Electromagnetism",
+              "topics": [
+                {
+                  "name": "Oersted experiment"
+                },
+                {
+                  "name": "Magnetic Field"
+                },
+                {
+                  "name": "Lines of magnetic field"
+                },
+                {
+                  "name": "Magnetic flux - Magnetic flux density"
+                },
+                {
+                  "name": "Magnetic field due to currents"
+                },
+                {
+                  "name": "Magnetic field due to straight wire carrying current"
+                },
+                {
+                  "name": "Magnetic field due to circular coil"
+                },
+                {
+                  "name": "Magnetic field due to solenoid"
+                },
+                {
+                  "name": "Magnetic Force On Moving Charge And Current Carrying Wire"
+                },
+                {
+                  "name": "Electric Motor"
+                },
+                {
+                  "name": "Electromagnetic induction"
+                },
+                {
+                  "name": "Faraday's Law"
+                },
+                {
+                  "name": "Lenz Law"
+                },
+                {
+                  "name": "Derivation of Faraday's Law"
+                },
+                {
+                  "name": "Magnetic Levitation"
+                },
+                {
+                  "name": "Electric Generator and Alternating - Direct Currents"
+                }
+              ]
+            },
+            {
+              "name": "Principles of Metallurgy",
+              "topics": [
+                {
+                  "name": "Occurrence of the metals in nature"
+                },
+                {
+                  "name": "Extraction of metals from the files"
+                },
+                {
+                  "name": "Concentration or Dressing of the ore"
+                },
+                {
+                  "name": "Extraction of crude metal from the ore"
+                },
+                {
+                  "name": "Reduction of purified ore to the metal"
+                },
+                {
+                  "name": "Purification of the crude metal"
+                },
+                {
+                  "name": "Corrosion"
+                },
+                {
+                  "name": "Prevention of corrosion"
+                },
+                {
+                  "name": "A few important processes used in metallurgy"
+                },
+                {
+                  "name": "Smelting"
+                },
+                {
+                  "name": "Roasting"
+                },
+                {
+                  "name": "Calcination"
+                },
+                {
+                  "name": "Flux"
+                },
+                {
+                  "name": "Furnace"
+                }
+              ]
+            },
+            {
+              "name": "Carbon and its Compounds",
+              "topics": [
+                {
+                  "name": "Promotion of an electron"
+                },
+                {
+                  "name": "Hybridisation"
+                },
+                {
+                  "name": "sp2 hybridisation"
+                },
+                {
+                  "name": "sp hybridisation"
+                },
+                {
+                  "name": "Allotropes of Carbon"
+                },
+                {
+                  "name": "Amorphous forms"
+                },
+                {
+                  "name": "Crystalline forms"
+                },
+                {
+                  "name": "Versatile nature of carbon"
+                },
+                {
+                  "name": "Catenation"
+                },
+                {
+                  "name": "Hydrocarbons"
+                },
+                {
+                  "name": "Open and closed chain hydrocarbons"
+                },
+                {
+                  "name": "Saturated and unsaturated hydrocarbons"
+                },
+                {
+                  "name": "Binding of carbon with other elements"
+                },
+                {
+                  "name": "Functional groups in carbon compounds"
+                },
+                {
+                  "name": "Isomerism"
+                },
+                {
+                  "name": "Homologous series"
+                },
+                {
+                  "name": "Nomenclature of organic compounds"
+                },
+                {
+                  "name": "Numan Clature- Rules"
+                },
+                {
+                  "name": "Numbering carbon atoms"
+                },
+                {
+                  "name": "How to draw structure of a compound"
+                },
+                {
+                  "name": "Chemical properties of carbon compounds"
+                },
+                {
+                  "name": "Combustion reactions"
+                },
+                {
+                  "name": "Oxidation reactions"
+                },
+                {
+                  "name": "Addition reactions"
+                },
+                {
+                  "name": "Substitution reactions"
+                },
+                {
+                  "name": "Some important carbon compounds"
+                },
+                {
+                  "name": "Ethanol (Ethyl alcohol)"
+                },
+                {
+                  "name": "Ethanoic acid (Acetic acid or CH3COOH)"
+                },
+                {
+                  "name": "Esterification"
+                },
+                {
+                  "name": "Soaps - Saponification and Micelles"
+                },
+                {
+                  "name": "Saponification reaction"
+                },
+                {
+                  "name": "Micelle"
+                },
+                {
+                  "name": "Cleansing action of soap"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "biology",
+          "name": "Biology",
+          "icon": "Dna",
+          "description": "Life processes & evolution",
+          "chapters": [
+            {
+              "name": "NUTRITION",
+              "topics": [
+                {
+                  "name": "Autotrophic Nutrition"
+                },
+                {
+                  "name": "Photosynthesis"
+                },
+                {
+                  "name": "Factors (Materials) essential for the process of Photosynthesis"
+                },
+                {
+                  "name": "Water and Photosynthesis"
+                },
+                {
+                  "name": "Air and Photosynthesis"
+                },
+                {
+                  "name": "Light and Photosynthesis"
+                },
+                {
+                  "name": "Chlorophyll and Photosynthesis"
+                },
+                {
+                  "name": "Where does Photosynthesis take place?"
+                },
+                {
+                  "name": "Mechanism of Photosynthesis"
+                },
+                {
+                  "name": "Light dependent reaction (Light phase)"
+                },
+                {
+                  "name": "Light independent reaction (Dark phase)"
+                },
+                {
+                  "name": "Nutrition in Heterotrophs (Heterotrophic Nutrition)"
+                },
+                {
+                  "name": "How do organisms obtain their nutrition?"
+                },
+                {
+                  "name": "Parasitic nutrition in Cuscuta"
+                },
+                {
+                  "name": "Digestive system in Human Beings"
+                },
+                {
+                  "name": "Passage of food through alimentary canal or gut"
+                },
+                {
+                  "name": "Health aspects of the alimentary canal"
+                },
+                {
+                  "name": "Diseases due to malnutrition"
+                },
+                {
+                  "name": "Vitamin deficiency diseases"
+                }
+              ]
+            },
+            {
+              "name": "Respiration",
+              "topics": [
+                {
+                  "name": "Discovery of gases and respiration"
+                },
+                {
+                  "name": "Steps in Respiration"
+                },
+                {
+                  "name": "Breathing (Inhalation and Exhalation)"
+                },
+                {
+                  "name": "Pathway of air"
+                },
+                {
+                  "name": "Epiglottis and passage of air"
+                },
+                {
+                  "name": "Mechanism of respiration in human beings"
+                },
+                {
+                  "name": "Gaseous Exchange (alveoli to capillaries)"
+                },
+                {
+                  "name": "Transportation of gases"
+                },
+                {
+                  "name": "Gaseous exchange (capillaries to cells and cells to capillaries)"
+                },
+                {
+                  "name": "Cellular respiration"
+                },
+                {
+                  "name": "Can energy be released without oxygen?"
+                },
+                {
+                  "name": "Anaerobic respiration"
+                },
+                {
+                  "name": "Fermentation"
+                },
+                {
+                  "name": "Respiration versus combustion"
+                },
+                {
+                  "name": "Heat production by living organisms"
+                },
+                {
+                  "name": "Evolution in gases exchanging system"
+                },
+                {
+                  "name": "Respiration in Plants"
+                },
+                {
+                  "name": "Transportation of gases in plants"
+                },
+                {
+                  "name": "Respiration through roots"
+                },
+                {
+                  "name": "Photosynthesis versus Respiration"
+                },
+                {
+                  "name": "Pranayama - The art of breathing"
+                }
+              ]
+            },
+            {
+              "name": "Circulation",
+              "topics": [
+                {
+                  "name": "Heart Beat"
+                },
+                {
+                  "name": "Internal structure of the heart"
+                },
+                {
+                  "name": "Blood vessels and circulation"
+                },
+                {
+                  "name": "Arteries and Veins"
+                },
+                {
+                  "name": "Blood capillaries"
+                },
+                {
+                  "name": "The cardiac cycle"
+                },
+                {
+                  "name": "Single and double circulation"
+                },
+                {
+                  "name": "Lymphatic system"
+                },
+                {
+                  "name": "Evolution of the transport (circulatory) system"
+                },
+                {
+                  "name": "Blood pressure (B.P.)"
+                },
+                {
+                  "name": "Coagulation of blood"
+                },
+                {
+                  "name": "How material transport within the plant"
+                },
+                {
+                  "name": "How is water absorbed?"
+                },
+                {
+                  "name": "The mechanism of water movement in plants"
+                },
+                {
+                  "name": "Transport of mineral salts"
+                },
+                {
+                  "name": "Transport of food materials in plants"
+                },
+                {
+                  "name": "The rhesus factor"
+                },
+                {
+                  "name": "Thalassemia"
+                }
+              ]
+            },
+            {
+              "name": "Excretion",
+              "topics": [
+                {
+                  "name": "Excretion in Human Beings"
+                },
+                {
+                  "name": "Excretory system in Human beings"
+                },
+                {
+                  "name": "Kidneys"
+                },
+                {
+                  "name": "Internal structure of the kidney"
+                },
+                {
+                  "name": "Structure of nephron"
+                },
+                {
+                  "name": "Mechanism of urine formation"
+                },
+                {
+                  "name": "Ureters"
+                },
+                {
+                  "name": "Urinary bladder"
+                },
+                {
+                  "name": "Urethra"
+                },
+                {
+                  "name": "Micturition"
+                },
+                {
+                  "name": "Composition of urine"
+                },
+                {
+                  "name": "Dialysis Machine (Artificial kidney)"
+                },
+                {
+                  "name": "Kidney transplantation"
+                },
+                {
+                  "name": "Other pathways of excretion (accessory excretory organs)"
+                },
+                {
+                  "name": "Excretion in other organisms"
+                },
+                {
+                  "name": "Excretion in plants"
+                },
+                {
+                  "name": "Alkaloids"
+                },
+                {
+                  "name": "Tannins"
+                },
+                {
+                  "name": "Resin"
+                },
+                {
+                  "name": "Gums"
+                },
+                {
+                  "name": "Latex"
+                },
+                {
+                  "name": "Excretion Vs Secretion"
+                },
+                {
+                  "name": "Organ donation - A gift for life"
+                }
+              ]
+            },
+            {
+              "name": "Coordination",
+              "topics": [
+                {
+                  "name": "Responding to stimuli"
+                },
+                {
+                  "name": "Integrating pathways - Nervous coordination"
+                },
+                {
+                  "name": "Structure of nerve cell"
+                },
+                {
+                  "name": "Pathways: From stimulus to response"
+                },
+                {
+                  "name": "The reflex arc"
+                },
+                {
+                  "name": "Central Nervous System (CNS)"
+                },
+                {
+                  "name": "Brain"
+                },
+                {
+                  "name": "Spinal Cord"
+                },
+                {
+                  "name": "Peripheral nervous system"
+                },
+                {
+                  "name": "Autonomous Nervous System"
+                },
+                {
+                  "name": "Coordination without nervous system"
+                },
+                {
+                  "name": "The Story of insulin"
+                },
+                {
+                  "name": "Other chemical co-ordinators"
+                },
+                {
+                  "name": "Feedback mechanism"
+                },
+                {
+                  "name": "Control mechanisms in plants"
+                },
+                {
+                  "name": "How do plants respond to stimuli?"
+                },
+                {
+                  "name": "Tropic and nastic movements in plants"
+                }
+              ]
+            },
+            {
+              "name": "Reproduction",
+              "topics": [
+                {
+                  "name": "Asexual reproduction"
+                },
+                {
+                  "name": "Fission"
+                },
+                {
+                  "name": "Budding"
+                },
+                {
+                  "name": "Fragmentation"
+                },
+                {
+                  "name": "Parthenogenesis"
+                },
+                {
+                  "name": "Parthenocarpy"
+                },
+                {
+                  "name": "Regeneration"
+                },
+                {
+                  "name": "Vegetative propagation"
+                },
+                {
+                  "name": "Natural propagation"
+                },
+                {
+                  "name": "Artificial propagation"
+                },
+                {
+                  "name": "Spore formation"
+                },
+                {
+                  "name": "Sporophyll"
+                },
+                {
+                  "name": "Sexual reproduction"
+                },
+                {
+                  "name": "Reproduction in placental mammals - Human beings"
+                },
+                {
+                  "name": "Male reproductive system"
+                },
+                {
+                  "name": "The passage of spermetozoa"
+                },
+                {
+                  "name": "The sperm"
+                },
+                {
+                  "name": "Female reproductive system"
+                },
+                {
+                  "name": "Child birth"
+                },
+                {
+                  "name": "Sexual reproduction in flowering plants"
+                },
+                {
+                  "name": "Flower - The reproductive part"
+                },
+                {
+                  "name": "Structure of the ovule"
+                },
+                {
+                  "name": "Cell division - History"
+                },
+                {
+                  "name": "Cell division in Human beings"
+                },
+                {
+                  "name": "Cell cycle"
+                },
+                {
+                  "name": "Meiosis"
+                },
+                {
+                  "name": "Reproductive health"
+                },
+                {
+                  "name": "Birth control methods"
+                },
+                {
+                  "name": "Fighting against social ills"
+                },
+                {
+                  "name": "Teenage motherhood"
+                },
+                {
+                  "name": "Stop female foeticide"
+                }
+              ]
+            },
+            {
+              "name": "Coordination in life processes",
+              "topics": [
+                {
+                  "name": "Feeling Hungry"
+                },
+                {
+                  "name": "Outcome of sensation of hunger"
+                },
+                {
+                  "name": "Relation between taste and smell"
+                },
+                {
+                  "name": "Taste is something connected to the tongue and the palate"
+                },
+                {
+                  "name": "Mouth - the munching machine"
+                },
+                {
+                  "name": "Travel of food through oesophagus"
+                },
+                {
+                  "name": "Peristaltic movement in oesophagus"
+                },
+                {
+                  "name": "Stomach the mixer and digester"
+                },
+                {
+                  "name": "Travel of food from the stomach to the intestine"
+                },
+                {
+                  "name": "Window in a stomach"
+                },
+                {
+                  "name": "Vomiting - Belching"
+                }
+              ]
+            },
+            {
+              "name": "Heredity - Evolution",
+              "topics": [
+                {
+                  "name": "New characters and variations"
+                },
+                {
+                  "name": "Mendel and his experiments"
+                },
+                {
+                  "name": "Reasons for selecting Pea plant"
+                },
+                {
+                  "name": "Procedure followed by Mendel"
+                },
+                {
+                  "name": "Monohybrid Cross"
+                },
+                {
+                  "name": "Self pollination in F1-Generation"
+                },
+                {
+                  "name": "F2-Generation"
+                },
+                {
+                  "name": "Phenotype"
+                },
+                {
+                  "name": "Genotype"
+                },
+                {
+                  "name": "Dihybrid Cross"
+                },
+                {
+                  "name": "Mendel's Laws"
+                },
+                {
+                  "name": "Parent to progeny"
+                },
+                {
+                  "name": "How do traits get expressed?"
+                },
+                {
+                  "name": "Sex determination in human beings"
+                },
+                {
+                  "name": "Evolution"
+                },
+                {
+                  "name": "Lamarckism - Jean Baptist Larmark (1774-1829)"
+                },
+                {
+                  "name": "Darwinism - Charles Darwin (1809-1882)"
+                },
+                {
+                  "name": "Darwin's theory of evolution in a nutshell"
+                },
+                {
+                  "name": "Speciation"
+                },
+                {
+                  "name": "Evidences of evolution"
+                },
+                {
+                  "name": "Homologous and analogous organs"
+                },
+                {
+                  "name": "Evidences from embryology"
+                },
+                {
+                  "name": "Evidences from fossils"
+                },
+                {
+                  "name": "Human Evolution"
+                },
+                {
+                  "name": "Human being a moving museum of Vestigial Organs"
+                },
+                {
+                  "name": "Mendel's law of independent assortment"
+                }
+              ]
+            },
+            {
+              "name": "Our Environment",
+              "topics": [
+                {
+                  "name": "Food Chain"
+                },
+                {
+                  "name": "Food Web"
+                },
+                {
+                  "name": "Ecological pyramids"
+                },
+                {
+                  "name": "Pyramid of numbers"
+                },
+                {
+                  "name": "Pyramid of Biomass"
+                },
+                {
+                  "name": "Pyramid of Energy"
+                },
+                {
+                  "name": "The effects of human activities on ecosystems"
+                },
+                {
+                  "name": "Story of Kolleru Lake"
+                },
+                {
+                  "name": "Seasonal Bioaccumulation of heavy metals in fish (cyprinus carpio) of Edulabad Water Reservoir (EBWR)- effect on humans"
+                },
+                {
+                  "name": "Sparrow campaign"
+                },
+                {
+                  "name": "Steps towards prevention"
+                },
+                {
+                  "name": "Biological Principles"
+                }
+              ]
+            },
+            {
+              "name": "Natural Resources",
+              "topics": [
+                {
+                  "name": "Case I: Situation of water resources in Wanaparthy and Vaddicherla of Jangaon District"
+                },
+                {
+                  "name": "Water for all"
+                },
+                {
+                  "name": "Case II: A Study of Kothapally Village, an example of water management effort"
+                },
+                {
+                  "name": "Community based interventions"
+                },
+                {
+                  "name": "Farmer based interventions"
+                },
+                {
+                  "name": "Wasteland development and tree plantation"
+                },
+                {
+                  "name": "Natural resources around us"
+                },
+                {
+                  "name": "Forest: an important renewable resource"
+                },
+                {
+                  "name": "Soil"
+                },
+                {
+                  "name": "Biodiversity"
+                },
+                {
+                  "name": "Fossil Fuels"
+                },
+                {
+                  "name": "Minerals"
+                },
+                {
+                  "name": "Conservation- A vital concern"
+                },
+                {
+                  "name": "Conservation Groups"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
-  }
+  ]
 }
