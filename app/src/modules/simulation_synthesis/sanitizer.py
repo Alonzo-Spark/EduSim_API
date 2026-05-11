@@ -17,3 +17,5 @@ def sanitize_json(raw_output: str) -> dict:
         return json.loads(cleaned)
     except json.JSONDecodeError as e:
         raise ValueError(f"Failed to parse AI output as JSON: {e}\nRaw output: {raw_output}")
+    except Exception as e:
+        raise ValueError(f"An unexpected error occurred while parsing JSON: {e}")
