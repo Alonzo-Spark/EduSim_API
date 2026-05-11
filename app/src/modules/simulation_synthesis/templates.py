@@ -82,7 +82,7 @@ def detect_subject(prompt: str) -> SubjectType:
 
 def get_system_prompt(subject: SubjectType) -> str:
     """
-    Return subject-specific system prompt for Gemini LLM synthesis.
+    Return subject-specific system prompt for AI/OpenRouter synthesis.
     Each template emphasizes domain-specific visualization and interaction patterns.
     """
     

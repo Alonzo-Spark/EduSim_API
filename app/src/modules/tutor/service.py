@@ -4,8 +4,8 @@ import difflib
 import time
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
-import google.generativeai as genai
 from rag.retriever import get_retriever
+from rag.generator import generate_llm_text
 import pickle
 import faiss
 from sentence_transformers import SentenceTransformer
@@ -22,37 +22,6 @@ _embeddings_model = None
 # Curriculum Index Cache
 _curriculum_data = None
 _curriculum_index = None
-
-
-def _configure_gemini_model():
-    api_key = os.getenv("GOOGLE_API_KEY")
-    print("Starting Gemini generation...")
-    print("API KEY EXISTS:", bool(api_key))
-
-    if not api_key:
-        raise ValueError("GOOGLE_API_KEY is missing. Add it to .env to enable Gemini generation.")
-
-    genai.configure(api_key=api_key)
-    return genai.GenerativeModel("gemini-1.5-flash")
-
-
-def _generate_with_gemini(prompt: str):
-    model_names = ["gemini-1.5-flash", "gemini-flash-latest"]
-    last_error = None
-
-    for model_name in model_names:
-        try:
-            model = genai.GenerativeModel(model_name)
-            response = model.generate_content(prompt)
-            print("Gemini Response:", response)
-            print("Gemini Text:", getattr(response, "text", None))
-            return response
-        except Exception as e:
-            last_error = e
-            if model_name != model_names[-1]:
-                print(f"Gemini primary model failed ({model_name}); trying fallback gemini-flash-latest: {e}")
-
-    raise RuntimeError(f"Gemini generation failed: {str(last_error)}") from last_error
 
 
 def _empty_tutor_payload(message: str):
@@ -111,17 +80,15 @@ def analyze_with_llm(query: str, context: str) -> Dict[str, Any]:
     user_prompt = f"Context:\n{context}\n\nQuery:\n{query}"
     
     try:
-        _configure_gemini_model()
         final_prompt = f"{system_prompt}\n\n{user_prompt}\n\nReturn only the JSON object."
-        response = _generate_with_gemini(final_prompt)
+        response_text = generate_llm_text(final_prompt, temperature=0.1)
 
-        response_text = getattr(response, "text", None)
-        if not response_text:
-            return _empty_tutor_payload("Gemini returned an empty response.")
+        if not response_text or response_text.startswith("Error:"):
+            return _empty_tutor_payload("AI returned an empty or error response.")
 
         json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
         if json_match:
-            print("Gemini generation completed: tutor analysis")
+            print("AI generation completed: tutor analysis")
             parsed = json.loads(json_match.group())
             return {
                 **parsed,
@@ -134,15 +101,15 @@ def analyze_with_llm(query: str, context: str) -> Dict[str, Any]:
                 "sources": parsed.get("sources", []),
             }
 
-        return _empty_tutor_payload("Gemini returned an invalid JSON response.")
+        return _empty_tutor_payload("AI returned an invalid JSON response.")
     except Exception as e:
-        print("Gemini Generation Error:", str(e))
-        return _empty_tutor_payload(f"Gemini generation failed: {str(e)}")
+        print("AI Generation Error:", str(e))
+        return _empty_tutor_payload(f"AI generation failed: {str(e)}")
 
 def analyze_tutor_query(query: str) -> Dict[str, Any]:
     # 1. RAG Retrieval First
     request_started = time.perf_counter()
-    print("Gemini request started: tutor retrieval")
+    print("AI request started: tutor retrieval")
     retriever, _ = get_rag_components()
     rag_content = []
     context = ""
@@ -166,7 +133,7 @@ def analyze_tutor_query(query: str) -> Dict[str, Any]:
             })
             
             context += f"{content}\n\n"
-        print(f"Gemini retrieval completed: {len(rag_content)} chunks")
+        print(f"RAG retrieval completed: {len(rag_content)} chunks")
     else:
         context = "No textbook context available."
 
@@ -175,7 +142,7 @@ def analyze_tutor_query(query: str) -> Dict[str, Any]:
     print("Retrieved Context:", context)
 
     if not query or len(query.strip()) < 2:
-        return _empty_tutor_payload("Query is too short for Gemini generation.")
+        return _empty_tutor_payload("Query is too short for AI generation.")
 
     # 2. Use LLM for intelligent extraction based on context
     structured = analyze_with_llm(query, context)
@@ -183,7 +150,7 @@ def analyze_tutor_query(query: str) -> Dict[str, Any]:
     if not context.strip():
         context = "No textbook context available."
 
-    # 3. Generate the explanation with Gemini using the same textbook context
+    # 3. Generate the explanation with AI using the same textbook context
     explanation_prompt = (
         "You are an intelligent physics textbook tutor. Use the retrieved textbook context to answer the student's query. "
         "Keep the explanation accurate, concise, and educational.\n\n"
@@ -193,21 +160,19 @@ def analyze_tutor_query(query: str) -> Dict[str, Any]:
     )
     try:
         explanation_started = time.perf_counter()
-        print("Gemini request started: tutor explanation")
-        _configure_gemini_model()
-        response = _generate_with_gemini(explanation_prompt)
+        print("AI request started: tutor explanation")
+        rag_explanation = generate_llm_text(explanation_prompt, temperature=0.2)
 
-        rag_explanation = getattr(response, "text", None)
-        if not rag_explanation:
-            rag_explanation = "Gemini returned an empty response."
+        if not rag_explanation or rag_explanation.startswith("Error:"):
+            rag_explanation = "AI returned an empty or error response."
         else:
-            print("Gemini generation completed: tutor explanation")
+            print("AI generation completed: tutor explanation")
 
         explanation_time = time.perf_counter() - explanation_started
-        print(f"Gemini generation time: {explanation_time:.2f}s")
+        print(f"AI generation time: {explanation_time:.2f}s")
     except Exception as e:
-        print("Gemini Generation Error:", str(e))
-        rag_explanation = f"Gemini generation failed: {str(e)}"
+        print("AI Generation Error:", str(e))
+        rag_explanation = f"AI generation failed: {str(e)}"
 
     total_time = time.perf_counter() - request_started
     print(f"Total request time: {total_time:.2f}s")

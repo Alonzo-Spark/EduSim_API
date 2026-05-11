@@ -1,5 +1,323 @@
 [
   {
+    "id": "f56bdfd1-f236-466a-9954-8692faf296d4",
+    "title": "Astronomy Simulation",
+    "description": "AI-synthesized interactive simulation for: a man falling from moon",
+    "topic": {
+      "topic": "Astronomy Simulation",
+      "subject": "astronomy",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "meta": {
+        "id": "free_fall_from_moon_001",
+        "title": "Free Fall from Moon",
+        "topic": "Gravitation",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.62
+        },
+        "airResistance": 0.0,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "man",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 0.5,
+            "height": 1.8,
+            "radius": null
+          },
+          "position": {
+            "x": 0.0,
+            "y": 10.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 75.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#e74c3c",
+            "label": "Man"
+          }
+        },
+        {
+          "id": "moon_surface",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 1.0,
+            "radius": null
+          },
+          "position": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1000000000000.0,
+            "movable": false,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.6,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#95a5a6",
+            "label": "Moon Surface"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Man's Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 50.0,
+          "max": 150.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Initial Height",
+          "bind": "objects[0].position.y",
+          "min": 5.0,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "formula": "F = 2",
+    "formulas": [
+      "F = 2",
+      "m  =  2",
+      "g = \n2",
+      "We get g = 9.8  m/s2 (approximately)",
+      "v = u + at",
+      "s = ut +",
+      "u2 = 2as.",
+      "g = 10 m/s2)",
+      "v =  2",
+      "am = \n22"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Astronomy Simulation",
+      "formulas": [
+        "F = 2",
+        "m  =  2",
+        "g = \n2",
+        "We get g = 9.8  m/s2 (approximately)",
+        "v = u + at",
+        "s = ut +",
+        "u2 = 2as.",
+        "g = 10 m/s2)",
+        "v =  2",
+        "am = \n22"
+      ],
+      "constants": [
+        "g = \n2\nGM",
+        "g = 9.8  m/s2",
+        "g = 10 m/s2",
+        "h = 2\nKm"
+      ],
+      "laws": [
+        "From Newton's second law, F/m is equal",
+        "According to Newton's third law the",
+        "earth by using the second law of motion",
+        "From Newton's second law of motion"
+      ],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 80
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 81
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 79
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 75
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T09:07:44.371945+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "7fbeb6b2-7949-41c4-b518-b627e043e980",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: A man with 50kgs collides with 10kg",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "meta": {
+        "id": "collision_001",
+        "title": "Collision Example",
+        "topic": "Momentum",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.0,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "man",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "width": null,
+            "height": null,
+            "radius": 0.5
+          },
+          "position": {
+            "x": 2.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 50.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 1.0
+          },
+          "visual": {
+            "color": "#e74c3c",
+            "label": "Man"
+          }
+        },
+        {
+          "id": "object2",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "width": null,
+            "height": null,
+            "radius": 0.3
+          },
+          "position": {
+            "x": 5.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 1.0
+          },
+          "visual": {
+            "color": "#27ae60",
+            "label": "Object"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Man Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 10.0,
+          "max": 100.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Object Mass",
+          "bind": "objects[1].physics.mass",
+          "min": 1.0,
+          "max": 20.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Man Velocity",
+          "bind": "objects[0].physics.velocity.x",
+          "min": -5.0,
+          "max": 5.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "formula": "m = 250g",
+    "formulas": [
+      "m = 250g",
+      "v = 40 cm / s"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "m = 250g",
+        "v = 40 cm / s"
+      ],
+      "constants": [
+        "g = 0.25 kg"
+      ],
+      "laws": [],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 183
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T09:06:41.597320+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
     "id": "9bf18452-10b7-4131-b5c0-85c39f939418",
     "title": "Orbital Mechanics",
     "description": "AI-synthesized interactive simulation for: A 2kg hammer and a 0.1kg feather falling on the moon. Add a slider for gravity and mass.",

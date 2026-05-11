@@ -2,7 +2,6 @@ import os
 import json
 from pathlib import Path
 
-import google.generativeai as genai
 import httpx
 from dotenv import load_dotenv
 
@@ -12,30 +11,11 @@ from dotenv import load_dotenv
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 # =========================================================
-# LLM MODELS
+# LLM MODELS (via OpenRouter)
 # =========================================================
-# OpenRouter Models (Primary)
-OPENROUTER_MODEL = "google/gemini-2.0-flash-001" # Very fast and reliable fallback
-OPENROUTER_FALLBACK = "anthropic/claude-3-haiku"
-
-# Gemini Models (Fallback)
-GEMINI_MODEL = "gemini-1.5-flash-latest"
-GEMINI_FALLBACK_MODEL = "gemini-1.5-pro-latest"
-
-
-# =========================================================
-# CONFIGURE GEMINI
-# =========================================================
-def _configure_gemini(model_name: str = GEMINI_MODEL):
-    api_key = os.getenv("GOOGLE_API_KEY")
-    if not api_key:
-        return None
-    
-    try:
-        genai.configure(api_key=api_key)
-        return genai.GenerativeModel(model_name)
-    except Exception:
-        return None
+# Using reliable non-Gemini models as primary to avoid quota confusion
+OPENROUTER_MODEL = "anthropic/claude-3-haiku" 
+OPENROUTER_FALLBACK = "openai/gpt-4o-mini"
 
 
 # =========================================================
@@ -44,6 +24,7 @@ def _configure_gemini(model_name: str = GEMINI_MODEL):
 def _generate_openrouter_text(prompt: str, model_name: str, temperature: float, max_tokens: int):
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
+        print("❌ OPENROUTER_API_KEY is missing from environment.")
         return None
 
     try:
@@ -53,8 +34,8 @@ def _generate_openrouter_text(prompt: str, model_name: str, temperature: float, 
                 headers={
                     "Authorization": f"Bearer {api_key}",
                     "Content-Type": "application/json",
-                    "HTTP-Referer": "https://edusim.ai", # Optional
-                    "X-Title": "EduSim", # Optional
+                    "HTTP-Referer": "https://edusim.ai", 
+                    "X-Title": "EduSim", 
                 },
                 json={
                     "model": model_name,
@@ -65,7 +46,13 @@ def _generate_openrouter_text(prompt: str, model_name: str, temperature: float, 
             )
             response.raise_for_status()
             data = response.json()
-            return data["choices"][0]["message"]["content"].strip()
+            
+            if "choices" in data and len(data["choices"]) > 0:
+                return data["choices"][0]["message"]["content"].strip()
+            
+            print(f"⚠ OpenRouter returned unexpected format: {data}")
+            return None
+            
     except Exception as e:
         print(f"⚠ OpenRouter failed ({model_name}): {e}")
         return None
@@ -80,45 +67,19 @@ def generate_llm_text(
     max_output_tokens: int = 2048
 ):
     """
-    Unified text generation with OpenRouter as primary and Gemini as fallback.
+    Unified text generation using OpenRouter exclusively.
     """
     last_error = None
 
-    # 1. Try OpenRouter (Primary)
-    print("🔄 Attempting OpenRouter primary...")
+    # Try OpenRouter Models
+    print(f"🔄 Attempting OpenRouter generation with {OPENROUTER_MODEL}...")
     for model_name in (OPENROUTER_MODEL, OPENROUTER_FALLBACK):
         result = _generate_openrouter_text(final_prompt, model_name, temperature, max_output_tokens)
         if result:
             return result
 
-    # 2. Try Gemini (Fallback)
-    print("🔄 Switching to Gemini fallback...")
-    for model_name in (GEMINI_MODEL, GEMINI_FALLBACK_MODEL, "gemini-1.5-flash-latest"):
-        try:
-            model = _configure_gemini(model_name)
-            if not model:
-                continue
-
-            response = model.generate_content(
-                final_prompt,
-                generation_config={
-                    "temperature": temperature,
-                    "max_output_tokens": max_output_tokens,
-                },
-            )
-
-            generated_text = getattr(response, "text", None)
-            if generated_text:
-                return generated_text.strip()
-            
-            # If no text but response exists (safety filter?)
-            print(f"⚠ Gemini returned no text for {model_name}. Possible safety filter.")
-        except Exception as e:
-            last_error = e
-            print(f"⚠ Gemini model failed ({model_name}): {e}")
-
-    print(f"\n❌ All LLM generation paths failed. Last error: {last_error}")
-    return "Error: Unable to generate response after multiple attempts."
+    print(f"\n❌ All OpenRouter generation paths failed.")
+    return "Error: Unable to generate response from OpenRouter after multiple attempts."
 
 
 # =========================================================

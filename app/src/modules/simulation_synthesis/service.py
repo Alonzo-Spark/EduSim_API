@@ -174,18 +174,18 @@ def generate_simulation_synthesis(prompt: str, topic: str | None = None):
     # Detect subject from prompt (used for template selection)
     subject = detect_subject(prompt)
     
-    print("Gemini request started: simulation retrieval")
+    print("AI request started: simulation retrieval")
     retriever = _load_retriever()
     chunks = retriever(prompt)[:8] if retriever else []
-    print(f"Gemini retrieval completed: {len(chunks)} chunks")
+    print(f"RAG retrieval completed: {len(chunks)} chunks")
 
     context = _build_context_block(chunks)
     extracted = _extract_context_features(chunks)
     
-    print("Gemini request started: DSL synthesis")
+    print("OpenRouter request started: DSL synthesis")
     dsl_prompt = build_dsl_prompt(prompt, context, extracted)
     raw_generated = generate_llm_text(dsl_prompt, temperature=0.2, max_output_tokens=3500)
-    print("Gemini generation completed: DSL synthesis")
+    print("OpenRouter generation completed: DSL synthesis")
     
     # Sanitize and parse JSON
     dsl_json = sanitize_json(raw_generated)
@@ -310,10 +310,10 @@ def generate_simulation_synthesis_stream(prompt: str, topic: str | None = None):
 
         # Event 2: Retrieving context
         yield _format_sse_event("progress", {"stage": "Retrieving textbook context..."})
-        print("Gemini request started: simulation retrieval")
+        print("AI request started: simulation retrieval")
         retriever = _load_retriever()
         chunks = retriever(prompt)[:8] if retriever else []
-        print(f"Gemini retrieval completed: {len(chunks)} chunks")
+        print(f"RAG retrieval completed: {len(chunks)} chunks")
         yield _format_sse_event("progress", {"stage": f"Retrieved {len(chunks)} context chunks"})
 
         # Event 3: Extracting features
