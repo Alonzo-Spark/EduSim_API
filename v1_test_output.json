@@ -1,0 +1,156 @@
+{
+  "id": "6b510c5f-e007-464c-aeda-b7471cdd9256",
+  "title": "Physics Simulation",
+  "description": "AI-synthesized interactive simulation for: A 10kg iron ball falling from 50 meters with air resistance. Add a slider for mass.",
+  "topic": {
+    "topic": "Physics Simulation",
+    "subject": "physics",
+    "complexity": "medium"
+  },
+  "dsl": {
+    "meta": {
+      "id": "free_fall_with_drag_001",
+      "title": "Free Fall with Air Resistance",
+      "topic": "Mechanics",
+      "difficulty": "Grade 9",
+      "version": "1.0"
+    },
+    "environment": {
+      "gravity": {
+        "x": 0.0,
+        "y": 9.8
+      },
+      "airResistance": 0.5,
+      "groundFriction": 0.0
+    },
+    "objects": [
+      {
+        "id": "iron_ball",
+        "type": "dynamicBody",
+        "shape": {
+          "type": "circle",
+          "width": null,
+          "height": null,
+          "radius": 0.2
+        },
+        "position": {
+          "x": 4.0,
+          "y": 50.0
+        },
+        "rotation": 0.0,
+        "physics": {
+          "mass": 10.0,
+          "movable": true,
+          "isSensor": false
+        },
+        "material": {
+          "friction": 0.3,
+          "restitution": 0.5
+        },
+        "visual": {
+          "color": "#7f8c8d",
+          "label": "Iron Ball"
+        }
+      }
+    ],
+    "forces": [],
+    "interactions": [
+      {
+        "type": "slider",
+        "label": "Ball Mass",
+        "bind": "objects[0].physics.mass",
+        "min": 1.0,
+        "max": 20.0,
+        "step": 0.1
+      }
+    ]
+  },
+  "formula": "g=10 m/ s2)  (AS1)  (Ans",
+  "formulas": [
+    "g=10 m/ s2)  (AS1)  (Ans",
+    "Take g = 10m/ s2  (AS1)",
+    "If  Fnet = 0",
+    "m = 250g",
+    "v = 40 cm / s",
+    "t = 5 or -1",
+    "t = 5s",
+    "Let us take the equation s = ut +",
+    "For entire motion s = 0",
+    "a = - g"
+  ],
+  "learning_objectives": [],
+  "related_concepts": [],
+  "interactions": [],
+  "context": {
+    "topic": "Physics Simulation",
+    "formulas": [
+      "g=10 m/ s2)  (AS1)  (Ans",
+      "Take g = 10m/ s2  (AS1)",
+      "If  Fnet = 0",
+      "m = 250g",
+      "v = 40 cm / s",
+      "t = 5 or -1",
+      "t = 5s",
+      "Let us take the equation s = ut +",
+      "For entire motion s = 0",
+      "a = - g"
+    ],
+    "constants": [
+      "g=10 m/",
+      "g = 10m/",
+      "g = 0.25 kg",
+      "h = 76cm",
+      "r= 13.6 gm/cc",
+      "g = 9.8 m/s2"
+    ],
+    "laws": [
+      "Newton's first Law of motion",
+      "is also known as the Law of Inertia",
+      "Newton's second law of motion"
+    ],
+    "definitions": [
+      "through different means and is able to do"
+    ],
+    "sources": [
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 49
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 88
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 43
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 89
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 183
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 83
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 148
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 180
+      }
+    ]
+  },
+  "timestamp": "2026-05-11T06:19:11.643959+00:00",
+  "generation_stages": [
+    "Started",
+    "Retrieved",
+    "Synthesized",
+    "Complete"
+  ]
+}

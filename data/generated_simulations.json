@@ -1,5 +1,635 @@
 [
   {
+    "id": "9bf18452-10b7-4131-b5c0-85c39f939418",
+    "title": "Orbital Mechanics",
+    "description": "AI-synthesized interactive simulation for: A 2kg hammer and a 0.1kg feather falling on the moon. Add a slider for gravity and mass.",
+    "topic": {
+      "topic": "Orbital Mechanics",
+      "subject": "astronomy",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "meta": {
+        "id": "free_fall_moon_001",
+        "title": "Free Fall on the Moon",
+        "topic": "Gravitation",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.62
+        },
+        "airResistance": 0.0,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "hammer",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 0.1,
+            "height": 0.03,
+            "radius": null
+          },
+          "position": {
+            "x": 1.0,
+            "y": 1.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 2.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#8e44ad",
+            "label": "Hammer"
+          }
+        },
+        {
+          "id": "feather",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 0.05,
+            "height": 0.01,
+            "radius": null
+          },
+          "position": {
+            "x": 2.0,
+            "y": 1.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.1,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#f1c40f",
+            "label": "Feather"
+          }
+        },
+        {
+          "id": "moon_surface",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 10.0,
+            "height": 0.1,
+            "radius": null
+          },
+          "position": {
+            "x": 2.0,
+            "y": 4.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10000000000.0,
+            "movable": false,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.6,
+            "restitution": 0.7
+          },
+          "visual": {
+            "color": "#95a5a6",
+            "label": "Moon Surface"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Gravity",
+          "bind": "environment.gravity.y",
+          "min": 0.1,
+          "max": 5.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Hammer Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 0.1,
+          "max": 5.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Feather Mass",
+          "bind": "objects[1].physics.mass",
+          "min": 0.01,
+          "max": 1.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "formula": "F = 2",
+    "formulas": [
+      "F = 2",
+      "m  =  2",
+      "g = \n2",
+      "We get g = 9.8  m/s2 (approximately)",
+      "v = u + at",
+      "s = ut +",
+      "u2 = 2as.",
+      "g = 10 m/s2)",
+      "v =  2",
+      "am = \n22"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Orbital Mechanics",
+      "formulas": [
+        "F = 2",
+        "m  =  2",
+        "g = \n2",
+        "We get g = 9.8  m/s2 (approximately)",
+        "v = u + at",
+        "s = ut +",
+        "u2 = 2as.",
+        "g = 10 m/s2)",
+        "v =  2",
+        "am = \n22"
+      ],
+      "constants": [
+        "g = \n2\nGM",
+        "g = 9.8  m/s2",
+        "g = 10 m/s2",
+        "h = 2\nKm",
+        "G=6.67x10",
+        "g=9.8m/s2"
+      ],
+      "laws": [
+        "From Newton's second law, F/m is equal",
+        "According to Newton's third law the",
+        "earth by using the second law of motion",
+        "From Newton's second law of motion",
+        "2 Universal law of gravitation",
+        "generalised law of gravitation as stated by"
+      ],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 89
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 80
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 75
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 81
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 79
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 185
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 186
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T07:30:10.516618+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "6b510c5f-e007-464c-aeda-b7471cdd9256",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: A 10kg iron ball falling from 50 meters with air resistance. Add a slider for mass.",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "meta": {
+        "id": "free_fall_with_drag_001",
+        "title": "Free Fall with Air Resistance",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 9.8
+        },
+        "airResistance": 0.5,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "iron_ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "width": null,
+            "height": null,
+            "radius": 0.2
+          },
+          "position": {
+            "x": 4.0,
+            "y": 50.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#7f8c8d",
+            "label": "Iron Ball"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Ball Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 1.0,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "formula": "g=10 m/ s2)  (AS1)  (Ans",
+    "formulas": [
+      "g=10 m/ s2)  (AS1)  (Ans",
+      "Take g = 10m/ s2  (AS1)",
+      "If  Fnet = 0",
+      "m = 250g",
+      "v = 40 cm / s",
+      "t = 5 or -1",
+      "t = 5s",
+      "Let us take the equation s = ut +",
+      "For entire motion s = 0",
+      "a = - g"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "g=10 m/ s2)  (AS1)  (Ans",
+        "Take g = 10m/ s2  (AS1)",
+        "If  Fnet = 0",
+        "m = 250g",
+        "v = 40 cm / s",
+        "t = 5 or -1",
+        "t = 5s",
+        "Let us take the equation s = ut +",
+        "For entire motion s = 0",
+        "a = - g"
+      ],
+      "constants": [
+        "g=10 m/",
+        "g = 10m/",
+        "g = 0.25 kg",
+        "h = 76cm",
+        "r= 13.6 gm/cc",
+        "g = 9.8 m/s2"
+      ],
+      "laws": [
+        "Newton's first Law of motion",
+        "is also known as the Law of Inertia",
+        "Newton's second law of motion"
+      ],
+      "definitions": [
+        "through different means and is able to do"
+      ],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 49
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 88
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 43
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 89
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 183
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 83
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 148
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 180
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T06:19:11.643959+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "a8a62c79-1a32-4e5e-811a-6ef5a6267cba",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: what formulas or concecpt can be simulated if i have 2 boxes",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "collision_simulation",
+      "topic": "Collision of Two Boxes",
+      "environment": {
+        "gravity": 0.0,
+        "friction": 0.1,
+        "air_resistance": 0.0
+      },
+      "entities": [
+        {
+          "id": "box_1",
+          "type": "block",
+          "mass": 1.0,
+          "properties": {}
+        },
+        {
+          "id": "box_2",
+          "type": "block",
+          "mass": 1.0,
+          "properties": {}
+        }
+      ],
+      "interactions": [
+        {
+          "type": "apply_force",
+          "target": "box_1",
+          "parameters": {
+            "force": [
+              10,
+              0
+            ]
+          }
+        },
+        {
+          "type": "collision",
+          "target": "box_1",
+          "parameters": {
+            "with_entity": "box_2",
+            "restitution": 0.8
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "velocity_graph"
+        },
+        {
+          "type": "motion_trace"
+        },
+        {
+          "type": "force_vectors"
+        }
+      ],
+      "equations": [
+        "p = mv",
+        "F = dp/dt",
+        "m1v1 + m2v2 = m1v1' + m2v2'"
+      ]
+    },
+    "formula": "",
+    "formulas": [],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [],
+      "constants": [],
+      "laws": [],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 10
+        },
+        {
+          "source": "jee-mains-physics-formulas-pdf-77541965.pdf",
+          "page": 0
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T04:32:08.899672+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "d6568b62-bcec-403c-9bfc-8b2437438adb",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: explain friction concept using ice cube",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "simulation_type": "friction_on_ice",
+      "topic": "Friction and Motion on Ice",
+      "environment": {
+        "gravity": 9.8,
+        "friction": 0.1,
+        "air_resistance": 0.0
+      },
+      "entities": [
+        {
+          "id": "ice_cube",
+          "type": "block",
+          "mass": 0.1,
+          "properties": {}
+        },
+        {
+          "id": "plane",
+          "type": "plane",
+          "mass": null,
+          "properties": {}
+        }
+      ],
+      "interactions": [
+        {
+          "type": "gravity",
+          "target": "ice_cube",
+          "parameters": {
+            "g": 9.8
+          }
+        },
+        {
+          "type": "friction",
+          "target": "ice_cube",
+          "parameters": {
+            "mu_kinetic": 0.1,
+            "mu_static": 0.15
+          }
+        },
+        {
+          "type": "apply_force",
+          "target": "ice_cube",
+          "parameters": {
+            "force": [
+              0.5,
+              0
+            ]
+          }
+        }
+      ],
+      "visualizations": [
+        {
+          "type": "force_vectors"
+        },
+        {
+          "type": "velocity_graph"
+        },
+        {
+          "type": "motion_trace"
+        }
+      ],
+      "equations": [
+        "F_friction = mu * N",
+        "F = ma"
+      ]
+    },
+    "formula": "D= D  (k is constrant)",
+    "formulas": [
+      "D= D  (k is constrant)",
+      "D= D",
+      "We know p=mv",
+      "Dp   = D(mv)",
+      "Dp = mDv",
+      "Latent  heat  of  fusion  L = Q"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "D= D  (k is constrant)",
+        "D= D",
+        "We know p=mv",
+        "Dp   = D(mv)",
+        "Dp = mDv",
+        "Latent  heat  of  fusion  L = Q"
+      ],
+      "constants": [],
+      "laws": [
+        "second law states that the rate of change of",
+        "fundamental laws which explain the",
+        "These three laws are popularly",
+        "known as Newton's laws of motion",
+        "1 First law of motion",
+        "The first law of motion can be stated",
+        "Newton\u2019s first law explains what",
+        "\u25cf Newton\u2019s Law of Gravitation is \ud835\udc39 = \ud835\udc3a\ud835\udc5a1\ud835\udc5a2/\ud835\udc452 where \ud835\udc3a \u2248 6"
+      ],
+      "definitions": [],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 210
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 45
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 40
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 211
+        },
+        {
+          "source": "jee-mains-physics-formulas-pdf-77541965.pdf",
+          "page": 4
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 49
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 146
+        }
+      ]
+    },
+    "timestamp": "2026-05-09T09:44:39.942118+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
     "id": "37d6c5be-41d0-4df3-b5e1-6ed167edb86e",
     "title": "Chemistry Visualization",
     "description": "AI-synthesized interactive simulation for: exaplain colliosion with two cars colliding",
