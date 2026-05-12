@@ -19,7 +19,7 @@ def test_openrouter():
                 "https://openrouter.ai/api/v1/chat/completions",
                 headers=headers,
                 json={
-                    "model": "anthropic/claude-3-haiku",
+                    "model": "google/gemini-3-flash-preview",
                     "messages": [{"role": "user", "content": "say hi"}],
                 },
             )

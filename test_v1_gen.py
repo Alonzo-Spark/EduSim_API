@@ -2,7 +2,7 @@ import json
 from app.src.modules.simulation_synthesis.service import generate_simulation_synthesis
 
 def test_generation():
-    prompt = "Explain me collision using cars as an example"
+    prompt = "Explain me collision using cars as an example add sliders for mass and friction"
     
     print(f"Testing Prompt: {prompt}")
     try:

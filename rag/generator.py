@@ -14,8 +14,10 @@ load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 # LLM MODELS (via OpenRouter)
 # =========================================================
 # Using reliable non-Gemini models as primary to avoid quota confusion
-OPENROUTER_MODEL = "anthropic/claude-3-haiku" 
-OPENROUTER_FALLBACK = "openai/gpt-4o-mini"
+#OPENROUTER_MODEL = "anthropic/claude-3-haiku" 
+OPENROUTER_MODEL = "google/gemini-3-flash-preview"
+#OPENROUTER_FALLBACK = "openai/gpt-4o-mini"
+OPENROUTER_FALLBACK = "google/gemini-2.5-flash"
 
 
 # =========================================================
