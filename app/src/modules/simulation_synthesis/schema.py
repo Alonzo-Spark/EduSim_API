@@ -18,7 +18,7 @@ class Environment(BaseModel):
     groundFriction: float = 0.0
 
 class Shape(BaseModel):
-    type: str  # "rectangle", "circle", "polygon"
+    type: str  # "rectangle", "circle"
     width: Optional[float] = None
     height: Optional[float] = None
     radius: Optional[float] = None
@@ -41,22 +41,26 @@ class SimulationObject(BaseModel):
     type: str = "dynamicBody"
     shape: Shape
     position: Vector2D
+    velocity: Optional[Vector2D] = None
+    acceleration: Optional[Vector2D] = None
     rotation: float = 0.0
     physics: PhysicsProps
     material: MaterialProps
     visual: VisualProps
+    initialState: Optional[Dict[str, Any]] = None
 
 class Force(BaseModel):
     id: str
-    type: str  # "applied", "gravity", "spring", etc.
+    type: str  # "applied", "drag", "friction"
     target: str
-    vector: Vector2D
+    vector: Optional[Vector2D] = None
+    coefficient: Optional[float] = None
     enabled: bool = True
 
 class Interaction(BaseModel):
     type: str  # "slider", "toggle", "button"
     label: str
-    bind: str  # The CRITICAL path: e.g. "objects[0].physics.mass"
+    bind: str  # e.g. "objects[0].physics.mass"
     min: Optional[float] = None
     max: Optional[float] = None
     step: Optional[float] = 0.1
@@ -67,3 +71,29 @@ class SimulationDSL(BaseModel):
     objects: List[SimulationObject]
     forces: List[Force]
     interactions: List[Interaction]
+
+    def dict(self, **kwargs):
+        kwargs.update({"exclude_none": True})
+        return super().dict(**kwargs)
+
+class KnowledgeSection(BaseModel):
+    relevant_formulas: List[str]
+    related_concepts: List[str]
+    laws: List[str]
+    explanations: List[str]
+
+class MetadataSection(BaseModel):
+    topic: str
+    subject: str
+    difficulty: str
+    generated_at: str
+    simulation_type: str
+
+class EduSimResponse(BaseModel):
+    dsl: SimulationDSL
+    knowledge: KnowledgeSection
+    metadata: MetadataSection
+
+    def dict(self, **kwargs):
+        kwargs.update({"exclude_none": True})
+        return super().dict(**kwargs)

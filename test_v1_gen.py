@@ -2,7 +2,7 @@ import json
 from app.src.modules.simulation_synthesis.service import generate_simulation_synthesis
 
 def test_generation():
-    prompt = "A 10kg iron ball falling from 50 meters with air resistance. Add a slider for mass."
+    prompt = "Explain me collision using cars as an example"
     
     print(f"Testing Prompt: {prompt}")
     try:
@@ -10,18 +10,27 @@ def test_generation():
         result = generate_simulation_synthesis(prompt)
         
         print("\n✅ GENERATION SUCCESSFUL")
-        print(f"Simulation Title: {result['title']}")
         print(f"Simulation ID: {result['id']}")
         
-        # Verify the structure of the DSL
+        # Verify New Structure
+        print("\n--- ARCHITECTURE VERIFICATION ---")
+        print(f"Has DSL: {'dsl' in result}")
+        print(f"Has Knowledge: {'knowledge' in result}")
+        print(f"Has Metadata: {'metadata' in result}")
+
+        # Verify DSL
         dsl = result['dsl']
         print("\n--- DSL VERIFICATION ---")
-        print(f"Meta ID: {dsl['meta']['id']}")
+        print(f"Title: {dsl['meta']['title']}")
         print(f"Environment Gravity: {dsl['environment']['gravity']}")
-        print(f"Interactions Count: {len(dsl['interactions'])}")
+        print(f"Objects Count: {len(dsl['objects'])}")
+        print(f"Forces Count: {len(dsl['forces'])}")
         
-        if len(dsl['interactions']) > 0:
-            print(f"First Binding Path: {dsl['interactions'][0]['bind']}")
+        # Verify Knowledge
+        knowledge = result['knowledge']
+        print("\n--- KNOWLEDGE VERIFICATION ---")
+        print(f"Formulas: {knowledge['relevant_formulas']}")
+        print(f"Explanations: {knowledge['explanations']}")
 
         # Final check: Save to a local file for you to inspect manually
         with open("v1_test_output.json", "w") as f:
@@ -31,6 +40,8 @@ def test_generation():
     except Exception as e:
         print(f"\n❌ GENERATION FAILED")
         print(f"Error: {str(e)}")
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
     test_generation()

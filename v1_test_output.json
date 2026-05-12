@@ -1,156 +1,171 @@
 {
-  "id": "6b510c5f-e007-464c-aeda-b7471cdd9256",
-  "title": "Physics Simulation",
-  "description": "AI-synthesized interactive simulation for: A 10kg iron ball falling from 50 meters with air resistance. Add a slider for mass.",
-  "topic": {
-    "topic": "Physics Simulation",
-    "subject": "physics",
-    "complexity": "medium"
-  },
+  "id": "f04a50d5-0dec-4932-ad4a-3c6b74e1707c",
+  "timestamp": "2026-05-12T05:05:11.011149+00:00",
+  "sources": [
+    {
+      "source": "IX Physics EM 2025-26.pdf",
+      "page": 54
+    },
+    {
+      "source": "IX Physics EM 2025-26.pdf",
+      "page": 30
+    },
+    {
+      "source": "IX Physics EM 2025-26.pdf",
+      "page": 53
+    },
+    {
+      "source": "IX Physics EM 2025-26.pdf",
+      "page": 22
+    },
+    {
+      "source": "IX Physics EM 2025-26.pdf",
+      "page": 21
+    },
+    {
+      "source": "IX Physics EM 2025-26.pdf",
+      "page": 25
+    }
+  ],
   "dsl": {
     "meta": {
-      "id": "free_fall_with_drag_001",
-      "title": "Free Fall with Air Resistance",
+      "id": "car_collision_001",
+      "title": "Car Collision",
       "topic": "Mechanics",
-      "difficulty": "Grade 9",
+      "difficulty": "Grade 10",
       "version": "1.0"
     },
     "environment": {
       "gravity": {
         "x": 0.0,
-        "y": 9.8
+        "y": 0.0
       },
-      "airResistance": 0.5,
+      "airResistance": 0.0,
       "groundFriction": 0.0
     },
     "objects": [
       {
-        "id": "iron_ball",
+        "id": "car1",
         "type": "dynamicBody",
         "shape": {
-          "type": "circle",
-          "width": null,
-          "height": null,
-          "radius": 0.2
+          "type": "rectangle",
+          "width": 4.0,
+          "height": 2.0
         },
         "position": {
-          "x": 4.0,
-          "y": 50.0
+          "x": 10.0,
+          "y": 10.0
+        },
+        "velocity": {
+          "x": 10.0,
+          "y": 0.0
         },
         "rotation": 0.0,
         "physics": {
-          "mass": 10.0,
+          "mass": 1500.0,
           "movable": true,
           "isSensor": false
         },
         "material": {
-          "friction": 0.3,
-          "restitution": 0.5
+          "friction": 0.5,
+          "restitution": 0.2
         },
         "visual": {
-          "color": "#7f8c8d",
-          "label": "Iron Ball"
+          "color": "#3498db",
+          "label": "Car 1"
+        }
+      },
+      {
+        "id": "car2",
+        "type": "dynamicBody",
+        "shape": {
+          "type": "rectangle",
+          "width": 4.0,
+          "height": 2.0
+        },
+        "position": {
+          "x": 20.0,
+          "y": 10.0
+        },
+        "velocity": {
+          "x": -10.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "physics": {
+          "mass": 1500.0,
+          "movable": true,
+          "isSensor": false
+        },
+        "material": {
+          "friction": 0.5,
+          "restitution": 0.2
+        },
+        "visual": {
+          "color": "#e74c3c",
+          "label": "Car 2"
         }
       }
     ],
-    "forces": [],
+    "forces": [
+      {
+        "id": "friction_car1",
+        "type": "friction",
+        "target": "car1",
+        "coefficient": 0.5,
+        "enabled": true
+      },
+      {
+        "id": "friction_car2",
+        "type": "friction",
+        "target": "car2",
+        "coefficient": 0.5,
+        "enabled": true
+      }
+    ],
     "interactions": [
       {
         "type": "slider",
-        "label": "Ball Mass",
+        "label": "Car 1 Mass",
         "bind": "objects[0].physics.mass",
-        "min": 1.0,
-        "max": 20.0,
+        "min": 1000.0,
+        "max": 2000.0,
+        "step": 0.1
+      },
+      {
+        "type": "slider",
+        "label": "Car 2 Mass",
+        "bind": "objects[1].physics.mass",
+        "min": 1000.0,
+        "max": 2000.0,
         "step": 0.1
       }
     ]
   },
-  "formula": "g=10 m/ s2)  (AS1)  (Ans",
-  "formulas": [
-    "g=10 m/ s2)  (AS1)  (Ans",
-    "Take g = 10m/ s2  (AS1)",
-    "If  Fnet = 0",
-    "m = 250g",
-    "v = 40 cm / s",
-    "t = 5 or -1",
-    "t = 5s",
-    "Let us take the equation s = ut +",
-    "For entire motion s = 0",
-    "a = - g"
-  ],
-  "learning_objectives": [],
-  "related_concepts": [],
-  "interactions": [],
-  "context": {
-    "topic": "Physics Simulation",
-    "formulas": [
-      "g=10 m/ s2)  (AS1)  (Ans",
-      "Take g = 10m/ s2  (AS1)",
-      "If  Fnet = 0",
-      "m = 250g",
-      "v = 40 cm / s",
-      "t = 5 or -1",
-      "t = 5s",
-      "Let us take the equation s = ut +",
-      "For entire motion s = 0",
-      "a = - g"
+  "knowledge": {
+    "relevant_formulas": [
+      "p = mv",
+      "F = ma",
+      "p_1 + p_2 = p_1' + p_2'"
     ],
-    "constants": [
-      "g=10 m/",
-      "g = 10m/",
-      "g = 0.25 kg",
-      "h = 76cm",
-      "r= 13.6 gm/cc",
-      "g = 9.8 m/s2"
+    "related_concepts": [
+      "Momentum",
+      "Impulse",
+      "Conservation of Momentum"
     ],
     "laws": [
-      "Newton's first Law of motion",
-      "is also known as the Law of Inertia",
-      "Newton's second law of motion"
+      "Newton's Laws of Motion",
+      "Conservation of Momentum"
     ],
-    "definitions": [
-      "through different means and is able to do"
-    ],
-    "sources": [
-      {
-        "source": "IX Physics EM 2025-26.pdf",
-        "page": 49
-      },
-      {
-        "source": "IX Physics EM 2025-26.pdf",
-        "page": 88
-      },
-      {
-        "source": "IX Physics EM 2025-26.pdf",
-        "page": 43
-      },
-      {
-        "source": "IX Physics EM 2025-26.pdf",
-        "page": 89
-      },
-      {
-        "source": "IX Physics EM 2025-26.pdf",
-        "page": 183
-      },
-      {
-        "source": "IX Physics EM 2025-26.pdf",
-        "page": 83
-      },
-      {
-        "source": "IX Physics EM 2025-26.pdf",
-        "page": 148
-      },
-      {
-        "source": "IX Physics EM 2025-26.pdf",
-        "page": 180
-      }
+    "explanations": [
+      "In a collision between two cars, the momentum of each car before the collision is equal to the momentum after the collision, assuming no external forces. The total momentum is conserved, but the individual momenta of the cars change due to the collision forces."
     ]
   },
-  "timestamp": "2026-05-11T06:19:11.643959+00:00",
-  "generation_stages": [
-    "Started",
-    "Retrieved",
-    "Synthesized",
-    "Complete"
-  ]
+  "metadata": {
+    "topic": "Collision",
+    "subject": "Physics",
+    "difficulty": "Intermediate",
+    "generated_at": "2026-05-12T05:05:02.312495+00:00",
+    "simulation_type": "Matter.js-RigidBody"
+  }
 }

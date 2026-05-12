@@ -1,5 +1,1691 @@
 [
   {
+    "id": "f04a50d5-0dec-4932-ad4a-3c6b74e1707c",
+    "timestamp": "2026-05-12T05:05:11.011149+00:00",
+    "sources": [
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 54
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 30
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 53
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 22
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 21
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 25
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "car_collision_001",
+        "title": "Car Collision",
+        "topic": "Mechanics",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.0,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "car1",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 4.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": 10.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.2
+          },
+          "visual": {
+            "color": "#3498db",
+            "label": "Car 1"
+          }
+        },
+        {
+          "id": "car2",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 4.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 20.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": -10.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.2
+          },
+          "visual": {
+            "color": "#e74c3c",
+            "label": "Car 2"
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "friction_car1",
+          "type": "friction",
+          "target": "car1",
+          "coefficient": 0.5,
+          "enabled": true
+        },
+        {
+          "id": "friction_car2",
+          "type": "friction",
+          "target": "car2",
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Car 1 Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 1000.0,
+          "max": 2000.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Car 2 Mass",
+          "bind": "objects[1].physics.mass",
+          "min": 1000.0,
+          "max": 2000.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "F = ma",
+        "p_1 + p_2 = p_1' + p_2'"
+      ],
+      "related_concepts": [
+        "Momentum",
+        "Impulse",
+        "Conservation of Momentum"
+      ],
+      "laws": [
+        "Newton's Laws of Motion",
+        "Conservation of Momentum"
+      ],
+      "explanations": [
+        "In a collision between two cars, the momentum of each car before the collision is equal to the momentum after the collision, assuming no external forces. The total momentum is conserved, but the individual momenta of the cars change due to the collision forces."
+      ]
+    },
+    "metadata": {
+      "topic": "Collision",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T05:05:02.312495+00:00",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "57218809-7958-4586-b11d-400f990fd585",
+    "timestamp": "2026-05-12T05:00:15.064771+00:00",
+    "sources": [
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 48
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 89
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 81
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 87
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 77
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 80
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "rocket_gravitation_001",
+        "title": "Rocket Propulsion and Gravitation",
+        "topic": "Mechanics",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.8
+        },
+        "airResistance": 0.2,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "rocket",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 1.0,
+            "height": 3.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 20.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.2
+          },
+          "visual": {
+            "color": "#2980b9",
+            "label": "Rocket"
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "rocket_thrust",
+          "type": "applied",
+          "target": "rocket",
+          "vector": {
+            "x": 0.0,
+            "y": 1000.0
+          },
+          "enabled": true
+        },
+        {
+          "id": "air_drag",
+          "type": "drag",
+          "target": "rocket",
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Thrust Force",
+          "bind": "forces[0].vector.y",
+          "min": 500.0,
+          "max": 2000.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = ma",
+        "F_thrust = -F_exhaust"
+      ],
+      "related_concepts": [
+        "Newton's Third Law",
+        "Rocket Propulsion",
+        "Gravitational Acceleration"
+      ],
+      "laws": [
+        "Newton's Third Law of Motion"
+      ],
+      "explanations": [
+        "A rocket accelerates by expelling gas at high velocity. The reaction force of the gas on the rocket accelerates the rocket in the opposite direction, as per Newton's Third Law. This thrust force overcomes the downward gravitational force, allowing the rocket to lift off and ascend against Earth's gravity."
+      ]
+    },
+    "metadata": {
+      "topic": "Rocket Propulsion and Gravitation",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T05:00:06.865627+00:00",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "bbed4d02-552d-4715-a609-4ca947a68cd3",
+    "timestamp": "2026-05-12T04:56:47.492760+00:00",
+    "sources": [
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 43
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 178
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 77
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 186
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 44
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 83
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "box_push_001",
+        "title": "Box Pushing with Friction",
+        "topic": "Mechanics",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.8
+        },
+        "airResistance": 0.0,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "box1",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 1.0,
+            "height": 0.5
+          },
+          "position": {
+            "x": 2.0,
+            "y": 1.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 5.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.2
+          },
+          "visual": {
+            "color": "#7f8c8d",
+            "label": "Box"
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "applied_force",
+          "type": "applied",
+          "target": "box1",
+          "vector": {
+            "x": 20.0,
+            "y": 0.0
+          },
+          "enabled": true
+        },
+        {
+          "id": "friction_force",
+          "type": "friction",
+          "target": "box1",
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Applied Force",
+          "bind": "forces[0].vector.x",
+          "min": 0.0,
+          "max": 50.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Box Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 1.0,
+          "max": 10.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = ma",
+        "F_f = \u03bc * N"
+      ],
+      "related_concepts": [
+        "Newton's Second Law",
+        "Friction Force"
+      ],
+      "laws": [
+        "Newton's Second Law of Motion"
+      ],
+      "explanations": [
+        "The applied force pushes the box, causing it to accelerate. Friction force opposes the motion, reducing the acceleration."
+      ]
+    },
+    "metadata": {
+      "topic": "Mechanics",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T04:56:39Z",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "bedceec3-8f23-474c-bf49-8517318d61bb",
+    "timestamp": "2026-05-12T04:08:38.383833+00:00",
+    "sources": [
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 49
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 88
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 43
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 89
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 183
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 83
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "free_fall_with_drag",
+        "title": "Free Fall with Drag",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.8
+        },
+        "airResistance": 0.5,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "iron_ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.5
+          },
+          "position": {
+            "x": 10.0,
+            "y": 50.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.6
+          },
+          "visual": {
+            "color": "#a1887f",
+            "label": "Iron Ball"
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "drag_force",
+          "type": "drag",
+          "target": "iron_ball",
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Ball Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 1.0,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = ma",
+        "F_d = -bv"
+      ],
+      "related_concepts": [
+        "Terminal Velocity",
+        "Newton's Second Law"
+      ],
+      "laws": [
+        "Newton's Second Law of Motion"
+      ],
+      "explanations": [
+        "Gravity pulls the object down while air resistance opposes motion. The ball will accelerate downward initially, but as the air resistance force increases, it will approach a terminal velocity where the net force is zero."
+      ]
+    },
+    "metadata": {
+      "topic": "Free Fall",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T04:08:31.221892+00:00",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "7a1c69a2-ddda-4c6b-a264-8cd8905e2b9e",
+    "timestamp": "2026-05-12T04:07:35.299591+00:00",
+    "sources": [
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 49
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 88
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 43
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 89
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 183
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 83
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "free_fall_with_drag",
+        "title": "Free Fall with Drag",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.8
+        },
+        "airResistance": 0.5,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "iron_ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.5
+          },
+          "position": {
+            "x": 10.0,
+            "y": 50.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.6
+          },
+          "visual": {
+            "color": "#a1887f",
+            "label": "Iron Ball"
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "drag_force",
+          "type": "drag",
+          "target": "iron_ball",
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Ball Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 1.0,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = ma",
+        "F_d = -bv"
+      ],
+      "related_concepts": [
+        "Terminal Velocity",
+        "Newton's Second Law"
+      ],
+      "laws": [
+        "Newton's Second Law of Motion"
+      ],
+      "explanations": [
+        "Gravity pulls the iron ball down while air resistance opposes its motion. The ball will accelerate downward initially, but as its velocity increases, the air resistance force will also increase, eventually reaching a terminal velocity where the net force is zero."
+      ]
+    },
+    "metadata": {
+      "topic": "Free Fall",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T04:07:27.629981+00:00",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "87e8dbc6-fa9c-4430-a9cc-5c7c466c2c6c",
+    "timestamp": "2026-05-12T03:58:50.289418+00:00",
+    "sources": [
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 49
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 88
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 43
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 89
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 183
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 83
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "free_fall_with_drag_001",
+        "title": "Free Fall with Drag",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.8
+        },
+        "airResistance": 0.5,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "iron_ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "width": null,
+            "height": null,
+            "radius": 0.5
+          },
+          "position": {
+            "x": 400.0,
+            "y": 50.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "acceleration": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.6
+          },
+          "visual": {
+            "color": "#7d7d7d",
+            "label": "Iron Ball"
+          },
+          "initialState": {}
+        }
+      ],
+      "forces": [
+        {
+          "id": "gravity",
+          "type": "gravity",
+          "target": "iron_ball",
+          "vector": null,
+          "coefficient": null,
+          "enabled": true
+        },
+        {
+          "id": "drag_force",
+          "type": "drag",
+          "target": "iron_ball",
+          "vector": null,
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Ball Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 1.0,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = ma",
+        "F_d = -bv"
+      ],
+      "related_concepts": [
+        "Terminal Velocity",
+        "Newton's Second Law"
+      ],
+      "laws": [
+        "Newton's Law of Gravitation"
+      ],
+      "explanations": [
+        "Gravity pulls the object down while air resistance opposes motion. The slider allows adjusting the mass of the ball to observe the effects."
+      ]
+    },
+    "metadata": {
+      "topic": "Free Fall",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T03:58:42.873009+00:00",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "50ab70b9-5b6a-4878-aeea-3cb8e806bf10",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: A 10kg iron ball falling from 50 meters with air resistance. Add a slider for mass.",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "meta": {
+        "id": "falling_iron_ball_001",
+        "title": "Falling Iron Ball with Air Resistance",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.8
+        },
+        "airResistance": 0.5,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "iron_ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.5
+          },
+          "position": {
+            "x": 10.0,
+            "y": 50.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "acceleration": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.6
+          },
+          "visual": {
+            "color": "#a06a42",
+            "label": "Iron Ball"
+          },
+          "initialState": {
+            "y": 50
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "drag_force",
+          "type": "drag",
+          "target": "iron_ball",
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Ball Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 5.0,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "formula": "(g=10 m/ s2)  (AS1)  (Ans",
+    "formulas": [
+      "(g=10 m/ s2)  (AS1)  (Ans",
+      "Take g = 10m/ s2  (AS1)",
+      "ight of the mercury column (W) = mass of mercury (m)",
+      "g\n= (V olume) (density) g",
+      "the column) r g\n= Ahrg",
+      "ue to the atmospheric pressure = Po A",
+      "A hrg = Po A",
+      "Po = rgh (of mercury)",
+      "Height of the mercury column h = 76cm",
+      "Density of the mercury r= 13.6 gm/cc"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "(g=10 m/ s2)  (AS1)  (Ans",
+        "Take g = 10m/ s2  (AS1)",
+        "ight of the mercury column (W) = mass of mercury (m)",
+        "g\n= (V olume) (density) g",
+        "the column) r g\n= Ahrg",
+        "ue to the atmospheric pressure = Po A",
+        "A hrg = Po A",
+        "Po = rgh (of mercury)",
+        "Height of the mercury column h = 76cm",
+        "Density of the mercury r= 13.6 gm/cc"
+      ],
+      "constants": [
+        "g=10 m/",
+        "g = 10m/",
+        "h = 76cm",
+        "r= 13.6 gm/cc",
+        "g = 9.8 m/s2",
+        "g = 0.25 kg"
+      ],
+      "laws": [
+        "Newton's first Law of motion",
+        "is also known as the Law of Inertia"
+      ],
+      "definitions": [
+        "through different means and is able to do"
+      ],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 88
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 148
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 43
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 183
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 180
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 81
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 49
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T18:25:13.251890+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "4da407be-52e5-45cc-841d-51a4e8c2d569",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: A 10kg iron ball falling from 50 meters with air resistance. Add a slider for mass.",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "meta": {
+        "id": "falling_iron_ball_with_air_resistance",
+        "title": "Falling Iron Ball with Air Resistance",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.8
+        },
+        "airResistance": 0.5,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "iron_ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.25
+          },
+          "position": {
+            "x": 5.0,
+            "y": 50.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "acceleration": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#a1887f",
+            "label": "Iron Ball"
+          },
+          "initialState": {
+            "y": 50
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "gravity",
+          "type": "gravity",
+          "target": "iron_ball",
+          "enabled": true
+        },
+        {
+          "id": "air_resistance",
+          "type": "drag",
+          "target": "iron_ball",
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Ball Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 5.0,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "formula": "(g=10 m/ s2)  (AS1)  (Ans",
+    "formulas": [
+      "(g=10 m/ s2)  (AS1)  (Ans",
+      "Take g = 10m/ s2  (AS1)",
+      "ight of the mercury column (W) = mass of mercury (m)",
+      "g\n= (V olume) (density) g",
+      "the column) r g\n= Ahrg",
+      "ue to the atmospheric pressure = Po A",
+      "A hrg = Po A",
+      "Po = rgh (of mercury)",
+      "Height of the mercury column h = 76cm",
+      "Density of the mercury r= 13.6 gm/cc"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "(g=10 m/ s2)  (AS1)  (Ans",
+        "Take g = 10m/ s2  (AS1)",
+        "ight of the mercury column (W) = mass of mercury (m)",
+        "g\n= (V olume) (density) g",
+        "the column) r g\n= Ahrg",
+        "ue to the atmospheric pressure = Po A",
+        "A hrg = Po A",
+        "Po = rgh (of mercury)",
+        "Height of the mercury column h = 76cm",
+        "Density of the mercury r= 13.6 gm/cc"
+      ],
+      "constants": [
+        "g=10 m/",
+        "g = 10m/",
+        "h = 76cm",
+        "r= 13.6 gm/cc",
+        "g = 9.8 m/s2",
+        "g = 0.25 kg"
+      ],
+      "laws": [
+        "Newton's first Law of motion",
+        "is also known as the Law of Inertia"
+      ],
+      "definitions": [
+        "through different means and is able to do"
+      ],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 88
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 148
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 43
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 183
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 180
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 81
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 49
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T18:21:20.180814+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "0d6977b1-acda-4dbd-9aea-43d47b989de8",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: A 10kg iron ball falling from 50 meters with air resistance. Add a slider for mass.",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "meta": {
+        "id": "falling_ball_with_air_resistance",
+        "title": "Falling Ball with Air Resistance",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.8
+        },
+        "airResistance": 0.5,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.25
+          },
+          "position": {
+            "x": 10.0,
+            "y": 50.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "acceleration": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#e74c3c",
+            "label": "Iron Ball"
+          },
+          "initialState": {
+            "y": 50
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "drag_force",
+          "type": "drag",
+          "target": "ball",
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Ball Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 5.0,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "formula": "(g=10 m/ s2)  (AS1)  (Ans",
+    "formulas": [
+      "(g=10 m/ s2)  (AS1)  (Ans",
+      "Take g = 10m/ s2  (AS1)",
+      "ight of the mercury column (W) = mass of mercury (m)",
+      "g\n= (V olume) (density) g",
+      "the column) r g\n= Ahrg",
+      "ue to the atmospheric pressure = Po A",
+      "A hrg = Po A",
+      "Po = rgh (of mercury)",
+      "Height of the mercury column h = 76cm",
+      "Density of the mercury r= 13.6 gm/cc"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "(g=10 m/ s2)  (AS1)  (Ans",
+        "Take g = 10m/ s2  (AS1)",
+        "ight of the mercury column (W) = mass of mercury (m)",
+        "g\n= (V olume) (density) g",
+        "the column) r g\n= Ahrg",
+        "ue to the atmospheric pressure = Po A",
+        "A hrg = Po A",
+        "Po = rgh (of mercury)",
+        "Height of the mercury column h = 76cm",
+        "Density of the mercury r= 13.6 gm/cc"
+      ],
+      "constants": [
+        "g=10 m/",
+        "g = 10m/",
+        "h = 76cm",
+        "r= 13.6 gm/cc",
+        "g = 9.8 m/s2",
+        "g = 0.25 kg"
+      ],
+      "laws": [
+        "Newton's first Law of motion",
+        "is also known as the Law of Inertia"
+      ],
+      "definitions": [
+        "through different means and is able to do"
+      ],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 88
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 148
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 43
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 183
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 180
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 81
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 49
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T18:19:07.135314+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "88f7a2a8-540f-42cf-848f-c56b6ea0a99c",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: A 10kg iron ball falling from 50 meters with air resistance. Add a slider for mass.",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "meta": {
+        "id": "falling_ball_with_air_resistance",
+        "title": "Falling Ball with Air Resistance",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.8
+        },
+        "airResistance": 0.5,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.25
+          },
+          "position": {
+            "x": 0.0,
+            "y": 50.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "acceleration": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#e74c3c",
+            "label": "Iron Ball"
+          },
+          "initialState": {
+            "y": 50
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "drag_force",
+          "type": "drag",
+          "target": "ball",
+          "coefficient": 0.5,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Ball Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 5.0,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "formula": "(g=10 m/ s2)  (AS1)  (Ans",
+    "formulas": [
+      "(g=10 m/ s2)  (AS1)  (Ans",
+      "Take g = 10m/ s2  (AS1)",
+      "ight of the mercury column (W) = mass of mercury (m)",
+      "g\n= (V olume) (density) g",
+      "the column) r g\n= Ahrg",
+      "ue to the atmospheric pressure = Po A",
+      "A hrg = Po A",
+      "Po = rgh (of mercury)",
+      "Height of the mercury column h = 76cm",
+      "Density of the mercury r= 13.6 gm/cc"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "(g=10 m/ s2)  (AS1)  (Ans",
+        "Take g = 10m/ s2  (AS1)",
+        "ight of the mercury column (W) = mass of mercury (m)",
+        "g\n= (V olume) (density) g",
+        "the column) r g\n= Ahrg",
+        "ue to the atmospheric pressure = Po A",
+        "A hrg = Po A",
+        "Po = rgh (of mercury)",
+        "Height of the mercury column h = 76cm",
+        "Density of the mercury r= 13.6 gm/cc"
+      ],
+      "constants": [
+        "g=10 m/",
+        "g = 10m/",
+        "h = 76cm",
+        "r= 13.6 gm/cc",
+        "g = 9.8 m/s2",
+        "g = 0.25 kg"
+      ],
+      "laws": [
+        "Newton's first Law of motion",
+        "is also known as the Law of Inertia"
+      ],
+      "definitions": [
+        "through different means and is able to do"
+      ],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 88
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 148
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 43
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 183
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 180
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 81
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 49
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T18:10:43.856492+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
+    "id": "6ae6a43a-59f1-4df3-9bf5-de3d545db5f8",
+    "title": "Physics Simulation",
+    "description": "AI-synthesized interactive simulation for: A 10kg iron ball falling from 50 meters with air resistance. Add a slider for mass.",
+    "topic": {
+      "topic": "Physics Simulation",
+      "subject": "physics",
+      "complexity": "medium"
+    },
+    "dsl": {
+      "meta": {
+        "id": "falling_iron_ball_001",
+        "title": "Falling Iron Ball",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 9.8
+        },
+        "airResistance": 0.1,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "iron_ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.2
+          },
+          "position": {
+            "x": 100.0,
+            "y": 50.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "acceleration": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#8b4513",
+            "label": "Iron Ball"
+          },
+          "initialState": {}
+        }
+      ],
+      "forces": [
+        {
+          "id": "gravity",
+          "type": "gravity",
+          "target": "iron_ball",
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Ball Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 1.0,
+          "max": 50.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "formula": "(g=10 m/ s2)  (AS1)  (Ans",
+    "formulas": [
+      "(g=10 m/ s2)  (AS1)  (Ans",
+      "Take g = 10m/ s2  (AS1)",
+      "ight of the mercury column (W) = mass of mercury (m)",
+      "g\n= (V olume) (density) g",
+      "the column) r g\n= Ahrg",
+      "ue to the atmospheric pressure = Po A",
+      "A hrg = Po A",
+      "Po = rgh (of mercury)",
+      "Height of the mercury column h = 76cm",
+      "Density of the mercury r= 13.6 gm/cc"
+    ],
+    "learning_objectives": [],
+    "related_concepts": [],
+    "interactions": [],
+    "context": {
+      "topic": "Physics Simulation",
+      "formulas": [
+        "(g=10 m/ s2)  (AS1)  (Ans",
+        "Take g = 10m/ s2  (AS1)",
+        "ight of the mercury column (W) = mass of mercury (m)",
+        "g\n= (V olume) (density) g",
+        "the column) r g\n= Ahrg",
+        "ue to the atmospheric pressure = Po A",
+        "A hrg = Po A",
+        "Po = rgh (of mercury)",
+        "Height of the mercury column h = 76cm",
+        "Density of the mercury r= 13.6 gm/cc"
+      ],
+      "constants": [
+        "g=10 m/",
+        "g = 10m/",
+        "h = 76cm",
+        "r= 13.6 gm/cc",
+        "g = 9.8 m/s2",
+        "g = 0.25 kg"
+      ],
+      "laws": [
+        "Newton's first Law of motion",
+        "is also known as the Law of Inertia"
+      ],
+      "definitions": [
+        "through different means and is able to do"
+      ],
+      "sources": [
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 88
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 148
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 43
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 183
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 180
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 81
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 49
+        },
+        {
+          "source": "IX Physics EM 2025-26.pdf",
+          "page": 77
+        }
+      ]
+    },
+    "timestamp": "2026-05-11T18:08:04.929699+00:00",
+    "generation_stages": [
+      "Started",
+      "Retrieved",
+      "Synthesized",
+      "Complete"
+    ]
+  },
+  {
     "id": "f56bdfd1-f236-466a-9954-8692faf296d4",
     "title": "Astronomy Simulation",
     "description": "AI-synthesized interactive simulation for: a man falling from moon",
