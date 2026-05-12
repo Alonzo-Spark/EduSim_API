@@ -16,8 +16,9 @@ from dotenv import load_dotenv
 load_dotenv(Path(__file__).resolve().parents[4] / ".env")
 
 # RAG Setup
-_retriever = None
-_embeddings_model = None
+from rag.vector_loader import vector_store
+from rag.subject_router import detect_subject
+import asyncio
 
 # Curriculum Index Cache
 _curriculum_data = None
@@ -40,168 +41,151 @@ def _empty_tutor_payload(message: str):
         "ragContent": [],
     }
 
-def get_rag_components():
-    global _retriever, _embeddings_model
-    if _retriever is None:
-        try:
-            # Load FAISS index and metadata
-            index = faiss.read_index("faiss_index/index.faiss")
-            with open("faiss_index/metadata.pkl", "rb") as f:
-                metadata = pickle.load(f)
-            
-            _embeddings_model = SentenceTransformer('all-MiniLM-L6-v2')
-            _retriever = get_retriever(index, metadata, _embeddings_model)
-        except Exception as e:
-            print(f"⚠️ RAG Initialization Warning: {e}")
-            return None, None
-    return _retriever, _embeddings_model
+def get_rag_components(subject: str = None):
+    retriever = vector_store.get_retriever(subject)
+    return retriever
 
-def analyze_with_llm(query: str, context: str) -> Dict[str, Any]:
-    """
-    Uses LLM to extract physics concepts, formulas, query type, and explanation from the context.
-    """
+async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
     system_prompt = (
-        "You are an intelligent physics textbook tutor. Analyze the user's query and the provided Context.\n\n"
-        "1. Determine the 'queryType': 'concept', 'formula', or 'mixed'.\n"
-        "2. Extract 'concepts': list of related physics topics from the context.\n"
-        "3. Extract 'formulas': find relevant formulas in the context. IF the query is a concept but has fundamental formulas (like F=ma for force) not present in context, you MUST include them from your knowledge. Provide formula, name, topic, meaning.\n"
-        "4. Generate an 'explanation' answering the query based on the context.\n\n"
-        "Return ONLY a valid JSON object:\n"
-        "{\n"
-        "  \"queryType\": \"string\",\n"
-        "  \"concepts\": [\"string\"],\n"
-        "  \"formulas\": [\n"
-        "    {\"formula\": \"string\", \"name\": \"string\", \"topic\": \"string\", \"meaning\": \"string\"}\n"
-        "  ],\n"
-        "  \"explanation\": \"string\"\n"
-        "}\n"
+        "You are an intelligent tutor. Analyze query and context.\n"
+        "1. Determine 'queryType': 'concept', 'formula', or 'mixed'.\n"
+        "2. Extract 'concepts': topics.\n"
+        "3. Extract 'formulas': [{formula, name, topic, meaning}]. Include fundamental ones if omitted in text.\n"
+        "4. Generate a brief 'explanation'.\n"
+        "Return ONLY valid JSON."
     )
-    
     user_prompt = f"Context:\n{context}\n\nQuery:\n{query}"
+    final_prompt = f"{system_prompt}\n\n{user_prompt}"
     
+    from rag.generator import generate_llm_text_async
     try:
-        final_prompt = f"{system_prompt}\n\n{user_prompt}\n\nReturn only the JSON object."
-        response_text = generate_llm_text(final_prompt, temperature=0.1)
-
-        if not response_text or response_text.startswith("Error:"):
-            return _empty_tutor_payload("AI returned an empty or error response.")
-
+        response_text = await generate_llm_text_async(final_prompt, temperature=0.1)
+        if not response_text or "Error:" in response_text:
+            return _empty_tutor_payload("AI failed to extract concepts.")
+            
         json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
         if json_match:
-            print("AI generation completed: tutor analysis")
             parsed = json.loads(json_match.group())
             return {
                 **parsed,
-                "title": parsed.get("title", "AI Tutor Response"),
-                "description": parsed.get("description", ""),
+                "title": parsed.get("title", "AI Tutor"),
                 "formula": parsed.get("formula", ""),
                 "related_concepts": parsed.get("concepts", []),
                 "related_formulas": parsed.get("formulas", []),
                 "ai_explanation": parsed.get("explanation", ""),
-                "sources": parsed.get("sources", []),
             }
-
-        return _empty_tutor_payload("AI returned an invalid JSON response.")
+        return _empty_tutor_payload("Invalid JSON returned.")
     except Exception as e:
-        print("AI Generation Error:", str(e))
-        return _empty_tutor_payload(f"AI generation failed: {str(e)}")
+        return _empty_tutor_payload(f"AI error: {str(e)}")
 
-def analyze_tutor_query(query: str) -> Dict[str, Any]:
-    # 1. RAG Retrieval First
+async def generate_explanation_async(query: str, context: str) -> str:
+    from rag.generator import generate_llm_text_async
+    prompt = (
+        "You are an intelligent educational tutor. Use the context to clearly explain the query. "
+        f"Context:\n{context}\n\nQuery:\n{query}"
+    )
+    res = await generate_llm_text_async(prompt, temperature=0.3)
+    return res if res else "Failed to generate explanation."
+
+async def analyze_tutor_query(query: str) -> Dict[str, Any]:
     request_started = time.perf_counter()
-    print("AI request started: tutor retrieval")
-    retriever, _ = get_rag_components()
+    
+    # 1. Subject Routing & RAG Retrieval
+    subject = detect_subject(query)
+    retriever = get_rag_components(subject)
+    
     rag_content = []
     context = ""
-    retrieval_started = time.perf_counter()
+    retrieval_start = time.perf_counter()
     
     if retriever:
         docs = retriever(query)
-        # Format RAG content for frontend
-        for doc in docs[:5]: # Top 5
+        for doc in docs[:3]: # Optimized to 3
             source = os.path.basename(doc.get("source", "Textbook"))
-            content = doc.get("text", "").strip()
-            
-            # Clean up text
-            content = re.sub(r'\s+', ' ', content)
-            if len(content) > 400:
-                content = content[:400] + "..."
-
-            rag_content.append({
-                "title": source,
-                "content": content
-            })
-            
+            content = re.sub(r'\s+', ' ', doc.get("text", "")).strip()
+            if len(content) > 400: content = content[:400] + "..."
+            rag_content.append({"title": source, "content": content})
             context += f"{content}\n\n"
-        print(f"RAG retrieval completed: {len(rag_content)} chunks")
-    else:
-        context = "No textbook context available."
-
-    retrieval_time = time.perf_counter() - retrieval_started
-    print(f"Retrieval time: {retrieval_time:.2f}s")
-    print("Retrieved Context:", context)
-
-    if not query or len(query.strip()) < 2:
-        return _empty_tutor_payload("Query is too short for AI generation.")
-
-    # 2. Use LLM for intelligent extraction based on context
-    structured = analyze_with_llm(query, context)
-
+            
+    retrieval_time = time.perf_counter() - retrieval_start
+    print(f"[RAG] {retrieval_time:.2f}s (Subject: {subject})")
+    
     if not context.strip():
         context = "No textbook context available."
 
-    # 3. Generate the explanation with AI using the same textbook context
-    explanation_prompt = (
-        "You are an intelligent physics textbook tutor. Use the retrieved textbook context to answer the student's query. "
-        "Keep the explanation accurate, concise, and educational.\n\n"
-        f"Context:\n{context}\n\n"
-        f"Query:\n{query}\n\n"
-        "Respond with a clear explanation and include relevant formulas when appropriate."
-    )
-    try:
-        explanation_started = time.perf_counter()
-        print("AI request started: tutor explanation")
-        rag_explanation = generate_llm_text(explanation_prompt, temperature=0.2)
-
-        if not rag_explanation or rag_explanation.startswith("Error:"):
-            rag_explanation = "AI returned an empty or error response."
-        else:
-            print("AI generation completed: tutor explanation")
-
-        explanation_time = time.perf_counter() - explanation_started
-        print(f"AI generation time: {explanation_time:.2f}s")
-    except Exception as e:
-        print("AI Generation Error:", str(e))
-        rag_explanation = f"AI generation failed: {str(e)}"
-
-    total_time = time.perf_counter() - request_started
-    print(f"Total request time: {total_time:.2f}s")
-
-    concepts = structured.get("concepts", [])
-    formulas = structured.get("formulas", [])
-    if isinstance(formulas, list) and formulas and isinstance(formulas[0], dict):
-        first_formula = formulas[0].get("formula", "")
-    elif isinstance(formulas, list) and formulas:
-        first_formula = formulas[0]
-    else:
-        first_formula = ""
-
-    explanation_text = rag_explanation or structured.get("explanation", "")
+    # 2. Async Parallel Execution
+    llm_start = time.perf_counter()
     
+    structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
+    explanation_task = asyncio.create_task(generate_explanation_async(query, context))
+    
+    structured, rag_explanation = await asyncio.gather(structured_task, explanation_task)
+    
+    llm_time = time.perf_counter() - llm_start
+    print(f"[LLM] {llm_time:.2f}s")
+    
+    total_time = time.perf_counter() - request_started
+    print(f"[TOTAL] {total_time:.2f}s")
+    
+    formulas = structured.get("formulas", [])
+    first_formula = formulas[0].get("formula", "") if formulas and isinstance(formulas[0], dict) else (formulas[0] if formulas else "")
+
     return {
         "title": structured.get("title", "AI Tutor Response"),
-        "description": structured.get("description", query),
+        "description": query,
         "formula": first_formula,
-        "related_concepts": concepts,
+        "related_concepts": structured.get("related_concepts", []),
         "related_formulas": formulas,
-        "ai_explanation": explanation_text,
-        "sources": rag_content[:3],
+        "ai_explanation": rag_explanation,
+        "sources": rag_content,
         "queryType": structured.get("queryType", "concept"),
-        "concepts": concepts,
+        "concepts": structured.get("related_concepts", []),
         "formulas": formulas,
-        "explanation": explanation_text,
-        "ragContent": rag_content[:3], # Send top 3 to frontend
+        "explanation": rag_explanation,
+        "ragContent": rag_content,
     }
+
+async def analyze_tutor_query_stream(query: str):
+    """
+    Streaming SSE generator for ultra-fast first token.
+    """
+    request_started = time.perf_counter()
+    
+    subject = detect_subject(query)
+    retriever = get_rag_components(subject)
+    
+    rag_content = []
+    context = ""
+    if retriever:
+        docs = retriever(query)
+        for doc in docs[:3]:
+            source = os.path.basename(doc.get("source", "Textbook"))
+            content = re.sub(r'\s+', ' ', doc.get("text", "")).strip()
+            if len(content) > 400: content = content[:400] + "..."
+            rag_content.append({"title": source, "content": content})
+            context += f"{content}\n\n"
+            
+    if not context.strip():
+        context = "No textbook context available."
+
+    # Yield RAG Content immediately
+    yield f"data: {json.dumps({'ragContent': rag_content})}\n\n"
+    
+    # Start structured task
+    structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
+    
+    # Stream explanation text
+    from rag.generator import generate_llm_stream_async
+    prompt = f"You are an educational tutor. Use the context to explain the query clearly.\nContext:\n{context}\n\nQuery:\n{query}"
+    
+    async for chunk in generate_llm_stream_async(prompt):
+        yield chunk
+        
+    # Wait for structured data to finish
+    structured = await structured_task
+    yield f"data: {json.dumps({'structured': structured})}\n\n"
+    
+    yield "data: [DONE]\n\n"
 
 
 # --- Comprehensive Curriculum Search System ---

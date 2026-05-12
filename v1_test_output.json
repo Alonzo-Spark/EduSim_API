@@ -1,33 +1,25 @@
 {
-  "id": "a109b04b-276d-4666-b053-728ebbfc9224",
-  "timestamp": "2026-05-12T06:42:10.105598+00:00",
+  "id": "d39e30e5-a48f-42ca-b5e6-6586cfb18b6f",
+  "timestamp": "2026-05-12T10:04:47.782304+00:00",
   "sources": [
     {
-      "source": "IX Physics EM 2025-26.pdf",
+      "source": "X Physics EM 2025-26.pdf",
+      "page": 227
+    },
+    {
+      "source": "X Physics EM 2025-26.pdf",
       "page": 40
     },
     {
-      "source": "IX Physics EM 2025-26.pdf",
-      "page": 54
-    },
-    {
-      "source": "IX Physics EM 2025-26.pdf",
-      "page": 53
-    },
-    {
-      "source": "IX Physics EM 2025-26.pdf",
-      "page": 43
-    },
-    {
-      "source": "IX Physics EM 2025-26.pdf",
-      "page": 52
+      "source": "X Physics EM 2025-26.pdf",
+      "page": 232
     }
   ],
   "dsl": {
     "meta": {
-      "id": "collision_cars_001",
-      "title": "Car Collision Simulation",
-      "topic": "Collisions",
+      "id": "car_collision_001",
+      "title": "Elastic and Inelastic Car Collisions",
+      "topic": "Mechanics - Momentum",
       "difficulty": "Grade 10",
       "version": "1.0"
     },
@@ -36,12 +28,12 @@
         "x": 0.0,
         "y": 0.0
       },
-      "airResistance": 0.0,
+      "airResistance": 0.05,
       "groundFriction": 0.0
     },
     "objects": [
       {
-        "id": "car1",
+        "id": "car_red",
         "type": "dynamicBody",
         "shape": {
           "type": "rectangle",
@@ -50,7 +42,7 @@
         },
         "position": {
           "x": 5.0,
-          "y": 5.0
+          "y": 10.0
         },
         "velocity": {
           "x": 5.0,
@@ -63,16 +55,16 @@
           "isSensor": false
         },
         "material": {
-          "friction": 0.8,
-          "restitution": 0.6
+          "friction": 0.3,
+          "restitution": 0.5
         },
         "visual": {
-          "color": "#3498db",
-          "label": "Car 1"
+          "color": "#e74c3c",
+          "label": "Car A (Red)"
         }
       },
       {
-        "id": "car2",
+        "id": "car_blue",
         "type": "dynamicBody",
         "shape": {
           "type": "rectangle",
@@ -81,10 +73,10 @@
         },
         "position": {
           "x": 15.0,
-          "y": 5.0
+          "y": 10.0
         },
         "velocity": {
-          "x": -5.0,
+          "x": 0.0,
           "y": 0.0
         },
         "rotation": 0.0,
@@ -94,12 +86,12 @@
           "isSensor": false
         },
         "material": {
-          "friction": 0.8,
-          "restitution": 0.6
+          "friction": 0.3,
+          "restitution": 0.5
         },
         "visual": {
-          "color": "#e74c3c",
-          "label": "Car 2"
+          "color": "#3498db",
+          "label": "Car B (Blue)"
         }
       }
     ],
@@ -107,32 +99,16 @@
     "interactions": [
       {
         "type": "slider",
-        "label": "Car 1 Mass",
+        "label": "Red Car Mass",
         "bind": "objects[0].physics.mass",
         "min": 500.0,
-        "max": 2500.0,
+        "max": 5000.0,
         "step": 0.1
       },
       {
         "type": "slider",
-        "label": "Car 2 Mass",
-        "bind": "objects[1].physics.mass",
-        "min": 500.0,
-        "max": 2500.0,
-        "step": 0.1
-      },
-      {
-        "type": "slider",
-        "label": "Friction",
+        "label": "Road Friction",
         "bind": "objects[0].material.friction",
-        "min": 0.0,
-        "max": 1.0,
-        "step": 0.1
-      },
-      {
-        "type": "slider",
-        "label": "Restitution",
-        "bind": "objects[0].material.restitution",
         "min": 0.0,
         "max": 1.0,
         "step": 0.1
@@ -141,31 +117,28 @@
   },
   "knowledge": {
     "relevant_formulas": [
-      "p = mv (Momentum)",
-      "p_total_initial = p_total_final (Conservation of Momentum)",
-      "KE = 1/2 mv^2 (Kinetic Energy)"
+      "p = mv",
+      "m1u1 + m2u2 = m1v1 + m2v2",
+      "KE = 1/2mv^2"
     ],
     "related_concepts": [
-      "Elastic Collision",
-      "Inelastic Collision",
       "Conservation of Momentum",
+      "Kinetic Energy Transfer",
       "Impulse"
     ],
     "laws": [
-      "Newton's First Law of Motion",
-      "Newton's Second Law of Motion",
-      "Law of Conservation of Momentum"
+      "Law of Conservation of Momentum",
+      "Newton's Third Law"
     ],
     "explanations": [
-      "During a collision, momentum is conserved. The total momentum before the collision equals the total momentum after the collision. Kinetic energy may or may not be conserved depending on whether the collision is elastic or inelastic.",
-      "Friction affects the energy lost during the collision."
+      "When cars collide, the total momentum of the system remains constant if no external forces act on it. Friction acts as an external force that eventually brings the cars to a stop."
     ]
   },
   "metadata": {
-    "topic": "Collisions",
+    "topic": "Linear Momentum",
     "subject": "Physics",
     "difficulty": "Intermediate",
-    "generated_at": "2024-05-12T06:42:03Z",
+    "generated_at": "2026-05-12T10:04:40Z",
     "simulation_type": "Matter.js-RigidBody"
   }
 }

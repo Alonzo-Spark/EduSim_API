@@ -6,12 +6,25 @@ from app.src.modules.tutor import service as tutor_service
 tutor_router = APIRouter()
 
 
+from fastapi.responses import StreamingResponse
+
 @tutor_router.post("/analyze")
 async def analyze_query(request: TutorQueryRequest):
     """
     Analyzes a physics query to detect concepts, formulas, and provide AI/RAG explanations.
     """
     return await analyze_tutor_controller(request)
+
+@tutor_router.post("/analyze-stream")
+async def analyze_query_stream(request: TutorQueryRequest):
+    """
+    Analyzes a physics query and streams the response back for ultra-fast first token.
+    """
+    from app.src.modules.tutor.service import analyze_tutor_query_stream
+    return StreamingResponse(
+        analyze_tutor_query_stream(request.query),
+        media_type="text/event-stream"
+    )
 
 
 @tutor_router.get("/search")
