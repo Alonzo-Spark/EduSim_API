@@ -1,5 +1,954 @@
 [
   {
+    "id": "d7267ef3-0402-41c4-96e9-c3c7a29aa525",
+    "timestamp": "2026-05-12T10:07:28.153385+00:00",
+    "sources": [
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 107
+      },
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 207
+      },
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 71
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "projectile_motion_001",
+        "title": "Projectile Motion Lab",
+        "topic": "Kinematics",
+        "difficulty": "Grade 11",
+        "version": "1.1"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": -9.81
+        },
+        "airResistance": 0.02,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "projectile_ball",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.3
+          },
+          "position": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "velocity": {
+            "x": 15.0,
+            "y": 15.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1.5,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.05,
+            "restitution": 0.4
+          },
+          "visual": {
+            "color": "#3498db",
+            "label": "Projectile"
+          }
+        },
+        {
+          "id": "ground",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 100.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 50.0,
+            "y": -0.5
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "movable": false,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.8,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#2ecc71",
+            "label": "Ground"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Initial Velocity X",
+          "bind": "objects[0].velocity.x",
+          "min": 0.0,
+          "max": 30.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Initial Velocity Y",
+          "bind": "objects[0].velocity.y",
+          "min": 0.0,
+          "max": 30.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Launch Angle (Visual)",
+          "bind": "objects[0].rotation",
+          "min": 0.0,
+          "max": 1.57,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "R = (v^2 * sin(2\u03b8)) / g",
+        "H = (v^2 * sin^2(\u03b8)) / 2g",
+        "y = x*tan(\u03b8) - (g*x^2) / (2*v^2*cos^2(\u03b8))"
+      ],
+      "related_concepts": [
+        "Parabolic Trajectory",
+        "Independence of Horizontal and Vertical Motion",
+        "Range and Maximum Height"
+      ],
+      "laws": [
+        "Newton's First Law of Motion",
+        "Equations of Uniformly Accelerated Motion"
+      ],
+      "explanations": [
+        "The horizontal component of velocity remains constant (neglecting air resistance), while the vertical component changes due to the constant acceleration of gravity."
+      ]
+    },
+    "metadata": {
+      "topic": "Projectile Motion",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T10:07:21Z",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "bbc428a4-a6ce-421a-aa10-4f2c9009fdcd",
+    "timestamp": "2026-05-12T10:07:21.931572+00:00",
+    "sources": [
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 227
+      },
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 40
+      },
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 232
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "car_collision_001",
+        "title": "Elastic and Inelastic Car Collisions",
+        "topic": "Mechanics - Momentum",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.05,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "car_red",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 5.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": 5.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#e74c3c",
+            "label": "Car A"
+          }
+        },
+        {
+          "id": "car_blue",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 15.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#3498db",
+            "label": "Car B"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Mass of Car A (kg)",
+          "bind": "objects[0].physics.mass",
+          "min": 500.0,
+          "max": 5000.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Road Friction",
+          "bind": "objects[0].material.friction",
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "m1v1 + m2v2 = m1v1' + m2v2'",
+        "F * \u0394t = \u0394p"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Kinetic Energy Transfer",
+        "Impulse"
+      ],
+      "laws": [
+        "Law of Conservation of Momentum",
+        "Newton's Third Law of Motion"
+      ],
+      "explanations": [
+        "When two cars collide, the total momentum of the system remains constant if no external forces act on it. The friction slider simulates the road surface resistance which eventually brings the cars to a stop after impact."
+      ]
+    },
+    "metadata": {
+      "topic": "Collisions",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T10:07:15Z",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "aa781c91-70e0-4a13-859c-df6220c5b908",
+    "timestamp": "2026-05-12T10:07:15.031670+00:00",
+    "sources": [
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 227
+      },
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 40
+      },
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 232
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "car_collision_001",
+        "title": "Elastic Collision: Two Cars",
+        "topic": "Mechanics - Momentum",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.05,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "car_a",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 5.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": 5.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1200.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.8
+          },
+          "visual": {
+            "color": "#3498db",
+            "label": "Car A"
+          }
+        },
+        {
+          "id": "car_b",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 15.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": -2.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1200.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.8
+          },
+          "visual": {
+            "color": "#e67e22",
+            "label": "Car B"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Car A Mass (kg)",
+          "bind": "objects[0].physics.mass",
+          "min": 500.0,
+          "max": 3000.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Surface Friction",
+          "bind": "objects[0].material.friction",
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "m1u1 + m2u2 = m1v1 + m2v2",
+        "KE = 1/2mv^2"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Elastic vs Inelastic Collisions",
+        "Impulse"
+      ],
+      "laws": [
+        "Law of Conservation of Momentum",
+        "Newton's Third Law of Motion"
+      ],
+      "explanations": [
+        "When two cars collide, the total momentum before the impact equals the total momentum after the impact, provided no external forces act on the system.",
+        "Friction acts as an external force that gradually reduces the kinetic energy of the cars after the collision."
+      ]
+    },
+    "metadata": {
+      "topic": "Linear Momentum",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T10:07:08Z",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "d39e30e5-a48f-42ca-b5e6-6586cfb18b6f",
+    "timestamp": "2026-05-12T10:04:47.782304+00:00",
+    "sources": [
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 227
+      },
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 40
+      },
+      {
+        "source": "X Physics EM 2025-26.pdf",
+        "page": 232
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "car_collision_001",
+        "title": "Elastic and Inelastic Car Collisions",
+        "topic": "Mechanics - Momentum",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.05,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "car_red",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 5.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": 5.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#e74c3c",
+            "label": "Car A (Red)"
+          }
+        },
+        {
+          "id": "car_blue",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 15.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#3498db",
+            "label": "Car B (Blue)"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Red Car Mass",
+          "bind": "objects[0].physics.mass",
+          "min": 500.0,
+          "max": 5000.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Road Friction",
+          "bind": "objects[0].material.friction",
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "m1u1 + m2u2 = m1v1 + m2v2",
+        "KE = 1/2mv^2"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Kinetic Energy Transfer",
+        "Impulse"
+      ],
+      "laws": [
+        "Law of Conservation of Momentum",
+        "Newton's Third Law"
+      ],
+      "explanations": [
+        "When cars collide, the total momentum of the system remains constant if no external forces act on it. Friction acts as an external force that eventually brings the cars to a stop."
+      ]
+    },
+    "metadata": {
+      "topic": "Linear Momentum",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T10:04:40Z",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "95d49c28-8a9a-4afe-99fc-7f36c1e23d4d",
+    "timestamp": "2026-05-12T09:21:32.987981+00:00",
+    "sources": [
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 40
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 54
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 53
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 43
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 52
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "car_collision_001",
+        "title": "Car Collision & Momentum",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.1"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.01,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "ground",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 40.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 20.0,
+            "y": 2.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.2,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#34495e",
+            "label": "Road"
+          }
+        },
+        {
+          "id": "car_a",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 4.0,
+            "height": 1.5
+          },
+          "position": {
+            "x": 5.0,
+            "y": 4.0
+          },
+          "velocity": {
+            "x": 10.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.2,
+            "restitution": 0.3
+          },
+          "visual": {
+            "color": "#e74c3c",
+            "label": "Car A"
+          }
+        },
+        {
+          "id": "car_b",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 4.0,
+            "height": 1.5
+          },
+          "position": {
+            "x": 25.0,
+            "y": 4.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.2,
+            "restitution": 0.3
+          },
+          "visual": {
+            "color": "#3498db",
+            "label": "Car B"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Mass of Car A (kg)",
+          "bind": "objects[1].physics.mass",
+          "min": 500.0,
+          "max": 5000.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Road Friction",
+          "bind": "objects[0].material.friction",
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "m1u1 + m2u2 = m1v1 + m2v2",
+        "F = \u0394p / \u0394t"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Inertia",
+        "Impulse",
+        "Elastic vs Inelastic Collisions"
+      ],
+      "laws": [
+        "Newton's Second Law of Motion",
+        "Newton's Third Law of Motion",
+        "Law of Conservation of Momentum"
+      ],
+      "explanations": [
+        "When Car A hits Car B, it exerts a force on Car B, and Car B exerts an equal and opposite force on Car A (Newton's 3rd Law).",
+        "The total momentum of the two cars before the collision is equal to the total momentum after the collision, provided no external net force acts on the system.",
+        "Increasing the mass of Car A increases its inertia, making it harder to stop and causing a greater change in Car B's motion upon impact."
+      ]
+    },
+    "metadata": {
+      "topic": "Linear Momentum",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T09:21:25Z",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "1357218f-9c79-47e0-9f4c-6fae693b39b4",
+    "timestamp": "2026-05-12T09:20:18.031188+00:00",
+    "sources": [
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 40
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 54
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 53
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 43
+      },
+      {
+        "source": "IX Physics EM 2025-26.pdf",
+        "page": 52
+      }
+    ],
+    "dsl": {
+      "meta": {
+        "id": "car_collision_001",
+        "title": "Car Collision & Momentum",
+        "topic": "Mechanics",
+        "difficulty": "Grade 9",
+        "version": "1.1"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.0,
+        "groundFriction": 0.0
+      },
+      "objects": [
+        {
+          "id": "car_red",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 4.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 5.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": 10.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.2
+          },
+          "visual": {
+            "color": "#e74c3c",
+            "label": "Car A (Red)"
+          }
+        },
+        {
+          "id": "car_blue",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 4.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 20.0,
+            "y": 10.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.2
+          },
+          "visual": {
+            "color": "#3498db",
+            "label": "Car B (Blue)"
+          }
+        },
+        {
+          "id": "ground",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 50.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 25.0,
+            "y": 12.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1.0,
+            "movable": false,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#2c3e50",
+            "label": "Road"
+          }
+        }
+      ],
+      "forces": [],
+      "interactions": [
+        {
+          "type": "slider",
+          "label": "Mass of Car A (kg)",
+          "bind": "objects[0].physics.mass",
+          "min": 500.0,
+          "max": 5000.0,
+          "step": 0.1
+        },
+        {
+          "type": "slider",
+          "label": "Road Friction",
+          "bind": "objects[0].material.friction",
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.1
+        }
+      ]
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "m1u1 + m2u2 = m1v1 + m2v2",
+        "F = ma"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Inertia",
+        "Impulse",
+        "Newton's Third Law"
+      ],
+      "laws": [
+        "Law of Conservation of Momentum",
+        "Newton's Second Law of Motion"
+      ],
+      "explanations": [
+        "When the red car hits the blue car, it exerts a force. According to Newton's Third Law, the blue car exerts an equal and opposite force back.",
+        "The total momentum of the system remains constant if no external net force acts on it.",
+        "Increasing the mass of a car increases its inertia, making it harder to stop or change its motion."
+      ]
+    },
+    "metadata": {
+      "topic": "Linear Momentum",
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "generated_at": "2026-05-12T09:20:10Z",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
     "id": "a109b04b-276d-4666-b053-728ebbfc9224",
     "timestamp": "2026-05-12T06:42:10.105598+00:00",
     "sources": [

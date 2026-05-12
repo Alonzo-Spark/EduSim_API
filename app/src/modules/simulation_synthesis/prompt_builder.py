@@ -65,10 +65,6 @@ _EXAMPLE_RESPONSE = {
 }
 
 def build_dsl_prompt(user_prompt: str, context: str) -> str:
-    """
-    Constructs a prompt for the LLM to generate the refined EduSimResponse structure.
-    Strictly enforces SI units, no nulls, and Matter.js optimization.
-    """
     now = datetime.now(timezone.utc).isoformat()
     
     return f"""You are a Physics Simulation Engine Architect and Educational Content Creator.
@@ -98,11 +94,18 @@ CRITICAL RULES:
 Example Structure (SI Units + Clean JSON):
 {json.dumps(_EXAMPLE_RESPONSE, indent=2)}
 
-Reference Context (For conceptual inspiration):
+RULES:
+1. SI UNITS (METERS) for positions/dimensions. NOT pixels.
+2. NO NULLS. Every object MUST have: id, type, shape (dict with "type" key), position, physics, material, visual.
+3. shape MUST be a dict: {{"type": "circle", "radius": 0.5}} or {{"type": "rectangle", "width": 2, "height": 1}}
+4. dsl MUST contain: meta (with id, title, topic, difficulty), environment, objects, forces, interactions.
+5. Forces and interactions arrays can be empty [] but MUST exist.
+6. Generate clean, accurate formulas and laws in "knowledge".
+
+Reference Context:
 {context}
 
-Current Timestamp: {now}
+Timestamp: {now}
 User Request: {user_prompt}
 
-Return ONLY the valid JSON object.
-"""
+Return ONLY the valid JSON object."""

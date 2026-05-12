@@ -7,7 +7,7 @@ class TutorQueryRequest(BaseModel):
 
 async def analyze_tutor_controller(request: TutorQueryRequest):
     try:
-        data = analyze_tutor_query(request.query)
+        data = await analyze_tutor_query(request.query)
         return {
             "success": True,
             "data": data

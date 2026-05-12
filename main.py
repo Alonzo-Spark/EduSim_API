@@ -14,13 +14,21 @@ logging.basicConfig(
 logger = logging.getLogger("EduSim")
 logger.info("EduSim Backend Starting Up...")
 
+from contextlib import asynccontextmanager
+from rag.vector_loader import vector_store
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Preload FAISS globally
+    vector_store.load_all()
+    yield
+
 app = FastAPI(
     title="EduSim Physics API",
     description="Backend APIs for EduSim  simulations",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
-
-
 
 # CORS
 

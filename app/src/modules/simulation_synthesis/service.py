@@ -23,25 +23,14 @@ INDEX_FILE = Path("faiss_index/index.faiss")
 METADATA_FILE = Path("faiss_index/metadata.pkl")
 PERSISTENCE_FILE = Path("data/generated_simulations.json")
 
-_retriever = None
 _store_lock = Lock()
 
+from rag.vector_loader import vector_store
+from rag.subject_router import detect_subject
 
-def _load_retriever():
-    global _retriever
-    if _retriever is not None:
-        return _retriever
-
-    if not INDEX_FILE.exists() or not METADATA_FILE.exists():
-        return None
-
-    index = faiss.read_index(str(INDEX_FILE))
-    with open(METADATA_FILE, "rb") as file:
-        metadata = pickle.load(file)
-
-    embeddings_model = SentenceTransformer("all-MiniLM-L6-v2")
-    _retriever = get_retriever(index, metadata, embeddings_model, k=10)
-    return _retriever
+def _load_retriever(topic: str = None):
+    subject = detect_subject(topic) if topic else "physics"
+    return vector_store.get_retriever(subject)
 
 
 def _build_context_block(chunks: list[dict[str, Any]]):
@@ -72,7 +61,7 @@ def _write_store(items: list[dict[str, Any]]):
 
 def generate_simulation_synthesis(prompt: str, topic: str | None = None):
     print("AI request started: simulation retrieval")
-    retriever = _load_retriever()
+    retriever = _load_retriever(prompt)
     raw_chunks = retriever(prompt)[:10] if retriever else []
     
     # Simple filtering for better context
@@ -155,7 +144,7 @@ def generate_simulation_synthesis_stream(prompt: str, topic: str | None = None):
 
         # Event 2: Retrieving context
         yield _format_sse_event("progress", {"stage": "Retrieving textbook context..."})
-        retriever = _load_retriever()
+        retriever = _load_retriever(prompt)
         raw_chunks = retriever(prompt)[:10] if retriever else []
         chunks = raw_chunks[:6]
         
