@@ -1,5 +1,1933 @@
 [
   {
+    "id": "9b3198f5-d8bb-430e-96bb-86599eecb3e4",
+    "timestamp": "2026-05-12T11:54:24.927167+00:00",
+    "dsl": {
+      "meta": {
+        "id": "car_collision_001",
+        "title": "Elastic and Inelastic Collisions",
+        "topic": "Momentum and Impulse",
+        "difficulty": "Grade 11",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.01,
+        "world": {
+          "width": 800.0,
+          "height": 400.0
+        },
+        "background": {
+          "color": "#1e293b"
+        }
+      },
+      "objects": [
+        {
+          "id": "road",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 9.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#475569",
+            "label": "Road Surface",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "car_a",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 4.0,
+            "y": 8.0
+          },
+          "velocity": {
+            "x": 5.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.2,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Car A (Red)",
+            "showVelocityVector": true
+          }
+        },
+        {
+          "id": "car_b",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 12.0,
+            "y": 8.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.2,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#3b82f6",
+            "label": "Car B (Blue)",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [],
+      "behaviors": [
+        {
+          "id": "friction_loss",
+          "type": "drag",
+          "targets": [
+            "car_a",
+            "car_b"
+          ],
+          "coefficient": 0.05,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "id": "velocity_a_slider",
+          "type": "slider",
+          "label": "Car A Initial Velocity",
+          "bind": "objects[1].velocity.x",
+          "min": 0.0,
+          "max": 20.0,
+          "step": 1.0
+        },
+        {
+          "id": "mass_b_slider",
+          "type": "slider",
+          "label": "Car B Mass",
+          "bind": "objects[2].physics.mass",
+          "min": 500.0,
+          "max": 5000.0,
+          "step": 100.0
+        },
+        {
+          "id": "restitution_toggle",
+          "type": "toggle",
+          "label": "Bouncy Collision",
+          "bind": "objects[1].material.restitution"
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 40
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "m1v1 + m2v2 = m1v1' + m2v2'",
+        "KE = 1/2 mv^2"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Elastic vs Inelastic Collisions",
+        "Impulse-Momentum Theorem"
+      ],
+      "laws": [
+        "Newton's Third Law",
+        "Law of Conservation of Momentum"
+      ],
+      "explanations": [
+        "In a closed system, the total momentum before a collision equals the total momentum after.",
+        "Kinetic energy is only conserved in perfectly elastic collisions."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Advanced",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "60957144-16ff-4c7b-b830-df027a2df237",
+    "timestamp": "2026-05-12T11:54:17.035730+00:00",
+    "dsl": {
+      "meta": {
+        "id": "rocket_propulsion_gravitation",
+        "title": "Rocket Propulsion & Gravitational Escape",
+        "topic": "Dynamics and Gravitation",
+        "difficulty": "Grade 11",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.5
+        },
+        "airResistance": 0.01,
+        "world": {
+          "width": 800.0,
+          "height": 1200.0
+        },
+        "background": {
+          "color": "#020617"
+        }
+      },
+      "objects": [
+        {
+          "id": "launch_pad",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 28.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.8,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#475569",
+            "label": "Earth Surface",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "rocket_body",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 1.0,
+            "height": 3.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 25.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Rocket",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "thrust_force",
+          "type": "constantForce",
+          "target": "rocket_body",
+          "vector": {
+            "x": 0.0,
+            "y": -15.0
+          },
+          "enabled": false
+        }
+      ],
+      "constraints": [],
+      "behaviors": [
+        {
+          "id": "mass_decay",
+          "type": "variableMass",
+          "targets": [
+            "rocket_body"
+          ],
+          "coefficient": -0.05,
+          "enabled": false
+        }
+      ],
+      "interactions": [
+        {
+          "id": "ignition_button",
+          "type": "button",
+          "label": "Ignite Engines",
+          "bind": "forces[0].enabled"
+        },
+        {
+          "id": "thrust_slider",
+          "type": "slider",
+          "label": "Thrust Magnitude",
+          "bind": "forces[0].vector.y",
+          "min": -50.0,
+          "max": 0.0,
+          "step": 1.0
+        },
+        {
+          "id": "gravity_toggle",
+          "type": "toggle",
+          "label": "Zero Gravity",
+          "bind": "environment.gravity.y"
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 30
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = dp/dt (Newton's Second Law)",
+        "v = u * ln(m0/m) (Tsiolkovsky Rocket Equation)",
+        "F_g = G(m1*m2)/r^2"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Escape Velocity",
+        "Variable Mass Systems"
+      ],
+      "laws": [
+        "Newton's Third Law of Motion",
+        "Law of Universal Gravitation"
+      ],
+      "explanations": [
+        "Rocket propulsion is an application of Newton's Third Law: the downward ejection of exhaust gases creates an upward reaction force (thrust).",
+        "As fuel is consumed, the rocket's mass decreases, leading to higher acceleration for the same amount of thrust."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Advanced",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "9f85221f-31ac-4a06-bc9a-e9444618c48a",
+    "timestamp": "2026-05-12T11:54:09.263946+00:00",
+    "dsl": {
+      "meta": {
+        "id": "pendulum_motion_v1",
+        "title": "Simple Harmonic Motion: The Pendulum",
+        "topic": "Oscillation and Gravity",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.002,
+        "world": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "background": {
+          "color": "#0f172a"
+        }
+      },
+      "objects": [
+        {
+          "id": "pivot_point",
+          "type": "staticBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.2
+          },
+          "position": {
+            "x": 10.0,
+            "y": 2.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.0
+          },
+          "visual": {
+            "color": "#94a3b8",
+            "label": "Pivot",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "pendulum_bob",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.8
+          },
+          "position": {
+            "x": 15.0,
+            "y": 2.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 2.5,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.01,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Bob",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [
+        {
+          "id": "string_constraint",
+          "type": "rope",
+          "bodyA": "pivot_point",
+          "bodyB": "pendulum_bob",
+          "length": 5.0,
+          "stiffness": 1.0
+        }
+      ],
+      "behaviors": [
+        {
+          "id": "damping",
+          "type": "drag",
+          "targets": [
+            "pendulum_bob"
+          ],
+          "coefficient": 0.005,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "id": "gravity_control",
+          "type": "slider",
+          "label": "Gravity Strength",
+          "bind": "environment.gravity.y",
+          "min": 0.0,
+          "max": 5.0,
+          "step": 0.1
+        },
+        {
+          "id": "air_resistance_toggle",
+          "type": "toggle",
+          "label": "Air Resistance",
+          "bind": "behaviors[0].enabled"
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 40
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "T = 2\u03c0\u221a(L/g)",
+        "PE = mgh",
+        "KE = \u00bdmv\u00b2"
+      ],
+      "related_concepts": [
+        "Simple Harmonic Motion",
+        "Restoring Force",
+        "Potential vs Kinetic Energy"
+      ],
+      "laws": [
+        "Law of Conservation of Energy",
+        "Newton's Second Law"
+      ],
+      "explanations": [
+        "The pendulum bob moves because gravity acts as a restoring force, pulling it back toward the center (equilibrium).",
+        "At the highest point of the swing, potential energy is at its maximum and kinetic energy is zero.",
+        "The period (time for one full swing) depends on the length of the string and the strength of gravity, but not on the mass of the bob."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "a6063f12-afbe-401b-aaa1-0f789030c62c",
+    "timestamp": "2026-05-12T11:52:16.760653+00:00",
+    "dsl": {
+      "meta": {
+        "id": "car_collision_001",
+        "title": "Elastic and Inelastic Collisions",
+        "topic": "Momentum and Impulse",
+        "difficulty": "Grade 11",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.01,
+        "world": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "background": {
+          "color": "#1e293b"
+        }
+      },
+      "objects": [
+        {
+          "id": "road",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 40.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 20.0,
+            "y": 14.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.8,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#334155",
+            "label": "Road Surface",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "car_a",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 3.0,
+            "height": 1.5
+          },
+          "position": {
+            "x": 5.0,
+            "y": 12.0
+          },
+          "velocity": {
+            "x": 15.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1200.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.2
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Car A (Red)",
+            "showVelocityVector": true
+          }
+        },
+        {
+          "id": "car_b",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 3.0,
+            "height": 1.5
+          },
+          "position": {
+            "x": 15.0,
+            "y": 12.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1200.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.2
+          },
+          "visual": {
+            "color": "#3b82f6",
+            "label": "Car B (Blue)",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "engine_thrust",
+          "type": "constant",
+          "target": "car_a",
+          "vector": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "enabled": true
+        }
+      ],
+      "constraints": [],
+      "behaviors": [
+        {
+          "id": "friction_loss",
+          "type": "drag",
+          "targets": [
+            "car_a",
+            "car_b"
+          ],
+          "coefficient": 0.05,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "id": "velocity_a_slider",
+          "type": "slider",
+          "label": "Initial Velocity Car A",
+          "bind": "objects[1].velocity.x",
+          "min": 0.0,
+          "max": 50.0,
+          "step": 5.0
+        },
+        {
+          "id": "mass_b_slider",
+          "type": "slider",
+          "label": "Mass Car B",
+          "bind": "objects[2].physics.mass",
+          "min": 500.0,
+          "max": 5000.0,
+          "step": 100.0
+        },
+        {
+          "id": "bounciness_toggle",
+          "type": "toggle",
+          "label": "Elastic Collision",
+          "bind": "objects[1].material.restitution"
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 20
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "m1v1 + m2v2 = m1v1' + m2v2'",
+        "KE = 1/2 mv^2"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Kinetic Energy Transfer",
+        "Inelastic vs Elastic Collisions"
+      ],
+      "laws": [
+        "Newton's Third Law",
+        "Law of Conservation of Momentum"
+      ],
+      "explanations": [
+        "In a collision, the total momentum of the system remains constant if no external forces act.",
+        "Kinetic energy is often lost to heat and sound in real-world car crashes (inelastic)."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Advanced",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "ca21720c-a455-4f0a-a9de-684659cb09b7",
+    "timestamp": "2026-05-12T11:52:08.099519+00:00",
+    "dsl": {
+      "meta": {
+        "id": "rocket_propulsion_gravitation",
+        "title": "Rocket Propulsion & Gravitational Escape",
+        "topic": "Dynamics and Gravitation",
+        "difficulty": "Grade 11",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.001,
+        "world": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "background": {
+          "color": "#020617"
+        }
+      },
+      "objects": [
+        {
+          "id": "launch_pad",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 14.5
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.8,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#475569",
+            "label": "Earth Surface",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "rocket_body",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 1.0,
+            "height": 3.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 12.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 10.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Rocket",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "thrust_force",
+          "type": "constantForce",
+          "target": "rocket_body",
+          "vector": {
+            "x": 0.0,
+            "y": -25.0
+          },
+          "enabled": false
+        }
+      ],
+      "constraints": [],
+      "behaviors": [
+        {
+          "id": "mass_decay",
+          "type": "variableMass",
+          "targets": [
+            "rocket_body"
+          ],
+          "coefficient": -0.05,
+          "enabled": false
+        }
+      ],
+      "interactions": [
+        {
+          "id": "ignition_button",
+          "type": "button",
+          "label": "Ignite Engines",
+          "bind": "forces[0].enabled"
+        },
+        {
+          "id": "thrust_slider",
+          "type": "slider",
+          "label": "Thrust Magnitude",
+          "bind": "forces[0].vector.y",
+          "min": -50.0,
+          "max": 0.0,
+          "step": 1.0
+        },
+        {
+          "id": "gravity_toggle",
+          "type": "toggle",
+          "label": "Zero Gravity Mode",
+          "bind": "environment.gravity.y"
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 30
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = dp/dt (Thrust = Rate of change of momentum)",
+        "v = u * ln(m0/m) (Tsiolkovsky Rocket Equation)",
+        "F_g = G(m1*m2)/r^2"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Newton's Third Law",
+        "Escape Velocity"
+      ],
+      "laws": [
+        "Newton's Third Law of Motion",
+        "Law of Universal Gravitation"
+      ],
+      "explanations": [
+        "Rocket propulsion works by ejecting mass at high velocity in the opposite direction of desired travel.",
+        "As fuel is consumed, the rocket's mass decreases, leading to higher acceleration for the same thrust."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Advanced",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "974f791f-ce60-4b0c-8b33-5c413ba5c192",
+    "timestamp": "2026-05-12T11:52:00.643832+00:00",
+    "dsl": {
+      "meta": {
+        "id": "pendulum_motion_v1",
+        "title": "Simple Harmonic Motion: The Pendulum",
+        "topic": "Oscillation",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.002,
+        "world": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "background": {
+          "color": "#0f172a"
+        }
+      },
+      "objects": [
+        {
+          "id": "ceiling_mount",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 4.0,
+            "height": 0.5
+          },
+          "position": {
+            "x": 10.0,
+            "y": 1.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "visual": {
+            "color": "#64748b",
+            "label": "Fixed Support",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "pendulum_bob",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.8
+          },
+          "position": {
+            "x": 14.0,
+            "y": 6.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 2.5,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.01,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Bob",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [
+        {
+          "id": "string_constraint",
+          "type": "rope",
+          "bodyA": "ceiling_mount",
+          "bodyB": "pendulum_bob",
+          "length": 7.0,
+          "stiffness": 1.0
+        }
+      ],
+      "behaviors": [
+        {
+          "id": "damping",
+          "type": "drag",
+          "targets": [
+            "pendulum_bob"
+          ],
+          "coefficient": 0.02,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "id": "gravity_control",
+          "type": "slider",
+          "label": "Gravity Strength",
+          "bind": "environment.gravity.y",
+          "min": 0.0,
+          "max": 5.0,
+          "step": 0.1
+        },
+        {
+          "id": "air_friction_toggle",
+          "type": "toggle",
+          "label": "Air Resistance",
+          "bind": "behaviors[0].enabled"
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 40
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "T = 2\u03c0\u221a(L/g)",
+        "PE = mgh",
+        "KE = 1/2mv\u00b2"
+      ],
+      "related_concepts": [
+        "Simple Harmonic Motion",
+        "Restoring Force",
+        "Potential and Kinetic Energy Exchange"
+      ],
+      "laws": [
+        "Law of Conservation of Energy",
+        "Newton's Second Law of Motion"
+      ],
+      "explanations": [
+        "A pendulum oscillates because gravity acts as a restoring force, pulling the bob back toward its equilibrium position.",
+        "The period (T) of a simple pendulum depends only on the length of the string and the acceleration due to gravity, not the mass of the bob.",
+        "At the highest point of the swing, potential energy is at its maximum. At the lowest point, kinetic energy is at its maximum."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "354687fe-69a0-488c-9182-fc05966da800",
+    "timestamp": "2026-05-12T11:51:02.529887+00:00",
+    "dsl": {
+      "meta": {
+        "id": "pendulum_motion_edu",
+        "title": "Simple Harmonic Motion: The Pendulum",
+        "topic": "Oscillation and Gravity",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.002,
+        "world": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "background": {
+          "color": "#0f172a"
+        }
+      },
+      "objects": [
+        {
+          "id": "pivot_point",
+          "type": "staticBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.2
+          },
+          "position": {
+            "x": 10.0,
+            "y": 2.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.0
+          },
+          "visual": {
+            "color": "#94a3b8",
+            "label": "Pivot",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "pendulum_bob",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.8
+          },
+          "position": {
+            "x": 15.0,
+            "y": 5.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 2.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.01,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Bob",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [
+        {
+          "id": "string_constraint",
+          "type": "rope",
+          "bodyA": "pivot_point",
+          "bodyB": "pendulum_bob",
+          "length": 6.0,
+          "stiffness": 1.0
+        }
+      ],
+      "behaviors": [
+        {
+          "id": "damping_force",
+          "type": "drag",
+          "targets": [
+            "pendulum_bob"
+          ],
+          "coefficient": 0.02,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "id": "gravity_control",
+          "type": "slider",
+          "label": "Gravity Strength",
+          "bind": "environment.gravity.y",
+          "min": 0.0,
+          "max": 5.0,
+          "step": 0.1
+        },
+        {
+          "id": "bob_mass",
+          "type": "slider",
+          "label": "Bob Mass",
+          "bind": "objects[1].physics.mass",
+          "min": 0.5,
+          "max": 10.0,
+          "step": 0.5
+        },
+        {
+          "id": "toggle_damping",
+          "type": "toggle",
+          "label": "Air Resistance",
+          "bind": "behaviors[0].enabled"
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 40
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "T = 2\u03c0\u221a(L/g)",
+        "PE = mgh",
+        "KE = 1/2mv\u00b2"
+      ],
+      "related_concepts": [
+        "Simple Harmonic Motion",
+        "Restoring Force",
+        "Conservation of Mechanical Energy"
+      ],
+      "laws": [
+        "Newton's Second Law",
+        "Law of Conservation of Energy"
+      ],
+      "explanations": [
+        "A pendulum swings because gravity acts as a restoring force, pulling the bob back toward the center (equilibrium).",
+        "The period (time for one swing) depends on the length of the string and gravity, but is independent of the mass of the bob.",
+        "At the highest point, potential energy is maximum; at the lowest point, kinetic energy is maximum."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "2320b752-835c-43f5-8883-170b01a606da",
+    "timestamp": "2026-05-12T11:50:17.825761+00:00",
+    "dsl": {
+      "meta": {
+        "id": "car_collision_001",
+        "title": "Elastic and Inelastic Car Collisions",
+        "topic": "Momentum and Impulse",
+        "difficulty": "Grade 11",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.01,
+        "world": {
+          "width": 800.0,
+          "height": 400.0
+        },
+        "background": {
+          "color": "#1e293b"
+        }
+      },
+      "objects": [
+        {
+          "id": "road",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 8.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#475569",
+            "label": "Road Surface",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "car_a",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 4.0,
+            "y": 7.0
+          },
+          "velocity": {
+            "x": 5.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Car A (Red)",
+            "showVelocityVector": true
+          }
+        },
+        {
+          "id": "car_b",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 12.0,
+            "y": 7.0
+          },
+          "velocity": {
+            "x": -2.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1200.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#3b82f6",
+            "label": "Car B (Blue)",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [],
+      "behaviors": [],
+      "interactions": [
+        {
+          "id": "mass_a_slider",
+          "type": "slider",
+          "label": "Mass Car A (kg)",
+          "bind": "objects[1].physics.mass",
+          "min": 500.0,
+          "max": 3000.0,
+          "step": 100.0
+        },
+        {
+          "id": "vel_a_slider",
+          "type": "slider",
+          "label": "Initial Velocity A (m/s)",
+          "bind": "objects[1].velocity.x",
+          "min": 0.0,
+          "max": 20.0,
+          "step": 1.0
+        },
+        {
+          "id": "restitution_slider",
+          "type": "slider",
+          "label": "Bounciness (Restitution)",
+          "bind": "objects[1].material.restitution",
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.1
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 40
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "m1v1 + m2v2 = m1v1' + m2v2'",
+        "KE = 1/2 mv^2"
+      ],
+      "related_concepts": [
+        "Conservation of Momentum",
+        "Elastic vs Inelastic Collisions",
+        "Impulse"
+      ],
+      "laws": [
+        "Newton's Third Law",
+        "Law of Conservation of Momentum"
+      ],
+      "explanations": [
+        "In a closed system, the total momentum before a collision equals the total momentum after.",
+        "Kinetic energy is conserved in perfectly elastic collisions but lost as heat/sound in inelastic ones."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Advanced",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "505e3f0f-d362-43ef-8c9e-326c15298c68",
+    "timestamp": "2026-05-12T11:50:01.763290+00:00",
+    "dsl": {
+      "meta": {
+        "id": "pendulum_motion_edu",
+        "title": "Simple Harmonic Motion: The Pendulum",
+        "topic": "Oscillation and Gravity",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.002,
+        "world": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "background": {
+          "color": "#0f172a"
+        }
+      },
+      "objects": [
+        {
+          "id": "pivot_point",
+          "type": "staticBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.2
+          },
+          "position": {
+            "x": 10.0,
+            "y": 2.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.0
+          },
+          "visual": {
+            "color": "#94a3b8",
+            "label": "Pivot",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "pendulum_bob",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.8
+          },
+          "position": {
+            "x": 15.0,
+            "y": 2.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 2.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.01,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Bob",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [
+        {
+          "id": "string_constraint",
+          "type": "rope",
+          "bodyA": "pivot_point",
+          "bodyB": "pendulum_bob",
+          "length": 5.0,
+          "stiffness": 1.0
+        }
+      ],
+      "behaviors": [
+        {
+          "id": "damping_force",
+          "type": "drag",
+          "targets": [
+            "pendulum_bob"
+          ],
+          "coefficient": 0.02,
+          "enabled": true
+        }
+      ],
+      "interactions": [
+        {
+          "id": "gravity_control",
+          "type": "slider",
+          "label": "Gravity Strength",
+          "bind": "environment.gravity.y",
+          "min": 0.0,
+          "max": 5.0,
+          "step": 0.1
+        },
+        {
+          "id": "mass_control",
+          "type": "slider",
+          "label": "Bob Mass",
+          "bind": "objects[1].physics.mass",
+          "min": 0.5,
+          "max": 10.0,
+          "step": 0.5
+        },
+        {
+          "id": "toggle_damping",
+          "type": "toggle",
+          "label": "Air Resistance",
+          "bind": "behaviors[0].enabled",
+          "step": 0.1
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 40
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "T = 2\u03c0\u221a(L/g)",
+        "PE = mgh",
+        "KE = 1/2mv\u00b2"
+      ],
+      "related_concepts": [
+        "Simple Harmonic Motion (SHM)",
+        "Restoring Force",
+        "Conservation of Mechanical Energy",
+        "Period and Frequency"
+      ],
+      "laws": [
+        "Newton's Second Law of Motion",
+        "Law of Conservation of Energy"
+      ],
+      "explanations": [
+        "A pendulum oscillates because gravity acts as a restoring force, pulling the bob back toward the equilibrium position.",
+        "The period (T) of a simple pendulum depends only on the length of the string and the acceleration due to gravity, not on the mass of the bob.",
+        "At the highest point of the swing, potential energy is at its maximum and kinetic energy is zero. At the lowest point, kinetic energy is at its maximum."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "b44776c6-a740-472e-a8ad-4ae57582834f",
+    "timestamp": "2026-05-12T11:39:03.415697+00:00",
+    "dsl": {
+      "meta": {
+        "id": "rocket_gravitation_sim",
+        "title": "Rocket Launch and Gravitation",
+        "topic": "Classical Mechanics",
+        "difficulty": "Grade 10",
+        "version": "1.1"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 9.8
+        },
+        "airResistance": 0.01,
+        "groundFriction": 0.0,
+        "world": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "background": {
+          "color": "#020617"
+        }
+      },
+      "objects": [
+        {
+          "id": "ground",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 14.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.8,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#1e293b",
+            "label": "Launch Pad",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "rocket_body",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 1.0,
+            "height": 3.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 11.5
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 5.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Rocket",
+            "showVelocityVector": false
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "thrust",
+          "type": "force",
+          "target": "rocket_body",
+          "vector": {
+            "x": 0.0,
+            "y": -60.0
+          },
+          "enabled": false
+        }
+      ],
+      "constraints": [],
+      "behaviors": [
+        {
+          "id": "fuel_consumption",
+          "type": "mass_decay",
+          "targets": [
+            "rocket_body"
+          ],
+          "enabled": false
+        }
+      ],
+      "interactions": [
+        {
+          "id": "ignition",
+          "type": "toggle",
+          "label": "Engine Thrust",
+          "bind": "forces[0].enabled",
+          "step": 0.1
+        },
+        {
+          "id": "gravity_control",
+          "type": "slider",
+          "label": "Planetary Gravity",
+          "bind": "environment.gravity.y",
+          "min": 1.6,
+          "max": 20.0,
+          "step": 0.1
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 40
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F_net = F_thrust - (m * g)",
+        "F = G * (m1 * m2) / r^2",
+        "v = u + at"
+      ],
+      "related_concepts": [
+        "Weight vs Mass",
+        "Escape Velocity",
+        "Thrust-to-Weight Ratio"
+      ],
+      "laws": [
+        "Newton's Universal Law of Gravitation",
+        "Newton's Third Law of Motion"
+      ],
+      "explanations": [
+        "A rocket must generate thrust greater than the force of gravity (weight) to achieve lift-off.",
+        "Gravity acts as a downward force pulling the rocket toward the center of the Earth.",
+        "As the rocket moves further from Earth, the gravitational pull decreases according to the inverse-square law."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
+    "id": "fd22f0b3-6239-46a7-b3c8-2525af21e36a",
+    "timestamp": "2026-05-12T11:34:16.176913+00:00",
+    "dsl": {
+      "meta": {
+        "id": "car_collision_physics",
+        "title": "Elastic and Inelastic Car Collisions",
+        "topic": "Momentum and Impulse",
+        "difficulty": "Grade 10",
+        "version": "1.1"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 9.8
+        },
+        "airResistance": 0.01,
+        "groundFriction": 0.0,
+        "world": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "background": {
+          "color": "#1e293b"
+        }
+      },
+      "objects": [
+        {
+          "id": "ground",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 14.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.1
+          },
+          "visual": {
+            "color": "#475569",
+            "label": "Road",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "car_a",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 4.0,
+            "y": 13.0
+          },
+          "velocity": {
+            "x": 5.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Car A (Red)",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "car_b",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 12.0,
+            "y": 13.0
+          },
+          "velocity": {
+            "x": -2.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1500.0,
+            "movable": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#3b82f6",
+            "label": "Car B (Blue)",
+            "showVelocityVector": false
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [],
+      "behaviors": [],
+      "interactions": [
+        {
+          "id": "mass_slider_a",
+          "type": "slider",
+          "label": "Mass Car A (kg)",
+          "bind": "objects[1].physics.mass",
+          "min": 500.0,
+          "max": 5000.0,
+          "step": 100.0
+        },
+        {
+          "id": "friction_slider",
+          "type": "slider",
+          "label": "Road Friction",
+          "bind": "objects[0].material.friction",
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.05
+        },
+        {
+          "id": "restitution_slider",
+          "type": "slider",
+          "label": "Bounciness (Elasticity)",
+          "bind": "objects[1].material.restitution",
+          "min": 0.0,
+          "max": 1.0,
+          "step": 0.1
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 40
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "p = mv",
+        "m1u1 + m2u2 = m1v1 + m2v2",
+        "F\u0394t = \u0394p"
+      ],
+      "related_concepts": [
+        "Linear Momentum",
+        "Impulse",
+        "Coefficient of Restitution",
+        "Kinetic Energy Transfer"
+      ],
+      "laws": [
+        "Law of Conservation of Momentum",
+        "Newton's Third Law of Motion"
+      ],
+      "explanations": [
+        "In a collision, the total momentum of the system remains constant if no external forces act on it.",
+        "Friction on the road acts as an external force that eventually brings the cars to a stop after impact.",
+        "The 'restitution' value determines if the collision is elastic (bouncy) or inelastic (sticky)."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics - Mechanics",
+      "difficulty": "Intermediate",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
     "id": "d7267ef3-0402-41c4-96e9-c3c7a29aa525",
     "timestamp": "2026-05-12T10:07:28.153385+00:00",
     "sources": [

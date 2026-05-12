@@ -1,24 +1,23 @@
 {
-  "id": "b44776c6-a740-472e-a8ad-4ae57582834f",
-  "timestamp": "2026-05-12T11:39:03.415697+00:00",
+  "id": "60957144-16ff-4c7b-b830-df027a2df237",
+  "timestamp": "2026-05-12T11:54:17.035730+00:00",
   "dsl": {
     "meta": {
-      "id": "rocket_gravitation_sim",
-      "title": "Rocket Launch and Gravitation",
-      "topic": "Classical Mechanics",
-      "difficulty": "Grade 10",
-      "version": "1.1"
+      "id": "rocket_propulsion_gravitation",
+      "title": "Rocket Propulsion & Gravitational Escape",
+      "topic": "Dynamics and Gravitation",
+      "difficulty": "Grade 11",
+      "version": "1.0"
     },
     "environment": {
       "gravity": {
         "x": 0.0,
-        "y": 9.8
+        "y": 0.5
       },
       "airResistance": 0.01,
-      "groundFriction": 0.0,
       "world": {
         "width": 800.0,
-        "height": 600.0
+        "height": 1200.0
       },
       "background": {
         "color": "#020617"
@@ -26,16 +25,16 @@
     },
     "objects": [
       {
-        "id": "ground",
+        "id": "launch_pad",
         "type": "staticBody",
         "shape": {
           "type": "rectangle",
           "width": 20.0,
-          "height": 2.0
+          "height": 1.0
         },
         "position": {
           "x": 10.0,
-          "y": 14.0
+          "y": 28.0
         },
         "velocity": {
           "x": 0.0,
@@ -44,7 +43,6 @@
         "rotation": 0.0,
         "physics": {
           "mass": 0.0,
-          "movable": true,
           "isSensor": false
         },
         "material": {
@@ -52,8 +50,8 @@
           "restitution": 0.1
         },
         "visual": {
-          "color": "#1e293b",
-          "label": "Launch Pad",
+          "color": "#475569",
+          "label": "Earth Surface",
           "showVelocityVector": false
         }
       },
@@ -67,7 +65,7 @@
         },
         "position": {
           "x": 10.0,
-          "y": 11.5
+          "y": 25.0
         },
         "velocity": {
           "x": 0.0,
@@ -75,8 +73,7 @@
         },
         "rotation": 0.0,
         "physics": {
-          "mass": 5.0,
-          "movable": true,
+          "mass": 10.0,
           "isSensor": false
         },
         "material": {
@@ -86,18 +83,18 @@
         "visual": {
           "color": "#ef4444",
           "label": "Rocket",
-          "showVelocityVector": false
+          "showVelocityVector": true
         }
       }
     ],
     "forces": [
       {
-        "id": "thrust",
-        "type": "force",
+        "id": "thrust_force",
+        "type": "constantForce",
         "target": "rocket_body",
         "vector": {
           "x": 0.0,
-          "y": -60.0
+          "y": -15.0
         },
         "enabled": false
       }
@@ -105,62 +102,67 @@
     "constraints": [],
     "behaviors": [
       {
-        "id": "fuel_consumption",
-        "type": "mass_decay",
+        "id": "mass_decay",
+        "type": "variableMass",
         "targets": [
           "rocket_body"
         ],
+        "coefficient": -0.05,
         "enabled": false
       }
     ],
     "interactions": [
       {
-        "id": "ignition",
-        "type": "toggle",
-        "label": "Engine Thrust",
-        "bind": "forces[0].enabled",
-        "step": 0.1
+        "id": "ignition_button",
+        "type": "button",
+        "label": "Ignite Engines",
+        "bind": "forces[0].enabled"
       },
       {
-        "id": "gravity_control",
+        "id": "thrust_slider",
         "type": "slider",
-        "label": "Planetary Gravity",
-        "bind": "environment.gravity.y",
-        "min": 1.6,
-        "max": 20.0,
-        "step": 0.1
+        "label": "Thrust Magnitude",
+        "bind": "forces[0].vector.y",
+        "min": -50.0,
+        "max": 0.0,
+        "step": 1.0
+      },
+      {
+        "id": "gravity_toggle",
+        "type": "toggle",
+        "label": "Zero Gravity",
+        "bind": "environment.gravity.y"
       }
     ],
     "runtime": {
       "engine": "matter-js",
       "fps": 60,
-      "scale": 40
+      "scale": 30
     }
   },
   "knowledge": {
     "relevant_formulas": [
-      "F_net = F_thrust - (m * g)",
-      "F = G * (m1 * m2) / r^2",
-      "v = u + at"
+      "F = dp/dt (Newton's Second Law)",
+      "v = u * ln(m0/m) (Tsiolkovsky Rocket Equation)",
+      "F_g = G(m1*m2)/r^2"
     ],
     "related_concepts": [
-      "Weight vs Mass",
+      "Conservation of Momentum",
       "Escape Velocity",
-      "Thrust-to-Weight Ratio"
+      "Variable Mass Systems"
     ],
     "laws": [
-      "Newton's Universal Law of Gravitation",
-      "Newton's Third Law of Motion"
+      "Newton's Third Law of Motion",
+      "Law of Universal Gravitation"
     ],
     "explanations": [
-      "A rocket must generate thrust greater than the force of gravity (weight) to achieve lift-off.",
-      "Gravity acts as a downward force pulling the rocket toward the center of the Earth.",
-      "As the rocket moves further from Earth, the gravitational pull decreases according to the inverse-square law."
+      "Rocket propulsion is an application of Newton's Third Law: the downward ejection of exhaust gases creates an upward reaction force (thrust).",
+      "As fuel is consumed, the rocket's mass decreases, leading to higher acceleration for the same amount of thrust."
     ]
   },
   "metadata": {
     "subject": "Physics",
-    "difficulty": "Intermediate",
+    "difficulty": "Advanced",
     "simulation_type": "Matter.js-RigidBody"
   }
 }

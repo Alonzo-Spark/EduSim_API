@@ -1,47 +1,56 @@
-import json
 from app.src.modules.simulation_synthesis.service import generate_simulation_synthesis
+import json
+import os
 
-def test_generation():
-    prompt = "Explain me collision using cars as an example add sliders for mass and friction"
-    
-    print(f"Testing Prompt: {prompt}")
+def test_generation(prompt, filename="v1_test_output.json"):
+    print(f"\nTesting Prompt: {prompt}")
     try:
-        # This calls the service which uses your updated prompt and validator
         result = generate_simulation_synthesis(prompt)
         
-        print("\n✅ GENERATION SUCCESSFUL")
-        print(f"Simulation ID: {result['id']}")
+        # Verify absence of deprecated fields
+        def check_deprecated(d):
+            if isinstance(d, dict):
+                for k, v in d.items():
+                    if k in ["movable", "groundFriction"]:
+                        raise ValueError(f"CRITICAL: Found deprecated field '{k}'")
+                    check_deprecated(v)
+            elif isinstance(d, list):
+                for item in d:
+                    check_deprecated(item)
+
+        check_deprecated(result)
         
-        # Verify New Structure
+        print("\n✅ GENERATION SUCCESSFUL")
+        print(f"Simulation ID: {result.get('id')}")
+        
+        # DSL structure check
+        dsl = result.get("dsl", {})
         print("\n--- ARCHITECTURE VERIFICATION ---")
         print(f"Has DSL: {'dsl' in result}")
         print(f"Has Knowledge: {'knowledge' in result}")
         print(f"Has Metadata: {'metadata' in result}")
-
-        # Verify DSL
-        dsl = result['dsl']
-        print("\n--- DSL VERIFICATION ---")
-        print(f"Title: {dsl['meta']['title']}")
-        print(f"Environment Gravity: {dsl['environment']['gravity']}")
-        print(f"Objects Count: {len(dsl['objects'])}")
-        print(f"Forces Count: {len(dsl['forces'])}")
         
-        # Verify Knowledge
-        knowledge = result['knowledge']
-        print("\n--- KNOWLEDGE VERIFICATION ---")
-        print(f"Formulas: {knowledge['relevant_formulas']}")
-        print(f"Explanations: {knowledge['explanations']}")
-
-        # Final check: Save to a local file for you to inspect manually
-        with open("v1_test_output.json", "w") as f:
+        print("\n--- DSL VERIFICATION ---")
+        print(f"Title: {dsl.get('meta', {}).get('title')}")
+        print(f"Environment Gravity: {dsl.get('environment', {}).get('gravity')}")
+        print(f"Objects Count: {len(dsl.get('objects', []))}")
+        print(f"Constraints Count: {len(dsl.get('constraints', []))}")
+        
+        with open(filename, "w") as f:
             json.dump(result, f, indent=2)
-        print("\nFull output saved to 'v1_test_output.json' for inspection.")
-
+            
+        return True
     except Exception as e:
         print(f"\n❌ GENERATION FAILED")
         print(f"Error: {str(e)}")
-        import traceback
-        traceback.print_exc()
+        return False
 
 if __name__ == "__main__":
-    test_generation()
+    prompts = [
+        "Explain me pendulum motion",
+        "Rocket propulsion and gravitation",
+        "Car collision on a road"
+    ]
+    
+    for i, p in enumerate(prompts):
+        test_generation(p, f"v1_test_{i}.json")
