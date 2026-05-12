@@ -24,13 +24,13 @@ class Shape(BaseModel):
     radius: Optional[float] = None
 
 class PhysicsProps(BaseModel):
-    mass: float
+    mass: float = 1.0
     movable: bool = True
     isSensor: bool = False
 
 class MaterialProps(BaseModel):
-    friction: float
-    restitution: float
+    friction: float = 0.5
+    restitution: float = 0.5
 
 class VisualProps(BaseModel):
     color: str
@@ -44,8 +44,8 @@ class SimulationObject(BaseModel):
     velocity: Optional[Vector2D] = None
     acceleration: Optional[Vector2D] = None
     rotation: float = 0.0
-    physics: PhysicsProps
-    material: MaterialProps
+    physics: PhysicsProps = Field(default_factory=PhysicsProps)
+    material: MaterialProps = Field(default_factory=MaterialProps)
     visual: VisualProps
     initialState: Optional[Dict[str, Any]] = None
 

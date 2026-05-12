@@ -68,21 +68,6 @@ def _write_store(items: list[dict[str, Any]]):
         json.dump(items, file, indent=2, ensure_ascii=True)
 
 
-def _build_sources(chunks: list[dict[str, Any]]):
-    sources = []
-    seen = set()
-
-    for chunk in chunks:
-        raw_source = chunk.get("source", "Textbook")
-        source = os.path.basename(raw_source.replace("\\", "/"))
-        page = chunk.get("page", "?")
-        key = f"{source}:{page}"
-        if key in seen:
-            continue
-        seen.add(key)
-        sources.append({"source": source, "page": page})
-
-    return sources
 
 
 def generate_simulation_synthesis(prompt: str, topic: str | None = None):
@@ -114,7 +99,6 @@ def generate_simulation_synthesis(prompt: str, topic: str | None = None):
     item = {
         "id": simulation_id,
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "sources": _build_sources(chunks),
         **valid_response
     }
 
@@ -198,7 +182,6 @@ def generate_simulation_synthesis_stream(prompt: str, topic: str | None = None):
         item = {
             "id": simulation_id,
             "timestamp": datetime.now(timezone.utc).isoformat(),
-            "sources": _build_sources(chunks),
             **valid_response
         }
 
