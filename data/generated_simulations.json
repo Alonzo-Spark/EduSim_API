@@ -1,5 +1,1623 @@
 [
   {
+    "id": "a295ca1e-2aa5-4a79-a382-aeef3e07bb58",
+    "timestamp": "2026-05-13T08:28:03.942893+00:00",
+    "dsl": {
+      "meta": {
+        "id": "inertia_force_block",
+        "title": "Inertia and Newton's Second Law",
+        "topic": "Dynamics",
+        "simulationType": "Mechanics",
+        "difficulty": "Grade 8-10",
+        "version": "2.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.0,
+        "world": {
+          "width": 20.0,
+          "height": 10.0
+        },
+        "background": {
+          "color": "#0f172a"
+        },
+        "units": {
+          "length": "m",
+          "mass": "kg",
+          "time": "s",
+          "force": "N",
+          "energy": "J"
+        },
+        "boundaries": {
+          "enabled": true
+        }
+      },
+      "objects": [
+        {
+          "id": "table_surface",
+          "category": "environment",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 9.5
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#475569",
+            "label": "Table Surface",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        },
+        {
+          "id": "block_1",
+          "category": "physics-object",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 5.0,
+            "y": 8.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 5.0,
+            "density": 1.0,
+            "fixedRotation": true,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.1
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#f59e0b",
+            "label": "Block",
+            "showLabel": true,
+            "showVelocityVector": true,
+            "showTrail": false
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "applied_force",
+          "type": "constantForce",
+          "target": "block_1",
+          "vector": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "active": true
+        }
+      ],
+      "constraints": [],
+      "behaviors": [],
+      "formulaBindings": [
+        {
+          "formula": "F = ma",
+          "variables": {
+            "F": {
+              "path": "forces[0].vector.x",
+              "type": "independent"
+            },
+            "m": {
+              "path": "objects[1].physics.mass",
+              "type": "independent"
+            },
+            "a": {
+              "path": "runtime.calculated.accelerationX",
+              "type": "dependent"
+            }
+          }
+        }
+      ],
+      "controls": {
+        "parameters": [
+          {
+            "id": "mass_slider",
+            "type": "slider",
+            "label": "Mass of Block",
+            "symbol": "m",
+            "formulaReferences": [
+              "F = ma"
+            ],
+            "bind": "objects[1].physics.mass",
+            "min": 1.0,
+            "max": 50.0,
+            "step": 1.0
+          },
+          {
+            "id": "force_slider",
+            "type": "slider",
+            "label": "Applied Force",
+            "symbol": "F",
+            "formulaReferences": [
+              "F = ma"
+            ],
+            "bind": "forces[0].vector.x",
+            "min": 0.0,
+            "max": 100.0,
+            "step": 5.0
+          }
+        ],
+        "actions": [
+          {
+            "id": "start_btn",
+            "type": "button",
+            "label": "Start",
+            "action": "startSimulation"
+          },
+          {
+            "id": "reset_btn",
+            "type": "button",
+            "label": "Reset",
+            "action": "resetSimulation"
+          }
+        ]
+      },
+      "observables": [
+        {
+          "id": "obs_velocity",
+          "label": "Velocity",
+          "source": "objects[1].velocity.x",
+          "unit": "m/s"
+        },
+        {
+          "id": "obs_accel",
+          "label": "Acceleration",
+          "source": "runtime.calculated.accelerationX",
+          "unit": "m/s\u00b2"
+        },
+        {
+          "id": "obs_mass",
+          "label": "Inertia (Mass)",
+          "source": "objects[1].physics.mass",
+          "unit": "kg"
+        }
+      ],
+      "events": [],
+      "runtime": {
+        "engine": "matter-js",
+        "renderer": "pixi-js",
+        "fps": 60,
+        "scale": 40,
+        "paused": true,
+        "allowDragging": true,
+        "allowReset": true,
+        "debug": false,
+        "calculated": {
+          "accelerationX": 0.0,
+          "netForce": 0.0
+        }
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = ma",
+        "Inertia \u221d Mass"
+      ],
+      "related_concepts": [
+        "Newton's First Law",
+        "Newton's Second Law",
+        "Inertia",
+        "Net Force"
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "chapter": "Laws of Motion",
+      "difficulty": "Beginner",
+      "curriculum": "General Science",
+      "simulationCategory": "Mechanics",
+      "renderer": "Matter.js",
+      "tags": [
+        "Inertia",
+        "Force",
+        "Mass",
+        "Acceleration"
+      ]
+    }
+  },
+  {
+    "id": "249f0f0c-a344-4e1f-94ae-dfb2ac0dc207",
+    "timestamp": "2026-05-13T07:22:45.350598+00:00",
+    "dsl": {
+      "meta": {
+        "id": "pendulum_energy_conversion",
+        "title": "Pendulum Energy Transformation",
+        "topic": "Conservation of Energy",
+        "simulationType": "Mechanics",
+        "difficulty": "Grade 9-12",
+        "version": "2.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 9.8
+        },
+        "airResistance": 0.0,
+        "world": {
+          "width": 20.0,
+          "height": 15.0
+        },
+        "background": {
+          "color": "#0f172a"
+        },
+        "units": {
+          "length": "m",
+          "mass": "kg",
+          "time": "s",
+          "force": "N",
+          "energy": "J"
+        },
+        "boundaries": {
+          "enabled": true
+        }
+      },
+      "objects": [
+        {
+          "id": "bob_1",
+          "category": "physics-object",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.5
+          },
+          "position": {
+            "x": 13.0,
+            "y": 5.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 2.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Pendulum Bob",
+            "showLabel": true,
+            "showVelocityVector": true,
+            "showTrail": true
+          }
+        },
+        {
+          "id": "anchor_point",
+          "category": "static-structure",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 1.0,
+            "height": 0.2
+          },
+          "position": {
+            "x": 10.0,
+            "y": 2.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#94a3b8",
+            "label": "Pivot",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [
+        {
+          "id": "string_1",
+          "type": "rope",
+          "bodyA": "anchor_point",
+          "bodyB": "bob_1",
+          "length": 5.0,
+          "stiffness": 1.0,
+          "visual": {
+            "color": "#ffffff",
+            "lineWidth": 2
+          }
+        }
+      ],
+      "behaviors": [
+        {
+          "id": "drag_behavior",
+          "type": "drag",
+          "targets": [
+            "bob_1"
+          ],
+          "coefficient": 0.0,
+          "active": false
+        }
+      ],
+      "formulaBindings": [
+        {
+          "formula": "PE = mgh",
+          "variables": {
+            "m": {
+              "path": "objects[0].physics.mass",
+              "type": "independent"
+            },
+            "g": {
+              "path": "environment.gravity.y",
+              "type": "independent"
+            },
+            "h": {
+              "path": "objects[0].position.y",
+              "type": "dependent"
+            },
+            "PE": {
+              "path": "runtime.calculated.potentialEnergy",
+              "type": "dependent"
+            }
+          }
+        },
+        {
+          "formula": "KE = 1/2mv\u00b2",
+          "variables": {
+            "m": {
+              "path": "objects[0].physics.mass",
+              "type": "independent"
+            },
+            "v": {
+              "path": "objects[0].velocity.magnitude",
+              "type": "dependent"
+            },
+            "KE": {
+              "path": "runtime.calculated.kineticEnergy",
+              "type": "dependent"
+            }
+          }
+        },
+        {
+          "formula": "T = 2\u03c0\u221a(L/g)",
+          "variables": {
+            "L": {
+              "path": "constraints[0].length",
+              "type": "independent"
+            },
+            "g": {
+              "path": "environment.gravity.y",
+              "type": "independent"
+            },
+            "T": {
+              "path": "runtime.calculated.period",
+              "type": "dependent"
+            }
+          }
+        }
+      ],
+      "controls": {
+        "parameters": [
+          {
+            "id": "mass_slider",
+            "type": "slider",
+            "label": "Bob Mass",
+            "symbol": "m",
+            "formulaReferences": [],
+            "bind": "objects[0].physics.mass",
+            "min": 0.5,
+            "max": 10.0,
+            "step": 0.5
+          },
+          {
+            "id": "length_slider",
+            "type": "slider",
+            "label": "String Length",
+            "symbol": "L",
+            "formulaReferences": [],
+            "bind": "constraints[0].length",
+            "min": 2.0,
+            "max": 8.0,
+            "step": 0.1
+          },
+          {
+            "id": "gravity_slider",
+            "type": "slider",
+            "label": "Gravity",
+            "symbol": "g",
+            "formulaReferences": [],
+            "bind": "environment.gravity.y",
+            "min": 1.0,
+            "max": 20.0,
+            "step": 0.1
+          },
+          {
+            "id": "air_res_toggle",
+            "type": "toggle",
+            "label": "Air Resistance",
+            "formulaReferences": [],
+            "bind": "behaviors[0].active"
+          }
+        ],
+        "actions": [
+          {
+            "id": "start_btn",
+            "type": "button",
+            "label": "Start",
+            "action": "startSimulation"
+          },
+          {
+            "id": "pause_btn",
+            "type": "button",
+            "label": "Pause",
+            "action": "togglePause"
+          },
+          {
+            "id": "reset_btn",
+            "type": "button",
+            "label": "Reset",
+            "action": "resetSimulation"
+          }
+        ]
+      },
+      "observables": [
+        {
+          "id": "ke_val",
+          "label": "Kinetic Energy",
+          "source": "runtime.calculated.kineticEnergy",
+          "unit": "J"
+        },
+        {
+          "id": "pe_val",
+          "label": "Potential Energy",
+          "source": "runtime.calculated.potentialEnergy",
+          "unit": "J"
+        },
+        {
+          "id": "vel_val",
+          "label": "Velocity",
+          "source": "objects[0].velocity.magnitude",
+          "unit": "m/s"
+        },
+        {
+          "id": "period_val",
+          "label": "Theoretical Period",
+          "source": "runtime.calculated.period",
+          "unit": "s"
+        }
+      ],
+      "events": [],
+      "runtime": {
+        "engine": "matter-js",
+        "renderer": "pixi-js",
+        "fps": 60,
+        "scale": 50,
+        "paused": true,
+        "allowDragging": true,
+        "allowReset": true,
+        "debug": false,
+        "calculated": {
+          "kineticEnergy": 0.0,
+          "potentialEnergy": 0.0,
+          "period": 0.0,
+          "totalEnergy": 0.0
+        }
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "PE = mgh",
+        "KE = 1/2mv\u00b2",
+        "E_total = KE + PE",
+        "T = 2\u03c0\u221a(L/g)"
+      ],
+      "related_concepts": [
+        "Conservation of Mechanical Energy",
+        "Simple Harmonic Motion",
+        "Gravitational Potential Energy",
+        "Restoring Force"
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "chapter": "Work, Power, and Energy",
+      "difficulty": "Intermediate",
+      "curriculum": "General Science / Physics",
+      "simulationCategory": "Energy Transformation",
+      "renderer": "Matter.js",
+      "tags": [
+        "Pendulum",
+        "Kinetic Energy",
+        "Potential Energy",
+        "Mechanics"
+      ]
+    }
+  },
+  {
+    "id": "e0a732f6-741a-4037-ad79-8f3ecbdc3669",
+    "timestamp": "2026-05-13T07:22:32.420139+00:00",
+    "dsl": {
+      "meta": {
+        "id": "mass_gravity_relationship",
+        "title": "Mass and Gravity: Free Fall Simulation",
+        "topic": "Gravitational Acceleration",
+        "simulationType": "Mechanics",
+        "difficulty": "Grade 9-10",
+        "version": "2.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.0,
+        "world": {
+          "width": 20.0,
+          "height": 15.0
+        },
+        "background": {
+          "color": "#0f172a"
+        },
+        "units": {
+          "length": "m",
+          "mass": "kg",
+          "time": "s",
+          "force": "N",
+          "energy": "J"
+        },
+        "boundaries": {
+          "enabled": true
+        }
+      },
+      "objects": [
+        {
+          "id": "falling_ball",
+          "category": "physics-object",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.5
+          },
+          "position": {
+            "x": 10.0,
+            "y": 2.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 5.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.5
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Falling Ball",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        },
+        {
+          "id": "ground",
+          "category": "environment",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 14.5
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.1
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#334155",
+            "label": "Ground",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [],
+      "behaviors": [],
+      "formulaBindings": [
+        {
+          "formula": "W = mg",
+          "variables": {
+            "m": {
+              "path": "objects[0].physics.mass",
+              "type": "independent"
+            },
+            "g": {
+              "path": "environment.gravity.y",
+              "type": "independent"
+            },
+            "W": {
+              "path": "runtime.calculated.weightForce",
+              "type": "dependent"
+            }
+          }
+        },
+        {
+          "formula": "PE = mgh",
+          "variables": {
+            "m": {
+              "path": "objects[0].physics.mass",
+              "type": "independent"
+            },
+            "g": {
+              "path": "environment.gravity.y",
+              "type": "independent"
+            },
+            "h": {
+              "path": "objects[0].position.y",
+              "type": "dependent"
+            },
+            "PE": {
+              "path": "runtime.calculated.potentialEnergy",
+              "type": "dependent"
+            }
+          }
+        }
+      ],
+      "controls": {
+        "parameters": [
+          {
+            "id": "mass_slider",
+            "type": "slider",
+            "label": "Mass of Ball",
+            "symbol": "m",
+            "formulaReferences": [],
+            "bind": "objects[0].physics.mass",
+            "min": 0.5,
+            "max": 50.0,
+            "step": 0.5
+          },
+          {
+            "id": "gravity_slider",
+            "type": "slider",
+            "label": "Gravity Strength",
+            "symbol": "g",
+            "formulaReferences": [],
+            "bind": "environment.gravity.y",
+            "min": 0.0,
+            "max": 20.0,
+            "step": 0.1
+          }
+        ],
+        "actions": [
+          {
+            "id": "start_btn",
+            "type": "button",
+            "label": "Drop Ball",
+            "action": "startSimulation"
+          },
+          {
+            "id": "reset_btn",
+            "type": "button",
+            "label": "Reset",
+            "action": "resetSimulation"
+          }
+        ]
+      },
+      "observables": [
+        {
+          "id": "weight",
+          "label": "Weight (Force)",
+          "source": "runtime.calculated.weightForce",
+          "unit": "N"
+        },
+        {
+          "id": "velocity_y",
+          "label": "Vertical Velocity",
+          "source": "objects[0].velocity.y",
+          "unit": "m/s"
+        },
+        {
+          "id": "pot_energy",
+          "label": "Potential Energy",
+          "source": "runtime.calculated.potentialEnergy",
+          "unit": "J"
+        }
+      ],
+      "events": [],
+      "runtime": {
+        "engine": "matter-js",
+        "renderer": "pixi-js",
+        "fps": 60,
+        "scale": 40,
+        "paused": true,
+        "allowDragging": true,
+        "allowReset": true,
+        "debug": false,
+        "calculated": {
+          "weightForce": 0.0,
+          "potentialEnergy": 0.0
+        }
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "W = mg",
+        "PE = mgh",
+        "v = u + at"
+      ],
+      "related_concepts": [
+        "Gravitational Force",
+        "Free Fall",
+        "Mass vs Weight",
+        "Acceleration due to Gravity"
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "chapter": "Gravitation",
+      "difficulty": "Beginner",
+      "curriculum": "General Science",
+      "simulationCategory": "Mechanics",
+      "renderer": "Matter.js",
+      "tags": [
+        "Gravity",
+        "Mass",
+        "Weight",
+        "Free Fall"
+      ]
+    }
+  },
+  {
+    "id": "07590ae8-13d1-4eb4-8ae2-3e1aff97689f",
+    "timestamp": "2026-05-13T07:22:22.292273+00:00",
+    "dsl": {
+      "meta": {
+        "id": "newtons_second_law_block",
+        "title": "Newton's Second Law: Force and Acceleration",
+        "topic": "Mechanics",
+        "simulationType": "Kinematics",
+        "difficulty": "Grade 9-10",
+        "version": "2.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.0,
+        "world": {
+          "width": 20.0,
+          "height": 10.0
+        },
+        "background": {
+          "color": "#0f172a"
+        },
+        "units": {
+          "length": "m",
+          "mass": "kg",
+          "time": "s",
+          "force": "N",
+          "energy": "J"
+        },
+        "boundaries": {
+          "enabled": true
+        }
+      },
+      "objects": [
+        {
+          "id": "ground",
+          "category": "environment",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 20.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 9.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#334155",
+            "label": "Surface",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        },
+        {
+          "id": "block_1",
+          "category": "physics-object",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 5.0,
+            "y": 7.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 5.0,
+            "density": 1.0,
+            "fixedRotation": true,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#3b82f6",
+            "label": "Block (m)",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "applied_force",
+          "type": "constantForce",
+          "target": "block_1",
+          "vector": {
+            "x": 10.0,
+            "y": 0.0
+          },
+          "active": true
+        }
+      ],
+      "constraints": [],
+      "behaviors": [],
+      "formulaBindings": [
+        {
+          "formula": "F = ma",
+          "variables": {
+            "F": {
+              "path": "forces[0].vector.x",
+              "type": "independent"
+            },
+            "m": {
+              "path": "objects[1].physics.mass",
+              "type": "independent"
+            },
+            "a": {
+              "path": "runtime.calculated.accelerationX",
+              "type": "dependent"
+            }
+          }
+        },
+        {
+          "formula": "f = \u03bcN",
+          "variables": {
+            "\u03bc": {
+              "path": "objects[1].material.friction",
+              "type": "independent"
+            },
+            "N": {
+              "path": "runtime.calculated.normalForce",
+              "type": "dependent"
+            },
+            "f": {
+              "path": "runtime.calculated.frictionForce",
+              "type": "dependent"
+            }
+          }
+        }
+      ],
+      "controls": {
+        "parameters": [
+          {
+            "id": "mass_slider",
+            "type": "slider",
+            "label": "Mass (m)",
+            "symbol": "m",
+            "formulaReferences": [
+              "F = ma"
+            ],
+            "bind": "objects[1].physics.mass",
+            "min": 1.0,
+            "max": 20.0,
+            "step": 0.5
+          },
+          {
+            "id": "force_slider",
+            "type": "slider",
+            "label": "Applied Force (F)",
+            "symbol": "F",
+            "formulaReferences": [
+              "F = ma"
+            ],
+            "bind": "forces[0].vector.x",
+            "min": 0.0,
+            "max": 50.0,
+            "step": 1.0
+          },
+          {
+            "id": "friction_slider",
+            "type": "slider",
+            "label": "Coefficient of Friction",
+            "symbol": "\u03bc",
+            "formulaReferences": [
+              "f = \u03bcN"
+            ],
+            "bind": "objects[1].material.friction",
+            "min": 0.0,
+            "max": 0.5,
+            "step": 0.01
+          }
+        ],
+        "actions": [
+          {
+            "id": "start_btn",
+            "type": "button",
+            "label": "Start",
+            "action": "startSimulation"
+          },
+          {
+            "id": "pause_btn",
+            "type": "button",
+            "label": "Pause",
+            "action": "togglePause"
+          },
+          {
+            "id": "reset_btn",
+            "type": "button",
+            "label": "Reset",
+            "action": "resetSimulation"
+          }
+        ]
+      },
+      "observables": [
+        {
+          "id": "accel_val",
+          "label": "Acceleration",
+          "source": "runtime.calculated.accelerationX",
+          "unit": "m/s\u00b2"
+        },
+        {
+          "id": "vel_val",
+          "label": "Velocity",
+          "source": "objects[1].velocity.x",
+          "unit": "m/s"
+        },
+        {
+          "id": "fric_val",
+          "label": "Friction Force",
+          "source": "runtime.calculated.frictionForce",
+          "unit": "N"
+        }
+      ],
+      "events": [],
+      "runtime": {
+        "engine": "matter-js",
+        "renderer": "pixi-js",
+        "fps": 60,
+        "scale": 50,
+        "paused": true,
+        "allowDragging": true,
+        "allowReset": true,
+        "debug": false,
+        "calculated": {
+          "accelerationX": 0.0,
+          "normalForce": 0.0,
+          "frictionForce": 0.0,
+          "netForce": 0.0
+        }
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F_net = ma",
+        "f = \u03bc * N",
+        "N = m * g"
+      ],
+      "related_concepts": [
+        "Inertia",
+        "Net Force",
+        "Proportionality",
+        "Friction"
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "chapter": "Laws of Motion",
+      "difficulty": "Beginner",
+      "curriculum": "General Science",
+      "simulationCategory": "Mechanics",
+      "renderer": "Matter.js",
+      "tags": [
+        "Newton's Laws",
+        "Force",
+        "Acceleration",
+        "Mass"
+      ]
+    }
+  },
+  {
+    "id": "2a643d72-93b6-4746-90b2-4555eb77d02d",
+    "timestamp": "2026-05-13T07:12:33.058952+00:00",
+    "dsl": {
+      "meta": {
+        "id": "friction_ice_wood_001",
+        "title": "Friction: Ice Cube on Wood",
+        "topic": "Mechanics - Friction",
+        "simulationType": "Kinematics",
+        "difficulty": "Grade 8-10",
+        "version": "2.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.001,
+        "world": {
+          "width": 20.0,
+          "height": 15.0
+        },
+        "background": {
+          "color": "#f8fafc"
+        },
+        "units": {
+          "length": "m",
+          "mass": "kg",
+          "time": "s",
+          "force": "N",
+          "energy": "J"
+        },
+        "boundaries": {
+          "enabled": true
+        }
+      },
+      "objects": [
+        {
+          "id": "wooden_surface",
+          "category": "environment",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 18.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 12.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.1
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#78350f",
+            "label": "Wooden Surface",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        },
+        {
+          "id": "ice_cube",
+          "category": "physics-object",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 1.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 2.0,
+            "y": 11.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 2.0,
+            "density": 0.92,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.05,
+            "restitution": 0.05
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#bae6fd",
+            "label": "Ice Cube",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "push_force",
+          "type": "constantForce",
+          "target": "ice_cube",
+          "vector": {
+            "x": 10.0,
+            "y": 0.0
+          },
+          "active": false
+        }
+      ],
+      "constraints": [],
+      "behaviors": [],
+      "formulaBindings": [
+        {
+          "formula": "f = \u03bcN",
+          "variables": {
+            "\u03bc": {
+              "path": "objects[1].material.friction",
+              "type": "independent"
+            },
+            "N": {
+              "path": "objects[1].physics.mass",
+              "type": "independent"
+            },
+            "f": {
+              "path": "observables[2].source",
+              "type": "dependent"
+            }
+          }
+        },
+        {
+          "formula": "F_net = ma",
+          "variables": {
+            "F_net": {
+              "path": "forces[0].vector.x",
+              "type": "independent"
+            },
+            "m": {
+              "path": "objects[1].physics.mass",
+              "type": "independent"
+            },
+            "a": {
+              "path": "observables[1].source",
+              "type": "dependent"
+            }
+          }
+        }
+      ],
+      "controls": {
+        "parameters": [
+          {
+            "id": "friction_slider",
+            "type": "slider",
+            "label": "Coefficient of Friction",
+            "symbol": "\u03bc",
+            "formulaReferences": [],
+            "bind": "objects[1].material.friction",
+            "min": 0.0,
+            "max": 1.0,
+            "step": 0.01
+          },
+          {
+            "id": "mass_slider",
+            "type": "slider",
+            "label": "Ice Mass",
+            "symbol": "m",
+            "formulaReferences": [],
+            "bind": "objects[1].physics.mass",
+            "min": 0.5,
+            "max": 10.0,
+            "step": 0.5
+          },
+          {
+            "id": "force_slider",
+            "type": "slider",
+            "label": "Applied Force",
+            "symbol": "F",
+            "formulaReferences": [],
+            "bind": "forces[0].vector.x",
+            "min": 0.0,
+            "max": 50.0,
+            "step": 1.0
+          },
+          {
+            "id": "apply_force_toggle",
+            "type": "toggle",
+            "label": "Push Cube",
+            "formulaReferences": [],
+            "bind": "forces[0].active"
+          }
+        ],
+        "actions": [
+          {
+            "id": "start_sim",
+            "type": "button",
+            "label": "Start",
+            "action": "startSimulation"
+          },
+          {
+            "id": "pause_sim",
+            "type": "button",
+            "label": "Pause",
+            "action": "togglePause"
+          },
+          {
+            "id": "reset_sim",
+            "type": "button",
+            "label": "Reset",
+            "action": "resetSimulation"
+          }
+        ]
+      },
+      "observables": [
+        {
+          "id": "velocity",
+          "label": "Velocity",
+          "source": "objects[1].velocity.x",
+          "unit": "m/s"
+        },
+        {
+          "id": "acceleration",
+          "label": "Acceleration",
+          "source": "objects[1].acceleration.x",
+          "unit": "m/s\u00b2"
+        },
+        {
+          "id": "friction_force",
+          "label": "Frictional Force",
+          "source": "objects[1].physics.mass * 9.8 * objects[1].material.friction",
+          "unit": "N"
+        }
+      ],
+      "events": [],
+      "runtime": {
+        "engine": "matter-js",
+        "renderer": "pixi-js",
+        "fps": 60,
+        "scale": 50,
+        "paused": true,
+        "allowDragging": true,
+        "allowReset": true,
+        "debug": false
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "f = \u03bcN",
+        "N = mg",
+        "F_net = F_applied - f"
+      ],
+      "related_concepts": [
+        "Static Friction",
+        "Kinetic Friction",
+        "Normal Force",
+        "Coefficient of Friction"
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "chapter": "Laws of Motion",
+      "difficulty": "Beginner",
+      "curriculum": "General Science",
+      "simulationCategory": "Mechanics",
+      "renderer": "Matter.js",
+      "tags": [
+        "Friction",
+        "Ice",
+        "Wood",
+        "Newton's Second Law"
+      ]
+    }
+  },
+  {
+    "id": "e6c2324b-9683-4cae-8847-b831a53d83b7",
+    "timestamp": "2026-05-13T06:26:07.405558+00:00",
+    "dsl": {
+      "meta": {
+        "id": "pendulum_physics_edu",
+        "title": "Simple Harmonic Motion: The Pendulum",
+        "topic": "Oscillatory Motion",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.001,
+        "world": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "background": {
+          "color": "#0f172a"
+        }
+      },
+      "objects": [
+        {
+          "id": "ceiling_mount",
+          "type": "staticBody",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 0.5
+          },
+          "position": {
+            "x": 10.0,
+            "y": 1.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "visual": {
+            "color": "#94a3b8",
+            "label": "Fixed Support",
+            "showVelocityVector": false
+          }
+        },
+        {
+          "id": "pendulum_bob",
+          "type": "dynamicBody",
+          "shape": {
+            "type": "circle",
+            "radius": 0.6
+          },
+          "position": {
+            "x": 14.0,
+            "y": 5.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 2.0,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.01,
+            "restitution": 0.5
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Bob (m)",
+            "showVelocityVector": true
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [
+        {
+          "id": "string_constraint",
+          "type": "rope",
+          "bodyA": "ceiling_mount",
+          "bodyB": "pendulum_bob",
+          "length": 5.0,
+          "stiffness": 1.0
+        }
+      ],
+      "behaviors": [
+        {
+          "id": "damping_effect",
+          "type": "drag",
+          "targets": [
+            "pendulum_bob"
+          ],
+          "coefficient": 0.02,
+          "enabled": false
+        }
+      ],
+      "interactions": [
+        {
+          "id": "gravity_control",
+          "type": "slider",
+          "label": "Gravity Strength",
+          "bind": "environment.gravity.y",
+          "min": 0.0,
+          "max": 5.0,
+          "step": 0.1
+        },
+        {
+          "id": "air_resistance_toggle",
+          "type": "toggle",
+          "label": "Enable Air Resistance",
+          "bind": "behaviors[0].enabled"
+        }
+      ],
+      "runtime": {
+        "engine": "matter-js",
+        "fps": 60,
+        "scale": 40
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "T = 2\u03c0\u221a(L/g)",
+        "PE = mgh",
+        "KE = 1/2mv\u00b2"
+      ],
+      "related_concepts": [
+        "Restoring Force",
+        "Simple Harmonic Motion",
+        "Potential vs Kinetic Energy"
+      ],
+      "laws": [
+        "Law of Conservation of Energy",
+        "Newton's Second Law"
+      ],
+      "explanations": [
+        "A pendulum consists of a mass (bob) suspended from a fixed point that swings back and forth under the influence of gravity.",
+        "The period (T) of a simple pendulum depends only on the length of the string and the acceleration due to gravity, not on the mass of the bob.",
+        "At the highest point of the swing, potential energy is maximum; at the lowest point, kinetic energy is maximum."
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "difficulty": "Intermediate",
+      "simulation_type": "Matter.js-RigidBody"
+    }
+  },
+  {
     "id": "9b3198f5-d8bb-430e-96bb-86599eecb3e4",
     "timestamp": "2026-05-12T11:54:24.927167+00:00",
     "dsl": {

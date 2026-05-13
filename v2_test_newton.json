@@ -1,0 +1,299 @@
+{
+  "id": "07590ae8-13d1-4eb4-8ae2-3e1aff97689f",
+  "timestamp": "2026-05-13T07:22:22.292273+00:00",
+  "dsl": {
+    "meta": {
+      "id": "newtons_second_law_block",
+      "title": "Newton's Second Law: Force and Acceleration",
+      "topic": "Mechanics",
+      "simulationType": "Kinematics",
+      "difficulty": "Grade 9-10",
+      "version": "2.0"
+    },
+    "environment": {
+      "gravity": {
+        "x": 0.0,
+        "y": 1.0
+      },
+      "airResistance": 0.0,
+      "world": {
+        "width": 20.0,
+        "height": 10.0
+      },
+      "background": {
+        "color": "#0f172a"
+      },
+      "units": {
+        "length": "m",
+        "mass": "kg",
+        "time": "s",
+        "force": "N",
+        "energy": "J"
+      },
+      "boundaries": {
+        "enabled": true
+      }
+    },
+    "objects": [
+      {
+        "id": "ground",
+        "category": "environment",
+        "type": "staticBody",
+        "shape": {
+          "type": "rectangle",
+          "width": 20.0,
+          "height": 2.0
+        },
+        "position": {
+          "x": 10.0,
+          "y": 9.0
+        },
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "physics": {
+          "mass": 0.0,
+          "density": 1.0,
+          "fixedRotation": false,
+          "affectedByGravity": true,
+          "isSensor": false
+        },
+        "material": {
+          "friction": 0.1,
+          "restitution": 0.0
+        },
+        "collision": {
+          "enabled": true,
+          "group": "default"
+        },
+        "visual": {
+          "color": "#334155",
+          "label": "Surface",
+          "showLabel": true,
+          "showVelocityVector": false,
+          "showTrail": false
+        }
+      },
+      {
+        "id": "block_1",
+        "category": "physics-object",
+        "type": "dynamicBody",
+        "shape": {
+          "type": "rectangle",
+          "width": 2.0,
+          "height": 2.0
+        },
+        "position": {
+          "x": 5.0,
+          "y": 7.0
+        },
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "rotation": 0.0,
+        "physics": {
+          "mass": 5.0,
+          "density": 1.0,
+          "fixedRotation": true,
+          "affectedByGravity": true,
+          "isSensor": false
+        },
+        "material": {
+          "friction": 0.1,
+          "restitution": 0.0
+        },
+        "collision": {
+          "enabled": true,
+          "group": "default"
+        },
+        "visual": {
+          "color": "#3b82f6",
+          "label": "Block (m)",
+          "showLabel": true,
+          "showVelocityVector": false,
+          "showTrail": false
+        }
+      }
+    ],
+    "forces": [
+      {
+        "id": "applied_force",
+        "type": "constantForce",
+        "target": "block_1",
+        "vector": {
+          "x": 10.0,
+          "y": 0.0
+        },
+        "active": true
+      }
+    ],
+    "constraints": [],
+    "behaviors": [],
+    "formulaBindings": [
+      {
+        "formula": "F = ma",
+        "variables": {
+          "F": {
+            "path": "forces[0].vector.x",
+            "type": "independent"
+          },
+          "m": {
+            "path": "objects[1].physics.mass",
+            "type": "independent"
+          },
+          "a": {
+            "path": "runtime.calculated.accelerationX",
+            "type": "dependent"
+          }
+        }
+      },
+      {
+        "formula": "f = \u03bcN",
+        "variables": {
+          "\u03bc": {
+            "path": "objects[1].material.friction",
+            "type": "independent"
+          },
+          "N": {
+            "path": "runtime.calculated.normalForce",
+            "type": "dependent"
+          },
+          "f": {
+            "path": "runtime.calculated.frictionForce",
+            "type": "dependent"
+          }
+        }
+      }
+    ],
+    "controls": {
+      "parameters": [
+        {
+          "id": "mass_slider",
+          "type": "slider",
+          "label": "Mass (m)",
+          "symbol": "m",
+          "formulaReferences": [
+            "F = ma"
+          ],
+          "bind": "objects[1].physics.mass",
+          "min": 1.0,
+          "max": 20.0,
+          "step": 0.5
+        },
+        {
+          "id": "force_slider",
+          "type": "slider",
+          "label": "Applied Force (F)",
+          "symbol": "F",
+          "formulaReferences": [
+            "F = ma"
+          ],
+          "bind": "forces[0].vector.x",
+          "min": 0.0,
+          "max": 50.0,
+          "step": 1.0
+        },
+        {
+          "id": "friction_slider",
+          "type": "slider",
+          "label": "Coefficient of Friction",
+          "symbol": "\u03bc",
+          "formulaReferences": [
+            "f = \u03bcN"
+          ],
+          "bind": "objects[1].material.friction",
+          "min": 0.0,
+          "max": 0.5,
+          "step": 0.01
+        }
+      ],
+      "actions": [
+        {
+          "id": "start_btn",
+          "type": "button",
+          "label": "Start",
+          "action": "startSimulation"
+        },
+        {
+          "id": "pause_btn",
+          "type": "button",
+          "label": "Pause",
+          "action": "togglePause"
+        },
+        {
+          "id": "reset_btn",
+          "type": "button",
+          "label": "Reset",
+          "action": "resetSimulation"
+        }
+      ]
+    },
+    "observables": [
+      {
+        "id": "accel_val",
+        "label": "Acceleration",
+        "source": "runtime.calculated.accelerationX",
+        "unit": "m/s\u00b2"
+      },
+      {
+        "id": "vel_val",
+        "label": "Velocity",
+        "source": "objects[1].velocity.x",
+        "unit": "m/s"
+      },
+      {
+        "id": "fric_val",
+        "label": "Friction Force",
+        "source": "runtime.calculated.frictionForce",
+        "unit": "N"
+      }
+    ],
+    "events": [],
+    "runtime": {
+      "engine": "matter-js",
+      "renderer": "pixi-js",
+      "fps": 60,
+      "scale": 50,
+      "paused": true,
+      "allowDragging": true,
+      "allowReset": true,
+      "debug": false,
+      "calculated": {
+        "accelerationX": 0.0,
+        "normalForce": 0.0,
+        "frictionForce": 0.0,
+        "netForce": 0.0
+      }
+    }
+  },
+  "knowledge": {
+    "relevant_formulas": [
+      "F_net = ma",
+      "f = \u03bc * N",
+      "N = m * g"
+    ],
+    "related_concepts": [
+      "Inertia",
+      "Net Force",
+      "Proportionality",
+      "Friction"
+    ]
+  },
+  "metadata": {
+    "subject": "Physics",
+    "chapter": "Laws of Motion",
+    "difficulty": "Beginner",
+    "curriculum": "General Science",
+    "simulationCategory": "Mechanics",
+    "renderer": "Matter.js",
+    "tags": [
+      "Newton's Laws",
+      "Force",
+      "Acceleration",
+      "Mass"
+    ]
+  }
+}

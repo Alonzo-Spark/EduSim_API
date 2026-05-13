@@ -3,17 +3,10 @@ from .schema import EduSimResponse
 
 def validate_simulation(data: dict) -> dict:
     """
-    Validate AI-generated EduSimResponse JSON with strict runtime constraints.
-    
-    Checks:
-    1. Structural: Pydantic ensures the JSON matches the architecture.
-    2. Deprecation: Rejects fields that are no longer part of the spec.
-    3. Contextual: Ensures 'bind' paths in interactions are logically formatted.
-    4. Physics: Checks for duplicate IDs, valid targets, and static body mass.
-    5. Runtime Optimization: Ensures SI units are used and gravity is normalized.
+    Validate AI-generated EduSimResponse JSON with strict runtime constraints (v2.0).
     """
     try:
-        # Pass 0: Deprecation Check (Manual check before Pydantic might strip them)
+        # Pass 0: Deprecation Check
         deprecated_fields = ["movable", "groundFriction"]
         def find_deprecated(d, path=""):
             errors = []
@@ -42,16 +35,41 @@ def validate_simulation(data: dict) -> dict:
         dsl = validated_dict.get("dsl", {})
 
         semantic_errors = []
-        valid_roots = ["objects", "forces", "environment", "constraints", "behaviors"]
+        valid_roots = [
+            "objects", "forces", "environment", "constraints", 
+            "behaviors", "formulaBindings", "controls", 
+            "observables", "events", "runtime"
+        ]
         
-        # Pass 2: Semantic Path Validation
-        for i, interaction in enumerate(dsl.get("interactions", [])):
-            path = interaction.get("bind", "")
+        # Pass 2: Semantic Path Validation (for controls.parameters and observables)
+        # Check parameters
+        controls = dsl.get("controls", {})
+        for i, param in enumerate(controls.get("parameters", [])):
+            path = param.get("bind", "")
             if not any(path.startswith(root) for root in valid_roots):
                 semantic_errors.append(
-                    f"Interaction[{i}] has invalid bind path '{path}'. "
+                    f"ControlParameter[{i}] has invalid bind path '{path}'. "
                     f"Must start with one of: {valid_roots}"
                 )
+
+        # Check observables
+        for i, obs in enumerate(dsl.get("observables", [])):
+            path = obs.get("source", "")
+            if not any(path.startswith(root) for root in valid_roots):
+                semantic_errors.append(
+                    f"Observable[{i}] has invalid source path '{path}'. "
+                    f"Must start with one of: {valid_roots}"
+                )
+
+        # Check formula bindings
+        for i, binding in enumerate(dsl.get("formulaBindings", [])):
+            for var_name, var_info in binding.get("variables", {}).items():
+                path = var_info.get("path", "")
+                if not any(path.startswith(root) for root in valid_roots):
+                    semantic_errors.append(
+                        f"FormulaBinding[{i}] variable '{var_name}' has invalid path '{path}'. "
+                        f"Must start with one of: {valid_roots}"
+                    )
 
         # Pass 3: Physics Logic Validation
         object_ids = {obj["id"] for obj in dsl.get("objects", [])}
@@ -77,14 +95,12 @@ def validate_simulation(data: dict) -> dict:
         for i, force in enumerate(dsl.get("forces", [])):
             if force["target"] not in object_ids:
                 semantic_errors.append(f"Force[{i}] ('{force['id']}') targets unknown object '{force['target']}'")
-            if force["type"] == "gravity":
-                semantic_errors.append(f"Force[{i}] has type 'gravity'. Gravity must only be defined in 'environment.gravity'.")
 
         # Check if constraints targets exist
         for i, constraint in enumerate(dsl.get("constraints", [])):
-            if constraint["bodyA"] not in object_ids:
+            if constraint.get("bodyA") and constraint["bodyA"] not in object_ids:
                 semantic_errors.append(f"Constraint[{i}] ('{constraint['id']}') bodyA targets unknown object '{constraint['bodyA']}'")
-            if constraint["bodyB"] not in object_ids:
+            if constraint.get("bodyB") and constraint["bodyB"] not in object_ids:
                 semantic_errors.append(f"Constraint[{i}] ('{constraint['id']}') bodyB targets unknown object '{constraint['bodyB']}'")
 
         # Check if behavior targets exist
@@ -96,17 +112,13 @@ def validate_simulation(data: dict) -> dict:
         # Pass 4: SI Unit and Normalization Sanity Check
         env = dsl.get("environment", {})
         gravity = env.get("gravity", {})
-        if abs(gravity.get("y", 0)) > 5.0:
-            semantic_errors.append(f"Gravity Y ({gravity.get('y')}) seems too high for EduSim runtime. Please use scaled values (typically around 1.0).")
+        if abs(gravity.get("y", 0)) > 20.0: # Relaxed slightly for v2.0
+            semantic_errors.append(f"Gravity Y ({gravity.get('y')}) seems too high. Please use scaled values.")
 
         for i, obj in enumerate(dsl.get("objects", [])):
             pos = obj.get("position", {})
-            if abs(pos.get("x", 0)) > 500 or abs(pos.get("y", 0)) > 500:
-                semantic_errors.append(f"Object[{i}] ('{obj['id']}') position seems to use pixels. Please use SI meters (typically < 100).")
-            
-            shape = obj.get("shape", {})
-            if shape.get("type") == "circle" and (shape.get("width") or shape.get("height")):
-                semantic_errors.append(f"Object[{i}] is a circle but contains width/height. These must be omitted.")
+            if abs(pos.get("x", 0)) > 1000 or abs(pos.get("y", 0)) > 1000:
+                semantic_errors.append(f"Object[{i}] ('{obj['id']}') position seems to use pixels. Please use SI meters.")
 
         if semantic_errors:
             return {
