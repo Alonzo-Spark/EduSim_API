@@ -5,6 +5,7 @@ from rag.loader import load_all_pdfs
 from app.src.api.simulation_router import simulation_router
 from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
+from app.src.api.generate_router import generate_router
 
 # Configure global logging
 logging.basicConfig(
@@ -25,13 +26,12 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="EduSim Physics API",
-    description="Backend APIs for EduSim  simulations",
+    description="Backend APIs for EduSim simulations",
     version="1.0.0",
     lifespan=lifespan
 )
 
 # CORS
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # change later in production
@@ -40,9 +40,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 # Root Route
-
 @app.get("/")
 async def root():
     logger.info("Health check endpoint pinged.")
@@ -51,9 +49,12 @@ async def root():
         "message": "EduSim FastAPI Backend Running"
     }
 
-
-
 # Simulation Routes
+
+app.include_router(
+    generate_router,
+    prefix="/api"
+)
 
 app.include_router(
     simulation_router,
