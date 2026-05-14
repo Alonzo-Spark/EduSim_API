@@ -76,7 +76,17 @@ EXAMPLE_RESPONSE = json.loads("""{
           "showLabel": true,
           "showVelocityVector": true,
           "showForceVector": false,
-          "showTrail": false
+          "showTrail": false,
+          "asset": {
+                      "enabled": true,
+                      "assetId": "ball_basket1",
+                      "scale": 1,
+                      "rotationSync": true,
+                      "anchor": {
+                        "x": 0.5,
+                        "y": 0.5
+                      }
+                  }
         }
       },
       {
@@ -565,6 +575,58 @@ Optional visual fields:
 - showForceVector
 - showTrail
 
+Optional visual.asset fields:
+- enabled
+- assetId
+- scale
+- rotationSync
+- anchor
+
+Example:
+"asset": {{
+  "enabled": false,
+  "assetId": "planet_earth",
+  "scale": 1,
+  "rotationSync": true,
+  "anchor": {{
+    "x": 0.5,
+    "y": 0.5
+  }}
+}}
+
+
+━━━━━━━━━━━━━━━
+ASSET RULES
+━━━━━━━━━━━━━━━
+
+1. Assets are OPTIONAL visual enhancements.
+
+2. Primitive rendering should remain the default fallback.
+
+3. Assets must NEVER affect physics calculations.
+
+4. Physics bodies must remain simple geometric shapes.
+
+5. Use assetId instead of external image URLs.
+
+6. Do NOT generate remote asset URLs.
+
+7. Assets should only be generated when visually meaningful for the simulation.
+
+━━━━━━━━━━━━━━━
+AVAILABLE ASSET LIBRARY
+━━━━━━━━━━━━━━━
+
+The following assets are pre-installed. Use the 'id' as the 'assetId' in the DSL:
+
+1. Physics (ids): ball_blue, ball_red, ball_basket, weight_heavy, weight_light, spring_relaxed, spring_stretched, chain_link.
+2. Vehicles (ids): car_blue_1, car_red_1, car_black_1, truck_delivery, ambulance, bus_school, motorcycle_blue, suv_military.
+3. Space (ids): planet_earth, planet_mars, moon, sun, asteroid_large, spacecraft_apollo, satellite_dish.
+4. Nature (ids): tree_oak, tree_pine, bush1, mushroom_red, cactus, wood_plank.
+5. Misc (ids): crate_wooden, barrel_metal, target_red, flag_checkered, arrow_direction.
+
+*Note: Always prefer these IDs over generic names to ensure images load correctly.*
+
 ━━━━━━━━━━━━━━━
 FORCE RULES
 ━━━━━━━━━━━━━━━
@@ -607,6 +669,31 @@ Constraint fields may include:
 - damping
 - breakable
 - maxForce
+- visual
+
+Constraint visual fields may include:
+- visible
+- color
+- lineWidth
+
+━━━━━━━━━━━━━━━
+VISUAL RULES
+━━━━━━━━━━━━━━━
+
+1. Visual properties are rendering-only metadata.
+
+2. Visual properties must NEVER affect physics behavior.
+
+3. Renderable entities may contain:
+- color
+- label
+- vectors
+- trails
+- assets
+
+4. Primitive rendering should always work even if assets are missing.
+
+5. Objects, constraints, and boundaries may contain visual configuration.
 
 ━━━━━━━━━━━━━━━
 BEHAVIOR RULES
@@ -812,6 +899,8 @@ IMPORTANT GENERATION RULES
 4. Keep structures reusable across all physics domains.
 5. Maintain runtime-safe normalized values.
 6. Ensure the simulation can scale dynamically.
+7. Keep physics and rendering concerns separated.
+8. Physics simulation must remain functional without assets.
 
 ━━━━━━━━━━━━━━━
 DSL REFERENCE

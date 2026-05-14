@@ -68,12 +68,20 @@ class Collision(BaseModel):
     enabled: bool = True
     group: str = "default"
 
+class AssetProps(BaseModel):
+    enabled: bool = False
+    assetId: str
+    scale: float = 1.0
+    rotationSync: bool = True
+    anchor: Optional[Vector2D] = Field(default_factory=lambda: Vector2D(x=0.5, y=0.5))
+
 class VisualProps(BaseModel):
     color: str
     label: Optional[str] = None
     showLabel: bool = True
     showVelocityVector: bool = False
     showTrail: bool = False
+    asset: Optional[AssetProps] = None
 
 class SimulationObject(BaseModel):
     id: str

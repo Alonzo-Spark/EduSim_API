@@ -8,8 +8,8 @@ sys.path.append(os.getcwd())
 from app.src.modules.simulation_synthesis.service import generate_simulation_synthesis
 
 def test_v3_generation():
-    # Scenario: Friction and Motion
-    prompt = "explain inertia and force using a block on a table. add a slider for mass and force."
+    # Scenario: Friction and Motion with Assets
+    prompt = "create a visually rich simulation of a block on a table to explain inertia. use a wooden block asset if possible. add sliders for mass and force."
     
     print(f"--- EDU-SIM DSL V3.0 GENERATION TEST ---")
     print(f"Prompt: {prompt}")
@@ -26,7 +26,10 @@ def test_v3_generation():
         for obj in dsl['objects']:
             label = obj['visual'].get('label', obj['id'])
             mass = obj['physics'].get('mass', 'N/A')
-            print(f"- {label}: Mass={mass}kg, Category={obj.get('category')}, BodyType={obj.get('bodyType')}")
+            asset_info = "No Asset"
+            if 'asset' in obj['visual'] and obj['visual']['asset'].get('enabled'):
+                asset_info = f"Asset: {obj['visual']['asset'].get('assetId')}"
+            print(f"- {label}: Mass={mass}kg, {asset_info}, Category={obj.get('category')}, BodyType={obj.get('bodyType')}")
             
         print("\n✅ CONTROLS CHECK (Parameters):")
         for p in dsl['controls']['parameters']:

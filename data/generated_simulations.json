@@ -1,0 +1,599 @@
+[
+  {
+    "id": "dfdf4e83-8d30-42cb-b0d6-0a27287bce5f",
+    "timestamp": "2026-05-14T10:23:29.738483+00:00",
+    "dsl": {
+      "meta": {
+        "id": "inertia_block_table",
+        "title": "Inertia: Block on a Table",
+        "topic": "Newton's First Law",
+        "simulationType": "Mechanics",
+        "difficulty": "Grade 6-9",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.005,
+        "world": {
+          "width": 20.0,
+          "height": 12.0,
+          "unitSystem": "normalized"
+        },
+        "background": {
+          "color": "#1e293b"
+        },
+        "units": {
+          "length": "m",
+          "mass": "kg",
+          "time": "s",
+          "force": "N",
+          "energy": "J"
+        },
+        "camera": {
+          "mode": "auto-fit",
+          "padding": 0.1,
+          "allowZoom": false,
+          "allowPan": false
+        },
+        "boundaries": {
+          "enabled": true,
+          "type": "solid"
+        }
+      },
+      "objects": [
+        {
+          "id": "table_surface",
+          "category": "environment",
+          "bodyType": "static",
+          "shape": {
+            "type": "rectangle",
+            "width": 18.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 9.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": false,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.3,
+            "restitution": 0.1
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#78350f",
+            "label": "Table",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false,
+            "asset": {
+              "enabled": true,
+              "assetId": "wooden_table",
+              "scale": 1.0,
+              "rotationSync": true,
+              "anchor": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            }
+          }
+        },
+        {
+          "id": "wooden_block",
+          "category": "physics-object",
+          "bodyType": "dynamic",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 4.0,
+            "y": 7.5
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 5.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.4,
+            "restitution": 0.05
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#d97706",
+            "label": "Block",
+            "showLabel": true,
+            "showVelocityVector": true,
+            "showTrail": true,
+            "asset": {
+              "enabled": true,
+              "assetId": "wooden_block_asset",
+              "scale": 1.0,
+              "rotationSync": true,
+              "anchor": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "applied_push",
+          "type": "impulse",
+          "target": "wooden_block",
+          "vector": {
+            "x": 10.0,
+            "y": 0.0
+          },
+          "active": false
+        }
+      ],
+      "constraints": [],
+      "behaviors": [
+        {
+          "id": "friction_behavior",
+          "type": "airDrag",
+          "targets": [
+            "wooden_block"
+          ],
+          "coefficient": 0.02,
+          "active": true
+        }
+      ],
+      "interactions": [
+        {
+          "id": "drag_block",
+          "type": "drag",
+          "targets": [
+            "wooden_block"
+          ]
+        },
+        {
+          "id": "reset_sim",
+          "type": "reset",
+          "targets": [
+            "wooden_block"
+          ]
+        }
+      ],
+      "formulaBindings": [
+        {
+          "id": "inertia_relation",
+          "formula": "a = F / m",
+          "variables": {
+            "F": {
+              "path": "forces[0].vector.x",
+              "role": "independent"
+            },
+            "m": {
+              "path": "objects[1].physics.mass",
+              "role": "independent"
+            },
+            "a": {
+              "path": "runtime.calculated.acceleration",
+              "role": "dependent"
+            }
+          }
+        }
+      ],
+      "controls": {
+        "parameters": [
+          {
+            "id": "mass_slider",
+            "type": "slider",
+            "label": "Block Mass",
+            "symbol": "m",
+            "formulaReferences": [],
+            "bind": "objects[1].physics.mass",
+            "min": 1.0,
+            "max": 50.0,
+            "step": 1.0
+          },
+          {
+            "id": "force_slider",
+            "type": "slider",
+            "label": "Push Strength",
+            "symbol": "F",
+            "formulaReferences": [],
+            "bind": "forces[0].vector.x",
+            "min": 0.0,
+            "max": 100.0,
+            "step": 5.0
+          }
+        ],
+        "actions": [
+          {
+            "id": "push_button",
+            "type": "button",
+            "label": "Apply Push",
+            "action": "startSimulation"
+          },
+          {
+            "id": "reset_button",
+            "type": "button",
+            "label": "Reset Position",
+            "action": "resetSimulation"
+          }
+        ]
+      },
+      "observables": [
+        {
+          "id": "velocity_obs",
+          "label": "Velocity",
+          "source": "objects[1].velocity.magnitude",
+          "precision": 2
+        },
+        {
+          "id": "accel_obs",
+          "label": "Acceleration",
+          "source": "runtime.calculated.acceleration",
+          "precision": 2
+        },
+        {
+          "id": "momentum_obs",
+          "label": "Momentum",
+          "source": "runtime.calculated.momentum",
+          "precision": 2
+        }
+      ],
+      "events": [],
+      "runtime": {
+        "engine": "matter-js",
+        "renderer": "pixi-js",
+        "fps": 60,
+        "scaling": {
+          "mode": "dynamic-auto-fit",
+          "baseUnit": 50,
+          "allowResponsiveResize": true
+        },
+        "paused": false,
+        "interaction": {
+          "allowDragging": true,
+          "allowZoom": false,
+          "allowPan": false
+        },
+        "debug": false,
+        "calculated": {
+          "acceleration": 0.0,
+          "momentum": 0.0
+        }
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = ma",
+        "p = mv"
+      ],
+      "related_concepts": [
+        "Inertia",
+        "Mass",
+        "Newton's First Law",
+        "Friction"
+      ],
+      "learningObjectives": [
+        "Understand that higher mass requires more force to change state of motion",
+        "Observe how an object at rest stays at rest until a force is applied",
+        "Relate mass to the resistance of acceleration"
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "chapter": "Laws of Motion",
+      "difficulty": "Beginner",
+      "curriculum": "General Science",
+      "simulationCategory": "Mechanics",
+      "renderer": "Matter.js + PixiJS",
+      "tags": [
+        "Inertia",
+        "Newton",
+        "Mass",
+        "Force",
+        "Classroom Demo"
+      ]
+    }
+  },
+  {
+    "id": "70a9b115-f95d-4b90-80f4-a6336fff3d1e",
+    "timestamp": "2026-05-14T10:22:46.165882+00:00",
+    "dsl": {
+      "meta": {
+        "id": "inertia_block_table",
+        "title": "Inertia and Force: Block on a Table",
+        "topic": "Newton's Laws of Motion",
+        "simulationType": "Mechanics",
+        "difficulty": "Grade 8-10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.0,
+        "world": {
+          "width": 20.0,
+          "height": 10.0,
+          "unitSystem": "normalized"
+        },
+        "background": {
+          "color": "#0f172a"
+        },
+        "units": {
+          "length": "m",
+          "mass": "kg",
+          "time": "s",
+          "force": "N",
+          "energy": "J"
+        },
+        "camera": {
+          "mode": "auto-fit",
+          "padding": 0.1,
+          "allowZoom": false,
+          "allowPan": false
+        },
+        "boundaries": {
+          "enabled": true,
+          "type": "solid"
+        }
+      },
+      "objects": [
+        {
+          "id": "table_surface",
+          "category": "environment",
+          "bodyType": "static",
+          "shape": {
+            "type": "rectangle",
+            "width": 18.0,
+            "height": 1.0
+          },
+          "position": {
+            "x": 10.0,
+            "y": 8.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": false,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#475569",
+            "label": "Table Surface",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        },
+        {
+          "id": "block_1",
+          "category": "physics-object",
+          "bodyType": "dynamic",
+          "shape": {
+            "type": "rectangle",
+            "width": 2.0,
+            "height": 2.0
+          },
+          "position": {
+            "x": 4.0,
+            "y": 6.5
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 5.0,
+            "density": 1.0,
+            "fixedRotation": true,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#3b82f6",
+            "label": "Block",
+            "showLabel": true,
+            "showVelocityVector": true,
+            "showTrail": true
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "applied_push",
+          "type": "constantForce",
+          "target": "block_1",
+          "vector": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "active": true
+        }
+      ],
+      "constraints": [],
+      "behaviors": [],
+      "interactions": [
+        {
+          "id": "reset_sim",
+          "type": "reset",
+          "targets": [
+            "block_1"
+          ]
+        }
+      ],
+      "formulaBindings": [
+        {
+          "id": "newton_2",
+          "formula": "a = F / m",
+          "variables": {
+            "F": {
+              "path": "forces[0].vector.x",
+              "role": "independent"
+            },
+            "m": {
+              "path": "objects[1].physics.mass",
+              "role": "independent"
+            },
+            "a": {
+              "path": "runtime.calculated.acceleration",
+              "role": "dependent"
+            }
+          }
+        }
+      ],
+      "controls": {
+        "parameters": [
+          {
+            "id": "mass_slider",
+            "type": "slider",
+            "label": "Mass (Inertia)",
+            "symbol": "m",
+            "formulaReferences": [],
+            "bind": "objects[1].physics.mass",
+            "min": 1.0,
+            "max": 20.0,
+            "step": 1.0
+          },
+          {
+            "id": "force_slider",
+            "type": "slider",
+            "label": "Applied Force",
+            "symbol": "F",
+            "formulaReferences": [],
+            "bind": "forces[0].vector.x",
+            "min": 0.0,
+            "max": 50.0,
+            "step": 1.0
+          }
+        ],
+        "actions": [
+          {
+            "id": "reset_btn",
+            "type": "button",
+            "label": "Reset Block",
+            "action": "resetSimulation"
+          }
+        ]
+      },
+      "observables": [
+        {
+          "id": "accel_val",
+          "label": "Acceleration",
+          "source": "runtime.calculated.acceleration",
+          "precision": 2
+        },
+        {
+          "id": "vel_val",
+          "label": "Velocity",
+          "source": "objects[1].velocity.x",
+          "precision": 2
+        }
+      ],
+      "events": [],
+      "runtime": {
+        "engine": "matter-js",
+        "renderer": "pixi-js",
+        "fps": 60,
+        "scaling": {
+          "mode": "dynamic-auto-fit",
+          "baseUnit": 50,
+          "allowResponsiveResize": true
+        },
+        "paused": false,
+        "interaction": {
+          "allowDragging": false,
+          "allowZoom": true,
+          "allowPan": true
+        },
+        "debug": false,
+        "calculated": {
+          "acceleration": 0.0
+        }
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "F = ma",
+        "Inertia \u221d Mass"
+      ],
+      "related_concepts": [
+        "Newton's First Law",
+        "Newton's Second Law",
+        "Friction",
+        "Mass vs Weight"
+      ],
+      "learningObjectives": [
+        "Demonstrate that higher mass requires more force to change motion (Inertia)",
+        "Observe the relationship between Force, Mass, and Acceleration",
+        "Understand that an object at rest stays at rest unless acted upon"
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "chapter": "Laws of Motion",
+      "difficulty": "Beginner",
+      "curriculum": "General Science",
+      "simulationCategory": "Mechanics",
+      "renderer": "Matter.js + PixiJS",
+      "tags": [
+        "Inertia",
+        "Newton",
+        "Force",
+        "Mass"
+      ]
+    }
+  }
+]
