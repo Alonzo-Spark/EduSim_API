@@ -87,7 +87,7 @@ def validate_simulation(data: dict) -> dict:
 
         # Check for static body mass
         for i, obj in enumerate(dsl.get("objects", [])):
-            if obj["type"] == "staticBody":
+            if obj.get("bodyType") == "static":
                 if obj["physics"]["mass"] != 0.0:
                     semantic_errors.append(f"Static body '{obj['id']}' must have mass: 0.0")
 
@@ -108,6 +108,18 @@ def validate_simulation(data: dict) -> dict:
             for target in behavior.get("targets", []):
                 if target not in object_ids:
                     semantic_errors.append(f"Behavior[{i}] ('{behavior['id']}') targets unknown object '{target}'")
+
+        # Check if interaction targets exist
+        for i, interaction in enumerate(dsl.get("interactions", [])):
+            for target in interaction.get("targets", []):
+                if target not in object_ids:
+                    semantic_errors.append(f"Interaction[{i}] ('{interaction['id']}') targets unknown object '{target}'")
+
+        # Check if event targets exist
+        for i, event in enumerate(dsl.get("events", [])):
+            for target in event.get("targets", []):
+                if target not in object_ids:
+                    semantic_errors.append(f"Event[{i}] ('{event['id']}') targets unknown object '{target}'")
 
         # Pass 4: SI Unit and Normalization Sanity Check
         env = dsl.get("environment", {})

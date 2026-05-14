@@ -22,10 +22,18 @@ class Units(BaseModel):
 
 class Boundaries(BaseModel):
     enabled: bool = True
+    type: str = "solid"
+
+class CameraConfig(BaseModel):
+    mode: str = "auto-fit"
+    padding: float = 0.15
+    allowZoom: bool = True
+    allowPan: bool = True
 
 class WorldConfig(BaseModel):
     width: float = 800
     height: float = 600
+    unitSystem: str = "normalized"
 
 class BackgroundConfig(BaseModel):
     color: str = "#0f172a"
@@ -36,6 +44,7 @@ class Environment(BaseModel):
     world: Optional[WorldConfig] = Field(default_factory=WorldConfig)
     background: Optional[BackgroundConfig] = Field(default_factory=BackgroundConfig)
     units: Optional[Units] = Field(default_factory=Units)
+    camera: Optional[CameraConfig] = Field(default_factory=CameraConfig)
     boundaries: Optional[Boundaries] = Field(default_factory=Boundaries)
 
 class Shape(BaseModel):
@@ -69,7 +78,7 @@ class VisualProps(BaseModel):
 class SimulationObject(BaseModel):
     id: str
     category: str = "physics-object"
-    type: str = "dynamicBody"
+    bodyType: str = "dynamic"
     shape: Shape
     position: Vector2D
     velocity: Optional[Vector2D] = None
@@ -112,9 +121,10 @@ class Behavior(BaseModel):
 
 class FormulaVariable(BaseModel):
     path: str
-    type: str # "independent", "dependent"
+    role: str # "independent", "dependent"
 
 class FormulaBinding(BaseModel):
+    id: str
     formula: str
     variables: Dict[str, FormulaVariable]
 
@@ -155,22 +165,37 @@ class Observable(BaseModel):
     id: str
     label: str
     source: str
-    unit: str
+    precision: int = 2
+    unit: Optional[str] = None
 
 class Event(BaseModel):
     id: str
-    trigger: str
+    type: str
     targets: List[str]
-    action: str
+    response: Optional[Dict[str, Any]] = None
+
+class Interaction(BaseModel):
+    id: str
+    type: str
+    targets: List[str]
+
+class ScalingConfig(BaseModel):
+    mode: str = "dynamic-auto-fit"
+    baseUnit: int = 50
+    allowResponsiveResize: bool = True
+
+class InteractionConfig(BaseModel):
+    allowDragging: bool = True
+    allowZoom: bool = True
+    allowPan: bool = True
 
 class RuntimeConfig(BaseModel):
     engine: str = "matter-js"
     renderer: str = "pixi-js"
     fps: int = 60
-    scale: int = 40
+    scaling: ScalingConfig = Field(default_factory=ScalingConfig)
     paused: bool = False
-    allowDragging: bool = True
-    allowReset: bool = True
+    interaction: InteractionConfig = Field(default_factory=InteractionConfig)
     debug: bool = False
     calculated: Dict[str, float] = Field(default_factory=dict)
 
@@ -181,6 +206,7 @@ class SimulationDSL(BaseModel):
     forces: List[Force] = Field(default_factory=list)
     constraints: List[Constraint] = Field(default_factory=list)
     behaviors: List[Behavior] = Field(default_factory=list)
+    interactions: List[Interaction] = Field(default_factory=list)
     formulaBindings: List[FormulaBinding] = Field(default_factory=list)
     controls: Controls = Field(default_factory=Controls)
     observables: List[Observable] = Field(default_factory=list)
@@ -194,6 +220,7 @@ class SimulationDSL(BaseModel):
 class KnowledgeSection(BaseModel):
     relevant_formulas: List[str]
     related_concepts: List[str]
+    learningObjectives: List[str] = Field(default_factory=list)
 
 class MetadataSection(BaseModel):
     subject: str
