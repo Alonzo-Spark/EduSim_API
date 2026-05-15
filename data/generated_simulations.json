@@ -1,5 +1,646 @@
 [
   {
+    "id": "aeecdb33-1a6b-4954-9ea8-800daf4e0957",
+    "timestamp": "2026-05-15T08:24:52.138162+00:00",
+    "dsl": {
+      "meta": {
+        "id": "shm_pendulum_energy",
+        "title": "Pendulum: Energy Exchange in SHM",
+        "topic": "Simple Harmonic Motion",
+        "simulationType": "Mechanics",
+        "difficulty": "Grade 9-12",
+        "version": "3.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 1.0
+        },
+        "airResistance": 0.0,
+        "world": {
+          "width": 20.0,
+          "height": 12.0,
+          "unitSystem": "normalized"
+        },
+        "background": {
+          "color": "#0f172a"
+        },
+        "units": {
+          "length": "m",
+          "mass": "kg",
+          "time": "s",
+          "force": "N",
+          "energy": "J"
+        },
+        "camera": {
+          "mode": "auto-fit",
+          "padding": 0.2,
+          "allowZoom": true,
+          "allowPan": false
+        },
+        "boundaries": {
+          "enabled": false,
+          "type": "solid"
+        }
+      },
+      "objects": [
+        {
+          "id": "pivot_point",
+          "category": "environment",
+          "bodyType": "static",
+          "shape": {
+            "type": "circle",
+            "radius": 0.2
+          },
+          "position": {
+            "x": 10.0,
+            "y": 2.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 0.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": false,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#94a3b8",
+            "label": "Pivot",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false
+          }
+        },
+        {
+          "id": "bob",
+          "category": "physics-object",
+          "bodyType": "dynamic",
+          "shape": {
+            "type": "circle",
+            "radius": 0.6
+          },
+          "position": {
+            "x": 14.0,
+            "y": 2.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 2.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": true,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.0,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "Bob",
+            "showLabel": false,
+            "showVelocityVector": true,
+            "showTrail": true,
+            "asset": {
+              "enabled": true,
+              "assetId": "weight_heavy",
+              "scale": 1.2,
+              "rotationSync": true,
+              "anchor": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "forces": [],
+      "constraints": [
+        {
+          "id": "string",
+          "type": "distance",
+          "bodyA": "pivot_point",
+          "bodyB": "bob",
+          "length": 6.0,
+          "stiffness": 1.0,
+          "visual": {
+            "color": "#cbd5e1",
+            "lineWidth": 2
+          }
+        }
+      ],
+      "behaviors": [
+        {
+          "id": "damping_control",
+          "type": "airDrag",
+          "targets": [
+            "bob"
+          ],
+          "coefficient": 0.0,
+          "active": true
+        }
+      ],
+      "interactions": [
+        {
+          "id": "drag_bob",
+          "type": "drag",
+          "targets": [
+            "bob"
+          ]
+        }
+      ],
+      "formulaBindings": [
+        {
+          "id": "kinetic_energy_calc",
+          "formula": "KE = 1/2mv^2",
+          "variables": {
+            "m": {
+              "path": "objects[1].physics.mass",
+              "role": "independent"
+            },
+            "v": {
+              "path": "objects[1].velocity.magnitude",
+              "role": "dependent"
+            },
+            "KE": {
+              "path": "runtime.calculated.kineticEnergy",
+              "role": "dependent"
+            }
+          }
+        },
+        {
+          "id": "potential_energy_calc",
+          "formula": "PE = mgh",
+          "variables": {
+            "m": {
+              "path": "objects[1].physics.mass",
+              "role": "independent"
+            },
+            "g": {
+              "path": "environment.gravity.y",
+              "role": "independent"
+            },
+            "h": {
+              "path": "objects[1].position.y",
+              "role": "dependent"
+            },
+            "PE": {
+              "path": "runtime.calculated.potentialEnergy",
+              "role": "dependent"
+            }
+          }
+        }
+      ],
+      "controls": {
+        "parameters": [
+          {
+            "id": "length_slider",
+            "type": "slider",
+            "label": "String Length",
+            "symbol": "L",
+            "formulaReferences": [],
+            "bind": "constraints[0].length",
+            "min": 2.0,
+            "max": 8.0,
+            "step": 0.1
+          },
+          {
+            "id": "gravity_slider",
+            "type": "slider",
+            "label": "Gravity",
+            "symbol": "g",
+            "formulaReferences": [],
+            "bind": "environment.gravity.y",
+            "min": 0.1,
+            "max": 2.0,
+            "step": 0.1
+          },
+          {
+            "id": "damping_slider",
+            "type": "slider",
+            "label": "Friction",
+            "symbol": "b",
+            "formulaReferences": [],
+            "bind": "behaviors[0].coefficient",
+            "min": 0.0,
+            "max": 0.05,
+            "step": 0.001
+          }
+        ],
+        "actions": [
+          {
+            "id": "reset_sim",
+            "type": "button",
+            "label": "Reset",
+            "action": "resetSimulation"
+          }
+        ]
+      },
+      "observables": [
+        {
+          "id": "ke_val",
+          "label": "Kinetic Energy",
+          "source": "runtime.calculated.kineticEnergy",
+          "precision": 2
+        },
+        {
+          "id": "pe_val",
+          "label": "Potential Energy",
+          "source": "runtime.calculated.potentialEnergy",
+          "precision": 2
+        },
+        {
+          "id": "total_energy",
+          "label": "Total Energy",
+          "source": "runtime.calculated.totalEnergy",
+          "precision": 2
+        }
+      ],
+      "events": [],
+      "runtime": {
+        "engine": "matter-js",
+        "renderer": "pixi-js",
+        "fps": 60,
+        "scaling": {
+          "mode": "dynamic-auto-fit",
+          "baseUnit": 50,
+          "allowResponsiveResize": true
+        },
+        "paused": false,
+        "interaction": {
+          "allowDragging": true,
+          "allowZoom": true,
+          "allowPan": true
+        },
+        "debug": false,
+        "calculated": {
+          "kineticEnergy": 0.0,
+          "potentialEnergy": 0.0,
+          "totalEnergy": 0.0
+        }
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "T = 2\u03c0\u221a(L/g)",
+        "E_total = KE + PE",
+        "PE = mgh",
+        "KE = 1/2mv\u00b2"
+      ],
+      "related_concepts": [
+        "Conservation of Energy",
+        "Restoring Force",
+        "Oscillation Period",
+        "Damping"
+      ],
+      "learningObjectives": [
+        "Identify points of maximum Kinetic and Potential energy",
+        "Understand how string length affects oscillation period",
+        "Observe energy conservation in a closed system"
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "chapter": "Oscillations",
+      "difficulty": "Intermediate",
+      "curriculum": "General Science",
+      "simulationCategory": "Mechanics",
+      "renderer": "Matter.js + PixiJS",
+      "tags": [
+        "SHM",
+        "Pendulum",
+        "Energy Conservation",
+        "Kinetic Energy",
+        "Potential Energy"
+      ]
+    }
+  },
+  {
+    "id": "e20dd3f0-3a22-4cbd-90ba-07878f82d5e5",
+    "timestamp": "2026-05-15T08:23:24.210100+00:00",
+    "dsl": {
+      "meta": {
+        "id": "magnetic_field_visualization",
+        "title": "Magnetic Field Mapping",
+        "topic": "Electromagnetism",
+        "simulationType": "Field Physics",
+        "difficulty": "Grade 10",
+        "version": "1.0"
+      },
+      "environment": {
+        "gravity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "airResistance": 0.05,
+        "world": {
+          "width": 20.0,
+          "height": 12.0,
+          "unitSystem": "normalized"
+        },
+        "background": {
+          "color": "#ffffff"
+        },
+        "units": {
+          "length": "m",
+          "mass": "kg",
+          "time": "s",
+          "force": "N",
+          "energy": "J"
+        },
+        "camera": {
+          "mode": "auto-fit",
+          "padding": 0.1,
+          "allowZoom": true,
+          "allowPan": false
+        },
+        "boundaries": {
+          "enabled": true,
+          "type": "solid"
+        }
+      },
+      "objects": [
+        {
+          "id": "bar_magnet",
+          "category": "source",
+          "bodyType": "kinematic",
+          "shape": {
+            "type": "rectangle",
+            "width": 6.0,
+            "height": 1.5
+          },
+          "position": {
+            "x": 10.0,
+            "y": 6.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 100.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": false,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.5,
+            "restitution": 0.1
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#ef4444",
+            "label": "N          S",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": false,
+            "asset": {
+              "enabled": true,
+              "assetId": "barrel_metal",
+              "scale": 1.5,
+              "rotationSync": true,
+              "anchor": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            }
+          }
+        },
+        {
+          "id": "compass_needle",
+          "category": "probe",
+          "bodyType": "dynamic",
+          "shape": {
+            "type": "circle",
+            "radius": 0.4
+          },
+          "position": {
+            "x": 14.0,
+            "y": 4.0
+          },
+          "velocity": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "physics": {
+            "mass": 1.0,
+            "density": 1.0,
+            "fixedRotation": false,
+            "affectedByGravity": false,
+            "isSensor": false
+          },
+          "material": {
+            "friction": 0.1,
+            "restitution": 0.0
+          },
+          "collision": {
+            "enabled": true,
+            "group": "default"
+          },
+          "visual": {
+            "color": "#3b82f6",
+            "label": "Compass",
+            "showLabel": true,
+            "showVelocityVector": false,
+            "showTrail": true,
+            "asset": {
+              "enabled": true,
+              "assetId": "arrow_direction",
+              "scale": 0.8,
+              "rotationSync": true,
+              "anchor": {
+                "x": 0.5,
+                "y": 0.5
+              }
+            }
+          }
+        }
+      ],
+      "forces": [
+        {
+          "id": "magnetic_alignment",
+          "type": "magneticForce",
+          "target": "compass_needle",
+          "active": true
+        }
+      ],
+      "constraints": [],
+      "behaviors": [
+        {
+          "id": "field_alignment",
+          "type": "orbitMotion",
+          "targets": [
+            "compass_needle"
+          ],
+          "active": true
+        }
+      ],
+      "interactions": [
+        {
+          "id": "drag_compass",
+          "type": "drag",
+          "targets": [
+            "compass_needle",
+            "bar_magnet"
+          ]
+        },
+        {
+          "id": "reset_sim",
+          "type": "reset",
+          "targets": []
+        }
+      ],
+      "formulaBindings": [
+        {
+          "id": "magnetic_torque",
+          "formula": "\u03c4 = m \u00d7 B",
+          "variables": {
+            "m": {
+              "path": "objects[1].physics.mass",
+              "role": "independent"
+            },
+            "B": {
+              "path": "forces[0].strength",
+              "role": "independent"
+            },
+            "torque": {
+              "path": "runtime.calculated.angularVelocity",
+              "role": "dependent"
+            }
+          }
+        }
+      ],
+      "controls": {
+        "parameters": [
+          {
+            "id": "magnet_strength",
+            "type": "slider",
+            "label": "Magnet Strength",
+            "symbol": "B",
+            "formulaReferences": [],
+            "bind": "forces[0].strength",
+            "min": 0.0,
+            "max": 20.0,
+            "step": 1.0
+          },
+          {
+            "id": "magnet_rotation",
+            "type": "slider",
+            "label": "Rotate Magnet",
+            "symbol": "\u03b8",
+            "formulaReferences": [],
+            "bind": "objects[0].rotation",
+            "min": 0.0,
+            "max": 6.28,
+            "step": 0.1
+          }
+        ],
+        "actions": [
+          {
+            "id": "reset_btn",
+            "type": "button",
+            "label": "Clear Path",
+            "action": "resetSimulation"
+          }
+        ]
+      },
+      "observables": [
+        {
+          "id": "field_angle",
+          "label": "Needle Angle",
+          "source": "objects[1].rotation",
+          "precision": 2
+        },
+        {
+          "id": "dist_to_source",
+          "label": "Distance (r)",
+          "source": "runtime.calculated.displacement",
+          "precision": 2
+        }
+      ],
+      "events": [],
+      "runtime": {
+        "engine": "matter-js",
+        "renderer": "pixi-js",
+        "fps": 60,
+        "scaling": {
+          "mode": "dynamic-auto-fit",
+          "baseUnit": 50,
+          "allowResponsiveResize": true
+        },
+        "paused": false,
+        "interaction": {
+          "allowDragging": true,
+          "allowZoom": true,
+          "allowPan": false
+        },
+        "debug": false,
+        "calculated": {
+          "angularVelocity": 0.0,
+          "displacement": 0.0
+        }
+      }
+    },
+    "knowledge": {
+      "relevant_formulas": [
+        "B \u221d 1/r\u00b2",
+        "\u03c4 = mB sin(\u03b8)"
+      ],
+      "related_concepts": [
+        "Magnetic Flux",
+        "Dipole Moment",
+        "Field Lines",
+        "North and South Poles"
+      ],
+      "learningObjectives": [
+        "Visualize the direction of magnetic field lines",
+        "Observe how field strength decreases with distance",
+        "Understand that field lines form closed loops from North to South"
+      ]
+    },
+    "metadata": {
+      "subject": "Physics",
+      "chapter": "Magnetism",
+      "difficulty": "Intermediate",
+      "curriculum": "X Physics EM",
+      "simulationCategory": "Electromagnetism",
+      "renderer": "Matter.js + PixiJS",
+      "tags": [
+        "Magnet",
+        "Compass",
+        "Field Lines",
+        "Interactive"
+      ]
+    }
+  },
+  {
     "id": "dfdf4e83-8d30-42cb-b0d6-0a27287bce5f",
     "timestamp": "2026-05-14T10:23:29.738483+00:00",
     "dsl": {

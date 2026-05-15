@@ -3,47 +3,295 @@ import re
 
 def detect_subject(query: str) -> str:
     """
-    Lightweight keyword-based subject routing to avoid LLM overhead.
-    Returns: 'physics', 'chemistry', or 'maths'. Defaults to 'physics'.
+    Lightweight keyword-based subject routing
+    for educational textbook retrieval.
     """
+
     q = query.lower()
-    
-    # Physics keywords
+
+    # =====================================================
+    # PHYSICS KEYWORDS
+    # =====================================================
     physics_keywords = [
-        "force", "motion", "gravity", "velocity", "acceleration", 
-        "newton", "momentum", "energy", "power", "work", 
-        "optics", "light", "sound", "wave", "current", "voltage"
+
+        # Mechanics
+        "force",
+        "motion",
+        "gravity",
+        "velocity",
+        "acceleration",
+        "speed",
+        "distance",
+        "displacement",
+        "momentum",
+        "friction",
+        "inertia",
+        "newton",
+        "work",
+        "energy",
+        "power",
+
+        # Waves & Sound
+        "wave",
+        "sound",
+        "frequency",
+        "amplitude",
+        "wavelength",
+        "echo",
+        "ultrasound",
+
+        # Light & Optics
+        "light",
+        "reflection",
+        "refraction",
+        "mirror",
+        "lens",
+        "optics",
+        "prism",
+
+        # Electricity & Magnetism
+        "electricity",
+        "electric current",
+        "voltage",
+        "resistance",
+        "circuit",
+        "battery",
+        "magnet",
+        "magnetic field",
+
+        # Heat
+        "temperature",
+        "heat",
+        "thermal",
+        "conduction",
+        "convection",
+        "radiation",
+
+        # Modern Physics
+        "atom",
+        "nuclear",
+        "radioactivity",
+        "electron",
+        "proton",
+        "neutron"
     ]
-    
-    # Chemistry keywords
+
+    # =====================================================
+    # CHEMISTRY KEYWORDS
+    # =====================================================
     chemistry_keywords = [
-        "atom", "molecule", "bond", "reaction", "acid", "base",
-        "ph", "electron", "proton", "neutron", "periodic table",
-        "molar", "oxidation", "reduction", "gas law", "compound"
+
+        # Basic Chemistry
+        "molecule",
+        "compound",
+        "element",
+        "mixture",
+        "solution",
+
+        # Atomic Structure
+        "atom",
+        "electron",
+        "proton",
+        "neutron",
+        "nucleus",
+
+        # Reactions
+        "reaction",
+        "chemical reaction",
+        "oxidation",
+        "reduction",
+        "combustion",
+
+        # Acids & Bases
+        "acid",
+        "base",
+        "ph",
+        "neutralization",
+
+        # Bonding
+        "bond",
+        "ionic bond",
+        "covalent bond",
+
+        # Periodic Table
+        "periodic table",
+        "metal",
+        "nonmetal",
+        "metalloid",
+
+        # States of Matter
+        "solid",
+        "liquid",
+        "gas",
+        "evaporation",
+        "condensation",
+
+        # Organic Chemistry
+        "hydrocarbon",
+        "carbon",
+        "organic compound",
+
+        # Quantities
+        "mole",
+        "molarity",
+        "molality"
     ]
-    
-    # Maths keywords
+
+    # =====================================================
+    # MATHEMATICS KEYWORDS
+    # =====================================================
     maths_keywords = [
-        "algebra", "geometry", "calculus", "trigonometry", "equation",
-        "polynomial", "derivative", "integral", "matrix", "vector",
-        "probability", "statistics", "triangle", "circle", "area"
+
+        # Algebra
+        "algebra",
+        "equation",
+        "linear equation",
+        "quadratic equation",
+        "polynomial",
+        "factorization",
+
+        # Geometry
+        "geometry",
+        "triangle",
+        "circle",
+        "rectangle",
+        "square",
+        "perimeter",
+        "area",
+        "volume",
+        "surface area",
+
+        # Trigonometry
+        "trigonometry",
+        "sin",
+        "cos",
+        "tan",
+        "angle",
+
+        # Calculus
+        "calculus",
+        "derivative",
+        "integration",
+        "integral",
+        "differentiation",
+        "limit",
+
+        # Coordinate Geometry
+        "coordinate geometry",
+        "graph",
+        "slope",
+        "distance formula",
+
+        # Statistics & Probability
+        "statistics",
+        "probability",
+        "mean",
+        "median",
+        "mode",
+
+        # Linear Algebra
+        "matrix",
+        "vector",
+
+        # Arithmetic
+        "percentage",
+        "ratio",
+        "proportion",
+        "profit",
+        "loss",
+        "simple interest",
+        "compound interest",
+
+        # Number System
+        "number system",
+        "prime number",
+        "rational number",
+        "irrational number"
     ]
-    
-    # Simple scoring
-    physics_score = sum(1 for k in physics_keywords if k in q)
-    chemistry_score = sum(1 for k in chemistry_keywords if k in q)
-    maths_score = sum(1 for k in maths_keywords if k in q)
-    
+
+    # =====================================================
+    # BIOLOGY KEYWORDS
+    # =====================================================
+    biology_keywords = [
+
+        # Cell Biology
+        "cell",
+        "cell membrane",
+        "nucleus",
+        "mitochondria",
+
+        # Genetics
+        "dna",
+        "gene",
+        "genetics",
+        "chromosome",
+        "heredity",
+
+        # Human Body
+        "human body",
+        "heart",
+        "brain",
+        "lungs",
+        "kidney",
+        "digestive system",
+        "respiratory system",
+        "circulatory system",
+
+        # Plants
+        "plant",
+        "photosynthesis",
+        "transpiration",
+
+        # Animals
+        "animal",
+        "vertebrate",
+        "invertebrate",
+
+        # Ecology
+        "ecosystem",
+        "food chain",
+        "environment",
+        "biodiversity",
+
+        # Life Processes
+        "respiration",
+        "nutrition",
+        "reproduction",
+
+        # Microbiology
+        "bacteria",
+        "virus",
+        "fungi",
+
+        # Evolution
+        "evolution",
+        "adaptation",
+
+        # Health
+        "disease",
+        "immunity",
+        "vaccine"
+    ]
+
+    # =====================================================
+    # SCORING
+    # =====================================================
     scores = {
-        "physics": physics_score,
-        "chemistry": chemistry_score,
-        "maths": maths_score
+        "physics": sum(1 for k in physics_keywords if k in q),
+        "chemistry": sum(1 for k in chemistry_keywords if k in q),
+        "maths": sum(1 for k in maths_keywords if k in q),
+        "biology": sum(1 for k in biology_keywords if k in q),
     }
-    
+
+    # =====================================================
+    # BEST MATCH
+    # =====================================================
     best_match = max(scores, key=scores.get)
-    
-    # Default to physics if no strong match
+
+    # =====================================================
+    # DEFAULT FALLBACK
+    # =====================================================
     if scores[best_match] == 0:
         return "physics"
-        
+
     return best_match

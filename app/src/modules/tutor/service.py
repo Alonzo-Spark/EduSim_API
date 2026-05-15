@@ -78,14 +78,21 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
     except Exception as e:
         return _empty_tutor_payload(f"AI error: {str(e)}")
 
-async def generate_explanation_async(query: str, context: str) -> str:
-    from rag.generator import generate_llm_text_async
-    prompt = (
-        "You are an intelligent educational tutor. Use the context to clearly explain the query. "
-        f"Context:\n{context}\n\nQuery:\n{query}"
-    )
+async def generate_explanation_async(query: str, context: str, fallback_mode: bool = False) -> str:
+    from rag.generator import generate_llm_text_async, get_tutor_prompt
+    prompt = get_tutor_prompt(context, query, fallback_mode)
     res = await generate_llm_text_async(prompt, temperature=0.3)
-    return res if res else "Failed to generate explanation."
+    
+    if not res:
+        return "Failed to generate explanation."
+        
+    if fallback_mode:
+        warning_msg = (
+            "This topic is not available in the provided textbook context.\n\n"
+            "The following explanation is AI-generated and may not exactly match your textbook.\n\n"
+        )
+        return warning_msg + res
+    return res
 
 async def analyze_tutor_query(query: str) -> Dict[str, Any]:
     request_started = time.perf_counter()
@@ -98,9 +105,15 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
     context = ""
     retrieval_start = time.perf_counter()
     
+    valid_docs = []
     if retriever:
         docs = retriever(query)
-        for doc in docs[:3]: # Optimized to 3
+        valid_docs = [doc for doc in docs if doc.get('score', 0) > 0.35]
+        
+    fallback_mode = not bool(valid_docs)
+    
+    if not fallback_mode:
+        for doc in valid_docs[:3]: # Optimized to 3
             source = os.path.basename(doc.get("source", "Textbook"))
             content = re.sub(r'\s+', ' ', doc.get("text", "")).strip()
             if len(content) > 400: content = content[:400] + "..."
@@ -117,7 +130,7 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
     llm_start = time.perf_counter()
     
     structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
-    explanation_task = asyncio.create_task(generate_explanation_async(query, context))
+    explanation_task = asyncio.create_task(generate_explanation_async(query, context, fallback_mode))
     
     structured, rag_explanation = await asyncio.gather(structured_task, explanation_task)
     
@@ -156,9 +169,16 @@ async def analyze_tutor_query_stream(query: str):
     
     rag_content = []
     context = ""
+    valid_docs = []
+    
     if retriever:
         docs = retriever(query)
-        for doc in docs[:3]:
+        valid_docs = [doc for doc in docs if doc.get('score', 0) > 0.35]
+        
+    fallback_mode = not bool(valid_docs)
+    
+    if not fallback_mode:
+        for doc in valid_docs[:3]:
             source = os.path.basename(doc.get("source", "Textbook"))
             content = re.sub(r'\s+', ' ', doc.get("text", "")).strip()
             if len(content) > 400: content = content[:400] + "..."
@@ -171,12 +191,19 @@ async def analyze_tutor_query_stream(query: str):
     # Yield RAG Content immediately
     yield f"data: {json.dumps({'ragContent': rag_content})}\n\n"
     
+    if fallback_mode:
+        warning_msg = (
+            "This topic is not available in the provided textbook context.\n\n"
+            "The following explanation is AI-generated and may not exactly match your textbook.\n\n"
+        )
+        yield f"data: {json.dumps({'content': warning_msg})}\n\n"
+    
     # Start structured task
     structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
     
     # Stream explanation text
-    from rag.generator import generate_llm_stream_async
-    prompt = f"You are an educational tutor. Use the context to explain the query clearly.\nContext:\n{context}\n\nQuery:\n{query}"
+    from rag.generator import generate_llm_stream_async, get_tutor_prompt
+    prompt = get_tutor_prompt(context, query, fallback_mode)
     
     async for chunk in generate_llm_stream_async(prompt):
         yield chunk

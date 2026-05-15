@@ -2,7 +2,7 @@ import numpy as np
 import faiss
 
 
-def get_retriever(index, metadata, embeddings_model, k=3):
+def get_retriever(index, metadata, embeddings_model, k=5):
 
     def retrieve(query: str):
 
@@ -46,7 +46,7 @@ def get_retriever(index, metadata, embeddings_model, k=3):
                     score = float(distances[0][i])
 
                     # Skip weak matches
-                    if score < 0.15:
+                    if score < 0.28:
                         continue
 
                     # Copy metadata

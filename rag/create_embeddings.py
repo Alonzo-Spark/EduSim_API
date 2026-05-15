@@ -1,16 +1,20 @@
 import os
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
 import faiss
 import numpy as np
 import pickle
-from pathlib import Path
 import shutil
 
 from rag.loader import load_pdf
 from rag.splitter import split_docs
 from rag.embedder import get_embeddings
 
-DATA_DIR = Path("data")
-VECTORSTORE_DIR = Path("vectorstore")
+ROOT_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = ROOT_DIR / "data"
+VECTORSTORE_DIR = ROOT_DIR / "vectorstore"
 
 def create_embeddings_for_subject(pdf_path: Path, subject: str, embeddings_model):
     print(f"\n=========================================")
