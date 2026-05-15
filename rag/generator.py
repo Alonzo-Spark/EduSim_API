@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import httpx
 from dotenv import load_dotenv
+from utils.usage_tracker import log_usage
 
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
@@ -40,6 +41,15 @@ def _generate_openrouter_text(prompt: str, model_name: str, temperature: float, 
             response.raise_for_status()
             data = response.json()
             if "choices" in data and len(data["choices"]) > 0:
+                # Log Usage
+                usage = data.get("usage", {})
+                if usage:
+                    log_usage(
+                        model=data.get("model", model_name),
+                        prompt_tokens=usage.get("prompt_tokens", 0),
+                        completion_tokens=usage.get("completion_tokens", 0),
+                        total_tokens=usage.get("total_tokens", 0)
+                    )
                 return data["choices"][0]["message"]["content"].strip()
             return None
     except Exception as e:
@@ -81,6 +91,15 @@ async def _generate_openrouter_text_async(prompt: str, model_name: str, temperat
             response.raise_for_status()
             data = response.json()
             if "choices" in data and len(data["choices"]) > 0:
+                # Log Usage
+                usage = data.get("usage", {})
+                if usage:
+                    log_usage(
+                        model=data.get("model", model_name),
+                        prompt_tokens=usage.get("prompt_tokens", 0),
+                        completion_tokens=usage.get("completion_tokens", 0),
+                        total_tokens=usage.get("total_tokens", 0)
+                    )
                 return data["choices"][0]["message"]["content"].strip()
             return None
     except Exception as e:
@@ -119,7 +138,8 @@ async def generate_llm_stream_async(final_prompt: str, temperature: float = 0.3,
                     "messages": [{"role": "user", "content": final_prompt}],
                     "temperature": temperature,
                     "max_tokens": max_output_tokens,
-                    "stream": True
+                    "stream": True,
+                    "stream_options": {"include_usage": true}
                 },
             ) as response:
                 response.raise_for_status()
@@ -130,6 +150,18 @@ async def generate_llm_stream_async(final_prompt: str, temperature: float = 0.3,
                             break
                         try:
                             data = json.loads(data_str)
+                            
+                            # Handle usage chunk (usually the last one)
+                            if "usage" in data and data["usage"]:
+                                usage = data["usage"]
+                                log_usage(
+                                    model=data.get("model", OPENROUTER_MODEL),
+                                    prompt_tokens=usage.get("prompt_tokens", 0),
+                                    completion_tokens=usage.get("completion_tokens", 0),
+                                    total_tokens=usage.get("total_tokens", 0)
+                                )
+                                yield f"data: {json.dumps({'usage': usage})}\n\n"
+
                             if "choices" in data and len(data["choices"]) > 0:
                                 delta = data["choices"][0].get("delta", {}).get("content", "")
                                 if delta:

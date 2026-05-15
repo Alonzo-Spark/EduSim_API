@@ -6,6 +6,7 @@ from app.src.api.simulation_router import simulation_router
 from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
 from app.src.api.generate_router import generate_router
+from app.src.api.usage_router import usage_router
 
 # Configure global logging
 logging.basicConfig(
@@ -69,4 +70,8 @@ app.include_router(
 app.include_router(
     tutor_router,
     prefix="/api/tutor"
+)
+app.include_router(
+    usage_router,
+    prefix="/api/admin"
 )
