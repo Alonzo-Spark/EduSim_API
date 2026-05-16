@@ -8,9 +8,9 @@ import numpy as np
 import pickle
 import shutil
 
-from rag.loader import load_pdf
-from rag.splitter import split_docs
-from rag.embedder import get_embeddings
+from .loader import load_pdf
+from .splitter import split_docs
+from .embedder import get_embeddings
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT_DIR / "data"

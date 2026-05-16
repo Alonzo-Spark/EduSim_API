@@ -299,8 +299,8 @@ async def generate_llm_stream_async(
 # PREMIUM EDUCATIONAL RESPONSE GENERATOR
 # =========================================================
 def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -> str:
-    from rag.topic_type import detect_topic_type, get_dynamic_sections
-    from rag.query_intent import detect_query_intent, get_intent_structure
+    from .topic_type import detect_topic_type, get_dynamic_sections
+    from ..tutor.query_intent import detect_query_intent, get_intent_structure
     
     topic_type = detect_topic_type(question, context)
     topic_structure = get_dynamic_sections(topic_type)

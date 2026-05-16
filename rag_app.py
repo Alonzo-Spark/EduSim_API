@@ -1,12 +1,12 @@
 import os
 from dotenv import load_dotenv
 
-from rag.loader import load_all_pdfs
-from rag.splitter import split_docs
-from rag.embedder import get_embeddings
-from rag.vector_store import create_vector_store
-from rag.retriever import get_retriever
-from rag.generator import generate_response
+from app.src.modules.rag.loader import load_all_pdfs
+from app.src.modules.rag.splitter import split_docs
+from app.src.modules.rag.embedder import get_embeddings
+from app.src.modules.rag.vector_store import create_vector_store
+from app.src.modules.rag.retriever import get_retriever
+from app.src.modules.rag.generator import generate_response
 
 # Load environment variables
 load_dotenv()

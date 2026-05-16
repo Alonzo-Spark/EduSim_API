@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.src.modules.physics.rag.controller import rag_query_controller, RagQueryRequest
+from app.src.modules.rag.controller import rag_query_controller, RagQueryRequest
 
 rag_router = APIRouter()
 

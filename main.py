@@ -1,7 +1,7 @@
 import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from rag.loader import load_all_pdfs
+from app.src.modules.rag import load_all_pdfs
 from app.src.api.simulation_router import simulation_router
 from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
@@ -16,7 +16,7 @@ logger = logging.getLogger("EduSim")
 logger.info("EduSim Backend Starting Up...")
 
 from contextlib import asynccontextmanager
-from rag.vector_loader import vector_store
+from app.src.modules.rag import vector_store
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

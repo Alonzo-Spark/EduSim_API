@@ -4,8 +4,8 @@ import pickle
 from pathlib import Path
 from typing import Dict, Any, Tuple
 
-from rag.embedder import get_embeddings
-from rag.retriever import get_retriever
+from .embedder import get_embeddings
+from .retriever import get_retriever
 
 VECTORSTORE_DIR = Path("vectorstore")
 

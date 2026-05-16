@@ -1,15 +1,16 @@
 import os
-from rag.loader import load_all_pdfs
-from rag.splitter import split_docs
-from rag.embedder import get_embeddings
-from rag.vector_store import create_vector_store
+from .loader import load_all_pdfs
+from .splitter import split_docs
+from .embedder import get_embeddings
+from .vector_store import create_vector_store
 
 def rebuild():
     print("=========================================")
     print("Rebuilding RAG Index")
     print("=========================================")
     
-    data_dir = os.path.join(os.path.dirname(__file__), "data")
+    # Path relative to project root
+    data_dir = "data"
     
     print(f"\n1. Loading all PDFs from {data_dir}...")
     docs = load_all_pdfs(data_dir)
