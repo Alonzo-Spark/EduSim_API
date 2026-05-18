@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 # =========================================================
 # LOAD ENV
 # =========================================================
-load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+load_dotenv(Path(__file__).resolve().parents[4] / ".env")
 
 # =========================================================
 # LLM MODELS

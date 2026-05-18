@@ -1,3 +1,11 @@
+import sys
+import os
+# Configure Python Path to allow loading absolute namespaces (rag, tutor, sandbox)
+root_dir = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(root_dir)
+sys.path.append(os.path.join(root_dir, "app", "src"))
+sys.path.append(os.path.join(root_dir, "app", "src", "modules"))
+
 import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,6 +14,7 @@ from app.src.api.simulation_router import simulation_router
 from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
 from app.src.api.generate_router import generate_router
+from app.src.modules.sandbox.controller import sandbox_router
 
 # Configure global logging
 logging.basicConfig(
@@ -53,6 +62,11 @@ async def root():
 
 app.include_router(
     generate_router,
+    prefix="/api"
+)
+
+app.include_router(
+    sandbox_router,
     prefix="/api"
 )
 

@@ -13,7 +13,7 @@ from .prompt_builder import build_dsl_prompt as _build_dsl_prompt
 from .sanitizer import sanitize_json
 from .validator import validate_simulation
 from rag.vector_loader import vector_store
-from rag.subject_router import detect_subject
+from tutor.subject_classifier import detect_subject
 
 PERSISTENCE_FILE = Path("data/generated_simulations.json")
 _store_lock = Lock()
@@ -83,11 +83,34 @@ def generate_simulation_synthesis(prompt: str, topic: str | None = None):
     # 5. Validate
     valid_response = validate_dsl(response_json)
     
+    # Compile and Serialize using the unified Sandbox & Serializer subsystem!
+    try:
+        from app.src.modules.sandbox.initialization.sandbox_initializer import SandboxInitializer
+        from app.src.modules.sandbox.state.runtime_store import RuntimeStore
+        from app.src.modules.sandbox.serializers import RuntimeSerializer
+
+        spec_data = valid_response.get("dsl", valid_response)
+        
+        # Run physical compiler pipeline
+        initializer = SandboxInitializer()
+        sandbox_schema = initializer.pipeline.execute(spec_data)
+        
+        # Hydrate state store
+        store = RuntimeStore(sandbox_schema)
+        store.observables.evaluate_all(store.objects, store.get_gravity_y(), 0)
+        
+        # Serialize the master initial JSON payload
+        compiled_payload = RuntimeSerializer.serialize_full(store)
+    except Exception as compile_err:
+        print(f"⚠️ API Synthesis Compilation/Serialization failed: {compile_err}")
+        compiled_payload = None
+
     simulation_id = str(uuid4())
     item = {
         "id": simulation_id,
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        **valid_response
+        **valid_response,
+        "payload": compiled_payload
     }
 
     with _store_lock:
@@ -149,10 +172,34 @@ def generate_simulation_synthesis_stream(prompt: str, topic: str | None = None):
 
         # 6. Save
         yield _format_sse_event("progress", {"stage": "Saving to store..."})
+        
+        # Compile and Serialize using the unified Sandbox & Serializer subsystem!
+        try:
+            from app.src.modules.sandbox.initialization.sandbox_initializer import SandboxInitializer
+            from app.src.modules.sandbox.state.runtime_store import RuntimeStore
+            from app.src.modules.sandbox.serializers import RuntimeSerializer
+
+            spec_data = valid_response.get("dsl", valid_response)
+            
+            # Run physical compiler pipeline
+            initializer = SandboxInitializer()
+            sandbox_schema = initializer.pipeline.execute(spec_data)
+            
+            # Hydrate state store
+            store = RuntimeStore(sandbox_schema)
+            store.observables.evaluate_all(store.objects, store.get_gravity_y(), 0)
+            
+            # Serialize the master initial JSON payload
+            compiled_payload = RuntimeSerializer.serialize_full(store)
+        except Exception as compile_err:
+            print(f"⚠️ API Stream Synthesis Compilation/Serialization failed: {compile_err}")
+            compiled_payload = None
+
         item = {
             "id": simulation_id,
             "timestamp": datetime.now(timezone.utc).isoformat(),
-            **valid_response
+            **valid_response,
+            "payload": compiled_payload
         }
 
         with _store_lock:

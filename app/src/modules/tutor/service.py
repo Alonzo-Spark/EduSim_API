@@ -17,7 +17,7 @@ load_dotenv(Path(__file__).resolve().parents[4] / ".env")
 
 # RAG Setup
 from rag.vector_loader import vector_store
-from rag.subject_router import detect_subject
+from tutor.subject_classifier import detect_subject
 import asyncio
 
 # Curriculum Index Cache

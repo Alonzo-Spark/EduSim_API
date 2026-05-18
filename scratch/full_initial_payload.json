@@ -1,0 +1,552 @@
+{
+  "metadata": {
+    "id": "4165cc2a-332d-461c-b744-1bb5ee1eae54",
+    "schema_version": "2.0.0",
+    "created_at": "2026-05-18T07:07:11.164195+00:00",
+    "updated_at": "2026-05-18T07:07:11.164267+00:00",
+    "author": "system",
+    "is_template": false,
+    "tutor_context": {
+      "learning_objectives": [],
+      "key_concepts": [],
+      "prerequisite_ids": [],
+      "assessment_questions": []
+    }
+  },
+  "environment": {
+    "gravity": {
+      "x": 0.0,
+      "y": 1.0,
+      "scale": 1.0
+    },
+    "wind": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "medium": {
+      "medium_type": "vacuum",
+      "density": 1.2,
+      "viscosity": 1.8e-05
+    }
+  },
+  "objects": [
+    {
+      "id": "ceiling",
+      "role": "body",
+      "shape": "rectangle",
+      "dimensions": {},
+      "label": "Ceiling",
+      "render": {
+        "color": "#4A90E2",
+        "stroke_color": "#2C3E50",
+        "stroke_width": 2,
+        "visible": true
+      },
+      "physics": {
+        "position": {
+          "x": 10.0,
+          "y": 1.0
+        },
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "acceleration": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "angle": 0.0,
+        "angular_velocity": 0.0,
+        "angular_acceleration": 0.0,
+        "net_force": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "torque": 0.0,
+        "mass": 1.0,
+        "inertia": 800.0,
+        "is_static": false,
+        "is_sleeping": false,
+        "is_sensor": false
+      },
+      "derived": {
+        "kinetic_energy": 0.0,
+        "rotational_energy": 0.0,
+        "momentum": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      "interaction": {
+        "is_visible": true,
+        "is_selected": false,
+        "is_hovered": false,
+        "colliding_with": []
+      }
+    },
+    {
+      "id": "mass_block",
+      "role": "body",
+      "shape": "rectangle",
+      "dimensions": {},
+      "label": "Mass_block",
+      "render": {
+        "color": "#4A90E2",
+        "stroke_color": "#2C3E50",
+        "stroke_width": 2,
+        "visible": true
+      },
+      "physics": {
+        "position": {
+          "x": 10.0,
+          "y": 6.0
+        },
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "acceleration": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "angle": 0.0,
+        "angular_velocity": 0.0,
+        "angular_acceleration": 0.0,
+        "net_force": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "torque": 0.0,
+        "mass": 2.0,
+        "inertia": 1600.0,
+        "is_static": false,
+        "is_sleeping": false,
+        "is_sensor": false
+      },
+      "derived": {
+        "kinetic_energy": 0.0,
+        "rotational_energy": 0.0,
+        "momentum": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      "interaction": {
+        "is_visible": true,
+        "is_selected": false,
+        "is_hovered": false,
+        "colliding_with": []
+      }
+    }
+  ],
+  "constraints": [],
+  "controls": [],
+  "observables": [
+    {
+      "id": "amplitude",
+      "name": "Observable",
+      "observable_type": "direct",
+      "value": 0.0,
+      "unit": "",
+      "derivation_formula": null,
+      "target_object_ids": [],
+      "display": {
+        "display_mode": "numeric",
+        "color": "#00D4FF",
+        "visible": true,
+        "show_on_canvas": false,
+        "label": "Observable",
+        "min_value": null,
+        "max_value": null
+      },
+      "tutor": {
+        "concept_tags": [],
+        "tutor_questions": [],
+        "importance": 3
+      }
+    },
+    {
+      "id": "energy_total",
+      "name": "Observable",
+      "observable_type": "direct",
+      "value": 0.0,
+      "unit": "",
+      "derivation_formula": null,
+      "target_object_ids": [],
+      "display": {
+        "display_mode": "numeric",
+        "color": "#00D4FF",
+        "visible": true,
+        "show_on_canvas": false,
+        "label": "Observable",
+        "min_value": null,
+        "max_value": null
+      },
+      "tutor": {
+        "concept_tags": [],
+        "tutor_questions": [],
+        "importance": 3
+      }
+    },
+    {
+      "id": "velocity_y",
+      "name": "Observable",
+      "observable_type": "direct",
+      "value": 0.0,
+      "unit": "",
+      "derivation_formula": null,
+      "target_object_ids": [],
+      "display": {
+        "display_mode": "numeric",
+        "color": "#00D4FF",
+        "visible": true,
+        "show_on_canvas": false,
+        "label": "Observable",
+        "min_value": null,
+        "max_value": null
+      },
+      "tutor": {
+        "concept_tags": [],
+        "tutor_questions": [],
+        "importance": 3
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "newton_2nd_ceiling",
+      "name": "Newton's Second Law for Object 1",
+      "scope": "object",
+      "concept_tags": [
+        "forces",
+        "newtons_laws"
+      ],
+      "formula_latex": "F = m a",
+      "formula_sympy": "F - m * a",
+      "variable_map": [
+        {
+          "symbol": "F",
+          "description": "Net Force acting on Object 1",
+          "object_id": "ceiling",
+          "property_path": "runtime.net_force",
+          "observable_id": null,
+          "unit": "N"
+        },
+        {
+          "symbol": "m",
+          "description": "Mass of Object 1",
+          "object_id": "ceiling",
+          "property_path": "physics.mass",
+          "observable_id": null,
+          "unit": "kg"
+        },
+        {
+          "symbol": "a",
+          "description": "Live acceleration of Object 1",
+          "object_id": "ceiling",
+          "property_path": null,
+          "observable_id": null,
+          "unit": "m/s^2"
+        }
+      ],
+      "curriculum_level": "high_school",
+      "misconceptions": [],
+      "tutor_hints": [
+        "What is the total sum of all forces acting on this object?",
+        "If you double the mass but keep the force the same, what happens to the acceleration?",
+        "Does the net force vector point in the same direction as the acceleration?"
+      ],
+      "extra_context": {}
+    },
+    {
+      "id": "momentum_ceiling",
+      "name": "Linear Momentum of Object 1",
+      "scope": "object",
+      "concept_tags": [
+        "momentum",
+        "collisions"
+      ],
+      "formula_latex": "p = m v",
+      "formula_sympy": "p - m * v",
+      "variable_map": [
+        {
+          "symbol": "p",
+          "description": "Momentum of Object 1",
+          "object_id": "ceiling",
+          "property_path": "runtime.momentum",
+          "observable_id": null,
+          "unit": "kg*m/s"
+        },
+        {
+          "symbol": "m",
+          "description": "Mass of Object 1",
+          "object_id": "ceiling",
+          "property_path": "physics.mass",
+          "observable_id": null,
+          "unit": "kg"
+        },
+        {
+          "symbol": "v",
+          "description": "Live velocity of Object 1",
+          "object_id": "ceiling",
+          "property_path": null,
+          "observable_id": null,
+          "unit": "m/s"
+        }
+      ],
+      "curriculum_level": "middle_school",
+      "misconceptions": [],
+      "tutor_hints": [
+        "If two moving objects collide, what can we say about their combined momentum?",
+        "Which has more momentum: a slow-moving heavy truck, or a fast-moving light bullet?"
+      ],
+      "extra_context": {}
+    },
+    {
+      "id": "newton_2nd_mass_block",
+      "name": "Newton's Second Law for Object 2",
+      "scope": "object",
+      "concept_tags": [
+        "forces",
+        "newtons_laws"
+      ],
+      "formula_latex": "F = m a",
+      "formula_sympy": "F - m * a",
+      "variable_map": [
+        {
+          "symbol": "F",
+          "description": "Net Force acting on Object 2",
+          "object_id": "mass_block",
+          "property_path": "runtime.net_force",
+          "observable_id": null,
+          "unit": "N"
+        },
+        {
+          "symbol": "m",
+          "description": "Mass of Object 2",
+          "object_id": "mass_block",
+          "property_path": "physics.mass",
+          "observable_id": null,
+          "unit": "kg"
+        },
+        {
+          "symbol": "a",
+          "description": "Live acceleration of Object 2",
+          "object_id": "mass_block",
+          "property_path": null,
+          "observable_id": null,
+          "unit": "m/s^2"
+        }
+      ],
+      "curriculum_level": "high_school",
+      "misconceptions": [],
+      "tutor_hints": [
+        "What is the total sum of all forces acting on this object?",
+        "If you double the mass but keep the force the same, what happens to the acceleration?",
+        "Does the net force vector point in the same direction as the acceleration?"
+      ],
+      "extra_context": {}
+    },
+    {
+      "id": "momentum_mass_block",
+      "name": "Linear Momentum of Object 2",
+      "scope": "object",
+      "concept_tags": [
+        "momentum",
+        "collisions"
+      ],
+      "formula_latex": "p = m v",
+      "formula_sympy": "p - m * v",
+      "variable_map": [
+        {
+          "symbol": "p",
+          "description": "Momentum of Object 2",
+          "object_id": "mass_block",
+          "property_path": "runtime.momentum",
+          "observable_id": null,
+          "unit": "kg*m/s"
+        },
+        {
+          "symbol": "m",
+          "description": "Mass of Object 2",
+          "object_id": "mass_block",
+          "property_path": "physics.mass",
+          "observable_id": null,
+          "unit": "kg"
+        },
+        {
+          "symbol": "v",
+          "description": "Live velocity of Object 2",
+          "object_id": "mass_block",
+          "property_path": null,
+          "observable_id": null,
+          "unit": "m/s"
+        }
+      ],
+      "curriculum_level": "middle_school",
+      "misconceptions": [],
+      "tutor_hints": [
+        "If two moving objects collide, what can we say about their combined momentum?",
+        "Which has more momentum: a slow-moving heavy truck, or a fast-moving light bullet?"
+      ],
+      "extra_context": {}
+    },
+    {
+      "id": "drag_ceiling",
+      "name": "Fluid Drag on Object 1",
+      "scope": "object",
+      "concept_tags": [
+        "drag",
+        "forces",
+        "fluids"
+      ],
+      "formula_latex": "F_d = \\frac{1}{2} \\rho v^2 C_d A",
+      "formula_sympy": "F_d - 0.5 * rho * v**2 * C_d * A",
+      "variable_map": [
+        {
+          "symbol": "F_d",
+          "description": "Fluid drag resistance on Object 1",
+          "object_id": "ceiling",
+          "property_path": "runtime.drag_force",
+          "observable_id": null,
+          "unit": "N"
+        },
+        {
+          "symbol": "rho",
+          "description": "Density of the surrounding medium",
+          "object_id": null,
+          "property_path": "atmosphere.air_density",
+          "observable_id": null,
+          "unit": "kg/m^3"
+        },
+        {
+          "symbol": "v",
+          "description": "Velocity of Object 1 relative to medium",
+          "object_id": "ceiling",
+          "property_path": null,
+          "observable_id": null,
+          "unit": "m/s"
+        },
+        {
+          "symbol": "C_d",
+          "description": "Shape drag coefficient",
+          "object_id": "ceiling",
+          "property_path": "physics.drag_coefficient",
+          "observable_id": null,
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "A",
+          "description": "Projected frontal area",
+          "object_id": "ceiling",
+          "property_path": "physics.cross_sectional_area",
+          "observable_id": null,
+          "unit": "m^2"
+        }
+      ],
+      "curriculum_level": "high_school",
+      "misconceptions": [],
+      "tutor_hints": [
+        "How does doubling the speed affect the drag force? Why is driving at high speed so air-resistant?",
+        "What happens to terminal velocity when you increase the cross-sectional area (A) like opening a parachute?",
+        "How does entering standard water density versus earth air density change the drag experience?"
+      ],
+      "extra_context": {}
+    },
+    {
+      "id": "drag_mass_block",
+      "name": "Fluid Drag on Object 2",
+      "scope": "object",
+      "concept_tags": [
+        "drag",
+        "forces",
+        "fluids"
+      ],
+      "formula_latex": "F_d = \\frac{1}{2} \\rho v^2 C_d A",
+      "formula_sympy": "F_d - 0.5 * rho * v**2 * C_d * A",
+      "variable_map": [
+        {
+          "symbol": "F_d",
+          "description": "Fluid drag resistance on Object 2",
+          "object_id": "mass_block",
+          "property_path": "runtime.drag_force",
+          "observable_id": null,
+          "unit": "N"
+        },
+        {
+          "symbol": "rho",
+          "description": "Density of the surrounding medium",
+          "object_id": null,
+          "property_path": "atmosphere.air_density",
+          "observable_id": null,
+          "unit": "kg/m^3"
+        },
+        {
+          "symbol": "v",
+          "description": "Velocity of Object 2 relative to medium",
+          "object_id": "mass_block",
+          "property_path": null,
+          "observable_id": null,
+          "unit": "m/s"
+        },
+        {
+          "symbol": "C_d",
+          "description": "Shape drag coefficient",
+          "object_id": "mass_block",
+          "property_path": "physics.drag_coefficient",
+          "observable_id": null,
+          "unit": "dimensionless"
+        },
+        {
+          "symbol": "A",
+          "description": "Projected frontal area",
+          "object_id": "mass_block",
+          "property_path": "physics.cross_sectional_area",
+          "observable_id": null,
+          "unit": "m^2"
+        }
+      ],
+      "curriculum_level": "high_school",
+      "misconceptions": [],
+      "tutor_hints": [
+        "How does doubling the speed affect the drag force? Why is driving at high speed so air-resistant?",
+        "What happens to terminal velocity when you increase the cross-sectional area (A) like opening a parachute?",
+        "How does entering standard water density versus earth air density change the drag experience?"
+      ],
+      "extra_context": {}
+    }
+  ],
+  "runtime": {
+    "is_paused": true,
+    "current_frame": 0,
+    "simulated_time_s": 0.0,
+    "time_delta": 0.01667,
+    "substeps": 1,
+    "speed_multiplier": 1.0,
+    "active_scene_id": "4165cc2a-332d-461c-b744-1bb5ee1eae54",
+    "bounds": {
+      "min": {
+        "x": 0.0,
+        "y": 0.0
+      },
+      "max": {
+        "x": 1280.0,
+        "y": 720.0
+      }
+    },
+    "interaction_state": {
+      "pointer": {
+        "x": 0.0,
+        "y": 0.0,
+        "is_down": false
+      },
+      "dragged_body_id": null,
+      "hovered_body_id": null,
+      "selected_body_id": null,
+      "interaction_locks": {
+        "pointer_drag": false,
+        "controls_edit": false
+      }
+    }
+  }
+}

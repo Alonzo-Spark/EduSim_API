@@ -1,0 +1,97 @@
+{
+  "objects": [
+    {
+      "id": "ceiling",
+      "physics": {
+        "position": {
+          "x": 10.0,
+          "y": 1.0
+        },
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "acceleration": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "angle": 0.0,
+        "angular_velocity": 0.0
+      },
+      "derived": {
+        "kinetic_energy": 0.0,
+        "momentum": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      "interaction": {
+        "is_selected": false,
+        "is_hovered": false,
+        "colliding_with": []
+      }
+    },
+    {
+      "id": "mass_block",
+      "physics": {
+        "position": {
+          "x": 10.0,
+          "y": 6.0
+        },
+        "velocity": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "acceleration": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "angle": 0.0,
+        "angular_velocity": 0.0
+      },
+      "derived": {
+        "kinetic_energy": 0.0,
+        "momentum": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      "interaction": {
+        "is_selected": false,
+        "is_hovered": false,
+        "colliding_with": []
+      }
+    }
+  ],
+  "observables": [
+    {
+      "id": "amplitude",
+      "value": 0.0
+    },
+    {
+      "id": "velocity_y",
+      "value": 0.0
+    },
+    {
+      "id": "energy_total",
+      "value": 0.0
+    }
+  ],
+  "runtime": {
+    "is_paused": true,
+    "current_frame": 0,
+    "simulated_time_s": 0.0,
+    "interaction_state": {
+      "pointer": {
+        "x": 0.0,
+        "y": 0.0,
+        "is_down": false
+      },
+      "dragged_body_id": null,
+      "interaction_locks": {
+        "pointer_drag": false,
+        "controls_edit": false
+      }
+    }
+  }
+}
