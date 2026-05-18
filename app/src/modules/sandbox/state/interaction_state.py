@@ -33,6 +33,10 @@ class InteractionState(BaseModel):
     selected_object_id: Optional[str] = Field(default=None, description="Currently selected SandboxObject ID")
     hovered_object_id: Optional[str] = Field(default=None, description="Object ID under active cursor hover")
     dragged_object_id: Optional[str] = Field(default=None, description="Object ID actively dragged by user")
+    
+    # Editor tool and manipulation states
+    active_tool: str = Field(default="select", description="Current sandbox tool: 'select' | 'spawn_circle' | 'spawn_rectangle' | 'delete' | 'connect_spring' etc.")
+    manipulation_mode: str = Field(default="translate", description="Current manipulation mode: 'translate' | 'rotate' | 'scale'")
 
     # Mouse / Touch coordinates
     pointer: PointerCoordinate = Field(default_factory=PointerCoordinate)
@@ -88,11 +92,21 @@ class InteractionState(BaseModel):
         """Applies/releases a visual interaction lock (e.g. during tutor steps)."""
         self.interaction_locks[action_key] = is_locked
 
+    def change_tool(self, tool_name: str) -> None:
+        """Changes the active sandbox editing tool."""
+        self.active_tool = tool_name
+
+    def change_manipulation_mode(self, mode: str) -> None:
+        """Changes the transform mode (translate, rotate, scale)."""
+        self.manipulation_mode = mode
+
     def reset(self) -> None:
         """Clears target focus and locks to pristine states."""
         self.selected_object_id = None
         self.hovered_object_id = None
         self.dragged_object_id = None
+        self.active_tool = "select"
+        self.manipulation_mode = "translate"
         self.pointer = PointerCoordinate()
         self.widget_values.clear()
         self.interaction_locks = {"pointer_drag": False, "controls_edit": False}

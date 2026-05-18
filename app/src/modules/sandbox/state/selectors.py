@@ -16,10 +16,16 @@ from typing import List, Dict, Tuple, Optional, Any
 from app.src.modules.sandbox.state.runtime_store import RuntimeStore
 from app.src.modules.sandbox.state.object_state import ObjectRuntimeState, StateVector2D
 from app.src.modules.sandbox.schemas.relationship_schema import EducationalRelationship
+from app.src.modules.sandbox.schemas.constaraint_schema import SandboxConstraint
 
 
 def get_object_state(store: RuntimeStore, object_id: str) -> Optional[ObjectRuntimeState]:
     """Retrieves an object's physical runtime parameters by ID."""
+    return store.objects.get(object_id)
+
+
+def get_object_by_id(store: RuntimeStore, object_id: str) -> Optional[ObjectRuntimeState]:
+    """Retrieves an object's physical runtime parameters by ID (alias)."""
     return store.objects.get(object_id)
 
 
@@ -35,6 +41,27 @@ def get_selected_object(store: RuntimeStore) -> Optional[ObjectRuntimeState]:
     if not sel_id:
         return None
     return get_object_state(store, sel_id)
+
+
+def get_dynamic_objects(store: RuntimeStore) -> List[ObjectRuntimeState]:
+    """Returns all non-static dynamic objects in the simulation."""
+    return [obj for obj in store.objects.values() if not obj.is_static]
+
+
+def get_constraints_for_object(store: RuntimeStore, object_id: str) -> List[SandboxConstraint]:
+    """Finds all constraints anchored to a specific body."""
+    return [
+        c for c in store.constraints.values()
+        if c.anchor_a.body_id == object_id or c.anchor_b.body_id == object_id
+    ]
+
+
+def get_observable_targets(store: RuntimeStore, observable_id: str) -> List[str]:
+    """Returns the list of target object IDs configured for a given observable."""
+    schema = store.observables.schemas.get(observable_id)
+    if schema and schema.target_object_ids:
+        return schema.target_object_ids
+    return []
 
 
 def get_observable_value(store: RuntimeStore, observable_id: str) -> float:

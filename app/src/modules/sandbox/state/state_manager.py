@@ -14,8 +14,8 @@ Physics Tick / Frontend Event Sync
 → Trigger Socratic Event Hooks
 → Dispatch Frontend Synchronization
 
-It supports registering external tutor event hooks and handles coordinate updates 
-dispatched by Matter.js.
+It supports registering external tutor event hooks, handles coordinate updates 
+dispatched by Matter.js, and integrates a unified history rollback timeline.
 """
 
 from __future__ import annotations
@@ -24,19 +24,37 @@ from typing import Any, Dict, List, Callable, Optional
 from app.src.modules.sandbox.state.runtime_store import RuntimeStore
 from app.src.modules.sandbox.state.object_state import ObjectRuntimeState
 from app.src.modules.sandbox.state.mutations import apply_force
+from app.src.modules.sandbox.state.snapshots import SnapshotTimeline
 
 
 class StateManager:
     """
     Main orchestrator for synchronization, event dispatching, 
-    and reactive recomputations.
+    reactive recomputations, and historic snapshot checkpoints.
     """
     def __init__(self, store: RuntimeStore) -> None:
         self.store: RuntimeStore = store
         
+        # Unified Undo/Redo & checkpoint scrub timeline
+        self.timeline: SnapshotTimeline = SnapshotTimeline(store)
+        
         # Socratic tutor callbacks and event hooks
         self._tutor_triggers: List[Callable[[str, Any], None]] = []
         self._collision_callbacks: List[Callable[[str, str], None]] = []
+
+    # --- Timeline Orchestration ---
+
+    def record_checkpoint(self) -> None:
+        """Saves current sandbox state in the undo history stack."""
+        self.timeline.record_checkpoint()
+
+    def undo(self) -> bool:
+        """Rolls back the entire sandbox state to the previous checkpoint."""
+        return self.timeline.undo()
+
+    def redo(self) -> bool:
+        """Rolls forward the entire sandbox state to the next redo checkpoint."""
+        return self.timeline.redo()
 
     # --- Orchestration Event hooks ---
 

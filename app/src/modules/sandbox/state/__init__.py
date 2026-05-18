@@ -50,13 +50,23 @@ from .mutations import (
     update_velocity,
     set_position,
     select_object_mutation,
-    update_widget_mutation
+    update_widget_mutation,
+    add_object,
+    remove_object,
+    update_object,
+    add_constraint,
+    remove_constraint,
+    update_environment
 )
 
 from .selectors import (
     get_object_state,
+    get_object_by_id,
     get_object_velocity,
     get_selected_object,
+    get_dynamic_objects,
+    get_constraints_for_object,
+    get_observable_targets,
     get_observable_value,
     get_total_energy,
     get_active_relationships,
@@ -87,11 +97,21 @@ __all__ = [
     "set_position",
     "select_object_mutation",
     "update_widget_mutation",
+    "add_object",
+    "remove_object",
+    "update_object",
+    "add_constraint",
+    "remove_constraint",
+    "update_environment",
     
     # Selectors
     "get_object_state",
+    "get_object_by_id",
     "get_object_velocity",
     "get_selected_object",
+    "get_dynamic_objects",
+    "get_constraints_for_object",
+    "get_observable_targets",
     "get_observable_value",
     "get_total_energy",
     "get_active_relationships",

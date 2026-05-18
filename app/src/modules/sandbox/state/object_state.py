@@ -5,7 +5,7 @@ Runtime physics body state representation for EduSim objects.
 
 This module acts as the authoritative backend runtime database for each object's 
 live physical attributes (positions, velocities, accelerations, forces) and 
-interactive properties (selection, hover, collision lists).
+interactive properties (selection, hover, dragging, collision lists).
 
 It computes derived attributes (such as linear momentum or kinetic energy) directly 
 on demand to support educational formulas.
@@ -60,6 +60,10 @@ class ObjectRuntimeState(BaseModel):
     is_visible: bool = Field(default=True)
     is_selected: bool = Field(default=False)
     is_hovered: bool = Field(default=False)
+    is_dragged: bool = Field(default=False, description="Whether actively dragged by active mouse/touch tool")
+    
+    # Dynamic properties bag
+    runtime_flags: Dict[str, Any] = Field(default_factory=dict, description="Custom sandbox configurations")
     
     # Collision contacts list (other body IDs currently in contact)
     colliding_with: List[str] = Field(default_factory=list)

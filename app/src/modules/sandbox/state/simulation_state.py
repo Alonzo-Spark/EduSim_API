@@ -33,6 +33,7 @@ class SimulationState(BaseModel):
     substeps: int = Field(default=1, ge=1, le=10, description="Matter.js execution substeps")
     
     active_scene_id: str = Field(default="default_scene", description="Identifier of the active scenario")
+    stepping_mode: bool = Field(default=False, description="Whether simulation is in manual frame-by-frame stepping mode")
     runtime_flags: Dict[str, Any] = Field(default_factory=dict, description="Open runtime configuration toggles")
 
     def pause(self) -> None:
@@ -58,9 +59,14 @@ class SimulationState(BaseModel):
         """Sets slow-mo or fast-forward speed multiplier."""
         self.playback_speed = max(0.0, multiplier)
 
+    def set_stepping_mode(self, enabled: bool) -> None:
+        """Enables or disables manual stepping mode."""
+        self.stepping_mode = enabled
+
     def reset(self) -> None:
         """Resets the execution metrics to pristine initial states."""
         self.is_running = False
         self.is_paused = True
+        self.stepping_mode = False
         self.simulation_time = 0.0
         self.frame_count = 0

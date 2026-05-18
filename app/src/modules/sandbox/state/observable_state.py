@@ -37,6 +37,7 @@ class ObservableRuntimeValue(BaseModel):
     value: float = 0.0
     is_cached: bool = False
     last_updated_frame: int = -1
+    history: List[float] = Field(default_factory=list, description="Historical list of evaluated values")
 
 
 class ObservableStateManager:
@@ -113,6 +114,12 @@ class ObservableStateManager:
         run_val.value = float(result)
         run_val.is_cached = True
         run_val.last_updated_frame = frame_count
+        
+        # Append to rolling history
+        run_val.history.append(run_val.value)
+        if len(run_val.history) > 1000:
+            run_val.history.pop(0)
+            
         return run_val.value
 
     # --- Calculation Engines ---

@@ -19,6 +19,7 @@ from typing import Any, Dict, List, Callable, Optional
 from pydantic import BaseModel, Field
 
 from app.src.modules.sandbox.schemas.sandbox_schema import SandboxSchema
+from app.src.modules.sandbox.schemas.constaraint_schema import SandboxConstraint
 from app.src.modules.sandbox.state.simulation_state import SimulationState
 from app.src.modules.sandbox.state.object_state import ObjectRuntimeState, StateVector2D
 from app.src.modules.sandbox.state.observable_state import ObservableStateManager
@@ -79,15 +80,21 @@ class RuntimeStore:
             )
             self.objects[obj.id] = state
 
-        # 3. Initialize ObservableStateManager
+        # 3. Populate Constraints states from SandboxConstraints
+        self.constraints: Dict[str, SandboxConstraint] = {}
+        if sandbox.constraints:
+            for c in sandbox.constraints:
+                self.constraints[c.id] = c
+
+        # 4. Initialize ObservableStateManager
         self.observables: ObservableStateManager = ObservableStateManager(sandbox.observables)
         # Sequence order based on topological sort from schema compilation
         self.observables.set_evaluation_order([o.id for o in sandbox.observables])
 
-        # 4. Initialize Pointer & Interaction State
+        # 5. Initialize Pointer & Interaction State
         self.interaction: InteractionState = InteractionState()
 
-        # 5. Pub/Sub Subscribers registry
+        # 6. Pub/Sub Subscribers registry
         self._subscribers: Dict[str, Callable[[RuntimeStore], None]] = {}
 
     # --- Subscriber Registration ---
@@ -119,3 +126,11 @@ class RuntimeStore:
     def get_gravity_y(self) -> float:
         """Returns the vertical environment gravity component."""
         return self.schema.environment.gravity.y * self.schema.environment.gravity.scale
+
+    def get_object(self, object_id: str) -> Optional[ObjectRuntimeState]:
+        """Helper to fetch runtime object by ID."""
+        return self.objects.get(object_id)
+
+    def get_constraint(self, constraint_id: str) -> Optional[SandboxConstraint]:
+        """Helper to fetch constraint schema by ID."""
+        return self.constraints.get(constraint_id)
