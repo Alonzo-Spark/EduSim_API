@@ -1,0 +1,76 @@
+{
+  "classes": [
+    {
+      "name": "Class 9",
+      "display_order": 9,
+      "subjects": [
+        {
+          "name": "Physics",
+          "icon": "atom",
+          "description": "Classical mechanics, light, electricity",
+          "chapters": [
+            {
+              "name": "Motion",
+              "order_index": 1,
+              "topics": [
+                {
+                  "name": "Introduction to Motion",
+                  "has_simulation": true,
+                  "simulation_type": "motion",
+                  "subtopics": ["Rest and Motion", "Types of Motion"]
+                },
+                {
+                  "name": "Acceleration",
+                  "has_simulation": true,
+                  "simulation_type": "motion",
+                  "subtopics": ["Uniform Acceleration", "Equations of Motion", "Graphical Representation"]
+                },
+                {
+                  "name": "Projectile Motion",
+                  "has_simulation": true,
+                  "simulation_type": "projectile",
+                  "subtopics": ["Horizontal Projection", "Oblique Projection", "Range and Maximum Height"]
+                }
+              ]
+            },
+            {
+              "name": "Force and Laws of Motion",
+              "order_index": 2,
+              "topics": [
+                {
+                  "name": "Newton's First Law",
+                  "has_simulation": false,
+                  "subtopics": ["Inertia", "Examples of Inertia"]
+                },
+                {
+                  "name": "Newton's Second Law",
+                  "has_simulation": true,
+                  "simulation_type": "motion",
+                  "subtopics": ["F = ma", "Momentum", "Impulse"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Biology",
+          "icon": "leaf",
+          "description": "Cell biology, tissues, life processes",
+          "chapters": [
+            {
+              "name": "The Fundamental Unit of Life",
+              "order_index": 1,
+              "topics": [
+                {
+                  "name": "Cell Structure",
+                  "has_simulation": false,
+                  "subtopics": ["Cell Membrane", "Nucleus", "Cytoplasm"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
