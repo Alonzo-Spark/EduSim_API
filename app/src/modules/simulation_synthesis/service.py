@@ -7,12 +7,12 @@ from threading import Lock
 from typing import Any
 from uuid import uuid4
 
-from rag.retriever import get_retriever
-from rag.generator import generate_llm_text
+from app.src.modules.legacy_rag.retriever import get_retriever
+from app.src.modules.legacy_rag.generator import generate_llm_text
 from .prompt_builder import build_dsl_prompt as _build_dsl_prompt
 from .sanitizer import sanitize_json
 from .validator import validate_simulation
-from rag.vector_loader import vector_store
+from app.src.modules.legacy_rag.vector_loader import vector_store
 from tutor.subject_classifier import detect_subject
 
 PERSISTENCE_FILE = Path("data/generated_simulations.json")

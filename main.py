@@ -3,13 +3,13 @@ import os
 # Configure Python Path to allow loading absolute namespaces (rag, tutor, sandbox)
 root_dir = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(root_dir)
-sys.path.append(os.path.join(root_dir, "app", "src"))
 sys.path.append(os.path.join(root_dir, "app", "src", "modules"))
+sys.path.append(os.path.join(root_dir, "app", "src"))
 
 import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.src.modules.rag import load_all_pdfs
+from app.src.modules.legacy_rag import load_all_pdfs
 from app.src.api.simulation_router import simulation_router
 from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
@@ -25,7 +25,7 @@ logger = logging.getLogger("EduSim")
 logger.info("EduSim Backend Starting Up...")
 
 from contextlib import asynccontextmanager
-from app.src.modules.rag import vector_store
+from app.src.modules.legacy_rag import vector_store
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -84,3 +84,7 @@ app.include_router(
     tutor_router,
     prefix="/api/tutor"
 )
+
+# New Educational Intelligence Engine RAG router
+from app.src.rag.controller import router as rag_router
+app.include_router(rag_router)

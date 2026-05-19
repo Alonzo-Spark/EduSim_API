@@ -4,8 +4,8 @@ import difflib
 import time
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
-from rag.retriever import get_retriever
-from rag.generator import generate_llm_text
+from app.src.modules.legacy_rag.retriever import get_retriever
+from app.src.modules.legacy_rag.generator import generate_llm_text
 import pickle
 import faiss
 from sentence_transformers import SentenceTransformer
@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 load_dotenv(Path(__file__).resolve().parents[4] / ".env")
 
 # RAG Setup
-from rag.vector_loader import vector_store
+from app.src.modules.legacy_rag.vector_loader import vector_store
 from tutor.subject_classifier import detect_subject
 import asyncio
 
@@ -57,7 +57,7 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
     user_prompt = f"Context:\n{context}\n\nQuery:\n{query}"
     final_prompt = f"{system_prompt}\n\n{user_prompt}"
     
-    from rag.generator import generate_llm_text_async
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async
     try:
         response_text = await generate_llm_text_async(final_prompt, temperature=0.1)
         if not response_text or "Error:" in response_text:
@@ -79,7 +79,7 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
         return _empty_tutor_payload(f"AI error: {str(e)}")
 
 async def generate_explanation_async(query: str, context: str, fallback_mode: bool = False) -> str:
-    from rag.generator import generate_llm_text_async, get_tutor_prompt
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt
     prompt = get_tutor_prompt(context, query, fallback_mode)
     res = await generate_llm_text_async(prompt, temperature=0.3)
     
@@ -202,7 +202,7 @@ async def analyze_tutor_query_stream(query: str):
     structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
     
     # Stream explanation text
-    from rag.generator import generate_llm_stream_async, get_tutor_prompt
+    from app.src.modules.legacy_rag.generator import generate_llm_stream_async, get_tutor_prompt
     prompt = get_tutor_prompt(context, query, fallback_mode)
     
     async for chunk in generate_llm_stream_async(prompt):
