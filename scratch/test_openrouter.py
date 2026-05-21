@@ -2,6 +2,8 @@ import os
 import httpx
 from dotenv import load_dotenv
 
+from app.src.config.models import DEFAULT_MODEL, OPENROUTER_URL
+
 load_dotenv()
 
 def test_openrouter():
@@ -16,10 +18,10 @@ def test_openrouter():
         print(f"Headers: {headers}")
         with httpx.Client(timeout=10.0) as client:
             response = client.post(
-                "https://openrouter.ai/api/v1/chat/completions",
+                OPENROUTER_URL,
                 headers=headers,
                 json={
-                    "model": "google/gemini-3-flash-preview",
+                    "model": DEFAULT_MODEL,
                     "messages": [{"role": "user", "content": "say hi"}],
                 },
             )

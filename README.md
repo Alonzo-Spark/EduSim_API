@@ -87,7 +87,8 @@ Type `exit` or `quit` to exit the application.
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `GOOGLE_API_KEY` | Your Gemini API key | Yes |
+| `OPENROUTER_API_KEY` | Your OpenRouter API key | Yes |
+| `OPENROUTER_MODEL` | Primary OpenRouter model | No |
 | `PDF_PATH` | Path to PDF file | Yes |
 | `FORCE_REBUILD` | Force rebuild of FAISS index | No |
 
@@ -95,10 +96,14 @@ Type `exit` or `quit` to exit the application.
 
 #### Change LLM Model
 
-Edit `rag/generator.py`:
+Edit `app/src/config/models.py`:
 
 ```python
-GEMINI_MODEL = "gemini-1.5-flash"  # Change this if needed
+DEFAULT_MODEL = "deepseek/deepseek-chat"
+FALLBACK_MODELS = [
+  "openai/gpt-4o-mini",
+  "mistralai/mistral-small",
+]
 ```
 
 #### Change Number of Retrieved Chunks

@@ -1,10 +1,4 @@
-import httpx
-
-from app.src.config.openrouter_config import (
-    OPENROUTER_API_KEY,
-    OPENROUTER_URL,
-    MODEL_NAME
-)
+from app.src.modules.legacy_rag.generator import generate_openrouter_text_async
 
 async def generate_runtime_overlay(
     topic: str,
@@ -26,35 +20,11 @@ Generate a short educational overlay for the student.
 Keep it concise and educational.
 """
 
-    headers = {
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-        "Content-Type": "application/json"
-    }
+    response = await generate_openrouter_text_async(
+        prompt,
+        temperature=0.2,
+        max_output_tokens=220,
+        system_prompt=None,
+    )
 
-    payload = {
-        "model": MODEL_NAME,
-        "messages": [
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
-    }
-
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.post(
-                OPENROUTER_URL,
-                headers=headers,
-                json=payload,
-                timeout=60
-            )
-            response.raise_for_status()
-        data = response.json()
-        return (
-            data["choices"][0]
-            ["message"]["content"]
-            .strip()
-        )
-    except Exception:
-        return "Observe the simulation carefully."
+    return response or "Observe the simulation carefully."

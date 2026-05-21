@@ -2,6 +2,7 @@ import re
 import json
 import difflib
 import time
+import unicodedata
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 from app.src.modules.legacy_rag.retriever import get_retriever
@@ -66,11 +67,12 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
         json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
         if json_match:
             parsed = json.loads(json_match.group())
+            related_concepts = _dedupe_related_topics(parsed.get("concepts", []), max_items=_MAX_RELATED_TOPICS)
             return {
                 **parsed,
                 "title": parsed.get("title", "AI Tutor"),
                 "formula": parsed.get("formula", ""),
-                "related_concepts": parsed.get("concepts", []),
+                "related_concepts": related_concepts,
                 "related_formulas": parsed.get("formulas", []),
                 "ai_explanation": parsed.get("explanation", ""),
             }
@@ -141,18 +143,19 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
     print(f"[TOTAL] {total_time:.2f}s")
     
     formulas = structured.get("formulas", [])
+    related_concepts = _dedupe_related_topics(structured.get("related_concepts", []), max_items=_MAX_RELATED_TOPICS)
     first_formula = formulas[0].get("formula", "") if formulas and isinstance(formulas[0], dict) else (formulas[0] if formulas else "")
 
     return {
         "title": structured.get("title", "AI Tutor Response"),
         "description": query,
         "formula": first_formula,
-        "related_concepts": structured.get("related_concepts", []),
+        "related_concepts": related_concepts,
         "related_formulas": formulas,
         "ai_explanation": rag_explanation,
         "sources": rag_content,
         "queryType": structured.get("queryType", "concept"),
-        "concepts": structured.get("related_concepts", []),
+        "concepts": related_concepts,
         "formulas": formulas,
         "explanation": rag_explanation,
         "ragContent": rag_content,
@@ -218,6 +221,189 @@ async def analyze_tutor_query_stream(query: str):
 # --- Comprehensive Curriculum Search System ---
 
 _TYPE_PRIORITY = {"topic": 0, "chapter": 1, "subject": 2, "class": 3}
+
+_MAX_RELATED_TOPICS = 4
+
+_SUBSCRIPT_TRANSLATION = str.maketrans({
+    "₀": "0",
+    "₁": "1",
+    "₂": "2",
+    "₃": "3",
+    "₄": "4",
+    "₅": "5",
+    "₆": "6",
+    "₇": "7",
+    "₈": "8",
+    "₉": "9",
+})
+
+_FORMULA_TOPIC_MAP: List[Tuple[re.Pattern[str], str]] = [
+    (re.compile(r"^(?:f=ma|ma=f|fma|maf)$", re.IGNORECASE), "Newton's Second Law"),
+    (re.compile(r"^(?:v=ir|i=v/r)$", re.IGNORECASE), "Ohm's Law"),
+    (re.compile(r"^(?:n1sin\(?i\)?=n2sin\(?r\)?|n1sin\(?theta1\)?=n2sin\(?theta2\)?)$", re.IGNORECASE), "Snell's Law"),
+    (re.compile(r"^(?:ke=1/2mv\^2|ke=0?\.5mv\^2|1/2mv\^2)$", re.IGNORECASE), "Kinetic Energy"),
+    (re.compile(r"^(?:p=mv)$", re.IGNORECASE), "Momentum"),
+    (re.compile(r"^(?:f=mg)$", re.IGNORECASE), "Weight"),
+    (re.compile(r"^(?:j=fdt|j=fdelta t)$", re.IGNORECASE), "Impulse"),
+    (re.compile(r"^(?:ff=mun|f=mun)$", re.IGNORECASE), "Friction"),
+    (re.compile(r"^(?:t=2pisqrt\(?l/g\)?|t=2pisqrtl/g)$", re.IGNORECASE), "Simple Pendulum"),
+    (re.compile(r"^(?:r=v\^2sin\(?2theta\)?/g)$", re.IGNORECASE), "Projectile Motion"),
+    (re.compile(r"^(?:fc=mv\^2/r)$", re.IGNORECASE), "Centripetal Force"),
+    (re.compile(r"^(?:fb=rhogv)$", re.IGNORECASE), "Buoyancy"),
+    (re.compile(r"^(?:f=kq1q2/r\^2|f=kq_?1q_?2/r\^2)$", re.IGNORECASE), "Coulomb's Law"),
+    (re.compile(r"^(?:ke\+pe=constant)$", re.IGNORECASE), "Conservation of Energy"),
+    (re.compile(r"^(?:tau=rfsin\(?theta\)?|t=rfsin\(?theta\)?)$", re.IGNORECASE), "Torque"),
+    (re.compile(r"^(?:h'?=n\*?h)$", re.IGNORECASE), "Magnification"),
+]
+
+
+def _strip_latex_markup(value: Any) -> str:
+    text = unicodedata.normalize("NFKC", str(value or ""))
+    text = text.translate(_SUBSCRIPT_TRANSLATION)
+    text = text.replace("×", "*").replace("·", "*").replace("÷", "/")
+    text = text.replace("−", "-").replace("–", "-").replace("—", "-")
+    text = text.replace("′", "'").replace("″", '"')
+    text = text.replace("$", " ")
+    text = re.sub(r"\\(?:left|right|,|;|!|quad|qquad)", " ", text)
+    text = re.sub(r"\\([a-zA-Z]+)", r"\1", text)
+    text = re.sub(r"[{}]", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _normalize_related_topic_key(value: Any) -> str:
+    text = _strip_latex_markup(value).lower()
+    text = unicodedata.normalize("NFKD", text)
+    return re.sub(r"[^a-z0-9]+", "", text)
+
+
+def _smart_title_case(text: str) -> str:
+    parts = re.split(r"(\s+|[-/])", text.strip())
+    normalized_parts: List[str] = []
+
+    for part in parts:
+        if not part:
+            continue
+        if part.isspace() or part in {"-", "/"}:
+            normalized_parts.append(part)
+            continue
+
+        sub_parts = part.split("'")
+        head = sub_parts[0]
+        if head:
+            head = head[:1].upper() + head[1:].lower()
+        rebuilt = [head]
+        for tail in sub_parts[1:]:
+            rebuilt.append(tail.lower())
+        normalized_parts.append("'".join(rebuilt))
+
+    return "".join(normalized_parts).strip()
+
+
+def _normalize_formula_signature(value: Any) -> str:
+    text = _strip_latex_markup(value).lower()
+    text = text.replace(" ", "")
+    text = re.sub(r"\\[a-zA-Z]+", "", text)
+    text = text.replace("\u200b", "")
+    return text
+
+
+def _map_formula_to_concept(value: Any) -> Optional[str]:
+    signature = _normalize_formula_signature(value)
+    if not signature:
+        return None
+
+    for pattern, concept in _FORMULA_TOPIC_MAP:
+        if pattern.search(signature):
+            return concept
+
+    return None
+
+
+def _looks_like_formula_topic(value: Any) -> bool:
+    signature = _normalize_formula_signature(value)
+    if not signature:
+        return False
+
+    if _map_formula_to_concept(value):
+        return True
+
+    if re.fullmatch(r"[a-z]", signature):
+        return True
+
+    if re.fullmatch(r"\d+(?:\.\d+)?", signature):
+        return True
+
+    if re.search(r"[=+\-*/^<>≤≥≈∑∫√]", signature):
+        return True
+
+    if re.search(r"\d", signature) and len(signature) <= 12:
+        return True
+
+    if re.search(r"\\|_|\$", str(value or "")):
+        return True
+
+    return False
+
+
+def _clean_related_topic(value: Any) -> Optional[str]:
+    if value is None:
+        return None
+
+    text = _strip_latex_markup(value)
+    if not text:
+        return None
+
+    text = re.sub(r"^(?:explain|define|what\s+is|meaning\s+of)\s+", "", text, flags=re.IGNORECASE).strip()
+    if not text:
+        return None
+
+    concept = _map_formula_to_concept(text)
+    if concept:
+        return concept
+
+    if _looks_like_formula_topic(text):
+        return None
+
+    text = re.sub(r"\s+", " ", text).strip(" -–—:;.,")
+    if not text:
+        return None
+
+    # Reject variable-level, symbol-level, and unit-level fragments.
+    if re.fullmatch(r"[A-Za-z]", text):
+        return None
+
+    if re.fullmatch(r"[Ω°%]+", text):
+        return None
+
+    if re.fullmatch(r"\d+(?:\.\d+)?(?:\s?[A-Za-zΩ/%²³]+)?", text):
+        return None
+
+    if re.fullmatch(r"(?:kg|m/s\^?2|m/s|m|s|N|J|Pa|mol|A|V|Ω|ohm|volt|ampere)", text, flags=re.IGNORECASE):
+        return None
+
+    return _smart_title_case(text)
+
+
+def _dedupe_related_topics(items: Any, max_items: int = _MAX_RELATED_TOPICS) -> List[str]:
+    cleaned: List[str] = []
+    seen = set()
+
+    if not isinstance(items, list):
+        return cleaned
+
+    for item in items:
+        topic = _clean_related_topic(item)
+        if not topic:
+                        continue
+        key = _normalize_related_topic_key(topic)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        cleaned.append(topic)
+        if len(cleaned) >= max_items:
+            break
+
+    return cleaned
 
 _QUERY_HINTS = {
     "ele": ["electric", "electro", "electromag", "current", "charge", "voltage", "resistance"],
@@ -509,22 +695,30 @@ def search_curriculum(query: str, max_results: int = 30) -> List[Dict[str, Any]]
     return results
 
 
-def autocomplete_curriculum(query: str, max_suggestions: int = 15) -> List[Dict[str, Any]]:
+def autocomplete_curriculum(query: str, max_suggestions: int = _MAX_RELATED_TOPICS) -> List[Dict[str, Any]]:
     q = (query or "").strip()
     if not q:
         return []
 
-    ranked = search_curriculum(q, max_results=max_suggestions * 3)
+    limit = max(1, min(max_suggestions, _MAX_RELATED_TOPICS))
+    ranked = search_curriculum(q, max_results=limit * 3)
     suggestions: List[Dict[str, Any]] = []
     seen = set()
 
     for entry in ranked:
+        topic_value = entry.get("topic")
+        if entry.get("type") == "topic":
+            cleaned_topic = _clean_related_topic(topic_value)
+            if not cleaned_topic:
+                continue
+            topic_value = cleaned_topic
+
         key = (
             entry.get("type"),
             entry.get("class_name"),
             entry.get("subject"),
             entry.get("chapter"),
-            entry.get("topic"),
+            topic_value,
         )
         if key in seen:
             continue
@@ -535,12 +729,12 @@ def autocomplete_curriculum(query: str, max_suggestions: int = 15) -> List[Dict[
                 "class_name": entry.get("class_name"),
                 "subject": entry.get("subject"),
                 "chapter": entry.get("chapter"),
-                "topic": entry.get("topic"),
+                "topic": topic_value,
                 "display": entry.get("display"),
                 "priority": _TYPE_PRIORITY.get(entry.get("type", "class"), 999),
             }
         )
-        if len(suggestions) >= max_suggestions:
+        if len(suggestions) >= limit:
             break
 
     return suggestions
@@ -582,11 +776,12 @@ def get_topic_content(subject: str, class_name: str, chapter: str, topic: Option
     if not chapter_record:
         return {"error": "chapter_not_found"}
 
-    topic_list = [item.get("name", "") for item in chapter_record.get("topics", []) or []]
+    raw_topic_list = [item.get("name", "") for item in chapter_record.get("topics", []) or []]
+    topic_list = _dedupe_related_topics(raw_topic_list, max_items=_MAX_RELATED_TOPICS)
     matched_topic = topic
     if topic:
         matched_topic = None
-        for candidate in topic_list:
+        for candidate in raw_topic_list:
             if _normalize_text(candidate) == _normalize_text(topic):
                 matched_topic = candidate
                 break
