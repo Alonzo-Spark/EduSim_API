@@ -8,8 +8,7 @@ import { ObservableEngine } from '../observables/observableEngine';
 import { RuntimeStore } from '../state/runtimeStore';
 import { PropertyController } from '../properties/propertyController';
 import { PropertyPanel } from '../ui/PropertyPanel';
-import { TutorOverlay } from '../ui/TutorOverlay';
-import { inferActiveTopics, topicChanged, type TopicResult } from '../intelligence/topicInference';
+
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -296,45 +295,7 @@ export const SandboxCanvas: React.FC = () => {
           setPropertyVersion((v) => v + 1);
         });
 
-        // ── Topic inference ─────────────────────────────────────────────────
-        // Track last fired topic so we don't repeat the same message on every
-        // small update (e.g. spawning rope segments one by one).
-        let lastTopicResult: TopicResult | null = null;
-        let inferDebounceId: ReturnType<typeof setTimeout> | null = null;
 
-        const runTopicInference = () => {
-          // Debounce by one tick so that multi-body spawns (rope chain)
-          // resolve before we inspect the store.
-          if (inferDebounceId) clearTimeout(inferDebounceId);
-          inferDebounceId = setTimeout(() => {
-            const result = inferActiveTopics(store);
-            if (topicChanged(lastTopicResult, result) && result) {
-              lastTopicResult = result;
-              // Fire tutor overlay message
-              window.showTutorMessage?.({ 
-                type: result.messageType,
-                title: result.tutorTitle,
-                message: result.tutorMessage,
-                formula: result.formula,
-                duration: 7500,
-              });
-              // Auto-register recommended observables on all current dynamic objects
-              const dynamicObjs = store.getAllObjects().filter((o) => !o.body.isStatic);
-              dynamicObjs.forEach((obj) => {
-                observableEngineRef.current?.registerObservable({
-                  objectId: obj.id,
-                  types: result.recommendedObservables,
-                  label: obj.metadata?.label || obj.id,
-                  color: 0xffffff,
-                });
-              });
-            }
-          }, 120);
-        };
-
-        store.subscribe('objectAdded', runTopicInference);
-        store.subscribe('constraintAdded', runTopicInference);
-        store.subscribe('constraintRemoved', runTopicInference);
 
         // 1. Init renderer
         await rt.init(el);
@@ -871,7 +832,6 @@ export const SandboxCanvas: React.FC = () => {
       bodyB: sensor,
       length: ARM_LEN,
       stiffness: 1,
-      damping: 0,
     }));
 
     // ── 4. Visible drop-zone ring that tracks the sensor via SyncRegistry ───
@@ -1293,8 +1253,6 @@ export const SandboxCanvas: React.FC = () => {
           Drag shapes & constraints · Drop anywhere
         </div>
 
-        {/* AI Tutor Overlay — driven by live topic inference */}
-        <TutorOverlay />
 
         {/* Floating glassmorphic STEM Laboratory HUD Overlay */}
         {selected && (
