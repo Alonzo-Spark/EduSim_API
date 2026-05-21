@@ -364,6 +364,12 @@ def _clean_related_topic(value: Any) -> Optional[str]:
     if _looks_like_formula_topic(text):
         return None
 
+    if re.search(r"[=\\$_{}^]", text):
+        return None
+
+    if re.search(r"\d", text):
+        return None
+
     text = re.sub(r"\s+", " ", text).strip(" -–—:;.,")
     if not text:
         return None
@@ -381,6 +387,43 @@ def _clean_related_topic(value: Any) -> Optional[str]:
     if re.fullmatch(r"(?:kg|m/s\^?2|m/s|m|s|N|J|Pa|mol|A|V|Ω|ohm|volt|ampere)", text, flags=re.IGNORECASE):
         return None
 
+    single_word_concepts = {
+        "current",
+        "voltage",
+        "resistance",
+        "force",
+        "mass",
+        "acceleration",
+        "momentum",
+        "inertia",
+        "energy",
+        "power",
+        "pressure",
+        "density",
+        "temperature",
+        "velocity",
+        "speed",
+        "charge",
+        "circuit",
+        "circuits",
+        "conductors",
+        "insulators",
+        "gravity",
+        "friction",
+        "impulse",
+        "torque",
+        "buoyancy",
+        "refraction",
+        "reflection",
+        "optics",
+        "electricity",
+        "wavelength",
+        "frequency",
+    }
+
+    if len(re.findall(r"[A-Za-z]+(?:'[A-Za-z]+)?", text)) < 2 and text.lower() not in single_word_concepts:
+        return None
+
     return _smart_title_case(text)
 
 
@@ -394,7 +437,7 @@ def _dedupe_related_topics(items: Any, max_items: int = _MAX_RELATED_TOPICS) -> 
     for item in items:
         topic = _clean_related_topic(item)
         if not topic:
-                        continue
+            continue
         key = _normalize_related_topic_key(topic)
         if not key or key in seen:
             continue
@@ -404,6 +447,8 @@ def _dedupe_related_topics(items: Any, max_items: int = _MAX_RELATED_TOPICS) -> 
             break
 
     return cleaned
+    related_concepts = _dedupe_related_topics(parsed.get("concepts", []), max_items=6)
+    related_concepts = _dedupe_related_topics(structured.get("related_concepts", []), max_items=6)
 
 _QUERY_HINTS = {
     "ele": ["electric", "electro", "electromag", "current", "charge", "voltage", "resistance"],

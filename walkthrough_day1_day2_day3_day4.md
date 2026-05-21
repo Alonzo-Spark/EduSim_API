@@ -75,7 +75,7 @@ app/src/
 
 ### Day 4: AI Educational Enrichment Layer
 1. **OpenRouter Configuration (`openrouter_config.py`)**:
-  * Securely binds OpenRouter URLs and pre-configured environment credentials (`OPENROUTER_API_KEY`, default model falls back to `deepseek/deepseek-chat` or the configured fallback chain).
+  * Securely binds OpenRouter URLs and pre-configured environment credentials (`OPENROUTER_API_KEY`, default model falls back to `google/gemini-3-flash-preview` or the configured fallback chain).
 2. **AI Explanation Generator (`generators/explanation_generator.py`)**:
    * Asynchronously calls OpenRouter to translate concise physical definitions into premium academic summaries for students.
 3. **AI Tutor Response Generator (`generators/tutor_response_generator.py`)**:

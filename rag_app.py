@@ -8,7 +8,7 @@ from app.src.modules.legacy_rag.vector_store import create_vector_store
 from app.src.modules.legacy_rag.retriever import get_retriever
 from app.src.modules.legacy_rag.generator import generate_response
 
-# Load environment variables
+# Load environment variablesemo
 load_dotenv()
 
 

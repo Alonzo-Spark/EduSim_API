@@ -7,7 +7,7 @@ A clean, lightweight Retrieval-Augmented Generation (RAG) system using Gemini AP
 - **PDF Processing**: Load and chunk PDF documents
 - **Lightweight Embeddings**: Uses sentence-transformers `all-MiniLM-L6-v2` (25MB, very fast)
 - **FAISS Vector Database**: Fast similarity search with persistence
-- **Gemini API**: Uses `gemini-1.5-flash` model
+- **Gemini API**: Uses `google/gemini-3-flash-preview` model
 - **Error Handling**: Graceful error handling for API failures
 - **No Large Model Downloads**: No need to download large LLMs locally
 
@@ -99,10 +99,9 @@ Type `exit` or `quit` to exit the application.
 Edit `app/src/config/models.py`:
 
 ```python
-DEFAULT_MODEL = "deepseek/deepseek-chat"
+DEFAULT_MODEL = "google/gemini-3-flash-preview"
 FALLBACK_MODELS = [
-  "openai/gpt-4o-mini",
-  "mistralai/mistral-small",
+  "google/gemini-2.5-flash",
 ]
 ```
 

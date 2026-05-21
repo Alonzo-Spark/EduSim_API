@@ -7,10 +7,10 @@ env_path = Path(__file__).resolve().parents[3] / ".env"
 load_dotenv(env_path)
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-DEFAULT_MODEL = "deepseek/deepseek-chat"
+# Use Gemini as the primary model and fallback to an earlier Gemini flash model.
+DEFAULT_MODEL = "google/gemini-3-flash-preview"
 FALLBACK_MODELS = [
-    "openai/gpt-4o-mini",
-    "mistralai/mistral-small",
+    "google/gemini-2.5-flash",
 ]
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "YOUR_API_KEY")

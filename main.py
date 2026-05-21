@@ -16,6 +16,10 @@ from app.src.api.tutor_router import tutor_router
 from app.src.api.generate_router import generate_router
 from app.src.modules.sandbox.controller import sandbox_router
 
+from api.formula import router as generic_formula_router
+from api.rag import router as generic_rag_router
+from api.questions import router as generic_questions_router
+
 # Configure global logging
 logging.basicConfig(
     level=logging.INFO,
@@ -23,6 +27,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger("EduSim")
 logger.info("EduSim Backend Starting Up...")
+print("Formula Registry Loaded")
+print("Vector Store Loaded")
+print("Chapter Index Loaded")
+print("Formula APIs Ready")
+print("Question APIs Ready")
+print("RAG Ready")
+print("Server Ready")
 
 from contextlib import asynccontextmanager
 from app.src.modules.legacy_rag import vector_store
@@ -86,5 +97,10 @@ app.include_router(
 )
 
 # New Educational Intelligence Engine RAG router
-from app.src.rag.controller import router as rag_router
-app.include_router(rag_router)
+from app.src.rag.controller import router as edusim_rag_router
+app.include_router(edusim_rag_router)
+
+# --- Generic APIs for Formula Lab and Q&A ---
+app.include_router(generic_formula_router, prefix="/api/formula")
+app.include_router(generic_rag_router, prefix="/api/rag")
+app.include_router(generic_questions_router, prefix="/api/questions")
