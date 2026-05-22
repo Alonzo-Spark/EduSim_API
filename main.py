@@ -6,14 +6,17 @@ sys.path.append(root_dir)
 sys.path.append(os.path.join(root_dir, "app", "src", "modules"))
 sys.path.append(os.path.join(root_dir, "app", "src"))
 
+# Dynamically extend app.src.modules.__path__ to resolve archived modules safely
+import app.src.modules
+archive_modules_dir = os.path.join(root_dir, "archive", "app", "src", "modules")
+if os.path.exists(archive_modules_dir):
+    app.src.modules.__path__.append(archive_modules_dir)
+
 import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.src.modules.legacy_rag import load_all_pdfs
-from app.src.api.simulation_router import simulation_router
-from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
-from app.src.api.generate_router import generate_router
 from app.src.modules.sandbox.controller import sandbox_router
 
 from api.formula import router as generic_formula_router
@@ -69,26 +72,11 @@ async def root():
         "message": "EduSim FastAPI Backend Running"
     }
 
-# Simulation Routes
-
-app.include_router(
-    generate_router,
-    prefix="/api"
-)
+# Simulation and Tutoring Routes
 
 app.include_router(
     sandbox_router,
     prefix="/api"
-)
-
-app.include_router(
-    simulation_router,
-    prefix="/api/simulations"
-)
-
-app.include_router(
-    rag_router,
-    prefix="/api/rag"
 )
 
 app.include_router(
