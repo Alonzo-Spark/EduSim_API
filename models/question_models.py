@@ -1,9 +1,1 @@
-from pydantic import BaseModel
-from typing import List
-
-class QuestionModel(BaseModel):
-    question: str
-    answer: str
-
-class QuestionGenerationResponse(BaseModel):
-    questions: List[QuestionModel]
+from app.src.models.question_models import QuestionGenerationResponse, QuestionModel

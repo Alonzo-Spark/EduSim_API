@@ -15,10 +15,12 @@ from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
 from app.src.api.generate_router import generate_router
 from app.src.modules.sandbox.controller import sandbox_router
+from app.src.api.auth import auth_router
 
 from api.formula import router as generic_formula_router
 from api.rag import router as generic_rag_router
 from api.questions import router as generic_questions_router
+from app.src.config.database import ping_database
 
 # Configure global logging
 logging.basicConfig(
@@ -69,7 +71,17 @@ async def root():
         "message": "EduSim FastAPI Backend Running"
     }
 
+
+@app.get("/api/db/health")
+async def database_health():
+    return ping_database()
+
 # Simulation Routes
+
+app.include_router(
+    auth_router,
+    prefix="/api/auth"
+)
 
 app.include_router(
     generate_router,
@@ -103,4 +115,4 @@ app.include_router(edusim_rag_router)
 # --- Generic APIs for Formula Lab and Q&A ---
 app.include_router(generic_formula_router, prefix="/api/formula")
 app.include_router(generic_rag_router, prefix="/api/rag")
-app.include_router(generic_questions_router, prefix="/api/questions")
+app.include_router(generic_questions_router, prefix="/api/questions")

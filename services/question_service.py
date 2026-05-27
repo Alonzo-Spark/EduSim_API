@@ -1,9 +1,9 @@
 import json
 import re
 from typing import List, Optional
-from models.question_models import QuestionGenerationResponse, QuestionModel
 from services.rag_service import RagService
 from app.src.modules.legacy_rag.generator import generate_llm_text_async
+from app.src.models.question_models import QuestionGenerationResponse, QuestionModel
 
 class QuestionService:
     @staticmethod
@@ -11,7 +11,10 @@ class QuestionService:
         subject: str, 
         class_name: str, 
         chapter: str, 
-        topic: str
+        topic: str,
+        formula: str = "",
+        difficulty: str = "Medium",
+        question_type: str = "mixed"
     ) -> QuestionGenerationResponse:
         
         # 1. Try to fetch chunks via RAG
@@ -25,35 +28,58 @@ Subject: {subject}
 Class: {class_name}
 Chapter: {chapter}
 Topic: {topic}
+Formula: {formula}
+Difficulty: {difficulty}
+Question Type: {question_type}
 
 Context provided from textbook:
 {context_text}
 
 Instructions:
-Generate exactly 4 important educational questions about this topic, along with their answers. Include a mix of conceptual, definition, and application questions. 
-If the context is empty, rely on your general knowledge to generate accurate questions for this subject.
+Generate EXACTLY 4 high-quality practice questions based on the provided inputs. Follow these strict priority rules for generating questions:
+1. First Priority: Extract or adapt actual questions found in the textbook context above.
+2. Second Priority: Generate questions based specifically on calculating or applying the Formula: {formula}. Use numerical values for variables and ask to calculate the unknown.
+3. Third Priority: If no formula or context exists, generate conceptual questions about the Topic: {topic}.
+
+Ensure questions are meaningful. Do NOT generate generic placeholders like "What is the main concept?".
+Include a mix of MCQ, numerical, conceptual, and application-based questions.
+Difficulty should match: {difficulty}. Provide step-by-step solutions in the explanation.
 
 Respond STRICTLY in this JSON format, no markdown blocks:
 {{
   "questions": [
     {{
       "question": "string",
-      "answer": "string"
+      "answer": "string",
+      "type": "string (MCQ, numerical, conceptual)",
+      "options": ["list", "of", "4 options if MCQ"],
+      "explanation": "string with stepwise solution",
+      "formula_used": "string",
+      "related_concept": "string",
+      "difficulty": "{difficulty}"
     }}
   ]
 }}
 """
         try:
-            llm_text = await generate_llm_text_async(prompt, temperature=0.3, max_output_tokens=1000)
+            llm_text = await generate_llm_text_async(prompt, temperature=0.3, max_output_tokens=3000)
             if llm_text:
                 llm_text = re.sub(r"^```json|```$", "", llm_text.strip(), flags=re.MULTILINE).strip()
+                # Repair single backslashes in LaTeX commands that violate JSON escaping rules
+                llm_text = re.sub(r'\\(?!n|"|u[0-9a-fA-F]{4})', r'\\\\', llm_text)
                 data = json.loads(llm_text)
                 
                 questions = []
                 for q in data.get("questions", []):
                     questions.append(QuestionModel(
                         question=q.get("question", ""),
-                        answer=q.get("answer", "")
+                        answer=q.get("answer", ""),
+                        type=q.get("type", "conceptual"),
+                        options=q.get("options", None),
+                        explanation=q.get("explanation", ""),
+                        formula_used=q.get("formula_used", ""),
+                        related_concept=q.get("related_concept", ""),
+                        difficulty=q.get("difficulty", difficulty)
                     ))
                 
                 # Ensure we don't return an empty array if possible
@@ -62,10 +88,5 @@ Respond STRICTLY in this JSON format, no markdown blocks:
         except Exception as e:
             print(f"Error generating questions via LLM: {e}")
             
-        # Fallback if RAG + LLM fails entirely
-        fallback = [
-            QuestionModel(question=f"What is the main concept of {topic}?", answer="This is a placeholder answer due to generation failure."),
-            QuestionModel(question="Provide an example of this concept.", answer="Example could not be retrieved."),
-            QuestionModel(question="Why is this topic important?", answer="Importance is context dependent.")
-        ]
-        return QuestionGenerationResponse(questions=fallback)
+        # Return empty list if generation fails. No generic fallbacks allowed.
+        return QuestionGenerationResponse(questions=[])
