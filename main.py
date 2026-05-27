@@ -98,7 +98,9 @@ app.include_router(
 
 # New Educational Intelligence Engine RAG router
 from app.src.rag.controller import router as edusim_rag_router
-app.include_router(edusim_rag_router)
+from app.src.api.benchmark_router import router as benchmark_router
+
+app.include_router(benchmark_router, prefix="/api/benchmark")
 
 # --- Generic APIs for Formula Lab and Q&A ---
 app.include_router(generic_formula_router, prefix="/api/formula")
