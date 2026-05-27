@@ -50,9 +50,9 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
     system_prompt = (
         "You are an intelligent tutor. Analyze query and context.\n"
         "1. Determine 'queryType': 'concept', 'formula', or 'mixed'.\n"
-        "2. Extract 'concepts': topics.\n"
+        "2. Extract 'concepts': list of simple, concise topic names (e.g. ['Gravity', 'Orbital Velocity', 'Centripetal Force']). Do NOT output nested dictionaries.\n"
         "3. Extract 'formulas': [{formula, name, topic, meaning}]. Include fundamental ones if omitted in text.\n"
-        "4. Generate a brief 'explanation'.\n"
+        "4. Generate a brief 'explanation': a short summary string.\n"
         "Return ONLY valid JSON."
     )
     user_prompt = f"Context:\n{context}\n\nQuery:\n{query}"
@@ -60,7 +60,7 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
     
     from app.src.modules.legacy_rag.generator import generate_llm_text_async
     try:
-        response_text = await generate_llm_text_async(final_prompt, temperature=0.1)
+        response_text = await generate_llm_text_async(final_prompt, temperature=0.1, system_prompt=None)
         if not response_text or "Error:" in response_text:
             return _empty_tutor_payload("AI failed to extract concepts.")
             
@@ -80,10 +80,11 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
     except Exception as e:
         return _empty_tutor_payload(f"AI error: {str(e)}")
 
+
 async def generate_explanation_async(query: str, context: str, fallback_mode: bool = False) -> str:
-    from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt, TUTOR_SYSTEM_PROMPT
     prompt = get_tutor_prompt(context, query, fallback_mode)
-    res = await generate_llm_text_async(prompt, temperature=0.3)
+    res = await generate_llm_text_async(prompt, temperature=0.3, system_prompt=TUTOR_SYSTEM_PROMPT)
     
     if not res:
         return "Failed to generate explanation."
@@ -95,6 +96,7 @@ async def generate_explanation_async(query: str, context: str, fallback_mode: bo
         )
         return warning_msg + res
     return res
+
 
 async def analyze_tutor_query(query: str) -> Dict[str, Any]:
     request_started = time.perf_counter()

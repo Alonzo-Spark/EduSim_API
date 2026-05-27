@@ -15,6 +15,7 @@ from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
 from app.src.api.generate_router import generate_router
 from app.src.modules.sandbox.controller import sandbox_router
+from app.src.api.scene_router import scene_router
 
 from api.formula import router as generic_formula_router
 from api.rag import router as generic_rag_router
@@ -78,6 +79,11 @@ app.include_router(
 
 app.include_router(
     sandbox_router,
+    prefix="/api"
+)
+
+app.include_router(
+    scene_router,
     prefix="/api"
 )
 

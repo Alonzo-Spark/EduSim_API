@@ -119,6 +119,23 @@ Card
   -> Responsive table
 '''
 
+# =========================================================
+# TUTOR SYSTEM PROMPT (Dedicated for premium explanations)
+# =========================================================
+TUTOR_SYSTEM_PROMPT = r'''
+You are the premium EduSim AI Physics Tutor.
+Your task is to provide direct, extremely short, and beautifully formatted physics explanations for sandbox simulations.
+
+STRICT INSTRUCTIONS:
+1. Be ULTRA-CONCISE: The entire response must be very short (strictly ONE single paragraph of at most 3-4 sentences total, under 70 words).
+2. Direct Answer: Answer the user's specific query and explain the physics of the sandbox simulation directly and immediately in 2-3 sentences.
+3. Formula: Include at most ONE key mathematical formula on its own line using standard LaTeX ($$).
+4. Absolutely no long textbook notes, no multiple headings, no step-by-step derivations, and no comparisons. Keep it compact, clean, and punchy.
+'''
+
+
+
+
 def _format_prompt(prompt: str, system_prompt: str | None) -> str:
     if system_prompt:
         return f"{system_prompt}\n\n{prompt}"
@@ -241,12 +258,13 @@ def generate_llm_text(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
+    system_prompt: str | None = NEW_RENDERING_SYSTEM,
 ):
     return generate_openrouter_text(
         final_prompt,
         temperature=temperature,
         max_output_tokens=max_output_tokens,
-        system_prompt=NEW_RENDERING_SYSTEM,
+        system_prompt=system_prompt,
     )
 
 
@@ -278,13 +296,15 @@ async def generate_llm_text_async(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
+    system_prompt: str | None = NEW_RENDERING_SYSTEM,
 ):
     return await generate_openrouter_text_async(
         final_prompt,
         temperature=temperature,
         max_output_tokens=max_output_tokens,
-        system_prompt=NEW_RENDERING_SYSTEM,
+        system_prompt=system_prompt,
     )
+
 
 
 async def generate_openrouter_text_async(
@@ -380,34 +400,11 @@ async def generate_llm_stream_async(
 # PREMIUM EDUCATIONAL RESPONSE GENERATOR
 # =========================================================
 def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -> str:
-    from .topic_type import detect_topic_type, get_dynamic_sections
-    from ..tutor.query_intent import detect_query_intent, get_intent_structure
-    
-    topic_type = detect_topic_type(question, context)
-    topic_structure = get_dynamic_sections(topic_type)
-    
-    intent = detect_query_intent(question)
-    
-    # =========================================================
-    # VALIDATION LOGIC: PREVENT INVALID SECTIONS
-    # =========================================================
-    if topic_type in ["history", "social_science"]:
-        # Strictly prevent formulas and calculations for history/social science
-        if intent in ["formula", "numerical"]:
-            intent = "detailed"
-            
-    elif topic_type == "biology":
-        # Avoid unnecessary calculations in biology unless explicitly a formula
-        if intent == "numerical":
-            intent = "detailed"
-            
-    dynamic_structure = get_intent_structure(intent, topic_structure)
-    
     if fallback_mode:
-        context_instruction = "Generate a comprehensive educational explanation based on your general knowledge. Do NOT claim the explanation came from a textbook."
+        context_instruction = "Answer based on your general knowledge. Do NOT claim the explanation came from a textbook."
         context_section = ""
     else:
-        context_instruction = "Use the provided TEXTBOOK CONTEXT to answer the QUESTION accurately."
+        context_instruction = "Use the provided TEXTBOOK CONTEXT to answer the question accurately and provide concise physical insights."
         context_section = f"""
 =========================================================
 TEXTBOOK CONTEXT
@@ -417,119 +414,29 @@ TEXTBOOK CONTEXT
 """
 
     return f"""
-You are the EduSim AI Tutor.
-
-Your task is to create professional textbook-style educational notes
-for students from Class 6 to Class 12.
+You are the EduSim AI Physics Tutor.
+Provide a direct, concise, and beautifully formatted physics explanation for the active sandbox simulation.
 
 {context_instruction}
-
-=========================================================
-STRICT FORMATTING RULES
-=========================================================
-
-1. Main headings MUST:
-   - Use Markdown H1 (#)
-   - Be bold
-   - No emojis
-
-Example:
-# Heading
-
-2. Subheadings MUST:
-   - Use Markdown H2 (##)
-   - Be bold
-   - No emojis
-
-Example:
-## Subheading
-
-3. Do NOT use emojis anywhere.
-
-4. Use proper spacing and indentation.
-
-5. Use bullet points where needed.
-
-6. Paragraphs should be short and readable.
-
-7. Use professional textbook-style formatting.
-
-8. Mathematical formulas MUST ALWAYS use LaTeX.
-
-Examples:
-
-$$F = ma$$
-
-$$v = u + at$$
-
-$$E = mc^2$$
-
-9. Never output formulas as plain text.
-
-10. Advantages and disadvantages MUST use markdown tables.
-
-11. Use horizontal separators:
-
----
-
-between major sections.
-
-12. ONLY headings and subheadings may be bold.
-
-13. Do NOT use excessive bold text.
-
-14. Remaining content should be plain readable text.
-
-15. Add detailed educational explanations.
-
-16. Include:
-- Definitions
-- Characteristics
-- Types
-- Formulas
-- Derivations (if applicable)
-- Applications
-- Real-world examples
-- Advantages
-- Disadvantages
-- Important notes
-- Common mistakes
-- Summary
-
-17. Maintain clean textbook formatting.
-
-18. Use proper markdown indentation.
-
-19. Avoid repeating concepts.
-
-20. Keep explanations student-friendly.
-
-21. Keep formatting visually premium.
-
-22. Use professional academic language.
 
 {context_section}
 
 =========================================================
-QUESTION
+QUESTION / SIMULATION INTENT
 =========================================================
 
 {question}
 
 =========================================================
-FOLLOW THIS STRUCTURE EXACTLY
+STRICT RULES:
 =========================================================
-{dynamic_structure}
-
-=========================================================
-IMPORTANT
-=========================================================
-
-- Keep formatting beautiful.
-- Use markdown properly.
-- Generate premium educational notes.
-- Keep explanations detailed but readable.
+- Directly answer the question or explain the core physical concept of the simulation.
+- Keep the entire response very brief (around 2-3 short, clear, and highly focused paragraphs maximum).
+- Avoid long derivations, historical context, advantages/disadvantages, or verbose textbook structures.
+- Use simple, student-friendly, and highly engaging language.
+- Formatting: Use simple Markdown with double dollar signs ($$) on separate lines for display math formulas, or single dollar signs ($) for inline variables.
 """
+
 
 def generate_response(
     context: str,
