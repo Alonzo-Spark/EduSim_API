@@ -30,5 +30,5 @@ async def tutor_question(payload: dict):
 
 @router.post("/educational/runtime")
 async def runtime_event(payload: RuntimeEventSchema):
-    response = await process_runtime_event(payload.event)
+    response = await process_runtime_event(payload)
     return response
