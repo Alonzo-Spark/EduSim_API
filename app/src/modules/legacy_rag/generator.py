@@ -135,7 +135,10 @@ def _openrouter_headers() -> Dict[str, str]:
 
 
 def _extract_openrouter_content(data: Dict[str, Any]) -> Optional[str]:
-    choices = data.get("choices", []) if isinstance(data, dict) else []
+    if not isinstance(data, dict):
+        return None
+
+    choices = data.get("choices") or []
     if not choices:
         return None
 
@@ -173,7 +176,7 @@ def _generate_openrouter_text(
         return None
 
     try:
-        with httpx.Client(timeout=60.0) as client:
+        with httpx.Client(timeout=httpx.Timeout(60.0, connect=10.0)) as client:
             response = client.post(
                 OPENROUTER_URL,
                 headers=_openrouter_headers(),
@@ -211,7 +214,7 @@ async def _generate_openrouter_text_async(
         return None
 
     try:
-        async with httpx.AsyncClient(timeout=60.0) as client:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0)) as client:
             response = await client.post(
                 OPENROUTER_URL,
                 headers=_openrouter_headers(),
@@ -241,12 +244,14 @@ def generate_llm_text(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
+    system_prompt: str | None = NEW_RENDERING_SYSTEM,
 ):
+    final_prompt = final_prompt.strip()
     return generate_openrouter_text(
         final_prompt,
         temperature=temperature,
         max_output_tokens=max_output_tokens,
-        system_prompt=NEW_RENDERING_SYSTEM,
+        system_prompt=system_prompt,
     )
 
 
@@ -278,12 +283,14 @@ async def generate_llm_text_async(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
+    system_prompt: str | None = NEW_RENDERING_SYSTEM,
 ):
+    final_prompt = final_prompt.strip()
     return await generate_openrouter_text_async(
         final_prompt,
         temperature=temperature,
         max_output_tokens=max_output_tokens,
-        system_prompt=NEW_RENDERING_SYSTEM,
+        system_prompt=system_prompt,
     )
 
 
@@ -316,6 +323,7 @@ async def generate_llm_stream_async(
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
 ):
+    final_prompt = final_prompt.strip()
     if not OPENROUTER_API_KEY:
         yield "data: Error: Missing API Key\n\n"
         return
@@ -325,7 +333,7 @@ async def generate_llm_stream_async(
     for index, model_name in enumerate(models):
         _log_model_attempt(model_name, fallback=index > 0)
         try:
-            async with httpx.AsyncClient(timeout=60.0) as client:
+            async with httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0)) as client:
                 async with client.stream(
                     "POST",
                     OPENROUTER_URL,
@@ -349,7 +357,6 @@ async def generate_llm_stream_async(
                     async for chunk in response.aiter_lines():
                         if chunk.startswith("data: "):
                             data_str = chunk[6:]
-
                             if data_str == "[DONE]":
                                 break
 
@@ -382,12 +389,12 @@ async def generate_llm_stream_async(
 def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -> str:
     from .topic_type import detect_topic_type, get_dynamic_sections
     from ..tutor.query_intent import detect_query_intent, get_intent_structure
-    
+
     topic_type = detect_topic_type(question, context)
     topic_structure = get_dynamic_sections(topic_type)
-    
+
     intent = detect_query_intent(question)
-    
+
     # =========================================================
     # VALIDATION LOGIC: PREVENT INVALID SECTIONS
     # =========================================================
@@ -395,14 +402,14 @@ def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -
         # Strictly prevent formulas and calculations for history/social science
         if intent in ["formula", "numerical"]:
             intent = "detailed"
-            
+
     elif topic_type == "biology":
         # Avoid unnecessary calculations in biology unless explicitly a formula
         if intent == "numerical":
             intent = "detailed"
-            
+
     dynamic_structure = get_intent_structure(intent, topic_structure)
-    
+
     if fallback_mode:
         context_instruction = "Generate a comprehensive educational explanation based on your general knowledge. Do NOT claim the explanation came from a textbook."
         context_section = ""
@@ -530,6 +537,7 @@ IMPORTANT
 - Generate premium educational notes.
 - Keep explanations detailed but readable.
 """
+
 
 def generate_response(
     context: str,

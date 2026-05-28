@@ -56,11 +56,14 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
         "Return ONLY valid JSON."
     )
     user_prompt = f"Context:\n{context}\n\nQuery:\n{query}"
-    final_prompt = f"{system_prompt}\n\n{user_prompt}"
     
     from app.src.modules.legacy_rag.generator import generate_llm_text_async
     try:
-        response_text = await generate_llm_text_async(final_prompt, temperature=0.1)
+        response_text = await generate_llm_text_async(
+            final_prompt=user_prompt,
+            temperature=0.1,
+            system_prompt=system_prompt
+        )
         if not response_text or "Error:" in response_text:
             return _empty_tutor_payload("AI failed to extract concepts.")
             
@@ -159,6 +162,7 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
         "formulas": formulas,
         "explanation": rag_explanation,
         "ragContent": rag_content,
+        "structured": None,
     }
 
 async def analyze_tutor_query_stream(query: str):
