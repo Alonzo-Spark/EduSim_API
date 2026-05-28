@@ -163,6 +163,55 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
         "ragContent": rag_content,
     }
 
+
+async def explain_simulation_query(query: str) -> Dict[str, Any]:
+    request_started = time.perf_counter()
+    
+    # Direct prompt to LLM (No RAG!)
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async, TUTOR_SYSTEM_PROMPT
+    
+    context = "Live interactive physics sandbox simulation."
+    
+    from app.src.modules.legacy_rag.generator import get_tutor_prompt
+    prompt = get_tutor_prompt(context, query, fallback_mode=True)
+    
+    # Generate structured explanation
+    llm_start = time.perf_counter()
+    
+    structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
+    explanation_task = asyncio.create_task(generate_llm_text_async(prompt, temperature=0.3, system_prompt=TUTOR_SYSTEM_PROMPT))
+    
+    structured, rag_explanation = await asyncio.gather(structured_task, explanation_task)
+    
+    if not rag_explanation:
+        rag_explanation = "Failed to generate simulation explanation."
+    
+    llm_time = time.perf_counter() - llm_start
+    print(f"[Direct LLM Simulation] {llm_time:.2f}s")
+    
+    total_time = time.perf_counter() - request_started
+    print(f"[TOTAL Direct Sim] {total_time:.2f}s")
+    
+    formulas = structured.get("formulas", [])
+    related_concepts = _dedupe_related_topics(structured.get("related_concepts", []), max_items=_MAX_RELATED_TOPICS)
+    first_formula = formulas[0].get("formula", "") if formulas and isinstance(formulas[0], dict) else (formulas[0] if formulas else "")
+
+    return {
+        "title": structured.get("title", "Simulation Insights"),
+        "description": query,
+        "formula": first_formula,
+        "related_concepts": related_concepts,
+        "related_formulas": formulas,
+        "ai_explanation": rag_explanation,
+        "sources": [],
+        "queryType": structured.get("queryType", "concept"),
+        "concepts": related_concepts,
+        "formulas": formulas,
+        "explanation": rag_explanation,
+        "ragContent": [],
+    }
+
+
 async def analyze_tutor_query_stream(query: str):
     """
     Streaming SSE generator for ultra-fast first token.
