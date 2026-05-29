@@ -39,7 +39,7 @@ class VectorStoreManager:
         self._embeddings_model = get_embeddings()
         
         if not VECTORSTORE_DIR.exists():
-            print(f"⚠️ Vectorstore directory {VECTORSTORE_DIR} not found. Please run create_embeddings.py")
+            print(f"[WARNING] Vectorstore directory {VECTORSTORE_DIR} not found. Please run create_embeddings.py")
             return
             
         # Load each subject
@@ -66,10 +66,10 @@ class VectorStoreManager:
                         )
                         loaded_subjects.append(subject)
                     except Exception as e:
-                        print(f"❌ Failed to load index for {subject}: {e}")
+                        print(f"[ERROR] Failed to load index for {subject}: {e}")
                         
         self._is_loaded = True
-        print(f"✅ Successfully preloaded subjects: {', '.join(loaded_subjects) if loaded_subjects else 'None'}")
+        print(f"[SUCCESS] Successfully preloaded subjects: {', '.join(loaded_subjects) if loaded_subjects else 'None'}")
 
     def get_retriever(self, subject: str = None):
         """

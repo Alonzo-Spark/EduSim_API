@@ -72,13 +72,18 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
         "       * 'gravityPreset': 'zero', 'moon', 'earth', or 'jupiter'\n"
         "       * 'forces': A list of initial forces to apply. Each force config contains: 'bodyId' (string), 'vector' ({x, y}, force components, small numbers e.g. 0.01 to 0.05)\n"
         "Return ONLY valid, parseable JSON matching the requested schema."
+        "Return ONLY valid JSON."
     )
     user_prompt = f"Context:\n{context}\n\nQuery:\n{query}"
-    final_prompt = f"{system_prompt}\n\n{user_prompt}"
     
     from app.src.modules.legacy_rag.generator import generate_llm_text_async
     try:
         response_text = await generate_llm_text_async(final_prompt, temperature=0.1, system_prompt=None)
+        response_text = await generate_llm_text_async(
+            final_prompt=user_prompt,
+            temperature=0.1,
+            system_prompt=system_prompt
+        )
         if not response_text or "Error:" in response_text:
             return _empty_tutor_payload("AI failed to extract concepts.")
             
@@ -104,6 +109,9 @@ async def generate_explanation_async(query: str, context: str, fallback_mode: bo
     from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt, TUTOR_SYSTEM_PROMPT
     prompt = get_tutor_prompt(context, query, fallback_mode)
     res = await generate_llm_text_async(prompt, temperature=0.3, system_prompt=TUTOR_SYSTEM_PROMPT)
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt, NEW_RENDERING_SYSTEM
+    prompt = get_tutor_prompt(context, query, fallback_mode)
+    res = await generate_llm_text_async(prompt, temperature=0.3, system_prompt=NEW_RENDERING_SYSTEM)
     
     if not res:
         return "Failed to generate explanation."
@@ -181,7 +189,106 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
         "explanation": rag_explanation,
         "ragContent": rag_content,
         "simulation_guide": structured.get("simulation_guide", {"is_buildable": False}),
+        "structured": None,
     }
+
+
+async def explain_simulation_query(query: str) -> Dict[str, Any]:
+    request_started = time.perf_counter()
+    
+    # Direct prompt to LLM (No RAG!)
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async, TUTOR_SYSTEM_PROMPT
+    
+    context = "Live interactive physics sandbox simulation."
+    
+    from app.src.modules.legacy_rag.generator import get_tutor_prompt
+    prompt = get_tutor_prompt(context, query, fallback_mode=True)
+    
+    # Generate structured explanation
+    llm_start = time.perf_counter()
+    
+    structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
+    explanation_task = asyncio.create_task(generate_llm_text_async(prompt, temperature=0.3, system_prompt=TUTOR_SYSTEM_PROMPT))
+    
+    structured, rag_explanation = await asyncio.gather(structured_task, explanation_task)
+    
+    if not rag_explanation:
+        rag_explanation = "Failed to generate simulation explanation."
+    
+    llm_time = time.perf_counter() - llm_start
+    print(f"[Direct LLM Simulation] {llm_time:.2f}s")
+    
+    total_time = time.perf_counter() - request_started
+    print(f"[TOTAL Direct Sim] {total_time:.2f}s")
+    
+    formulas = structured.get("formulas", [])
+    related_concepts = _dedupe_related_topics(structured.get("related_concepts", []), max_items=_MAX_RELATED_TOPICS)
+    first_formula = formulas[0].get("formula", "") if formulas and isinstance(formulas[0], dict) else (formulas[0] if formulas else "")
+
+    return {
+        "title": structured.get("title", "Simulation Insights"),
+        "description": query,
+        "formula": first_formula,
+        "related_concepts": related_concepts,
+        "related_formulas": formulas,
+        "ai_explanation": rag_explanation,
+        "sources": [],
+        "queryType": structured.get("queryType", "concept"),
+        "concepts": related_concepts,
+        "formulas": formulas,
+        "explanation": rag_explanation,
+        "ragContent": [],
+    }
+
+
+
+async def explain_simulation_query(query: str) -> Dict[str, Any]:
+    request_started = time.perf_counter()
+    
+    # Direct prompt to LLM (No RAG!)
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async, TUTOR_SYSTEM_PROMPT
+    
+    context = "Live interactive physics sandbox simulation."
+    
+    from app.src.modules.legacy_rag.generator import get_tutor_prompt
+    prompt = get_tutor_prompt(context, query, fallback_mode=True)
+    
+    # Generate structured explanation
+    llm_start = time.perf_counter()
+    
+    structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
+    explanation_task = asyncio.create_task(generate_llm_text_async(prompt, temperature=0.3, system_prompt=TUTOR_SYSTEM_PROMPT))
+    
+    structured, rag_explanation = await asyncio.gather(structured_task, explanation_task)
+    
+    if not rag_explanation:
+        rag_explanation = "Failed to generate simulation explanation."
+    
+    llm_time = time.perf_counter() - llm_start
+    print(f"[Direct LLM Simulation] {llm_time:.2f}s")
+    
+    total_time = time.perf_counter() - request_started
+    print(f"[TOTAL Direct Sim] {total_time:.2f}s")
+    
+    formulas = structured.get("formulas", [])
+    related_concepts = _dedupe_related_topics(structured.get("related_concepts", []), max_items=_MAX_RELATED_TOPICS)
+    first_formula = formulas[0].get("formula", "") if formulas and isinstance(formulas[0], dict) else (formulas[0] if formulas else "")
+
+    return {
+        "title": structured.get("title", "Simulation Insights"),
+        "description": query,
+        "formula": first_formula,
+        "related_concepts": related_concepts,
+        "related_formulas": formulas,
+        "ai_explanation": rag_explanation,
+        "sources": [],
+        "queryType": structured.get("queryType", "concept"),
+        "concepts": related_concepts,
+        "formulas": formulas,
+        "explanation": rag_explanation,
+        "ragContent": [],
+    }
+
 
 async def analyze_tutor_query_stream(query: str):
     """

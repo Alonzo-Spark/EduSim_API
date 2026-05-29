@@ -1,34 +1,26 @@
+import asyncio
+import sys
 import os
-import httpx
-from dotenv import load_dotenv
 
-from app.src.config.models import DEFAULT_MODEL, OPENROUTER_URL
+# Add parent directories to sys.path so we can import from app
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-load_dotenv()
+from app.src.modules.legacy_rag.generator import generate_llm_text_async, generate_llm_text
 
-def test_openrouter():
-    api_key = os.getenv("OPENROUTER_API_KEY")
-    print(f"Key found: {api_key[:10]}...")
-    
+async def main():
+    print("Testing generate_llm_text...")
     try:
-        headers = {
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        }
-        print(f"Headers: {headers}")
-        with httpx.Client(timeout=10.0) as client:
-            response = client.post(
-                OPENROUTER_URL,
-                headers=headers,
-                json={
-                    "model": DEFAULT_MODEL,
-                    "messages": [{"role": "user", "content": "say hi"}],
-                },
-            )
-            print(f"Status: {response.status_code}")
-            print(f"Response: {response.text}")
+        res = generate_llm_text("Hello, tell me a 1-word greeting.", temperature=0.1)
+        print("Sync response:", res)
     except Exception as e:
-        print(f"Error: {e}")
+        print("Sync error:", e)
+
+    print("Testing generate_llm_text_async...")
+    try:
+        res_async = await generate_llm_text_async("Hello, tell me a 1-word greeting.", temperature=0.1)
+        print("Async response:", res_async)
+    except Exception as e:
+        print("Async error:", e)
 
 if __name__ == "__main__":
-    test_openrouter()
+    asyncio.run(main())

@@ -15,6 +15,25 @@ async def analyze_query(request: TutorQueryRequest):
     """
     return await analyze_tutor_controller(request)
 
+@tutor_router.post("/explain-sim")
+async def explain_sim(request: TutorQueryRequest):
+    """
+    Direct, fast, and RAG-free dynamic LLM explanation for simulation physics events.
+    """
+    from app.src.modules.tutor.service import explain_simulation_query
+    from fastapi import HTTPException
+    try:
+        data = await explain_simulation_query(request.query)
+        return {
+            "success": True,
+            "data": data
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Simulation Tutor Explanation Error: {str(e)}"
+        )
+
 @tutor_router.post("/analyze-stream")
 async def analyze_query_stream(request: TutorQueryRequest):
     """
