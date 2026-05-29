@@ -147,13 +147,15 @@ class FormulaService:
         
         for match in re.finditer(display_regex, text, re.DOTALL):
             val = match.group(1).strip()
-            if "=" in val:
-                candidates.add(val)
+            # Split display blocks by newlines to get individual equations (like the frontend does!)
+            for line in val.split("\n"):
+                line_cleaned = line.strip()
+                if line_cleaned:
+                    candidates.add(line_cleaned)
                 
         for match in re.finditer(inline_regex, text):
             val = match.group(1).strip()
-            if "=" in val and re.search(r"[a-zA-Z]", val):
-                candidates.add(val)
+            candidates.add(val)
                 
         if not candidates:
             # Fallback for plain text equations
@@ -166,12 +168,14 @@ class FormulaService:
         
         for formula in candidates:
             # STRICT FILTER
-            if not re.search(r"[=≈≤≥∝→]", formula):
+            # Support both raw symbols and LaTeX equivalents like \propto, \approx, \to, \rightarrow, \le, \ge, =
+            if not re.search(r"[=≈≤≥∝→]|propto|approx|\\to|\\rightarrow|\\le|\\ge", formula):
                 continue
                 
             canonical = formula.replace(" ", "").lower()
             if "propto" in canonical or "deltap" in canonical or "andinsiunitstheconstant" in canonical:
-                continue
+                if len(canonical) > 40 and not any(x in canonical for x in ["frac", "sqrt", "sin", "cos"]):
+                    continue
                 
             if canonical.isalpha():
                 continue
@@ -360,8 +364,9 @@ Do NOT include markdown block markers, output raw JSON.'''
         try:
             llm_text = await generate_llm_text_async(prompt, temperature=0.2, max_output_tokens=1000)
             if llm_text:
-                # clean up markdown backticks if any
-                llm_text = re.sub(r"^```json|```$", "", llm_text.strip(), flags=re.MULTILINE).strip()
+                # clean up markdown backticks if any (json, python, or plain)
+                llm_text = llm_text.strip()
+                llm_text = re.sub(r"^```(?:json|text|markdown)?|```$", "", llm_text, flags=re.MULTILINE).strip()
                 # Repair single backslashes in LaTeX commands that violate JSON escaping rules
                 llm_text = re.sub(r'\\(?!n|"|u[0-9a-fA-F]{4})', r'\\\\', llm_text)
                 data = json.loads(llm_text)
