@@ -15,6 +15,7 @@ from app.src.api.rag_router import rag_router
 from app.src.api.tutor_router import tutor_router
 from app.src.api.generate_router import generate_router
 from app.src.modules.sandbox.controller import sandbox_router
+from app.src.api.scene_router import scene_router
 from app.src.api.auth import auth_router
 
 from api.formula import router as generic_formula_router
@@ -44,6 +45,16 @@ from app.src.modules.legacy_rag import vector_store
 async def lifespan(app: FastAPI):
     # Preload FAISS globally
     vector_store.load_all()
+    
+    # Automatically create tables for SQLite/PostgreSQL
+    try:
+        from app.src.config.database import Base, engine
+        from app.src.models.user import User  # Registers User model with Base metadata
+        Base.metadata.create_all(bind=engine)
+        logger.info("Database tables initialized successfully.")
+    except Exception as e:
+        logger.error(f"Failed to initialize database tables: {e}")
+        
     yield
 
 app = FastAPI(
@@ -90,6 +101,11 @@ app.include_router(
 
 app.include_router(
     sandbox_router,
+    prefix="/api"
+)
+
+app.include_router(
+    scene_router,
     prefix="/api"
 )
 

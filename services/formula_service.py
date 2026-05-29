@@ -306,7 +306,9 @@ class FormulaService:
         
         # Fetch cached derived forms if available
         cache_data = FORMULA_GROUP_CACHE.get(formula, {})
-        canon_form = cache_data.get("canonical_form", FormulaService._canonicalize_formula(formula) or "")
+        canon_res = FormulaService._canonicalize_formula(formula)
+        canon_form_str = canon_res[0] if isinstance(canon_res, tuple) and canon_res[0] is not None else formula
+        canon_form = cache_data.get("canonical_form", canon_form_str)
         primary_form = cache_data.get("primary_formula", formula)
         derived_forms = cache_data.get("derived_forms", [])
         
@@ -356,7 +358,7 @@ Return a JSON object with:
 Do NOT include markdown block markers, output raw JSON.'''
         
         try:
-            llm_text = await generate_llm_text_async(prompt, temperature=0.2, max_output_tokens=500)
+            llm_text = await generate_llm_text_async(prompt, temperature=0.2, max_output_tokens=1000)
             if llm_text:
                 # clean up markdown backticks if any
                 llm_text = re.sub(r"^```json|```$", "", llm_text.strip(), flags=re.MULTILINE).strip()

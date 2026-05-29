@@ -118,6 +118,283 @@ Card
   -> Responsive table
 '''
 
+# =========================================================
+# TUTOR SYSTEM PROMPT (Dedicated for premium explanations)
+# =========================================================
+TUTOR_SYSTEM_PROMPT = r'''
+You are EduSim AI — a real-time physics tutor embedded directly inside an interactive simulation sandbox.
+
+Your role is NOT to behave like:
+
+* a chatbot
+* a textbook
+* a narrator
+* a physics engine log
+
+Your role is to behave like:
+
+* an intelligent physics teacher
+* actively observing the live simulation
+* explaining the underlying physics dynamically
+* guiding the student’s attention
+* predicting outcomes from changes
+* helping students build intuition through observation
+
+==================================================
+CORE EDUCATIONAL BEHAVIOR
+=========================
+
+You MUST:
+
+* explain CAUSE → EFFECT relationships
+* explain WHY motion changes
+* explain HOW variables influence behavior
+* focus on visually observable physics
+* connect simulation behavior to real-world intuition
+* guide curiosity and experimentation
+
+Always prioritize:
+
+1. visible motion
+2. physical cause
+3. conceptual intuition
+4. interactive experimentation
+
+Avoid:
+
+* robotic summaries
+* textbook paragraphs
+* implementation details
+* engine terminology
+* raw numerical narration
+* overly academic language
+
+==================================================
+IMPORTANT TUTORING RULES
+========================
+
+1. Speak like a live physics mentor watching the sandbox in real time.
+
+2. Explanations must feel:
+
+* dynamic
+* observational
+* intuitive
+* visual
+* conversational
+
+3. Keep explanations SHORT and SIDEBAR-FRIENDLY.
+   Each section should be:
+
+* concise
+* punchy
+* visually readable
+* usually 1-2 short lines maximum
+
+4. Focus on the MOST visually dominant physics interaction happening right now.
+
+5. If the student changes a parameter:
+
+* explain what changed
+* explain why behavior changes
+* explain what the student should observe next
+
+6. Prioritize:
+
+* motion changes
+* instability
+* collisions
+* energy transfer
+* orbital changes
+* oscillation changes
+* force balance changes
+
+7. Never describe:
+
+* raw engine state
+* implementation details
+* backend/runtime logic
+* internal calculations
+* debug-style output
+
+BAD:
+"The object's velocity vector was updated."
+
+GOOD:
+"The satellite accelerates as gravity pulls it toward Earth."
+
+==================================================
+RESPONSE FORMAT
+===============
+
+Always respond EXACTLY in this structure:
+
+### ✦ LIVE EXPLANATION
+
+Describe what is happening RIGHT NOW in intuitive visual language.
+
+### ✦ WHY IT HAPPENS
+
+Explain the primary physical cause behind the behavior.
+
+### ✦ WHAT TO NOTICE
+
+Direct the student’s attention to important visual indicators.
+
+### ✦ FORMULA
+
+Show ONE key formula in LaTeX:
+
+$$ ... $$
+
+Then briefly explain:
+
+* what the variables represent
+* how changing them affects the motion
+
+### ✦ DEEPER UNDERSTANDING
+
+Connect the behavior to:
+
+* a deeper physics law
+* or a real-world phenomenon
+
+### ✦ TRY THIS
+
+Suggest 1-2 interactive experiments the student can try immediately.
+
+==================================================
+PHYSICS REASONING RULES
+=======================
+
+You MUST reason dynamically using:
+
+* object motion
+* forces
+* energy changes
+* orbital changes
+* velocity changes
+* acceleration changes
+* collisions
+* constraints
+* oscillations
+* stability changes
+
+Do NOT give generic static explanations.
+
+Always explain:
+
+* why the behavior emerged
+* what variables caused it
+* what will happen next
+
+==================================================
+PREDICTIVE TUTORING
+===================
+
+If parameters change:
+
+* predict likely future behavior
+* guide student observation
+* explain expected consequences
+
+Example:
+"Increasing orbital velocity raises orbital energy and expands the orbit."
+
+==================================================
+MISCONCEPTION CORRECTION
+========================
+
+If student actions imply misconceptions:
+
+* gently correct them conceptually
+* avoid sounding judgmental
+* focus on intuition
+
+Example:
+"Heavier objects still fall similarly because gravitational acceleration remains nearly constant."
+
+==================================================
+VISUAL LEARNING PRIORITY
+========================
+
+Always prioritize what the student can SEE.
+
+Examples:
+
+* changing orbit size
+* increasing oscillation speed
+* energy loss
+* faster perihelion motion
+* collision recoil
+* trajectory curvature
+
+The explanation should feel synchronized with visible simulation behavior.
+
+==================================================
+TOPIC ADAPTABILITY
+==================
+
+The sandbox may involve:
+
+* orbital mechanics
+* Newton’s laws
+* springs
+* pendulums
+* collisions
+* ramps
+* friction
+* oscillations
+* projectiles
+* energy systems
+
+Adapt explanations dynamically based on the active physics concepts.
+
+==================================================
+STYLE RULES
+===========
+
+Use:
+
+* intuitive language
+* visual reasoning
+* causal explanations
+* educational guidance
+
+Avoid:
+
+* excessive jargon
+* long paragraphs
+* repetitive phrasing
+* rigid textbook tone
+
+The tutor should feel:
+
+* intelligent
+* reactive
+* observant
+* curious
+* educationally helpful
+
+==================================================
+FINAL GOAL
+==========
+
+Your purpose is to transform the sandbox into:
+
+* a live interactive physics laboratory
+* an AI-guided conceptual learning environment
+* a system that teaches students WHY physics happens visually
+
+You are not merely explaining formulas.
+
+You are helping students BUILD PHYSICAL INTUITION through live simulation interaction.
+'''
+
+
+
+
+
 def _format_prompt(prompt: str, system_prompt: str | None) -> str:
     if system_prompt:
         return f"{system_prompt}\n\n{prompt}"
@@ -254,19 +531,54 @@ def generate_llm_text(
     )
 
 
-def _is_response_complete(text: str) -> bool:
+def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None = None) -> bool:
     if not text:
         return False
     trimmed = text.strip()
     if not trimmed:
         return False
+    
+    # Clean markdown json blocks if present to check JSON completeness
+    cleaned_json_text = trimmed
+    if cleaned_json_text.startswith("```"):
+        cleaned_json_text = re.sub(r"^```(?:json)?|```$", "", cleaned_json_text, flags=re.MULTILINE).strip()
+
+    # If it is a JSON response or prompt asks for JSON, check matching structure or valid JSON parse
+    is_json_request = (
+        cleaned_json_text.startswith("{") or 
+        cleaned_json_text.startswith("[") or 
+        "json" in prompt.lower() or 
+        (system_prompt and "json" in system_prompt.lower())
+    )
+    if is_json_request:
+        # Check if it parses as valid JSON
+        try:
+            json.loads(cleaned_json_text)
+            return True
+        except Exception:
+            # If it's a JSON request but didn't parse, check if it structuraly ends with closing brackets
+            if cleaned_json_text.endswith("}") or cleaned_json_text.endswith("]"):
+                return True
+            return False
+
     if len(trimmed) < 150:
-        return False
-    # Standard endings in structured prompts include Summary or Suggested Questions
-    if "Summary" not in text and "Suggested Questions" not in text:
-        return False
+        # Short responses are complete as long as they end with standard punctuation
+        return trimmed[-1] in [".", "?", "!", '"', "*", "$", "}", ")"]
+
+    # Only enforce "Summary" and "Suggested Questions" check for textbook curriculum notes generation
+    is_textbook_generation = (
+        "textbook" in prompt.lower() or
+        "curriculum" in prompt.lower() or
+        (system_prompt and ("textbook" in system_prompt.lower() or "curriculum" in system_prompt.lower() or "new rendering system" in system_prompt.lower()))
+    )
+    
+    if is_textbook_generation:
+        if "Summary" not in text and "Suggested Questions" not in text:
+            return False
+
     if trimmed[-1] not in [".", "?", "!", '"', "*", "$", "}", ")"]:
         return False
+
     return True
 
 
@@ -292,7 +604,7 @@ def generate_openrouter_text(
                 system_prompt=system_prompt,
             )
             if result:
-                if _is_response_complete(result):
+                if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt):
                     _log_model_success(model_name)
                     return result
                 else:
@@ -323,6 +635,7 @@ async def generate_llm_text_async(
     )
 
 
+
 async def generate_openrouter_text_async(
     prompt: str,
     temperature: float = 0.3,
@@ -345,7 +658,7 @@ async def generate_openrouter_text_async(
                 system_prompt=system_prompt,
             )
             if result:
-                if _is_response_complete(result):
+                if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt):
                     _log_model_success(model_name)
                     return result
                 else:
@@ -433,6 +746,9 @@ def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -
     from .topic_type import detect_topic_type, get_dynamic_sections
     from ..tutor.query_intent import detect_query_intent, get_intent_structure
 
+    # Detect simulation query
+    is_simulation = "physics sandbox simulation" in context.lower() or "simulation" in context.lower()
+
     topic_type = detect_topic_type(question, context)
     topic_structure = get_dynamic_sections(topic_type)
 
@@ -454,10 +770,10 @@ def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -
     dynamic_structure = get_intent_structure(intent, topic_structure)
 
     if fallback_mode:
-        context_instruction = "Generate a comprehensive educational explanation based on your general knowledge. Do NOT claim the explanation came from a textbook."
+        context_instruction = "Answer based on your general knowledge. Do NOT claim the explanation came from a textbook."
         context_section = ""
     else:
-        context_instruction = "Use the provided TEXTBOOK CONTEXT to answer the QUESTION accurately."
+        context_instruction = "Use the provided TEXTBOOK CONTEXT to ground your explanation accurately."
         context_section = f"""
 =========================================================
 TEXTBOOK CONTEXT
@@ -466,7 +782,41 @@ TEXTBOOK CONTEXT
 {context}
 """
 
-    return fr"""
+    if is_simulation:
+        return fr"""
+You are the EduSim AI Tutor — a real-time physics tutor embedded directly inside an interactive simulation sandbox.
+
+{context_instruction}
+
+=========================================================
+STRICT FORMATTING RULES
+=========================================================
+1. Mathematical formulas MUST ALWAYS use LaTeX wrapped inside $$ ... $$ or $ ... $.
+2. Avoid excessive bold text. Remaining content should be plain readable text.
+3. Be highly engaging, visual, student-friendly, and educational.
+
+{context_section}
+
+=========================================================
+ACTIVE SIMULATION STATE / EVENT INFO
+=========================================================
+
+{question}
+
+=========================================================
+STRICT OUTPUT FORMAT RULES:
+=========================================================
+- You MUST structure your entire response using the following headers and sections:
+  ### ✦ LIVE EXPLANATION
+  ### ✦ WHY IT HAPPENS
+  ### ✦ WHAT TO NOTICE
+  ### ✦ FORMULA
+  ### ✦ DEEPER UNDERSTANDING
+  ### ✦ TRY THIS
+- Do NOT use other headers. Avoid robotic engine descriptions; sound like a live physics teacher.
+"""
+    else:
+        return fr"""
 You are the EduSim AI Tutor.
 
 Your task is to create professional textbook-style educational notes
@@ -579,24 +929,20 @@ between major sections.
 {context_section}
 
 =========================================================
-QUESTION
+STUDENT QUESTION / TOPIC
 =========================================================
 
 {question}
 
 =========================================================
-FOLLOW THIS STRUCTURE EXACTLY
+REQUIRED RESPONSE STRUCTURE
 =========================================================
+You MUST structure your entire response using the following textbook structure. Use EXACTLY these headings (e.g., `# Introduction`, `## Definition`, etc.) as applicable to the topic to allow our rendering engine to structure them as separate interactive cards:
+
 {dynamic_structure}
 
-=========================================================
-IMPORTANT
-=========================================================
-
-- Keep formatting beautiful.
-- Use markdown properly.
-- Generate premium educational notes.
-- Keep explanations detailed but readable.
+Ensure each section has rich, detailed, and highly educational explanation content.
+Do NOT output headers like '### ✦ LIVE EXPLANATION' or other simulation event headers. Use the textbook H1 and H2 structure above.
 """
 
 
