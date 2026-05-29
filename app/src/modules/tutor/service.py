@@ -40,6 +40,7 @@ def _empty_tutor_payload(message: str):
         "formulas": [],
         "explanation": message,
         "ragContent": [],
+        "simulation_guide": {"is_buildable": False},
     }
 
 def get_rag_components(subject: str = None):
@@ -48,12 +49,29 @@ def get_rag_components(subject: str = None):
 
 async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
     system_prompt = (
-        "You are an intelligent tutor. Analyze query and context.\n"
+        "You are an intelligent physics tutor. Analyze the query and textbook context to determine scientific properties and check if the user is asking to build or understand how to set up a physics simulation scenario (e.g. pendulums, spring systems, falling bodies, collisions, orbits, projectiles, double pendulums, cart tracks, sliding blocks, inclined planes, pulleys, etc.).\n"
         "1. Determine 'queryType': 'concept', 'formula', or 'mixed'.\n"
         "2. Extract 'concepts': list of simple, concise topic names (e.g. ['Gravity', 'Orbital Velocity', 'Centripetal Force']). Do NOT output nested dictionaries.\n"
         "3. Extract 'formulas': [{formula, name, topic, meaning}]. Include fundamental ones if omitted in text.\n"
         "4. Generate a brief 'explanation': a short summary string.\n"
-        "Return ONLY valid JSON."
+        "5. If the query represents a physical scenario that can be built in the sandbox, include a 'simulation_guide' object. Otherwise set 'simulation_guide': {'is_buildable': false}.\n"
+        "The 'simulation_guide' object MUST contain:\n"
+        "   - 'is_buildable': true\n"
+        "   - 'title': A beautiful short title (e.g. 'Double Pendulum Setup')\n"
+        "   - 'steps': A list of exactly 6 step card objects, representing customized instructions. Each step object MUST contain:\n"
+        "       * 'step_number': 1 to 6\n"
+        "       * 'title': Short header (e.g. 'Spawn Objects')\n"
+        "       * 'description': Clear, beginner-friendly instructions starting with a brief scientific explanation. Explicitly mention and highlight the relevant sandbox assets (e.g., 'Circle', 'Rectangle', 'Rope', 'Spring', 'Pivot') and sandbox controllers (e.g. 'Play button', 'Gravity presets', 'Simulation Speed slider') that the user needs to use in this step. Suggest exact sizes, coordinates, mass values, and placement on the canvas. Keep workspace limits in mind (x between 100-700, y between 100-500).\n"
+        "       * 'icon': A relevant emoji (e.g. '🏮', '🔴', '➰', '🪐', '🚀', '🤼')\n"
+        "       * Note: The last step (Step 6) MUST explain the final physics conclusion, explaining the underlying physics relationship demonstrated by the simulation (e.g., simple harmonic motion, conservation of energy, centripetal force thresholds, etc.).\n"
+        "   - 'tips': A list of 3 scientific, inquiry-based tips matching the query (e.g. ['Try changing mass to see if swing period scales', 'Increase linear gravity preset to verify acceleration increases'])\n"
+        "   - 'spawn_config': A procedural physics setup object describing the simulation layout so the frontend can auto-build it! It MUST contain:\n"
+        "       * 'bodies': A list of shapes. Each body config MUST contain: 'id' (string, e.g. 'c1', 'rect1'), 'type' ('circle' or 'rectangle'), 'x' (number), 'y' (number), 'radius' (number, only if circle), 'width' (number, only if rectangle), 'height' (number, only if rectangle), 'isStatic' (boolean), 'mass' (number, optional), 'restitution' (number, optional), 'fillColor' (hex string, e.g. '0x38bdf8'), 'label' (string)\n"
+        "       * 'constraints': A list of joints. Each constraint MUST contain: 'id' (string), 'type' ('rope' or 'spring'), 'bodyIdA' (string, source body ID), 'bodyIdB' (string, destination body ID), 'length' (number, optional), 'stiffness' (number, optional), 'damping' (number, optional)\n"
+        "       * 'gravityMode': 'linear' or 'radial'\n"
+        "       * 'gravityPreset': 'zero', 'moon', 'earth', or 'jupiter'\n"
+        "       * 'forces': A list of initial forces to apply. Each force config contains: 'bodyId' (string), 'vector' ({x, y}, force components, small numbers e.g. 0.01 to 0.05)\n"
+        "Return ONLY valid, parseable JSON matching the requested schema."
     )
     user_prompt = f"Context:\n{context}\n\nQuery:\n{query}"
     final_prompt = f"{system_prompt}\n\n{user_prompt}"
@@ -75,6 +93,7 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
                 "related_concepts": related_concepts,
                 "related_formulas": parsed.get("formulas", []),
                 "ai_explanation": parsed.get("explanation", ""),
+                "simulation_guide": parsed.get("simulation_guide", {"is_buildable": False}),
             }
         return _empty_tutor_payload("Invalid JSON returned.")
     except Exception as e:
@@ -161,6 +180,7 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
         "formulas": formulas,
         "explanation": rag_explanation,
         "ragContent": rag_content,
+        "simulation_guide": structured.get("simulation_guide", {"is_buildable": False}),
     }
 
 async def analyze_tutor_query_stream(query: str):

@@ -109,4 +109,4 @@ app.include_router(edusim_rag_router)
 # --- Generic APIs for Formula Lab and Q&A ---
 app.include_router(generic_formula_router, prefix="/api/formula")
 app.include_router(generic_rag_router, prefix="/api/rag")
-app.include_router(generic_questions_router, prefix="/api/questions")
+app.include_router(generic_questions_router, prefix="/api/questions")
