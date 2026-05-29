@@ -243,7 +243,7 @@ def generate_llm_text(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
-    system_prompt: str | None = NEW_RENDERING_SYSTEM,
+    system_prompt: str | None = None,
 ):
     final_prompt = final_prompt.strip()
     return generate_openrouter_text(
@@ -292,7 +292,8 @@ def generate_openrouter_text(
                 system_prompt=system_prompt,
             )
             if result:
-                if _is_response_complete(result):
+                is_textbook = (system_prompt == NEW_RENDERING_SYSTEM)
+                if not is_textbook or _is_response_complete(result):
                     _log_model_success(model_name)
                     return result
                 else:
@@ -312,7 +313,7 @@ async def generate_llm_text_async(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
-    system_prompt: str | None = NEW_RENDERING_SYSTEM,
+    system_prompt: str | None = None,
 ):
     final_prompt = final_prompt.strip()
     return await generate_openrouter_text_async(
@@ -345,7 +346,8 @@ async def generate_openrouter_text_async(
                 system_prompt=system_prompt,
             )
             if result:
-                if _is_response_complete(result):
+                is_textbook = (system_prompt == NEW_RENDERING_SYSTEM)
+                if not is_textbook or _is_response_complete(result):
                     _log_model_success(model_name)
                     return result
                 else:
@@ -613,5 +615,6 @@ def generate_response(
     return generate_llm_text(
         final_prompt,
         temperature=0.3,
-        max_output_tokens=1800
+        max_output_tokens=1800,
+        system_prompt=NEW_RENDERING_SYSTEM,
     )

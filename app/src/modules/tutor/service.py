@@ -18,7 +18,7 @@ load_dotenv(Path(__file__).resolve().parents[4] / ".env")
 
 # RAG Setup
 from app.src.modules.legacy_rag.vector_loader import vector_store
-from tutor.subject_classifier import detect_subject
+from app.src.modules.tutor.subject_classifier import detect_subject
 import asyncio
 
 # Curriculum Index Cache
@@ -84,9 +84,9 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
         return _empty_tutor_payload(f"AI error: {str(e)}")
 
 async def generate_explanation_async(query: str, context: str, fallback_mode: bool = False) -> str:
-    from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt, NEW_RENDERING_SYSTEM
     prompt = get_tutor_prompt(context, query, fallback_mode)
-    res = await generate_llm_text_async(prompt, temperature=0.3)
+    res = await generate_llm_text_async(prompt, temperature=0.3, system_prompt=NEW_RENDERING_SYSTEM)
     
     if not res:
         return "Failed to generate explanation."
@@ -451,8 +451,6 @@ def _dedupe_related_topics(items: Any, max_items: int = _MAX_RELATED_TOPICS) -> 
             break
 
     return cleaned
-    related_concepts = _dedupe_related_topics(parsed.get("concepts", []), max_items=6)
-    related_concepts = _dedupe_related_topics(structured.get("related_concepts", []), max_items=6)
 
 _QUERY_HINTS = {
     "ele": ["electric", "electro", "electromag", "current", "charge", "voltage", "resistance"],
