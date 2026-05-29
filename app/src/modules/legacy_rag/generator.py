@@ -243,7 +243,7 @@ def generate_llm_text(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
-    system_prompt: str | None = None,
+    system_prompt: str | None = NEW_RENDERING_SYSTEM,
 ):
     final_prompt = final_prompt.strip()
     return generate_openrouter_text(
@@ -313,7 +313,7 @@ async def generate_llm_text_async(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
-    system_prompt: str | None = None,
+    system_prompt: str | None = NEW_RENDERING_SYSTEM,
 ):
     final_prompt = final_prompt.strip()
     return await generate_openrouter_text_async(
@@ -557,6 +557,8 @@ between major sections.
 21. Keep formatting visually premium.
 
 22. Use professional academic language.
+
+24. Do NOT generate any "Important Notes" section. Do NOT write "Important Notes" as a main heading. All notes must be incorporated into other sections like Introduction, Characteristics, or Summary.
 
 23. Every solved numerical, step-by-step example, or calculation MUST follow this exact sub-section structure using H3 (###) headers:
     - ### Problem

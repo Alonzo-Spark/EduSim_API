@@ -24,43 +24,29 @@ def detect_topic_type(query: str, context: str = "") -> str:
 def get_dynamic_sections(topic_type: str) -> str:
     """Returns formatting sections based on the detected topic type."""
     
-    base_structure = """
+    if topic_type in ["history", "social_science"]:
+        return """
 # Introduction
 
 ## Definition
 
 ## Key Concepts
-"""
 
-    advantages_structure = """
----
+# Characteristics
 
-# Advantages and Disadvantages
-
-| Type | Description |
-|---|---|
-"""
-    
-    applications_structure = """
----
+## Important Properties
 
 # Applications
 
 ## Real-World Applications
 
 ## Industry Usage
-"""
-
-    summary_structure = """
----
 
 # Summary
 
 ## Key Takeaways
 
 ## Quick Revision Points
-
----
 
 # Suggested Questions
 
@@ -69,17 +55,18 @@ def get_dynamic_sections(topic_type: str) -> str:
 3. Question 3
 """
 
-    if topic_type in ["physics"]:
-        specific_structure = """
----
+    return """
+# Introduction
+
+## Definition
+
+## Key Concepts
 
 # Characteristics
 
 ## Important Properties
 
----
-
-# Mathematical Formulas
+# Formula
 
 ## Main Formula
 
@@ -87,101 +74,26 @@ def get_dynamic_sections(topic_type: str) -> str:
 
 ## Derivation
 
----
-
-# Detailed Example
+# Example
 
 ## Solved Numerical
+
+# Applications
+
+## Real-World Applications
+
+## Industry Usage
+
+# Summary
+
+## Key Takeaways
+
+## Quick Revision Points
+
+# Suggested Questions
+
+1. Question 1
+2. Question 2
+3. Question 3
 """
-        return base_structure + specific_structure + advantages_structure + applications_structure + summary_structure
 
-    elif topic_type in ["maths"]:
-        specific_structure = """
----
-
-# Mathematical Equations
-
-## Core Equation
-
-## Proof / Derivation
-
----
-
-# Detailed Example
-
-## Step-by-Step Calculation
-"""
-        return base_structure + specific_structure + applications_structure + summary_structure
-
-    elif topic_type in ["chemistry"]:
-        specific_structure = """
----
-
-# Chemical Properties
-
-## Characteristics
-
----
-
-# Chemical Reactions and Formulas
-
-## Main Reaction / Formula
-
-## Explanation
-"""
-        return base_structure + specific_structure + advantages_structure + applications_structure + summary_structure
-
-    elif topic_type in ["biology"]:
-        specific_structure = """
----
-
-# Characteristics and Processes
-
-## Important Properties
-
-## Biological Mechanisms
-
----
-
-# Structure and Diagram Description
-
-## Components
-"""
-        return base_structure + specific_structure + advantages_structure + applications_structure + summary_structure
-
-    elif topic_type in ["history", "social_science"]:
-        specific_structure = """
----
-
-# Historical Context / Background
-
-## Timeline of Events
-
----
-
-# Key Figures and Movements
-
-## Significant Contributions
-
----
-
-# Impact and Significance
-
-## Short-term Impact
-
-## Long-term Consequences
-"""
-        return base_structure + specific_structure + summary_structure
-
-    else:
-        # General topics
-        specific_structure = """
----
-
-# Characteristics
-
-## Important Properties
-
-## Types
-"""
-        return base_structure + specific_structure + advantages_structure + applications_structure + summary_structure

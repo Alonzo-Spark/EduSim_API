@@ -51,89 +51,123 @@ def get_intent_structure(intent: str, fallback_structure: str) -> str:
     """Returns the template structure strictly based on intent."""
     if intent == "comparison":
         return """
-# Differences
+# Introduction
 
-| Feature | Concept A | Concept B |
-|---|---|---|
+## Definition
+
+## Key Concepts
+
+# Characteristics
+
+## Important Properties
+(Provide a comparison table of features between the concepts here)
 
 # Summary
 
-## Conclusion
+## Key Takeaways
 """
     elif intent == "definition":
         return """
-# Definition
+# Introduction
 
-## Concise Meaning
+## Definition
 
-# Key Points
-
-## Important Highlights
+## Key Concepts
 """
     elif intent == "relationship":
         return """
-# Relationship Explanation
+# Introduction
 
-## Connecting Concepts
+## Definition
 
-# Connecting Formulas / Principles
+## Key Concepts
 
-## Mathematical or Theoretical Link
+# Formula
+
+## Main Formula
+
+## Formula Explanation
 """
     elif intent == "advantages":
         return """
-# Advantages and Disadvantages
+# Introduction
 
-| Type | Description |
-|---|---|
+## Definition
+
+# Characteristics
+
+## Important Properties
+(Provide an advantages and disadvantages markdown table here)
+
+# Summary
+
+## Key Takeaways
 """
     elif intent == "examples":
         return """
-# Practical Examples
+# Introduction
 
-## Daily Life Applications
+## Definition
+
+# Example
+
+## Solved Numerical
+
+# Applications
+
+## Real-World Applications
 
 ## Industry Usage
 """
     elif intent == "formula":
         return """
-# Mathematical Formulas
+# Introduction
+
+## Definition
+
+# Formula
 
 ## Main Formula
 
 ## Formula Explanation
 
-# Derivation
-
-## Step-by-Step Derivation
+## Derivation
 """
     elif intent == "characteristics":
         return """
-# Characteristics and Features
+# Introduction
+
+## Definition
+
+# Characteristics
 
 ## Important Properties
 """
     elif intent == "process":
         return """
-# Process / Working Mechanism
+# Introduction
 
-## Step-by-Step Explanation
+## Definition
 
-# Important Components
+## Key Concepts
 
-## Key Elements Involved
+# Characteristics
+
+## Important Properties
 """
     elif intent == "numerical":
         return """
-# Problem Solution
+# Introduction
 
-## Given Data
+## Definition
 
-## Formulas Used
+# Formula
 
-## Step-by-Step Calculation
+## Main Formula
 
-## Final Answer
+# Example
+
+## Solved Numerical
 """
     else:
         # Fallback to the detailed educational textbook notes structure
