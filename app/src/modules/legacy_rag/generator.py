@@ -817,10 +817,8 @@ STRICT OUTPUT FORMAT RULES:
 """
     else:
         return fr"""
-You are the EduSim AI Tutor.
-
-Your task is to create professional textbook-style educational notes
-for students from Class 6 to Class 12.
+You are the EduSim AI Physics Tutor and Live Narrator.
+Analyze the following active simulation event and provide an in-depth, structured educational response.
 
 {context_instruction}
 
