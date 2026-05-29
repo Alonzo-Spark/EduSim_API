@@ -49,7 +49,6 @@ Formula
 Applications
 Advantages
 Disadvantages
-Important Notes
 Summary
 Suggested Questions
 
@@ -255,6 +254,22 @@ def generate_llm_text(
     )
 
 
+def _is_response_complete(text: str) -> bool:
+    if not text:
+        return False
+    trimmed = text.strip()
+    if not trimmed:
+        return False
+    if len(trimmed) < 150:
+        return False
+    # Standard endings in structured prompts include Summary or Suggested Questions
+    if "Summary" not in text and "Suggested Questions" not in text:
+        return False
+    if trimmed[-1] not in [".", "?", "!", '"', "*", "$", "}", ")"]:
+        return False
+    return True
+
+
 def generate_openrouter_text(
     prompt: str,
     temperature: float = 0.3,
@@ -262,19 +277,33 @@ def generate_openrouter_text(
     system_prompt: str | None = None,
 ):
     models = get_model_chain()
+    best_fallback = None
 
     for index, model_name in enumerate(models):
         _log_model_attempt(model_name, fallback=index > 0)
-        result = _generate_openrouter_text(
-            prompt,
-            model_name,
-            temperature,
-            max_output_tokens,
-            system_prompt=system_prompt,
-        )
-        if result:
-            _log_model_success(model_name)
-            return result
+        current_max = max_output_tokens
+        current_temp = temperature
+        for attempt in range(2):
+            result = _generate_openrouter_text(
+                prompt,
+                model_name,
+                current_temp,
+                current_max,
+                system_prompt=system_prompt,
+            )
+            if result:
+                if _is_response_complete(result):
+                    _log_model_success(model_name)
+                    return result
+                else:
+                    best_fallback = result
+                    print(f"[LLM] Response incomplete on attempt {attempt + 1}. Retrying with more tokens...")
+                    current_max = min(current_max + 400, 2500)
+                    current_temp = 0.15
+
+    if best_fallback:
+        print("[LLM] Returning best fallback incomplete response.")
+        return best_fallback
 
     return "Error: Unable to generate response from OpenRouter."
 
@@ -301,19 +330,33 @@ async def generate_openrouter_text_async(
     system_prompt: str | None = None,
 ):
     models = get_model_chain()
+    best_fallback = None
 
     for index, model_name in enumerate(models):
         _log_model_attempt(model_name, fallback=index > 0)
-        result = await _generate_openrouter_text_async(
-            prompt,
-            model_name,
-            temperature,
-            max_output_tokens,
-            system_prompt=system_prompt,
-        )
-        if result:
-            _log_model_success(model_name)
-            return result
+        current_max = max_output_tokens
+        current_temp = temperature
+        for attempt in range(2):
+            result = await _generate_openrouter_text_async(
+                prompt,
+                model_name,
+                current_temp,
+                current_max,
+                system_prompt=system_prompt,
+            )
+            if result:
+                if _is_response_complete(result):
+                    _log_model_success(model_name)
+                    return result
+                else:
+                    best_fallback = result
+                    print(f"[LLM] Response incomplete on attempt {attempt + 1}. Retrying with more tokens...")
+                    current_max = min(current_max + 400, 2500)
+                    current_temp = 0.15
+
+    if best_fallback:
+        print("[LLM] Returning best fallback incomplete response.")
+        return best_fallback
 
     return "Error: Unable to generate response from OpenRouter."
 
@@ -423,7 +466,7 @@ TEXTBOOK CONTEXT
 {context}
 """
 
-    return f"""
+    return fr"""
 You are the EduSim AI Tutor.
 
 Your task is to create professional textbook-style educational notes
@@ -499,21 +542,39 @@ between major sections.
 - Real-world examples
 - Advantages
 - Disadvantages
-- Important notes
-- Common mistakes
 - Summary
 
 17. Maintain clean textbook formatting.
 
 18. Use proper markdown indentation.
 
-19. Avoid repeating concepts.
+19. Avoid repeating concepts or duplicating math equations.
 
 20. Keep explanations student-friendly.
 
 21. Keep formatting visually premium.
 
 22. Use professional academic language.
+
+23. Every solved numerical, step-by-step example, or calculation MUST follow this exact sub-section structure using H3 (###) headers:
+    - ### Problem
+      A clear statement of the question or problem.
+    - ### Given
+      A list of all known variables, symbols, and values with units (e.g. *Mass ($m$) = $5 \text{{ kg}}$*).
+    - ### Formula
+      The equation or mathematical relation used to solve the problem (rendered in display LaTeX, e.g. $$F = ma$$).
+    - ### Substitution
+      Showing the plugging-in of the given values into the formula.
+    - ### Calculation
+      The step-by-step arithmetic steps showing how the calculation is performed.
+    - ### Final Answer
+      The final value of the calculation with proper units, clearly highlighted (e.g. **Force ($F$) = $10 \text{{ N}}$**).
+    - ### Interpretation
+      A brief statement of what the result physically means.
+
+24. NEVER stack mathematical fractions or equations vertically on separate single-character lines (e.g. numerator on line 1, denominator on line 3). ALWAYS use proper LaTeX syntax like \frac{{a}}{{b}} and wrap it inside $$ ... $$ or $ ... $ (e.g. Write $$\frac{{1}}{{f}} = \frac{{1}}{{v}} - \frac{{1}}{{u}}$$).
+
+25. NEVER write plain text on the same line as display math delimiters ($$). Always start a new paragraph on a new line for any text explanation that follows a formula.
 
 {context_section}
 

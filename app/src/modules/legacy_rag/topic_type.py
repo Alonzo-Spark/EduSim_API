@@ -54,13 +54,9 @@ def get_dynamic_sections(topic_type: str) -> str:
     summary_structure = """
 ---
 
-# Important Notes
+# Summary
 
 ## Key Takeaways
-
----
-
-# Summary
 
 ## Quick Revision Points
 
@@ -114,8 +110,6 @@ def get_dynamic_sections(topic_type: str) -> str:
 # Detailed Example
 
 ## Step-by-Step Calculation
-
-## Common Mistakes
 """
         return base_structure + specific_structure + applications_structure + summary_structure
 
