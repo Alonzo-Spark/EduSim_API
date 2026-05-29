@@ -395,6 +395,7 @@ You are helping students BUILD PHYSICAL INTUITION through live simulation intera
 
 
 
+
 def _format_prompt(prompt: str, system_prompt: str | None) -> str:
     if system_prompt:
         return f"{system_prompt}\n\n{prompt}"
