@@ -1,0 +1,35 @@
+
+=========================================
+Line 244: Tool replace_file_content
+TargetContent:
+"import { BuildGuidePanel, CanvasHighlights } from './BuildGuideSystem';"
+ReplacementContent:
+"import { BuildGuidePanel, CanvasHighlights } from './BuildGuideSystem';\nimport { useAssistedModeStore } from '../../store/assistedModeStore';"
+
+=========================================
+Line 246: Tool replace_file_content
+TargetContent:
+"  // Premium onboarding/guide modal states\n  const [guideModalOpen, setGuideModalOpen] = useState(false);\n  const [tutorPanelOpen, setTutorPanelOpen] = useState(false);\n  const [aiGuideData, setAiGuideData] = useState<any>(null);\n  const [activeGuideStep, setActiveGuideStep] = useState(1);"
+ReplacementContent:
+"  // Premium onboarding/guide modal states\n  const [guideModalOpen, setGuideModalOpen] = useState(false);\n  const [tutorPanelOpen, setTutorPanelOpen] = useState(false);\n  const [aiGuideData, setAiGuideData] = useState<any>(null);\n  const [activeGuideStep, setActiveGuideStep] = useState(1);\n\n  const { mode: storeMode, isOpen: isStoreOpen, setIsOpen: setStoreOpen } = useAssistedModeStore();\n\n  useEffect(() => {\n    if (isStoreOpen && storeMode === 'guided') {\n      setGuideModalOpen(true);\n      setStoreOpen(false);\n    }\n  }, [isStoreOpen, storeMode, setStoreOpen]);"
+
+=========================================
+Line 264: Tool replace_file_content
+TargetContent:
+"        if (json.success && json.data) {\n          const d = json.data;\n          pushExplanation({\n            title: d.title || 'AI Answer',\n            explanation: d.ai_explanation || d.explanation || '',\n            effects: d.related_concepts?.map((c: string) => `📌 ${c}`) || [],\n            formula: d.formula || '',\n            suggestions: d.concepts || []\n          });\n        } else {\n          throw new Error(json.detail || 'Unknown error from backend');\n        }"
+ReplacementContent:
+"        if (json.success && json.data) {\n          const d = json.data;\n          pushExplanation({\n            title: d.title || 'AI Answer',\n            explanation: d.ai_explanation || d.explanation || '',\n            effects: d.related_concepts?.map((c: string) => `📌 ${c}`) || [],\n            formula: d.formula || '',\n            suggestions: d.concepts || []\n          });\n\n          // Check if LLM returned a custom step-by-step simulation build guide\n          if (d.simulation_guide && d.simulation_guide.is_buildable) {\n            setAiGuideData(d.simulation_guide);\n            setActiveGuideStep(1);\n            setGuideModalOpen(true);\n            // Sync with global store so selector toolbar updates\n            useAssistedModeStore.getState().setMode('guided');\n            useAssistedModeStore.getState().setIsOpen(true);\n          }\n        } else {\n          throw new Error(json.detail || 'Unknown error from backend');\n        }"
+
+=========================================
+Line 283: Tool replace_file_content
+TargetContent:
+"import { BuildGuidePanel, CanvasHighlights } from './BuildGuideSystem';"
+ReplacementContent:
+"import { BuildGuidePanel, CanvasHighlights } from './BuildGuideSystem';\nimport { useAssistedModeStore } from '../../store/assistedModeStore';"
+
+=========================================
+Line 317: Tool replace_file_content
+TargetContent:
+"  // ── Static boundaries ─────────────────────────────────────────────────────\n  addStatic(createObject({\n    id: 'ground', type: 'rectangle',\n    x: W / 2, y: H - 40, width: 5000, height: 28,\n    isStatic: true, fillColor: 0x1e293b, strokeColor: 0x334155, strokeWidth: 1,\n  }));"
+ReplacementContent:
+"  // ── Static boundaries ─────────────────────────────────────────────────────\n  addStatic(createObject({\n    id: 'ground', type: 'rectangle',\n    x: W / 2, y: H - 124, width: 5000, height: 28,\n    isStatic: true, fillColor: 0x0f172a, strokeColor: 0x5b5fff, strokeWidth: 2.5,\n  }));"

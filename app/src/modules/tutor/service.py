@@ -49,21 +49,26 @@ def get_rag_components(subject: str = None):
 
 async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
     system_prompt = (
-        "You are an intelligent physics tutor. Analyze the query and textbook context to determine scientific properties and check if the user is asking to build or understand how to set up a physics simulation scenario (e.g. pendulums, spring systems, falling bodies, collisions, orbits, projectiles, double pendulums, cart tracks, sliding blocks, inclined planes, pulleys, etc.).\n"
+        "You are an intelligent physics tutor. Analyze the query and textbook context to determine scientific properties and design a custom interactive physics sandbox simulation that demonstrates, explores, or proves the concept in the query (e.g., if they ask about Newton's Second Law, design a block-impulse collision system; if they ask about simple harmonic motion, design a spring oscillator; if they ask about gravity, design a falling-mass setup; if they ask about orbits, design planetary radial motion; etc.). The goal is to ALWAYS design an interactive, playable sandbox layout demonstrating their query.\n"
         "1. Determine 'queryType': 'concept', 'formula', or 'mixed'.\n"
         "2. Extract 'concepts': list of simple, concise topic names (e.g. ['Gravity', 'Orbital Velocity', 'Centripetal Force']). Do NOT output nested dictionaries.\n"
         "3. Extract 'formulas': [{formula, name, topic, meaning}]. Include fundamental ones if omitted in text.\n"
         "4. Generate a brief 'explanation': a short summary string.\n"
-        "5. If the query represents a physical scenario that can be built in the sandbox, include a 'simulation_guide' object. Otherwise set 'simulation_guide': {'is_buildable': false}.\n"
+        "5. The 'simulation_guide' object MUST ALWAYS be included and have 'is_buildable': true.\n"
         "The 'simulation_guide' object MUST contain:\n"
         "   - 'is_buildable': true\n"
         "   - 'title': A beautiful short title (e.g. 'Double Pendulum Setup')\n"
         "   - 'steps': A list of exactly 6 step card objects, representing customized instructions. Each step object MUST contain:\n"
         "       * 'step_number': 1 to 6\n"
-        "       * 'title': Short header (e.g. 'Spawn Objects')\n"
+        "       * 'title': The title of the step, which must strictly match the following 6-step curriculum template:\n"
+        "           - Step 1: 'Concept & Goal' (Explain the physical concept and the goal of the simulation)\n"
+        "           - Step 2: 'Mass Setup' (Spawn the main physical masses like Circle or Rectangle at specific canvas coordinates)\n"
+        "           - Step 3: 'Joints & Constraints' (Connect the masses using constraints like Rope, Spring, or Pivot)\n"
+        "           - Step 4: 'Parameter Tuning' (Fine-tune values like gravity presets, mass, stiffness, or apply initial forces)\n"
+        "           - Step 5: 'Run & Observe' (Explain how to run the simulation using the Play button and what active telemetry indicators like velocities, mechanical clock, or Kinetic Energy to inspect)\n"
+        "           - Step 6: 'Physics Conclusion' (Provide a rigorous, definitive scientific summary and conclusion explaining the physical principles, equations, and outcomes proved or demonstrated by the simulation, e.g. how potential energy converts to kinetic energy, how acceleration is net force over mass, or how centripetal orbit scales with constant gravity)\n"
         "       * 'description': Clear, beginner-friendly instructions starting with a brief scientific explanation. Explicitly mention and highlight the relevant sandbox assets (e.g., 'Circle', 'Rectangle', 'Rope', 'Spring', 'Pivot') and sandbox controllers (e.g. 'Play button', 'Gravity presets', 'Simulation Speed slider') that the user needs to use in this step. Suggest exact sizes, coordinates, mass values, and placement on the canvas. Keep workspace limits in mind (x between 100-700, y between 100-500).\n"
         "       * 'icon': A relevant emoji (e.g. '🏮', '🔴', '➰', '🪐', '🚀', '🤼')\n"
-        "       * Note: The last step (Step 6) MUST explain the final physics conclusion, explaining the underlying physics relationship demonstrated by the simulation (e.g., simple harmonic motion, conservation of energy, centripetal force thresholds, etc.).\n"
         "   - 'tips': A list of 3 scientific, inquiry-based tips matching the query (e.g. ['Try changing mass to see if swing period scales', 'Increase linear gravity preset to verify acceleration increases'])\n"
         "   - 'spawn_config': A procedural physics setup object describing the simulation layout so the frontend can auto-build it! It MUST contain:\n"
         "       * 'bodies': A list of shapes. Each body config MUST contain: 'id' (string, e.g. 'c1', 'rect1'), 'type' ('circle' or 'rectangle'), 'x' (number), 'y' (number), 'radius' (number, only if circle), 'width' (number, only if rectangle), 'height' (number, only if rectangle), 'isStatic' (boolean), 'mass' (number, optional), 'restitution' (number, optional), 'fillColor' (hex string, e.g. '0x38bdf8'), 'label' (string)\n"
@@ -521,8 +526,7 @@ def _dedupe_related_topics(items: Any, max_items: int = _MAX_RELATED_TOPICS) -> 
             break
 
     return cleaned
-    related_concepts = _dedupe_related_topics(parsed.get("concepts", []), max_items=6)
-    related_concepts = _dedupe_related_topics(structured.get("related_concepts", []), max_items=6)
+
 
 _QUERY_HINTS = {
     "ele": ["electric", "electro", "electromag", "current", "charge", "voltage", "resistance"],
