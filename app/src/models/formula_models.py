@@ -1,5 +1,6 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
+
 
 
 class FormulaVariable(BaseModel):
@@ -46,6 +47,7 @@ class FormulaLabResponse(FormulaBase):
     common_mistakes: List[str] = []
     graphType: str = "auto"
     resultSymbol: str = "y"
+    message: Optional[str] = None
 
 
 class FormulaExtractionResponse(BaseModel):

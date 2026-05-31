@@ -3,12 +3,13 @@ import random
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from uuid import UUID
-from fastapi import APIRouter, Depends, HTTPException, status, Header
+from fastapi import APIRouter, Depends, HTTPException, status, Header, Request
 from pydantic import BaseModel, EmailStr, Field, model_validator
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 
 from app.src.config.database import get_db
+from app.src.services.persistence_service import mark_user_active, record_login_event, record_refresh_token, record_user_session
 from app.src.models.user import User
 from app.src.utils.auth import (
     hash_password,
@@ -135,6 +136,10 @@ async def get_current_user(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="User no longer exists"
         )
+
+    mark_user_active(db, user)
+    db.commit()
+    print("[Database] User last active status saved in the database: updated")
     
     return user
 
@@ -196,6 +201,7 @@ def register(request: RegisterRequest, db: Session = Depends(get_db)):
     
     db.add(new_user)
     db.commit()
+    print("[Database] User account saved in the database: updated")
     db.refresh(new_user)
     
     # Simulated email sending
@@ -204,13 +210,13 @@ def register(request: RegisterRequest, db: Session = Depends(get_db)):
     
     return RegisterResponse(
         success=True,
-        message="Account created successfully",
+        message="Account created successfully.",
         id=new_user.id,
     )
 
 
 @auth_router.post("/login", response_model=TokenResponse)
-def login(request: LoginRequest, db: Session = Depends(get_db)):
+def login(request: LoginRequest, http_request: Request, db: Session = Depends(get_db)):
     """Logs in user using email and password, issuing access & refresh tokens."""
     email = normalize_email(request.email)
     
@@ -228,19 +234,50 @@ def login(request: LoginRequest, db: Session = Depends(get_db)):
             )
             db.add(user)
             db.commit()
+            print("[Database] Admin user saved in the database: updated")
             db.refresh(user)
+
+        record_login_event(
+            db,
+            user=user,
+            email=user.email,
+            success=True,
+            provider="password",
+            ip_address=http_request.client.host if http_request.client else None,
+            user_agent=http_request.headers.get("user-agent"),
+            metadata={"mode": "admin-bypass"},
+        )
+        db.commit()
+        print("[Database] Login event saved in the database: updated")
             
         access_token = create_access_token(data={"sub": str(user.id), "role": user.role})
         refresh_token = create_refresh_token(data={"sub": str(user.id)})
+        record_user_session(db, user=user, session_key=refresh_token, metadata={"mode": "admin-bypass"})
+        record_refresh_token(db, user=user, token_jti=refresh_token, metadata={"mode": "admin-bypass"})
+        db.commit()
+        print("[Database] User session saved in the database: updated")
         return {
             "access_token": access_token,
             "refresh_token": refresh_token,
             "token_type": "bearer",
-            "user": user
+            "user": user,
+            "message": "Welcome back!"
         }
 
     user = db.query(User).filter(func.lower(User.email) == email).first()
     if not user or not verify_password(request.password, user.password_hash):
+        record_login_event(
+            db,
+            user=user,
+            email=email,
+            success=False,
+            provider="password",
+            ip_address=http_request.client.host if http_request.client else None,
+            user_agent=http_request.headers.get("user-agent"),
+            failure_reason="Invalid email or password",
+        )
+        db.commit()
+        print("[Database] Login failure event saved in the database: updated")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password"
@@ -249,12 +286,41 @@ def login(request: LoginRequest, db: Session = Depends(get_db)):
     # Generate tokens
     access_token = create_access_token(data={"sub": str(user.id), "role": user.role})
     refresh_token = create_refresh_token(data={"sub": str(user.id)})
+
+    record_login_event(
+        db,
+        user=user,
+        email=user.email,
+        success=True,
+        provider="password",
+        ip_address=http_request.client.host if http_request.client else None,
+        user_agent=http_request.headers.get("user-agent"),
+    )
+    record_user_session(
+        db,
+        user=user,
+        session_key=refresh_token,
+        user_agent=http_request.headers.get("user-agent"),
+        ip_address=http_request.client.host if http_request.client else None,
+        metadata={"source": "password-login"},
+    )
+    record_refresh_token(
+        db,
+        user=user,
+        token_jti=refresh_token,
+        user_agent=http_request.headers.get("user-agent"),
+        ip_address=http_request.client.host if http_request.client else None,
+        metadata={"source": "password-login"},
+    )
+    db.commit()
+    print("[Database] User session saved in the database: updated")
     
     return {
         "access_token": access_token,
         "refresh_token": refresh_token,
         "token_type": "bearer",
-        "user": user
+        "user": user,
+        "message": "Welcome back!"
     }
 
 
@@ -275,6 +341,17 @@ def refresh_token(request: RefreshTokenRequest, db: Session = Depends(get_db)):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="User not found"
         )
+
+    mark_user_active(db, user)
+    record_user_session(
+        db,
+        user=user,
+        session_key=request.refresh_token,
+        metadata={"source": "refresh"},
+    )
+    record_refresh_token(db, user=user, token_jti=request.refresh_token, metadata={"source": "refresh"})
+    db.commit()
+    print("[Database] User session saved in the database: updated")
         
     # Re-issue both tokens
     access_token = create_access_token(data={"sub": str(user.id), "role": user.role})
@@ -301,6 +378,7 @@ def verify_email(request: VerifyEmailRequest, db: Session = Depends(get_db)):
     user.is_email_verified = True
     user.verification_token = None
     db.commit()
+    print("[Database] Email verification saved in the database: updated")
     
     return {"success": True, "message": "Email verified successfully."}
 
@@ -317,6 +395,7 @@ def forgot_password(request: ForgotPasswordRequest, db: Session = Depends(get_db
     reset_token = str(uuid.uuid4())
     user.verification_token = reset_token
     db.commit()
+    print("[Database] Password reset token saved in the database: updated")
     
     # Simulated email sending
     print(f"\n[EMAIL SIMULATOR] Sent password reset instructions to {user.email}")
@@ -338,6 +417,7 @@ def reset_password(request: ResetPasswordRequest, db: Session = Depends(get_db))
     user.password_hash = hash_password(request.new_password)
     user.verification_token = None
     db.commit()
+    print("[Database] Password reset completed saved in the database: updated")
     
     return {"success": True, "message": "Password reset completed successfully."}
 
@@ -365,6 +445,7 @@ def send_otp(request: SendOtpRequest, db: Session = Depends(get_db)):
             )
             db.add(user)
             db.commit()
+            print("[Database] Mock user saved in the database: updated")
             db.refresh(user)
 
     otp = f"{random.randint(100000, 999999)}"
@@ -373,6 +454,7 @@ def send_otp(request: SendOtpRequest, db: Session = Depends(get_db)):
     user.otp_code = otp
     user.otp_expires_at = expires
     db.commit()
+    print("[Database] OTP code saved in the database: updated")
     
     # Simulated SMS
     print(f"\n[SMS SIMULATOR] Sent OTP '{otp}' to {request.country_code}{request.mobile_number}")
@@ -406,16 +488,24 @@ def verify_otp(request: VerifyOtpRequest, db: Session = Depends(get_db)):
     user.is_mobile_verified = True
     user.otp_code = None
     user.otp_expires_at = None
+    user.last_login_at = datetime.now(timezone.utc)
+    user.last_active_at = user.last_login_at
     db.commit()
+    print("[Database] User verification and session saved in the database: updated")
     
     access_token = create_access_token(data={"sub": str(user.id), "role": user.role})
     refresh_token = create_refresh_token(data={"sub": str(user.id)})
+    record_user_session(db, user=user, session_key=refresh_token, metadata={"source": "otp"})
+    record_refresh_token(db, user=user, token_jti=refresh_token, metadata={"source": "otp"})
+    db.commit()
+    print("[Database] User session saved in the database: updated")
     
     return {
         "access_token": access_token,
         "refresh_token": refresh_token,
         "token_type": "bearer",
-        "user": user
+        "user": user,
+        "message": "Welcome back!"
     }
 
 

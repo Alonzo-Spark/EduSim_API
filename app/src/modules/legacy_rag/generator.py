@@ -7,6 +7,10 @@ from app.src.config.models import (
     OPENROUTER_URL,
     get_model_chain,
 )
+import os
+
+print("OPENROUTER KEY EXISTS:", bool(os.getenv("OPENROUTER_API_KEY")))
+print("OPENROUTER KEY PREFIX:", os.getenv("OPENROUTER_API_KEY", "")[:15])
 
 # =========================================================
 # NEW RENDERING SYSTEM (Sent to LLM)

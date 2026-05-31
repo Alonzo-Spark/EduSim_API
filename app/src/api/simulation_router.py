@@ -1,4 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Header
+from typing import Optional
+from sqlalchemy.orm import Session
+
+from app.src.config.database import get_db
+from app.src.services.persistence_service import record_activity, resolve_user_from_authorization
 
 from app.src.modules.simulation_synthesis.controller import (
     AgentGenerateRequest,
@@ -15,8 +20,32 @@ simulation_router = APIRouter()
 @simulation_router.post("/synthesis/generate")
 async def generate_synthesized_simulation(
     request: AgentGenerateRequest,
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db),
 ):
-    return await synthesis_generate_controller(request)
+    response = await synthesis_generate_controller(request)
+    user = resolve_user_from_authorization(authorization, db)
+    if user:
+        record_activity(
+            db,
+            user=user,
+            domain="simulation",
+            action="synthesis-generate",
+            entity_type="simulation",
+            entity_id=str(response.get("id") or request.prompt[:120]),
+            source="/api/simulations/synthesis/generate",
+            metadata={"topic": request.topic},
+        )
+        try:
+            db.commit()
+            print("[Database] Activity logs saved in the database: updated")
+            if isinstance(response, dict):
+                response["message"] = "Simulation progress saved successfully."
+        except Exception as e:
+            db.rollback()
+            from fastapi.responses import JSONResponse
+            return JSONResponse(status_code=500, content={"success": False, "message": "Failed to save simulation progress."})
+    return response
 
 
 @simulation_router.get("/synthesis/list")
@@ -62,4 +91,4 @@ async def report_agent_error(simulation_id: str | None = None, payload: dict | N
 
 @simulation_router.post("/runtime/report")
 async def report_runtime_intelligence(report_data: dict):
-    return {"success": True, "detail": "Telemetry disabled by design."}
+    return {"success": True, "detail": "Telemetry disabled by design."}
