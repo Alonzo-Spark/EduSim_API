@@ -1,5 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends, Header
 from pydantic import BaseModel, Field
+from typing import Optional
+from sqlalchemy.orm import Session
+
+from app.src.config.database import get_db
+from app.src.services.persistence_service import record_activity, resolve_user_from_authorization
 from app.src.modules.simulation_synthesis.service import (
     retrieve_context,
     build_dsl_prompt,
@@ -14,7 +19,11 @@ class GenerateRequest(BaseModel):
     prompt: str = Field(..., min_length=4, description="User prompt for simulation generation")
 
 @generate_router.post("/generate")
-async def generate_simulation(request: GenerateRequest):
+async def generate_simulation(
+    request: GenerateRequest,
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db),
+):
     """
     POST /api/generate
     
@@ -43,6 +52,28 @@ async def generate_simulation(request: GenerateRequest):
         valid_dsl = validate_dsl(sanitized_json)
         
         # 6. Return the final JSON response (dsl, knowledge, metadata)
+        user = resolve_user_from_authorization(authorization, db)
+        if user:
+            record_activity(
+                db,
+                user=user,
+                domain="simulation",
+                action="generate",
+                entity_type="dsl",
+                entity_id=request.prompt[:120],
+                source="/api/generate",
+                metadata={"topic": request.prompt, "context": context},
+            )
+            try:
+                db.commit()
+                print("[Database] Activity logs saved in the database: updated")
+                if isinstance(valid_dsl, dict):
+                    valid_dsl["message"] = "Simulation progress saved successfully."
+            except Exception as e:
+                db.rollback()
+                from fastapi.responses import JSONResponse
+                return JSONResponse(status_code=500, content={"success": False, "message": "Failed to save simulation progress."})
+
         return valid_dsl
 
     except ValueError as e:

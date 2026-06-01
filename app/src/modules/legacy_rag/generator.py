@@ -1,4 +1,5 @@
 import json
+import re
 from typing import Any, Dict, Optional
 
 import httpx
@@ -12,110 +13,68 @@ from app.src.config.models import (
 # NEW RENDERING SYSTEM (Sent to LLM)
 # =========================================================
 NEW_RENDERING_SYSTEM = r'''
-The KaTeX rendering and table styling are working, but the AI Tutor still feels like a markdown document.
+The KaTeX rendering, markdown lists, and table styling are fully working. The frontend has a high-fidelity interactive rendering engine that automatically detects key Markdown headings and converts them into gorgeous, animated React cards, interactive tables, and tabs.
 
-I do NOT want the output to look like ChatGPT notes.
-
-I want it to look like an interactive textbook.
+To ensure a premium, modern textbook-like UI, you must adhere to the following clean Markdown constraints:
 
 =========================================================
-NEW RENDERING SYSTEM
+STRICT FORMATTING CONSTRAINTS
 =========================================================
-
-Instead of rendering markdown sequentially:
-
-# Heading
-Paragraph
-
-## Formula
-
-$$F=ma$$
-
-Table
-
-Convert content into structured UI blocks.
+1. DO NOT output any ASCII-art borders, frames, or box-drawing characters (e.g. `┌`, `└`, `│`, `─`, or `┌───────────────────────────┐`).
+2. DO NOT output mock action button links in brackets (e.g. `[ Explain Formula ]` or `[ Open Formula Lab ]`).
+3. Output standard, clean, valid GitHub Flavored Markdown (GFM). The frontend parser will dynamically construct modern, interactive React cards, formula cards, and interactive tables directly from your semantic markdown.
 
 =========================================================
 SECTION DETECTION
 =========================================================
+Organize your response using standard Markdown H1 headings (`# Heading Name`). Use the exact heading names below so that the frontend router can automatically group them into interactive accordion tabs:
 
-Detect sections automatically:
-
-Introduction
-Definition
-Key Concepts
-Characteristics
-Formula
-Applications
-Advantages
-Disadvantages
-Summary
-Suggested Questions
-
-Render each section as a card.
-
-Example:
-
-┌───────────────────────────┐
-│ Quick Definition          │
-│                           │
-│ Photosynthesis is ...     │
-└───────────────────────────┘
+# Definition
+# Key Points
+# Characteristics
+# Formula
+# Derivation
+# Applications
+# Advantages
+# Disadvantages
+# Summary
+# Suggested Questions
 
 =========================================================
-FORMULA CARD SYSTEM
+FORMULA SYSTEM
 =========================================================
-
-Whenever a display formula exists:
+When presenting a mathematical formula, place it under a `# Formula` heading. 
+Render the formula using standard, clear LaTeX wrapped in `$$ ... $$` block syntax on a new line:
 
 $$
-...
+F_{net} = ma
 $$
 
-Render:
+Directly below the math block, list the variables in a standard bulleted list under a "Where:" line:
 
-┌───────────────────────────┐
-│ Main Formula              │
-│                           │
-│     Rendered Formula      │
-│                           │
-│ [ Explain Formula ]       │
-│ [ Open Formula Lab ]      │
-└───────────────────────────┘
+Where:
+* $F_{net}$ represents the net force acting on the object (measured in Newtons, N).
+* $m$ represents the mass of the object (measured in kilograms, kg).
+* $a$ represents the acceleration of the object (measured in meters per second squared, m/s²).
 
-Do not leave formulas floating in text.
-
-Every formula must become a dedicated FormulaCard component.
+Do not leave formulas floating in plain paragraph text. Do not wrap them in box-drawing characters. The frontend automatically translates this clean syntax into a dedicated, interactive, and high-fidelity interactive React FormulaCard component.
 
 =========================================================
-FORMULA EXTRACTION
+LISTS AND BULLET POINTS
 =========================================================
-
-During markdown parsing:
-
-Extract all display LaTeX blocks.
-
-Store:
-
-{
- formula,
- title,
- surroundingContext,
- variables
-}
-
-Use this for Formula Lab.
-
-Do not parse again later.
+For key points, characteristics, and bullet lists, always keep the property/item name and its description on the SAME bullet point. NEVER split a term/name and its description into separate consecutive bullet points:
+* **Good:** `* **Universal Attraction:** Gravity is an attractive force, meaning it always pulls objects together.`
+* **Bad:** 
+  `* **Universal Attraction:**`
+  `* Gravity is an attractive force, meaning it always pulls objects together.`
 
 =========================================================
-TABLE RENDERING
+COMPARISONS (ADVANTAGES & DISADVANTAGES)
 =========================================================
-
-Markdown tables must render as:
-
-Card
-  -> Responsive table
+1. Always present Advantages and Disadvantages under two separate H1 headings: `# Advantages` and `# Disadvantages`.
+2. Do NOT use markdown tables or pipe characters (`|`) for advantages and disadvantages. Instead, list the points under each heading as a standard bulleted list.
+3. Keep the title/name of each point in bold and its description on the same bullet line (e.g. `* **Property/Point:** Detailed description here.`).
+4. The frontend will automatically detect these two adjacent sections and display them in a stunning, side-by-side green/red comparison card component!
 '''
 
 # =========================================================
@@ -136,7 +95,7 @@ Your role is to behave like:
 * an intelligent physics teacher
 * actively observing the live simulation
 * explaining the underlying physics dynamically
-* guiding the student’s attention
+* guiding the student's attention
 * predicting outcomes from changes
 * helping students build intuition through observation
 
@@ -239,7 +198,7 @@ Explain the primary physical cause behind the behavior.
 
 ### ✦ WHAT TO NOTICE
 
-Direct the student’s attention to important visual indicators.
+Direct the student's attention to important visual indicators.
 
 ### ✦ FORMULA
 
@@ -338,7 +297,7 @@ TOPIC ADAPTABILITY
 The sandbox may involve:
 
 * orbital mechanics
-* Newton’s laws
+* Newton's laws
 * springs
 * pendulums
 * collisions
@@ -390,9 +349,6 @@ You are not merely explaining formulas.
 
 You are helping students BUILD PHYSICAL INTUITION through live simulation interaction.
 '''
-
-
-
 
 
 def _format_prompt(prompt: str, system_prompt: str | None) -> str:
@@ -519,7 +475,7 @@ async def _generate_openrouter_text_async(
 def generate_llm_text(
     final_prompt: str,
     temperature: float = 0.3,
-    max_output_tokens: int = 1800,
+    max_output_tokens: int = 2500,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
 ):
     final_prompt = final_prompt.strip()
@@ -537,7 +493,7 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
     trimmed = text.strip()
     if not trimmed:
         return False
-    
+
     # Clean markdown json blocks if present to check JSON completeness
     cleaned_json_text = trimmed
     if cleaned_json_text.startswith("```"):
@@ -545,9 +501,9 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
 
     # If it is a JSON response or prompt asks for JSON, check matching structure or valid JSON parse
     is_json_request = (
-        cleaned_json_text.startswith("{") or 
-        cleaned_json_text.startswith("[") or 
-        "json" in prompt.lower() or 
+        cleaned_json_text.startswith("{") or
+        cleaned_json_text.startswith("[") or
+        "json" in prompt.lower() or
         (system_prompt and "json" in system_prompt.lower())
     )
     if is_json_request:
@@ -556,7 +512,7 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
             json.loads(cleaned_json_text)
             return True
         except Exception:
-            # If it's a JSON request but didn't parse, check if it structuraly ends with closing brackets
+            # If it's a JSON request but didn't parse, check if it structurally ends with closing brackets
             if cleaned_json_text.endswith("}") or cleaned_json_text.endswith("]"):
                 return True
             return False
@@ -565,7 +521,7 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
         # Short responses are complete as long as they end with standard punctuation
         return trimmed[-1] in [".", "?", "!", '"', "*", "$", "}", ")"]
 
-    # Only enforce "Summary" and "Suggested Questions" check for textbook curriculum notes generation
+    # Textbook curriculum generation requires structural completeness markers
     is_simulation = (
         "simulation" in prompt.lower() or
         (system_prompt and "simulation" in system_prompt.lower())
@@ -574,12 +530,30 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
     is_textbook_generation = (
         "textbook" in prompt.lower() or
         "curriculum" in prompt.lower() or
-        (system_prompt and ("textbook" in system_prompt.lower() or "curriculum" in system_prompt.lower() or "new rendering system" in system_prompt.lower()))
+        (system_prompt and (
+            "textbook" in system_prompt.lower() or
+            "curriculum" in system_prompt.lower() or
+            "new rendering system" in system_prompt.lower()
+        ))
     )
-    
+
     if is_textbook_generation and not is_simulation:
-        if "Summary" not in text and "Suggested Questions" not in text:
-            return False
+        has_structural_end = (
+            "# Summary" in text or
+            "# Suggested Questions" in text or
+            "Suggested Questions" in text
+        )
+        if has_structural_end:
+            return True
+        # If very long but still missing structural markers, accept it to avoid
+        # infinite retries — the LLM likely just formatted differently.
+        if len(trimmed) > 6000:
+            return True
+        return False
+
+    # For non-textbook responses (simulation, short answers, etc.), be lenient
+    if len(trimmed) > 1000:
+        return True
 
     if trimmed[-1] not in [".", "?", "!", '"', "*", "$", "}", ")"]:
         return False
@@ -590,7 +564,7 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
 def generate_openrouter_text(
     prompt: str,
     temperature: float = 0.3,
-    max_output_tokens: int = 1800,
+    max_output_tokens: int = 2500,
     system_prompt: str | None = None,
 ):
     models = get_model_chain()
@@ -615,7 +589,7 @@ def generate_openrouter_text(
                 else:
                     best_fallback = result
                     print(f"[LLM] Response incomplete on attempt {attempt + 1}. Retrying with more tokens...")
-                    current_max = min(current_max + 400, 2500)
+                    current_max = min(current_max + 800, 4096)
                     current_temp = 0.15
 
     if best_fallback:
@@ -628,7 +602,7 @@ def generate_openrouter_text(
 async def generate_llm_text_async(
     final_prompt: str,
     temperature: float = 0.3,
-    max_output_tokens: int = 1800,
+    max_output_tokens: int = 2500,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
 ):
     final_prompt = final_prompt.strip()
@@ -640,11 +614,10 @@ async def generate_llm_text_async(
     )
 
 
-
 async def generate_openrouter_text_async(
     prompt: str,
     temperature: float = 0.3,
-    max_output_tokens: int = 1800,
+    max_output_tokens: int = 2500,
     system_prompt: str | None = None,
 ):
     models = get_model_chain()
@@ -669,7 +642,7 @@ async def generate_openrouter_text_async(
                 else:
                     best_fallback = result
                     print(f"[LLM] Response incomplete on attempt {attempt + 1}. Retrying with more tokens...")
-                    current_max = min(current_max + 400, 2500)
+                    current_max = min(current_max + 800, 4096)
                     current_temp = 0.15
 
     if best_fallback:
@@ -788,7 +761,7 @@ TEXTBOOK CONTEXT
 """
 
     if is_simulation:
-        return fr"""
+        return f"""
 You are the EduSim AI Tutor — a real-time physics tutor embedded directly inside an interactive simulation sandbox.
 
 {context_instruction}
@@ -812,16 +785,16 @@ ACTIVE SIMULATION STATE / EVENT INFO
 STRICT OUTPUT FORMAT RULES:
 =========================================================
 - You MUST structure your entire response using the following headers and sections:
-  ### ✦ LIVE EXPLANATION
-  ### ✦ WHY IT HAPPENS
-  ### ✦ WHAT TO NOTICE
-  ### ✦ FORMULA
-  ### ✦ DEEPER UNDERSTANDING
-  ### ✦ TRY THIS
+  ### \u2746 LIVE EXPLANATION
+  ### \u2746 WHY IT HAPPENS
+  ### \u2746 WHAT TO NOTICE
+  ### \u2746 FORMULA
+  ### \u2746 DEEPER UNDERSTANDING
+  ### \u2746 TRY THIS
 - Do NOT use other headers. Avoid robotic engine descriptions; sound like a live physics teacher.
 """
     else:
-        return fr"""
+        return f"""
 You are the EduSim AI Physics Tutor and Live Narrator.
 Analyze the following active simulation event and provide an in-depth, structured educational response.
 
@@ -869,7 +842,7 @@ $$E = mc^2$$
 
 9. Never output formulas as plain text.
 
-10. Advantages and disadvantages MUST use markdown tables.
+10. Advantages and Disadvantages MUST be presented under two separate H1 headings: `# Advantages` and `# Disadvantages`. List each point as a bullet with the title bolded (e.g. `* **Point Name:** Description.`). Do NOT use markdown tables for advantages/disadvantages.
 
 11. Use horizontal separators:
 
@@ -913,7 +886,7 @@ between major sections.
     - ### Problem
       A clear statement of the question or problem.
     - ### Given
-      A list of all known variables, symbols, and values with units (e.g. *Mass ($m$) = $5 \text{{ kg}}$*).
+      A list of all known variables, symbols, and values with units (e.g. *Mass ($m$) = $5 \\text{{kg}}$*).
     - ### Formula
       The equation or mathematical relation used to solve the problem (rendered in display LaTeX, e.g. $$F = ma$$).
     - ### Substitution
@@ -921,11 +894,11 @@ between major sections.
     - ### Calculation
       The step-by-step arithmetic steps showing how the calculation is performed.
     - ### Final Answer
-      The final value of the calculation with proper units, clearly highlighted (e.g. **Force ($F$) = $10 \text{{ N}}$**).
+      The final value of the calculation with proper units, clearly highlighted (e.g. **Force ($F$) = $10 \\text{{N}}$**).
     - ### Interpretation
       A brief statement of what the result physically means.
 
-24. NEVER stack mathematical fractions or equations vertically on separate single-character lines (e.g. numerator on line 1, denominator on line 3). ALWAYS use proper LaTeX syntax like \frac{{a}}{{b}} and wrap it inside $$ ... $$ or $ ... $ (e.g. Write $$\frac{{1}}{{f}} = \frac{{1}}{{v}} - \frac{{1}}{{u}}$$).
+24. NEVER stack mathematical fractions or equations vertically on separate single-character lines (e.g. numerator on line 1, denominator on line 3). ALWAYS use proper LaTeX syntax like \\frac{{a}}{{b}} and wrap it inside $$ ... $$ or $ ... $ (e.g. Write $$\\frac{{1}}{{f}} = \\frac{{1}}{{v}} - \\frac{{1}}{{u}}$$).
 
 25. NEVER write plain text on the same line as display math delimiters ($$). Always start a new paragraph on a new line for any text explanation that follows a formula.
 
@@ -945,7 +918,7 @@ You MUST structure your entire response using the following textbook structure. 
 {dynamic_structure}
 
 Ensure each section has rich, detailed, and highly educational explanation content.
-Do NOT output headers like '### ✦ LIVE EXPLANATION' or other simulation event headers. Use the textbook H1 and H2 structure above.
+Do NOT output headers like '### \u2746 LIVE EXPLANATION' or other simulation event headers. Use the textbook H1 and H2 structure above.
 """
 
 
@@ -953,7 +926,7 @@ def generate_response(
     context: str,
     question: str,
     user_preference: str = "student_friendly",
-    fallback_mode: bool = False
+    fallback_mode: bool = False,
 ):
     """
     Generates premium textbook-style educational responses.
@@ -962,5 +935,5 @@ def generate_response(
     return generate_llm_text(
         final_prompt,
         temperature=0.3,
-        max_output_tokens=1800
+        max_output_tokens=2500,
     )

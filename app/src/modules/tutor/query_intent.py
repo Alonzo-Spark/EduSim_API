@@ -48,7 +48,15 @@ def detect_query_intent(question: str) -> str:
     return "detailed"
 
 def get_intent_structure(intent: str, fallback_structure: str) -> str:
-    """Returns the template structure strictly based on intent."""
+    """Returns the template structure based on intent.
+    
+    General educational intents (definition, relationship, characteristics, process)
+    use the full topic-type fallback structure to ensure complete textbook-style output
+    with Advantages, Disadvantages, Summary, and Suggested Questions.
+    
+    Only specialized intents (comparison, numerical, examples, formula, advantages)
+    use custom minimal skeletons.
+    """
     if intent == "comparison":
         return """
 # Differences
@@ -60,68 +68,13 @@ def get_intent_structure(intent: str, fallback_structure: str) -> str:
 
 ## Conclusion
 """
-    elif intent == "definition":
-        return """
-# Definition
-
-## Concise Meaning
-
-# Key Points
-
-## Important Highlights
-"""
-    elif intent == "relationship":
-        return """
-# Relationship Explanation
-
-## Connecting Concepts
-
-# Connecting Formulas / Principles
-
-## Mathematical or Theoretical Link
-"""
     elif intent == "advantages":
         return """
-# Advantages and Disadvantages
+# Advantages
 
-| Type | Description |
-|---|---|
-"""
-    elif intent == "examples":
-        return """
-# Practical Examples
+# Disadvantages
 
-## Daily Life Applications
-
-## Industry Usage
-"""
-    elif intent == "formula":
-        return """
-# Mathematical Formulas
-
-## Main Formula
-
-## Formula Explanation
-
-# Derivation
-
-## Step-by-Step Derivation
-"""
-    elif intent == "characteristics":
-        return """
-# Characteristics and Features
-
-## Important Properties
-"""
-    elif intent == "process":
-        return """
-# Process / Working Mechanism
-
-## Step-by-Step Explanation
-
-# Important Components
-
-## Key Elements Involved
+# Summary
 """
     elif intent == "numerical":
         return """
@@ -134,7 +87,36 @@ def get_intent_structure(intent: str, fallback_structure: str) -> str:
 ## Step-by-Step Calculation
 
 ## Final Answer
+
+## Interpretation
+"""
+    elif intent == "examples":
+        return """
+# Practical Examples
+
+## Daily Life Applications
+
+## Industry Usage
+
+# Summary
+"""
+    elif intent == "formula":
+        return """
+# Mathematical Formulas
+
+## Main Formula
+
+## Formula Explanation
+
+# Derivation
+
+## Step-by-Step Derivation
+
+# Summary
 """
     else:
-        # Fallback to the detailed educational textbook notes structure
+        # For definition, relationship, characteristics, process, detailed, textbook_strict,
+        # and any other intent: use the full topic-type structure which includes
+        # Characteristics, Formulas, Advantages, Disadvantages, Applications, Summary,
+        # and Suggested Questions.
         return fallback_structure

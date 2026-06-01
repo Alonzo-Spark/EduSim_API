@@ -35,10 +35,9 @@ def get_dynamic_sections(topic_type: str) -> str:
     advantages_structure = """
 ---
 
-# Advantages and Disadvantages
+# Advantages
 
-| Type | Description |
-|---|---|
+# Disadvantages
 """
     
     applications_structure = """
