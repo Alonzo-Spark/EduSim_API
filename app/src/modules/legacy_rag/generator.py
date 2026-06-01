@@ -566,13 +566,18 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
         return trimmed[-1] in [".", "?", "!", '"', "*", "$", "}", ")"]
 
     # Only enforce "Summary" and "Suggested Questions" check for textbook curriculum notes generation
+    is_simulation = (
+        "simulation" in prompt.lower() or
+        (system_prompt and "simulation" in system_prompt.lower())
+    )
+
     is_textbook_generation = (
         "textbook" in prompt.lower() or
         "curriculum" in prompt.lower() or
         (system_prompt and ("textbook" in system_prompt.lower() or "curriculum" in system_prompt.lower() or "new rendering system" in system_prompt.lower()))
     )
     
-    if is_textbook_generation:
+    if is_textbook_generation and not is_simulation:
         if "Summary" not in text and "Suggested Questions" not in text:
             return False
 
