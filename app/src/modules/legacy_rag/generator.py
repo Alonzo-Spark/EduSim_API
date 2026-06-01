@@ -537,19 +537,9 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
         ))
     )
 
-    if is_textbook_generation and not is_simulation:
-        has_structural_end = (
-            "# Summary" in text or
-            "# Suggested Questions" in text or
-            "Suggested Questions" in text
-        )
-        if has_structural_end:
-            return True
-        # If very long but still missing structural markers, accept it to avoid
-        # infinite retries — the LLM likely just formatted differently.
-        if len(trimmed) > 6000:
-            return True
-        return False
+    if is_textbook_generation:
+        if "Summary" not in text and "Suggested Questions" not in text:
+            return False
 
     # For non-textbook responses (simulation, short answers, etc.), be lenient
     if len(trimmed) > 1000:
@@ -935,5 +925,5 @@ def generate_response(
     return generate_llm_text(
         final_prompt,
         temperature=0.3,
-        max_output_tokens=2500,
+        max_output_tokens=1800,
     )
