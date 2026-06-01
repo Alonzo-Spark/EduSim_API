@@ -1,4 +1,5 @@
 import json
+import re
 from typing import Any, Dict, Optional
 
 import httpx
@@ -136,7 +137,7 @@ Your role is to behave like:
 * an intelligent physics teacher
 * actively observing the live simulation
 * explaining the underlying physics dynamically
-* guiding the student’s attention
+* guiding the student's attention
 * predicting outcomes from changes
 * helping students build intuition through observation
 
@@ -239,7 +240,7 @@ Explain the primary physical cause behind the behavior.
 
 ### ✦ WHAT TO NOTICE
 
-Direct the student’s attention to important visual indicators.
+Direct the student's attention to important visual indicators.
 
 ### ✦ FORMULA
 
@@ -338,7 +339,7 @@ TOPIC ADAPTABILITY
 The sandbox may involve:
 
 * orbital mechanics
-* Newton’s laws
+* Newton's laws
 * springs
 * pendulums
 * collisions
@@ -390,9 +391,6 @@ You are not merely explaining formulas.
 
 You are helping students BUILD PHYSICAL INTUITION through live simulation interaction.
 '''
-
-
-
 
 
 def _format_prompt(prompt: str, system_prompt: str | None) -> str:
@@ -537,7 +535,7 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
     trimmed = text.strip()
     if not trimmed:
         return False
-    
+
     # Clean markdown json blocks if present to check JSON completeness
     cleaned_json_text = trimmed
     if cleaned_json_text.startswith("```"):
@@ -545,9 +543,9 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
 
     # If it is a JSON response or prompt asks for JSON, check matching structure or valid JSON parse
     is_json_request = (
-        cleaned_json_text.startswith("{") or 
-        cleaned_json_text.startswith("[") or 
-        "json" in prompt.lower() or 
+        cleaned_json_text.startswith("{") or
+        cleaned_json_text.startswith("[") or
+        "json" in prompt.lower() or
         (system_prompt and "json" in system_prompt.lower())
     )
     if is_json_request:
@@ -556,7 +554,7 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
             json.loads(cleaned_json_text)
             return True
         except Exception:
-            # If it's a JSON request but didn't parse, check if it structuraly ends with closing brackets
+            # If it's a JSON request but didn't parse, check if it structurally ends with closing brackets
             if cleaned_json_text.endswith("}") or cleaned_json_text.endswith("]"):
                 return True
             return False
@@ -569,9 +567,13 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
     is_textbook_generation = (
         "textbook" in prompt.lower() or
         "curriculum" in prompt.lower() or
-        (system_prompt and ("textbook" in system_prompt.lower() or "curriculum" in system_prompt.lower() or "new rendering system" in system_prompt.lower()))
+        (system_prompt and (
+            "textbook" in system_prompt.lower() or
+            "curriculum" in system_prompt.lower() or
+            "new rendering system" in system_prompt.lower()
+        ))
     )
-    
+
     if is_textbook_generation:
         if "Summary" not in text and "Suggested Questions" not in text:
             return False
@@ -633,7 +635,6 @@ async def generate_llm_text_async(
         max_output_tokens=max_output_tokens,
         system_prompt=system_prompt,
     )
-
 
 
 async def generate_openrouter_text_async(
@@ -783,7 +784,7 @@ TEXTBOOK CONTEXT
 """
 
     if is_simulation:
-        return fr"""
+        return f"""
 You are the EduSim AI Tutor — a real-time physics tutor embedded directly inside an interactive simulation sandbox.
 
 {context_instruction}
@@ -807,16 +808,16 @@ ACTIVE SIMULATION STATE / EVENT INFO
 STRICT OUTPUT FORMAT RULES:
 =========================================================
 - You MUST structure your entire response using the following headers and sections:
-  ### ✦ LIVE EXPLANATION
-  ### ✦ WHY IT HAPPENS
-  ### ✦ WHAT TO NOTICE
-  ### ✦ FORMULA
-  ### ✦ DEEPER UNDERSTANDING
-  ### ✦ TRY THIS
+  ### \u2746 LIVE EXPLANATION
+  ### \u2746 WHY IT HAPPENS
+  ### \u2746 WHAT TO NOTICE
+  ### \u2746 FORMULA
+  ### \u2746 DEEPER UNDERSTANDING
+  ### \u2746 TRY THIS
 - Do NOT use other headers. Avoid robotic engine descriptions; sound like a live physics teacher.
 """
     else:
-        return fr"""
+        return f"""
 You are the EduSim AI Physics Tutor and Live Narrator.
 Analyze the following active simulation event and provide an in-depth, structured educational response.
 
@@ -908,7 +909,7 @@ between major sections.
     - ### Problem
       A clear statement of the question or problem.
     - ### Given
-      A list of all known variables, symbols, and values with units (e.g. *Mass ($m$) = $5 \text{{ kg}}$*).
+      A list of all known variables, symbols, and values with units (e.g. *Mass ($m$) = $5 \\text{{kg}}$*).
     - ### Formula
       The equation or mathematical relation used to solve the problem (rendered in display LaTeX, e.g. $$F = ma$$).
     - ### Substitution
@@ -916,11 +917,11 @@ between major sections.
     - ### Calculation
       The step-by-step arithmetic steps showing how the calculation is performed.
     - ### Final Answer
-      The final value of the calculation with proper units, clearly highlighted (e.g. **Force ($F$) = $10 \text{{ N}}$**).
+      The final value of the calculation with proper units, clearly highlighted (e.g. **Force ($F$) = $10 \\text{{N}}$**).
     - ### Interpretation
       A brief statement of what the result physically means.
 
-24. NEVER stack mathematical fractions or equations vertically on separate single-character lines (e.g. numerator on line 1, denominator on line 3). ALWAYS use proper LaTeX syntax like \frac{{a}}{{b}} and wrap it inside $$ ... $$ or $ ... $ (e.g. Write $$\frac{{1}}{{f}} = \frac{{1}}{{v}} - \frac{{1}}{{u}}$$).
+24. NEVER stack mathematical fractions or equations vertically on separate single-character lines (e.g. numerator on line 1, denominator on line 3). ALWAYS use proper LaTeX syntax like \\frac{{a}}{{b}} and wrap it inside $$ ... $$ or $ ... $ (e.g. Write $$\\frac{{1}}{{f}} = \\frac{{1}}{{v}} - \\frac{{1}}{{u}}$$).
 
 25. NEVER write plain text on the same line as display math delimiters ($$). Always start a new paragraph on a new line for any text explanation that follows a formula.
 
@@ -940,7 +941,7 @@ You MUST structure your entire response using the following textbook structure. 
 {dynamic_structure}
 
 Ensure each section has rich, detailed, and highly educational explanation content.
-Do NOT output headers like '### ✦ LIVE EXPLANATION' or other simulation event headers. Use the textbook H1 and H2 structure above.
+Do NOT output headers like '### \u2746 LIVE EXPLANATION' or other simulation event headers. Use the textbook H1 and H2 structure above.
 """
 
 
@@ -948,7 +949,7 @@ def generate_response(
     context: str,
     question: str,
     user_preference: str = "student_friendly",
-    fallback_mode: bool = False
+    fallback_mode: bool = False,
 ):
     """
     Generates premium textbook-style educational responses.
@@ -957,5 +958,5 @@ def generate_response(
     return generate_llm_text(
         final_prompt,
         temperature=0.3,
-        max_output_tokens=1800
+        max_output_tokens=1800,
     )
