@@ -1,3 +1,4 @@
+
 import uuid
 
 from sqlalchemy import (
@@ -25,14 +26,29 @@ class TimestampMixin:
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
 
 
+class CurriculumClass(Base, TimestampMixin):
+    __tablename__ = "classes"
+
+    id = Column(Integer, primary_key=True)  # Using Integer to match TS class ID
+    name = Column(String(100), nullable=False)
+    description = Column(Text, nullable=True)
+    display_order = Column(Integer, default=0, nullable=False)
+
+
 class Subject(Base, TimestampMixin):
     __tablename__ = "subjects"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    code = Column(String(100), unique=True, nullable=False, index=True)
+    class_id = Column(Integer, ForeignKey("classes.id", ondelete="CASCADE"), nullable=False, index=True)
+    code = Column(String(100), nullable=False, index=True)
     name = Column(String(100), nullable=False)
     description = Column(Text, nullable=True)
     icon = Column(String(100), nullable=True)
+    display_order = Column(Integer, default=0, nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("class_id", "code", name="uq_class_subject_code"),
+    )
 
 
 class Chapter(Base, TimestampMixin):
@@ -41,8 +57,12 @@ class Chapter(Base, TimestampMixin):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     subject_id = Column(UUID(as_uuid=True), ForeignKey("subjects.id", ondelete="CASCADE"), nullable=False, index=True)
     name = Column(String(200), nullable=False)
-    class_name = Column(String(100), nullable=False, index=True)
     description = Column(Text, nullable=True)
+    display_order = Column(Integer, default=0, nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("subject_id", "name", name="uq_subject_chapter_name"),
+    )
 
 
 class Topic(Base, TimestampMixin):
@@ -52,6 +72,13 @@ class Topic(Base, TimestampMixin):
     chapter_id = Column(UUID(as_uuid=True), ForeignKey("chapters.id", ondelete="CASCADE"), nullable=False, index=True)
     name = Column(String(200), nullable=False)
     description = Column(Text, nullable=True)
+    has_simulation = Column(Boolean, default=False)
+    simulation_route = Column(String(255), nullable=True)
+    display_order = Column(Integer, default=0, nullable=False)
+
+    __table_args__ = (
+        UniqueConstraint("chapter_id", "name", name="uq_chapter_topic_name"),
+    )
 
 
 class ChatHistory(Base, TimestampMixin):

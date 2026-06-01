@@ -4,6 +4,10 @@ from .service import analyze_tutor_query
 
 class TutorQueryRequest(BaseModel):
     query: str = Field(..., min_length=2, description="The physics question or formula to analyze")
+    class_name: str | None = None
+    subject: str | None = None
+    chapter: str | None = None
+    topic: str | None = None
 
 async def analyze_tutor_controller(request: TutorQueryRequest):
     try:

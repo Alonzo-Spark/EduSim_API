@@ -18,6 +18,7 @@ from app.src.api.persistence_router import persistence_router
 from app.src.modules.sandbox.controller import sandbox_router
 from app.src.api.scene_router import scene_router
 from app.src.api.auth import auth_router
+from app.src.api.curriculum_router import router as curriculum_router
 
 from api.formula import router as generic_formula_router
 from api.rag import router as generic_rag_router
@@ -52,6 +53,7 @@ async def lifespan(app: FastAPI):
         from app.src.config.database import Base, engine
         from app.src.models.user import User  # Registers User model with Base metadata
         from app.src.models.persistence import (  # Registers persistence models with Base metadata
+            CurriculumClass,
             Subject,
             Chapter,
             Topic,
@@ -153,3 +155,4 @@ app.include_router(generic_formula_router, prefix="/api/formula")
 app.include_router(generic_rag_router, prefix="/api/rag")
 app.include_router(generic_questions_router, prefix="/api/questions")
 app.include_router(persistence_router, prefix="/api/persistence")
+app.include_router(curriculum_router, prefix="/api")

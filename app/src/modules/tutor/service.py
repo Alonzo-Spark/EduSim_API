@@ -85,19 +85,23 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
         if not response_text or "Error:" in response_text:
             return _empty_tutor_payload("AI failed to extract concepts.")
             
-        json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
+        cleaned = response_text.replace("```json", "").replace("```", "").strip()
+        json_match = re.search(r'\{.*\}', cleaned, re.DOTALL)
         if json_match:
-            parsed = json.loads(json_match.group())
-            related_concepts = _dedupe_related_topics(parsed.get("concepts", []), max_items=_MAX_RELATED_TOPICS)
-            return {
-                **parsed,
-                "title": parsed.get("title", "AI Tutor"),
-                "formula": parsed.get("formula", ""),
-                "related_concepts": related_concepts,
-                "related_formulas": parsed.get("formulas", []),
-                "ai_explanation": parsed.get("explanation", ""),
-                "simulation_guide": parsed.get("simulation_guide", {"is_buildable": False}),
-            }
+            try:
+                parsed = json.loads(json_match.group())
+                related_concepts = _dedupe_related_topics(parsed.get("concepts", []), max_items=_MAX_RELATED_TOPICS)
+                return {
+                    **parsed,
+                    "title": parsed.get("title", "AI Tutor"),
+                    "formula": parsed.get("formula", ""),
+                    "related_concepts": related_concepts,
+                    "related_formulas": parsed.get("formulas", []),
+                    "ai_explanation": parsed.get("explanation", ""),
+                    "simulation_guide": parsed.get("simulation_guide", {"is_buildable": False}),
+                }
+            except json.JSONDecodeError:
+                pass
         return _empty_tutor_payload("Invalid JSON returned.")
     except Exception as e:
         return _empty_tutor_payload(f"AI error: {str(e)}")

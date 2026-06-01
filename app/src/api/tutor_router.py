@@ -66,6 +66,10 @@ async def analyze_query(
     """
     response = await analyze_tutor_controller(request)
     user = resolve_user_from_authorization(authorization, db)
+    print("--- DEBUG AUTH ---")
+    print(f"Authorization Header: {authorization}")
+    print(f"Resolved User: {user.id if user else 'NONE'}")
+    print("------------------")
     data = response.get("data", {}) if isinstance(response, dict) else {}
     explanation = data.get("explanation") or data.get("ai_explanation") or ""
     
@@ -94,39 +98,61 @@ async def analyze_query(
         summary = await generate_learning_summary(explanation)
         
         # 3. Save the summary into chat_history
-        summary_record = ChatHistory(
-            user_id=user.id,
-            session_id=session_id,
-            session_type="tutor",
-            role="user",
-            topic=topic,
-            content=request.query,
-            summary=summary,
-            metadata_json={"class_name": "10", "subject": "Physics"}
-        )
-        db.add(summary_record)
-        db.flush()
-
-        record_activity(
-            db,
-            user=user,
-            domain="tutor",
-            action="analyze",
-            entity_type="query",
-            entity_id=request.query[:120],
-            source="/api/tutor/analyze",
-            metadata={"topic": topic},
-        )
         try:
-            print("[DB SAVE] Topic:", topic)
-            print("[DB SAVE] Summary:", summary[:100])
+            summary_record = ChatHistory(
+                user_id=user.id,
+                session_id=session_id,
+                session_type="tutor",
+                role="user",
+                topic=topic,
+                content=request.query,
+                summary=summary,
+                metadata_json={
+                    "class_name": request.class_name,
+                    "subject": request.subject,
+                    "chapter": request.chapter,
+                    "topic": request.topic
+                }
+            )
+            
+            print("--- PERSISTENCE LOG ---")
+            print(f"user_id: {user.id}")
+            print(f"session_id: {session_id}")
+            print(f"topic: {topic}")
+            print(f"summary length: {len(summary) if summary else 0}")
+            
+            print("Before db.add()")
+            db.add(summary_record)
+            print("After db.add()")
+            
+            record_activity(
+                db,
+                user=user,
+                domain="tutor",
+                action="analyze",
+                entity_type="query",
+                entity_id=request.query[:120],
+                source="/api/tutor/analyze",
+                metadata={"topic": topic},
+            )
+
+            print("Before db.commit()")
             db.commit()
-            print("[DB SAVE] chat_history")
+            print("After db.commit()")
+            
+            print("Before db.refresh()")
+            db.refresh(summary_record)
+            print("After db.refresh()")
+            
+            print(f"INSERTED RECORD ID: {summary_record.id}")
+            print("-----------------------")
+            
             if isinstance(response, dict):
                 response["success"] = True
                 response["message"] = "Learning summary saved successfully"
         except Exception as e:
             db.rollback()
+            print(f"Exception during save: {repr(e)}")
             from fastapi.responses import JSONResponse
             return JSONResponse(status_code=500, content={"success": False, "message": "Failed to save learning summary."})
     
@@ -181,39 +207,61 @@ async def explain_sim(
             summary = await generate_learning_summary(explanation)
             
             # 3. Save the summary into chat_history
-            summary_record = ChatHistory(
-                user_id=user.id,
-                session_id=session_id,
-                session_type="tutor",
-                role="user",
-                topic=topic,
-                content=request.query,
-                summary=summary,
-                metadata_json={"class_name": "10", "subject": "Physics"}
-            )
-            db.add(summary_record)
-            db.flush()
-
-            record_activity(
-                db,
-                user=user,
-                domain="tutor",
-                action="explain-sim",
-                entity_type="query",
-                entity_id=request.query[:120],
-                source="/api/tutor/explain-sim",
-            )
             try:
-                print("[DB SAVE] Topic:", topic)
-                print("[DB SAVE] Summary:", summary[:100])
+                summary_record = ChatHistory(
+                    user_id=user.id,
+                    session_id=session_id,
+                    session_type="tutor",
+                    role="user",
+                    topic=topic,
+                    content=request.query,
+                    summary=summary,
+                    metadata_json={
+                        "class_name": request.class_name,
+                        "subject": request.subject,
+                        "chapter": request.chapter,
+                        "topic": request.topic
+                    }
+                )
+                
+                print("--- PERSISTENCE LOG ---")
+                print(f"user_id: {user.id}")
+                print(f"session_id: {session_id}")
+                print(f"topic: {topic}")
+                print(f"summary length: {len(summary) if summary else 0}")
+                
+                print("Before db.add()")
+                db.add(summary_record)
+                print("After db.add()")
+                
+                record_activity(
+                    db,
+                    user=user,
+                    domain="tutor",
+                    action="explain-sim",
+                    entity_type="query",
+                    entity_id=request.query[:120],
+                    source="/api/tutor/explain-sim",
+                )
+
+                print("Before db.commit()")
                 db.commit()
-                print("[DB SAVE] chat_history")
+                print("After db.commit()")
+                
+                print("Before db.refresh()")
+                db.refresh(summary_record)
+                print("After db.refresh()")
+                
+                print(f"INSERTED RECORD ID: {summary_record.id}")
+                print("-----------------------")
+                
                 if isinstance(response, dict):
                     response["success"] = True
                     response["message"] = "Learning summary saved successfully"
                 
             except Exception as e:
                 db.rollback()
+                print(f"Exception during save: {repr(e)}")
                 from fastapi.responses import JSONResponse
                 return JSONResponse(status_code=500, content={"success": False, "message": "Failed to save learning summary."})
         return response
