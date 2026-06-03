@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 60,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'gravity_changed' event to zero-g environment.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a user interaction with the global environment controllers.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe environmental gravity parameter was modified by the user from Earth conditions to a weightless state (`gravity_changed`).\n\n### WHAT CHANGED\nThe vertical acceleration vector acting on all active canvas masses dropped to zero, causing floating objects to cease downward travel.\n\n### SIMPLE WHY\nSetting the gravity constant to zero removes the downward gravitational force vector, leaving objects to move purely by their linear inertia.\n\n### WHAT TO NOTICE\nNotice how objects that were falling now drift in straight lines across the grid, unaffected by any downward pull.",
+  "candidate_response": "### Zero-Gravity Environment Overlay  \n**Trigger Event:** `gravity_changed → zero_g`  \n\n---\n\n### 🚨 Critical Alert: Gravity Systems Offline  \n<div style=\"background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #ff4d4d;\">\n⚠️ **WARNING**  \nAll artificial gravity generators have disengaged. Objects and personnel are now in freefall.  \n</div>\n\n---\n\n### 🔧 Immediate Actions  \n| Priority | Action                          | Keybind       | Visual Cue                     |\n|----------|---------------------------------|---------------|--------------------------------|\n| 1        | Secure loose objects            | `F`           | Flashing red highlights        |\n| 2        | Activate mag-boots              | `B`           | Blue boot icon (HUD)           |\n| 3        | Anchor to handrail              | `Hold E`      | Green rail overlay             |\n| 4        | Deploy tethers                  | `T`           | Yellow tether lines            |\n\n---\n\n### 🚀 Movement Mechanics  \n```python\n# Physics update (zero-g vector model)\nvelocity_vector = (thrust_input * orientation) * delta_time\nrotation = (torque_input * MOI⁻¹) * delta_time  # MOI = Moment of Inertia\n```\n**Key Changes:**  \n- ⬆️ **Vertical thrusters** now control *all* directional movement  \n- 🔄 **Rotation sensitivity** increased 300% (use small inputs)  \n- 🎯 **Momentum conservation**: Objects drift until collision  \n\n---\n\n### ⚠️ Hazard Indicators  \n| Icon | Meaning                     | Response Protocol               |\n|------|-----------------------------|---------------------------------|\n| 🔴   | Unsecured object trajectory | Evade path (dashed red line)    |\n| 🟡   | Spin > 2 RPM                | Counter-rotation jets (auto)    |\n| 🔵   | Critical system drift       | Anchor point suggested (HUD)    |\n\n---\n\n### 🛠️ Environment Tools  \n```lua\n-- Enable zero-G assist mode\nsimulation.setGravity(0)\nplayer.enableStabilizers(true)\nHUD.showVectorArrows(true)\nphysics.setDragCoefficient(0.02)\n```\n**New HUD Elements:**  \n- 3D trajectory predictor (purple dotted lines)  \n- Angular velocity gauge (bottom-right)  \n- Collision alert spheres (pulsing orange)  \n\n---\n\n### 🧠 Adaptation Protocol  \n```mermaid\ngraph LR\nA[Disorientation] -->|Trigger| B[Auto-gyro stabilization]\nC[Nausea] -->|Trigger| D[Inject anti-motion sickness]\nE[Task Failure] -->|3 attempts| F[Enable AI pilot takeover]\n```\n\n**Countdown Timer:**  \n`ADAPTATION PHASE: 04:27`  \n*Complete tasks to reduce time*\n\n---\n\n### 🔚 Reversion Procedure  \n```diff\n! Gravity will NOT auto-restart\n+ Manually trigger reboot sequence:\n  1. Reach engineering bay (yellow nav marker)\n  2. Override safety (code: 767θ)\n  3. Initiate spin-up (hold ⏻ for 5s)\n```\n\n<div style=\"text-align: center; margin-top: 20px;\">\n<button style=\"background: linear-gradient(to right, #4facfe, #00f2fe); border: none; padding: 12px 24px; border-radius: 6px; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2);\">\n  ACKNOWLEDGE ZERO-G PROTOCOL\n</button>\n</div>",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 7,
+    "overall_average": "8.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a good understanding of the zero-gravity environment and its implications on object movement. However, the response could be improved by providing a clearer explanation of the underlying physics concepts, such as the relationship between gravity and inertia. The use of code snippets and diagrams is helpful, but some of the notation and terminology may be unfamiliar to beginners. To improve the educational score, consider adding more introductory explanations and definitions for key terms. Additionally, the response could benefit from a more concise and focused structure, with clearer headings and section divisions. Overall, the response is well-organized and visually appealing, but could be refined to better support learning and understanding.",
+  "candidate_token_usage": {
+    "promptTokens": 373,
+    "completionTokens": 3170,
+    "totalTokens": 3543
+  },
+  "candidate_latency_ms": 139917,
+  "candidate_cost_usd": 0.00714745,
+  "judge_token_usage": {
+    "promptTokens": 1363,
+    "completionTokens": 192,
+    "totalTokens": 1555
+  },
+  "judge_latency_ms": 12024,
+  "judge_cost_usd": 0.0012786,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:47:54.915Z"
+}

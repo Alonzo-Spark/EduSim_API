@@ -1,0 +1,853 @@
+Here is a complete, self-contained HTML file that implements an interactive textbook simulation. It features a physics engine to simulate the sliding block, a dynamic rendering system that structures content into "cards" as requested, and a specific "Formula Lab" for exploring the math behind the motion.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Physics: Friction & Inertia</title>
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #0f172a;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+            --font-sans: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 80px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Badge Styles */
+        .badge {
+            background: #eff6ff;
+            color: var(--primary);
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+
+        /* Simulation Container */
+        .sim-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(to bottom, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #bae6fd;
+            margin-bottom: 20px;
+            cursor: crosshair;
+        }
+
+        .sim-floor {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: repeating-linear-gradient(
+                45deg,
+                #cbd5e1,
+                #cbd5e1 10px,
+                #94a3b8 10px,
+                #94a3b8 20px
+            );
+            border-top: 2px solid #64748b;
+        }
+
+        .block {
+            position: absolute;
+            bottom: 40px; /* on top of floor */
+            left: 50px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            user-select: none;
+            z-index: 10;
+        }
+
+        .vector-arrow {
+            position: absolute;
+            height: 4px;
+            background: #ef4444;
+            transform-origin: left center;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+        }
+        
+        .vector-arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -6px;
+            border-width: 8px 0 8px 10px;
+            border-style: solid;
+            border-color: transparent transparent transparent #ef4444;
+        }
+
+        .vector-label {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ef4444;
+            font-weight: bold;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        /* Controls */
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            background: #f1f5f9;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: #cbd5e1;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: #eff6ff;
+        }
+
+        /* Formula Card */
+        .formula-display {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 16px;
+            border: 1px dashed var(--border);
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Interactive Formula Lab Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal h3 {
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .variable-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .variable-label {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transform: translateY(100px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        /* Utility */
+        .hidden { display: none; }
+        .katex-display { margin: 0; overflow-x: auto; overflow-y: hidden; }
+        
+        .status-bar {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Newtonian Motion Lab</h1>
+        <p class="subtitle">Interactive exploration of friction and inertia</p>
+    </header>
+
+    <main id="content-root">
+        <!-- Content will be injected here by the renderer -->
+    </main>
+</div>
+
+<!-- Formula Lab Modal -->
+<div class="modal-overlay" id="formula-lab-modal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h3>Formula Lab: Friction Force</h3>
+        <p style="margin-bottom: 16px; color: var(--text-muted); font-size: 0.9rem;">
+            Calculate the kinetic friction force opposing the motion.
+        </p>
+        <div class="formula-display" id="lab-formula-display">
+            <!-- Dynamic Formula -->
+        </div>
+        <div class="variable-input-group">
+            <span class="variable-label">μ</span>
+            <input type="range" id="lab-mu" min="0" max="1" step="0.01" value="0.1">
+            <span id="lab-mu-val">0.10</span>
+        </div>
+        <div class="variable-input-group">
+            <span class="variable-label">N</span>
+            <input type="range" id="lab-n" min="10" max="100" step="1" value="50">
+            <span id="lab-n-val">50 N</span>
+        </div>
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <strong>Result: </strong> <span id="lab-result" style="color: var(--primary); font-weight: bold;">5.00 N</span>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">Simulation Started</div>
+
+<script>
+    // ==========================================
+    // DATA & CONTENT MODEL
+    // ==========================================
+    
+    const courseContent = [
+        {
+            type: 'card',
+            title: 'Quick Definition',
+            content: `
+                <p><strong>Kinetic Friction</strong> is the force that opposes the relative motion of solid surfaces sliding against each other. It depends on the materials in contact and the normal force, but <strong>not</strong> on the sliding speed or contact area.</p>
+            `
+        },
+        {
+            type: 'simulation',
+            title: 'Live Sandbox: Sliding Block',
+            id: 'sim-block'
+        },
+        {
+            type: 'formula',
+            latex: 'f_k = \\mu_k N',
+            title: 'Kinetic Friction Formula',
+            variables: { f_k: 'Kinetic Friction Force', mu_k: 'Coefficient of Kinetic Friction', N: 'Normal Force' },
+            context: 'This formula calculates the force resisting the motion of the block.'
+        },
+        {
+            type: 'card',
+            title: 'Key Concepts',
+            content: `
+                <ul>
+                    <li><strong>Coefficient of Friction (μ):</strong> A dimensionless scalar value. Ice on ice has μ ≈ 0.05, while Rubber on concrete has μ ≈ 1.0.</li>
+                    <li><strong>Normal Force (N):</strong> The support force exerted upon an object that is in contact with another stable object. Usually equal to the object's weight on a flat surface.</li>
+                    <li><strong>Zero Friction Scenario:</strong> If μ scales to zero, $f_k$ becomes 0. According to Newton's First Law, the object will slide forever at constant velocity unless acted upon by another force.</li>
+                </ul>
+            `
+        },
+        {
+            type: 'table',
+            title: 'Material Properties',
+            headers: ['Material Pair', 'Coeff. of Friction (μ)', 'Behavior'],
+            rows: [
+                ['Teflon on Teflon', '0.04', 'Extremely slippery'],
+                ['Ice on Ice', '0.05 - 0.1', 'Low resistance'],
+                ['Wood on Wood', '0.25 - 0.5', 'Moderate resistance'],
+                ['Rubber on Concrete', '0.6 - 0.85', 'High grip']
+            ]
+        },
+        {
+            type: 'card',
+            title: 'Summary',
+            content: `
+                <p>As the coefficient of friction ($\\mu_k$) approaches zero, the friction force ($f_k$) vanishes. In the simulation, you will observe the block maintaining its velocity for much longer distances, eventually stopping only due to numerical precision or air resistance (not modeled here).</p>
+            `
+        }
+    ];
+
+    // ==========================================
+    // RENDERING SYSTEM
+    // ==========================================
+
+    const root = document.getElementById('content-root');
+
+    function renderContent() {
+        courseContent.forEach(section => {
+            if (section.type === 'card') {
+                root.appendChild(createCard(section));
+            } else if (section.type === 'formula') {
+                root.appendChild(createFormulaCard(section));
+            } else if (section.type === 'simulation') {
+                root.appendChild(createSimulationCard(section));
+            } else if (section.type === 'table') {
+                root.appendChild(createTableCard(section));
+            }
+        });
+        
+        // Render Math
+        renderMathInElement(root, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ],
+            throwOnError : false
+        });
+    }
+
+    function createCard(data) {
+        const el = document.createElement('section');
+        el.className = 'card';
+        el.innerHTML = `
+            <div class="card-header">
+                <span class="card-title">${data.title}</span>
+                <span class="badge">Textbook</span>
+            </div>
+            <div class="card-body">${data.content}</div>
+        `;
+        return el;
+    }
+
+    function createFormulaCard(data) {
+        const el = document.createElement('section');
+        el.className = 'card';
+        el.innerHTML = `
+            <div class="card-header">
+                <span class="card-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    ${data.title}
+                </span>
+                <span class="badge">Formula</span>
+            </div>
+            <div class="formula-display">
+                $$${data.latex}$$
+            </div>
+            <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px; text-align: center;">
+                <em>${data.context}</em>
+            </div>
+            <div class="formula-actions">
+                <button class="btn btn-outline" onclick="explainFormula('${data.title}')">Explain Formula</button>
+                <button class="btn" onclick="openFormulaLab('${data.latex}')">Open Formula Lab</button>
+            </div>
+            <div id="explanation-${data.title.replace(/\s+/g, '-')}" class="hidden" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.9rem;">
+                <strong>Variable Breakdown:</strong>
+                <ul style="margin-left: 20px; margin-top: 8px;">
+                    ${Object.entries(data.variables).map(([key, val]) => `<li><strong>$${key}$</strong>: ${val}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+        return el;
+    }
+
+    function createTableCard(data) {
+        const el = document.createElement('section');
+        el.className = 'card';
+        const rowsHtml = data.rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('');
+        
+        el.innerHTML = `
+            <div class="card-header">
+                <span class="card-title">${data.title}</span>
+                <span class="badge">Reference</span>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>${data.headers.map(h => `<th>${h}</th>`).join('')}</tr>
+                    </thead>
+                    <tbody>
+                        ${rowsHtml}
+                    </tbody>
+                </table>
+            </div>
+        `;
+        return el;
+    }
+
+    function createSimulationCard(data) {
+        const el = document.createElement('section');
+        el.className = 'card';
+        el.innerHTML = `
+            <div class="card-header">
+                <span class="card-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    ${data.title}
+                </span>
+                <span class="badge" style="background:#dcfce7; color:#166534">Live</span>
+            </div>
+            
+            <div class="sim-container" id="sim-stage">
+                <div class="sim-floor"></div>
+                <div class="block" id="sim-block">M</div>
+                <div class="vector-arrow" id="vel-vector" style="width: 0px; bottom: 70px;">
+                    <span class="vector-label">v</span>
+                </div>
+            </div>
+
+            <div class="status-bar" id="sim-status">
+                <span>⚪ Ready to simulate.</span>
+            </div>
+
+            <div class="controls" style="margin-top: 20px;">
+                <div class="control-group">
+                    <label>
+                        Coefficient ($\\mu_k$)
+                        <span id="mu-display">0.30</span>
+                    </label>
+                    <input type="range" id="mu-slider" min="0" max="1.0" step="0.01" value="0.30">
+                </div>
+                <div class="control-group">
+                    <label>
+                        Initial Velocity ($v_0$)
+                        <span id="v0-display">15 m/s</span>
+                    </label>
+                    <input type="range" id="v0-slider" min="5" max="30" step="1" value="15">
+                </div>
+                <div class="control-group" style="justify-content: flex-end;">
+                    <button class="btn" id="btn-start">Push Block</button>
+                    <button class="btn btn-outline" id="btn-reset">Reset</button>
+                </div>
+            </div>
+        `;
+        
+        // Attach Simulation Logic after DOM insertion
+        setTimeout(() => initSimulation(), 0);
+        return el;
+    }
+
+    // ==========================================
+    // INTERACTION LOGIC
+    // ==========================================
+
+    function explainFormula(titleId) {
+        const el = document.getElementById(`explanation-${titleId.replace(/\s+/g, '-')}`);
+        el.classList.toggle('hidden');
+    }
+
+    // Formula Lab Logic
+    let labFormulaLatex = '';
+    
+    function openFormulaLab(latex) {
+        labFormulaLatex = latex;
+        const modal = document.getElementById('formula-lab-modal');
+        modal.classList.add('active');
+        
+        // Render formula in modal
+        const display = document.getElementById('lab-formula-display');
+        display.innerHTML = `$$${latex}$$`;
+        renderMathInElement(display);
+        
+        updateLabCalc();
+    }
+
+    function closeModal() {
+        document.getElementById('formula-lab-modal').classList.remove('active');
+    }
+
+    // Lab Inputs
+    document.getElementById('lab-mu').addEventListener('input', (e) => {
+        document.getElementById('lab-mu-val').textContent = parseFloat(e.target.value).toFixed(2);
+        updateLabCalc();
+    });
+
+    document.getElementById('lab-n').addEventListener('input', (e) => {
+        document.getElementById('lab-n-val').textContent = e.target.value + ' N';
+        updateLabCalc();
+    });
+
+    function updateLabCalc() {
+        const mu = parseFloat(document.getElementById('lab-mu').value);
+        const N = parseFloat(document.getElementById('lab-n').value);
+        const fk = mu * N;
+        
+        document.getElementById('lab-result').textContent = fk.toFixed(2) + ' N';
+    }
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ==========================================
+    // PHYSICS ENGINE
+    // ==========================================
+    
+    let simState = {
+        running: false,
+        x: 50, // pixels
+        v: 0,  // m/s (virtual)
+        mu: 0.3,
+        v0: 15,
+        mass: 5, // kg
+        scale: 10, // pixels per meter
+        dt: 1/60, // seconds per frame
+        animId: null
+    };
+
+    function initSimulation() {
+        const block = document.getElementById('sim-block');
+        const sliderMu = document.getElementById('mu-slider');
+        const sliderV0 = document.getElementById('v0-slider');
+        const btnStart = document.getElementById('btn-start');
+        const btnReset = document.getElementById('btn-reset');
+        const velVector = document.getElementById('vel-vector');
+
+        // Update UI from sliders
+        sliderMu.addEventListener('input', (e) => {
+            simState.mu = parseFloat(e.target.value);
+            document.getElementById('mu-display').textContent = simState.mu.toFixed(2);
+            if (!simState.running) updateStatus(`Friction set to $\\mu = ${simState.mu}$`);
+        });
+
+        sliderV0.addEventListener('input', (e) => {
+            simState.v0 = parseFloat(e.target.value);
+            document.getElementById('v0-display').textContent = simState.v0 + ' m/s';
+            if (!simState.running) updateStatus(`Initial velocity set to $v_0 = ${simState.v0}$ m/s`);
+        });
+
+        btnStart.addEventListener('click', () => {
+            if (simState.running) return;
+            startSim();
+        });
+
+        btnReset.addEventListener('click', () => {
+            stopSim();
+            resetSim();
+        });
+
+        resetSim();
+
+        function resetSim() {
+            simState.x = 50;
+            simState.v = 0;
+            simState.running = false;
+            block.style.transform = `translateX(0px)`;
+            velVector.style.width = '0px';
+            updateStatus("Ready. Adjust parameters and push block.");
+            renderMathInElement(document.getElementById('sim-status'));
+        }
+
+        function startSim() {
+            simState.running = true;
+            simState.v = simState.v0;
+            simState.x = 50; // reset pos
+            updateStatus("Simulating... Block is decelerating.");
+            renderMathInElement(document.getElementById('sim-status'));
+            showToast("Simulation Started");
+            loop();
+        }
+
+        function stopSim() {
+            simState.running = false;
+            cancelAnimationFrame(simState.animId);
+        }
+
+        function loop() {
+            if (!simState.running) return;
+
+            // Physics: a = -mu * g
+            // g = 9.8
+            const g = 9.8;
+            const a = -simState.mu * g;
+
+            // Euler integration
+            simState.v += a * simState.dt;
+            simState.x += simState.v * simState.scale * simState.dt;
+
+            // Stop condition
+            if (simState.v <= 0) {
+                simState.v = 0;
+                simState.running = false;
+                updateStatus("Stopped. Velocity reached zero.");
+                renderMathInElement(document.getElementById('sim-status'));
+                showToast("Block Stopped");
+            }
+
+            // Render
+            block.style.transform = `translateX(${simState.x - 50}px)`;
+            
+            // Visualizing Velocity Vector
+            // Scale vector length for visibility
+            const vecLen = Math.max(0, simState.v * 5); 
+            velVector.style.width = `${vecLen}px`;
+            velVector.style.transform = `translateX(${simState.x}px)`;
+            
+            // Loop bounds (wrap around for infinite feel if mu is very low)
+            if (simState.x > 800) {
+                simState.x = 50;
+            }
+
+            simState.animId = requestAnimationFrame(loop);
+        }
+    }
+
+    function updateStatus(text) {
+        document.getElementById('sim-status').innerHTML = `<span>${text}</span>`;
+    }
+
+    // Initialize App
+    document.addEventListener('DOMContentLoaded', renderContent);
+
+</script>
+</body>
+</html>
+```

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 19,
+  "question": "Define kinetic energy and derive its expression.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nKinetic energy is the capacity of an object to perform mechanical work by virtue of its state of motion. Every moving mass possesses kinetic energy, which scales relative to its mass and speed.\n\n---\n\n## Formula\n\nThe classical expression for kinetic energy is stated as:\n\n$$K = \\frac{1}{2}mv^2$$\n\nWhere:\n* $K$ represents the kinetic energy scalar value\n* $m$ represents the total mass of the object\n* $v$ represents the magnitude of its velocity vector\n\n---\n\n## Derivations\n\nConsider a body of mass $m$ initially resting at a standstill on a frictionless horizontal plane.\n\nLet its initial velocity be zero:\n$$u = 0$$\n\nLet a constant net horizontal force $F$ act on the body, displacing it through a straight distance $s$. The work performed by this force during displacement transfers energy to the body, appearing completely as kinetic energy ($K$):\n$$K = W = F \\cdot s$$\n\nFrom Newton's Second Law, the force parameter can be written as:\n$$F = ma$$\n\nSubstitute this force expression directly into the work tracking template:\n$$K = (ma) \\cdot s = m(as)$$\n\nUsing the kinematic relation linking velocity components across distance $s$:\n$$v^2 = u^2 + 2as$$\n\nSince the object started from rest ($u = 0$), the equation simplifies to:\n$$v^2 = 0 + 2as$$\n\n$$as = \\frac{v^2}{2}$$\n\nSubstitute this ($as$) expression back into our kinetic energy equation:\n$$K = m \\left(\\frac{v^2}{2}\\right)$$\n\nRearrange the expression into its final form:\n$$K = \\frac{1}{2}mv^2$$\n\nThis completes the mechanical derivation of the kinetic energy equation.\n\n---\n\n## Summary\n\nKinetic energy represents the work required to accelerate a mass from rest to a specific velocity, climbing linearly with mass but quadratically with velocity.",
+  "candidate_response": "# Kinetic Energy\n\n## Quick Definition\n\nKinetic energy is the energy possessed by an object due to its motion. Any object in motion has kinetic energy, which depends on both its mass and speed.\n\n---\n\n## Key Concept\n\nWhen work is done on an object to make it move from rest, energy is transferred to the object. This energy, stored in the form of motion, is called **kinetic energy**.\n\n---\n\n## Derivation of Kinetic Energy Expression\n\nLet’s derive the expression for kinetic energy using the **work-energy principle**.\n\nSuppose:\n- A body of mass $ m $ is initially at rest (initial velocity $ u = 0 $).\n- A constant force $ F $ is applied, causing it to accelerate to a final velocity $ v $ over a distance $ s $.\n\nWe know from Newton’s second law:\n$$\nF = ma\n$$\nwhere $ a $ is the constant acceleration.\n\nFrom the third equation of motion:\n$$\nv^2 = u^2 + 2as\n$$\nSince $ u = 0 $, this becomes:\n$$\nv^2 = 2as \\quad \\Rightarrow \\quad s = \\frac{v^2}{2a}\n$$\n\nWork done by the force $ F $ over distance $ s $ is:\n$$\nW = F \\cdot s = (ma) \\cdot \\left( \\frac{v^2}{2a} \\right) = \\frac{1}{2} m v^2\n$$\n\nThis work done is equal to the **kinetic energy** gained by the object.\n\n---\n\n## Main Formula\n\n$$\nK = \\frac{1}{2}mv^2\n$$\n\n### Formula Card\n\n┌─────────────────────────────────────────────────────┐\n│ **Kinetic Energy**                                  │\n│                                                     │\n│ $$ K = \\frac{1}{2}mv^2 $$                           │\n│                                                     │\n│ - $ K $: Kinetic energy (in joules, J)              │\n│ - $ m $: Mass of the object (in kg)                 │\n│ - $ v $: Speed of the object (in m/s)                │\n│                                                     │\n│ [ Explain Formula ]    [ Open Formula Lab ™ ]       │\n└─────────────────────────────────────────────────────┘\n\n---\n\n## Important Notes\n\n- Kinetic energy is a **scalar quantity** — it has magnitude but no direction.\n- It depends on the **square of the velocity**, so doubling the speed quadruples the kinetic energy.\n- Kinetic energy is always **positive or zero**, since mass is positive and $ v^2 \\geq 0 $.\n\n---\n\n## Applications\n\n- Calculating stopping distances in vehicles.\n- Understanding energy transfer in collisions.\n- Used in engineering, space missions, and particle physics.\n\n---\n\n## Summary\n\n- Kinetic energy is energy due to motion.\n- Derived from work done to accelerate a body from rest.\n- Formula: $ K = \\frac{1}{2}mv^2 $.\n- Proportional to mass and the square of velocity.\n\n---\n\n## Suggested Questions\n\n1. How much kinetic energy does a 1000 kg car have when moving at 20 m/s?\n2. If the speed of an object doubles, how does its kinetic energy change?\n3. Why is kinetic energy a scalar even though velocity is a vector?\n4. Can kinetic energy be negative? Why or why not?\n\nWould you like to explore the **Formula Lab** for $ K = \\frac{1}{2}mv^2 $? (Simulate changes in mass and velocity interactively)",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly defines kinetic energy, derives its expression using the work-energy principle, and provides a clear summary. The use of formatting, such as headings and a formula card, enhances readability. The response also includes important notes, applications, and suggested questions, which contribute to its educational value. However, to achieve a perfect score, the candidate could further improve by including more detailed explanations of the underlying physics principles, such as the relationship between force, mass, and acceleration, and providing more examples or illustrations to support the concepts. Additionally, minor improvements could be made to the formatting for better consistency and visual appeal.",
+  "candidate_token_usage": {
+    "promptTokens": 354,
+    "completionTokens": 757,
+    "totalTokens": 1111
+  },
+  "candidate_latency_ms": 59383,
+  "candidate_cost_usd": 0.001868,
+  "judge_token_usage": {
+    "promptTokens": 1584,
+    "completionTokens": 197,
+    "totalTokens": 1781
+  },
+  "judge_latency_ms": 4930,
+  "judge_cost_usd": 0.0014232,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:33:08.960Z"
+}

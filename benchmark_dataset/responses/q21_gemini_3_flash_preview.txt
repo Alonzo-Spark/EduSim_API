@@ -1,0 +1,67 @@
+```json
+{
+  "action": "render_interactive_textbook",
+  "topic": "Newton's Law of Universal Gravitation",
+  "sections": [
+    {
+      "type": "Introduction",
+      "content": "In 1687, Sir Isaac Newton published the *Principia*, where he formulated a law that governs the motion of everything from falling apples to orbiting planets. This law describes the invisible force that acts between any two objects in the universe."
+    },
+    {
+      "type": "Definition",
+      "title": "The Universal Law",
+      "content": "Newton's Law of Universal Gravitation states that **every particle in the universe attracts every other particle** with a force that is:\n\n1.  **Directly proportional** to the product of their masses.\n2.  **Inversely proportional** to the square of the distance between their centers."
+    },
+    {
+      "type": "Formula",
+      "title": "The Gravitational Force Equation",
+      "formula_data": {
+        "formula": "F = G \\frac{m_1 m_2}{r^2}",
+        "variables": [
+          {"symbol": "F", "meaning": "Gravitational force between two objects", "unit": "Newtons (N)"},
+          {"symbol": "G", "meaning": "Universal Gravitational Constant", "value": "6.674 \\times 10^{-11} \\text{ Nm}^2/\\text{kg}^2"},
+          {"symbol": "m_1, m_2", "meaning": "Masses of the two objects", "unit": "Kilograms (kg)"},
+          {"symbol": "r", "meaning": "Distance between the centers of the masses", "unit": "Meters (m)"}
+        ],
+        "context": "This equation follows the Inverse Square Law. If you double the distance, the force becomes one-fourth of its original strength."
+      }
+    },
+    {
+      "type": "Characteristics",
+      "title": "Properties of Gravitational Force",
+      "content": [
+        "**Central Force:** It acts along the line joining the centers of the two bodies.",
+        "**Conservative Force:** The work done by gravity depends only on initial and final positions, not the path taken.",
+        "**Action-Reaction Pair:** The force exerted by mass A on mass B is equal and opposite to the force exerted by mass B on mass A.",
+        "**Weak Force:** Gravity is the weakest of the four fundamental forces but dominates on a cosmic scale due to its infinite range."
+      ]
+    },
+    {
+      "type": "Table",
+      "title": "Mass vs. Distance Relationship",
+      "table_data": {
+        "headers": ["Change in Factor", "Effect on Force (F)"],
+        "rows": [
+          ["Mass of one object doubles", "Force doubles ($2F$)"],
+          ["Both masses double", "Force quadruples ($4F$)"],
+          ["Distance doubles ($2r$)", "Force becomes one-fourth ($F/4$)"],
+          ["Distance triples ($3r$)", "Force becomes one-ninth ($F/9$)"]
+        ]
+      }
+    },
+    {
+      "type": "Important Notes",
+      "title": "Why 'Universal'?",
+      "content": "The law is called 'Universal' because it applies to all bodies in the universe—whether they are terrestrial (on Earth), celestial (stars and planets), or microscopic particles—regardless of the medium separating them."
+    },
+    {
+      "type": "Suggested Questions",
+      "questions": [
+        "Why don't we feel the gravitational attraction between two people sitting in a room?",
+        "What happens to the gravitational force if the distance between two objects is halved?",
+        "Explain why G is called a universal constant while 'g' (acceleration due to gravity) is not."
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 59,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'collision' event between two equal masses.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a physical interaction within the workspace canvas.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nAn instantaneous impact interface event (`collision`) was registered between sphere `c1` and sphere `c2` at the center coordinate intersection.\n\n### WHAT CHANGED\nSphere `c1` came to an immediate halt, transferring its entire velocity vector component directly to sphere `c2`, which shot forward instantly.\n\n### SIMPLE WHY\nBecause the two masses are identical and the restitution parameter is set to maximum, the system undergoes a perfect elastic momentum exchange.\n\n### WHAT TO NOTICE\nObserve the velocity indicator vectors. Watch how the velocity swap occurs instantaneously without any net loss in total system speed.",
+  "candidate_response": "┌───────────────────────────┐\n│ Collision Event Overview   │\n│                           │\n│ This section explains the   │\n│ dynamics of a collision     │\n│ event between two equal     │\n│ masses.                    │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ A collision occurs when   │\n│ two objects come into     │\n│ contact, exerting forces   │\n│ on each other. In this    │\n│ case, we consider two      │\n│ equal masses colliding.   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ 1. **Types of Collisions**:        │\n│    - Elastic: Total kinetic energy is conserved.   │\n│    - Inelastic: Total kinetic energy is not conserved.  │\n│                           │\n│ 2. **Momentum Conservation**:       │\n│    The total momentum before and after the collision is constant. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     $$ p_{initial} = p_{final} $$      │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics           │\n│                           │\n│ - Both masses are equal   │\n│ - The collision can be     │\n│   elastic or inelastic     │\n│ - The outcome depends on    │\n│   initial velocities       │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Applications              │\n│                           │\n│ - Analyzing car crashes   │\n│ - Understanding particle   │\n│   physics                 │\n│ - Sports dynamics         │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Advantages                │\n│                           │\n│ - Helps predict outcomes   │\n│ - Useful in engineering    │\n│ - Applies to various fields│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Disadvantages             │\n│                           │\n│ - Simplifies real-world    │\n│   complexities             │\n│ - Requires assumptions     │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ - Ensure both masses are   │\n│   measured accurately.     │\n│ - Consider external forces  │\n│   that may affect the      │\n│   collision.              │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                   │\n│                           │\n│ In a collision between     │\n│ two equal masses, momentum │\n│ is conserved, and the     │\n│ outcome depends on their   │\n│ initial velocities. This   │\n│ concept is fundamental in  │\n│ physics and engineering.   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions        │\n│                           │\n│ 1. What happens to the    │\n│    kinetic energy in an    │\n│    elastic collision?      │\n│ 2. How do external forces  │\n│    affect the outcome of   │\n│    a collision?           │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 6,
+    "quality": 8,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks specific details about the collision event between two equal masses, such as the instantaneous impact interface event and the perfect elastic momentum exchange. The response provides a general overview of collisions, including types, momentum conservation, and characteristics, but fails to directly address the original question. The formatting is well-structured, but the content does not semantically align with the gold reference answer. To improve, the candidate should focus on providing more accurate and relevant information about the collision event, including the physical interaction and the outcome. Additionally, the response could benefit from more visual aids, such as diagrams or illustrations, to enhance the educational value and clarity of the explanation.",
+  "candidate_token_usage": {
+    "promptTokens": 372,
+    "completionTokens": 773,
+    "totalTokens": 1145
+  },
+  "candidate_latency_ms": 7709,
+  "candidate_cost_usd": 0.0005196,
+  "judge_token_usage": {
+    "promptTokens": 1362,
+    "completionTokens": 192,
+    "totalTokens": 1554
+  },
+  "judge_latency_ms": 6982,
+  "judge_cost_usd": 0.0012779999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:44:32.710Z"
+}

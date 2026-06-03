@@ -1,0 +1,216 @@
+Here's how the content will be structured and rendered according to the new guidelines:
+
+```html
+<div class="interactive-textbook">
+
+  <div class="section-card">
+    <div class="card-header">
+      Introduction
+    </div>
+    <div class="card-content">
+      Let's explore what happens when a planet's tangential velocity, its speed perpendicular to the gravitational pull of the star, is reduced below the stable speed required for a circular orbit. This scenario leads to a fascinating change in the planet's path.
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header">
+      Key Concepts
+    </div>
+    <div class="card-content">
+      <ul>
+        <li><b>Tangential Velocity:</b> The speed of a planet moving along its orbit.</li>
+        <li><b>Gravitational Force:</b> The force of attraction between the planet and the star.</li>
+        <li><b>Orbital Stability:</b> The state where the planet maintains a consistent orbit.</li>
+        <li><b>Elliptical Orbit:</b> An orbit shaped like an oval, where the planet's distance from the star varies.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header">
+      Orbital Behavior with Reduced Velocity
+    </div>
+    <div class="card-content">
+      When a planet's tangential velocity is reduced, the balance between inertia (the tendency to move in a straight line) and gravitational force is disrupted. The planet no longer has enough speed to counteract the gravitational pull of the star and maintain a circular orbit.
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header">
+      Resulting Orbit: Ellipse
+    </div>
+    <div class="card-content">
+      The planet will begin to spiral inward towards the star. The orbit will change from a circle to an ellipse.
+    </div>
+  </div>
+
+  <div class="formula-card">
+    <div class="card-header">
+      Formula for Orbital Velocity
+    </div>
+    <div class="card-content">
+      $$v = \sqrt{\frac{GM}{r}}$$
+    </div>
+    <div class="card-footer">
+      <button class="formula-button">Explain Formula</button>
+      <button class="formula-button">Open Formula Lab</button>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header">
+      Explanation of the Formula
+    </div>
+    <div class="card-content">
+        <ul>
+          <li>`v` represents the orbital velocity of the planet.</li>
+          <li>`G` is the gravitational constant.</li>
+          <li>`M` is the mass of the star.</li>
+          <li>`r` is the distance between the planet and the star.</li>
+        </ul>
+        <p>This formula demonstrates the relationship between a planet's orbital speed, the mass of the central star, and the distance between them. Reducing the velocity below this calculated value will result in a non-circular orbit.</p>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header">
+      Perihelion and Aphelion
+    </div>
+    <div class="card-content">
+      <ul>
+        <li><b>Perihelion:</b> The point in the orbit where the planet is closest to the star.</li>
+        <li><b>Aphelion:</b> The point in the orbit where the planet is farthest from the star.</li>
+      </ul>
+      In an elliptical orbit, the planet's speed is greatest at perihelion and slowest at aphelion.
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header">
+      Consequences of Velocity Reduction
+    </div>
+    <div class="card-content">
+      As the planet moves closer to the star (perihelion), its speed increases due to the stronger gravitational pull. As it moves away (aphelion), its speed decreases. If the initial reduction in velocity is significant enough, the planet may eventually:
+      <ul>
+        <li>Collide with the star.</li>
+        <li>Be ejected from the system entirely.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header">
+      Summary
+    </div>
+    <div class="card-content">
+      Reducing a planet's tangential velocity below the stable circular speed results in an elliptical orbit. The planet's path changes as it spirals inward.
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header">
+      Suggested Questions
+    </div>
+    <div class="card-content">
+      <ul>
+        <li>How does the shape of the orbit change with varying tangential velocities?</li>
+        <li>What factors determine the size and eccentricity of the resulting elliptical orbit?</li>
+        <li>What are the implications for a planet's habitability if its orbit becomes more elliptical?</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<style>
+.interactive-textbook {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.section-card, .formula-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-footer {
+  padding: 10px;
+  background-color: #eee;
+  display: flex;
+  justify-content: space-around;
+}
+
+.formula-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* KaTeX styling (assuming you have KaTeX loaded) */
+.katex {
+  font-size: 1.2em; /* Adjust as needed */
+  display: block; /* Make sure it's block-level for proper spacing */
+  text-align: center; /* Center the formula */
+  margin: 10px 0; /* Add some margin for spacing */
+}
+</style>
+
+<script>
+  // KaTeX rendering (assuming you have KaTeX loaded)
+  document.addEventListener('DOMContentLoaded', function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false},
+          {left: "\\[", right: "\\]", display: true}
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+```
+
+Key improvements and explanations:
+
+*   **Structured UI Blocks:**  The content is now organized into `section-card` and `formula-card` components.  Each card has a header and content. This creates the textbook-like layout.
+*   **Formula Card:** The formula is contained within a dedicated `formula-card`, with "Explain Formula" and "Open Formula Lab" buttons as requested.  The CSS styles the card to visually separate it.
+*   **Formula Extraction and Handling:**  The code now *includes* the formula and its context.  In a real implementation, you would extract the formula, title, surrounding context, and variables during parsing and store them for future use (e.g., in the Formula Lab). This example shows the *result* of that process.
+*   **Section Detection:** The content is broken down into sections: Introduction, Key Concepts, Orbital Behavior, Formula, Explanation, Perihelion/Aphelion, Consequences, Summary, and Suggested Questions.  Each section becomes a card.
+*   **KaTeX Integration:** The `katex` class is used to style the formulas, and a Javascript snippet is included to render the math equations.  This assumes you have KaTeX loaded in your HTML.
+*   **No Markdown:** The output is pure HTML and CSS, designed to be rendered directly.
+*   **Clearer Explanations:** The explanations are more detailed and better formatted within the card content.
+*   **Responsive Design (Basic):**  The `max-width` on the `.interactive-textbook` class ensures the content doesn't stretch too wide on larger screens.  More advanced responsive design could be added.
+*   **Button Functionality (Placeholder):** The "Explain Formula" and "Open Formula Lab" buttons are present but need JavaScript event listeners added to make them functional.
+
+To use this:
+
+1.  **Include KaTeX:**  Make sure you include the KaTeX CSS and JavaScript files in your HTML (e.g., in the `<head>` section).
+2.  **Paste the HTML:**  Paste the provided HTML code into your HTML file (e.g., inside the `<body>` tag).
+3.  **Implement Button Actions:** Write the JavaScript code for the button clicks (e.g., to show an explanation or open the formula lab).
+4.  **Parsing and Data Storage (Important for a real app):**  You *must* implement the markdown parsing, formula extraction, and data storage logic in your application.  This example *shows the result* of that processing, not the process itself.  You'll need a parser to find the display LaTeX blocks, extract the formula, and associate it with the surrounding context.
+
+This example provides a solid foundation for creating an interactive textbook-like experience.  The key is the structured layout, formula handling, and sectioning.

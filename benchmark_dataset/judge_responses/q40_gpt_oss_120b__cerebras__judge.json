@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 40,
+  "question": "Differentiate between transverse and longitudinal waves.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWaves are classified into two primary structural types based on how the particles of the medium vibrate relative to the direction of the wave's energy travel.\n\nA transverse wave is a wave in which the particles of the medium oscillate perpendicular to the direction of wave propagation.\n\nA longitudinal wave is a wave in which the particles of the medium oscillate parallel to the direction of wave propagation.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Transverse Waves | Longitudinal Waves |\n| --- | --- | --- |\n| **Structure** | Forms alternating crests (peaks) and troughs (valleys). | Forms alternating compressions (high density) and rarefactions (low density). |\n| **Medium Context** | Can travel through solids and liquid surfaces, but not gases. | Can travel through solids, liquids, and gases. |\n| **Polarization** | Can be polarized. | Cannot be polarized. |\n\n---\n\n## Real-world Examples\n\n* **Transverse Waves:** Light waves, radio waves, seismic S-waves, and surface ripples on a pond.\n* **Longitudinal Waves:** Sound waves traveling through air, seismic P-waves, and ultrasound tracking pulses.\n\n---\n\n## Summary\n\nTransverse waves produce variations perpendicular to their direction of travel, whereas longitudinal waves create pressure pulses that run parallel to their path.",
+  "candidate_response": "┌─────────────────────────────────────┐\n│ Introduction                        │\n│                                     │\n│ Waves are disturbances that transfer │\n│ energy through a medium (or vacuum).│\n│ Understanding the two primary      │\n│ classifications—transverse and      │\n│ longitudinal—helps explain many     │\n│ physical phenomena, from light to  │\n│ sound.                               │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│ Definition                          │\n│                                     │\n│ **Transverse Wave**: The particle   │\n│ displacement is perpendicular to the│\n│ direction of wave propagation.      │\n│                                     │\n│ **Longitudinal Wave**: The particle│\n│ displacement is parallel to the      │\n│ direction of wave propagation.      │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│ Key Concepts                        │\n│                                     │\n│ • **Particle Motion** – describes how│\n│   the medium’s particles move relative│\n│   to the wave’s travel direction.     │\n│ • **Propagation Direction** – the    │\n│   path the wave energy follows.       │\n│ • **Restoring Forces** – determine   │\n│   whether the disturbance is         │\n│   transverse or longitudinal.        │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│ Characteristics                     │\n│                                     │\n│ | Property                | Transverse | Longitudinal | │\n│ |--------------------------|------------|--------------│ │\n│ | Particle displacement    | ⟂ to travel| ∥ to travel │ │\n│ | Typical examples         | Light,     | Sound,       │ │\n│ |                          | seismic S‑waves │ seismic P‑waves │ │\n│ | Medium requirement       | Any (including vacuum)│ Requires a material │ │\n│ | Speed relation           | Depends on shear modulus │ Depends on bulk modulus │ │\n│ | Polarization possible    | Yes (directional) │ No (single direction) │ │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│ Applications                        │\n│                                     │\n│ • **Transverse Waves** – optics (light│\n│   waves), electromagnetic radiation,│\n│   surface water waves, seismic S‑   │\n│   waves.                             │\n│ • **Longitudinal Waves** – acoustic │\n│   waves (sound), seismic P‑waves,   │\n│   ultrasound imaging.               │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│ Summary                             │\n│                                     │\n│ - Transverse: particle motion ⟂    │\n│   to travel direction; can propagate│\n│   in vacuum; exhibits polarization.│\n│ - Longitudinal: particle motion ∥   │\n│   to travel direction; needs a     │\n│   material medium; no polarization.│\n│ Understanding both types is crucial │\n│ for physics, engineering, and       │\n│ everyday technology.                │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│ Suggested Questions                 │\n│                                     │\n│ 1. Why can light, a transverse wave, │\n│    travel through empty space?      │\n│ 2. How does polarization arise in   │\n│    transverse waves?                │\n│ 3. What determines the speed of      │\n│    longitudinal waves in a gas?     │\n│ 4. Explain how seismic S‑ and P‑    │\n│    waves differ in an earthquake.   │\n│ 5. Could a wave be both transverse   │\n│    and longitudinal simultaneously?│\n└─────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts of transverse and longitudinal waves, accurately defining and comparing the two types. The use of tables and concise descriptions enhances readability. However, minor improvements could be made in the 'Key Concepts' section by providing more detailed explanations of 'Restoring Forces' and its role in determining wave type. Additionally, the 'Suggested Questions' section, while useful for encouraging further learning, could be more effectively integrated into the main body of the text or clearly linked to specific concepts discussed. Overall, the response is well-structured, clear, and free of hallucinations, making it a valuable educational resource.",
+  "candidate_token_usage": {
+    "promptTokens": 425,
+    "completionTokens": 1110,
+    "totalTokens": 1535
+  },
+  "candidate_latency_ms": 1294,
+  "candidate_cost_usd": 0.00072975,
+  "judge_token_usage": {
+    "promptTokens": 1524,
+    "completionTokens": 189,
+    "totalTokens": 1713
+  },
+  "judge_latency_ms": 3037,
+  "judge_cost_usd": 0.0013679999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:30:53.442Z"
+}

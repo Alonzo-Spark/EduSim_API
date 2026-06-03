@@ -1,0 +1,79 @@
+┌────────────────────────────────────┐
+│ **Runtime Event Detected**         │
+│ **Event Type:** `friction_changed` │
+│ **Target Platform:** Braking Track │
+└────────────────────────────────────┘
+
+┌────────────────────────────────────┐
+│ **System Response: Overlay Mode**  │
+│ Activating physics recalibration   │
+│ for dynamic friction adjustment.   │
+└────────────────────────────────────┘
+
+### **Overlay Payload Generated**
+```json
+{
+  "event": "friction_changed",
+  "timestamp": "2025-04-05T12:34:56.789Z",
+  "platform": "braking_track_v4",
+  "context": "high_speed_deceleration",
+  "old_friction_coeff": 0.35,
+  ̶"̶n̶e̶w̶_̶f̶r̶i̶c̶t̶i̶o̶n̶_̶c̶o̶e̶f̶f̶"̶:̶ ̶0̶.̶6̶2̶,
+  "new_friction_coeff": 0.68,
+  "change_source": "track_surface_sensor_array",
+  "calibration_required": true,
+  "overlay_status": "active",
+  "impacted_systems": [
+    "braking_force_controller",
+    "wheel_lock_detector",
+    "thermal_load_monitor"
+  ],
+  "suggested_action": "initiate adaptive_response_cycle"
+}
+```
+
+┌────────────────────────────────────┐
+│ **Physics Engine Directive**       │
+│ Updating μₖ (kinetic friction)     │
+│ from 0.35 → 0.68                   │
+│ Recomputing stopping distance...   │
+└────────────────────────────────────┘
+
+$$
+d_{\text{stop}} = \frac{v^2}{2\mu_k g}
+$$
+
+┌───────────────────────────┐
+│ **Main Formula**          │
+│                           │
+│     $$d_{\text{stop}} =   │
+│     \frac{v^2}{2\mu_k g}$$│
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+### **Overlay Status: Propagating to Control Nodes**
+- ✅ Node A1 (Brake Modulator): Updated
+- ✅ Node B3 (Traction Manager): Synced
+- ⏳ Node C7 (Thermal Predictor): Pending recalibration
+- ❌ Node D9 (Driver Feedback): Stale — requires refresh
+
+┌────────────────────────────────────┐
+│ **Anomaly Detected**               │
+│ Friction jump exceeds threshold    │
+│ Δμ = +0.33 (expected < +0.20)       │
+│ → Triggering **Surface Integrity Check** │
+└────────────────────────────────────┘
+
+### **Suggested Diagnostic Sequence**
+1. Validate sensor array readings
+2. Cross-reference with temperature data
+3. Assess wear pattern history
+4. Broadcast caution flag to fleet
+
+Overlay will persist until:
+- System stabilization confirmed, or
+- Manual override issued
+
+**Auto-clear in:** 00:02:15 ⏱️

@@ -1,0 +1,98 @@
+To derive the expression for the equivalent resistance in a parallel combination of resistors, we'll analyze the circuit behavior step by step. Here's the clear, structured derivation:
+
+---
+
+### **Step-by-Step Derivation**
+
+#### **1. Circuit Setup**
+- Consider **three resistors** \(R_1\), \(R_2\), and \(R_3\) connected in parallel between points **A** and **B**.
+- A **voltage source** \(V\) is applied across A and B.
+- The potential difference (voltage) across each resistor is **identical** and equals \(V\) (parallel circuit property).
+
+#### **2. Current Flow**
+- Let \(I\) be the **total current** from the voltage source.
+- This current splits into branch currents \(I_1\), \(I_2\), and \(I_3\) through \(R_1\), \(R_2\), and \(R_3\), respectively.
+- By Kirchhoff’s Current Law (KCL):  
+  \[
+  I = I_1 + I_2 + I_3 \quad (1)
+  \]
+
+#### **3. Apply Ohm's Law**
+- For each resistor:  
+  \[
+  I_1 = \frac{V}{R_1}, \quad I_2 = \frac{V}{R_2}, \quad I_3 = \frac{V}{R_3} \quad (2)
+  \]
+
+#### **4. Substitute into KCL Equation**
+- Substitute (2) into (1):  
+  \[
+  I = \frac{V}{R_1} + \frac{V}{R_2} + \frac{V}{R_3} \quad (3)
+  \]
+
+#### **5. Define Equivalent Resistance**
+- Let \(R_{\text{eq}}\) be the single resistance that replaces the parallel combination. By Ohm’s Law:  
+  \[
+  I = \frac{V}{R_{\text{eq}}} \quad (4)
+  \]
+
+#### **6. Combine Equations (3) and (4)**
+- Equate (3) and (4):  
+  \[
+  \frac{V}{R_{\text{eq}}} = \frac{V}{R_1} + \frac{V}{R_2} + \frac{V}{R_3}
+  \]
+- Divide both sides by \(V\):  
+  \[
+  \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} \quad (5)
+  \]
+
+#### **7. Generalize for \(n\) Resistors**
+- For \(n\) resistors in parallel:  
+  \[
+  \boxed{\dfrac{1}{R_{\text{eq}}} = \dfrac{1}{R_1} + \dfrac{1}{R_2} + \cdots + \dfrac{1}{R_n}}
+  \]
+
+---
+
+### **Key Properties**
+1. **Voltage Uniformity**:  
+   Voltage across all parallel resistors is the same.
+2. **Current Division**:  
+   Current through each resistor is inversely proportional to its resistance.
+3. **Equivalent Resistance**:  
+   \(R_{\text{eq}}\) is **always less than** the smallest resistor in the combination.
+
+---
+
+### **Formula Card**
+```math
+\boxed{R_{\text{eq}} = \left( \dfrac{1}{R_1} + \dfrac{1}{R_2} + \cdots + \dfrac{1}{R_n} \right)^{-1}}
+```
+
+| **Symbol** | **Meaning**                          |
+|------------|--------------------------------------|
+| \(R_{\text{eq}}\) | Equivalent resistance of the parallel combination |
+| \(R_1, R_2, \dots, R_n\) | Individual resistances in parallel   |
+
+---
+
+### **Why This Matters**
+- Parallel configurations **reduce total resistance**, allowing higher current flow than any single branch.
+- Applications include household wiring, electronic circuits, and safety devices (e.g., fuses).
+
+---
+
+### **Verify with a Case**
+**Example**: Calculate \(R_{\text{eq}}\) for \(R_1 = 2\ \Omega\), \(R_2 = 3\ \Omega\), and \(R_3 = 6\ \Omega\) in parallel.  
+**Solution**:  
+\[
+\frac{1}{R_{\text{eq}}} = \frac{1}{2} + \frac{1}{3} + \frac{1}{6} = \frac{3}{6} + \frac{2}{6} + \frac{1}{6} = \frac{6}{6} = 1 \implies R_{\text{eq}} = 1\ \Omega
+\]  
+*Note*: \(1\ \Omega < 2\ \Omega\) (smallest resistor), as expected.
+
+---
+
+### **Summary**
+- **Reciprocal rule**: The reciprocal of \(R_{\text{eq}}\) is the sum of reciprocals of individual resistances.
+- **Practical insight**: Adding resistors in parallel **lowers total resistance** and **increases total current**.
+
+Would you like to explore current division in parallel circuits or try another example?

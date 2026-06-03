@@ -1,0 +1,184 @@
+Okay, I understand. You want a completely revamped rendering system for your AI Tutor that moves away from a plain markdown document aesthetic and adopts a structured, interactive textbook-like design.  Here's a breakdown of how I'll approach this, incorporating your requirements for section detection, formula cards, formula extraction, and table rendering.  I'll outline the logic and the expected output format.
+
+**Core Principles**
+
+*   **UI Block Structure:**  Transform markdown into distinct UI components (cards, sections, etc.) to create a visually organized and interactive experience.
+*   **Formula-Centric:** Formulas are the focal point.  They'll be rendered in dedicated cards with interactive elements.
+*   **Contextual Awareness:**  Maintain context around formulas so they aren't isolated.
+*   **Efficiency:**  Extract information during parsing to avoid redundant processing.
+*   **Responsive Design:**  Tables should adapt to different screen sizes.
+
+**Implementation Details**
+
+1.  **Markdown Parsing & Section Detection:**
+
+    *   I will parse the input markdown.
+    *   I will use regular expressions and keyword matching to identify section headings (Introduction, Definition, Key Concepts, etc.).
+    *   Each section will be encapsulated within a `SectionCard` component.
+
+2.  **SectionCard Component:**
+
+    *   The `SectionCard` will contain the section heading and the associated text content.
+    *   The text will be rendered using appropriate formatting (bold, italics, lists, etc.).
+
+    ```
+    ┌───────────────────────────┐
+    │ **Section Heading**       │
+    │                           │
+    │ [Section Content Text]    │
+    │                           │
+    └───────────────────────────┘
+    ```
+
+3.  **FormulaCard Component:**
+
+    *   When a LaTeX formula is detected (using regular expressions), a `FormulaCard` will be created.
+    *   The `FormulaCard` will display:
+        *   A title for the formula (if provided). If not, a default title will be generated (e.g., "Main Formula").
+        *   The rendered formula (using KaTeX).
+        *   "Explain Formula" button (will link to an explanation/definition).
+        *   "Open Formula Lab" button (will link to an interactive formula manipulation tool - *this part is outside the scope of the current implementation, but I'll include placeholder logic*).
+        *   The surrounding context of the formula.
+
+    ```
+    ┌───────────────────────────┐
+    │ **Main Formula**          │
+    │                           │
+    │     \\[ Rendered Formula \\] │
+    │                           │
+    │ [ Explain Formula ]       │
+    │ [ Open Formula Lab ]      │
+    └───────────────────────────┘
+    ```
+
+4.  **Table Rendering:**
+
+    *   Markdown tables will be converted into `TableCard` components.
+    *   The table will be rendered as a responsive HTML table using CSS.
+
+    ```
+    ┌───────────────────────────┐
+    │ **Table Title**           │
+    │                           │
+    │ | Header 1 | Header 2 |    │
+    │ | -------- | -------- |    │
+    │ | Data 1   | Data 2   |    │
+    │ | Data 3   | Data 4   |    │
+    │ | Data 5   | Data 6   |    │
+    │ | -------- | -------- |    │
+    │ | Data 7   | Data 8   |    │
+    │ | Data 9   | Data 10  |    │
+    │ | Data 11  | Data 12  |    │
+    │                           │
+    └───────────────────────────┘
+    ```
+
+5.  **Formula Extraction:**
+
+    *   During parsing, all LaTeX formulas will be extracted, along with their title (if present) and surrounding text.
+    *   The extracted data will be stored in a structured format (as you specified), ready for use by the Formula Lab.
+
+6. **Contextual Formula Handling:**
+
+   * Ensure formulas are not floating in text. They must be contained within a `FormulaCard` component with the surrounding text included.
+   * The `surroundingContext` element in the extracted formula data will store a snippet of the surrounding text, so the formula and the explanation remain connected.
+
+**Example Output (Illustrative)**
+
+Let's say you provide the following markdown:
+
+```markdown
+# Introduction
+
+This is an introduction to physics.  We will cover some fundamental concepts.
+
+## Formula
+
+$$F = ma$$
+
+This is Newton's Second Law of Motion.
+
+## Key Concepts
+
+Key concepts include force, mass, and acceleration.
+
+## Table
+
+| Header 1 | Header 2 |
+| -------- | -------- |
+| Data 1   | Data 2   |
+| Data 3   | Data 4   |
+
+## Summary
+
+In summary, physics is fascinating!
+
+```
+
+The output would be something like:
+
+```html
+<div>
+  ┌───────────────────────────┐
+  │ **Introduction**          │
+  │                           │
+  │ This is an introduction to │
+  │ physics.  We will cover   │
+  │ some fundamental concepts. │
+  │                           │
+  └───────────────────────────┘
+
+  ┌───────────────────────────┐
+  │ **Main Formula**          │
+  │                           │
+  │     \\[ F = ma \\]        │
+  │                           │
+  │ [ Explain Formula ]       │
+  │ [ Open Formula Lab ]      │
+  └───────────────────────────┘
+
+  ┌───────────────────────────┐
+  │ **Key Concepts**          │
+  │                           │
+  │ Key concepts include force,│
+  │ mass, and acceleration.  │
+  │                           │
+  └───────────────────────────┘
+
+  ┌───────────────────────────┐
+  │ **Table Title**           │
+  │                           │
+  │ | Header 1 | Header 2 |    │
+  │ | -------- | -------- |    │
+  │ | Data 1   | Data 2   |    │
+  │ | Data 3   | Data 4   |    │
+  │                           │
+  └───────────────────────────┘
+
+  ┌───────────────────────────┐
+  │ **Summary**               │
+  │                           │
+  │ In summary, physics is     │
+  │ fascinating!              │
+  │                           │
+  └───────────────────────────┘
+</div>
+```
+**Technology Stack (Conceptual)**
+
+*   **Python:** For parsing the markdown and generating the UI elements.
+*   **Markdown Parsing Library:**  `markdown` or `mistune`
+*   **KaTeX:**  For rendering LaTeX formulas.
+*   **HTML/CSS/JavaScript:**  For creating the UI structure and styling.
+
+**Next Steps**
+
+1.  **Core Parser Implementation:** I'll start by building the core markdown parser and section detection logic.
+2.  **Component Creation:**  I'll create the `SectionCard`, `FormulaCard`, and `TableCard` components.
+3.  **Formula Extraction:** Implement the formula extraction logic.
+4.  **Testing:** I'll thoroughly test the system with various markdown inputs.
+
+Please provide a sample markdown document so I can begin the implementation process.  I'll update you on my progress and provide code snippets as needed.  Let me know if you have any other specific requirements or modifications.
+
+
+

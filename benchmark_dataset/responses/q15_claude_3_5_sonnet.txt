@@ -1,0 +1,203 @@
+<thinking>
+The user wants an explanation of gun recoil using Newton's third law. I need to render this as structured UI blocks - cards, formula cards, etc. - rather than sequential markdown.
+
+Let me think about the content:
+
+1. Introduction/Quick Definition
+2. Newton's Third Law explanation
+3. Action-Reaction pair
+4. Formula (momentum conservation, force equation)
+5. Key Concepts
+6. Real-world applications/notes
+
+Let me structure this as proper UI components using JSX/React-like syntax or HTML-like structure that can be rendered as cards.
+
+Wait, I need to think about what format to actually output. The system says to convert content into structured UI blocks. Since I'm an AI in a chat interface, I should output this in a way that the frontend can parse and render as cards.
+
+Looking at the instructions more carefully - this seems to be about how I should structure my response for a rendering system. The frontend will parse my output and render it as cards.
+
+Let me output structured content that represents these UI blocks. I'll use a consistent format that the frontend can parse.
+
+Actually, looking at this more carefully, I think the system wants me to output in a specific format that their rendering system can parse. Let me think about what format would work...
+
+The instructions say "Convert content into structured UI blocks" and show card diagrams. This suggests I should output JSON or some structured format, or perhaps use special markdown-like syntax for cards.
+
+Let me output a structured response that represents the card system. I'll use a format like:
+
+```
+[SECTION: type="definition" title="..."]
+content
+[/SECTION]
+
+[FORMULA: title="..." variables="..."]
+$$formula$$
+[/FORMULA]
+```
+
+Or maybe I should just output clean structured content that their parser can handle. Let me look at what makes sense for a React frontend.
+
+I think the best approach is to output structured JSON that represents the UI blocks, which the frontend can then render as React components.
+
+Let me create a comprehensive response about gun recoil and Newton's third law, structured as UI blocks.
+
+Actually, I think I should output this as a specific structured format. Let me use a JSON-like structure or a special syntax that the frontend rendering system can parse.
+
+Looking at the instructions again - "Convert content into structured UI blocks" with section detection and formula cards. This seems like the frontend has a parser that will take my output and render it as cards.
+
+Let me output in a format that makes sense for parsing - perhaps using special delimiters or a structured format.
+
+I'll go with outputting structured content blocks that the system can parse. Let me use a format like:
+
+BLOCK_TYPE | title | content
+
+Or maybe the system just wants me to output HTML/JSX directly?
+
+I think the most practical approach given this is a chat interface is to output structured content using a consistent syntax that their parser can handle. Let me use something like:
+
+```json
+{
+  "blocks": [...]
+}
+```
+
+Actually, I'll just output the content in a way that's clearly structured for their rendering system. Let me use a clear block format.
+
+Hmm, I think I'm overthinking this. The system prompt is telling me how to structure my responses, and the frontend will parse whatever format I output. Let me just output a well-structured response using clear section markers and formula cards.
+
+Let me output something like this (structured blocks):
+
+```
+[INTRO_CARD]
+title: "Gun Recoil & Newton's Third Law"
+subtitle: "Action and Reaction in Motion"
+[/INTRO_CARD]
+
+[DEFINITION_CARD]
+title: "Newton's Third Law"
+content: "For every action, there is an equal and opposite reaction."
+[/DEFINITION_CARD]
+
+[CONCEPT_CARD]
+...
+```
+
+I think the frontend is expecting a specific format. Without knowing exactly what format the parser expects, let me output clean structured content that clearly delineates sections, and use the formula card format described.
+
+Let me just write a well-structured response with clear section markers. The frontend parser should handle it.
+
+Actually, you know what, let me just write this in a format that clearly represents the card structure described in the system prompt. I'll use a consistent delimiter system.
+</thinking>
+
+```json
+{
+  "blocks": [
+    {
+      "type": "hero",
+      "title": "Gun Recoil",
+      "subtitle": "Explained through Newton's Third Law of Motion",
+      "icon": "🔫"
+    },
+    {
+      "type": "definition",
+      "title": "Newton's Third Law",
+      "content": "For every **action force**, there is an equal and **opposite reaction force** — acting on two different objects simultaneously."
+    },
+    {
+      "type": "concept",
+      "title": "What Happens When a Gun Fires?",
+      "items": [
+        {
+          "label": "Action",
+          "description": "The gun exerts a **forward force** on the bullet, pushing it out of the barrel at high speed.",
+          "icon": "➡️"
+        },
+        {
+          "label": "Reaction",
+          "description": "The bullet exerts an **equal and opposite (backward) force** on the gun — causing it to recoil.",
+          "icon": "⬅️"
+        }
+      ]
+    },
+    {
+      "type": "action_reaction_diagram",
+      "title": "Action–Reaction Pair",
+      "left": {
+        "label": "Gun pushes Bullet",
+        "direction": "forward →",
+        "color": "blue"
+      },
+      "right": {
+        "label": "Bullet pushes Gun",
+        "direction": "← backward",
+        "color": "red"
+      },
+      "note": "Same magnitude · Opposite direction · Different objects"
+    },
+    {
+      "type": "formula",
+      "title": "Newton's Third Law — Force Form",
+      "formula": "\\vec{F}_{\\text{gun on bullet}} = -\\vec{F}_{\\text{bullet on gun}}",
+      "variables": [
+        { "symbol": "\\vec{F}_{\\text{gun on bullet}}", "meaning": "Force the gun exerts on the bullet (forward)" },
+        { "symbol": "\\vec{F}_{\\text{bullet on gun}}", "meaning": "Force the bullet exerts on the gun (backward)" },
+        { "symbol": "-", "meaning": "Equal magnitude, opposite direction" }
+      ]
+    },
+    {
+      "type": "formula",
+      "title": "Law of Conservation of Momentum",
+      "formula": "m_{\\text{bullet}} \\cdot v_{\\text{bullet}} = m_{\\text{gun}} \\cdot v_{\\text{recoil}}",
+      "variables": [
+        { "symbol": "m_{\\text{bullet}}", "meaning": "Mass of the bullet (small)" },
+        { "symbol": "v_{\\text{bullet}}", "meaning": "Velocity of bullet (very large)" },
+        { "symbol": "m_{\\text{gun}}", "meaning": "Mass of the gun (large)" },
+        { "symbol": "v_{\\text{recoil}}", "meaning": "Recoil velocity of gun (small)" }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Comparing Action vs. Reaction",
+      "headers": ["Property", "Bullet", "Gun"],
+      "rows": [
+        ["Direction of Force", "Forward →", "← Backward"],
+        ["Mass", "Very small", "Much larger"],
+        ["Velocity gained", "Very high", "Much lower"],
+        ["Momentum", "m·v (forward)", "M·V (backward)"],
+        ["Net Momentum", "Zero (conserved)", "Zero (conserved)"]
+      ]
+    },
+    {
+      "type": "key_insight",
+      "title": "Why Does the Gun Move Less Than the Bullet?",
+      "content": "Both experience the **same force** for the **same time** — so they gain **equal momentum**. But since the gun is much **heavier**, it moves at a much **lower velocity**.\n\n$$p = mv \\implies v = \\frac{p}{m}$$\n\nLarger mass → smaller velocity."
+    },
+    {
+      "type": "note",
+      "variant": "important",
+      "title": "Common Misconception",
+      "content": "Action and reaction forces are **always on different objects**. They can never cancel each other out — cancellation only happens when two forces act on the **same** object."
+    },
+    {
+      "type": "applications",
+      "title": "Real-World Applications of This Principle",
+      "items": [
+        { "icon": "🚀", "label": "Rocket propulsion — exhaust gases pushed back, rocket moves forward" },
+        { "icon": "🚤", "label": "Jet boats — water pushed backward, boat moves forward" },
+        { "icon": "🎆", "label": "Fireworks launching — gases expelled downward, rocket goes up" },
+        { "icon": "🏊", "label": "Swimming — hands push water back, swimmer moves forward" }
+      ]
+    },
+    {
+      "type": "summary",
+      "title": "Quick Summary",
+      "points": [
+        "Gun fires → exerts forward force on bullet (Action)",
+        "Bullet simultaneously exerts backward force on gun (Reaction)",
+        "Forces are equal in magnitude, opposite in direction",
+        "Gun recoils backward — this is Newton's Third Law in action",
+        "Total momentum of the system remains zero (Conservation of Momentum)"
+      ]
+    }
+  ]
+}
+```

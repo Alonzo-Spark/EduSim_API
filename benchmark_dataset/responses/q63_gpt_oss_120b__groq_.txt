@@ -1,0 +1,190 @@
+┌─────────────────────────────────────────────┐
+│ Introduction                                 │
+│                                             │
+│ In a braking‑track simulation platform, the      │
+│ **`friction_changed`** event signals that the   │
+│ coefficient of friction (μ) between the wheels │
+│ and the track has been altered – for example   │
+│ due to rain, oil, or wear. The runtime overlay   │
+│ must react instantly to keep the simulated       │
+│ vehicle behavior realistic and safe.            │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Definition                                   │
+│                                             │
+│ **Friction‑Changed Event** – a discrete signal │
+│ emitted by the physics engine whenever the     │
+│ surface friction coefficient μ is updated.     │
+│ The payload typically contains:                │
+│   • `new_mu`   – the updated coefficient (unit‑less) │
+│   • `timestamp` – simulation time of the change │
+│   • `track_id` – identifier of the affected track │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Key Concepts                                 │
+│                                             │
+│ • **μ (mu)** – coefficient of friction; 0 ≤ μ ≤ 1 │
+│ • **g** – gravitational acceleration (9.81 m/s²) │
+│ • **v** – vehicle speed at the moment of change │
+│ • **a** – deceleration produced by braking      │
+│ • **d** – stopping distance after the event      │
+│ • **Brake‑Force Modulation** – scaling brake   │
+│   torque proportionally to μ                 │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Formula                                      │
+│                                             │
+│ Main Formula                                 │
+│                                             │
+│   \[ d = \frac{v^{2}}{2\,\mu\,g} \]          │
+│                                             │
+│ [ Explain Formula ]   [ Open Formula Lab ]   │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Formula Explanation                           │
+│                                             │
+│ The stopping distance *d* depends inversely   │
+│ on the friction coefficient μ. When μ drops,   │
+│ the denominator shrinks, making *d* grow –     │
+│ i.e., the vehicle needs more track to stop.    │
+│                                             │
+│ Variables:                                   │
+│   • *v* – speed (m s⁻¹)                       │
+│   • *μ* – friction coefficient (unit‑less)   │
+│   • *g* – 9.81 m s⁻²                          │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Runtime Overlay Response                     │
+│                                             │
+│ 1. **Capture Event**                         │
+│    ```json                                   │
+│    {                                          │
+│      "event": "friction_changed",             │
+│      "payload": {                             │
+│        "track_id": "T-07",                     │
+│        "new_mu": 0.45,                         │
+│        "timestamp": 12.34                     │
+│      }                                        │
+│    }```                                       │
+│                                             │
+│ 2. **Re‑compute Braking Parameters**         │
+│    • Update `brake_gain = base_gain * new_mu`│
+│    • Re‑evaluate stopping distance using the  │
+│      formula above.                           │
+│                                             │
+│ 3. **Refresh UI Overlay**                     │
+│    • Show a gauge “Friction: 0.45”            │
+│    • Plot projected stopping distance curve   │
+│    • Highlight safety margin if *d* exceeds   │
+│      track length.                           │
+│                                             │
+│ 4. **Trigger Safety Actions**                │
+│    • If *d* > safety_threshold → activate    │
+│      emergency brake or warning.             │
+│                                             │
+│ 5. **Log for Post‑Run Analysis**             │
+│    • Store `{timestamp, track_id, new_mu, d}`│
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Sample Code (JavaScript)                     │
+│                                             │
+│ ```js                                         │
+│ function onFrictionChanged(event) {          │
+│   const { new_mu, timestamp, track_id } =    │
+│         event.payload;                       │
+│                                             │
+│   const g = 9.81;                            │
+│   const v = getCurrentSpeed(track_id);       │
+│   const d = (v * v) / (2 * new_mu * g);      │
+│                                             │
+│   updateBrakeGain(track_id, baseGain * new_mu);│
+│   overlay.updateFrictionGauge(new_mu);      │
+│   overlay.plotStoppingDistance(d);           │
+│                                             │
+│   if (d > safetyThreshold) {                 │
+│     triggerEmergencyBrake(track_id);        │
+│   }                                          │
+│                                             │
+│   logEvent({ timestamp, track_id, new_mu, d});│
+│ }                                            │
+│ ```                                         │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Table: Before vs. After Friction Change       │
+│                                             │
+│ ┌─────────────────────┬───────────────┬───────┐ │
+│ │ Parameter           │ Before (μ=0.70)│ After │ │
+│ ├─────────────────────┼───────────────┼───────┤ │
+│ │ μ                   │ 0.70          │ 0.45  │ │
+│ │ Speed v (m s⁻¹)     │ 20            │ 20    │ │
+│ │ Stopping distance d │ 28.9 m        │ 44.9 m│ │
+│ │ Brake gain factor   │ 1.0           │ 0.64  │ │
+│ └─────────────────────┴───────────────┴───────┘ │
+│                                             │
+│ *All values are illustrative.*               │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Advantages                                   │
+│                                             │
+│ • Immediate adaptation keeps the simulation  │
+│   physically plausible.                     │
+│ • Drivers (or AI agents) receive realistic   │
+│   feedback on loss of traction.             │
+│ • Centralized event handling simplifies      │
+│   maintenance and testing.                  │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Disadvantages                                │
+│                                             │
+│ • Sensor noise can trigger spurious updates. │
+│ • Frequent recalculations may affect real‑time│
+│   performance on low‑end hardware.          │
+│ • Requires careful tuning of safety thresholds│
+│   to avoid over‑reacting.                    │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Important Notes                              │
+│                                             │
+│ • Always clamp μ to a realistic range (0.1 – 1.0)│
+│   to avoid division‑by‑zero in the formula. │
+│ • When multiple tracks share a vehicle,      │
+│   aggregate the most restrictive μ.         │
+│ • Log every change – it is invaluable for   │
+│   debugging and post‑simulation analysis.   │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Summary                                      │
+│                                             │
+│ The **`friction_changed`** event is the key   │
+│ hook for dynamically adjusting braking       │
+│ behavior on a track platform. By extracting   │
+│ the new μ, recomputing the stopping distance  │
+│ with \( d = \frac{v^{2}}{2\mu g} \), and updating│
+│ UI gauges and safety logic, the runtime overlay│
+│ maintains realism and safety throughout the   │
+│ simulation.                                 │
+└─────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────┐
+│ Suggested Questions                          │
+│                                             │
+│ 1. How would you modify the response if the   │
+│    vehicle also changes mass during the event?│
+│ 2. What strategies can reduce the impact of  │
+│    noisy μ measurements?                     │
+│ 3. How could you extend the overlay to show   │
+│    real‑time tire temperature alongside μ?   │
+│ 4. In a multi‑vehicle scenario, how do you    │
+│    synchronize friction updates?            │
+└─────────────────────────────────────────────┘

@@ -1,0 +1,252 @@
+Here's how the content will be structured and rendered according to the new guidelines:
+
+**Introduction**
+
+```
+┌───────────────────────────┐
+│ Introduction              │
+│                           │
+│ In this section, we will │
+│ derive the formula for    │
+│ the equivalent resistance │
+│ of resistors connected in │
+│ parallel.                 │
+└───────────────────────────┘
+```
+
+**Definition**
+
+```
+┌───────────────────────────┐
+│ Definition                │
+│                           │
+│ A parallel combination of │
+│ resistors is a circuit    │
+│ configuration where all   │
+│ resistors are connected   │
+│ across the same two nodes.│
+└───────────────────────────┘
+```
+
+**Key Concepts**
+
+```
+┌───────────────────────────┐
+│ Key Concepts              │
+│                           │
+│ 1.  Voltage: The voltage  │
+│     across each resistor  │
+│     in a parallel circuit │
+│     is the same.          │
+│ 2.  Current: The total    │
+│     current is the sum of │
+│     the individual        │
+│     currents through each │
+│     resistor.             │
+└───────────────────────────┘
+```
+
+**Formula**
+
+```
+┌───────────────────────────┐
+│ Main Formula              │
+│                           │
+│    1/R_eq = 1/R_1 + 1/R_2 + ... + 1/R_n     │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+```
+
+**Derivation**
+
+```
+┌───────────────────────────┐
+│ Derivation                │
+│                           │
+│ Let's derive the formula  │
+│ for equivalent resistance │
+│ in a parallel circuit.    │
+└───────────────────────────┘
+```
+
+**Step 1: Define Variables**
+
+```
+┌───────────────────────────┐
+│ Step 1: Define Variables  │
+│                           │
+│ *   `V` = Voltage across  │
+│     the parallel          │
+│     combination           │
+│ *   `I` = Total current   │
+│     through the circuit   │
+│ *   `R_eq` = Equivalent   │
+│     resistance            │
+│ *   `R_1`, `R_2`, ...,    │
+│     `R_n` = Individual    │
+│     resistor values       │
+└───────────────────────────┘
+```
+
+**Step 2: Apply Ohm's Law**
+
+```
+┌───────────────────────────┐
+│ Step 2: Apply Ohm's Law   │
+│                           │
+│ According to Ohm's Law:   │
+│                           │
+│     V = I * R_eq          │
+│                           │
+│ Therefore:                │
+│     I = V / R_eq          │
+└───────────────────────────┘
+```
+
+**Step 3: Current Division**
+
+```
+┌───────────────────────────┐
+│ Step 3: Current Division  │
+│                           │
+│ In a parallel circuit,    │
+│ the total current `I` is  │
+│ the sum of currents      │
+│ through each resistor:    │
+│                           │
+│     I = I_1 + I_2 + ... + I_n │
+└───────────────────────────┘
+```
+
+**Step 4: Apply Ohm's Law to each resistor**
+
+```
+┌───────────────────────────┐
+│ Step 4: Apply Ohm's Law   │
+│ to each resistor        │
+│                           │
+│ Using Ohm's Law for each  │
+│ resistor:                 │
+│                           │
+│     I_1 = V / R_1         │
+│     I_2 = V / R_2         │
+│     ...                   │
+│     I_n = V / R_n         │
+└───────────────────────────┘
+```
+
+**Step 5: Substitute and Simplify**
+
+```
+┌───────────────────────────┐
+│ Step 5: Substitute and   │
+│ Simplify                  │
+│                           │
+│ Substitute the individual │
+│ currents into the total   │
+│ current equation:         │
+│                           │
+│     V / R_eq = V / R_1 + V / R_2 + ... + V / R_n │
+│                           │
+│ Divide both sides by `V`: │
+│                           │
+│     1 / R_eq = 1 / R_1 + 1 / R_2 + ... + 1 / R_n │
+└───────────────────────────┘
+```
+
+**Applications**
+
+```
+┌───────────────────────────┐
+│ Applications              │
+│                           │
+│ Parallel circuits are     │
+│ commonly used in:         │
+│                           │
+│ *   Household electrical  │
+│     wiring (outlets)      │
+│ *   Electronic circuits   │
+│     (e.g., in computers)  │
+└───────────────────────────┘
+```
+
+**Advantages**
+
+```
+┌───────────────────────────┐
+│ Advantages                │
+│                           │
+│ 1.  If one component     │
+│     fails, the others     │
+│     continue to function. │
+│ 2.  Each component        │
+│     receives the full     │
+│     source voltage.       │
+└───────────────────────────┘
+```
+
+**Disadvantages**
+
+```
+┌───────────────────────────┐
+│ Disadvantages             │
+│                           │
+│ 1.  The total current    │
+│     drawn from the source │
+│     increases as more     │
+│     components are added. │
+└───────────────────────────┘
+```
+
+**Important Notes**
+
+```
+┌───────────────────────────┐
+│ Important Notes           │
+│                           │
+│ *   The equivalent        │
+│     resistance in a       │
+│     parallel circuit is   │
+│     always less than the  │
+│     smallest resistance   │
+│     value in the circuit. │
+└───────────────────────────┘
+```
+
+**Summary**
+
+```
+┌───────────────────────────┐
+│ Summary                   │
+│                           │
+│ We derived the formula    │
+│ for equivalent resistance │
+│ in a parallel circuit:    │
+│                           │
+│     1 / R_eq = 1 / R_1 + 1 / R_2 + ... + 1 / R_n │
+│                           │
+│ The key takeaway is the  │
+│ inverse relationship     │
+│ between resistance and    │
+│ current flow.             │
+└───────────────────────────┘
+```
+
+**Suggested Questions**
+
+```
+┌───────────────────────────┐
+│ Suggested Questions       │
+│                           │
+│ 1.  Calculate the         │
+│     equivalent resistance │
+│     of three resistors    │
+│     (10Ω, 20Ω, and 30Ω)   │
+│     in parallel.          │
+│ 2.  Explain why parallel  │
+│     circuits are preferred│
+│     in household wiring.  │
+└───────────────────────────┘
+```

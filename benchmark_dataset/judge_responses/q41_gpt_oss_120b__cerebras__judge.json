@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 41,
+  "question": "Electrostatics: State Coulomb’s law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nCoulomb's Law states that the electrostatic force of attraction or repulsion between two stationary point charges is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance separating them.\n\n---\n\n## Characteristics\n\n* **Action-Reaction Interaction:** The forces exerted by the charges on each other are equal in magnitude and opposite in direction, acting along the straight line connecting them.\n* **Charge Dependency:** Like charges repel each other, whereas opposite charges experience a mutual attraction force.\n\n---\n\n## Formula\n\nThe mathematical equation for the electrostatic force:\n\n$$F = k_e \\frac{|q_1 q_2|}{r^2}$$\n\nIn a vacuum, the proportionality constant ($k_e$) is expressed as:\n\n$$k_e = \\frac{1}{4\\pi\\varepsilon_0} \\approx 8.988 \\times 10^9 \\text{ N}\\cdot\\text{m}^2/\\text{C}^2$$\n\nWhere:\n* $F$ represents the electrostatic force magnitude\n* $q_1, q_2$ represent the magnitudes of the point charges\n* $r$ represents the distance separating the two charges\n* $\\varepsilon_0$ represents the permittivity of free space ($8.854 \\times 10^{-12} \\text{ C}^2/\\text{N}\\cdot\\text{m}^2$)\n\n---\n\n## Summary\n\nCoulomb's Law describes the electrostatic force between charges, showing that it increases with charge magnitude but decreases according to an inverse-square relationship with distance.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│ Introduction                           │\n│                                       │\n│ Electrostatics studies the behavior  │\n│ of electric charges at rest. Central   │\n│ to this field is Coulomb’s law, which │\n│ describes the force between two point │\n│ charges.                               │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Definition                             │\n│                                       │\n│ Coulomb’s law states that the magnitude│\n│ of the electrostatic force ( F ) between│\n│ two point charges is directly proportional│\n│ to the product of the charges and invers│\n│ emently proportional to the square of   │\n│ the distance separating them.           │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Main Formula                           │\n│                                       │\n│ $$\\displaystyle F = k\\,\\frac{q_1 q_2}{r^{2}}$$ │\n│                                       │\n│ [ Explain Formula ]                    │\n│ [ Open Formula Lab ]                   │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Formula Explanation                     │\n│                                       │\n│ • **F** – Electrostatic force (newtons, N)│\n│ • **k** – Coulomb constant (≈ 8.9875 × 10⁹ N·m²·C⁻²)│\n│ • **q₁, q₂** – Magnitudes of the two point │\n│   charges (coulombs, C)               │\n│ • **r** – Distance between the charges (meters, m)│\n│                                       │\n│ The force is attractive if the charges │\n│ have opposite signs and repulsive if   │\n│ they have the same sign.                │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Applications                           │\n│                                       │\n│ • Predicting forces in atomic and     │\n│   molecular structures                │\n│ • Designing electrostatic equipment   │\n│   (e.g., capacitors, spray printers)  │\n│ • Understanding phenomena such as     │\n│   lightning and static cling          │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Advantages                             │\n│                                       │\n│ • Simple, closed‑form expression       │\n│ • Works for point charges at any      │\n│   separation (in vacuum)              │\n│ • Foundation for more complex electro│\n│   static models                        │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Limitations                            │\n│                                       │\n│ • Assumes point charges (real charges │\n│   have finite size)                   │\n│ • Valid only in vacuum; in media the  │\n│   constant **k** changes with permitt│\n│   ivec permittivity ε_r                │\n│ • Does not account for relativistic   │\n│   effects at very high speeds         │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Summary                                │\n│                                       │\n│ Coulomb’s law quantifies the electro- │\n│ static force between two point charges│\n│ as **F = k q₁q₂ / r²**, linking charge │\n│ magnitude and separation. It underpins│\n│ much of electrostatics, from atomic to │\n│ macroscopic scales.                    │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Suggested Questions                    │\n│                                       │\n│ 1. How does the force change if the     │\n│    distance between charges is halved? │\n│ 2. What happens to the force if one    │\n│    charge is doubled?                  │\n│ 3. How is Coulomb’s law modified in a  │\n│    dielectric medium?                 │\n│ 4. Compare Coulomb’s law with Newton’s │\n│    law of gravitation.                │\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of Coulomb's Law, including its definition, formula, and applications. The response is well-structured and easy to follow, with clear explanations and examples. However, there are some minor issues with formatting and readability. The use of tables and boxes to separate sections is not necessary and can make the text harder to read. Additionally, some of the sentences are wordy and could be simplified for better clarity. Overall, the response is accurate, well-organized, and effective in teaching the concept of Coulomb's Law.",
+  "candidate_token_usage": {
+    "promptTokens": 428,
+    "completionTokens": 1223,
+    "totalTokens": 1651
+  },
+  "candidate_latency_ms": 1073,
+  "candidate_cost_usd": 0.000798,
+  "judge_token_usage": {
+    "promptTokens": 1673,
+    "completionTokens": 172,
+    "totalTokens": 1845
+  },
+  "judge_latency_ms": 6147,
+  "judge_cost_usd": 0.0014166,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:32:56.930Z"
+}

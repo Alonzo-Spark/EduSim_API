@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 49,
+  "question": "A current of 2 A flows through a resistor of 10 Ω. Calculate voltage.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Ohm's Law Problem\n\n### Problem\nA steady electric current of $2 \\text{ A}$ flows through a resistor with a value of $10 \\ \\Omega$. Calculate the voltage drop across the resistor.\n\n### Given\n* Current tracking ($I$) = $2 \\text{ A}$\n* Resistance value ($R$) = $10 \\ \\Omega$\n\n### Formula\n$$V = IR$$\n\n### Substitution\n$$V = 2 \\times 10$$\n\n### Calculation\n$$V = 20 \\text{ V}$$\n\n### Final Answer\n**Potential Difference ($V$) = $20 \\text{ V}$**\n\n### Interpretation\nThis means that a potential difference of $20 \\text{ Volts}$ must be maintained across the ends of the $10 \\ \\Omega$ resistor to sustain a continuous current flow of $2 \\text{ Amperes}$.",
+  "candidate_response": "Here's the breakdown of the information and the rendering as requested:\n\n**Introduction**\n\nThis section will introduce the concept of voltage, current, and resistance, and how they relate to each other.\n\n**Definition**\n\nVoltage is the electric potential difference between two points. It is the driving force that causes electric current to flow. Current is the rate of flow of electric charge. Resistance is the opposition to the flow of electric current.\n\n**Key Concepts**\n\n*   **Ohm's Law:** The fundamental relationship between voltage, current, and resistance.\n*   **Units:**\n    *   Voltage (V) is measured in Volts (V).\n    *   Current (I) is measured in Amperes (A).\n    *   Resistance (R) is measured in Ohms (Ω).\n\n**Formula**\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     V = I * R             │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n**Applications**\n\nUnderstanding Ohm's Law is crucial for:\n\n*   Circuit analysis and design\n*   Calculating power consumption\n*   Troubleshooting electrical problems\n\n**Advantages**\n\n*   Simple and fundamental\n*   Applicable to a wide range of electrical circuits\n\n**Disadvantages**\n\n*   Doesn't apply to all circuit elements (e.g., semiconductors)\n\n**Important Notes**\n\n*   Make sure units are consistent before performing calculations.\n*   Ohm's Law is a linear relationship.\n\n**Summary**\n\nThis problem uses Ohm's Law to calculate voltage.\n\n**Suggested Questions**\n\n*   What would happen to the voltage if the current doubled?\n*   What would happen to the voltage if the resistance doubled?\n\n---\n\nNow, let's solve the problem:\n\n**Problem**\n\nA current of 2 A flows through a resistor of 10 Ω. Calculate the voltage.\n\n**Solution**\n\nWe will use Ohm's Law: V = I * R\n\n*   I (Current) = 2 A\n*   R (Resistance) = 10 Ω\n\n**Calculation**\n\nV = 2 A \\* 10 Ω = 20 V\n\n**Answer**\n\nThe voltage across the resistor is 20 V.\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is largely accurate and well-structured, effectively conveying the concept of Ohm's Law and its application to the given problem. The use of clear headings, definitions, and step-by-step calculations enhances readability and understanding. However, the inclusion of unnecessary sections such as 'Introduction', 'Advantages', and 'Disadvantages' detracts from the focus on the specific problem at hand. Additionally, the 'Suggested Questions' section, while potentially useful for learning, does not directly contribute to solving the given problem. To improve, the response could be more concise and directly focused on the problem, with clearer connections between the concepts introduced and the final calculation. Furthermore, the formatting, while generally good, could benefit from a more consistent use of mathematical notation and clearer differentiation between explanatory text and calculated values.",
+  "candidate_token_usage": {
+    "promptTokens": 389,
+    "completionTokens": 501,
+    "totalTokens": 890
+  },
+  "candidate_latency_ms": 3432,
+  "candidate_cost_usd": 0.00152775,
+  "judge_token_usage": {
+    "promptTokens": 1073,
+    "completionTokens": 222,
+    "totalTokens": 1295
+  },
+  "judge_latency_ms": 2043,
+  "judge_cost_usd": 0.0011765999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:51:35.397Z"
+}

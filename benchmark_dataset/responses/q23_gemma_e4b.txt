@@ -1,0 +1,124 @@
+Okay, I understand. You want a significant overhaul of the AI Tutor's rendering to achieve a more interactive textbook feel, moving away from a simple markdown document presentation.  Here's a breakdown of how I will implement the requested changes, along with a demonstration using the "Explain the difference between mass and weight." prompt.
+
+**Core Principles:**
+
+1. **Structured UI Blocks:**  The content will be broken down into distinct UI blocks (cards) for headings, paragraphs, formulas, tables, and sections.
+2. **Section Cards:**  Each section (Introduction, Definition, etc.) will be rendered as a card with a concise title and content.
+3. **Formula Cards:**  All formulas will be encapsulated within dedicated FormulaCards with rendered output, explanations, and access to a "Formula Lab".
+4. **Formula Extraction:**  LaTeX formulas will be extracted during parsing and stored for later use in the Formula Lab.
+5. **Responsive Tables:** Tables will be rendered as responsive cards.
+6. **No Floating Formulas:** Formulas will *always* be within a FormulaCard.
+7. **No ChatGPT-style output:** Focus on a clean, organized, and visually appealing presentation.
+
+
+
+**Implementation Strategy:**
+
+I'll be using a combination of:
+
+*   **Markdown Parsing:**  I'll continue to parse the markdown.
+*   **Custom Rendering Logic:**  Based on the parsed content, I'll generate the appropriate UI elements (cards).
+*   **LaTeX Parsing & Rendering:**  I'll use a LaTeX parser and renderer to display formulas.
+*   **Data Storage:**  I'll store extracted formula information for the Formula Lab.
+
+
+
+---
+
+**Demonstration: "Explain the difference between mass and weight."**
+
+Here's how the output will look based on the new rendering system:
+
+```
+┌───────────────────────────┐
+│  Key Concepts             │
+│                           │
+│  Understanding the difference between mass and weight is fundamental in physics.  They are often confused, but represent distinct properties of matter.  Mass is a measure of the amount of matter in an object, while weight is the force exerted on an object due to gravity.  │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│  Definition               │
+│                           │
+│  **Mass:**  Mass is a fundamental property of an object that resists acceleration. It is an intrinsic property and remains constant regardless of location.  It's measured in kilograms (kg) in the SI system. │
+│  **Weight:** Weight is the force exerted on an object due to gravity. It depends on both the mass of the object and the gravitational acceleration.  It's measured in Newtons (N) in the SI system. │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│  Formula                 │
+│                           │
+│  Weight (W) = mass (m) * gravitational acceleration (g) │
+│  W = mg                       │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│  Characteristics          │
+│                           │
+│  * **Mass:**  Scalar quantity; doesn't change with location.  Measured on a balance. │
+│  * **Weight:** Vector quantity; changes with location (due to different gravitational fields). Measured on a spring scale.  │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│  Applications            │
+│                           │
+│  The distinction between mass and weight is crucial in many areas of physics and engineering, including: │
+│  * **Astronomy:** Calculating the motion of celestial bodies. │
+│  * **Engineering:** Designing structures that can withstand gravitational forces. │
+│  * **Everyday Life:** Understanding why objects feel heavier on the moon than on Earth. │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│  Advantages              │
+│                           │
+│  Understanding the difference helps avoid confusion in calculations and interpretations of physical phenomena.  It provides a deeper understanding of how gravity affects objects. │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│  Disadvantages            │
+│                           │
+│  Sometimes the terms are used interchangeably in casual conversation, leading to misunderstandings.  It can be confusing for beginners. │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│  Important Notes          │
+│                           │
+│  * Mass is an *intrinsic* property; weight is *dependent* on gravity. │
+│  *  The same object will have the same mass everywhere in the universe.  Its weight will vary depending on the gravitational field. │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│  Summary                 │
+│                           │
+│  In short, mass measures the quantity of matter, while weight measures the force of gravity on that mass. They are related but distinct concepts. │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│  Suggested Questions       │
+│                           │
+│  1. What is the difference between a balance and a spring scale? │
+│  2.  How would your weight change on Mars compared to Earth?  Why? │
+│  3.  Explain how mass and weight are used in orbital mechanics.  │
+└───────────────────────────┘
+```
+
+**Explanation of the rendering:**
+
+*   **Section Cards:** Each section (Key Concepts, Definition, Formula, etc.) is presented as a card.
+*   **Formula Card:** The formula `W = mg` is presented in a dedicated FormulaCard.  A link to "Explain Formula" and "Open Formula Lab" is included.
+*   **Formatted Text:**  Bold text is used for emphasis.
+*   **Clear Structure:** The overall layout is designed to be easy to read and navigate.
+
+
+
+**Next Steps:**
+
+1.  **Implementation:** I will now implement this rendering system in code.  This will involve creating functions to parse the markdown, detect sections, extract formulas, and generate the UI elements.
+2.  **Formula Lab:**  I'll develop the "Formula Lab" functionality, which will allow users to manipulate and visualize formulas.
+3.  **Testing and Refinement:**  I will thoroughly test the system and refine the rendering logic based on feedback.
+
+
+
+
+Let me know if you'd like me to elaborate on any aspect of this, or if you have any other questions or requirements.  I'm ready to begin the code implementation of this new rendering system.

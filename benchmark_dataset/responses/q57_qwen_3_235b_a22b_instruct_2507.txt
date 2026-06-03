@@ -1,0 +1,106 @@
+┌───────────────────────────┐
+│ Interactive Physics Lab   │
+│ Forced Harmonic Oscillator│
+└───────────────────────────┘
+
+### 🔄 System Setup
+
+A **forced harmonic oscillator** consists of:
+- A mass on a spring (natural frequency $ \omega_0 $)
+- A damping force (friction/resistance)
+- An external driving force with adjustable frequency $ \omega $
+
+The equation of motion is:
+
+$$
+m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = F_0 \cos(\omega t)
+$$
+
+---
+
+┌───────────────────────────┐
+│ Key Concept               │
+│                           │
+│ As driven frequency       │
+│ increases, the system     │
+│ responds with changing    │
+│ amplitude and phase.      │
+└───────────────────────────┘
+
+---
+
+### 👁️ Visual Effect of Increasing Driven Frequency
+
+Drag the slider below in your mind (or imagine a live simulation):
+
+#### 🟦 Low Driven Frequency ($ \omega \ll \omega_0 $)
+- The driving force changes **very slowly**
+- The mass moves **in phase** with the driver
+- **Amplitude is moderate**, follows static response
+- Motion looks smooth and synchronized
+
+> 🎯 *Visual:* Mass gently rocks back and forth, keeping perfect time with the slow push.
+
+---
+
+#### 🟨 Near Resonance ($ \omega \approx \omega_0 $)
+- Driven frequency approaches natural frequency
+- **Amplitude peaks dramatically**
+- System absorbs maximum energy
+- **Phase lag** of about $ 90^\circ $ develops
+
+> ⚠️ *Visual:* Oscillations grow larger and larger—possibly violent if damping is low. Like pushing a swing at just the right time.
+
+---
+
+#### 🟥 High Driven Frequency ($ \omega \gg \omega_0 $)
+- Driver oscillates much faster than system can respond
+- **Amplitude drops sharply**
+- Mass barely moves—“can’t keep up”
+- **Phase opposition**: mass moves *opposite* to the driver
+
+> 🎯 *Visual:* Rapid shaking, but the mass just quivers slightly, lagging behind by nearly half a cycle.
+
+---
+
+┌───────────────────────────┐
+│ Formula Card              │
+│                           │
+│ $$                        │
+│ x(t) = A \cos(\omega t -  │
+│ \phi)                     │
+│ $$                        │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+Where:
+- $ A = \frac{F_0/m}{\sqrt{(\omega_0^2 - \omega^2)^2 + (b\omega/m)^2}} $ → amplitude depends on $ \omega $
+- $ \phi $ = phase difference between driver and response
+
+---
+
+┌───────────────────────────┐
+│ Resonance Behavior Table  │
+└───────────────────────────┘
+
+| Driven Freq $ \omega $ | Amplitude | Phase Lag | Visual Response         |
+|------------------------|-----------|-----------|--------------------------|
+| $ \ll \omega_0 $       | Moderate  | ~0°       | Smooth, in-step motion   |
+| $ \approx \omega_0 $   | Maximum   | ~90°      | Large, energetic swings  |
+| $ \gg \omega_0 $       | Small     | ~180°     | Weak, out-of-sync jitter |
+
+---
+
+💡 **Note:** Damping controls how sharp the resonance peak is. Lower damping → taller, narrower peak.
+
+---
+
+### 🧠 Suggested Questions for Exploration
+- What happens to the resonance peak when damping increases?
+- Why does the phase shift from 0° to 180° as frequency increases?
+- How would this behavior appear in a car's suspension system?
+
+Ready to simulate?  
+➡️ *Adjust $ \omega $ and watch amplitude peak at resonance.*

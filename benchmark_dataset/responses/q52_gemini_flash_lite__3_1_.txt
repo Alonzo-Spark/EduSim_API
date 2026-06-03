@@ -1,0 +1,317 @@
+Here's an interactive explanation of how air resistance affects a projectile's trajectory, designed to look like an interactive textbook:
+
+```html
+<div class="interactive-textbook">
+
+  <!-- Introduction Card -->
+  <div class="card">
+    <div class="card-header">
+      Introduction: Projectile Motion with Air Resistance
+    </div>
+    <div class="card-body">
+      <p>Projectile motion describes the path of an object launched into the air, subject to gravity.  However, in many simplified models, we ignore a critical factor: air resistance. Let's explore how air resistance changes the projectile's flight.</p>
+    </div>
+  </div>
+
+  <!-- Key Concepts Card -->
+  <div class="card">
+    <div class="card-header">
+      Key Concepts: Air Resistance
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><b>Drag Force:</b> Air resistance, also known as drag, is a force that opposes the motion of an object through the air.</li>
+        <li><b>Factors Affecting Drag:</b>  The magnitude of the drag force depends on several factors: the object's shape, size, velocity, and the density of the air.</li>
+        <li><b>Direction:</b>  The drag force always acts in the opposite direction to the object's velocity.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Formula Card (Simplified Drag Force) -->
+  <div class="formula-card">
+    <div class="card-header">
+      Main Formula: Simplified Drag Force
+    </div>
+    <div class="card-body">
+      <p>A simplified model for drag force is:</p>
+      <div class="formula-display">
+        $$
+        F_d = \frac{1}{2} \rho v^2 C_d A
+        $$
+      </div>
+      <div class="formula-explanation">
+        <p>Where:</p>
+        <ul>
+          <li>\(F_d\) = Drag Force (Newtons)</li>
+          <li>\(\rho\) = Air density (kg/m³)</li>
+          <li>\(v\) = Velocity of the object (m/s)</li>
+          <li>\(C_d\) = Drag coefficient (dimensionless, depends on the object's shape)</li>
+          <li>\(A\) = Cross-sectional area of the object (m²)</li>
+        </ul>
+      </div>
+      <div class="formula-actions">
+        <button class="btn btn-primary">Explain Formula</button>
+        <!--  <button class="btn btn-secondary">Open Formula Lab (Coming Soon)</button> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Characteristics Card -->
+  <div class="card">
+    <div class="card-header">
+      Characteristics: The Impact of Air Resistance
+    </div>
+    <div class="card-body">
+      <p>Air resistance significantly alters a projectile's trajectory, compared to the ideal, air-free scenario.</p>
+      <ul>
+        <li><b>Reduced Range:</b> The projectile travels a shorter horizontal distance.</li>
+        <li><b>Asymmetric Trajectory:</b> The path is no longer perfectly symmetrical. The descent is steeper than the ascent.</li>
+        <li><b>Lower Maximum Height:</b> The projectile reaches a lower peak altitude.</li>
+        <li><b>Velocity Reduction:</b> The projectile's speed decreases throughout the flight.</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Visual Comparison Card (Conceptual) -->
+  <div class="card">
+    <div class="card-header">
+      Visual Comparison: Without vs. With Air Resistance
+    </div>
+    <div class="card-body">
+      <p>Imagine two projectiles launched with the same initial conditions:</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Trajectory_comparison.svg/1200px-Trajectory_comparison.svg.png" alt="Projectile Trajectory Comparison" style="max-width: 100%;">
+      <p>The blue curve represents the ideal trajectory (no air resistance), while the red curve shows the trajectory with air resistance. Notice the differences in range and height.</p>
+    </div>
+  </div>
+
+
+    <!-- Table Card -->
+    <div class="card">
+        <div class="card-header">
+            Impact: Key Differences
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>No Air Resistance (Ideal)</th>
+                            <th>With Air Resistance (Real)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Trajectory Shape</td>
+                            <td>Symmetrical Parabola</td>
+                            <td>Asymmetrical Curve</td>
+                        </tr>
+                        <tr>
+                            <td>Horizontal Range</td>
+                            <td>Maximum possible</td>
+                            <td>Reduced</td>
+                        </tr>
+                        <tr>
+                            <td>Maximum Height</td>
+                            <td>Higher</td>
+                            <td>Lower</td>
+                        </tr>
+                        <tr>
+                            <td>Velocity</td>
+                            <td>Constant horizontal velocity, decreasing vertical velocity (due to gravity)</td>
+                            <td>Horizontal and vertical velocity continuously decrease</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+  <!-- Important Notes Card -->
+  <div class="card">
+    <div class="card-header">
+      Important Notes
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>The effects of air resistance are more pronounced at higher speeds and for objects with larger surface areas and/or irregular shapes.</li>
+        <li>For slow-moving, dense objects (like a golf ball), air resistance may be less significant.</li>
+        <li>Accurate modeling of air resistance can be complex, often requiring numerical methods to solve the equations of motion.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Summary Card -->
+  <div class="card">
+    <div class="card-header">
+      Summary
+    </div>
+    <div class="card-body">
+      <p>Air resistance significantly alters projectile motion. It reduces range and maximum height, makes the trajectory asymmetrical, and continuously slows the projectile down. Understanding air resistance is crucial for realistic modeling of projectile motion in many real-world scenarios.</p>
+    </div>
+  </div>
+
+  <!-- Suggested Questions Card -->
+  <div class="card">
+    <div class="card-header">
+      Suggested Questions
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>How does the shape of an object affect its drag coefficient?</li>
+        <li>Why is it important to consider air resistance in sports like baseball or golf?</li>
+        <li>Can you describe a real-world example where air resistance is a dominant factor in projectile motion?</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<style>
+/* Basic Card Styling */
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden; /* Ensures content stays within the card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+/* Formula Card Styling */
+.formula-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formula-display {
+  padding: 15px;
+  text-align: center;
+  font-size: 1.2em; /* Adjust for readability */
+}
+
+.formula-explanation {
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+.formula-actions {
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Responsive Table Styling */
+.table-responsive {
+    overflow-x: auto; /* Horizontal scroll for small screens */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse; /* Optional: Clean up table borders */
+}
+
+.table th, .table td {
+    padding: 8px;
+    border: 1px solid #dee2e6; /* Bootstrap's default border color */
+    text-align: left;
+}
+
+.table th {
+    background-color: #f2f2f2; /* Optional: Header background color */
+    font-weight: bold;
+}
+
+/* Overall layout */
+.interactive-textbook {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 10px;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-5+3K8FzG9Wd5w/w+J5j5f5bK5v5b5e5X5x5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X5X
+```
+
+**Explanation of the Code:**
+
+*   **`div class="interactive-textbook"`:** This is the main container for the entire textbook layout. It's used to apply overall styling.
+*   **`div class="card"`:**  Represents a single card or section of the content (e.g., Introduction, Formula, Summary).
+*   **`div class="card-header"`:** The header of the card (e.g., "Introduction", "Main Formula").
+*   **`div class="card-body"`:** The main content area of the card.
+*   **`<p>`:** Paragraphs of text.
+*   **`<ul>` and `<li>`:**  For bulleted lists.
+*   **`div class="formula-card"`:** A specialized card for displaying formulas.  This is key to the new rendering system.
+*   **`div class="formula-display"`:**  Where the KaTeX rendered formula will go.  Note the use of `$$...$$` to indicate a display formula (separate line).
+*   **`div class="formula-explanation"`:**  Provides an explanation of the formula's components.
+*   **`button`:**  An interactive button (e.g., "Explain Formula").
+*   **`table`:** Basic HTML table (with `table-responsive` class for responsiveness).
+*   **`<img>`:** Shows an image (for visual comparison).  Replace the `src` with a suitable image URL.
+*   **`<style>`:**  CSS styling to achieve the card layout, button styles, and responsive table.  This includes:
+    *   Card borders, padding, and shadows.
+    *   Formula card-specific styling.
+    *   Button styling.
+    *   Responsive table styling.
+*   **`<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>` &  `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">`:**  These lines *include* the KaTeX library for rendering LaTeX formulas.  **Crucially, you'll need to write JavaScript to use KaTeX to actually render the formulas within the `formula-display` divs.**  I've provided the HTML structure, but the actual LaTeX rendering is missing.
+
+**To make this fully functional, you need to add JavaScript to do the following:**
+
+1.  **Find all elements with the class `formula-display`.**
+2.  **For each of those elements, find the content within the `$$...$$` tags.**
+3.  **Use KaTeX to render that LaTeX into the `formula-display` element.**  You'll likely use `katex.render()` (see KaTeX documentation).
+
+**Example JavaScript (to be added within `<script>` tags, preferably at the end of the `<body>`):**
+
+```javascript
+document.addEventListener('DOMContentLoaded', function() {
+  const formulaDisplays = document.querySelectorAll('.formula-display');
+
+  formulaDisplays.forEach(display => {
+    const latexString = display.textContent.trim(); // Get the LaTeX string
+    try {
+      katex.render(latexString, display, {
+        throwOnError: false  // Prevents errors from stopping the rendering, useful for testing
+      });
+    } catch (e) {
+      console.error("KaTeX rendering error:", e);
+      display.textContent = "Error rendering formula."; // Display an error message
+    }
+  });
+});
+```
+
+**How This Code Addresses the Requirements:**
+
+*   **Structured UI Blocks:** The code uses `div

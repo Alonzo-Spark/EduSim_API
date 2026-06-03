@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 30,
+  "question": "Explain Bernoulli’s theorem and its applications.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nBernoulli's Theorem states that for an ideal, incompressible fluid undergoing steady, non-viscous flow, the total mechanical energy—comprising pressure energy, kinetic energy, and potential energy—remains constant along any streamline.\n\n---\n\n## Formula\n\nThe conservation expression along a fluid streamline:\n\n$$P + \\frac{1}{2}\\rho v^2 + \\rho g h = \\text{Constant}$$\n\nWhere:\n* $P$ represents the static fluid pressure\n* $\\rho$ represents the constant mass density of the fluid\n* $v$ represents the local flow velocity\n* $g$ represents acceleration due to gravity\n* $h$ represents the elevation height relative to a reference plane\n\n---\n\n## Applications\n\n* **Aerodynamic Lift:** Airplane wings are shaped so that air travels faster over the curved top surface, creating a lower pressure zone that generates upward lift.\n* **Venturi Tube Meters:** Measuring fluid flow rates through pipelines by tracking the pressure drop that occurs when the flow speeds up through a narrowed throat section.\n* **Atomizers and Paint Sprayers:** Passing a fast stream of air over a small draw tube lowers the local pressure, drawing liquid up to be atomized into a fine spray.\n\n---\n\n## Summary\n\nBernoulli's Theorem shows that as a fluid's velocity increases, its static pressure drops simultaneously, a principle widely used in aerodynamics and fluid flow systems.",
+  "candidate_response": "Here's the structured explanation of Bernoulli's Theorem and its applications:\n\n```jsx\n<SectionContainer>\n  <QuickDefinition title=\"Bernoulli's Theorem\">\n    In fluid dynamics, Bernoulli's theorem states that for an incompressible, non-viscous fluid in steady flow, the total mechanical energy (pressure energy + kinetic energy + potential energy) remains constant along a streamline.\n  </QuickDefinition>\n\n  <FormulaCard\n    title=\"Bernoulli's Equation\"\n    formula=\"P + \\frac{1}{2}\\rho v^2 + \\rho gh = \\text{constant}\"\n    variables={[\n      {symbol: 'P', meaning: 'Fluid pressure'},\n      {symbol: '\\\\rho', meaning: 'Fluid density'},\n      {symbol: 'v', meaning: 'Flow velocity'},\n      {symbol: 'g', meaning: 'Gravitational acceleration'},\n      {symbol: 'h', meaning: 'Height above reference point'}\n    ]}\n  />\n\n  <KeyConcepts>\n    <ConceptItem title=\"Energy Conservation\">\n      The theorem is a manifestation of energy conservation principle for flowing fluids\n    </ConceptItem>\n    \n    <ConceptItem title=\"Inverse Relationship\">\n      Pressure and velocity are inversely related - faster flow means lower pressure\n    </ConceptItem>\n\n    <ConceptItem title=\"Streamline Restriction\">\n      Applies only along a single streamline in steady (time-invariant) flow\n    </ConceptItem>\n  </KeyConcepts>\n\n  <ApplicationSection>\n    <ApplicationCard title=\"Aerodynamic Lift\">\n      <ul>\n        <li>Airplane wing design (airfoil shape creates pressure difference)</li>\n        <li>Curve ball dynamics in sports</li>\n      </ul>\n    </ApplicationCard>\n\n    <ApplicationCard title=\"Fluid Measurement\">\n      <ul>\n        <li>Venturi meters for flow rate measurement</li>\n        <li>Pitot tubes in aircraft speed indicators</li>\n      </ul>\n    </ApplicationCard>\n\n    <ApplicationCard title=\"Everyday Devices\">\n      <ul>\n        <li>Spray bottles and atomizers</li>\n        <li>Carburetors in engines</li>\n        <li>Chimney ventilation systems</li>\n      </ul>\n    </ApplicationCard>\n  </ApplicationSection>\n\n  <LimitationsCard>\n    <LimitationItem title=\"Real Fluids\">\n      Assumes zero viscosity - real fluids have some energy loss\n    </LimitationItem>\n    \n    <LimitationItem title=\"Compressibility\">\n      Only strictly true for incompressible fluids\n    </LimitationItem>\n\n    <LimitationItem title=\"Turbulence\">\n      Does not account for turbulent flow conditions\n    </LimitationItem>\n  </LimitationsCard>\n\n  <InteractiveLab type=\"BernoulliSimulator\">\n    <LabFeature title=\"Pressure-Velocity Tradeoff\">\n      Adjust pipe diameter and observe pressure changes\n    </LabFeature>\n    \n    <LabFeature title=\"Lift Visualization\">\n      Simulate airflow over different wing profiles\n    </LabFeature>\n  </InteractiveLab>\n</SectionContainer>\n```\n\nThis structured presentation features:\n- Clear visual separation of concepts\n- Interactive formula breakdown\n- Practical application examples\n- Limitations disclosure\n- Virtual lab integration\n- Would you like to explore any specific application in more detail?\n- Should I generate practice problems related to Bernoulli's equation?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of Bernoulli's Theorem, including its definition, formula, and applications. The structured presentation is clear, well-organized, and easy to follow. The inclusion of interactive elements, such as the formula breakdown and virtual lab, enhances the educational value of the response. However, to further improve the response, it would be beneficial to include more detailed explanations of the limitations of Bernoulli's Theorem, such as the assumptions of incompressibility and non-viscosity, and how these limitations affect its applicability in real-world scenarios. Additionally, providing more examples of everyday devices that utilize Bernoulli's Theorem, such as wind turbines or hydroelectric power plants, could help to illustrate its practical significance.",
+  "candidate_token_usage": {
+    "promptTokens": 360,
+    "completionTokens": 1278,
+    "totalTokens": 1638
+  },
+  "candidate_latency_ms": 16281,
+  "candidate_cost_usd": 0.00299682,
+  "judge_token_usage": {
+    "promptTokens": 1406,
+    "completionTokens": 212,
+    "totalTokens": 1618
+  },
+  "judge_latency_ms": 10921,
+  "judge_cost_usd": 0.0013524000000000001,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:57:54.659Z"
+}

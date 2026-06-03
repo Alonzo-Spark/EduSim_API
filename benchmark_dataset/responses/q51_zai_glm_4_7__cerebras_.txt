@@ -1,0 +1,606 @@
+Here is a complete, self-contained HTML page that simulates a simple pendulum and explains the physics using the requested "Interactive Textbook" design system.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Pendulum Lab: Mass vs. Period</title>
+    
+    <!-- KaTeX for Formula Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #64748b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* Layout Grid */
+        .layout-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 24px;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-header::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Simulation Area */
+        .simulation-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .simulation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        canvas {
+            background: #f1f5f9;
+            border-radius: 8px;
+            width: 100%;
+            height: 400px;
+            cursor: crosshair;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: #eff6ff;
+        }
+
+        /* Formula Card */
+        .formula-container {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        /* Data Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .badge-constant { background: #dcfce7; color: #166534; }
+        .badge-variable { background: #dbeafe; color: #1e40af; }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout-container">
+        
+        <!-- Header Card -->
+        <div class="card">
+            <h1 style="margin-bottom: 8px;">Simple Pendulum Lab</h1>
+            <p style="color: var(--text-muted);">Investigate the relationship between mass, length, and the period of oscillation.</p>
+        </div>
+
+        <!-- Interactive Simulation Card -->
+        <div class="card">
+            <div class="card-header">Live Sandbox</div>
+            
+            <div class="simulation-grid">
+                <canvas id="pendulumCanvas"></canvas>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <label>
+                            Mass (m)
+                            <span id="val-mass">1.0 kg</span>
+                        </label>
+                        <input type="range" id="input-mass" min="0.1" max="5.0" step="0.1" value="1.0">
+                    </div>
+
+                    <div class="control-group">
+                        <label>
+                            Length (L)
+                            <span id="val-length">1.0 m</span>
+                        </label>
+                        <input type="range" id="input-length" min="0.1" max="3.0" step="0.1" value="1.0">
+                    </div>
+
+                    <div class="control-group">
+                        <label>
+                            Gravity (g)
+                            <span id="val-gravity">9.8 m/s²</span>
+                        </label>
+                        <input type="range" id="input-gravity" min="1.6" max="20.0" step="0.1" value="9.8">
+                    </div>
+
+                    <div style="margin-top: auto; display: flex; gap: 10px;">
+                        <button class="btn" id="btn-toggle">Pause</button>
+                        <button class="btn btn-outline" id="btn-reset">Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border-radius: 8px;">
+                <strong>Current Period (T): </strong> <span id="display-period" style="color: var(--primary); font-family: monospace; font-size: 1.2rem;">2.01 s</span>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">
+                    The time taken for one complete back-and-forth swing.
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Definition Card -->
+        <div class="card">
+            <div class="card-header">Quick Definition</div>
+            <p>
+                A <strong>simple pendulum</strong> consists of a point mass (bob) suspended from a fixed point by a massless, inextensible string. It is an idealized physical system used to demonstrate harmonic motion.
+            </p>
+        </div>
+
+        <!-- Formula Card -->
+        <div class="card">
+            <div class="card-header">Period Formula</div>
+            
+            <div class="formula-container">
+                $$ T = 2\pi \sqrt{\frac{L}{g}} $$
+            </div>
+
+            <div class="formula-actions">
+                <button class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem;" onclick="showToast('Mass is not in the formula! The period depends on Length and Gravity only.')">Explain Formula</button>
+                <button class="btn" style="padding: 8px 16px; font-size: 0.9rem;" onclick="scrollToSim()">Open Formula Lab</button>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Meaning</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>T</strong></td>
+                            <td>Period (seconds)</td>
+                            <td><span class="badge badge-variable">Dependent</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>L</strong></td>
+                            <td>Length of string (meters)</td>
+                            <td><span class="badge badge-variable">Independent</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>g</strong></td>
+                            <td>Acceleration due to gravity (m/s²)</td>
+                            <td><span class="badge badge-variable">Independent</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>m</strong></td>
+                            <td>Mass of bob (kg)</td>
+                            <td><span class="badge badge-constant">Not Present</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Analysis Card -->
+        <div class="card">
+            <div class="card-header">Analysis: The Mass Paradox</div>
+            <p style="margin-bottom: 12px;">
+                Intuitively, you might think a heavier object would swing faster or slower. However, the simulation and formula demonstrate that <strong>mass does not affect the period</strong> of a simple pendulum.
+            </p>
+            <p>
+                <strong>Why?</strong><br>
+                While a heavier mass experiences a larger gravitational force ($F = mg$), it also has more inertia (resistance to acceleration, $F = ma$). These two effects cancel each other out perfectly, resulting in the same acceleration regardless of mass.
+            </p>
+        </div>
+
+        <!-- Key Concepts Card -->
+        <div class="card">
+            <div class="card-header">Key Concepts</div>
+            <ul style="padding-left: 20px; display: grid; gap: 10px;">
+                <li><strong>Restoring Force:</strong> The component of gravity acting tangential to the arc pulls the bob back to equilibrium.</li>
+                <li><strong>Simple Harmonic Motion (SHM):</strong> For small angles (< 15°), the motion approximates SHM.</li>
+                <li><strong>Amplitude Independence:</strong> For small angles, the period is independent of how far back you pull the pendulum.</li>
+            </ul>
+        </div>
+
+        <!-- Suggested Questions Card -->
+        <div class="card">
+            <div class="card-header">Suggested Questions</div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <details style="border: 1px solid var(--border); border-radius: 8px; padding: 10px; cursor: pointer;">
+                    <summary style="font-weight: 600;">What happens to the period if you double the length?</summary>
+                    <p style="margin-top: 8px; color: var(--text-muted);">Since $T \propto \sqrt{L}$, doubling the length increases the period by $\sqrt{2} \approx 1.41$. The pendulum swings slower.</p>
+                </details>
+                <details style="border: 1px solid var(--border); border-radius: 8px; padding: 10px; cursor: pointer;">
+                    <summary style="font-weight: 600;">Why would a pendulum clock run slow on the moon?</summary>
+                    <p style="margin-top: 8px; color: var(--text-muted);">Gravity on the moon is about 1/6th of Earth's. Since $T \propto \frac{1}{\sqrt{g}}$, lower gravity means a larger period (longer time to swing), making the clock run slow.</p>
+                </details>
+                <details style="border: 1px solid var(--border); border-radius: 8px; padding: 10px; cursor: pointer;">
+                    <summary style="font-weight: 600;">Does mass matter in a REAL pendulum?</summary>
+                    <p style="margin-top: 8px; color: var(--text-muted);">In a real physical pendulum (with a rod of significant mass), the distribution of mass matters, but the total mass still generally cancels out if air resistance is negligible.</p>
+                </details>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div id="toast">Message here</div>
+
+    <script>
+        // --- Physics Engine & State ---
+        const state = {
+            mass: 1.0,      // kg
+            length: 1.0,    // m
+            gravity: 9.8,   // m/s^2
+            angle: Math.PI / 4, // Initial angle (45 degrees)
+            velocity: 0,
+            acceleration: 0,
+            damping: 0.998, // Air resistance approximation
+            running: true,
+            timeScale: 1.0
+        };
+
+        const canvas = document.getElementById('pendulumCanvas');
+        const ctx = canvas.getContext('2d');
+        let animationId;
+
+        // --- DOM Elements ---
+        const els = {
+            mass: document.getElementById('input-mass'),
+            length: document.getElementById('input-length'),
+            gravity: document.getElementById('input-gravity'),
+            valMass: document.getElementById('val-mass'),
+            valLength: document.getElementById('val-length'),
+            valGravity: document.getElementById('val-gravity'),
+            periodDisplay: document.getElementById('display-period'),
+            toggleBtn: document.getElementById('btn-toggle'),
+            resetBtn: document.getElementById('btn-reset')
+        };
+
+        // --- Initialization ---
+        function resizeCanvas() {
+            // Handle high-DPI displays
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            
+            ctx.scale(dpr, dpr);
+            
+            // Store logical size for calculations
+            state.width = rect.width;
+            state.height = rect.height;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // --- Physics Loop ---
+        function updatePhysics() {
+            if (!state.running) return;
+
+            // Simple Pendulum Equation of Motion:
+            // angular_acceleration = -(g / L) * sin(theta)
+            
+            // We perform Euler integration (simple but sufficient for this visual)
+            // Note: We use a small time step approximation
+            const dt = 0.016 * state.timeScale; // approx 60fps
+
+            state.acceleration = (-1 * state.gravity / state.length) * Math.sin(state.angle);
+            state.velocity += state.acceleration * dt;
+            state.velocity *= state.damping; // Apply air resistance
+            state.angle += state.velocity * dt;
+        }
+
+        function calculatePeriod() {
+            // T = 2 * pi * sqrt(L / g)
+            return 2 * Math.PI * Math.sqrt(state.length / state.gravity);
+        }
+
+        // --- Rendering ---
+        function draw() {
+            ctx.clearRect(0, 0, state.width, state.height);
+
+            const originX = state.width / 2;
+            const originY = 50;
+            
+            // Scale pixels per meter (dynamic based on canvas height)
+            // Ensure the pendulum fits even at max length (3.0m)
+            const maxLenPixels = state.height - 100;
+            const pixelsPerMeter = maxLenPixels / 3.0; 
+
+            const bobX = originX + Math.sin(state.angle) * (state.length * pixelsPerMeter);
+            const bobY = originY + Math.cos(state.angle) * (state.length * pixelsPerMeter);
+
+            // Draw Pivot
+            ctx.beginPath();
+            ctx.fillStyle = '#64748b';
+            ctx.arc(originX, originY, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw String
+            ctx.beginPath();
+            ctx.moveTo(originX, originY);
+            ctx.lineTo(bobX, bobY);
+            ctx.strokeStyle = '#334155';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw Bob (Size scales slightly with mass for visual feedback)
+            // Base radius 15px, increases with mass
+            const bobRadius = 15 + (state.mass * 5); 
+            
+            // Bob Gradient
+            const gradient = ctx.createRadialGradient(bobX - 5, bobY - 5, 2, bobX, bobY, bobRadius);
+            gradient.addColorStop(0, '#60a5fa');
+            gradient.addColorStop(1, '#1d4ed8');
+
+            ctx.beginPath();
+            ctx.arc(bobX, bobY, bobRadius, 0, Math.PI * 2);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            
+            // Bob Border
+            ctx.strokeStyle = '#1e3a8a';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Draw Shadow (Fake depth)
+            ctx.beginPath();
+            ctx.ellipse(originX, originY + (state.length * pixelsPerMeter) + 40, bobRadius * 0.8, bobRadius * 0.2, 0, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            ctx.fill();
+
+            // Update UI Text
+            els.periodDisplay.textContent = calculatePeriod().toFixed(2) + ' s';
+        }
+
+        function loop() {
+            updatePhysics();
+            draw();
+            animationId = requestAnimationFrame(loop);
+        }
+
+        // --- Interaction Handlers ---
+        function updateInputs() {
+            state.mass = parseFloat(els.mass.value);
+            state.length = parseFloat(els.length.value);
+            state.gravity = parseFloat(els.gravity.value);
+
+            els.valMass.textContent = state.mass.toFixed(1) + ' kg';
+            els.valLength.textContent = state.length.toFixed(1) + ' m';
+            els.valGravity.textContent = state.gravity.toFixed(1) + ' m/s²';
+
+            // Recalculate and update display immediately even if paused
+            els.periodDisplay.textContent = calculatePeriod().toFixed(2) + ' s';
+        }
+
+        els.mass.addEventListener('input', updateInputs);
+        els.length.addEventListener('input', updateInputs);
+        els.gravity.addEventListener('input', updateInputs);
+
+        els.toggleBtn.addEventListener('click', () => {
+            state.running = !state.running;
+            els.toggleBtn.textContent = state.running ? 'Pause' : 'Resume';
+            els.toggleBtn.classList.toggle('btn-outline');
+        });
+
+        els.resetBtn.addEventListener('click', () => {
+            state.angle = Math.PI / 4;
+            state.velocity = 0;
+            state.acceleration = 0;
+            state.running = true;
+            els.toggleBtn.textContent = 'Pause';
+            els.toggleBtn.classList.remove('btn-outline');
+            
+            // Reset inputs to default
+            els.mass.value = 1.0;
+            els.length.value = 1.0;
+            els.gravity.value = 9.8;
+            updateInputs();
+            
+            showToast("Simulation reset to defaults.");
+        });
+
+        // --- Utilities ---
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        function scrollToSim() {
+            document.querySelector('.simulation-grid').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Render KaTeX ---
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+
+        // Start
+        loop();
+
+    </script>
+</body>
+</html>
+```

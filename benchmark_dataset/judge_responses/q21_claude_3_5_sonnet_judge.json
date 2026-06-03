@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 21,
+  "question": "Gravitation: State Newton’s law of gravitation.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's Law of Universal Gravitation states that every particle of matter in the universe attracts every other particle with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers.\n\n---\n\n## Characteristics\n\n* **Universal Action Range:** The attraction acts between all scale profiles, from small atomic fields up to massive galactic cluster structures.\n* **Inverse Square Law:** Doubling the distance separating two objects cuts their mutual gravitational pull down to one-fourth of its initial value.\n* **Central Force Property:** The force acts along the imaginary straight line connecting the centers of mass of the two interacting bodies.\n\n---\n\n## Formula\n\nThe gravitational force equation is written as:\n\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\nWhere:\n* $F$ represents the gravitational attraction force magnitude\n* $m_1, m_2$ represent the masses of the interacting bodies\n* $r$ represents the distance separating the mass centers\n* $G$ represents the Universal Gravitational Constant ($6.674 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$)\n\n---\n\n## Summary\n\nUniversal gravitation is a long-range mutual attraction force that links all matter, scaling up with mass density but dropping off sharply with distance.",
+  "candidate_response": "Here's the topic rendered as an interactive textbook experience:\n\n---\n\n## Gravitation\n\n---\n\n### Quick Definition\n\n> **Gravitation** is the universal phenomenon by which all objects with mass attract one another. It governs everything from falling apples to orbiting planets.\n\n---\n\n### Newton's Law of Universal Gravitation\n\n**Statement:**\n\nEvery particle in the universe attracts every other particle with a force that is:\n- **Directly proportional** to the product of their masses\n- **Inversely proportional** to the **square of the distance** between them\n- Directed along the line joining the two particles\n\nThis force acts **along the line joining the two bodies** and is always **attractive** in nature.\n\n---\n\n### Main Formula\n\n$$F = G \\dfrac{m_1 \\, m_2}{r^2}$$\n\n| Symbol | Meaning | SI Unit |\n|--------|---------|---------|\n| $F$ | Gravitational Force between two bodies | Newton (N) |\n| $G$ | Universal Gravitational Constant | $\\text{N m}^2 \\text{kg}^{-2}$ |\n| $m_1$ | Mass of first body | kilogram (kg) |\n| $m_2$ | Mass of second body | kilogram (kg) |\n| $r$ | Distance between the two bodies | metre (m) |\n\n---\n\n### Value of G\n\n$$G = 6.674 \\times 10^{-11} \\ \\text{N m}^2 \\text{ kg}^{-2}$$\n\n> $G$ is a **universal constant** — its value is the same everywhere in the universe, regardless of the medium, temperature, or the nature of the masses.\n\n---\n\n### Proportionality Form\n\nThe law can be expressed in two proportionality steps:\n\n$$F \\propto m_1 m_2 \\quad \\text{(fixed } r\\text{)}$$\n\n$$F \\propto \\dfrac{1}{r^2} \\quad \\text{(fixed masses)}$$\n\nCombining both:\n\n$$F \\propto \\dfrac{m_1 m_2}{r^2}$$\n\nIntroducing the constant of proportionality $G$:\n\n$$\\boxed{F = G \\dfrac{m_1 m_2}{r^2}}$$\n\n---\n\n### Key Characteristics of Gravitational Force\n\n| Property | Detail |\n|----------|--------|\n| **Nature** | Always attractive, never repulsive |\n| **Medium** | Independent of the medium between masses |\n| **Range** | Infinite range (long-range force) |\n| **Type** | Central force (acts along line joining bodies) |\n| **Mutual** | Equal and opposite on both bodies (Newton's 3rd Law) |\n| **Weakest force** | Weakest of the four fundamental forces |\n\n---\n\n### Inverse Square Law — Visualised\n\n| Distance $r$ | Force $F$ |\n|-------------|-----------|\n| $r$ | $F$ |\n| $2r$ | $F/4$ |\n| $3r$ | $F/9$ |\n| $4r$ | $F/16$ |\n\n> If distance **doubles**, force becomes **one-fourth**. This is the **inverse square** relationship.\n\n---\n\n### Important Notes\n\n> ⚠️ **Newton's Law of Gravitation applies strictly between point masses.** For extended bodies, it applies when the distance between them is very large compared to their sizes, or when they are uniform spheres (treated as point masses at their centres).\n\n> ⚠️ The law is **not valid** at extremely small (quantum) scales — where General Relativity or Quantum Gravity takes over.\n\n---\n\n### Quick Summary\n\n- Every mass attracts every other mass.\n- Force $\\propto$ product of masses, $\\propto$ inverse square of distance.\n- $G = 6.674 \\times 10^{-11} \\ \\text{N m}^2 \\text{kg}^{-2}$\n- Force is central, mutual, and always attractive.\n- Independent of the medium.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational effectiveness. It correctly states Newton's Law of Universal Gravitation, provides the formula, and explains the characteristics of gravitational force. The response is well-structured, easy to read, and includes helpful visualizations and examples. However, to achieve a perfect score, the candidate could consider adding more detailed explanations of the underlying physics concepts, such as the implications of the inverse square law and the universal gravitational constant. Additionally, the response could benefit from more explicit connections to real-world applications and phenomena, making it more engaging and relevant to beginners.",
+  "candidate_token_usage": {
+    "promptTokens": 436,
+    "completionTokens": 966,
+    "totalTokens": 1402
+  },
+  "candidate_latency_ms": 17935,
+  "candidate_cost_usd": 0.002368,
+  "judge_token_usage": {
+    "promptTokens": 1581,
+    "completionTokens": 182,
+    "totalTokens": 1763
+  },
+  "judge_latency_ms": 4300,
+  "judge_cost_usd": 0.0013854,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:38:43.137Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 56,
+  "question": "Live Sandbox: Explain how changing restitution alters the collision bounce between two rigid bodies.",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nTwo solid spheres are aligned to collide head-on in the center of the canvas. We can adjust the restitution parameter slider ($\\text{e}$) to observe how the collision interaction updates.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nWhen restitution is set to maximum, the spheres bounce apart aggressively without losing any speed. If we lower the value to zero, they stick together upon impact and move forward as a single combined mass.\n\n### ✦ WHY IT HAPPENS\nRestitution defines the elasticity of a collision. A value of $1.0$ represents a perfectly elastic collision where kinetic energy is conserved. A value of $0.0$ represents a perfectly inelastic collision where the bodies maximize their kinetic energy loss by sticking together.\n\n### ✦ WHAT TO NOTICE\nObserve the mechanical energy indicators. At a restitution of $1.0$, total kinetic energy remains identical before and after impact. At $0.0$, the energy meter drops sharply during the collision.\n\n### ✦ FORMULA\nThe coefficient of restitution relation is written as:\n\n$$e = \\frac{v_2 - v_1}{u_1 - u_2}$$\n\n* $e = 1$ matches perfectly elastic kinetic energy retention.\n* $e = 0$ matches perfectly inelastic shared tracking.\n\n### ✦ DEEPER UNDERSTANDING\nRestitution controls how much kinetic energy is preserved as mechanical motion versus how much is converted into deformation, heat, or internal work during an impact.\n\n### ✦ TRY THIS\n1. Run an impact with **Restitution slider set to 1.0** and observe the energetic recoil behavior.\n2. Shift the **Restitution value** to `0.0` to see the two masses latch together into a unified mass.",
+  "candidate_response": "### Restitution in Rigid Body Collisions\n\n#### 🎯 Quick Definition\n**Restitution** is a measure of how much kinetic energy is conserved after a collision between two rigid bodies. It's quantified by the **coefficient of restitution (COR)**, ranging from **0** (perfectly inelastic, no bounce) to **1** (perfectly elastic, maximum bounce).\n\n---\n\n#### 📐 Restitution Formula\nThe coefficient of restitution \\( e \\) is defined as:  \n$$  \ne = -\\frac{v_{\\text{rel, after}}}{v_{\\text{rel, before}}}  \n$$  \nwhere:\n- \\( v_{\\text{rel, before}} \\) = Relative velocity **before** collision (\\( v_1 - v_2 \\)),  \n- \\( v_{\\text{rel, after}} \\) = Relative velocity **after** collision (\\( v_1' - v_2' \\)).  \n\n```katex\ne = -\\frac{v_{1}^{\\prime} - v_{2}^{\\prime}}{v_{1} - v_{2}}\n```\n\n<details>\n<summary>🧠 **Explain Formula**</summary>\n- **Negative sign**: Ensures \\( e \\) stays positive (velocities reverse direction after collision).  \n- **Energy link**: For ideal elastic collisions (\\( e = 1 \\)), kinetic energy is conserved.  \n- **Real-world**: Friction/heat reduce \\( e \\) below 1.  \n</details>\n\n---\n\n#### ⚖️ How Restitution Changes Collision Behavior\n| Coefficient (\\( e \\)) | Collision Type          | Bounce Behavior                  | Energy Loss       |\n|-----------------------|-------------------------|----------------------------------|-------------------|\n| **\\( e = 0 \\)**       | Perfectly Inelastic     | Bodies stick together           | Maximal loss      |\n| **\\( 0 < e < 1 \\)**   | Inelastic               | Partial bounce (e.g., tennis ball) | Moderate loss    |\n| **\\( e = 1 \\)**       | Perfectly Elastic       | Full bounce (e.g., superball)     | No energy loss   |\n\n---\n\n#### 🔬 Key Effects of Adjusting Restitution\n1. **Bounce Height**  \n   Higher \\( e \\) → Greater rebound height.  \n   - *Example*: A basketball (\\( e ≈ 0.8 \\)) bounces higher than clay (\\( e ≈ 0.1 \\)).\n\n2. **Collision Duration**  \n   Lower \\( e \\) → Longer contact time (energy dissipates slowly).\n\n3. **Post-Impact Velocity**  \n   Velocities after collision depend on \\( e \\):  \n   $$  \n   v_1' = \\frac{m_1 v_1 + m_2 v_2 + m_2 e (v_2 - v_1)}{m_1 + m_2}  \n   $$  \n   *(Solve similarly for \\( v_2' \\))*\n\n---\n\n#### 🛠️ Practical Applications\n- **Game Physics**:  \n  - Low \\( e \\) → Realistic car crashes (crumple zones).  \n  - High \\( e \\) → Bouncy platforms (platformer games).  \n- **Sports Equipment**:  \n  Golf balls designed with \\( e ≈ 0.8 \\) for optimal rebound.  \n- **Engineering Safety**:  \n  Crash barriers use low-\\( e \\) materials to absorb impact.  \n\n---\n\n#### ⚠️ Important Notes\n- **Material Matters**: Steel has higher \\( e \\) (0.6–0.8) than rubber (0.3–0.6) despite rubber feeling \"bouncier\" (due to deformation).  \n- **Speed Dependence**: \\( e \\) often decreases at high velocities (e.g., bullet impacts).  \n- **Angular Effects**: Restitution combines with friction to influence spin during oblique collisions.  \n\n---\n\n#### 💡 Summary\n> **Restitution directly controls bounce intensity**:  \n> - **Increase \\( e \\)** → More energetic rebounds, less energy loss.  \n> - **Decrease \\( e \\)** → \"Mushy\" collisions, energy converted to heat/sound.  \n>  \n> Adjust \\( e \\) to simulate materials from putty (\\( e ≈ 0 \\)) to glass (\\( e ≈ 0.95 \\)).\n\n---\n\n#### ❓ Suggested Questions\n1. Why does a basketball bounce higher than a clay ball?  \n2. How does restitution affect momentum conservation?  \n3. Can \\( e > 1 \\) exist? What would it imply?  \n\nLet me know if you'd like to simulate a specific collision! 🚀",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the concept of restitution in rigid body collisions, accurately explaining its definition, formula, and effects on collision behavior. The response is well-structured, readable, and effectively uses formatting to convey complex information. The use of examples, tables, and equations enhances the educational value of the response. However, minor suggestions for improvement include adding more visual aids, such as diagrams or graphs, to illustrate the concepts and providing additional practice problems or exercises to reinforce learning. Overall, the response is of high quality and effectively communicates the physics of restitution in a clear and concise manner.",
+  "candidate_token_usage": {
+    "promptTokens": 368,
+    "completionTokens": 1127,
+    "totalTokens": 1495
+  },
+  "candidate_latency_ms": 51287,
+  "candidate_cost_usd": 0.00267053,
+  "judge_token_usage": {
+    "promptTokens": 1800,
+    "completionTokens": 181,
+    "totalTokens": 1981
+  },
+  "judge_latency_ms": 3922,
+  "judge_cost_usd": 0.0015144,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:26:05.736Z"
+}

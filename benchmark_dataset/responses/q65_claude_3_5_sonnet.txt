@@ -1,0 +1,136 @@
+```
+ORBIT_STARTED :: STABLE_LOOP_TRIGGER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SANDBOX OVERLAY v2.1 — RUNTIME EVENT
+```
+
+---
+
+## Event Trace
+
+```json
+{
+  "event":     "orbit_started",
+  "trigger":   "stable_loop",
+  "status":    "ACTIVE",
+  "loop_id":   "SL-0x4F2A",
+  "timestamp": "T+00:00.000",
+  "origin":    "sandbox_core",
+  "flags": {
+    "render_overlay": true,
+    "lock_frame":     false,
+    "persist_state":  true,
+    "debug_trace":    true
+  }
+}
+```
+
+---
+
+## Overlay Render Stack
+
+```
+[ LAYER 0 ]  Base Canvas .............. MOUNTED
+[ LAYER 1 ]  Orbit Path Geometry ....... COMPUTED
+[ LAYER 2 ]  Stable Loop Detector ...... ARMED
+[ LAYER 3 ]  Event Listener Hooks ....... BOUND
+[ LAYER 4 ]  Overlay UI Panel ........... INJECTED
+[ LAYER 5 ]  Debug Trace Stream ......... OPEN
+```
+
+---
+
+## Stable Loop State Machine
+
+```
+  INIT ──► ORBIT_ARMED ──► LOOP_DETECTED
+                                │
+                    ┌───────────▼────────────┐
+                    │   STABLE_LOOP_ACTIVE   │
+                    │                        │
+                    │  ◉ Δθ  = 0.000 rad/s  │
+                    │  ◉ ΔR  = 0.000 m      │
+                    │  ◉ ΔV  = 0.000 m/s    │
+                    │  ◉ TTL = ∞  (stable)  │
+                    └───────────┬────────────┘
+                                │
+              ┌─────────────────┼──────────────────┐
+              ▼                 ▼                  ▼
+        PERTURB?          DECAY?             ESCAPE?
+        → RE-ARM          → DISSOLVE         → BREAK
+```
+
+---
+
+## Runtime Metrics
+
+```
+ORBIT PARAMETERS
+────────────────────────────────────────
+  Semi-major axis (a)   :   7,200 km
+  Eccentricity  (e)     :   0.0012
+  Inclination   (i)     :   28.5°
+  Period        (T)     :   6,047 s
+  Velocity      (v)     :   7,784 m/s
+
+LOOP STABILITY INDEX
+────────────────────────────────────────
+  Δ Energy drift        :   < 0.001%
+  Phase lock            :   CONFIRMED
+  Resonance ratio       :   1:1
+  Loop health           :   ████████░░  82%
+```
+
+---
+
+## Overlay Panel Output
+
+```
+╔══════════════════════════════════════╗
+║   🛰  ORBIT OVERLAY — LIVE           ║
+╠══════════════════════════════════════╣
+║  Event   :  orbit_started            ║
+║  Loop    :  SL-0x4F2A  [STABLE]      ║
+║  Frame   :  #00001  →  RENDERING     ║
+║  Tick    :  T+00:00.012              ║
+╠══════════════════════════════════════╣
+║  [ ▶ CONTINUE ]  [ ⏸ PAUSE LOOP ]   ║
+║  [ 🔍 INSPECT ]  [ ✕ DISMISS ]      ║
+╚══════════════════════════════════════╝
+```
+
+---
+
+## Bound Event Hooks
+
+```javascript
+onOrbitStarted(event => {
+  overlay.inject(event.loop_id);       // ✔ injected
+  stateEngine.arm("stable_loop");      // ✔ armed
+  debugStream.open(event.timestamp);   // ✔ streaming
+  renderStack.push("LAYER_4");         // ✔ pushed
+  metricsPanel.bind(event.params);     // ✔ bound
+});
+```
+
+---
+
+## Sandbox Log
+
+```
+[T+00:00.000]  EVENT RECEIVED   :: orbit_started
+[T+00:00.001]  TRIGGER MATCHED  :: stable_loop
+[T+00:00.002]  LOOP ARMED       :: SL-0x4F2A
+[T+00:00.004]  OVERLAY INJECTED :: LAYER_4 → canvas
+[T+00:00.007]  METRICS BOUND    :: 5 params active
+[T+00:00.009]  RENDER TICK #1   :: frame stable
+[T+00:00.012]  STATUS           :: ✔ ORBIT STABLE
+```
+
+---
+
+```
+OVERLAY STATUS ──────────────────── ACTIVE ✔
+LOOP STATUS  ────────────────────── STABLE ✔
+NEXT CHECK   ────────────────── T+00:30.000
+```

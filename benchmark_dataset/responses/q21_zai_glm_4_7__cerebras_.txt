@@ -1,0 +1,632 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Law of Universal Gravitation</title>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --accent-formula: #eff6ff;
+            --border-formula: #dbeafe;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            background-color: var(--accent-formula);
+            color: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .card-content {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        /* Typography inside cards */
+        p {
+            margin-bottom: 16px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: #fff;
+            border: 2px solid var(--border-formula);
+        }
+
+        .formula-display {
+            background-color: var(--accent-formula);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent-formula);
+        }
+
+        /* Variable Explanation (Hidden by default) */
+        .variable-explanation {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            display: none; /* Toggled via JS */
+            font-size: 0.95rem;
+        }
+        
+        .variable-explanation.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .var-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .var-row:last-child {
+            border-bottom: none;
+        }
+
+        .var-symbol {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Formula Lab Modal */
+        dialog {
+            border: none;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            width: 90%;
+            max-width: 600px;
+            padding: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+        }
+
+        .lab-header {
+            background: var(--primary);
+            color: white;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .lab-content {
+            padding: 24px;
+        }
+
+        .lab-visual {
+            height: 150px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            position: relative;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .mass-object {
+            border-radius: 50%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .m1 {
+            background: #ef4444; /* Red */
+        }
+
+        .m2 {
+            background: #3b82f6; /* Blue */
+        }
+
+        .lab-controls label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .slider-group {
+            margin-bottom: 16px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .lab-result {
+            margin-top: 20px;
+            padding: 16px;
+            background: var(--accent-formula);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .lab-result h4 {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .lab-result .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Key Concepts Grid */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .concept-item {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .concept-item h4 {
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .concept-item p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 20px; }
+            .formula-display { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Gravitation</h1>
+            <p>Chapter 2: Forces and Motion</p>
+        </header>
+
+        <main>
+            <!-- Section: Introduction -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon">1</div>
+                    <div class="card-title">Introduction</div>
+                </div>
+                <div class="card-content">
+                    <p>Gravity is the invisible force that attracts two masses towards each other. It is the force that keeps planets in orbit around the sun and keeps us standing on the Earth. Before Newton, many scientists studied motion, but none had unified the movement of celestial bodies with objects on Earth.</p>
+                </div>
+            </article>
+
+            <!-- Section: Definition -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon">2</div>
+                    <div class="card-title">Definition</div>
+                </div>
+                <div class="card-content">
+                    <p><strong>Newton’s Law of Universal Gravitation</strong> states that every particle of matter in the universe attracts every other particle with a force that is directly proportional to the product of the masses and inversely proportional to the square of the distance between them.</p>
+                </div>
+            </article>
+
+            <!-- Section: Formula (Interactive) -->
+            <article class="card formula-card">
+                <div class="card-header">
+                    <div class="card-icon">Fx</div>
+                    <div class="card-title">The Formula</div>
+                </div>
+                <div class="card-content">
+                    <p>The mathematical expression of this law is:</p>
+                    
+                    <div class="formula-display">
+                        $$ F = G \frac{m_1 m_2}{r^2} $$
+                    </div>
+
+                    <div class="formula-actions">
+                        <button class="btn-outline" onclick="toggleExplanation()">Explain Formula</button>
+                        <button class="btn-primary" onclick="openLab()">Open Formula Lab</button>
+                    </div>
+
+                    <!-- Hidden Explanation Area -->
+                    <div id="variable-explanation" class="variable-explanation">
+                        <div class="var-row">
+                            <span class="var-symbol">F</span>
+                            <span>Gravitational Force (Newtons)</span>
+                        </div>
+                        <div class="var-row">
+                            <span class="var-symbol">G</span>
+                            <span>Gravitational Constant ($6.674 \times 10^{-11} \, \text{N}\cdot\text{m}^2/\text{kg}^2$)</span>
+                        </div>
+                        <div class="var-row">
+                            <span class="var-symbol">m₁, m₂</span>
+                            <span>Masses of the two objects (kg)</span>
+                        </div>
+                        <div class="var-row">
+                            <span class="var-symbol">r</span>
+                            <span>Distance between the centers of the masses (m)</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Section: Key Concepts -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon">★</div>
+                    <div class="card-title">Key Characteristics</div>
+                </div>
+                <div class="card-content">
+                    <div class="concepts-grid">
+                        <div class="concept-item">
+                            <h4>Universal Force</h4>
+                            <p>Gravity acts between any two objects anywhere in the universe.</p>
+                        </div>
+                        <div class="concept-item">
+                            <h4>Attractive</h4>
+                            <p>It is always a force of attraction; it never pushes objects apart.</p>
+                        </div>
+                        <div class="concept-item">
+                            <h4>Inverse Square Law</h4>
+                            <p>If distance doubles, force becomes 1/4th. If distance triples, force becomes 1/9th.</p>
+                        </div>
+                        <div class="concept-item">
+                            <h4>Dependent on Mass</h4>
+                            <p>Greater mass means a stronger gravitational pull.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Section: Applications -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon">A</div>
+                    <div class="card-title">Applications</div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><strong>Planetary Motion:</strong> Explains how planets orbit the sun and moons orbit planets.</li>
+                        <li><strong>Tides:</strong> The gravitational pull of the moon and sun causes ocean tides on Earth.</li>
+                        <li><strong>Artificial Satellites:</strong> Used to calculate the necessary velocity for satellites to stay in orbit.</li>
+                        <li><strong>Free Fall:</strong> Explains why objects accelerate towards the Earth at $9.8 \, \text{m/s}^2$ (ignoring air resistance).</li>
+                    </ul>
+                </div>
+            </article>
+            
+            <!-- Section: Important Notes -->
+            <article class="card" style="background-color: #fffbeb; border: 1px solid #fcd34d;">
+                <div class="card-header" style="border-bottom-color: #fcd34d;">
+                    <div class="card-icon" style="background-color: #fef3c7; color: #d97706;">!</div>
+                    <div class="card-title">Important Notes</div>
+                </div>
+                <div class="card-content">
+                    <p>The law strictly applies to <strong>point masses</strong>. However, for spherical objects (like planets), the mass can be considered concentrated at the center, provided the distance is measured from center to center.</p>
+                </div>
+            </article>
+
+        </main>
+    </div>
+
+    <!-- Formula Lab Modal -->
+    <dialog id="labModal">
+        <div class="lab-header">
+            <h3>Formula Lab</h3>
+            <button class="close-btn" onclick="closeLab()">&times;</button>
+        </div>
+        <div class="lab-content">
+            <p style="margin-bottom: 15px; font-size: 0.9rem; color: #64748b;">Adjust the masses and distance to see how the Force ($F$) changes.</p>
+            
+            <div class="lab-visual">
+                <!-- Visualization Objects -->
+                <div id="obj1" class="mass-object m1">10kg</div>
+                <div id="obj2" class="mass-object m2">10kg</div>
+                <div style="position: absolute; bottom: 10px; font-size: 0.8rem; color: #64748b;">Visual Representation (Not to scale)</div>
+            </div>
+
+            <div class="lab-controls">
+                <div class="slider-group">
+                    <label>Mass 1 ($m_1$): <span id="val-m1">10</span> kg</label>
+                    <input type="range" id="range-m1" min="1" max="50" value="10" step="1">
+                </div>
+                <div class="slider-group">
+                    <label>Mass 2 ($m_2$): <span id="val-m2">10</span> kg</label>
+                    <input type="range" id="range-m2" min="1" max="50" value="10" step="1">
+                </div>
+                <div class="slider-group">
+                    <label>Distance ($r$): <span id="val-r">5</span> m</label>
+                    <input type="range" id="range-r" min="1" max="10" value="5" step="0.1">
+                </div>
+            </div>
+
+            <div class="lab-result">
+                <h4>Calculated Force ($F$)</h4>
+                <div class="value" id="result-force">-- N</div>
+                <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">(Using $G = 1$ for simplified demo)</div>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        // --- Interaction Logic ---
+
+        // Toggle Variable Explanation
+        function toggleExplanation() {
+            const el = document.getElementById('variable-explanation');
+            el.classList.toggle('visible');
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('labModal');
+        
+        function openLab() {
+            modal.showModal();
+            updateLab(); // Initialize values
+        }
+
+        function closeLab() {
+            modal.close();
+        }
+
+        // Close modal if clicking outside
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.close();
+            }
+        });
+
+        // Formula Lab Simulation Logic
+        const rangeM1 = document.getElementById('range-m1');
+        const rangeM2 = document.getElementById('range-m2');
+        const rangeR = document.getElementById('range-r');
+        
+        const valM1 = document.getElementById('val-m1');
+        const valM2 = document.getElementById('val-m2');
+        const valR = document.getElementById('val-r');
+        
+        const resForce = document.getElementById('result-force');
+        
+        const obj1 = document.getElementById('obj1');
+        const obj2 = document.getElementById('obj2');
+
+        function updateLab() {
+            // Get values
+            const m1 = parseFloat(rangeM1.value);
+            const m2 = parseFloat(rangeM2.value);
+            const r = parseFloat(rangeR.value);
+
+            // Update Text Labels
+            valM1.textContent = m1;
+            valM2.textContent = m2;
+            valR.textContent = r;
+
+            // Calculate Force (Using G=1 for simplicity in visualization)
+            // F = (G * m1 * m2) / r^2
+            const G = 1; 
+            const F = (G * m1 * m2) / (r * r);
+            
+            // Update Result Display
+            resForce.textContent = F.toFixed(2) + " N";
+
+            // Update Visuals
+            // 1. Size based on mass
+            const baseSize = 30;
+            const sizeScale = 1.5;
+            obj1.style.width = (baseSize + m1 * sizeScale) + 'px';
+            obj1.style.height = (baseSize + m1 * sizeScale) + 'px';
+            obj1.textContent = m1 + 'kg';
+
+            obj2.style.width = (baseSize + m2 * sizeScale) + 'px';
+            obj2.style.height = (baseSize + m2 * sizeScale) + 'px';
+            obj2.textContent = m2 + 'kg';
+
+            // 2. Distance based on r
+            // Container width is roughly 100% (let's say 500px max in modal)
+            // We need to position them absolutely.
+            // Center is 50%. Left object at 50% - r/2 * scale, Right object at 50% + r/2 * scale
+            
+            const containerWidth = document.querySelector('.lab-visual').offsetWidth;
+            const visualScale = 30; // pixels per meter for visual
+            
+            const center = containerWidth / 2;
+            const offset = (r * visualScale) / 2;
+
+            // Clamp logic to prevent them from leaving the box or overlapping too much visually
+            // We limit the max offset so they stay inside
+            const maxOffset = (containerWidth / 2) - 40; 
+            const safeOffset = Math.min(offset, maxOffset);
+
+            obj1.style.left = (center - safeOffset - (obj1.offsetWidth/2)) + 'px';
+            obj2.style.left = (center + safeOffset - (obj2.offsetWidth/2)) + 'px';
+        }
+
+        // Event Listeners for Sliders
+        rangeM1.addEventListener('input', updateLab);
+        rangeM2.addEventListener('input', updateLab);
+        rangeR.addEventListener('input', updateLab);
+
+        // Handle window resize for the visualizer
+        window.addEventListener('resize', updateLab);
+
+    </script>
+</body>
+</html>
+```

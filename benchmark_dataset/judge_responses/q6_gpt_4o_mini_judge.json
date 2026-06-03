@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 6,
+  "question": "Motion in a Plane: Define projectile motion and explain its characteristics.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nProjectile motion is a form of motion experienced by an object or particle that is projected near the Earth's surface and moves along a curved path under the action of gravity alone. \n\nThe path followed by the projectile is called its trajectory, which always takes the geometric shape of a parabola.\n\n---\n\n## Characteristics\n\n* **Two-Dimensional Independent Motion:** The motion can be split into a horizontal component (constant velocity) and a vertical component (uniform acceleration due to gravity).\n* **Constant Horizontal Velocity:** Neglecting air resistance, there is no horizontal acceleration.\n* **Symmetrical Path:** The time taken to reach maximum height equals the time taken to descend back to the initial launch impact level.\n\n---\n\n## Formula\n\nThe initial velocity vector ($u$) broken down into its rectangular components:\n\n$$u_x = u \\cos(\\theta)$$\n\n$$u_y = u \\sin(\\theta)$$\n\nWhere:\n* $u_x$ represents the constant horizontal velocity component\n* $u_y$ represents the initial vertical velocity component\n* $\\theta$ represents the angle of projection with the horizontal plane\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Offers precise tracking vectors for basic structural ballistics projections. | Fails to incorporate atmospheric fluid dynamics or crosswinds. |\n| Breaks complex curved trajectories down into basic orthogonal linear equations. | The assumption of a flat Earth baseline fails over long, intercontinental ranges. |\n\n---\n\n## Summary\n\nProjectile motion combines steady horizontal cruise with uniform vertical gravitational acceleration. These components act simultaneously yet function independently, defining a clean parabolic trajectory profile.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Projectile motion is the │  \n│ motion of an object that  │  \n│ is thrown into the air and│  \n│ is subject to the force of│  \n│ gravity.                 │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Key Characteristics       │  \n│                           │  \n│ 1. **Trajectory**: The path│  \n│    followed by the object  │  \n│    is a curved shape,     │  \n│    typically a parabola.  │  \n│                           │  \n│ 2. **Initial Velocity**:  │  \n│    The motion begins with  │  \n│    an initial velocity at   │  \n│    a certain angle to the  │  \n│    horizontal.            │  \n│                           │  \n│ 3. **Acceleration**:      │  \n│    The only force acting on │  \n│    the object is gravity,  │  \n│    causing a constant      │  \n│    downward acceleration.  │  \n│                           │  \n│ 4. **Independence of Motion**:│  \n│    The horizontal and      │  \n│    vertical components of   │  \n│    motion are independent. │  \n│                           │  \n│ 5. **Maximum Height**:     │  \n│    There is a point in the │  \n│    trajectory where the    │  \n│    object reaches its      │  \n│    highest point.         │  \n│                           │  \n│ 6. **Range**: The total    │  \n│    horizontal distance      │  \n│    traveled by the object   │  \n│    when it returns to the   │  \n│    same vertical level.    │  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a good understanding of the key characteristics of projectile motion, including the trajectory, initial velocity, acceleration, independence of motion, maximum height, and range. However, the response lacks depth and clarity in its explanation, particularly in comparison to the gold reference answer. The use of a unique formatting style with boxes and numbered points, while visually appealing, does not enhance the readability or understanding of the concepts. To improve, the candidate should focus on providing more detailed explanations, incorporating relevant formulas and equations, and using a more conventional formatting style to enhance readability. Additionally, the response could benefit from discussions on the advantages and disadvantages of the projectile motion model, as well as more explicit connections to the fundamental principles of physics.",
+  "candidate_token_usage": {
+    "promptTokens": 367,
+    "completionTokens": 382,
+    "totalTokens": 749
+  },
+  "candidate_latency_ms": 5271,
+  "candidate_cost_usd": 0.00028425,
+  "judge_token_usage": {
+    "promptTokens": 1117,
+    "completionTokens": 205,
+    "totalTokens": 1322
+  },
+  "judge_latency_ms": 13211,
+  "judge_cost_usd": 0.0011622,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:03:53.922Z"
+}

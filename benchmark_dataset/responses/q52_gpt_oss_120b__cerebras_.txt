@@ -1,0 +1,168 @@
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Introduction                               │
+│                                                                       │
+│ A projectile launched in a vacuum follows a perfect parabola.  When  │
+│ the projectile moves through air, the surrounding fluid exerts a     │
+│ resistive force that opposes its motion.  This “air‑resistance” (or   │
+│ drag) changes the shape of the trajectory, the range, the time of    │
+│ flight, and the landing speed.  In this sandbox we explore those      │
+│ visual effects and the physics behind them.                           │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Definition                                  │
+│                                                                       │
+│ **Air resistance** is the force exerted by a fluid (air) on a body   │
+│ moving through it.  It always points opposite to the direction of    │
+│ motion and its magnitude depends on the speed, size, shape, and      │
+│ properties of the fluid.                                               │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Key Concepts                                 │
+│                                                                       │
+│ • **Drag Force (Fₙ)** – commonly modeled as                     │
+│   • *Linear drag*: Fₙ = –k v                                                  │
+│   • *Quadratic drag*: Fₙ = –c v²                                               │
+│ • **k** (kg s⁻¹) and **c** (kg m⁻¹) are drag coefficients that depend on │
+│   shape, cross‑sectional area, air density, and Reynolds number.      │
+│ • **Terminal velocity** – the speed at which gravity balances drag.  │
+│ • **Time constant τ = m/k** for linear drag (m = mass).               │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Characteristics                              │
+│                                                                       │
+│ Adding air resistance produces several noticeable visual changes:   │
+│                                                                       │
+│ 1. **Lower apex** – the projectile reaches a smaller maximum height   │
+│    because part of its kinetic energy is dissipated by drag.         │
+│ 2. **Shorter range** – the horizontal distance is reduced; the curve  │
+│    “flattens” and the landing point shifts leftward.                  │
+│ 3. **Asymmetric flight** – the ascent is steeper than the descent,  │
+│    especially for quadratic drag where the speed drops faster on   │
+│    the way down.                                                       │
+│ 4. **Longer flight time (linear drag)** – the vertical deceleration   │
+│    is less abrupt, so the projectile can stay aloft slightly longer │
+│    before hitting the ground.                                         │
+│ 5. **Non‑parabolic shape** – the trajectory is no longer a perfect     │
+│    parabola; it becomes a curve described by exponential terms.       │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Formula                                      │
+│                                                                       │
+│ The motion with **linear drag** (Fₙ = –k v) can be solved analytically.│
+│ Below is the main result for a projectile launched with speed v₀ at   │
+│ angle θ (from the horizontal).                                         │
+│                                                                       │
+│ ┌───────────────────────────────────────────────────────────────────┐ │
+│ │ Main Formula                                                    │ │
+│ │                                                               │ │
+│ │ \[                                                            │ │
+│ │   x(t) = \frac{m v_{0x}}{k}\!\left(1-e^{-k t/m}\right)      │ │
+│ │ \]                                                            │ │
+│ │                                                               │ │
+│ │ \[                                                            │ │
+│ │   y(t) = \frac{m}{k}\!\Big(v_{0y}+ \frac{mg}{k}\Big)       │ │
+│ │          \!\left(1-e^{-k t/m}\right) - \frac{mg}{k}\,t      │ │
+│ │ \]                                                            │ │
+│ │                                                               │ │
+│ │   where:                                                      │ │
+│ │   v₀x = v₀\cosθ ,   v₀y = v₀\sinθ                           │ │
+│ │   m = projectile mass,   k = linear drag coefficient       │ │
+│ │   g = 9.81 m s⁻²                                            │ │
+│ │                                                               │ │
+│ │ [ Explain Formula ]   [ Open Formula Lab ]                  │ │
+│ └───────────────────────────────────────────────────────────────────┘ │
+│                                                                       │
+│ The exponential terms (e^{‑k t/m}) cause the velocity to decay       │
+│ gradually, producing the visual effects described above.            │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Applications                                 │
+│                                                                       │
+│ • **Ballistics** – realistic range predictions for artillery and      │
+│   small‑arms fire.                                                     │
+│ • **Sports** – modeling the flight of baseballs, golf balls, soccer │
+│   kicks, and frisbees.                                                │
+│ • **Aerospace** – re‑entry trajectories, parachute descent.          │
+│ • **Engineering** – designing projectile‑based launch systems where │
+│   drag cannot be ignored.                                            │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Advantages                                   │
+│                                                                       │
+│ • **More realistic** – captures energy loss to the atmosphere.      │
+│ • **Predictive power** – helps engineers design safer, more accurate │
+│   trajectories.                                                       │
+│ • **Educational value** – illustrates how non‑conservative forces   │
+│   alter motion.                                                       │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Disadvantages                                │
+│                                                                       │
+│ • **Mathematical complexity** – analytical solutions exist only for  │
+│   simple drag models; numerical integration is often required.       │
+│ • **Parameter sensitivity** – accurate drag coefficients depend on   │
+│   shape, spin, and atmospheric conditions, which may be hard to       │
+│   measure.                                                            │
+│ • **Computation cost** – real‑time simulations need iterative solvers│
+│   for quadratic drag.                                                │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Important Notes                              │
+│                                                                       │
+│ • The formulas shown assume **linear drag**.  Real projectiles at    │
+│   typical speeds often experience **quadratic drag** (∝ v²).          │
+│ • For quadratic drag the solution involves the **Lambert W** function│
+│   and is usually solved numerically.                                 │
+│ • Air density changes with altitude; for high‑arc shots the drag    │
+│   coefficient *k* may vary during flight.                           │
+│ • The “terminal velocity” in the vertical direction is v_t = mg/k for │
+│   linear drag; it caps the downward speed.                           │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Summary                                      │
+│                                                                       │
+│ Adding air resistance transforms the ideal parabola into a curve     │
+│ that rises to a lower apex, lands sooner, and displays an exponential│
+│ decay of speed.  The linear‑drag model gives closed‑form expressions │
+│ for x(t) and y(t), highlighting the role of the time constant τ = m/k │
+│ in shaping the motion.  Understanding these effects is essential for │
+│ accurate predictions in ballistics, sports, and aerospace.          │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Suggested Questions                           │
+│                                                                       │
+│ 1. How does increasing the drag coefficient *k* affect the range?     │
+│ 2. Derive the expression for the maximum height when linear drag is   │
+│    present.                                                          │
+│ 3. Compare the trajectories for linear vs. quadratic drag on the same │
+│    projectile.                                                       │
+│ 4. What happens to the flight time if the projectile mass is doubled?│
+│ 5. How would you modify the model to include wind (a constant horizontal│
+│    velocity of the air)?                                             │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│                           Comparative Table                            │
+│                                                                       │
+│ ┌───────────────────────┬───────────────────────┬─────────────────────┐ │
+│ │ Feature               │ No Air Resistance     │ With Linear Drag    │ │
+│ ├───────────────────────┼───────────────────────┼─────────────────────┤ │
+│ │ Trajectory shape      │ Perfect parabola      │ Flattened, exponential│ │
+│ │ Maximum height (h)    │ h = v₀² sin²θ / (2g)   │ h ↓ (depends on k)   │ │
+│ │ Horizontal range (R) │ R = v₀² sin2θ / g     │ R ↓ (≈ (m/k) v₀ cosθ)│ │
+│ │ Time of flight (T)   │ T = 2v₀ sinθ / g      │ T ↑ (linear drag)    │ │
+│ │ Speed at impact       │ √(v₀²)                │ < √(v₀²)             │ │
+│ └───────────────────────┴───────────────────────┴─────────────────────┘ │
+│                                                                       │
+│ *Values decrease (↑) or increase (↓) relative to the vacuum case.*   │
+└───────────────────────────────────────────────────────────────────────┘

@@ -1,0 +1,450 @@
+<thinking>
+The user wants me to explain Archimedes' principle with an example. I need to render this as structured UI blocks - like an interactive textbook, not a markdown document. Let me think about how to structure this content.
+
+I need to create:
+1. Section cards for different parts of the explanation
+2. Formula cards for any formulas
+3. Tables as cards with responsive tables
+4. Interactive elements
+
+Let me plan the content:
+
+1. Quick Definition card
+2. Key Concepts card
+3. Formula Card (Buoyant Force)
+4. How it Works card
+5. Example card (object in water)
+6. Applications card
+7. Important Notes card
+
+For the formula:
+- Buoyant Force: F_b = ρ_fluid × V_displaced × g
+
+Let me write the JSX/component structure. Since I'm an AI in a chat interface, I need to render this using HTML/CSS or React components. Let me think about what format to use.
+
+Looking at the system prompt, it seems like I should be outputting structured UI components. I'll render this as React components with proper styling.
+
+Let me create a comprehensive response with:
+- Proper card components
+- Formula cards with KaTeX
+- Interactive elements
+- Tables in cards
+
+I'll write this as React JSX that can be rendered in the interface.
+</thinking>
+
+```tsx
+import { useState } from "react";
+import katex from "katex";
+
+const renderMath = (tex: string, display = false) => {
+  return katex.renderToString(tex, { displayMode: display, throwOnError: false });
+};
+
+export default function ArchimedesPrinciple() {
+  const [formulaOpen, setFormulaOpen] = useState(false);
+  const [labOpen, setLabOpen] = useState(false);
+  const [density, setDensity] = useState(1000);
+  const [volume, setVolume] = useState(0.5);
+  const buoyantForce = (density * volume * 9.8).toFixed(2);
+
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-8 space-y-5 font-sans">
+
+      {/* ── Topic Header ── */}
+      <div className="bg-gradient-to-r from-blue-700 to-cyan-600 rounded-2xl px-7 py-6 text-white shadow-lg">
+        <p className="text-xs font-semibold uppercase tracking-widest opacity-80 mb-1">
+          Physics · Fluid Mechanics
+        </p>
+        <h1 className="text-3xl font-bold">Archimedes' Principle</h1>
+        <p className="mt-2 text-blue-100 text-sm">
+          The foundational law behind buoyancy — discovered circa 250 BCE.
+        </p>
+      </div>
+
+      {/* ── Quick Definition ── */}
+      <div className="bg-white border border-slate-200 rounded-2xl px-6 py-5 shadow-sm">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+            Definition
+          </span>
+        </div>
+        <p className="text-slate-700 text-[15px] leading-relaxed">
+          Any object fully or partially submerged in a fluid experiences an
+          <strong className="text-blue-700"> upward buoyant force</strong> equal
+          to the <strong>weight of the fluid it displaces</strong>.
+        </p>
+        <div className="mt-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-xl px-4 py-3 text-slate-600 text-sm italic">
+          "Eureka!" — Archimedes, upon discovering this principle in his bath.
+        </div>
+      </div>
+
+      {/* ── Formula Card ── */}
+      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-slate-50 border-b border-slate-200 px-6 py-3 flex items-center gap-2">
+          <span className="bg-violet-100 text-violet-700 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+            Core Formula
+          </span>
+          <span className="text-slate-400 text-xs ml-auto">Buoyant Force</span>
+        </div>
+        <div className="px-6 py-7 flex flex-col items-center">
+          <div
+            className="text-2xl"
+            dangerouslySetInnerHTML={{
+              __html: renderMath(
+                "F_b = \\rho_{\\text{fluid}} \\times V_{\\text{displaced}} \\times g",
+                true
+              ),
+            }}
+          />
+
+          {/* Variable breakdown toggle */}
+          <button
+            onClick={() => setFormulaOpen(!formulaOpen)}
+            className="mt-5 text-sm text-violet-600 border border-violet-300 rounded-lg px-4 py-1.5 hover:bg-violet-50 transition"
+          >
+            {formulaOpen ? "▲ Hide" : "▼ Explain"} Formula
+          </button>
+
+          {formulaOpen && (
+            <div className="mt-4 w-full rounded-xl bg-slate-50 border border-slate-200 overflow-hidden">
+              <table className="w-full text-sm text-left">
+                <thead>
+                  <tr className="bg-slate-100 text-slate-500 text-xs uppercase tracking-wide">
+                    <th className="px-4 py-2">Symbol</th>
+                    <th className="px-4 py-2">Meaning</th>
+                    <th className="px-4 py-2">SI Unit</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200">
+                  {[
+                    ["F_b", "Buoyant Force", "Newton (N)"],
+                    ["\\rho_{\\text{fluid}}", "Density of fluid", "kg/m³"],
+                    ["V_{\\text{displaced}}", "Volume of fluid displaced", "m³"],
+                    ["g", "Acceleration due to gravity", "m/s² (≈ 9.8)"],
+                  ].map(([sym, meaning, unit]) => (
+                    <tr key={sym} className="hover:bg-white transition">
+                      <td
+                        className="px-4 py-2 font-mono text-violet-700"
+                        dangerouslySetInnerHTML={{
+                          __html: renderMath(sym),
+                        }}
+                      />
+                      <td className="px-4 py-2 text-slate-700">{meaning}</td>
+                      <td className="px-4 py-2 text-slate-500">{unit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Formula Lab toggle */}
+          <button
+            onClick={() => setLabOpen(!labOpen)}
+            className="mt-3 text-sm text-cyan-600 border border-cyan-300 rounded-lg px-4 py-1.5 hover:bg-cyan-50 transition"
+          >
+            🧪 {labOpen ? "Close" : "Open"} Formula Lab
+          </button>
+
+          {labOpen && (
+            <div className="mt-4 w-full bg-cyan-50 border border-cyan-200 rounded-xl px-5 py-4 space-y-4">
+              <p className="text-xs font-semibold text-cyan-700 uppercase tracking-wide">
+                Formula Lab — Try It Yourself
+              </p>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">
+                    Fluid Density (kg/m³)
+                  </label>
+                  <input
+                    type="range"
+                    min={500}
+                    max={13600}
+                    step={100}
+                    value={density}
+                    onChange={(e) => setDensity(Number(e.target.value))}
+                    className="w-full accent-cyan-600"
+                  />
+                  <span className="text-sm text-slate-700 font-semibold">
+                    {density} kg/m³
+                  </span>
+                  <p className="text-xs text-slate-400">
+                    {density <= 1000
+                      ? "≈ Water or lighter"
+                      : density <= 1025
+                      ? "≈ Seawater"
+                      : "≈ Denser fluid (e.g. Mercury at 13,600)"}
+                  </p>
+                </div>
+
+                <div>
+                  <label className="text-xs text-slate-600 font-medium block mb-1">
+                    Displaced Volume (m³)
+                  </label>
+                  <input
+                    type="range"
+                    min={0.1}
+                    max={2}
+                    step={0.1}
+                    value={volume}
+                    onChange={(e) => setVolume(Number(e.target.value))}
+                    className="w-full accent-cyan-600"
+                  />
+                  <span className="text-sm text-slate-700 font-semibold">
+                    {volume} m³
+                  </span>
+                </div>
+              </div>
+
+              <div className="bg-white border border-cyan-300 rounded-lg px-4 py-3 text-center">
+                <p className="text-xs text-slate-500 mb-1">Buoyant Force</p>
+                <div
+                  className="text-xl text-cyan-700 font-bold"
+                  dangerouslySetInnerHTML={{
+                    __html: renderMath(
+                      `F_b = ${density} \\times ${volume} \\times 9.8 = ${buoyantForce}\\text{ N}`,
+                      true
+                    ),
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── Worked Example ── */}
+      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 flex items-center gap-2">
+          <span className="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+            Worked Example
+          </span>
+          <span className="text-slate-400 text-xs ml-auto">
+            A wooden block in water
+          </span>
+        </div>
+        <div className="px-6 py-5 space-y-4">
+          <p className="text-slate-600 text-sm">
+            A wooden block of volume{" "}
+            <strong>0.003 m³</strong> is fully submerged in water
+            (density = <strong>1000 kg/m³</strong>). Find the buoyant force.
+          </p>
+
+          {/* Step-by-step */}
+          {[
+            {
+              step: "1",
+              label: "Identify known values",
+              content: (
+                <div className="space-y-1 text-sm text-slate-600">
+                  <p>
+                    Fluid density:{" "}
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: renderMath("\\rho = 1000 \\text{ kg/m}^3"),
+                      }}
+                    />
+                  </p>
+                  <p>
+                    Displaced volume:{" "}
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: renderMath("V = 0.003 \\text{ m}^3"),
+                      }}
+                    />
+                  </p>
+                  <p>
+                    Gravity:{" "}
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: renderMath("g = 9.8 \\text{ m/s}^2"),
+                      }}
+                    />
+                  </p>
+                </div>
+              ),
+            },
+            {
+              step: "2",
+              label: "Apply the formula",
+              content: (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: renderMath(
+                      "F_b = 1000 \\times 0.003 \\times 9.8",
+                      true
+                    ),
+                  }}
+                />
+              ),
+            },
+            {
+              step: "3",
+              label: "Calculate",
+              content: (
+                <div
+                  className="text-green-700 font-semibold"
+                  dangerouslySetInnerHTML={{
+                    __html: renderMath("F_b = 29.4 \\text{ N}", true),
+                  }}
+                />
+              ),
+            },
+          ].map(({ step, label, content }) => (
+            <div key={step} className="flex gap-4">
+              <div className="flex-shrink-0 w-7 h-7 rounded-full bg-amber-500 text-white text-xs font-bold flex items-center justify-center mt-0.5">
+                {step}
+              </div>
+              <div className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">
+                  {label}
+                </p>
+                {content}
+              </div>
+            </div>
+          ))}
+
+          <div className="bg-green-50 border border-green-200 rounded-xl px-4 py-3 text-sm text-green-800">
+            ✅ The water exerts an upward buoyant force of{" "}
+            <strong>29.4 N</strong> on the wooden block. If this exceeds the
+            block's weight, it floats.
+          </div>
+        </div>
+      </div>
+
+      {/* ── Floating vs Sinking ── */}
+      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-slate-50 border-b border-slate-200 px-6 py-3">
+          <span className="bg-slate-200 text-slate-700 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+            Key Concept
+          </span>
+          <span className="text-slate-500 text-xs ml-3">
+            Why do objects float or sink?
+          </span>
+        </div>
+        <div className="px-6 py-5">
+          <div className="overflow-x-auto rounded-xl border border-slate-200">
+            <table className="w-full text-sm text-left">
+              <thead>
+                <tr className="bg-slate-100 text-slate-500 text-xs uppercase tracking-wide">
+                  <th className="px-4 py-3">Condition</th>
+                  <th className="px-4 py-3">Comparison</th>
+                  <th className="px-4 py-3">Result</th>
+                  <th className="px-4 py-3">Example</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200">
+                {[
+                  {
+                    cond: "Float",
+                    comp: "F_b > W",
+                    result: "Object rises",
+                    ex: "Wood in water",
+                    color: "text-green-600",
+                    bg: "bg-green-50",
+                  },
+                  {
+                    cond: "Neutral",
+                    comp: "F_b = W",
+                    result: "Suspended mid-fluid",
+                    ex: "Submarine hovering",
+                    color: "text-blue-600",
+                    bg: "bg-blue-50",
+                  },
+                  {
+                    cond: "Sink",
+                    comp: "F_b < W",
+                    result: "Object sinks",
+                    ex: "Iron in water",
+                    color: "text-red-600",
+                    bg: "bg-red-50",
+                  },
+                ].map(({ cond, comp, result, ex, color, bg }) => (
+                  <tr key={cond} className={`${bg} hover:brightness-95 transition`}>
+                    <td className={`px-4 py-3 font-bold ${color}`}>{cond}</td>
+                    <td
+                      className="px-4 py-3"
+                      dangerouslySetInnerHTML={{ __html: renderMath(comp) }}
+                    />
+                    <td className="px-4 py-3 text-slate-700">{result}</td>
+                    <td className="px-4 py-3 text-slate-500 italic">{ex}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Applications ── */}
+      <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-slate-50 border-b border-slate-200 px-6 py-3">
+          <span className="bg-teal-100 text-teal-700 text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+            Real-World Applications
+          </span>
+        </div>
+        <div className="px-6 py-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {[
+            { icon: "🚢", title: "Ships", desc: "Hull displaces enough water to float despite being heavy" },
+            { icon: "🎈", title: "Hot Air Balloons", desc: "Buoyancy in air — less dense than surrounding air" },
+            { icon: "🤿", title: "Submarines", desc: "Control buoyancy by adjusting ballast water" },
+            { icon: "🧪", title: "Hydrometers", desc: "Measure fluid density using float depth" },
+            { icon: "🏊", title: "Swimming", desc: "Human body is close in density to water" },
+            { icon: "🛢️", title: "Icebergs", desc: "~90% submerged — ice slightly less dense than water" },
+          ].map(({ icon, title, desc }) => (
+            <div
+              key={title}
+              className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 hover:border-teal-300 hover:bg-teal-50 transition"
+            >
+              <p className="text-2xl mb-1">{icon}</p>
+              <p className="font-semibold text-slate-700 text-sm">{title}</p>
+              <p className="text-xs text-slate-500 mt-0.5">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Important Note ── */}
+      <div className="bg-yellow-50 border border-yellow-300 rounded-2xl px-6 py-4 flex gap-3 shadow-sm">
+        <span className="text-2xl">⚠️</span>
+        <div>
+          <p className="font-semibold text-yellow-800 text-sm mb-1">
+            Important Note
+          </p>
+          <p className="text-yellow-700 text-sm leading-relaxed">
+            Archimedes' principle applies to <strong>any fluid</strong> — not
+            just water. This includes liquids and gases. The buoyant force
+            depends on the <em>fluid's density</em> and the{" "}
+            <em>volume displaced</em>, not on the object's own density or
+            material.
+          </p>
+        </div>
+      </div>
+
+      {/* ── Summary ── */}
+      <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-2xl px-6 py-5 shadow-lg">
+        <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">
+          Summary
+        </p>
+        <ul className="space-y-2 text-sm text-slate-200">
+          {[
+            "Buoyant force acts upward on any submerged object.",
+            "It equals the weight of the displaced fluid.",
+            "If buoyant force ≥ weight → object floats.",
+            "Depends on fluid density and displaced volume, not object material.",
+            "Applies to all fluids: liquids and gases alike.",
+          ].map((point, i) => (
+            <li key={i} className="flex gap-2">
+              <span className="text-cyan-400 font-bold">→</span>
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  );
+}
+```

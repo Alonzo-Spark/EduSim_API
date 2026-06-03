@@ -1,0 +1,159 @@
+I'll render this as a structured interactive textbook experience.
+
+```json
+{
+  "topic": "Momentum & Conservation of Momentum",
+  "subject": "Physics",
+  "sections": [
+    {
+      "type": "introduction",
+      "title": "Introduction",
+      "content": "Momentum is one of the most fundamental concepts in classical mechanics. It describes the quantity of motion an object possesses and plays a central role in analyzing collisions, explosions, and interactions between objects."
+    },
+    {
+      "type": "definition",
+      "title": "What is Momentum?",
+      "content": "Momentum is the product of an object's mass and its velocity. It is a **vector quantity** — it has both magnitude and direction.",
+      "formula": {
+        "id": "momentum-def",
+        "title": "Definition of Momentum",
+        "latex": "\\vec{p} = m\\vec{v}",
+        "variables": [
+          { "symbol": "\\vec{p}", "name": "Momentum", "unit": "kg·m/s" },
+          { "symbol": "m", "name": "Mass", "unit": "kg" },
+          { "symbol": "\\vec{v}", "name": "Velocity", "unit": "m/s" }
+        ]
+      }
+    },
+    {
+      "type": "concept",
+      "title": "Newton's Second Law — The Foundation",
+      "content": "Before deriving conservation of momentum, we revisit Newton's Second Law in its most general form.",
+      "formula": {
+        "id": "newton-second",
+        "title": "Newton's Second Law (General Form)",
+        "latex": "\\vec{F} = \\frac{d\\vec{p}}{dt}",
+        "note": "Force equals the rate of change of momentum. This is more general than F = ma."
+      }
+    },
+    {
+      "type": "derivation",
+      "title": "Deriving the Law of Conservation of Momentum",
+      "steps": [
+        {
+          "step": 1,
+          "heading": "Consider a Two-Body System",
+          "content": "Let two objects A and B interact with each other. Let F_AB be the force exerted by A on B, and F_BA be the force exerted by B on A."
+        },
+        {
+          "step": 2,
+          "heading": "Apply Newton's Third Law",
+          "content": "By Newton's Third Law, every action has an equal and opposite reaction.",
+          "formula": {
+            "id": "third-law",
+            "title": "Newton's Third Law",
+            "latex": "\\vec{F}_{AB} = -\\vec{F}_{BA}"
+          }
+        },
+        {
+          "step": 3,
+          "heading": "Express Forces as Rate of Change of Momentum",
+          "content": "Using Newton's Second Law in its general form for each body:",
+          "formula": {
+            "id": "force-momentum",
+            "title": "Forces as Momentum Rates",
+            "latex": "\\frac{d\\vec{p}_A}{dt} = -\\frac{d\\vec{p}_B}{dt}"
+          }
+        },
+        {
+          "step": 4,
+          "heading": "Rearrange",
+          "content": "Bringing both terms to one side:",
+          "formula": {
+            "id": "rearrange",
+            "title": "Rearranged Form",
+            "latex": "\\frac{d\\vec{p}_A}{dt} + \\frac{d\\vec{p}_B}{dt} = 0"
+          }
+        },
+        {
+          "step": 5,
+          "heading": "Combine into Total Momentum",
+          "content": "Since the derivative of a sum equals the sum of derivatives:",
+          "formula": {
+            "id": "total-momentum-deriv",
+            "title": "Total Momentum Derivative",
+            "latex": "\\frac{d}{dt}(\\vec{p}_A + \\vec{p}_B) = 0"
+          }
+        },
+        {
+          "step": 6,
+          "heading": "Conclusion",
+          "content": "If the derivative of total momentum is zero, total momentum is constant.",
+          "formula": {
+            "id": "conservation-law",
+            "title": "Law of Conservation of Momentum",
+            "latex": "\\vec{p}_A + \\vec{p}_B = \\text{constant}",
+            "note": "The total momentum of an isolated system remains constant if no external force acts on it."
+          }
+        }
+      ]
+    },
+    {
+      "type": "formula",
+      "title": "Conservation in Collision Form",
+      "content": "For a collision between two objects, conservation of momentum is written as:",
+      "formula": {
+        "id": "collision-form",
+        "title": "Collision Form",
+        "latex": "m_1\\vec{u}_1 + m_2\\vec{u}_2 = m_1\\vec{v}_1 + m_2\\vec{v}_2",
+        "variables": [
+          { "symbol": "m_1, m_2", "name": "Masses of objects 1 and 2", "unit": "kg" },
+          { "symbol": "\\vec{u}_1, \\vec{u}_2", "name": "Initial velocities", "unit": "m/s" },
+          { "symbol": "\\vec{v}_1, \\vec{v}_2", "name": "Final velocities", "unit": "m/s" }
+        ]
+      }
+    },
+    {
+      "type": "table",
+      "title": "Types of Collisions",
+      "columns": ["Type", "Momentum Conserved?", "Kinetic Energy Conserved?", "Example"],
+      "rows": [
+        ["Elastic", "✅ Yes", "✅ Yes", "Billiard balls"],
+        ["Inelastic", "✅ Yes", "❌ No", "Car crash"],
+        ["Perfectly Inelastic", "✅ Yes", "❌ No (maximum loss)", "Clay balls sticking together"]
+      ]
+    },
+    {
+      "type": "applications",
+      "title": "Real-World Applications",
+      "items": [
+        { "icon": "🚀", "title": "Rocket Propulsion", "detail": "Exhaust gases expelled backward give the rocket forward momentum." },
+        { "icon": "🎱", "title": "Billiards & Collisions", "detail": "Ball trajectories are predicted using momentum conservation." },
+        { "icon": "💥", "title": "Explosions", "detail": "Fragments fly apart such that total momentum remains zero if system was at rest." },
+        { "icon": "🛹", "title": "Recoil of a Gun", "detail": "Bullet moves forward; gun recoils backward — total momentum stays zero." }
+      ]
+    },
+    {
+      "type": "important",
+      "title": "Key Conditions",
+      "points": [
+        "The system must be **isolated** — no net external force.",
+        "Internal forces between parts of the system do NOT affect total momentum.",
+        "Momentum is conserved in **all directions** independently (x, y, z).",
+        "Conservation of momentum does NOT require conservation of kinetic energy."
+      ]
+    },
+    {
+      "type": "summary",
+      "title": "Summary",
+      "points": [
+        "Momentum p = mv is a vector quantity.",
+        "Newton's Second Law: F = dp/dt.",
+        "Newton's Third Law leads directly to conservation of momentum.",
+        "Total momentum of an isolated system is always conserved.",
+        "Applies to elastic, inelastic, and perfectly inelastic collisions."
+      ]
+    }
+  ]
+}
+```

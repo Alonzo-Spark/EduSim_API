@@ -1,0 +1,67 @@
+### 🟢 EVENT DETECTED: ELASTIC COLLISION
+**System State:** `mass_1 == mass_2` | `initial_velocity_2 = 0` | `1D-Manifold`
+
+---
+
+#### 📘 Quick Definition
+A **Perfectly Elastic Collision** between two equal masses is a momentum exchange event where kinetic energy is conserved. In this specific configuration, the system undergoes a complete **Velocity Swap**.
+
+---
+
+#### 🧮 Main Formula: Conservation of Momentum
+┌──────────────────────────────────────────────────────────┐
+│ **Linear Momentum Transfer**                             │
+│                                                          │
+│ $$m_1v_1 + m_2v_2 = m_1v_1' + m_2v_2'$$                  │
+│                                                          │
+│ ℹ️ Since $m_1 = m_2$, the masses cancel out, leaving:    │
+│ $$v_1 + v_2 = v_1' + v_2'$$                              │
+│                                                          │
+│ [ 🔬 Open Formula Lab ]                                  │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+#### 🧮 Main Formula: Kinetic Energy Conservation
+┌──────────────────────────────────────────────────────────┐
+│ **Energy Invariance**                                    │
+│                                                          │
+│ $$\frac{1}{2}m_1v_1^2 + \frac{1}{2}m_2v_2^2 = \text{const}$$ │
+│                                                          │
+│ ℹ️ For equal masses, the relative velocity of approach   │
+│ equals the relative velocity of separation.              │
+│                                                          │
+│ [ 🔬 Open Formula Lab ]                                  │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+#### 📊 Post-Collision State Table
+| Parameter | Object A (Striker) | Object B (Target) |
+| :--- | :--- | :--- |
+| **Initial Velocity** | $v$ | $0$ |
+| **Final Velocity** | $0$ | $v$ |
+| **Momentum Change** | $-mv$ | $+mv$ |
+| **Energy State** | Stationary | Maximum Kinetic |
+
+---
+
+#### 💡 Key Concept: The Velocity Swap
+When two identical masses collide elastically:
+1.  **Object A** comes to a complete halt.
+2.  **Object B** takes on the exact velocity and direction Object A had prior to impact.
+3.  **Coefficient of Restitution ($e$):** In this ideal sandbox environment, $e = 1.0$.
+
+---
+
+#### ⚠️ Important Notes
+*   **Frictionless Constraint:** These calculations assume a coefficient of friction $\mu = 0$.
+*   **Point Mass Approximation:** Rotation and torque are ignored unless "Rigid Body Dynamics" is toggled ON.
+*   **Vector Signage:** If Object A moves right (+), the resulting velocity of Object B will remain (+).
+
+---
+
+#### ❓ Suggested Questions
+*   "What happens if Mass A is twice the size of Mass B?"
+*   "How does the 'Inelastic' setting change the energy output?"
+*   "Calculate the Impulse $(J)$ during the contact time $\Delta t$."

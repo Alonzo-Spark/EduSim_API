@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 16,
+  "question": "Work, Energy and Power: Define work and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWork is defined as the measure of energy transfer that occurs when an external force acts on an object and causes it to move through a displacement distance. \n\nWork is a scalar quantity calculated as the dot product of the applied force vector and the displacement vector.\n\n---\n\n## Characteristics\n\n* **Directional Orientation Dependency:** Work value can scale as positive, negative, or zero depending on the angle between the force and displacement vectors.\n* **Zero Work Scenarios:** No work is performed if the object remains stationary ($\\Delta x = 0$) or if the applied force vector acts at a right angle ($90^\\circ$) relative to the motion.\n\n---\n\n## Formula\n\nThe mathematical dot product defining mechanical work:\n\n$$W = Fs \\cos(\\theta)$$\n\nWhere:\n* $W$ represents the work scalar value\n* $F$ represents the magnitude of the applied force vector\n* $s$ represents the magnitude of the displacement vector\n* $\\theta$ represents the angle between the force and displacement paths\n\n---\n\n## Metric System Units\n\nThe standard SI unit of work is the **Joule ($\\text{J}$)**, which is defined as the work performed when a constant force of $1 \\text{ Newton}$ displaces an object through a distance of $1 \\text{ meter}$ along its line of action.\n\n$$1 \\text{ J} = 1 \\text{ N} \\cdot \\text{m} = 1 \\text{ kg} \\cdot \\text{m}^2/\\text{s}^2$$\n\n---\n\n## Summary\n\nWork measures mechanical energy conversion, directly proportional to force intensity and displacement length, with a dependency on their mutual vector alignment angle.",
+  "candidate_response": "# Work, Energy and Power\n\n---\n\n## What is Work?\n\nIn physics, **work** is said to be done when a **force applied on an object causes displacement** in the direction of the force.\n\n---\n\n## Definition\n\n> Work is defined as the product of the force applied on an object and the displacement produced in the direction of the force.\n\n---\n\n## Formula\n\n$$W = F \\cdot d \\cdot \\cos\\theta$$\n\n**Where:**\n\n| Symbol | Meaning | SI Unit |\n|--------|---------|---------|\n| $W$ | Work done | Joule (J) |\n| $F$ | Applied Force | Newton (N) |\n| $d$ | Displacement | Metre (m) |\n| $\\theta$ | Angle between Force and Displacement | Degrees / Radians |\n\n---\n\n## SI Unit of Work\n\n$$1 \\text{ Joule} = 1 \\text{ Newton} \\times 1 \\text{ Metre}$$\n\n$$1 \\text{ J} = 1 \\text{ N·m}$$\n\n> **The SI unit of Work is the Joule (J)**, named after the physicist **James Prescott Joule**.\n\n**1 Joule** is defined as the work done when a force of **1 Newton** displaces an object by **1 metre** in the direction of the force.\n\n---\n\n## Special Cases\n\n| Condition | Angle $\\theta$ | Work Done |\n|-----------|---------------|-----------|\n| Force and displacement in **same direction** | $0°$ | $W = Fd$ (Maximum) |\n| Force applied at an **angle** | $0° < \\theta < 90°$ | $W = Fd\\cos\\theta$ |\n| Force **perpendicular** to displacement | $90°$ | $W = 0$ |\n| Force **opposite** to displacement | $180°$ | $W = -Fd$ (Negative Work) |\n\n---\n\n## Key Conditions for Work to be Done\n\nWork is done **only if** all three conditions are met:\n\n- ✅ A **force** must be applied\n- ✅ The object must undergo **displacement**\n- ✅ There must be a **component of force** in the direction of displacement\n\n---\n\n## Quick Example\n\nA person pushes a box with a force of **10 N** and it moves **3 metres** in the same direction.\n\n$$W = F \\times d = 10 \\times 3 = 30 \\text{ J}$$\n\n> **Work done = 30 Joules**",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of work, its definition, formula, and SI unit. The layout is well-structured, and the presentation is clear and readable. The use of tables and formulas enhances the educational value of the response. However, there are minor areas for improvement, such as providing more detailed explanations for special cases and including more examples to illustrate the concept. Additionally, the response could benefit from a brief introduction to the importance of work in physics and its relationship to energy and power.",
+  "candidate_token_usage": {
+    "promptTokens": 438,
+    "completionTokens": 605,
+    "totalTokens": 1043
+  },
+  "candidate_latency_ms": 12660,
+  "candidate_cost_usd": 0.001648,
+  "judge_token_usage": {
+    "promptTokens": 1291,
+    "completionTokens": 163,
+    "totalTokens": 1454
+  },
+  "judge_latency_ms": 8801,
+  "judge_cost_usd": 0.0011657999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:25:27.274Z"
+}

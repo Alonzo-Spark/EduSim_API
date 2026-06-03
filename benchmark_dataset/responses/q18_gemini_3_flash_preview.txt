@@ -1,0 +1,89 @@
+<div id="textbook-container" style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #202124; line-height: 1.6; max-width: 800px; margin: auto; background-color: #f8f9fa; padding: 20px; border-radius: 12px;">
+
+  <!-- INTRODUCTION SECTION -->
+  <section style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 5px solid #4285f4;">
+    <h2 style="margin-top: 0; color: #1a73e8; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;">Introduction</h2>
+    <p>When an object is raised against the force of gravity, work is done on it. This work is stored in the object as <strong>Gravitational Potential Energy (GPE)</strong>. The amount of energy depends on the object's mass, the height it reaches, and the strength of gravity.</p>
+  </section>
+
+  <!-- KEY CONCEPTS SECTION -->
+  <section style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #1a73e8; font-size: 1.1rem;">Key Concepts</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+      <thead>
+        <tr style="border-bottom: 2px solid #eee; text-align: left;">
+          <th style="padding: 10px;">Parameter</th>
+          <th style="padding: 10px;">Value</th>
+          <th style="padding: 10px;">Unit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #eee;">
+          <td style="padding: 10px;">Mass ($m$)</td>
+          <td style="padding: 10px;">5</td>
+          <td style="padding: 10px;">kg</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #eee;">
+          <td style="padding: 10px;">Height ($h$)</td>
+          <td style="padding: 10px;">10</td>
+          <td style="padding: 10px;">m</td>
+        </tr>
+        <tr>
+          <td style="padding: 10px;">Gravity ($g$)</td>
+          <td style="padding: 10px;">9.8 (approx. 10)</td>
+          <td style="padding: 10px;">m/s²</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- FORMULA CARD -->
+  <section style="background: #e8f0fe; border-radius: 12px; padding: 25px; margin-bottom: 20px; border: 1px solid #aecbfa; text-align: center;">
+    <span style="display: block; font-weight: bold; color: #1967d2; margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase;">Main Formula</span>
+    <div style="font-size: 1.8rem; margin: 15px 0; color: #202124;">
+      $$U = mgh$$
+    </div>
+    <div style="background: white; border-radius: 6px; padding: 10px; display: inline-block; font-size: 0.9rem; color: #5f6368; border: 1px solid #dadce0;">
+      <strong>U</strong> = Potential Energy (Joules) | 
+      <strong>m</strong> = Mass | 
+      <strong>g</strong> = Gravity | 
+      <strong>h</strong> = Height
+    </div>
+    <div style="margin-top: 20px;">
+        <button style="background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">Open Formula Lab</button>
+    </div>
+  </section>
+
+  <!-- CALCULATION STEPS -->
+  <section style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #1a73e8; font-size: 1.1rem;">Step-by-Step Solution</h2>
+    <ol style="padding-left: 20px; color: #3c4043;">
+      <li style="margin-bottom: 10px;"><strong>Identify Given Values:</strong> $m = 5\,kg$, $h = 10\,m$, and we assume $g = 9.8\,m/s^2$.</li>
+      <li style="margin-bottom: 10px;"><strong>Substitute into Formula:</strong> $PE = 5 \times 9.8 \times 10$.</li>
+      <li style="margin-bottom: 10px;"><strong>Final Calculation:</strong> $PE = 490\,J$.</li>
+    </ol>
+  </section>
+
+  <!-- IMPORTANT NOTES -->
+  <section style="background: #fef7e0; border-radius: 8px; padding: 15px; margin-bottom: 20px; border-left: 5px solid #fbbc04;">
+    <h3 style="margin: 0 0 10px 0; font-size: 1rem; color: #b06000;">Important Notes</h3>
+    <ul style="margin: 0; padding-left: 20px; font-size: 0.95rem;">
+      <li>Potential energy is relative to a reference point (usually the ground).</li>
+      <li>If using $g = 10\,m/s^2$ for simplicity, the result is exactly $500\,J$.</li>
+    </ul>
+  </section>
+
+  <!-- SUGGESTED QUESTIONS -->
+  <section style="background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #1a73e8; font-size: 1.1rem;">Suggested Questions</h2>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="padding: 10px; border: 1px solid #eee; border-radius: 6px; cursor: pointer; hover: background #f1f3f4;">
+        "What happens to the potential energy if the height is doubled?"
+      </div>
+      <div style="padding: 10px; border: 1px solid #eee; border-radius: 6px; cursor: pointer;">
+        "Calculate the kinetic energy if the body is dropped from this height just before it hits the ground."
+      </div>
+    </div>
+  </section>
+
+</div>

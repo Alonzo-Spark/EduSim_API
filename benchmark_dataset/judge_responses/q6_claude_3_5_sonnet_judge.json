@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 6,
+  "question": "Motion in a Plane: Define projectile motion and explain its characteristics.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nProjectile motion is a form of motion experienced by an object or particle that is projected near the Earth's surface and moves along a curved path under the action of gravity alone. \n\nThe path followed by the projectile is called its trajectory, which always takes the geometric shape of a parabola.\n\n---\n\n## Characteristics\n\n* **Two-Dimensional Independent Motion:** The motion can be split into a horizontal component (constant velocity) and a vertical component (uniform acceleration due to gravity).\n* **Constant Horizontal Velocity:** Neglecting air resistance, there is no horizontal acceleration.\n* **Symmetrical Path:** The time taken to reach maximum height equals the time taken to descend back to the initial launch impact level.\n\n---\n\n## Formula\n\nThe initial velocity vector ($u$) broken down into its rectangular components:\n\n$$u_x = u \\cos(\\theta)$$\n\n$$u_y = u \\sin(\\theta)$$\n\nWhere:\n* $u_x$ represents the constant horizontal velocity component\n* $u_y$ represents the initial vertical velocity component\n* $\\theta$ represents the angle of projection with the horizontal plane\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Offers precise tracking vectors for basic structural ballistics projections. | Fails to incorporate atmospheric fluid dynamics or crosswinds. |\n| Breaks complex curved trajectories down into basic orthogonal linear equations. | The assumption of a flat Earth baseline fails over long, intercontinental ranges. |\n\n---\n\n## Summary\n\nProjectile motion combines steady horizontal cruise with uniform vertical gravitational acceleration. These components act simultaneously yet function independently, defining a clean parabolic trajectory profile.",
+  "candidate_response": "Here's the interactive lesson on **Projectile Motion**:\n\n---\n\n## 📖 Quick Definition\n\n> **Projectile Motion** is a form of motion experienced by an object that is launched into the air and moves under the influence of gravity alone (after the initial launch), following a curved path called a **trajectory**.\n\n---\n\n## ⚡ Key Characteristics\n\n| # | Characteristic | Details |\n|---|---------------|---------|\n| 1 | **Path Shape** | Always a **parabola** |\n| 2 | **Acceleration** | Only gravity acts → $a_x = 0$, $a_y = -g$ |\n| 3 | **Horizontal Motion** | Uniform (constant velocity) |\n| 4 | **Vertical Motion** | Uniformly accelerated (like free fall) |\n| 5 | **Independence** | Horizontal & vertical motions are **independent** |\n| 6 | **Launch Angle** | Determines range, height, and time of flight |\n\n---\n\n## 🔢 Core Equations\n\n### Horizontal Motion\n\n$$x = u\\cos\\theta \\cdot t$$\n\n### Vertical Motion\n\n$$y = u\\sin\\theta \\cdot t - \\frac{1}{2}gt^2$$\n\n### Velocity Components at time *t*\n\n$$v_x = u\\cos\\theta \\qquad v_y = u\\sin\\theta - gt$$\n\n---\n\n## 📐 Derived Formulas\n\n### 🔹 Time of Flight\n\n$$T = \\frac{2u\\sin\\theta}{g}$$\n\n> Total time the projectile stays in the air.\n\n---\n\n### 🔹 Maximum Height\n\n$$H = \\frac{u^2\\sin^2\\theta}{2g}$$\n\n> Reached when vertical velocity becomes **zero**.\n\n---\n\n### 🔹 Horizontal Range\n\n$$R = \\frac{u^2\\sin 2\\theta}{g}$$\n\n> Maximum when $\\theta = 45°$\n\n---\n\n## 🏆 Special Angle Results\n\n| Launch Angle $\\theta$ | Range $R$ | Height $H$ | Notes |\n|----------------------|-----------|------------|-------|\n| $15°$ | $\\frac{u^2}{2g}$ | Low | Short range |\n| $30°$ | $\\frac{u^2\\sqrt{3}}{2g}$ | Medium | — |\n| $45°$ | $\\frac{u^2}{g}$ | Medium | **Maximum Range** ✓ |\n| $60°$ | $\\frac{u^2\\sqrt{3}}{2g}$ | High | Same range as 30° |\n| $90°$ | $0$ | Maximum | Straight up, falls back |\n\n> **Note:** Angles that are **complementary** (add to 90°) give the **same horizontal range**.\n\n---\n\n## 🔗 Equation of Trajectory\n\nEliminating $t$ from the $x$ and $y$ equations:\n\n$$y = x\\tan\\theta - \\frac{gx^2}{2u^2\\cos^2\\theta}$$\n\nThis is of the form $y = ax - bx^2$ → a **downward parabola**, confirming the parabolic path.\n\n---\n\n## 📦 Variable Reference\n\n| Symbol | Meaning | SI Unit |\n|--------|---------|---------|\n| $u$ | Initial speed | m/s |\n| $\\theta$ | Launch angle | degrees / radians |\n| $g$ | Acceleration due to gravity ($9.8$) | m/s² |\n| $t$ | Time elapsed | s |\n| $T$ | Time of flight | s |\n| $H$ | Maximum height | m |\n| $R$ | Horizontal range | m |\n\n---\n\n## 🌍 Real-World Applications\n\n- 🏏 Cricket ball / baseball trajectory\n- 💣 Artillery and ballistics\n- 🚀 Rocket launches (initial phase)\n- ⚽ Kicking a football\n- 🎯 Long jump in athletics\n\n---\n\n## ⚠️ Important Assumptions\n\n> 1. Air resistance is **neglected**\n> 2. $g$ is **constant** throughout the motion\n> 3. The Earth's surface is **flat** (valid for short ranges)\n> 4. The projectile is treated as a **point mass**\n\n---\n\n## 💡 Quick Memory Tips\n\n- **Horizontal** → Think *train on flat track* → constant speed\n- **Vertical** → Think *free fall* → gravity pulls it down\n- **45°** → Always gives **maximum range**\n- **Complementary angles** → **Same range**",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of projectile motion, accurately covering its definition, characteristics, and key equations. The use of tables, formulas, and explanations enhances readability and comprehension. However, minor improvements could include discussing the limitations of the assumptions made (e.g., neglecting air resistance, constant g) in more detail and providing more real-world examples to illustrate the practical applications of projectile motion. Overall, the response is well-structured, clear, and effective in teaching the concept of projectile motion.",
+  "candidate_token_usage": {
+    "promptTokens": 439,
+    "completionTokens": 1132,
+    "totalTokens": 1571
+  },
+  "candidate_latency_ms": 22036,
+  "candidate_cost_usd": 0.002703,
+  "judge_token_usage": {
+    "promptTokens": 1712,
+    "completionTokens": 160,
+    "totalTokens": 1872
+  },
+  "judge_latency_ms": 10335,
+  "judge_cost_usd": 0.0014112,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:03:53.950Z"
+}

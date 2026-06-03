@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 57,
+  "question": "Live Sandbox: Describe the visual effect of increasing the driven frequency in a forced harmonic oscillator.",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nA spring-mass system is driven by an external motor that applies a periodic pushing force. We can adjust the driving frequency slider to observe how it interacts with the system's natural frequency.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nAs the driving frequency approaches the natural frequency of the spring, the amplitude of the oscillations grows larger. If the driving frequency is increased past this point, the motions become uncoordinated and the amplitude drops off significantly.\n\n### ✦ WHY IT HAPPENS\nMatching frequencies creates a condition called resonance, where the external force always pushes in the direction of the block's motion, transferring energy efficiently. If the driving frequency is too high, the force often opposes the motion, canceling out its own energy transfer.\n\n### ✦ WHAT TO NOTICE\nWatch the amplitude tracking envelope. Note how it peaks at a specific frequency match and falls off when the driving motor runs too fast.\n\n### ✦ FORMULA\nThe steady-state amplitude of a driven harmonic oscillator is given by:\n\n$$A = \\frac{F_0/m}{\\sqrt{(\\omega_0^2 - \\omega^2)^2 + (b\\omega/m)^2}}$$\n\n* $\\omega$ represents the external driving frequency parameter.\n* $\\omega_0$ represents the natural frequency of the system ($\\sqrt{k/m}$).\n* The amplitude ($A$) reaches its maximum when $\\omega \\approx \\omega_0$.\n\n### ✦ DEEPER UNDERSTANDING\nResonance depends on timing. When the driving force is synchronized with the system's natural timing, it builds up energy over multiple cycles, creating large-scale oscillations.\n\n### ✦ TRY THIS\n1. Slowly increase the **Driver frequency control** until you hit the peak resonant vibration amplitude.\n2. Turn the **Frequency slider** past the peak and observe the system return to small, uncoordinated movements.",
+  "candidate_response": "To understand the visual effect of increasing the driven frequency in a **forced harmonic oscillator**, let’s break it down:\n\n---\n\n### Quick Definition\nA **forced harmonic oscillator** is a system (e.g., a mass-spring or pendulum) subjected to an external periodic force. The system oscillates at the **driven frequency** (\\( \\omega_d \\)) of the external force, not just its natural frequency (\\( \\omega_0 \\)).\n\n---\n\n### Key Observations When Increasing Driven Frequency\n1. **Amplitude Response**:\n   - **Below Resonance** (\\( \\omega_d < \\omega_0 \\)):  \n     The oscillator follows the driver closely. Amplitude increases as \\( \\omega_d \\) approaches \\( \\omega_0 \\).\n   - **At Resonance** (\\( \\omega_d = \\omega_0 \\)):  \n     Amplitude peaks dramatically (resonance). Energy transfer is maximized.\n   - **Above Resonance** (\\( \\omega_d > \\omega_0 \\)):  \n     Amplitude decreases sharply. The system struggles to keep up with the driver.\n\n   ```math\n   \\text{Amplitude } A \\propto \\frac{1}{\\sqrt{(\\omega_0^2 - \\omega_d^2)^2 + (2\\beta\\omega_d)^2}}\n   ```\n   *(\\( \\beta \\): damping coefficient)*\n\n2. **Phase Shift**:\n   - **Low \\( \\omega_d \\)** → Oscillator moves **in phase** with the driver.\n   - **At \\( \\omega_d = \\omega_0 \\)** → Phase lag is **90°**.\n   - **High \\( \\omega_d \\)** → Oscillator lags by **180°** (out of phase).\n\n---\n\n### Visual Effects\n- **Amplitude Changes**:  \n  - Starting from low \\( \\omega_d \\), oscillations grow larger until resonance, then shrink.  \n  - Example: Pushing a swing—gentle pushes at its natural frequency make it swing high; pushing too fast reduces the effect.  \n\n- **Phase Behavior**:  \n  - Below resonance, the system moves in sync with the driver.  \n  - Above resonance, it moves oppositely (e.g., driver pushes left while the mass moves right).\n\n---\n\n### Formula Card: Resonance Amplitude\n\\boxed{A = \\frac{F_0/m}{\\sqrt{(\\omega_0^2 - \\omega_d^2)^2 + (2\\beta\\omega_d)^2}}}\n- \\( F_0 \\): Amplitude of driving force  \n- \\( m \\): Mass of the oscillator  \n\n| Parameter       | Effect on Amplitude          |\n|-----------------|------------------------------|\n| \\( \\omega_d ≈ \\omega_0 \\) | **Max amplitude** (resonance) |\n| High damping (\\( \\beta \\)) | Reduces peak amplitude       |\n\n---\n\n### Summary\nIncreasing \\( \\omega_d \\) causes:\n1. **Amplitude** to rise, peak at resonance, then fall.\n2. **Phase shift** from 0° to 180°, with a 90° lag at resonance.\n\n---\n\n### Suggested Questions\n1. How does damping affect the resonance peak?  \n2. Why does phase shift occur in forced oscillations?  \n3. What happens if \\( \\omega_d \\) is much greater than \\( \\omega_0 \\)?  \n\nLet me know if you’d like to explore these! 🎢",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts related to forced harmonic oscillators, including resonance, amplitude response, and phase shift. The use of formulas, such as the amplitude equation, is accurate and well-explained. The response is well-structured and easy to follow, with clear headings and concise descriptions. However, there are a few areas where the response could be improved. For example, the candidate could have provided more visual aids, such as diagrams or graphs, to help illustrate the concepts. Additionally, some of the sentences are a bit long and convoluted, which can make them difficult to follow. In terms of educational effectiveness, the response is clear and concise, but may benefit from more explicit explanations of key concepts for beginners. Overall, the response is of high quality and demonstrates a strong understanding of the subject matter.",
+  "candidate_token_usage": {
+    "promptTokens": 370,
+    "completionTokens": 1425,
+    "totalTokens": 1795
+  },
+  "candidate_latency_ms": 21385,
+  "candidate_cost_usd": 0.00332425,
+  "judge_token_usage": {
+    "promptTokens": 1536,
+    "completionTokens": 230,
+    "totalTokens": 1766
+  },
+  "judge_latency_ms": 8066,
+  "judge_cost_usd": 0.0014735999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:29:31.054Z"
+}

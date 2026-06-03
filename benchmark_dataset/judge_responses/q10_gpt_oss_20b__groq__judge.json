@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 10,
+  "question": "Differentiate between scalar and vector quantities with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nPhysical quantities in classical mechanics are categorized into two structural classes based on their directional dependence properties.\n\nA scalar quantity is a physical property that is completely described by its magnitude (a numerical value with its matching measurement unit) without any directional tracking context.\n\nA vector quantity is a physical property that requires both a defined magnitude and a clear spatial direction descriptor to be fully specified.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Scalar Quantities | Vector Quantities |\n| --- | --- | --- |\n| **Components** | Possess magnitude descriptors exclusively. | Require both magnitude and direction vectors. |\n| **Mathematical Logic** | Combine via basic algebraic addition. | Require vector addition laws (triangle law). |\n| **Graphic Profile** | Represented simply by static numbers. | Represented graphically by directed straight arrows. |\n\n---\n\n## Real-world Examples\n\n* **Scalar Class:** Speed ($50 \\text{ km/h}$), mass ($10 \\text{ kg}$), temperature ($37^\\circ\\text{C}$), and time interval ($12 \\text{ s}$).\n* **Vector Class:** Velocity ($50 \\text{ km/h due North}$), weight ($98 \\text{ N downward}$), and force ($15 \\text{ N applied East}$).\n\n---\n\n## Summary\n\nScalars maintain total independence from spatial alignment changes, while vectors update their identity if either their magnitude scales or their orientation axes shift.",
+  "candidate_response": "┌───────────────────────────────────────────────────────────────┐\n│                         Definition                           │\n│                                                               │\n│ A **scalar** is a physical quantity that is completely        │\n│ described by a magnitude (numerical value) and a unit. It     │\n│ has no direction.                                            │\n│                                                               │\n│ A **vector** is a physical quantity that is described by     │\n│ both a magnitude and a direction. It is represented by a     │\n│ magnitude, a direction (often an angle or a set of          │\n│ components), and a unit.                                      │\n└───────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────┐\n│                       Key Concepts                           │\n│                                                               │\n│ • **Components**: Scalars have one component (the magnitude). │\n│   Vectors have multiple components (e.g., horizontal and    │\n│   vertical components).                                       │\n│ • **Transformation**: Scalars remain unchanged under           │\n│   coordinate transformations. Vectors transform according to  │\n│   the rules of vector algebra.                                 │\n│ • **Addition**: Scalars add algebraically (e.g., 5 m + 3 m = 8 m). │\n│   Vectors add vectorially, requiring both magnitude and       │\n│   direction (e.g., 5 m i + 3 m j).                             │\n│ • **Physical Interpretation**: Scalars often represent       │\n│   quantities like mass, temperature, or energy. Vectors       │\n│   represent quantities like velocity, force, or displacement. │\n└───────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────┐\n│                          Examples                            │\n│                                                               │\n│ **Scalars**:                                                     │\n│   • Mass (kg)                                                   │\n│   • Temperature (°C)                                            │\n│   • Speed (m/s) – note: speed is the magnitude of velocity     │\n│   • Energy (J)                                                  │\n│   • Time (s)                                                    │\n│                                                               │\n│ **Vectors**:                                                     │\n│   • Velocity (m/s) – magnitude + direction                    │\n│   • Force (N)                                                   │\n│   • Displacement (m)                                            │\n│   • Acceleration (m/s²)                                         │\n│   • Electric field (N/C)                                        │\n│   • Momentum (kg·m/s)                                           │\n└───────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────┐\n│                          Summary                              │\n│                                                               │\n│ Scalars: single number + unit, no direction. Vectors: number   │\n│ + direction, represented by components or arrows. The choice   │\n│ between scalar and vector depends on whether direction is     │\n│ essential to the physical description.                        │\n└───────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of scalar and vector quantities, providing clear definitions, key concepts, and examples. The use of tables and concise language enhances readability. However, minor improvements could be made in formatting for better visual appeal and to enhance the distinction between different sections. Additionally, including more visual aids such as diagrams for vector representation could further improve the educational score. Overall, the response is accurate, well-structured, and effective in teaching the concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 427,
+    "completionTokens": 915,
+    "totalTokens": 1342
+  },
+  "candidate_latency_ms": 2215,
+  "candidate_cost_usd": 0.00030653,
+  "judge_token_usage": {
+    "promptTokens": 1339,
+    "completionTokens": 152,
+    "totalTokens": 1491
+  },
+  "judge_latency_ms": 7658,
+  "judge_cost_usd": 0.0011681999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:12:40.881Z"
+}

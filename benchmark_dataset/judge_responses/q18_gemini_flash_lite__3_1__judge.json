@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 18,
+  "question": "A body of mass 5 kg is lifted to a height of 10 m. Calculate potential energy.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Potential Energy Assessment\n\n### Problem\nA body of mass $5 \\text{ kg}$ is lifted vertically to a height of $10 \\text{ m}$. Calculate its gravitational potential energy.\n\n### Given\n* Mass of the body ($m$) = $5 \\text{ kg}$\n* Vertical height ($h$) = $10 \\text{ m}$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$U = mgh$$\n\n### Substitution\n$$U = 5 \\times 9.8 \\times 10$$\n\n### Calculation\n$$U = 49 \\times 10$$\n\n$$U = 490 \\text{ J}$$\n\n### Final Answer\n**Potential Energy ($U$) = $490 \\text{ J}$**\n\n### Interpretation\nThis indicates that lifting the object stores $490 \\text{ Joules}$ of mechanical energy within the gravity field, which can convert back into kinetic energy if the object is released.",
+  "candidate_response": "Here's the breakdown of the problem, rendered in the interactive textbook style:\n\n**Introduction**\n\nThis section explores the concept of potential energy, a fundamental concept in physics. We'll calculate the potential energy gained by a body when lifted against the force of gravity.\n\n**Formula Card**\n\n┌───────────────────────────┐\n│ Potential Energy Formula  │\n│                           │\n│  $$PE = mgh$$            │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n**Key Concepts**\n\n*   **Potential Energy (PE):** The energy stored in an object due to its position relative to a force field (like gravity).\n*   **Mass (m):** The amount of matter in the object (measured in kilograms, kg).\n*   **Gravity (g):** The acceleration due to gravity (approximately 9.8 m/s² on Earth).\n*   **Height (h):** The vertical distance the object is lifted (measured in meters, m).\n\n**Problem Breakdown**\n\nWe are given:\n\n*   Mass (m) = 5 kg\n*   Height (h) = 10 m\n*   Acceleration due to gravity (g) = 9.8 m/s²\n\n**Calculation**\n\nUsing the formula $$PE = mgh$$, we can substitute the given values:\n\n$$PE = (5 \\text{ kg}) \\cdot (9.8 \\text{ m/s}^2) \\cdot (10 \\text{ m})$$\n\n$$PE = 490 \\text{ Joules}$$\n\n**Answer**\n\nThe potential energy of the body is 490 Joules.\n\n**Summary**\n\nWe successfully calculated the potential energy of an object by applying the formula $$PE = mgh$$. This demonstrates how potential energy increases with mass, height, and the strength of the gravitational field.\n\n**Suggested Questions**\n\n1.  How would the potential energy change if the height was doubled?\n2.  What would the potential energy be if the object was on the moon (where gravity is different)?\n3.  Explain the difference between potential and kinetic energy.\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately calculates the potential energy using the correct formula PE = mgh and provides a clear, step-by-step breakdown of the problem. The response is well-structured, easy to follow, and effectively teaches the concept of potential energy. The use of interactive elements, such as the formula card and suggested questions, enhances the educational value of the response. However, to achieve a perfect score, the candidate could provide more detailed explanations of the concepts and formulas, and include additional examples or illustrations to support the teaching.",
+  "candidate_token_usage": {
+    "promptTokens": 392,
+    "completionTokens": 470,
+    "totalTokens": 862
+  },
+  "candidate_latency_ms": 3254,
+  "candidate_cost_usd": 0.0014454,
+  "judge_token_usage": {
+    "promptTokens": 1109,
+    "completionTokens": 164,
+    "totalTokens": 1273
+  },
+  "judge_latency_ms": 6237,
+  "judge_cost_usd": 0.001059,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:29:12.214Z"
+}

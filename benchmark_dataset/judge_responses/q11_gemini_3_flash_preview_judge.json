@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 11,
+  "question": "Laws of Motion: State Newton’s three laws of motion with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's laws of motion are three fundamental physical axioms that define the relationships linking the forces acting on a body to its resulting structural dynamic motion.\n\n---\n\n## The Three Axioms\n\n### 1. Newton's First Law (Law of Inertia)\nAn object will remain at rest or continue moving at a constant velocity in a straight line unless acted upon by an external net unbalanced force.\n\n### 2. Newton's Second Law (Law of Force and Acceleration)\nThe acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, occurring in the direction of the applied net force.\n\n### 3. Newton's Third Law (Law of Action and Reaction)\nWhen one body exerts a force on a second body, the second body simultaneously exerts a force equal in magnitude and opposite in direction on the first body.\n\n---\n\n## Formula\n\nThe mathematical expression summarizing the second law of motion:\n\n$$F = ma$$\n\nWhere:\n* $F$ represents the net force vector acting on the mass\n* $m$ represents the invariant inertial mass value\n* $a$ represents the resulting uniform acceleration vector\n\n---\n\n## Real-world Examples\n\n* **First Law Application:** A passenger jolts forward when a speeding transit bus hits the brakes suddenly because their body maintains its forward inertial velocity.\n* **Second Law Application:** Pushing an empty shopping cart causes it to accelerate much faster than pushing a cart filled with heavy grocery items using the same effort.\n* **Third Law Application:** A swimmer pushes water backward with their hands, and the water simultaneously pushes the swimmer forward with an equal force vector.\n\n---\n\n## Summary\n\nNewton's laws form the structural core of classical mechanics, defining force as the fundamental driver that disrupts rest states, generates linear acceleration profiles, and generates equal reactions.",
+  "candidate_response": "### 📘 THE PHYSICS CORE: NEWTON’S LAWS OF MOTION\n\n---\n\n| 🧩 **Quick Definition** |\n| :--- |\n| **Mechanics** is the branch of physics dealing with the motion of objects and the forces that cause that motion. Sir Isaac Newton formulated three fundamental laws that describe the relationship between a body and the forces acting upon it. |\n\n---\n\n### 🟢 SECTION 1: THE LAW OF INERTIA (FIRST LAW)\n\n**The Concept:** An object will not change its motion unless acted upon by an external force. If it is at rest, it stays at rest. If it is moving, it keeps moving at the same speed and direction.\n\n┌──────────────────────────────────────────────────────────┐\n│ **Key Characteristics**                                  │\n│ • **Inertia:** The inherent resistance of an object to   │\n│   change its state of motion.                            │\n│ • **Mass Connection:** Greater mass = Greater inertia.    │\n└──────────────────────────────────────────────────────────┘\n\n> **Real-World Example:** When a bus suddenly stops, passengers jerk forward. Their bodies were in motion and \"want\" to stay in motion due to inertia.\n\n---\n\n### 🔵 SECTION 2: THE LAW OF ACCELERATION (SECOND LAW)\n\n**The Concept:** The acceleration of an object depends on the net force acting upon the object and the mass of the object.\n\n┌──────────────────────────────────────────────────────────┐\n│ 📐 **Main Formula**                                      │\n│                                                          │\n│                  $$F = m \\cdot a$$                       │\n│                                                          │\n│ **Variables:**                                           │\n│ • $F$ = Net Force (Newtons, $N$)                         │\n│ • $m$ = Mass (Kilograms, $kg$)                           │\n│ • $a$ = Acceleration ($m/s^2$)                           │\n│                                                          │\n│ [ 🔬 Open Formula Lab ] [ 📘 Detailed Derivation ]       │\n└──────────────────────────────────────────────────────────┘\n\n> **Real-World Example:** It is much easier to push an empty shopping cart (low mass) than a full one (high mass). To get the full cart to move at the same speed, you must apply much more force.\n\n---\n\n### 🔴 SECTION 3: THE LAW OF ACTION & REACTION (THIRD LAW)\n\n**The Concept:** For every action, there is an equal and opposite reaction. Forces always exist in pairs.\n\n| Action Force | Reaction Force |\n| :--- | :--- |\n| You push against a wall | The wall pushes back on you |\n| A rocket expels gas downward | The gas pushes the rocket upward |\n| A bird's wing pushes air down | The air pushes the bird up |\n\n> **Important Note:** Action and reaction forces act on **different** objects, which is why they do not cancel each other out.\n\n---\n\n### 📊 SUMMARY COMPARISON\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Law Summary Table**                                                   │\n│                                                                          │\n| Law | Focus | Core Message |\n| :--- | :--- | :--- |\n| **1st Law** | Inertia | Objects are \"lazy\"; they resist change. |\n| **2nd Law** | Force/Mass | Force equals mass times acceleration. |\n| **3rd Law** | Interactions | You cannot touch without being touched back. |\n└──────────────────────────────────────────────────────────────────────────┘\n\n---\n\n### ❓ KNOWLEDGE CHECK\n\n1.  **Conceptual:** Why do athletes run some distance before taking a long jump? (Hint: Law 1)\n2.  **Calculation:** How much force is required to accelerate a $5kg$ bowling ball at $2m/s^2$?\n3.  **Application:** When you jump off a small rowing boat into a pier, why does the boat move backward?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately covers Newton's three laws of motion, including the law of inertia, the law of acceleration, and the law of action and reaction. The response is well-structured, readable, and effectively uses tables, formulas, and examples to illustrate key concepts. The use of real-world examples, such as the bus suddenly stopping and the swimmer pushing water, helps to clarify the laws of motion. The response also includes a summary table and knowledge check questions to reinforce understanding. However, there are some minor formatting issues and the response could benefit from more detailed explanations of certain concepts, such as the derivation of the formula F = ma. Overall, the response demonstrates a strong understanding of Newton's laws of motion and effectively communicates this understanding to the reader.",
+  "candidate_token_usage": {
+    "promptTokens": 385,
+    "completionTokens": 825,
+    "totalTokens": 1210
+  },
+  "candidate_latency_ms": 6009,
+  "candidate_cost_usd": 0.0026675,
+  "judge_token_usage": {
+    "promptTokens": 1631,
+    "completionTokens": 212,
+    "totalTokens": 1843
+  },
+  "judge_latency_ms": 2976,
+  "judge_cost_usd": 0.0014874,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:16:31.463Z"
+}

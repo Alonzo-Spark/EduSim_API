@@ -1,0 +1,84 @@
+┌─────────────────────────────────────────────────────────────────────┐
+│ Quick Definition                                                    │
+│                                                                     │
+│ In a mass‑spring system the **stiffness constant** \(k\) controls   │
+│ how strongly the spring resists deformation. It appears in Hooke’s │
+│ law \(F = -k\,x\) and determines the natural period \(T =          │
+│ 2\pi\sqrt{m/k}\). Doubling \(k\) makes the spring “stiffer.”        │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ Key Concepts                                                       │
+│                                                                     │
+│ • **Frequency increases** – The angular frequency is            │
+│   \(\omega = \sqrt{k/m}\). If \(k\) is doubled, \(\omega\) becomes │
+│   \(\sqrt{2}\) times larger.                                      │
+│ • **Period shortens** – The period \(T = 2\pi/\omega\) is reduced │
+│   by a factor of \(\sqrt{2}\).                                    │
+│ • **Speed of motion rises** – The maximum velocity \(v_{\max} =   │
+│   \omega A\) grows proportionally to \(\sqrt{k}\).                │
+│ • **Amplitude unchanged** – If the initial displacement \(A\) is │
+│   fixed, the amplitude stays the same; only the timing changes.   │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ Main Formula                                                       │
+│                                                                     │
+│ \(\displaystyle T = 2\pi \sqrt{\frac{m}{k}}\)                       │
+│                                                                     │
+│ [ Explain Formula ]                                                │
+│ [ Open Formula Lab ]                                               │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ Responsive Table                                                   │
+│                                                                     │
+│ | Stiffness \(k\) | Period \(T\) (s) | Frequency \(f\) (Hz) |      │
+│ |-----------------|-------------------|----------------------|------│
+│ | \(k\)           | \(2\pi\sqrt{m/k}\) | \(\frac{1}{2\pi}\sqrt{k/m}\) |      │
+│ | \(2k\)          | \(\frac{2\pi}{\sqrt{2}}\sqrt{\frac{m}{k}}\) | \(\frac{1}{2\pi}\sqrt{2k/m}\) |      │
+│ |                 | \(\approx 0.707\,T\) | \(\approx 1.414\,f\) |      │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ Live Sandbox (Conceptual)                                          │
+│                                                                     │
+│ • Imagine a cart attached to a spring. Doubling the spring’s      │
+│   stiffness makes the cart oscillate faster, completing a full    │
+│   back‑and‑forth in roughly \(0.707\) of the original time. The   │
+│   visual trajectory becomes a tighter, faster‑moving sine wave.   │
+│ • The cart’s maximum speed increases, but the peak displacement   │
+│   remains the same if the initial push is unchanged.              │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ Summary                                                            │
+│                                                                     │
+│ Doubling the stiffness constant \(k\) shortens the period by     │
+│ \(\sqrt{2}\), increases the frequency by \(\sqrt{2}\), and raises  │
+│ the maximum speed by the same factor, while leaving the amplitude │
+│ unchanged.                                                         │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ Suggested Questions                                                │
+│                                                                     │
+│ 1. If the mass is doubled while \(k\) is doubled, what happens   │
+│    to the period?                                                  │
+│ 2. How would a change in amplitude affect the maximum speed when  │
+│    \(k\) is doubled?                                               │
+│ 3. In a real spring, why might the period not change exactly as   │
+│    predicted by the ideal formula when \(k\) is increased?         │
+└─────────────────────────────────────────────────────────────────────┘

@@ -1,0 +1,94 @@
+┌───────────────────────────────────────────────┐
+│               **Spring Stretched Peak**        │
+│               Runtime Overlay Response          │
+│                                               │
+│  • **Event ID**: spring_stretched               │
+│  • **Trigger Condition**: spring length > Lₘₐₓ │
+│  • **Timestamp**: {{CURRENT_TIME}}             │
+│  • **Source Module**: Physics Sandbox Engine    │
+│                                               │
+│  [▶️ View Full Log]   [⚙️ Reset Spring]        │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│               **Event Details**                │
+│                                               │
+│  **Current Length (x)**      : {{x}} m          │
+│  **Maximum Allowed Length**  : {{Lₘₐₓ}} m      │
+│  **Extension beyond limit**  : {{Δx}} m        │
+│  **Spring Constant (k)**     : {{k}} N/m      │
+│  **Rest Length (x₀)**         : {{x₀}} m       │
+│                                               │
+│  • The spring has exceeded its designed stretch │
+│    limit, potentially causing structural failure│
+│  • Immediate actions recommended:               │
+│      – Pause simulation                         │
+│      – Reset spring to safe length              │
+│                                               │
+│  [⏸️ Pause Simulation]   [🔄 Reset Spring]     │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│               **Formula Card**                 │
+│               Hooke’s Law (Force)              │
+│                                               │
+│        **F = -k · (x – x₀)**                   │
+│                                               │
+│  • **F** – Restoring force (N)                 │
+│  • **k** – Spring constant (N/m)               │
+│  • **x** – Current length (m)                  │
+│  • **x₀** – Rest length (m)                    │
+│                                               │
+│  [🔎 Explain Formula]   [🧪 Open Formula Lab]   │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│               **Formula Card**                 │
+│        Elastic Potential Energy (U)            │
+│                                               │
+│        **U = ½ k · (x – x₀)²**                 │
+│                                               │
+│  • Energy stored due to spring extension        │
+│  • Useful for assessing impact of over‑stretch │
+│                                               │
+│  [🔎 Explain Formula]   [🧪 Open Formula Lab]   │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│               **Parameter Table**              │
+│                                               │
+│  ┌───────────────┬───────────────┬────────────┐ │
+│  │ Parameter     │ Symbol        │ Value      │ │
+│  ├───────────────┼───────────────┼────────────┤ │
+│  │ Spring Constant│ k            │ {{k}} N/m │ │
+│  │ Rest Length    │ x₀           │ {{x₀}} m  │ │
+│  │ Max Length     │ Lₘₐₓ         │ {{Lₘₐₓ}} m│ │
+│  │ Current Length │ x            │ {{x}} m   │ │
+│  │ Over‑stretch   │ Δx = x‑Lₘₐₓ  │ {{Δx}} m  │ │
+│  └───────────────┴───────────────┴────────────┘ │
+│                                               │
+│  [💾 Export Table]   [🔍 Inspect Values]       │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│               **Suggested Actions**            │
+│                                               │
+│  1️⃣ **Pause** the simulation to prevent       │
+│      further stress on the spring.            │
+│  2️⃣ **Reset** the spring length to ≤ Lₘₐₓ.     │
+│  3️⃣ **Log** the event details for analysis.   │
+│  4️⃣ **Adjust** spring parameters (k, Lₘₐₓ) if │
+│      the design limits are too restrictive.   │
+│                                               │
+│  [✅ Action Completed]   [❓ Need Help?]       │
+└───────────────────────────────────────────────┘

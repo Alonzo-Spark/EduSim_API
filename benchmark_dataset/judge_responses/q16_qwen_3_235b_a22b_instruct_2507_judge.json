@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 16,
+  "question": "Work, Energy and Power: Define work and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWork is defined as the measure of energy transfer that occurs when an external force acts on an object and causes it to move through a displacement distance. \n\nWork is a scalar quantity calculated as the dot product of the applied force vector and the displacement vector.\n\n---\n\n## Characteristics\n\n* **Directional Orientation Dependency:** Work value can scale as positive, negative, or zero depending on the angle between the force and displacement vectors.\n* **Zero Work Scenarios:** No work is performed if the object remains stationary ($\\Delta x = 0$) or if the applied force vector acts at a right angle ($90^\\circ$) relative to the motion.\n\n---\n\n## Formula\n\nThe mathematical dot product defining mechanical work:\n\n$$W = Fs \\cos(\\theta)$$\n\nWhere:\n* $W$ represents the work scalar value\n* $F$ represents the magnitude of the applied force vector\n* $s$ represents the magnitude of the displacement vector\n* $\\theta$ represents the angle between the force and displacement paths\n\n---\n\n## Metric System Units\n\nThe standard SI unit of work is the **Joule ($\\text{J}$)**, which is defined as the work performed when a constant force of $1 \\text{ Newton}$ displaces an object through a distance of $1 \\text{ meter}$ along its line of action.\n\n$$1 \\text{ J} = 1 \\text{ N} \\cdot \\text{m} = 1 \\text{ kg} \\cdot \\text{m}^2/\\text{s}^2$$\n\n---\n\n## Summary\n\nWork measures mechanical energy conversion, directly proportional to force intensity and displacement length, with a dependency on their mutual vector alignment angle.",
+  "candidate_response": "┌───────────────────────────┐  \n│ **Quick Definition**      │  \n│                           │  \n│ **Work** is said to be done when a force applied on an object causes it to move in the direction of the force. │  \n│                           │  \n│ **SI Unit**: joule (J)    │  \n└───────────────────────────┘  \n\n---\n\n### Introduction  \nIn physics, **work** is a fundamental concept that describes the transfer of energy when a force acts on an object over a distance. It plays a central role in understanding motion, energy, and power in mechanical systems.\n\n---\n\n┌───────────────────────────┐  \n│ **Key Concept**           │  \n│                           │  \n│ Work is only done when:   │  \n│ 1. A force is applied     │  \n│ 2. The object moves       │  \n│ 3. The displacement is in the direction of the force (or has a component in that direction) │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Main Formula**          │  \n│                           │  \n│ $$                         │  \n│ W = F \\cdot d \\cdot \\cos\\theta  \n$$                         │  \n│                           │  \n│ **W** = Work done         │  \n│ **F** = Magnitude of force applied │  \n│ **d** = Magnitude of displacement │  \n│ **θ** = Angle between force and displacement vectors │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n---\n\n### Important Notes  \n- If the object does **not move**, no work is done — regardless of how much force is applied.  \n- When force and displacement are in the **same direction** (θ = 0°), work is **maximum and positive**.  \n- When force is **perpendicular** to displacement (θ = 90°), work done is **zero**.  \n- When force opposes motion (θ = 180°), work is **negative** (e.g., friction doing negative work).  \n\n---\n\n### SI Unit of Work  \nThe SI unit of work is the **joule (J)**.  \n$$\n1~\\text{joule} = 1~\\text{newton} \\times 1~\\text{meter} \\quad \\text{or} \\quad 1~\\text{J} = 1~\\text{N·m}\n$$\n\nThis means that **1 joule** of work is done when a force of **1 newton** moves an object by **1 meter** in the direction of the force.\n\n---\n\n### Real-Life Examples  \n| Situation                     | Work Done? | Explanation |  \n|------------------------------|------------|-----------|  \n| Pushing a wall that doesn't move | No       | No displacement → $ W = 0 $ |  \n| Lifting a book upward        | Yes        | Force and displacement are aligned |  \n| Carrying a box horizontally  | Zero (by lifting force) | Force is vertical, displacement horizontal → $ \\theta = 90^\\circ $, $ \\cos 90^\\circ = 0 $ |  \n| Slowing down a sliding box using friction | Negative work | Friction acts opposite to displacement |  \n\n---\n\n### Connection to Energy  \nWork is closely related to energy:  \n> **\"Work is the process of transferring energy.\"**\n\n- When work is done **on** an object, energy is **transferred to** it.  \n- When work is done **by** an object, it **loses energy**.  \n- Hence, **work and energy have the same unit: the joule (J)**.\n\n---\n\n### Summary  \n- **Work** is defined as the product of force, displacement, and the cosine of the angle between them.  \n- Work is a **scalar quantity** — it has magnitude but no direction.  \n- The **SI unit** is the **joule (J)**.  \n- Work can be **positive, negative, or zero**, depending on the direction of force relative to motion.  \n\n---\n\n### Suggested Questions  \n1. Can work be negative? Give an example.  \n2. Why is no work done when carrying a heavy bag horizontally?  \n3. How is work related to energy transfer?  \n4. Calculate the work done when a force of 10 N moves an object 5 m along its direction.  \n5. What happens to the work done if the angle between force and displacement is 60°?  \n\nLet me know if you'd like to explore **Work-Energy Theorem**, **Power**, or **Kinetic & Potential Energy** next!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively teaches the concept of work in physics. The use of tables, formulas, and explanations is clear and concise. The response covers all necessary aspects, including the definition, formula, units, and examples. The only minor improvements could be adding more visual aids, such as diagrams, to further illustrate the concepts. Additionally, some of the sections, like 'Real-Life Examples' and 'Suggested Questions', could be expanded to provide more comprehensive coverage. However, overall, the response is excellent and effectively communicates the subject matter.",
+  "candidate_token_usage": {
+    "promptTokens": 360,
+    "completionTokens": 984,
+    "totalTokens": 1344
+  },
+  "candidate_latency_ms": 7672,
+  "candidate_cost_usd": 0.002328,
+  "judge_token_usage": {
+    "promptTokens": 1760,
+    "completionTokens": 177,
+    "totalTokens": 1937
+  },
+  "judge_latency_ms": 5924,
+  "judge_cost_usd": 0.0014807999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:25:27.203Z"
+}

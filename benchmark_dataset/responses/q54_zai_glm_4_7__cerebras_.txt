@@ -1,0 +1,128 @@
+┌─────────────────────────────────────────────────────────────┐
+│ INTRODUCTION                                                │
+│                                                             │
+│ When a planet orbits a star, it exists in a delicate balance│
+│ between its forward motion (tangential velocity) and the    │
+│ inward pull of gravity.                                     │
+│                                                             │
+│ If a planet's tangential velocity is suddenly reduced below │
+│ the speed required for a circular orbit, it can no longer   │
+│ maintain its current distance from the star. It begins to   │
+│ fall inward, transforming its trajectory from a circle into │
+│ an elliptical orbit.                                        │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ KEY CONCEPTS                                                │
+│                                                             │
+│ • Tangential Velocity: The instantaneous speed of the planet│
+│   moving perpendicular to the line connecting it to the star│
+│                                                             │
+│ • Centripetal Force: The net force required to keep an      │
+│   object moving in a circular path (provided by gravity).   │
+│                                                             │
+│ • Apoapsis: The point in an orbit farthest from the focus   │
+│   (the star). In this scenario, the starting point becomes  │
+│   the apoapsis.                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ MAIN FORMULA                                                │
+│                                                             │
+│         v_circ = √(GM / r)                                  │
+│                                                             │
+│ Where:                                                      │
+│ • G is the gravitational constant                           │
+│ • M is the mass of the central star                         │
+│ • r is the orbital radius                                   │
+│                                                             │
+│ [ Explain Formula ]       [ Open Formula Lab ]              │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ ORBITAL ANALYSIS                                            │
+│                                                             │
+│ 1. Initial State:                                            │
+│    The planet orbits at radius r with velocity v. If v <    │
+│    v_circ, the gravitational force exceeds the required     │
+│    centripetal force for that radius.                       │
+│                                                             │
+│ 2. The "Fall":                                               │
+│    Because gravity is stronger than needed for a circle,    │
+│    the planet is pulled inward. As it falls, potential      │
+│    energy is converted into kinetic energy.                 │
+│                                                             │
+│ 3. Acceleration:                                             │
+│    Paradoxically, as the planet gets closer to the star, it │
+│    speeds up. It moves fastest at the closest point         │
+│    (periapsis).                                              │
+│                                                             │
+│ 4. New Orbit:                                                │
+│    The planet settles into an elliptical orbit where the    │
+│    original starting point is now the farthest point from   │
+│    the star (Apoapsis).                                      │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ COMPARISON TABLE                                            │
+│                                                             │
+│ ┌─────────────────────┬──────────────────┬──────────────────┐│
+│ │ Parameter           │ Circular Orbit   │ Reduced Velocity ││
+│ │                     │ (Stable)         │ (v < v_circ)     ││
+│ ├─────────────────────┼──────────────────┼──────────────────┤│
+│ │ Shape               │ Perfect Circle   │ Ellipse          ││
+│ │ Speed at Start      │ Constant         │ Decreasing       ││
+│ │ Distance to Star    │ Constant         │ Decreasing       ││
+│ │ Energy Status       │ Equilibrium      │ Falling Inward   ││
+│ └─────────────────────┴──────────────────┴──────────────────┘│
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ IMPORTANT NOTES                                             │
+│                                                             │
+│ • Crash Risk: If the velocity is reduced significantly, the │
+│   periapsis (closest point) may be inside the physical body │
+│   of the star, causing a collision.                         │
+│                                                             │
+│ • Conservation of Angular Momentum: The planet speeds up    │
+│   as it gets closer not because of a new force, but because │
+│   angular momentum (L = mvr) must be conserved.             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ SUMMARY                                                     │
+│                                                             │
+│ Reducing tangential velocity below the stable circular speed│
+│ breaks the equilibrium of forces. Gravity pulls the planet  │
+│ inward, converting the circular path into an elliptical one │
+│ where the planet "falls" toward the star, accelerating as   │
+│ it approaches the periapsis.                                │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ SUGGESTED QUESTIONS                                         │
+│                                                             │
+│ • What happens if the velocity is reduced to zero?          │
+│ • How does the orbital period change in the new ellipse?    │
+│ • What is the relationship between kinetic and potential    │
+│   energy during the fall?                                   │
+└─────────────────────────────────────────────────────────────┘
+
+=========================================================
+FORMULA LAB EXTRACTION DATA
+=========================================================
+```json
+[
+  {
+    "formula": "v_{circ} = \\sqrt{\\frac{GM}{r}}",
+    "title": "Circular Velocity",
+    "surroundingContext": "If a planet's tangential velocity is suddenly reduced below the speed required for a circular orbit...",
+    "variables": [
+      { "symbol": "v", "meaning": "Tangential Velocity" },
+      { "symbol": "G", "meaning": "Gravitational Constant" },
+      { "symbol": "M", "meaning": "Mass of the Star" },
+      { "symbol": "r", "meaning": "Orbital Radius" }
+    ]
+  }
+]
+```

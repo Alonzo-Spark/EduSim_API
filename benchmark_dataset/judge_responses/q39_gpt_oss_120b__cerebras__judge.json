@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 39,
+  "question": "Define wavelength, frequency, and amplitude of a wave.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWavelength, frequency, and amplitude are primary parameters used to quantify and describe the physical properties of wave propagation through space and time.\n\n---\n\n## Core Wave Metrics\n\n### 1. Wavelength ($\\lambda$)\nWavelength is the spatial distance between two consecutive points that are in the same phase of oscillation, such as the distance between two adjacent wave crests or troughs.\n\n### 2. Frequency ($f$)\nFrequency is the number of complete wave cycles or oscillations that pass a fixed reference point per unit of time, measured internationally in Hertz ($\\text{Hz}$).\n\n### 3. Amplitude ($A$)\nAmplitude is the maximum displacement of a medium's particles from their equilibrium position as a wave passes through.\n\n---\n\n## Formula\n\nThe wave speed equation linking these parameters is defined as:\n\n$$v = f\\lambda$$\n\nWhere:\n* $v$ represents the propagation velocity of the wave profile\n* $f$ represents the wave frequency\n* $\\lambda$ represents the wavelength value\n\n---\n\n## Summary\n\nWavelength measures a wave's spatial structure, frequency tracks its speed over time, and amplitude defines its energy intensity and displacement scale.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│ Wavelength                             │\n│                                       │\n│ The distance between two consecutive   │\n│ points of the same phase on a wave –  │\n│ for example, crest‑to‑crest or trough‑│\n│ to‑trough. It is usually denoted by λ   │\n│ and measured in meters (m).            │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Frequency                              │\n│                                       │\n│ The number of complete wave cycles that│\n│ pass a given point each second. It is  │\n│ expressed in hertz (Hz), where 1 Hz =   │\n│ one cycle per second. Frequency is the│\n│ inverse of the period (T): f = 1/T.     │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Amplitude                               │\n│                                       │\n│ The maximum displacement of a point   │\n│ on the wave from its equilibrium (rest│\n│ position). It indicates the wave’s     │\n│ energy or intensity and is measured in │\n│ the same units as the quantity being   │\n│ displaced (e.g., meters for a mechanical│\n│ wave, volts for an electromagnetic wave).│\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines wavelength, frequency, and amplitude, aligning with the gold reference answer. However, it lacks the wave speed equation and the summary section, which are present in the gold reference. The layout and formatting are unique but clear and readable. To improve, the candidate could include the wave speed equation and provide a summary section to enhance the overall quality and educational effectiveness of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 428,
+    "completionTokens": 477,
+    "totalTokens": 905
+  },
+  "candidate_latency_ms": 716,
+  "candidate_cost_usd": 0.0003504,
+  "judge_token_usage": {
+    "promptTokens": 970,
+    "completionTokens": 140,
+    "totalTokens": 1110
+  },
+  "judge_latency_ms": 4143,
+  "judge_cost_usd": 0.000918,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:28:09.809Z"
+}

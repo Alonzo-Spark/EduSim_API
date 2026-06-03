@@ -1,0 +1,86 @@
+Here's a breakdown of Coulomb's Law, presented in an interactive textbook format.
+
+---
+
+### Quick Definition
+
+Coulomb's Law describes the electrostatic interaction between electrically charged particles. It quantifies the force between two stationary, charged objects.
+
+---
+
+### Main Formula
+
+$$
+F = k \frac{|q_1 q_2|}{r^2}
+$$
+
+Where:
+*   $F$ is the magnitude of the electrostatic force between the charges.
+*   $k$ is Coulomb's constant, approximately $8.987 \times 10^9 \text{ N} \cdot \text{m}^2/\text{C}^2$.
+*   $q_1$ and $q_2$ are the magnitudes of the two point charges.
+*   $r$ is the distance between the centers of the two charges.
+
+[ Explain Formula ]
+[ Open Formula Lab ]
+
+---
+
+### Key Concepts
+
+*   **Point Charges:** Coulomb's Law is most accurately applied to point charges, which are idealized charged objects with negligible size. For extended objects, it can be used by considering the objects as a collection of point charges or by using integration.
+*   **Inverse Square Law:** The force diminishes rapidly with increasing distance, proportional to the inverse square of the distance between the charges. This is a common feature in many fundamental laws of physics (e.g., Newton's Law of Universal Gravitation).
+*   **Magnitude and Direction:** The formula provides the *magnitude* of the force. The *direction* is determined by the nature of the charges:
+    *   Like charges (both positive or both negative) repel each other.
+    *   Opposite charges (one positive, one negative) attract each other.
+*   **Electrostatic Constant ($k$):** This constant, also known as the electric force constant or Coulomb's proportionality constant, relates the electric force to the charges and distance. It can also be expressed in terms of the permittivity of free space ($\epsilon_0$):
+    $$
+    k = \frac{1}{4\pi\epsilon_0}
+    $$
+    where $\epsilon_0 \approx 8.854 \times 10^{-12} \text{ C}^2/(\text{N} \cdot \text{m}^2)$.
+
+---
+
+### Vector Form of Coulomb's Law
+
+While the scalar form gives the magnitude, the vector form explicitly defines the direction of the force.
+
+$$
+\vec{F}_{12} = k \frac{q_1 q_2}{r^2} \hat{r}_{12}
+$$
+
+Where:
+*   $\vec{F}_{12}$ is the force exerted on charge $q_1$ by charge $q_2$.
+*   $\hat{r}_{12}$ is a unit vector pointing from $q_1$ to $q_2$.
+*   If the product $q_1 q_2$ is positive, the force is repulsive (in the direction of $\hat{r}_{12}$).
+*   If the product $q_1 q_2$ is negative, the force is attractive (in the opposite direction of $\hat{r}_{12}$).
+
+[ Explain Formula ]
+[ Open Formula Lab ]
+
+---
+
+### Characteristics of Electrostatic Force
+
+| Characteristic      | Description                                                                                             |
+| :------------------ | :------------------------------------------------------------------------------------------------------ |
+| **Conservative**    | The work done by the electrostatic force is independent of the path taken.                               |
+| **Central Force**   | The force acts along the line joining the centers of the two charges.                                   |
+| **Action-Reaction** | The force exerted by $q_1$ on $q_2$ is equal in magnitude and opposite in direction to the force by $q_2$ on $q_1$ (Newton's Third Law). |
+| **Permeates Space** | The force acts through empty space, without the need for a medium.                                      |
+
+---
+
+### Important Notes
+
+*   **Superposition Principle:** For systems with more than two charges, the net force on any single charge is the vector sum of the forces exerted by all other individual charges.
+*   **Limitations:** Coulomb's Law applies to static charges (not moving at high speeds). For charges moving at speeds comparable to the speed of light, relativistic effects and magnetic forces must be considered.
+*   **Analogy to Gravity:** Coulomb's Law is mathematically similar to Newton's Law of Universal Gravitation, both being inverse-square laws. However, gravitational force is always attractive, while electrostatic force can be either attractive or repulsive.
+
+---
+
+### Suggested Questions
+
+1.  How does the electrostatic force change if the distance between two charges is doubled?
+2.  What is the main difference between Coulomb's Law and Newton's Law of Universal Gravitation, despite their similar mathematical forms?
+3.  If you have three charges arranged in a triangle, how would you calculate the net force on one of the charges?
+4.  Explain the significance of Coulomb's constant ($k$) and the permittivity of free space ($\epsilon_0$).

@@ -1,0 +1,95 @@
+<div id="textbook-container" style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #202124; line-height: 1.6; max-width: 850px; margin: auto; padding: 20px; background-color: #f8f9fa;">
+
+  <!-- TOP HEADER -->
+  <header style="border-bottom: 3px solid #1a73e8; margin-bottom: 25px; padding-bottom: 10px;">
+    <h1 style="color: #1a73e8; font-size: 2.2rem; margin: 0;">Coulomb's Law of Electrostatics</h1>
+    <p style="color: #5f6368; font-style: italic; margin-top: 5px;">Fundamental Principles of Electric Force</p>
+  </header>
+
+  <!-- INTRODUCTION CARD -->
+  <section style="background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); padding: 20px; margin-bottom: 20px; border-left: 5px solid #1a73e8;">
+    <h2 style="margin-top: 0; color: #1a73e8; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;">Introduction</h2>
+    <p>The interaction between stationary electrically charged particles is governed by <strong>Coulomb's Law</strong>. Developed by Charles-Augustin de Coulomb in 1785, this law quantifies the amount of force exerted between two point charges.</p>
+  </section>
+
+  <!-- KEY CONCEPTS CARD -->
+  <section style="background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); padding: 20px; margin-bottom: 20px;">
+    <h2 style="margin-top: 0; color: #1a73e8; font-size: 1.2rem; text-transform: uppercase;">Key Concepts</h2>
+    <ul style="padding-left: 20px;">
+      <li><strong>Point Charges:</strong> Charges whose spatial dimensions are negligible compared to the distance between them.</li>
+      <li><strong>Nature of Force:</strong> Like charges repel; unlike charges attract.</li>
+      <li><strong>Line of Action:</strong> The force acts along the straight line joining the centers of the two charges.</li>
+    </ul>
+  </section>
+
+  <!-- DERIVATION / FORMULA CARD -->
+  <section style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 12px; margin-bottom: 25px; overflow: hidden;">
+    <div style="background: #f1f3f4; padding: 10px 20px; border-bottom: 1px solid #e0e0e0; font-weight: bold; color: #3c4043;">
+      Main Formula: Coulomb's Law
+    </div>
+    <div style="padding: 30px; text-align: center;">
+      <div style="font-size: 1.8rem; margin-bottom: 20px; color: #000;">
+        $$F = k \frac{|q_1 q_2|}{r^2}$$
+      </div>
+      <div style="display: flex; justify-content: center; gap: 10px;">
+        <button style="background: #1a73e8; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Explain Formula</button>
+        <button style="background: white; color: #1a73e8; border: 1px solid #1a73e8; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Open Formula Lab</button>
+      </div>
+    </div>
+    <div style="background: #fafafa; padding: 15px 20px; border-top: 1px solid #e0e0e0; font-size: 0.9rem;">
+      <strong>Variables:</strong><br>
+      • $F$: Electrostatic Force (Newtons, N)<br>
+      • $q_1, q_2$: Magnitudes of the charges (Coulombs, C)<br>
+      • $r$: Distance between charge centers (Meters, m)<br>
+      • $k$: Coulomb's constant $\approx 8.99 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2$
+    </div>
+  </section>
+
+  <!-- CHARACTERISTICS TABLE CARD -->
+  <section style="background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); padding: 20px; margin-bottom: 20px;">
+    <h2 style="margin-top: 0; color: #1a73e8; font-size: 1.2rem; text-transform: uppercase;">Proportionality Relationships</h2>
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+          <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+            <th style="padding: 12px; text-align: left;">Relationship</th>
+            <th style="padding: 12px; text-align: left;">Mathematical Form</th>
+            <th style="padding: 12px; text-align: left;">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 12px;">Direct Variation</td>
+            <td style="padding: 12px;">$F \propto q_1 q_2$</td>
+            <td style="padding: 12px;">Force is directly proportional to the product of charges.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 12px;">Inverse Square Law</td>
+            <td style="padding: 12px;">$F \propto \frac{1}{r^2}$</td>
+            <td style="padding: 12px;">Force decreases with the square of the distance.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- IMPORTANT NOTES CARD -->
+  <section style="background: #fff9e6; border-radius: 8px; padding: 20px; margin-bottom: 20px; border: 1px solid #ffeeba;">
+    <h2 style="margin-top: 0; color: #856404; font-size: 1.1rem; text-transform: uppercase;">Important Notes</h2>
+    <ul style="margin: 0; padding-left: 20px; color: #856404;">
+      <li>The value of $k$ is often written as $\frac{1}{4\pi\epsilon_0}$, where $\epsilon_0$ is the permittivity of free space.</li>
+      <li>In a medium other than vacuum, the force decreases by a factor of the dielectric constant ($K$ or $\epsilon_r$).</li>
+      <li>Coulomb's law is only strictly applicable to point charges at rest.</li>
+    </ul>
+  </section>
+
+  <!-- SUGGESTED QUESTIONS -->
+  <section style="background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); padding: 20px;">
+    <h2 style="margin-top: 0; color: #1a73e8; font-size: 1.2rem; text-transform: uppercase;">Review Questions</h2>
+    <ol style="padding-left: 20px; margin-bottom: 0;">
+      <li style="margin-bottom: 10px;">What happens to the force if the distance between two charges is doubled?</li>
+      <li>Define the value and units of the permittivity of free space ($\epsilon_0$).</li>
+    </ol>
+  </section>
+
+</div>

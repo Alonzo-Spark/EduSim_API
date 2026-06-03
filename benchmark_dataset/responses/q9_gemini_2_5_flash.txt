@@ -1,0 +1,125 @@
+## Uniform Circular Motion and Centripetal Acceleration
+
+This section explores the fundamental concepts of uniform circular motion and the associated centripetal acceleration.
+
+### Introduction
+
+Imagine a satellite orbiting the Earth or a car turning a corner. In both scenarios, the object is moving in a curved path. When an object moves in a circular path at a constant speed, it's undergoing **uniform circular motion**. While the speed remains constant, the direction of the velocity is continuously changing, which implies there must be an acceleration. This acceleration, directed towards the center of the circle, is known as **centripetal acceleration**.
+
+### Quick Definition
+
+Uniform circular motion is the motion of an object traveling at a constant speed in a circular path.
+
+### Key Concepts
+
+*   **Period (T):** The time it takes for an object to complete one full revolution around the circle. It is measured in seconds (s).
+*   **Frequency (f):** The number of revolutions an object completes per unit of time. It is measured in Hertz (Hz) or revolutions per second (s⁻¹). Frequency is the reciprocal of the period ($f = 1/T$).
+*   **Tangential Velocity ($v$):** The instantaneous velocity of the object, always directed tangent to the circular path. Although the speed is constant, the direction of the tangential velocity continuously changes.
+*   **Centripetal Acceleration ($a_c$):** The acceleration that causes an object to move in a circular path. It is always directed towards the center of the circle, perpendicular to the tangential velocity.
+*   **Centripetal Force ($F_c$):** The net force required to maintain uniform circular motion. By Newton's second law, $F_c = ma_c$.
+
+### Formula: Tangential Velocity
+
+The magnitude of the tangential velocity in uniform circular motion can be calculated as the distance traveled (circumference of the circle) divided by the time taken (period).
+
+```
+$$
+v = \frac{2\pi r}{T}
+$$
+```
+
+<FormulaCard
+  formula="v = \frac{2\pi r}{T}"
+  title="Tangential Velocity"
+  description="This formula calculates the magnitude of the tangential velocity (v) for an object undergoing uniform circular motion, where r is the radius of the circular path and T is the period of the motion."
+  variables={[
+    { symbol: 'v', name: 'Tangential Velocity', unit: 'm/s' },
+    { symbol: '\pi', name: 'Pi (constant)', unit: 'dimensionless' },
+    { symbol: 'r', name: 'Radius of the circular path', unit: 'm' },
+    { symbol: 'T', name: 'Period of the motion', unit: 's' }
+  ]}
+/>
+
+### Formula: Centripetal Acceleration
+
+The magnitude of the centripetal acceleration is directly proportional to the square of the tangential velocity and inversely proportional to the radius of the circular path.
+
+```
+$$
+a_c = \frac{v^2}{r}
+$$
+```
+
+<FormulaCard
+  formula="a_c = \frac{v^2}{r}"
+  title="Centripetal Acceleration"
+  description="This formula calculates the magnitude of the centripetal acceleration (a_c) required to keep an object moving in a circular path. It depends on the tangential velocity (v) and the radius of the circle (r)."
+  variables={[
+    { symbol: 'a_c', name: 'Centripetal Acceleration', unit: 'm/s²' },
+    { symbol: 'v', name: 'Tangential Velocity', unit: 'm/s' },
+    { symbol: 'r', name: 'Radius of the circular path', unit: 'm' }
+  ]}
+/>
+
+Alternatively, centripetal acceleration can also be expressed in terms of angular velocity ($\omega$):
+
+```
+$$
+a_c = \omega^2 r
+$$
+```
+
+<FormulaCard
+  formula="a_c = \omega^2 r"
+  title="Centripetal Acceleration (Angular Velocity)"
+  description="This alternative formula for centripetal acceleration (a_c) uses the angular velocity (ω) and the radius of the circular path (r). Angular velocity is the rate of change of angular displacement."
+  variables={[
+    { symbol: 'a_c', name: 'Centripetal Acceleration', unit: 'm/s²' },
+    { symbol: '\omega', name: 'Angular Velocity', unit: 'rad/s' },
+    { symbol: 'r', name: 'Radius of the circular path', unit: 'm' }
+  ]}
+/>
+
+### Characteristics of Centripetal Acceleration
+
+*   **Direction:** Always points towards the center of the circular path.
+*   **Cause:** It is caused by a net force acting towards the center of the circle (centripetal force). Without this force, the object would move in a straight line tangent to the circle.
+*   **Effect:** Changes the direction of the velocity vector, not its magnitude (speed).
+
+### Applications
+
+Uniform circular motion and centripetal acceleration are prevalent in many real-world phenomena:
+
+*   **Planetary Orbits:** Planets orbiting stars and moons orbiting planets.
+*   **Roller Coasters:** The forces experienced by riders in loops and turns.
+*   **Car Turns:** The friction between tires and the road provides the centripetal force.
+*   **Spin Dryers:** Water is flung out of clothes due to the lack of sufficient centripetal force to keep it moving in a circle.
+*   **Centrifuges:** Used to separate substances of different densities.
+
+### Comparison of Linear and Circular Motion
+
+<ResponsiveTable
+  headers={['Property', 'Linear Motion', 'Uniform Circular Motion']}
+  data={[
+    ['Velocity', 'Constant or changing magnitude and/or direction', 'Constant magnitude (speed), changing direction'],
+    ['Acceleration', 'Causes change in speed and/or direction', 'Causes change in direction only'],
+    ['Force', 'Can be in any direction relative to motion', 'Always directed towards the center of the circle'],
+    ['Path', 'Straight line (if no net force)', 'Circular path']
+  ]}
+/>
+
+### Important Notes
+
+*   **Centripetal vs. Centrifugal Force:** Centripetal force is a real force acting *on* the object, pulling it towards the center. Centrifugal force is an *apparent* or *fictitious* force experienced by an observer in a rotating reference frame, seemingly pushing objects away from the center.
+*   **Constant Speed, Changing Velocity:** It's crucial to remember that "uniform" in uniform circular motion refers to constant *speed*, not constant *velocity*. Since the direction of motion is continuously changing, the velocity vector is continuously changing, hence there is always an acceleration.
+
+### Summary
+
+Uniform circular motion describes movement in a circle at a constant speed. Despite the constant speed, the continuous change in direction necessitates an acceleration, known as centripetal acceleration. This acceleration is always directed towards the center of the circle and is caused by a centripetal force. Understanding these concepts is fundamental to analyzing various physical systems, from celestial mechanics to everyday phenomena.
+
+### Suggested Questions
+
+1.  A car is moving around a circular track at a constant speed. Is its velocity constant? Is its acceleration constant? Explain your reasoning.
+2.  What provides the centripetal force for a satellite orbiting the Earth?
+3.  If you swing a bucket of water over your head in a vertical circle, why does the water not fall out at the top of the swing?
+4.  How would doubling the speed of an object in uniform circular motion affect its centripetal acceleration? How would doubling the radius affect it?

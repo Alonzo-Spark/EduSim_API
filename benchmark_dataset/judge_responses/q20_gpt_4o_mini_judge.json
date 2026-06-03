@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 20,
+  "question": "Explain conservation of mechanical energy with an example.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe Principle of Conservation of Mechanical Energy states that if only conservative forces (like gravity or spring forces) perform work within an isolated system, the total mechanical energy (the sum of kinetic and potential energies) remains completely constant over time.\n\n---\n\n## Formula\n\nThe conservation rule is expressed mathematically as:\n\n$$E_{\\text{total}} = K + U = \\text{Constant}$$\n\n$$K_i + U_i = K_f + U_f$$\n\nWhere:\n* $K_i, K_f$ represent the initial and final kinetic energy states\n* $U_i, U_f$ represent the initial and final potential energy states\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Simplifies tracking positions and speeds without requiring precise force-time integrations. | Fails in non-conservative tracking configurations involving friction or air resistance. |\n\n---\n\n## Real-world Example: Free-Falling Object\n\nConsider a heavy steel ball held stationary at a height $h$ above the floor.\n* **At Peak Height:** The ball has zero velocity, so kinetic energy is zero ($K = 0$), and total mechanical energy equals maximum potential energy ($E = mgh$).\n* **During Mid-Descent:** As the ball drops, its height decreases, causing potential energy to drop, while its speed climbs, increasing kinetic energy by an identical amount.\n* **At Floor Impact Point:** Just before striking the ground, height becomes zero ($U = 0$), and potential energy converts completely into kinetic energy ($K = \\frac{1}{2}mv^2 = mgh$).\n\n---\n\n## Summary\n\nMechanical energy conservation demonstrates that kinetic and potential energy act as balanced components within a closed system, transforming into one another while keeping the total energy constant.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Introduction               │  \n│                           │  \n│ The conservation of mechanical energy states that in a closed system where only conservative forces are acting, the total mechanical energy remains constant. This means that the sum of potential energy and kinetic energy remains unchanged over time.  │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Key Concepts              │  \n│                           │  \n│ - **Mechanical Energy**: The sum of kinetic and potential energy in a system.  │  \n│ - **Kinetic Energy (KE)**: Energy of an object due to its motion, given by the formula:  \n│   $$ KE = \\frac{1}{2} mv^2 $$  \n│ - **Potential Energy (PE)**: Energy stored in an object due to its position, often gravitational, given by:  \n│   $$ PE = mgh $$  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Example                  │  \n│                           │  \n│ Consider a simple pendulum. At its highest point, the pendulum has maximum potential energy and zero kinetic energy. As it swings down, potential energy is converted into kinetic energy. At the lowest point, the kinetic energy is at its maximum while potential energy is at its minimum. When it swings up again, kinetic energy converts back into potential energy.  │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│ The conservation of mechanical energy can be expressed as:  \n│ $$ KE_i + PE_i = KE_f + PE_f $$  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Applications              │  \n│                           │  \n│ - Engineering (roller coasters)  \n│ - Physics (projectile motion)  \n│ - Natural phenomena (waterfalls)  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Important Notes          │  \n│                           │  \n│ - Non-conservative forces (like friction) can cause mechanical energy to be transformed into thermal energy, affecting the total mechanical energy of the system.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Summary                  │  \n│                           │  \n│ The conservation of mechanical energy is a fundamental principle in physics that illustrates how energy can change forms but is never created or destroyed in a closed system.  │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Suggested Questions       │  \n│                           │  \n│ 1. How does the conservation of mechanical energy apply to real-world scenarios?  \n│ 2. What are the implications of non-conservative forces on mechanical energy?  \n│ 3. Can you provide another example where mechanical energy is conserved?  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately covers the concept of conservation of mechanical energy, including the definition, key concepts, and a relevant example. The layout and formatting are well-structured and readable. However, the response could be improved by including more detailed explanations of the formulas and providing additional examples to illustrate the concept. The summary effectively captures the essence of the principle, and the suggested questions are relevant and thought-provoking. To further enhance the response, consider adding more visual aids, such as diagrams or graphs, to help illustrate the concepts and make the explanation more engaging for beginners.",
+  "candidate_token_usage": {
+    "promptTokens": 363,
+    "completionTokens": 628,
+    "totalTokens": 991
+  },
+  "candidate_latency_ms": 12598,
+  "candidate_cost_usd": 0.00043125,
+  "judge_token_usage": {
+    "promptTokens": 1399,
+    "completionTokens": 174,
+    "totalTokens": 1573
+  },
+  "judge_latency_ms": 4602,
+  "judge_cost_usd": 0.0012569999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:34:52.755Z"
+}

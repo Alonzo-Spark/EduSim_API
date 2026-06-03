@@ -1,0 +1,92 @@
+### 📘 Physics Module: Electrical Circuits
+
+---
+
+#### 🟢 Introduction
+In a series combination, electrical components are arranged in a single path, such that the same current flows through all of them sequentially. This derivation determines the single total resistance ($R_s$) that could replace all individual resistors while keeping the circuit behavior identical.
+
+---
+
+#### 📍 Definition
+A **Series Circuit** is a configuration where resistors are connected end-to-end. There is only one path for the flow of electrons, meaning the current ($I$) remains constant across every resistor in the chain.
+
+---
+
+#### ⚡ Key Concepts
+*   **Current ($I$):** Remains constant throughout the circuit. $I = I_1 = I_2 = I_3$.
+*   **Voltage ($V$):** The total potential difference is the sum of individual voltage drops. $V = V_1 + V_2 + V_3$.
+*   **Ohm's Law:** The fundamental relationship $V = IR$ applies to each component and the whole circuit.
+
+---
+
+#### 🧪 Formula Card: Total Potential Difference
+┌──────────────────────────────────────────────────────────┐
+│ **Conservation of Energy (Voltage)**                     │
+│                                                          │
+│ $$V_{total} = V_1 + V_2 + V_3$$                          │
+│                                                          │
+│ **Context:** The total work done per unit charge by the  │
+│ battery is distributed across each resistor.             │
+│ [ 🔬 Open Circuit Lab ]                                  │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+#### 📝 The Derivation
+Consider three resistors $R_1, R_2,$ and $R_3$ connected in series to a battery of voltage $V$.
+
+1.  **Apply Ohm's Law** to each individual resistor:
+    *   $V_1 = I \cdot R_1$
+    *   $V_2 = I \cdot R_2$
+    *   $V_3 = I \cdot R_3$
+
+2.  **Substitute** these into the total voltage equation:
+    *   $V = (I \cdot R_1) + (I \cdot R_2) + (I \cdot R_3)$
+
+3.  **Factorize** the common current ($I$):
+    *   $V = I(R_1 + R_2 + R_3)$
+
+4.  **Define Equivalent Resistance ($R_s$):**
+    If $R_s$ is the total resistance, then by Ohm's Law: $V = I \cdot R_s$.
+
+5.  **Equate the two expressions:**
+    *   $I \cdot R_s = I(R_1 + R_2 + R_3)$
+    *   Cancel $I$ from both sides.
+
+---
+
+#### 🏆 Formula Card: Equivalent Resistance (Series)
+┌──────────────────────────────────────────────────────────┐
+│ **Main Formula**                                         │
+│                                                          │
+│ $$R_s = R_1 + R_2 + R_3 + ... + R_n$$                    │
+│                                                          │
+│ **Variables:**                                           │
+│ • $R_s$: Equivalent Series Resistance ($\Omega$)         │
+│ • $R_n$: Individual Resistance values ($\Omega$)         │
+│ [ 🧮 Open Formula Lab ]                                  │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+#### 📊 Characteristics Summary
+| Feature | Behavior in Series |
+| :--- | :--- |
+| **Current** | Same at every point in the circuit. |
+| **Voltage** | Divided among resistors proportional to their resistance. |
+| **Total Resistance** | Always greater than the largest individual resistor. |
+| **Fault Impact** | If one component breaks, the entire circuit fails. |
+
+---
+
+#### 💡 Important Notes
+> **Maximized Resistance:** Use a series connection when you need to increase the total resistance in a circuit or limit the overall current flow.
+>
+> **Identical Resistors:** If $n$ resistors of equal value $R$ are connected in series, the total resistance is simply $R_s = nR$.
+
+---
+
+#### ❓ Suggested Questions
+1. What happens to the total resistance if a fourth resistor is added in series?
+2. Why are household appliances not connected in series?
+3. If $R_1 = 2\Omega$ and $R_2 = 4\Omega$ are in series with a $12V$ battery, what is the voltage drop across $R_2$?

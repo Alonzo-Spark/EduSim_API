@@ -1,0 +1,90 @@
+## Electrical Power
+
+Electrical power is the rate at which electrical energy is transferred by an electrical circuit. In simpler terms, it's how quickly electrical energy is used or produced.
+
+### Main Formula
+
+$$P = \frac{W}{t}$$
+
+Where:
+*   $P$ is power, measured in watts (W)
+*   $W$ is energy (work done), measured in joules (J)
+*   $t$ is time, measured in seconds (s)
+
+[ Explain Formula ] [ Open Formula Lab ]
+
+### Derivation of P = VI
+
+To derive the relationship $P = VI$, we start with the fundamental definitions of electrical quantities.
+
+#### Key Concepts
+
+1.  **Electric Potential Difference (Voltage, V):** The work done per unit positive charge in moving the charge from one point to another in an electric field.
+    $$V = \frac{W}{Q}$$
+    Where:
+    *   $V$ is the potential difference (voltage), measured in volts (V)
+    *   $W$ is the work done (energy), measured in joules (J)
+    *   $Q$ is the electric charge, measured in coulombs (C)
+
+2.  **Electric Current (I):** The rate of flow of electric charge.
+    $$I = \frac{Q}{t}$$
+    Where:
+    *   $I$ is the current, measured in amperes (A)
+    *   $Q$ is the electric charge, measured in coulombs (C)
+    *   $t$ is time, measured in seconds (s)
+
+#### Step-by-Step Derivation
+
+From the definition of voltage, we can express the work done ($W$) as:
+
+$$W = V \times Q$$
+
+Now, substitute this expression for $W$ into the general power formula ($P = \frac{W}{t}$):
+
+$$P = \frac{V \times Q}{t}$$
+
+We know from the definition of current that $I = \frac{Q}{t}$. We can substitute $I$ into the equation for power:
+
+$$P = V \times I$$
+
+Therefore, the electrical power ($P$) dissipated in a circuit is the product of the voltage ($V$) across it and the current ($I$) flowing through it.
+
+### Main Formula
+
+$$P = VI$$
+
+Where:
+*   $P$ is electrical power, measured in watts (W)
+*   $V$ is the potential difference (voltage), measured in volts (V)
+*   $I$ is the electric current, measured in amperes (A)
+
+[ Explain Formula ] [ Open Formula Lab ]
+
+### Units
+
+The unit of electrical power is the **watt (W)**.
+
+From $P = VI$:
+$1 \text{ Watt} = 1 \text{ Volt} \times 1 \text{ Ampere}$
+
+This means that if a device has a voltage of 1 Volt across it and a current of 1 Ampere flowing through it, it consumes or produces 1 Watt of power.
+
+### Important Notes
+
+*   This formula applies to both DC (direct current) and instantaneous power in AC (alternating current) circuits. For average power in AC circuits, power factor needs to be considered.
+*   Power can also be expressed using Ohm's Law ($V = IR$):
+    *   Substituting $V = IR$ into $P = VI$:
+        $$P = (IR)I \implies P = I^2R$$
+    *   Substituting $I = \frac{V}{R}$ into $P = VI$:
+        $$P = V\left(\frac{V}{R}\right) \implies P = \frac{V^2}{R}$$
+
+### Summary
+
+Electrical power is the rate at which electrical energy is transferred. It is fundamentally defined as work done per unit time. By combining the definitions of voltage (work per unit charge) and current (charge per unit time), we derive the essential relationship $P = VI$, which states that electrical power is the product of voltage and current.
+
+### Suggested Questions
+
+*   How does electrical power relate to the brightness of a light bulb?
+*   What is the difference between power and energy?
+*   If a device has a power rating of 100W and operates at 220V, what is the current it draws?
+*   Explain how resistive heating (Joule heating) is related to electrical power.

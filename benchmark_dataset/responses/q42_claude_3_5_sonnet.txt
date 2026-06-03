@@ -1,0 +1,134 @@
+Here's a structured breakdown of **Electric Field** and **Electric Potential**.
+
+---
+
+## ⚡ Electric Field
+
+<div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 24px; margin: 16px 0; color: #e0e0e0;">
+
+<div style="font-size: 13px; font-weight: 700; color: #4fc3f7; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">📖 Definition</div>
+
+The **electric field** at a point in space is the **force per unit positive charge** that would be experienced by a small test charge placed at that point.
+
+It is a **vector quantity** — it has both magnitude and direction.
+
+</div>
+
+<div style="background: linear-gradient(135deg, #0d1b2a 0%, #1b2a3b 100%); border: 1px solid #2196f3; border-left: 4px solid #2196f3; border-radius: 12px; padding: 24px; margin: 16px 0; color: #e0e0e0;">
+
+<div style="font-size: 13px; font-weight: 700; color: #64b5f6; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">🔢 Formula</div>
+
+$$\vec{E} = \frac{\vec{F}}{q_0}$$
+
+<div style="margin-top: 16px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 16px;">
+
+| Symbol | Meaning | Unit |
+|--------|---------|------|
+| $\vec{E}$ | Electric Field | N/C or V/m |
+| $\vec{F}$ | Force on test charge | Newton (N) |
+| $q_0$ | Test charge (positive) | Coulomb (C) |
+
+</div>
+
+<div style="margin-top: 16px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 16px;">
+
+**Due to a point charge $Q$:**
+
+$$\vec{E} = \frac{kQ}{r^2}\hat{r} = \frac{Q}{4\pi\varepsilon_0 r^2}\hat{r}$$
+
+| Symbol | Meaning |
+|--------|---------|
+| $k = 9 \times 10^9$ | Coulomb's constant |
+| $\varepsilon_0$ | Permittivity of free space |
+| $r$ | Distance from charge |
+| $\hat{r}$ | Unit vector (radially outward) |
+
+</div>
+</div>
+
+<div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #0f3460; border-radius: 12px; padding: 24px; margin: 16px 0; color: #e0e0e0;">
+
+<div style="font-size: 13px; font-weight: 700; color: #4fc3f7; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">✅ Key Characteristics</div>
+
+- Points **away** from positive charges, **toward** negative charges
+- Electric field lines **never cross** each other
+- Stronger field = field lines **closer together**
+- Superposition applies: $\vec{E}_{net} = \vec{E}_1 + \vec{E}_2 + \cdots$
+
+</div>
+
+---
+
+## ⚡ Electric Potential
+
+<div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #6a0dad; border-radius: 12px; padding: 24px; margin: 16px 0; color: #e0e0e0;">
+
+<div style="font-size: 13px; font-weight: 700; color: #ce93d8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">📖 Definition</div>
+
+The **electric potential** at a point is the **work done per unit positive charge** in bringing a test charge from **infinity to that point**, against the electric field.
+
+It is a **scalar quantity** — it has magnitude only, no direction.
+
+</div>
+
+<div style="background: linear-gradient(135deg, #0d1b2a 0%, #1b2a3b 100%); border: 1px solid #9c27b0; border-left: 4px solid #9c27b0; border-radius: 12px; padding: 24px; margin: 16px 0; color: #e0e0e0;">
+
+<div style="font-size: 13px; font-weight: 700; color: #ce93d8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">🔢 Formula</div>
+
+$$V = \frac{W}{q_0}$$
+
+<div style="margin-top: 16px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 16px;">
+
+| Symbol | Meaning | Unit |
+|--------|---------|------|
+| $V$ | Electric Potential | Volt (V) |
+| $W$ | Work done | Joule (J) |
+| $q_0$ | Test charge | Coulomb (C) |
+
+</div>
+
+<div style="margin-top: 16px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 16px;">
+
+**Due to a point charge $Q$:**
+
+$$V = \frac{kQ}{r} = \frac{Q}{4\pi\varepsilon_0 r}$$
+
+</div>
+</div>
+
+<div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #6a0dad; border-radius: 12px; padding: 24px; margin: 16px 0; color: #e0e0e0;">
+
+<div style="font-size: 13px; font-weight: 700; color: #ce93d8; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">✅ Key Characteristics</div>
+
+- Scalar — can be **positive, negative, or zero**
+- Potential due to **positive charge** is positive; due to **negative charge** is negative
+- Superposition applies: $V_{net} = V_1 + V_2 + \cdots$ *(algebraic sum)*
+- At infinity: $V = 0$
+
+</div>
+
+---
+
+## 🔗 Relationship Between E and V
+
+<div style="background: linear-gradient(135deg, #0d2b1d 0%, #1a3a2a 100%); border: 1px solid #2e7d32; border-left: 4px solid #4caf50; border-radius: 12px; padding: 24px; margin: 16px 0; color: #e0e0e0;">
+
+<div style="font-size: 13px; font-weight: 700; color: #a5d6a7; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">⚡ The Connection</div>
+
+$$E = -\frac{dV}{dr}$$
+
+<div style="margin-top: 16px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 16px;">
+
+| Aspect | Electric Field $\vec{E}$ | Electric Potential $V$ |
+|--------|--------------------------|------------------------|
+| Nature | Vector | Scalar |
+| Unit | N/C or V/m | Volt (V) = J/C |
+| Formula (point charge) | $\frac{kQ}{r^2}$ | $\frac{kQ}{r}$ |
+| Superposition | Vector sum | Algebraic sum |
+| At infinity | 0 | 0 |
+
+</div>
+
+> 💡 **Key Insight:** The electric field points in the direction of **decreasing potential** — from high $V$ to low $V$.
+
+</div>

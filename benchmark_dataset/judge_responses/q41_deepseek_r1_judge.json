@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 41,
+  "question": "Electrostatics: State Coulomb’s law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nCoulomb's Law states that the electrostatic force of attraction or repulsion between two stationary point charges is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance separating them.\n\n---\n\n## Characteristics\n\n* **Action-Reaction Interaction:** The forces exerted by the charges on each other are equal in magnitude and opposite in direction, acting along the straight line connecting them.\n* **Charge Dependency:** Like charges repel each other, whereas opposite charges experience a mutual attraction force.\n\n---\n\n## Formula\n\nThe mathematical equation for the electrostatic force:\n\n$$F = k_e \\frac{|q_1 q_2|}{r^2}$$\n\nIn a vacuum, the proportionality constant ($k_e$) is expressed as:\n\n$$k_e = \\frac{1}{4\\pi\\varepsilon_0} \\approx 8.988 \\times 10^9 \\text{ N}\\cdot\\text{m}^2/\\text{C}^2$$\n\nWhere:\n* $F$ represents the electrostatic force magnitude\n* $q_1, q_2$ represent the magnitudes of the point charges\n* $r$ represents the distance separating the two charges\n* $\\varepsilon_0$ represents the permittivity of free space ($8.854 \\times 10^{-12} \\text{ C}^2/\\text{N}\\cdot\\text{m}^2$)\n\n---\n\n## Summary\n\nCoulomb's Law describes the electrostatic force between charges, showing that it increases with charge magnitude but decreases according to an inverse-square relationship with distance.",
+  "candidate_response": "### Coulomb's Law: Fundamental Electrostatic Principle\n\n#### ⚡ Quick Definition  \nCoulomb's Law quantitatively describes the **electrostatic force** between two stationary point charges. This force is:\n- Proportional to the product of the charge magnitudes  \n- Inversely proportional to the square of the distance between them  \n- Directed along the line connecting the charges  \n\n---\n\n#### 🔬 Main Formula\n```math\n\\boxed{F = \\frac{1}{4\\pi\\varepsilon_0} \\frac{|q_1 q_2|}{r^2}}\n```\n\n<div class=\"flex justify-center my-8\">\n  <div class=\"bg-white rounded-xl shadow-lg p-6 max-w-md w-full border border-blue-100\">\n    <div class=\"text-center text-2xl font-bold text-gray-800 mb-4\">Coulomb's Law Formula</div>\n    <div class=\"flex justify-center py-3\">\n      <div class=\"text-3xl\">\n        $$ F = k_e \\frac{|q_1 q_2|}{r^2} $$\n      </div>\n    </div>\n    <div class=\"mt-4 space-y-2\">\n      <button class=\"w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg transition duration-200\">\n        Explain Variables\n      </button>\n      <button class=\"w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg transition duration-200\">\n        Open Formula Lab\n      </button>\n    </div>\n  </div>\n</div>\n\n---\n\n#### 📖 Detailed Explanation\n**Force Direction:**  \n- **Like charges** (+,+ or −,−) → **Repulsive force**  \n- **Opposite charges** (+,−) → **Attractive force**  \n\n**Key Variables:**  \n| Symbol | Quantity | SI Unit | Physical Meaning |\n|--------|----------|---------|------------------|\n| \\( F \\) | Force | Newton (N) | Electrostatic force magnitude |\n| \\( q_1, q_2 \\) | Charges | Coulomb (C) | Magnitude of point charges |\n| \\( r \\) | Distance | Meter (m) | Separation between charges |\n| \\( \\varepsilon_0 \\) | Vacuum permittivity | 8.85×10⁻¹² C²/N·m² | Electric constant |\n| \\( k_e \\) | Coulomb's constant | 8.99×10⁹ N·m²/C² | \\( \\frac{1}{4\\pi\\varepsilon_0} \\) |\n\n**Mathematical Properties:**  \n- **Inverse-square law**: Force decreases with \\( \\frac{1}{r^2} \\)  \n- **Superposition principle**: For multiple charges, net force is vector sum of individual forces  \n\n---\n\n#### 🌍 Real-World Applications\n1. **Atomic physics**: Electron-nucleus attraction in atoms  \n2. **Capacitor design**: Charge storage in electronic components  \n3. **Electrostatic precipitators**: Pollution control in smokestacks  \n4. **Inkjet printing**: Precise droplet control using charged plates  \n\n---\n\n#### ⚖️ Limitations\n- Applies **only to point charges** (finite-size objects require integration)  \n- Valid for **stationary charges** (moving charges require magnetism corrections)  \n- Assumes **uniform dielectric medium** (vacuum or air approximation)  \n\n---\n\n#### 💎 Core Principles\n```mermaid\ngraph LR\nA[Coulomb's Law] --> B[Inverse-square dependence]\nA --> C[Central force]\nA --> D[Conservative field]\nA --> E[Linear superposition]\n```\n\n---\n\n#### 🧪 Formula Lab (Interactive)  \n*Calculate the force between two 1μC charges separated by 1m:*  \n$$ F = (8.99\\times10^9) \\frac{(10^{-6})(10^{-6})}{(1)^2} = 8.99 \\text{ N} $$\n\n<div class=\"bg-gray-50 p-4 rounded-xl mt-6\">\n  <div class=\"grid grid-cols-1 md:grid-cols-3 gap-4\">\n    <div>\n      <label class=\"block text-sm font-medium text-gray-700\">q₁ (μC)</label>\n      <input type=\"number\" value=\"1\" class=\"mt-1 p-2 border rounded w-full\">\n    </div>\n    <div>\n      <label class=\"block text-sm font-medium text-gray-700\">q₂ (μC)</label>\n      <input type=\"number\" value=\"1\" class=\"mt-1 p-2 border rounded w-full\">\n    </div>\n    <div>\n      <label class=\"block text-sm font-medium text-gray-700\">r (m)</label>\n      <input type=\"number\" value=\"1\" class=\"mt-1 p-2 border rounded w-full\">\n    </div>\n  </div>\n  <button class=\"mt-4 bg-blue-600 text-white px-4 py-2 rounded w-full\">\n    Calculate Force\n  </button>\n  <div class=\"mt-4 text-center text-xl\">\n    Result: <span class=\"font-bold\">F = 8.99 N</span> (repulsive)\n  </div>\n</div>\n\n---\n\n#### 📝 Key Takeaways  \n1. Electrostatic force follows inverse-square law  \n2. Coulomb's constant \\( k_e = 8.99 \\times 10^9 \\) N·m²/C²  \n3. Direction determined by charge signs  \n4. Forms foundation for classical electromagnetism  \n\n> \"Coulomb's law is the electric counterpart to Newton's law of universal gravitation.\"  \n> *— Richard Feynman, The Feynman Lectures on Physics*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of Coulomb's Law, including its definition, formula, and characteristics. The response is well-structured, readable, and effectively conveys the key concepts. The use of formatting, such as headers and tables, enhances the overall quality of the presentation. The candidate also provides real-world applications and limitations of Coulomb's Law, showcasing a deep understanding of the subject. However, there are some minor issues with the formatting, such as the use of unnecessary HTML elements and buttons, which do not affect the overall accuracy or educational value of the response. To further improve, the candidate could focus on streamlining the formatting and removing unnecessary elements.",
+  "candidate_token_usage": {
+    "promptTokens": 362,
+    "completionTokens": 1702,
+    "totalTokens": 2064
+  },
+  "candidate_latency_ms": 72374,
+  "candidate_cost_usd": 0.00392648,
+  "judge_token_usage": {
+    "promptTokens": 1994,
+    "completionTokens": 196,
+    "totalTokens": 2190
+  },
+  "judge_latency_ms": 6696,
+  "judge_cost_usd": 0.0016668,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:32:56.954Z"
+}

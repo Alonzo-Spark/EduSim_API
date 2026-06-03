@@ -1,0 +1,61 @@
+:::section{title="System Status: Orbit Initialized"}
+The stable loop trigger event `orbit_started` has been successfully captured. The following runtime overlay provides the physical parameters and governing dynamics for the current orbital simulation.
+:::
+
+:::section{title="Quick Definition"}
+**Orbital Motion** occurs when an object's forward velocity is perfectly balanced by the gravitational pull of a central mass, resulting in a continuous, stable falling path known as a **stable loop**.
+:::
+
+:::section{title="Main Formula"}
+$$
+v_c = \sqrt{\frac{GM}{r}}
+$$
+**Title:** Circular Orbital Velocity  
+**Variables:**  
+*   $v_c$: Velocity required to maintain orbit ($m/s$)
+*   $G$: Gravitational Constant ($6.674 \times 10^{-11} \, m^3kg^{-1}s^{-2}$)
+*   $M$: Mass of the central body ($kg$)
+*   $r$: Radius from the center of mass ($m$)
+
+[ **Explain Formula**: This formula determines the exact speed required for an object to stay in a circular orbit at a specific distance. If velocity decreases, the orbit decays; if it increases, the orbit becomes elliptical. ]  
+[ **Open Formula Lab** ]
+:::
+
+:::section{title="Key Concepts"}
+*   **Centripetal Force:** The "center-seeking" force provided by gravity that keeps the satellite from flying off in a straight line.
+*   **Freefall State:** An orbiting body is technically in a state of perpetual freefall toward the center, but its tangential velocity causes it to miss the surface constantly.
+*   **Orbital Period:** The time taken for one full revolution, determined by the altitude and mass of the primary body.
+:::
+
+:::section{title="Comparative Dynamics"}
+| Orbit Type | Altitude (km) | Velocity (km/s) | Common Use |
+| :--- | :--- | :--- | :--- |
+| **LEO** (Low Earth) | 160 – 2,000 | ~7.8 | ISS, Starlink |
+| **MEO** (Medium Earth) | 2,000 – 35,786 | ~3.1 | GPS Satellites |
+| **GEO** (Geostationary) | 35,786 | ~3.07 | TV, Weather |
+:::
+
+:::section{title="The Period-Radius Relationship"}
+$$
+T = 2\pi \sqrt{\frac{r^3}{GM}}
+$$
+**Title:** Kepler's Third Law (Period)  
+**Variables:**  
+*   $T$: Orbital Period (seconds)
+*   $r$: Semi-major axis/Radius
+*   $GM$: Standard gravitational parameter
+
+[ **Explain Formula**: This shows that the time it takes to complete an orbit is proportional to the cube of the distance from the center. Higher orbits move slower. ]  
+[ **Open Formula Lab** ]
+:::
+
+:::section{title="Important Notes"}
+> [!WARNING]
+> **Atmospheric Drag:** In Low Earth Orbit (LEO), trace gases create friction. Without periodic "re-boosts," the `orbit_started` state will eventually transition to an `orbital_decay` event.
+:::
+
+:::section{title="Suggested Questions"}
+1. How does the mass of the satellite itself affect the required orbital velocity?
+2. What happens to the stable loop if the velocity exceeds the "Escape Velocity" $(\sqrt{2} \times v_c)$?
+3. Why do geostationary satellites appear stationary from the Earth's surface?
+:::

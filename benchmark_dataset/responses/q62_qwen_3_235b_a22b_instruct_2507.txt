@@ -1,0 +1,94 @@
+┌─────────────────────────────────────┐
+│  Sandbox Runtime Overlay            │
+│  Event: object_attached             │
+│  Target: Flying Pendulum Bob        │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│  Event Context                      │
+│                                     │
+│  • Trigger: A new object has been   │
+│    dynamically attached to the      │
+│    pendulum bob during simulation.  │
+│                                     │
+│  • Runtime State: Simulation is     │
+│    active; physics engine is        │
+│    processing constraints and       │
+│    rigid body interactions.         │
+│                                     │
+│  • Affected Components:             │
+│    - Bob's mass & inertia tensor    │
+│    - Joint constraints (rope/rod)   │
+│    - Collision geometry             │
+│    - Center of mass (COM) shift     │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│  System Response Actions            │
+│                                     │
+│  1. Dynamic Mass Update:            │
+│     - Recalculate total mass:       │
+│         $$                          │
+│         m_{\text{new}} = m_b + m_a  │
+│         $$                          │
+│     - Adjust inertia based on       │
+│       attachment position.          │
+│                                     │
+│  2. Joint Re-evaluation:            │
+│     - Verify constraint stability   │
+│       under new load.               │
+│     - Apply corrective impulse if   │
+│       oscillation threshold is      │
+│       exceeded.                     │
+│                                     │
+│  3. COM Shift Compensation:         │
+│     - Recompute pendulum length     │
+│       from pivot to new COM.        │
+│     - Update angular dynamics:      │
+│         $$                          │
+│         \tau = I \alpha            │
+│         $$                          │
+│                                     │
+│  4. Collision Mesh Merge:           │
+│     - Union bob and attached        │
+│       object colliders.             │
+│     - Enable continuous collision   │
+│       detection (CCD) if velocity   │
+│       > threshold.                  │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│  Formula Card: Effective Length     │
+│                                     │
+│     $$                             │
+│     L_{\text{eff}} = L + \Delta r  │
+│     $$                             │
+│                                     │
+│ [ Explain Formula ]   [ Open Lab ]  │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│  Real-Time Diagnostics              │
+│                                     │
+│  • Mass Change: +1.4 kg             │
+│  • COM Shift: +0.12 m downward      │
+│  • Period Change: ΔT = +0.34 s      │
+│  • Damping Ratio: Adjusted to 0.02  │
+│                                     │
+│  ⚠️ Alert: Minor instability         │
+│     detected in roll axis.          │
+│     Recommendation: Apply soft      │
+│     stabilization impulse.          │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│  Developer Actions                  │
+│                                     │
+│  [ ✔ ] Confirm attachment           │
+│  [ ⧉ ] Detach object                │
+│  [ ⚙ ] Tune damping parameters      │
+│  [ 📊 ] Open dynamics profiler      │
+│  [ 🛑 ] Freeze simulation            │
+└─────────────────────────────────────┘
+
+> **System Note:** This overlay is non-blocking. Physics tick continues unless manual intervention is triggered.

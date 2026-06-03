@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 22,
+  "question": "Derive the expression for acceleration due to gravity.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe acceleration due to gravity ($g$) is the uniform acceleration vector experienced by a freely falling object near the surface of a massive celestial body, such as the Earth, produced entirely by gravitational attraction.\n\n---\n\n## Formula\n\nThe surface acceleration value is determined by:\n\n$$g = \\frac{GM}{R^2}$$\n\nWhere:\n* $g$ represents the acceleration due to gravity\n* $G$ represents the Universal Gravitational Constant\n* $M$ represents the total mass of the planet or central body\n* $R$ represents the radius of the planet or central body\n\n---\n\n## Derivations\n\nConsider a small object of mass $m$ resting on or near the surface of the Earth, which has a total mass $M$ and a radius $R$.\n\nAccording to Newton's Law of Universal Gravitation, the attraction force exerted by the Earth on the object is given by:\n$$F = G \\frac{Mm}{R^2}$$\n\nSimultaneously, according to Newton's Second Law of Motion, the weight force causing the object to accelerate downward at a rate of $g$ is defined as:\n$$F = mg$$\n\nSince both expressions define the exact same mutual interaction force, we equate them directly:\n$$mg = G \\frac{Mm}{R^2}$$\n\nDivide both sides of the balance equation by the object's mass parameter ($m$):\n$$g = \\frac{GM}{R^2}$$\n\nThis completes the analytical derivation of acceleration due to gravity.\n\n---\n\n## Summary\n\nThe acceleration due to gravity depends solely on the mass and radius of the planet, meaning all objects fall at the exact same rate regardless of their individual masses when air resistance is absent.",
+  "candidate_response": "To derive the expression for acceleration due to gravity, we'll start with Newton's Law of Universal Gravitation and analyze gravity at Earth's surface and at a height \\(h\\) above it. Here's the step-by-step derivation:\n\n---\n\n### **1. Newton's Law of Universal Gravitation**\nThe gravitational force \\(F\\) between two masses \\(M\\) (Earth) and \\(m\\) (object) is:\n\\[\nF = G \\frac{M \\cdot m}{r^2}\n\\]\nwhere:\n- \\(G\\) = Gravitational constant (\\(6.674 \\times 10^{-11}  \\text{N·m}^2\\text{/kg}^2\\)),\n- \\(r\\) = Distance between centers of the masses.\n\n---\n\n### **2. Acceleration Due to Gravity at Earth's Surface**\n- For an object on Earth's surface, \\(r = R\\) (Earth's radius).\n- By Newton's second law, \\(F = m \\cdot g\\), where \\(g\\) is acceleration due to gravity.\n- Equate the two expressions:\n  \\[\n  m \\cdot g = G \\frac{M \\cdot m}{R^2}\n  \\]\n- Cancel \\(m\\) (mass of the object):\n  \\[\n  g = \\frac{G M}{R^2}\n  \\]\n\n---\n\n### **3. Acceleration Due to Gravity at Height \\(h\\)**\n- For an object at height \\(h\\) above Earth, \\(r = R + h\\).\n- Gravitational force:\n  \\[\n  F = G \\frac{M \\cdot m}{(R + h)^2}\n  \\]\n- Using \\(F = m \\cdot g'\\) (where \\(g'\\) is gravity at height \\(h\\)):\n  \\[\n  m \\cdot g' = G \\frac{M \\cdot m}{(R + h)^2}\n  \\]\n- Cancel \\(m\\):\n  \\[\n  g' = \\frac{G M}{(R + h)^2}\n  \\]\n- Substitute \\(g = \\frac{G M}{R^2}\\):\n  \\[\n  g' = g \\cdot \\frac{R^2}{(R + h)^2} = g \\left( \\frac{R}{R + h} \\right)^2\n  \\]\n\n---\n\n### **Key Results**\n| Scenario | Formula |\n|----------|---------|\n| **At Earth's surface** | \\( g = \\dfrac{GM}{R^2} \\) |\n| **At height \\(h\\)** | \\( g' = g \\left( \\dfrac{R}{R + h} \\right)^2 \\) |\n\n---\n\n### **Important Notes**\n1. **Why mass \\(m\\) cancels**:  \n   Acceleration due to gravity is independent of the object's mass, consistent with Galileo's observation that all objects fall at the same rate in a vacuum.\n\n2. **Assumptions**:  \n   - Earth is a uniform sphere (not strictly true but valid for surface calculations).\n   - \\(h \\ll R\\) simplifies to \\(g' \\approx g(1 - \\frac{2h}{R})\\).\n\n3. **Decrease with height**:  \n   \\(g' < g\\) since \\(\\left( \\frac{R}{R + h} \\right)^2 < 1\\). For example:\n   - At \\(h = R\\), \\(g' = \\frac{g}{4}\\).\n\n---\n\n### **Practical Applications**\n- **Satellite orbits**: Determines orbital velocity (\\(v = \\sqrt{g' (R + h)}\\)).\n- **Topography studies**: Measures tiny variations in \\(g\\) to map underground structures.\n- **Space missions**: Adjusts thrust for gravity changes during ascent.\n\n---\n\n### **Formula Lab**\nExplore how gravity changes with height:\n\\[\ng' = g \\left( \\frac{R}{R + h} \\right)^2\n\\]\n\n| Parameter | Value | Unit |\n|-----------|-------|------|\n| \\(g\\) (surface) | 9.8 | m/s² |\n| \\(R\\) (Earth) | 6.37 × 10⁶ | m |\n| \\(h\\) | <input type=\"range\" min=\"0\" max=\"10000000\" value=\"0\"> | m |\n| **Result**: \\(g'\\) = <output>9.8</output> m/s² |\n\n---\n\n### **Summary**\n- Gravity arises from mass and distance: \\(g \\propto \\frac{M}{r^2}\\).\n- At Earth's surface: \\(g = \\frac{GM}{R^2}\\).\n- Above surface: \\(g\\) decreases as \\(\\left( \\frac{R}{R + h} \\right)^2\\).\n\nReady to test your understanding? Try these exercises:\n1. Calculate \\(g'\\) at \\(h = 3200  \\text{km}\\) (Earth's radius \\(R = 6370  \\text{km}\\)).\n2. Why is \\(g\\) slightly higher at poles than at the equator?\n3. How would \\(g\\) change if Earth’s mass doubled?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly derives the expression for acceleration due to gravity, provides clear explanations, and includes relevant examples and applications. The use of formatting, such as headings and tables, enhances readability. The response also covers additional aspects, like the decrease of gravity with height and its practical applications, without introducing any fabricated concepts or incorrect physics claims. Minor suggestions for improvement could include further simplification of some equations and providing more detailed explanations for certain assumptions, but overall, the response is of high quality.",
+  "candidate_token_usage": {
+    "promptTokens": 361,
+    "completionTokens": 1620,
+    "totalTokens": 1981
+  },
+  "candidate_latency_ms": 72763,
+  "candidate_cost_usd": 0.00374635,
+  "judge_token_usage": {
+    "promptTokens": 1878,
+    "completionTokens": 172,
+    "totalTokens": 2050
+  },
+  "judge_latency_ms": 3132,
+  "judge_cost_usd": 0.0015396,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:41:11.490Z"
+}

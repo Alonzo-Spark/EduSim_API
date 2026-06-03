@@ -1,0 +1,106 @@
+Here's a breakdown of how to find the range of a projectile, presented in an interactive textbook format.
+
+***
+
+### Quick Definition
+
+The **range** of a projectile is the horizontal distance it travels from its launch point until it returns to the same horizontal level.
+
+***
+
+### Key Concepts
+
+For projectile motion, we typically analyze the horizontal and vertical components of motion independently.
+
+*   **Initial Velocity Components:**
+    *   Horizontal component ($V_x$): $V_0 \cos(\theta)$
+    *   Vertical component ($V_y$): $V_0 \sin(\theta)$
+*   **Horizontal Motion:**
+    *   Constant velocity (assuming no air resistance).
+    *   Distance = Velocity $\times$ Time ($R = V_x \times T$)
+*   **Vertical Motion:**
+    *   Affected by gravity (constant downward acceleration, $g \approx 9.8 \text{ m/s}^2$).
+    *   Symmetrical motion (time to reach maximum height equals time to fall back down).
+
+***
+
+### Main Formula
+
+The range ($R$) of a projectile launched from a flat surface can be calculated using the following formula:
+
+$$
+R = \frac{V_0^2 \sin(2\theta)}{g}
+$$
+
+<details>
+<summary>Explain Formula</summary>
+This formula combines the horizontal velocity, the total time of flight, and the effects of gravity into a single expression for the range.
+<ul>
+    <li>$R$: The horizontal range of the projectile (in meters).</li>
+    <li>$V_0$: The initial velocity of the projectile (in meters per second).</li>
+    <li>$\theta$: The launch angle with respect to the horizontal (in degrees or radians, ensure your calculator is in the correct mode).</li>
+    <li>$g$: The acceleration due to gravity (approximately $9.8 \text{ m/s}^2$).</li>
+</ul>
+</details>
+<button onclick="openFormulaLab('R = (V_0^2 * sin(2*theta)) / g')">Open Formula Lab</button>
+
+***
+
+### Problem Solution
+
+Let's apply the formula to the given problem.
+
+**Given:**
+*   Initial velocity ($V_0$) = $20 \text{ m/s}$
+*   Launch angle ($\theta$) = $45^\circ$
+*   Acceleration due to gravity ($g$) = $9.8 \text{ m/s}^2$
+
+**Calculation Steps:**
+
+1.  **Substitute the values into the range formula:**
+    $$
+    R = \frac{(20 \text{ m/s})^2 \sin(2 \times 45^\circ)}{9.8 \text{ m/s}^2}
+    $$
+
+2.  **Calculate $2\theta$:**
+    $$
+    2 \times 45^\circ = 90^\circ
+    $$
+
+3.  **Find $\sin(90^\circ)$:**
+    $$
+    \sin(90^\circ) = 1
+    $$
+
+4.  **Calculate $V_0^2$:**
+    $$
+    (20 \text{ m/s})^2 = 400 \text{ m}^2/\text{s}^2
+    $$
+
+5.  **Substitute these values back into the formula:**
+    $$
+    R = \frac{400 \text{ m}^2/\text{s}^2 \times 1}{9.8 \text{ m/s}^2}
+    $$
+
+6.  **Calculate the final range:**
+    $$
+    R \approx 40.82 \text{ meters}
+    $$
+
+Therefore, the range of the ball is approximately **40.82 meters**.
+
+***
+
+### Important Notes
+
+*   This formula for range assumes the projectile lands at the same height from which it was launched.
+*   Air resistance is neglected in this calculation, which is a common simplification in introductory physics problems. In reality, air resistance would reduce the actual range.
+*   The maximum range for a given initial velocity occurs at a launch angle of $45^\circ$.
+
+***
+
+### Suggested Questions
+
+*   How would the range change if the launch angle was $30^\circ$ instead of $45^\circ$?
+*   What if the ball was launched from a cliff? How would that affect the calculation?
+*   How does gravity on the Moon (approximately $1.62 \text{ m/s}^2$) affect the range of the same projectile?

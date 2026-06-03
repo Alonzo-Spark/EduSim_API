@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 66,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'bounce' boundary reflection event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on an environmental boundary wall collision interface.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nA moving body collided with the solid vertical containment border, triggering a reflection event (`bounce`).\n\n### WHAT CHANGED\nThe horizontal component of the velocity vector reversed direction instantly, causing the object to rebound back toward the center.\n\n### SIMPLE WHY\nThe rigid boundary wall exerts an equal and opposite normal force that reverses the object's horizontal momentum.\n\n### WHAT TO NOTICE\nNotice how the velocity vector arrow flips direction instantly upon impact while maintaining its vertical component.",
+  "candidate_response": "┌───────────────────────────────────────────────────────┐\n│ **Bounce Event Overlay**                              │\n│                                                       │\n│ • **Time**: 1.234 s                                    │\n│ • **Position**: (x = 5.0, y = 3.2)                     │\n│ • **Incoming Velocity**: (vx = 2.0, vy = –4.0)         │\n│ • **Outgoing Velocity**: (vx = 1.8, vy = 3.6)          │\n│ • **Incidence Angle**: 45°                             │\n│ • **Reflection Angle**: 45°                            │\n│ • **Restitution Coefficient (e)**: 0.9                 │\n│ • **Energy Loss**: 10%                                 │\n│                                                       │\n│ *This card updates in real‑time whenever a boundary   │\n│ reflection occurs, displaying key kinematic          │\n│ parameters for debugging and analysis.*               │\n└───────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────┐\n│ **Reflection Law**                                     │\n│                                                       │\n│     v'  =  – e · v                                     │\n│                                                       │\n│ [Explain Formula]  [Open Formula Lab]                 │\n└───────────────────────────────────────────────────────┘\n\nCard  \n  → Responsive table\n\n| Symbol | Description                     | Value                 |\n|--------|---------------------------------|-----------------------|\n| e      | Restitution coefficient         | 0.9                   |\n| v      | Incoming velocity vector        | (2.0, –4.0)           |\n| v'     | Outgoing velocity vector        | (1.8, 3.6)            |\n| θ_i    | Incidence angle                 | 45°                   |\n| θ_r    | Reflection angle                | 45°                   |",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 7,
+    "overall_average": "8.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a good understanding of the physics concepts involved in a bounce event, including the reflection law and restitution coefficient. However, the response lacks a clear and concise explanation of the 'why' behind the physics, which is present in the gold reference answer. The quality of presentation is excellent, with a well-structured and readable format. To improve the educational score, the candidate could provide more context and explanation for beginners, such as defining key terms like 'restitution coefficient' and 'incidence angle'. Additionally, the candidate could provide more visual aids, such as diagrams or graphs, to help illustrate the concepts. Overall, the response is strong, but could benefit from more attention to pedagogical effectiveness and clarity of teaching.",
+  "candidate_token_usage": {
+    "promptTokens": 433,
+    "completionTokens": 1161,
+    "totalTokens": 1594
+  },
+  "candidate_latency_ms": 1655,
+  "candidate_cost_usd": 0.00038078,
+  "judge_token_usage": {
+    "promptTokens": 982,
+    "completionTokens": 208,
+    "totalTokens": 1190
+  },
+  "judge_latency_ms": 3755,
+  "judge_cost_usd": 0.0010884,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:14:09.237Z"
+}

@@ -1,0 +1,223 @@
+```json
+{
+  "event": "friction_changed",
+  "platform": "braking_track",
+  "timestamp": "2025-01-30T14:23:07.441Z",
+  "overlay_id": "overlay_friction_braking_001"
+}
+```
+
+---
+
+# Friction Changed — Braking Track Platform
+
+## Overlay Runtime Response
+
+---
+
+## Physics Engine Recalculation
+
+When `friction_changed` fires, the sandbox must immediately recalculate all dependent motion variables.
+
+---
+
+### Core Governing Equations
+
+**Frictional Force**
+
+$$
+f = \mu \cdot N
+$$
+
+**Deceleration from Friction**
+
+$$
+a = -\mu g
+$$
+
+**Stopping Distance**
+
+$$
+d = \frac{v_0^2}{2\mu g}
+$$
+
+**Time to Stop**
+
+$$
+t = \frac{v_0}{\mu g}
+$$
+
+---
+
+### Variable Map at Event Trigger
+
+| Variable | Symbol | Pre-Event Value | Post-Event Value | Unit |
+|---|---|---|---|---|
+| Coefficient of Friction | μ | 0.35 | 0.72 | dimensionless |
+| Normal Force | N | 9810 N | 9810 N | Newtons |
+| Frictional Force | f | 3433.5 | 7063.2 | Newtons |
+| Deceleration | a | 3.43 | 7.06 | m/s² |
+| Initial Velocity | v₀ | 28.0 | 28.0 | m/s |
+| Stopping Distance | d | 114.2 | 55.5 | meters |
+| Time to Stop | t | 8.16 | 3.97 | seconds |
+
+---
+
+### Overlay Runtime Payload
+
+```json
+{
+  "overlay_runtime": {
+    "event_type": "friction_changed",
+    "platform": "braking_track",
+    "trigger": {
+      "source": "surface_material_swap",
+      "old_mu": 0.35,
+      "new_mu": 0.72,
+      "delta_mu": 0.37
+    },
+    "physics_recalc": {
+      "frictional_force": {
+        "old": 3433.5,
+        "new": 7063.2,
+        "unit": "N"
+      },
+      "deceleration": {
+        "old": -3.43,
+        "new": -7.06,
+        "unit": "m/s²"
+      },
+      "stopping_distance": {
+        "old": 114.2,
+        "new": 55.5,
+        "unit": "m"
+      },
+      "time_to_stop": {
+        "old": 8.16,
+        "new": 3.97,
+        "unit": "s"
+      }
+    },
+    "overlay_visuals": {
+      "friction_bar": {
+        "fill_percent": 72,
+        "color": "#FF6B35",
+        "animate": true,
+        "transition_ms": 400
+      },
+      "stopping_distance_arc": {
+        "old_radius_px": 228,
+        "new_radius_px": 111,
+        "animate": true,
+        "easing": "ease-out"
+      },
+      "deceleration_arrow": {
+        "magnitude_scale": 2.06,
+        "direction": "negative_x",
+        "color": "#E63946"
+      },
+      "velocity_curve": {
+        "replot": true,
+        "curve_type": "linear_decay",
+        "endpoint_x": 3.97
+      }
+    },
+    "hud_panels": {
+      "friction_coefficient_display": {
+        "value": 0.72,
+        "flash": true,
+        "flash_color": "#FFD166",
+        "flash_duration_ms": 600
+      },
+      "stopping_distance_display": {
+        "value": "55.5 m",
+        "delta_badge": "-58.7 m",
+        "badge_color": "#06D6A0"
+      },
+      "time_to_stop_display": {
+        "value": "3.97 s",
+        "delta_badge": "-4.19 s",
+        "badge_color": "#06D6A0"
+      }
+    },
+    "warnings": [
+      {
+        "id": "W001",
+        "type": "abrupt_deceleration",
+        "severity": "high",
+        "message": "Deceleration increased by 105.8%. Check passenger safety constraints.",
+        "trigger_threshold_mu": 0.65
+      },
+      {
+        "id": "W002",
+        "type": "stopping_zone_updated",
+        "severity": "info",
+        "message": "Stopping zone boundary recalculated. New safe stop at 55.5 m.",
+        "color_code": "#118AB2"
+      }
+    ],
+    "state_flags": {
+      "physics_stable": true,
+      "overlay_rendered": true,
+      "hud_synced": true,
+      "event_logged": true
+    }
+  }
+}
+```
+
+---
+
+### Overlay Rendering Pipeline
+
+```
+friction_changed
+      │
+      ▼
+┌─────────────────────┐
+│  Extract Δμ = 0.37  │
+└────────┬────────────┘
+         │
+         ▼
+┌─────────────────────────┐
+│  Recalculate Physics    │
+│  f, a, d, t             │
+└────────┬────────────────┘
+         │
+         ▼
+┌──────────────────────────────┐
+│  Push to Overlay HUD Panels  │
+│  friction_bar                │
+│  stopping_distance_arc       │
+│  deceleration_arrow          │
+│  velocity_curve              │
+└────────┬─────────────────────┘
+         │
+         ▼
+┌──────────────────────┐
+│  Evaluate Warnings   │
+│  W001 → HIGH         │
+│  W002 → INFO         │
+└────────┬─────────────┘
+         │
+         ▼
+┌──────────────────────┐
+│  Sync State Flags    │
+│  Log Event           │
+└──────────────────────┘
+```
+
+---
+
+### Warning Thresholds Reference
+
+| Condition | μ Threshold | Severity | Action |
+|---|---|---|---|
+| Low friction | μ < 0.25 | Critical | Emergency stop flag |
+| Moderate friction | 0.25 ≤ μ < 0.50 | Warning | Reduce speed limit |
+| Normal friction | 0.50 ≤ μ < 0.65 | Info | Standard operation |
+| High friction | μ ≥ 0.65 | High | Check deceleration safety |
+
+---
+
+> **Overlay Status** `ACTIVE` — All panels synced. Physics engine stable. Event logged at `2025-01-30T14:23:07.441Z`.

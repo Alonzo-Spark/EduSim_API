@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 34,
+  "question": "A metal rod expands on heating. Explain thermal expansion.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThermal expansion is the tendency of matter to increase in volume, area, or length in response to an increase in temperature. \n\nThis behavior occurs because heating causes atoms to vibrate more vigorously, increasing the average separation distance between them.\n\n---\n\n## Characteristics\n\n* **Reversible Behavior:** The material expands uniformly as temperature rises and contracts back to its initial dimensions when cooled, provided it stays within its elastic limits.\n\n---\n\n## Formula\n\nThe linear thermal expansion equation for a solid rod is defined as:\n\n$$\\Delta L = \\alpha L_0 \\Delta T$$\n\nWhere:\n* $\\Delta L$ represents the net change in length\n* $\\alpha$ represents the coefficient of linear thermal expansion\n* $L_0$ represents the initial length of the rod sample\n* $\\Delta T$ represents the change in temperature\n\n---\n\n## Summary\n\nThermal expansion occurs because heat increases atomic vibrations, forcing atoms further apart and causing macroscopic expansion that scales with temperature changes.",
+  "candidate_response": "Here's an interactive explanation of thermal expansion:\n\n┌───────────────────────────┐\n│ Quick Definition          │\n├───────────────────────────┤\n│ Thermal expansion is the  │\n│ tendency of materials to  │\n│ change dimensions when     │\n│ temperature changes.      │\n│ Metals expand when heated │\n│ due to increased atomic   │\n│ vibrations.               │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n├───────────────────────────┤\n│ 1. Atomic vibration       │\n│ 2. Kinetic energy increase│\n│ 3. Interatomic spacing    │\n│ 4. Material-specific     │\n│    response              │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n├───────────────────────────┤\n│ Linear Thermal Expansion  │\n│                           │\n│ ΔL = αL₀ΔT                │\n│                           │\n│ [Explain Formula]         │\n│ [Formula Lab]             │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Formula Explanation       │\n├───────────────────────────┤\n│ ΔL - Length change        │\n│ α - Coefficient of linear │\n│      expansion (¹/°C)     │\n│ L₀ - Original length     │\n│ ΔT - Temperature change  │\n│                          │\n│ Example:                  │\n│ 1m steel rod (α=12×10⁻⁶) │\n│ heated +100°C → ΔL=12mm   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Atomic Mechanism          │\n├───────────────────────────┤\n│ 1. Heat → kinetic energy ↑│\n│ 2. Atoms vibrate wider    │\n│ 3. Average separation ↑   │\n│ 4. Macroscopic expansion  │\n│                          │\n│ [Show Atomic Model]       │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Real-World Applications  │\n├───────────────────────────┤\n│ 1. Expansion joints in    │\n│    bridges/railroads      │\n│ 2. Bimetallic strips in   │\n│    thermostats            │\n│ 3. Engine component      │\n│    design                 │\n│ 4. Tightening metal lids │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Considerations  │\n├───────────────────────────┤\n│ • Different metals expand│\n│   at different rates      │\n│ • Expansion occurs in all │\n│   dimensions              │\n│ • Stress develops if      │\n│   expansion is constrained│\n│ • Reversible process      │\n│   (contraction on cooling)│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Interactive Lab           │\n├───────────────────────────┤\n│ [Material Selector:       │\n│  Aluminum | Steel | Copper│\n│ Length Slider: 0-10m      │\n│ Temp. Change: -200°C+500°C│\n│                          │\n│ [Simulate Expansion]      │\n└───────────────────────────┘\n\nWould you like to explore specific aspects of thermal expansion through simulations or practical examples?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of thermal expansion, accurately covering key concepts, the formula, and real-world applications. The use of interactive elements and examples enhances the educational value. However, the quality score is slightly reduced due to the unconventional formatting, which, while engaging, may not be suitable for all audiences. The accuracy and educational scores are high due to the comprehensive coverage of the topic, including the explanation of the formula and the discussion of material-specific responses. Minor improvements could include a clearer introduction to the topic and more detailed explanations of certain concepts, such as the implications of stress development when expansion is constrained. Overall, the response effectively teaches thermal expansion and its relevance, making it a valuable educational resource.",
+  "candidate_token_usage": {
+    "promptTokens": 362,
+    "completionTokens": 1280,
+    "totalTokens": 1642
+  },
+  "candidate_latency_ms": 15867,
+  "candidate_cost_usd": 0.0030023,
+  "judge_token_usage": {
+    "promptTokens": 1387,
+    "completionTokens": 202,
+    "totalTokens": 1589
+  },
+  "judge_latency_ms": 5513,
+  "judge_cost_usd": 0.001317,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:10:40.522Z"
+}

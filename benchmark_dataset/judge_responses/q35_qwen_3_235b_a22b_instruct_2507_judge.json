@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 35,
+  "question": "Define latent heat and explain change of state.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nLatent heat is the thermal energy absorbed or released by a substance during a phase change that occurs at a constant, unchanging temperature.\n\nA change of state refers to the transition of matter between solid, liquid, and gaseous phases as internal molecular bonds break or form.\n\n---\n\n## Types of Latent Heat\n\n* **Latent Heat of Fusion:** The heat energy required to transition a substance from a solid to a liquid phase at its melting point.\n* **Latent Heat of Vaporization:** The heat energy required to transition a substance from a liquid to a gaseous phase at its boiling point.\n\n---\n\n## Formula\n\nThe phase change heat transfer equation is written as:\n\n$$Q = mL$$\n\nWhere:\n* $Q$ represents the heat energy transferred during the phase change\n* $m$ represents the total mass of the substance undergoing transformation\n* $L$ represents the specific latent heat constant for that substance\n\n---\n\n## Summary\n\nLatent heat drives phase changes at a constant temperature by breaking or forming molecular bonds rather than changing the system's kinetic temperature.",
+  "candidate_response": "```json\n{\n  \"sections\": [\n    {\n      \"type\": \"QuickDefinition\",\n      \"title\": \"Quick Definition\",\n      \"content\": \"Latent heat is the amount of thermal energy absorbed or released by a substance during a change of state (phase transition) without a change in temperature.\"\n    },\n    {\n      \"type\": \"KeyConcept\",\n      \"title\": \"Change of State\",\n      \"content\": \"A change of state, also known as a phase transition, occurs when matter transforms from one physical state (solid, liquid, gas) to another. This happens due to the addition or removal of thermal energy, which affects the arrangement and motion of particles.\"\n    },\n    {\n      \"type\": \"FormulaCard\",\n      \"title\": \"Main Formula\",\n      \"formula\": \"Q = m \\\\cdot L\",\n      \"variables\": [\n        {\n          \"symbol\": \"Q\",\n          \"description\": \"Thermal energy transferred (in joules, J)\"\n        },\n        {\n          \"object\": \"m\",\n          \"description\": \"Mass of the substance (in kilograms, kg)\"\n        },\n        {\n          \"symbol\": \"L\",\n          \"description\": \"Specific latent heat (in joules per kilogram, J/kg)\"\n        }\n      ],\n      \"explanation\": \"This formula calculates the energy required or released during a phase change. The temperature remains constant during this process.\",\n      \"actions\": [\n        \"Explain Formula\",\n        \"Open Formula Lab\"\n      ]\n    },\n    {\n      \"type\": \"Characteristics\",\n      \"title\": \"Characteristics of Latent Heat\",\n      \"content\": [\n        \"No temperature change occurs during the absorption or release of latent heat.\",\n        \"Energy is used to break or form intermolecular bonds.\",\n        \"It is 'hidden' energy—hence the term 'latent'.\",\n        \"Depends on the type of substance and the type of phase change.\"\n      ]\n    },\n    {\n      \"type\": \"TypesTable\",\n      \"title\": \"Types of Latent Heat\",\n      \"table\": [\n        [\"Type\", \"Process\", \"Energy Change\"],\n        [\"Latent Heat of Fusion\", \"Solid ↔ Liquid\", \"Absorbed or released during melting or freezing\"],\n        [\"Latent Heat of Vaporization\", \"Liquid ↔ Gas\", \"Absorbed or released during vaporization or condensation\"]\n      ]\n    },\n    {\n      \"type\": \"Applications\",\n      \"title\": \"Real-World Applications\",\n      \"content\": [\n        \"Refrigeration and air conditioning systems use latent heat during condensation and evaporation of refrigerants.\",\n        \"Sweating cools the body because evaporation of sweat absorbs latent heat from the skin.\",\n        \"Steam burns are more severe than boiling water burns because steam releases latent heat upon condensation.\"\n      ]\n    },\n    {\n      \"type\": \"ImportantNotes\",\n      \"title\": \"Important Notes\",\n      \"content\": [\n        \"Temperature remains constant during a phase change, even though energy is being added or removed.\",\n        \"The value of latent heat is specific to each material and type of phase transition.\",\n        \"Latent heat is different from sensible heat, which causes temperature changes without phase change.\"\n      ]\n    },\n    {\n      \"type\": \"Summary\",\n      \"title\": \"Summary\",\n      \"content\": \"Latent heat is the energy involved in changing the state of a substance without changing its temperature. It plays a crucial role in natural and engineered systems involving phase transitions such as melting, freezing, evaporation, and condensation.\"\n    },\n    {\n      \"type\": \"SuggestedQuestions\",\n      \"title\": \"Suggested Questions\",\n      \"questions\": [\n        \"Why does temperature remain constant during a phase change?\",\n        \"How is latent heat different from specific heat capacity?\",\n        \"Explain why ice at 0°C is more effective in cooling than water at 0°C.\",\n        \"What factors affect the value of latent heat of vaporization?\"\n      ]\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It covers all key concepts, including the definition of latent heat, types of latent heat, and the formula for phase change heat transfer. The use of a JSON format allows for clear organization and easy access to information. However, to reach a perfect score, the candidate could consider adding more visual aids, such as diagrams or graphs, to enhance understanding and engagement. Additionally, providing more real-world examples or applications of latent heat could further improve the educational value of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 355,
+    "completionTokens": 831,
+    "totalTokens": 1186
+  },
+  "candidate_latency_ms": 74037,
+  "candidate_cost_usd": 0.002017,
+  "judge_token_usage": {
+    "promptTokens": 1452,
+    "completionTokens": 169,
+    "totalTokens": 1621
+  },
+  "judge_latency_ms": 3992,
+  "judge_cost_usd": 0.0012767999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:12:54.059Z"
+}

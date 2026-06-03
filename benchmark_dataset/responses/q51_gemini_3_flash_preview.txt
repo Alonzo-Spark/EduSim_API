@@ -1,0 +1,53 @@
+:::section{title="Introduction"}
+In classical mechanics, a **Simple Pendulum** consists of a point mass (bob) suspended by a massless, unstretchable string. A common misconception is that a heavier "bob" will swing faster or slower. Today, we analyze the relationship between **Mass ($m$)** and the **Period ($T$)**.
+:::
+
+:::section{title="Quick Definition"}
+**The Period ($T$)** is the total time taken for the pendulum to complete one full back-and-forth cycle (oscillation).
+:::
+
+:::section{title="Formula Card"}
+### The Period of a Simple Pendulum
+$$
+T = 2\pi \sqrt{\frac{L}{g}}
+$$
+
+**Variable Breakdown:**
+*   $T$: Period (seconds)
+*   $L$: Length of the string (meters)
+*   $g$: Acceleration due to gravity ($\approx 9.81 \, m/s^2$)
+*   $m$: Mass of the bob (kilograms) — *Note its absence in the formula.*
+
+[ 🔬 Open Formula Lab: Period Analysis ]
+:::
+
+:::section{title="Key Concepts: The Role of Mass"}
+Contrary to intuition, **changing the mass does not affect the period** of a simple pendulum (assuming air resistance is negligible and the angle is small).
+
+*   **Gravitational Force:** A larger mass experiences a stronger gravitational pull ($F = mg$).
+*   **Inertia:** A larger mass also has greater resistance to changes in motion ($F = ma$).
+*   **The Cancellation:** These two effects cancel each other out perfectly. The acceleration of the bob is independent of its mass.
+:::
+
+:::section{title="Data Comparison Table"}
+| Mass ($kg$) | Length ($m$) | Gravity ($m/s^2$) | Calculated Period ($s$) |
+| :--- | :--- | :--- | :--- |
+| 0.5 | 1.0 | 9.81 | ~2.01 |
+| 1.0 | 1.0 | 9.81 | ~2.01 |
+| 5.0 | 1.0 | 9.81 | ~2.01 |
+| 10.0 | 1.0 | 9.81 | ~2.01 |
+
+**Observation:** As mass increases by a factor of 20, the period remains constant at $\approx 2.01$ seconds.
+:::
+
+:::section{title="Important Notes"}
+*   **Small Angle Approximation:** This independence holds true primarily for small angles (usually $< 15^\circ$).
+*   **Air Resistance:** In a real-world "Live Sandbox," a very light object with a large surface area (like a balloon) will be slowed by air resistance, making it *appear* that mass matters.
+*   **Center of Mass:** If changing the mass changes the *effective length* (e.g., using a very large physical sphere), the period will change because $L$ changed, not because of the mass itself.
+:::
+
+:::section{title="Suggested Questions"}
+1.  **If mass doesn't affect the period, what happens if we move the pendulum to the Moon?**
+2.  **How does the period change if we quadruple the length of the string?**
+3.  **Why does a pendulum eventually stop swinging in a real-world simulation?**
+:::

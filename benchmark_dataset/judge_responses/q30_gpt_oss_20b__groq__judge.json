@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 30,
+  "question": "Explain Bernoulli’s theorem and its applications.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nBernoulli's Theorem states that for an ideal, incompressible fluid undergoing steady, non-viscous flow, the total mechanical energy—comprising pressure energy, kinetic energy, and potential energy—remains constant along any streamline.\n\n---\n\n## Formula\n\nThe conservation expression along a fluid streamline:\n\n$$P + \\frac{1}{2}\\rho v^2 + \\rho g h = \\text{Constant}$$\n\nWhere:\n* $P$ represents the static fluid pressure\n* $\\rho$ represents the constant mass density of the fluid\n* $v$ represents the local flow velocity\n* $g$ represents acceleration due to gravity\n* $h$ represents the elevation height relative to a reference plane\n\n---\n\n## Applications\n\n* **Aerodynamic Lift:** Airplane wings are shaped so that air travels faster over the curved top surface, creating a lower pressure zone that generates upward lift.\n* **Venturi Tube Meters:** Measuring fluid flow rates through pipelines by tracking the pressure drop that occurs when the flow speeds up through a narrowed throat section.\n* **Atomizers and Paint Sprayers:** Passing a fast stream of air over a small draw tube lowers the local pressure, drawing liquid up to be atomized into a fine spray.\n\n---\n\n## Summary\n\nBernoulli's Theorem shows that as a fluid's velocity increases, its static pressure drops simultaneously, a principle widely used in aerodynamics and fluid flow systems.",
+  "candidate_response": "<failed>",
+  "judge_model": "N/A",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Model generation failed: OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "candidate_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "candidate_latency_ms": 95,
+  "candidate_cost_usd": 0,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 0,
+  "judge_cost_usd": 0,
+  "retry_count": 2,
+  "success": false,
+  "error": "OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "timestamp": "2026-06-01T07:57:54.610Z"
+}

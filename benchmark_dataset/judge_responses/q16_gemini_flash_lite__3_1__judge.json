@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 16,
+  "question": "Work, Energy and Power: Define work and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWork is defined as the measure of energy transfer that occurs when an external force acts on an object and causes it to move through a displacement distance. \n\nWork is a scalar quantity calculated as the dot product of the applied force vector and the displacement vector.\n\n---\n\n## Characteristics\n\n* **Directional Orientation Dependency:** Work value can scale as positive, negative, or zero depending on the angle between the force and displacement vectors.\n* **Zero Work Scenarios:** No work is performed if the object remains stationary ($\\Delta x = 0$) or if the applied force vector acts at a right angle ($90^\\circ$) relative to the motion.\n\n---\n\n## Formula\n\nThe mathematical dot product defining mechanical work:\n\n$$W = Fs \\cos(\\theta)$$\n\nWhere:\n* $W$ represents the work scalar value\n* $F$ represents the magnitude of the applied force vector\n* $s$ represents the magnitude of the displacement vector\n* $\\theta$ represents the angle between the force and displacement paths\n\n---\n\n## Metric System Units\n\nThe standard SI unit of work is the **Joule ($\\text{J}$)**, which is defined as the work performed when a constant force of $1 \\text{ Newton}$ displaces an object through a distance of $1 \\text{ meter}$ along its line of action.\n\n$$1 \\text{ J} = 1 \\text{ N} \\cdot \\text{m} = 1 \\text{ kg} \\cdot \\text{m}^2/\\text{s}^2$$\n\n---\n\n## Summary\n\nWork measures mechanical energy conversion, directly proportional to force intensity and displacement length, with a dependency on their mutual vector alignment angle.",
+  "candidate_response": "Here's the information presented in an interactive textbook format:\n\n┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ Let's explore the concepts│\n│ of work, energy, and     │\n│ power. These are          │\n│ fundamental in physics.   │\n└───────────────────────────┘\n\n---\n\n┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Work is done when a force │\n│ causes displacement of an│\n│ object.                   │\n└───────────────────────────┘\n\n---\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│  $$W = F \\cdot d \\cdot cos(\\theta)$$ │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n---\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ *   **Force (F):** The    │\n│     push or pull acting   │\n│     on the object.        │\n│ *   **Displacement (d):** │\n│     The distance the      │\n│     object moves in the   │\n│     direction of the      │\n│     force.                │\n│ *   **Angle (θ):** The    │\n│     angle between the     │\n│     force vector and the  │\n│     displacement vector.  │\n│                           │\n└───────────────────────────┘\n\n---\n\n┌───────────────────────────┐\n│ SI Unit of Work         │\n│                           │\n│ The SI unit of work is   │\n│ the Joule (J).           │\n│                           │\n│ 1 Joule = 1 Newton-meter  │\n│ (1 J = 1 N⋅m)             │\n│                           │\n└───────────────────────────┘\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is generally accurate and well-structured, but lacks some details and depth compared to the gold reference answer. Specifically, it does not explicitly mention that work is a scalar quantity calculated as the dot product of the applied force vector and the displacement vector. Additionally, it does not discuss the characteristics of work, such as directional orientation dependency and zero work scenarios. The formula is correctly presented, but the explanation of the variables is brief and could be expanded for better clarity. The SI unit of work is correctly identified as the Joule, but the definition of 1 Joule is not fully elaborated. To improve, the candidate response could provide more comprehensive explanations and include additional details to enhance conceptual understanding.",
+  "candidate_token_usage": {
+    "promptTokens": 384,
+    "completionTokens": 408,
+    "totalTokens": 792
+  },
+  "candidate_latency_ms": 3119,
+  "candidate_cost_usd": 0.0012744,
+  "judge_token_usage": {
+    "promptTokens": 1202,
+    "completionTokens": 202,
+    "totalTokens": 1404
+  },
+  "judge_latency_ms": 2930,
+  "judge_cost_usd": 0.001206,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:25:27.163Z"
+}

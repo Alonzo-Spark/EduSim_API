@@ -1,0 +1,1011 @@
+I'll build this response as a structured interactive textbook experience.
+
+```jsx
+import { useState } from "react";
+import katex from "https://esm.sh/katex@0.16.9";
+
+// ── tiny KaTeX helpers ──────────────────────────────────
+function KT({ tex, block = false }) {
+  try {
+    const html = katex.renderToString(tex, {
+      throwOnError: false,
+      displayMode: block,
+    });
+    return (
+      <span
+        dangerouslySetInnerHTML={{ __html: html }}
+        style={{ fontFamily: "inherit" }}
+      />
+    );
+  } catch {
+    return <code>{tex}</code>;
+  }
+}
+
+// ── colour tokens ───────────────────────────────────────
+const C = {
+  bg: "#0f1117",
+  surface: "#16181f",
+  card: "#1c1f2b",
+  cardBorder: "#2a2d3e",
+  accent: "#7c6af7",
+  accentSoft: "#2d2850",
+  accentText: "#a89ffe",
+  teal: "#2dd4bf",
+  tealSoft: "#0d3330",
+  amber: "#f59e0b",
+  amberSoft: "#2d1f05",
+  red: "#f87171",
+  redSoft: "#2d1010",
+  green: "#4ade80",
+  greenSoft: "#0d2d1a",
+  blue: "#60a5fa",
+  blueSoft: "#0d1e2d",
+  textPrimary: "#e8eaf0",
+  textSecondary: "#8b90a7",
+  textMuted: "#555a72",
+  divider: "#22253a",
+};
+
+// ── shared card shell ───────────────────────────────────
+function Card({ children, style = {}, accent }) {
+  const borderColor = accent || C.cardBorder;
+  return (
+    <div
+      style={{
+        background: C.card,
+        border: `1px solid ${borderColor}`,
+        borderRadius: 14,
+        padding: "22px 24px",
+        marginBottom: 18,
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function SectionLabel({ icon, text, color = C.accentText }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        marginBottom: 14,
+        fontSize: 11,
+        fontWeight: 700,
+        letterSpacing: "0.12em",
+        textTransform: "uppercase",
+        color,
+      }}
+    >
+      <span style={{ fontSize: 15 }}>{icon}</span>
+      {text}
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// ORBITAL ANIMATION
+// ══════════════════════════════════════════════════════
+function OrbitalAnimation({ velocityFactor }) {
+  // velocityFactor: 1 = circular, <1 = elliptical/falling
+  const [tick, setTick] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [animId, setAnimId] = useState(null);
+
+  const cx = 160, cy = 160, r = 0;
+  const circR = 90;
+
+  // Ellipse parameters based on velocity factor
+  // At v_factor=1: circle. As factor drops, semi-minor shrinks
+  const vf = Math.max(0.3, Math.min(1.0, velocityFactor));
+  // Semi-major axis stays ~circR, semi-minor shrinks
+  const semiA = circR;
+  const semiB = circR * vf * vf; // shrinks quadratically
+  // Ellipse centre offset so periapsis stays on right
+  const c_dist = Math.sqrt(semiA * semiA - semiB * semiB);
+  const ellipseCX = cx - c_dist; // shift left so right focus = cx,cy
+
+  function startAnim() {
+    if (running) return;
+    setRunning(true);
+    let t = tick;
+    const step = () => {
+      t += 0.018;
+      setTick(t);
+      const id = requestAnimationFrame(step);
+      setAnimId(id);
+    };
+    const id = requestAnimationFrame(step);
+    setAnimId(id);
+  }
+
+  function stopAnim() {
+    setRunning(false);
+    if (animId) cancelAnimationFrame(animId);
+  }
+
+  function resetAnim() {
+    stopAnim();
+    setTick(0);
+    setRunning(false);
+  }
+
+  // Planet position on ellipse (parametric)
+  const px = ellipseCX + semiA * Math.cos(tick);
+  const py = cy + semiB * Math.sin(tick);
+
+  // Circular orbit ghost position
+  const gpx = cx + circR * Math.cos(tick);
+  const gpy = cy + circR * Math.sin(tick);
+
+  // Velocity vector direction (tangent to ellipse)
+  const dvx = -semiA * Math.sin(tick);
+  const dvy = semiB * Math.cos(tick);
+  const dvMag = Math.sqrt(dvx * dvx + dvy * dvy);
+  const vLen = 28 * vf;
+  const vx2 = px + (dvx / dvMag) * vLen;
+  const vy2 = py + (dvy / dvMag) * vLen;
+
+  // Gravity vector toward star
+  const gvx = cx - px;
+  const gvy = cy - py;
+  const gMag = Math.sqrt(gvx * gvx + gvy * gvy);
+  const gLen = 22;
+  const gx2 = px + (gvx / gMag) * gLen;
+  const gy2 = py + (gvy / gMag) * gLen;
+
+  const isCircular = vf >= 0.98;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+      <svg width={320} height={320} style={{ borderRadius: 12, background: "#090b12", display: "block" }}>
+        {/* Star glow */}
+        <defs>
+          <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fff7a0" stopOpacity="1" />
+            <stop offset="40%" stopColor="#f59e0b" stopOpacity="0.8" />
+            <stop offset="100%" stopColor="#f59e0b" stopOpacity="0" />
+          </radialGradient>
+          <radialGradient id="planetGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#93c5fd" stopOpacity="1" />
+            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
+          </radialGradient>
+          <marker id="arrowV" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill={C.teal} />
+          </marker>
+          <marker id="arrowG" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill={C.amber} />
+          </marker>
+        </defs>
+
+        {/* Circular orbit ghost */}
+        <circle
+          cx={cx} cy={cy} r={circR}
+          fill="none"
+          stroke={isCircular ? C.accent : "#2a2d3e"}
+          strokeWidth={isCircular ? 1.5 : 1}
+          strokeDasharray={isCircular ? "none" : "4 4"}
+          opacity={0.5}
+        />
+
+        {/* Actual elliptical orbit */}
+        {!isCircular && (
+          <ellipse
+            cx={ellipseCX} cy={cy}
+            rx={semiA} ry={semiB}
+            fill="none"
+            stroke={C.accent}
+            strokeWidth={1.5}
+            opacity={0.7}
+          />
+        )}
+
+        {/* Periapsis & Apoapsis labels */}
+        {!isCircular && (
+          <>
+            <circle cx={ellipseCX + semiA} cy={cy} r={3} fill={C.red} opacity={0.8} />
+            <text x={ellipseCX + semiA + 6} y={cy - 6} fill={C.red} fontSize={9} opacity={0.8}>periapsis</text>
+            <circle cx={ellipseCX - semiA} cy={cy} r={3} fill={C.teal} opacity={0.8} />
+            <text x={ellipseCX - semiA - 44} y={cy - 6} fill={C.teal} fontSize={9} opacity={0.8}>apoapsis</text>
+          </>
+        )}
+
+        {/* Ghost planet on circular orbit */}
+        {!isCircular && (
+          <circle cx={gpx} cy={gpy} r={6} fill="none" stroke="#3b4060" strokeWidth={1.5} strokeDasharray="2 2" />
+        )}
+
+        {/* Gravity vector */}
+        <line
+          x1={px} y1={py} x2={gx2} y2={gy2}
+          stroke={C.amber} strokeWidth={2}
+          markerEnd="url(#arrowG)"
+        />
+
+        {/* Velocity vector */}
+        <line
+          x1={px} y1={py} x2={vx2} y2={vy2}
+          stroke={C.teal} strokeWidth={2}
+          markerEnd="url(#arrowV)"
+        />
+
+        {/* Star */}
+        <circle cx={cx} cy={cy} r={20} fill="url(#starGlow)" />
+        <circle cx={cx} cy={cy} r={10} fill="#fde68a" />
+
+        {/* Planet */}
+        <circle cx={px} cy={py} r={9} fill="url(#planetGlow)" />
+        <circle cx={px} cy={py} r={6} fill="#60a5fa" />
+
+        {/* Legend */}
+        <line x1={14} y1={296} x2={30} y2={296} stroke={C.teal} strokeWidth={2} />
+        <text x={34} y={300} fill={C.teal} fontSize={10}>velocity</text>
+        <line x1={90} y1={296} x2={106} y2={296} stroke={C.amber} strokeWidth={2} />
+        <text x={110} y={300} fill={C.amber} fontSize={10}>gravity</text>
+        {!isCircular && (
+          <>
+            <line x1={170} y1={296} x2={186} y2={296} stroke={C.accent} strokeWidth={1.5} />
+            <text x={190} y={300} fill={C.accentText} fontSize={10}>actual orbit</text>
+            <line x1={170} y1={308} x2={186} y2={308} stroke="#3b4060" strokeWidth={1.5} strokeDasharray="2 2" />
+            <text x={190} y={312} fill={C.textMuted} fontSize={10}>circular ref</text>
+          </>
+        )}
+      </svg>
+
+      {/* Controls */}
+      <div style={{ display: "flex", gap: 10 }}>
+        {["▶ Play", "⏸ Pause", "↺ Reset"].map((label, i) => (
+          <button
+            key={i}
+            onClick={[startAnim, stopAnim, resetAnim][i]}
+            style={{
+              background: i === 0 ? C.accentSoft : C.surface,
+              color: i === 0 ? C.accentText : C.textSecondary,
+              border: `1px solid ${i === 0 ? C.accent : C.divider}`,
+              borderRadius: 8,
+              padding: "6px 16px",
+              fontSize: 12,
+              cursor: "pointer",
+              fontWeight: 600,
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// FORMULA LAB
+// ══════════════════════════════════════════════════════
+function FormulaLab({ formula, title, variables, description }) {
+  const [open, setOpen] = useState(false);
+  const [vals, setVals] = useState(
+    Object.fromEntries(variables.map((v) => [v.key, v.default]))
+  );
+
+  const result = formula.compute(vals);
+
+  return (
+    <div style={{ marginTop: 12 }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        style={{
+          background: open ? C.accentSoft : C.surface,
+          color: open ? C.accentText : C.textSecondary,
+          border: `1px solid ${open ? C.accent : C.divider}`,
+          borderRadius: 8,
+          padding: "7px 18px",
+          fontSize: 12,
+          cursor: "pointer",
+          fontWeight: 600,
+          marginRight: 8,
+        }}
+      >
+        {open ? "▼ Close Formula Lab" : "⚗ Open Formula Lab"}
+      </button>
+
+      {open && (
+        <div
+          style={{
+            marginTop: 14,
+            background: C.surface,
+            border: `1px solid ${C.accent}`,
+            borderRadius: 12,
+            padding: "18px 20px",
+          }}
+        >
+          <div style={{ fontSize: 12, fontWeight: 700, color: C.accentText, marginBottom: 12, letterSpacing: "0.08em" }}>
+            ⚗ {title} — Interactive Lab
+          </div>
+          <div style={{ fontSize: 12, color: C.textSecondary, marginBottom: 14 }}>{description}</div>
+
+          {variables.map((v) => (
+            <div key={v.key} style={{ marginBottom: 14 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                <span style={{ fontSize: 12, color: C.textSecondary }}>
+                  <KT tex={v.label} /> — {v.name}
+                </span>
+                <span style={{ fontSize: 12, color: C.accentText, fontWeight: 700 }}>
+                  {vals[v.key].toFixed(v.decimals ?? 2)} {v.unit}
+                </span>
+              </div>
+              <input
+                type="range"
+                min={v.min} max={v.max} step={v.step}
+                value={vals[v.key]}
+                onChange={(e) => setVals({ ...vals, [v.key]: parseFloat(e.target.value) })}
+                style={{ width: "100%", accentColor: C.accent }}
+              />
+            </div>
+          ))}
+
+          <div
+            style={{
+              background: C.card,
+              border: `1px solid ${C.teal}`,
+              borderRadius: 10,
+              padding: "12px 16px",
+              marginTop: 8,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <span style={{ fontSize: 12, color: C.textSecondary }}>Result</span>
+            <span style={{ fontSize: 16, color: C.teal, fontWeight: 700 }}>
+              {result.value.toFixed(result.decimals ?? 2)} {result.unit}
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// FORMULA CARD
+// ══════════════════════════════════════════════════════
+function FormulaCard({ title, tex, explanation, lab, accentColor = C.accent }) {
+  const [showExplain, setShowExplain] = useState(false);
+
+  return (
+    <Card accent={accentColor} style={{ background: "#13162a" }}>
+      <SectionLabel icon="📐" text={title} color={C.accentText} />
+
+      <div
+        style={{
+          background: C.bg,
+          borderRadius: 10,
+          padding: "18px 12px",
+          textAlign: "center",
+          margin: "0 0 16px 0",
+          border: `1px solid ${C.divider}`,
+          fontSize: 20,
+        }}
+      >
+        <KT tex={tex} block />
+      </div>
+
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <button
+          onClick={() => setShowExplain((s) => !s)}
+          style={{
+            background: showExplain ? "#1a2a1a" : C.surface,
+            color: showExplain ? C.green : C.textSecondary,
+            border: `1px solid ${showExplain ? C.green : C.divider}`,
+            borderRadius: 8,
+            padding: "7px 18px",
+            fontSize: 12,
+            cursor: "pointer",
+            fontWeight: 600,
+          }}
+        >
+          {showExplain ? "▼ Hide Explanation" : "💬 Explain Formula"}
+        </button>
+      </div>
+
+      {showExplain && (
+        <div
+          style={{
+            marginTop: 14,
+            background: C.surface,
+            borderRadius: 10,
+            padding: "14px 16px",
+            border: `1px solid ${C.divider}`,
+          }}
+        >
+          {explanation.map((line, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                gap: 10,
+                marginBottom: i < explanation.length - 1 ? 10 : 0,
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={{ color: C.accentText, fontSize: 13, marginTop: 1 }}>•</span>
+              <span style={{ fontSize: 13, color: C.textSecondary, lineHeight: 1.6 }}>
+                {line}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {lab && <FormulaLab {...lab} />}
+    </Card>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// COMPARISON TABLE
+// ══════════════════════════════════════════════════════
+function ComparisonTable() {
+  const rows = [
+    {
+      scenario: "v = v_c",
+      orbit: "Perfect Circle",
+      energy: "Constant",
+      path: "Stays at same altitude",
+      color: C.green,
+      icon: "🟢",
+    },
+    {
+      scenario: "v slightly < v_c",
+      orbit: "Slightly Elliptical",
+      energy: "Lower",
+      path: "Dips below circular altitude",
+      color: C.amber,
+      icon: "🟡",
+    },
+    {
+      scenario: "v = v_c / √2",
+      orbit: "Highly Elliptical",
+      energy: "Much Lower",
+      path: "Periapsis near surface",
+      color: C.red,
+      icon: "🔴",
+    },
+    {
+      scenario: "v → 0",
+      orbit: "Radial Fall",
+      energy: "Near zero KE",
+      path: "Falls directly into star",
+      color: "#f87171",
+      icon: "💥",
+    },
+  ];
+
+  return (
+    <Card>
+      <SectionLabel icon="📊" text="Velocity vs Orbital Outcome" color={C.textSecondary} />
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+          <thead>
+            <tr>
+              {["Velocity", "Orbit Type", "Total Energy", "Behaviour"].map((h) => (
+                <th
+                  key={h}
+                  style={{
+                    padding: "10px 14px",
+                    textAlign: "left",
+                    color: C.textMuted,
+                    fontWeight: 700,
+                    fontSize: 11,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    borderBottom: `1px solid ${C.divider}`,
+                  }}
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr
+                key={i}
+                style={{
+                  background: i % 2 === 0 ? "transparent" : "#13141c",
+                  borderBottom: `1px solid ${C.divider}`,
+                }}
+              >
+                <td style={{ padding: "11px 14px", color: row.color, fontWeight: 700 }}>
+                  {row.icon} <KT tex={row.scenario} />
+                </td>
+                <td style={{ padding: "11px 14px", color: C.textPrimary }}>{row.orbit}</td>
+                <td style={{ padding: "11px 14px", color: C.textSecondary }}>{row.energy}</td>
+                <td style={{ padding: "11px 14px", color: C.textSecondary }}>{row.path}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Card>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// VELOCITY SLIDER + LIVE ORBIT
+// ══════════════════════════════════════════════════════
+function LiveOrbitExplorer() {
+  const [vFactor, setVFactor] = useState(1.0);
+
+  const label =
+    vFactor >= 0.98
+      ? { text: "Stable Circular Orbit", color: C.green }
+      : vFactor >= 0.75
+      ? { text: "Mildly Elliptical — Planet dips inward", color: C.amber }
+      : vFactor >= 0.5
+      ? { text: "Strongly Elliptical — Close periapsis", color: "#fb923c" }
+      : { text: "Near-Radial Fall — Collision course", color: C.red };
+
+  return (
+    <Card accent={C.accent}>
+      <SectionLabel icon="🔭" text="Live Orbit Explorer" color={C.accentText} />
+
+      <OrbitalAnimation velocityFactor={vFactor} />
+
+      <div style={{ marginTop: 20 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+          <span style={{ fontSize: 12, color: C.textSecondary }}>
+            Tangential Velocity: <KT tex={`v = ${vFactor.toFixed(2)}\\, v_c`} />
+          </span>
+          <span style={{ fontSize: 12, color: label.color, fontWeight: 700 }}>
+            {label.text}
+          </span>
+        </div>
+        <input
+          type="range"
+          min={0.3} max={1.0} step={0.01}
+          value={vFactor}
+          onChange={(e) => setVFactor(parseFloat(e.target.value))}
+          style={{ width: "100%", accentColor: C.accent }}
+        />
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: 4 }}>
+          <span style={{ fontSize: 10, color: C.textMuted }}>0.3 v_c (near-radial)</span>
+          <span style={{ fontSize: 10, color: C.textMuted }}>1.0 v_c (circular)</span>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// ENERGY CARD
+// ══════════════════════════════════════════════════════
+function EnergyCard() {
+  const [vFactor, setVFactor] = useState(1.0);
+  const G = 6.674e-11, M = 2e30, m = 6e24, r = 1.5e11;
+  const vc = Math.sqrt(G * M / r);
+  const v = vc * vFactor;
+  const KE = 0.5 * m * v * v;
+  const PE = -G * M * m / r;
+  const E = KE + PE;
+  const KEn = KE / Math.abs(PE);
+  const En = E / Math.abs(PE);
+
+  const barW = (val, max) => `${Math.min(100, Math.abs(val / max) * 100).toFixed(1)}%`;
+
+  return (
+    <Card accent={C.teal}>
+      <SectionLabel icon="⚡" text="Energy Budget" color={C.teal} />
+      <div style={{ fontSize: 12, color: C.textSecondary, marginBottom: 16 }}>
+        Adjust velocity to see how kinetic and potential energy shift.
+      </div>
+
+      <input
+        type="range" min={0.3} max={1.0} step={0.01}
+        value={vFactor}
+        onChange={(e) => setVFactor(parseFloat(e.target.value))}
+        style={{ width: "100%", accentColor: C.teal, marginBottom: 18 }}
+      />
+      <div style={{ fontSize: 12, color: C.textSecondary, marginBottom: 18, textAlign: "center" }}>
+        <KT tex={`v = ${vFactor.toFixed(2)}\\, v_c`} />
+      </div>
+
+      {[
+        { label: "Kinetic Energy (KE)", val: KEn, color: C.teal, tex: "\\frac{1}{2}mv^2" },
+        { label: "Potential Energy (PE)", val: -1, color: C.red, tex: "-\\frac{GMm}{r}" },
+        { label: "Total Energy (E)", val: En, color: En < 0 ? C.green : C.amber, tex: "E = KE + PE" },
+      ].map((row, i) => (
+        <div key={i} style={{ marginBottom: 14 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
+            <span style={{ fontSize: 12, color: C.textSecondary }}>{row.label}</span>
+            <span style={{ fontSize: 12, color: row.color, fontWeight: 700 }}>
+              <KT tex={`${row.val.toFixed(3)}\\,|PE_0|`} />
+            </span>
+          </div>
+          <div style={{ background: C.bg, borderRadius: 6, height: 10, overflow: "hidden" }}>
+            <div
+              style={{
+                width: barW(row.val, 1),
+                height: "100%",
+                background: row.color,
+                borderRadius: 6,
+                transition: "width 0.2s",
+                opacity: 0.8,
+              }}
+            />
+          </div>
+        </div>
+      ))}
+
+      <div
+        style={{
+          marginTop: 10,
+          padding: "10px 14px",
+          background: En < 0 ? C.greenSoft : C.amberSoft,
+          border: `1px solid ${En < 0 ? C.green : C.amber}`,
+          borderRadius: 8,
+          fontSize: 12,
+          color: En < 0 ? C.green : C.amber,
+          fontWeight: 600,
+        }}
+      >
+        {En < 0
+          ? "✓ E < 0 — Bound orbit (planet stays captured)"
+          : "⚠ E ≥ 0 — Unbound — planet escapes"}
+      </div>
+    </Card>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// CONCEPT PILL
+// ══════════════════════════════════════════════════════
+function Pill({ text, color = C.accentText, bg = C.accentSoft }) {
+  return (
+    <span
+      style={{
+        display: "inline-block",
+        background: bg,
+        color,
+        borderRadius: 20,
+        padding: "3px 12px",
+        fontSize: 11,
+        fontWeight: 700,
+        marginRight: 6,
+        marginBottom: 6,
+        letterSpacing: "0.05em",
+      }}
+    >
+      {text}
+    </span>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// KEPLER CARD
+// ══════════════════════════════════════════════════════
+function KeplerCard() {
+  const [step, setStep] = useState(0);
+  const steps = [
+    {
+      title: "Circular Speed Condition",
+      content: "At circular orbital speed, gravity exactly provides the centripetal force needed. The planet neither falls inward nor drifts outward.",
+      tex: "\\frac{mv_c^2}{r} = \\frac{GMm}{r^2}",
+      color: C.green,
+    },
+    {
+      title: "Below Circular Speed",
+      content: "When velocity drops below v_c, gravity exceeds the centripetal requirement. The net inward force pulls the planet below the original circular path.",
+      tex: "\\frac{mv^2}{r} < \\frac{GMm}{r^2} \\quad \\Rightarrow \\quad F_{\\text{net inward}} > 0",
+      color: C.amber,
+    },
+    {
+      title: "Elliptical Orbit Forms",
+      content: "The planet traces an ellipse with the star at one focus. The point of velocity reduction becomes the apoapsis — the farthest point from the star.",
+      tex: "r_{\\text{apo}} = r_0 \\quad (\\text{where } v \\text{ was reduced})",
+      color: C.accent,
+    },
+    {
+      title: "Conservation of Energy",
+      content: "Total mechanical energy is conserved. The planet gains speed at periapsis and slows at apoapsis — exactly as Kepler's second law demands.",
+      tex: "E = \\frac{1}{2}mv^2 - \\frac{GMm}{r} = \\text{const}",
+      color: C.teal,
+    },
+  ];
+
+  return (
+    <Card accent={steps[step].color}>
+      <SectionLabel icon="📖" text="Step-by-Step Reasoning" color={C.textSecondary} />
+
+      {/* Step tabs */}
+      <div style={{ display: "flex", gap: 6, marginBottom: 18, flexWrap: "wrap" }}>
+        {steps.map((s, i) => (
+          <button
+            key={i}
+            onClick={() => setStep(i)}
+            style={{
+              background: step === i ? s.color + "22" : C.surface,
+              color: step === i ? s.color : C.textMuted,
+              border: `1px solid ${step === i ? s.color : C.divider}`,
+              borderRadius: 8,
+              padding: "5px 14px",
+              fontSize: 11,
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            {i + 1}. {s.title.split(" ").slice(0, 2).join(" ")}
+          </button>
+        ))}
+      </div>
+
+      <div
+        style={{
+          background: C.bg,
+          borderRadius: 10,
+          padding: "16px 18px",
+          border: `1px solid ${steps[step].color}44`,
+        }}
+      >
+        <div style={{ fontSize: 13, fontWeight: 700, color: steps[step].color, marginBottom: 8 }}>
+          {steps[step].title}
+        </div>
+        <div style={{ fontSize: 13, color: C.textSecondary, lineHeight: 1.7, marginBottom: 14 }}>
+          {steps[step].content}
+        </div>
+        <div style={{ textAlign: "center", fontSize: 17 }}>
+          <KT tex={steps[step].tex} block />
+        </div>
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "space-between", marginTop: 14 }}>
+        <button
+          onClick={() => setStep((s) => Math.max(0, s - 1))}
+          disabled={step === 0}
+          style={{
+            background: C.surface, color: step === 0 ? C.textMuted : C.textSecondary,
+            border: `1px solid ${C.divider}`, borderRadius: 8, padding: "6px 16px",
+            fontSize: 12, cursor: step === 0 ? "default" : "pointer",
+          }}
+        >
+          ← Previous
+        </button>
+        <span style={{ fontSize: 11, color: C.textMuted, alignSelf: "center" }}>
+          {step + 1} / {steps.length}
+        </span>
+        <button
+          onClick={() => setStep((s) => Math.min(steps.length - 1, s + 1))}
+          disabled={step === steps.length - 1}
+          style={{
+            background: step === steps.length - 1 ? C.surface : C.accentSoft,
+            color: step === steps.length - 1 ? C.textMuted : C.accentText,
+            border: `1px solid ${step === steps.length - 1 ? C.divider : C.accent}`,
+            borderRadius: 8, padding: "6px 16px", fontSize: 12,
+            cursor: step === steps.length - 1 ? "default" : "pointer",
+          }}
+        >
+          Next →
+        </button>
+      </div>
+    </Card>
+  );
+}
+
+// ══════════════════════════════════════════════════════
+// MAIN PAGE
+// ══════════════════════════════════════════════════════
+export default function OrbitalBehavior() {
+  return (
+    <div
+      style={{
+        background: C.bg,
+        minHeight: "100vh",
+        padding: "28px 20px 60px",
+        fontFamily: "'Inter', 'Segoe UI', sans-serif",
+        color: C.textPrimary,
+        maxWidth: 720,
+        margin: "0 auto",
+      }}
+    >
+      {/* ── Hero ── */}
+      <div style={{ marginBottom: 28 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+          <span style={{ fontSize: 28 }}>🪐</span>
+          <h1 style={{ margin: 0, fontSize: 22, fontWeight: 800, color: C.textPrimary }}>
+            Sub-Circular Orbital Velocity
+          </h1>
+        </div>
+        <p style={{ margin: "0 0 14px 0", fontSize: 14, color: C.textSecondary, lineHeight: 1.7 }}>
+          What happens when a planet's tangential velocity drops below the stable circular orbital speed?
+        </p>
+        <div>
+          <Pill text="Classical Mechanics" />
+          <Pill text="Orbital Dynamics" />
+          <Pill text="Kepler's Laws" color={C.teal} bg={C.tealSoft} />
+          <Pill text="Conservation of Energy" color={C.amber} bg={C.amberSoft} />
+        </div>
+      </div>
+
+      {/* ── Quick Definition ── */}
+      <Card accent={C.green} style={{ background: "#0d1a12" }}>
+        <SectionLabel icon="📌" text="Core Concept" color={C.green} />
+        <p style={{ margin: 0, fontSize: 14, color: C.textSecondary, lineHeight: 1.75 }}>
+          The <strong style={{ color: C.textPrimary }}>circular orbital speed</strong> is the precise tangential velocity at which gravitational attraction exactly supplies the centripetal force for a circular path. Reducing velocity below this threshold means gravity <em>overcomes</em> the centripetal balance — the planet begins to fall inward, converting the circular orbit into an <strong style={{ color: C.accentText }}>ellipse</strong> with the point of reduction becoming the <strong style={{ color: C.teal }}>apoapsis</strong>.
+        </p>
+      </Card>
+
+      {/* ── Circular Speed Formula ── */}
+      <FormulaCard
+        title="Circular Orbital Speed"
+        tex="v_c = \sqrt{\frac{GM}{r}}"
+        explanation={[
+          "G is the gravitational constant (6.674 × 10⁻¹¹ N m² kg⁻²).",
+          "M is the mass of the central body (star or planet being orbited).",
+          "r is the orbital radius — distance from the centre of the central body.",
+          "This formula is derived by equating gravitational force to centripetal force: GMm/r² = mv²/r.",
+          "Any velocity below this value means gravity dominates — the orbit shrinks inward.",
+        ]}
+        lab={{
+          title: "Circular Speed",
+          description: "Compute circular orbital speed for different star masses and orbital radii.",
+          formula: {
+            compute: ({ M, r }) => ({
+              value: Math.sqrt(6.674e-11 * M * 1e30 / (r * 1e11)),
+              unit: "m/s",
+              decimals: 0,
+            }),
+          },
+          variables: [
+            { key: "M", label: "M", name: "Star mass", default: 1.0, min: 0.1, max: 5, step: 0.1, unit: "M☉", decimals: 1 },
+            { key: "r", label: "r", name: "Orbital radius", default: 1.0, min: 0.1, max: 5, step: 0.1, unit: "AU", decimals: 1 },
+          ],
+        }}
+      />
+
+      {/* ── Step-by-Step ── */}
+      <KeplerCard />
+
+      {/* ── Live Explorer ── */}
+      <LiveOrbitExplorer />
+
+      {/* ── Vis Viva Formula ── */}
+      <FormulaCard
+        title="Vis-Viva Equation"
+        tex="v^2 = GM\left(\frac{2}{r} - \frac{1}{a}\right)"
+        accentColor={C.teal}
+        explanation={[
+          "This is the master equation linking speed, position, and orbit shape.",
+          "a is the semi-major axis of the ellipse. For a circle, a = r and v = v_c.",
+          "When v < v_c at radius r, the semi-major axis a shrinks below r — confirming the orbit tightens.",
+          "At periapsis, r is minimum and v is maximum. At apoapsis, r is maximum and v is minimum.",
+          "The equation is a direct consequence of conservation of mechanical energy.",
+        ]}
+        lab={{
+          title: "Vis-Viva",
+          description: "Find orbital speed at any point on the ellipse given semi-major axis and current radius.",
+          formula: {
+            compute: ({ r, a, M }) => {
+              const v2 = 6.674e-11 * M * 1e30 * (2 / (r * 1e11) - 1 / (a * 1e11));
+              return { value: v2 > 0 ? Math.sqrt(v2) : 0, unit: "m/s", decimals: 0 };
+            },
+          },
+          variables: [
+            { key: "M", label: "M", name: "Star mass", default: 1.0, min: 0.1, max: 5, step: 0.1, unit: "M☉", decimals: 1 },
+            { key: "r", label: "r", name: "Current radius", default: 1.0, min: 0.1, max: 4, step: 0.05, unit: "AU", decimals: 2 },
+            { key: "a", label: "a", name: "Semi-major axis", default: 0.8, min: 0.1, max: 4, step: 0.05, unit: "AU", decimals: 2 },
+          ],
+        }}
+      />
+
+      {/* ── Energy ── */}
+      <EnergyCard />
+
+      {/* ── Comparison Table ── */}
+      <ComparisonTable />
+
+      {/* ── Key Consequences ── */}
+      <Card>
+        <SectionLabel icon="💡" text="Key Physical Consequences" color={C.amber} />
+        {[
+          {
+            icon: "🔁",
+            title: "Orbit Becomes Elliptical",
+            body: "The point where velocity was reduced becomes the apoapsis. The planet falls to a lower periapsis on the opposite side.",
+            color: C.accent,
+          },
+          {
+            icon: "⚡",
+            title: "Speed Increases at Periapsis",
+            body: "By conservation of angular momentum (L = mvr = const), the planet must speed up as it moves closer to the star.",
+            color: C.teal,
+          },
+          {
+            icon: "📉",
+            title: "Total Energy Decreases",
+            body: "The orbit has lower total mechanical energy than the original circular orbit. More negative E means a tighter, smaller ellipse.",
+            color: C.green,
+          },
+          {
+            icon: "⏱",
+            title: "Orbital Period Changes",
+            body: "By Kepler's Third Law, T² ∝ a³. A smaller semi-major axis means a shorter orbital period.",
+            color: C.amber,
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            style={{
+              display: "flex",
+              gap: 14,
+              padding: "12px 0",
+              borderBottom: i < 3 ? `1px solid ${C.divider}` : "none",
+            }}
+          >
+            <div
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: 10,
+                background: item.color + "22",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 18,
+                flexShrink: 0,
+              }}
+            >
+              {item.icon}
+            </div>
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: item.color, marginBottom: 4 }}>
+                {item.title}
+              </div>
+              <div style={{ fontSize: 13, color: C.textSecondary, lineHeight: 1.6 }}>
+                {item.body}
+              </div>
+            </div>
+          </div>
+        ))}
+      </Card>
+
+      {/* ── Kepler T3 Formula ── */}
+      <FormulaCard
+        title="Kepler's Third Law"
+        tex="T^2 = \frac{4\pi^2}{GM}\, a^3"
+        accentColor={C.amber}
+        explanation={[
+          "T is the orbital period — time for one complete orbit.",
+          "a is the semi-major axis of the ellipse.",
+          "When v drops below v_c, the new ellipse has a smaller semi-major axis.",
+          "Smaller a → smaller T. The planet completes orbits faster than it did on the original circle.",
+          "This is how mission designers plan Hohmann transfer burns — reducing speed lowers the orbit.",
+        ]}
+      />
+
+      {/* ── Summary ── */}
+      <Card accent={C.accent} style={{ background: "#13162a" }}>
+        <SectionLabel icon="📋" text="Summary" color={C.accentText} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {[
+            ["Velocity reduced below v_c", "Gravity exceeds centripetal need → net inward force"],
+            ["Orbit shape", "Circular → Elliptical (reduction point = apoapsis)"],
+            ["Energy", "Total E decreases; orbit is more tightly bound"],
+            ["Speed variation", "Faster at periapsis, slower at apoapsis (angular momentum conservation)"],
+            ["Period", "Shorter — smaller semi-major axis by Kepler's Third Law"],
+          ].map(([k, v], i) => (
+            <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+              <span style={{ color: C.accent, fontSize: 13, marginTop: 2 }}>▸</span>
+              <div style={{ fontSize: 13, color: C.textSecondary, lineHeight: 1.6 }}>
+                <strong style={{ color: C.textPrimary }}>{k}:</strong> {v}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  );
+}
+```

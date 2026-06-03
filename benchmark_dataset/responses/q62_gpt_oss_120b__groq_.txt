@@ -1,0 +1,142 @@
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Introduction                                                                     │
+│                                                                                  │
+│ This overlay is triggered when an external object becomes attached to the       │
+│ flying pendulum bob during a simulation run. Its purpose is to inform the user │
+│ about the physical state change, display key parameters, and offer quick       │
+│ actions (e.g., inspect, detach, or modify properties) without pausing the      │
+│ simulation.                                                                      │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Event Definition                                                                │
+│                                                                                  │
+│ **Event Name:** `object_attached`                                                │
+│ **Source:** FlyingPendulumComponent                                            │
+│ **Trigger Condition:** An object collides and sticks to the pendulum bob while │
+│ the bob is in motion.                                                            │
+│ **Propagation:** Local to the pendulum entity; can be listened to by any system │
+│ attached to the same entity.                                                     │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Parameters                                                                      │
+│                                                                                  │
+│ ┌───────────────────────┬───────────────────────────────────────────────────────┐ │
+│ │ Parameter              │ Description                                           │ │
+│ ├───────────────────────┼───────────────────────────────────────────────────────┤ │
+│ │ `attachedObjectId`    │ Unique identifier of the object that got attached.   │ │
+│ │ `attachmentPoint`     │ Local coordinates on the bob where the object sticks.│ │
+│ │ `relativeVelocity`    │ Velocity vector of the object at the moment of impact│ │
+│ │ `impactForce`         │ Magnitude of the collision force (N).                 │ │
+│ └───────────────────────┴───────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Expected Behavior                                                               │
+│                                                                                  │
+│ 1. **Overlay Appearance** – A semi‑transparent card fades in at the top‑right   │
+│    corner of the viewport within 150 ms.                                         │
+│ 2. **Live Data Update** – The card shows real‑time values for `impactForce` and │
+│    the resulting angular acceleration of the bob.                               │
+│ 3. **User Actions** – Buttons allow the user to:                                │
+│    • *Inspect* – Open the object inspector panel.                                │
+│    • *Detach* – Issue a detachment command (if physics permits).                │
+│    • *Log* – Record the event to the debug console.                              │
+│ 4. **Auto‑Dismiss** – If no interaction occurs within 8 seconds, the overlay     │
+│    collapses gracefully.                                                         │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Visual Overlay Details                                                         │
+│                                                                                  │
+│ ┌──────────────────────────────────────────────────────────────────────────────┐ │
+│ │  ┌─────────────────────┐   ┌─────────────────────┐   ┌─────────────────────┐ │ │
+│ │  │  📎 Attached Object │   │  ⚙️ Impact Force    │   │  📐 Angular Accel.   │ │ │
+│ │  └─────────────────────┘   └─────────────────────┘   └─────────────────────┘ │ │
+│ │                                                                              │ │
+│ │  • Icon + label for the attached object.                                      │ │
+│ │  • Numeric read‑out of impact force with unit (N).                            │ │
+│ │  • Computed angular acceleration (rad / s²) using the pendulum formula.       │ │
+│ │                                                                              │ │
+│ │  [ Inspect ]   [ Detach ]   [ Log ]                                          │ │
+│ └──────────────────────────────────────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Main Formula                                                                    │
+│                                                                                  │
+│          T = m·(g·cosθ + L·ω²)                                                   │
+│                                                                                  │
+│  • *T* – Tension in the string (N)                                                │
+│  • *m* – Mass of the bob (kg)                                                    │
+│  • *g* – Gravitational acceleration (9.81 m / s²)                                 │
+│  • *θ* – Instantaneous angle from the vertical (rad)                             │
+│  • *L* – Length of the pendulum (m)                                               │
+│  • *ω* – Angular velocity of the bob (rad / s)                                    │
+│                                                                                  │
+│  [ Explain Formula ]    [ Open Formula Lab ]                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Sample Code (Pseudo‑JS)                                                         │
+│                                                                                  │
+│ ```js                                                                          │
+│ // Event listener registration                                                   │
+│ pendulumEntity.on('object_attached', (event) => {                               │
+│   const { attachedObjectId, impactForce, relativeVelocity } = event;           │
+│   Overlay.show({                                                               │
+│     title: 'Object Attached',                                                  │
+│     fields: [                                                                  │
+│       { label: 'Object ID', value: attachedObjectId },                         │
+│       { label: 'Impact Force', value: `${impactForce.toFixed(2)} N` },        │
+│       { label: 'Angular Accel.',                                            │
+│         value: computeAngularAccel(impactForce, pendulumEntity) }             │
+│     ],                                                                         │
+│     actions: [                                                                 │
+│       { label: 'Inspect',   callback: () => Inspector.open(attachedObjectId) },│
+│       { label: 'Detach',   callback: () => pendulumEntity.detachObject() },   │
+│       { label: 'Log',      callback: () => console.log(event) }               │
+│     ]                                                                          │
+│   });                                                                          │
+│ });                                                                            │
+│                                                                                  │
+│ function computeAngularAccel(force, pendulum) {                                 │
+│   const T = force; // using impact force as an approximation of tension        │
+│   const L = pendulum.length;                                                   │
+│   return Math.sqrt(T / (pendulum.mass * L)); // ω = √(T/(mL))                    │
+│ }                                                                               │
+│ ```                                                                            │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Important Notes                                                                 │
+│                                                                                  │
+│ • The overlay is **non‑blocking** – the simulation continues to run.            │
+│ • If the pendulum is already at its maximum angular displacement, the           │
+│   `impactForce` may exceed the static tension limit; the overlay will flag this │
+│   with a red warning icon.                                                       │
+│ • Detachment is only possible when the resulting tension stays above the       │
+│   minimum string tension (`T_min`).                                              │
+│ • All numeric values are displayed with two decimal precision for clarity.     │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Summary                                                                         │
+│                                                                                  │
+│ The `object_attached` runtime overlay provides immediate visual feedback about   │
+│ the attachment event, displays critical physics parameters, and offers quick    │
+│ actions to inspect, detach, or log the event. It leverages the pendulum tension │
+│ formula to compute derived quantities like angular acceleration, keeping the   │
+│ user informed without interrupting the simulation flow.                         │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ Suggested Questions                                                             │
+│                                                                                  │
+│ 1. How does the impact force affect the subsequent swing amplitude?              │
+│ 2. What limits the maximum mass of an object that can be attached safely?       │
+│ 3. How would you modify the overlay to show energy transfer details?            │
+│ 4. In what scenarios should the detachment button be disabled automatically?    │
+│ 5. Can the overlay be extended to support multiple simultaneous attachments?     │
+└──────────────────────────────────────────────────────────────────────────────┘

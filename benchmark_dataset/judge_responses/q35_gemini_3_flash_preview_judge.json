@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 35,
+  "question": "Define latent heat and explain change of state.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nLatent heat is the thermal energy absorbed or released by a substance during a phase change that occurs at a constant, unchanging temperature.\n\nA change of state refers to the transition of matter between solid, liquid, and gaseous phases as internal molecular bonds break or form.\n\n---\n\n## Types of Latent Heat\n\n* **Latent Heat of Fusion:** The heat energy required to transition a substance from a solid to a liquid phase at its melting point.\n* **Latent Heat of Vaporization:** The heat energy required to transition a substance from a liquid to a gaseous phase at its boiling point.\n\n---\n\n## Formula\n\nThe phase change heat transfer equation is written as:\n\n$$Q = mL$$\n\nWhere:\n* $Q$ represents the heat energy transferred during the phase change\n* $m$ represents the total mass of the substance undergoing transformation\n* $L$ represents the specific latent heat constant for that substance\n\n---\n\n## Summary\n\nLatent heat drives phase changes at a constant temperature by breaking or forming molecular bonds rather than changing the system's kinetic temperature.",
+  "candidate_response": "### 📘 Physics Module: Phase Transitions\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Quick Definition: Latent Heat**                                │\n│                                                                  │\n│ Latent heat is the energy absorbed or released by a substance    │\n│ during a change in its physical state (phase) that occurs        │\n│ **without** changing its temperature.                            │\n└──────────────────────────────────────────────────────────────────┘\n\n### 🌡️ Key Concepts: Change of State\nMatter exists in three primary phases: **Solid, Liquid, and Gas**. A change of state occurs when thermal energy breaks or forms molecular bonds rather than increasing kinetic energy (temperature).\n\n| Process | Transition | Energy Change |\n| :--- | :--- | :--- |\n| **Fusion (Melting)** | Solid → Liquid | Absorbed |\n| **Vaporization** | Liquid → Gas | Absorbed |\n| **Condensation** | Gas → Liquid | Released |\n| **Freezing** | Liquid → Solid | Released |\n\n---\n\n### 🧪 Main Formula: Specific Latent Heat\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Formula Card: Latent Heat Calculation**                        │\n│                                                                  │\n│ $$Q = m \\cdot L$$                                                │\n│                                                                  │\n│ **Where:**                                                       │\n│ • $Q$ = Total Heat Energy (Joules, $J$)                          │\n│ • $m$ = Mass of the substance (kg)                               │\n│ • $L$ = Specific Latent Heat ($J/kg$)                            │\n│                                                                  │\n│ [ 🔬 Open Formula Lab ]                                          │\n└──────────────────────────────────────────────────────────────────┘\n\n---\n\n### 🔍 Characteristics of Phase Change\n*   **Isothermal Process:** During the actual transition (e.g., boiling water at $100^\\circ C$), the temperature remains constant until the entire mass has changed state.\n*   **Internal Energy:** While temperature (average kinetic energy) stays the same, the **potential energy** of the molecules increases or decreases as bonds are manipulated.\n*   **Hidden Energy:** The word \"Latent\" comes from the Latin *latere* (to lie hidden), because the heat added does not show up on a thermometer.\n\n---\n\n### 💡 Types of Latent Heat\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Latent Heat of Fusion ($L_f$)**                                │\n│                                                                  │\n│ The heat required to change $1kg$ of a substance from **solid**  │\n│ to **liquid** at its melting point.                              │\n│ *Example: Ice to Water*                                          │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Latent Heat of Vaporization ($L_v$)**                          │\n│                                                                  │\n│ The heat required to change $1kg$ of a substance from **liquid** │\n│ to **gas** at its boiling point.                                 │\n│ *Example: Water to Steam*                                        │\n└──────────────────────────────────────────────────────────────────┘\n\n---\n\n### ⚠️ Important Notes\n> **Why is $L_v$ usually much larger than $L_f$?**\n> To turn a liquid into a gas, molecules must be pulled completely apart, overcoming almost all attractive forces. To turn a solid into a liquid, the bonds only need to be loosened/weakened. Therefore, vaporization requires significantly more energy.\n\n---\n\n### 📝 Suggested Questions\n1.  **Conceptual:** Why does steam at $100^\\circ C$ cause more severe burns than boiling water at the same temperature?\n2.  **Calculation:** How much energy is required to melt $2kg$ of ice at $0^\\circ C$? (Given $L_f = 3.34 \\times 10^5 J/kg$)\n3.  **Graphical:** Sketch a heating curve for water and identify the plateaus where latent heat is being applied.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational value. It correctly defines latent heat, explains the change of state, and provides relevant formulas and examples. The response is well-structured, readable, and effective in teaching the concept. However, to reach a perfect score, it could benefit from minor improvements such as adding more visual aids or diagrams to illustrate the concepts, and providing additional practice questions or exercises to reinforce learning. Overall, the response is excellent and effectively communicates the physics concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 379,
+    "completionTokens": 848,
+    "totalTokens": 1227
+  },
+  "candidate_latency_ms": 5942,
+  "candidate_cost_usd": 0.0027335,
+  "judge_token_usage": {
+    "promptTokens": 1478,
+    "completionTokens": 163,
+    "totalTokens": 1641
+  },
+  "judge_latency_ms": 11365,
+  "judge_cost_usd": 0.001278,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:12:54.042Z"
+}

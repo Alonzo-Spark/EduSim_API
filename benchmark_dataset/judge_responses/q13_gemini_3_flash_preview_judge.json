@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 13,
+  "question": "A force of 50 N acts on a body of mass 10 kg. Find acceleration.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Dynamics Problem\n\n### Problem\nA net force of $50 \\text{ N}$ acts on a body of mass $10 \\text{ kg}$. Find its resulting acceleration.\n\n### Given\n* Force applied ($F$) = $50 \\text{ N}$\n* Mass of the body ($m$) = $10 \\text{ kg}$\n\n### Formula\n$$F = ma$$\n\nRearranging to solve for acceleration ($a$):\n$$a = \\frac{F}{m}$$\n\n### Substitution\n$$a = \\frac{50}{10}$$\n\n### Calculation\n$$a = 5 \\text{ m/s}^2$$\n\n### Final Answer\n**Acceleration ($a$) = $5 \\text{ m/s}^2$**\n\n### Interpretation\nThis indicates that the $50 \\text{ N}$ force causes the $10 \\text{ kg}$ mass to increase its velocity uniformly by $5 \\text{ meters per second}$ every single second in the direction of the applied force vector.",
+  "candidate_response": "# Physics Module: Dynamics\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Introduction**                                                         │\n│                                                                          │\n│ This problem explores the relationship between force, mass, and the      │\n│ resulting motion of an object, governed by Newton's Second Law of        │\n│ Motion.                                                                  │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Given Parameters**                                                     │\n│                                                                          │\n│ • **Force ($F$):** $50\\text{ N}$                                         │\n│ • **Mass ($m$):** $10\\text{ kg}$                                         │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Main Formula: Newton's Second Law**                                    │\n│                                                                          │\n│                         $$a = \\frac{F}{m}$$                              │\n│                                                                          │\n│ **[ Explain Formula ]**                                                  │\n│ Acceleration ($a$) is directly proportional to the net force acting on   │\n│ an object and inversely proportional to its mass.                        │\n│                                                                          │\n│ **[ Open Formula Lab ]**                                                 │\n│ Variables:                                                               │\n│ - $F$ (Force in Newtons)                                                 │\n│ - $m$ (Mass in Kilograms)                                                │\n│ - $a$ (Acceleration in $m/s^2$)                                          │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Step-by-Step Calculation**                                             │\n│                                                                          │\n│ 1. **Identify the Unknown:** We need to find Acceleration ($a$).         │\n│ 2. **Substitute Values:**                                                │\n│    $$a = \\frac{50\\text{ N}}{10\\text{ kg}}$$                              │\n│ 3. **Solve:**                                                            │\n│    $$a = 5\\text{ m/s}^2$$                                                │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Summary Table**                                                        │\n│                                                                          │\n│ | Property     | Value        | Unit      |                              │\n│ |--------------|--------------|-----------|                              │\n│ | Net Force    | 50           | Newtons   |                              │\n│ | Total Mass   | 10           | Kilograms |                              │\n│ | **Result**   | **5**        | **m/s²**  |                              │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Important Notes**                                                      │\n│                                                                          │\n│ • **Vector Nature:** Acceleration always occurs in the same direction    │\n│   as the applied net force.                                              │\n│ • **Unit Consistency:** Ensure mass is in kg and force is in N to        │\n│   obtain acceleration in $m/s^2$.                                        │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Suggested Questions**                                                  │\n│                                                                          │\n│ 1. What would happen to the acceleration if the force was doubled to     │\n│    100 N?                                                                │\n│ 2. If the mass was increased to 20 kg while the force remained 50 N,     │\n│    how would the acceleration change?                                    │\n└──────────────────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the problem, correctly applying Newton's Second Law of Motion to find the acceleration. The step-by-step calculation is clear, and the summary table effectively organizes the given information and the result. The inclusion of important notes about vector nature and unit consistency adds depth to the explanation. The suggested questions at the end encourage further exploration and application of the concept. However, to reach perfection, the candidate could further enhance the educational value by providing a brief introduction to Newton's Second Law for readers unfamiliar with it, and perhaps an example or two of real-world applications where this principle is crucial. Additionally, minor adjustments in formatting for better readability, such as using consistent spacing between sections and possibly incorporating diagrams or illustrations to explain complex concepts, could elevate the quality and educational scores to a perfect 10.",
+  "candidate_token_usage": {
+    "promptTokens": 391,
+    "completionTokens": 769,
+    "totalTokens": 1160
+  },
+  "candidate_latency_ms": 5395,
+  "candidate_cost_usd": 0.0025025,
+  "judge_token_usage": {
+    "promptTokens": 1421,
+    "completionTokens": 225,
+    "totalTokens": 1646
+  },
+  "judge_latency_ms": 5996,
+  "judge_cost_usd": 0.0013926,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:19:37.537Z"
+}

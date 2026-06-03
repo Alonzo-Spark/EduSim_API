@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 39,
+  "question": "Define wavelength, frequency, and amplitude of a wave.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWavelength, frequency, and amplitude are primary parameters used to quantify and describe the physical properties of wave propagation through space and time.\n\n---\n\n## Core Wave Metrics\n\n### 1. Wavelength ($\\lambda$)\nWavelength is the spatial distance between two consecutive points that are in the same phase of oscillation, such as the distance between two adjacent wave crests or troughs.\n\n### 2. Frequency ($f$)\nFrequency is the number of complete wave cycles or oscillations that pass a fixed reference point per unit of time, measured internationally in Hertz ($\\text{Hz}$).\n\n### 3. Amplitude ($A$)\nAmplitude is the maximum displacement of a medium's particles from their equilibrium position as a wave passes through.\n\n---\n\n## Formula\n\nThe wave speed equation linking these parameters is defined as:\n\n$$v = f\\lambda$$\n\nWhere:\n* $v$ represents the propagation velocity of the wave profile\n* $f$ represents the wave frequency\n* $\\lambda$ represents the wavelength value\n\n---\n\n## Summary\n\nWavelength measures a wave's spatial structure, frequency tracks its speed over time, and amplitude defines its energy intensity and displacement scale.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│ Quick Definition                       │\n│                                       │\n│ A **wave** is a disturbance that        │\n│ transfers energy through a medium (or   │\n│ vacuum) without transporting matter.   │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Wavelength (λ)                         │\n│                                       │\n│ • Definition: The distance between two │\n│   consecutive points that are in      │\n│   **identical phase** of the wave (e.g., │\n│   crest‑to‑crest or trough‑to‑trough).│\n│ • Symbol: λ                           │\n│ • Units: meters (m)                    │\n│ • Visual cue: One full “hill” of the   │\n│   sinusoidal shape.                    │\n│                                       │\n│ **Key Point:** Larger λ → longer wave   │\n│ cycles; smaller λ → more tightly packed│\n│ cycles.                                │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Frequency (f)                          │\n│                                       │\n│ • Definition: The number of complete    │\n│   wave cycles that pass a fixed point   │\n│   per unit time.                         │\n│ • Symbol: f                            │\n│ • Units: hertz (Hz) = cycles/second    │\n│ • Relationship to period (T):           │\n│   f = 1/T                               │\n│                                       │\n│ **Key Point:** Higher f → more cycles   │\n│ per second → higher‑pitch sound or     │\n│ higher‑energy electromagnetic wave.    │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Amplitude (A)                          │\n│                                       │\n│ • Definition: The maximum displacement │\n│   of a point on the wave from its       │\n│   equilibrium (rest) position.         │\n│ • Symbol: A                            │\n│ • Units: Same as the quantity being     │\n│   displaced (e.g., meters for a       │\n│   water wave, volts for an electric   │\n│   field).                              │\n│ • Visual cue: Height of the “hill” or  │\n│   depth of the “valley” in the wave.   │\n│                                       │\n│ **Key Point:** Larger A → more energy   │\n│ carried by the wave (energy ∝ A²).       │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Summary                                 │\n│                                       │\n│ • **Wavelength (λ):** distance between │\n│   identical points of a wave.          │\n│ • **Frequency (f):** cycles per second,│\n│   f = 1/T.                              │\n│ • **Amplitude (A):** maximum displacement│\n│   from equilibrium; determines wave    │\n│   energy.                               │\n│ • The three are interrelated:           │\n│   - For a given wave speed (v),          │\n│     v = f · λ.                           │\n│   - Changing one (e.g., λ) while keeping │\n│     v constant changes the others.      │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Suggested Questions                     │\n│                                       │\n│ 1. If a wave travels at 300 m/s and its   │\n│    frequency is 150 Hz, what is its       │\n│    wavelength?                           │\n│ 2. How does increasing the amplitude affect│\n│    the energy of a sound wave?           │\n│ 3. Why does light in a vacuum have a      │\n│    constant speed regardless of its      │\n│    frequency?                             │\n│ 4. Explain how wavelength and frequency   │\n│    are inversely related for a fixed wave│\n│    speed.                                 │\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly defines wavelength, frequency, and amplitude, and provides clear explanations and visual cues. The use of tables and summaries enhances readability. However, minor improvements could be made, such as adding more detailed explanations of the wave speed equation and its implications. Additionally, the suggested questions could be more comprehensive and challenging. Overall, the response demonstrates a strong understanding of the concepts and effectively communicates them to the reader.",
+  "candidate_token_usage": {
+    "promptTokens": 428,
+    "completionTokens": 1034,
+    "totalTokens": 1462
+  },
+  "candidate_latency_ms": 2528,
+  "candidate_cost_usd": 0.0006846,
+  "judge_token_usage": {
+    "promptTokens": 1561,
+    "completionTokens": 156,
+    "totalTokens": 1717
+  },
+  "judge_latency_ms": 2781,
+  "judge_cost_usd": 0.001311,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:28:09.786Z"
+}

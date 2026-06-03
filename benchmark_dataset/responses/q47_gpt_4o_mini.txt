@@ -1,0 +1,102 @@
+┌───────────────────────────┐
+│ Quick Definition          │
+│                           │
+│ The equivalent resistance  │
+│ in a series circuit is the │
+│ total resistance faced by  │
+│ the current.              │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Key Concepts              │
+│                           │
+│ In a series circuit, the  │
+│ total resistance is the   │
+│ sum of individual         │
+│ resistances.              │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Derivation                │
+│                           │
+│ Consider resistors \( R_1, R_2, R_3, \ldots, R_n \) connected in series. The total voltage \( V \) across the combination is the sum of the voltages across each resistor. Using Ohm's law, we can express this as:  │
+│                           │
+│ $$ V = I \cdot R_{eq} $$  │
+│                           │
+│ The voltage across each resistor can be expressed as:  │
+│ $$ V_1 = I \cdot R_1 $$  │
+│ $$ V_2 = I \cdot R_2 $$  │
+│ $$ V_3 = I \cdot R_3 $$  │
+│                           │
+│ Thus, the total voltage is: │
+│ $$ V = V_1 + V_2 + V_3 + \ldots + V_n $$ │
+│                           │
+│ Substituting the expressions for \( V_1, V_2, \) and \( V_3 \): │
+│                           │
+│ $$ V = I \cdot R_1 + I \cdot R_2 + I \cdot R_3 + \ldots + I \cdot R_n $$ │
+│                           │
+│ Factoring out the current \( I \): │
+│                           │
+│ $$ V = I (R_1 + R_2 + R_3 + \ldots + R_n) $$ │
+│                           │
+│ Therefore, the equivalent resistance \( R_{eq} \) is given by: │
+│                           │
+│ $$ R_{eq} = R_1 + R_2 + R_3 + \ldots + R_n $$ │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Main Formula              │
+│                           │
+│     Rendered Formula      │
+│                           │
+│ $$ R_{eq} = R_1 + R_2 + R_3 + \ldots + R_n $$ │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Applications              │
+│                           │
+│ - Circuit design          │
+│ - Electrical engineering   │
+│ - Analyzing complex circuits│
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Advantages                │
+│                           │
+│ - Simple to calculate     │
+│ - Easy to understand       │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Disadvantages             │
+│                           │
+│ - Does not apply to parallel circuits │
+│ - Assumes ideal conditions │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Important Notes           │
+│                           │
+│ Ensure current is the same │
+│ across all components in a series circuit. │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Summary                  │
+│                           │
+│ The equivalent resistance  │
+│ for resistors in series is the sum of all individual resistances. │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Suggested Questions       │
+│                           │
+│ 1. How does the total     │
+│    resistance change with  │
+│    additional resistors?   │
+│ 2. What happens to the     │
+│    current in the circuit? │
+└───────────────────────────┘

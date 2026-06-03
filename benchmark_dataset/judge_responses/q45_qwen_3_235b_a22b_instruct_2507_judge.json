@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 45,
+  "question": "What is electrostatic shielding?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectrostatic shielding is the physical phenomenon where a specific region of space is isolated from the influence of external electric fields. This shielding is achieved by enclosing the region within a hollow conducting shell, creating a Faraday cage.\n\n---\n\n## Operating Principle\n\n* **Zero Cavity Field:** When an external electric field is applied to a conductor, its free electrons redistribute along the outer surface to cancel out the field internally, ensuring the net electric field inside the cavity remains exactly zero.\n\n---\n\n## Formula\n\nThe mathematical field constraint inside a hollow conductor:\n\n$$E_{\\text{internal}} = 0$$\n\n---\n\n## Real-world Examples\n\n* **Car in a Lightning Storm:** A car acts as an electrostatic shield; if struck by lightning, the charge travels along the conductive outer metal body to the ground, leaving the passengers inside unharmed.\n* **Coaxial Electronics Cables:** Critical signal wires are wrapped in a braided metal mesh shield to protect data transfers from external electrical interference.\n\n---\n\n## Summary\n\nElectrostatic shielding uses a conducting shell to isolate an internal space from external electric fields, as charges redistribute along the outer surface to keep the internal field at zero.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition            │\n│                           │\n│ **Electrostatic shielding** (also known as **electrostatic screening**) is the phenomenon where a conductive enclosure blocks external static electric fields from reaching its interior. This means that the electric field inside a closed conductor is zero when exposed to external electrostatic fields.  \n│  \n└───────────────────────────┘\n\n---\n\n### Key Concepts\n\nElectro游戏副本\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 6,
+    "quality": 4,
+    "educational": 5,
+    "overall_average": "5.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": true,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks detailed explanation and key concepts present in the gold reference answer. The definition provided is partially correct but does not fully capture the essence of electrostatic shielding. The phrase 'electro游戏副本' appears to be a hallucination, as it does not relate to the topic of electrostatic shielding and seems to be a fragment of unrelated text. The response also fails to provide any formulas, real-world examples, or a summary, which are crucial for a comprehensive understanding of the topic. Furthermore, the layout and formatting are not well-structured, making it difficult to follow. To improve, the candidate should ensure that their response covers all relevant aspects of electrostatic shielding, including its definition, operating principle, mathematical representation, and practical applications, while maintaining a clear and organized presentation.",
+  "candidate_token_usage": {
+    "promptTokens": 352,
+    "completionTokens": 94,
+    "totalTokens": 446
+  },
+  "candidate_latency_ms": 4161,
+  "candidate_cost_usd": 0.00054,
+  "judge_token_usage": {
+    "promptTokens": 735,
+    "completionTokens": 218,
+    "totalTokens": 953
+  },
+  "judge_latency_ms": 2121,
+  "judge_cost_usd": 0.0009641999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:41:43.743Z"
+}

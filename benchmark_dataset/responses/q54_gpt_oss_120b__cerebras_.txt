@@ -1,0 +1,154 @@
+┌─────────────────────────────┐
+│ Introduction                │
+│                             │
+│ In a stable circular orbit a planet │
+│ moves with exactly the speed that │
+│ balances the gravitational pull   │
+│ with the required centripetal    │
+│ acceleration. If the planet’s     │
+│ tangential velocity is reduced     │
+│ below this “circular speed”, the   │
+│ orbit can no longer remain circular│
+│ and the planet will begin to      │
+│ fall toward the central body.      │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Definition                  │
+│                             │
+│ **Stable circular speed** – the      │
+│ unique tangential velocity at a given│
+│ orbital radius *r* that satisfies   │
+│ the equality of gravitational and   │
+│ centripetal forces.                 │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Key Concepts                │
+│                             │
+│ • Gravitational force  :  F_g = GMm/r² │
+│ • Centripetal force    :  F_c = mv²/r │
+│ • Tangential velocity  :  v_t               │
+│ • Specific mechanical   │
+│   energy (ε) = v²/2 – GM/r                │
+│ • Angular momentum L = m v_t r          │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Characteristics             │
+│                             │
+│ When v_t < v_c:                           │
+│   – The net inward force exceeds the      │
+│     required centripetal force, so the   │
+│     planet accelerates radially inward.   │
+│   – The trajectory becomes an ellipse,   │
+│     with the original radius becoming the │
+│     **apoapsis** (furthest point).        │
+│   – Periapsis distance shrinks each orbit│
+│     until the planet either spirals into   │
+│     the central body or reaches a new     │
+│     stable orbit after energy exchange.   │
+│   – Orbital period lengthens because      │
+│     average radius grows.                 │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Main Formula                │
+│                             │
+│        v_c = √(GM / r)      │
+│                             │
+│ [ Explain Formula ]         │
+│ [ Open Formula Lab ]        │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Supporting Formula          │
+│                             │
+│        ε = -GM/(2a)         │
+│   (specific orbital energy)│
+│   a = semi‑major axis       │
+│                             │
+│ [ Explain Formula ]         │
+│ [ Open Formula Lab ]        │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Table: Circular Speed vs.   │
+│ Radius (Earth‑Sun System)   │
+│                             │
+│ ──────────────────────────────── │
+│  r (AU) │ v_c (km s⁻¹) │          │
+│ ──────────────────────────────── │
+│   0.5   │   42.1      │          │
+│   1.0   │   29.8      │          │
+│   1.5   │   24.3      │          │
+│   2.0   │   21.1      │          │
+│ ──────────────────────────────── │
+│ (Values rounded for illustration) │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Advantages                  │
+│                             │
+│ • Predictable orbital periods│
+│ • Minimal fuel needed for      │
+│   station‑keeping               │
+│ • Simple analytical treatment  │
+│   using Kepler’s laws           │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Disadvantages               │
+│                             │
+│ • Any reduction in v_t immediately │
+│   destabilises the orbit            │
+│ • Requires precise velocity control │
+│   for insertion into a circular orbit│
+│ • Small perturbations (e.g., drag)   │
+│   can accumulate over time           │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Important Notes             │
+│                             │
+│ • The “stable circular speed” is a │
+│   function of the central mass *M* │
+│   and the orbital radius *r*.       │
+│ • Reducing speed does **not**        │
+│   instantly crash the planet; the   │
+│   new orbit is elliptical.          │
+│ • Energy is conserved (ignoring      │
+│   dissipative forces).              │
+│ • Real systems experience          │
+│   perturbations (planetary tides,   │
+│   solar radiation pressure).       │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Summary                     │
+│                             │
+│ • Circular speed: v_c = √(GM/r).│
+│ • v_t < v_c → inward radial      │
+│   acceleration → elliptical orbit│
+│ • Apoapsis = original radius,    │
+│   periapsis shrinks each pass.   │
+│ • Orbital energy becomes more   │
+│   negative; period lengthens.    │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Suggested Questions         │
+│                             │
+│ 1. How does the orbital period change │
+│    when the semi‑major axis changes? │
+│ 2. What role does angular momentum   │
+│    play in preventing a crash?      │
+│ 3. How would atmospheric drag affect │
+│    a low‑Earth orbit with v_t < v_c?│
+│ 4. Derive the relationship between    │
+│    specific energy ε and orbital     │
+│    shape (circle vs. ellipse).       │
+│ 5. If a spacecraft performs a Δv   │
+│    retro‑burn, how does its new       │
+│    orbit compare to the original?    │
+└─────────────────────────────┘

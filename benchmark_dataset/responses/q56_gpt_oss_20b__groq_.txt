@@ -1,0 +1,79 @@
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│ Quick Definition                                                                          │
+│                                                                                           │
+│ Restitution is a dimensionless coefficient that quantifies the elasticity of a collision. │
+│ It is defined as the ratio of the relative speed of two bodies after impact to the speed │
+│ before impact:                                                                             │
+│                                                                                           │
+│ $$e = \frac{v_{\text{after}}}{v_{\text{before}}}$$                                        │
+│                                                                                           │
+│ A value of 1 indicates a perfectly elastic collision, while 0 represents a perfectly   │
+│ inelastic collision.                                                                       │
+└───────────────────────────────────────────────────────────────────────────────────────┘
+
+───────────────────────────────────────────────────────────────────────────────────────
+
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│ Key Concepts                                                                              │
+│                                                                                           │
+│ • **Relative velocity** – The velocity difference between the two bodies at the instant │
+│   of contact.                                                                             │
+│ • **Energy loss** – The portion of kinetic energy that is not recovered after the      │
+│   collision.                                                                             │
+│ • **Coefficient of restitution (e)** – Ranges from 0 (no bounce) to 1 (full bounce).   │
+│ • **Effect on bounce** – Higher e → higher rebound velocity → more bounce.              │
+└───────────────────────────────────────────────────────────────────────────────────────┘
+
+───────────────────────────────────────────────────────────────────────────────────────
+
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│ Main Formula                                                                               │
+│                                                                                           │
+│     Rendered Formula                                                                       │
+│                                                                                           │
+│     $$e = \frac{v_{\text{after}}}{v_{\text{before}}}$$                                   │
+│                                                                                           │
+│ [ Explain Formula ] [ Open Formula Lab ]                                                   │
+└───────────────────────────────────────────────────────────────────────────────────────┘
+
+───────────────────────────────────────────────────────────────────────────────────────
+
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│ Example Table                                                                              │
+│                                                                                           │
+│ | Restitution (e) | Bounce Height (relative to drop) | Energy Retained (%) |         │
+│ |-----------------|------------------------------------|---------------------|---------|
+│ | 0.0             | 0%                                 | 0%                  |         |
+│ | 0.3             | 30%                                | 15%                 |         |
+│ | 0.6             | 60%                                | 36%                 |         |
+│ | 0.9             | 90%                                | 81%                 |         |
+│ | 1.0             | 100%                               | 100%                |         |
+│                                                                                           │
+│ The table illustrates how increasing e raises the bounce height and the fraction of     │
+│ kinetic energy that survives the collision.                                               │
+└───────────────────────────────────────────────────────────────────────────────────────┘
+
+───────────────────────────────────────────────────────────────────────────────────────
+
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│ Summary                                                                                   │
+│                                                                                           │
+│ • Restitution governs how much kinetic energy is conserved during a collision.           │
+│ • It is a ratio of post‑collision to pre‑collision relative speeds.                       │
+│ • Raising e increases rebound velocity and bounce height, while lowering e reduces both │
+│   and can lead to a sticking or rolling outcome.                                          │
+└───────────────────────────────────────────────────────────────────────────────────────┘
+
+───────────────────────────────────────────────────────────────────────────────────────
+
+┌───────────────────────────────────────────────────────────────────────────────────────┐
+│ Suggested Questions                                                                        │
+│                                                                                           │
+│ 1. If two identical spheres collide head‑on with e = 0.8, what fraction of the initial     │
+│    kinetic energy is lost?                                                                │
+│ 2. How would a coefficient of restitution greater than 1 affect the physical realism of │
+│    a simulation?                                                                          │
+│ 3. Describe a real‑world scenario where a low restitution coefficient is desirable.      │
+│ 4. How does mass ratio between colliding bodies influence the post‑collision velocities │
+│    when restitution is fixed?                                                             │
+└───────────────────────────────────────────────────────────────────────────────────────┘

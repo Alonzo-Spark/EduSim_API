@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 42,
+  "question": "Define electric field and electric potential.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectric field and electric potential describe how a distribution of electric charge influences the surrounding space.\n\nAn electric field is a vector field surrounding a charged particle, representing the electrostatic force experienced per unit positive charge placed at that point.\n\nAn electric potential is a scalar field representing the electrostatic potential energy per unit charge at a specific point relative to a reference location.\n\n---\n\n## Characteristics\n\n* **Vector vs. Scalar:** The electric field is a vector quantity that points in the direction a positive test charge would move. Electric potential is a scalar quantity measuring energy states.\n\n---\n\n## Formula\n\nThe mathematical definitions for electric field ($E$) and potential ($V$) are written as:\n\n$$E = \\frac{F}{q}$$\n\n$$V = \\frac{W}{q}$$\n\nWhere:\n* $E$ represents the electric field vector intensity\n* $V$ represents the electric potential scalar value\n* $F$ represents the electrostatic force vector\n* $W$ represents the work performed moving a charge from infinity\n* $q$ represents the magnitude of the test charge\n\n---\n\n## Summary\n\nThe electric field measures the electrostatic force vector per unit charge, whereas electric potential tracks the energy scalar state per unit charge.",
+  "candidate_response": "### 📘 CHAPTER: ELECTROSTATICS\n---\n\n┌──────────────────────────────────────────────────────────┐\n│ **Quick Definition**                                     │\n│                                                          │\n│ **Electric Field:** A physical region around a charged   │\n│ particle that exerts force on other charged particles.   │\n│                                                          │\n│ **Electric Potential:** The amount of work needed to     │\n│ move a unit positive charge from infinity to a point.    │\n└──────────────────────────────────────────────────────────┘\n\n### ⚡ Key Concepts\n\n| Concept | Description | SI Unit | Type |\n| :--- | :--- | :--- | :--- |\n| **Electric Field ($E$)** | Force per unit charge at a specific point. | $N/C$ or $V/m$ | Vector |\n| **Electric Potential ($V$)** | Potential energy per unit charge. | $Volts$ ($V$) | Scalar |\n\n---\n\n┌──────────────────────────────────────────────────────────┐\n│ **Main Formula: Electric Field Strength**                │\n│                                                          │\n│ $$E = \\frac{kQ}{r^2}$$                                   │\n│                                                          │\n│ **[ Explain Formula ]**                                  │\n│ Describes the intensity of the field at distance $r$     │\n│ from a source charge $Q$.                                │\n│                                                          │\n│ **[ Open Formula Lab ]**                                 │\n└──────────────────────────────────────────────────────────┘\n\n### 🔍 Characteristics\n\n*   **Directionality:** Electric field lines point **away** from positive charges and **toward** negative charges.\n*   **Superposition:** Both fields and potentials from multiple charges can be added (vectors for field, scalars for potential).\n*   **Work-Energy Link:** Electric potential is the \"electrical pressure\" that causes charges to move, creating current.\n\n---\n\n┌──────────────────────────────────────────────────────────┐\n│ **Main Formula: Electric Potential**                     │\n│                                                          │\n│ $$V = \\frac{kQ}{r}$$                                     │\n│                                                          │\n│ **[ Explain Formula ]**                                  │\n│ Calculates the potential at a point relative to zero     │\n│ potential at infinity.                                   │\n│                                                          │\n│ **[ Open Formula Lab ]**                                 │\n└──────────────────────────────────────────────────────────┘\n\n### 💡 Important Notes\n> [!NOTE]\n> While **Electric Field** tells you how hard a charge will be pushed (Force), **Electric Potential** tells you how much energy is stored at that location (Energy). They are related by the gradient: $E = -\\frac{dV}{dr}$.\n\n---\n\n### 📝 Suggested Questions\n\n1.  **Conceptual:** Why is the electric field zero inside a hollow conducting sphere, but the potential is constant?\n2.  **Calculation:** If the potential at a point is $10V$, how much work is required to move a $2C$ charge to that point?\n3.  **Relationship:** How does the electric field change if you double the distance from a point charge?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is generally accurate and well-structured, with clear definitions and formulas for electric field and electric potential. However, there are some minor issues with formatting and consistency. For example, the use of tables and boxes is not consistent throughout the response, and some sections could be more clearly labeled. Additionally, the response could benefit from more explicit connections to the gold reference answer and more detailed explanations of key concepts. To improve, the candidate should focus on refining their formatting and providing more explicit links to the reference material. Furthermore, the candidate could enhance their educational score by including more beginner-friendly explanations and examples to illustrate complex concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 377,
+    "completionTokens": 649,
+    "totalTokens": 1026
+  },
+  "candidate_latency_ms": 4782,
+  "candidate_cost_usd": 0.0021355,
+  "judge_token_usage": {
+    "promptTokens": 1303,
+    "completionTokens": 187,
+    "totalTokens": 1490
+  },
+  "judge_latency_ms": 4078,
+  "judge_cost_usd": 0.0012305999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:35:00.456Z"
+}

@@ -1,0 +1,128 @@
+┌─────────────────────────────┐
+│ Introduction                 │
+│─────────────────────────────│
+│ Electrical power quantifies   │
+│ the rate at which electrical   │
+│ energy is transferred or      │
+│ converted. It is a fundamental│
+│ concept in circuits and       │
+│ electrical engineering.      │
+└─────────────────────────────┘
+
+
+┌─────────────────────────────┐
+│ Definition                  │
+│─────────────────────────────│
+│ **Electrical Power (P)** is   │
+│ the amount of energy per unit │
+│ time that is delivered by an │
+│ electric circuit. Mathematically│
+│ it is defined as the product │
+│ of the electric potential     │
+│ difference (voltage) and the  │
+│ current flowing through the   │
+│ circuit.                     │
+└─────────────────────────────┘
+
+
+┌─────────────────────────────┐
+│ Derivation                  │
+│─────────────────────────────│
+│ 1. Start with the definition   │
+│    of work (energy) done by a │
+│    charge **q** moving through │
+│    a potential difference **V**:│
+│    \[ W = qV \]                │
+│                                 │
+│ 2. Power is the rate of doing   │
+│    work:                       │
+│    \[ P = \frac{dW}{dt} \]      │
+│                                 │
+│ 3. Substitute \(W = qV\) into   │
+│    the power definition:       │
+│    \[ P = \frac{d(qV)}{dt} \]   │
+│                                 │
+│ 4. Assuming **V** is constant   │
+│    (common for many circuits), │
+│    it can be taken out of the   │
+│    derivative:                 │
+│    \[ P = V\frac{dq}{dt} \]     │
+│                                 │
+│ 5. Recognize that \(\frac{dq}{dt}\)│
+│    is the electric current **I**│
+│    (charge flow per unit time).│
+│                                 │
+│ 6. Hence, the fundamental       │
+│    relationship emerges:       │
+│                                 │
+│    \[ P = VI \]                 │
+└─────────────────────────────┘
+
+
+┌─────────────────────────────┐
+│ Main Formula                 │
+│─────────────────────────────│
+│          P = V I             │
+│                               │
+│ [ Explain Formula ]           │
+│ [ Open Formula Lab ]          │
+└─────────────────────────────┘
+
+
+┌─────────────────────────────┐
+│ Formula Explanation          │
+│─────────────────────────────│
+│ **P** – Electrical power (watts, W) │
+│ **V** – Voltage (potential difference, volts, V) │
+│ **I** – Current (amperes, A)            │
+│                                           │
+│ The formula tells us that the power │
+│ delivered to a load equals the │
+│ product of how much electric │
+│ potential pushes the charge (V) │
+│ and how many charges flow per │
+│ second (I).                        │
+└─────────────────────────────┘
+
+
+┌─────────────────────────────┐
+│ Applications                 │
+│─────────────────────────────│
+│ • Determining the energy consumption of │
+│   appliances (e.g., a 60 W bulb).      │
+│ • Sizing power supplies and generators. │
+│ • Calculating heat generated in resistors│
+│   (P = I²R, derived from P = VI).        │
+└─────────────────────────────┘
+
+
+┌─────────────────────────────┐
+│ Summary                      │
+│─────────────────────────────│
+│ • Electrical power is the rate of │
+│   energy transfer in an electric   │
+│   circuit.                         │
+│ • Starting from work \(W = qV\) and │
+│   using the definition of current │
+│   (\(I = dq/dt\)), we derive      │
+│   the concise relationship \(P = VI\).│
+│ • This simple product links voltage│
+│   and current directly to the power│
+│   consumed or delivered.           │
+└─────────────────────────────┘
+
+
+┌─────────────────────────────┐
+│ Suggested Questions          │
+│─────────────────────────────│
+│ 1. If a device operates at 120 V │
+│    and draws 2 A, what is its power?│
+│ 2. A motor requires 1500 W and   │
+│    is supplied by a 240 V source.│
+│    What current must the motor draw?│
+│ 3. How does the formula change    │
+│    when resistance is introduced?│
+│    (Hint: use Ohm’s law \(V = IR\)).│
+│ 4. Why is power expressed in watts │
+│    rather than volts or amperes?│
+└─────────────────────────────┘

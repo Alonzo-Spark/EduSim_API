@@ -1,0 +1,63 @@
+**Runtime Overlay Response: Spring Stretched (Peak Limit Event)**
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**🔍 Quick Definition**  
+A spring reaches its *peak limit* when stretched beyond the elastic deformation range, entering plastic deformation where Hooke's Law no longer applies.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**📜 Main Formula**  
+**Hooke's Law (Pre-Limit):**  
+$$ F = -kx $$  
+
+**Peak Limit Condition:**  
+$$ x > x_{\text{elastic}} $$  
+
+**Key Variables**  
+| Symbol | Quantity | SI Unit | Critical Value |  
+|--------|----------|---------|----------------|  
+| *F* | Restoring force | N | Varies |  
+| *k* | Spring constant | N/m | Material-dependent |  
+| *x* | Displacement | m | **Critical:** x_elastic |  
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**⚠️ Key Consequences**  
+1. **Permanent deformation** - Spring won't return to original length  
+2. **Hysteresis** - Altered force-displacement relationship  
+3. **Energy dissipation** - Work done isn't fully recoverable  
+
+**Real-World Impact**  
+- Suspension system failure  
+- Mattress spring breakdown  
+- Mechanical watch inaccuracy  
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**🛠️ Formula Lab**  
+```spring-sandbox  
+[Interactive Simulation]  
+Controls:  
+- Adjust spring constant (50-500 N/m)  
+- Drag displacement slider (0-150% of x_elastic)  
+
+Visualization:  
+- Real-time force calculation  
+- Color-coded strain indicators  
+- Elastic/plastic transition marker  
+```  
+
+**🔬 Experimental Observations**  
+| Load Condition | Spring Behavior |  
+|----------------|-----------------|  
+| x < x_elastic | Returns to original length |  
+| x = x_elastic | Maximum elastic stretch |  
+| x > x_elastic | Permanent deformation occurs |  
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+**💡 Expert Insight**  
+*"The elastic limit isn't just about force - it's about energy storage capacity. Beyond this point, the spring becomes a mechanical fuse."* - Materials Engineering Principle
+
+[🔄 Reset Simulation] | [📊 Show Stress-Strain Curve] | [❓ Why This Matters]

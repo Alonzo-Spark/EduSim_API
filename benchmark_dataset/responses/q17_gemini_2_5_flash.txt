@@ -1,0 +1,149 @@
+## The Work-Energy Theorem
+
+The Work-Energy Theorem is a fundamental principle in physics that establishes a direct relationship between the work done on an object and its change in kinetic energy. It provides a powerful alternative to Newton's laws for analyzing motion, particularly when forces are not constant or when dealing with complex systems.
+
+***
+
+### Quick Definition
+
+The **Work-Energy Theorem** states that the net work done on an object by all forces acting on it is equal to the change in the object's kinetic energy.
+
+***
+
+### Main Formula
+
+$$
+W_{net} = \Delta K
+$$
+
+Where:
+*   $W_{net}$ is the net work done on the object (measured in Joules, J).
+*   $\Delta K$ is the change in the object's kinetic energy (measured in Joules, J).
+
+This can also be expressed as:
+
+$$
+W_{net} = K_f - K_i
+$$
+
+Where:
+*   $K_f$ is the final kinetic energy of the object.
+*   $K_i$ is the initial kinetic energy of the object.
+
+And since kinetic energy ($K$) is defined as $K = \frac{1}{2}mv^2$:
+
+$$
+W_{net} = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2
+$$
+
+Where:
+*   $m$ is the mass of the object.
+*   $v_f$ is the final speed of the object.
+*   $v_i$ is the initial speed of the object.
+
+***
+
+### Key Concepts
+
+*   **Work ($W$)**: Work done by a constant force is defined as the product of the magnitude of the force, the magnitude of the displacement, and the cosine of the angle between them: $W = Fd \cos\theta$. For a variable force, work is calculated by integrating the force over the displacement.
+*   **Kinetic Energy ($K$)**: The energy an object possesses due to its motion. It is directly proportional to the object's mass and the square of its speed.
+*   **Net Work ($W_{net}$)**: The algebraic sum of the work done by all individual forces acting on an object. It can also be calculated as the work done by the net force.
+*   **Change in Kinetic Energy ($\Delta K$)**: The difference between the final kinetic energy and the initial kinetic energy of an object.
+
+***
+
+### Derivation
+
+The Work-Energy Theorem can be derived from Newton's Second Law of Motion and the definitions of work and kinetic energy.
+
+1.  **Start with Newton's Second Law:**
+    Newton's Second Law states that the net force acting on an object is equal to its mass times its acceleration:
+
+    $$
+    F_{net} = ma
+    $$
+
+2.  **Recall the definition of work done by a constant force:**
+    For a constant net force acting over a displacement $d$ in the same direction, the work done is:
+
+    $$
+    W_{net} = F_{net}d
+    $$
+
+3.  **Substitute $F_{net}$ from Newton's Second Law into the work equation:**
+
+    $$
+    W_{net} = (ma)d
+    $$
+
+4.  **Relate acceleration, displacement, and velocity using kinematics:**
+    From kinematics, for constant acceleration, we have the following equation:
+
+    $$
+    v_f^2 = v_i^2 + 2ad
+    $$
+
+    Rearranging this equation to solve for $ad$:
+
+    $$
+    2ad = v_f^2 - v_i^2
+    $$
+
+    $$
+    ad = \frac{1}{2}(v_f^2 - v_i^2)
+    $$
+
+5.  **Substitute this expression for $ad$ back into the work equation:**
+
+    $$
+    W_{net} = m \left( \frac{1}{2}(v_f^2 - v_i^2) \right)
+    $$
+
+    $$
+    W_{net} = \frac{1}{2}m v_f^2 - \frac{1}{2}m v_i^2
+    $$
+
+6.  **Recognize the terms as kinetic energy:**
+    Since kinetic energy $K = \frac{1}{2}mv^2$, we can write:
+
+    $$
+    W_{net} = K_f - K_i
+    $$
+
+    $$
+    W_{net} = \Delta K
+    $$
+
+This completes the derivation of the Work-Energy Theorem.
+
+***
+
+### Important Notes
+
+*   **Net Work:** It is crucial to consider the *net* work done by *all* forces (conservative and non-conservative) acting on the object.
+*   **Scalar Quantity:** Both work and kinetic energy are scalar quantities, meaning they have magnitude but no direction.
+*   **Units:** The standard unit for both work and energy is the Joule (J).
+*   **Applicability:** The theorem is valid for both constant and variable forces. For variable forces, the work done must be calculated using integration ($W = \int \vec{F} \cdot d\vec{r}$).
+*   **Energy Transfer:** The Work-Energy Theorem essentially describes how energy is transferred to or from an object, resulting in a change in its motion (kinetic energy).
+*   **Reference Frame:** The values of work and kinetic energy depend on the chosen reference frame. However, the Work-Energy Theorem holds true in all inertial reference frames.
+
+***
+
+### Applications
+
+The Work-Energy Theorem is widely used in various areas of physics and engineering:
+
+*   **Calculating Speed:** If the net work done on an object is known, its final speed can be determined without explicitly using acceleration.
+*   **Analyzing Complex Motion:** It simplifies problems where forces are not constant or where the path of motion is curved, making kinematic equations difficult to apply directly.
+*   **Roller Coasters and Projectiles:** Understanding the speed of objects at different points in their trajectory based on changes in potential and kinetic energy (often combined with conservation of energy).
+*   **Impact Problems:** Estimating the extent of deformation or damage in collisions.
+*   **Mechanical Systems:** Analyzing the performance of machines, engines, and other mechanical devices.
+
+***
+
+### Suggested Questions
+
+1.  A car accelerates from rest to a speed of 20 m/s. If the mass of the car is 1200 kg, what is the net work done on the car?
+2.  Explain the difference between positive work, negative work, and zero work, and how each affects an object's kinetic energy.
+3.  Can the net work done on an object be zero even if individual forces are doing work? If so, what does this imply about the object's motion?
+4.  How does the Work-Energy Theorem relate to the principle of conservation of energy? Are they the same, or are they different aspects of the same concept?

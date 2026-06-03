@@ -1,0 +1,98 @@
+<div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8f9fa; padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0;">
+
+<!-- INTRODUCTION CARD -->
+<div style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 5px solid #2196f3;">
+    <h2 style="margin-top: 0; color: #1a73e8; font-size: 1.25rem;">Quick Definition</h2>
+    <p style="line-height: 1.6; color: #3c4043;">
+        <b>Electrical Power</b> is the rate at which electrical energy is consumed or dissipated in an electric circuit. In simpler terms, it measures how fast work is being done by an electric current.
+    </p>
+</div>
+
+<!-- FORMULA CARD: MAIN DEFINITION -->
+<div style="background: #ffffff; border: 1px solid #d1d9e0; border-radius: 8px; margin-bottom: 20px; overflow: hidden;">
+    <div style="background: #f1f3f4; padding: 10px 20px; font-weight: bold; border-bottom: 1px solid #d1d9e0; color: #5f6368;">
+        General Power Formula
+    </div>
+    <div style="padding: 30px; text-align: center; font-size: 1.5rem;">
+        $$P = \frac{W}{t}$$
+    </div>
+    <div style="padding: 15px 20px; background: #fafafa; border-top: 1px solid #eee; font-size: 0.9rem; color: #555;">
+        <b>Where:</b> $P$ is Power (Watts), $W$ is Work Done (Joules), and $t$ is Time (Seconds).
+    </div>
+</div>
+
+<!-- KEY CONCEPTS: DERIVATION STEPS -->
+<div style="background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <h2 style="margin-top: 0; color: #202124; font-size: 1.1rem; border-bottom: 1px solid #eee; padding-bottom: 10px;">Derivation of P = VI</h2>
+    <p style="color: #5f6368; font-size: 0.95rem;">To derive the relationship, we combine the definitions of Potential Difference and Current:</p>
+    
+    <ol style="line-height: 1.8; color: #3c4043;">
+        <li><b>From Potential Difference:</b> $V = \frac{W}{Q} \implies W = V \times Q$</li>
+        <li><b>From Electric Current:</b> $I = \frac{Q}{t} \implies Q = I \times t$</li>
+        <li><b>Substitution:</b> Replace $Q$ in the work equation: $W = V \times (I \times t)$</li>
+        <li><b>Final Step:</b> Substitute $W$ into the power formula $P = \frac{W}{t}$</li>
+    </ol>
+</div>
+
+<!-- FORMULA CARD: DERIVED RESULT -->
+<div style="background: #ffffff; border: 2px solid #34a853; border-radius: 8px; margin-bottom: 20px; overflow: hidden;">
+    <div style="background: #e6f4ea; padding: 10px 20px; font-weight: bold; border-bottom: 2px solid #34a853; color: #137333;">
+        Main Formula: Electrical Power
+    </div>
+    <div style="padding: 30px; text-align: center; font-size: 1.8rem; color: #202124;">
+        $$P = V \times I$$
+    </div>
+    <div style="padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+        <span style="font-size: 0.85rem; color: #70757a;">[ Derived from $W/t$ ]</span>
+        <button style="background: #34a853; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Open Formula Lab</button>
+    </div>
+</div>
+
+<!-- CHARACTERISTICS TABLE -->
+<div style="background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 20px;">
+    <div style="padding: 15px 20px; background: #202124; color: white; font-weight: bold;">
+        Unit Specifications
+    </div>
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead style="background: #f8f9fa;">
+                <tr>
+                    <th style="padding: 12px 20px; border-bottom: 1px solid #eee;">Quantity</th>
+                    <th style="padding: 12px 20px; border-bottom: 1px solid #eee;">SI Unit</th>
+                    <th style="padding: 12px 20px; border-bottom: 1px solid #eee;">Symbol</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 12px 20px; border-bottom: 1px solid #eee;">Power ($P$)</td>
+                    <td style="padding: 12px 20px; border-bottom: 1px solid #eee;">Watt</td>
+                    <td style="padding: 12px 20px; border-bottom: 1px solid #eee;">W</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px 20px; border-bottom: 1px solid #eee;">Voltage ($V$)</td>
+                    <td style="padding: 12px 20px; border-bottom: 1px solid #eee;">Volt</td>
+                    <td style="padding: 12px 20px; border-bottom: 1px solid #eee;">V</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px 20px;">Current ($I$)</td>
+                    <td style="padding: 12px 20px;">Ampere</td>
+                    <td style="padding: 12px 20px;">A</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- IMPORTANT NOTES -->
+<div style="background: #fff8e1; border-radius: 8px; padding: 20px; border: 1px solid #ffe082;">
+    <h3 style="margin-top: 0; color: #f57f17; font-size: 1rem;">Important Note</h3>
+    <p style="margin: 0; font-size: 0.95rem; color: #5d4037;">
+        By applying <b>Ohm's Law ($V=IR$)</b>, the power formula can also be expressed as:
+        <ul style="margin-top: 10px;">
+            <li>$P = I^2R$ (Useful for series circuits)</li>
+            <li>$P = \frac{V^2}{R}$ (Useful for parallel circuits)</li>
+        </ul>
+    </p>
+</div>
+
+</div>

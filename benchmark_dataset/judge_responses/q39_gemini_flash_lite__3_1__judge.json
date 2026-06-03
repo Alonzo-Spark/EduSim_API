@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 39,
+  "question": "Define wavelength, frequency, and amplitude of a wave.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWavelength, frequency, and amplitude are primary parameters used to quantify and describe the physical properties of wave propagation through space and time.\n\n---\n\n## Core Wave Metrics\n\n### 1. Wavelength ($\\lambda$)\nWavelength is the spatial distance between two consecutive points that are in the same phase of oscillation, such as the distance between two adjacent wave crests or troughs.\n\n### 2. Frequency ($f$)\nFrequency is the number of complete wave cycles or oscillations that pass a fixed reference point per unit of time, measured internationally in Hertz ($\\text{Hz}$).\n\n### 3. Amplitude ($A$)\nAmplitude is the maximum displacement of a medium's particles from their equilibrium position as a wave passes through.\n\n---\n\n## Formula\n\nThe wave speed equation linking these parameters is defined as:\n\n$$v = f\\lambda$$\n\nWhere:\n* $v$ represents the propagation velocity of the wave profile\n* $f$ represents the wave frequency\n* $\\lambda$ represents the wavelength value\n\n---\n\n## Summary\n\nWavelength measures a wave's spatial structure, frequency tracks its speed over time, and amplitude defines its energy intensity and displacement scale.",
+  "candidate_response": "Let's explore the fundamental properties of waves!\n\n---\n\n**Introduction**\n\nWaves are ubiquitous in the universe, transferring energy without transferring matter. From the ripples in a pond to the light that allows us to see, understanding wave properties is crucial. We'll define three key characteristics: wavelength, frequency, and amplitude.\n\n---\n\n**Quick Definition**\n\n*   **Wavelength:** The distance between two consecutive identical points in a wave.\n*   **Frequency:** The number of wave cycles that pass a given point per unit of time.\n*   **Amplitude:** The maximum displacement of a point on the wave from its equilibrium position.\n\n---\n\n**Key Concepts**\n\nThese three properties are interconnected and define the behavior of a wave. They are essential for understanding wave phenomena like interference, diffraction, and the Doppler effect.\n\n---\n\n**Formula**\n\n$$\nc = f \\lambda\n$$\n\n---\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     $$c = f \\lambda$$      │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n---\n\n**Explanation of the Formula**\n\nThe formula  $$c = f \\lambda$$  relates the speed of a wave (c) to its frequency (f) and wavelength (λ). In this equation:\n\n*   **c** represents the wave speed, which is constant for a given medium (e.g., the speed of light in a vacuum).\n*   **f** represents the frequency, measured in Hertz (Hz), which is the number of cycles per second.\n*   **λ** represents the wavelength, measured in meters (m), which is the distance between two consecutive crests or troughs.\n\nThe formula tells us that the speed of a wave is directly proportional to its frequency and wavelength. If the frequency increases, the wavelength must decrease to maintain a constant wave speed, and vice-versa.\n\n---\n\n**Detailed Definitions**\n\nLet's break down each property:\n\n**1. Wavelength (λ - Lambda)**\n\n┌───────────────────────────┐\n│ Wavelength Definition     │\n│                           │\n│ Wavelength is the distance  │\n│ between two consecutive    │\n│ corresponding points on a  │\n│ wave. This could be from   │\n│ crest to crest, trough to  │\n│ trough, or any other       │\n│ repeating point.          │\n│                           │\n│ [ Visualize Wavelength ]  │\n│ [ Wavelength Examples ]   │\n└───────────────────────────┘\n\n**2. Frequency (f)**\n\n┌───────────────────────────┐\n│ Frequency Definition      │\n│                           │\n│ Frequency is the number   │\n│ of complete wave cycles   │\n│ that pass a given point   │\n│ in a unit of time, often  │\n│ measured in Hertz (Hz).   │\n│ A higher frequency means  │\n│ more cycles per second.   │\n│                           │\n│ [ Visualize Frequency ]   │\n│ [ Frequency Examples ]    │\n└───────────────────────────┘\n\n**3. Amplitude**\n\n┌───────────────────────────┐\n│ Amplitude Definition      │\n│                           │\n│ Amplitude is the maximum  │\n│ displacement of a point   │\n│ on the wave from its      │\n│ equilibrium (rest)        │\n│ position. It represents  │\n│ the wave's intensity or   │\n│ \"height.\"                │\n│                           │\n│ [ Visualize Amplitude ]   │\n│ [ Amplitude Examples ]    │\n└───────────────────────────┘\n\n---\n\n**Suggested Questions**\n\n*   How are wavelength and frequency related?\n*   What is the unit of measurement for frequency?\n*   How does amplitude relate to wave energy?\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts of wavelength, frequency, and amplitude, with accurate definitions and a correct formula. The response is well-structured and easy to follow, making it beginner-friendly and pedagogically effective. However, the quality score is slightly lower due to the excessive use of unnecessary formatting elements, such as the boxed sections, which can make the text appear cluttered. Additionally, some of the sentences are wordy and could be condensed for improved clarity. Overall, the response is of high quality and effectively conveys the key concepts, but could benefit from some refinement in terms of presentation and concision.",
+  "candidate_token_usage": {
+    "promptTokens": 381,
+    "completionTokens": 814,
+    "totalTokens": 1195
+  },
+  "candidate_latency_ms": 5558,
+  "candidate_cost_usd": 0.00236925,
+  "judge_token_usage": {
+    "promptTokens": 1452,
+    "completionTokens": 188,
+    "totalTokens": 1640
+  },
+  "judge_latency_ms": 5369,
+  "judge_cost_usd": 0.0013223999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:28:09.817Z"
+}

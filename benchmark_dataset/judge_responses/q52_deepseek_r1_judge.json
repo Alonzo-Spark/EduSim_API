@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 52,
+  "question": "Live Sandbox: Explain the visual effect of adding air resistance to a projectile trajectory.",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nWe track a launched projectile passing across the coordinate grid. By activating the fluid friction toggle, we can observe how an atmospheric medium alters the trajectory profile compared to an ideal vacuum path.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nThe projectile no longer follows a symmetrical path across the workspace. As it travels forward, its forward speed drops off sharply, causing the trajectory curve to steepen on the descent and land much closer to the launch point.\n\n### ✦ WHY IT HAPPENS\nAir resistance acts as a non-conservative drag force that opposes the velocity vector at every point. This continuous resistance drains kinetic energy from the system, disrupting the steady horizontal velocity component and adding a backward deceleration.\n\n### ✦ WHAT TO NOTICE\nObserve the shape of the path. The peak of the curve is shifted forward, and the descending line drops down much more steeply than the initial climbing line.\n\n### ✦ FORMULA\nThe total net force vector acting on the tracking object becomes:\n\n$$F_{\\text{net}} = F_g + F_d$$\n\n$$F_d = -\\frac{1}{2}\\rho v^2 C_d A$$\n\n* $F_g$ represents the constant downward gravitational force vector.\n* $F_d$ represents the dynamic velocity-dependent drag force vector acting opposite to motion.\n\n### ✦ DEEPER UNDERSTANDING\nBecause drag scales quadratically with velocity ($v^2$), high-speed projectiles experience a rapid energy loss early in their flight, creating an asymmetric curve known as a ballistic trajectory.\n\n### ✦ TRY THIS\n1. Launch a mass with **Air Resistance toggled off** to view the perfect parabolic path.\n2. Turn the **Friction slider** up to high and observe how the horizontal range decreases.",
+  "candidate_response": "### Visual Effect of Air Resistance on Projectile Trajectory\n\n#### 🎯 Quick Definition\n**Air resistance** (drag) opposes a projectile's motion, reducing its velocity asymmetrically. This breaks the symmetry of ideal parabolic motion, creating a steeper descent and shorter range.\n\n---\n\n#### 📐 Main Formula Comparison\n**Without Air Resistance**  \n$$ \\begin{cases} x(t) = v_{0x}t \\\\ y(t) = v_{0y}t - \\frac{1}{2}gt^2 \\end{cases} $$  \n*Symmetric parabola*\n\n**With Air Resistance**  \n$$ m\\frac{d\\vec{v}}{dt} = m\\vec{g} - \\frac{1}{2}\\rho C_d A v^2 \\hat{v} $$  \n*Asymmetric trajectory with faster energy loss*\n\n---\n\n#### 🔍 Key Visual Characteristics\n| Feature               | No Air Resistance          | With Air Resistance         |\n|-----------------------|----------------------------|-----------------------------|\n| **Shape**             | Symmetric parabola         | Asymmetric curve            |\n| **Maximum Height**    | Higher                     | Lower                       |\n| **Range**             | Longer                     | Shorter                     |\n| **Descent Angle**     | Matches launch angle       | Steeper than launch angle   |\n| **Impact Velocity**   | Same as launch velocity    | Lower than launch velocity  |\n\n---\n\n#### 📉 Visual Comparison Sketch\n```\n        Ideal Trajectory (No Drag)        Trajectory with Air Resistance\n                     *                                  *\n                    * *                                * *\n                   *   *                              *   *\n                  *     *                            *     *\n                 *       *                          *       *\n                *         *                        *         *\n               *           *                      *           *\nLaunch ➔ *                 *                *                 *\n                                                             * * \n                                                               * ➔ Impact\n```\n- **Asymmetry**: Descent phase becomes steeper and shorter.\n- **Reduced Range**: Horizontal distance decreases by 20-60% (depending on drag).\n- **Lower Peak**: Maximum height drops significantly.\n\n---\n\n#### ⚙️ Why This Happens\n1. **Horizontal Deceleration**  \n   Drag continuously reduces horizontal velocity (\\(v_x\\)), shortening flight time.\n2. **Vertical Asymmetry**  \n   - *Ascent*: Drag and gravity **both** oppose upward motion → faster slowdown.\n   - *Descent*: Drag opposes downward motion → slower acceleration than free fall.\n3. **Energy Loss**  \n   Kinetic energy dissipates as heat → total mechanical energy decreases over time.\n\n---\n\n#### 💡 Practical Implications\n- **Sports**: Golf balls with dimples reduce drag to extend range.\n- **Military**: Artillery shells use streamlined shapes to minimize trajectory distortion.\n- **Meteorology**: Raindrop trajectories affect precipitation patterns.\n\n> **Note**: Drag force scales with \\(v^2\\). Effects are negligible at low speeds (e.g., throwing a paper wad) but dominant at high speeds (e.g., baseball pitch).\n\n---\n\n#### 🧪 Formula Lab (Interactive)\n**Try adjusting drag coefficient** (\\(C_d\\)):  \n$$ \\text{Range } R \\approx \\frac{v_0^2 \\sin 2\\theta}{g} \\cdot e^{-k R} \\quad (k \\propto C_d) $$  \n*Higher \\(C_d\\) → faster exponential decay of range*\n\n---\n\n#### ✅ Summary\nAir resistance:\n1. Shortens range and reduces peak height\n2. Creates a \"squashed\" trajectory with a steep descent\n3. Breaks time symmetry (ascent time ≠ descent time)\n4. Causes the projectile to land vertically rather than at the launch angle\n\n**Key Insight**: Drag transforms the mathematically elegant parabola into a real-world trajectory dominated by energy dissipation.\n\n---\n\n❓ **Suggested Questions**  \n1. Why does air resistance affect the horizontal and vertical motion differently?  \n2. How would doubling the projectile mass change the trajectory (assuming same initial velocity)?  \n3. Why do golf balls have dimples if drag reduces range?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the visual effect of adding air resistance to a projectile trajectory, with accurate formulas, clear explanations, and effective use of visual aids. The response is well-structured, easy to follow, and provides a comprehensive overview of the topic. The use of tables, diagrams, and interactive elements enhances the educational value of the response. However, there are some minor areas for improvement, such as the potential for additional visualizations or interactive simulations to further illustrate key concepts. Overall, the response is of high quality and effectively communicates complex physics concepts in an accessible and engaging manner.",
+  "candidate_token_usage": {
+    "promptTokens": 368,
+    "completionTokens": 1888,
+    "totalTokens": 2256
+  },
+  "candidate_latency_ms": 81553,
+  "candidate_cost_usd": 0.00433712,
+  "judge_token_usage": {
+    "promptTokens": 1638,
+    "completionTokens": 181,
+    "totalTokens": 1819
+  },
+  "judge_latency_ms": 6751,
+  "judge_cost_usd": 0.0014172,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:07:54.152Z"
+}

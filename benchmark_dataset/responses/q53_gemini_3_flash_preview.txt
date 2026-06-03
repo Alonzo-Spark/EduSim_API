@@ -1,0 +1,75 @@
+### 🧪 Live Sandbox: Oscillator Dynamics
+
+| Parameter | Initial State | Modified State |
+| :--- | :--- | :--- |
+| **Stiffness ($k$)** | $k$ | $2k$ |
+| **Mass ($m$)** | $m$ | $m$ |
+
+---
+
+### 📘 Introduction
+In a simple harmonic oscillator, the stiffness constant ($k$)—also known as the spring constant—represents the "restoring force" per unit of displacement. When we double this value, we are essentially making the spring twice as "stiff," requiring twice the force to stretch it the same distance.
+
+---
+
+### 💡 Key Concepts
+*   **Restoring Force:** $F = -kx$. Doubling $k$ doubles the pull-back force at any given position.
+*   **Inertia vs. Restoring Force:** The mass ($m$) provides resistance to change in motion, while $k$ drives the motion. Increasing $k$ tips the balance toward faster motion.
+
+---
+
+### 📉 Formula Card: Angular Frequency
+┌──────────────────────────────────────────────────────────┐
+│ **System Frequency Analysis**                            │
+│                                                          │
+│ $$\omega = \sqrt{\frac{k}{m}}$$                          │
+│                                                          │
+│ **Effect of $2k$:**                                      │
+│ The frequency increases by a factor of $\sqrt{2} \approx 1.41$. │
+│                                                          │
+│ [ 🔬 Open Formula Lab ]                                  │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### 📉 Formula Card: Oscillation Period
+┌──────────────────────────────────────────────────────────┐
+│ **Time for One Cycle**                                   │
+│                                                          │
+│ $$T = 2\pi \sqrt{\frac{m}{k}}$$                          │
+│                                                          │
+│ **Effect of $2k$:**                                      │
+│ The period decreases. $T_{new} = \frac{T_{old}}{\sqrt{2}}$.   │
+│                                                          │
+│ [ 🔬 Open Formula Lab ]                                  │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### 👁️ Visual Characteristics
+When you "Run" the sandbox with $2k$, look for these three specific visual changes:
+
+1.  **Increased "Snappiness":** The mass will move much faster through the equilibrium position. It will look more "aggressive" and less "lazy."
+2.  **Higher Frequency:** You will count more full oscillations in a 10-second window than you did previously.
+3.  **Smaller Amplitude (Energy Dependent):** If you provide the same initial **Potential Energy**, the spring will not stretch as far ($x = \sqrt{2E/k}$). The "swing" will appear tighter and more compact.
+
+---
+
+### 📊 Comparison Table
+┌──────────────────────────────────────────────────────────┐
+│ **Impact of Doubling Stiffness ($k \rightarrow 2k$)**      │
+│                                                          │
+│ | Feature | Change Factor | Visual Result |            │
+│ | :--- | :--- | :--- |                                  │
+│ | **Frequency** | $\times 1.41$ | Faster cycles |          │
+│ | **Period** | $\times 0.707$ | Shorter duration per cycle |│
+│ | **Velocity (max)** | $\times 1.41$ | Faster crossing at center | │
+│ | **Acceleration** | $\times 2.0$ | Sharper turns at edges |   │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### ❓ Suggested Questions
+*   How does the total energy of the system change if we double $k$ but keep the displacement amplitude the same?
+*   What happens if we double both the mass ($m$) and the stiffness ($k$) simultaneously?
+*   How does the damping ratio change in a real-world scenario when stiffness is increased?

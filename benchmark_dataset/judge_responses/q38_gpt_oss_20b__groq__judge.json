@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 38,
+  "question": "Explain resonance with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nResonance is a physical phenomenon that occurs when a periodic driving force is applied to an oscillatory system at a frequency that matches its natural frequency of vibration, causing a significant increase in the system's amplitude.\n\n---\n\n## Mechanism\n\n* **Frequency Matching:** When the external driving frequency matches the system's natural frequency, energy transfers efficiently, causing the system's structural amplitude to grow larger over time.\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Enhances signal amplification in wireless radios and acoustic instruments. | Can cause structural failure in mechanical systems, bridges, or buildings. |\n\n---\n\n## Real-world Examples\n\n* **Playground Swing:** Pushing a child on a swing at the exact moment the swing reaches its peak height increases the amplitude with minimal effort.\n* **Acoustic Wine Glass:** A singer matching their vocal pitch to the natural resonant frequency of a crystal wine glass can cause it to shatter as the vibrations become too large.\n* **Radio Tuning Circuit:** Adjusting a radio's electrical frequency to match an incoming broadcast wave amplifies that specific signal while filtering out others.\n\n---\n\n## Summary\n\nResonance occurs when a driving force matches a system's natural frequency, maximizing energy transfer and significantly amplifying the vibration scale.",
+  "candidate_response": "<failed>",
+  "judge_model": "N/A",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Model generation failed: OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "candidate_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "candidate_latency_ms": 119,
+  "candidate_cost_usd": 0,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 0,
+  "judge_cost_usd": 0,
+  "retry_count": 2,
+  "success": false,
+  "error": "OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "timestamp": "2026-06-01T09:26:41.722Z"
+}

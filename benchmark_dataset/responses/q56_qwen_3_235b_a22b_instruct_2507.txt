@@ -1,0 +1,130 @@
+┌───────────────────────────┐  
+│ **Interactive Sandbox**   │  
+│ *Physics Playground*      │  
+└───────────────────────────┘  
+
+### **Introduction**  
+Welcome to the **Collision Restitution Sandbox**, where you can explore how the **coefficient of restitution (e)** affects how rigid bodies bounce during a collision.  
+
+Adjust the restitution value and observe real-time changes in bounce behavior between two colliding spheres.  
+
+---
+
+### **Key Concept: What Is Restitution?**  
+
+┌───────────────────────────┐  
+│ **Quick Definition**      │  
+│                           │  
+│ The **coefficient of    │  
+│ restitution (e)** measures│  
+│ how "bouncy" a collision │  
+│ is. It determines the    │  
+│ ratio of relative speed   │  
+│ after and before impact. │  
+└───────────────────────────┘  
+
+- **e = 0**: No bounce (perfectly inelastic)  
+- **e = 1**: Perfect bounce (perfectly elastic)  
+- **0 < e < 1**: Partial bounce (realistic materials)  
+
+---
+
+### **Main Formula**  
+
+┌───────────────────────────┐  
+│ **Collision Restitution** │  
+│                           │  
+│ $$                        │  
+│ e = \frac{v_{2f} - v_{1f}}│  
+│ {v_{1i} - v_{2i}}         │  
+$$                        │  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+**Variables**:  
+- \( e \): Coefficient of restitution  
+- \( v_{1i}, v_{2i} \): Initial velocities of objects 1 and 2  
+- \( v_{1f}, v_{2f} \): Final velocities after collision  
+
+> 🔍 *The higher the `e`, the more kinetic energy is preserved during the bounce.*
+
+---
+
+### **Interactive Simulation Guide**  
+
+🔧 **Controls**:  
+- **Slider**: Adjust `e` from 0.0 to 1.0  
+- **Play/Pause**: Run or freeze the collision  
+- **Reset**: Return objects to starting positions  
+
+🎯 **Scenario**:  
+Two identical spheres approach each other with equal speed.  
+- Initial velocity: \( v_1 = +5\, \text{m/s},\ v_2 = -5\, \text{m/s} \)  
+- Mass: \( 1\, \text{kg} \) each  
+- Collision: Head-on, frictionless  
+
+---
+
+### **Behavior by Restitution Level**  
+
+┌─────────────────────────────────────────────────────┐  
+│ **Restitution Effects on Bounce**                   │  
+├───────────────┬─────────────────────────────────────┤  
+│ **e = 0.0**   │ Objects **stick together** after    │  
+│ (Clay-like)   │ impact. No separation. Final speed: │  
+│               │ both move at 0 m/s (center of mass).│  
+├───────────────┼─────────────────────────────────────┤  
+│ **e = 0.5**   │ **Partial rebound**. Objects bounce │  
+│ (Rubber ball) │ weakly. Final speeds reduced by half │  
+│               │ relative to initial separation.     │  
+├───────────────┼─────────────────────────────────────┤  
+│ **e = 1.0**   │ **Perfect rebound**. Objects reverse│  
+│ (Superball)   │ velocities completely. Total kinetic│  
+│               │ energy is conserved.                │  
+└─────────────────────────────────────────────────────┘  
+
+> 📈 **Trend**: As `e` increases →  
+> - Greater separation speed after collision  
+> - More kinetic energy retained  
+> - "Bouncier" interaction  
+
+---
+
+### **Applications in Real-World Design**  
+
+🔧 **Engineering & Game Physics**:  
+- **Low `e`**: Car crumple zones (absorb energy)  
+- **High `e`**: Tennis balls, basketballs (maximize bounce)  
+- **Simulations**: Video games use tuned `e` values for realism  
+
+---
+
+### **Important Notes**  
+⚠️ Restitution **only affects the normal (impact) direction**.  
+⚠️ Values >1.0 are unphysical (would create energy).  
+⚠️ Real materials vary:  
+   - Steel on steel: ~0.9  
+   - Wood on wood: ~0.5  
+   - Putty on wall: ~0.1  
+
+---
+
+### **Suggested Questions to Explore**  
+1. What happens when one object is stationary?  
+2. How does mass ratio interact with restitution?  
+3. Can restitution ever be greater than 1? Why or why not?  
+4. If `e = 0.8`, how much kinetic energy is lost?  
+
+---
+
+🔄 **Try It Now**:  
+Slide `e` from 0 → 1 and watch the final velocities update in real time.  
+
+👉 *Use the Formula Lab to derive final speeds for any `e` value.*  
+
+┌───────────────────────────┐  
+│ [ Launch Sandbox ]        │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘

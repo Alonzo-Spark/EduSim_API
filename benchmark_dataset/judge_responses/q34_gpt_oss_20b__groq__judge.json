@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 34,
+  "question": "A metal rod expands on heating. Explain thermal expansion.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThermal expansion is the tendency of matter to increase in volume, area, or length in response to an increase in temperature. \n\nThis behavior occurs because heating causes atoms to vibrate more vigorously, increasing the average separation distance between them.\n\n---\n\n## Characteristics\n\n* **Reversible Behavior:** The material expands uniformly as temperature rises and contracts back to its initial dimensions when cooled, provided it stays within its elastic limits.\n\n---\n\n## Formula\n\nThe linear thermal expansion equation for a solid rod is defined as:\n\n$$\\Delta L = \\alpha L_0 \\Delta T$$\n\nWhere:\n* $\\Delta L$ represents the net change in length\n* $\\alpha$ represents the coefficient of linear thermal expansion\n* $L_0$ represents the initial length of the rod sample\n* $\\Delta T$ represents the change in temperature\n\n---\n\n## Summary\n\nThermal expansion occurs because heat increases atomic vibrations, forcing atoms further apart and causing macroscopic expansion that scales with temperature changes.",
+  "candidate_response": "<failed>",
+  "judge_model": "N/A",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Model generation failed: OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "candidate_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "candidate_latency_ms": 108,
+  "candidate_cost_usd": 0,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 0,
+  "judge_cost_usd": 0,
+  "retry_count": 2,
+  "success": false,
+  "error": "OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "timestamp": "2026-06-01T09:10:40.475Z"
+}

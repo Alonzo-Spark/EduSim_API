@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 8,
+  "question": "A ball is projected at an angle of 45° with velocity 20 m/s. Find its range.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Projectile Tracking\n\n### Problem\nA ball is projected at an angle of $45^\\circ$ with a velocity of $20 \\text{ m/s}$. Find its horizontal range.\n\n### Given\n* Initial launch velocity ($u$) = $20 \\text{ m/s}$\n* Projection angle ($\\theta$) = $45^\\circ$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$R = \\frac{u^2 \\sin(2\\theta)}{g}$$\n\n### Substitution\n$$R = \\frac{(20)^2 \\times \\sin(2 \\times 45^\\circ)}{9.8}$$\n\n### Calculation\n$$R = \\frac{400 \\times \\sin(90^\\circ)}{9.8}$$\n\nSince $\\sin(90^\\circ) = 1$:\n$$R = \\frac{400 \\times 1}{9.8}$$\n\n$$R = 40.82 \\text{ m}$$\n\n### Final Answer\n**Horizontal Range ($R$) = $40.82 \\text{ m}$**\n\n### Interpretation\nThis means the ball travels a total horizontal ground shortcut distance of $40.82 \\text{ meters}$ away from its initial launch spot before striking the earth baseline.",
+  "candidate_response": "┌───────────────────────────┐\n│ Problem                    │\n│                            │\n│ A ball is projected at an  │\n│ angle of 45° with velocity │\n│ 20 m/s. Find its range.    │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Introduction               │\n│                            │\n│ Projectile motion describes│\n│ the trajectory of an       │\n│ object launched into the   │\n│ air under the influence of│\n│ gravity. The range is the  │\n│ horizontal distance        │\n│ traveled.                  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts               │\n│                            │\n│ - Projectile motion        │\n│ - Range                     │\n│ - Launch angle              │\n│ - Initial speed             │\n│ - Gravity                   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula               │\n│                            │\n│  R = v^2 sin(2θ) / g       │\n│                            │\n│ [ Explain Formula ]        │\n│ [ Open Formula Lab ]       │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Application                │\n│                            │\n│ Using the formula with     │\n│ v=20 m/s, θ=45°,           │\n│ g=9.8 m/s², we get R =     │\n│ (20² sin 90°) / 9.8 = 400   │\n│ / 9.8 ≈ 40.8 m.            │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                    │\n│                            │\n│ The range of the ball is   │\n│ approximately 40.8 meters. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions        │\n│                            │\n│ - What is the range at 30°?│\n│ - How does increasing speed│\n│ affect range?              │\n│ - What happens if launch   │\n│ angle is 90°?              │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is largely accurate and well-structured, with a clear introduction, key concepts, and application of the formula. However, the quality score is slightly lower due to the unconventional use of ASCII art tables, which may not be suitable for all platforms or readers. The educational score is high due to the clear explanation of the formula and the suggested questions for further exploration. To improve, consider using standard formatting and providing more detailed explanations for the formula and its components. Additionally, the candidate response could benefit from more visual aids, such as diagrams or graphs, to illustrate the concept of projectile motion and range.",
+  "candidate_token_usage": {
+    "promptTokens": 439,
+    "completionTokens": 7870,
+    "totalTokens": 8309
+  },
+  "candidate_latency_ms": 13899,
+  "candidate_cost_usd": 0.00239393,
+  "judge_token_usage": {
+    "promptTokens": 1187,
+    "completionTokens": 183,
+    "totalTokens": 1370
+  },
+  "judge_latency_ms": 4449,
+  "judge_cost_usd": 0.0011514,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:07:44.518Z"
+}

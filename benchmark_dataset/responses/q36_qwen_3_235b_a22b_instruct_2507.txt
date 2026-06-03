@@ -1,0 +1,139 @@
+# Oscillations and Waves
+
+---
+
+## 🟦 Quick Definition
+
+**Simple Harmonic Motion (SHM)** is a type of periodic motion where the restoring force is directly proportional to the displacement from the equilibrium position and acts in the direction opposite to that displacement.
+
+In simpler terms, it’s the motion of an object oscillating back and forth around a central (equilibrium) position, with acceleration always directed toward the center and proportional to its distance from it.
+
+---
+
+## 🔶 Key Concepts
+
+- SHM occurs when a system experiences a **linear restoring force** obeying **Hooke’s Law**.
+- It is **sinusoidal** in nature — the displacement can be described by sine or cosine functions.
+- Examples include:
+  - A mass on a spring
+  - A simple pendulum (for small angles)
+  - Vibrations of atoms in molecules
+
+---
+
+## 🟨 Formula
+
+┌─────────────────────────────────────┐  
+│ **Main Formula – SHM Definition** │  
+│                                     │  
+│ $$ a = -\omega^2 x $$              │  
+│                                     │  
+│ [ Explain Formula ]                 │  
+│ [ Open Formula Lab ]                │  
+└─────────────────────────────────────┘  
+
+This equation defines SHM:
+- $ a $: acceleration
+- $ x $: displacement from equilibrium
+- $ \omega $: angular frequency
+- The negative sign indicates that acceleration is directed toward the equilibrium point (opposite to displacement)
+
+---
+
+## 🟩 Characteristics of SHM
+
+| Feature                  | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| **Periodic & Oscillatory** | Motion repeats at regular intervals (period $T$)                           |
+| **Amplitude (A)**          | Maximum displacement from equilibrium                                     |
+| **Period (T)**             | Time for one complete cycle: $ T = \frac{2\pi}{\omega} $                  |
+| **Frequency (f)**          | Number of cycles per second: $ f = \frac{1}{T} $                          |
+| **Phase**                  | Describes the stage in the cycle; often used in equations like $ x = A\cos(\omega t + \phi) $ |
+
+Displacement in SHM is given by:
+
+┌───────────────────────────────┐  
+│ **Displacement Equation**     │  
+│                               │  
+│ $$ x = A \cos(\omega t + \phi) $$ │  
+│                               │  
+│ [ Explain Formula ]           │  
+│ [ Open Formula Lab ]          │  
+└───────────────────────────────┘  
+
+Where:
+- $ A $: amplitude
+- $ \omega $: angular frequency
+- $ t $: time
+- $ \phi $: phase constant
+
+---
+
+## 🟦 Energy in SHM
+
+In an ideal SHM system (no damping):
+- Total mechanical energy is conserved.
+- Energy interchanges between kinetic and potential forms.
+
+$$
+E_{\text{total}} = \frac{1}{2} k A^2
+= \frac{1}{2} m \omega^2 A^2
+$$
+
+┌──────────────────────────────┐  
+│ **Energy Formula (SHM)**    │  
+│                              │  
+$$ E = \frac{1}{2} k A^2 $$   │  
+│                              │  
+│ [ Explain Formula ]          │  
+│ [ Open Formula Lab ]         │  
+└──────────────────────────────┘  
+
+- $ k $: force constant (e.g., spring constant)
+- $ A $: amplitude
+
+---
+
+## 🟥 Applications
+
+- **Clocks** (pendulum, quartz oscillators)
+- **Musical instruments** (vibrating strings, air columns)
+- **Seismic sensors**
+- **AC circuits** (LC oscillations)
+- **Quantum harmonic oscillator** model
+
+---
+
+## 🟨 Advantages of Studying SHM
+
+- Provides a **foundation** for understanding wave motion and resonance.
+- Allows modeling of **complex oscillatory systems** using simple mathematics.
+- Applicable across physics, engineering, and biology.
+
+---
+
+## ⚠️ Important Notes
+
+- SHM assumes **no friction or damping** unless otherwise modeled.
+- The **small angle approximation** ($ \sin\theta \approx \theta $) is required for pendulums to exhibit SHM.
+- Real-world oscillations often **dampen** over time; SHM is an idealized model.
+
+---
+
+## 📚 Summary
+
+Simple Harmonic Motion is a fundamental concept in oscillations and waves. It describes repetitive, smooth oscillations where the acceleration is proportional to displacement and directed toward the equilibrium point. Governed by sinusoidal equations, SHM underpins the behavior of springs, pendulums, sound waves, and more.
+
+---
+
+## 💬 Suggested Questions
+
+1. How does the period of SHM depend on amplitude?
+2. Why is the acceleration in SHM proportional to $-x$?
+3. Derive the expression for velocity in SHM from the displacement equation.
+4. Compare SHM with uniform circular motion — how are they related?
+5. What happens to SHM when damping is introduced?
+
+--- 
+
+*Use the Formula Lab to explore how changing amplitude or frequency affects motion graphs.*

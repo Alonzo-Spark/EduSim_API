@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 23,
+  "question": "Explain the difference between mass and weight.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nMass and weight are distinct physical parameters that describe different structural qualities of matter.\n\nMass is a measure of the total quantity of matter contained within an object and reflects its inherent inertial resistance to acceleration.\n\nWeight is the gravitational force vector exerted on an object by a massive central body, such as the Earth.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Mass | Weight |\n| --- | --- | --- |\n| **Quantity Type** | Scalar property (Magnitude only). | Vector property (Magnitude and direction). |\n| **Location Factor** | Invariant; remains identical across all locations in the universe. | Variable; changes depending on the local gravitational acceleration field. |\n| **Measurement Instrument** | Measured using a balance scale. | Measured using a calibrated spring scale. |\n| **SI System Unit** | Kilogram ($\\text{kg}$). | Newton ($\\text{N}$). |\n\n---\n\n## Real-world Example\n\nAn astronaut has a mass of $60 \\text{ kg}$ on Earth.\n* **On Earth's Surface:** Their mass is $60 \\text{ kg}$, and their weight force is approximately $$60 \\times 9.8 = 588 \\text{ N}$$.\n* **On Moon's Surface:** Their mass remains exactly $60 \\text{ kg}$, but their weight drops to one-sixth of its Earth value ($98 \\text{ N}$) because the Moon's local gravitational pull is weaker.\n\n---\n\n## Summary\n\nMass is an unchanging scalar property intrinsic to an object, whereas weight is a variable vector force that scales with the strength of the surrounding gravitational field.",
+  "candidate_response": "┌───────────────────────────┐  \n│ **Quick Definition**      │  \n│                           │  \n│ **Mass** is the amount of matter in an object.  \n│ **Weight** is the force of gravity acting on that mass.  \n│                           │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Key Concepts**          │  \n│                           │  \n│ • Mass is intrinsic — it doesn't change with location.  \n│ • Weight depends on gravity — it changes on the Moon, Mars, etc.  \n│ • Mass is measured in kilograms (kg).  \n│ • Weight is measured in newtons (N).  \n│                           │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Main Formula**          │  \n│                           │  \n│ $$  \nW = mg  \n$$                          │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n> **Where:**  \n> - $ W $ = weight (in newtons, N)  \n> - $ m $ = mass (in kilograms, kg)  \n> - $ g $ = acceleration due to gravity (~9.8 m/s² on Earth)  \n\n---\n\n┌───────────────────────────┐  \n│ **Characteristics**       │  \n│                           │  \n│ **Mass**                  │  \n│ ✔ Scalar quantity          │  \n│ ✔ Constant everywhere      │  \n│ ✔ Measured with balance    │  \n│                           │  \n│ **Weight**                │  \n│ ✔ Vector quantity (has direction — toward center of gravity)  \n│ ✔ Varies with location     │  \n│ ✔ Measured with spring scale  \n│                           │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Example Comparison**    │  \n│                           │  \n│ Suppose you have a 10 kg object:  \n│  \n│ - **On Earth:**  \n│   $ W = 10~\\text{kg} \\times 9.8~\\text{m/s}^2 = 98~\\text{N} $  \n│  \n│ - **On the Moon** (g ≈ 1.6 m/s²):  \n│   $ W = 10~\\text{kg} \\times 1.6~\\text{m/s}^2 = 16~\\text{N} $  \n│  \n│ → Mass remains **10 kg**, but weight drops from 98 N to 16 N.  \n│                           │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Common Misconceptions** │  \n│                           │  \n│ ❌ \"I weigh 60 kg\"         │  \n│ → Technically, that’s your *mass*. Your *weight* is about 588 N.  \n│  \n│ ❌ \"Mass and weight are the same.\"  \n│ → They’re related, but fundamentally different.  \n│  \n│ ✅ Use \"mass\" when talking about matter.  \n│ ✅ Use \"weight\" when talking about gravitational force.  \n│                           │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Applications**          │  \n│                           │  \n│ • Engineering: Calculating loads on structures (uses weight).  \n│ • Space travel: Fuel calculations depend on mass (unchanging).  \n│ • Medicine: Dosages based on *mass*, not weight.  \n│ • Physics: Inertia depends on mass; gravitational force on weight.  \n│                           │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Summary**               │  \n│                           │  \n│ • **Mass** = how much stuff. **Weight** = how hard gravity pulls.  \n│ • Mass is constant. Weight changes with gravity.  \n│ • Use $ W = mg $ to convert between them.  \n│ • Always distinguish units: kg (mass) vs. N (weight).  \n│                           │  \n└───────────────────────────┘  \n\n---\n\n**Suggested Questions**  \n• Why do astronauts feel weightless in orbit?  \n• If you took a balance scale to the Moon, would it give the same mass reading?  \n• Can an object have zero weight but non-zero mass?  \n• How would your weight change on Jupiter?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the concepts of mass and weight, accurately defining and distinguishing between them. The use of a formula (W = mg) and examples (on Earth and the Moon) effectively illustrates the relationship between mass and weight. The response is well-structured, readable, and free of hallucinations. However, minor improvements could be made in formatting consistency and the addition of more nuanced discussions on real-world applications and common misconceptions. Overall, the response excels in accuracy, quality, and educational value, providing a clear and comprehensive explanation suitable for beginners and advanced learners alike.",
+  "candidate_token_usage": {
+    "promptTokens": 355,
+    "completionTokens": 927,
+    "totalTokens": 1282
+  },
+  "candidate_latency_ms": 15907,
+  "candidate_cost_usd": 0.002209,
+  "judge_token_usage": {
+    "promptTokens": 1657,
+    "completionTokens": 180,
+    "totalTokens": 1837
+  },
+  "judge_latency_ms": 5668,
+  "judge_cost_usd": 0.0014261999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:44:01.366Z"
+}

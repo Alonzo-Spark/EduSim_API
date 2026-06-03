@@ -1,0 +1,204 @@
+┌───────────────────────────┐  
+│      Introduction         │  
+│                           │  
+│ Momentum is a fundamental │  
+│ concept in physics that   │  
+│ describes the "quantity   │  
+│ of motion" an object has. │  
+│ It plays a central role   │  
+│ in analyzing collisions,│  
+│ explosions, and motion    │  
+│ in general.               │  
+└───────────────────────────┘  
+
+---
+
+┌───────────────────────────┐  
+│   Quick Definition        │  
+│                           │  
+│ **Momentum** is the product│  
+│ of an object's mass and   │  
+│ its velocity. It is a     │  
+│ vector quantity, meaning  │  
+│ it has both magnitude and │  
+│ direction.                │  
+└───────────────────────────┘  
+
+---
+
+$$
+\vec{p} = m \vec{v}
+$$
+
+<FormulaCard
+  formula="\vec{p} = m \vec{v}"
+  title="Momentum Formula"
+  description="The momentum of an object depends on its mass (m) and velocity (v). Since velocity is a vector, momentum is also a vector — it points in the same direction as the velocity."
+  variables={{
+    p: "Momentum (kg·m/s)",
+    m: "Mass (kg)",
+    v: "Velocity (m/s)"
+  }}
+  actions={["Explain Formula", "Open Formula Lab"]}
+/>
+
+---
+
+┌───────────────────────────┐  
+│   Key Concepts            │  
+│                           │  
+│ • Momentum increases with│  
+│   mass and speed.          │  
+│ • A heavy truck moving at│  
+│   the same speed as a bike │  
+│   has more momentum.       │  
+│ • Momentum is conserved  │  
+│   in isolated systems.     │  
+│ • Direction matters — a  │  
+│   ball moving left has    │  
+│   negative momentum if   │  
+│   right is positive.       │  
+└───────────────────────────┘  
+
+---
+
+### Derivation of the Law of Conservation of Momentum
+
+Consider two objects interacting — for example, colliding.
+
+Let:  
+- Object 1 have mass $ m_1 $, initial velocity $ u_1 $, final velocity $ v_1 $  
+- Object 2 have mass $ m_2 $, initial velocity $ u_2 $, final velocity $ v_2 $
+
+Assume they are isolated — no external forces act on them.
+
+During collision, by **Newton’s Third Law**:  
+The force $ F_{12} $ that object 1 exerts on object 2 is equal and opposite to the force $ F_{21} $ that object 2 exerts on object 1.
+
+$$
+F_{12} = -F_{21}
+$$
+
+<FormulaCard
+  formula="F_{12} = -F_{21}"
+  title="Newton's Third Law"
+  description="For every action, there is an equal and opposite reaction."
+  variables={{
+    F12: "Force on object 2 by object 1",
+    F21: "Force on object 1 by object 2"
+  }}
+  actions={["Explain Formula"]}
+/>
+
+Now, apply **Newton’s Second Law**:  
+Force = rate of change of momentum.
+
+For object 1:
+$$
+F_{21} = \frac{m_1 v_1 - m_1 u_1}{t}
+$$
+
+For object 2:
+$$
+F_{12} = \frac{m_2 v_2 - m_2 u_2}{t}
+$$
+
+But $ F_{12} = -F_{21} $, so:
+
+$$
+\frac{m_2 v_2 - m_2 u_2}{t} = -\frac{m_1 v_1 - m_1 u_1}{t}
+$$
+
+Multiply both sides by $ t $ (time of interaction):
+
+$$
+m_2 v_2 - m_2 u_2 = - (m_1 v_1 - m_1 u_1)
+$$
+
+Rearranging:
+
+$$
+m_1 u_1 + m_2 u_2 = m_1 v_1 + m_2 v_2
+$$
+
+<FormulaCard
+  formula="m_1 u_1 + m_2 u_2 = m_1 v_1 + m_2 v_2"
+  title="Conservation of Momentum"
+  description="The total momentum before the interaction equals the total momentum after — provided no external forces act on the system."
+  variables={{
+    "u₁, u₂": "Initial velocities",
+    "v₁, v₂": "Final velocities",
+    "m₁, m₂": "Masses of objects"
+  }}
+  actions={["Explain Formula", "Open Formula Lab"]}
+/>
+
+---
+
+┌───────────────────────────┐  
+│   Law of Conservation of  │  
+│      Momentum             │  
+│                           │  
+│ **In an isolated system,**│  
+│ **the total linear        │  
+│ momentum remains constant.**│  
+│                           │  
+│ This means:               │  
+│ Total momentum before =   │  
+│ Total momentum after      │  
+│ (for collisions,          │  
+│ explosions, or any        │  
+│ internal interaction).    │  
+└───────────────────────────┘  
+
+---
+
+### Characteristics
+
+| Feature | Description |
+|--------|-------------|
+| **Applies to** | Isolated systems (no net external force) |
+| **Vector Law** | Momentum conservation applies in each direction (x, y, z) |
+| **Independent of Energy** | Momentum is always conserved in isolated systems, but kinetic energy may not be |
+| **Universal** | Holds true in classical mechanics, relativity, and quantum physics |
+
+---
+
+### Applications
+
+- **Collisions**: Car crashes, billiard balls, particle physics  
+- **Recoil**: Gun kicks back when fired  
+- **Rocket Propulsion**: Rockets move forward by expelling gas backward  
+- **Sports**: Analyzing tackles in football, hits in baseball  
+
+---
+
+### Important Notes
+
+⚠️ **Momentum is conserved only when the net external force is zero.**  
+If friction, air resistance, or other forces act, momentum may not be conserved unless you include the environment (e.g., Earth).
+
+⚠️ **Direction matters!** Use positive/negative signs for opposite directions.
+
+⚠️ **Even when kinetic energy is lost (inelastic collision), momentum is still conserved.**
+
+---
+
+### Summary
+
+- Momentum: $ \vec{p} = m\vec{v} $  
+- It’s a vector and depends on mass and velocity  
+- Conservation arises from Newton’s Third Law and no external forces  
+- Total momentum before = Total momentum after  
+- A powerful tool for analyzing motion interactions
+
+---
+
+### Suggested Questions
+
+1. A 1000 kg car moving at 20 m/s collides with a stationary 1500 kg truck. If they stick together, what is their final velocity?  
+2. Why does a gun recoil when fired? Explain using conservation of momentum.  
+3. Is momentum conserved in an explosion? Why or why not?  
+4. How does rocket propulsion work in space where there’s nothing to “push against”?  
+
+[Practice Problems]  [Open Simulation]  [Ask a Tutor]

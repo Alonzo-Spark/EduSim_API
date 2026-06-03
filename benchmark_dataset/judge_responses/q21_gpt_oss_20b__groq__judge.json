@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 21,
+  "question": "Gravitation: State Newton’s law of gravitation.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's Law of Universal Gravitation states that every particle of matter in the universe attracts every other particle with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers.\n\n---\n\n## Characteristics\n\n* **Universal Action Range:** The attraction acts between all scale profiles, from small atomic fields up to massive galactic cluster structures.\n* **Inverse Square Law:** Doubling the distance separating two objects cuts their mutual gravitational pull down to one-fourth of its initial value.\n* **Central Force Property:** The force acts along the imaginary straight line connecting the centers of mass of the two interacting bodies.\n\n---\n\n## Formula\n\nThe gravitational force equation is written as:\n\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\nWhere:\n* $F$ represents the gravitational attraction force magnitude\n* $m_1, m_2$ represent the masses of the interacting bodies\n* $r$ represents the distance separating the mass centers\n* $G$ represents the Universal Gravitational Constant ($6.674 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$)\n\n---\n\n## Summary\n\nUniversal gravitation is a long-range mutual attraction force that links all matter, scaling up with mass density but dropping off sharply with distance.",
+  "candidate_response": "─────────────────────────────────────────────\n│ Definition                                 │\n│                                             │\n│ Newton’s law of gravitation states that     │\n│ every mass exerts an attractive force on    │\n│ every other mass proportional to the product│\n│ of their masses and inversely proportional │\n│ to the square of the distance between them. │\n─────────────────────────────────────────────\n\n─────────────────────────────────────────────\n│ Main Formula                               │\n│                                             │\n│     F = G \\frac{m_1 m_2}{r^2}               │\n│                                             │\n│ [ Explain Formula ]                         │\n│ [ Open Formula Lab ]                       │\n─────────────────────────────────────────────",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately captures the core concept of Newton's Law of Gravitation, including the definition and the main formula. However, it lacks the detailed explanation and characteristics of the law as presented in the gold reference answer, such as the universal action range, inverse square law, and central force property. The quality score is lower due to the unconventional layout formatting, which may hinder readability. The educational score is decent because the response still conveys the fundamental idea of the law, but it could be improved with additional explanations and examples to enhance pedagogical effectiveness. To improve, the candidate should expand on the definition with more details about the law's characteristics and provide a clearer, more structured presentation.",
+  "candidate_token_usage": {
+    "promptTokens": 429,
+    "completionTokens": 684,
+    "totalTokens": 1113
+  },
+  "candidate_latency_ms": 1870,
+  "candidate_cost_usd": 0.00023738,
+  "judge_token_usage": {
+    "promptTokens": 840,
+    "completionTokens": 200,
+    "totalTokens": 1040
+  },
+  "judge_latency_ms": 4938,
+  "judge_cost_usd": 0.000984,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:38:43.068Z"
+}

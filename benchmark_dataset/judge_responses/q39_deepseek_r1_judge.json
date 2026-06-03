@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 39,
+  "question": "Define wavelength, frequency, and amplitude of a wave.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWavelength, frequency, and amplitude are primary parameters used to quantify and describe the physical properties of wave propagation through space and time.\n\n---\n\n## Core Wave Metrics\n\n### 1. Wavelength ($\\lambda$)\nWavelength is the spatial distance between two consecutive points that are in the same phase of oscillation, such as the distance between two adjacent wave crests or troughs.\n\n### 2. Frequency ($f$)\nFrequency is the number of complete wave cycles or oscillations that pass a fixed reference point per unit of time, measured internationally in Hertz ($\\text{Hz}$).\n\n### 3. Amplitude ($A$)\nAmplitude is the maximum displacement of a medium's particles from their equilibrium position as a wave passes through.\n\n---\n\n## Formula\n\nThe wave speed equation linking these parameters is defined as:\n\n$$v = f\\lambda$$\n\nWhere:\n* $v$ represents the propagation velocity of the wave profile\n* $f$ represents the wave frequency\n* $\\lambda$ represents the wavelength value\n\n---\n\n## Summary\n\nWavelength measures a wave's spatial structure, frequency tracks its speed over time, and amplitude defines its energy intensity and displacement scale.",
+  "candidate_response": "### Wave Properties: Wavelength, Frequency, and Amplitude\n\nHere's a structured breakdown of these fundamental wave characteristics:\n\n---\n\n#### 📏 **Wavelength (λ)**  \n**Definition:**  \nThe distance between two consecutive **identical points** on a wave (e.g., crest-to-crest or trough-to-trough).  \n**Key Details:**  \n- Measured in **meters (m)**.  \n- Represents the **spatial period** of the wave.  \n- Determines wave color in light (e.g., red = long λ, blue = short λ).  \n**Visual:**  \n```plaintext\n    λ          λ\n~~~⭱~~~⭱~~~⭱~~~  (Crests marked with ⭱)\n```\n\n---\n\n#### 🔁 **Frequency (f)**  \n**Definition:**  \nThe number of **complete wave cycles** passing a fixed point per second.  \n**Key Details:**  \n- Measured in **Hertz (Hz)** (1 Hz = 1 cycle/second).  \n- Represents the **temporal period** of the wave.  \n- Determines pitch in sound (e.g., high f = high pitch).  \n**Formula:**  \n$$ f = \\frac{1}{T} $$  \nwhere \\(T\\) = time period (seconds per cycle).\n\n---\n\n#### 📈 **Amplitude (A)**  \n**Definition:**  \nThe **maximum displacement** of a wave particle from its equilibrium (rest) position.  \n**Key Details:**  \n- Measured in **meters (m)** for mechanical waves.  \n- Directly relates to wave **energy** (\\(E \\propto A^2\\)).  \n- Determines loudness in sound or brightness in light.  \n**Visual:**  \n```plaintext\nEquilibrium ────────────────\n           ▲     ▲\n           |A    |A\n           ▼     ▼\n```\n\n---\n\n### Relationship Between Wavelength and Frequency  \n**Core Formula:**  \n$$ v = f \\lambda $$  \nwhere:  \n- \\(v\\) = wave speed (m/s),  \n- \\(f\\) = frequency (Hz),  \n- \\(\\lambda\\) = wavelength (m).  \n\n**Key Implications:**  \n1. **Inverse Relationship:** For a fixed speed \\(v\\):  \n   - Higher \\(f\\) → Shorter \\(\\lambda\\)  \n   - Lower \\(f\\) → Longer \\(\\lambda\\)  \n   *(Example: Radio waves have long λ/low f; gamma rays have short λ/high f)*  \n\n2. **Medium Dependence:**  \n   - \\(v\\) is constant for a given medium (e.g., sound in air ≈ 343 m/s).  \n   - Changing medium alters \\(v\\), affecting λ and \\(f\\) proportionally.  \n\n---\n\n#### 🧪 Formula Lab: Wave Equation  \nExperiment with the wave equation:  \n$$ v = f \\lambda $$  \n\n| Variable | Role | Example Values |\n|----------|------|----------------|\n| \\(v\\)    | Wave speed | Light: \\(3 \\times 10^8\\) m/s<br>Sound (air): 343 m/s |\n| \\(f\\)    | Frequency | Human hearing: 20 Hz – 20 kHz |\n| \\(\\lambda\\) | Wavelength | Visible light: 400–700 nm |\n\n**Try it:**  \nIf \\(v = 340  \\text{m/s}\\) (sound) and \\(f = 1000  \\text{Hz}\\), then:  \n$$ \\lambda = \\frac{v}{f} = \\frac{340}{1000} = 0.34  \\text{m} $$\n\n---\n\n### 💎 Summary  \n| Property | Symbol | Unit | Physical Meaning |\n|----------|--------|------|------------------|\n| **Wavelength** | \\(\\lambda\\) | meters (m) | Distance between identical points |\n| **Frequency** | \\(f\\) | Hertz (Hz) | Cycles per second |\n| **Amplitude** | \\(A\\) | meters (m) | Maximum displacement from rest |\n\n**Energy Connection:**  \n- Amplitude \\(A\\) → Controls **intensity** (\\(I \\propto A^2\\)).  \n- Frequency \\(f\\) → Controls **energy per photon** (for light: \\(E = hf\\)).\n\n---\n\n#### ❓ Suggested Practice Questions  \n1. A wave has \\(\\lambda = 2  \\text{m}\\) and \\(v = 10  \\text{m/s}\\). Calculate its frequency.  \n2. If you double a wave’s amplitude, how does its energy change?  \n3. Why does sound travel faster in water than air? How does this affect λ and \\(f\\)?  \n\nLet me know if you’d like to solve these or explore further!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational value. It provides clear definitions, formulas, and examples for wavelength, frequency, and amplitude, aligning well with the gold reference answer. The structured breakdown, visuals, and practice questions enhance readability and pedagogical effectiveness. Minor suggestions for improvement include adding more detailed explanations for certain concepts, such as the relationship between wave speed, frequency, and wavelength in different mediums, and considering additional visual aids to illustrate complex ideas. Overall, the response is well-organized, informative, and suitable for educational purposes.",
+  "candidate_token_usage": {
+    "promptTokens": 362,
+    "completionTokens": 1237,
+    "totalTokens": 1599
+  },
+  "candidate_latency_ms": 55001,
+  "candidate_cost_usd": 0.00290813,
+  "judge_token_usage": {
+    "promptTokens": 1666,
+    "completionTokens": 175,
+    "totalTokens": 1841
+  },
+  "judge_latency_ms": 2736,
+  "judge_cost_usd": 0.0014196,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:28:09.836Z"
+}

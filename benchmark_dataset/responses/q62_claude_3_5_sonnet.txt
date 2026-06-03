@@ -1,0 +1,1481 @@
+I'll create a comprehensive runtime overlay system for the flying pendulum bob physics simulation.
+
+```tsx
+import { useState, useEffect, useRef, useCallback } from "react";
+
+// ============================================================
+// TYPE DEFINITIONS
+// ============================================================
+
+interface Vector2D {
+  x: number;
+  y: number;
+}
+
+interface PendulumState {
+  angle: number;
+  angularVelocity: number;
+  angularAcceleration: number;
+  length: number;
+  mass: number;
+  tension: number;
+  velocity: Vector2D;
+  position: Vector2D;
+  pivotPosition: Vector2D;
+  isFlying: boolean;
+  flightTime: number;
+  attachedObjectMass: number;
+  collisionVelocity: Vector2D;
+}
+
+interface FormulaData {
+  formula: string;
+  title: string;
+  context: string;
+  variables: Record<string, string>;
+}
+
+interface OverlayBlock {
+  type:
+    | "definition"
+    | "formula"
+    | "table"
+    | "note"
+    | "summary"
+    | "application"
+    | "characteristics";
+  title: string;
+  content?: string;
+  formulaData?: FormulaData;
+  tableData?: { headers: string[]; rows: string[][] };
+  highlight?: boolean;
+}
+
+// ============================================================
+// PHYSICS ENGINE
+// ============================================================
+
+const G = 9.81;
+const RAD = Math.PI / 180;
+
+function computePendulumPhysics(state: PendulumState): PendulumState {
+  const { angle, angularVelocity, length, mass, attachedObjectMass } = state;
+  const totalMass = mass + attachedObjectMass;
+  const alpha = -(G / length) * Math.sin(angle);
+  const omega = angularVelocity + alpha * 0.016;
+  const theta = angle + omega * 0.016;
+  const v = omega * length;
+  const vx = v * Math.cos(theta);
+  const vy = v * Math.sin(theta);
+  const tension = totalMass * ((v * v) / length + G * Math.cos(theta));
+  const px =
+    state.pivotPosition.x + length * Math.sin(theta) * 120;
+  const py =
+    state.pivotPosition.y + length * Math.cos(theta) * 120;
+  return {
+    ...state,
+    angle: theta,
+    angularVelocity: omega,
+    angularAcceleration: alpha,
+    tension,
+    velocity: { x: vx, y: vy },
+    position: { x: px, y: py },
+  };
+}
+
+// ============================================================
+// FORMULA CARD
+// ============================================================
+
+function FormulaCard({ data, live }: { data: FormulaData; live?: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const [labOpen, setLabOpen] = useState(false);
+
+  return (
+    <div className="formula-card">
+      <div className="formula-card-header">
+        <span className="formula-badge">∑</span>
+        <span className="formula-title">{data.title}</span>
+      </div>
+
+      <div className="formula-display">
+        <div className="katex-render">{data.formula}</div>
+        {live && (
+          <div className="live-value">
+            <span className="live-dot" />
+            <span>{live}</span>
+          </div>
+        )}
+      </div>
+
+      <div className="formula-actions">
+        <button
+          className="formula-btn"
+          onClick={() => setExpanded(!expanded)}
+        >
+          {expanded ? "▲ Hide" : "▼ Explain Formula"}
+        </button>
+        <button
+          className="formula-btn accent"
+          onClick={() => setLabOpen(!labOpen)}
+        >
+          ⚗ Formula Lab
+        </button>
+      </div>
+
+      {expanded && (
+        <div className="formula-explain">
+          <p className="context-text">{data.context}</p>
+          <div className="variable-grid">
+            {Object.entries(data.variables).map(([k, v]) => (
+              <div key={k} className="variable-row">
+                <span className="var-symbol">{k}</span>
+                <span className="var-desc">{v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {labOpen && <FormulaLab data={data} />}
+    </div>
+  );
+}
+
+// ============================================================
+// FORMULA LAB
+// ============================================================
+
+function FormulaLab({ data }: { data: FormulaData }) {
+  const [inputs, setInputs] = useState<Record<string, number>>({
+    m1: 2.0,
+    m2: 0.5,
+    v0: 4.2,
+    L: 1.5,
+  });
+
+  const momentum = inputs.m1 * inputs.v0;
+  const vFinal = momentum / (inputs.m1 + inputs.m2);
+  const ke_before = 0.5 * inputs.m1 * inputs.v0 ** 2;
+  const ke_after = 0.5 * (inputs.m1 + inputs.m2) * vFinal ** 2;
+  const keLost = ke_before - ke_after;
+  const maxAngle =
+    (Math.acos(1 - (vFinal ** 2) / (2 * G * inputs.L)) * 180) / Math.PI;
+
+  return (
+    <div className="lab-panel">
+      <div className="lab-header">
+        <span>⚗</span>
+        <span>Formula Lab — Collision Dynamics</span>
+      </div>
+
+      <div className="lab-inputs">
+        {[
+          { key: "m1", label: "Bob Mass (kg)", min: 0.1, max: 10, step: 0.1 },
+          {
+            key: "m2",
+            label: "Object Mass (kg)",
+            min: 0.1,
+            max: 10,
+            step: 0.1,
+          },
+          {
+            key: "v0",
+            label: "Impact Velocity (m/s)",
+            min: 0.1,
+            max: 20,
+            step: 0.1,
+          },
+          { key: "L", label: "String Length (m)", min: 0.5, max: 5, step: 0.1 },
+        ].map(({ key, label, min, max, step }) => (
+          <div key={key} className="lab-input-row">
+            <label>{label}</label>
+            <input
+              type="range"
+              min={min}
+              max={max}
+              step={step}
+              value={inputs[key]}
+              onChange={(e) =>
+                setInputs((p) => ({ ...p, [key]: parseFloat(e.target.value) }))
+              }
+            />
+            <span className="lab-value">{inputs[key].toFixed(2)}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="lab-results">
+        <div className="lab-result-row">
+          <span>Final Velocity</span>
+          <span className="result-val">{vFinal.toFixed(3)} m/s</span>
+        </div>
+        <div className="lab-result-row">
+          <span>KE Before</span>
+          <span className="result-val">{ke_before.toFixed(3)} J</span>
+        </div>
+        <div className="lab-result-row">
+          <span>KE After</span>
+          <span className="result-val">{ke_after.toFixed(3)} J</span>
+        </div>
+        <div className="lab-result-row highlight">
+          <span>KE Lost (Heat/Sound)</span>
+          <span className="result-val">{keLost.toFixed(3)} J</span>
+        </div>
+        <div className="lab-result-row highlight">
+          <span>Max Swing Angle</span>
+          <span className="result-val">
+            {isNaN(maxAngle) ? "—" : maxAngle.toFixed(1) + "°"}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// TABLE CARD
+// ============================================================
+
+function TableCard({
+  title,
+  headers,
+  rows,
+}: {
+  title: string;
+  headers: string[];
+  rows: string[][];
+}) {
+  return (
+    <div className="table-card">
+      <div className="table-card-header">{title}</div>
+      <div className="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              {headers.map((h) => (
+                <th key={h}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i}>
+                {row.map((cell, j) => (
+                  <td key={j}>{cell}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// SECTION CARD
+// ============================================================
+
+function SectionCard({
+  block,
+  liveState,
+}: {
+  block: OverlayBlock;
+  liveState?: PendulumState;
+}) {
+  const iconMap: Record<string, string> = {
+    definition: "📖",
+    formula: "∑",
+    table: "📊",
+    note: "⚠",
+    summary: "✦",
+    application: "🔬",
+    characteristics: "⚙",
+  };
+
+  if (block.type === "formula" && block.formulaData) {
+    const liveValue =
+      liveState && block.formulaData.title.includes("Momentum")
+        ? `p = ${(liveState.mass * Math.hypot(liveState.velocity.x, liveState.velocity.y)).toFixed(2)} kg·m/s`
+        : liveState && block.formulaData.title.includes("Tension")
+        ? `T = ${liveState.tension.toFixed(2)} N`
+        : undefined;
+
+    return <FormulaCard data={block.formulaData} live={liveValue} />;
+  }
+
+  if (block.type === "table" && block.tableData) {
+    return (
+      <TableCard
+        title={block.title}
+        headers={block.tableData.headers}
+        rows={block.tableData.rows}
+      />
+    );
+  }
+
+  return (
+    <div className={`section-card ${block.highlight ? "highlighted" : ""} ${block.type}`}>
+      <div className="section-card-header">
+        <span className="section-icon">{iconMap[block.type] || "•"}</span>
+        <span className="section-title">{block.title}</span>
+      </div>
+      <div className="section-body">
+        <p>{block.content}</p>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// LIVE TELEMETRY PANEL
+// ============================================================
+
+function LiveTelemetry({ state }: { state: PendulumState }) {
+  const speed = Math.hypot(state.velocity.x, state.velocity.y);
+  const angleDeg = (state.angle * 180) / Math.PI;
+
+  const metrics = [
+    { label: "Angle", value: angleDeg.toFixed(1), unit: "°", color: "#60a5fa" },
+    {
+      label: "Angular Vel",
+      value: state.angularVelocity.toFixed(3),
+      unit: "rad/s",
+      color: "#34d399",
+    },
+    { label: "Speed", value: speed.toFixed(2), unit: "m/s", color: "#f59e0b" },
+    { label: "Tension", value: state.tension.toFixed(1), unit: "N", color: "#f87171" },
+    {
+      label: "Flight Time",
+      value: state.flightTime.toFixed(2),
+      unit: "s",
+      color: "#a78bfa",
+    },
+    {
+      label: "Total Mass",
+      value: (state.mass + state.attachedObjectMass).toFixed(2),
+      unit: "kg",
+      color: "#fb923c",
+    },
+  ];
+
+  return (
+    <div className="telemetry-panel">
+      <div className="telemetry-header">
+        <span className="live-dot" />
+        <span>Live Telemetry</span>
+        <span className="event-badge">object_attached</span>
+      </div>
+      <div className="telemetry-grid">
+        {metrics.map((m) => (
+          <div key={m.label} className="telemetry-metric">
+            <span className="metric-label">{m.label}</span>
+            <span className="metric-value" style={{ color: m.color }}>
+              {m.value}
+              <span className="metric-unit">{m.unit}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// PENDULUM CANVAS
+// ============================================================
+
+function PendulumCanvas({ state }: { state: PendulumState }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const W = canvas.width;
+    const H = canvas.height;
+    const px = W / 2;
+    const py = 60;
+    const L = state.length * 100;
+    const bx = px + L * Math.sin(state.angle);
+    const by = py + L * Math.cos(state.angle);
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Background grid
+    ctx.strokeStyle = "rgba(255,255,255,0.04)";
+    ctx.lineWidth = 1;
+    for (let gx = 0; gx < W; gx += 30) {
+      ctx.beginPath();
+      ctx.moveTo(gx, 0);
+      ctx.lineTo(gx, H);
+      ctx.stroke();
+    }
+    for (let gy = 0; gy < H; gy += 30) {
+      ctx.beginPath();
+      ctx.moveTo(0, gy);
+      ctx.lineTo(W, gy);
+      ctx.stroke();
+    }
+
+    // Pivot
+    ctx.beginPath();
+    ctx.arc(px, py, 8, 0, Math.PI * 2);
+    ctx.fillStyle = "#94a3b8";
+    ctx.fill();
+
+    // String
+    const grad = ctx.createLinearGradient(px, py, bx, by);
+    grad.addColorStop(0, "#60a5fa");
+    grad.addColorStop(1, "#a78bfa");
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(bx, by);
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    // Bob glow
+    const glow = ctx.createRadialGradient(bx, by, 0, bx, by, 28);
+    glow.addColorStop(0, "rgba(251, 146, 60, 0.4)");
+    glow.addColorStop(1, "rgba(251, 146, 60, 0)");
+    ctx.beginPath();
+    ctx.arc(bx, by, 28, 0, Math.PI * 2);
+    ctx.fillStyle = glow;
+    ctx.fill();
+
+    // Bob
+    ctx.beginPath();
+    ctx.arc(bx, by, 14, 0, Math.PI * 2);
+    const bobGrad = ctx.createRadialGradient(bx - 4, by - 4, 2, bx, by, 14);
+    bobGrad.addColorStop(0, "#fbbf24");
+    bobGrad.addColorStop(1, "#f97316");
+    ctx.fillStyle = bobGrad;
+    ctx.fill();
+    ctx.strokeStyle = "#fff3";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Attached object
+    if (state.attachedObjectMass > 0) {
+      const ox = bx + 20;
+      const oy = by - 10;
+      ctx.beginPath();
+      ctx.rect(ox - 10, oy - 10, 20, 20);
+      ctx.fillStyle = "#34d399";
+      ctx.fill();
+      ctx.strokeStyle = "#fff3";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Attachment line
+      ctx.beginPath();
+      ctx.moveTo(bx + 14, by);
+      ctx.lineTo(ox - 10, oy);
+      ctx.strokeStyle = "#34d39988";
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 3]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Velocity vector
+    const spd = Math.hypot(state.velocity.x, state.velocity.y);
+    if (spd > 0.01) {
+      const scale = 12;
+      const vx = (state.velocity.x / spd) * scale * spd;
+      const vy = (state.velocity.y / spd) * scale * spd;
+      ctx.beginPath();
+      ctx.moveTo(bx, by);
+      ctx.lineTo(bx + vx, by + vy);
+      ctx.strokeStyle = "#60a5fa";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Arrow head
+      const angle = Math.atan2(vy, vx);
+      ctx.beginPath();
+      ctx.moveTo(bx + vx, by + vy);
+      ctx.lineTo(
+        bx + vx - 8 * Math.cos(angle - 0.4),
+        by + vy - 8 * Math.sin(angle - 0.4)
+      );
+      ctx.lineTo(
+        bx + vx - 8 * Math.cos(angle + 0.4),
+        by + vy - 8 * Math.sin(angle + 0.4)
+      );
+      ctx.closePath();
+      ctx.fillStyle = "#60a5fa";
+      ctx.fill();
+    }
+
+    // Labels
+    ctx.font = "11px monospace";
+    ctx.fillStyle = "#94a3b8";
+    ctx.fillText(`θ = ${((state.angle * 180) / Math.PI).toFixed(1)}°`, px + 12, py + 16);
+    ctx.fillText(`v = ${spd.toFixed(2)} m/s`, bx + 18, by - 18);
+  }, [state]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={320}
+      height={260}
+      className="pendulum-canvas"
+    />
+  );
+}
+
+// ============================================================
+// MAIN OVERLAY COMPONENT
+// ============================================================
+
+export default function SandboxOverlay() {
+  const [pendulumState, setPendulumState] = useState<PendulumState>({
+    angle: 35 * RAD,
+    angularVelocity: 0,
+    angularAcceleration: 0,
+    length: 1.5,
+    mass: 2.0,
+    tension: 0,
+    velocity: { x: 0, y: 0 },
+    position: { x: 160, y: 160 },
+    pivotPosition: { x: 160, y: 60 },
+    isFlying: true,
+    flightTime: 1.24,
+    attachedObjectMass: 0.5,
+    collisionVelocity: { x: 4.2, y: 0 },
+  });
+
+  const animRef = useRef<number>();
+  const [running, setRunning] = useState(true);
+  const [activeTab, setActiveTab] = useState<"physics" | "collision" | "energy">("physics");
+
+  const tick = useCallback(() => {
+    setPendulumState((prev) =>
+      computePendulumPhysics({
+        ...prev,
+        flightTime: prev.flightTime + 0.016,
+      })
+    );
+    animRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  useEffect(() => {
+    if (running) {
+      animRef.current = requestAnimationFrame(tick);
+    } else {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+    }
+    return () => {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+    };
+  }, [running, tick]);
+
+  // ============================================================
+  // CONTENT BLOCKS
+  // ============================================================
+
+  const tabContent: Record<string, OverlayBlock[]> = {
+    physics: [
+      {
+        type: "definition",
+        title: "Event: object_attached",
+        content:
+          "A flying pendulum bob has captured an external object mid-swing. The system mass increases instantaneously. This is a perfectly inelastic collision — momentum is conserved but kinetic energy is not.",
+        highlight: true,
+      },
+      {
+        type: "formula",
+        title: "Conservation of Momentum",
+        formulaData: {
+          formula: "m₁v₁ = (m₁ + m₂)v_f",
+          title: "Conservation of Momentum",
+          context:
+            "At the moment of attachment, the total momentum of the system is conserved. The bob (m₁) traveling at v₁ captures the object (m₂) at rest. The combined system moves at a reduced velocity v_f.",
+          variables: {
+            m₁: "Mass of pendulum bob (kg)",
+            m₂: "Mass of attached object (kg)",
+            v₁: "Bob velocity before collision (m/s)",
+            v_f: "Combined velocity after collision (m/s)",
+          },
+        },
+      },
+      {
+        type: "formula",
+        title: "String Tension",
+        formulaData: {
+          formula: "T = (m₁+m₂)(v²/L + g·cos θ)",
+          title: "String Tension",
+          context:
+            "After attachment, the increased total mass raises the centripetal force demand. The string tension spikes immediately upon capture — this is the critical failure point for the string.",
+          variables: {
+            T: "String tension (N)",
+            v: "Tangential speed (m/s)",
+            L: "String length (m)",
+            g: "Gravitational acceleration = 9.81 m/s²",
+            θ: "Angle from vertical (rad)",
+          },
+        },
+      },
+      {
+        type: "note",
+        title: "⚠ Tension Spike Warning",
+        content:
+          "The tension in the string increases immediately after object attachment due to the added mass. If T exceeds the string's tensile strength, the system detaches. Monitor the Live Telemetry panel for real-time tension readings.",
+        highlight: true,
+      },
+    ],
+    collision: [
+      {
+        type: "characteristics",
+        title: "Collision Classification",
+        content:
+          "This event is a perfectly inelastic collision. The bob and object stick together, moving as one body. This is the maximum possible kinetic energy loss scenario for a given momentum.",
+      },
+      {
+        type: "formula",
+        title: "Post-Collision Velocity",
+        formulaData: {
+          formula: "v_f = (m₁v₁) / (m₁ + m₂)",
+          title: "Post-Collision Velocity",
+          context:
+            "Derived directly from conservation of momentum. The final velocity is always less than the initial velocity of the bob, scaled by the mass ratio.",
+          variables: {
+            v_f: "Final combined velocity (m/s)",
+            m₁: "Bob mass (kg)",
+            v₁: "Initial bob velocity (m/s)",
+            m₂: "Attached object mass (kg)",
+          },
+        },
+      },
+      {
+        type: "formula",
+        title: "Kinetic Energy Lost",
+        formulaData: {
+          formula: "ΔKE = ½m₁v₁² − ½(m₁+m₂)v_f²",
+          title: "Kinetic Energy Lost",
+          context:
+            "The energy lost appears as heat, sound, and deformation during the collision. This quantity is always positive for an inelastic collision and represents the inelasticity of the event.",
+          variables: {
+            ΔKE: "Kinetic energy dissipated (J)",
+            m₁: "Bob mass (kg)",
+            v₁: "Initial bob speed (m/s)",
+            m₂: "Attached object mass (kg)",
+            v_f: "Final combined speed (m/s)",
+          },
+        },
+      },
+      {
+        type: "table",
+        title: "Collision Type Comparison",
+        tableData: {
+          headers: ["Property", "Elastic", "Inelastic", "Perfectly Inelastic"],
+          rows: [
+            ["Momentum", "Conserved", "Conserved", "Conserved"],
+            ["Kinetic Energy", "Conserved", "Partially Lost", "Maximum Loss"],
+            ["Objects", "Separate", "Separate", "Stick Together"],
+            ["This Event?", "✗", "✗", "✓"],
+          ],
+        },
+      },
+    ],
+    energy: [
+      {
+        type: "formula",
+        title: "Maximum Swing Height",
+        formulaData: {
+          formula: "h = v_f² / (2g)",
+          title: "Maximum Swing Height",
+          context:
+            "After the collision, the combined system converts kinetic energy into gravitational potential energy. The maximum height reached determines the swing amplitude.",
+          variables: {
+            h: "Maximum height above lowest point (m)",
+            v_f: "Post-collision velocity (m/s)",
+            g: "Gravitational acceleration = 9.81 m/s²",
+          },
+        },
+      },
+      {
+        type: "formula",
+        title: "Maximum Swing Angle",
+        formulaData: {
+          formula: "θ_max = arccos(1 − v_f²/2gL)",
+          title: "Maximum Swing Angle",
+          context:
+            "The maximum angle the pendulum reaches after the collision, derived from energy conservation between the lowest point and the maximum height.",
+          variables: {
+            θ_max: "Maximum angle from vertical (rad)",
+            v_f: "Post-collision velocity (m/s)",
+            g: "Gravitational acceleration (m/s²)",
+            L: "String length (m)",
+          },
+        },
+      },
+      {
+        type: "application",
+        title: "Real-World Application: Ballistic Pendulum",
+        content:
+          "This exact physics underpins the ballistic pendulum — a classic device used to measure bullet velocity. A bullet embeds in a suspended block (perfectly inelastic collision), and the swing height reveals the bullet's initial speed through reverse momentum-energy analysis.",
+      },
+      {
+        type: "summary",
+        title: "Energy Flow Summary",
+        content:
+          "Bullet KE → Momentum transfer → Combined KE (reduced) → Gravitational PE at max height. The energy lost to heat and deformation during impact is the difference between initial and final kinetic energies.",
+      },
+    ],
+  };
+
+  const m1 = pendulumState.mass;
+  const m2 = pendulumState.attachedObjectMass;
+  const v0 = Math.hypot(
+    pendulumState.collisionVelocity.x,
+    pendulumState.collisionVelocity.y
+  );
+  const vf = (m1 * v0) / (m1 + m2);
+  const keBefore = 0.5 * m1 * v0 ** 2;
+  const keAfter = 0.5 * (m1 + m2) * vf ** 2;
+
+  return (
+    <>
+      <style>{`
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+          background: #0a0f1e;
+          font-family: 'Inter', system-ui, sans-serif;
+          color: #e2e8f0;
+        }
+
+        .overlay-root {
+          min-height: 100vh;
+          background: linear-gradient(135deg, #0a0f1e 0%, #0f172a 50%, #0a0f1e 100%);
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        /* ── HEADER ── */
+        .overlay-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 14px 20px;
+          background: rgba(15, 23, 42, 0.9);
+          border: 1px solid rgba(96, 165, 250, 0.2);
+          border-radius: 12px;
+          backdrop-filter: blur(12px);
+        }
+
+        .header-left {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .event-chip {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 4px 12px;
+          background: rgba(251, 146, 60, 0.15);
+          border: 1px solid rgba(251, 146, 60, 0.4);
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #fb923c;
+          letter-spacing: 0.5px;
+        }
+
+        .pulse-dot {
+          width: 7px;
+          height: 7px;
+          background: #fb923c;
+          border-radius: 50%;
+          animation: pulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        .header-title {
+          font-size: 18px;
+          font-weight: 700;
+          color: #f1f5f9;
+          letter-spacing: -0.3px;
+        }
+
+        .header-sub {
+          font-size: 12px;
+          color: #64748b;
+          margin-top: 2px;
+        }
+
+        .sim-controls {
+          display: flex;
+          gap: 8px;
+        }
+
+        .ctrl-btn {
+          padding: 7px 16px;
+          border-radius: 8px;
+          border: 1px solid rgba(255,255,255,0.1);
+          background: rgba(255,255,255,0.05);
+          color: #e2e8f0;
+          font-size: 13px;
+          cursor: pointer;
+          transition: all 0.15s;
+        }
+
+        .ctrl-btn:hover {
+          background: rgba(255,255,255,0.1);
+          border-color: rgba(96,165,250,0.4);
+        }
+
+        .ctrl-btn.active {
+          background: rgba(96, 165, 250, 0.15);
+          border-color: rgba(96, 165, 250, 0.5);
+          color: #60a5fa;
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .main-layout {
+          display: grid;
+          grid-template-columns: 340px 1fr;
+          gap: 16px;
+          align-items: start;
+        }
+
+        /* ── LEFT PANEL ── */
+        .left-panel {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        .pendulum-canvas {
+          width: 100%;
+          border-radius: 12px;
+          background: rgba(15, 23, 42, 0.8);
+          border: 1px solid rgba(255,255,255,0.07);
+          display: block;
+        }
+
+        /* ── TELEMETRY ── */
+        .telemetry-panel {
+          background: rgba(15, 23, 42, 0.9);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        .telemetry-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 14px;
+          background: rgba(251, 146, 60, 0.08);
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          font-size: 12px;
+          font-weight: 600;
+          color: #94a3b8;
+          letter-spacing: 0.5px;
+        }
+
+        .live-dot {
+          width: 6px;
+          height: 6px;
+          background: #4ade80;
+          border-radius: 50%;
+          animation: pulse 1s infinite;
+          flex-shrink: 0;
+        }
+
+        .event-badge {
+          margin-left: auto;
+          padding: 2px 8px;
+          background: rgba(251, 146, 60, 0.15);
+          border: 1px solid rgba(251, 146, 60, 0.3);
+          border-radius: 10px;
+          font-size: 10px;
+          color: #fb923c;
+        }
+
+        .telemetry-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1px;
+          background: rgba(255,255,255,0.04);
+        }
+
+        .telemetry-metric {
+          padding: 10px 14px;
+          background: rgba(15, 23, 42, 0.9);
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .metric-label {
+          font-size: 10px;
+          color: #475569;
+          text-transform: uppercase;
+          letter-spacing: 0.8px;
+        }
+
+        .metric-value {
+          font-size: 16px;
+          font-weight: 700;
+          font-variant-numeric: tabular-nums;
+        }
+
+        .metric-unit {
+          font-size: 11px;
+          font-weight: 400;
+          opacity: 0.6;
+          margin-left: 3px;
+        }
+
+        /* ── COLLISION SUMMARY ── */
+        .collision-summary {
+          background: rgba(15, 23, 42, 0.9);
+          border: 1px solid rgba(52, 211, 153, 0.2);
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        .cs-header {
+          padding: 10px 14px;
+          background: rgba(52, 211, 153, 0.06);
+          border-bottom: 1px solid rgba(52, 211, 153, 0.1);
+          font-size: 11px;
+          font-weight: 700;
+          color: #34d399;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
+        }
+
+        .cs-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 8px 14px;
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+          font-size: 13px;
+        }
+
+        .cs-row:last-child { border-bottom: none; }
+        .cs-label { color: #64748b; }
+        .cs-value { font-weight: 600; font-variant-numeric: tabular-nums; }
+        .cs-value.green { color: #34d399; }
+        .cs-value.red { color: #f87171; }
+        .cs-value.blue { color: #60a5fa; }
+        .cs-value.amber { color: #fbbf24; }
+
+        /* ── RIGHT PANEL ── */
+        .right-panel {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        /* ── TABS ── */
+        .tab-bar {
+          display: flex;
+          gap: 4px;
+          padding: 4px;
+          background: rgba(15, 23, 42, 0.8);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 10px;
+        }
+
+        .tab-btn {
+          flex: 1;
+          padding: 8px;
+          border-radius: 7px;
+          border: none;
+          background: transparent;
+          color: #64748b;
+          font-size: 13px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.15s;
+        }
+
+        .tab-btn:hover { color: #94a3b8; }
+
+        .tab-btn.active {
+          background: rgba(96, 165, 250, 0.12);
+          color: #60a5fa;
+          font-weight: 600;
+        }
+
+        /* ── SECTION CARD ── */
+        .section-card {
+          background: rgba(15, 23, 42, 0.85);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 12px;
+          overflow: hidden;
+          transition: border-color 0.2s;
+        }
+
+        .section-card.highlighted {
+          border-color: rgba(251, 146, 60, 0.35);
+          background: rgba(251, 146, 60, 0.04);
+        }
+
+        .section-card.note.highlighted {
+          border-color: rgba(248, 113, 113, 0.4);
+          background: rgba(248, 113, 113, 0.04);
+        }
+
+        .section-card-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 11px 16px;
+          border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .section-icon { font-size: 14px; }
+
+        .section-title {
+          font-size: 13px;
+          font-weight: 700;
+          color: #cbd5e1;
+          letter-spacing: 0.2px;
+        }
+
+        .section-body {
+          padding: 14px 16px;
+        }
+
+        .section-body p {
+          font-size: 14px;
+          line-height: 1.7;
+          color: #94a3b8;
+        }
+
+        /* ── FORMULA CARD ── */
+        .formula-card {
+          background: rgba(15, 23, 42, 0.9);
+          border: 1px solid rgba(96, 165, 250, 0.2);
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        .formula-card-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 16px;
+          background: rgba(96, 165, 250, 0.06);
+          border-bottom: 1px solid rgba(96, 165, 250, 0.1);
+        }
+
+        .formula-badge {
+          width: 22px;
+          height: 22px;
+          background: rgba(96, 165, 250, 0.15);
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          color: #60a5fa;
+          font-weight: 700;
+        }
+
+        .formula-title {
+          font-size: 13px;
+          font-weight: 700;
+          color: #93c5fd;
+        }
+
+        .formula-display {
+          padding: 20px 16px 14px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+        }
+
+        .katex-render {
+          font-size: 20px;
+          font-family: 'Georgia', 'Times New Roman', serif;
+          color: #f1f5f9;
+          font-style: italic;
+          letter-spacing: 1px;
+        }
+
+        .live-value {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 4px 10px;
+          background: rgba(74, 222, 128, 0.1);
+          border: 1px solid rgba(74, 222, 128, 0.2);
+          border-radius: 8px;
+          font-size: 11px;
+          color: #4ade80;
+          font-weight: 600;
+          white-space: nowrap;
+          font-style: normal;
+          font-family: monospace;
+        }
+
+        .formula-actions {
+          display: flex;
+          gap: 8px;
+          padding: 0 16px 14px;
+        }
+
+        .formula-btn {
+          padding: 6px 14px;
+          border-radius: 7px;
+          border: 1px solid rgba(255,255,255,0.1);
+          background: rgba(255,255,255,0.04);
+          color: #94a3b8;
+          font-size: 12px;
+          cursor: pointer;
+          transition: all 0.15s;
+        }
+
+        .formula-btn:hover {
+          background: rgba(255,255,255,0.08);
+          color: #e2e8f0;
+        }
+
+        .formula-btn.accent {
+          border-color: rgba(167, 139, 250, 0.3);
+          color: #a78bfa;
+          background: rgba(167, 139, 250, 0.06);
+        }
+
+        .formula-btn.accent:hover {
+          background: rgba(167, 139, 250, 0.12);
+        }
+
+        .formula-explain {
+          padding: 14px 16px;
+          border-top: 1px solid rgba(255,255,255,0.06);
+          background: rgba(0,0,0,0.2);
+        }
+
+        .context-text {
+          font-size: 13px;
+          line-height: 1.65;
+          color: #94a3b8;
+          margin-bottom: 12px;
+        }
+
+        .variable-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        }
+
+        .variable-row {
+          display: flex;
+          align-items: baseline;
+          gap: 10px;
+          padding: 5px 10px;
+          background: rgba(255,255,255,0.03);
+          border-radius: 6px;
+        }
+
+        .var-symbol {
+          font-family: 'Georgia', serif;
+          font-style: italic;
+          font-size: 14px;
+          color: #60a5fa;
+          min-width: 32px;
+        }
+
+        .var-desc {
+          font-size: 12px;
+          color: #64748b;
+        }
+
+        /* ── LAB PANEL ── */
+        .lab-panel {
+          margin: 0 16px 14px;
+          background: rgba(167, 139, 250, 0.06);
+          border: 1px solid rgba(167, 139, 250, 0.2);
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        .lab-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 9px 14px;
+          background: rgba(167, 139, 250, 0.08);
+          border-bottom: 1px solid rgba(167, 139, 250, 0.15);
+          font-size: 12px;
+          font-weight: 700;
+          color: #a78bfa;
+          letter-spacing: 0.3px;
+        }
+
+        .lab-inputs {
+          padding: 12px 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .lab-input-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .lab-input-row label {
+          font-size: 11px;
+          color: #64748b;
+          min-width: 140px;
+        }
+
+        .lab-input-row input[type=range] {
+          flex: 1;
+          accent-color: #a78bfa;
+          height: 4px;
+        }
+
+        .lab-value {
+          font-size: 12px;
+          font-weight: 600;
+          color: #c4b5fd;
+          min-width: 38px;
+          text-align: right;
+          font-variant-numeric: tabular-nums;
+        }
+
+        .lab-results {
+          border-top: 1px solid rgba(167, 139, 250, 0.1);
+          padding: 10px 14px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .lab-result-row {
+          display: flex;
+          justify-content: space-between;
+          padding: 5px 8px;
+          border-radius: 6px;
+          font-size: 12px;
+          color: #64748b;
+        }
+
+        .lab-result-row.highlight {
+          background: rgba(167, 139, 250, 0.08);
+          color: #94a3b8;
+        }
+
+        .result-val {
+          font-weight: 700;
+          color: #c4b5fd;
+          font-variant-numeric: tabular-nums;
+        }
+
+        /* ── TABLE CARD ── */
+        .table-card {
+          background: rgba(15, 23, 42, 0.9);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 12px;
+          overflow: hidden;
+        }
+
+        .table-card-header {
+          padding: 10px 16px;
+          font-size: 12px;
+          font-weight: 700;
+          color: #94a3b8;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+          background: rgba(255,255,255,0.02);
+        }
+
+        .table-scroll {
+          overflow-x: auto;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 13px;
+        }
+
+        thead tr {
+          background: rgba(96, 165, 250, 0.06);
+        }
+
+        th {
+          padding: 9px 14px;
+          text-align: left;
+          font-size: 11px;
+          font-weight: 700;
+          color: #60a5fa;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        td {
+          padding: 9px 14px;
+          color: #94a3b8;
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        tr:hover td {
+          background: rgba(255,255,255,0.02);
+          color: #cbd5e1;
+        }
+      `}</style>
+
+      <div className="overlay-root">
+        {/* HEADER */}
+        <div className="overlay-header">
+          <div className="header-left">
+            <div className="event-chip">
+              <div className="pulse-dot" />
+              object_attached
+            </div>
+            <div>
+              <div className="header-title">Flying Pendulum Bob — Collision Overlay</div>
+              <div className="header-sub">
+                Runtime physics analysis · Perfectly inelastic collision detected
+              </div>
+            </div>
+          </div>
+          <div className="sim-controls">
+            <button
+              className={`ctrl-btn ${running ? "active" : ""}`}
+              onClick={() => setRunning(!running)}
+            >
+              {running ? "⏸ Pause" : "▶ Resume"}
+            </button>
+            <button
+              className="ctrl-btn"
+              onClick={() =>
+                setPendulumState((p) => ({
+                  ...p,
+                  angle: 35 * RAD,
+                  angularVelocity: 0,
+                  flightTime: 0,
+                }))
+              }
+            >
+              ↺ Reset
+            </button>
+          </div>
+        </div>
+
+        {/* MAIN */}
+        <div className="main-layout">
+          {/* LEFT */}
+          <div className="left-panel">
+            <PendulumCanvas state={pendulumState} />
+            <LiveTelemetry state={pendulumState} />
+
+            {/* Collision Summary */}
+            <div className="collision-summary">
+              <div className="cs-header">⚡ Collision Snapshot</div>
+              <div className="cs-row">
+                <span className="cs-label">Bob Mass</span>
+                <span className="cs-value blue">{m1.toFixed(2)} kg</span>
+              </div>
+              <div className="cs-row">
+                <span className="cs-label">Attached Mass</span>
+                <span className="cs-value green">{m2.toFixed(2)} kg</span>
+              </div>
+              <div className="cs-row">
+                <span className="cs-label">Impact Velocity</span>
+                <span className="cs-value amber">{v0.toFixed(2)} m/s</span>
+              </div>
+              <div className="cs-row">
+                <span className="cs-label">Post-Collision v</span>
+                <span className="cs-value blue">{vf.toFixed(3)} m/s</span>
+              </div>
+              <div className="cs-row">
+                <span className="cs-label">KE Before</span>
+                <span className="cs-value amber">{keBefore.toFixed(2)} J</span>
+              </div>
+              <div className="cs-row">
+                <span className="cs-label">KE After</span>
+                <span className="cs-value green">{keAfter.toFixed(2)} J</span>
+              </div>
+              <div className="cs-row">
+                <span className="cs-label">KE Lost</span>
+                <span className="cs-value red">{(keBefore - keAfter).toFixed(2)} J</span>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT */}
+          <div className="right-panel">
+            <div className="tab-bar">
+              {(["physics", "collision", "energy"] as const).map((tab) => (
+                <button
+                  key={tab}
+                  className={`tab-btn ${activeTab === tab ? "active" : ""}`}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab === "physics"
+                    ? "⚛ Physics"
+                    : tab === "collision"
+                    ? "💥 Collision"
+                    : "⚡ Energy"}
+                </button>
+              ))}
+            </div>
+
+            {tabContent[activeTab].map((block, i) => (
+              <SectionCard key={i} block={block} liveState={pendulumState} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+```
+
+---
+
+## What This Builds
+
+### Runtime Architecture
+
+| Layer | Role |
+|---|---|
+| **Physics Engine** | 60fps pendulum simulation with post-collision state |
+| **Event Handler** | `object_attached` triggers overlay mount + telemetry |
+| **Block Renderer** | Converts detected sections → typed UI cards |
+| **Formula Lab** | Interactive sliders computing live collision outcomes |
+
+### UI Block System
+
+- **`SectionCard`** — Definition, Note, Summary, Application, Characteristics
+- **`FormulaCard`** — Every `$$...$$` becomes a dedicated card with Explain + Lab
+- **`TableCard`** — Responsive scrollable table inside a card
+- **`LiveTelemetry`** — 60fps real-time physics metrics
+- **`PendulumCanvas`** — Canvas simulation with velocity vectors + glow
+
+### Formula Lab Features
+- Sliders for `m₁`, `m₂`, `v₀`, `L`
+- Live computes: final velocity, KE before/after, KE lost, max swing angle
+- All derived from the extracted formula context — no re-parsing

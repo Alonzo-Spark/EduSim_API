@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 34,
+  "question": "A metal rod expands on heating. Explain thermal expansion.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThermal expansion is the tendency of matter to increase in volume, area, or length in response to an increase in temperature. \n\nThis behavior occurs because heating causes atoms to vibrate more vigorously, increasing the average separation distance between them.\n\n---\n\n## Characteristics\n\n* **Reversible Behavior:** The material expands uniformly as temperature rises and contracts back to its initial dimensions when cooled, provided it stays within its elastic limits.\n\n---\n\n## Formula\n\nThe linear thermal expansion equation for a solid rod is defined as:\n\n$$\\Delta L = \\alpha L_0 \\Delta T$$\n\nWhere:\n* $\\Delta L$ represents the net change in length\n* $\\alpha$ represents the coefficient of linear thermal expansion\n* $L_0$ represents the initial length of the rod sample\n* $\\Delta T$ represents the change in temperature\n\n---\n\n## Summary\n\nThermal expansion occurs because heat increases atomic vibrations, forcing atoms further apart and causing macroscopic expansion that scales with temperature changes.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ **Thermal expansion** is the tendency of matter to change its shape, area, and volume in response to a change in temperature. When substances (especially solids like metal rods) are heated, their particles gain kinetic energy and vibrate more, causing them to occupy more space.  \n└───────────────────────────┘  \n\n---\n\n### 🔍 Introduction  \nWhen you heat a metal rod, it gets slightly longer. This everyday observation is a classic example of **thermal expansion** — a fundamental concept in physics and engineering. Understanding this behavior helps in designing bridges, railways, and electronic devices that must withstand temperature changes.\n\n---\n\n### 📘 Key Concepts  \n\n- **Particles in motion**: All matter is made of atoms or molecules in constant motion.  \n- **Increased vibration with heat**: Heating adds energy, increasing atomic vibrations.  \n- **Increased average separation**: As particles vibrate more vigorously, the average distance between them increases.  \n- **Macroscopic expansion**: This microscopic increase in spacing results in observable expansion of the material.\n\n---\n\n### 🧮 Formula  \n\n$$\n\\Delta L = \\alpha \\cdot L_0 \\cdot \\Delta T\n$$\n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│     $$\\Delta L = \\alpha \\cdot L_0 \\cdot \\Delta T$$      │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n**Where:**  \n- $\\Delta L$ = change in length (m)  \n- $\\alpha$ = coefficient of linear expansion (per °C or K⁻¹)  \n- $L_0$ = original length (m)  \n- $\\Delta T$ = change in temperature (°C or K)\n\n> 🔧 **Example**: A 1-meter iron rod ($\\alpha = 12 \\times 10^{-6} \\, \\text{K}^{-1}$) heated by 50°C expands by:  \n> $\\Delta L = 12 \\times 10^{-6} \\cdot 1 \\cdot 50 = 0.0006\\, \\text{m} = 0.6\\, \\text{mm}$\n\n---\n\n### 📊 Characteristics of Thermal Expansion  \n\n| State of Matter | Expansion Level | Reason |\n|-----------------|------------------|--------|\n| **Solids**      | Low              | Particles are tightly bound; only vibrate around fixed positions |\n| **Liquids**     | Moderate         | Particles are less constrained, allowing more movement |\n| **Gases**       | High             | Particles move freely and are far apart; highly responsive to temperature |\n\n> 🔔 All three states expand when heated — but gases show the most dramatic change.\n\n---\n\n### ⚙️ Applications  \n\n- **Railway tracks**: Gaps (expansion joints) are left between rails to allow expansion in summer.  \n- **Bridges**: Roller supports allow movement due to thermal expansion.  \n- **Thermostats**: Bimetallic strips bend due to differential expansion of two metals, triggering switches.  \n- **Pipelines**: U-shaped bends absorb expansion without damage.\n\n---\n\n### ❗ Important Notes  \n\n- **Not all materials expand equally**: Different materials have different $\\alpha$ values.  \n- **Water is anomalous**: It contracts when heated from 0°C to 4°C, then expands — crucial for aquatic life.  \n- **Expansion can cause stress**: If constrained, thermal expansion generates large forces — may lead to buckling or cracking.\n\n---\n\n### ✅ Summary  \n\nThermal expansion is the increase in size of a material due to rising temperature. In solids like metal rods, it manifests mainly as **linear expansion**, governed by material-specific properties. Proper understanding and management of this phenomenon are essential in engineering and everyday technology.\n\n---\n\n### 💡 Suggested Questions  \n1. Why are gaps left between railway tracks?  \n2. How does a bimetallic strip work in a thermostat?  \n3. Why doesn’t water behave like most other liquids when heated from 0°C to 4°C?  \n4. Can thermal expansion be used to generate mechanical work?  \n5. What would happen if a metal lid on a glass jar is heated?  \n\nLet me know if you'd like to explore the **Formula Lab** for $\\Delta L = \\alpha L_0 \\Delta T$ with interactive sliders!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of thermal expansion, accurately covering its definition, characteristics, and formula. The inclusion of examples, applications, and notes on different materials and states of matter enhances the response's educational value. The layout and formatting are well-structured, making the content easily readable and understandable. However, to achieve perfection, minor improvements could be suggested, such as adding more interactive elements to the 'Formula Lab' or providing additional examples to illustrate the consequences of thermal expansion in everyday life. Overall, the response is of high quality, accurate, and educational, making it an excellent resource for learning about thermal expansion.",
+  "candidate_token_usage": {
+    "promptTokens": 357,
+    "completionTokens": 944,
+    "totalTokens": 1301
+  },
+  "candidate_latency_ms": 10594,
+  "candidate_cost_usd": 0.002245,
+  "judge_token_usage": {
+    "promptTokens": 1563,
+    "completionTokens": 185,
+    "totalTokens": 1748
+  },
+  "judge_latency_ms": 5553,
+  "judge_cost_usd": 0.0013817999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:10:40.531Z"
+}

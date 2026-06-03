@@ -1,0 +1,102 @@
+Here's a runtime overlay response for a 'friction_changed' event on a braking track platform, designed to be interactive and informative.
+
+---
+
+**Overlay Response: Braking Platform Friction Change**
+
+```json
+{
+  "overlayType": "dynamic_notification",
+  "title": "Friction Alert: Braking Platform",
+  "icon": "warning_triangle",
+  "priority": "high",
+  "sections": [
+    {
+      "type": "quick_definition",
+      "title": "Quick Definition: Friction",
+      "content": "Friction is a force that opposes motion between surfaces in contact. On a braking platform, higher friction allows for quicker deceleration, while lower friction reduces braking efficiency."
+    },
+    {
+      "type": "key_concepts",
+      "title": "Key Changes Detected",
+      "items": [
+        {
+          "label": "Platform ID",
+          "value": "BP-732-Alpha"
+        },
+        {
+          "label": "Previous Friction Coefficient (μₚ)",
+          "value": "0.75"
+        },
+        {
+          "label": "Current Friction Coefficient (μ𝒸)",
+          "value": "0.40",
+          "highlight": "negative"
+        },
+        {
+          "label": "Change",
+          "value": "Decrease of 46.67%",
+          "highlight": "negative"
+        },
+        {
+          "label": "Status",
+          "value": "Critical: Low Friction Detected",
+          "highlight": "negative"
+        }
+      ]
+    },
+    {
+      "type": "formula_card",
+      "title": "Braking Force Formula",
+      "formula": "$$ F_\\text{braking} = \\mu_\\text{k} \\cdot N $$",
+      "explanation": "This formula calculates the kinetic friction force ($F_{\\text{braking}}$), which is the primary force for braking. Here, $\\mu_\\text{k}$ represents the coefficient of kinetic friction (which has just decreased), and $N$ is the normal force (the force perpendicular to the surface, often related to the weight of the object). A decrease in $\\mu_\\text{k}$ directly reduces the maximum possible braking force.",
+      "variables": [
+        {"symbol": "$F_\\text{braking}$", "name": "Braking Force", "unit": "Newtons (N)"},
+        {"symbol": "$$\\mu_\\text{k}$$", "name": "Coefficient of Kinetic Friction", "unit": "Dimensionless"},
+        {"symbol": "$N$", "name": "Normal Force", "unit": "Newtons (N)"}
+      ],
+      "actions": [
+        {"label": "Explain Formula", "action": "open_formula_explanation", "formulaId": "braking_force_formula"},
+        {"label": "Open Formula Lab", "action": "open_formula_lab", "formulaId": "braking_force_formula"}
+      ]
+    },
+    {
+      "type": "important_notes",
+      "title": "Immediate Impact & Recommendations",
+      "items": [
+        "**Increased Braking Distance:** Vehicles on this platform will require significantly longer distances to stop.",
+        "**Reduced Deceleration:** Expect a noticeable reduction in the rate at which objects slow down.",
+        "**Risk of Skidding:** Lower friction increases the likelihood of wheels locking up and skidding, especially under hard braking.",
+        "**Action Required:** Immediate inspection of the platform surface and braking system is recommended. Consider reducing track speed or rerouting traffic until friction is restored."
+      ]
+    },
+    {
+      "type": "suggested_questions",
+      "title": "Further Investigation",
+      "questions": [
+        "What caused the sudden drop in friction?",
+        "Are there environmental factors (e.g., fluid spills, ice, debris) contributing to this?",
+        "How does this affect the safety margin for present and incoming vehicles?",
+        "What is the estimated safe speed for this platform given the current friction?"
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "label": "Acknowledge & Dismiss",
+      "action": "dismiss_overlay",
+      "style": "primary"
+    },
+    {
+      "label": "View Platform Diagnostics",
+      "action": "navigate_to_diagnostics",
+      "targetId": "BP-732-Alpha"
+    },
+    {
+      "label": "Initiate Emergency Protocol",
+      "action": "trigger_emergency_protocol",
+      "protocolId": "low_friction_braking_platform"
+    }
+  ]
+}
+```

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 35,
+  "question": "Define latent heat and explain change of state.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nLatent heat is the thermal energy absorbed or released by a substance during a phase change that occurs at a constant, unchanging temperature.\n\nA change of state refers to the transition of matter between solid, liquid, and gaseous phases as internal molecular bonds break or form.\n\n---\n\n## Types of Latent Heat\n\n* **Latent Heat of Fusion:** The heat energy required to transition a substance from a solid to a liquid phase at its melting point.\n* **Latent Heat of Vaporization:** The heat energy required to transition a substance from a liquid to a gaseous phase at its boiling point.\n\n---\n\n## Formula\n\nThe phase change heat transfer equation is written as:\n\n$$Q = mL$$\n\nWhere:\n* $Q$ represents the heat energy transferred during the phase change\n* $m$ represents the total mass of the substance undergoing transformation\n* $L$ represents the specific latent heat constant for that substance\n\n---\n\n## Summary\n\nLatent heat drives phase changes at a constant temperature by breaking or forming molecular bonds rather than changing the system's kinetic temperature.",
+  "candidate_response": "┌─────────────────────────────┐\n│ Quick Definition            │\n│                             │\n│ Latent heat is the amount   │\n│ of heat energy absorbed or   │\n│ released by a substance during│\n│ a phase change without a     │\n│ change in temperature.       │\n└─────────────────────────────┘\n\n---\n\n┌─────────────────────────────┐\n│ Change of State            │\n│                           │\n│ A change of state, also   │\n│ known as a phase change,  │\n│ occurs when a substance   │\n│ transitions from one      │\n│ physical state to another,│\n│ such as solid, liquid, or │\n│ gas. The most common      │\n│ changes of state are:    │\n│ - Melting (solid to liquid)│\n│ - Freezing (liquid to solid)│\n│ - Vaporization (liquid to gas)│\n│ - Condensation (gas to liquid)│\n│ - Sublimation (solid to gas)│\n│ - Deposition (gas to solid)│\n│ During these processes,    │\n│ latent heat is either      │\n│ absorbed or released,      │\n│ allowing the substance to   │\n│ change its state without    │\n│ changing its temperature.   │\n└─────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines latent heat and explains change of state, including various types of phase changes. However, it lacks a clear and concise formula presentation, such as the phase change heat transfer equation (Q = mL), which is present in the gold reference answer. The quality score is lower due to the unconventional use of ASCII art tables, which may not be suitable for all platforms or readers. To improve, the candidate should consider using standard formatting and including relevant equations to enhance clarity and readability. Additionally, the educational score could be improved by providing more detailed explanations or examples to help beginners understand the concepts more effectively.",
+  "candidate_token_usage": {
+    "promptTokens": 363,
+    "completionTokens": 288,
+    "totalTokens": 651
+  },
+  "candidate_latency_ms": 6162,
+  "candidate_cost_usd": 0.00022725,
+  "judge_token_usage": {
+    "promptTokens": 907,
+    "completionTokens": 183,
+    "totalTokens": 1090
+  },
+  "judge_latency_ms": 8782,
+  "judge_cost_usd": 0.0009834,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:12:54.028Z"
+}

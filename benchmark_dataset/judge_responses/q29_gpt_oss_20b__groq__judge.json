@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 29,
+  "question": "Define surface tension and mention factors affecting it.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nSurface tension is the property of a liquid surface that causes it to behave like a stretched elastic membrane, minimizing its surface area. \n\nThis behavior is caused by cohesive forces, as liquid molecules at the surface experience a net inward pull from the molecules beneath them.\n\n---\n\n## Factors Affecting Surface Tension\n\n* **Temperature Inversion:** Raising the temperature increases the kinetic energy of the molecules, weakening cohesive bonds and reducing surface tension.\n* **Chemical Impurities:** Adding highly soluble materials like salt increases surface tension, whereas adding surfactants like soap lowers it significantly.\n\n---\n\n## Formula\n\nThe surface tension scalar definition is given by:\n\n$$T = \\frac{F}{L}$$\n\nWhere:\n* $T$ represents the surface tension factor\n* $F$ represents the force acting parallel to the surface along a line segment\n* $L$ represents the total length of the line segment over which the force acts\n\n---\n\n## Summary\n\nSurface tension arises from unbalanced molecular attraction at a liquid's surface, causing it to minimize its area. This property decreases with heat and surfactant additives.",
+  "candidate_response": "<failed>",
+  "judge_model": "N/A",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Model generation failed: OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "candidate_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "candidate_latency_ms": 130,
+  "candidate_cost_usd": 0,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 0,
+  "judge_cost_usd": 0,
+  "retry_count": 2,
+  "success": false,
+  "error": "OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "timestamp": "2026-06-01T07:56:01.386Z"
+}

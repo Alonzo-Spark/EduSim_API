@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 26,
+  "question": "Mechanical Properties of Fluids: Define pressure and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nFluid pressure is defined as the normal compressive force exerted by a fluid per unit surface area of a container or object. \n\nPressure acts perpendicular to the surface at every point, distributing uniformly across a level horizontal plane within a static fluid column.\n\n---\n\n## Characteristics\n\n* **Isotropic Distribution:** At any given depth within a continuous static fluid body, pressure acts with equal intensity in all directions.\n* **Scalar Nature:** Pressure is a scalar parameter because the force it produces acts in whatever direction face the surface points.\n\n---\n\n## Formula\n\nThe mechanical definition of surface pressure:\n\n$$P = \\frac{F}{A}$$\n\nWhere:\n* $P$ represents the fluid pressure\n* $F$ represents the normal force component acting perpendicular to the surface\n* $A$ represents the total boundary area of the surface interface\n\n---\n\n## Metric System Units\n\nThe standard SI unit of pressure is the **Pascal ($\\text{Pas}$)**, which is equivalent to a force of $1 \\text{ Newton}$ acting uniformly over a surface area of $1 \\text{ square meter}$.\n\n$$1 \\text{ Pa} = 1 \\text{ N}/\\text{m}^2 = 1 \\text{ kg}/(\\text{m}\\cdot\\text{s}^2)$$\n\n---\n\n## Summary\n\nPressure measures force distribution across a surface area, acting isotropically within fluid systems and measured internationally in Pascals.",
+  "candidate_response": "┌───────────────────────────┐\n│ Definition                │\n│                           │\n│ Pressure is the normal force exerted per unit area by a fluid on a surface. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ SI Unit                   │\n│                           │\n│ The SI unit of pressure is the Pascal (Pa), equal to one newton per square metre (1 Pa = 1 N/m²). │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines pressure and provides the correct SI unit, aligning with the gold reference answer. However, the quality score is lower due to the unconventional use of ASCII art for formatting, which may hinder readability. The educational score is decent, but the response lacks additional explanations, examples, or illustrations to enhance pedagogical effectiveness. To improve, consider using standard formatting techniques, such as headings and paragraphs, and provide more detailed explanations to facilitate beginner understanding. Additionally, including relevant formulas, such as P = F/A, and discussing the characteristics of pressure, like isotropic distribution and scalar nature, would increase the accuracy and educational value of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 431,
+    "completionTokens": 612,
+    "totalTokens": 1043
+  },
+  "candidate_latency_ms": 929,
+  "candidate_cost_usd": 0.00021593,
+  "judge_token_usage": {
+    "promptTokens": 838,
+    "completionTokens": 189,
+    "totalTokens": 1027
+  },
+  "judge_latency_ms": 3475,
+  "judge_cost_usd": 0.0009563999999999999,
+  "retry_count": 1,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:49:34.562Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 53,
+  "question": "Live Sandbox: What happens visually when the stiffness constant of a spring oscillator is doubled?",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nA block attached to a horizontal spring oscillates back and forth about an equilibrium line. We can adjust the spring stiffness parameter ($k$) to observe how the restoring force scales the oscillation speed.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nThe block transitions into a much faster, higher-frequency oscillation. It cycles back and forth rapidly across the center point, showing sharp direction changes at its maximum extension limits.\n\n### ✦ WHY IT HAPPENS\nDoubling the stiffness constant ($k$) means the spring exerts twice as much restoring force for the exact same displacement distance. A larger restoring force generates a higher acceleration vector, driving the mass back to equilibrium much faster.\n\n### ✦ WHAT TO NOTICE\nWatch the velocity telemetry indicators. The peak velocity at the center equilibrium point climbs significantly higher, while the time required to complete one full cycle decreases.\n\n### ✦ FORMULA\nThe angular frequency of a simple harmonic oscillator is defined as:\n\n$$\\omega = \\sqrt{\\frac{k}{m}}$$\n\n* $k$ represents the spring stiffness parameter value.\n* $m$ represents the mass value of the attached block.\n* Increasing $k$ increases the angular frequency ($\\omega$), which decreases the time period ($T = \\frac{2\\pi}{\\omega}$).\n\n### ✦ DEEPER UNDERSTANDING\nA stiffer spring stores and releases potential energy much faster, accelerating the attached mass more aggressively and reducing the time required for each cycle.\n\n### ✦ TRY THIS\n1. Set the **Stiffness slider ($k$)** to a low value and count the cycles over a ten-second window.\n2. Drag the **Stiffness slider** to maximum and observe the rapid pulse tracking profile.",
+  "candidate_response": "When the stiffness constant \\(k\\) of a spring oscillator is doubled, the **visual changes** in motion are significant and can be analyzed through key physical properties. Below is a structured breakdown:\n\n---\n\n### 🔍 Quick Definition  \nA spring oscillator consists of a mass \\(m\\) attached to a spring with stiffness constant \\(k\\). The motion is harmonic, governed by Hooke's Law: \\(F = -kx\\).\n\n---\n\n### 📊 Key Visual Effects of Doubling \\(k\\) (Stiffness)  \n| Property          | Original System (\\(k\\)) | After Doubling Stiffness (\\(2k\\)) | Visual Change                                                                 |\n|-------------------|--------------------------|-----------------------------------|-------------------------------------------------------------------------------|\n| **Period (\\(T\\))** | \\(T = 2\\pi \\sqrt{\\frac{m}{k}}\\) | \\(T' = \\frac{T}{\\sqrt{2}}\\)       | Oscillations complete **faster** (shorter cycle time).                        |\n| **Frequency (\\(f\\))** | \\(f = \\frac{1}{2\\pi} \\sqrt{\\frac{k}{m}}\\) | \\(f' = \\sqrt{2} \\cdot f\\)         | More oscillations per second (**faster back-and-forth motion**).              |\n| **Max Speed (\\(v_{\\text{max}}\\))** | \\(v_{\\text{max}} = A\\sqrt{\\frac{k}{m}}\\) | \\(v_{\\text{max}}' = \\sqrt{2} \\cdot v_{\\text{max}}\\) | Mass moves **faster** through equilibrium.                                    |\n| **Amplitude (\\(A\\))** | Unchanged (depends on initial displacement) | Unchanged                         | **Same maximum stretch/compression** distance.                                |\n| **Restoring Force** | \\(F_{\\text{max}} = kA\\) | \\(F_{\\text{max}}' = 2kA\\)         | Spring pulls/pushes the mass **more aggressively** toward equilibrium.       |\n\n---\n\n### 📽️ Visual Simulation  \nImagine two identical spring-mass systems side by side:  \n1. **Original (\\(k\\))**: Gentle, slower oscillations.  \n2. **Stiffened (\\(2k\\))**:  \n   - **Faster turnaround** at equilibrium.  \n   - **Shorter pauses** at maximum stretch/compression.  \n   - **Sharper, jerkier motion** due to stronger restoring force.  \n\n**Example**:  \n- Original period: \\(T = 2.0  \\text{s}\\) → New period: \\(T' \\approx 1.4  \\text{s}\\).  \n- Original frequency: \\(f = 0.5  \\text{Hz}\\) → New frequency: \\(f' \\approx 0.7  \\text{Hz}\\).  \n\n---\n\n### ⚛️ Physics Insight  \nThe change occurs because **stiffness \\(k\\) directly opposes inertia** (mass \\(m\\)):  \n- Higher \\(k\\) → Stronger spring force → **Reduced time** to reverse motion.  \n- Energy conservation: Total energy \\(E = \\frac{1}{2}kA^2\\) **doubles** (since \\(k\\) doubles), leading to higher max kinetic energy (faster speeds).  \n\n---\n\n### 💡 Conclusion  \n**Visually, doubling \\(k\\) makes the oscillator:**  \n- **Faster** (shorter periods, higher frequency).  \n- **More forceful** (sharper direction changes).  \n- **Energetic** (higher max speeds) without changing amplitude.  \n\n> 🔄 **Try it**: In a real lab, stiffening the spring would make the mass \"jitter\" rapidly compared to its original motion!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the physics concepts related to spring oscillators and the effects of doubling the stiffness constant. The use of formulas, such as Hooke's Law and the equations for period and frequency, is accurate and well-explained. The response is well-structured and easy to follow, with clear headings and concise descriptions. The visual simulation section effectively conveys the expected changes in the oscillator's behavior. However, to further improve, the candidate could consider adding more detailed explanations for the derivation of the formulas or providing additional examples to illustrate the concepts. Overall, the response is of high quality and effectively communicates the physics principles involved.",
+  "candidate_token_usage": {
+    "promptTokens": 369,
+    "completionTokens": 2772,
+    "totalTokens": 3141
+  },
+  "candidate_latency_ms": 113267,
+  "candidate_cost_usd": 0.00627363,
+  "judge_token_usage": {
+    "promptTokens": 1568,
+    "completionTokens": 191,
+    "totalTokens": 1759
+  },
+  "judge_latency_ms": 6349,
+  "judge_cost_usd": 0.0013992,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:11:00.426Z"
+}

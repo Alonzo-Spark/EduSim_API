@@ -1,0 +1,156 @@
+┌───────────────────────────────┐
+│           Introduction          │
+│                                   │
+│ In this sandbox you can explore   │
+│ how the period **T** of a simple │
+│ pendulum changes when you vary    │
+│ the **mass (m)** of the bob while │
+│ keeping the length **L** and      │
+│ gravitational acceleration **g**  │
+│ constant. The simulation provides│
+│ real‑time animation and a numeric │
+│ read‑out of the period.           │
+│                                   │
+│ ▶️ **Controls**                    │
+│   • Slider: Mass (0.1 kg – 5 kg)   │
+│   • Slider: Length (0.2 m – 2 m)   │
+│   • Toggle: Small‑angle approx.   │
+│   • Button: Reset                 │
+│                                   │
+│ Observe the period as you move the│
+│ mass slider and note that it stays│
+│ unchanged (ideal case).           │
+└───────────────────────────────┘
+
+┌───────────────────────────────┐
+│            Definition           │
+│                                   │
+│ A **simple pendulum** consists of │
+│ a point mass **m** attached to a   │
+│ massless, inextensible string of   │
+│ length **L**, swinging under the   │
+│ influence of gravity **g**.       │
+│                                   │
+│ The **period (T)** is the time for │
+│ one complete back‑and‑forth swing.│
+└───────────────────────────────┘
+
+┌───────────────────────────────┐
+│          Key Concepts           │
+│                                   │
+│ • **Mass (m)** – weight of the bob │
+│   (kg).                           │
+│ • **Length (L)** – distance from   │
+│   pivot to bob’s centre of mass    │
+│   (m).                             │
+│ • **Gravity (g)** – 9.81 m s⁻² on   │
+│   Earth’s surface.                │
+│ • **Small‑angle approximation** – │
+│   valid for θ ≲ 15°, allowing the  │
+│   simple harmonic motion model.   │
+│ • **Period (T)** – independent of │
+│   mass for an ideal pendulum.     │
+└───────────────────────────────┘
+
+┌───────────────────────────────┐
+│            Formula               │
+│                                   │
+│ Main Formula                      │
+│                                   │
+│   T = 2π √( L / g )                │
+│                                   │
+│ [ Explain Formula ]               │
+│   • Derivation assumes a massless │
+│     string and no air resistance.│
+│   • Mass **m** cancels out, so T  │
+│     depends only on **L** and **g**.│
+│                                   │
+│ [ Open Formula Lab ]              │
+│   • Change **L** or **g** and see  │
+│     the effect on **T** in real‑   │
+│     time.                         │
+└───────────────────────────────┘
+
+┌───────────────────────────────┐
+│          Applications            │
+│                                   │
+│ • Classroom demonstration of      │
+│   mass‑independence of period.    │
+│ • Calibration of clocks using     │
+│   pendulums.                      │
+│ • Seismology: modeling simple     │
+│   oscillators.                    │
+│                                   │
+│ The sandbox lets students verify   │
+│ theory by measuring T for several │
+│ masses while keeping L constant.  │
+└───────────────────────────────┘
+
+┌───────────────────────────────┐
+│          Advantages              │
+│                                   │
+│ • Immediate visual feedback.      │
+│ • No need for physical equipment. │
+│ • Safe exploration of extreme     │
+│   masses (no breaking strings).   │
+│                                   │
+│ **Disadvantages**                 │
+│ • Ignores air resistance and      │
+│   string mass (real‑world effects).│
+│ • Small‑angle restriction limits  │
+│   large‑amplitude studies.        │
+└───────────────────────────────┘
+
+┌───────────────────────────────┐
+│        Important Notes           │
+│                                   │
+│ 1. **Mass does NOT affect T** in  │
+│    the ideal model; any observed │
+│    variation in the sandbox is    │
+│    due to numerical rounding or  │
+│    the optional damping model.   │
+│                                   │
+│ 2. For large amplitudes, the       │
+│    period increases:              │
+│    T ≈ 2π √(L/g) · [1 + (θ₀²/16) + …]│
+│                                   │
+│ 3. Damping (air resistance) adds  │
+│    a weak dependence on mass; the │
+│    sandbox can toggle this mode. │
+└───────────────────────────────┘
+
+┌───────────────────────────────┐
+│            Summary                │
+│                                   │
+│ • The period of a simple pendulum │
+│   is given by **T = 2π√(L/g)**.   │
+│ • In the ideal case **mass m** has│
+│   no influence on **T**.          │
+│ • The sandbox lets you vary **m**  │
+│   and see the period stay constant│
+│   (or change only when damping is │
+│   enabled).                       │
+│ • Understanding this helps bridge│
+│   theory and experiment in physics│
+│   education.                      │
+└───────────────────────────────┘
+
+┌───────────────────────────────┐
+│       Suggested Questions        │
+│                                   │
+│ 1. Why does the mass cancel out in │
+│    the derivation of the period?  │
+│ 2. How would the period change if│
+│    the pendulum were swung at a   │
+│    large angle (θ₀ = 30°)?        │
+│ 3. What effect does adding a small│
+│    amount of damping have to the │
+│    period for different masses?   │
+│ 4. If you placed the pendulum on  │
+│    the Moon (g ≈ 1.62 m s⁻²), how │
+│    would the period compare to    │
+│    Earth’s?                       │
+│ 5. Design an experiment using the │
+│    sandbox to verify the independence│
+│    of mass. Outline the steps.    │
+└───────────────────────────────┘

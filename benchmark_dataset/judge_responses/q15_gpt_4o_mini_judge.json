@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 15,
+  "question": "A gun recoils after firing a bullet. Explain using Newton’s third law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nGun recoil is the backward velocity vector experienced by a firearm immediately upon discharging a bullet projectile from its barrel assembly. This behavior provides a clear physical demonstration of Newton's Third Law of Motion.\n\n---\n\n## Physical Interaction\n\n* **Action Force Vector:** The expanding high-pressure gas generation inside the chamber drives the bullet forward through the barrel with a powerful action force.\n* **Reaction Force Vector:** Simultaneously, an identical reaction force vector pushes backward on the breech mechanism of the gun body.\n\n---\n\n## Formula\n\nApplying momentum conservation rules from a mutual rest state ($0$):\n\n$$m_b v_b + m_g v_g = 0$$\n\n$$v_g = -\\frac{m_b v_b}{m_g}$$\n\nWhere:\n* $m_b, m_g$ represent the masses of the bullet and gun respectively\n* $v_b$ represents the forward velocity vector of the bullet\n* $v_g$ represents the backward recoil velocity vector of the gun body\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Recoil force can be redirected to cycle automatic reloading mechanisms. | High recoil velocity degrades targeting stability and causes structural operator fatigue. |\n\n---\n\n## Summary\n\nThe backward velocity of a recoiling gun arises directly from an equal and opposite reaction force, with its final velocity scaled down relative to the bullet due to the gun's much larger mass profile.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Introduction              │  \n│                           │  \n│ When a gun is fired, it recoils due to the action of the bullet being propelled forward. This phenomenon can be explained using Newton’s third law of motion.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Key Concepts              │  \n│                           │  \n│ - **Action and Reaction**: For every action, there is an equal and opposite reaction.  \n│ - **Recoil**: The backward movement of the gun when a bullet is fired.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Explanation               │  \n│                           │  \n│ When the trigger of the gun is pulled, the gunpowder ignites, causing a rapid expansion of gases that propel the bullet forward. According to Newton's third law, the force exerted on the bullet in the forward direction results in an equal and opposite force acting on the gun, causing it to recoil backward.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Important Notes           │  \n│                           │  \n│ - The mass of the bullet and the gun plays a significant role in the extent of the recoil. A heavier gun will recoil less than a lighter one when firing the same bullet.  \n│ - The speed at which the bullet is fired also impacts the recoil. A faster bullet will result in a stronger recoil.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Summary                  │  \n│                           │  \n│ The recoil of a gun after firing a bullet can be understood through Newton’s third law of motion, which states that every action has an equal and opposite reaction. As the bullet is propelled forward, the gun experiences an equal and opposite force that causes it to move backward.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Suggested Questions       │  \n│                           │  \n│ 1. How does the mass of the gun influence its recoil?  \n│ 2. What would happen if a bullet were fired in a vacuum?  \n│ 3. Can you describe a real-life example of Newton’s third law in action?  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately explains the concept of gun recoil using Newton's third law of motion. The response is well-structured and easy to follow, with clear headings and concise explanations. However, the response lacks a detailed mathematical formulation of the recoil phenomenon, such as the momentum conservation equation provided in the gold reference answer. Additionally, the response could benefit from more specific examples and illustrations to enhance its educational value. Overall, the response demonstrates a good understanding of the concept, but could be improved with more comprehensive coverage of the topic and more engaging pedagogical approaches.",
+  "candidate_token_usage": {
+    "promptTokens": 370,
+    "completionTokens": 481,
+    "totalTokens": 851
+  },
+  "candidate_latency_ms": 5144,
+  "candidate_cost_usd": 0.0003441,
+  "judge_token_usage": {
+    "promptTokens": 1201,
+    "completionTokens": 172,
+    "totalTokens": 1373
+  },
+  "judge_latency_ms": 5785,
+  "judge_cost_usd": 0.0011334,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:23:34.766Z"
+}

@@ -1,0 +1,48 @@
+:::section{title="Event: Boundary Reflection (Bounce)"}
+A boundary reflection occurs when a kinetic object's position vector exceeds the defined constraints of the simulation space, requiring an instantaneous inversion of momentum to maintain conservation of energy.
+:::
+
+:::section{title="Quick Definition"}
+**Boundary Reflection** is the process of detecting a collision between a particle and a simulation wall and calculating the new velocity vector based on the angle of incidence and the coefficient of restitution.
+:::
+
+:::section{title="Main Formula"}
+$$
+\vec{v}_{new} = \vec{v}_{old} - 2(\vec{v}_{old} \cdot \hat{n})\hat{n} \times \epsilon
+$$
+
+**Variables:**
+*   $\vec{v}$: Velocity vector of the object.
+*   $\hat{n}$: Normal vector of the boundary surface.
+*   $\epsilon$: Coefficient of restitution (energy loss factor).
+
+[ Explain Formula ]
+The formula reflects the velocity vector across the surface normal. If $\epsilon = 1$, the bounce is perfectly elastic; if $\epsilon < 1$, energy is lost to the boundary.
+
+[ Open Formula Lab ]
+:::
+
+:::section{title="Key Concepts"}
+*   **Collision Detection:** Checking if $P_x > W_{width}$ or $P_x < 0$.
+*   **Normal Vector:** A vector perpendicular to the wall (e.g., for a right wall, $\hat{n} = [-1, 0]$).
+*   **Impulse:** The sudden change in momentum applied at the timestamp of impact.
+:::
+
+:::section{title="Runtime Logic Table"}
+| Boundary | Condition | Response (Velocity) | Normal Vector ($\hat{n}$) |
+| :--- | :--- | :--- | :--- |
+| **Left Wall** | $x \le 0$ | $v_x = |v_x| \cdot \epsilon$ | $[1, 0]$ |
+| **Right Wall** | $x \ge W$ | $v_x = -|v_x| \cdot \epsilon$ | $[-1, 0]$ |
+| **Ceiling** | $y \le 0$ | $v_y = |v_y| \cdot \epsilon$ | $[0, 1]$ |
+| **Floor** | $y \ge H$ | $v_y = -|v_y| \cdot \epsilon$ | $[0, -1]$ |
+:::
+
+:::section{title="Important Notes"}
+> **Correction Step:** To prevent "sticky walls," the object's position must be reset to the boundary edge exactly at the moment of reflection. If the object penetrates the wall during a frame, move it back by the penetration depth: $P_{corrected} = Boundary \pm (P_{current} - Boundary)$.
+:::
+
+:::section{title="Suggested Questions"}
+1. How does adding friction ($\mu$) change the tangential velocity during a bounce?
+2. What happens to the reflection vector if the boundary is a circular arc instead of a flat plane?
+3. How is the "Time of Impact" (TOI) calculated for sub-frame accuracy?
+:::

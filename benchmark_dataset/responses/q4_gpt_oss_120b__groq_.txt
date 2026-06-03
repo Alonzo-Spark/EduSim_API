@@ -1,0 +1,117 @@
+┌───────────────────────────────────────┐
+│ Introduction                           │
+│                                       │
+│ This section introduces the kinematic   │
+│ relationship for an object moving with  │
+│ constant acceleration. Understanding │
+│ how displacement, initial velocity,    │
+│ acceleration, and time are related is  │
+│ fundamental in physics and engineering.│
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Definition of Variables                │
+│                                       │
+│ • **s** – Displacement (metres)        │
+│ • **u** – Initial velocity (m s⁻¹)     │
+│ • **a** – Constant acceleration (m s⁻²)│
+│ • **t** – Time elapsed (seconds)       │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Key Concepts                           │
+│                                       │
+│ • **Constant acceleration** means a is  │
+│   unchanged during the time interval. │
+│ • Motion can be described by integrating│
+│   the acceleration once (to get velocity│
+│   ) and twice (to get displacement).   │
+│ • The equations of motion are derived   │
+│   from these integrations.             │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Derivation Steps                       │
+│                                       │
+│ 1. Start with the definition of         │
+│    constant acceleration:              │
+│       a = dv/dt                        │
+│                                       │
+│ 2. Integrate with respect to time to get │
+│    velocity:                           │
+│       ∫a dt = ∫dv  →  a t + C₁ = v     │
+│    The constant C₁ is the initial      │
+│    velocity **u**, so v = u + a t.      │
+│                                       │
+│ 3. Displacement is the integral of      │
+│    velocity:                           │
+│       s = ∫v dt = ∫(u + a t) dt        │
+│    = ∫u dt + ∫a t dt                    │
+│    = u t + (a/2) t² + C₂                │
+│    With the origin chosen at t = 0,    │
+│    the integration constant C₂ = 0.     │
+│                                       │
+│ 4. Resulting relation:                 │
+│       s = u t + ½ a t²                 │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Main Formula                           │
+│                                       │
+│     s = u t + \frac{1}{2} a t^{2}      │
+│                                       │
+│ [ Explain Formula ]   [ Open Formula Lab ] │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Formula Lab (Metadata)                 │
+│                                       │
+│ • Title: Displacement under constant   │
+│   acceleration                        │
+│ • Formula: s = u t + ½ a t²            │
+│ • Variables:                          │
+│     u – initial velocity (m s⁻¹)      │
+│     t – time (s)                       │
+│     a – acceleration (m s⁻²)           │
+│     s – displacement (m)               │
+│ • Derived from: v = u + a t and       │
+│   s = ∫v dt                           │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Applications                           │
+│                                       │
+│ • Predicting the distance a car will   │
+│   travel after accelerating from rest.│
+│ • Calculating the height reached by a  │
+│   projectile (ignoring air resistance).│
+│ • Engineering problems involving       │
+│   uniformly accelerated motion, such   │
+│   as conveyor belts or elevators.      │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Summary                                │
+│                                       │
+│ The displacement of an object moving   │
+│ with constant acceleration is given by│
+│ **s = u t + ½ a t²**. The formula comes │
+│ from integrating acceleration to obtain│
+│ velocity and then integrating velocity  │
+│ to obtain displacement.                │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Suggested Questions                    │
+│                                       │
+│ 1. If a car starts from rest (u = 0)   │
+│    and accelerates at 3 m s⁻² for 5 s, │
+│    what distance does it cover?        │
+│ 2. A projectile is launched vertically │
+│    with an initial speed of 20 m s⁻¹.  │
+│    How high does it rise before it     │
+│    starts falling? (ignore air drag)   │
+│ 3. Derive the alternate form            │
+│    s = (v² – u²)/(2a) from the same     │
+│    set of equations.                    │
+└───────────────────────────────────────┘

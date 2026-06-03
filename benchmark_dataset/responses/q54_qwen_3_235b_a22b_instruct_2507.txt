@@ -1,0 +1,80 @@
+```json
+{
+  "title": "Orbital Behavior When Tangential Velocity Drops Below Circular Orbit Speed",
+  "sections": [
+    {
+      "type": "Introduction",
+      "content": "When a planet or satellite orbits a central body like a star, its path is determined by the balance between gravitational pull and its tangential velocity. If this velocity decreases below the threshold needed for a stable circular orbit, the orbit becomes elliptical—and if reduced significantly, may lead to orbital decay or collision."
+    },
+    {
+      "type": "Key Concepts",
+      "content": [
+        "Gravitational force provides the centripetal force needed for orbital motion.",
+        "Tangential velocity determines the shape and stability of the orbit.",
+        "Reducing velocity disrupts equilibrium, causing the object to fall inward."
+      ]
+    },
+    {
+      "type": "Formula",
+      "formula": "v_{\\text{circ}} = \\sqrt{\\frac{GM}{r}}",
+      "title": "Circular Orbital Velocity",
+      "variables": [
+        { "symbol": "v_{\\text{circ}}", "definition": "Velocity required for a circular orbit at distance r" },
+        { "symbol": "G", "definition": "Gravitational constant" },
+        { "symbol": "M", "definition": "Mass of the central body (e.g., star)" },
+        { "symbol": "r", "definition": "Orbital radius from the center of the central body" }
+      ],
+      "explanation": "This is the exact speed at which an object must travel perpendicular to the radius to maintain a circular orbit. If velocity drops below this value, the orbit becomes elliptical with perihelion closer to the star."
+    },
+    {
+      "type": "Characteristics",
+      "content": [
+        "Orbit transitions from circular to elliptical.",
+        "The object begins to spiral inward toward periapsis (closest point).",
+        "Angular momentum is conserved, but total orbital energy decreases.",
+        "If velocity is too low, the trajectory may intersect the central body."
+      ]
+    },
+    {
+      "type": "Formula",
+      "formula": "E_{\\text{orbit}} = -\\frac{GMm}{2a}",
+      "title": "Total Orbital Energy",
+      "variables": [
+        { "symbol": "E_{\\text{orbit}}", "definition": "Total mechanical energy of the orbiting body" },
+        { "symbol": "a", "definition": "Semi-major axis of the elliptical orbit" },
+        { "symbol": "m", "definition": "Mass of the orbiting body" }
+      ],
+      "explanation": "As tangential velocity decreases, the orbit’s semi-major axis (a) shrinks, reducing the orbit's total energy (more negative), indicating a tighter, bound orbit."
+    },
+    {
+      "type": "Applications",
+      "content": [
+        "Spacecraft deorbiting: Engineers reduce velocity via retrograde burns to initiate re-entry.",
+        "Natural orbital decay due to atmospheric drag in low Earth orbit.",
+        "Stellar capture scenarios where passing objects lose speed and become bound."
+      ]
+    },
+    {
+      "type": "Important Notes",
+      "content": [
+        "Velocity reduction does not immediately cause a 'spiral'—it creates an elliptical orbit unless continuous drag is present.",
+        "True spiraling (like in atmospheric decay) requires ongoing energy loss, not just a single velocity change.",
+        "An object with zero tangential velocity would fall directly toward the central body in a radial trajectory."
+      ]
+    },
+    {
+      "type": "Summary",
+      "content": "Reducing tangential velocity below circular orbit speed transforms the orbit into an ellipse with a lower periapsis. Significant reductions can lead to atmospheric entry or collision. The new orbit follows Keplerian mechanics, governed by conservation of energy and angular momentum."
+    },
+    {
+      "type": "Suggested Questions",
+      "questions": [
+        "What happens if a satellite in circular orbit fires its engines opposite to its direction of motion?",
+        "How does angular momentum change when orbital velocity decreases?",
+        "Can an object crash into a planet just by slowing down once?",
+        "What velocity is required for an orbit to become parabolic?"
+      ]
+    }
+  ]
+}
+```

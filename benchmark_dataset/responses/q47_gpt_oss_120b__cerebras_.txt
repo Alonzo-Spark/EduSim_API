@@ -1,0 +1,116 @@
+┌───────────────────────────────────────────────┐
+│ Introduction                                   │
+│                                               │
+│ When resistors are connected end‑to‑end,      │
+│ the same current flows through each element. │
+│ This arrangement is called a *series*        │
+│ circuit. Understanding how to find the       │
+│ equivalent resistance helps simplify analysis │
+│ of more complex networks.                     │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Definition                                     │
+│                                               │
+│ **Equivalent resistance** ( \(R_{\text{eq}}\) ) │
+│ is a single resistance that can replace a     │
+│ group of resistors without changing the        │
+│ overall current‑voltage relationship of the    │
+│ circuit.                                       │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Key Concepts                                   │
+│                                               │
+│ • In a series connection the same current **I**│
+│   passes through every resistor.               │
+│ • The voltage across the whole series is the   │
+│   sum of the individual voltage drops:         │
+│   \(V_{\text{total}} = V_1 + V_2 + \dots + V_n\)│
+│ • Ohm’s law for each resistor:                 │
+│   \(V_k = I\,R_k\)                              │
+│ • Because **I** is common, the total voltage   │
+│   can be written as                         │
+│   \(V_{\text{total}} = I\,(R_1+R_2+\dots+R_n)\)│
+│ • Comparing with \(V_{\text{total}} = I\,R_{\text{eq}}\) │
+│   gives the expression for \(R_{\text{eq}}\).   │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Derivation Steps                                │
+│                                               │
+│ 1. Write Ohm’s law for each resistor:         │
+│    \(V_k = I\,R_k\) (for \(k = 1,2,\dots,n\)).│
+│                                               │
+│ 2. Sum all voltage drops:                     │
+│    \(V_{\text{total}} = \sum_{k=1}^{n} V_k\)  │
+│    \(= \sum_{k=1}^{n} I\,R_k\)                │
+│    \(= I\!\sum_{k=1}^{n} R_k\).                │
+│                                               │
+│ 3. Define the equivalent resistance by        │
+│    \(V_{\text{total}} = I\,R_{\text{eq}}\).   │
+│                                               │
+│ 4. Equate the two expressions for \(V_{\text{total}}\):│
+│    \(I\,R_{\text{eq}} = I\!\sum_{k=1}^{n} R_k\).│
+│                                               │
+│ 5. Cancel the common current **I** (non‑zero):│
+│    \(R_{\text{eq}} = \sum_{k=1}^{n} R_k\).     │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Main Formula                                    │
+│                                               │
+│          R_{\text{eq}} = \displaystyle\sum_{k=1}^{n} R_k          │
+│                                               │
+│ [ Explain Formula ]   [ Open Formula Lab ]    │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Applications                                   │
+│                                               │
+│ • Simplifying circuit analysis for          │
+│   power‑distribution networks.               │
+│ • Calculating total resistance in series     │
+│   LED strings, heating elements, etc.        │
+│ • Designing voltage dividers (by pairing a   │
+│   known resistor with the series equivalent).│
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Summary                                        │
+│                                               │
+│ • In a series circuit the current is the same│
+│   through every resistor.                     │
+│ • The total voltage is the algebraic sum of   │
+│   individual drops.                           │
+│ • Consequently, the equivalent resistance is │
+│   the sum of all individual resistances:     │
+│   \(R_{\text{eq}} = R_1 + R_2 + \dots + R_n\).│
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Suggested Questions                             │
+│                                               │
+│ 1. If three resistors of 10 Ω, 20 Ω, and 30 Ω   │
+│    are connected in series, what is \(R_{\text{eq}}\)?│
+│ 2. How would the formula change if one resistor│
+│    is a variable resistor (potentiometer)?   │
+│ 3. Why does the current remain constant in a   │
+│    series circuit?                            │
+│ 4. Compare the series‑combination result with  │
+│    a parallel‑combination of the same values.│
+└───────────────────────────────────────────────┘

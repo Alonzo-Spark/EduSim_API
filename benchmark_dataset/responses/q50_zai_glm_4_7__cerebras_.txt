@@ -1,0 +1,651 @@
+Here is the complete, self-contained HTML solution. It implements the "Interactive Textbook" design system, parses the content into structured cards, extracts formulas, and features a functional "Formula Lab."
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical Power - Interactive Textbook</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0f172a;
+            --accent: #f59e0b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-heading: #1e293b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        /* Layout */
+        header {
+            background: var(--secondary);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+        }
+
+        header p {
+            opacity: 0.8;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--bg-body);
+            padding-bottom: 0.75rem;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+            background: #eff6ff;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-heading);
+        }
+
+        .card-content p {
+            margin-bottom: 1rem;
+        }
+
+        .card-content ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+
+        .card-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: linear-gradient(to bottom right, #ffffff, #f0f9ff);
+            border-left: 5px solid var(--primary);
+        }
+
+        .formula-display {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            font-size: 1.25rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: #eff6ff;
+        }
+
+        /* Modal / Formula Lab */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        /* Lab Controls */
+        .lab-controls {
+            margin-top: 1.5rem;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: #cbd5e1;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .lab-result {
+            text-align: center;
+            padding: 1rem;
+            background: var(--secondary);
+            color: white;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .lab-result .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            color: #92400e;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .explanation-box.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .formula-actions {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Physics: Electrical Power</h1>
+        <p>Interactive Module 1.2</p>
+    </header>
+
+    <main id="app">
+        <!-- Content will be injected here via JavaScript -->
+    </main>
+
+    <!-- Modal Template -->
+    <div class="modal-overlay" id="labModal">
+        <div class="modal">
+            <button class="close-modal" id="closeLab">&times;</button>
+            <h2 id="modalTitle">Formula Lab</h2>
+            <div id="modalContent">
+                <!-- Dynamic Lab Content -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. DATA SOURCE (Markdown-like structure)
+        // ==========================================
+        const sourceContent = `
+## Introduction
+Electrical energy is one of the most widely used forms of energy in the modern world. From lighting up our homes to powering massive industrial machines, understanding how electrical energy is consumed and transferred is crucial. This module focuses specifically on **Electrical Power**—the rate at which this energy is used.
+
+## Definition
+**Electrical Power** is defined as the rate at which electrical energy is transferred by an electric circuit. The SI unit of power is the **Watt (W)**, named after James Watt. One watt is defined as the consumption of one joule of energy per second.
+
+## Key Concepts
+To understand power, we must revisit three fundamental quantities:
+*   **Voltage (V):** The potential difference or electric pressure that pushes electrons.
+*   **Current (I):** The flow of electric charge (electrons).
+*   **Energy (W):** The total work done by the circuit.
+
+Power tells us *how fast* energy is being used, not necessarily how much total energy is used.
+
+## Derivation
+We start with the basic definition of power in physics:
+$$ P = \\frac{W}{t} $$
+Where:
+*   $P$ is Power
+*   $W$ is Work Done (Electrical Energy)
+*   $t$ is Time
+
+We know from electric potential definitions that the work done to move a charge $Q$ across a potential difference $V$ is:
+$$ W = V \\times Q $$
+
+Substitute $W$ into the power equation:
+$$ P = \\frac{V \\times Q}{t} $$
+
+We also know that electric current is the rate of flow of charge ($I = Q/t$), which means $Q = I \\times t$.
+
+Substituting $Q = I \\times t$ into our equation:
+$$ P = \\frac{V \\times (I \\times t)}{t} $$
+
+The time $t$ cancels out:
+$$ P = V \\times I $$
+
+## Main Formula
+The relationship between Power, Voltage, and Current is one of the most fundamental formulas in electrical engineering.
+
+$$ P = VI $$
+
+## Applications
+This formula is used universally to determine the power rating of appliances.
+*   **Heaters:** High current at standard voltage produces high heating power.
+*   **LEDs:** Low current results in low power consumption (efficiency).
+*   **Computers:** Power supplies are rated in Watts (e.g., 500W) based on the max voltage and current they can handle.
+
+## Important Notes
+*   Power is a scalar quantity (it has magnitude but no direction).
+*   1 Horsepower (HP) is approximately equal to 746 Watts.
+*   The formula $P=VI$ applies to DC circuits and purely resistive AC circuits.
+
+## Summary
+In this lesson, we defined electrical power as the rate of energy consumption. By combining the definitions of Voltage ($V$), Current ($I$), and Work ($W$), we derived the fundamental relationship $$ P = VI $$.
+
+## Suggested Questions
+1.  Calculate the power of a bulb operating at 220V with a current of 0.5A.
+2.  If a device has a power rating of 100W and operates at 5V, what is the current draw?
+3.  Why does a high-power appliance typically need thicker wires?
+`;
+
+        // ==========================================
+        // 2. STATE & FORMULA REGISTRY
+        // ==========================================
+        const formulaRegistry = [];
+
+        // ==========================================
+        // 3. PARSER & RENDERER
+        // ==========================================
+        
+        function parseAndRender() {
+            const app = document.getElementById('app');
+            
+            // Split content into sections based on "##"
+            const rawSections = sourceContent.split(/^##\s+/gm).filter(s => s.trim() !== '');
+            
+            rawSections.forEach(sectionText => {
+                // Extract Title (First Line)
+                const firstLineBreak = sectionText.indexOf('\n');
+                const title = sectionText.substring(0, firstLineBreak).trim();
+                let body = sectionText.substring(firstLineBreak + 1).trim();
+
+                // Check for Display Formulas ($$ ... $$)
+                const formulaRegex = /\$\$(.*?)\$\$/gs;
+                let match;
+                let hasFormula = false;
+                let extractedFormula = null;
+
+                // We only extract the FIRST formula for the "Main Formula Card" logic 
+                // or treat specific sections as Formula Cards.
+                // For this system: If the section is "Main Formula" or "Derivation", we handle it specially.
+                
+                if ((title === "Main Formula" || title === "Derivation") && (match = formulaRegex.exec(body))) {
+                    // Extract the formula string
+                    const latex = match[1].trim();
+                    
+                    // Store in registry
+                    const formulaId = `formula-${formulaRegistry.length}`;
+                    formulaRegistry.push({
+                        id: formulaId,
+                        latex: latex,
+                        title: title === "Main Formula" ? "Power Formula" : "Derivation Step",
+                        context: title
+                    });
+
+                    // Remove formula from text body if we want to isolate it, 
+                    // but for "Main Formula" we want ONLY the formula card.
+                    if (title === "Main Formula") {
+                        renderFormulaCard(title, latex, formulaId);
+                        return; 
+                    }
+                }
+
+                // Standard Section Rendering
+                renderStandardCard(title, body);
+            });
+        }
+
+        // ==========================================
+        // 4. COMPONENT RENDERERS
+        // ==========================================
+
+        function getIconForTitle(title) {
+            const map = {
+                'Introduction': '📖',
+                'Definition': '📝',
+                'Key Concepts': '💡',
+                'Derivation': '🧮',
+                'Main Formula': '⚡',
+                'Applications': '🔌',
+                'Important Notes': '⚠️',
+                'Summary': '📌',
+                'Suggested Questions': '❓'
+            };
+            return map[title] || '📄';
+        }
+
+        function renderStandardCard(title, content) {
+            const card = document.createElement('article');
+            card.className = 'card';
+            
+            const icon = getIconForTitle(title);
+
+            // Convert inline math ($...$) and basic markdown
+            let processedContent = content
+                .replace(/\$(.*?)\$/g, (match, math) => {
+                    try { return katex.renderToString(math, { throwOnError: false, displayMode: false }); } catch(e) { return match; }
+                })
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
+                .replace(/\n/g, '<br>'); // Line breaks
+
+            // Handle lists simply
+            if (processedContent.includes('* ')) {
+                const lines = processedContent.split('<br>');
+                const listItems = lines.filter(l => l.trim().startsWith('* ')).map(l => `<li>${l.replace('* ', '')}</li>`).join('');
+                const nonList = lines.filter(l => !l.trim().startsWith('* ')).join('<br>');
+                processedContent = nonList + (nonList && listItems ? '<br><ul>' : '<ul>') + listItems + '</ul>';
+            }
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="card-icon">${icon}</div>
+                    <h2 class="card-title">${title}</h2>
+                </div>
+                <div class="card-content">
+                    ${processedContent}
+                </div>
+            `;
+            
+            document.getElementById('app').appendChild(card);
+        }
+
+        function renderFormulaCard(title, latex, id) {
+            const card = document.createElement('article');
+            card.className = 'card formula-card';
+            
+            const renderedMath = katex.renderToString(latex, { throwOnError: false, displayMode: true });
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="card-icon" style="color: var(--accent); background: #fffbeb;">⚡</div>
+                    <h2 class="card-title">${title}</h2>
+                </div>
+                <div class="card-content">
+                    <p>The fundamental relation for electrical power is:</p>
+                    <div class="formula-display">
+                        ${renderedMath}
+                    </div>
+                    <div class="formula-actions">
+                        <button class="btn btn-outline" onclick="toggleExplanation(this)">
+                            Explain Formula
+                        </button>
+                        <button class="btn btn-primary" onclick="openLab('${id}')">
+                            Open Formula Lab
+                        </button>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>Variables:</strong><br>
+                        <strong>P</strong>: Power (Watts)<br>
+                        <strong>V</strong>: Voltage (Volts)<br>
+                        <strong>I</strong>: Current (Amperes)<br><br>
+                        This equation states that the power consumed by a device is equal to the electrical potential difference across it multiplied by the current flowing through it.
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('app').appendChild(card);
+        }
+
+        // ==========================================
+        // 5. INTERACTION LOGIC
+        // ==========================================
+
+        function toggleExplanation(btn) {
+            const box = btn.parentElement.nextElementSibling;
+            box.classList.toggle('visible');
+            btn.textContent = box.classList.contains('visible') ? "Hide Explanation" : "Explain Formula";
+        }
+
+        function openLab(formulaId) {
+            const formula = formulaRegistry.find(f => f.id === formulaId);
+            if (!formula) return;
+
+            const modal = document.getElementById('labModal');
+            const content = document.getElementById('modalContent');
+            
+            // Generate Lab UI based on P = VI
+            content.innerHTML = `
+                <p>Adjust the sliders to see how Voltage ($V$) and Current ($I$) affect Power ($P$).</p>
+                
+                <div class="lab-controls">
+                    <div class="control-group">
+                        <label>
+                            <span>Voltage (V)</span>
+                            <span id="val-v">220 V</span>
+                        </label>
+                        <input type="range" id="input-v" min="0" max="240" value="220" oninput="updateLab()">
+                    </div>
+
+                    <div class="control-group">
+                        <label>
+                            <span>Current (I)</span>
+                            <span id="val-i">0.5 A</span>
+                        </label>
+                        <input type="range" id="input-i" min="0.1" max="10" step="0.1" value="0.5" oninput="updateLab()">
+                    </div>
+
+                    <div class="lab-result">
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Calculated Power</div>
+                        <div class="value" id="result-p">110.0 W</div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+            updateLab(); // Initial calculation
+        }
+
+        function updateLab() {
+            const v = parseFloat(document.getElementById('input-v').value);
+            const i = parseFloat(document.getElementById('input-i').value);
+            const p = v * i;
+
+            document.getElementById('val-v').textContent = `${v} V`;
+            document.getElementById('val-i').textContent = `${i} A`;
+            document.getElementById('result-p').textContent = `${p.toFixed(1)} W`;
+        }
+
+        // Close Modal Logic
+        document.getElementById('closeLab').addEventListener('click', () => {
+            document.getElementById('labModal').classList.remove('active');
+        });
+
+        document.getElementById('labModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('labModal')) {
+                document.getElementById('labModal').classList.remove('active');
+            }
+        });
+
+        // ==========================================
+        // 6. INITIALIZATION
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            // Wait for KaTeX to be ready if needed, though script is defer
+            if (window.katex) {
+                parseAndRender();
+            } else {
+                // Fallback if CDN loads slowly (simple timeout check)
+                setTimeout(() => {
+                    if (window.katex) parseAndRender();
+                    else console.error("KaTeX failed to load");
+                }, 500);
+            }
+        });
+
+    </script>
+</body>
+</html>
+```

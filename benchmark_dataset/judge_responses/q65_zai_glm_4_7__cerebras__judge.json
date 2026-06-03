@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "zai-glm-4.7 (Cerebras)",
+  "question_id": 65,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'orbit_started' stable loop trigger event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a orbital tracking alignment profile match.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe satellite successfully closed its trajectory path, triggering the stable closed loop status notification (`orbit_started`).\n\n### WHAT CHANGED\nThe path display updated from a open line to a stable elliptical orbit track surrounding the central gravity source.\n\n### SIMPLE WHY\nThe satellite's velocity vector and distance create a balance where gravity provides the exact centripetal force needed for a stable orbit.\n\n### WHAT TO NOTICE\nObserve how the satellite continuously circles the central mass without flying out into deep space or crashing into the planet.",
+  "candidate_response": "```json\n{\n  \"event\": \"orbit_started\",\n  \"timestamp\": \"2023-10-27T10:00:00Z\",\n  \"status\": \"active\",\n  \"data\": {\n    \"centralBody\": {\n      \"name\": \"Kepler-186f\",\n      \"type\": \"Exoplanet\",\n      \"mass\": \"1.2 Earths\",\n      \"radius\": \"1.1 Earths\"\n    },\n    \"orbit\": {\n      \"altitude\": \"400 km\",\n      \"eccentricity\": \"0.0167\",\n      \"inclination\": \"0.5°\",\n      \"period\": \"92.68 minutes\",\n      \"velocity\": \"7.67 km/s\"\n    }\n  },\n  \"visuals\": {\n    \"showPath\": true,\n    \"highlightBody\": true,\n    \"addTrail\": true\n  },\n  \"ui\": {\n    \"toast\": {\n      \"message\": \"Orbit established around Kepler-186f.\",\n      \"type\": \"success\",\n      \"duration\": 3000\n    },\n    \"card\": {\n      \"type\": \"orbit_info_card\",\n      \"title\": \"Orbit Stabilized\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"You have successfully entered a stable orbit around **Kepler-186f**. Your current velocity is sufficient to maintain this trajectory.\"\n        },\n        {\n          \"type\": \"formula_card\",\n          \"title\": \"Orbital Velocity\",\n          \"formula\": \"v = \\\\sqrt{\\\\frac{GM}{r}}\",\n          \"variables\": [\n            { \"symbol\": \"v\", \"description\": \"Orbital Velocity\" },\n            { \"symbol\": \"G\", \"description\": \"Gravitational Constant\" },\n            { \"symbol\": \"M\", \"description\": \"Mass of the Central Body\" },\n            { \"symbol\": \"r\", \"description\": \"Distance from the Center of the Body\" }\n          ]\n        }\n      ],\n      \"actions\": [\n        { \"label\": \"Adjust Orbit\", \"action\": \"open_orbit_editor\" },\n        { \"label\": \"De-orbit\", \"action\": \"initiate_deorbit\" },\n        { \"label\": \"View Telemetry\", \"action\": \"show_telemetry\" }\n      ]\n    }\n  }\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 6,
+    "overall_average": "7.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is a well-structured JSON object that provides detailed information about the orbit, including the central body, orbit parameters, and UI elements. However, it lacks a clear explanation of the physics behind the orbit, which is a crucial aspect of the gold reference answer. The response assumes a high level of prior knowledge about orbital mechanics and does not provide a clear and concise explanation of the concepts. To improve, the candidate should focus on adding a brief introduction to the physics of orbits, including the concept of centripetal force and the balance between velocity and gravity. Additionally, the response could benefit from more detailed explanations of the formulas and variables used, such as the orbital velocity formula. In terms of formatting, the response is well-organized and easy to read, but some of the UI elements, such as the toast message and card content, could be more concise and focused on the key concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 366,
+    "completionTokens": 2356,
+    "totalTokens": 2722
+  },
+  "candidate_latency_ms": 3685,
+  "candidate_cost_usd": 0.005078,
+  "judge_token_usage": {
+    "promptTokens": 1047,
+    "completionTokens": 241,
+    "totalTokens": 1288
+  },
+  "judge_latency_ms": 8874,
+  "judge_cost_usd": 0.0012066,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:09:13.760Z"
+}

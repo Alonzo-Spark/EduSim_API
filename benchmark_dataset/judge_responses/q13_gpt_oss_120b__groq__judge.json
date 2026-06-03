@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 13,
+  "question": "A force of 50 N acts on a body of mass 10 kg. Find acceleration.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Dynamics Problem\n\n### Problem\nA net force of $50 \\text{ N}$ acts on a body of mass $10 \\text{ kg}$. Find its resulting acceleration.\n\n### Given\n* Force applied ($F$) = $50 \\text{ N}$\n* Mass of the body ($m$) = $10 \\text{ kg}$\n\n### Formula\n$$F = ma$$\n\nRearranging to solve for acceleration ($a$):\n$$a = \\frac{F}{m}$$\n\n### Substitution\n$$a = \\frac{50}{10}$$\n\n### Calculation\n$$a = 5 \\text{ m/s}^2$$\n\n### Final Answer\n**Acceleration ($a$) = $5 \\text{ m/s}^2$**\n\n### Interpretation\nThis indicates that the $50 \\text{ N}$ force causes the $10 \\text{ kg}$ mass to increase its velocity uniformly by $5 \\text{ meters per second}$ every single second in the direction of the applied force vector.",
+  "candidate_response": "┌───────────────────────────────────────────────┐  \n│ Problem Statement                               │  \n│                                                 │  \n│ A force of 50 N acts on a body of mass 10 kg.   │  \n│ Find the acceleration of the body.             │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Main Formula                                    │  \n│                                                 │  \n│          F = m a                                 │  \n│                                                 │  \n│          a = \\frac{F}{m}                         │  \n│                                                 │  \n│ [ Explain Formula ]   [ Open Formula Lab ]      │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Solution Steps                                  │  \n│                                                 │  \n│ 1. Identify given values:                       │  \n│    • Force (F) = 50 N                           │  \n│    • Mass (m) = 10 kg                           │  \n│                                                 │  \n│ 2. Use the rearranged formula a = F/m.          │  \n│                                                 │  \n│ 3. Substitute: a = 50 N / 10 kg = 5 m/s².       │  \n│                                                 │  \n│ 4. Result: Acceleration a = 5 m/s².             │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Summary                                         │  \n│                                                 │  \n│ The acceleration of a 10 kg body under a 50 N   │  \n│ force is 5 m/s², obtained by dividing the force │  \n│ by the mass (a = F/m).                          │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Suggested Questions                             │  \n│                                                 │  \n│ • What would be the acceleration if the force   │  \n│   were doubled?                                 │  \n│ • How does changing the mass affect the         │  \n│   acceleration for a constant force?           │  \n│ • If a body experiences an acceleration of      │  \n│   3 m/s² under a 30 N force, what is its mass?  │  \n└───────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concept, correctly applying the formula F = ma to solve for acceleration. The step-by-step solution is clear and easy to follow. The use of boxes to separate different sections of the response, such as the problem statement, main formula, solution steps, and summary, enhances readability. However, the quality score is not perfect due to the unconventional use of boxes and symbols, which may not be suitable for all audiences. The educational score is high because the response provides a clear and concise explanation of the concept, making it accessible to beginners. The suggested questions at the end also promote further learning and critical thinking. Overall, the response is well-structured and effectively communicates the physics concept, but minor adjustments to formatting could improve its quality and appeal to a broader audience.",
+  "candidate_token_usage": {
+    "promptTokens": 436,
+    "completionTokens": 1282,
+    "totalTokens": 1718
+  },
+  "candidate_latency_ms": 3197,
+  "candidate_cost_usd": 0.0008346,
+  "judge_token_usage": {
+    "promptTokens": 1147,
+    "completionTokens": 222,
+    "totalTokens": 1369
+  },
+  "judge_latency_ms": 3134,
+  "judge_cost_usd": 0.0012209999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:19:37.509Z"
+}

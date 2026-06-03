@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 61,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'spring_connected' event linking a anchor to a mass.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a structural connection update within the workspace.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nA new elastic joint constraint (`spring_connected`) was created, linking the static pin anchor `p1` to the moving circular mass `c1`.\n\n### WHAT CHANGED\nThe free-floating mass was brought under a positional constraint, causing it to pull backward as it moved away from the anchor point.\n\n### SIMPLE WHY\nThe newly initialized spring joint applies an elastic restoring force that pulls the mass back toward the anchor whenever the constraint is stretched.\n\n### WHAT TO NOTICE\nWatch how the distance between the anchor and the mass determines the strength of the restoring force vector.",
+  "candidate_response": "Certainly! Below is a structured representation of an interactive textbook section that explains the concept of a spring connected to a mass, along with relevant formulas and concepts.\n\n---\n\n┌───────────────────────────┐  \n│ Introduction              │  \n│                           │  \n│ When a mass is attached to a spring, it exhibits harmonic motion. This system can be analyzed using Hooke's Law, which describes the behavior of springs.   │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ A spring-mass system consists of a mass attached to a spring that can oscillate back and forth when displaced from its equilibrium position.   │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Key Concepts              │  \n│                           │  \n│ - **Mass (m)**: The object attached to the spring.  \n│ - **Spring Constant (k)**: A measure of the spring's stiffness.  \n│ - **Displacement (x)**: The distance from the equilibrium position.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│     Rendered Formula      │  \n│                           │  \n│ $$ F = -kx $$            │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Characteristics           │  \n│                           │  \n│ - The force exerted by the spring is proportional to the displacement.  \n│ - The direction of the force is always opposite to the displacement.  \n│ - The system can oscillate indefinitely if not dampened.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Applications              │  \n│                           │  \n│ - Used in mechanical clocks.  \n│ - Found in suspension systems in vehicles.  \n│ - Used in various engineering applications such as measuring devices.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Advantages                │  \n│                           │  \n│ - Simple to model mathematically.  \n│ - Demonstrates fundamental principles of mechanics.  \n│ - Widely applicable in real-world scenarios.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Disadvantages             │  \n│                           │  \n│ - Assumes ideal conditions (no friction, perfect elasticity).  \n│ - Real springs may not behave linearly at large displacements.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Important Notes           │  \n│                           │  \n│ - The spring constant (k) varies with the material and geometry of the spring.  \n│ - Damping forces (like friction) can affect the oscillation amplitude over time.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Summary                  │  \n│                           │  \n│ A spring connected to a mass forms a simple harmonic oscillator, governed by Hooke's Law. Understanding this system is crucial for applications in physics and engineering.  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Suggested Questions       │  \n│                           │  \n│ 1. How does the spring constant affect the oscillation frequency?  \n│ 2. What role does damping play in the motion of a spring-mass system?  \n│ 3. How can the system be modeled mathematically beyond Hooke's Law?  \n└───────────────────────────┘  \n\n--- \n\nFeel free to request any additional modifications or sections!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 2,
+    "quality": 8,
+    "educational": 6,
+    "overall_average": "5.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": true,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks semantic alignment with the gold reference answer. It does not address the 'spring_connected' event or the real-time overlay response. Instead, it provides a general overview of a spring-mass system, including Hooke's Law and harmonic motion. The response includes fabricated concepts, such as the 'Quick Definition' and 'Main Formula' sections, which are not relevant to the original question. The candidate response also fails to provide a clear explanation of the event telemetry report, the real-time sandbox overlay feed, or the simple 'why' behind the spring joint's behavior. To improve, the candidate should focus on providing a concise and accurate response that directly addresses the question, including the key concepts of elastic joint constraints, positional constraints, and restoring force vectors. The response should also be free of unnecessary sections and fabricated concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 375,
+    "completionTokens": 770,
+    "totalTokens": 1145
+  },
+  "candidate_latency_ms": 8911,
+  "candidate_cost_usd": 0.00051825,
+  "judge_token_usage": {
+    "promptTokens": 1355,
+    "completionTokens": 227,
+    "totalTokens": 1582
+  },
+  "judge_latency_ms": 3468,
+  "judge_cost_usd": 0.0013578,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:54:12.646Z"
+}

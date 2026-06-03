@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 13,
+  "question": "A force of 50 N acts on a body of mass 10 kg. Find acceleration.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Dynamics Problem\n\n### Problem\nA net force of $50 \\text{ N}$ acts on a body of mass $10 \\text{ kg}$. Find its resulting acceleration.\n\n### Given\n* Force applied ($F$) = $50 \\text{ N}$\n* Mass of the body ($m$) = $10 \\text{ kg}$\n\n### Formula\n$$F = ma$$\n\nRearranging to solve for acceleration ($a$):\n$$a = \\frac{F}{m}$$\n\n### Substitution\n$$a = \\frac{50}{10}$$\n\n### Calculation\n$$a = 5 \\text{ m/s}^2$$\n\n### Final Answer\n**Acceleration ($a$) = $5 \\text{ m/s}^2$**\n\n### Interpretation\nThis indicates that the $50 \\text{ N}$ force causes the $10 \\text{ kg}$ mass to increase its velocity uniformly by $5 \\text{ meters per second}$ every single second in the direction of the applied force vector.",
+  "candidate_response": "To find the acceleration of a body when a force is applied, we use **Newton's Second Law of Motion**. Here's a step-by-step solution:\n\n### Step 1: Newton's Second Law\nThe law states that the acceleration (\\(a\\)) of an object is directly proportional to the net force (\\(F\\)) acting on it and inversely proportional to its mass (\\(m\\)). The formula is:\n\n**Formula**  \n\\[\nF = m \\cdot a\n\\]\n\n### Step 2: Rearrange the Formula\nSolve for acceleration (\\(a\\)):  \n\\[\na = \\frac{F}{m}\n\\]\n\n### Step 3: Substitute Values\nGiven:  \n- Force, \\(F = 50  \\text{N}\\) (Newtons)  \n- Mass, \\(m = 10  \\text{kg}\\) (kilograms)  \n\nSubstitute into the formula:  \n\\[\na = \\frac{50  \\text{N}}{10  \\text{kg}}\n\\]\n\n### Step 4: Calculate\nSimplify the expression:  \n\\[\na = 5  \\text{m/s}^2\n\\]\n\n### Final Answer  \nThe acceleration of the body is **\\(5  \\text{m/s}^2\\)**.\n\n---\n\n### Key Notes  \n1. **Units**:  \n   - Newtons (\\(\\text{N}\\)) are equivalent to \\(\\text{kg} \\cdot \\text{m/s}^2\\), so \\(\\frac{\\text{N}}{\\text{kg}} = \\text{m/s}^2\\).  \n   - Always ensure units are consistent. Here, they are (force in \\(\\text{N}\\), mass in \\(\\text{kg}\\)).  \n\n2. **Interpretation**:  \n   - An acceleration of \\(5  \\text{m/s}^2\\) means the body's velocity increases by \\(5  \\text{m/s}\\) every second.  \n\n3. **Direction**:  \n   - Acceleration occurs in the direction of the applied force.  \n\n---\n\n**Suggested Practice Question**  \nIf the same force (\\(50  \\text{N}\\)) acts on a body of mass \\(5  \\text{kg}\\), what would be its acceleration?  \n*(Hint: Use \\(a = \\frac{F}{m}\\))*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and educational. It correctly applies Newton's Second Law of Motion, rearranges the formula to solve for acceleration, and provides a clear step-by-step solution. The response also includes key notes on units, interpretation, and direction, making it beginner-friendly and pedagogically effective. The only minor deduction is for slight variations in formatting and wording compared to the gold reference answer, but overall, the response is excellent.",
+  "candidate_token_usage": {
+    "promptTokens": 370,
+    "completionTokens": 548,
+    "totalTokens": 918
+  },
+  "candidate_latency_ms": 24221,
+  "candidate_cost_usd": 0.00140362,
+  "judge_token_usage": {
+    "promptTokens": 1131,
+    "completionTokens": 153,
+    "totalTokens": 1284
+  },
+  "judge_latency_ms": 3757,
+  "judge_cost_usd": 0.0010458,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:19:37.534Z"
+}

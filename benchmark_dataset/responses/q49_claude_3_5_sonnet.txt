@@ -1,0 +1,161 @@
+<thinking>
+The user wants to calculate voltage using Ohm's Law. Let me structure this as an interactive textbook with proper UI blocks, formula cards, and sections.
+
+V = I × R = 2 × 10 = 20 V
+
+Let me render this properly with the new rendering system.
+</thinking>
+
+<div style="font-family: 'Segoe UI', system-ui, sans-serif; max-width: 780px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 16px;">
+
+<!-- Topic Header -->
+<div style="background: linear-gradient(135deg, #1e3a5f 0%, #2d6a9f 100%); border-radius: 14px; padding: 28px 32px; color: white;">
+  <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.75; margin-bottom: 8px;">⚡ Electricity · Ohm's Law</div>
+  <div style="font-size: 26px; font-weight: 700; margin-bottom: 6px;">Calculating Voltage</div>
+  <div style="opacity: 0.85; font-size: 15px;">Given: Current and Resistance → Find: Voltage</div>
+</div>
+
+<!-- Quick Definition Card -->
+<div style="background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 22px 26px;">
+  <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #3b82f6; margin-bottom: 10px;">📘 Quick Definition</div>
+  <div style="font-size: 15px; color: #1e3a5f; line-height: 1.7;">
+    <strong>Ohm's Law</strong> states that the voltage across a conductor is directly proportional to the current flowing through it, provided temperature and other physical conditions remain constant.
+  </div>
+</div>
+
+<!-- Formula Card -->
+<div style="background: #ffffff; border: 2px solid #6366f1; border-radius: 14px; padding: 28px 32px; box-shadow: 0 4px 20px rgba(99,102,241,0.12);">
+  <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #6366f1; margin-bottom: 16px;">📐 Core Formula</div>
+
+  <!-- Rendered Formula -->
+  <div style="background: #f5f3ff; border-radius: 10px; padding: 22px; text-align: center; font-size: 28px; margin-bottom: 20px; border: 1px solid #e0e7ff;">
+
+$$V = I \times R$$
+
+  </div>
+
+  <!-- Variable Table -->
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
+    <div style="background: #fef9c3; border-radius: 10px; padding: 14px; text-align: center; border: 1px solid #fde68a;">
+      <div style="font-size: 22px; font-weight: 700; color: #92400e;">V</div>
+      <div style="font-size: 12px; color: #78350f; margin-top: 4px;">Voltage</div>
+      <div style="font-size: 11px; color: #a16207; margin-top: 2px;">Volts (V)</div>
+    </div>
+    <div style="background: #dcfce7; border-radius: 10px; padding: 14px; text-align: center; border: 1px solid #bbf7d0;">
+      <div style="font-size: 22px; font-weight: 700; color: #166534;">I</div>
+      <div style="font-size: 12px; color: #15803d; margin-top: 4px;">Current</div>
+      <div style="font-size: 11px; color: #16a34a; margin-top: 2px;">Amperes (A)</div>
+    </div>
+    <div style="background: #fce7f3; border-radius: 10px; padding: 14px; text-align: center; border: 1px solid #fbcfe8;">
+      <div style="font-size: 22px; font-weight: 700; color: #9d174d;">R</div>
+      <div style="font-size: 12px; color: #be185d; margin-top: 4px;">Resistance</div>
+      <div style="font-size: 11px; color: #db2777; margin-top: 2px;">Ohms (Ω)</div>
+    </div>
+  </div>
+</div>
+
+<!-- Given Values Card -->
+<div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 22px 26px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+  <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #6b7280; margin-bottom: 16px;">📋 Given Values</div>
+  <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 140px; background: #f0fdf4; border-radius: 10px; padding: 16px 20px; border-left: 4px solid #22c55e;">
+      <div style="font-size: 13px; color: #6b7280;">Current</div>
+      <div style="font-size: 24px; font-weight: 700; color: #15803d; margin-top: 4px;">I = 2 A</div>
+    </div>
+    <div style="flex: 1; min-width: 140px; background: #fff1f2; border-radius: 10px; padding: 16px 20px; border-left: 4px solid #f43f5e;">
+      <div style="font-size: 13px; color: #6b7280;">Resistance</div>
+      <div style="font-size: 24px; font-weight: 700; color: #be123c; margin-top: 4px;">R = 10 Ω</div>
+    </div>
+    <div style="flex: 1; min-width: 140px; background: #fffbeb; border-radius: 10px; padding: 16px 20px; border-left: 4px solid #f59e0b;">
+      <div style="font-size: 13px; color: #6b7280;">Voltage</div>
+      <div style="font-size: 24px; font-weight: 700; color: #b45309; margin-top: 4px;">V = ?</div>
+    </div>
+  </div>
+</div>
+
+<!-- Step-by-Step Solution -->
+<div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 22px 26px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+  <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #6b7280; margin-bottom: 18px;">🔢 Step-by-Step Solution</div>
+
+  <!-- Step 1 -->
+  <div style="display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start;">
+    <div style="background: #6366f1; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; margin-top: 2px;">1</div>
+    <div style="flex: 1;">
+      <div style="font-weight: 600; color: #111827; margin-bottom: 8px;">Write the formula</div>
+      <div style="background: #f9fafb; border-radius: 8px; padding: 14px; border: 1px solid #e5e7eb;">
+
+$$V = I \times R$$
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div style="display: flex; gap: 16px; margin-bottom: 18px; align-items: flex-start;">
+    <div style="background: #6366f1; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; margin-top: 2px;">2</div>
+    <div style="flex: 1;">
+      <div style="font-weight: 600; color: #111827; margin-bottom: 8px;">Substitute the known values</div>
+      <div style="background: #f9fafb; border-radius: 8px; padding: 14px; border: 1px solid #e5e7eb;">
+
+$$V = 2 \, \text{A} \times 10 \, \Omega$$
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div style="display: flex; gap: 16px; align-items: flex-start;">
+    <div style="background: #6366f1; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0; margin-top: 2px;">3</div>
+    <div style="flex: 1;">
+      <div style="font-weight: 600; color: #111827; margin-bottom: 8px;">Calculate</div>
+      <div style="background: #f9fafb; border-radius: 8px; padding: 14px; border: 1px solid #e5e7eb;">
+
+$$V = 20 \, \text{V}$$
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Answer Card -->
+<div style="background: linear-gradient(135deg, #065f46, #047857); border-radius: 14px; padding: 26px 32px; color: white; text-align: center; box-shadow: 0 6px 24px rgba(4,120,87,0.3);">
+  <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 10px;">✅ Final Answer</div>
+  <div style="font-size: 42px; font-weight: 800; letter-spacing: 1px;">V = 20 Volts</div>
+  <div style="opacity: 0.85; margin-top: 8px; font-size: 15px;">The voltage across the resistor is <strong>20 V</strong></div>
+</div>
+
+<!-- Rearranged Forms -->
+<div style="background: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 22px 26px;">
+  <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #6b7280; margin-bottom: 16px;">🔄 Ohm's Law — All Forms</div>
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+    <div style="background: #eff6ff; border-radius: 10px; padding: 16px; text-align: center; border: 1px solid #bfdbfe;">
+      <div style="font-size: 11px; color: #3b82f6; font-weight: 600; margin-bottom: 8px;">Find Voltage</div>
+
+$$V = I \times R$$
+
+    </div>
+    <div style="background: #f0fdf4; border-radius: 10px; padding: 16px; text-align: center; border: 1px solid #bbf7d0;">
+      <div style="font-size: 11px; color: #22c55e; font-weight: 600; margin-bottom: 8px;">Find Current</div>
+
+$$I = \dfrac{V}{R}$$
+
+    </div>
+    <div style="background: #fff1f2; border-radius: 10px; padding: 16px; text-align: center; border: 1px solid #fecdd3;">
+      <div style="font-size: 11px; color: #f43f5e; font-weight: 600; margin-bottom: 8px;">Find Resistance</div>
+
+$$R = \dfrac{V}{I}$$
+
+    </div>
+  </div>
+</div>
+
+<!-- Key Takeaway -->
+<div style="background: #fefce8; border: 1px solid #fde68a; border-radius: 12px; padding: 18px 24px; display: flex; gap: 14px; align-items: flex-start;">
+  <div style="font-size: 22px;">💡</div>
+  <div>
+    <div style="font-weight: 700; color: #92400e; margin-bottom: 4px;">Key Insight</div>
+    <div style="color: #78350f; font-size: 14px; line-height: 1.6;">Doubling the current <strong>doubles</strong> the voltage. Doubling the resistance also <strong>doubles</strong> the voltage. They are directly proportional — a core principle in circuit design.</div>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,78 @@
+### Explanation of Archimedes' Principle  
+
+#### 🧠 Quick Definition  
+**Archimedes' principle** states that when an object is partially or fully submerged in a fluid (liquid or gas), it experiences an upward buoyant force equal to the weight of the fluid it displaces.  
+
+---
+
+#### 🔍 Key Concept  
+- **Buoyant Force (\(F_b\))**: The upward force exerted by the fluid on the object.  
+- **Displaced Fluid**: The volume of fluid pushed aside by the object.  
+- **Mathematical Statement**:  
+  \[
+  F_b = \rho_{\text{fluid}} \times V_{\text{displaced}} \times g
+  \]  
+  Where:  
+  - \(\rho_{\text{fluid}}\) = Density of the fluid (kg/m³),  
+  - \(V_{\text{displaced}}\) = Volume of displaced fluid (m³),  
+  - \(g\) = Acceleration due to gravity (9.8 m/s²).  
+
+---
+
+#### 🎯 Why It Matters  
+- Determines whether an object **floats**, **sinks**, or remains **neutrally buoyant**:  
+  - **Float**: \(F_b > \text{Weight}_{\text{object}}\)  
+  - **Sink**: \(F_b < \text{Weight}_{\text{object}}\)  
+  - **Neutral**: \(F_b = \text{Weight}_{\text{object}}\).  
+
+---
+
+#### 🌊 Example: Floating Iceberg  
+Imagine an iceberg floating in seawater:  
+1. **Given**:  
+   - Density of seawater (\(\rho_{\text{seawater}}\)) = 1030 kg/m³,  
+   - Density of ice (\(\rho_{\text{ice}}\)) = 920 kg/m³,  
+   - Volume of iceberg above water = 80 m³.  
+
+2. **Calculate Displaced Volume**:  
+   - Let \(V_{\text{total}}\) = Total volume of iceberg,  
+   - \(V_{\text{displaced}}\) = Volume submerged (displacing seawater).  
+   - By Archimedes' principle:  
+     \[
+     \rho_{\text{ice}} V_{\text{total}} g = \rho_{\text{seawater}} V_{\text{displaced}} g
+     \]  
+     \[
+     \frac{V_{\text{displaced}}}{V_{\text{total}}} = \frac{\rho_{\text{ice}}}{\rho_{\text{seawater}}} = \frac{920}{1030} \approx 0.893
+     \]  
+     So, **89.3%** of the iceberg is submerged.  
+
+3. **Volume Above Water**:  
+   \[
+   V_{\text{above}} = V_{\text{total}} - V_{\text{displaced}} = (1 - 0.893) V_{\text{total}} = 0.107 V_{\text{total}}
+   \]  
+   Given \(V_{\text{above}} = 80  \text{m}^3\):  
+   \[
+   V_{\text{total}} = \frac{80}{0.107} \approx 748  \text{m}^3
+   \]  
+
+---
+
+#### ⚖️ Practical Applications  
+1. **Ship Design**: Hulls displace water equal to the ship’s weight to float.  
+2. **Hot Air Balloons**: Displace heavier cool air to rise.  
+3. **Hydrometers**: Measure fluid density via buoyancy.  
+
+---
+
+#### 💡 Important Insight  
+Buoyant force depends **only** on the displaced fluid’s properties—**not** the object’s material, shape, or depth (as long as fluid density is uniform).  
+
+❓ **Test Yourself**  
+*A 5 kg iron cube (density 7870 kg/m³) is submerged in water. What buoyant force acts on it?*  
+*(Hint: First find the cube’s volume!)*  
+
+<details>  
+<summary>📝 Answer</summary>  
+Volume of cube = \(\frac{5  \text{kg}}{7870  \text{kg/m}^3} \approx 0.000635  \text{m}^3\).  
+Buoyant force \(F_b = \rho_{\text{water}} V g = 1000 \times 0.000635 \times 9.8 \approx 6.22  \text{N}\).  
+</details>

@@ -1,0 +1,560 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics: Newton's Second Law</title>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Google Fonts for Textbook Vibe -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --accent-hover: #2980b9;
+            --bg-color: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-radius: 12px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --font-serif: 'Merriweather', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        /* Layout Container */
+        .textbook-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .chapter-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Generic Card Styles */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent-color);
+        }
+
+        .card-content {
+            font-size: 1.05rem;
+            color: #4a4a4a;
+        }
+
+        /* Specific Card Types */
+        .problem-statement {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .highlight-box {
+            background-color: #eef7fc;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: #fff;
+            border: 2px solid var(--primary-color);
+            position: relative;
+        }
+
+        .formula-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+            font-size: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #ddd;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1a252f;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: #f0f4f8;
+        }
+
+        /* Answer Card */
+        .answer-card {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+
+        .answer-card .card-title {
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.2);
+        }
+
+        .answer-card .card-content {
+            color: #ecf0f1;
+        }
+
+        .final-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #f1c40f;
+            margin: 0.5rem 0;
+            font-family: var(--font-serif);
+        }
+
+        /* Modal / Formula Lab */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Lab Interactive Elements */
+        .lab-controls {
+            margin-top: 1.5rem;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        input[type=range] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .lab-result {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+        }
+
+        .lab-result h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .lab-result .dynamic-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f1c40f;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .card { padding: 1.5rem; }
+            .formula-actions { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="textbook-container">
+        
+        <!-- Header -->
+        <header class="chapter-header">
+            <div class="chapter-label">Classical Mechanics • Problem 1.1</div>
+            <h1>Newton's Second Law</h1>
+            <p style="color: var(--text-secondary);">Understanding the relationship between force, mass, and acceleration.</p>
+        </header>
+
+        <!-- Section: Problem Statement -->
+        <article class="card problem-statement">
+            <div class="card-title">
+                <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/></svg>
+                Problem Statement
+            </div>
+            <div class="card-content">
+                <p>A force of 50 N acts on a body of mass 10 kg. Find the acceleration produced.</p>
+            </div>
+        </article>
+
+        <!-- Section: Concept Definition -->
+        <article class="card">
+            <div class="card-title">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                Key Concept
+            </div>
+            <div class="card-content">
+                <p>Newton's Second Law of Motion states that the acceleration of an object is dependent upon the net force acting upon the object and the mass of the object.</p>
+                <div class="highlight-box">
+                    "The acceleration of an object as produced by a net force is directly proportional to the magnitude of the net force, in the same direction as the net force, and inversely proportional to the mass of the object."
+                </div>
+            </div>
+        </article>
+
+        <!-- Section: Formula Card -->
+        <article class="card formula-card" id="formula-section">
+            <div class="card-title">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 2h2v5h5v2h-5v5h-2v-5H7v-2h5V5z"/></svg>
+                Core Formula
+            </div>
+            <div class="formula-display">
+                $$ F = m \cdot a $$
+            </div>
+            <div class="formula-actions">
+                <button class="btn btn-outline" onclick="explainFormula()">
+                    <span>Explain Variables</span>
+                </button>
+                <button class="btn btn-primary" onclick="openFormulaLab()">
+                    <span>Open Formula Lab</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                </button>
+            </div>
+        </article>
+
+        <!-- Section: Solution Steps -->
+        <article class="card">
+            <div class="card-title">
+                <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+                Solution Steps
+            </div>
+            <div class="card-content">
+                <p>To find the acceleration, we rearrange the formula to solve for $a$:</p>
+                <div style="margin: 1rem 0; background: #f8f9fa; padding: 1rem; border-radius: 8px;">
+                    $$ a = \frac{F}{m} $$
+                </div>
+                <p><strong>Given:</strong></p>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li>Force ($F$) = 50 N</li>
+                    <li>Mass ($m$) = 10 kg</li>
+                </ul>
+                <p><strong>Calculation:</strong></p>
+                <p>Substitute the given values into the equation:</p>
+                <div style="margin: 1rem 0;">
+                    $$ a = \frac{50 \text{ N}}{10 \text{ kg}} $$
+                </div>
+            </div>
+        </article>
+
+        <!-- Section: Final Answer -->
+        <article class="card answer-card">
+            <div class="card-title">
+                <svg viewBox="0 0 24 24" style="fill:white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Final Result
+            </div>
+            <div class="card-content">
+                <p>The acceleration produced is:</p>
+                <div class="final-value">5 m/s²</div>
+                <p style="font-size: 0.9rem; opacity: 0.8;">The direction of acceleration is the same as the direction of the applied force.</p>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- Interactive Formula Lab Modal -->
+    <div class="modal-overlay" id="labModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeFormulaLab()">&times;</button>
+            <h2 style="font-family: var(--font-serif); margin-bottom: 0.5rem; color: var(--primary-color);">Formula Lab</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Experiment with the variables to see how acceleration changes.</p>
+
+            <div class="formula-display" style="padding: 1rem 0;">
+                $$ a = \frac{F}{m} $$
+            </div>
+
+            <div class="lab-controls">
+                <div class="control-group">
+                    <label>
+                        <span>Force (F)</span>
+                        <span id="forceVal">50 N</span>
+                    </label>
+                    <input type="range" id="forceInput" min="0" max="200" value="50" step="1">
+                </div>
+
+                <div class="control-group">
+                    <label>
+                        <span>Mass (m)</span>
+                        <span id="massVal">10 kg</span>
+                    </label>
+                    <input type="range" id="massInput" min="1" max="100" value="10" step="1">
+                </div>
+            </div>
+
+            <div class="lab-result">
+                <h4>Calculated Acceleration</h4>
+                <div class="dynamic-value" id="accelResult">5.00</div>
+                <div style="font-size: 0.8rem; margin-top: 0.5rem;">m/s²</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explanation Modal -->
+    <div class="modal-overlay" id="explainModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeExplain()">&times;</button>
+            <h2 style="font-family: var(--font-serif); margin-bottom: 1rem; color: var(--primary-color);">Variable Breakdown</h2>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <strong style="color: var(--accent-color);">F (Net Force)</strong>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">The vector sum of all forces acting on an object. Measured in Newtons (N).</p>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <strong style="color: var(--accent-color);">m (Mass)</strong>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">The quantity of matter in an object. A measure of its resistance to acceleration. Measured in kilograms (kg).</p>
+            </div>
+
+            <div>
+                <strong style="color: var(--accent-color);">a (Acceleration)</strong>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">The rate of change of velocity of an object with respect to time. Measured in meters per second squared (m/s²).</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Render Math with KaTeX
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false
+            });
+        });
+
+        // 2. Formula Data Structure (Extraction Simulation)
+        const formulaData = {
+            formula: "F = ma",
+            title: "Newton's Second Law",
+            variables: {
+                F: { name: "Force", unit: "N" },
+                m: { name: "Mass", unit: "kg" },
+                a: { name: "Acceleration", unit: "m/s²" }
+            }
+        };
+
+        // 3. Interaction Logic
+        
+        // Formula Lab Logic
+        const labModal = document.getElementById('labModal');
+        const explainModal = document.getElementById('explainModal');
+        const forceInput = document.getElementById('forceInput');
+        const massInput = document.getElementById('massInput');
+        const forceVal = document.getElementById('forceVal');
+        const massVal = document.getElementById('massVal');
+        const accelResult = document.getElementById('accelResult');
+
+        function openFormulaLab() {
+            labModal.classList.add('active');
+            calculateLab(); // Initial calculation
+        }
+
+        function closeFormulaLab() {
+            labModal.classList.remove('active');
+        }
+
+        function explainFormula() {
+            explainModal.classList.add('active');
+        }
+
+        function closeExplain() {
+            explainModal.classList.remove('active');
+        }
+
+        // Close modals on outside click
+        window.onclick = function(event) {
+            if (event.target == labModal) {
+                closeFormulaLab();
+            }
+            if (event.target == explainModal) {
+                closeExplain();
+            }
+        }
+
+        // Lab Calculation Logic
+        function calculateLab() {
+            const F = parseFloat(forceInput.value);
+            const m = parseFloat(massInput.value);
+            
+            // Update Labels
+            forceVal.textContent = F + " N";
+            massVal.textContent = m + " kg";
+
+            // Calculate Acceleration
+            let a = 0;
+            if (m > 0) {
+                a = F / m;
+            }
+
+            // Update Result with animation effect
+            accelResult.textContent = a.toFixed(2);
+        }
+
+        // Event Listeners for Sliders
+        forceInput.addEventListener('input', calculateLab);
+        massInput.addEventListener('input', calculateLab);
+
+    </script>
+</body>
+</html>
+```

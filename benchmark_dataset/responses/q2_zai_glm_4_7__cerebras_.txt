@@ -1,0 +1,555 @@
+Here is the complete, self-contained HTML solution. It transforms the physics problem into an interactive textbook experience using the "Card System" you requested, featuring dedicated Formula Cards, interactive "Formula Labs," and a structured layout.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Physics Textbook: Uniform Acceleration</title>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0f172a;
+            --accent: #f59e0b;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 20px;
+        }
+
+        /* Layout */
+        .textbook-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chapter-title {
+            font-family: 'Merriweather', serif;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+
+        .chapter-subtitle {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            background-color: #f8fafc;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        /* Typography inside cards */
+        .card-body p {
+            margin-bottom: 16px;
+        }
+        
+        .card-body ul {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .card-body li {
+            margin-bottom: 8px;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            border-left: 4px solid var(--primary);
+        }
+
+        .formula-display {
+            background-color: #f8fafc;
+            padding: 32px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px dashed var(--border);
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        /* Calculation Steps */
+        .step-row {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .step-row:last-child {
+            border-bottom: none;
+        }
+
+        .step-number {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+            min-width: 30px;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .highlight-box {
+            background-color: #eff6ff;
+            border: 1px solid #dbeafe;
+            color: #1e40af;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        /* Modal / Formula Lab */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            padding: 32px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .lab-controls {
+            margin-top: 24px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .control-group {
+            margin-bottom: 16px;
+        }
+
+        .control-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .lab-output {
+            margin-top: 16px;
+            font-family: 'Merriweather', serif;
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .chapter-title {
+                font-size: 1.5rem;
+            }
+            .card-body {
+                padding: 16px;
+            }
+            .formula-display {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="textbook-container">
+        
+        <header class="chapter-header">
+            <h1 class="chapter-title">Uniform Acceleration</h1>
+            <p class="chapter-subtitle">Problem Solving with Kinematic Equations</p>
+        </header>
+
+        <!-- 1. Problem Statement Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">!</div>
+                <h2 class="card-title">Problem Statement</h2>
+            </div>
+            <div class="card-body">
+                <p>A car starts from rest and accelerates uniformly at <strong>2 m/s²</strong>. Find its velocity after <strong>10 seconds</strong>.</p>
+                
+                <div style="margin-top: 16px;">
+                    <strong>Given Data:</strong>
+                    <ul style="margin-top: 8px; list-style-type: none; padding-left: 0;">
+                        <li>🚗 Initial velocity (\(u\)) = 0 m/s (starts from rest)</li>
+                        <li>⚡ Acceleration (\(a\)) = 2 m/s²</li>
+                        <li>⏱️ Time (\(t\)) = 10 s</li>
+                        <li>❓ Final velocity (\(v\)) = ?</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Concept Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">i</div>
+                <h2 class="card-title">Key Concept</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Uniform Acceleration</strong> implies that the velocity of the object increases by equal amounts in equal time intervals. The relationship between velocity, acceleration, and time is linear.</p>
+            </div>
+        </section>
+
+        <!-- 3. Formula Card (Structured UI Block) -->
+        <section class="card formula-card">
+            <div class="card-header">
+                <div class="card-icon">∑</div>
+                <h2 class="card-title">Main Formula</h2>
+            </div>
+            <div class="card-body">
+                <p>To find the final velocity, we use the first equation of motion:</p>
+                
+                <div class="formula-display">
+                    <div id="main-formula"></div>
+                </div>
+
+                <div class="formula-actions">
+                    <button class="btn btn-outline" onclick="openExplainModal()">
+                        <span>💡 Explain Formula</span>
+                    </button>
+                    <button class="btn btn-primary" onclick="openLabModal()">
+                        <span>🧪 Open Formula Lab</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Calculation Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">=</div>
+                <h2 class="card-title">Calculation Steps</h2>
+            </div>
+            <div class="card-body">
+                <div class="step-row">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        Write down the formula.
+                        <br>
+                        <span id="step1-math"></span>
+                    </div>
+                </div>
+
+                <div class="step-row">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        Substitute the known values (\(u=0\), \(a=2\), \(t=10\)).
+                        <br>
+                        <span id="step2-math"></span>
+                    </div>
+                </div>
+
+                <div class="step-row">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        Perform the multiplication.
+                        <br>
+                        <span id="step3-math"></span>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    Final Velocity (\(v\)) = 20 m/s
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Suggested Questions -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">?</div>
+                <h2 class="card-title">Suggested Questions</h2>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>How far did the car travel during these 10 seconds? (Hint: Use \(s = ut + \frac{1}{2}at^2\))</li>
+                    <li>What would the velocity be if the car accelerated for 20 seconds?</li>
+                    <li>If the car decelerated at -2 m/s² from 20 m/s, how long until it stops?</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- MODAL: Explain Formula -->
+    <div class="modal-overlay" id="explainModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModals()">&times;</button>
+            <h2 style="margin-bottom: 16px; color: var(--primary);">Understanding \( v = u + at \)</h2>
+            <p>This equation connects the final velocity of an object to its initial velocity, acceleration, and time.</p>
+            <br>
+            <ul>
+                <li><strong>\(v\)</strong>: Final velocity (speed and direction at the end).</li>
+                <li><strong>\(u\)</strong>: Initial velocity (speed and direction at the start).</li>
+                <li><strong>\(a\)</strong>: Constant acceleration (rate of change of velocity).</li>
+                <li><strong>\(t\)</strong>: Time duration.</li>
+            </ul>
+            <br>
+            <p><strong>Intuition:</strong> If you start at speed \(u\) and add \(a\) meters per second to your speed every second for \(t\) seconds, your total speed is \(u\) plus the product \(a \times t\).</p>
+            <div style="margin-top: 24px; text-align: right;">
+                <button class="btn btn-primary" onclick="closeModals()">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Formula Lab (Interactive) -->
+    <div class="modal-overlay" id="labModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModals()">&times;</button>
+            <h2 style="margin-bottom: 8px;">Formula Lab 🧪</h2>
+            <p style="color: var(--text-light); margin-bottom: 24px;">Experiment with the variables to see how velocity changes.</p>
+
+            <div class="lab-controls">
+                <div class="control-group">
+                    <label>Initial Velocity (\(u\)): <span id="val-u">0</span> m/s</label>
+                    <input type="range" id="input-u" min="0" max="20" value="0" step="1" oninput="updateLab()">
+                </div>
+                
+                <div class="control-group">
+                    <label>Acceleration (\(a\)): <span id="val-a">2</span> m/s²</label>
+                    <input type="range" id="input-a" min="-5" max="10" value="2" step="0.5" oninput="updateLab()">
+                </div>
+
+                <div class="control-group">
+                    <label>Time (\(t\)): <span id="val-t">10</span> s</label>
+                    <input type="range" id="input-t" min="1" max="30" value="10" step="1" oninput="updateLab()">
+                </div>
+            </div>
+
+            <div class="lab-output">
+                <div id="lab-formula-render"></div>
+                <div style="font-size: 1rem; color: var(--text-light); margin-top: 8px;">Result: <span id="lab-result">20</span> m/s</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Render initial formulas
+            katex.render("v = u + at", document.getElementById("main-formula"), { throwOnError: false, displayMode: true });
+            katex.render("v = u + at", document.getElementById("step1-math"), { throwOnError: false });
+            katex.render("v = 0 + (2 \\times 10)", document.getElementById("step2-math"), { throwOnError: false });
+            katex.render("v = 20 \\text{ m/s}", document.getElementById("step3-math"), { throwOnError: false });
+            
+            updateLab();
+        });
+
+        // Modal Logic
+        function openExplainModal() {
+            document.getElementById('explainModal').classList.add('active');
+        }
+
+        function openLabModal() {
+            document.getElementById('labModal').classList.add('active');
+            updateLab(); // Ensure state is fresh
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.modal-overlay').forEach(el => el.classList.remove('active'));
+        }
+
+        // Close on clicking outside
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    closeModals();
+                }
+            });
+        });
+
+        // Formula Lab Logic
+        function updateLab() {
+            const u = parseFloat(document.getElementById('input-u').value);
+            const a = parseFloat(document.getElementById('input-a').value);
+            const t = parseFloat(document.getElementById('input-t').value);
+
+            // Update Labels
+            document.getElementById('val-u').textContent = u;
+            document.getElementById('val-a').textContent = a;
+            document.getElementById('val-t').textContent = t;
+
+            // Calculate Result
+            const v = u + (a * t);
+            
+            // Render Dynamic Formula
+            const formulaString = `v = ${u} + (${a} \\times ${t})`;
+            katex.render(formulaString, document.getElementById('lab-formula-render'), { throwOnError: false, displayMode: true });
+            
+            // Update Result Text
+            document.getElementById('lab-result').textContent = v.toFixed(2);
+        }
+    </script>
+</body>
+</html>
+```

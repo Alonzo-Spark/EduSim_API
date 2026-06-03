@@ -1,0 +1,166 @@
+┌───────────────────────────┐  
+│ **Introduction**          │  
+│                           │  
+│ The laws of thermodynamics form the foundation of classical thermodynamics, describing how energy behaves in physical systems. These laws define fundamental quantities such as temperature, energy, and entropy, and govern their interactions in all natural processes. │  
+└───────────────────────────┘  
+
+---
+
+### **First Law of Thermodynamics**
+
+┌───────────────────────────┐  
+│ **Quick Definition**      │  
+│                           │  
+│ Energy cannot be created or destroyed—only converted from one form to another. │  
+└───────────────────────────┘  
+
+$$
+\Delta U = Q - W
+$$
+
+┌───────────────────────────┐  
+│ **Main Formula**          │  
+│                           │  
+│ $$  
+\Delta U = Q - W  
+$$  │  
+│                           │  
+│ - $\Delta U$: Change in internal energy of the system  
+│ - $Q$: Heat added to the system  
+│ - $W$: Work done *by* the system  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+> 🔹 Also known as the **law of energy conservation**.  
+> 🔹 If heat is added to a system, it either increases internal energy or does work (or both).  
+> 🔹 Sign convention:  
+> - $Q > 0$: Heat flows *into* system  
+> - $W > 0$: System does work *on surroundings*
+
+---
+
+### **Second Law of Thermodynamics**
+
+┌───────────────────────────┐  
+│ **Key Concepts**          │  
+│                           │  
+│ The total entropy of an isolated system can never decrease over time. Natural processes are irreversible and tend toward increasing disorder. │  
+└───────────────────────────┘  
+
+There are several equivalent statements:
+
+#### 🔹 **Clausius Statement**  
+> "Heat cannot spontaneously flow from a colder body to a hotter body."
+
+#### 🔹 **Kelvin-Planck Statement**  
+> "It is impossible to convert heat completely into work in a cyclic process without other effects."
+
+#### 🔹 **Entropy Statement**  
+> For any spontaneous process in an isolated system:  
+>  
+> $$
+> \Delta S_{\text{universe}} = \Delta S_{\text{system}} + \Delta S_{\text{surroundings}} \geq 0
+> $$
+
+┌───────────────────────────┐  
+│ **Main Formula**          │  
+│                           │  
+│ $$  
+\Delta S \geq \int \frac{\delta Q}{T}  
+$$  │  
+│                           │  
+│ - $\Delta S$: Change in entropy  
+│ - $\delta Q$: Infinitesimal heat transfer  
+│ - $T$: Absolute temperature (in Kelvin)  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+> 🔹 Equality holds only for reversible processes.  
+> 🔹 In real (irreversible) processes, $\Delta S > \int \frac{\delta Q}{T}$.
+
+---
+
+### **Third Law of Thermodynamics**
+
+┌───────────────────────────┐  
+│ **Definition**            │  
+│                           │  
+│ As the temperature of a perfect crystalline substance approaches absolute zero, its entropy approaches zero. │  
+└───────────────────────────┘  
+
+$$
+\lim_{T \to 0} S = 0
+$$
+
+┌───────────────────────────┐  
+│ **Main Formula**          │  
+│                           │  
+│ $$  
+\lim_{T \to 0} S = 0  
+$$  │  
+│                           │  
+│ - $S$: Entropy of a perfect crystal  
+│ - $T \to 0$: Approaching absolute zero (0 K)  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+> 🔹 At 0 K, particles are in their lowest energy state with no disorder.  
+> 🔹 Only applies to perfectly ordered crystals.  
+> 🔹 Absolute zero is unattainable in finite steps (**Nernst’s theorem**).
+
+---
+
+### **Zeroth Law of Thermodynamics**
+
+┌───────────────────────────┐  
+│ **Fundamental Principle** │  
+│                           │  
+│ If two systems are each in thermal equilibrium with a third system, they are in thermal equilibrium with each other. │  
+└───────────────────────────┘  
+
+> 🔹 Defines the basis for temperature measurement.  
+> 🔹 Establishes **temperature** as a valid and transitive property.  
+> 🔹 Allows use of thermometers: if A = B and B = C, then A = C (in terms of temperature).
+
+---
+
+### **Summary Table**
+
+┌───────────────────────────┐  
+│ **Laws of Thermodynamics**│  
+└───────────────────────────┘  
+
+| Law       | Statement                                                                 | Key Concept             |  
+|-----------|---------------------------------------------------------------------------|--------------------------|  
+| **Zeroth**| If A ≈ B and B ≈ C, then A ≈ C (thermal equilibrium)                      | Defines temperature      |  
+| **First** | $\Delta U = Q - W$                                                        | Conservation of energy   |  
+| **Second**| $\Delta S_{\text{universe}} \geq 0$                                       | Entropy always increases |  
+| **Third** | $S \to 0$ as $T \to 0$ for perfect crystals                               | Absolute zero entropy    |  
+
+---
+
+### **Important Notes**
+
+- The **First Law** says energy is conserved, but doesn’t restrict direction.  
+- The **Second Law** introduces the *arrow of time*—why processes go one way.  
+- The **Third Law** implies that absolute zero is a limit we can approach but never reach.  
+- The **Zeroth Law** seems obvious but is logically necessary for thermometry.
+
+---
+
+### **Suggested Questions**
+
+- Why can't we build a 100% efficient heat engine?  
+- How does entropy explain why ice melts in warm water?  
+- What happens to molecular motion at absolute zero?  
+- Can entropy ever decrease? If so, under what conditions?
+
+---
+
+📘 **Next Topic:** Applications of Thermodynamics — Heat Engines, Refrigerators, and Entropy in Real Systems

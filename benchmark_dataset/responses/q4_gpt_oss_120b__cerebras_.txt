@@ -1,0 +1,109 @@
+┌───────────────────────────────────────┐
+│ Introduction                           │
+│                                       │
+│ In kinematics, the motion of an object   │
+│ that experiences a constant acceleration │
+│ can be described by a simple algebraic   │
+│ relationship between its displacement,   │
+│ initial velocity, time, and acceleration.│
+│ This derivation shows how that relationship│
+│ emerges directly from the definitions of │
+│ velocity and acceleration.                │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Definition                             │
+│                                       │
+│ • **s** – Displacement (meters)        │
+│ • **u** – Initial velocity (m s⁻¹)    │
+│ • **t** – Time elapsed (seconds)       │
+│ • **a** – Constant acceleration (m s⁻²)│
+│                                       │
+│ All symbols refer to a single‑dimensional │
+│ straight‑line motion.                     │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Key Concepts                           │
+│                                       │
+│ 1. **Acceleration** is the rate of change │
+│    of velocity:   a = (v – u) / t       │
+│ 2. **Velocity** at any instant is the     │
+│    initial velocity plus the change     │
+│    due to acceleration:   v = u + a t   │
+│ 3. **Displacement** is the area under the │
+│    velocity‑time graph.                  │
+│    For constant a, the graph is a        │
+│    trapezoid, giving the average velocity│
+│    (u + v)/2 over the interval t.        │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Derivation Steps                       │
+│                                       │
+│ 1️⃣  Start from the definition of        │
+│    acceleration:                        │
+│    a = (v – u) / t   ⇒   v = u + a t    │
+│                                       │
+│ 2️⃣  Displacement is the integral of      │
+│    velocity over time. For constant a,   │
+│    the average velocity 𝑣̅ = (u + v)/2  │
+│    gives:                               │
+│    s = 𝑣̅·t = [(u + v)/2]·t             │
+│                                       │
+│ 3️⃣  Substitute v from step 1:           │
+│    s = [(u + (u + a t))/2]·t             │
+│    = [(2u + a t)/2]·t                    │
+│    = u t + (a t²)/2                      │
+│                                       │
+│ 4️⃣  The final relation is:               │
+│    **s = u t + ½ a t²**                   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Main Formula                           │
+│                                       │
+│      s = u t + \frac{1}{2} a t^{2}    │
+│                                       │
+│ [ Explain Formula ]                    │
+│ [ Open Formula Lab ]                   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Applications                           │
+│                                       │
+│ • Predicting the distance a car travels│
+│   when it accelerates uniformly.      │
+│ • Calculating the height reached by a  │
+│   projectile launched vertically.     │
+│ • Solving problems in physics labs     │
+│   involving constant‑acceleration ramps│
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Summary                                 │
+│                                       │
+│ • Constant acceleration ⇒ linear change│
+│   in velocity.                         │
+│ • Displacement equals initial velocity│
+│   times time plus half the product of   │
+│   acceleration and the square of time.│
+│ • The formula s = u t + ½ a t² links   │
+│   kinematic variables without needing │
+│   calculus.                             │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Suggested Questions                     │
+│                                       │
+│ 1. If a train starts from rest (u = 0)│
+│    and accelerates at 0.5 m s⁻² for 10│
+│    s, how far does it travel?          │
+│ 2. A ball is thrown upward with u = 15│
+│    m s⁻¹. How high does it rise before│
+│    its velocity becomes zero?          │
+│ 3. Rearrange the equation to solve for│
+│    a given s, u, and t.                │
+│ 4. How would the graph change if a is │
+│    negative?                           │
+└───────────────────────────────────────┘

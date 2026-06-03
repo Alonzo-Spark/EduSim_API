@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 2,
+  "question": "A car starts from rest and accelerates uniformly at 2m/s. Find its velocity after 10 seconds.",
+  "gold_answer": "```python\nu = 0\na = 2\nt = 10\nv = u + a * t\nprint(f\"v = {v}\")\n\n\n\n```\n\n```text\nv = 20\n\n\n```\n\n# Solved Numerical\n\n---\n\n## Kinematics Problem\n\n### Problem\n\nA car starts from rest and accelerates uniformly at $2 \\text{ m/s}^2$. Find its velocity after 10 seconds.\n\n### Given\n\n* Initial velocity ($u$) = $0 \\text{ m/s}$\n* Uniform acceleration ($a$) = $2 \\text{ m/s}^2$\n* Time taken ($t$) = $10 \\text{ s}$\n\n### Formula\n\n$$v = u + at$$\n\n### Substitution\n\n$$v = 0 + (2 \\times 10)$$\n\n### Calculation\n\n$$v = 0 + 20$$\n\n$$v = 20$$\n\n### Final Answer\n\n**Final Velocity ($v$) = $20 \\text{ m/s}$**\n\n### Interpretation\n\nThis means that after starting from a complete standstill and accelerating steadily at a rate of $2 \\text{ m/s}^2$ for $10 \\text{ seconds}$, the car reaches a speed of $20 \\text{ meters per second}$ in its direction of motion.",
+  "candidate_response": "┌───────────────────────────┐  \n│ **Quick Definition**      │  \n│                           │  \n│ When an object accelerates│  \n│ uniformly from rest, its  │  \n│ velocity increases at a   │  \n│ constant rate over time.  │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Main Formula**          │  \n│                           │  \n│ $$                        │  \n│ v = u + at                │  \n$$                          │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n---\n\n### **Given Values**\n\n- Initial velocity ($u$) = 0 m/s *(since the car starts from rest)*  \n- Acceleration ($a$) = 2 m/s²  \n- Time ($t$) = 10 s  \n\n---\n\n### **Apply the Formula**\n\n$$\nv = u + at = 0 + (2)(10) = 20 \\text{ m/s}\n$$\n\n---\n\n┌───────────────────────────┐  \n│ **Final Answer**          │  \n│                           │  \n│ The car's velocity after  │  \n│ 10 seconds is **20 m/s**. │  \n└───────────────────────────┘  \n\n---\n\n### **Key Concept**\nUniform acceleration means the velocity changes by the same amount each second. Here, the car gains 2 m/s every second, so after 10 seconds:  \n$2 \\times 10 = 20$ m/s.\n\n---\n\n### **Suggested Questions**\n- How far does the car travel in 10 seconds?  \n- What would the velocity be if acceleration was 3 m/s²?  \n- How long would it take to reach 30 m/s?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is largely accurate and well-structured, with a clear explanation of the concept of uniform acceleration and the correct application of the formula v = u + at. The use of formatting and sectioning (e.g., Quick Definition, Main Formula, Given Values) enhances readability. However, the accuracy score is not a perfect 10 because the response could benefit from a more detailed explanation of the physics behind uniform acceleration and its implications. The quality score is 8 due to some minor formatting inconsistencies and the presence of suggested questions that, while useful, do not directly contribute to the solution of the given problem. The educational score is high because the response effectively teaches the concept and applies it to solve the problem, making it accessible to beginners. Overall, the response is of high quality, but minor improvements in detail and consistency would elevate it further.",
+  "candidate_token_usage": {
+    "promptTokens": 370,
+    "completionTokens": 380,
+    "totalTokens": 750
+  },
+  "candidate_latency_ms": 3965,
+  "candidate_cost_usd": 0.00113,
+  "judge_token_usage": {
+    "promptTokens": 1063,
+    "completionTokens": 231,
+    "totalTokens": 1294
+  },
+  "judge_latency_ms": 5237,
+  "judge_cost_usd": 0.0011922,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T06:55:10.428Z"
+}

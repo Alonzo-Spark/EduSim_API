@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 16,
+  "question": "Work, Energy and Power: Define work and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWork is defined as the measure of energy transfer that occurs when an external force acts on an object and causes it to move through a displacement distance. \n\nWork is a scalar quantity calculated as the dot product of the applied force vector and the displacement vector.\n\n---\n\n## Characteristics\n\n* **Directional Orientation Dependency:** Work value can scale as positive, negative, or zero depending on the angle between the force and displacement vectors.\n* **Zero Work Scenarios:** No work is performed if the object remains stationary ($\\Delta x = 0$) or if the applied force vector acts at a right angle ($90^\\circ$) relative to the motion.\n\n---\n\n## Formula\n\nThe mathematical dot product defining mechanical work:\n\n$$W = Fs \\cos(\\theta)$$\n\nWhere:\n* $W$ represents the work scalar value\n* $F$ represents the magnitude of the applied force vector\n* $s$ represents the magnitude of the displacement vector\n* $\\theta$ represents the angle between the force and displacement paths\n\n---\n\n## Metric System Units\n\nThe standard SI unit of work is the **Joule ($\\text{J}$)**, which is defined as the work performed when a constant force of $1 \\text{ Newton}$ displaces an object through a distance of $1 \\text{ meter}$ along its line of action.\n\n$$1 \\text{ J} = 1 \\text{ N} \\cdot \\text{m} = 1 \\text{ kg} \\cdot \\text{m}^2/\\text{s}^2$$\n\n---\n\n## Summary\n\nWork measures mechanical energy conversion, directly proportional to force intensity and displacement length, with a dependency on their mutual vector alignment angle.",
+  "candidate_response": "┌───────────────────────────┐\n│ Definition                 │\n│                             │\n│ Work is the transfer of    │\n│ energy that occurs when a  │\n│ force acts on an object and │\n│ the object moves in the    │\n│ direction of the force.    │\n│ SI unit: Joule (J).        │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula               │\n│                             │\n│     W = F · d · cosθ        │\n│                             │\n│ [ Explain Formula ]         │\n│ [ Open Formula Lab ]       │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines work and provides the correct SI unit, Joule (J). The formula W = F · d · cosθ is also correct. However, the response lacks detailed explanations and characteristics of work, such as directional orientation dependency and zero work scenarios, which are present in the gold reference answer. The layout formatting is simple and easy to read, but it could be improved with clearer section headings and more detailed explanations. To improve, the candidate should provide more comprehensive information about work, including its characteristics and examples, and enhance the formatting to make it more engaging and easy to understand. Additionally, the use of ASCII art tables, while creative, may not be the most effective way to present information and could be replaced with more traditional formatting methods.",
+  "candidate_token_usage": {
+    "promptTokens": 431,
+    "completionTokens": 533,
+    "totalTokens": 964
+  },
+  "candidate_latency_ms": 1062,
+  "candidate_cost_usd": 0.00019222,
+  "judge_token_usage": {
+    "promptTokens": 900,
+    "completionTokens": 212,
+    "totalTokens": 1112
+  },
+  "judge_latency_ms": 9982,
+  "judge_cost_usd": 0.0010488,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:25:27.133Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 6,
+  "question": "Motion in a Plane: Define projectile motion and explain its characteristics.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nProjectile motion is a form of motion experienced by an object or particle that is projected near the Earth's surface and moves along a curved path under the action of gravity alone. \n\nThe path followed by the projectile is called its trajectory, which always takes the geometric shape of a parabola.\n\n---\n\n## Characteristics\n\n* **Two-Dimensional Independent Motion:** The motion can be split into a horizontal component (constant velocity) and a vertical component (uniform acceleration due to gravity).\n* **Constant Horizontal Velocity:** Neglecting air resistance, there is no horizontal acceleration.\n* **Symmetrical Path:** The time taken to reach maximum height equals the time taken to descend back to the initial launch impact level.\n\n---\n\n## Formula\n\nThe initial velocity vector ($u$) broken down into its rectangular components:\n\n$$u_x = u \\cos(\\theta)$$\n\n$$u_y = u \\sin(\\theta)$$\n\nWhere:\n* $u_x$ represents the constant horizontal velocity component\n* $u_y$ represents the initial vertical velocity component\n* $\\theta$ represents the angle of projection with the horizontal plane\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Offers precise tracking vectors for basic structural ballistics projections. | Fails to incorporate atmospheric fluid dynamics or crosswinds. |\n| Breaks complex curved trajectories down into basic orthogonal linear equations. | The assumption of a flat Earth baseline fails over long, intercontinental ranges. |\n\n---\n\n## Summary\n\nProjectile motion combines steady horizontal cruise with uniform vertical gravitational acceleration. These components act simultaneously yet function independently, defining a clean parabolic trajectory profile.",
+  "candidate_response": "### Projectile Motion: Interactive Textbook Explanation\n\n#### 🎯 Quick Definition  \n**Projectile motion** is the curved path an object follows when launched near Earth's surface and influenced *only* by gravity and air resistance (often neglected). The object is called a **projectile**.\n\n---\n\n#### 🔑 Key Characteristics  \nProjectile motion exhibits two independent components:  \n- **Horizontal motion**: Constant velocity (no acceleration).  \n- **Vertical motion**: Constant downward acceleration due to gravity (\\(g = 9.8 \\, \\text{m/s}^2\\)).  \n\n| Characteristic          | Description                                                                 |  \n|-------------------------|-----------------------------------------------------------------------------|  \n| **Trajectory**          | Parabolic path                                                              |  \n| **Acceleration**        | Zero horizontally (\\(a_x = 0\\)), constant \\(g\\) downward vertically (\\(a_y = -g\\)) |  \n| **Velocity Components** | Horizontal (\\(v_x\\)) constant; vertical (\\(v_y\\)) changes linearly with time |  \n| **Time of Flight**      | Determined *only* by vertical motion and initial height                     |  \n| **Range**               | Horizontal distance traveled; depends on launch speed and angle             |  \n| **Symmetry**            | For same launch/landing height: ascent time = descent time                 |  \n\n---\n\n#### 🧮 Key Formulas  \nExplore the equations governing projectile motion:\n\n<div class=\"formula-card\">\n  <h3>Position Components</h3>\n  $$ x(t) = v_{0x} t $$  \n  $$ y(t) = v_{0y} t - \\frac{1}{2} g t^2 $$  \n  <p class=\"formula-explanation\">  \n    <strong>Where:</strong>  \n    \\(v_{0x} = v_0 \\cos \\theta\\) (horizontal initial velocity),  \n    \\(v_{0y} = v_0 \\sin \\theta\\) (vertical initial velocity),  \n    \\(t\\) = time, \\(g\\) = gravity.  \n  </p>\n</div>\n\n<div class=\"formula-card\">\n  <h3>Velocity Components</h3>\n  $$ v_x = v_{0x} $$  \n  $$ v_y = v_{0y} - g t $$  \n  <p class=\"formula-explanation\">  \n    Horizontal velocity remains constant; vertical velocity decreases during ascent.  \n  </p>\n</div>\n\n<div class=\"formula-card\">\n  <h3>Range (Same Launch/Landing Height)</h3>\n  $$ R = \\frac{v_0^2 \\sin 2\\theta}{g} $$  \n  <p class=\"formula-explanation\">  \n    <strong>Maximum range</strong> occurs at \\(\\theta = 45^\\circ\\).  \n  </p>\n</div>\n\n<div class=\"formula-card\">\n  <h3>Maximum Height</h3>\n  $$ H = \\frac{(v_0 \\sin \\theta)^2}{2g} $$  \n  <p class=\"formula-explanation\">  \n    Achieved when vertical velocity \\(v_y = 0\\).  \n  </p>\n</div>\n\n---\n\n#### ⚠️ Important Notes  \n1. **Independence of Motions**: Horizontal motion does not affect vertical motion (and vice versa).  \n2. **Air Resistance**: Ignored in ideal cases but reduces range/height in reality.  \n3. **Launch Angle**: Determines trajectory shape:  \n   - \\(\\theta = 0^\\circ\\): Horizontal launch (no initial \\(v_y\\))  \n   - \\(\\theta = 90^\\circ\\): Vertical launch (maximum height, zero range)  \n\n---\n\n#### 🌐 Real-World Applications  \n- Sports: Calculating trajectories of basketballs or javelins.  \n- Engineering: Designing water fountains or missile paths.  \n- Astronomy: Predicting meteor paths entering the atmosphere.  \n\n---\n\n### 💡 Conceptual Summary  \nProjectile motion combines uniform motion (horizontally) and accelerated motion (vertically), resulting in a **parabola**. Success requires analyzing \\(x\\) and \\(y\\) components separately using kinematics.  \n\n---\n\n#### 🚀 Try This Thought Experiment  \n> *If you fire a bullet horizontally and drop another bullet from the same height simultaneously, which hits the ground first?*  \n> **Answer**: Both hit simultaneously! Vertical motion is identical regardless of horizontal velocity.  \n\nLet me know if you’d like to simulate a specific projectile scenario or derive a formula step-by-step!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of projectile motion, accurately covering its definition, characteristics, and key formulas. The use of interactive textbook explanations, formulas, and real-world applications enhances the educational value. However, minor improvements could be made in formatting for better readability and consistency. Overall, the response is well-structured, clear, and effective in teaching projectile motion concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 364,
+    "completionTokens": 1565,
+    "totalTokens": 1929
+  },
+  "candidate_latency_ms": 68937,
+  "candidate_cost_usd": 0.00362755,
+  "judge_token_usage": {
+    "promptTokens": 1706,
+    "completionTokens": 134,
+    "totalTokens": 1840
+  },
+  "judge_latency_ms": 4247,
+  "judge_cost_usd": 0.0013452,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:03:53.945Z"
+}

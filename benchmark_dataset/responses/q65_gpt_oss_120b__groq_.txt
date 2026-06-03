@@ -1,0 +1,76 @@
+**🛰️ Orbit Started – Runtime Overlay (Stable Loop Trigger)**  
+
+```
+┌───────────────────────────────────────────────────────────────────────┐
+│                       🚀 Orbit Started Overlay                         │
+├───────────────────────────────────────────────────────────────────────┤
+│ Event ID          : orbit_started_2026_06_01_001                      │
+│ Trigger Type      : stable_loop                                        │
+│ Timestamp (UTC)   : 2026‑06‑01 12:00:00.000                            │
+│ Source System     : Satellite‑Control‑Module (SCM)                     │
+│ Current Phase     : Initiation → Stabilizing → Active                  │
+│ Status            : ✅ Success – Orbit achieved and stable            │
+│ --------------------------------------------------------------------- │
+│ 📊  Key Metrics                                                       │
+│   • Altitude        : 550 km (target 550 km)                           │
+│   • Inclination     : 97.5° (target 97.5°)                            │
+│   • Velocity        : 7.61 km/s (within ±0.02 km/s)                    │
+│   • Fuel Remaining : 78 % (sufficient for 180 days)                  │
+│ --------------------------------------------------------------------- │
+│ 📡  Telemetry Snapshot (last 5 s)                                      │
+│   ────────────────────────────────────────────────────────────────   │
+│   Time (s) | Alt (km) | Vel (km/s) | Fuel (%) | Temp (°C) |  Status │
+│   ---------------------------------------------------------------   │
+│      0.0   |  0.00    | 0.00       | 100.0    |  25.0     |  Init   │
+│      1.0   | 120.5    | 7.20       |  99.2    |  28.1     |  Burn   │
+│      2.0   | 260.8    | 7.45       |  98.4    |  30.2     |  Burn   │
+│      3.0   | 410.2    | 7.58       |  97.6    |  31.8     |  Burn   │
+│      4.0   | 549.7    | 7.61       |  96.8    |  33.0     |  Stable │
+│   ---------------------------------------------------------------   │
+│ --------------------------------------------------------------------- │
+│ 🛠️  Available Actions                                                │
+│   [1] View Full Telemetry Log                                         │
+│   [2] Open Orbit Control Panel                                        │
+│   [3] Schedule Next Maneuver (ΔV)                                      │
+│   [4] Export Event Report (PDF/JSON)                                  │
+│   [5] Dismiss Overlay                                                 │
+└───────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 📄 Structured Payload (for API / Sandbox Integration)
+
+```json
+{
+  "overlayId": "orbit_started_2026_06_01_001",
+  "event": "orbit_started",
+  "triggerType": "stable_loop",
+  "timestampUtc": "2026-06-01T12:00:00.000Z",
+  "sourceSystem": "Satellite-Control-Module",
+  "status": "success",
+  "metrics": {
+    "altitudeKm": 550,
+    "inclinationDeg": 97.5,
+    "velocityKms": 7.61,
+    "fuelRemainingPct": 78,
+    "phase": "active"
+  },
+  "telemetrySnapshot": [
+    {"t":0,"altKm":0.00,"velKms":0.00,"fuelPct":100.0,"tempC":25.0,"status":"Init"},
+    {"t":1,"altKm":120.5,"velKms":7.20,"fuelPct":99.2,"tempC":28.1,"status":"Burn"},
+    {"t":2,"altKm":260.8,"velKms":7.45,"fuelPct":98.4,"tempC":30.2,"status":"Burn"},
+    {"t":3,"altKm":410.2,"velKms":7.58,"fuelPct":97.6,"tempC":31.8,"status":"Burn"},
+    {"t":4,"altKm":549.7,"velKms":7.61,"fuelPct":96.8,"tempC":33.0,"status":"Stable"}
+  ],
+  "actions": [
+    {"id":1,"label":"View Full Telemetry Log","type":"modal"},
+    {"id":2,"label":"Open Orbit Control Panel","type":"navigate"},
+    {"id":3,"label":"Schedule Next Maneuver (ΔV)","type":"dialog"},
+    {"id":4,"label":"Export Event Report (PDF/JSON)","type":"download"},
+    {"id":5,"label":"Dismiss Overlay","type":"close"}
+  ]
+}
+```
+
+*Use the JSON payload to feed your sandbox UI framework; the visual card above is a ready‑to‑display overlay for operators.*

@@ -1,0 +1,125 @@
+┌───────────────────────────────────────────────┐
+│               Introduction                      │
+│                                                   │
+│ In this interactive module we explore the         │
+│ dynamics of a perfectly elastic head‑on collision │
+│ between two objects of **equal mass**. The       │
+│ sandbox visualises the event in real time,       │
+│ displaying positions, velocities and kinetic      │
+│ energy before, during, and after impact.          │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Definition                        │
+│                                                   │
+│ *Elastic Collision (equal masses)*: Two          │
+│ objects, each of mass **m**, collide head‑on      │
+│ and exchange their velocities without loss of    │
+│ kinetic energy.                                    │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Key Concepts                      │
+│                                                   │
+│ • **Conservation of Linear Momentum**            │
+│   \[ m v_{1i} + m v_{2i} = m v_{1f} + m v_{2f} \] │
+│ • **Conservation of Kinetic Energy**            │
+│   \[ \tfrac12 m v_{1i}^2 + \tfrac12 m v_{2i}^2   │
+│      = \tfrac12 m v_{1f}^2 + \tfrac12 m v_{2f}^2 \]│
+│ • For **equal masses** the equations simplify to │
+│   \[ v_{1f} = v_{2i}, \quad v_{2f} = v_{1i} \]   │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Main Formula                       │
+│                                                   │
+│   \[ m v_{1i} + m v_{2i} = m v_{1f} + m v_{2f} \] │
+│   \[ \tfrac12 m v_{1i}^2 + \tfrac12 m v_{2i}^2   │
+│      = \tfrac12 m v_{1f}^2 + \tfrac12 m v_{2f}^2 \]│
+│                                                   │
+│   **Reduced (m cancels)**                        │
+│   \[ v_{1f} = v_{2i}, \qquad v_{2f} = v_{1i} \]   │
+│                                                   │
+│   [ Explain Formula ]   [ Open Formula Lab ]     │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Variables Table                    │
+│                                                   │
+│   ┌───────────────────────┬─────────────────────┐ │
+│   │ Symbol                │ Meaning             │ │
+│   ├───────────────────────┼─────────────────────┤ │
+│   │ m                     │ Mass of each object │ │
+│   │ v₁ᵢ, v₂ᵢ             │ Initial velocities   │ │
+│   │ v₁𝒻, v₂𝒻             │ Final velocities     │ │
+│   │ KEᵢ, KE𝒻             │ Kinetic energy before│ │
+│   │                       │ and after collision │ │
+│   └───────────────────────┴─────────────────────┘ │
+│                                                   │
+│   [ View Detailed Variable Info ]                │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Runtime Overlay                    │
+│                                                   │
+│   **Live Data (updates every 0.05 s)**           │
+│   ─────────────────────────────────────────────   │
+│   • **Object A**                                 │
+│     – Position:  x₁(t)   = 0.00 m → 2.00 m       │
+│     – Velocity:  v₁(t)   = 5.00 m/s → –5.00 m/s │
+│   • **Object B**                                 │
+│     – Position:  x₂(t)   = 4.00 m → 2.00 m       │
+│     – Velocity:  v₂(t)   = –5.00 m/s → 5.00 m/s │
+│   • **Momentum (total)**   = 0 kg·m/s (conserved)│
+│   • **Kinetic Energy**     = 25 J (constant)    │
+│                                                   │
+│   [ Pause / Step Forward ]   [ Reset Simulation ]│
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Applications                       │
+│                                                   │
+│ • Particle physics (elastic scattering)          │
+│ • Billiard ball dynamics                          │
+│ • Vehicle safety testing (crash simulations)     │
+│ • Teaching fundamental concepts of momentum       │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Summary                            │
+│                                                   │
+│ • Equal‑mass elastic collisions simply swap      │
+│   velocities.                                      │
+│ • Momentum and kinetic energy remain constant.    │
+│ • The sandbox visualises these principles in      │
+│   real time, reinforcing intuition.              │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Suggested Questions                │
+│                                                   │
+│ 1. If Object A starts at rest and Object B moves   │
+│    at 3 m/s toward it, what are the final speeds? │
+│ 2. How would the outcome change if the masses were │
+│    different?                                      │
+│ 3. What role does the coefficient of restitution   │
+│    play in an inelastic collision?                │
+│                                                   │
+│   [ Explore Answers ]   [ Try New Scenario ]      │
+└───────────────────────────────────────────────┘

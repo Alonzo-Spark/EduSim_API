@@ -1,0 +1,128 @@
+# Zero-G Environment: Gravity Changed Event
+
+---
+
+## Event Detected
+
+```
+EVENT: gravity_changed
+PAYLOAD: { g: 0, environment: "zero-g", timestamp: NOW }
+```
+
+---
+
+## Physics Response Engine
+
+When **g = 0**, the following transformations apply across all active simulations:
+
+---
+
+### Core Formula Update
+
+$$
+F_g = mg \quad \Rightarrow \quad F_g = m \cdot 0 = 0
+$$
+
+$$
+W = mg = 0 \text{ N} \quad \forall \text{ objects}
+$$
+
+$$
+a_{net} = \frac{F_{net}}{m} \quad \text{(gravity term removed)}
+$$
+
+---
+
+### Affected Physics Variables
+
+| Variable | Normal (g = 9.8) | Zero-G (g = 0) | Status |
+|---|---|---|---|
+| Weight (W) | mg | 0 N | ✅ Updated |
+| Free-fall accel | 9.8 m/s² | 0 m/s² | ✅ Updated |
+| Projectile arc | Parabolic | Linear | ✅ Updated |
+| Pendulum period | 2π√(L/g) | ∞ (undefined) | ⚠️ Suspended |
+| Pressure (fluid) | ρgh | 0 Pa | ✅ Updated |
+| Normal force | mg cos θ | 0 N | ✅ Updated |
+
+---
+
+### Overlay Runtime Patch
+
+```js
+// gravity_changed event handler
+sandbox.on("gravity_changed", (event) => {
+  const { g } = event.payload; // g = 0
+
+  physics.setGravity(g);                  // → 0
+  renderer.updateTrajectories();          // → linear paths
+  formulas.invalidate("pendulum");        // → undefined period
+  formulas.invalidate("fluid_pressure"); // → zero gradient
+  ui.showOverlay("zero-g-mode");          // → banner active
+});
+```
+
+---
+
+### Simulation Behavior Changes
+
+**Projectile Motion**
+- Path changes from **parabolic → straight line**
+- Horizontal velocity persists indefinitely
+- Vertical velocity component: unchanged (no deceleration)
+
+**Pendulum**
+- Period formula $T = 2\pi\sqrt{\dfrac{L}{g}}$ → **undefined** (division by zero)
+- Simulation suspended, warning flag raised
+
+**Fluid Statics**
+- Pressure gradient $\Delta P = \rho g h$ collapses to **zero**
+- Fluids form **spherical droplets** (surface tension dominant)
+
+**Orbital Mechanics**
+- All objects enter **free-float** state
+- Relative motion governed by **initial velocity vectors only**
+
+---
+
+### Active Overlay Banner
+
+```
+┌─────────────────────────────────────────────┐
+│  ⚠️  ZERO-G MODE ACTIVE                     │
+│                                             │
+│  Gravitational constant: g = 0 m/s²         │
+│  Weight of all objects:  W = 0 N            │
+│  Affected modules: 6 / 6                    │
+│                                             │
+│  [ Restore Normal Gravity ]                 │
+│  [ Enter Microgravity Mode (g = 0.001) ]    │
+│  [ View Affected Formulas ]                 │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+### Formula Cards Invalidated
+
+| Formula | Reason | Action |
+|---|---|---|
+| $T = 2\pi\sqrt{L/g}$ | g = 0 → undefined | Suspended |
+| $v = \sqrt{2gh}$ | g = 0 → v = 0 always | Collapsed |
+| $P = \rho g h$ | g = 0 → P = 0 | Zeroed |
+| $R = v_0^2\sin2\theta/g$ | g = 0 → infinite range | Clamped |
+
+---
+
+### System Log
+
+```
+[00:00.001]  gravity_changed received
+[00:00.002]  g set to 0.000 m/s²
+[00:00.003]  Weight recalculated → 0 N for all bodies
+[00:00.004]  Trajectory renderer switched to linear mode
+[00:00.005]  Pendulum module suspended (g=0 singularity)
+[00:00.006]  Fluid pressure module zeroed
+[00:00.007]  Overlay banner rendered → ZERO-G MODE
+[00:00.008]  Formula Lab updated → 4 cards invalidated
+[00:00.009]  Event handling complete ✓
+```

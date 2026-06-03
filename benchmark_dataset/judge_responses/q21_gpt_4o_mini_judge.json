@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 21,
+  "question": "Gravitation: State Newton’s law of gravitation.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's Law of Universal Gravitation states that every particle of matter in the universe attracts every other particle with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers.\n\n---\n\n## Characteristics\n\n* **Universal Action Range:** The attraction acts between all scale profiles, from small atomic fields up to massive galactic cluster structures.\n* **Inverse Square Law:** Doubling the distance separating two objects cuts their mutual gravitational pull down to one-fourth of its initial value.\n* **Central Force Property:** The force acts along the imaginary straight line connecting the centers of mass of the two interacting bodies.\n\n---\n\n## Formula\n\nThe gravitational force equation is written as:\n\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\nWhere:\n* $F$ represents the gravitational attraction force magnitude\n* $m_1, m_2$ represent the masses of the interacting bodies\n* $r$ represents the distance separating the mass centers\n* $G$ represents the Universal Gravitational Constant ($6.674 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$)\n\n---\n\n## Summary\n\nUniversal gravitation is a long-range mutual attraction force that links all matter, scaling up with mass density but dropping off sharply with distance.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Newton's law of gravitation states that every point mass attracts every other point mass in the universe with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers. │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│     $$F = G \\frac{m_1 m_2}{r^2}$$      │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 5,
+    "overall_average": "6.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately states Newton's law of gravitation and provides the correct formula. However, it lacks the detailed explanation and characteristics of the law as presented in the gold reference answer. The quality of presentation is compromised by the use of ASCII art boxes, which may not be readable on all platforms. The educational score is low because the response does not provide a clear and concise explanation of the concepts, and the '[ Explain Formula ]' and '[ Open Formula Lab ]' sections are not filled in, leaving the reader without additional resources or explanations. To improve, the candidate should focus on providing a clear and detailed explanation of the law, avoiding unnecessary formatting, and including additional resources or explanations to support the learning process.",
+  "candidate_token_usage": {
+    "promptTokens": 366,
+    "completionTokens": 151,
+    "totalTokens": 517
+  },
+  "candidate_latency_ms": 2221,
+  "candidate_cost_usd": 0.0001455,
+  "judge_token_usage": {
+    "promptTokens": 863,
+    "completionTokens": 200,
+    "totalTokens": 1063
+  },
+  "judge_latency_ms": 6012,
+  "judge_cost_usd": 0.0009978,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:38:43.090Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 60,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'gravity_changed' event to zero-g environment.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a user interaction with the global environment controllers.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe environmental gravity parameter was modified by the user from Earth conditions to a weightless state (`gravity_changed`).\n\n### WHAT CHANGED\nThe vertical acceleration vector acting on all active canvas masses dropped to zero, causing floating objects to cease downward travel.\n\n### SIMPLE WHY\nSetting the gravity constant to zero removes the downward gravitational force vector, leaving objects to move purely by their linear inertia.\n\n### WHAT TO NOTICE\nNotice how objects that were falling now drift in straight lines across the grid, unaffected by any downward pull.",
+  "candidate_response": "┌─────────────────────────────────────┐\n│  Sandbox Runtime Overlay            │\n│  Event: gravity_changed → zero-g   │\n└─────────────────────────────────────┘\n\n⚙️ **System State Update**  \nGravity magnitude set to **0.0 m/s²**  \nEnvironment transitioning to microgravity (free-fall equilibrium)\n\n---\n\n┌─────────────────────────────────────┐\n│  Physics Engine Reconfiguration     │\n│  Applying zero-g behavioral rules   │\n└─────────────────────────────────────┘\n\n🔄 Affected Systems:\n- [x] Rigid body dynamics → inertial drift mode\n- [x] Collision response → momentum-preserving bounce\n- [x] Joint constraints → floating anchor stabilization\n- [x] Fluid simulation → surface-tension dominant\n\n⚠️ Note: Friction-based locomotion disabled. Activate thruster or tether systems for mobility.\n\n---\n\n📌 **Key Behavioral Changes**\n\n| System              | Pre-Event (9.8 m/s²)     | Post-Event (0.0 m/s²)         |\n|---------------------|--------------------------|-------------------------------|\n| Object Trajectory   | Parabolic arcs           | Linear inertia paths          |\n| Resting Contact     | Stable support            | Persistent float or adhesion  |\n| Rotational Motion   | Torque + gravity tilt     | Pure angular momentum         |\n| Character Movement  | Walking/jumping           | Push-recoil translation       |\n\n---\n\n💡 **Recommended Actions**\n1. Enable `impulse_control` for navigation\n2. Activate magnetic anchoring where needed\n3. Update AI pathfinding to 3D volumetric navigation\n4. Calibrate sensor fusion (accelerometer bias reset)\n\n---\n\n🧪 **Formula Card: Inertial Drift Velocity**\n\n$$\n\\vec{v}(t) = \\vec{v}_0 + \\vec{a}_{\\text{net}} \\cdot t\n$$\n\nIn zero-g: $\\vec{a}_{\\text{net}} = 0$ → $\\vec{v}(t) = \\vec{v}_0$\n\n┌───────────────────────────┐\n│ Drift Motion Model        │\n│                           │\n│     $$\\vec{v}(t) = \\vec{v}_0$$     │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n> Without external forces, all objects maintain constant velocity. \"Falling\" ceases; \"floating\" becomes default state.\n\n---\n\n📡 **Overlay Status**  \n✅ Gravity field deactivated  \n✅ Dynamics rebalanced  \n✅ User notification broadcast  \n🔁 Monitoring for secondary events: `air_resistance_changed`, `magnetic_field_active`\n\n🔁 **Sandbox stabilized in zero-g mode**  \nReady for next instruction.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts related to a zero-g environment, including the effects on object trajectory, resting contact, rotational motion, and character movement. The use of formulas, such as the inertial drift velocity equation, is accurate and relevant. The response is well-structured and easy to follow, with clear headings and concise explanations. However, some minor improvements could be made to enhance the educational value, such as providing more explicit connections to the underlying physics principles and using more intuitive notation for the formulas. Additionally, the response could benefit from more visual aids, such as diagrams or graphs, to help illustrate the concepts. Overall, the response is of high quality and effectively communicates the key concepts related to a zero-g environment.",
+  "candidate_token_usage": {
+    "promptTokens": 366,
+    "completionTokens": 587,
+    "totalTokens": 953
+  },
+  "candidate_latency_ms": 10735,
+  "candidate_cost_usd": 0.00154,
+  "judge_token_usage": {
+    "promptTokens": 1162,
+    "completionTokens": 210,
+    "totalTokens": 1372
+  },
+  "judge_latency_ms": 7869,
+  "judge_cost_usd": 0.0012012,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:47:54.898Z"
+}

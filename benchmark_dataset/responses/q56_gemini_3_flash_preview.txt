@@ -1,0 +1,67 @@
+### 🟢 Lesson: The Coefficient of Restitution ($e$)
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ **Quick Definition**                                                              │
+│                                                                                   │
+│ The **Coefficient of Restitution ($e$)** is a scalar value (0 to 1) that         │
+│ measures the "bounciness" of a collision. It defines how much kinetic energy     │
+│ remains after two objects collide along their normal axis.                        │
+└───────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ **Key Concepts**                                                                  │
+│                                                                                   │
+│ • **Relative Velocity:** The speed at which objects approach or separate.         │
+│ • **Energy Loss:** Real-world collisions convert kinetic energy into heat/sound.  │
+│ • **Material Property:** $e$ depends on both materials (e.g., rubber vs. lead).   │
+└───────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ **Main Formula: Newton's Law of Restitution**                                     │
+│                                                                                   │
+│ $$ e = \frac{v_2 - v_1}{u_1 - u_2} $$                                             │
+│                                                                                   │
+│ **[ Explain Formula ]**                                                           │
+│ $u_1, u_2$: Initial velocities before impact.                                     │
+│ $v_1, v_2$: Final velocities after impact.                                        │
+│ The ratio compares **Separation Velocity** to **Approach Velocity**.              │
+│                                                                                   │
+│ **[ Open Formula Lab ]**                                                          │
+└───────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ **Collision Characteristics**                                                     │
+│                                                                                   │
+│ | Type of Collision | Value of $e$ | Description |                                │
+│ | :--- | :--- | :--- |                                                            │
+│ | **Perfectly Elastic** | $e = 1$ | No energy loss; objects bounce perfectly. |     │
+│ | **Inelastic** | $0 < e < 1$ | Some energy lost to heat/deformation. |            │
+│ | **Perfectly Inelastic** | $e = 0$ | Objects stick together; max energy loss. |    │
+└───────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ **Live Sandbox: Simulation Logic**                                                │
+│                                                                                   │
+│ If you are coding this in a physics engine (like Matter.js or Unity):             │
+│                                                                                   │
+│ 1. **At $e = 0.0$:** A ball dropped on the floor will thud and stop instantly.    │
+│ 2. **At $e = 0.5$:** The ball will return to $25\%$ of its original height ($e^2$).│
+│ 3. **At $e = 1.0$:** The ball will bounce back to the exact starting height.      │
+└───────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ **Important Notes**                                                               │
+│                                                                                   │
+│ • In most game engines, if two objects collide with different restitution values, │
+│   the engine usually takes the **$\text{max}()$** or **$\text{average}()$**.      │
+│ • Values of $e > 1$ are physically impossible (they would create energy),         │
+│   but can be used in games for "super-bounce" powerups.                          │
+└───────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│ **Suggested Questions**                                                           │
+│                                                                                   │
+│ 1. How does mass affect the bounce height if $e$ remains constant?                │
+│ 2. Why does a ball eventually stop bouncing if $e$ is set to 0.9?                 │
+│ 3. How do you calculate energy loss using the $e$ value?                          │
+└───────────────────────────────────────────────────────────────────────────────────┘

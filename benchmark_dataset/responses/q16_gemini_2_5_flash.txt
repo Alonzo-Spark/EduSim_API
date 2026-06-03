@@ -1,0 +1,80 @@
+## Work, Energy, and Power
+
+Here's a breakdown of the concept of "Work" in physics.
+
+***
+
+### Quick Definition
+
+Work, in physics, is the energy transferred to or from an object by means of a force acting on that object over a displacement. It is a scalar quantity.
+
+***
+
+### Key Concept: Conditions for Work
+
+For work to be done on an object, two conditions must be met:
+
+1.  **A force must be applied** to the object.
+2.  The object must undergo a **displacement** in the direction of, or opposite to, the applied force.
+
+If either condition is not met, no work is done. For example, if you push against a stationary wall, you apply a force, but since there is no displacement, no work is done on the wall. Similarly, if an object moves but no force is acting on it (e.g., an object moving at constant velocity in deep space), no work is being done on it.
+
+***
+
+### Main Formula
+
+$$ W = \vec{F} \cdot \vec{d} = Fd \cos(\theta) $$
+
+*   **W**: Represents the **Work** done.
+*   **F**: Represents the magnitude of the **Force** applied.
+*   **d**: Represents the magnitude of the **Displacement** of the object.
+*   **$\theta$**: Represents the **angle** between the force vector ($\vec{F}$) and the displacement vector ($\vec{d}$).
+
+<details>
+<summary>Explain Formula</summary>
+This formula states that work (W) is the dot product of the force vector ($\vec{F}$) and the displacement vector ($\vec{d}$). The dot product accounts for the directional relationship between the force and the displacement. If the force and displacement are in the same direction ($\theta = 0^\circ$), $\cos(0^\circ) = 1$, and work is maximum positive ($W = Fd$). If they are opposite ($\theta = 180^\circ$), $\cos(180^\circ) = -1$, and work is negative ($W = -Fd$). If they are perpendicular ($\theta = 90^\circ$), $\cos(90^\circ) = 0$, and no work is done ($W = 0$).
+</details>
+
+[Open Formula Lab]
+
+***
+
+### SI Unit of Work
+
+The SI unit of work is the **Joule (J)**.
+
+<div style="background-color: #e0f7fa; border-left: 4px solid #00bcd4; padding: 10px; margin-bottom: 15px;">
+    <strong>Important Note:</strong>
+    One Joule is defined as the amount of work done when a force of one Newton displaces an object by one meter in the direction of the force.
+    $$ 1 \text{ Joule (J)} = 1 \text{ Newton (N)} \times 1 \text{ meter (m)} $$
+</div>
+
+***
+
+### Other Units of Work
+
+While the Joule is the standard SI unit, other units are used in different contexts:
+
+| Unit Name       | Symbol | Relation to Joule                                    | Context of Use                                        |
+| :-------------- | :----- | :--------------------------------------------------- | :---------------------------------------------------- |
+| Erg             | erg    | $1 \text{ erg} = 10^{-7} \text{ J}$                 | CGS system of units (less common in modern physics)   |
+| Foot-pound      | ft-lb  | $1 \text{ ft-lb} \approx 1.356 \text{ J}$            | Imperial/US customary system (engineering contexts)   |
+| Electron-volt   | eV     | $1 \text{ eV} \approx 1.602 \times 10^{-19} \text{ J}$ | Atomic and particle physics (very small energies)     |
+| Kilowatt-hour   | kWh    | $1 \text{ kWh} = 3.6 \times 10^6 \text{ J}$         | Electrical energy consumption (utility bills)         |
+
+***
+
+### Summary
+
+*   **Definition:** Work is the energy transferred by a force acting over a displacement.
+*   **Conditions:** Force and displacement must both be present.
+*   **Formula:** $W = Fd \cos(\theta)$
+*   **SI Unit:** Joule (J)
+
+***
+
+### Suggested Questions
+
+1.  Can work be negative? If so, provide an example.
+2.  When is the work done by a force zero?
+3.  Explain the difference between work and effort.

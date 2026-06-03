@@ -1,0 +1,77 @@
+### 🧪 Interactive Physics Lab: Projectile Motion with Air Resistance
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Quick Definition**                                                     │
+│                                                                          │
+│ **Air Resistance (Drag)** is a fluid friction force that acts opposite   │
+│ to the relative motion of an object through the air. Unlike ideal        │
+│ vacuum physics, drag causes the trajectory to become asymmetrical.       │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Key Concepts**                                                         │
+│                                                                          │
+│ • **Velocity Dependence:** Drag increases as the object moves faster.    │
+│ • **Asymmetry:** The path is no longer a perfect parabola.               │
+│ • **Terminal Velocity:** The point where drag equals gravitational force.│
+│ • **Range Reduction:** Both maximum height and total distance decrease.   │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Main Formula: The Drag Equation**                                      │
+│                                                                          │
+│  $$F_D = \frac{1}{2} \rho v^2 C_D A$$                                    │
+│                                                                          │
+│ **[ Explain Formula ]**                                                  │
+│ $F_D$ is Drag Force, $\rho$ is air density, $v$ is velocity,             │
+│ $C_D$ is the drag coefficient, and $A$ is the cross-sectional area.      │
+│                                                                          │
+│ **[ Open Formula Lab ]**                                                 │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Visual Characteristics: Vacuum vs. Air**                               │
+│                                                                          │
+│ | Feature            | Vacuum (Ideal)      | With Air Resistance        |
+│ |--------------------|---------------------|----------------------------|
+│ | **Shape**          | Perfect Parabola    | Distorted/Skewed Left      |
+│ | **Apex Position**  | Exact Center        | Shifted toward the start   |
+│ | **Descent Angle**  | Same as Launch      | Steeper than Launch        |
+│ | **Impact Speed**   | Same as Launch      | Slower than Launch         |
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Formula: Equations of Motion (X-axis)**                                │
+│                                                                          │
+│  $$m \frac{dv_x}{dt} = -\frac{1}{2} \rho v_x^2 C_D A$$                   │
+│                                                                          │
+│ **[ Explain Formula ]**                                                  │
+│ This shows that horizontal acceleration is no longer zero; the air       │
+│ constantly "pushes back," causing the object to slow down horizontally.  │
+│                                                                          │
+│ **[ Open Formula Lab ]**                                                 │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Important Notes**                                                      │
+│                                                                          │
+│ ⚠️ **Mass Matters:** In a vacuum, a feather and a bowling ball fall at    │
+│ the same rate. With air resistance, the mass-to-surface-area ratio       │
+│ (Ballistic Coefficient) determines how much the path is affected.        │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Summary**                                                              │
+│                                                                          │
+│ Adding air resistance transforms the trajectory from a symmetric curve   │
+│ into a "truncated" arc. The object hits the ground sooner, covers less   │
+│ distance, and falls more vertically at the end of its flight.            │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Suggested Questions**                                                  │
+│                                                                          │
+│ 1. How does doubling the launch velocity affect the drag force?          │
+│ 2. Why do golf balls have dimples in relation to this trajectory?        │
+│ 3. At what point in the flight is the drag force at its minimum?         │
+└──────────────────────────────────────────────────────────────────────────┘

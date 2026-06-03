@@ -1,0 +1,257 @@
+Here's the interactive textbook rendering for a **collision event** between two equal masses.
+
+---
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  📘  TOPIC: Collision Between Two Equal Masses           │
+│       Classical Mechanics · Momentum & Energy            │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  🔵  Quick Definition                                    │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│  A collision is an event where two or more bodies        │
+│  exert forces on each other for a short time.            │
+│                                                          │
+│  When the two masses are EQUAL (m₁ = m₂ = m),           │
+│  the collision produces special, elegant outcomes        │
+│  depending on the type of collision.                     │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  ⚙️  System Setup                                        │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│   Mass 1 (m)         Mass 2 (m)                         │
+│   velocity: u₁       velocity: u₂                       │
+│                                                          │
+│   ──●──────────────────●──  →                           │
+│     m, u₁             m, u₂                             │
+│                                                          │
+│   After collision:                                       │
+│   Mass 1 → v₁        Mass 2 → v₂                       │
+│                                                          │
+│  Constraint:  m₁ = m₂ = m                               │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Conservation Laws
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  📐  Formula Card 1 · Conservation of Momentum          │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+```
+
+$$
+m u_1 + m u_2 = m v_1 + m v_2
+$$
+
+$$
+\boxed{u_1 + u_2 = v_1 + v_2}
+$$
+
+```
+│                                                          │
+│  Since masses cancel, momentum conservation reduces      │
+│  to a simple velocity sum equation.                      │
+│                                                          │
+│  [ Explain Formula ]    [ Open Formula Lab ]             │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  📐  Formula Card 2 · Conservation of Kinetic Energy    │
+│       (Elastic Collisions Only)                          │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+```
+
+$$
+\frac{1}{2}m u_1^2 + \frac{1}{2}m u_2^2 = \frac{1}{2}m v_1^2 + \frac{1}{2}m v_2^2
+$$
+
+$$
+\boxed{u_1^2 + u_2^2 = v_1^2 + v_2^2}
+$$
+
+```
+│                                                          │
+│  Masses again cancel. Energy is only conserved in        │
+│  perfectly elastic collisions.                           │
+│                                                          │
+│  [ Explain Formula ]    [ Open Formula Lab ]             │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Collision Type Cards
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  💥  Case 1 · Perfectly Elastic Collision                │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│  Solving momentum + energy equations simultaneously:     │
+│                                                          │
+```
+
+$$
+v_1 = u_2 \qquad v_2 = u_1
+$$
+
+```
+│                                                          │
+│  ✦ The velocities EXCHANGE completely.                   │
+│  ✦ If u₂ = 0 (target at rest):                          │
+│       → Mass 1 STOPS                                     │
+│       → Mass 2 moves with u₁                            │
+│                                                          │
+│  Real-world example: Newton's Cradle (equal balls)       │
+│                                                          │
+│  [ Explain Formula ]    [ Open Formula Lab ]             │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  💥  Case 2 · Perfectly Inelastic Collision              │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│  Bodies stick together after collision.                  │
+│  Combined mass = 2m                                      │
+│                                                          │
+```
+
+$$
+v_{\text{common}} = \frac{u_1 + u_2}{2}
+$$
+
+```
+│                                                          │
+│  ✦ Both masses move together at the AVERAGE velocity.   │
+│  ✦ Maximum kinetic energy is lost.                       │
+│                                                          │
+│  Energy Lost:                                            │
+```
+
+$$
+\Delta KE = \frac{1}{4}m(u_1 - u_2)^2
+$$
+
+```
+│                                                          │
+│  [ Explain Formula ]    [ Open Formula Lab ]             │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Comparison Table
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  📊  Collision Types at a Glance  (m₁ = m₂ = m)        │
+├───────────────────┬────────────────┬────────────────────┤
+│  Property         │  Elastic       │  Inelastic         │
+├───────────────────┼────────────────┼────────────────────┤
+│  Momentum         │  Conserved ✓   │  Conserved ✓       │
+│  Kinetic Energy   │  Conserved ✓   │  NOT conserved ✗   │
+│  v₁ (after)       │  u₂            │  (u₁+u₂)/2         │
+│  v₂ (after)       │  u₁            │  (u₁+u₂)/2         │
+│  Bodies separate? │  Yes           │  No (stick)        │
+│  Energy lost      │  Zero          │  ¼m(u₁−u₂)²        │
+└───────────────────┴────────────────┴────────────────────┘
+```
+
+---
+
+## Special Scenario Card
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  ⭐  Special Case · Head-On Elastic, Target at Rest      │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│   BEFORE          AFTER                                  │
+│                                                          │
+│   ●──→    ●       ●    ●──→                             │
+│   m,u₁   m,0     m,0  m,u₁                             │
+│                                                          │
+│   Mass 1 comes to a COMPLETE STOP.                       │
+│   Mass 2 moves forward with FULL velocity u₁.           │
+│                                                          │
+│   This is the most dramatic result of equal-mass         │
+│   elastic collisions and is seen in billiards.           │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Key Takeaways
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  📌  Summary Card                                        │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│  1.  Equal masses → momentum conservation simplifies     │
+│      to pure velocity equations (m cancels).             │
+│                                                          │
+│  2.  Elastic collision → velocities swap.                │
+│                                                          │
+│  3.  Inelastic collision → both move at average v.       │
+│                                                          │
+│  4.  Head-on elastic (target at rest) → projectile       │
+│      stops, target inherits full velocity.               │
+│                                                          │
+│  5.  Momentum is ALWAYS conserved.                       │
+│      Kinetic energy is only conserved if elastic.        │
+│                                                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  💡  Suggested Practice Questions                        │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│  Q1. Two 2 kg balls collide elastically. Ball 1 moves   │
+│      at 4 m/s, Ball 2 is at rest. Find v₁ and v₂.      │
+│                                                          │
+│  Q2. The same balls collide and stick together.          │
+│      Find common velocity and energy lost.               │
+│                                                          │
+│  Q3. Prove that for equal masses, elastic collision      │
+│      always results in velocity exchange algebraically.  │
+│                                                          │
+│  Q4. Can two equal masses both come to rest after        │
+│      a collision? Justify using conservation laws.       │
+│                                                          │
+│  [ Generate More Questions ]                             │
+└─────────────────────────────────────────────────────────┘
+```

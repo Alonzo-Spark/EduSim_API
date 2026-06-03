@@ -1,0 +1,253 @@
+## Understanding Heat Transfer
+
+Heat transfer is the movement of thermal energy from a hotter object or region to a cooler one. This fundamental process governs everything from how your coffee cools down to how the Earth is warmed by the sun. There are three primary mechanisms by which heat transfer occurs: conduction, convection, and radiation.
+
+### Conduction
+
+<div class="card">
+  <div class="card-title">Quick Definition</div>
+  <div class="card-content">
+    <p>Conduction is the transfer of heat through direct contact between particles, without any bulk movement of the material itself.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Key Concepts</div>
+  <div class="card-content">
+    <ul>
+      <li>**Mechanism:** Heat energy is transferred when more energetic particles (in the hotter region) collide with less energetic particles (in the cooler region), passing on their kinetic energy.</li>
+      <li>**Medium:** Requires a medium for transfer, typically solids, but can also occur in liquids and gases.</li>
+      <li>**Particle Movement:** Individual particles vibrate in place and transfer energy to their neighbors; there is no net displacement of the material.</li>
+      <li>**Examples:**
+        <ul>
+          <li>Touching a hot stove.</li>
+          <li>A metal spoon heating up when placed in a hot cup of tea.</li>
+          <li>Heat transferring from a hot iron to clothes.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Characteristics</div>
+  <div class="card-content">
+    <ul>
+      <li>**Effectiveness:** Generally most effective in materials with closely packed particles, such as metals.</li>
+      <li>**Conductors:** Materials that transfer heat efficiently (e.g., metals like copper, silver).</li>
+      <li>**Insulators:** Materials that resist heat transfer (e.g., wood, plastic, air).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="formula-card">
+  <div class="formula-card-title">Fourier's Law of Heat Conduction</div>
+  $$
+  Q = -kA \frac{dT}{dx}
+  $$
+  <div class="formula-card-explanation">
+    <p>This formula, known as Fourier's Law, quantifies the rate of heat conduction. It states that the rate of heat transfer ($Q$) through a material is proportional to the negative temperature gradient and the area perpendicular to that gradient.</p>
+    <ul>
+      <li>$Q$: Rate of heat transfer (in Watts, W)</li>
+      <li>$k$: Thermal conductivity of the material (in W/(m·K)) - a measure of how well a material conducts heat.</li>
+      <li>$A$: Cross-sectional area through which heat is conducted (in m²)</li>
+      <li>$\frac{dT}{dx}$: Temperature gradient (in K/m) - the change in temperature with respect to distance. The negative sign indicates that heat flows from higher to lower temperature.</li>
+    </ul>
+  </div>
+  <div class="formula-card-actions">
+    <button onclick="openFormulaExplanation('conduction-formula')">Explain Formula</button>
+    <button onclick="openFormulaLab('conduction-formula')">Open Formula Lab</button>
+  </div>
+</div>
+
+### Convection
+
+<div class="card">
+  <div class="card-title">Quick Definition</div>
+  <div class="card-content">
+    <p>Convection is the transfer of heat through the movement of fluids (liquids or gases) themselves.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Key Concepts</div>
+  <div class="card-content">
+    <ul>
+      <li>**Mechanism:** When a fluid is heated, it becomes less dense and rises. Cooler, denser fluid then sinks to take its place, creating a convection current. This movement carries thermal energy.</li>
+      <li>**Medium:** Requires a fluid (liquid or gas) for transfer. Cannot occur in solids or in a vacuum.</li>
+      <li>**Particle Movement:** Involves the actual movement (bulk flow) of the heated fluid particles.</li>
+      <li>**Types of Convection:**
+        <ul>
+          <li>**Natural Convection (Free Convection):** Occurs due to density differences created by temperature variations (e.g., hot air rising, boiling water).</li>
+          <li>**Forced Convection:** Occurs when a fluid is forced to move by external means, such as a fan or pump (e.g., a hairdryer, blood circulation in the body).</li>
+        </ul>
+      </li>
+      <li>**Examples:**
+        <ul>
+          <li>Boiling water in a pot.</li>
+          <li>Heating a room with a radiator.</li>
+          <li>The circulation of air in the atmosphere (wind).</li>
+          <li>A convection oven.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Characteristics</div>
+  <div class="card-content">
+    <ul>
+      <li>More efficient in fluids than conduction.</li>
+      <li>Plays a crucial role in weather patterns and ocean currents.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="formula-card">
+  <div class="formula-card-title">Newton's Law of Cooling (for Convection)</div>
+  $$
+  Q = hA(T_s - T_\infty)
+  $$
+  <div class="formula-card-explanation">
+    <p>Newton's Law of Cooling describes the rate of heat transfer by convection from a surface to a surrounding fluid.</p>
+    <ul>
+      <li>$Q$: Rate of heat transfer (in Watts, W)</li>
+      <li>$h$: Convective heat transfer coefficient (in W/(m²·K)) - depends on the fluid properties, flow conditions, and surface geometry.</li>
+      <li>$A$: Surface area through which heat is transferred (in m²)</li>
+      <li>$T_s$: Temperature of the surface (in K or °C)</li>
+      <li>$T_\infty$: Temperature of the fluid far from the surface (in K or °C)</li>
+    </ul>
+  </div>
+  <div class="formula-card-actions">
+    <button onclick="openFormulaExplanation('convection-formula')">Explain Formula</button>
+    <button onclick="openFormulaLab('convection-formula')">Open Formula Lab</button>
+  </div>
+</div>
+
+### Radiation
+
+<div class="card">
+  <div class="card-title">Quick Definition</div>
+  <div class="card-content">
+    <p>Radiation is the transfer of heat through electromagnetic waves, which do not require a medium.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Key Concepts</div>
+  <div class="card-content">
+    <ul>
+      <li>**Mechanism:** All objects with a temperature above absolute zero emit thermal energy in the form of electromagnetic waves (infrared, visible light, etc.). These waves travel through space and are absorbed by other objects, transferring heat.</li>
+      <li>**Medium:** Does not require a medium and can transfer heat through a vacuum.</li>
+      <li>**Particle Movement:** Involves the emission and absorption of photons; no physical particles are transferred.</li>
+      <li>**Examples:**
+        <ul>
+          <li>Heat from the sun reaching Earth.</li>
+          <li>The warmth felt from a campfire or a fireplace.</li>
+          <li>Heat radiating from a hot light bulb.</li>
+          <li>A microwave oven heating food.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Characteristics</div>
+  <div class="card-content">
+    <ul>
+      <li>The only method of heat transfer that can occur in a vacuum.</li>
+      <li>The rate of radiation depends on the temperature and surface properties (color, texture) of the object. Dark, dull surfaces are good emitters and absorbers; light, shiny surfaces are poor emitters and absorbers (good reflectors).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="formula-card">
+  <div class="formula-card-title">Stefan-Boltzmann Law of Radiation</div>
+  $$
+  Q = \epsilon \sigma A (T^4 - T_0^4)
+  $$
+  <div class="formula-card-explanation">
+    <p>The Stefan-Boltzmann Law describes the net rate of radiative heat transfer between an object and its surroundings. For an object radiating into its surroundings, the net heat transfer rate is the difference between the energy emitted by the object and the energy absorbed from the surroundings.</p>
+    <ul>
+      <li>$Q$: Net rate of radiative heat transfer (in Watts, W)</li>
+      <li>$\epsilon$: Emissivity of the object's surface (dimensionless, between 0 and 1). A perfect black body has $\epsilon = 1$.</li>
+      <li>$\sigma$: Stefan-Boltzmann constant ($5.67 \times 10^{-8}$ W/(m²·K⁴))</li>
+      <li>$A$: Surface area of the object (in m²)</li>
+      <li>$T$: Absolute temperature of the object's surface (in Kelvin, K)</li>
+      <li>$T_0$: Absolute temperature of the surroundings (in Kelvin, K)</li>
+    </ul>
+  </div>
+  <div class="formula-card-actions">
+    <button onclick="openFormulaExplanation('radiation-formula')">Explain Formula</button>
+    <button onclick="openFormulaLab('radiation-formula')">Open Formula Lab</button>
+  </div>
+</div>
+
+### Summary Table
+
+<div class="card">
+  <div class="card-title">Comparison of Heat Transfer Mechanisms</div>
+  <div class="card-content">
+    <div class="responsive-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Conduction</th>
+            <th>Convection</th>
+            <th>Radiation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>**Mechanism**</td>
+            <td>Particle collision (vibration)</td>
+            <td>Fluid movement (bulk flow)</td>
+            <td>Electromagnetic waves (photons)</td>
+          </tr>
+          <tr>
+            <td>**Medium Required?**</td>
+            <td>Yes (solids, liquids, gases)</td>
+            <td>Yes (liquids, gases)</td>
+            <td>No (can occur in a vacuum)</td>
+          </tr>
+          <tr>
+            <td>**Particle Movement?**</td>
+            <td>No bulk movement; particles vibrate</td>
+            <td>Yes, bulk movement of fluid</td>
+            <td>No particle movement</td>
+          </tr>
+          <tr>
+            <td>**Speed of Transfer**</td>
+            <td>Varies greatly (fast in metals, slow in insulators)</td>
+            <td>Moderate to fast (depends on fluid flow)</td>
+            <td>Very fast (speed of light)</td>
+          </tr>
+          <tr>
+            <td>**Examples**</td>
+            <td>Hot pan handle, iron on clothes</td>
+            <td>Boiling water, radiator, wind</td>
+            <td>Sun's warmth, campfire heat, microwave</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+### Suggested Questions
+
+<div class="card">
+  <div class="card-title">Test Your Understanding</div>
+  <div class="card-content">
+    <ol>
+      <li>Why is a metal spoon in hot soup an example of conduction, while the rising steam above the soup is an example of convection?</li>
+      <li>Explain why a thermos flask is designed to minimize all three forms of heat transfer.</li>
+      <li>A black car parked in the sun gets much hotter than a white car. Which form of heat transfer is primarily responsible for this difference?</li>
+      <li>Can heat be transferred through the vacuum of space? If so, by what mechanism?</li>
+      <li>How do differences in fluid density contribute to natural convection?</li>
+    </ol>
+  </div>
+</div>

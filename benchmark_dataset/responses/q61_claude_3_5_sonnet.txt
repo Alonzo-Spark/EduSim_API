@@ -1,0 +1,926 @@
+I'll create a comprehensive runtime overlay response for the `spring_connected` event. Let me build this as a full interactive textbook experience.
+
+```jsx
+import { useState, useEffect, useRef } from "react";
+import katex from "katex";
+import "katex/dist/katex.min.css";
+
+// ─── KaTeX Renderer ───────────────────────────────────────────────────────────
+function KaTeX({ expression, display = false }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current) {
+      try {
+        katex.render(expression, ref.current, {
+          displayMode: display,
+          throwOnError: false,
+          strict: false,
+        });
+      } catch (e) {
+        ref.current.textContent = expression;
+      }
+    }
+  }, [expression, display]);
+  return (
+    <span
+      ref={ref}
+      style={{ display: display ? "block" : "inline" }}
+    />
+  );
+}
+
+// ─── Formula Lab Modal ────────────────────────────────────────────────────────
+function FormulaLab({ formula, title, variables, onClose }) {
+  const [vals, setVals] = useState(
+    Object.fromEntries(variables.map((v) => [v.symbol, v.default]))
+  );
+  const [result, setResult] = useState(null);
+
+  const compute = () => {
+    try {
+      const r = formula.compute(vals);
+      setResult(r);
+    } catch {
+      setResult("Error");
+    }
+  };
+
+  return (
+    <div style={{
+      position: "fixed", inset: 0, background: "rgba(0,0,0,0.65)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      zIndex: 1000, backdropFilter: "blur(4px)"
+    }}>
+      <div style={{
+        background: "#0f172a", border: "1px solid #334155",
+        borderRadius: 16, padding: 32, width: 480, maxWidth: "95vw",
+        boxShadow: "0 25px 60px rgba(0,0,0,0.5)"
+      }}>
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 20 }}>
+          <span style={{ color: "#38bdf8", fontWeight: 700, fontSize: 16 }}>
+            🧪 Formula Lab — {title}
+          </span>
+          <button onClick={onClose} style={{
+            background: "none", border: "none", color: "#94a3b8",
+            cursor: "pointer", fontSize: 20
+          }}>✕</button>
+        </div>
+
+        <div style={{
+          background: "#1e293b", borderRadius: 10, padding: "16px",
+          textAlign: "center", marginBottom: 20
+        }}>
+          <KaTeX expression={formula.latex} display />
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {variables.map((v) => (
+            <div key={v.symbol} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <div style={{ width: 120 }}>
+                <span style={{ color: "#94a3b8", fontSize: 13 }}>{v.label} </span>
+                <KaTeX expression={`(${v.symbol})`} />
+              </div>
+              <input
+                type="number"
+                value={vals[v.symbol]}
+                step={v.step || 0.1}
+                onChange={(e) =>
+                  setVals((prev) => ({ ...prev, [v.symbol]: parseFloat(e.target.value) }))
+                }
+                style={{
+                  flex: 1, background: "#0f172a", border: "1px solid #334155",
+                  borderRadius: 8, padding: "8px 12px", color: "#f1f5f9",
+                  fontSize: 14
+                }}
+              />
+              <span style={{ color: "#64748b", fontSize: 12, width: 40 }}>{v.unit}</span>
+            </div>
+          ))}
+        </div>
+
+        <button onClick={compute} style={{
+          marginTop: 20, width: "100%", padding: "12px",
+          background: "linear-gradient(135deg, #0ea5e9, #6366f1)",
+          border: "none", borderRadius: 10, color: "#fff",
+          fontWeight: 700, fontSize: 15, cursor: "pointer"
+        }}>
+          ⚡ Calculate
+        </button>
+
+        {result !== null && (
+          <div style={{
+            marginTop: 16, background: "#1e293b", borderRadius: 10,
+            padding: "14px 20px", textAlign: "center"
+          }}>
+            <span style={{ color: "#94a3b8", fontSize: 13 }}>Result: </span>
+            <span style={{ color: "#4ade80", fontWeight: 700, fontSize: 18 }}>
+              {typeof result === "number" ? result.toFixed(4) : result}
+            </span>
+            <span style={{ color: "#64748b", fontSize: 13 }}> {formula.resultUnit}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Formula Card ─────────────────────────────────────────────────────────────
+function FormulaCard({ title, latex, description, variables, compute, resultUnit }) {
+  const [showExplain, setShowExplain] = useState(false);
+  const [showLab, setShowLab] = useState(false);
+
+  return (
+    <>
+      <div style={{
+        background: "linear-gradient(135deg, #0f172a 0%, #1a1f35 100%)",
+        border: "1px solid #1e3a5f",
+        borderRadius: 14, overflow: "hidden",
+        boxShadow: "0 4px 24px rgba(14,165,233,0.08)"
+      }}>
+        {/* Header */}
+        <div style={{
+          background: "linear-gradient(90deg, #0c2340, #0f2d54)",
+          padding: "10px 18px", display: "flex", alignItems: "center", gap: 8
+        }}>
+          <span style={{ fontSize: 16 }}>📐</span>
+          <span style={{ color: "#38bdf8", fontWeight: 700, fontSize: 14, letterSpacing: 0.5 }}>
+            {title}
+          </span>
+        </div>
+
+        {/* Formula Display */}
+        <div style={{
+          padding: "24px 20px", textAlign: "center",
+          background: "rgba(14,165,233,0.03)"
+        }}>
+          <KaTeX expression={latex} display />
+        </div>
+
+        {/* Variable Legend */}
+        {variables && (
+          <div style={{
+            margin: "0 16px 16px", display: "flex", flexWrap: "wrap", gap: 8
+          }}>
+            {variables.map((v) => (
+              <div key={v.symbol} style={{
+                background: "#1e293b", borderRadius: 8,
+                padding: "5px 10px", fontSize: 12,
+                display: "flex", alignItems: "center", gap: 6
+              }}>
+                <KaTeX expression={v.symbol} />
+                <span style={{ color: "#64748b" }}>=</span>
+                <span style={{ color: "#94a3b8" }}>{v.label}</span>
+                <span style={{ color: "#475569" }}>({v.unit})</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div style={{
+          padding: "12px 16px", display: "flex", gap: 10,
+          borderTop: "1px solid #1e293b"
+        }}>
+          <button
+            onClick={() => setShowExplain(!showExplain)}
+            style={{
+              flex: 1, padding: "9px", background: showExplain ? "#1e3a5f" : "#1e293b",
+              border: "1px solid #334155", borderRadius: 8,
+              color: "#94a3b8", fontSize: 13, cursor: "pointer",
+              transition: "all 0.2s"
+            }}
+          >
+            {showExplain ? "▲ Hide" : "▼ Explain Formula"}
+          </button>
+          <button
+            onClick={() => setShowLab(true)}
+            style={{
+              flex: 1, padding: "9px",
+              background: "linear-gradient(135deg, #0c2a4a, #1a1f45)",
+              border: "1px solid #0ea5e9", borderRadius: 8,
+              color: "#38bdf8", fontSize: 13, cursor: "pointer",
+              fontWeight: 600
+            }}
+          >
+            🧪 Open Formula Lab
+          </button>
+        </div>
+
+        {/* Explain Panel */}
+        {showExplain && (
+          <div style={{
+            padding: "14px 18px 18px",
+            borderTop: "1px solid #1e293b",
+            background: "#0a1628"
+          }}>
+            <p style={{ color: "#94a3b8", fontSize: 14, lineHeight: 1.7, margin: 0 }}>
+              {description}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {showLab && (
+        <FormulaLab
+          formula={{ latex, compute, resultUnit }}
+          title={title}
+          variables={variables}
+          onClose={() => setShowLab(false)}
+        />
+      )}
+    </>
+  );
+}
+
+// ─── Section Card ─────────────────────────────────────────────────────────────
+function SectionCard({ icon, title, accent = "#38bdf8", children }) {
+  return (
+    <div style={{
+      background: "#0f172a",
+      border: `1px solid #1e293b`,
+      borderLeft: `3px solid ${accent}`,
+      borderRadius: 14,
+      overflow: "hidden",
+      boxShadow: "0 2px 16px rgba(0,0,0,0.2)"
+    }}>
+      <div style={{
+        padding: "12px 18px",
+        background: "rgba(255,255,255,0.02)",
+        display: "flex", alignItems: "center", gap: 10,
+        borderBottom: "1px solid #1e293b"
+      }}>
+        <span style={{ fontSize: 18 }}>{icon}</span>
+        <span style={{ color: accent, fontWeight: 700, fontSize: 15 }}>{title}</span>
+      </div>
+      <div style={{ padding: "18px 20px" }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ─── Characteristic Badge ─────────────────────────────────────────────────────
+function Badge({ label, value, color = "#38bdf8" }) {
+  return (
+    <div style={{
+      display: "flex", justifyContent: "space-between", alignItems: "center",
+      padding: "10px 14px", background: "#1e293b", borderRadius: 10,
+      borderLeft: `3px solid ${color}`
+    }}>
+      <span style={{ color: "#94a3b8", fontSize: 13 }}>{label}</span>
+      <span style={{ color: color, fontWeight: 600, fontSize: 13 }}>{value}</span>
+    </div>
+  );
+}
+
+// ─── Data Table Card ──────────────────────────────────────────────────────────
+function TableCard({ title, icon, headers, rows, accent = "#38bdf8" }) {
+  return (
+    <SectionCard icon={icon} title={title} accent={accent}>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+          <thead>
+            <tr>
+              {headers.map((h, i) => (
+                <th key={i} style={{
+                  padding: "10px 14px", textAlign: "left",
+                  background: "#1e293b", color: accent,
+                  fontWeight: 700, fontSize: 12, letterSpacing: 0.5,
+                  borderBottom: `2px solid ${accent}33`
+                }}>
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, ri) => (
+              <tr key={ri} style={{
+                background: ri % 2 === 0 ? "transparent" : "rgba(255,255,255,0.02)"
+              }}>
+                {row.map((cell, ci) => (
+                  <td key={ci} style={{
+                    padding: "10px 14px", color: "#cbd5e1",
+                    borderBottom: "1px solid #1e293b"
+                  }}>
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </SectionCard>
+  );
+}
+
+// ─── Spring Visualizer ────────────────────────────────────────────────────────
+function SpringVisualizer() {
+  const [k, setK] = useState(50);
+  const [x, setX] = useState(0.3);
+  const canvasRef = useRef(null);
+  const animRef = useRef(null);
+  const tRef = useRef(0);
+
+  const F = (k * x).toFixed(2);
+  const PE = (0.5 * k * x * x).toFixed(3);
+  const omega = Math.sqrt(k / 1.0).toFixed(2);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+
+    const draw = () => {
+      tRef.current += 0.03;
+      const t = tRef.current;
+      const W = canvas.width;
+      const H = canvas.height;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Background
+      ctx.fillStyle = "#0a1628";
+      ctx.fillRect(0, 0, W, H);
+
+      const anchorX = 60;
+      const centerY = H / 2;
+      const naturalLength = 100;
+      const displacement = x * 120;
+      const massX = anchorX + naturalLength + displacement;
+
+      // Animated oscillation ghost
+      const ghostDisp = Math.sin(t) * 40;
+      const ghostX = anchorX + naturalLength + ghostDisp;
+
+      // Draw ghost spring (dim)
+      drawSpring(ctx, anchorX, centerY, ghostX, centerY, "#1e3a5f", 10);
+
+      // Ghost mass
+      ctx.globalAlpha = 0.25;
+      ctx.fillStyle = "#6366f1";
+      ctx.beginPath();
+      ctx.roundRect(ghostX, centerY - 18, 36, 36, 6);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      // Anchor wall
+      ctx.fillStyle = "#334155";
+      ctx.fillRect(anchorX - 20, centerY - 50, 20, 100);
+      for (let i = 0; i < 6; i++) {
+        ctx.strokeStyle = "#1e293b";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(anchorX - 20, centerY - 50 + i * 17);
+        ctx.lineTo(anchorX - 35, centerY - 50 + i * 17 + 10);
+        ctx.stroke();
+      }
+
+      // Equilibrium dashed line
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = "#334155";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(anchorX + naturalLength, centerY - 50);
+      ctx.lineTo(anchorX + naturalLength, centerY + 50);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Displacement arrow
+      if (Math.abs(displacement) > 2) {
+        ctx.strokeStyle = "#f59e0b";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(anchorX + naturalLength, centerY + 38);
+        ctx.lineTo(massX + 18, centerY + 38);
+        ctx.stroke();
+        const dir = displacement > 0 ? 1 : -1;
+        ctx.fillStyle = "#f59e0b";
+        ctx.beginPath();
+        ctx.moveTo(massX + 18 * dir, centerY + 38);
+        ctx.lineTo(massX + 18 * dir - 8 * dir, centerY + 34);
+        ctx.lineTo(massX + 18 * dir - 8 * dir, centerY + 42);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "#f59e0b";
+        ctx.font = "11px monospace";
+        ctx.fillText(`x = ${x.toFixed(2)} m`, anchorX + naturalLength + 4, centerY + 52);
+      }
+
+      // Main spring
+      drawSpring(ctx, anchorX, centerY, massX, centerY,
+        x > 0 ? "#ef4444" : x < 0 ? "#3b82f6" : "#22d3ee", 14);
+
+      // Force arrow
+      const forceDir = -Math.sign(x);
+      if (Math.abs(x) > 0.05) {
+        const arrowLen = Math.min(Math.abs(x) * 80, 60);
+        const arrowX = massX + 18 + (forceDir > 0 ? 8 : -8);
+        ctx.strokeStyle = "#4ade80";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(arrowX, centerY);
+        ctx.lineTo(arrowX + forceDir * arrowLen, centerY);
+        ctx.stroke();
+        ctx.fillStyle = "#4ade80";
+        ctx.beginPath();
+        ctx.moveTo(arrowX + forceDir * arrowLen, centerY);
+        ctx.lineTo(arrowX + forceDir * arrowLen - forceDir * 10, centerY - 5);
+        ctx.lineTo(arrowX + forceDir * arrowLen - forceDir * 10, centerY + 5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.font = "11px monospace";
+        ctx.fillStyle = "#4ade80";
+        ctx.fillText(`F = ${F} N`, arrowX + forceDir * (arrowLen / 2) - 20, centerY - 10);
+      }
+
+      // Mass block
+      const grad = ctx.createLinearGradient(massX, centerY - 18, massX + 36, centerY + 18);
+      grad.addColorStop(0, "#6366f1");
+      grad.addColorStop(1, "#4f46e5");
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.roundRect(massX, centerY - 18, 36, 36, 6);
+      ctx.fill();
+      ctx.strokeStyle = "#818cf8";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.fillStyle = "#fff";
+      ctx.font = "bold 12px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("m", massX + 18, centerY + 5);
+      ctx.textAlign = "left";
+
+      // Anchor point dot
+      ctx.fillStyle = "#38bdf8";
+      ctx.beginPath();
+      ctx.arc(anchorX, centerY, 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      animRef.current = requestAnimationFrame(draw);
+    };
+
+    animRef.current = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(animRef.current);
+  }, [k, x]);
+
+  return (
+    <div style={{
+      background: "#0a1628", border: "1px solid #1e293b",
+      borderRadius: 14, overflow: "hidden"
+    }}>
+      <div style={{
+        padding: "10px 18px", background: "rgba(99,102,241,0.1)",
+        borderBottom: "1px solid #1e293b",
+        display: "flex", alignItems: "center", gap: 8
+      }}>
+        <span>🎮</span>
+        <span style={{ color: "#818cf8", fontWeight: 700, fontSize: 14 }}>
+          Live Spring Simulator
+        </span>
+      </div>
+
+      <canvas
+        ref={canvasRef}
+        width={460}
+        height={160}
+        style={{ width: "100%", display: "block" }}
+      />
+
+      <div style={{ padding: "16px 20px" }}>
+        <div style={{ display: "flex", gap: 20, marginBottom: 16 }}>
+          <div style={{ flex: 1 }}>
+            <label style={{ color: "#94a3b8", fontSize: 12, display: "block", marginBottom: 6 }}>
+              Spring Constant <KaTeX expression="k" /> = <strong style={{ color: "#38bdf8" }}>{k} N/m</strong>
+            </label>
+            <input type="range" min={5} max={200} value={k}
+              onChange={(e) => setK(Number(e.target.value))}
+              style={{ width: "100%", accentColor: "#38bdf8" }} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <label style={{ color: "#94a3b8", fontSize: 12, display: "block", marginBottom: 6 }}>
+              Displacement <KaTeX expression="x" /> = <strong style={{ color: "#f59e0b" }}>{x.toFixed(2)} m</strong>
+            </label>
+            <input type="range" min={-0.8} max={0.8} step={0.01} value={x}
+              onChange={(e) => setX(Number(e.target.value))}
+              style={{ width: "100%", accentColor: "#f59e0b" }} />
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+          {[
+            { label: "Restoring Force", val: `${F} N`, color: "#4ade80" },
+            { label: "Potential Energy", val: `${PE} J`, color: "#f59e0b" },
+            { label: "Angular Frequency", val: `${omega} rad/s`, color: "#a78bfa" },
+          ].map((item) => (
+            <div key={item.label} style={{
+              background: "#1e293b", borderRadius: 10,
+              padding: "10px 12px", textAlign: "center"
+            }}>
+              <div style={{ color: item.color, fontWeight: 700, fontSize: 16 }}>{item.val}</div>
+              <div style={{ color: "#475569", fontSize: 11, marginTop: 3 }}>{item.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function drawSpring(ctx, x1, y1, x2, y2, color, coils) {
+  const dx = x2 - x1;
+  const len = Math.sqrt(dx * dx);
+  const coilWidth = 10;
+  const segLen = len / (coils * 2 + 2);
+
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x1 + segLen, y1);
+
+  for (let i = 0; i < coils; i++) {
+    ctx.lineTo(x1 + segLen + i * 2 * segLen + segLen / 2, y1 - coilWidth);
+    ctx.lineTo(x1 + segLen + i * 2 * segLen + segLen * 1.5, y1 + coilWidth);
+  }
+
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+}
+
+// ─── Event Badge ──────────────────────────────────────────────────────────────
+function EventBadge() {
+  const [pulse, setPulse] = useState(true);
+  useEffect(() => {
+    const t = setInterval(() => setPulse((p) => !p), 900);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <div style={{
+      display: "inline-flex", alignItems: "center", gap: 10,
+      background: "linear-gradient(135deg, #0c2a4a, #1a1230)",
+      border: "1px solid #0ea5e9",
+      borderRadius: 100, padding: "8px 18px",
+      boxShadow: "0 0 20px rgba(14,165,233,0.2)"
+    }}>
+      <div style={{
+        width: 8, height: 8, borderRadius: "50%",
+        background: pulse ? "#4ade80" : "#22c55e",
+        boxShadow: pulse ? "0 0 8px #4ade80" : "none",
+        transition: "all 0.4s"
+      }} />
+      <span style={{ color: "#94a3b8", fontSize: 12 }}>Event:</span>
+      <code style={{ color: "#38bdf8", fontSize: 13, fontWeight: 700 }}>spring_connected</code>
+      <span style={{ color: "#475569", fontSize: 11 }}>RUNTIME</span>
+    </div>
+  );
+}
+
+// ─── Main Overlay ─────────────────────────────────────────────────────────────
+export default function SpringConnectedOverlay() {
+  const [activeTab, setActiveTab] = useState("physics");
+
+  const tabs = [
+    { id: "physics", label: "Physics", icon: "⚛️" },
+    { id: "event", label: "Event Data", icon: "📡" },
+    { id: "equations", label: "Equations", icon: "📐" },
+  ];
+
+  const formulas = [
+    {
+      title: "Hooke's Law — Restoring Force",
+      latex: "F = -kx",
+      description:
+        "Hooke's Law states that the restoring force exerted by a spring is directly proportional to the displacement from its equilibrium position, and acts in the opposite direction. The negative sign indicates the force opposes displacement.",
+      variables: [
+        { symbol: "k", label: "Spring constant", unit: "N/m", default: 50, step: 5 },
+        { symbol: "x", label: "Displacement", unit: "m", default: 0.3, step: 0.05 },
+      ],
+      compute: ({ k, x }) => -(k * x),
+      resultUnit: "N",
+    },
+    {
+      title: "Elastic Potential Energy",
+      latex: "U = \\frac{1}{2}kx^2",
+      description:
+        "The elastic potential energy stored in a spring is proportional to the square of the displacement. This energy is fully recovered when the spring returns to equilibrium, making spring systems conservative.",
+      variables: [
+        { symbol: "k", label: "Spring constant", unit: "N/m", default: 50, step: 5 },
+        { symbol: "x", label: "Displacement", unit: "m", default: 0.3, step: 0.05 },
+      ],
+      compute: ({ k, x }) => 0.5 * k * x * x,
+      resultUnit: "J",
+    },
+    {
+      title: "Angular Frequency of Oscillation",
+      latex: "\\omega = \\sqrt{\\frac{k}{m}}",
+      description:
+        "When a mass is connected to a spring, it oscillates with an angular frequency determined by the ratio of spring stiffness to mass. A stiffer spring or lighter mass produces faster oscillations.",
+      variables: [
+        { symbol: "k", label: "Spring constant", unit: "N/m", default: 50, step: 5 },
+        { symbol: "m", label: "Mass", unit: "kg", default: 1.0, step: 0.1 },
+      ],
+      compute: ({ k, m }) => Math.sqrt(k / m),
+      resultUnit: "rad/s",
+    },
+    {
+      title: "Period of Oscillation",
+      latex: "T = 2\\pi\\sqrt{\\frac{m}{k}}",
+      description:
+        "The period is the time for one complete oscillation. It depends only on the mass and spring constant — not on amplitude. This is a key property of simple harmonic motion.",
+      variables: [
+        { symbol: "m", label: "Mass", unit: "kg", default: 1.0, step: 0.1 },
+        { symbol: "k", label: "Spring constant", unit: "N/m", default: 50, step: 5 },
+      ],
+      compute: ({ m, k }) => 2 * Math.PI * Math.sqrt(m / k),
+      resultUnit: "s",
+    },
+  ];
+
+  return (
+    <div style={{
+      minHeight: "100vh",
+      background: "linear-gradient(160deg, #060d1a 0%, #080f1f 50%, #06101e 100%)",
+      fontFamily: "'Inter', system-ui, sans-serif",
+      color: "#f1f5f9",
+      padding: "0 0 60px"
+    }}>
+
+      {/* ── Top Header Bar ── */}
+      <div style={{
+        background: "rgba(6,13,26,0.9)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid #1e293b",
+        padding: "14px 28px",
+        display: "flex", alignItems: "center",
+        justifyContent: "space-between",
+        position: "sticky", top: 0, zIndex: 100
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <div style={{
+            width: 36, height: 36, borderRadius: 10,
+            background: "linear-gradient(135deg, #0ea5e9, #6366f1)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: 18
+          }}>🌀</div>
+          <div>
+            <div style={{ fontWeight: 800, fontSize: 16, letterSpacing: -0.3 }}>
+              Spring System
+            </div>
+            <div style={{ color: "#475569", fontSize: 11 }}>
+              Anchor → Spring → Mass
+            </div>
+          </div>
+        </div>
+        <EventBadge />
+      </div>
+
+      <div style={{ maxWidth: 780, margin: "0 auto", padding: "0 20px" }}>
+
+        {/* ── Hero ── */}
+        <div style={{
+          marginTop: 32, marginBottom: 28,
+          background: "linear-gradient(135deg, #0c1f3a, #0f1a35)",
+          border: "1px solid #1e3a5f",
+          borderRadius: 18, padding: "28px 32px",
+          position: "relative", overflow: "hidden"
+        }}>
+          <div style={{
+            position: "absolute", right: -30, top: -30,
+            width: 180, height: 180, borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(14,165,233,0.08), transparent 70%)"
+          }} />
+          <div style={{
+            fontSize: 11, fontWeight: 700, letterSpacing: 2,
+            color: "#38bdf8", marginBottom: 10, textTransform: "uppercase"
+          }}>
+            Runtime Event Triggered
+          </div>
+          <h1 style={{
+            margin: "0 0 12px", fontSize: 26, fontWeight: 800,
+            background: "linear-gradient(135deg, #f1f5f9, #94a3b8)",
+            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"
+          }}>
+            Spring Connected to Anchor
+          </h1>
+          <p style={{
+            margin: 0, color: "#64748b", fontSize: 14, lineHeight: 1.7,
+            maxWidth: 560
+          }}>
+            A spring element has been linked between a fixed anchor point and a dynamic mass.
+            The system is now governed by Hooke's Law and will exhibit Simple Harmonic Motion
+            when displaced from equilibrium.
+          </p>
+
+          <div style={{ display: "flex", gap: 12, marginTop: 20, flexWrap: "wrap" }}>
+            {[
+              { label: "Event Type", val: "spring_connected", color: "#38bdf8" },
+              { label: "Anchor", val: "Fixed Point", color: "#4ade80" },
+              { label: "DOF", val: "1D Linear", color: "#a78bfa" },
+              { label: "Motion", val: "SHM", color: "#f59e0b" },
+            ].map((chip) => (
+              <div key={chip.label} style={{
+                background: "#1e293b", borderRadius: 8,
+                padding: "6px 12px", fontSize: 12
+              }}>
+                <span style={{ color: "#475569" }}>{chip.label}: </span>
+                <span style={{ color: chip.color, fontWeight: 600 }}>{chip.val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Tabs ── */}
+        <div style={{
+          display: "flex", gap: 4, marginBottom: 24,
+          background: "#0f172a", borderRadius: 12, padding: 4,
+          border: "1px solid #1e293b"
+        }}>
+          {tabs.map((tab) => (
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)} style={{
+              flex: 1, padding: "10px",
+              background: activeTab === tab.id
+                ? "linear-gradient(135deg, #0ea5e9, #6366f1)"
+                : "transparent",
+              border: "none", borderRadius: 9, cursor: "pointer",
+              color: activeTab === tab.id ? "#fff" : "#64748b",
+              fontWeight: activeTab === tab.id ? 700 : 400,
+              fontSize: 13, transition: "all 0.2s",
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 6
+            }}>
+              <span>{tab.icon}</span> {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* ── Tab: Physics ── */}
+        {activeTab === "physics" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+
+            <SpringVisualizer />
+
+            <SectionCard icon="📖" title="What Happens at Connection" accent="#38bdf8">
+              <p style={{ color: "#94a3b8", fontSize: 14, lineHeight: 1.8, margin: 0 }}>
+                When a spring connects an anchor to a mass, the anchor acts as a fixed reference
+                frame. Any displacement of the mass from the natural length of the spring generates
+                a <strong style={{ color: "#f1f5f9" }}>restoring force</strong> directed back toward
+                equilibrium. This is the fundamental mechanism of{" "}
+                <strong style={{ color: "#38bdf8" }}>Simple Harmonic Motion (SHM)</strong>.
+              </p>
+            </SectionCard>
+
+            <SectionCard icon="⚙️" title="System Properties" accent="#a78bfa">
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <Badge label="Equilibrium Position" value="Natural length of spring" color="#38bdf8" />
+                <Badge label="Restoring Force Direction" value="Opposite to displacement" color="#ef4444" />
+                <Badge label="Energy Type" value="Conservative (no loss)" color="#4ade80" />
+                <Badge label="Motion Classification" value="Simple Harmonic Motion" color="#a78bfa" />
+                <Badge label="Amplitude Independence" value="Period does not depend on amplitude" color="#f59e0b" />
+              </div>
+            </SectionCard>
+
+            <TableCard
+              icon="📊"
+              title="Displacement vs. Force vs. Energy"
+              accent="#38bdf8"
+              headers={["Displacement (m)", "Force (N) @ k=50", "PE (J) @ k=50", "State"]}
+              rows={[
+                ["−0.4", "+20", "4.00", "Compressed"],
+                ["−0.2", "+10", "1.00", "Compressed"],
+                ["0.0", "0", "0.00", "Equilibrium"],
+                ["0.2", "−10", "1.00", "Extended"],
+                ["0.4", "−20", "4.00", "Extended"],
+              ]}
+            />
+          </div>
+        )}
+
+        {/* ── Tab: Equations ── */}
+        {activeTab === "equations" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            {formulas.map((f) => (
+              <FormulaCard key={f.title} {...f} />
+            ))}
+
+            <SectionCard icon="📈" title="Equation of Motion" accent="#f59e0b">
+              <p style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.7, marginBottom: 14 }}>
+                The full second-order ODE governing the spring-mass system:
+              </p>
+              <div style={{
+                background: "#1e293b", borderRadius: 10, padding: "18px",
+                textAlign: "center", marginBottom: 14
+              }}>
+                <KaTeX expression="m\\ddot{x} + kx = 0" display />
+              </div>
+              <p style={{ color: "#64748b", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
+                With general solution:{" "}
+              </p>
+              <div style={{
+                background: "#1e293b", borderRadius: 10, padding: "16px",
+                textAlign: "center", marginTop: 10
+              }}>
+                <KaTeX expression="x(t) = A\\cos(\\omega t + \\phi)" display />
+              </div>
+            </SectionCard>
+          </div>
+        )}
+
+        {/* ── Tab: Event Data ── */}
+        {activeTab === "event" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <SectionCard icon="📡" title="Event Payload" accent="#4ade80">
+              <pre style={{
+                background: "#0a1628", borderRadius: 10, padding: 18,
+                fontSize: 12, lineHeight: 1.8, color: "#94a3b8",
+                overflowX: "auto", margin: 0,
+                border: "1px solid #1e293b"
+              }}>
+                {`{
+  "event": "spring_connected",
+  "timestamp": ${Date.now()},
+  "source": {
+    "type": "anchor",
+    "id": "anchor_01",
+    "position": { "x": 0.0, "y": 0.0, "z": 0.0 },
+    "fixed": true
+  },
+  "target": {
+    "type": "mass",
+    "id": "mass_01",
+    "position": { "x": 1.2, "y": 0.0, "z": 0.0 },
+    "mass_kg": 1.0
+  },
+  "spring": {
+    "id": "spring_01",
+    "k": 50.0,
+    "natural_length": 1.0,
+    "current_length": 1.2,
+    "displacement": 0.2,
+    "restoring_force": -10.0,
+    "potential_energy": 1.0
+  },
+  "state": "active",
+  "dof": "1D_linear",
+  "motion_type": "SHM"
+}`}
+              </pre>
+            </SectionCard>
+
+            <TableCard
+              icon="🔗"
+              title="Connection Parameters"
+              accent="#4ade80"
+              headers={["Parameter", "Value", "Type", "Mutable"]}
+              rows={[
+                ["event", "spring_connected", "string", "No"],
+                ["anchor.fixed", "true", "boolean", "No"],
+                ["spring.k", "50.0 N/m", "float", "Yes"],
+                ["spring.natural_length", "1.0 m", "float", "Yes"],
+                ["mass.mass_kg", "1.0 kg", "float", "Yes"],
+                ["state", "active", "enum", "Yes"],
+                ["dof", "1D_linear", "enum", "No"],
+              ]}
+            />
+
+            <SectionCard icon="⚡" title="Triggered Side Effects" accent="#f59e0b">
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {[
+                  { icon: "✅", text: "Physics solver subscribed to spring_01", color: "#4ade80" },
+                  { icon: "✅", text: "Force accumulator updated for mass_01", color: "#4ade80" },
+                  { icon: "✅", text: "Potential energy tracker initialized", color: "#4ade80" },
+                  { icon: "🔄", text: "Render loop notified of new constraint", color: "#38bdf8" },
+                  { icon: "📊", text: "Debug overlay registered spring entity", color: "#a78bfa" },
+                ].map((item, i) => (
+                  <div key={i} style={{
+                    display: "flex", alignItems: "center", gap: 10,
+                    padding: "10px 12px", background: "#1e293b", borderRadius: 8
+                  }}>
+                    <span>{item.icon}</span>
+                    <span style={{ color: item.color, fontSize: 13 }}>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </SectionCard>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+**What's built:**
+
+| Layer | Detail |
+|---|---|
+| **Event Badge** | Live pulsing `spring_connected` runtime indicator in sticky header |
+| **Spring Visualizer** | Canvas-animated spring with ghost oscillation, displacement arrows, force arrows — fully interactive sliders |
+| **Formula Cards** | Hooke's Law, PE, ω, T — each with Explain + Formula Lab modal |
+| **Formula Lab** | Per-formula variable inputs with live calculation |
+| **Event Payload** | Full JSON runtime payload with timestamp |
+| **3 Tabs** | Physics / Equations / Event Data |
+| **Tables** | Displacement↔Force↔Energy table + Connection Parameters table |

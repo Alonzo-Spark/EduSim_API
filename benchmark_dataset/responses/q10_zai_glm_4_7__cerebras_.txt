@@ -1,0 +1,574 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Module: Scalar vs Vector Quantities</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0KOVEMeaPoPPgE8KRjnZ7gF8nW7M9j5g6Pq1D5m3GfO3N5i0jl8+" crossorigin="anonymous">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #475569;
+            --accent-scalar: #0d9488; /* Teal */
+            --accent-vector: #7c3aed; /* Violet */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --font-serif: 'Georgia', 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 4rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .progress-indicator {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Card System */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-label {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Specific Card Styles */
+        .concept-box {
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border-left: 5px solid;
+        }
+
+        .concept-box.scalar {
+            background-color: #f0fdfa;
+            border-color: var(--accent-scalar);
+        }
+
+        .concept-box.vector {
+            background-color: #f5f3ff;
+            border-color: var(--accent-vector);
+        }
+
+        .concept-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Formula Card System */
+        .formula-card {
+            background: #1e293b; /* Dark theme for math */
+            color: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formula-card .card-label {
+            color: #94a3b8;
+        }
+
+        .formula-card .card-title {
+            color: white;
+            border-color: #334155;
+        }
+
+        .formula-display {
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+
+        .formula-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #cbd5e1;
+            border: 1px solid #475569;
+        }
+
+        .btn-ghost:hover {
+            background: #334155;
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .formula-explanation {
+            margin-top: 1rem;
+            text-align: left;
+            background: #334155;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.3s ease;
+        }
+
+        .formula-explanation.active {
+            display: block;
+        }
+
+        /* Table Rendering */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Quiz Section */
+        .quiz-option {
+            display: block;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .quiz-option:hover {
+            background-color: #f1f5f9;
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary-color);
+            background-color: #eff6ff;
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .feedback.correct {
+            background-color: #dcfce7;
+            color: #166534;
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background-color: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
+        /* Modal for Formula Lab */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.open .modal {
+            transform: scale(1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <h1>Physics Interactive</h1>
+            <span class="progress-indicator">Module 1.2: Scalars & Vectors</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Introduction Card -->
+        <section class="section-card">
+            <span class="card-label">Introduction</span>
+            <h2 class="card-title">Physical Quantities</h2>
+            <p>In the study of physics, we measure the world around us using <strong>physical quantities</strong>. Every measurement can be broadly classified into two distinct categories based on how they are defined mathematically and geometrically.</p>
+        </section>
+
+        <!-- Definition Cards (Split) -->
+        <div class="grid-2">
+            <section class="section-card concept-box scalar">
+                <span class="concept-icon">📏</span>
+                <span class="card-label" style="color: var(--accent-scalar);">Definition</span>
+                <h3 class="card-title" style="border:none; margin-bottom:0.5rem;">Scalar Quantities</h3>
+                <p>Quantities that are fully described by a <strong>magnitude</strong> (or numerical value) alone. They do not have a specific direction.</p>
+            </section>
+
+            <section class="section-card concept-box vector">
+                <span class="concept-icon">🧭</span>
+                <span class="card-label" style="color: var(--accent-vector);">Definition</span>
+                <h3 class="card-title" style="border:none; margin-bottom:0.5rem;">Vector Quantities</h3>
+                <p>Quantities that are fully described by both a <strong>magnitude</strong> and a <strong>direction</strong>. Changing direction changes the vector.</p>
+            </section>
+        </div>
+
+        <!-- Formula Card System -->
+        <section class="section-card formula-card" id="formula-notation">
+            <span class="card-label">Notation</span>
+            <h2 class="card-title">Mathematical Representation</h2>
+            
+            <div class="formula-display" id="katex-1">
+                <!-- Rendered by KaTeX -->
+                $$ \text{Scalar: } A \quad \quad \text{Vector: } \vec{A} \text{ or } \mathbf{A} $$
+            </div>
+
+            <div class="formula-actions">
+                <button class="btn btn-ghost" onclick="toggleExplanation('exp-1')">Explain Formula</button>
+                <button class="btn btn-primary" onclick="openLab('Notation', 'Differentiating scalars and vectors through typography.')">Open Formula Lab</button>
+            </div>
+
+            <div id="exp-1" class="formula-explanation">
+                <p><strong>Convention:</strong> In textbooks, scalar variables are usually written in italic (e.g., <em>m</em> for mass). Vector variables are written in <strong>boldface</strong> (e.g., <strong>F</strong>) or with an arrow above them (e.g., $\vec{F}$) to explicitly indicate directionality.</p>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="section-card">
+            <span class="card-label">Comparison</span>
+            <h2 class="card-title">Scalar vs. Vector</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Scalar Quantity</th>
+                            <th>Vector Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Information</strong></td>
+                            <td>Only Magnitude</td>
+                            <td>Magnitude + Direction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Example 1</strong></td>
+                            <td>Mass (5 kg)</td>
+                            <td>Displacement (5 m North)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Example 2</strong></td>
+                            <td>Temperature (30°C)</td>
+                            <td>Force (10 N Downwards)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mathematical Rules</strong></td>
+                            <td>Ordinary Algebra</td>
+                            <td>Vector Algebra</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Can it be negative?</strong></td>
+                            <td>Yes (depending on scale)</td>
+                            <td>Yes (implies opposite direction)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Formula Card System (Speed vs Velocity) -->
+        <section class="section-card formula-card">
+            <span class="card-label">Formulas</span>
+            <h2 class="card-title">Speed vs. Velocity</h2>
+            
+            <div class="formula-display" id="katex-2">
+                $$ \text{Speed} = \frac{d}{t} \quad \quad \text{Velocity} = \frac{\Delta \vec{x}}{\Delta t} $$
+            </div>
+
+            <div class="formula-actions">
+                <button class="btn btn-ghost" onclick="toggleExplanation('exp-2')">Explain Formula</button>
+                <button class="btn btn-primary" onclick="openLab('Motion', 'Comparing scalar distance to vector displacement.')">Open Formula Lab</button>
+            </div>
+
+            <div id="exp-2" class="formula-explanation">
+                <p><strong>Speed</strong> is a scalar calculated by dividing total distance ($d$) by time. <strong>Velocity</strong> is a vector calculated by dividing displacement (change in position, $\Delta \vec{x}$) by time. Note that displacement is a vector, making velocity a vector.</p>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section class="section-card">
+            <span class="card-label">Suggested Questions</span>
+            <h2 class="card-title">Knowledge Check</h2>
+            
+            <div style="margin-bottom: 2rem;">
+                <p style="margin-bottom: 1rem; font-weight: 600;">1. If a car travels 60 km East, then turns around and travels 60 km West, what is its total displacement?</p>
+                <div class="quiz-group" data-correct="0">
+                    <label class="quiz-option"><input type="radio" name="q1" value="0"> 0 km</label>
+                    <label class="quiz-option"><input type="radio" name="q1" value="1"> 120 km</label>
+                    <label class="quiz-option"><input type="radio" name="q1" value="2"> 60 km East</label>
+                </div>
+                <div class="feedback" id="fb-q1"></div>
+            </div>
+
+            <div>
+                <p style="margin-bottom: 1rem; font-weight: 600;">2. Which of the following is a scalar quantity?</p>
+                <div class="quiz-group" data-correct="1">
+                    <label class="quiz-option"><input type="radio" name="q2" value="0"> Force</label>
+                    <label class="quiz-option"><input type="radio" name="q2" value="1"> Time</label>
+                    <label class="quiz-option"><input type="radio" name="q2" value="2"> Acceleration</label>
+                </div>
+                <div class="feedback" id="fb-q2"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="lab-modal">
+        <div class="modal">
+            <h3 style="margin-bottom: 1rem; font-family: var(--font-serif);">Formula Lab</h3>
+            <div style="background: #f1f5f9; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                <strong id="modal-title">Title</strong>
+                <p id="modal-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Description</p>
+            </div>
+            <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 1.5rem;">
+                In a full application, this would allow you to manipulate variables (e.g., change Mass or Acceleration) to see how the Vector Force changes in real-time.
+            </p>
+            <div style="text-align: right;">
+                <button class="btn btn-primary" onclick="closeLab()">Close Lab</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+    <script>
+        // Formula Extraction & Management
+        const formulaData = {
+            'Notation': {
+                latex: '\\text{Scalar: } A \\quad \\quad \\text{Vector: } \\vec{A} \\text{ or } \\mathbf{A}',
+                variables: ['A (Magnitude)', 'Direction Arrow']
+            },
+            'Motion': {
+                latex: '\\text{Speed} = \\frac{d}{t} \\quad \\quad \\text{Velocity} = \\frac{\\Delta \\vec{x}}{\\Delta t}',
+                variables: ['d (Distance)', 't (Time)', 'x (Position)']
+            }
+        };
+
+        // UI Interactions
+        function toggleExplanation(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('active')) {
+                el.classList.remove('active');
+            } else {
+                // Close others
+                document.querySelectorAll('.formula-explanation').forEach(div => div.classList.remove('active'));
+                el.classList.add('active');
+            }
+        }
+
+        function openLab(title, desc) {
+            const modal = document.getElementById('lab-modal');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            modal.classList.add('open');
+        }
+
+        function closeLab() {
+            document.getElementById('lab-modal').classList.remove('open');
+        }
+
+        // Close modal on outside click
+        document.getElementById('lab-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'lab-modal') closeLab();
+        });
+
+        // Quiz Logic
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const group = this.closest('.quiz-group');
+                const feedbackId = group.nextElementSibling.id;
+                const feedbackEl = document.getElementById(feedbackId);
+                const correctVal = group.getAttribute('data-correct');
+                const selectedVal = this.querySelector('input').value;
+
+                // Visual selection
+                group.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+
+                // Validation
+                feedbackEl.className = 'feedback'; // reset
+                if (selectedVal === correctVal) {
+                    feedbackEl.innerText = "Correct! Well done.";
+                    feedbackEl.classList.add('correct');
+                } else {
+                    feedbackEl.innerText = "Incorrect. Review the definitions and try again.";
+                    feedbackEl.classList.add('incorrect');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```

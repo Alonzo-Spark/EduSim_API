@@ -1,0 +1,146 @@
+# Spring Stretched — Peak Limit Event
+
+---
+
+## Runtime Overlay Response
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║  ⚠  SANDBOX EVENT DETECTED                                   ║
+║  Event Type  :  spring_stretched                             ║
+║  Severity    :  PEAK LIMIT                                   ║
+║  Status      :  ACTIVE                                       ║
+╚══════════════════════════════════════════════════════════════╝
+```
+
+---
+
+### Event Payload
+
+```json
+{
+  "event_id"      : "EVT-2024-SS-0047",
+  "type"          : "spring_stretched",
+  "trigger"       : "peak_limit",
+  "timestamp"     : "2024-01-15T14:32:07.841Z",
+  "severity"      : "PEAK",
+  "status"        : "ACTIVE",
+
+  "spring_state" : {
+    "natural_length"    : 0.25,
+    "current_length"    : 0.48,
+    "extension"         : 0.23,
+    "unit"              : "meters",
+    "peak_limit"        : 0.45,
+    "limit_exceeded_by" : 0.03
+  },
+
+  "force_state" : {
+    "spring_constant"   : 120.0,
+    "applied_force"     : 27.6,
+    "peak_force_limit"  : 54.0,
+    "restoring_force"   : 27.6,
+    "unit"              : "Newtons"
+  },
+
+  "energy_state" : {
+    "elastic_pe"        : 3.174,
+    "peak_energy_limit" : 12.15,
+    "unit"              : "Joules"
+  },
+
+  "flags" : {
+    "elastic_limit_breached"  : true,
+    "plastic_deformation_risk": true,
+    "snap_risk"               : false,
+    "damping_active"          : false
+  }
+}
+```
+
+---
+
+### Physics Snapshot at Peak Limit
+
+| Parameter | Symbol | Value | Unit |
+|---|---|---|---|
+| Spring Constant | k | 120.0 | N/m |
+| Natural Length | L₀ | 0.25 | m |
+| Current Extension | x | 0.23 | m |
+| Restoring Force | F | 27.6 | N |
+| Elastic PE | U | 3.174 | J |
+| Peak Limit Extension | x_max | 0.45 | m |
+| Limit Exceeded By | Δx | 0.03 | m |
+
+---
+
+### Hooke's Law Evaluation
+
+$$
+F = kx = 120.0 \times 0.23 = 27.6 \text{ N}
+$$
+
+$$
+U = \frac{1}{2}kx^2 = \frac{1}{2}(120.0)(0.23)^2 = 3.174 \text{ J}
+$$
+
+---
+
+### Overlay Response Actions
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  RUNTIME OVERLAY ACTIONS                                │
+├─────────────────────────────────────────────────────────┤
+│  [1]  CLAMP extension to peak_limit (0.45 m)           │
+│  [2]  EMIT force_exceeded warning to physics engine    │
+│  [3]  TRIGGER damping response                         │
+│  [4]  LOG event to sandbox telemetry stream            │
+│  [5]  PAUSE simulation for manual inspection           │
+│  [6]  RESET spring to natural_length                   │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+### Overlay State Machine
+
+```
+IDLE
+  │
+  ▼
+MONITORING ──── extension < peak_limit ────► SAFE
+  │
+  │  extension >= peak_limit
+  ▼
+PEAK_LIMIT_TRIGGERED
+  │
+  ├──► CLAMP_ACTIVE
+  │         │
+  │         ▼
+  │    FORCE_CAPPED ──► Resume Simulation
+  │
+  └──► BREACH_LOGGED ──► Telemetry Stream
+```
+
+---
+
+### Console Output
+
+```bash
+[SANDBOX][14:32:07.841] spring_stretched :: peak_limit EVENT FIRED
+[SANDBOX][14:32:07.842] Extension    : 0.48 m  (limit: 0.45 m)
+[SANDBOX][14:32:07.842] Exceeded by  : 0.03 m
+[SANDBOX][14:32:07.843] Force        : 27.6 N
+[SANDBOX][14:32:07.843] Elastic PE   : 3.174 J
+[SANDBOX][14:32:07.844] FLAG :: elastic_limit_breached = TRUE
+[SANDBOX][14:32:07.844] FLAG :: plastic_deformation_risk = TRUE
+[SANDBOX][14:32:07.845] ACTION :: Clamping extension to 0.45 m
+[SANDBOX][14:32:07.845] ACTION :: Emitting peak_limit warning
+[SANDBOX][14:32:07.846] ACTION :: Logging to telemetry stream
+[SANDBOX][14:32:07.846] OVERLAY STATUS :: RESOLVED
+```
+
+---
+
+> **Overlay resolved.** Spring extension clamped to peak limit. Elastic limit breach flagged. Telemetry logged. Simulation may resume with damping active.

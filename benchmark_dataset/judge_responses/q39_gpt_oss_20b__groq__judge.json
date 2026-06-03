@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 39,
+  "question": "Define wavelength, frequency, and amplitude of a wave.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWavelength, frequency, and amplitude are primary parameters used to quantify and describe the physical properties of wave propagation through space and time.\n\n---\n\n## Core Wave Metrics\n\n### 1. Wavelength ($\\lambda$)\nWavelength is the spatial distance between two consecutive points that are in the same phase of oscillation, such as the distance between two adjacent wave crests or troughs.\n\n### 2. Frequency ($f$)\nFrequency is the number of complete wave cycles or oscillations that pass a fixed reference point per unit of time, measured internationally in Hertz ($\\text{Hz}$).\n\n### 3. Amplitude ($A$)\nAmplitude is the maximum displacement of a medium's particles from their equilibrium position as a wave passes through.\n\n---\n\n## Formula\n\nThe wave speed equation linking these parameters is defined as:\n\n$$v = f\\lambda$$\n\nWhere:\n* $v$ represents the propagation velocity of the wave profile\n* $f$ represents the wave frequency\n* $\\lambda$ represents the wavelength value\n\n---\n\n## Summary\n\nWavelength measures a wave's spatial structure, frequency tracks its speed over time, and amplitude defines its energy intensity and displacement scale.",
+  "candidate_response": "┌─────────────────────────────┐\n│           Definition         │\n│                             │\n│ • **Wavelength**: The distance between successive crests (or troughs) of a wave. It is the spatial period of the wave. │\n│ • **Frequency**: The number of complete oscillations (cycles) that pass a fixed point per unit time, measured in hertz (Hz). │\n│ • **Amplitude**: The maximum displacement of a point on the wave from its equilibrium position; it determines the wave’s intensity. │\n└─────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines wavelength, frequency, and amplitude, aligning with the gold reference answer. However, it lacks the wave speed equation and detailed explanations provided in the gold answer, which affects its accuracy score. The quality score is impacted by the unconventional use of a table format, which, although readable, does not follow standard formatting for educational content. The educational score is decent due to the clear and concise definitions, but it could be improved with additional explanations and examples to enhance pedagogical effectiveness. To improve, the candidate should incorporate the wave speed equation, expand on the definitions with examples, and adopt a more conventional formatting approach to enhance readability and educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 428,
+    "completionTokens": 421,
+    "totalTokens": 849
+  },
+  "candidate_latency_ms": 637,
+  "candidate_cost_usd": 0.0001584,
+  "judge_token_usage": {
+    "promptTokens": 789,
+    "completionTokens": 191,
+    "totalTokens": 980
+  },
+  "judge_latency_ms": 3345,
+  "judge_cost_usd": 0.0009318,
+  "retry_count": 1,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:28:09.804Z"
+}

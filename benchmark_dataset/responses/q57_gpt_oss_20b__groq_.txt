@@ -1,0 +1,136 @@
+┌───────────────────────────────────────┐
+│ Introduction                            │
+│                                           │
+│ A forced harmonic oscillator is a mass‑    │
+│ on a spring that is driven by an external │
+│ periodic force.  When the driving         │
+│ frequency is varied, the system’s steady‑ │
+│ state response shows a pronounced change   │
+│ in amplitude and phase.                   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Definition                              │
+│                                           │
+│ The system is governed by                │
+│ \[
+│ m\ddot{x} + 2\gamma m\dot{x} + kx = F_0 \sin(\omega t)
+│ \]
+│ where \(m\) is mass, \(k\) the spring      │
+│ constant, \(\gamma\) the damping rate,     │
+│ \(F_0\) the driving amplitude, and        │
+│ \(\omega\) the driving angular frequency. │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Key Concepts                            │
+│                                           │
+│ • **Resonance** – As \(\omega\) approaches the natural
+│   frequency \(\omega_0=\sqrt{k/m}\), the amplitude
+│   grows sharply, reaching a maximum at
+│   \(\omega=\sqrt{\omega_0^2-2\gamma^2}\).
+│ • **Visual Effect of Increasing \(\omega\)** – In a
+│   typical animation or live sandbox:
+│   – At low \(\omega\) the mass oscillates with
+│     a modest amplitude.
+│   – Near resonance the motion “blows up” and the
+│     amplitude becomes very large.
+│   – Beyond resonance the amplitude drops
+│     again, and the motion appears smaller.
+│   The phase lag also shifts from 0 to \(\pi\)
+│   as \(\omega\) increases.                 │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Characteristics                         │
+│                                           │
+│ • Linear response (superposition holds).│
+│ • Steady‑state solution is sinusoidal at
+│   the driving frequency.                 │
+│ • Amplitude depends on damping and
+│   detuning \((\omega_0-\omega)\).        │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Main Formula                            │
+│                                           │
+│     Rendered Formula                    │
+│                                           │
+│ \[
+│ A(\omega)=\frac{F_0/m}{\sqrt{(\omega_0^2-\omega^2)^2
+│ + (2\gamma\omega)^2}}
+│ \]
+│                                           │
+│ [ Explain Formula ]   [ Open Formula Lab ] │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Applications                           │
+│                                           │
+│ • Mechanical vibration analysis.        │
+│ • Acoustic resonators.                  │
+│ • Electrical RLC circuits (analogous).   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Advantages                             │
+│                                           │
+│ • Predictable response.                 │
+│ • Simple to model analytically.         │
+│ • Useful for tuning systems to avoid
+│   resonance.                             │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Disadvantages                          │
+│                                           │
+│ • High sensitivity to damping.          │
+│ • Large amplitudes can damage
+│   components.                            │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Important Notes                        │
+│                                           │
+│ • The displayed amplitude assumes
+│   steady‑state; transients decay over
+│   time.                                  │
+│ • In a live sandbox, visual feedback
+│   may be limited by screen refresh
+│   rates.                                 │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Summary                                │
+│                                           │
+│ Increasing the driving frequency
+│ causes the oscillator to pass through a
+│ resonance peak where the amplitude is
+│ maximized. Beyond resonance the
+│ amplitude diminishes, and the phase
+│ lag approaches \(\pi\).                   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Suggested Questions                    │
+│                                           │
+│ 1. How does damping modify the peak
+│    amplitude?                           │
+│ 2. What is the phase shift at exact
+│    resonance?                           │
+│ 3. How would a nonlinear restoring
+│    force alter the resonance curve?     │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Table: Amplitude vs Driving Frequency  │
+│                                           │
+│ | \(\omega/\omega_0\) | Amplitude \(A/A_{\max}\) |
+│ |---------------------|--------------------------|
+│ | 0.5                 | 0.20                     |
+│ | 0.8                 | 0.55                     |
+│ | 1.0                 | 1.00                     |
+│ | 1.2                 | 0.55                     |
+│ | 1.5                 | 0.20                     |
+│                                           │
+└───────────────────────────────────────┘

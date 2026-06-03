@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 40,
+  "question": "Differentiate between transverse and longitudinal waves.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWaves are classified into two primary structural types based on how the particles of the medium vibrate relative to the direction of the wave's energy travel.\n\nA transverse wave is a wave in which the particles of the medium oscillate perpendicular to the direction of wave propagation.\n\nA longitudinal wave is a wave in which the particles of the medium oscillate parallel to the direction of wave propagation.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Transverse Waves | Longitudinal Waves |\n| --- | --- | --- |\n| **Structure** | Forms alternating crests (peaks) and troughs (valleys). | Forms alternating compressions (high density) and rarefactions (low density). |\n| **Medium Context** | Can travel through solids and liquid surfaces, but not gases. | Can travel through solids, liquids, and gases. |\n| **Polarization** | Can be polarized. | Cannot be polarized. |\n\n---\n\n## Real-world Examples\n\n* **Transverse Waves:** Light waves, radio waves, seismic S-waves, and surface ripples on a pond.\n* **Longitudinal Waves:** Sound waves traveling through air, seismic P-waves, and ultrasound tracking pulses.\n\n---\n\n## Summary\n\nTransverse waves produce variations perpendicular to their direction of travel, whereas longitudinal waves create pressure pulses that run parallel to their path.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Introduction               │  \n│                           │  \n│ Transverse and longitudinal│  \n│ waves are the two basic    │  \n│ types of mechanical waves. │  \n│ They differ in how the      │  \n│ particles of the medium    │  \n│ move relative to the       │  \n│ direction of wave          │  \n│ propagation.               │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Definition                 │  \n│                           │  \n│ • Transverse wave: The     │  \n│   displacement of the      │  \n│   medium is perpendicular  │  \n│   to the direction of      │  \n│   wave travel.             │  \n│ • Longitudinal wave: The   │  \n│   displacement is parallel │  \n│   to the direction of      │  \n│   wave travel.             │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Key Concepts               │  \n│                           │  \n│ • Both are mechanical      │  \n│   waves that require a     │  \n│   medium (solid, liquid,   │  \n│   gas).                    │  \n│ • Transverse waves can     │  \n│   travel in solids;        │  \n│   longitudinal waves can   │  \n│   travel in all media.     │  \n│ • Speed depends on         │  \n│   medium properties.       │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Characteristics            │  \n│                           │  \n│ Transverse:                │  \n│ - Particle motion is       │  \n│   perpendicular to wave   │  \n│   propagation.             │  \n│ - Common in light, sound   │  \n│   waves in strings, and    │  \n│   electromagnetic waves.  │  \n│ Longitudinal:              │  \n│ - Particle motion is       │  \n│   parallel to wave         │  \n│   propagation.             │  \n│ - Sound waves in air, water│  \n│   and solids.              │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Applications               │  \n│                           │  \n│ • Transverse:              │  \n│   • Light and radio waves │  \n│   • Seismic surface waves │  \n│ • Longitudinal:            │  \n│   • Sound transmission    │  \n│   • Ultrasound imaging    │  \n│   • Seismic body waves    │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Summary                    │  \n│                           │  \n│ Transverse waves move the  │  \n│ particles perpendicular to │  \n│ the direction of travel,   │  \n│ while longitudinal waves   │  \n│ move particles parallel to │  \n│ the direction of travel.   │  \n│ Both require a medium and  │  \n│ have distinct applications │  \n│ in physics and engineering.│  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Suggested Questions        │  \n│                           │  \n│ 1. Why can light be a      │  \n│    transverse wave but    │  \n│    sound not?              │  \n│ 2. How does the speed of   │  \n│    a longitudinal wave     │  \n│    change with medium      │  \n│    density?                │  \n│ 3. Give an example of a    │  \n│    transverse wave in a    │  \n│    solid.                  │  \n│ 4. Explain why seismic      │  \n│    body waves are          │  \n│    longitudinal.          │  \n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts of transverse and longitudinal waves, accurately defining and differentiating between them. The use of a structured format with clear headings and bullet points enhances readability. However, there are minor areas for improvement, such as the inclusion of a comparison matrix similar to the gold reference answer, which could further clarify the differences between transverse and longitudinal waves. Additionally, some of the sentences could be rephrased for better clarity and flow. Overall, the response is well-organized, easy to follow, and effectively conveys the key concepts, making it suitable for educational purposes.",
+  "candidate_token_usage": {
+    "promptTokens": 425,
+    "completionTokens": 1330,
+    "totalTokens": 1755
+  },
+  "candidate_latency_ms": 2317,
+  "candidate_cost_usd": 0.00043088,
+  "judge_token_usage": {
+    "promptTokens": 1446,
+    "completionTokens": 183,
+    "totalTokens": 1629
+  },
+  "judge_latency_ms": 5097,
+  "judge_cost_usd": 0.0013067999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:30:53.424Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 54,
+  "question": "Live Sandbox: Explain the orbital behavior when a planet's tangential velocity is reduced below stable circular speed.",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nA satellite is in a circular orbit around a central gravitational mass. We can reduce its forward tangential velocity vector mid-flight to observe how its orbital path updates in real time.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nThe satellite immediately drops out of its stable circular path and plunges inward toward the central body. Its trajectory changes into an eccentric elliptical path, speeding up rapidly as it falls closer to the gravity source.\n\n### ✦ WHY IT HAPPENS\nA stable circular orbit requires a specific tangential velocity where the inward gravitational pull provides the exact centripetal acceleration needed for that radius. Reducing this speed means gravity overpowers the inertia of the satellite, pulling it inward.\n\n### ✦ WHAT TO NOTICE\nObserve the change in speed. The satellite moves slowest at its highest point (aphelion) and accelerates to its highest speed at its closest approach (perihelion).\n\n### ✦ FORMULA\nThe stable circular orbit velocity constraint is defined as:\n\n$$v_c = \\sqrt{\\frac{GM}{r}}$$\n\n* If the actual tracking velocity vector magnitude ($v$) drops below $v_c$, the orbit shifts from circular to eccentric elliptical ($e > 0$).\n\n### ✦ DEEPER UNDERSTANDING\nThis interaction demonstrates Kepler's Second Law. As the satellite falls down the gravitational potential well, it trades potential energy for kinetic energy, sweeping out equal areas in equal intervals of time.\n\n### ✦ TRY THIS\n1. Click the **Velocity subtract button** while the satellite orbits to observe it drop into an elliptical path.\n2. Lower the speed too much and observe the satellite collide with the central planet asset.",
+  "candidate_response": "### 🌌 Orbital Mechanics Lab: Velocity Reduction\n\nWhen a planet's tangential velocity $v_t$ is reduced below the required circular orbital speed $v_c$, the balance between **inertia** and **gravitational pull** is disrupted. The system transitions from a circular path to an elliptical decay or atmospheric reentry.\n\n---\n\n### 📘 Quick Definition\n**Orbital Decay / Elliptical Transition** occurs when the kinetic energy of an orbiting body is no longer sufficient to maintain a constant radius. Gravity \"wins\" the instantaneous tug-of-war, pulling the object into a lower, faster, and more eccentric path.\n\n---\n\n### 🗝️ Key Concepts\n\n*   **Circular Velocity ($v_c$):** The precise speed where centripetal acceleration exactly matches gravitational acceleration.\n*   **Perigee/Periapsis:** The new \"closest point\" created immediately at the location where the velocity was reduced.\n*   **Conservation of Angular Momentum:** As the planet falls closer to the star, it must spin faster to conserve momentum.\n*   **Potential vs. Kinetic Energy:** Potential energy is traded for kinetic energy as the planet \"falls\" into the gravity well.\n\n---\n\n### 📉 Formula Card: Orbital Velocity Requirement\n\n┌──────────────────────────────────────────────────────────┐\n│ **Main Formula: Circular Velocity**                      │\n│                                                          │\n│ $$v_c = \\sqrt{\\frac{GM}{r}}$$                            │\n│                                                          │\n│ **Variables:**                                           │\n│ $G$: Gravitational Constant                              │\n│ $M$: Mass of the Central Body                            │\n│ $r$: Current Orbital Radius                              │\n│                                                          │\n│ [ 🔬 **Open Formula Lab: Stability Analysis** ]          │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n### ⚙️ Characteristics of Reduced Velocity\n\n| Property | Change Direction | Scientific Explanation |\n| :--- | :--- | :--- |\n| **Orbit Shape** | Circular $\\rightarrow$ Elliptical | The path becomes an ellipse with the point of deceleration as the **Aphelion**. |\n| **Total Energy** | Decrease | Lower velocity means lower Kinetic Energy ($K$), reducing Total Mechanical Energy. |\n| **Orbital Period** | Decrease | According to Kepler’s 3rd Law, a smaller semi-major axis leads to a shorter year. |\n| **Velocity at Perihelion** | Increase | The planet accelerates as it falls inward, eventually exceeding its original speed. |\n\n---\n\n### 🚀 Formula Card: The Vis-Viva Equation\n\n┌──────────────────────────────────────────────────────────┐\n│ **Main Formula: Velocity at any Point**                  │\n│                                                          │\n│ $$v^2 = GM \\left( \\frac{2}{r} - \\frac{1}{a} \\right)$$    │\n│                                                          │\n│ **Context:**                                             │\n│ If $v < v_c$, then the semi-major axis $a$ must decrease  │\n│ to satisfy the energy balance of the new elliptical path.│\n│                                                          │\n│ [ 🛠️ **Simulator: Adjust Velocity Vector** ]             │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n### ⚠️ Important Notes\n\n> [!IMPORTANT]\n> **The Paradox of Falling:** When you slow a planet down, it eventually ends up moving **faster** than it was before. This is because it drops into a deeper part of the gravity well where the gravitational potential energy is converted into high kinetic energy at the perihelion.\n\n---\n\n### 🏁 Summary\n1.  **Immediate Effect:** The planet begins to \"fall\" toward the star.\n2.  **Path Change:** The circular orbit collapses into an elliptical orbit.\n3.  **New Extremes:** The point where you slowed down becomes the **highest point** (Apoapsis) of the new orbit.\n4.  **Final Result:** If the velocity is reduced significantly (below the \"impact\" threshold), the ellipse will intersect the star's surface or atmosphere.\n\n---\n\n### ❓ Suggested Questions\n*   \"How much velocity must be lost to cause atmospheric reentry?\"\n*   \"What happens if the velocity is reduced to zero instantaneously?\"\n*   \"How does Kepler's Second Law explain the speed increase at the lower point of the ellipse?\"",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the orbital behavior when a planet's tangential velocity is reduced below stable circular speed. The explanation is accurate, and the formulas provided are correct. The response is well-structured, readable, and effectively teaches the concept. However, there are some minor areas for improvement, such as providing more explicit connections to Kepler's laws and potentially simplifying some of the explanations for better beginner-friendliness. Overall, the response is of high quality and effectively conveys the necessary information.",
+  "candidate_token_usage": {
+    "promptTokens": 391,
+    "completionTokens": 916,
+    "totalTokens": 1307
+  },
+  "candidate_latency_ms": 6978,
+  "candidate_cost_usd": 0.0029435,
+  "judge_token_usage": {
+    "promptTokens": 1694,
+    "completionTokens": 164,
+    "totalTokens": 1858
+  },
+  "judge_latency_ms": 4878,
+  "judge_cost_usd": 0.00141,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:18:12.379Z"
+}

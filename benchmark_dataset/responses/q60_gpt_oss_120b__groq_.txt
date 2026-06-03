@@ -1,0 +1,170 @@
+┌─────────────────────────────┐  
+│          Introduction        │  
+│─────────────────────────────│  
+│ In a sandbox simulation, the   │  
+│ **gravity_changed** event signals │  
+│ that the global gravitational   │  
+│ acceleration has been altered. │  
+│ When the new value is **0 m/s²** │  
+│ (zero‑g), the runtime overlay must │  
+│ update all physics systems,      │  
+│ visual cues, and UI elements so   │  
+│ that the user perceives a weight‑ │  
+│ less environment.               │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│            Definition        │  
+│─────────────────────────────│  
+│ *Gravity‑Changed Event* – a       │  
+│ broadcast emitted by the sandbox │  
+│ engine whenever the scalar value │  
+│ of the world‑gravity vector is     │  
+│ modified.                         │  
+│                                     │  
+│ In this scenario the payload is:   │  
+│ `{ "gravity": [0, 0, 0] }`          │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│          Key Concepts        │  
+│─────────────────────────────│  
+│ • **World Gravity Vector** – 3‑D   │  
+│   vector `g = (gₓ, gᵧ, g_z)` that   │  
+│   is applied to every dynamic body.│  
+│ • **Zero‑G** – all components are   │  
+│   exactly `0`.                     │  
+│ • **Runtime Overlay** – UI layer   │  
+│   that reacts instantly to engine │  
+│   state changes.                  │  
+│ • **Physics Update Loop** – the    │  
+│   step where forces are recomputed│  
+│   each frame.                      │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│        Event Structure        │  
+│─────────────────────────────│  
+│ ```json                         │  
+│ {                               │  
+│   "type": "gravity_changed",    │  
+│   "payload": {                  │  
+│     "gravity": [0, 0, 0]        │  
+│   }                             │  
+│ }                               │  
+│ ```                             │  
+│ The overlay listener extracts the │  
+│ `gravity` array and propagates it │  
+│ to dependent subsystems.          │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│      Runtime Overlay Logic   │  
+│─────────────────────────────│  
+│ 1. **Listen** for `gravity_changed`.│  
+│ 2. **Validate** payload (must be 3 │  
+│    numbers).                       │  
+│ 3. **Update** global gravity state.│  
+│ 4. **Notify**:                     │  
+│    • Physics engine (set `g = 0`). │  
+│    • Particle systems (disable   │  
+│      gravity‑based emitters).    │  
+│    • UI cues (show “Zero‑G” banner).│  
+│ 5. **Refresh** rendering:          │  
+│    – Disable drop shadows,        │  
+│      enable floating animation.  │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│          Formula Card        │  
+│─────────────────────────────│  
+│ Main Formula                  │  
+│                               │  
+│   \[ F = m \, g \]            │  
+│                               │  
+│ [ Explain Formula ]           │  
+│ [ Open Formula Lab ]          │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│      Formula Explanation     │  
+│─────────────────────────────│  
+│ *F* – gravitational force on a   │  
+│ body, *m* – its mass, *g* – the │  
+│ gravity vector. In zero‑g,       │  
+│ `g = (0,0,0)`, thus `F = 0`.      │  
+│ Consequently all weight‑dependent│  
+│ forces vanish.                  │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│          Example Code        │  
+│─────────────────────────────│  
+│ ```javascript                     │  
+│ // Overlay listener            │  
+│ sandbox.on('gravity_changed', (e) => { │  
+│   const g = e.payload.gravity; │  
+│   // 1️⃣ Update physics engine │  
+│   physics.setWorldGravity(g); │  
+│   // 2️⃣ UI feedback            │  
+│   if (g.every(v => v === 0)) {│  
+│     ui.showBanner('Zero‑G Mode');│  
+│     ui.enableFloatingEffect(); │  
+│   } else {                     │  
+│     ui.hideBanner();           │  
+│   }                            │  
+│ });                            │  
+│ ```                            │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│        Parameter Table       │  
+│─────────────────────────────│  
+│ ┌───────────────────────────┐ │  
+│ │ Parameter │ Default | Zero‑G│ │  
+│ │-----------│---------|-------│ │  
+│ │ gravity.x │ 0       | 0     │ │  
+│ │ gravity.y │ -9.81   | 0     │ │  
+│ │ gravity.z │ 0       | 0     │ │  
+│ └───────────────────────────┘ │  
+│ The overlay swaps the “Default” column   │  
+│ with the “Zero‑G” column when the event   │  
+│ is received.                             │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│          Applications        │  
+│─────────────────────────────│  
+│ • Space‑flight training sims │  
+│ • Virtual reality zero‑g demos│  
+│ • Game mechanics where players│  
+│   toggle weightlessness.      │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│            Summary           │  
+│─────────────────────────────│  
+│ • Detect `gravity_changed` →   │  
+│   payload `{gravity:[0,0,0]}`   │  
+│ • Set global gravity to zero   │  
+│ • Disable all gravity‑based   │  
+│   forces, update UI, enable    │  
+│   floating visual cues.       │  
+│ • Formula `F = m g` collapses to │  
+│   `F = 0`, confirming physics   │  
+│   change.                     │  
+└─────────────────────────────┘  
+
+┌─────────────────────────────┐  
+│      Suggested Questions     │  
+│─────────────────────────────│  
+│ 1. How would you restore the   │  
+│    previous gravity after a   │  
+│    zero‑g period?              │  
+│ 2. Which subsystems must be    │  
+│    notified besides physics? │  
+│ 3. What visual effects best   │  
+│    convey weightlessness?    │  
+│ 4. How does zero‑g affect      │  
+│    collision response?       │  
+└─────────────────────────────┘  

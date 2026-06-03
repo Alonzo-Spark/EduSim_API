@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 13,
+  "question": "A force of 50 N acts on a body of mass 10 kg. Find acceleration.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Dynamics Problem\n\n### Problem\nA net force of $50 \\text{ N}$ acts on a body of mass $10 \\text{ kg}$. Find its resulting acceleration.\n\n### Given\n* Force applied ($F$) = $50 \\text{ N}$\n* Mass of the body ($m$) = $10 \\text{ kg}$\n\n### Formula\n$$F = ma$$\n\nRearranging to solve for acceleration ($a$):\n$$a = \\frac{F}{m}$$\n\n### Substitution\n$$a = \\frac{50}{10}$$\n\n### Calculation\n$$a = 5 \\text{ m/s}^2$$\n\n### Final Answer\n**Acceleration ($a$) = $5 \\text{ m/s}^2$**\n\n### Interpretation\nThis indicates that the $50 \\text{ N}$ force causes the $10 \\text{ kg}$ mass to increase its velocity uniformly by $5 \\text{ meters per second}$ every single second in the direction of the applied force vector.",
+  "candidate_response": "Here's the breakdown, transformed into an interactive textbook format:\n\n**Introduction**\n\nWelcome to a fundamental concept in physics: understanding how forces cause acceleration. In this section, we'll use Newton's Second Law of Motion to calculate the acceleration of an object given the force applied to it and its mass.\n\n**Formula Card**\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│  $$F = ma$$              │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n**Explanation:**\n\n*   **F** represents the force applied to the object, measured in Newtons (N).\n*   **m** represents the mass of the object, measured in kilograms (kg).\n*   **a** represents the acceleration of the object, measured in meters per second squared (m/s²).\n\n**Given Information:**\n\n*   Force (F) = 50 N\n*   Mass (m) = 10 kg\n\n**Calculation:**\n\nTo find the acceleration (a), we can rearrange the formula:\n\n$$a = \\frac{F}{m}$$\n\nSubstituting the given values:\n\n$$a = \\frac{50 \\text{ N}}{10 \\text{ kg}}$$\n\n$$a = 5 \\text{ m/s}^2$$\n\n**Answer:**\n\nThe acceleration of the body is 5 m/s².\n\n**Summary**\n\nWe successfully applied Newton's Second Law to determine the acceleration of an object.  By understanding the relationship between force, mass, and acceleration, you can solve a wide variety of physics problems.\n\n**Suggested Questions**\n\n1.  What would happen to the acceleration if the force was doubled?\n2.  What would happen to the acceleration if the mass was doubled?\n3.  A car has a mass of 1500 kg. If the engine produces a force of 3000 N, what is the car's acceleration?\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and educational. It correctly applies Newton's Second Law of Motion to calculate the acceleration of the object. The use of an interactive textbook format and the inclusion of a formula card are excellent pedagogical tools. The response also provides a clear explanation of the variables and units involved. The only minor suggestion for improvement is to consider adding more visual aids, such as diagrams or graphs, to further illustrate the concept of acceleration and force. Additionally, the suggested questions at the end are helpful for encouraging critical thinking and exploration of related concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 391,
+    "completionTokens": 431,
+    "totalTokens": 822
+  },
+  "candidate_latency_ms": 2972,
+  "candidate_cost_usd": 0.00133965,
+  "judge_token_usage": {
+    "promptTokens": 1044,
+    "completionTokens": 176,
+    "totalTokens": 1220
+  },
+  "judge_latency_ms": 5481,
+  "judge_cost_usd": 0.0010488,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:19:37.526Z"
+}

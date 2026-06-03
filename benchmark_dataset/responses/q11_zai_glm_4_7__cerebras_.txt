@@ -1,0 +1,544 @@
+Here is the interactive, textbook-style HTML page. It transforms the content into structured UI blocks, utilizes the specific Formula Card system, and ensures responsive table rendering within a single self-contained file.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newton's Laws of Motion | Interactive Textbook</title>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #475569;
+            --accent: #0f172a;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Merriweather', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Layout */
+        header {
+            background: var(--accent);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .layout-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .nav-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-card h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            background-color: #eff6ff;
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            scroll-margin-top: 2rem;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-icon {
+            background: #eff6ff;
+            color: var(--primary);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .content-body p {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .example-box {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .example-box strong {
+            display: block;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        /* Formula Card System */
+        .formula-card {
+            background: linear-gradient(to bottom right, #f8fafc, #fff);
+            border: 1px solid #cbd5e1;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .formula-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .formula-display {
+            font-size: 1.75rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: #eff6ff;
+        }
+
+        /* Table Rendering */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            min-width: 600px; /* Force scroll on mobile */
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                position: static;
+                margin-bottom: 1rem;
+            }
+
+            .nav-card {
+                padding: 1rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            transform: translateY(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Physics 101: Mechanics</h1>
+        <p>Interactive Learning Module • Newton's Laws of Motion</p>
+    </header>
+
+    <div class="layout-container">
+        <!-- Sidebar Navigation -->
+        <aside>
+            <nav class="nav-card">
+                <h3>Table of Contents</h3>
+                <ul class="nav-links">
+                    <li><a href="#intro">1. Introduction</a></li>
+                    <li><a href="#first-law">2. First Law (Inertia)</a></li>
+                    <li><a href="#second-law">3. Second Law (F=ma)</a></li>
+                    <li><a href="#third-law">4. Third Law (Action-Reaction)</a></li>
+                    <li><a href="#comparison">5. Comparison Table</a></li>
+                    <li><a href="#summary">6. Summary</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Blocks -->
+        <main>
+            
+            <!-- Section: Introduction -->
+            <section id="intro" class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><span class="card-icon">📘</span> Introduction</h2>
+                </div>
+                <div class="content-body">
+                    <p>Sir Isaac Newton's three laws of motion describe the relationship between the motion of an object and the forces acting on it. These laws laid the foundation for classical mechanics and are essential for understanding how objects move in our physical world.</p>
+                    <p>Together, they allow us to predict the behavior of everything from falling apples to orbiting planets.</p>
+                </div>
+            </section>
+
+            <!-- Section: First Law -->
+            <section id="first-law" class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><span class="card-icon">1️⃣</span> First Law: The Law of Inertia</h2>
+                </div>
+                <div class="content-body">
+                    <p>An object at rest stays at rest, and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced external force. This resistance to change in motion is called <strong>Inertia</strong>.</p>
+                    
+                    <div class="example-box">
+                        <strong>Real-World Example:</strong>
+                        A book sitting on a table remains at rest until you push it (external force). Alternatively, a passenger in a car lurches forward when the brakes are applied because their body wants to continue moving forward.
+                    </div>
+
+                    <!-- Formula Card Component -->
+                    <div class="formula-card">
+                        <div class="formula-label">Equilibrium Condition</div>
+                        <div class="formula-display">
+                            $$ \sum \vec{F} = 0 $$
+                        </div>
+                        <div class="formula-actions">
+                            <button class="btn btn-outline" onclick="showToast('The net force ($\sum F$) is zero when an object is at rest or moving at constant velocity.')">Explain Formula</button>
+                            <button class="btn btn-primary" onclick="showToast('Opening Force Lab: Equilibrium Simulation...')">Open Formula Lab</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Second Law -->
+            <section id="second-law" class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><span class="card-icon">2️⃣</span> Second Law: Force and Acceleration</h2>
+                </div>
+                <div class="content-body">
+                    <p>The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass. This is the law that allows us to calculate exactly how a force affects motion.</p>
+
+                    <div class="example-box">
+                        <strong>Real-World Example:</strong>
+                        If you push a bicycle and a car with the same amount of force, the bicycle will accelerate much faster because it has less mass ($m$).
+                    </div>
+
+                    <!-- Formula Card Component -->
+                    <div class="formula-card">
+                        <div class="formula-label">Newton's Second Law</div>
+                        <div class="formula-display">
+                            $$ \vec{F} = m\vec{a} $$
+                        </div>
+                        <div class="formula-actions">
+                            <button class="btn btn-outline" onclick="showToast('Force ($F$) equals mass ($m$) multiplied by acceleration ($a$). More force means more acceleration; more mass means less acceleration.')">Explain Formula</button>
+                            <button class="btn btn-primary" onclick="showToast('Opening Force Lab: Mass vs. Acceleration Graph...')">Open Formula Lab</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Third Law -->
+            <section id="third-law" class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><span class="card-icon">3️⃣</span> Third Law: Action and Reaction</h2>
+                </div>
+                <div class="content-body">
+                    <p>For every action, there is an equal and opposite reaction. Forces always occur in pairs; if Object A exerts a force on Object B, Object B exerts a force of equal magnitude in the opposite direction on Object A.</p>
+
+                    <div class="example-box">
+                        <strong>Real-World Example:</strong>
+                        When a swimmer pushes water backward (action), the water pushes the swimmer forward (reaction). Similarly, the recoil of a gun is caused by the forward force on the bullet creating an equal backward force on the gun.
+                    </div>
+
+                    <!-- Formula Card Component -->
+                    <div class="formula-card">
+                        <div class="formula-label">Action-Reaction Pair</div>
+                        <div class="formula-display">
+                            $$ \vec{F}_{AB} = -\vec{F}_{BA} $$
+                        </div>
+                        <div class="formula-actions">
+                            <button class="btn btn-outline" onclick="showToast('Force exerted by A on B ($F_{AB}$) is the negative of force exerted by B on A ($F_{BA}$). The negative sign indicates opposite direction.')">Explain Formula</button>
+                            <button class="btn btn-primary" onclick="showToast('Opening Force Lab: Collision Simulator...')">Open Formula Lab</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Comparison Table -->
+            <section id="comparison" class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><span class="card-icon">📊</span> Comparison of Laws</h2>
+                </div>
+                <div class="content-body">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Law</th>
+                                    <th>Name</th>
+                                    <th>Key Concept</th>
+                                    <th>Equation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1st</strong></td>
+                                    <td>Law of Inertia</td>
+                                    <td>Objects resist changes in motion.</td>
+                                    <td>$$ \sum \vec{F} = 0 $$</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2nd</strong></td>
+                                    <td>Law of Acceleration</td>
+                                    <td>Force causes acceleration; mass resists it.</td>
+                                    <td>$$ \vec{F} = m\vec{a} $$</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3rd</strong></td>
+                                    <td>Action-Reaction</td>
+                                    <td>Forces always occur in pairs.</td>
+                                    <td>$$ \vec{F}_{12} = -\vec{F}_{21} $$</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Summary -->
+            <section id="summary" class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><span class="card-icon">📝</span> Summary</h2>
+                </div>
+                <div class="content-body">
+                    <ul>
+                        <li style="margin-bottom: 0.5rem"><strong>First Law:</strong> Defines inertia and the concept of force as a changer of motion.</li>
+                        <li style="margin-bottom: 0.5rem"><strong>Second Law:</strong> Quantifies force and explains how force, mass, and acceleration relate mathematically.</li>
+                        <li><strong>Third Law:</strong> Explains the nature of forces as interactions between two bodies.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Render Math using KaTeX
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
+
+        // Simple Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            
+            // Render math inside toast if present
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = message;
+            renderMathInElement(tempDiv, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+            toast.innerHTML = tempDiv.innerHTML;
+
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+```

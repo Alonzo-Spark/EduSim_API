@@ -1,0 +1,126 @@
+```json
+[
+  {
+    "type": "Card",
+    "title": "Quick Definition",
+    "content": "Uniform acceleration refers to the motion of an object where its velocity changes by an equal amount in every equal time interval. In simpler terms, the rate at which the velocity changes remains constant."
+  },
+  {
+    "type": "Card",
+    "title": "Key Characteristics of Uniform Acceleration",
+    "content": [
+      "**Constant Rate of Velocity Change:** The most defining characteristic is that the acceleration vector is constant in both magnitude and direction.",
+      "**Linear Velocity-Time Graph:** When plotting velocity against time, the graph for uniformly accelerated motion will be a straight line.",
+      "**Parabolic Position-Time Graph:** When plotting position against time, the graph will be a parabola.",
+      "**Examples:** A freely falling object (ignoring air resistance) experiences uniform acceleration due to gravity. An object slowing down due to constant braking force also undergoes uniform (negative) acceleration."
+    ]
+  },
+  {
+    "type": "FormulaCard",
+    "title": "Main Formula: Definition of Acceleration",
+    "formula": "a = \\frac{\\Delta v}{\\Delta t} = \\frac{v_f - v_i}{t_f - t_i}",
+    "variables": [
+      {"symbol": "$a$", "description": "uniform acceleration"},
+      {"symbol": "$\\Delta v$", "description": "change in velocity"},
+      {"symbol": "$\\Delta t$", "description": "change in time"},
+      {"symbol": "$v_f$", "description": "final velocity"},
+      {"symbol": "$v_i$", "description": "initial velocity"},
+      {"symbol": "$t_f$", "description": "final time"},
+      {"symbol": "$t_i$", "description": "initial time"}
+    ],
+    "explanation": "This fundamental formula defines average acceleration as the change in velocity divided by the change in time. For uniform acceleration, the average acceleration is equal to the instantaneous acceleration at any point in time.",
+    "labEnabled": true
+  },
+  {
+    "type": "Card",
+    "title": "Units of Acceleration",
+    "content": {
+      "type": "Table",
+      "headers": ["Quantity", "SI Unit", "Derived From"],
+      "rows": [
+        ["Velocity ($v$)", "meters per second (m/s)", "Distance/Time"],
+        ["Time ($t$)", "seconds (s)", "Base Unit"],
+        ["Acceleration ($a$)", "meters per second squared (m/s²)", "Velocity/Time"]
+      ]
+    }
+  },
+  {
+    "type": "Card",
+    "title": "Derived Kinematic Equations for Uniform Acceleration",
+    "content": [
+      "For situations involving uniform acceleration, a set of kinematic equations allows us to relate displacement, velocity, acceleration, and time. These are often presented as:",
+      {
+        "type": "FormulaCard",
+        "title": "Equation 1: Velocity-Time Relation",
+        "formula": "v_f = v_i + at",
+        "variables": [
+          {"symbol": "$v_f$", "description": "final velocity"},
+          {"symbol": "$v_i$", "description": "initial velocity"},
+          {"symbol": "$a$", "description": "uniform acceleration"},
+          {"symbol": "$t$", "description": "time interval"}
+        ],
+        "explanation": "This equation allows you to calculate the final velocity of an object after a certain time, given its initial velocity and constant acceleration.",
+        "labEnabled": true
+      },
+      {
+        "type": "FormulaCard",
+        "title": "Equation 2: Displacement-Time Relation",
+        "formula": "\\Delta x = v_i t + \\frac{1}{2}at^2",
+        "variables": [
+          {"symbol": "$\\Delta x$", "description": "displacement"},
+          {"symbol": "$v_i$", "description": "initial velocity"},
+          {"symbol": "$a$", "description": "uniform acceleration"},
+          {"symbol": "$t$", "description": "time interval"}
+        ],
+        "explanation": "Use this equation to find the displacement of an object over a time interval, knowing its initial velocity and constant acceleration.",
+        "labEnabled": true
+      },
+      {
+        "type": "FormulaCard",
+        "title": "Equation 3: Velocity-Displacement Relation",
+        "formula": "v_f^2 = v_i^2 + 2a\\Delta x",
+        "variables": [
+          {"symbol": "$v_f$", "description": "final velocity"},
+          {"symbol": "$v_i$", "description": "initial velocity"},
+          {"symbol": "$a$", "description": "uniform acceleration"},
+          {"symbol": "$\\Delta x$", "description": "displacement"}
+        ],
+        "explanation": "This equation is useful when time is not known or not required, relating final and initial velocities to acceleration and displacement.",
+        "labEnabled": true
+      },
+      {
+        "type": "FormulaCard",
+        "title": "Equation 4: Displacement using Average Velocity",
+        "formula": "\\Delta x = \\left(\\frac{v_i + v_f}{2}\\right)t",
+        "variables": [
+          {"symbol": "$\\Delta x$", "description": "displacement"},
+          {"symbol": "$v_i$", "description": "initial velocity"},
+          {"symbol": "$v_f$", "description": "final velocity"},
+          {"symbol": "$t$", "description": "time interval"}
+        ],
+        "explanation": "This equation calculates displacement using the average velocity over the time interval.",
+        "labEnabled": true
+      }
+    ]
+  },
+  {
+    "type": "Card",
+    "title": "Important Notes",
+    "content": [
+      "**Vector Quantity:** Acceleration is a vector quantity, meaning it has both magnitude and direction. A negative acceleration can mean slowing down or accelerating in the negative direction.",
+      "**Distinction from Velocity:** Don't confuse acceleration with velocity. An object can have zero velocity but non-zero acceleration (e.g., a ball thrown upwards at its peak). An object can have constant speed but changing velocity (and thus acceleration) if it's changing direction (e.g., uniform circular motion, though this is not uniform acceleration in the strict sense of a constant vector).",
+      "**Applicability:** These formulas only apply when acceleration is constant. If acceleration changes, calculus methods are required."
+    ]
+  },
+  {
+    "type": "Card",
+    "title": "Suggested Questions",
+    "content": [
+      "What is the difference between uniform velocity and uniform acceleration?",
+      "Can an object have uniform acceleration and still change direction?",
+      "How would the kinematic equations change if we considered non-uniform acceleration?",
+      "Provide an example of uniform acceleration in everyday life and explain why it fits the definition."
+    ]
+  }
+]
+```

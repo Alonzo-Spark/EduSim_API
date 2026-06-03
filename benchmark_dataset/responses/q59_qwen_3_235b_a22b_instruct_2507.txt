@@ -1,0 +1,53 @@
+```json
+{
+  "event": "collision",
+  "type": "elastic",
+  "masses": [
+    {
+      "id": "m1",
+      "value": 2.0,
+      "unit": "kg",
+      "initialVelocity": {
+        "x": 3.0,
+        "y": 0.0,
+        "unit": "m/s"
+      },
+      "finalVelocity": {
+        "x": 0.0,
+        "y": 0.0,
+        "unit": "m/s"
+      }
+    },
+    {
+      "id": "m2",
+      "value": 2.0,
+      "unit": "kg",
+      "initialVelocity": {
+        "x": -1.0,
+        "y": 0.0,
+        "unit": "m/s"
+      },
+      "finalVelocity": {
+        "x": 2.0,
+        "y": 0.0,
+        "unit": "m/s"
+      }
+    }
+  ],
+  "conservation": {
+    "momentum": {
+      "initialTotalX": 4.0,
+      "finalTotalX": 4.0,
+      "isConserved": true
+    },
+    "kineticEnergy": {
+      "initialTotal": 10.0,
+      "finalTotal": 10.0,
+      "isConserved": true
+    }
+  },
+  "outcome": "velocitiesExchanged",
+  "timestamp": "2025-04-05T12:00:00Z",
+  "simulationFrame": 427
+}
+```

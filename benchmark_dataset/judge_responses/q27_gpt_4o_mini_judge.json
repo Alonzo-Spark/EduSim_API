@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 27,
+  "question": "State Pascal’s law and mention its applications.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nPascal's Law states that any change in pressure applied to an enclosed, incompressible fluid at rest is transmitted undiminished to every portion of the fluid and to the walls of its containing vessel.\n\n---\n\n## Operating Principle\n\n* **Undiminished Transmission:** When pressure increases at one point in a hydraulic circuit, that exact same pressure change propagates instantly through the entire connected fluid volume.\n* **Force Amplification:** Applying a small force over a narrow piston creates a pressure that can generate a much larger output force when transmitted to a wider piston.\n\n---\n\n## Formula\n\nThe pressure equality expression within a hydraulic link:\n\n$$P_1 = P_2$$\n\n$$\\frac{F_1}{A_1} = \\frac{F_2}{A_2}$$\n\nWhere:\n* $F_1$ represents the input force applied to the small piston\n* $A_1$ represents the cross-sectional area of the small input piston\n* $F_2$ represents the output force generated at the large piston\n* $A_2$ represents the cross-sectional area of the large output piston\n\n---\n\n## Applications\n\n* **Hydraulic Braking Systems:** Transmitting foot pedal force evenly through fluid lines to clamp brake pads onto all wheels simultaneously.\n* **Hydraulic Lifts:** Allowing a small compressor to raise heavy industrial vehicles by pushing fluid into a wide cylinder lift.\n* **Hydraulic Presses:** Generating massive compressive forces for metal forming and material crushing operations.\n\n---\n\n## Summary\n\nPascal's Law reveals that pressure applied to an enclosed fluid transmits equally in all directions, providing a foundation for hydraulic force amplification systems.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Pascal's law states that  │\n│ a change in pressure      │\n│ applied to an enclosed    │\n│ fluid is transmitted      │\n│ undiminished to all parts │\n│ of the fluid and to the   │\n│ walls of its container.   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Applications              │\n│                           │\n│ 1. Hydraulic Systems:     │\n│    Used in hydraulic      │\n│    presses and lifts.     │\n│                           │\n│ 2. Brake Systems:         │\n│    Hydraulic brakes in    │\n│    vehicles utilize       │\n│    Pascal's law to apply  │\n│    force evenly.          │\n│                           │\n│ 3. Hydraulic Jacks:      │\n│    Used for lifting heavy  │\n│    loads using minimal     │\n│    input force.           │\n│                           │\n│ 4. Fluid Power Systems:   │\n│    Utilized in machinery   │\n│    where fluid pressure    │\n│    is harnessed for work. │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately captures the essence of Pascal's Law and its applications, but lacks detailed explanations and formulas present in the gold reference answer. The quality score is lower due to the unconventional use of ASCII art for sectioning, which, while creative, may not be as readable or standard as traditional formatting methods. The educational score is decent because the response still manages to convey key points in a beginner-friendly manner, despite the absence of explicit formulas and detailed operating principles. To improve, the candidate should focus on incorporating more detailed explanations, including the formula for pressure equality, and adopting a more standard formatting approach to enhance readability and clarity.",
+  "candidate_token_usage": {
+    "promptTokens": 363,
+    "completionTokens": 271,
+    "totalTokens": 634
+  },
+  "candidate_latency_ms": 4441,
+  "candidate_cost_usd": 0.00021705,
+  "judge_token_usage": {
+    "promptTokens": 1037,
+    "completionTokens": 186,
+    "totalTokens": 1223
+  },
+  "judge_latency_ms": 8415,
+  "judge_cost_usd": 0.0010685999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:51:49.021Z"
+}

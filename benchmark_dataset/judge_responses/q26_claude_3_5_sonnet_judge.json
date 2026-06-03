@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 26,
+  "question": "Mechanical Properties of Fluids: Define pressure and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nFluid pressure is defined as the normal compressive force exerted by a fluid per unit surface area of a container or object. \n\nPressure acts perpendicular to the surface at every point, distributing uniformly across a level horizontal plane within a static fluid column.\n\n---\n\n## Characteristics\n\n* **Isotropic Distribution:** At any given depth within a continuous static fluid body, pressure acts with equal intensity in all directions.\n* **Scalar Nature:** Pressure is a scalar parameter because the force it produces acts in whatever direction face the surface points.\n\n---\n\n## Formula\n\nThe mechanical definition of surface pressure:\n\n$$P = \\frac{F}{A}$$\n\nWhere:\n* $P$ represents the fluid pressure\n* $F$ represents the normal force component acting perpendicular to the surface\n* $A$ represents the total boundary area of the surface interface\n\n---\n\n## Metric System Units\n\nThe standard SI unit of pressure is the **Pascal ($\\text{Pas}$)**, which is equivalent to a force of $1 \\text{ Newton}$ acting uniformly over a surface area of $1 \\text{ square meter}$.\n\n$$1 \\text{ Pa} = 1 \\text{ N}/\\text{m}^2 = 1 \\text{ kg}/(\\text{m}\\cdot\\text{s}^2)$$\n\n---\n\n## Summary\n\nPressure measures force distribution across a surface area, acting isotropically within fluid systems and measured internationally in Pascals.",
+  "candidate_response": "<here's my structured UI response>\n\n# Pressure — Interactive Concept Card\n\n---\n\n## Quick Definition\n\n**Pressure** is defined as the **force acting perpendicularly on a unit area** of a surface.\n\nIt measures how concentrated a force is over a given area.\n\n---\n\n## Formula Card\n\n$$P = \\frac{F}{A}$$\n\n| Symbol | Quantity | Unit |\n|--------|----------|------|\n| $P$ | Pressure | Pascal (Pa) |\n| $F$ | Normal Force | Newton (N) |\n| $A$ | Area | m² |\n\n---\n\n## SI Unit\n\n$$1 \\ \\text{Pascal} = 1 \\ \\frac{\\text{N}}{\\text{m}^2}$$\n\n> **Named after:** Blaise Pascal (French mathematician & physicist)\n>\n> **Symbol:** Pa\n\n---\n\n## Key Characteristics\n\n**① Scalar Quantity**\nPressure has magnitude only — no direction.\n\n**② Force must be perpendicular**\nOnly the component of force *normal* to the surface contributes to pressure.\n\n**③ Area inversely affects pressure**\nSmaller area → Greater pressure (for same force)\n\n---\n\n## Intuitive Example\n\n| Situation | Force | Area | Pressure |\n|-----------|-------|------|----------|\n| Nail tip | Same | Very small | **Very high** |\n| Flat head | Same | Large | **Low** |\n\n> This is why a sharp nail pierces wood easily — same force, tiny area = enormous pressure.\n\n---\n\n## Other Common Units\n\n| Unit | Relation to Pa |\n|------|---------------|\n| **Bar** | $1 \\ \\text{bar} = 10^5 \\ \\text{Pa}$ |\n| **Atmosphere (atm)** | $1 \\ \\text{atm} = 1.013 \\times 10^5 \\ \\text{Pa}$ |\n| **mm of Hg (Torr)** | $1 \\ \\text{atm} = 760 \\ \\text{mm Hg}$ |\n\n---\n\n## 💡 Important Note\n\n> Pressure is a **scalar**, but the *force causing it* is a vector.\n> In fluids, pressure acts **equally in all directions** at a point — this is **Pascal's Law**.\n\n---\n\n## Quick Recall\n\n| Property | Value |\n|----------|-------|\n| Formula | $P = F/A$ |\n| SI Unit | Pascal (Pa) |\n| Dimensions | $[\\text{ML}^{-1}\\text{T}^{-2}]$ |\n| Type | Scalar |",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly defines pressure, provides the formula, and explains key characteristics such as being a scalar quantity and acting equally in all directions. The use of examples, such as the nail tip and flat head, helps to intuitively understand the concept of pressure. The inclusion of other common units and Pascal's Law adds depth to the explanation. However, to reach perfection, the candidate could further emphasize the distinction between pressure as a scalar and the force causing it as a vector in the context of fluids, and perhaps provide more visual aids or diagrams to enhance pedagogical effectiveness.",
+  "candidate_token_usage": {
+    "promptTokens": 440,
+    "completionTokens": 621,
+    "totalTokens": 1061
+  },
+  "candidate_latency_ms": 13737,
+  "candidate_cost_usd": 0.001682,
+  "judge_token_usage": {
+    "promptTokens": 1235,
+    "completionTokens": 188,
+    "totalTokens": 1423
+  },
+  "judge_latency_ms": 5944,
+  "judge_cost_usd": 0.0011922,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:49:34.597Z"
+}

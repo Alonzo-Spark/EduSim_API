@@ -1,0 +1,163 @@
+┌───────────────────────────────────────────────┐
+│               spring_connected Event           │
+│               (Anchor ↔ Mass) Overlay           │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Introduction                                    │
+│                                               │
+│ In the sandbox simulation, the **spring_connected**   │
+│ event is triggered when a spring is attached   │
+│ between a fixed anchor point and a movable mass.│
+│ This creates a restorative force that obeys    │
+│ Hooke’s law, enabling oscillatory motion and   │
+│ energy exchange between kinetic and potential  │
+│ forms.                                         │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Definition                                      │
+│                                               │
+│ *spring_connected* – an event that links a      │
+│ spring element to a **static anchor** (position│
+│ vector **A**) and a **dynamic mass** (object **M**)│
+│ in the physics engine. The spring is defined   │
+│ by its stiffness **k**, rest length **ℓ₀**, and  │
+│ optional damping coefficient **c**.           │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Key Concepts                                    │
+│                                               │
+│ • **Anchor (A)** – Fixed point in world space.   │
+│ • **Mass (M)** – Movable body with mass **m**.   │
+│ • **Spring Constant (k)** – Stiffness, N/m.     │
+│ • **Rest Length (ℓ₀)** – Unstretched length.    │
+│ • **Damping (c)** – Energy‑dissipation factor. │
+│ • **Displacement (x)** – Vector from A to M.    │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Formula Card                                    │
+│ Main Formula                                    │
+│                                                │
+│   **Hooke’s Law (Force)**                       │
+│   $$\mathbf{F}_s = -k\,( \|\mathbf{x}\| - \ell_0 )\;      │
+│          \frac{\mathbf{x}}{\|\mathbf{x}\|}$$   │
+│                                                │
+│   **Potential Energy**                          │
+│   $$U_s = \tfrac12 k (\|\mathbf{x}\| - \ell_0)^2$$│
+│                                                │
+│   **Damping Force**                             │
+│   $$\mathbf{F}_d = -c\,\mathbf{v}_{\parallel}$$│
+│                                                │
+│ [ Explain Formula ]   [ Open Formula Lab ]     │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Parameters Table                                │
+│                                               │
+│ ┌─────────────────────┬─────────────────────┐ │
+│ │ Parameter           │ Value / Description│ │
+│ ├─────────────────────┼─────────────────────┤ │
+│ │ Anchor position **A**│ (xₐ, yₐ, zₐ)       │ │
+│ │ Mass **M**           │ Object with mass m │ │
+│ │ Spring constant **k**│ N · m⁻¹             │ │
+│ │ Rest length **ℓ₀**   │ meters             │ │
+│ │ Damping **c**        │ Ns · m⁻¹ (optional)│ │
+│ │ Current displacement **x**│ **M** – **A** │ │
+│ │ Velocity **v**       │ d**x**/dt          │ │
+│ └─────────────────────┴─────────────────────┘ │
+│                                               │
+│ [ Edit Parameters ]   [ View Live Values ]   │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Applications                                    │
+│                                               │
+│ • Simple harmonic motion simulations.          │
+│ • Mass‑spring‑damper systems for control theory.│
+│ • Interactive physics education (e.g.,          │
+│   demonstrating resonance).                  │
+│ • Game mechanics – bounce, jiggle, tethering.  │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Advantages                                      │
+│                                               │
+│ • Provides a clear, linear restoring force.   │
+│ • Easy to parameterise (k, ℓ₀, c).             │
+│ • Integrates naturally with existing physics   │
+│   engines (force accumulation).              │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Disadvantages                                   │
+│                                               │
+│ • Linear model only valid for small strains.   │
+│ • No accounting for material non‑linearity.    │
+│ • Requires careful damping to avoid numerical  │
+│   instability in stiff springs.               │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Important Notes                                 │
+│                                               │
+│ • Units must be consistent (SI recommended).  │
+│ • If **c = 0**, the system is undamped → perpetual │
+│   oscillations (ideal).                       │
+│ • The direction of **Fₛ** is always toward the   │
+│   anchor when stretched, away when compressed.│
+│ • For 2‑D simulations, treat vectors as (x, y). │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Summary                                         │
+│                                               │
+│ The *spring_connected* event creates a dynamic │
+│ link between a fixed anchor and a mass,       │
+│ governed by Hooke’s law and optional damping. │
+│ By adjusting **k**, **ℓ₀**, and **c**, users   │
+│ can explore a wide range of oscillatory        │
+│ behaviours, from ideal simple harmonic motion   │
+│ to critically damped responses.                │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Suggested Questions                             │
+│                                               │
+│ 1. How does increasing **k** affect the natural │
+│    frequency of the system?                    │
+│ 2. What happens to the motion if the damping   │
+│    coefficient **c** is set to zero?          │
+│ 3. Derive the period **T** for an undamped      │
+│    mass‑spring system.                         │
+│ 4. How would you modify the formula to model   │
+│    a non‑linear spring (e.g., cubic term)?    │
+│ 5. In a 2‑D sandbox, how does the direction of │
+│    the spring force change as the mass moves? │
+│                                               │
+│ [ Explore Answers ]   [ Add Your Own ]        │
+└───────────────────────────────────────────────┘  

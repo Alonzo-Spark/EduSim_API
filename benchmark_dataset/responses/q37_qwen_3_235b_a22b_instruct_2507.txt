@@ -1,0 +1,161 @@
+┌───────────────────────────┐  
+│   Introduction            │  
+│                           │  
+│ A simple pendulum consists│  
+│ of a small mass (bob)     │  
+│ suspended by a light,     │  
+│ inextensible string from  │  
+│ a fixed support. When     │  
+│ displaced slightly from   │  
+│ its equilibrium position  │  
+│ and released, it performs │  
+│ oscillations under the    │  
+│ influence of gravity.     │  
+│ This derivation finds the │  
+│ time period of these small│  
+│ oscillations.             │  
+└───────────────────────────┘  
+
+┌───────────────────────────┐  
+│   Key Assumptions         │  
+│                           │  
+│ • The bob is a point mass │  
+│ • The string is           │  
+│   massless and            │  
+│   inext游戏副本ible      │  
+│ • Oscillations are small  │  
+│   (θ ≈ sin θ in radians)  │  
+│ • Air resistance and      │  
+│   friction are negligible │  
+│ • Motion occurs in a      │  
+│   vertical plane          │  
+└───────────────────────────┘  
+
+┌───────────────────────────┐  
+│   Forces and Motion       │  
+│                           │  
+│ When the bob is displaced │  
+│ by an angle θ, the        │  
+│ restoring force is the    │  
+│ tangential component of   │  
+│ gravity:                  │  
+│                           │  
+│ \( F_{\text{restoring}} = -mg \sin\theta \) │  
+│                           │  
+│ For small angles: sin θ ≈ θ│  
+│ So:                       │  
+│ \( F \approx -mg\theta \) │  
+│                           │  
+│ Since θ = x/L (x = arc     │  
+│ displacement, L = length),│  
+│                           │  
+│ \( F \approx -\frac{mg}{L}x \) │  
+│                           │  
+│ This is proportional to   │  
+│ displacement (x) and in   │  
+│ opposite direction →      │  
+│ Simple Harmonic Motion    │  
+└───────────────────────────┘  
+
+┌───────────────────────────┐  
+│   Main Formula            │  
+│                           │  
+│ $$                       │  
+│ T = 2\pi \sqrt{\frac{L}{g}}│  
+│ $$                       │  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+┌───────────────────────────┐  
+│   Step-by-Step Derivation │  
+│                           │  
+│ 1. From Newton’s Second Law: │  
+│    \( F = ma \)           │  
+│    ⇒ \( -\frac{mg}{L}x = m\frac{d^2x}{dt^2} \) │  
+│                           │  
+│ 2. Cancel mass (m):       │  
+│    \( \frac{d^2x}{dt^2} = -\frac{g}{L}x \) │  
+│                           │  
+│ 3. This is the SHM equation│  
+│    of the form:           │  
+│    \( \frac{d^2x}{dt^2} = -\omega^2 x \) │  
+│                           │  
+│ 4. Comparing:             │  
+│    \( \omega = \sqrt{\frac{g}{L}} \) │  
+│                           │  
+│ 5. Time period:           │  
+│    \( T = \frac{2\pi}{\omega} = 2\pi \sqrt{\frac{L}{g}} \) │  
+└───────────────────────────┘  
+
+┌───────────────────────────┐  
+│   Variables in Formula    │  
+│                           │  
+│ • \( T \): Time period    │  
+│   (seconds)               │  
+│ • \( L \): Length of      │  
+│   pendulum (meters)       │  
+│ • \( g \): Acceleration   │  
+│   due to gravity (m/s²)   │  
+│ • \( \pi \): Mathematical │  
+│   constant (~3.1416)      │  
+└───────────────────────────┘  
+
+┌───────────────────────────┐  
+│   Important Notes         │  
+│                           │  
+│ • The time period is      │  
+│   independent of the mass │  
+│   of the bob.             │  
+│ • It depends only on      │  
+│   length (L) and gravity  │  
+│   (g).                    │  
+│ • Valid only for small    │  
+│   angular displacements   │  
+│   (< ~10°).               │  
+│ • For larger angles,      │  
+│   corrections are needed  │  
+│   (anharmonic behavior).  │  
+└───────────────────────────┘  
+
+┌───────────────────────────┐  
+│   Applications            │  
+│                           │  
+│ • Used in pendulum clocks │  
+│ • Measuring acceleration  │  
+│   due to gravity (g)      │  
+│ • Demonstrating harmonic  │  
+│   motion in physics labs  │  
+│ • Seismometers and        │  
+│   vibration sensors       │  
+└───────────────────────────┘  
+
+┌───────────────────────────┐  
+│   Summary                 │  
+│                           │  
+│ The time period of a      │  
+│ simple pendulum undergoing│  
+│ small oscillations is:    │  
+│                           │  
+│ $$ T = 2\pi \sqrt{\frac{L}{g}} $$ │  
+│                           │  
+│ This result arises from   │  
+│ modeling the restoring    │  
+│ force as linear in        │  
+│ displacement, leading to  │  
+│ simple harmonic motion.   │  
+└───────────────────────────┘  
+
+┌───────────────────────────┐  
+│   Suggested Questions     │  
+│                           │  
+│ • How does doubling the   │  
+│   length affect the period?│  
+│ • What happens to T in    │  
+│   zero gravity?           │  
+│ • Why is the small-angle  │  
+│   approximation necessary?│  
+│ • Can this formula be used│  
+│   for a conical pendulum? │  
+└───────────────────────────┘

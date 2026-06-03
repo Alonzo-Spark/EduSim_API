@@ -1,0 +1,1657 @@
+<thinking>
+The user wants me to define electrical power and derive the relation P = VI. I need to render this as structured UI blocks - like an interactive textbook, not markdown notes. Let me think about how to structure this response properly.
+
+I need to create:
+1. A topic header/hero section
+2. Definition card
+3. Key concepts card
+4. Derivation card with formula cards
+5. Formula card for P = VI
+6. Variables table card
+7. Related formulas card
+8. Applications card
+9. Summary card
+
+Let me write the content and structure it properly using React components with Tailwind CSS.
+
+Let me design this as a proper interactive textbook UI with React components.
+
+I'll create:
+- A hero/title section
+- Definition card
+- Derivation section with step-by-step cards
+- Formula cards with explain/lab buttons
+- Tables rendered as cards
+- Summary card
+
+Let me write the full React component.
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+// Helper to render KaTeX
+function KaTeX({ math, display = false }) {
+  const html = katex.renderToString(math, {
+    throwOnError: false,
+    displayMode: display,
+  });
+  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+}
+```
+
+Actually, I should use the existing KaTeX setup. Let me write a comprehensive React component.
+
+Let me think about the structure:
+
+1. **Hero Section** - Title + subtitle
+2. **Definition Card** - What is electrical power
+3. **Derivation Card** - Step by step with numbered steps
+4. **Main Formula Card** - P = VI with explain/lab buttons
+5. **Variables Table Card** - Table of variables
+6. **Related Formulas Card** - P = I²R, P = V²/R
+7. **Applications Card** - Real world applications
+8. **Summary Card** - Quick recap
+
+For the Formula Lab, I'll create an interactive calculator where users can input values.
+
+Let me write this properly.
+
+```jsx
+import { useState } from "react";
+
+function InlineMath({ math }) {
+  // Use window.katex if available
+  if (typeof window !== 'undefined' && window.katex) {
+    const html = window.katex.renderToString(math, { throwOnError: false, displayMode: false });
+    return <span dangerouslySetInnerHTML={{ __html: html }} />;
+  }
+  return <span>{math}</span>;
+}
+
+function DisplayMath({ math }) {
+  if (typeof window !== 'undefined' && window.katex) {
+    const html = window.katex.renderToString(math, { throwOnError: false, displayMode: true });
+    return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  }
+  return <div>{math}</div>;
+}
+```
+
+Actually, looking at the previous conversation, KaTeX is already set up. Let me use the `renderToString` approach with `dangerouslySetInnerHTML`.
+
+Let me write a comprehensive, well-designed component:
+
+```jsx
+import { useState } from "react";
+
+const katexOptions = { throwOnError: false };
+
+function M({ children, d = false }) {
+  try {
+    const html = katex.renderToString(children, { ...katexOptions, displayMode: d });
+    return <span dangerouslySetInnerHTML={{ __html: html }} className={d ? "block my-2" : "inline"} />;
+  } catch {
+    return <span>{children}</span>;
+  }
+}
+```
+
+I need to import katex. Let me check how it's typically done in the sandbox. I'll use the CDN approach with `window.katex` or just import it.
+
+Let me write the full component now. I'll make it comprehensive and beautiful.
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+function M({ t, d = false }) {
+  const html = katex.renderToString(t, { throwOnError: false, displayMode: d });
+  return (
+    <span
+      dangerouslySetInnerHTML={{ __html: html }}
+      className={d ? "flex justify-center my-3" : "inline"}
+    />
+  );
+}
+
+// Section types
+const SECTIONS = {
+  DEFINITION: "definition",
+  DERIVATION: "derivation", 
+  FORMULA: "formula",
+  TABLE: "table",
+  APPLICATIONS: "applications",
+  SUMMARY: "summary"
+};
+
+export default function ElectricalPower() {
+  const [activeFormula, setActiveFormula] = useState(null);
+  const [labOpen, setLabOpen] = useState(false);
+  const [labValues, setLabValues] = useState({ V: "", I: "", R: "" });
+  const [labResult, setLabResult] = useState(null);
+  const [explainOpen, setExplainOpen] = useState({});
+
+  const toggleExplain = (id) => {
+    setExplainOpen(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const calculatePower = () => {
+    const V = parseFloat(labValues.V);
+    const I = parseFloat(labValues.I);
+    const R = parseFloat(labValues.R);
+    
+    let results = {};
+    if (!isNaN(V) && !isNaN(I)) {
+      results.P_VI = (V * I).toFixed(3);
+    }
+    if (!isNaN(I) && !isNaN(R)) {
+      results.P_IR = (I * I * R).toFixed(3);
+    }
+    if (!isNaN(V) && !isNaN(R)) {
+      results.P_VR = (V * V / R).toFixed(3);
+    }
+    setLabResult(results);
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto space-y-4 font-sans p-4">
+      {/* Hero */}
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 text-white shadow-lg">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs font-semibold uppercase tracking-widest opacity-75">Chapter · Electricity</span>
+        </div>
+        <h1 className="text-2xl font-bold mb-1">Electrical Power</h1>
+        <p className="text-blue-100 text-sm">Definition · Derivation · Formula Lab</p>
+      </div>
+
+      {/* Definition Card */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-amber-50 border-b border-amber-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-amber-700">Quick Definition</span>
+        </div>
+        <div className="px-5 py-4">
+          <p className="text-gray-700 leading-relaxed">
+            <strong>Electrical power</strong> is the rate at which electrical energy is consumed or transferred in a circuit. It tells us how quickly a device converts electrical energy into other forms (heat, light, motion, etc.).
+          </p>
+          <div className="mt-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-100">
+            <p className="text-sm text-gray-600">
+              Mathematically: <strong>Power = Energy / Time</strong>, or equivalently, the rate of doing work.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* SI Unit Card */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-purple-50 border-b border-purple-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-purple-400"></span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-purple-700">SI Unit</span>
+        </div>
+        <div className="px-5 py-4">
+          <div className="flex items-center gap-4 flex-wrap">
+            <div className="text-center bg-purple-50 rounded-xl px-6 py-3 border border-purple-100">
+              <div className="text-2xl font-bold text-purple-700">W</div>
+              <div className="text-xs text-gray-500 mt-1">Watt</div>
+            </div>
+            <div className="text-gray-600 text-sm flex-1">
+              <p>1 Watt = 1 Joule per second</p>
+              <p className="mt-1"><M t="1\,\text{W} = 1\,\text{J s}^{-1}" /></p>
+              <p className="mt-1 text-gray-400 text-xs">Named after James Watt (1736–1819)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Derivation Card */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-blue-50 border-b border-blue-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-blue-700">Derivation · P = VI</span>
+        </div>
+        <div className="px-5 py-5 space-y-4">
+          
+          {/* Step 1 */}
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">1</div>
+            <div className="flex-1">
+              <p className="font-semibold text-gray-800 text-sm mb-1">Start with the definition of Power</p>
+              <p className="text-gray-600 text-sm mb-2">Power is the rate of doing work or transferring energy:</p>
+              <div className="bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 text-center">
+                <M t="P = \frac{W}{t}" d={true} />
+              </div>
+              <p className="text-xs text-gray-400 mt-1">where <M t="W" /> = work done (Joules), <M t="t" /> = time (seconds)</p>
+            </div>
+          </div>
+
+          <div className="border-l-2 border-dashed border-blue-200 ml-3.5 h-4"></div>
+
+          {/* Step 2 */}
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">2</div>
+            <div className="flex-1">
+              <p className="font-semibold text-gray-800 text-sm mb-1">Express work done using voltage</p>
+              <p className="text-gray-600 text-sm mb-2">
+                Voltage (potential difference) is defined as work done per unit charge:
+              </p>
+              <div className="bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 text-center">
+                <M t="V = \frac{W}{Q} \implies W = VQ" d={true} />
+              </div>
+              <p className="text-xs text-gray-400 mt-1">where <M t="Q" /> = charge (Coulombs)</p>
+            </div>
+          </div>
+
+          <div className="border-l-2 border-dashed border-blue-200 ml-3.5 h-4"></div>
+
+          {/* Step 3 */}
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">3</div>
+            <div className="flex-1">
+              <p className="font-semibold text-gray-800 text-sm mb-1">Substitute into the power formula</p>
+              <p className="text-gray-600 text-sm mb-2">Replace <M t="W" /> with <M t="VQ" />:</p>
+              <div className="bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 text-center">
+                <M t="P = \frac{W}{t} = \frac{VQ}{t}" d={true} />
+              </div>
+            </div>
+          </div>
+
+          <div className="border-l-2 border-dashed border-blue-200 ml-3.5 h-4"></div>
+
+          {/* Step 4 */}
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">4</div>
+            <div className="flex-1">
+              <p className="font-semibold text-gray-800 text-sm mb-1">Use the definition of current</p>
+              <p className="text-gray-600 text-sm mb-2">
+                Electric current is defined as charge per unit time:
+              </p>
+              <div className="bg-gray-50 rounded-xl px-4 py-3 border border-gray-100 text-center">
+                <M t="I = \frac{Q}{t}" d={true} />
+              </div>
+            </div>
+          </div>
+
+          <div className="border-l-2 border-dashed border-blue-200 ml-3.5 h-4"></div>
+
+          {/* Step 5 - Result */}
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-7 h-7 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">✓</div>
+            <div className="flex-1">
+              <p className="font-semibold text-gray-800 text-sm mb-1">Final Result</p>
+              <p className="text-gray-600 text-sm mb-2">
+                Substituting <M t="I = Q/t" /> into the equation:
+              </p>
+              <div className="bg-green-50 rounded-xl px-4 py-3 border border-green-200 text-center">
+                <M t="P = V \cdot \frac{Q}{t} = V \cdot I" d={true} />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Main Formula Card */}
+      <FormulaCard
+        title="Main Formula"
+        formula="P = VI"
+        latexFormula="P = V \times I"
+        explainContent={
+          <div className="space-y-2 text-sm text-gray-600">
+            <div className="flex items-start gap-3">
+              <span className="font-bold text-blue-600 w-6"><M t="P" /></span>
+              <span>= Electrical Power, measured in <strong>Watts (W)</strong></span>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="font-bold text-blue-600 w-6"><M t="V" /></span>
+              <span>= Potential Difference (Voltage), measured in <strong>Volts (V)</strong></span>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="font-bold text-blue-600 w-6"><M t="I" /></span>
+              <span>= Electric Current, measured in <strong>Amperes (A)</strong></span>
+            </div>
+          </div>
+        }
+        labContent={<FormulaLab />}
+      />
+
+      {/* Related Formulas Table */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-indigo-50 border-b border-indigo-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-indigo-700">Related Formulas</span>
+        </div>
+        <div className="px-5 py-4">
+          <p className="text-sm text-gray-500 mb-3">Using Ohm's Law (<M t="V = IR" />), we can derive two more forms:</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600 rounded-tl-lg">Formula</th>
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">Expression</th>
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600 rounded-tr-lg">Use when</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                <tr className="hover:bg-blue-50 transition-colors">
+                  <td className="px-4 py-3 font-medium text-gray-800">P = VI</td>
+                  <td className="px-4 py-3"><M t="P = VI" /></td>
+                  <td className="px-4 py-3 text-gray-500">V and I are known</td>
+                </tr>
+                <tr className="hover:bg-blue-50 transition-colors">
+                  <td className="px-4 py-3 font-medium text-gray-800">P = I²R</td>
+                  <td className="px-4 py-3"><M t="P = I^2 R" /></td>
+                  <td className="px-4 py-3 text-gray-500">I and R are known</td>
+                </tr>
+                <tr className="hover:bg-blue-50 transition-colors">
+                  <td className="px-4 py-3 font-medium text-gray-800">P = V²/R</td>
+                  <td className="px-4 py-3"><M t="P = \dfrac{V^2}{R}" /></td>
+                  <td className="px-4 py-3 text-gray-500">V and R are known</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* Applications */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-green-50 border-b border-green-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-green-500"></span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-green-700">Real-World Applications</span>
+        </div>
+        <div className="px-5 py-4 grid grid-cols-2 gap-3">
+          {[
+            { icon: "💡", title: "Light Bulbs", desc: "A 60W bulb uses 60J of energy every second" },
+            { icon: "🔌", title: "Appliances", desc: "Power ratings on devices (W or kW)" },
+            { icon: "⚡", title: "Electricity Bills", desc: "Units = Power × Time (kWh)" },
+            { icon: "🔋", title: "Batteries", desc: "Battery output = V × I" },
+          ].map((item, i) => (
+            <div key={i} className="bg-gray-50 rounded-xl p-3 border border-gray-100">
+              <div className="text-xl mb-1">{item.icon}</div>
+              <div className="font-semibold text-gray-800 text-sm">{item.title}</div>
+              <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div className="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-5 text-white shadow-lg">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-green-400"></span>
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-300">Summary</span>
+        </div>
+        <ul className="space-y-2 text-sm text-slate-200">
+          <li className="flex items-start gap-2">
+            <span className="text-green-400 mt-0.5">→</span>
+            <span>Electrical power is the <strong className="text-white">rate of energy transfer</strong> in a circuit.</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-green-400 mt-0.5">→</span>
+            <span>Derived from <M t="P = W/t" /> and <M t="W = VQ" /> and <M t="I = Q/t" />.</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-green-400 mt-0.5">→</span>
+            <span>Result: <strong className="text-white"><M t="P = VI" /></strong>, SI unit is <strong className="text-white">Watt (W)</strong>.</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-green-400 mt-0.5">→</span>
+            <span>Also written as <M t="P = I^2R" /> and <M t="P = V^2/R" /> using Ohm's Law.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+```
+
+Now let me write the `FormulaCard` and `FormulaLab` components:
+
+```jsx
+function FormulaCard({ title, formula, latexFormula, explainContent, labContent }) {
+  const [showExplain, setShowExplain] = useState(false);
+  const [showLab, setShowLab] = useState(false);
+
+  return (
+    <div className="bg-white border-2 border-blue-200 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-blue-600 px-5 py-3 flex items-center gap-2">
+        <span className="text-xs font-semibold uppercase tracking-wider text-blue-100">⚡ {title}</span>
+      </div>
+      <div className="px-5 py-6 text-center">
+        <div className="text-4xl font-bold text-gray-800 mb-4">
+          <M t={latexFormula} d={true} />
+        </div>
+        <div className="flex gap-2 justify-center flex-wrap">
+          <button
+            onClick={() => { setShowExplain(!showExplain); setShowLab(false); }}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              showExplain 
+                ? "bg-blue-600 text-white" 
+                : "bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200"
+            }`}
+          >
+            {showExplain ? "✕ Close" : "📖 Explain Formula"}
+          </button>
+          <button
+            onClick={() => { setShowLab(!showLab); setShowExplain(false); }}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              showLab
+                ? "bg-indigo-600 text-white"
+                : "bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200"
+            }`}
+          >
+            {showLab ? "✕ Close" : "🧪 Open Formula Lab"}
+          </button>
+        </div>
+      </div>
+      {showExplain && (
+        <div className="border-t border-gray-100 px-5 py-4 bg-blue-50">
+          <p className="text-xs font-semibold uppercase tracking-wider text-blue-600 mb-3">Variable Breakdown</p>
+          {explainContent}
+        </div>
+      )}
+      {showLab && (
+        <div className="border-t border-gray-100 px-5 py-4 bg-indigo-50">
+          <p className="text-xs font-semibold uppercase tracking-wider text-indigo-600 mb-3">🧪 Formula Lab — Try it yourself</p>
+          {labContent}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FormulaLab() {
+  const [values, setValues] = useState({ V: "", I: "", R: "" });
+  const [result, setResult] = useState(null);
+
+  const calculate = () => {
+    const V = parseFloat(values.V);
+    const I = parseFloat(values.I);
+    const R = parseFloat(values.R);
+    const res = {};
+    if (!isNaN(V) && !isNaN(I)) res.P_VI = (V * I).toFixed(3);
+    if (!isNaN(I) && !isNaN(R)) res.P_IR = (I * I * R).toFixed(3);
+    if (!isNaN(V) && !isNaN(R) && R !== 0) res.P_VR = (V * V / R).toFixed(3);
+    setResult(res);
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { key: "V", label: "Voltage (V)", unit: "V", color: "blue" },
+          { key: "I", label: "Current (I)", unit: "A", color: "green" },
+          { key: "R", label: "Resistance (R)", unit: "Ω", color: "orange" },
+        ].map(({ key, label, unit, color }) => (
+          <div key={key}>
+            <label className="text-xs text-gray-500 mb-1 block">{label}</label>
+            <div className="flex">
+              <input
+                type="number"
+                value={values[key]}
+                onChange={(e) => setValues(prev => ({ ...prev, [key]: e.target.value }))}
+                placeholder="0"
+                className="flex-1 border border-gray-200 rounded-l-lg px-2 py-2 text-sm focus:outline-none focus:border-blue-400 bg-white"
+              />
+              <span className="bg-gray-100 border border-l-0 border-gray-200 rounded-r-lg px-2 py-2 text-xs text-gray-500">{unit}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={calculate}
+        className="w-full bg-indigo-600 text-white rounded-lg py-2 text-sm font-medium hover:bg-indigo-700 transition-colors"
+      >
+        Calculate Power
+      </button>
+      {result && Object.keys(result).length > 0 && (
+        <div className="bg-white rounded-xl border border-indigo-200 p-3 space-y-2">
+          {result.P_VI && (
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-gray-600"><M t="P = VI" /> =</span>
+              <span className="font-bold text-indigo-700">{result.P_VI} W</span>
+            </div>
+          )}
+          {result.P_IR && (
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-gray-600"><M t="P = I^2R" /> =</span>
+              <span className="font-bold text-indigo-700">{result.P_IR} W</span>
+            </div>
+          )}
+          {result.P_VR && (
+            <div className="flex justify-between items-center text-sm">
+              <span className="text-gray-600"><M t="P = V^2/R" /> =</span>
+              <span className="font-bold text-indigo-700">{result.P_VR} W</span>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+Now let me put it all together into a single clean component. Let me also think about whether the M component needs to be defined at the top.
+
+Actually, let me rethink the structure. I want to put everything in a single export default function and define helper components inside or at the top level of the file.
+
+Let me write the complete, final version:
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+function M({ t, d = false }) {
+  try {
+    const html = katex.renderToString(t, { throwOnError: false, displayMode: d });
+    return (
+      <span
+        className={d ? "block text-center" : "inline"}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    );
+  } catch {
+    return <span className="font-mono text-sm">{t}</span>;
+  }
+}
+
+function FormulaLab() {
+  const [vals, setVals] = useState({ V: "", I: "", R: "" });
+  const [result, setResult] = useState(null);
+
+  const calc = () => {
+    const V = parseFloat(vals.V);
+    const I = parseFloat(vals.I);
+    const R = parseFloat(vals.R);
+    const r = {};
+    if (!isNaN(V) && !isNaN(I)) r.vi = +(V * I).toFixed(4);
+    if (!isNaN(I) && !isNaN(R)) r.ir = +(I * I * R).toFixed(4);
+    if (!isNaN(V) && !isNaN(R) && R !== 0) r.vr = +(V * V / R).toFixed(4);
+    setResult(Object.keys(r).length ? r : "none");
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { k: "V", label: "Voltage", unit: "V" },
+          { k: "I", label: "Current", unit: "A" },
+          { k: "R", label: "Resistance", unit: "Ω" },
+        ].map(({ k, label, unit }) => (
+          <div key={k}>
+            <div className="text-xs text-gray-500 mb-1">{label}</div>
+            <div className="flex rounded-lg overflow-hidden border border-gray-200 bg-white">
+              <input
+                type="number"
+                value={vals[k]}
+                onChange={e => setVals(p => ({ ...p, [k]: e.target.value }))}
+                placeholder="—"
+                className="flex-1 px-2 py-2 text-sm focus:outline-none w-0 min-w-0"
+              />
+              <span className="bg-gray-50 px-2 flex items-center text-xs text-gray-400 border-l border-gray-200">{unit}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={calc}
+        className="w-full bg-violet-600 hover:bg-violet-700 text-white rounded-lg py-2 text-sm font-semibold transition-colors"
+      >
+        Calculate →
+      </button>
+      {result && result !== "none" && (
+        <div className="bg-white border border-violet-100 rounded-xl p-3 divide-y divide-gray-100">
+          {result.vi !== undefined && (
+            <div className="flex justify-between py-1.5 text-sm">
+              <span className="text-gray-500">P = VI</span>
+              <span className="font-bold text-violet-700">{result.vi} W</span>
+            </div>
+          )}
+          {result.ir !== undefined && (
+            <div className="flex justify-between py-1.5 text-sm">
+              <span className="text-gray-500">P = I²R</span>
+              <span className="font-bold text-violet-700">{result.ir} W</span>
+            </div>
+          )}
+          {result.vr !== undefined && (
+            <div className="flex justify-between py-1.5 text-sm">
+              <span className="text-gray-500">P = V²/R</span>
+              <span className="font-bold text-violet-700">{result.vr} W</span>
+            </div>
+          )}
+        </div>
+      )}
+      {result === "none" && (
+        <p className="text-xs text-red-500 text-center">Enter at least two values to calculate.</p>
+      )}
+    </div>
+  );
+}
+
+function FormulaCard() {
+  const [tab, setTab] = useState(null); // null | 'explain' | 'lab'
+
+  return (
+    <div className="bg-white border-2 border-blue-300 rounded-2xl shadow-md overflow-hidden">
+      <div className="bg-blue-600 px-5 py-3">
+        <span className="text-xs font-bold uppercase tracking-widest text-blue-100">⚡ Main Formula</span>
+      </div>
+      <div className="px-5 py-6 text-center">
+        <div className="py-2">
+          <M t="P = V \times I" d={true} />
+        </div>
+        <div className="flex gap-2 justify-center mt-4 flex-wrap">
+          <button
+            onClick={() => setTab(tab === 'explain' ? null : 'explain')}
+            className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all ${
+              tab === 'explain'
+                ? "bg-blue-600 text-white border-blue-600"
+                : "bg-white text-blue-700 border-blue-200 hover:bg-blue-50"
+            }`}
+          >
+            {tab === 'explain' ? '✕ Close' : '📖 Explain Formula'}
+          </button>
+          <button
+            onClick={() => setTab(tab === 'lab' ? null : 'lab')}
+            className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all ${
+              tab === 'lab'
+                ? "bg-violet-600 text-white border-violet-600"
+                : "bg-white text-violet-700 border-violet-200 hover:bg-violet-50"
+            }`}
+          >
+            {tab === 'lab' ? '✕ Close' : '🧪 Open Formula Lab'}
+          </button>
+        </div>
+      </div>
+
+      {tab === 'explain' && (
+        <div className="border-t border-gray-100 bg-blue-50 px-5 py-4">
+          <p className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Variable Breakdown</p>
+          <div className="space-y-2">
+            {[
+              { sym: "P", name: "Electrical Power", unit: "Watt (W)", color: "bg-blue-100 text-blue-800" },
+              { sym: "V", name: "Potential Difference", unit: "Volt (V)", color: "bg-green-100 text-green-800" },
+              { sym: "I", name: "Electric Current", unit: "Ampere (A)", color: "bg-orange-100 text-orange-800" },
+            ].map(({ sym, name, unit, color }) => (
+              <div key={sym} className="flex items-center gap-3 bg-white rounded-lg px-3 py-2.5 border border-gray-100">
+                <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ${color}`}>{sym}</span>
+                <div className="flex-1">
+                  <div className="text-sm font-medium text-gray-800">{name}</div>
+                  <div className="text-xs text-gray-400">{unit}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {tab === 'lab' && (
+        <div className="border-t border-gray-100 bg-violet-50 px-5 py-4">
+          <p className="text-xs font-bold uppercase tracking-wider text-violet-600 mb-3">🧪 Formula Lab — Try it yourself</p>
+          <FormulaLab />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function ElectricalPower() {
+  return (
+    <div className="max-w-2xl mx-auto space-y-4 p-4 font-sans">
+      
+      {/* Hero */}
+      <div className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-2xl p-6 text-white shadow-xl">
+        <div className="text-xs font-bold uppercase tracking-widest text-blue-200 mb-2">Physics · Electricity</div>
+        <h1 className="text-3xl font-extrabold mb-1">Electrical Power</h1>
+        <p className="text-blue-200 text-sm">Definition · Derivation · Formula Lab</p>
+      </div>
+
+      {/* Definition */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-amber-50 border-b border-amber-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0"></span>
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-700">Quick Definition</span>
+        </div>
+        <div className="px-5 py-4 space-y-3">
+          <p className="text-gray-700 leading-relaxed">
+            <strong>Electrical power</strong> is the <em>rate at which electrical energy is consumed or transferred</em> in a circuit.
+          </p>
+          <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 text-sm text-gray-600">
+            In simple terms: it tells us how quickly a device converts electrical energy into other forms — heat, light, motion, etc.
+          </div>
+        </div>
+      </div>
+
+      {/* SI Unit */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-purple-50 border-b border-purple-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0"></span>
+          <span className="text-xs font-bold uppercase tracking-wider text-purple-700">SI Unit</span>
+        </div>
+        <div className="px-5 py-4 flex items-center gap-5">
+          <div className="text-center bg-purple-100 rounded-2xl px-6 py-4 flex-shrink-0">
+            <div className="text-3xl font-black text-purple-700">W</div>
+            <div className="text-xs text-purple-500 mt-1 font-medium">Watt</div>
+          </div>
+          <div className="text-sm text-gray-600 space-y-1.5">
+            <p><M t="1\,\text{W} = 1\,\text{J}\,\text{s}^{-1}" /></p>
+            <p>1 Watt = 1 Joule of energy per second</p>
+            <p className="text-gray-400 text-xs">Named after Scottish inventor <em>James Watt</em> (1736–1819)</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Derivation */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-blue-50 border-b border-blue-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0"></span>
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-700">Derivation of P = VI</span>
+        </div>
+        <div className="px-5 py-5">
+          <div className="relative space-y-0">
+            {[
+              {
+                num: "1",
+                title: "Start with the definition of Power",
+                body: "Power is the rate of doing work:",
+                formula: "P = \\dfrac{W}{t}",
+                note: "W = work done (Joules), t = time (seconds)",
+                color: "blue",
+              },
+              {
+                num: "2",
+                title: "Express work using Voltage",
+                body: "Voltage is work done per unit charge:",
+                formula: "V = \\dfrac{W}{Q} \\quad\\Longrightarrow\\quad W = VQ",
+                note: "Q = electric charge (Coulombs)",
+                color: "blue",
+              },
+              {
+                num: "3",
+                title: "Substitute W = VQ into Power",
+                body: "Replace W with VQ in the power equation:",
+                formula: "P = \\dfrac{W}{t} = \\dfrac{VQ}{t}",
+                note: "",
+                color: "blue",
+              },
+              {
+                num: "4",
+                title: "Use the definition of Current",
+                body: "Electric current is charge per unit time:",
+                formula: "I = \\dfrac{Q}{t}",
+                note: "I = current (Amperes)",
+                color: "blue",
+              },
+              {
+                num: "✓",
+                title: "Final Result",
+                body: "Substitute I = Q/t into the expression:",
+                formula: "\\boxed{P = V \\times I}",
+                note: "",
+                color: "green",
+                isResult: true,
+              },
+            ].map((step, i) => (
+              <div key={i} className="flex gap-4 mb-4">
+                <div className="flex flex-col items-center">
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0 ${step.isResult ? 'bg-green-500' : 'bg-blue-600'}`}>
+                    {step.num}
+                  </div>
+                  {i < 4 && <div className="w-0.5 bg-blue-100 flex-1 mt-1 mb-0" style={{minHeight: '1.5rem'}}></div>}
+                </div>
+                <div className={`flex-1 mb-2 rounded-xl border px-4 py-3 ${step.isResult ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-100'}`}>
+                  <p className={`font-semibold text-sm mb-1 ${step.isResult ? 'text-green-800' : 'text-gray-800'}`}>{step.title}</p>
+                  <p className="text-gray-500 text-sm mb-2">{step.body}</p>
+                  <div className={`rounded-lg px-3 py-2 text-center border ${step.isResult ? 'bg-green-100 border-green-200' : 'bg-white border-gray-200'}`}>
+                    <M t={step.formula} d={true} />
+                  </div>
+                  {step.note && <p className="text-xs text-gray-400 mt-1.5">{step.note}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Formula Card */}
+      <FormulaCard />
+
+      {/* Related Formulas Table */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-indigo-50 border-b border-indigo-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></span>
+          <span className="text-xs font-bold uppercase tracking-wider text-indigo-700">Related Formulas via Ohm's Law</span>
+        </div>
+        <div className="px-5 py-4">
+          <p className="text-sm text-gray-500 mb-3">
+            Using <strong>Ohm's Law</strong> (<M t="V = IR" />), two alternate forms can be derived:
+          </p>
+          <div className="overflow-x-auto rounded-xl border border-gray-100">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-100">
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">Formula</th>
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">Derivation</th>
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">Use when</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-50 hover:bg-blue-50 transition-colors">
+                  <td className="px-4 py-3 font-mono font-bold text-blue-700">P = VI</td>
+                  <td className="px-4 py-3 text-gray-500">Direct derivation</td>
+                  <td className="px-4 py-3 text-gray-500">V and I known</td>
+                </tr>
+                <tr className="border-b border-gray-50 hover:bg-blue-50 transition-colors">
+                  <td className="px-4 py-3">
+                    <M t="P = I^2R" />
+                  </td>
+                  <td className="px-4 py-3 text-gray-500">
+                    <M t="V = IR \Rightarrow P = (IR) \cdot I" />
+                  </td>
+                  <td className="px-4 py-3 text-gray-500">I and R known</td>
+                </tr>
+                <tr className="hover:bg-blue-50 transition-colors">
+                  <td className="px-4 py-3">
+                    <M t="P = \dfrac{V^2}{R}" />
+                  </td>
+                  <td className="px-4 py-3 text-gray-500">
+                    <M t="I = V/R \Rightarrow P = V \cdot \frac{V}{R}" />
+                  </td>
+                  <td className="px-4 py-3 text-gray-500">V and R known</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* Applications */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-green-50 border-b border-green-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0"></span>
+          <span className="text-xs font-bold uppercase tracking-wider text-green-700">Real-World Applications</span>
+        </div>
+        <div className="px-5 py-4 grid grid-cols-2 gap-3">
+          {[
+            { icon: "💡", title: "Light Bulbs", desc: "A 60 W bulb transfers 60 J of energy every second" },
+            { icon: "🔌", title: "Appliances", desc: "Power ratings (W or kW) printed on all devices" },
+            { icon: "⚡", title: "Electricity Bills", desc: "Energy = Power × Time, billed in kWh" },
+            { icon: "🔋", title: "Batteries", desc: "Power output = Terminal voltage × Current" },
+          ].map(({ icon, title, desc }) => (
+            <div key={title} className="bg-gray-50 border border-gray-100 rounded-xl p-3">
+              <div className="text-2xl mb-1.5">{icon}</div>
+              <div className="font-semibold text-gray-800 text-sm">{title}</div>
+              <div className="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-5 text-white shadow-lg">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-300">Chapter Summary</span>
+        </div>
+        <ul className="space-y-2.5">
+          {[
+            <>Electrical power = <strong>rate of energy transfer</strong> in a circuit.</>,
+            <>Derived using <M t="P = W/t" />, <M t="W = VQ" />, and <M t="I = Q/t" />.</>,
+            <>Result: <strong><M t="P = VI" /></strong> — SI unit is the <strong>Watt (W)</strong>.</>,
+            <>Extended forms: <M t="P = I^2R" /> and <M t="P = V^2/R" /> via Ohm's Law.</>,
+          ].map((item, i) => (
+            <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300">
+              <span className="text-emerald-400 mt-0.5 flex-shrink-0">→</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  );
+}
+```
+
+This looks comprehensive. Let me now write the final clean version. I want to make sure all the pieces fit together properly and the code is clean.
+
+One thing I want to double check - the derivation steps connector lines. Let me make sure they look right.
+
+Also, I want to make the formula in the formula card bigger and more prominent.
+
+Let me finalize the code now. I'll write it cleanly without too much back-and-forth.
+
+Actually wait, I realize I should double check - in the formula card, when I write `<M t="P = V \times I" d={true} />`, the `d={true}` means display mode which will be centered and larger. That should look good.
+
+For the boxed formula in derivation step 5, `\boxed{P = V \times I}` should render with a box around it.
+
+Let me write the final version now.
+
+One more thing - I need to make sure the `FormulaLab` and `FormulaCard` components are defined before they're used in `ElectricalPower`. Since they're function declarations or function expressions, I need to order them correctly or use hoisting.
+
+With function declarations (using `function` keyword), they're hoisted, so order doesn't matter within the file. With `const FormulaLab = () => ...`, they need to be defined before use.
+
+I'll use function declarations for the sub-components.
+
+Let me write the final version now.
+
+Actually, let me reconsider the derivation layout. The connector lines between steps might look odd if I use a flex column approach. Let me simplify it to just a numbered list with clear visual separation.
+
+Here's my final clean version:
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+function M({ t, d = false }) {
+  try {
+    const html = katex.renderToString(t, { throwOnError: false, displayMode: d });
+    return <span className={d ? "block my-1" : "inline"} dangerouslySetInnerHTML={{ __html: html }} />;
+  } catch {
+    return <code>{t}</code>;
+  }
+}
+
+function FormulaLab() {
+  const [v, setV] = useState({ V: "", I: "", R: "" });
+  const [res, setRes] = useState(null);
+
+  function calc() {
+    const V = parseFloat(v.V), I = parseFloat(v.I), R = parseFloat(v.R);
+    const r = {};
+    if (!isNaN(V) && !isNaN(I)) r.vi = (V * I).toFixed(4);
+    if (!isNaN(I) && !isNaN(R)) r.ir = (I * I * R).toFixed(4);
+    if (!isNaN(V) && !isNaN(R) && R !== 0) r.vr = (V * V / R).toFixed(4);
+    setRes(Object.keys(r).length ? r : null);
+  }
+
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-3 gap-2">
+        {[["V","Voltage","V"],["I","Current","A"],["R","Resistance","Ω"]].map(([k,lbl,unit]) => (
+          <div key={k}>
+            <div className="text-xs text-gray-500 mb-1">{lbl}</div>
+            <div className="flex border border-gray-200 rounded-lg overflow-hidden bg-white">
+              <input
+                type="number"
+                value={v[k]}
+                onChange={e => setV(p => ({...p,[k]:e.target.value}))}
+                placeholder="0"
+                className="flex-1 w-0 min-w-0 px-2 py-2 text-sm focus:outline-none"
+              />
+              <span className="px-2 bg-gray-50 border-l border-gray-200 text-xs text-gray-400 flex items-center">{unit}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button onClick={calc} className="w-full py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors">
+        Calculate →
+      </button>
+      {res && (
+        <div className="bg-white border border-violet-100 rounded-xl divide-y divide-gray-50 text-sm">
+          {res.vi && <div className="flex justify-between px-4 py-2.5"><span className="text-gray-500">P = V × I</span><span className="font-bold text-violet-700">{res.vi} W</span></div>}
+          {res.ir && <div className="flex justify-between px-4 py-2.5"><span className="text-gray-500">P = I²R</span><span className="font-bold text-violet-700">{res.ir} W</span></div>}
+          {res.vr && <div className="flex justify-between px-4 py-2.5"><span className="text-gray-500">P = V²/R</span><span className="font-bold text-violet-700">{res.vr} W</span></div>}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FormulaCard() {
+  const [tab, setTab] = useState(null);
+  const btn = (id, label, activeColor, inactiveColor) => (
+    <button
+      onClick={() => setTab(tab === id ? null : id)}
+      className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all ${tab === id ? activeColor : inactiveColor}`}
+    >
+      {tab === id ? "✕ Close" : label}
+    </button>
+  );
+
+  return (
+    <div className="border-2 border-blue-300 rounded-2xl overflow-hidden shadow-md bg-white">
+      <div className="bg-blue-600 px-5 py-3">
+        <span className="text-xs font-bold uppercase tracking-widest text-blue-100">⚡ Main Formula</span>
+      </div>
+      <div className="px-5 py-6 text-center">
+        <M t="P = V \times I" d />
+        <div className="flex gap-2 justify-center mt-5 flex-wrap">
+          {btn("explain", "📖 Explain Formula", "bg-blue-600 text-white border-blue-600", "bg-white text-blue-700 border-blue-200 hover:bg-blue-50")}
+          {btn("lab", "🧪 Open Formula Lab", "bg-violet-600 text-white border-violet-600", "bg-white text-violet-700 border-violet-200 hover:bg-violet-50")}
+        </div>
+      </div>
+      {tab === "explain" && (
+        <div className="border-t border-blue-100 bg-blue-50 px-5 py-4">
+          <p className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Variable Breakdown</p>
+          <div className="space-y-2">
+            {[
+              ["P","Electrical Power","Watt (W)","bg-blue-100 text-blue-800"],
+              ["V","Potential Difference","Volt (V)","bg-green-100 text-green-800"],
+              ["I","Electric Current","Ampere (A)","bg-orange-100 text-orange-800"],
+            ].map(([sym,name,unit,cls]) => (
+              <div key={sym} className="flex items-center gap-3 bg-white rounded-lg px-3 py-2.5 border border-gray-100">
+                <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0 ${cls}`}>{sym}</span>
+                <div>
+                  <div className="text-sm font-medium text-gray-800">{name}</div>
+                  <div className="text-xs text-gray-400">{unit}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {tab === "lab" && (
+        <div className="border-t border-violet-100 bg-violet-50 px-5 py-4">
+          <p className="text-xs font-bold uppercase tracking-wider text-violet-600 mb-3">🧪 Formula Lab — Try it yourself</p>
+          <FormulaLab />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function ElectricalPower() {
+  const steps = [
+    {
+      n: "1", title: "Start with the definition of Power",
+      body: "Power is the rate of doing work or transferring energy:",
+      formula: "P = \\dfrac{W}{t}",
+      note: "W = work done (Joules) · t = time (seconds)",
+    },
+    {
+      n: "2", title: "Express work done using Voltage",
+      body: "Voltage (potential difference) is work done per unit charge:",
+      formula: "V = \\dfrac{W}{Q} \\quad\\Longrightarrow\\quad W = VQ",
+      note: "Q = electric charge (Coulombs)",
+    },
+    {
+      n: "3", title: "Substitute W = VQ into the power formula",
+      body: "Replace W with VQ:",
+      formula: "P = \\dfrac{W}{t} = \\dfrac{VQ}{t}",
+      note: "",
+    },
+    {
+      n: "4", title: "Apply the definition of Current",
+      body: "Electric current is the rate of flow of charge:",
+      formula: "I = \\dfrac{Q}{t}",
+      note: "I = current (Amperes)",
+    },
+    {
+      n: "✓", title: "Final Result",
+      body: "Substituting I = Q/t into the expression above:",
+      formula: "P = V \\cdot \\dfrac{Q}{t} = V \\cdot I \\quad\\Longrightarrow\\quad \\boxed{P = VI}",
+      note: "",
+      isResult: true,
+    },
+  ];
+
+  return (
+    <div className="max-w-2xl mx-auto space-y-4 p-4">
+
+      {/* Hero */}
+      <div className="bg-gradient-to-br from-blue-600 to-indigo-800 rounded-2xl p-6 text-white shadow-xl">
+        <div className="text-xs font-bold uppercase tracking-widest text-blue-200 mb-2">Physics · Electricity</div>
+        <h1 className="text-3xl font-extrabold mb-1">Electrical Power</h1>
+        <p className="text-blue-200 text-sm">Definition · Derivation · Formula Lab</p>
+      </div>
+
+      {/* Definition */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-amber-50 border-b border-amber-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-700">Quick Definition</span>
+        </div>
+        <div className="px-5 py-4 space-y-3">
+          <p className="text-gray-700 leading-relaxed">
+            <strong>Electrical power</strong> is the <em>rate at which electrical energy is consumed or transferred</em> in a circuit.
+          </p>
+          <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 text-sm text-gray-600">
+            It tells us how quickly a device converts electrical energy into other forms — heat, light, mechanical motion, etc.
+          </div>
+        </div>
+      </div>
+
+      {/* SI Unit */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-purple-50 border-b border-purple-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-purple-700">SI Unit</span>
+        </div>
+        <div className="px-5 py-4 flex items-center gap-5">
+          <div className="text-center bg-purple-100 rounded-2xl px-6 py-4 flex-shrink-0 border border-purple-200">
+            <div className="text-3xl font-black text-purple-700">W</div>
+            <div className="text-xs text-purple-500 mt-1 font-semibold">Watt</div>
+          </div>
+          <div className="text-sm text-gray-600 space-y-1.5">
+            <p><M t="1\;\text{W} = 1\;\text{J}\;\text{s}^{-1}" /></p>
+            <p>1 Watt = 1 Joule of energy transferred per second</p>
+            <p className="text-gray-400 text-xs italic">Named after James Watt (1736–1819)</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Derivation */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-blue-50 border-b border-blue-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-700">Step-by-Step Derivation</span>
+        </div>
+        <div className="px-5 py-5 space-y-3">
+          {steps.map((s, i) => (
+            <div key={i} className="flex gap-3">
+              <div className="flex flex-col items-center flex-shrink-0">
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white ${s.isResult ? 'bg-green-500' : 'bg-blue-600'}`}>
+                  {s.n}
+                </div>
+                {i < steps.length - 1 && <div className="w-px flex-1 bg-blue-100 mt-1" style={{minHeight:'1rem'}} />}
+              </div>
+              <div className={`flex-1 rounded-xl border px-4 py-3 mb-1 ${s.isResult ? 'bg-green-50 border-green-200' : 'bg-gray-50 border-gray-100'}`}>
+                <p className={`font-semibold text-sm ${s.isResult ? 'text-green-800' : 'text-gray-800'}`}>{s.title}</p>
+                <p className="text-gray-500 text-sm mt-0.5 mb-2">{s.body}</p>
+                <div className={`rounded-lg px-3 py-2 border text-center ${s.isResult ? 'bg-green-100 border-green-200' : 'bg-white border-gray-200'}`}>
+                  <M t={s.formula} d />
+                </div>
+                {s.note && <p className="text-xs text-gray-400 mt-1.5">{s.note}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Formula Card */}
+      <FormulaCard />
+
+      {/* Related Formulas Table */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-indigo-50 border-b border-indigo-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-indigo-700">Related Formulas via Ohm's Law</span>
+        </div>
+        <div className="px-5 py-4">
+          <p className="text-sm text-gray-500 mb-3">
+            Substituting Ohm's Law <M t="(V = IR)" /> into <M t="P = VI" /> gives two alternate forms:
+          </p>
+          <div className="rounded-xl border border-gray-100 overflow-hidden">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-100">
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">Formula</th>
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">How it's derived</th>
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">Use when</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["P = VI", "P = VI", "Direct derivation", "V and I are known"],
+                  ["P = I²R", "P = I^2 R", "V = IR → P = (IR)·I", "I and R are known"],
+                  ["P = V²/R", "P = V^2/R", "I = V/R → P = V·(V/R)", "V and R are known"],
+                ].map(([label, formula, deriv, use], i) => (
+                  <tr key={i} className={`hover:bg-indigo-50 transition-colors ${i < 2 ? 'border-b border-gray-50' : ''}`}>
+                    <td className="px-4 py-3"><M t={formula} /></td>
+                    <td className="px-4 py-3 text-gray-400 text-xs">{deriv}</td>
+                    <td className="px-4 py-3 text-gray-500">{use}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* Applications */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-green-50 border-b border-green-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-green-700">Real-World Applications</span>
+        </div>
+        <div className="px-5 py-4 grid grid-cols-2 gap-3">
+          {[
+            ["💡","Light Bulbs","A 60 W bulb transfers 60 J every second"],
+            ["🔌","Appliances","Power ratings (W or kW) on all devices"],
+            ["⚡","Electricity Bills","Energy = Power × Time, billed in kWh"],
+            ["🔋","Batteries","Output power = terminal voltage × current"],
+          ].map(([icon,title,desc]) => (
+            <div key={title} className="bg-gray-50 border border-gray-100 rounded-xl p-3 hover:border-green-200 transition-colors">
+              <div className="text-2xl mb-1.5">{icon}</div>
+              <div className="font-semibold text-sm text-gray-800">{title}</div>
+              <div className="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-5 shadow-lg">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-300">Chapter Summary</span>
+        </div>
+        <ul className="space-y-2.5">
+          {[
+            <>Electrical power is the <strong className="text-white">rate of energy transfer</strong> in a circuit.</>,
+            <>Derived from <M t="P = W/t" />, <M t="W = VQ" />, and <M t="I = Q/t" />.</>,
+            <>Core result: <strong className="text-white"><M t="P = VI" /></strong> — SI unit is the <strong className="text-white">Watt (W)</strong>.</>,
+            <>Extended forms: <M t="P = I^2R" /> and <M t="P = V^2/R" /> via Ohm's Law.</>,
+          ].map((item, i) => (
+            <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300">
+              <span className="text-emerald-400 flex-shrink-0 mt-0.5">→</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  );
+}
+```
+
+This looks good! Let me do a final review:
+
+1. ✅ Hero section with gradient
+2. ✅ Definition card with amber accent
+3. ✅ SI Unit card with purple accent
+4. ✅ Step-by-step derivation with numbered circles and connecting lines
+5. ✅ Formula card with Explain and Lab buttons
+6. ✅ Related formulas table card
+7. ✅ Applications grid
+8. ✅ Summary card with dark background
+
+The FormulaLab is interactive - users can enter V, I, R values and get P calculated using all three formulas.
+
+I think this is comprehensive and well-structured. Let me finalize it.
+
+Wait, I need to double-check the `M` component with `d` as a shorthand prop. In JSX, `<M t="..." d />` is equivalent to `<M t="..." d={true} />`. That should work fine.
+
+Also, I should make sure the katex import works. The system seems to use `import katex from "katex"` based on the previous conversation.
+
+One more thing - for the formula card, the formula `P = V \times I` in display mode might look a bit plain. Let me make it larger by wrapping in a div with a larger text size... actually, KaTeX in display mode already renders larger. That should be fine.
+
+Let me finalize and write the complete code.
+</thinking>
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+function M({ t, d = false }) {
+  try {
+    const html = katex.renderToString(t, { throwOnError: false, displayMode: d });
+    return (
+      <span
+        className={d ? "block my-1" : "inline"}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    );
+  } catch {
+    return <code className="text-sm">{t}</code>;
+  }
+}
+
+function FormulaLab() {
+  const [v, setV] = useState({ V: "", I: "", R: "" });
+  const [res, setRes] = useState(null);
+
+  function calc() {
+    const V = parseFloat(v.V), I = parseFloat(v.I), R = parseFloat(v.R);
+    const r = {};
+    if (!isNaN(V) && !isNaN(I)) r.vi = (V * I).toFixed(4);
+    if (!isNaN(I) && !isNaN(R)) r.ir = (I * I * R).toFixed(4);
+    if (!isNaN(V) && !isNaN(R) && R !== 0) r.vr = (V * V / R).toFixed(4);
+    setRes(Object.keys(r).length ? r : "none");
+  }
+
+  return (
+    <div className="space-y-3">
+      <div className="grid grid-cols-3 gap-2">
+        {[["V","Voltage","V"],["I","Current","A"],["R","Resistance","Ω"]].map(([k,lbl,unit]) => (
+          <div key={k}>
+            <div className="text-xs text-gray-500 mb-1">{lbl}</div>
+            <div className="flex border border-gray-200 rounded-lg overflow-hidden bg-white">
+              <input
+                type="number"
+                value={v[k]}
+                onChange={e => setV(p => ({ ...p, [k]: e.target.value }))}
+                placeholder="0"
+                className="flex-1 w-0 min-w-0 px-2 py-2 text-sm focus:outline-none"
+              />
+              <span className="px-2 bg-gray-50 border-l border-gray-200 text-xs text-gray-400 flex items-center">{unit}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button
+        onClick={calc}
+        className="w-full py-2 bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold rounded-lg transition-colors"
+      >
+        Calculate →
+      </button>
+      {res && res !== "none" && (
+        <div className="bg-white border border-violet-100 rounded-xl divide-y divide-gray-50 text-sm">
+          {res.vi && (
+            <div className="flex justify-between px-4 py-2.5">
+              <span className="text-gray-500">P = V × I</span>
+              <span className="font-bold text-violet-700">{res.vi} W</span>
+            </div>
+          )}
+          {res.ir && (
+            <div className="flex justify-between px-4 py-2.5">
+              <span className="text-gray-500">P = I²R</span>
+              <span className="font-bold text-violet-700">{res.ir} W</span>
+            </div>
+          )}
+          {res.vr && (
+            <div className="flex justify-between px-4 py-2.5">
+              <span className="text-gray-500">P = V²/R</span>
+              <span className="font-bold text-violet-700">{res.vr} W</span>
+            </div>
+          )}
+        </div>
+      )}
+      {res === "none" && (
+        <p className="text-xs text-red-500 text-center">Enter at least two values to calculate.</p>
+      )}
+    </div>
+  );
+}
+
+function FormulaCard() {
+  const [tab, setTab] = useState(null);
+
+  const Btn = ({ id, label, active, inactive }) => (
+    <button
+      onClick={() => setTab(tab === id ? null : id)}
+      className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all ${
+        tab === id ? active : inactive
+      }`}
+    >
+      {tab === id ? "✕ Close" : label}
+    </button>
+  );
+
+  return (
+    <div className="border-2 border-blue-300 rounded-2xl overflow-hidden shadow-md bg-white">
+      <div className="bg-blue-600 px-5 py-3">
+        <span className="text-xs font-bold uppercase tracking-widest text-blue-100">⚡ Main Formula</span>
+      </div>
+      <div className="px-5 py-6 text-center">
+        <M t="P = V \times I" d />
+        <div className="flex gap-2 justify-center mt-5 flex-wrap">
+          <Btn
+            id="explain" label="📖 Explain Formula"
+            active="bg-blue-600 text-white border-blue-600"
+            inactive="bg-white text-blue-700 border-blue-200 hover:bg-blue-50"
+          />
+          <Btn
+            id="lab" label="🧪 Open Formula Lab"
+            active="bg-violet-600 text-white border-violet-600"
+            inactive="bg-white text-violet-700 border-violet-200 hover:bg-violet-50"
+          />
+        </div>
+      </div>
+
+      {tab === "explain" && (
+        <div className="border-t border-blue-100 bg-blue-50 px-5 py-4">
+          <p className="text-xs font-bold uppercase tracking-wider text-blue-600 mb-3">Variable Breakdown</p>
+          <div className="space-y-2">
+            {[
+              ["P","Electrical Power","Watt (W)","bg-blue-100 text-blue-800"],
+              ["V","Potential Difference","Volt (V)","bg-green-100 text-green-800"],
+              ["I","Electric Current","Ampere (A)","bg-orange-100 text-orange-800"],
+            ].map(([sym, name, unit, cls]) => (
+              <div key={sym} className="flex items-center gap-3 bg-white rounded-lg px-3 py-2.5 border border-gray-100">
+                <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0 ${cls}`}>{sym}</span>
+                <div>
+                  <div className="text-sm font-medium text-gray-800">{name}</div>
+                  <div className="text-xs text-gray-400">{unit}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {tab === "lab" && (
+        <div className="border-t border-violet-100 bg-violet-50 px-5 py-4">
+          <p className="text-xs font-bold uppercase tracking-wider text-violet-600 mb-3">🧪 Formula Lab — Try it yourself</p>
+          <FormulaLab />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function ElectricalPower() {
+  const steps = [
+    {
+      n: "1",
+      title: "Start with the definition of Power",
+      body: "Power is the rate of doing work or transferring energy:",
+      formula: "P = \\dfrac{W}{t}",
+      note: "W = work done (Joules)  ·  t = time (seconds)",
+    },
+    {
+      n: "2",
+      title: "Express work done using Voltage",
+      body: "Voltage is defined as work done per unit charge:",
+      formula: "V = \\dfrac{W}{Q} \\quad\\Longrightarrow\\quad W = VQ",
+      note: "Q = electric charge (Coulombs)",
+    },
+    {
+      n: "3",
+      title: "Substitute W = VQ into the power formula",
+      body: "Replace W with VQ:",
+      formula: "P = \\dfrac{W}{t} = \\dfrac{VQ}{t}",
+      note: "",
+    },
+    {
+      n: "4",
+      title: "Apply the definition of Current",
+      body: "Electric current is the rate of flow of charge:",
+      formula: "I = \\dfrac{Q}{t}",
+      note: "I = current (Amperes)",
+    },
+    {
+      n: "✓",
+      title: "Final Result",
+      body: "Substitute I = Q/t into the expression:",
+      formula: "P = V \\cdot \\dfrac{Q}{t} = V \\cdot I \\quad\\Longrightarrow\\quad \\boxed{P = VI}",
+      note: "",
+      isResult: true,
+    },
+  ];
+
+  return (
+    <div className="max-w-2xl mx-auto space-y-4 p-4">
+
+      {/* ── Hero ── */}
+      <div className="bg-gradient-to-br from-blue-600 to-indigo-800 rounded-2xl p-6 text-white shadow-xl">
+        <div className="text-xs font-bold uppercase tracking-widest text-blue-200 mb-2">Physics · Electricity</div>
+        <h1 className="text-3xl font-extrabold mb-1">Electrical Power</h1>
+        <p className="text-blue-200 text-sm">Definition · Derivation · Formula Lab</p>
+      </div>
+
+      {/* ── Definition ── */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-amber-50 border-b border-amber-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-amber-700">Quick Definition</span>
+        </div>
+        <div className="px-5 py-4 space-y-3">
+          <p className="text-gray-700 leading-relaxed">
+            <strong>Electrical power</strong> is the{" "}
+            <em>rate at which electrical energy is consumed or transferred</em> in a circuit.
+          </p>
+          <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3 text-sm text-gray-600">
+            It tells us how quickly a device converts electrical energy into other forms —
+            heat, light, mechanical motion, etc.
+          </div>
+        </div>
+      </div>
+
+      {/* ── SI Unit ── */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-purple-50 border-b border-purple-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-purple-700">SI Unit</span>
+        </div>
+        <div className="px-5 py-4 flex items-center gap-5">
+          <div className="text-center bg-purple-100 rounded-2xl px-6 py-4 flex-shrink-0 border border-purple-200">
+            <div className="text-3xl font-black text-purple-700">W</div>
+            <div className="text-xs text-purple-500 mt-1 font-semibold">Watt</div>
+          </div>
+          <div className="text-sm text-gray-600 space-y-1.5">
+            <p><M t="1\;\text{W} = 1\;\text{J}\;\text{s}^{-1}" /></p>
+            <p>1 Watt = 1 Joule of energy transferred per second</p>
+            <p className="text-gray-400 text-xs italic">Named after James Watt (1736–1819)</p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Derivation ── */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-blue-50 border-b border-blue-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-blue-700">Step-by-Step Derivation</span>
+        </div>
+        <div className="px-5 py-5 space-y-2">
+          {steps.map((s, i) => (
+            <div key={i} className="flex gap-3">
+              <div className="flex flex-col items-center flex-shrink-0">
+                <div
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white ${
+                    s.isResult ? "bg-green-500" : "bg-blue-600"
+                  }`}
+                >
+                  {s.n}
+                </div>
+                {i < steps.length - 1 && (
+                  <div className="w-px flex-1 bg-blue-100 mt-1" style={{ minHeight: "1rem" }} />
+                )}
+              </div>
+              <div
+                className={`flex-1 rounded-xl border px-4 py-3 mb-1 ${
+                  s.isResult
+                    ? "bg-green-50 border-green-200"
+                    : "bg-gray-50 border-gray-100"
+                }`}
+              >
+                <p className={`font-semibold text-sm ${s.isResult ? "text-green-800" : "text-gray-800"}`}>
+                  {s.title}
+                </p>
+                <p className="text-gray-500 text-sm mt-0.5 mb-2">{s.body}</p>
+                <div
+                  className={`rounded-lg px-3 py-2 border text-center ${
+                    s.isResult
+                      ? "bg-green-100 border-green-200"
+                      : "bg-white border-gray-200"
+                  }`}
+                >
+                  <M t={s.formula} d />
+                </div>
+                {s.note && (
+                  <p className="text-xs text-gray-400 mt-1.5">{s.note}</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Formula Card ── */}
+      <FormulaCard />
+
+      {/* ── Related Formulas Table ── */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-indigo-50 border-b border-indigo-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-indigo-700">
+            Related Formulas via Ohm's Law
+          </span>
+        </div>
+        <div className="px-5 py-4">
+          <p className="text-sm text-gray-500 mb-3">
+            Substituting Ohm's Law <M t="(V = IR)" /> into <M t="P = VI" /> gives two alternate forms:
+          </p>
+          <div className="rounded-xl border border-gray-100 overflow-hidden">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-100">
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">Formula</th>
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">How it's derived</th>
+                  <th className="text-left px-4 py-2.5 font-semibold text-gray-600">Use when</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["P = VI",    "P = VI",        "Direct derivation",           "V and I are known"],
+                  ["P = I²R",   "P = I^2 R",     "V = IR → P = (IR)·I",        "I and R are known"],
+                  ["P = V²/R",  "P = V^2/R",     "I = V/R → P = V·(V/R)",      "V and R are known"],
+                ].map(([, formula, deriv, use], i) => (
+                  <tr
+                    key={i}
+                    className={`hover:bg-indigo-50 transition-colors ${i < 2 ? "border-b border-gray-50" : ""}`}
+                  >
+                    <td className="px-4 py-3 font-medium"><M t={formula} /></td>
+                    <td className="px-4 py-3 text-gray-400 text-xs">{deriv}</td>
+                    <td className="px-4 py-3 text-gray-500">{use}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Applications ── */}
+      <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="bg-green-50 border-b border-green-100 px-5 py-3 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-green-700">Real-World Applications</span>
+        </div>
+        <div className="px-5 py-4 grid grid-cols-2 gap-3">
+          {[
+            ["💡","Light Bulbs",      "A 60 W bulb transfers 60 J of energy every second"],
+            ["🔌","Appliances",       "Power ratings (W or kW) are printed on all devices"],
+            ["⚡","Electricity Bills","Energy = Power × Time, billed in kilowatt-hours (kWh)"],
+            ["🔋","Batteries",        "Output power = terminal voltage × current drawn"],
+          ].map(([icon, title, desc]) => (
+            <div
+              key={title}
+              className="bg-gray-50 border border-gray-100 rounded-xl p-3 hover:border-green-200 transition-colors"
+            >
+              <div className="text-2xl mb-1.5">{icon}</div>
+              <div className="font-semibold text-sm text-gray-800">{title}</div>
+              <div className="text-xs text-gray-500 mt-0.5 leading-relaxed">{desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Summary ── */}
+      <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-5 shadow-lg">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-300">Chapter Summary</span>
+        </div>
+        <ul className="space-y-2.5">
+          {[
+            <>Electrical power is the <strong className="text-white">rate of energy transfer</strong> in a circuit.</>,
+            <>Derived from <M t="P = W/t" />, <M t="W = VQ" />, and <M t="I = Q/t" />.</>,
+            <>Core result: <strong className="text-white"><M t="P = VI" /></strong> — SI unit is the <strong className="text-white">Watt (W)</strong>.</>,
+            <>Extended forms: <M t="P = I^2R" /> and <M t="P = V^2/R" /> follow from Ohm's Law.</>,
+          ].map((item, i) => (
+            <li key={i} className="flex items-start gap-2.5 text-sm text-slate-300">
+              <span className="text-emerald-400 flex-shrink-0 mt-0.5">→</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  );
+}
+```

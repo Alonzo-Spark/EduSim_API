@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 25,
+  "question": "Why do astronauts experience weightlessness in space?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWeightlessness is the sensation of having no weight, experienced when there is an absence of contact forces or support reactions acting on the body. \n\nIn orbit, this state is called microgravity, occurring because the spacecraft and its occupants are in a continuous state of free fall.\n\n---\n\n## The Free Fall Mechanism\n\n* **Continuous Trajectory Fall:** A spacecraft in orbit accelerates toward the Earth due to gravity, but its high forward speed matches the curve of the planet, causing it to fall around the Earth indefinitely.\n* **Zero Normal Force Interaction:** Because both the astronaut and the spacecraft fall together at the exact same rate, there is no floor pushing upward against the astronaut's feet, creating a sensation of weightlessness.\n\n---\n\n## Formula\n\nThe apparent weight relationship inside an accelerating capsule frame:\n\n$$N = m(g - a)$$\n\nWhen in a stable free-fall orbit, the downward acceleration matches gravity ($a = g$):\n\n$$N = m(g - g) = 0$$\n\nWhere:\n* $N$ represents the normal contact reaction force\n* $m$ represents the astronaut's mass\n* $g$ represents the local acceleration due to gravity\n* $a$ represents the centripetal orbital acceleration of the vehicle\n\n---\n\n## Summary\n\nAstronauts retain nearly all of their gravitational weight in low orbit, but they experience weightlessness because they are in a state of continuous free fall alongside their spacecraft, removing all upward contact forces.",
+  "candidate_response": "The sensation of \"weightlessness\" experienced by astronauts in orbit is a fascinating concept often misunderstood. It's not because there's no gravity in space, but rather due to a continuous state of freefall.\n\n***\n\n### Quick Definition\n\nPhotosynthesis is a process used by plants and other organisms to convert light energy into chemical energy that can later be released to fuel the organisms' activities.\n\n***\n\n### Key Concepts\n\n*   **Gravity's Presence:** Gravity from Earth extends far into space. At the altitude of the International Space Station (ISS), Earth's gravity is still about 90% as strong as it is on the surface.\n*   **Freefall:** Astronauts and their spacecraft are constantly falling *around* the Earth, not directly into it. This continuous falling motion creates the sensation of weightlessness.\n*   **Orbital Velocity:** To achieve orbit, a spacecraft must travel at a very high horizontal velocity. This velocity is precisely balanced with the pull of gravity, causing the craft to continuously \"miss\" the Earth as it falls.\n\n***\n\n### Analogy: The Falling Elevator\n\nImagine being in an elevator, and suddenly the cable snaps. For the brief moments you are falling, you would feel weightless because you and the elevator are accelerating downwards at the same rate. In orbit, this \"falling\" is continuous.\n\n***\n\n### Main Formula\n\n$$\nF = G \\frac{m_1 m_2}{r^2}\n$$\n\n*   **F:** Gravitational force between two objects.\n*   **G:** Universal Gravitational Constant ($6.674 \\times 10^{-11} \\text{ N} \\cdot (\\text{m/kg})^2$).\n*   **$m_1$**: Mass of the first object (e.g., Earth).\n*   **$m_2$**: Mass of the second object (e.g., astronaut or spacecraft).\n*   **r:** Distance between the centers of the two objects.\n\nThis formula demonstrates that gravity still acts on astronauts in orbit, as $m_1$ (Earth), $m_2$ (astronaut), and $r$ (distance from Earth's center to the ISS) are all significant.\n\n***\n\n### Characteristics of Weightlessness\n\n*   **Absence of Normal Force:** On Earth, our weight is the force exerted by gravity on our mass, and we feel this weight due to the normal force from the ground pushing back on us. In freefall, there's no surface to exert this normal force, hence the feeling of weightlessness.\n*   **Floating Objects:** Anything not secured within the spacecraft will float because it is also in the same state of freefall as the astronauts and the craft itself.\n\n***\n\n### Common Misconceptions vs. Reality\n\n| Misconception                      | Reality                                                                                                    |\n| :--------------------------------- | :--------------------------------------------------------------------------------------------------------- |\n| There is no gravity in space.      | Gravity exists everywhere in the universe. Astronauts in orbit are still subject to significant Earth gravity. |\n| Astronauts are \"floating.\"         | They are in a continuous state of freefall around the Earth, not simply floating in a vacuum.              |\n| Space is a vacuum, so there's no air to push against. | While space is mostly a vacuum, the primary reason for weightlessness is freefall, not the absence of air. |\n\n***\n\n### Summary\n\nAstronauts experience weightlessness in orbit not because there's an absence of gravity, but because they are constantly falling around the Earth. This continuous freefall, balanced by their high orbital velocity, prevents them from hitting the Earth while still being under its gravitational influence.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of weightlessness in space, accurately explaining the role of continuous free fall and the balance between gravitational pull and orbital velocity. The inclusion of the gravitational force formula and the discussion on the absence of normal force in free fall are conceptually correct and well-aligned with the gold reference answer. The response is well-structured, readable, and effectively teaches the concept to beginners. However, there are minor deviations in formatting and a brief, unrelated definition of photosynthesis that slightly detract from the overall quality. To improve, the candidate could ensure that all content is strictly relevant to the question and refine the formatting for optimal readability.",
+  "candidate_token_usage": {
+    "promptTokens": 379,
+    "completionTokens": 782,
+    "totalTokens": 1161
+  },
+  "candidate_latency_ms": 6027,
+  "candidate_cost_usd": 0.0020687,
+  "judge_token_usage": {
+    "promptTokens": 1442,
+    "completionTokens": 193,
+    "totalTokens": 1635
+  },
+  "judge_latency_ms": 8089,
+  "judge_cost_usd": 0.0013284,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:47:57.895Z"
+}

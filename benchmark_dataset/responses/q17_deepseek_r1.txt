@@ -1,0 +1,133 @@
+### Work-Energy Theorem  
+The **work-energy theorem** is a fundamental principle in classical mechanics that establishes a direct relationship between the work done by all forces acting on an object and its kinetic energy.  
+
+---
+
+#### Quick Definition  
+**Work-Energy Theorem**:  
+> *The net work \( W_{\text{net}} \) done on an object equals the change in its kinetic energy \( \Delta K \).*  
+
+---
+
+#### Formula  
+<div class="formula-card">  
+<h3>Work-Energy Theorem</h3>  
+\[ W_{\text{net}} = \Delta K \]  
+<p><strong>Where:</strong></p>  
+<ul>  
+  <li>\( W_{\text{net}} \) = Net work done on the object (Joules, J)</li>  
+  <li>\( \Delta K \) = Change in kinetic energy = \( K_f - K_i \)</li>  
+  <li>\( K = \frac{1}{2}mv^2 \) (Kinetic energy)</li>  
+</ul>  
+<button class="formula-button">Explain Formula</button>  
+<button class="formula-button">Open Formula Lab</button>  
+</div>  
+
+---
+
+#### Derivation  
+1. **Start with Newton’s 2nd Law**:  
+   \[ \sum \vec{F} = m\vec{a} \]  
+   *For constant force and motion in 1D (simplified):*  
+   \[ F_{\text{net}} = ma \]  
+
+2. **Relate acceleration to velocity**:  
+   \[ a = \frac{dv}{dt} = \frac{dv}{dx} \cdot \frac{dx}{dt} = v \frac{dv}{dx} \]  
+   *(Chain rule used: \( a = v \frac{dv}{dx} \))*.  
+
+3. **Substitute into Newton’s 2nd Law**:  
+   \[ F_{\text{net}} = m v \frac{dv}{dx} \]  
+
+4. **Integrate both sides** over displacement (\( x_i \to x_f \)):  
+   \[ \int_{x_i}^{x_f} F_{\text{net}}  dx = \int_{v_i}^{v_f} m v  dv \]  
+   *Left side: Definition of work \( W_{\text{net}} \).*  
+   *Right side: Integrate with respect to velocity.*  
+
+5. **Evaluate the integral**:  
+   \[ W_{\text{net}} = \left[ \frac{1}{2} m v^2 \right]_{v_i}^{v_f} = \frac{1}{2} m v_f^2 - \frac{1}{2} m v_i^2 \]  
+   \[ \boxed{W_{\text{net}} = \Delta K} \]  
+
+---
+
+#### Key Insights  
+- **Work-energy equivalence**: Forces acting over a distance (work) directly alter kinetic energy.  
+- **Scalar quantities**: Work and kinetic energy are scalars (simpler than vector-based Newtonian analysis).  
+- **Net work**: Only the *net* force contributes. Conservative forces (e.g., gravity) can also be analyzed via potential energy.  
+
+---
+
+#### Practical Applications  
+1. **Calculating stopping distance**:  
+   \[ W_{\text{friction}} = \Delta K \implies -\mu mg d = 0 - \frac{1}{2}mv_i^2 \implies d = \frac{v_i^2}{2\mu g} \]  
+   *(Friction does negative work, reducing \( K \) to zero)*.  
+
+2. **Projectile motion**:  
+   Work done by gravity = \( \Delta K \), independent of path.  
+
+---
+
+#### Important Notes  
+- **Applicability**: Valid for all forces (conservative/non-conservative) and all paths.  
+- **Non-constant forces**: Use \( W_{\text{net}} = \int \vec{F}_{\text{net}} \cdot d\vec{x} \).  
+- **System vs. object**: For multi-object systems, include internal work (rigid bodies exclude it).  
+
+---
+
+#### Summary  
+The work-energy theorem simplifies motion analysis by linking force interactions (work) to energy transformations. It often bypasses complex kinematics, offering a powerful alternative to Newton’s laws.  
+
+```mermaid  
+graph LR  
+A[Newton's 2nd Law] --> B[F_net = ma]  
+B --> C[a = v dv/dx]  
+C --> D[Integrate over x]  
+D --> E[W_net = ΔK]  
+```  
+
+---
+
+#### Suggested Exercises  
+1. A 5-kg object accelerates from 2 m/s to 6 m/s. Calculate \( W_{\text{net}} \).  
+2. A car (1200 kg) brakes to stop from 30 m/s. If \( \mu_k = 0.6 \), find stopping distance.  
+3. Derive the work-energy theorem for a variable force \( F(x) = kx \).  
+
+<button class="solution-button">Show Solutions</button>  
+<div class="solution" hidden>  
+1. \( \Delta K = \frac{1}{2} \times 5 \times (6^2 - 2^2) = 80  \text{J} \)  
+2. \( d = \frac{v_i^2}{2\mu g} = \frac{900}{2 \times 0.6 \times 9.8} \approx 76.5  \text{m} \)  
+3. \( W = \int_{x_i}^{x_f} kx  dx = \frac{1}{2}k(x_f^2 - x_i^2) = \Delta K \)  
+</div>  
+
+<style>  
+.formula-card {  
+  border: 1px solid #ccc;  
+  border-radius: 8px;  
+  padding: 15px;  
+  margin: 10px 0;  
+  background-color: #f9f9f9;  
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);  
+}  
+.formula-button {  
+  margin: 5px;  
+  padding: 8px 15px;  
+  background-color: #4CAF50;  
+  color: white;  
+  border: none;  
+  border-radius: 4px;  
+  cursor: pointer;  
+}  
+.solution {  
+  display: none;  
+  padding: 15px;  
+  background-color: #e8f5e9;  
+  border-radius: 8px;  
+  margin-top: 10px;  
+}  
+</style>  
+
+<script>  
+document.querySelector('.solution-button').addEventListener('click', function() {  
+  const solution = this.nextElementSibling;  
+  solution.hidden = !solution.hidden;  
+});  
+</script>

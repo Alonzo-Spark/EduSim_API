@@ -1,0 +1,301 @@
+<div class="tutor-response">
+
+<div class="section-card definition-card">
+  <div class="card-label">📖 Pascal's Law</div>
+  <div class="card-content">
+    <p>Pressure applied to an <strong>enclosed fluid at rest</strong> is transmitted <strong>equally and undiminished</strong> in all directions throughout the fluid and acts perpendicular to the surfaces of the container.</p>
+  </div>
+</div>
+
+<div class="section-card formula-card">
+  <div class="card-label">⚗️ Mathematical Form</div>
+  <div class="formula-display">
+    $$\Delta P = \rho \, g \, \Delta h$$
+  </div>
+  <div class="formula-variables">
+    <div class="var-row"><span class="var-sym">ΔP</span><span class="var-desc">Change in pressure (Pa)</span></div>
+    <div class="var-row"><span class="var-sym">ρ</span><span class="var-desc">Density of the fluid (kg/m³)</span></div>
+    <div class="var-row"><span class="var-sym">g</span><span class="var-desc">Acceleration due to gravity (m/s²)</span></div>
+    <div class="var-row"><span class="var-sym">Δh</span><span class="var-desc">Change in height/depth (m)</span></div>
+  </div>
+  <div class="formula-note">
+    For a <em>static enclosed fluid</em>, if external pressure is applied, it adds equally at every point — the ρgΔh term accounts only for the hydrostatic contribution.
+  </div>
+</div>
+
+<div class="section-card formula-card">
+  <div class="card-label">⚙️ Hydraulic Principle (Derived from Pascal's Law)</div>
+  <div class="formula-display">
+    $$\frac{F_1}{A_1} = \frac{F_2}{A_2} \implies F_2 = F_1 \cdot \frac{A_2}{A_1}$$
+  </div>
+  <div class="formula-variables">
+    <div class="var-row"><span class="var-sym">F₁, F₂</span><span class="var-desc">Forces on piston 1 and piston 2 (N)</span></div>
+    <div class="var-row"><span class="var-sym">A₁, A₂</span><span class="var-desc">Cross-sectional areas of pistons (m²)</span></div>
+  </div>
+  <div class="formula-note">
+    A small force on a small piston produces a <strong>large force</strong> on a larger piston — the basis of all hydraulic machines.
+  </div>
+</div>
+
+<div class="section-card concept-card">
+  <div class="card-label">💡 Key Conditions</div>
+  <div class="conditions-grid">
+    <div class="condition-item">
+      <span class="condition-icon">✅</span>
+      <span>Fluid must be <strong>enclosed</strong></span>
+    </div>
+    <div class="condition-item">
+      <span class="condition-icon">✅</span>
+      <span>Fluid must be <strong>at rest</strong> (static)</span>
+    </div>
+    <div class="condition-item">
+      <span class="condition-icon">✅</span>
+      <span>Fluid must be <strong>incompressible</strong></span>
+    </div>
+    <div class="condition-item">
+      <span class="condition-icon">✅</span>
+      <span>Pressure transmitted <strong>equally in all directions</strong></span>
+    </div>
+  </div>
+</div>
+
+<div class="section-card applications-card">
+  <div class="card-label">🔧 Applications</div>
+  <div class="app-table-wrapper">
+    <table class="app-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Application</th>
+          <th>How Pascal's Law is Used</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>Hydraulic Lift / Jack</strong></td>
+          <td>Small input force on a small piston lifts heavy loads via a larger piston</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Hydraulic Brakes</strong></td>
+          <td>Brake pedal pressure is transmitted equally to all four wheel cylinders</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Hydraulic Press</strong></td>
+          <td>Used in industries to compress, shape, or punch materials with large force</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>Artesian Wells</strong></td>
+          <td>Underground water rises due to pressure transmitted through confined aquifers</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>Aircraft Control Systems</strong></td>
+          <td>Hydraulic actuators move control surfaces (flaps, rudders) using fluid pressure</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><strong>Dentist's Chair / Hospital Beds</strong></td>
+          <td>Smooth height adjustment using hydraulic cylinders</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section-card summary-card">
+  <div class="card-label">📌 One-Line Summary</div>
+  <div class="summary-text">
+    Pascal's Law states that pressure in a confined fluid spreads equally everywhere — this simple idea powers hydraulic machines that multiply force by hundreds of times.
+  </div>
+</div>
+
+</div>
+
+<style>
+.tutor-response {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  max-width: 860px;
+}
+
+/* ── Base Card ── */
+.section-card {
+  border-radius: 14px;
+  padding: 22px 26px;
+  border: 1px solid transparent;
+}
+
+/* ── Definition Card ── */
+.definition-card {
+  background: linear-gradient(135deg, #eef6ff 0%, #e8f0fe 100%);
+  border-color: #b6d0f7;
+}
+
+/* ── Formula Card ── */
+.formula-card {
+  background: linear-gradient(135deg, #f5f0ff 0%, #ede9fe 100%);
+  border-color: #c4b5fd;
+}
+
+/* ── Concept Card ── */
+.concept-card {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-color: #86efac;
+}
+
+/* ── Applications Card ── */
+.applications-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+/* ── Summary Card ── */
+.summary-card {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-color: #fcd34d;
+}
+
+/* ── Card Label ── */
+.card-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+/* ── Card Content ── */
+.card-content p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #1e293b;
+}
+
+/* ── Formula Display ── */
+.formula-display {
+  background: rgba(255,255,255,0.75);
+  border-radius: 10px;
+  padding: 18px 12px;
+  text-align: center;
+  margin-bottom: 16px;
+  border: 1px solid rgba(139,92,246,0.2);
+  font-size: 1.1rem;
+}
+
+/* ── Formula Variables ── */
+.formula-variables {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.var-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.93rem;
+}
+
+.var-sym {
+  font-weight: 700;
+  color: #7c3aed;
+  min-width: 50px;
+  font-family: 'Courier New', monospace;
+}
+
+.var-desc {
+  color: #374151;
+}
+
+/* ── Formula Note ── */
+.formula-note {
+  font-size: 0.88rem;
+  color: #6b7280;
+  border-left: 3px solid #c4b5fd;
+  padding-left: 12px;
+  line-height: 1.6;
+}
+
+/* ── Conditions Grid ── */
+.conditions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.condition-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #1e293b;
+  background: rgba(255,255,255,0.6);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.condition-icon {
+  font-size: 1.1rem;
+}
+
+/* ── App Table ── */
+.app-table-wrapper {
+  overflow-x: auto;
+}
+
+.app-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+}
+
+.app-table thead tr {
+  background: #f1f5f9;
+}
+
+.app-table th {
+  text-align: left;
+  padding: 11px 14px;
+  font-weight: 700;
+  color: #374151;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.app-table td {
+  padding: 11px 14px;
+  color: #374151;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: top;
+}
+
+.app-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* ── Summary ── */
+.summary-text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #1e293b;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .conditions-grid {
+    grid-template-columns: 1fr;
+  }
+  .section-card {
+    padding: 16px 16px;
+  }
+}
+</style>

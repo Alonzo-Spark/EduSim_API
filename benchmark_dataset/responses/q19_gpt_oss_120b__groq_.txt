@@ -1,0 +1,117 @@
+┌───────────────────────────────────────────────────────────────┐
+│ Introduction                                                    │
+│                                                                   │
+│ Kinetic energy is the energy an object possesses because of its   │
+│ motion.  It is a scalar quantity that depends only on the object's │
+│ mass and the square of its speed.  This concept is a cornerstone   │
+│ of classical mechanics and appears in everything from            │
+│ automobile safety design to orbital dynamics.                    │
+└───────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│ Definition                                                      │
+│                                                                   │
+│ **Kinetic Energy (K)** – the work required to accelerate a body   │
+│ of mass *m* from rest to a speed *v*.  It is expressed in joules │
+│ (J) in the SI system.                                            │
+└───────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│ Key Concepts                                                    │
+│                                                                   │
+│ • Work (W) is the transfer of energy by a force acting through a  │
+│   displacement.                                                   │
+│ • The work‑energy theorem states that the net work done on a      │
+│   particle equals the change in its kinetic energy.               │
+│ • For a constant mass, the kinetic energy depends on *v²*, not    │
+│   *v*.                                                            │
+└───────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│ Derivation – Step 1: Work from a Constant Force                  │
+│                                                                   │
+│ A constant force **F** acting through a displacement **d** does   │
+│ work                                                               │
+│                                                                   │
+│   \displaystyle W = F\,d                                          │
+│                                                                   │
+│ Using Newton’s second law (**F = m a**) and the kinematic        │
+│ relation **a = \frac{dv}{dt}**, we rewrite the displacement as   │
+│                                                                   │
+│   \displaystyle d = v\,dt                                          │
+│                                                                   │
+│ Substituting gives                                                   │
+│                                                                   │
+│   \displaystyle W = m a\,d = m\frac{dv}{dt}\,v\,dt                │
+│                                                                   │
+│   \displaystyle W = m v\,dv                                        │
+└───────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│ Derivation – Step 2: Integrate the Work                           │
+│                                                                   │
+│ Integrate from the initial speed *v₀* (often 0) to the final      │
+│ speed *v*:                                                        │
+│                                                                   │
+│   \displaystyle W = \int_{v_0}^{v} m v\,dv                        │
+│                                                                   │
+│   \displaystyle W = \frac{1}{2} m \bigl(v^{2} - v_{0}^{2}\bigr)  │
+│                                                                   │
+│ By the work‑energy theorem, the net work equals the change in     │
+│ kinetic energy:                                                   │
+│                                                                   │
+│   \displaystyle \Delta K = W                                      │
+│                                                                   │
+│ If the body starts from rest (**v₀ = 0**), the expression reduces │
+│ to the familiar form.                                            │
+└───────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│ Main Formula                                                    │
+│                                                                   │
+│   \displaystyle K = \frac{1}{2}\,m\,v^{2}                         │
+│                                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]                        │
+└───────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│ Applications                                                    │
+│                                                                   │
+│ • **Vehicle dynamics** – estimating fuel consumption and braking │
+│   distances.                                                     │
+│ • **Sports physics** – analyzing projectile motion of balls.     │
+│ • **Engineering** – designing safety devices (e.g., crumple      │
+│   zones) that absorb kinetic energy.                              │
+│ • **Astronomy** – calculating orbital energies of planets.        │
+└───────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│ Summary                                                         │
+│                                                                   │
+│ • Kinetic energy is the energy of motion, given by               │
+│   **K = ½ m v²**.                                                │
+│ • It follows directly from the work‑energy theorem and Newton’s   │
+│   second law.                                                     │
+│ • Because it depends on *v²*, small increases in speed cause a    │
+│   large increase in kinetic energy.                               │
+└───────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│ Suggested Questions                                             │
+│                                                                   │
+│ 1. A 1500 kg car accelerates from 0 to 20 m s⁻¹. What is its      │
+│    kinetic energy?                                               │
+│ 2. If the same car doubles its speed, by what factor does its    │
+│    kinetic energy change?                                        │
+│ 3. Derive the kinetic‑energy expression for a system of two       │
+│    particles moving with different velocities.                  │
+│ 4. How does kinetic energy relate to momentum?                    │
+└───────────────────────────────────────────────────────────────┘

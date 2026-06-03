@@ -1,0 +1,230 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Inclined Plane and Gravity Scaling</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/katex/0.16.9/katex.min.css" integrity="sha512-VbE1T3i97pT3v+cI8/Jg+U/t40/z0T+7r3X8/gNtI+cT+1z9i3S/z0hY0Qd0R78+hX+8CqO3gA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+  }
+
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    overflow: hidden; /* Ensures content within the card doesn't overflow */
+  }
+
+  .section-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .formula-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .formula-card .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .formula-card .formula {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+
+  .formula-card button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 10px;
+  }
+
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+  }
+
+  th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+  }
+
+  th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="section-title">Introduction</div>
+    <p>
+      This interactive textbook explores how the scaling of gravitational acceleration affects the range of a block sliding down an inclined plane. We'll delve into the physics principles at play, examine relevant formulas, and provide interactive elements to deepen your understanding.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Definition</div>
+    <p>
+      An inclined plane is a flat surface tilted at an angle (θ) relative to the horizontal. When a block slides down this plane, its motion is influenced by gravity, the angle of the incline, and friction.  The range of the block is the horizontal distance it travels before coming to a stop.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Key Concepts</div>
+    <ul>
+      <li><b>Gravitational Acceleration (g):</b> The acceleration caused by gravity, typically 9.8 m/s² on Earth.</li>
+      <li><b>Normal Force (N):</b> The force exerted by the inclined plane on the block, perpendicular to the surface.</li>
+      <li><b>Friction:</b> A force that opposes the motion of the block, dependent on the coefficient of friction (µ) and the normal force.</li>
+      <li><b>Angle of Inclination (θ):</b> The angle of the inclined plane, which affects the components of gravitational force acting on the block.</li>
+    </ul>
+  </div>
+
+  <div class="formula-card">
+    <div class="title">Main Formula - Acceleration Down the Incline</div>
+    <div class="formula">
+      $$a = g(\sin(\theta) - \mu \cos(\theta))$$
+    </div>
+    <button onclick="explainFormula()">Explain Formula</button>
+    <button onclick="openFormulaLab()">Open Formula Lab</button>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Formula Explanation</div>
+    <p>
+      The acceleration (a) of the block down the incline depends on the gravitational acceleration (g), the angle of the incline (θ), and the coefficient of friction (µ). The component of gravity acting down the incline is \(g \sin(\theta)\), and the friction force opposes the motion with a magnitude of \(\mu N\), where \(N = mg \cos(\theta)\).
+    </p>
+  </div>
+
+    <div class="card">
+    <div class="section-title">Variables</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Variable</th>
+                <th>Description</th>
+                <th>Units</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>\(a\)</td>
+                <td>Acceleration of the block down the incline</td>
+                <td>m/s²</td>
+            </tr>
+            <tr>
+                <td>\(g\)</td>
+                <td>Gravitational acceleration</td>
+                <td>m/s²</td>
+            </tr>
+            <tr>
+                <td>\(\theta\)</td>
+                <td>Angle of the incline</td>
+                <td>degrees or radians</td>
+            </tr>
+            <tr>
+                <td>\(\mu\)</td>
+                <td>Coefficient of kinetic friction</td>
+                <td>(unitless)</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+
+
+  <div class="card">
+    <div class="section-title">Applications</div>
+    <p>
+      Understanding how gravity scaling affects the range is critical in various applications, including:
+    </p>
+    <ul>
+      <li><b>Engineering:</b> Designing ramps, slides, and other inclined structures.</li>
+      <li><b>Physics Education:</b> Demonstrating the principles of mechanics.</li>
+      <li><b>Sports:</b> Analyzing the motion of objects on slopes (e.g., skiing, snowboarding).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Advantages</div>
+    <ul>
+      <li><b>Simplified Analysis:</b>  Provides a simplified model for understanding complex motion.</li>
+      <li><b>Predictive Power:</b> Allows for the prediction of the range of a sliding block.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Disadvantages</div>
+    <ul>
+      <li><b>Idealization:</b> The model often assumes frictionless surfaces or constant friction, which may not always be realistic.</li>
+      <li><b>Air Resistance:</b>  Air resistance is often ignored, which can affect the range in real-world scenarios.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Important Notes</div>
+    <p>
+      The range is directly proportional to the square of the initial velocity and inversely proportional to the gravitational acceleration. Therefore, scaling gravity significantly impacts the range.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Summary</div>
+    <p>
+      The range of a block sliding down an inclined plane is heavily influenced by gravitational acceleration.  A higher gravitational acceleration results in a shorter range, assuming all other factors remain constant. Friction and the angle of the incline also play crucial roles.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Suggested Questions</div>
+    <ul>
+      <li>How does the angle of the incline affect the range?</li>
+      <li>What happens to the range if friction is increased?</li>
+      <li>How could you design an experiment to test these concepts?</li>
+    </ul>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/katex/0.16.9/katex.min.js" integrity="sha512-YmG1O7xW8W+X/D4X6fN9J3t49w+nO9x2c4e+v5v87/7b5l1f6z9s0/f+e82d/P28j2Q+BvS48w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  function explainFormula() {
+    alert("Explanation of the formula will be displayed here.");
+  }
+
+  function openFormulaLab() {
+    alert("Formula Lab will open here.");
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false},
+        {left: "\\(", right: "\\)", display: false},
+        {left: "\\[", right: "\\]", display: true}
+      ],
+      throwOnError : false
+    });
+  });
+</script>
+</body>
+</html>
+```

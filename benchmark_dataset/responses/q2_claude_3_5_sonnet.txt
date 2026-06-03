@@ -1,0 +1,268 @@
+<div class="tutor-response">
+
+## Uniform Acceleration Problem
+
+<div class="card intro-card">
+  <div class="card-label">📘 What's Happening</div>
+  <p>A car begins at <strong>rest</strong> (zero initial velocity) and gains speed at a <em>constant rate</em>. We need to find how fast it's moving after a set time.</p>
+</div>
+
+<div class="card definition-card">
+  <div class="card-label">📖 Key Terms</div>
+  <div class="term-grid">
+    <div class="term-item">
+      <span class="term-name">Uniform Acceleration</span>
+      <span class="term-desc">Velocity increases by the same amount every second</span>
+    </div>
+    <div class="term-item">
+      <span class="term-name">Starts from Rest</span>
+      <span class="term-desc">Initial velocity u = 0 m/s</span>
+    </div>
+  </div>
+</div>
+
+<div class="card given-card">
+  <div class="card-label">📋 Given Information</div>
+  <div class="given-grid">
+    <div class="given-row">
+      <span class="given-symbol">u</span>
+      <span class="given-equals">=</span>
+      <span class="given-value">0 m/s</span>
+      <span class="given-note">starts from rest</span>
+    </div>
+    <div class="given-row">
+      <span class="given-symbol">a</span>
+      <span class="given-equals">=</span>
+      <span class="given-value">2 m/s²</span>
+      <span class="given-note">uniform acceleration</span>
+    </div>
+    <div class="given-row">
+      <span class="given-symbol">t</span>
+      <span class="given-equals">=</span>
+      <span class="given-value">10 s</span>
+      <span class="given-note">time elapsed</span>
+    </div>
+    <div class="given-row find-row">
+      <span class="given-symbol">v</span>
+      <span class="given-equals">=</span>
+      <span class="given-value">?</span>
+      <span class="given-note">find this</span>
+    </div>
+  </div>
+</div>
+
+<div class="card formula-card">
+  <div class="card-label">⚡ Formula Used</div>
+  <div class="formula-name">First Equation of Motion</div>
+  <div class="formula-display" id="formula-main">
+    \[ v = u + at \]
+  </div>
+  <div class="formula-variables">
+    <div class="var-row"><span class="var">v</span> = final velocity (m/s)</div>
+    <div class="var-row"><span class="var">u</span> = initial velocity (m/s)</div>
+    <div class="var-row"><span class="var">a</span> = acceleration (m/s²)</div>
+    <div class="var-row"><span class="var">t</span> = time (s)</div>
+  </div>
+</div>
+
+<div class="card solution-card">
+  <div class="card-label">🔢 Step-by-Step Solution</div>
+  <div class="step">
+    <div class="step-number">1</div>
+    <div class="step-content">
+      <div class="step-label">Write the formula</div>
+      <div class="step-math">\[ v = u + at \]</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-number">2</div>
+    <div class="step-content">
+      <div class="step-label">Substitute the values</div>
+      <div class="step-math">\[ v = 0 + (2)(10) \]</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-number">3</div>
+    <div class="step-content">
+      <div class="step-label">Simplify</div>
+      <div class="step-math">\[ v = 20 \text{ m/s} \]</div>
+    </div>
+  </div>
+</div>
+
+<div class="card answer-card">
+  <div class="answer-label">✅ Final Answer</div>
+  <div class="answer-value">\[ v = 20 \text{ m/s} \]</div>
+  <div class="answer-note">The car is travelling at <strong>20 metres per second</strong> after 10 seconds.</div>
+</div>
+
+<div class="card insight-card">
+  <div class="card-label">💡 Quick Insight</div>
+  <p>Since the car accelerates at <strong>2 m/s²</strong>, it gains <strong>2 m/s of speed every second</strong>. After 10 seconds, that's simply 2 × 10 = 20 m/s. The zero initial velocity made this especially clean!</p>
+</div>
+
+</div>
+
+<style>
+.tutor-response {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #1a1a2e;
+}
+
+.tutor-response h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 4px 0 8px 0;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #4f46e5;
+}
+
+/* Base Card */
+.card {
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.card-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Intro Card */
+.intro-card {
+  background: #f0f4ff;
+  border-left: 4px solid #4f46e5;
+}
+.intro-card .card-label { color: #4f46e5; }
+.intro-card p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: #374151; }
+
+/* Definition Card */
+.definition-card {
+  background: #fdf8ff;
+  border-left: 4px solid #9333ea;
+}
+.definition-card .card-label { color: #9333ea; }
+.term-grid { display: flex; flex-direction: column; gap: 8px; }
+.term-item { display: flex; flex-direction: column; background: white; border-radius: 8px; padding: 10px 14px; }
+.term-name { font-weight: 700; font-size: 0.9rem; color: #1a1a2e; }
+.term-desc { font-size: 0.85rem; color: #6b7280; margin-top: 2px; }
+
+/* Given Card */
+.given-card {
+  background: #f8fafc;
+  border-left: 4px solid #0ea5e9;
+}
+.given-card .card-label { color: #0ea5e9; }
+.given-grid { display: flex; flex-direction: column; gap: 6px; }
+.given-row {
+  display: grid;
+  grid-template-columns: 28px 20px 80px 1fr;
+  align-items: center;
+  padding: 7px 10px;
+  background: white;
+  border-radius: 7px;
+  font-size: 0.9rem;
+}
+.given-symbol { font-weight: 700; color: #0ea5e9; font-style: italic; font-size: 1rem; }
+.given-equals { color: #9ca3af; }
+.given-value { font-weight: 700; color: #1a1a2e; }
+.given-note { color: #9ca3af; font-size: 0.8rem; }
+.find-row { background: #fff7ed; border: 1px dashed #f97316; }
+.find-row .given-symbol { color: #f97316; }
+.find-row .given-value { color: #f97316; }
+
+/* Formula Card */
+.formula-card {
+  background: #1a1a2e;
+  color: white;
+}
+.formula-card .card-label { color: #a5b4fc; }
+.formula-name { font-size: 0.85rem; color: #a5b4fc; margin-bottom: 10px; font-weight: 600; }
+.formula-display {
+  background: #0f0f1a;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.3rem;
+  color: white;
+  margin-bottom: 14px;
+}
+.formula-variables { display: flex; flex-wrap: wrap; gap: 8px; }
+.var-row {
+  background: #2d2d4e;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  color: #c4b5fd;
+}
+.var { font-style: italic; font-weight: 700; color: #a5b4fc; margin-right: 4px; }
+
+/* Solution Card */
+.solution-card {
+  background: #f0fdf4;
+  border-left: 4px solid #16a34a;
+}
+.solution-card .card-label { color: #16a34a; }
+.step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.step:last-child { margin-bottom: 0; }
+.step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #16a34a;
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-content { flex: 1; }
+.step-label { font-size: 0.78rem; font-weight: 600; color: #16a34a; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.step-math {
+  background: white;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 1rem;
+  color: #1a1a2e;
+}
+
+/* Answer Card */
+.answer-card {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  text-align: center;
+  border-radius: 14px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 15px rgba(79,70,229,0.3);
+}
+.answer-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #c4b5fd; margin-bottom: 8px; }
+.answer-value { font-size: 1.6rem; font-weight: 700; color: white; margin-bottom: 8px; }
+.answer-note { font-size: 0.9rem; color: #e0e7ff; }
+
+/* Insight Card */
+.insight-card {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+}
+.insight-card .card-label { color: #d97706; }
+.insight-card p { margin: 0; font-size: 0.92rem; line-height: 1.65; color: #374151; }
+</style>

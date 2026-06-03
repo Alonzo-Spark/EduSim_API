@@ -1,0 +1,97 @@
+┌───────────────────────────────────────────────────────┐
+│ Quick Definition                                      │
+│                                                       │
+│ The *range* of a block sliding down an inclined plane │
+│ is the distance it travels along the plane from the  │
+│ top to the bottom, assuming no friction and a fixed   │
+│ gravitational acceleration.                           │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Key Concepts                                          │
+│                                                       │
+│ • **Gravity (g)** – the acceleration due to gravity   │
+│   that pulls the block downhill.                     │
+│ • **Incline angle (θ)** – the angle between the plane │
+│   and the horizontal.                                 │
+│ • **Range (R)** – the linear distance along the plane │
+│   that the block covers.                              │
+│ • **Scaling** – multiplying g by a factor changes the │
+│   acceleration proportionally.                       │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Formula                                               │
+│                                                       │
+│  ┌───────────────────────┐                           │
+│  │  Main Formula         │                           │
+│  │                       │                           │
+│  │     R = \frac{v₀² sin(2θ)}{g cos θ}                │
+│  │                       │                           │
+│  │  [Explain Formula]     │                           │
+│  │  [Open Formula Lab]    │                           │
+│  └───────────────────────┘                           │
+└───────────────────────────────────────────────────────┘
+
+**Explanation of the Formula**
+
+- `v₀` is the initial speed of the block at the top of the incline.  
+- `θ` is the incline angle measured from the horizontal.  
+- The denominator `g cos θ` represents the component of gravity that accelerates the block along the plane.  
+- The numerator `v₀² sin(2θ)` arises from the kinematic relation \(v_f^2 = v₀^2 + 2 a s\) with \(a = g sinθ\) and the geometry of the plane.
+
+---
+
+┌───────────────────────────────────────────────────────┐
+│ Gravity Scaling Effect                                │
+│                                                       │
+│ • The range \(R\) is **inversely proportional** to the │
+│   gravitational acceleration \(g\).                 │
+│ • If \(g\) is doubled (e.g., on a planet with twice   │
+│   Earth's gravity), the range is halved:                │
+│   \[
+│   R_{\text{new}} = \frac{R_{\text{old}}}{2}
+│   \]                                                 │
+│ • Conversely, halving \(g\) doubles the range.        │
+│ • This linear relationship holds as long as the incline │
+│   angle and initial speed remain unchanged.           │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Applications                                           │
+│                                                       │
+│ • Design of ramps and slides in amusement parks.     │
+│ • Calculating the length of a conveyor belt on an     │
+│   inclined surface.                                   │
+│ • Physics laboratory experiments on motion and       │
+│   gravitational effects.                              │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Important Notes                                       │
+│                                                       │
+│ • The formula assumes **no friction** and a **constant** │
+│   gravitational field.                                 │
+│ • In real-world scenarios, friction and air resistance│
+│   will reduce the actual range.                       │
+│ • The angle θ must be measured from the horizontal;   │
+│   if measured from the plane, use \(90°−θ\).           │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Suggested Questions                                   │
+│                                                       │
+│ 1. How does changing the incline angle θ affect the   │
+│    range if gravity remains constant?                 │
+│ 2. What would be the range on a frictionless incline  │
+│    if the block starts from rest (v₀ = 0)?             │
+│ 3. How would you modify the formula to account for a  │
+│    coefficient of kinetic friction μ?                │
+│ 4. In a simulation, what parameter would you adjust   │
+│    to observe the effect of gravity scaling?           │
+└───────────────────────────────────────────────────────┘
+
+--- 
+
+**Live Sandbox**  
+[Open Formula Lab] (interactive simulation to vary g, θ, v₀ and observe the resulting range)

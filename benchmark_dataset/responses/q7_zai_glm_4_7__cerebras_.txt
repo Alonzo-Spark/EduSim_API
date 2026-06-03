@@ -1,0 +1,504 @@
+Here is the interactive textbook page for the derivation of the maximum height of a projectile. I have structured the content into distinct UI blocks (cards) as requested, with a dedicated Formula Card system and a responsive table layout.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics: Maximum Height of a Projectile</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    
+    <!-- Google Fonts for Textbook Aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Color Palette - Academic/Clean */
+            --bg-body: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --accent-primary: #3182ce; /* Blue */
+            --accent-hover: #2b6cb0;
+            --accent-light: #ebf8ff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            
+            /* Radius */
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        /* Reset & Base */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: var(--spacing-md);
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        
+        p {
+            font-family: 'Merriweather', serif; /* Textbook feel for body text */
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .page-header h1 {
+            font-size: 2.25rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .page-header .subtitle {
+            font-family: 'Inter', sans-serif;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* ---------------------------------------------------------
+           CARD SYSTEM (Structured UI Blocks)
+        --------------------------------------------------------- */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            margin: 0;
+        }
+
+        .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: var(--accent-light);
+            color: var(--accent-primary);
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .card-body {
+            padding: var(--spacing-md);
+        }
+
+        /* ---------------------------------------------------------
+           FORMULA CARD SYSTEM
+        --------------------------------------------------------- */
+        .formula-card {
+            background: linear-gradient(to bottom right, #ffffff, #f7fafc);
+            border: 2px solid var(--accent-primary);
+        }
+
+        .formula-card .card-header {
+            background-color: var(--accent-light);
+            border-bottom: 1px solid rgba(49, 130, 206, 0.2);
+        }
+
+        .formula-display {
+            background-color: #fff;
+            padding: var(--spacing-lg);
+            margin: var(--spacing-md) 0;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-size: 1.2rem;
+            border: 1px dashed var(--border-color);
+        }
+
+        .formula-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-sm);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            background-color: var(--accent-light);
+        }
+
+        /* ---------------------------------------------------------
+           CONTENT SPECIFIC STYLES
+        --------------------------------------------------------- */
+        
+        /* Derivation Steps */
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .step-list li::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background-color: var(--text-primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 2rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Inline Math */
+        .inline-math {
+            font-family: 'KaTeX_Main', 'Times New Roman', serif;
+            font-style: italic;
+        }
+
+        /* ---------------------------------------------------------
+           TABLE RENDERING
+        --------------------------------------------------------- */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        thead {
+            background-color: var(--bg-body);
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ---------------------------------------------------------
+           INTERACTIVE ELEMENTS (Modals/Toasts)
+        --------------------------------------------------------- */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #2d3748;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(150%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        .toast.active {
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .page-header h1 { font-size: 1.75rem; }
+            .formula-actions { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <header class="page-header">
+            <div class="subtitle">Kinematics & Motion</div>
+            <h1>Maximum Height of a Projectile</h1>
+        </header>
+
+        <!-- Card: Introduction -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">📖</div>
+                <h2>Introduction</h2>
+            </div>
+            <div class="card-body">
+                <p>
+                    When an object is thrown into the air, it follows a curved path known as a parabola. The highest vertical point reached by the projectile during its flight is called the <strong>maximum height</strong> (denoted as $H$).
+                </p>
+                <p>
+                    At this specific point, the vertical component of the projectile's velocity becomes zero momentarily before gravity pulls it back down. To derive the expression, we focus solely on the vertical motion of the object.
+                </p>
+            </div>
+        </section>
+
+        <!-- Card: Derivation -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">🧮</div>
+                <h2>Step-by-Step Derivation</h2>
+            </div>
+            <div class="card-body">
+                <ol class="step-list">
+                    <li>
+                        <strong>Identify Vertical Motion Parameters:</strong>
+                        Consider a projectile launched with initial velocity $u$ at an angle $\theta$ to the horizontal.
+                        The initial vertical velocity is:
+                        $$u_y = u \sin \theta$$
+                        The acceleration acting downwards is gravity: $a = -g$.
+                    </li>
+                    <li>
+                        <strong>Condition at Maximum Height:</strong>
+                        At the highest point ($H$), the vertical velocity becomes zero.
+                        $$v_y = 0$$
+                    </li>
+                    <li>
+                        <strong>Apply Equation of Motion:</strong>
+                        We use the kinematic equation that relates velocity, acceleration, and displacement (not time):
+                        $$v^2 = u^2 + 2as$$
+                    </li>
+                    <li>
+                        <strong>Substitute Values:</strong>
+                        Substitute vertical components into the equation:
+                        $$0^2 = (u \sin \theta)^2 + 2(-g)H$$
+                        Simplify:
+                        $$0 = u^2 \sin^2 \theta - 2gH$$
+                    </li>
+                    <li>
+                        <strong>Solve for Height ($H$):</strong>
+                        Rearrange the equation to isolate $H$:
+                        $$2gH = u^2 \sin^2 \theta$$
+                        $$H = \frac{u^2 \sin^2 \theta}{2g}$$
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Card: Formula (Special Component) -->
+        <section class="card formula-card">
+            <div class="card-header">
+                <div class="card-icon">🚀</div>
+                <h2>Main Formula</h2>
+            </div>
+            <div class="card-body">
+                <p>The derived expression for the maximum height is:</p>
+                
+                <div class="formula-display" id="main-formula">
+                    $$H = \frac{u^2 \sin^2 \theta}{2g}$$
+                </div>
+
+                <div class="formula-actions">
+                    <button class="btn btn-outline" onclick="explainFormula()">
+                        <span style="margin-right: 8px;">💡</span> Explain Formula
+                    </button>
+                    <button class="btn btn-primary" onclick="openLab()">
+                        <span style="margin-right: 8px;">🔬</span> Open Formula Lab
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card: Variables Table -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">📊</div>
+                <h2>Variable Definitions</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Description</th>
+                                <th>SI Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$H$</td>
+                                <td>Maximum Height reached</td>
+                                <td>Meters (m)</td>
+                            </tr>
+                            <tr>
+                                <td>$u$</td>
+                                <td>Initial velocity of projection</td>
+                                <td>Meters per second (m/s)</td>
+                            </tr>
+                            <tr>
+                                <td>$\theta$</td>
+                                <td>Angle of projection</td>
+                                <td>Degrees or Radians</td>
+                            </tr>
+                            <tr>
+                                <td>$g$</td>
+                                <td>Acceleration due to gravity</td>
+                                <td>Meters per second squared (m/s²)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card: Important Notes -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">📝</div>
+                <h2>Important Notes</h2>
+            </div>
+            <div class="card-body">
+                <ul style="padding-left: 1.5rem; color: var(--text-secondary); font-family: 'Merriweather', serif;">
+                    <li style="margin-bottom: 0.5rem;">The maximum height depends on the <strong>square</strong> of the initial velocity. Doubling the speed quadruples the height.</li>
+                    <li style="margin-bottom: 0.5rem;">The maximum height is achieved when the angle of projection is $90^\circ$ (vertical throw), where $\sin 90^\circ = 1$.</li>
+                    <li>At $45^\circ$, the range is maximum, but the height is not maximum.</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Simple Toast Notification -->
+    <div id="toast" class="toast">
+        Message content here
+    </div>
+
+    <!-- KaTeX Script -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+            onload="renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });">
+    </script>
+
+    <!-- Interactive Logic -->
+    <script>
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('active');
+            
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
+
+        function explainFormula() {
+            showToast("Height increases with the square of velocity and the sine squared of the angle.");
+        }
+
+        function openLab() {
+            showToast("Opening Formula Lab: Adjust sliders for 'u' and 'θ' to see changes...");
+        }
+    </script>
+</body>
+</html>
+```

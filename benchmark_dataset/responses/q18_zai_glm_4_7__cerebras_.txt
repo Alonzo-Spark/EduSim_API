@@ -1,0 +1,593 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Interactive Textbook: Potential Energy</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0KOVEMeaPoFgYdR8w5iMzE8nLhN7U3IqBk6Z8p5oP5+O9G8hCcM" crossorigin="anonymous">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #64748b;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+            --accent-formula: #eff6ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        /* Layout Grid */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: repeat(12, 1fr);
+            }
+            .col-span-12 { grid-column: span 12; }
+            .col-span-8 { grid-column: span 8; }
+            .col-span-4 { grid-column: span 4; }
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Merriweather', serif;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+        
+        h1 { font-size: 2rem; font-weight: 700; }
+        h2 { font-size: 1.25rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+        h3 { font-size: 1.1rem; font-weight: 600; }
+
+        p { margin-bottom: 1rem; }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Specific Section Styles */
+        .section-icon {
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* Formula Card */
+        .formula-card {
+            background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+        }
+
+        .formula-display {
+            background-color: var(--accent-formula);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--border-color);
+            color: var(--text-main);
+        }
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .formula-explanation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: none; /* Hidden by default */
+        }
+        .formula-explanation.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Formula Lab Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .lab-input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .lab-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            accent-color: var(--primary);
+        }
+
+        .value-display {
+            font-weight: 700;
+            color: var(--primary);
+            width: 60px;
+            text-align: right;
+        }
+
+        .lab-result {
+            background: var(--accent-formula);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .lab-result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Utility */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #e2e8f0;
+            color: var(--text-muted);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header style="margin-bottom: 2rem; text-align: center;">
+        <div class="badge">Chapter 4: Work & Energy</div>
+        <h1 style="margin-top: 0.5rem;">Gravitational Potential Energy</h1>
+    </header>
+
+    <div class="container">
+
+        <!-- Card 1: Problem Statement -->
+        <section class="card col-span-12">
+            <div class="card-header">
+                <h2><span class="section-icon">📝</span>Problem Statement</h2>
+            </div>
+            <div class="card-body">
+                <p style="font-size: 1.1rem; color: var(--text-main);">
+                    A body of mass <strong>5 kg</strong> is lifted to a height of <strong>10 m</strong>. Calculate the potential energy gained by the body.
+                </p>
+            </div>
+        </section>
+
+        <!-- Card 2: Definition -->
+        <section class="card col-span-4">
+            <div class="card-header">
+                <h2><span class="section-icon">💡</span>Quick Definition</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Potential Energy (PE)</strong> is the energy possessed by an object due to its position or height relative to a reference point (usually the ground).</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                    It represents the work done to lift the object against gravity without acceleration.
+                </p>
+            </div>
+        </section>
+
+        <!-- Card 3: Formula System -->
+        <section class="card formula-card col-span-8">
+            <div class="card-header">
+                <h2><span class="section-icon">📐</span>Key Formula</h2>
+            </div>
+            <div class="card-body">
+                <!-- Formula Display -->
+                <div class="formula-display" id="main-formula-render">
+                    $$ PE = m \cdot g \cdot h $$
+                </div>
+
+                <!-- Formula Actions -->
+                <div class="formula-actions">
+                    <button class="btn btn-outline" onclick="toggleExplanation()">
+                        <span style="margin-right: 6px;">💬</span> Explain Formula
+                    </button>
+                    <button class="btn btn-primary" onclick="openFormulaLab()">
+                        <span style="margin-right: 6px;">🧪</span> Open Formula Lab
+                    </button>
+                </div>
+
+                <!-- Hidden Explanation -->
+                <div class="formula-explanation" id="formula-explanation">
+                    <p><strong>Where:</strong></p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><strong>PE</strong> = Potential Energy (Joules)</li>
+                        <li><strong>m</strong> = Mass of the object (kilograms)</li>
+                        <li><strong>g</strong> = Acceleration due to gravity ($9.8 \, m/s^2$ on Earth)</li>
+                        <li><strong>h</strong> = Height relative to the reference point (meters)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card 4: Known Variables (Table) -->
+        <section class="card col-span-6">
+            <div class="card-header">
+                <h2><span class="section-icon">📊</span>Known Variables</h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Symbol</th>
+                                <th>Value</th>
+                                <th>Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mass</td>
+                                <td><em>m</em></td>
+                                <td>5</td>
+                                <td>kg</td>
+                            </tr>
+                            <tr>
+                                <td>Height</td>
+                                <td><em>h</em></td>
+                                <td>10</td>
+                                <td>m</td>
+                            </tr>
+                            <tr>
+                                <td>Gravity</td>
+                                <td><em>g</em></td>
+                                <td>9.8</td>
+                                <td>m/s²</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card 5: Solution -->
+        <section class="card col-span-6">
+            <div class="card-header">
+                <h2><span class="section-icon">✅</span>Step-by-Step Solution</h2>
+            </div>
+            <div class="card-body">
+                <ol style="margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <li>
+                        <strong>Identify the formula:</strong><br>
+                        $$ PE = mgh $$
+                    </li>
+                    <li>
+                        <strong>Substitute the values:</strong><br>
+                        $$ PE = 5 \cdot 9.8 \cdot 10 $$
+                    </li>
+                    <li>
+                        <strong>Calculate the product:</strong><br>
+                        $$ PE = 490 \, \text{Joules} $$
+                    </li>
+                </ol>
+                <div style="margin-top: 1.5rem; padding: 1rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; color: #166534; font-weight: 600;">
+                    Final Answer: 490 J
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="lab-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Formula Lab: Potential Energy</h3>
+                <button class="btn btn-outline" style="border:none; padding: 0.5rem;" onclick="closeFormulaLab()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Adjust the variables to see how they affect the Potential Energy in real-time.</p>
+                
+                <div class="lab-input-group">
+                    <label>Mass (kg)</label>
+                    <div class="range-container">
+                        <input type="range" id="lab-mass" min="1" max="100" value="5" step="1">
+                        <span class="value-display" id="val-mass">5</span>
+                    </div>
+                </div>
+
+                <div class="lab-input-group">
+                    <label>Height (m)</label>
+                    <div class="range-container">
+                        <input type="range" id="lab-height" min="1" max="100" value="10" step="1">
+                        <span class="value-display" id="val-height">10</span>
+                    </div>
+                </div>
+
+                <div class="lab-input-group">
+                    <label>Gravity (m/s²)</label>
+                    <div class="range-container">
+                        <input type="range" id="lab-gravity" min="1.6" max="24.8" value="9.8" step="0.1">
+                        <span class="value-display" id="val-gravity">9.8</span>
+                    </div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">(Earth is ~9.8, Moon is ~1.6)</p>
+                </div>
+
+                <div class="lab-result">
+                    <span style="color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase;">Potential Energy</span>
+                    <span class="lab-result-value" id="lab-result">490 J</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="initKatex()"></script>
+
+    <script>
+        // 1. Initialize KaTeX Rendering
+        function initKatex() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError: false
+            });
+        }
+
+        // 2. Formula Data Extraction (Simulated as per request structure)
+        const formulaData = {
+            formula: "PE = m \\cdot g \\cdot h",
+            title: "Gravitational Potential Energy",
+            variables: [
+                { name: "Mass", symbol: "m", unit: "kg" },
+                { name: "Gravity", symbol: "g", unit: "m/s²" },
+                { name: "Height", symbol: "h", unit: "m" }
+            ]
+        };
+
+        // 3. UI Interaction Logic
+        
+        // Toggle Explanation
+        function toggleExplanation() {
+            const el = document.getElementById('formula-explanation');
+            el.classList.toggle('active');
+        }
+
+        // Formula Lab Logic
+        const modal = document.getElementById('lab-modal');
+        const inputs = {
+            m: document.getElementById('lab-mass'),
+            h: document.getElementById('lab-height'),
+            g: document.getElementById('lab-gravity')
+        };
+        const displays = {
+            m: document.getElementById('val-mass'),
+            h: document.getElementById('val-height'),
+            g: document.getElementById('val-gravity')
+        };
+        const resultDisplay = document.getElementById('lab-result');
+
+        function calculateLab() {
+            const m = parseFloat(inputs.m.value);
+            const h = parseFloat(inputs.h.value);
+            const g = parseFloat(inputs.g.value);
+
+            // Update Text Displays
+            displays.m.textContent = m;
+            displays.h.textContent = h;
+            displays.g.textContent = g;
+
+            // Calculate PE
+            const pe = m * g * h;
+            
+            // Format Result
+            resultDisplay.textContent = pe.toLocaleString(undefined, { maximumFractionDigits: 1 }) + " J";
+        }
+
+        function openFormulaLab() {
+            modal.classList.add('open');
+            // Reset to problem defaults for better UX
+            inputs.m.value = 5;
+            inputs.h.value = 10;
+            inputs.g.value = 9.8;
+            calculateLab();
+        }
+
+        function closeFormulaLab() {
+            modal.classList.remove('open');
+        }
+
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeFormulaLab();
+        });
+
+        // Attach listeners
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', calculateLab);
+        });
+
+    </script>
+</body>
+</html>
+```

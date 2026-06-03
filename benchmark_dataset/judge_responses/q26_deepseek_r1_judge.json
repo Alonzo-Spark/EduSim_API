@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 26,
+  "question": "Mechanical Properties of Fluids: Define pressure and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nFluid pressure is defined as the normal compressive force exerted by a fluid per unit surface area of a container or object. \n\nPressure acts perpendicular to the surface at every point, distributing uniformly across a level horizontal plane within a static fluid column.\n\n---\n\n## Characteristics\n\n* **Isotropic Distribution:** At any given depth within a continuous static fluid body, pressure acts with equal intensity in all directions.\n* **Scalar Nature:** Pressure is a scalar parameter because the force it produces acts in whatever direction face the surface points.\n\n---\n\n## Formula\n\nThe mechanical definition of surface pressure:\n\n$$P = \\frac{F}{A}$$\n\nWhere:\n* $P$ represents the fluid pressure\n* $F$ represents the normal force component acting perpendicular to the surface\n* $A$ represents the total boundary area of the surface interface\n\n---\n\n## Metric System Units\n\nThe standard SI unit of pressure is the **Pascal ($\\text{Pas}$)**, which is equivalent to a force of $1 \\text{ Newton}$ acting uniformly over a surface area of $1 \\text{ square meter}$.\n\n$$1 \\text{ Pa} = 1 \\text{ N}/\\text{m}^2 = 1 \\text{ kg}/(\\text{m}\\cdot\\text{s}^2)$$\n\n---\n\n## Summary\n\nPressure measures force distribution across a surface area, acting isotropically within fluid systems and measured internationally in Pascals.",
+  "candidate_response": "### Pressure in Fluids\n\n#### Quick Definition  \n**Pressure** is defined as the **force applied perpendicularly per unit area** on a surface.  \n**SI Unit:** Pascal (Pa) = 1 Newton per square meter (N/m²).\n\n---\n\n#### Formula  \nThe mathematical expression for pressure is:  \n$$ P = \\frac{F_{\\perp}}{A} $$  \n\n| Symbol | Quantity              | SI Unit          |\n|--------|-----------------------|------------------|\n| \\( P \\) | Pressure             | Pascal (Pa)      |\n| \\( F_{\\perp} \\) | Perpendicular force | Newton (N)       |\n| \\( A \\)  | Surface area         | Square meter (m²) |\n\n**Key Insight:**  \n- Pressure increases if force rises or area decreases (e.g., knife edges, high heels).  \n- Pressure decreases if force decreases or area increases (e.g., snowshoes, tank treads).  \n\n---\n\n#### Characteristics of Pressure in Fluids  \n1. **Scalar quantity** (has magnitude, no direction).  \n2. **Transmitted equally** in all directions (Pascal’s principle).  \n3. **Depth-dependent** in fluids: \\( P = \\rho gh \\) (where \\( \\rho \\) = density, \\( g \\) = gravity, \\( h \\) = depth).  \n\n---\n\n#### Practical Applications  \n- **Hydraulic systems**: Use fluid pressure to multiply force (e.g., car brakes, lifts).  \n- **Weather forecasting**: Atmospheric pressure changes predict storms.  \n- **Medical devices**: Blood pressure monitors.  \n\n---\n\n#### Common Misconceptions  \n❌ *\"Pressure and force are interchangeable.\"*  \n✅ **Correction**: Force is a vector acting on a surface; pressure is the scalar *effect* of that force per unit area.  \n\n---\n\n### Suggested Questions for Practice  \n1. Why does a sharp knife cut better than a blunt one?  \n2. Calculate the pressure exerted by a 500 N force on an area of 0.25 m².  \n3. How does pressure at the bottom of a lake change if the water density doubles?  \n\nLet me know if you’d like to explore formulas, simulations, or advanced concepts!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and educational. It correctly defines pressure, provides the SI unit, and includes a formula. The response also offers additional insights, characteristics of pressure, and practical applications, making it a comprehensive and beginner-friendly explanation. However, to reach perfection, it could more closely mirror the gold reference answer's structure and emphasize the isotropic distribution of pressure within a static fluid column. Minor adjustments for better alignment with the gold standard would elevate the response to a perfect score.",
+  "candidate_token_usage": {
+    "promptTokens": 366,
+    "completionTokens": 853,
+    "totalTokens": 1219
+  },
+  "candidate_latency_ms": 43268,
+  "candidate_cost_usd": 0.00206937,
+  "judge_token_usage": {
+    "promptTokens": 1169,
+    "completionTokens": 162,
+    "totalTokens": 1331
+  },
+  "judge_latency_ms": 4715,
+  "judge_cost_usd": 0.0010902,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:49:34.594Z"
+}

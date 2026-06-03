@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 26,
+  "question": "Mechanical Properties of Fluids: Define pressure and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nFluid pressure is defined as the normal compressive force exerted by a fluid per unit surface area of a container or object. \n\nPressure acts perpendicular to the surface at every point, distributing uniformly across a level horizontal plane within a static fluid column.\n\n---\n\n## Characteristics\n\n* **Isotropic Distribution:** At any given depth within a continuous static fluid body, pressure acts with equal intensity in all directions.\n* **Scalar Nature:** Pressure is a scalar parameter because the force it produces acts in whatever direction face the surface points.\n\n---\n\n## Formula\n\nThe mechanical definition of surface pressure:\n\n$$P = \\frac{F}{A}$$\n\nWhere:\n* $P$ represents the fluid pressure\n* $F$ represents the normal force component acting perpendicular to the surface\n* $A$ represents the total boundary area of the surface interface\n\n---\n\n## Metric System Units\n\nThe standard SI unit of pressure is the **Pascal ($\\text{Pas}$)**, which is equivalent to a force of $1 \\text{ Newton}$ acting uniformly over a surface area of $1 \\text{ square meter}$.\n\n$$1 \\text{ Pa} = 1 \\text{ N}/\\text{m}^2 = 1 \\text{ kg}/(\\text{m}\\cdot\\text{s}^2)$$\n\n---\n\n## Summary\n\nPressure measures force distribution across a surface area, acting isotropically within fluid systems and measured internationally in Pascals.",
+  "candidate_response": "```html\n<div class=\"section-card\">\n  <div class=\"section-title\">\n    Definition\n  </div>\n  <div class=\"section-content\">\n    <p>Pressure is defined as the force applied perpendicular to the surface of an object per unit area over which that force is distributed.</p>\n  </div>\n</div>\n\n<div class=\"formula-card\">\n  <div class=\"formula-card-title\">\n    Pressure Formula\n  </div>\n  <div class=\"formula-card-formula\">\n    $$P = \\frac{F}{A}$$\n  </div>\n  <div class=\"formula-card-buttons\">\n    <button class=\"formula-card-button\">Explain Formula</button>\n    <button class=\"formula-card-button\">Open Formula Lab</button>\n  </div>\n</div>\n\n<div class=\"section-card\">\n  <div class=\"section-title\">\n    SI Unit\n  </div>\n  <div class=\"section-content\">\n    <p>The SI unit of pressure is the Pascal (Pa), which is equivalent to one Newton per square meter (N/m²).</p>\n  </div>\n</div>\n```\n\n```css\n/* Basic styling for the UI cards */\n.section-card {\n  border: 1px solid #ccc;\n  border-radius: 8px;\n  margin-bottom: 20px;\n  padding: 15px;\n  background-color: #f9f9f9;\n}\n\n.section-title {\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-bottom: 10px;\n}\n\n.section-content {\n  line-height: 1.6;\n}\n\n/* Formula Card Styling */\n.formula-card {\n  border: 1px solid #ddd;\n  border-radius: 8px;\n  margin-bottom: 20px;\n  padding: 15px;\n  background-color: #fafafa;\n}\n\n.formula-card-title {\n  font-size: 1.2em;\n  font-weight: bold;\n  margin-bottom: 10px;\n}\n\n.formula-card-formula {\n  font-size: 1.4em;\n  text-align: center;\n  margin-bottom: 15px;\n}\n\n.formula-card-buttons {\n  display: flex;\n  justify-content: space-around;\n}\n\n.formula-card-button {\n  background-color: #4CAF50;\n  border: none;\n  color: white;\n  padding: 10px 20px;\n  text-align: center;\n  text-decoration: none;\n  display: inline-block;\n  font-size: 14px;\n  border-radius: 4px;\n  cursor: pointer;\n}\n```\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines pressure and provides the correct SI unit. However, it lacks the detailed explanation of pressure's characteristics, such as its isotropic distribution and scalar nature, which are present in the gold reference answer. The formula for pressure is correctly provided. The layout and formatting are well-structured and readable. To improve, the candidate response could include more detailed explanations and examples to enhance its educational effectiveness. Additionally, the use of HTML and CSS in the response is unnecessary and may detract from the clarity of the content.",
+  "candidate_token_usage": {
+    "promptTokens": 383,
+    "completionTokens": 663,
+    "totalTokens": 1046
+  },
+  "candidate_latency_ms": 3927,
+  "candidate_cost_usd": 0.00196245,
+  "judge_token_usage": {
+    "promptTokens": 1249,
+    "completionTokens": 166,
+    "totalTokens": 1415
+  },
+  "judge_latency_ms": 4587,
+  "judge_cost_usd": 0.0011478,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:49:34.575Z"
+}

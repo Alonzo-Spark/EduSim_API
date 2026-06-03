@@ -1,0 +1,322 @@
+<div class="tutor-response">
+
+# Surface Tension
+
+<div class="section-grid">
+
+<div class="card definition-card">
+  <div class="card-label">📖 Quick Definition</div>
+  <div class="card-body">
+    <strong>Surface Tension</strong> is the property of a liquid surface that makes it behave like a stretched elastic membrane, due to the <em>net inward cohesive force</em> acting on surface molecules.
+    <br/><br/>
+    It is defined as the <strong>force per unit length</strong> acting along the surface of a liquid, perpendicular to any imaginary line drawn on the surface.
+  </div>
+</div>
+
+<div class="card formula-card">
+  <div class="card-label">⚗️ Main Formula</div>
+  <div class="card-body formula-body">
+    <div class="formula-display">
+      $$T = \frac{F}{L}$$
+    </div>
+    <div class="formula-variables">
+      <div class="var-row"><span class="var">T</span><span class="var-desc">Surface Tension (N/m)</span></div>
+      <div class="var-row"><span class="var">F</span><span class="var-desc">Force acting on the surface (N)</span></div>
+      <div class="var-row"><span class="var">L</span><span class="var-desc">Length of the line on the surface (m)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="card concept-card">
+  <div class="card-label">💡 Physical Interpretation</div>
+  <div class="card-body">
+    <ul>
+      <li>Molecules <strong>inside</strong> a liquid are pulled equally in all directions → zero net force.</li>
+      <li>Molecules <strong>at the surface</strong> have fewer neighbors above → net inward pull.</li>
+      <li>This inward pull causes the surface to <em>contract and minimize its area</em>.</li>
+    </ul>
+    <div class="highlight-box">
+      SI Unit: <strong>N/m</strong> &nbsp;|&nbsp; CGS Unit: <strong>dyne/cm</strong> &nbsp;|&nbsp; Dimensions: <strong>[MT⁻²]</strong>
+    </div>
+  </div>
+</div>
+
+</div>
+
+---
+
+<div class="section-header">⚙️ Factors Affecting Surface Tension</div>
+
+<div class="section-grid">
+
+<div class="card factor-card">
+  <div class="card-label">🌡️ Temperature</div>
+  <div class="card-body">
+    As temperature <strong>increases</strong>, cohesive forces between molecules weaken.
+    <div class="result-box decrease">
+      ↓ Surface Tension decreases with rise in temperature
+    </div>
+    <em>Exception: Molten cadmium and copper show an increase.</em>
+  </div>
+</div>
+
+<div class="card factor-card">
+  <div class="card-label">🧪 Impurities / Solutes</div>
+  <div class="card-body">
+    <ul>
+      <li><strong>Soluble impurities</strong> (e.g., NaCl, sugar) → <span class="up">↑ Increase</span> surface tension</li>
+      <li><strong>Sparingly soluble impurities</strong> (e.g., soap, detergent) → <span class="down">↓ Decrease</span> surface tension</li>
+    </ul>
+    <div class="highlight-box">
+      Surfactants like soap drastically reduce surface tension — used in cleaning.
+    </div>
+  </div>
+</div>
+
+<div class="card factor-card">
+  <div class="card-label">🔗 Nature of Liquid</div>
+  <div class="card-body">
+    Liquids with <strong>stronger intermolecular (cohesive) forces</strong> have higher surface tension.
+    <div class="comparison-row">
+      <span class="badge high">Mercury — High ST</span>
+      <span class="badge low">Alcohol — Low ST</span>
+    </div>
+  </div>
+</div>
+
+<div class="card factor-card">
+  <div class="card-label">⚡ Electrification</div>
+  <div class="card-body">
+    When a liquid is <strong>electrified</strong>, charges on the surface repel each other, causing the surface to expand.
+    <div class="result-box decrease">
+      ↓ Surface Tension decreases on electrification
+    </div>
+  </div>
+</div>
+
+<div class="card factor-card">
+  <div class="card-label">🌊 Presence of Dissolved Gas</div>
+  <div class="card-body">
+    Dissolved gases in a liquid <strong>reduce cohesion</strong> between molecules.
+    <div class="result-box decrease">
+      ↓ Surface Tension decreases with dissolved gases
+    </div>
+  </div>
+</div>
+
+<div class="card factor-card">
+  <div class="card-label">🫧 Contamination / Surface Films</div>
+  <div class="card-body">
+    Oil films or dust on the surface reduce intermolecular attraction at the surface layer.
+    <div class="result-box decrease">
+      ↓ Surface Tension decreases with surface contamination
+    </div>
+  </div>
+</div>
+
+</div>
+
+---
+
+<div class="card summary-card">
+  <div class="card-label">📋 Quick Summary Table</div>
+  <div class="card-body">
+    <div class="table-wrapper">
+
+| Factor | Effect on Surface Tension |
+|---|---|
+| Increase in Temperature | ↓ Decreases |
+| Soluble impurities (NaCl) | ↑ Increases |
+| Surfactants (Soap) | ↓ Decreases |
+| Electrification | ↓ Decreases |
+| Dissolved Gases | ↓ Decreases |
+| Stronger cohesive forces | ↑ Increases |
+
+  </div>
+  </div>
+</div>
+
+</div>
+
+<style>
+.tutor-response {
+  font-family: 'Segoe UI', sans-serif;
+  color: #1a1a2e;
+  padding: 8px;
+  max-width: 860px;
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #e0e0e0;
+}
+
+.card-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+}
+
+.card-body {
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.definition-card .card-label { background: #e8f4fd; color: #1565c0; }
+.definition-card { border-color: #90caf9; }
+
+.formula-card .card-label { background: #f3e5f5; color: #6a1b9a; }
+.formula-card { border-color: #ce93d8; }
+
+.concept-card .card-label { background: #e8f5e9; color: #2e7d32; }
+.concept-card { border-color: #a5d6a7; }
+
+.factor-card .card-label { background: #fff8e1; color: #f57f17; }
+.factor-card { border-color: #ffe082; }
+
+.summary-card .card-label { background: #fce4ec; color: #880e4f; }
+.summary-card { border-color: #f48fb1; }
+
+.formula-body {
+  text-align: center;
+}
+
+.formula-display {
+  background: #f8f0ff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 14px;
+  font-size: 1.3rem;
+}
+
+.formula-variables {
+  text-align: left;
+}
+
+.var-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  border-bottom: 1px dashed #e0e0e0;
+}
+
+.var {
+  font-weight: 700;
+  color: #6a1b9a;
+  font-family: 'Courier New', monospace;
+  min-width: 24px;
+}
+
+.var-desc {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.highlight-box {
+  background: #f0f4ff;
+  border-left: 3px solid #3f51b5;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 10px;
+  font-size: 0.88rem;
+  color: #333;
+}
+
+.result-box {
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.result-box.decrease {
+  background: #fff3e0;
+  border-left: 3px solid #ef6c00;
+  color: #bf360c;
+}
+
+.result-box.increase {
+  background: #e8f5e9;
+  border-left: 3px solid #2e7d32;
+  color: #1b5e20;
+}
+
+.comparison-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badge.high { background: #e3f2fd; color: #0d47a1; }
+.badge.low { background: #fce4ec; color: #880e4f; }
+
+.up { color: #2e7d32; font-weight: 700; }
+.down { color: #c62828; font-weight: 700; }
+
+.section-header {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a237e;
+  margin: 20px 0 4px 0;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #c5cae9;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table-wrapper th {
+  background: #fce4ec;
+  color: #880e4f;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 700;
+}
+
+.table-wrapper td {
+  padding: 9px 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.table-wrapper tr:nth-child(even) td {
+  background: #fdf6f9;
+}
+
+ul {
+  margin: 6px 0;
+  padding-left: 18px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+</style>

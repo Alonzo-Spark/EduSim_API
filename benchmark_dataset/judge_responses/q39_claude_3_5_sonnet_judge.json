@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 39,
+  "question": "Define wavelength, frequency, and amplitude of a wave.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWavelength, frequency, and amplitude are primary parameters used to quantify and describe the physical properties of wave propagation through space and time.\n\n---\n\n## Core Wave Metrics\n\n### 1. Wavelength ($\\lambda$)\nWavelength is the spatial distance between two consecutive points that are in the same phase of oscillation, such as the distance between two adjacent wave crests or troughs.\n\n### 2. Frequency ($f$)\nFrequency is the number of complete wave cycles or oscillations that pass a fixed reference point per unit of time, measured internationally in Hertz ($\\text{Hz}$).\n\n### 3. Amplitude ($A$)\nAmplitude is the maximum displacement of a medium's particles from their equilibrium position as a wave passes through.\n\n---\n\n## Formula\n\nThe wave speed equation linking these parameters is defined as:\n\n$$v = f\\lambda$$\n\nWhere:\n* $v$ represents the propagation velocity of the wave profile\n* $f$ represents the wave frequency\n* $\\lambda$ represents the wavelength value\n\n---\n\n## Summary\n\nWavelength measures a wave's spatial structure, frequency tracks its speed over time, and amplitude defines its energy intensity and displacement scale.",
+  "candidate_response": "<div class=\"tutor-response\">\n\n# Wave Properties\n\n## Three Fundamental Properties\n\n---\n\n### 📏 Wavelength\n\n<div class=\"definition-card\">\n\n**Wavelength** is the distance between two consecutive points that are in phase on a wave — such as crest to crest or trough to trough.\n\n</div>\n\n<div class=\"formula-card\">\n\n**Symbol & Unit**\n\n$$\\lambda \\quad \\text{(lambda)} \\quad [\\text{meters, m}]$$\n\n</div>\n\n---\n\n### 🔁 Frequency\n\n<div class=\"definition-card\">\n\n**Frequency** is the number of complete wave cycles that pass a given point per unit time.\n\n</div>\n\n<div class=\"formula-card\">\n\n**Symbol & Unit**\n\n$$f \\quad [\\text{Hz} = \\text{cycles per second} = \\text{s}^{-1}]$$\n\n</div>\n\n---\n\n### 📶 Amplitude\n\n<div class=\"definition-card\">\n\n**Amplitude** is the maximum displacement of a point on the wave from its equilibrium (rest) position.\n\n</div>\n\n<div class=\"formula-card\">\n\n**Symbol & Unit**\n\n$$A \\quad [\\text{meters, m}]$$\n\n</div>\n\n---\n\n## How They Connect\n\n<div class=\"formula-card\">\n\n**The Wave Equation**\n\n$$v = f \\lambda$$\n\nwhere $v$ is wave speed, $f$ is frequency, and $\\lambda$ is wavelength.\n\n</div>\n\n---\n\n## Comparison Table\n\n| Property | Symbol | Unit | What It Measures |\n|---|---|---|---|\n| Wavelength | $\\lambda$ | m | Spatial length of one cycle |\n| Frequency | $f$ | Hz | Cycles per second |\n| Amplitude | $A$ | m | Maximum displacement |\n| Wave Speed | $v$ | m/s | Distance travelled per second |\n\n---\n\n## Quick Visual\n\n```\n        A ↑  *       *\n           * | *   * | *\n  ─────────*─┼─*─*─┼─*─────\n           * | *   * | *\n        A ↓  *       *\n           |←──λ──→|\n```\n\n- **A** = Amplitude (height from centre)\n- **λ** = Wavelength (length of one full cycle)\n- **f** = how many full cycles pass per second\n\n---\n\n> 💡 **Key Insight:** Frequency and wavelength are **inversely proportional** at constant wave speed — a higher frequency means a shorter wavelength.\n\n</div>",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines wavelength, frequency, and amplitude, and correctly presents the wave speed equation. The use of symbols, units, and a comparison table enhances clarity. The quick visual aid effectively illustrates the concepts. However, minor improvements could be made in formatting consistency and additional examples or explanations to further support beginner understanding. Overall, the response demonstrates strong conceptual correctness, readability, and pedagogical effectiveness.",
+  "candidate_token_usage": {
+    "promptTokens": 436,
+    "completionTokens": 619,
+    "totalTokens": 1055
+  },
+  "candidate_latency_ms": 12774,
+  "candidate_cost_usd": 0.001674,
+  "judge_token_usage": {
+    "promptTokens": 1182,
+    "completionTokens": 141,
+    "totalTokens": 1323
+  },
+  "judge_latency_ms": 2156,
+  "judge_cost_usd": 0.0010476,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:28:09.823Z"
+}

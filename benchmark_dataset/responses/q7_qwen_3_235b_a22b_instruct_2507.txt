@@ -1,0 +1,98 @@
+┌───────────────────────────┐
+│ Quick Definition          │
+│                           │
+│ The **maximum height** of a projectile is the highest vertical position reached during its trajectory, occurring when the vertical component of velocity becomes zero. │
+└───────────────────────────┘
+
+---
+
+┌───────────────────────────┐
+│ Key Concepts              │
+│                           │
+│ • Projectile motion follows a parabolic path under gravity.  
+│ • Motion can be split into horizontal and vertical components.  
+│ • At maximum height, vertical velocity $ v_y = 0 $.  
+│ • Acceleration in the vertical direction is $ -g $ (downward). │
+└───────────────────────────┘
+
+---
+
+┌───────────────────────────┐
+│ Formula                   │
+│                           │
+│     $$                    │
+│     H_{\text{max}} = \frac{u^2 \sin^2\theta}{2g}  
+\\  
+│     $$                    │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+---
+
+### Step-by-Step Derivation
+
+We consider a projectile launched with:
+
+- Initial speed: $ u $
+- Launch angle: $ \theta $
+- Acceleration due to gravity: $ g $ (acting downward)
+
+#### 1. **Resolve Initial Velocity**
+
+Break the initial velocity into vertical and horizontal components:
+
+- Horizontal component: $ u_x = u \cos\theta $
+- Vertical component: $ u_y = u \sin\theta $
+
+Only the vertical component affects the height.
+
+#### 2. **Use Equation of Motion**
+
+We use the kinematic equation (no time involved):
+
+$$
+v_y^2 = u_y^2 - 2gH
+$$
+
+At maximum height $ H_{\text{max}} $, the vertical velocity becomes zero:  
+$ v_y = 0 $
+
+Substitute:
+
+$$
+0 = (u \sin\theta)^2 - 2gH_{\text{max}}
+$$
+
+#### 3. **Solve for $ H_{\text{max}} $**
+
+$$
+2gH_{\text{max}} = u^2 \sin^2\theta
+$$
+
+$$
+H_{\text{max}} = \frac{u^2 \sin^2\theta}{2g}
+$$
+
+---
+
+┌───────────────────────────┐
+│ Important Notes           │
+│                           │
+│ • Maximum height depends only on the vertical component of velocity.  
+│ • For a given speed, height is maximized when $ \theta = 90^\circ $ (vertical throw).  
+│ • At $ \theta = 90^\circ $, $ \sin\theta = 1 $, so $ H_{\text{max}} = \frac{u^2}{2g} $.  
+│ • Horizontal motion does not affect maximum height. │
+└───────────────────────────┘
+
+---
+
+┌───────────────────────────┐
+│ Suggested Questions       │
+│                           │
+│ • What launch angle gives the greatest maximum height?  
+│ • How does doubling the initial speed affect maximum height?  
+│ • Why is the horizontal velocity irrelevant in this derivation?  
+│ • Derive the time taken to reach maximum height. │
+└───────────────────────────┘

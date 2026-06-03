@@ -1,0 +1,156 @@
+=========================================================
+INTERACTIVE TEXTBOOK RENDERER
+=========================================================
+
+[SYSTEM NOTE: Detecting sections...]
+[SYSTEM NOTE: Parsing LaTeX...]
+[SYSTEM NOTE: Generating UI Blocks...]
+
+┌─────────────────────────────────────────────────────────────┐
+│ Introduction                                                │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ A capacitor is a passive electronic component that stores   │
+│ electrical energy in an electric field. Unlike a battery,   │
+│ which stores energy chemically, a capacitor stores it       │
+│ physically as a charge imbalance between two plates. It     │
+│ acts as a temporary reservoir, releasing its stored charge  │
+│ when needed.                                                │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Quick Definition                                            │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ A capacitor consists of two electrical conductors           │
+│ (plates) separated by a distance. The space between the     │
+│ plates is filled with an insulating material known as a     │
+│ dielectric.                                                 │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Working Principle                                           │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ The operation relies on the movement of electrons and the   │
+│ creation of an electric field:                              │
+│                                                             │
+│ 1. **Charging:** When a voltage is applied across the       │
+│    plates, electrons from the negative terminal accumulate  │
+│    on one plate, creating a negative charge. Simultaneously,│
+│    electrons are pulled away from the opposite plate,       │
+│    leaving it with a positive charge.                       │
+│                                                             │
+│ 2. **Storage:** The charges stop moving once the voltage    │
+│    across the capacitor equals the source voltage. An       │
+│    electric field is established in the dielectric,         │
+│    storing potential energy.                                │
+│                                                             │
+│ 3. **Discharging:** When the power source is removed and    │
+│    a circuit (load) is connected, the accumulated           │
+│    electrons rush back to the positive plate, creating a    │
+│    current flow until the plates are neutral again.         │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Main Formula: Capacitance                                   │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│                       $$ C = \frac{Q}{V} $$                  │
+│                                                             │
+│   [ Explain Formula ]       [ Open Formula Lab ]            │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Main Formula: Stored Energy                                 │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│                     $$ E = \frac{1}{2}CV^2 $$                │
+│                                                             │
+│   [ Explain Formula ]       [ Open Formula Lab ]            │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Key Concepts                                                │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ • **Dielectric:** The insulating material (air, paper,      │
+│   ceramic) between the plates. It prevents direct current   │
+│   flow and increases the capacitor's storage capacity.      │
+│                                                             │
+│ • **Permittivity (ε):** A measure of how easily the         │
+│   dielectric material allows an electric field to form.     │
+│   Higher permittivity equals higher capacitance.            │
+│                                                             │
+│ • **Farad (F):** The unit of capacitance. One Farad is      │
+│   defined as storing one coulomb of charge per volt.        │
+│   Most capacitors are measured in microfarads (µF) or       │
+│   picofarads (pF).                                          │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Applications                                                │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ • **Energy Storage:** Used in camera flashes to provide a   │
+│   sudden burst of power.                                    │
+│                                                             │
+│ • **Filtering:** Smooth out voltage fluctuations in power   │
+│   supplies (removing ripple).                               │
+│                                                             │
+│ • **Timing:** Used in conjunction with resistors to create  │
+│   time delays (e.g., blinking lights, windshield wipers).   │
+│                                                             │
+│ • **Tuning:** Select specific frequencies in radio          │
+│   receivers.                                                │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Summary                                                     │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ A capacitor stores energy by holding opposite charges on    │
+│ two plates separated by a dielectric. Its capacity to       │
+│ store charge (Capacitance) is directly proportional to the  │
+│ charge and inversely proportional to the voltage. It is     │
+│ fundamental in circuits for filtering, timing, and energy   │
+│ management.                                                 │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+
+=========================================================
+SYSTEM DATA EXTRACTION (FOR FORMULA LAB)
+=========================================================
+
+STORED_FORMULAS = [
+  {
+    "id": "frm_001",
+    "title": "Capacitance Definition",
+    "formula": "C = \\frac{Q}{V}",
+    "variables": [
+      { "symbol": "C", "meaning": "Capacitance", "unit": "Farads (F)" },
+      { "symbol": "Q", "meaning": "Charge stored", "unit": "Coulombs (C)" },
+      { "symbol": "V", "meaning": "Voltage across plates", "unit": "Volts (V)" }
+    ],
+    "context": "Defines the relationship between stored charge, capacitance, and voltage."
+  },
+  {
+    "id": "frm_002",
+    "title": "Energy Stored in Capacitor",
+    "formula": "E = \\frac{1}{2}CV^2",
+    "variables": [
+      { "symbol": "E", "meaning": "Energy", "unit": "Joules (J)" },
+      { "symbol": "C", "meaning": "Capacitance", "unit": "Farads (F)" },
+      { "symbol": "V", "meaning": "Voltage", "unit": "Volts (V)" }
+    ],
+    "context": "Calculates the total potential energy stored in the electric field."
+  }
+]

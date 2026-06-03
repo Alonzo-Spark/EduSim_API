@@ -1,0 +1,82 @@
+```json
+{
+  "event": "spring_connected",
+  "payload": {
+    "status": "success",
+    "message": "Spring successfully connected between anchor and mass.",
+    "data": {
+      "connection_id": "spring_0017",
+      "type": "linear_spring",
+      "source": {
+        "type": "anchor",
+        "id": "anchor_A"
+      },
+      "target": {
+        "type": "mass",
+        "id": "mass_B"
+      },
+      "properties": {
+        "rest_length": "2.0 m",
+        "stiffness": "500 N/m",
+        "damping_ratio": "0.05",
+        "initial_length": "2.0 m"
+      }
+    }
+  },
+  "timestamp": "2023-11-15T08:45:32.170Z",
+  "overlay": {
+    "type": "visual",
+    "elements": [
+      {
+        "element": "spring_line",
+        "source_id": "anchor_A",
+        "target_id": "mass_B",
+        "style": {
+          "color": "#4a90e2",
+          "width": 3,
+          "pattern": "zigzag",
+          "animation": "pulse"
+        }
+      },
+      {
+        "element": "force_vector",
+        "attached_to": "mass_B",
+        "initial_visibility": false,
+        "label": "F_spring"
+      }
+    ],
+    "controls": [
+      {
+        "control": "toggle_force_vectors",
+        "label": "Show Spring Force",
+        "default": false
+      },
+      {
+        "control": "adjust_stiffness",
+        "label": "Spring Stiffness",
+        "type": "slider",
+        "min": 100,
+        "max": 2000,
+        "step": 50,
+        "unit": "N/m",
+        "current": 500
+      },
+      {
+        "control": "adjust_damping",
+        "label": "Damping Ratio",
+        "type": "slider",
+        "min": 0.0,
+        "max": 0.5,
+        "step": 0.01,
+        "unit": "",
+        "current": 0.05
+      }
+    ]
+  },
+  "next_suggested_actions": [
+    "apply_external_force",
+    "displace_mass_and_release",
+    "measure_oscillation_period"
+  ]
+}
+```

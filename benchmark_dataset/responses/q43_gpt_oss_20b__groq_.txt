@@ -1,0 +1,112 @@
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Introduction                                                                                           │
+│                                                                                                         │
+│ The electric force is the interaction that exists between stationary electric charges. It is a        │
+│ fundamental force that governs the behavior of charged particles in physics and chemistry. The          │
+│ quantitative description of this force is given by Coulomb’s law, which we will derive below.          │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Definition                                                                                              │
+│                                                                                                         │
+│ Electric force (F) is the vector quantity that describes the push or pull between two charges (q₁ and   │
+│ q₂) separated by a distance (r) in a given medium. It is directed along the line connecting the two    │
+│ charges.                                                                                                 │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Key Concepts                                                                                            │
+│                                                                                                         │
+│ • Point charges: the derivation assumes the charges are point-like, i.e., their spatial extent is     │
+│   negligible compared to the separation.                                                              │
+│ • Medium: the constant k (Coulomb constant) depends on the permittivity of the medium; in vacuum, k   │
+│   = 1/(4πϵ₀).                                                                                           │
+│ • Distance (r): the scalar separation between the charges; the force decays with the square of r.     │
+│ • Direction: the force is attractive if the charges have opposite signs, repulsive if they have the   │
+│   same sign.                                                                                            │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Derivation                                                                                              │
+│                                                                                                         │
+│ 1. Empirical observation: Experiments (e.g., Crookes' tube, electrostatic pendulum) reveal that the   │
+│    force between two small charged spheres is proportional to the product of their charges and       │
+│    inversely proportional to the square of their separation.                                         │
+│                                                                                                         │
+│ 2. Proportionality: Let F ∝ q₁q₂ and F ∝ 1/r².                                                    │
+│                                                                                                         │
+│ 3. Introduce a proportionality constant k to make the units consistent:                               │
+│    F = k · (q₁q₂) / r².                                                                                │
+│                                                                                                         │
+│ 4. Determination of k: In vacuum, k = 1/(4πϵ₀) ≈ 8.988 × 10⁹ N·m²·C⁻², where ϵ₀ is the vacuum       │
+│    permittivity.                                                                                        │
+│                                                                                                         │
+│ 5. Vector form: The direction of the force is along the unit vector 𝑟̂ pointing from q₁ to q₂:           │
+│    **F** = k · (q₁q₂) / r² · 𝑟̂.                                                                      │
+│                                                                                                         │
+│ Thus, Coulomb’s law is established:                                                                    │
+│                                                                                                         │
+│     **F** = k · (q₁q₂) / r² · 𝑟̂.                                                                    │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Main Formula                                                                                            │
+│                                                                                                         │
+│     $F = k \dfrac{q_1 q_2}{r^2}$                                                                         │
+│                                                                                                         │
+│     (Vector form: **F** = k (q₁q₂)/r² · 𝑟̂)                                                             │
+│                                                                                                         │
+│ [ Explain Formula ]  [ Open Formula Lab ]                                                               │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Applications                                                                                           │
+│                                                                                                         │
+│ • Electrostatic calculations in chemistry (e.g., predicting bond polarity).                           │
+│ • Design of capacitors and insulation materials.                                                      │
+│ • Analysis of electric fields in particle accelerators.                                               │
+│ • Teaching fundamental physics concepts in introductory courses.                                      │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Advantages                                                                                             │
+│                                                                                                         │
+│ • Simple, closed-form expression.                                                                      │
+│ • Accurate for point charges and static situations.                                                    │
+│ • Provides clear insight into the inverse-square nature of electrostatic interactions.                │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Disadvantages                                                                                          │
+│                                                                                                         │
+│ • Assumes point-like charges; real objects have finite size.                                          │
+│ • Valid only for static charges; dynamic situations require Maxwell’s equations.                     │
+│ • Neglects quantum effects at very small scales.                                                      │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Important Notes                                                                                         │
+│                                                                                                         │
+│ • k = 1/(4πϵ₀) ≈ 8.988 × 10⁹ N·m²·C⁻² in vacuum; in other media, k = 1/(4πϵ) where ϵ is the permittivity.│
+│ • The force is a vector; its magnitude is given by the formula, direction by the unit vector 𝑟̂.       │
+│ • For charges of opposite sign, the force is attractive; for like signs, it is repulsive.             │
+│ • Units: N (newtons) for force, C (coulombs) for charge, m (meters) for distance.                    │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Summary                                                                                                 │
+│                                                                                                         │
+│ We have derived Coulomb’s law, the fundamental relation describing the electric force between two     │
+│ point charges. The force depends linearly on each charge, inversely on the square of their separation,│
+│ and is directed along the line joining them. This law underpins much of classical electrostatics.     │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Suggested Questions                                                                                     │
+│                                                                                                         │
+│ 1. If two 3 µC charges are 0.5 m apart in vacuum, what is the magnitude of the force between them?    │
+│ 2. How does the force change if the charges are placed in water (ϵ ≈ 80ϵ₀)?                            │
+│ 3. Derive the vector form of Coulomb’s law starting from the scalar form.                              │
+│ 4. Explain why Coulomb’s law cannot be directly applied to moving charges.                              │
+│ 5. What would happen to the force if one of the charges is replaced by a dipole?                        │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────┘

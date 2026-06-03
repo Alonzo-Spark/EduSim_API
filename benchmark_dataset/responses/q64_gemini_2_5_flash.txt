@@ -1,0 +1,106 @@
+Here's a sandbox overlay response for a 'spring_stretched' peak limit event, designed to be structured and interactive, moving beyond a simple markdown document.
+
+---
+
+## ⚙️ System Event: Peak Limit Reached
+
+**Event Type:** `spring_stretched`
+**Timestamp:** `2023-10-27T10:30:15.123Z`
+**Component ID:** `spring_mechanism_A7`
+
+---
+
+### ⚠️ Event Details: Spring Stretched Beyond Limit
+
+A critical threshold has been detected for the `spring_mechanism_A7` component. The spring has exceeded its maximum allowable extension limit, indicating potential stress or failure.
+
+---
+
+### 🔍 Quick Definition: Peak Limit
+
+The **Peak Limit** refers to the maximum permissible value or range that a system parameter or component can reach before triggering an alert, protective action, or indicating a potential fault condition. Exceeding a peak limit often signifies that the component is operating outside its designed safe operating area.
+
+---
+
+### 💡 Key Concepts: Spring Mechanics
+
+┌───────────────────────────────────────────────────────────┐
+│ **Hooke's Law**                                           │
+│                                                           │
+│ Hooke's Law describes the elasticity of springs, stating  │
+│ that the force (F) needed to extend or compress a spring  │
+│ by some distance (x) is proportional to that distance.    │
+│                                                           │
+│ [ Explain Formula ]                                       │
+│ [ Open Formula Lab ]                                      │
+└───────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────┐
+│ **Main Formula**                                          │
+│                                                           │
+│ $$ F = -kx $$                                             │
+│                                                           │
+│ Where:                                                    │
+│ - \( F \) = Restoring force exerted by the spring (Newtons)│
+│ - \( k \) = Spring constant (N/m)                         │
+│ - \( x \) = Displacement from equilibrium position (meters)│
+│                                                           │
+│ [ Explain Formula ]                                       │
+│ [ Open Formula Lab ]                                      │
+└───────────────────────────────────────────────────────────┘
+
+**Spring Constant (k):** A measure of the spring's stiffness. A higher 'k' means a stiffer spring.
+
+**Elastic Limit:** The maximum stress a material can withstand without undergoing permanent deformation. Exceeding this limit can lead to plastic deformation or failure.
+
+---
+
+### 📊 Event Parameters
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ **Current Spring State**                                                      │
+│                                                                               │
+│ This table displays the relevant parameters at the time of the event.         │
+│                                                                               │
+│ | Parameter              | Value     | Unit  | Limit Type    | Threshold Value |
+│ | :--------------------- | :-------- | :---- | :------------ | :-------------- |
+│ | **Current Extension**  | `15.2`    | `cm`  | `Peak Upper`  | `15.0 cm`       |
+│ | **Spring Constant (k)**| `250`     | `N/m` | `N/A`         | `N/A`           |
+│ | **Restoring Force (F)**| `-38.0`   | `N`   | `N/A`         | `N/A`           |
+│ | **Temperature**        | `28`      | `°C`  | `Warning Upper`| `35 °C`         |
+│ | **Cycle Count**        | `1,245,678`| `cycles`| `Peak Upper` | `1,500,000 cycles`|
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+---
+
+### 🚀 Potential Causes
+
+*   **Excessive External Load:** The spring was subjected to a force greater than its design capacity.
+*   **Malfunctioning Actuator:** A component driving the spring extended it too far.
+*   **Material Fatigue:** Repeated cycles of stretching and compressing have weakened the spring over time.
+*   **Incorrect Spring Specification:** The installed spring is not suitable for the required application/load.
+*   **Environmental Factors:** Extreme temperatures or corrosive environments could degrade spring material properties.
+
+---
+
+### 🛠️ Recommended Actions
+
+1.  **Immediate Inspection:** Visually inspect `spring_mechanism_A7` for signs of permanent deformation, cracks, or material fatigue.
+2.  **Reduce Load:** If possible, decrease the external load on the spring mechanism.
+3.  **Check Actuator Settings:** Verify the calibration and operational limits of any actuators connected to the spring.
+4.  **Review Design Specifications:** Compare the current operational parameters against the spring's design specifications (e.g., maximum extension, spring constant, material).
+5.  **Consider Replacement:** If permanent deformation is observed or the event recurs, plan for immediate replacement of `spring_mechanism_A7`.
+6.  **Log Event:** Ensure this event is logged in the system's maintenance history for future analysis.
+
+---
+
+### 📚 Suggested Questions
+
+*   What was the exact force applied to the spring when the limit was reached?
+*   Has `spring_mechanism_A7` experienced similar 'stretched' events recently?
+*   What is the expected lifespan (cycle count) of this type of spring?
+*   Are there any related components that might have failed, causing the spring to over-extend?
+*   Can this limit be adjusted, and if so, what are the implications?
+
+---

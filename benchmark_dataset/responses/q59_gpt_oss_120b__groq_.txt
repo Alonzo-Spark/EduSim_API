@@ -1,0 +1,145 @@
+┌───────────────────────────────────────────────┐
+│                     Introduction                │
+│                                                   │
+│ In this overlay we examine what happens when two │
+│ identical point masses ( m₁ = m₂ = m ) collide.   │
+│ The system is isolated – no external forces act, │
+│ so linear momentum is conserved. Depending on    │
+│ the nature of the impact (elastic vs. inelastic) │
+│ the kinetic energy behavior differs.              │
+└───────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                     Definition                   │
+│                                                   │
+│ **Collision (two‑body)** – an instantaneous event │
+│ where two objects exert large forces on each      │
+│ other over a very short time interval.            │
+│                                                   │
+│ • Equal masses:  m₁ = m₂ = m                      │
+│ • One‑dimensional (head‑on) interaction assumed. │
+└───────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                  Key Concepts                    │
+│                                                   │
+│ • **Conservation of Linear Momentum**:            │
+│   The total momentum before impact equals the     │
+│   total momentum after impact.                    │
+│                                                   │
+│ • **Elastic vs. Inelastic**:                     │
+│   – Elastic: kinetic energy is also conserved.   │
+│   – Inelastic: some kinetic energy is transformed │
+│     into heat, deformation, etc.                 │
+│                                                   │
+│ • For **equal masses**, the algebra simplifies     │
+│   dramatically – the velocities essentially swap │
+│   in a perfectly elastic head‑on collision.       │
+└───────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                     Formula                      │
+│                                                   │
+│ **Momentum Conservation**                        │
+│                                                   │
+│     m v₁  +  m v₂   =   m v₁'  +  m v₂'          │
+│                                                   │
+│ **Elastic Kinetic‑Energy Conservation**          │
+│                                                   │
+│     ½ m v₁²  +  ½ m v₂²   =   ½ m v₁'²  +  ½ m v₂'²│
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]       │
+└───────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                Formula Card – Velocity Swap      │
+│                                                   │
+│ For m₁ = m₂ and a perfectly elastic head‑on      │
+│ collision the solution of the two equations above │
+│ reduces to a simple swap of velocities:           │
+│                                                   │
+│     v₁' = v₂                                      │
+│     v₂' = v₁                                      │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]       │
+└───────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│               Example Calculation                │
+│                                                   │
+│ **Given**                                         │
+│   m = 2 kg (both masses)                          │
+│   Initial velocities:  v₁ = +3 m s⁻¹ (right)      │
+│                        v₂ = –2 m s⁻¹ (left)       │
+│                                                   │
+│ **Apply the velocity‑swap result**                │
+│   v₁' = v₂ = –2 m s⁻¹                             │
+│   v₂' = v₁ = +3 m s⁻¹                             │
+│                                                   │
+│ **Check momentum**                               │
+│   p_initial = m(v₁+v₂) = 2(3‑2)=2 kg·m s⁻¹        │
+│   p_final   = m(v₁'+v₂') = 2(‑2+3)=2 kg·m s⁻¹      │
+│   → Momentum conserved.                           │
+│                                                   │
+│ **Check kinetic energy**                         │
+│   KE_initial = ½m(v₁²+v₂²)=½·2(9+4)=13 J          │
+│   KE_final   = ½m(v₁'²+v₂'²)=½·2(4+9)=13 J        │
+│   → Kinetic energy conserved (elastic).          │
+└───────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                     Table                         │
+│                                                   │
+│   ┌─────────────────────┬─────────────┬─────────┐ │
+│   │ Quantity            │ Before (·)  │ After (·)│ │
+│   ├─────────────────────┼─────────────┼─────────┤ │
+│   │ v₁ (m s⁻¹)          │  +3         │  –2     │ │
+│   │ v₂ (m s⁻¹)          │  –2         │  +3     │ │
+│   │ p₁ = m v₁ (kg·m s⁻¹)│  +6         │  –4     │ │
+│   │ p₂ = m v₂ (kg·m s⁻¹)│  –4         │  +6     │ │
+│   │ KE₁ (J)             │   9         │   4     │ │
+│   │ KE₂ (J)             │   4         │   9     │ │
+│   │ Total Momentum (kg·m s⁻¹)│  +2   │   +2    │ │
+│   │ Total KE (J)        │  13         │  13     │ │
+│   └─────────────────────┴─────────────┴─────────┘ │
+│                                                   │
+│   *All values are consistent with the conservation│
+│   laws for an elastic head‑on collision of equal  │
+│   masses.*                                        │
+└───────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                 Applications                     │
+│                                                   │
+│ • Billiard ball dynamics – identical balls on a │
+│   pool table exchange velocities after impact.   │
+│ • Particle physics simulations where two       │
+│   identical particles undergo elastic scattering.│
+│ • Engineering safety analyses for crash‑test   │
+│   dummies of equal mass.                         │
+└───────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                     Summary                       │
+│                                                   │
+│ • For two equal masses in a 1‑D elastic collision│
+│   the post‑collision velocities are simply       │
+│   swapped.                                        │
+│ • Momentum and kinetic energy remain unchanged.   │
+│ • The result holds regardless of the numerical   │
+│   speed values – only the masses being equal is   │
+│   required.                                       │
+└───────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                Suggested Questions               │
+│                                                   │
+│ 1. How would the outcome change if the collision  │
+│    were perfectly inelastic?                     │
+│ 2. What happens when the masses are unequal?      │
+│ 3. Extend the analysis to a two‑dimensional      │
+│    glancing collision – which components swap?   │
+│ 4. How does rotational motion affect the result? │
+│ 5. Derive the velocity‑swap result starting from   │
+│    the general momentum and energy equations.     │
+└───────────────────────────────────────────────────┘

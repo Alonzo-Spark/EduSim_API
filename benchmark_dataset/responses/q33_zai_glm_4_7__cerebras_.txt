@@ -1,0 +1,128 @@
+┌──────────────────────────────────────────────────────────────────┐
+│ Introduction                                                      │
+│                                                                   │
+│ Heat transfer is the physical phenomenon of energy moving from a  │
+│ hotter region to a cooler one. In physics and engineering, this  │
+│ transfer occurs through three fundamental mechanisms:             │
+│ Conduction, Convection, and Radiation.                            │
+│                                                                   │
+│ Unlike state changes, these methods describe *how* thermal energy │
+│ travels through space or matter.                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Core Definitions                                                  │
+│                                                                   │
+│ • Conduction: The transfer of heat between substances that are    │
+│   in direct physical contact with each other. It requires no     │
+│   bulk motion of matter; energy is transferred via molecular     │
+│   collisions (vibrations). Common in solids.                      │
+│                                                                   │
+│ • Convection: The transfer of heat by the actual movement of     │
+│   heated fluid (liquid or gas). As the fluid heats up, it becomes │
+│   less dense and rises, while cooler fluid sinks, creating a      │
+│   circulation current.                                            │
+│                                                                   │
+│ • Radiation: The transfer of energy via electromagnetic waves     │
+│   (photons). Unlike the other two, radiation requires no medium   │
+│   and can travel through the vacuum of space.                     │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Main Formula: Conduction (Fourier's Law)                         │
+│                                                                   │
+│ $$ Q = -kA \frac{dT}{dx} $$                                       │
+│                                                                   │
+│ [ Explain Formula ]  [ Open Formula Lab ]                         │
+│                                                                   │
+│ • Variables:                                                      │
+│   - Q: Heat transfer rate (Watts)                                 │
+│   - k: Thermal conductivity of the material                       │
+│   - A: Cross-sectional area (m²)                                  │
+│   - dT/dx: Temperature gradient (change in temp over distance)    │
+│                                                                   │
+│ • Context: This formula calculates how fast heat flows through a  │
+│   solid object like a metal rod or a wall.                        │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Main Formula: Convection (Newton's Law of Cooling)               │
+│                                                                   │
+│ $$ Q = hA(T_s - T_\infty) $$                                      │
+│                                                                   │
+│ [ Explain Formula ]  [ Open Formula Lab ]                         │
+│                                                                   │
+│ • Variables:                                                      │
+│   - Q: Convective heat transfer rate                              │
+│   - h: Convective heat transfer coefficient                       │
+│   - A: Surface area of the object                                 │
+│   - T_s: Temperature of the surface                               │
+│   - T_\infty: Temperature of the surrounding fluid                │
+│                                                                   │
+│ • Context: Used to estimate heat loss from a surface to a moving │
+│   fluid (like air blowing over a hot radiator).                   │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Main Formula: Radiation (Stefan-Boltzmann Law)                   │
+│                                                                   │
+│ $$ P = \epsilon \sigma A T^4 $$                                   │
+│                                                                   │
+│ [ Explain Formula ]  [ Open Formula Lab ]                         │
+│                                                                   │
+│ • Variables:                                                      │
+│   - P: Power radiated (Watts)                                     │
+│   - ε (epsilon): Emissivity (0 to 1, how well it radiates)        │
+│   - σ (sigma): Stefan-Boltzmann constant (5.67×10⁻⁸)              │
+│   - A: Surface area                                                │
+│   - T: Absolute temperature (Kelvin)                              │
+│                                                                   │
+│ • Context: Calculates energy emitted by a hot object, such as    │
+│   the sun or a heated piece of metal. Note the T⁴ relationship:  │
+│   small temp increases lead to massive radiation increases.       │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Comparison Matrix                                                 │
+│                                                                   │
+│ ┌─────────────┬──────────────┬──────────────┬──────────────┐      │
+│ │ Feature     │ Conduction   │ Convection   │ Radiation    │      │
+│ ├─────────────┼──────────────┼──────────────┼──────────────┤      │
+│ │ Medium      │ Solid (mostly│ Fluid (Liquid│ Vacuum / Any │      │
+│ │ Required    │ ) or still   │ or Gas)      │ Medium       │      │
+│ │             │ fluid        │              │              │      │
+│ ├─────────────┼──────────────┼──────────────┼──────────────┤      │
+│ │ Mechanism   │ Molecular    │ Mass motion  │ EM Waves     │      │
+│ │             │ Collisions   │ / Currents   │ (Photons)    │      │
+│ ├─────────────┼──────────────┼──────────────┼──────────────┤      │
+│ │ Speed       │ Slow (molecular│ Moderate    │ Fastest      │      │
+│ │             │ vibration)   │ (fluid flow) │ (Speed of    │      │
+│ │             │              │              │ light)       │      │
+│ ├─────────────┼──────────────┼──────────────┼──────────────┤      │
+│ │ Example     │ Heating a    │ Boiling water│ Feeling heat │      │
+│ │             │ metal spoon  │ in a pot     │ from a fire  │      │
+│ └─────────────┴──────────────┴──────────────┴──────────────┘      │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Summary                                                           │
+│                                                                   │
+│ • Conduction is contact-based transfer, dominant in solids.       │
+│ • Convection is movement-based transfer, dominant in fluids.      │
+│ • Radiation is wave-based transfer, dominant in vacuums or at     │
+│   very high temperatures.                                         │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ Suggested Questions                                               │
+│                                                                   │
+│ 1. Why is a wooden handle better than a metal one for a cooking   │
+│    pot in terms of heat transfer mechanism?                       │
+│                                                                   │
+│ 2. If you touch a piece of wood and a piece of metal both at      │
+│    room temperature, why does the metal feel colder? (Hint:      │
+│    relate to thermal conductivity).                               │
+│                                                                   │
+│ 3. How does a thermos flask minimize all three forms of heat      │
+│    transfer to keep liquids hot?                                  │
+└──────────────────────────────────────────────────────────────────┘

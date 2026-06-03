@@ -1,0 +1,109 @@
+The following is a detailed derivation of the equivalent resistance for resistors connected in a parallel combination.
+
+## Equivalent Resistance in Parallel Combination
+
+### Key Concept
+
+When resistors are connected in parallel, the voltage across each resistor is the same, but the current flowing through each resistor can be different. The total current entering the parallel combination is the sum of the currents flowing through each individual resistor.
+
+### Setup
+
+Consider a circuit with 'n' resistors, $R_1, R_2, R_3, \dots, R_n$, connected in parallel across a voltage source 'V'.
+
+```mermaid
+graph LR
+    A[Source +] --- I_total
+    I_total --- B
+    B --- R1_start
+    B --- R2_start
+    B --- Rn_start
+
+    R1_start --- R1[R1] --- R1_end
+    R2_start --- R2[R2] --- R2_end
+    Rn_start --- Rn[Rn] --- Rn_end
+
+    R1_end --- C
+    R2_end --- C
+    Rn_end --- C
+    C --- I_total_return
+    I_total_return --- D[Source -]
+```
+
+### Derivation
+
+1.  **Voltage Across Each Resistor:**
+    Since the resistors are connected in parallel, the voltage drop across each resistor is the same and equal to the voltage of the source, V.
+    $$V = V_1 = V_2 = V_3 = \dots = V_n$$
+
+2.  **Current Through Each Resistor (Ohm's Law):**
+    According to Ohm's Law, the current flowing through each individual resistor can be expressed as:
+    $$I_1 = \frac{V}{R_1}$$
+    $$I_2 = \frac{V}{R_2}$$
+    $$\vdots$$
+    $$I_n = \frac{V}{R_n}$$
+
+3.  **Total Current:**
+    The total current ($I_{total}$) drawn from the source is the sum of the currents flowing through each parallel branch:
+    $$I_{total} = I_1 + I_2 + I_3 + \dots + I_n$$
+
+4.  **Substituting Individual Currents:**
+    Substitute the expressions for $I_1, I_2, \dots, I_n$ from step 2 into the total current equation from step 3:
+    $$I_{total} = \frac{V}{R_1} + \frac{V}{R_2} + \frac{V}{R_3} + \dots + \frac{V}{R_n}$$
+
+5.  **Factoring Out Voltage:**
+    Factor out the common voltage 'V' from the right side of the equation:
+    $$I_{total} = V \left( \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \dots + \frac{1}{R_n} \right)$$
+
+6.  **Equivalent Resistance:**
+    Let $R_{eq}$ be the equivalent resistance of the parallel combination. By Ohm's Law, the total current can also be expressed in terms of the total voltage and the equivalent resistance:
+    $$I_{total} = \frac{V}{R_{eq}}$$
+
+7.  **Equating Total Current Expressions:**
+    Now, equate the two expressions for $I_{total}$ from step 5 and step 6:
+    $$\frac{V}{R_{eq}} = V \left( \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \dots + \frac{1}{R_n} \right)$$
+
+8.  **Simplifying for Equivalent Resistance:**
+    Divide both sides of the equation by 'V' (assuming $V \neq 0$):
+    $$\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \dots + \frac{1}{R_n}$$
+
+### Main Formula
+
+The reciprocal of the equivalent resistance of resistors connected in parallel is equal to the sum of the reciprocals of their individual resistances.
+
+$$\frac{1}{R_{eq}} = \sum_{i=1}^{n} \frac{1}{R_i}$$
+
+### Special Cases
+
+#### Two Resistors in Parallel
+
+For two resistors, $R_1$ and $R_2$, in parallel:
+
+$$\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2}$$
+$$\frac{1}{R_{eq}} = \frac{R_2 + R_1}{R_1 R_2}$$
+
+Taking the reciprocal of both sides:
+
+$$R_{eq} = \frac{R_1 R_2}{R_1 + R_2}$$
+
+#### 'n' Identical Resistors in Parallel
+
+If 'n' identical resistors, each with resistance 'R', are connected in parallel:
+
+$$\frac{1}{R_{eq}} = \frac{1}{R} + \frac{1}{R} + \dots + \frac{1}{R} \quad \text{(n times)}$$
+$$\frac{1}{R_{eq}} = \frac{n}{R}$$
+
+Taking the reciprocal of both sides:
+
+$$R_{eq} = \frac{R}{n}$$
+
+### Important Notes
+
+*   The equivalent resistance of a parallel combination is always **less than the smallest individual resistance** in the combination.
+*   Parallel combinations provide multiple paths for current, effectively increasing the total cross-sectional area for current flow, thus decreasing the overall resistance.
+*   This derivation assumes ideal resistors and ideal connecting wires (zero resistance).
+
+### Suggested Questions
+
+1.  What happens to the total current drawn from the source if you add more resistors in parallel?
+2.  Compare and contrast the characteristics of series and parallel resistor combinations.
+3.  Design a circuit using 10-ohm resistors to achieve an equivalent resistance of 2.5 ohms.

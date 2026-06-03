@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 60,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'gravity_changed' event to zero-g environment.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a user interaction with the global environment controllers.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe environmental gravity parameter was modified by the user from Earth conditions to a weightless state (`gravity_changed`).\n\n### WHAT CHANGED\nThe vertical acceleration vector acting on all active canvas masses dropped to zero, causing floating objects to cease downward travel.\n\n### SIMPLE WHY\nSetting the gravity constant to zero removes the downward gravitational force vector, leaving objects to move purely by their linear inertia.\n\n### WHAT TO NOTICE\nNotice how objects that were falling now drift in straight lines across the grid, unaffected by any downward pull.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│ 🌌  Event Overview                     │\n│                                       │\n│ **Event**: `gravity_changed`          │\n│ **Target State**: Zero‑g (g = 0 m/s²) │\n│ **Trigger**: Runtime change in the   │\n│ sandbox physics engine.               │\n│                                       │\n│ **What Happens**:                     │\n│ • All objects lose the constant        │\n│   downward acceleration.              │\n│ • Existing velocities are preserved, │\n│   so objects continue with their      │\n│   current momentum (inertia).          │\n│ • Collision response switches to     │\n│   elastic‑only unless otherwise       │\n│   specified.                           │\n│ • UI overlay appears to inform the    │\n│   player of the new gravity state.    │\n└───────────────────────────────────────┘\n\n\n┌───────────────────────────────────────┐\n│ 📐  Main Formula                        │\n│                                         │\n│           F = m·g                       │\n│                                         │\n│ **Explanation**                        │\n│ • *F* – Force acting on an object.      │\n│ • *m* – Mass of the object.             │\n│ • *g* – Gravitational acceleration.     │\n│   In zero‑g, **g = 0**, so **F = 0**.   │\n│                                         │\n│ [ Explain Formula ]   [ Open Formula Lab ] │\n└───────────────────────────────────────┘\n\n\n┌───────────────────────────────────────┐\n│ 📊  Zero‑g Effects Table                │\n│                                         │\n│ ┌─────────────────────┬─────────────────┐ │\n│ │ Property            │ Zero‑g Result   │ │\n│ ├─────────────────────┼─────────────────┤ │\n│ │ Weight (N)          │ 0               │ │\n│ │ Acceleration (m/s²)│ 0               │ │\n│ │ Terminal Velocity   │ Unlimited (no   │ │\n│ │                     │ drag‑induced stop)│ │\n│ │ Object Motion       │ Linear inertia │ │\n│ │ Collision Type      │ Elastic (no   │ │\n│ │                     │ gravity‑bias) │ │\n│ └─────────────────────┴─────────────────┘ │\n│                                         │\n│ *Table adapts to screen size – scroll if│\n│ needed.*                                 │\n└───────────────────────────────────────┘\n\n\n┌───────────────────────────────────────┐\n│ 💻  Sample Script (C# for Unity)        │\n│                                         │\n│ ```csharp                               │\n│ using UnityEngine;                     │\n│                                         │\n│ public class GravitySwitcher : MonoBehaviour │\n│ {                                      │\n│     void OnGravityChanged(float newG) │\n│     {                                  │\n│         Physics.gravity = new Vector3(0, newG, 0); │\n│         Debug.Log($\"Gravity set to {newG} m/s²\"); │\n│         // Trigger UI overlay            │\n│         UIManager.ShowOverlay(\"Zero‑g activated!\"); │\n│     }                                  │\n│ }                                      │\n│ ```                                    │\n│                                         │\n│ [ Run in Sandbox ]   [ Edit Script ]    │\n└───────────────────────────────────────┘\n\n\n┌───────────────────────────────────────┐\n│ 🎮  Runtime Overlay UI                  │\n│                                         │\n│ ┌─────────────────────────────────────┐ │\n│ │  ⚠️  Zero‑g Activated!               │ │\n│ │   • Objects now float                │ │\n│ │   • No downward pull                 │ │\n│ │   • Press **R** to reset gravity     │ │\n│ └─────────────────────────────────────┘ │\n│                                         │\n│ *Overlay fades after 5 seconds or stays│\n│ until gravity is restored.*             │\n│                                         │\n│ [ Dismiss ]   [ Reset Gravity ]          │\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the concept of zero-gravity and its effects on objects. The use of formulas, tables, and code snippets enhances the clarity of the explanation. However, there are minor areas for improvement, such as the lack of a clear introduction to the concept of gravity and its significance in the context of the simulation. Additionally, some of the sections, such as the 'Sample Script' and 'Runtime Overlay UI', could be more concise and directly related to the main topic. Overall, the response is well-structured, easy to follow, and effectively conveys the key concepts related to zero-gravity in a simulated environment.",
+  "candidate_token_usage": {
+    "promptTokens": 436,
+    "completionTokens": 1336,
+    "totalTokens": 1772
+  },
+  "candidate_latency_ms": 1165,
+  "candidate_cost_usd": 0.000867,
+  "judge_token_usage": {
+    "promptTokens": 1441,
+    "completionTokens": 191,
+    "totalTokens": 1632
+  },
+  "judge_latency_ms": 10004,
+  "judge_cost_usd": 0.001323,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:47:54.883Z"
+}

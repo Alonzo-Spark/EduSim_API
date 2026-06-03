@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 21,
+  "question": "Gravitation: State Newton’s law of gravitation.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's Law of Universal Gravitation states that every particle of matter in the universe attracts every other particle with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers.\n\n---\n\n## Characteristics\n\n* **Universal Action Range:** The attraction acts between all scale profiles, from small atomic fields up to massive galactic cluster structures.\n* **Inverse Square Law:** Doubling the distance separating two objects cuts their mutual gravitational pull down to one-fourth of its initial value.\n* **Central Force Property:** The force acts along the imaginary straight line connecting the centers of mass of the two interacting bodies.\n\n---\n\n## Formula\n\nThe gravitational force equation is written as:\n\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\nWhere:\n* $F$ represents the gravitational attraction force magnitude\n* $m_1, m_2$ represent the masses of the interacting bodies\n* $r$ represents the distance separating the mass centers\n* $G$ represents the Universal Gravitational Constant ($6.674 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$)\n\n---\n\n## Summary\n\nUniversal gravitation is a long-range mutual attraction force that links all matter, scaling up with mass density but dropping off sharply with distance.",
+  "candidate_response": "┌─────────────────────────────────────────────────────┐\n│           **Newton's Law of Gravitation**           │\n└─────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────┐\n│ **Quick Definition**                                │\n│                                                     │\n│ Newton’s Law of Gravitation states that every       │\n│ mass in the universe attracts every other mass      │\n│ with a force that is directly proportional to the   │\n│ product of their masses and inversely proportional  │\n│ to the square of the distance between their centers.│\n└─────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────┐\n│ **Main Formula**                                    │\n│                                                     │\n│ $$ F = G \\frac{m_1 m_2}{r^2} $$                     │\n│                                                     │\n│ [ Explain Formula ]    [ Open Formula Lab ]         │\n└─────────────────────────────────────────────────────┘\n\n**Where:**  \n- $ F $ = Gravitational force between two objects (in newtons, N)  \n- $ G $ = Universal gravitational constant $ \\approx 6.674 \\times 10^{-11} \\, \\text{N·m}^2/\\text{kg}^2 $  \n- $ m_1, m_2 $ = Masses of the two objects (in kilograms, kg)  \n- $ r $ = Distance between the centers of the masses (in meters, m)\n\n┌─────────────────────────────────────────────────────┐\n│ **Key Concepts**                                    │\n│                                                     │\n│ • Applies to **all objects with mass**              │\n│ • Force acts along the line joining the centers     │\n│ • Always **attractive**, never repulsive            │\n│ • Follows the **inverse-square law**               │\n│ • Explains planetary motion and tides               │\n└─────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────┐\n│ **Characteristics**                                 │\n│                                                     │\n│ • Conservative force                                │\n│ • Central force                                     │\n│ • Long-range interaction                            │\n│ • Weakest of the four fundamental forces            │\n│ • Acts even at infinite distance (theoretically)    │\n└─────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────┐\n│ **Applications**                                    │\n│                                                     │\n│ • Calculating planetary orbits                      │\n│ • Determining satellite trajectories                │\n│ • Understanding tides on Earth                      │\n│ • Estimating masses of celestial bodies             │\n│ • Space mission planning                            │\n└─────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────┐\n│ **Important Notes**                                 │\n│                                                     │\n│ • Only **net gravitational force** is considered    │\n│ • Assumes point masses or spherical symmetry        │\n│ • Negligible for small masses, dominant at cosmic   │\n│   scales                                              │\n│ • Modified by Einstein’s General Relativity, but    │\n│   Newton’s law remains highly accurate for most     │\n│   purposes                                          │\n└─────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────┐\n│ **Summary**                                         │\n│                                                     │\n│ Newton’s Law of Universal Gravitation provides a  │\n│ simple yet powerful description of how gravity     │\n│ works between any two masses. Though superseded    │\n│ in extreme conditions by General Relativity, it     │\n│ remains essential for understanding motion in the  │\n│ solar system and engineering space travel.           │\n└─────────────────────────────────────────────────────┘\n\n---\n**Suggested Questions for Practice:**  \n1. Calculate the gravitational force between Earth and the Moon.  \n2. How does the force change if the distance is doubled?  \n3. Why don’t we feel gravitational pull from everyday objects?  \n4. Derive the expression for acceleration due to gravity ($g$) using this law.  \n5. Compare gravitational force with electromagnetic force.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational value. It correctly states Newton's Law of Gravitation, provides the formula, and explains key concepts such as the inverse-square law and central force property. The response is well-structured, readable, and includes useful examples and applications. However, to achieve a perfect score, the candidate could have included more detailed explanations of the universal gravitational constant and its value, as well as more explicit connections to real-world phenomena. Additionally, the use of boxes and formatting could be improved for better readability. Overall, the response is excellent and effectively communicates the fundamental principles of Newton's Law of Gravitation.",
+  "candidate_token_usage": {
+    "promptTokens": 358,
+    "completionTokens": 880,
+    "totalTokens": 1238
+  },
+  "candidate_latency_ms": 69279,
+  "candidate_cost_usd": 0.002118,
+  "judge_token_usage": {
+    "promptTokens": 1597,
+    "completionTokens": 194,
+    "totalTokens": 1791
+  },
+  "judge_latency_ms": 8979,
+  "judge_cost_usd": 0.0014238,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:38:43.146Z"
+}

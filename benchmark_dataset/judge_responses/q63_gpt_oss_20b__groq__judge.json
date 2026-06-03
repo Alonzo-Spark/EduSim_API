@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 63,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'friction_changed' event on a braking track platform.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on surface property updates.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe surface friction coefficient (`friction_changed`) along the lower track platform was increased by the user.\n\n### WHAT CHANGED\nThe sliding block experienced a sharp increase in backward deceleration, causing its forward velocity vector to drop rapidly.\n\n### SIMPLE WHY\nA higher friction coefficient increases the kinetic resistive force, accelerating the rate at which kinetic energy converts into heat.\n\n### WHAT TO NOTICE\nObserve the acceleration indicator pointing backward, showing how the increased friction quickly brings the block to a halt.",
+  "candidate_response": "┌───────────────────────────────────────────────────────────────────────────────┐\n│                     **Friction Changed Event**                               │\n│                                                                               │\n│ *Platform:* Braking Track Platform                                            │\n│ *Event:* `friction_changed`                                                   │\n│ *New Coefficient (μ):* 0.85                                                   │\n│ *Impact:* Braking force increases, reducing stopping distance and time.      │\n│ *Immediate Action:* System recalculates braking profiles and updates sensor   │\n│   alerts.                                                                     │\n└───────────────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────────────┐\n│                          **Main Formula**                                      │\n│                                                                               │\n│     $$ F = μ \\cdot N $$                                                      │\n│                                                                               │\n│ *Where:*                                                                     │\n│ • `F` – Braking force (N)                                                    │\n│ • `μ` – Friction coefficient (dimensionless)                                 │\n│ • `N` – Normal force (N)                                                     │\n│                                                                               │\n│ [ Explain Formula ]   [ Open Formula Lab ]                                   │\n└───────────────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────────────┐\n│                     **Braking Distance vs. Friction Coefficient**              │\n│                                                                               │\n│ | Friction Coefficient (μ) | Braking Distance (m) | Δ Distance (%) |          │\n│ |---------------------------|-----------------------|----------------|          │\n│ | 0.70                      | 120                   | +0%            |          │\n│ | 0.75                      | 105                   | -12.5%         |          │\n│ | 0.80                      | 95                    | -20%           |          │\n│ | 0.85                      | 85                    | -29.2%         |          │\n│ | 0.90                      | 75                    | -37.5%         |          │\n│                                                                               │\n└───────────────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────────────┐\n│                           **Key Considerations**                              │\n│                                                                               │\n│ • **Safety Margin:** Ensure braking distance remains within safe limits for   │\n│   all train speeds.                                                          │\n│ • **Sensor Calibration:** Recalibrate wheel‑to‑track sensors after μ change. │\n│ • **Dynamic Load:** Account for variations in train mass and load distribution │\n│   when recomputing braking force.                                            │\n│                                                                               │\n└───────────────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────────────┐\n│                              **Suggested Questions**                           │\n│                                                                               │\n│ 1. How does the new μ value affect the stopping distance at 80 km/h?         │\n│ 2. What is the required normal force `N` for a 200 t train on this track?    │\n│ 3. How can we adjust the braking system to maintain a 5 % safety margin?     │\n│                                                                               │\n└───────────────────────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts related to friction and braking force, with accurate formulas and relevant examples. The layout and formatting are well-structured and readable. However, to improve the educational score, the response could benefit from more explicit explanations of the physics concepts, particularly for beginners. Additionally, the suggested questions could be more closely tied to the specific event of a 'friction_changed' event on a braking track platform. Overall, the response is of high quality, but could be further enhanced with more detailed explanations and more targeted questions to reinforce learning.",
+  "candidate_token_usage": {
+    "promptTokens": 438,
+    "completionTokens": 1255,
+    "totalTokens": 1693
+  },
+  "candidate_latency_ms": 1866,
+  "candidate_cost_usd": 0.00040935,
+  "judge_token_usage": {
+    "promptTokens": 1278,
+    "completionTokens": 174,
+    "totalTokens": 1452
+  },
+  "judge_latency_ms": 5607,
+  "judge_cost_usd": 0.0011844,
+  "retry_count": 1,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:03:00.547Z"
+}

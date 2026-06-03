@@ -1,0 +1,171 @@
+┌───────────────────────────────────────────────┐
+│ Introduction                                    │
+│                                                   │
+│ When a projectile moves through air, the        │
+│ surrounding fluid exerts a force opposite to its │
+│ motion. This force—commonly called air           │
+│ resistance or drag—alters the classic parabolic  │
+│ path predicted by the ideal‑gravity model.      │
+│                                                   │
+│ In this sandbox we explore how the trajectory    │
+│ visually changes when drag is taken into account.│
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Definition                                      │
+│                                                   │
+│ **Air resistance (drag)** is the aerodynamic      │
+│ force that opposes an object’s motion through a    │
+│ fluid (air). It depends on the object’s speed,    │
+│ shape, size, and the fluid’s density.              │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Key Concepts                                    │
+│                                                   │
+│ • **Drag Force (Fₙ)** – proportional to the       │
+│   square of velocity for most everyday speeds.   │
+│ • **Drag Coefficient (C_d)** – dimensionless       │
+│   number describing shape’s aerodynamic efficiency│
+│ • **Terminal Velocity** – speed at which gravity │
+│   and drag balance, giving zero net acceleration.│
+│ • **Quadratic vs. Linear Drag** – at low speeds   │
+│   drag ∝ v (linear), at higher speeds drag ∝ v²    │
+│   (quadratic).                                    │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Visual Characteristics                           │
+│                                                   │
+│ 1️⃣ **Shorter Range** – The projectile falls      │
+│    sooner because drag removes kinetic energy.   │
+│                                                   │
+│ 2️⃣ **Lower Apex** – Maximum height is reduced    │
+│    as upward velocity is quickly damped.          │
+│                                                   │
+│ 3️⃣ **Asymmetric Path** – The descent is steeper │
+│    than the ascent, giving a “flattened” curve.   │
+│                                                   │
+│ 4️⃣ **Speed‑Dependent Curvature** – Early in the │
+│    flight (high speed) the curve bends sharply,  │
+│    later (low speed) it approaches the ideal      │
+│    parabola.                                      │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Formula – Drag Force                              │
+│                                                   │
+│          Fₙ = ½ C_d ρ A v²                        │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]       │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Formula – Equations of Motion (Quadratic Drag)   │
+│                                                   │
+│ Horizontal:   m dvₓ/dt = –½ C_d ρ A v vₓ          │
+│ Vertical:     m dvᵧ/dt = –mg –½ C_d ρ A v vᵧ      │
+│                                                   │
+│ where v = √(vₓ²+vᵧ²).                             │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]       │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Table – Typical Drag Coefficients (C_d)          │
+│                                                   │
+│ ┌─────────────────────┬───────────────┐          │
+│ │ Object Shape        │ C_d (approx.) │          │
+│ ├─────────────────────┼───────────────┤          │
+│ │ Smooth sphere       │ 0.47          │          │
+│ │ Streamlined body    │ 0.04 – 0.1    │          │
+│ │ Flat plate (perp.)  │ 1.28          │          │
+│ │ Human body (standing)│ 1.0          │          │
+│ └─────────────────────┴───────────────┘          │
+│                                                   │
+│ [ Expand Table ]                                 │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Applications                                    │
+│                                                   │
+│ • **Ballistics** – Accurate range prediction for │
+│   firearms and artillery.                        │
+│ • **Sports** – Modeling golf ball, baseball,     │
+│   soccer ball trajectories.                      │
+│ • **Aerospace** – Re‑entry vehicle heating and    │
+│   descent profiles.                              │
+│ • **Engineering** – Designing projectile‑launch │
+│   mechanisms with optimal range.                 │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Advantages of Including Air Resistance            │
+│                                                   │
+│ – **Realism** – Matches observed flight paths.    │
+│ – **Safety** – Better predictions for impact zones│
+│   in training and testing.                        │
+│ – **Optimization** – Enables design of shapes     │
+│   that minimize drag for maximum range.           │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Disadvantages                                    │
+│                                                   │
+│ – **Complexity** – Differential equations are     │
+│   non‑linear, often requiring numerical methods. │
+│ – **Parameter Sensitivity** – Requires accurate   │
+│   C_d, ρ, and area values, which can vary with     │
+│   temperature and altitude.                      │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Important Notes                                   │
+│                                                   │
+│ • For low‑speed projectiles (e.g., a thrown stone│
+│   at < 10 m/s) linear drag (∝ v) may be a better   │
+│   approximation.                                 │
+│ • Air density ρ decreases with altitude, reducing │
+│   drag and lengthening the range.                 │
+│ • Wind adds a vector component to the drag force,│
+│   further distorting the path.                   │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Summary                                           │
+│                                                   │
+│ Adding air resistance transforms the ideal       │
+│ parabolic trajectory into a shorter, lower‑apex, │
+│ and asymmetric curve. The drag force,            │
+│ \(F_d = \tfrac12 C_d \rho A v^2\), dominates at   │
+│ higher speeds and introduces a speed‑dependent   │
+│ deceleration that must be solved numerically for │
+│ precise predictions.                             │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Suggested Questions                               │
+│                                                   │
+│ 1️⃣ How does the shape of a projectile affect its │
+│    range when drag is considered?                │
+│ 2️⃣ At what speed does quadratic drag become      │
+│    more accurate than linear drag?               │
+│ 3️⃣ How would a headwind versus a tailwind modify │
+│    the trajectory?                               │
+│ 4️⃣ Derive the expression for terminal velocity   │
+│    of a falling object with quadratic drag.       │
+│                                                   │
+│ [ Explore Answers ]                               │
+└───────────────────────────────────────────────┘

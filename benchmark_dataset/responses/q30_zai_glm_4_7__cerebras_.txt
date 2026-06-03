@@ -1,0 +1,598 @@
+Here is a fully self-contained, interactive HTML page that explains Bernoulli's Theorem using the "Interactive Textbook" design system you requested.
+
+It features structured section cards, dedicated formula blocks with interaction hooks, and responsive table styling, all built with vanilla HTML, CSS, and JavaScript.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Textbook: Bernoulli's Theorem</title>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0KOVEMeaPoFgVY2Nq2aLr9ilQK9f8aF0VhV4UfVhV4UfVhV4UfVhV4" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .card-icon {
+            background: #eff6ff;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .card-content {
+            font-size: 1.05rem;
+            color: #334155;
+        }
+
+        /* Specific Card Styles */
+        .card.definition {
+            border-left: 5px solid var(--primary);
+        }
+
+        .card.formula {
+            background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+            border: 1px solid #bfdbfe;
+        }
+
+        .card.applications {
+            border-left: 5px solid #10b981;
+        }
+
+        .card.assumptions {
+            border-left: 5px solid #f59e0b;
+        }
+
+        /* Formula Card Specifics */
+        .formula-display {
+            background: #fff;
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: #eff6ff;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        /* Modal / Interactive Elements */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .close-modal {
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+
+        /* Lab/Interactive Area */
+        .lab-controls {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .lab-result {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .formula-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Bernoulli's Theorem</h1>
+            <p class="subtitle">Fluid Dynamics & Pressure Relationships</p>
+        </header>
+
+        <!-- Section: Definition -->
+        <section class="card definition">
+            <div class="card-header">
+                <div class="card-icon">📖</div>
+                <div class="card-title">Quick Definition</div>
+            </div>
+            <div class="card-content">
+                <p>Bernoulli's Theorem describes the relationship between the <strong>pressure</strong>, <strong>velocity</strong>, and <strong>elevation</strong> in a moving fluid. It essentially states that for an inviscid flow of a non-conducting fluid, an increase in the speed of the fluid occurs simultaneously with a decrease in static pressure or a decrease in the fluid's potential energy.</p>
+            </div>
+        </section>
+
+        <!-- Section: Formula -->
+        <section class="card formula" id="main-formula-card">
+            <div class="card-header">
+                <div class="card-icon">∑</div>
+                <div class="card-title">The Main Formula</div>
+            </div>
+            <div class="card-content">
+                <p>For an incompressible, non-viscous fluid, the sum of pressure energy, kinetic energy, and potential energy per unit volume remains constant along a streamline.</p>
+                
+                <div class="formula-display" id="formula-1">
+                    $$ P + \frac{1}{2}\rho v^2 + \rho gh = \text{constant} $$
+                </div>
+
+                <div class="formula-actions">
+                    <button class="btn btn-outline" onclick="openExplanation()">
+                        <span>💡 Explain Formula</span>
+                    </button>
+                    <button class="btn btn-primary" onclick="openLab()">
+                        <span>🧪 Open Formula Lab</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Key Concepts/Variables -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">🔑</div>
+                <div class="card-title">Variables & Concepts</div>
+            </div>
+            <div class="card-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Meaning</th>
+                            <th>SI Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>P</strong></td>
+                            <td>Static Pressure (Force per unit area)</td>
+                            <td>Pascal (Pa)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ρ (rho)</strong></td>
+                            <td>Density of the fluid</td>
+                            <td>kg/m³</td>
+                        </tr>
+                        <tr>
+                            <td><strong>v</strong></td>
+                            <td>Flow velocity</td>
+                            <td>m/s</td>
+                        </tr>
+                        <tr>
+                            <td><strong>g</strong></td>
+                            <td>Acceleration due to gravity</td>
+                            <td>m/s²</td>
+                        </tr>
+                        <tr>
+                            <td><strong>h</strong></td>
+                            <td>Elevation height relative to a reference point</td>
+                            <td>m</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section: Assumptions -->
+        <section class="card assumptions">
+            <div class="card-header">
+                <div class="card-icon">⚠️</div>
+                <div class="card-title">Key Assumptions</div>
+            </div>
+            <div class="card-content">
+                <ul style="padding-left: 1.2rem;">
+                    <li><strong>Flow is ideal:</strong> The fluid is non-viscous (internal friction is zero).</li>
+                    <li><strong>Flow is steady:</strong> Fluid velocity at a point does not change with time.</li>
+                    <li><strong>Flow is incompressible:</strong> Density of the fluid remains constant.</li>
+                    <li><strong>Irrotational flow:</strong> There is no circulation in the flow.</li>
+                    <li><strong>Along a streamline:</strong> The equation applies strictly along a single streamline.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: Applications -->
+        <section class="card applications">
+            <div class="card-header">
+                <div class="card-icon">🚀</div>
+                <div class="card-title">Real-World Applications</div>
+            </div>
+            <div class="card-content">
+                <div style="display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid var(--border);">
+                        <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Aerodynamics (Wings)</h4>
+                        <p style="font-size: 0.9rem;">Air moves faster over the curved top surface of a wing than the bottom, creating lower pressure above and generating lift.</p>
+                    </div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid var(--border);">
+                        <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Venturimeter</h4>
+                        <p style="font-size: 0.9rem;">A device used to measure the flow rate of fluid in a pipe. It uses a constriction to create a pressure difference.</p>
+                    </div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid var(--border);">
+                        <h4 style="margin-bottom: 0.5rem; color: var(--primary);">Pitot Tube</h4>
+                        <p style="font-size: 0.9rem;">Used on aircraft to measure flow speed. It compares static pressure with dynamic (stagnation) pressure.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Modal: Explanation -->
+    <div class="modal-overlay" id="explanation-modal">
+        <div class="modal">
+            <h2 class="modal-title">Formula Explanation</h2>
+            <p>The equation represents the <strong>conservation of energy</strong> per unit volume of the fluid.</p>
+            <br>
+            <ul style="padding-left: 1.2rem; line-height: 2;">
+                <li><strong>P:</strong> Represents the <em>pressure energy</em> or work done by pressure forces.</li>
+                <li><strong>½ρv²:</strong> Represents the <em>kinetic energy</em> (energy due to motion).</li>
+                <li><strong>ρgh:</strong> Represents the <em>potential energy</em> due to gravity (elevation).</li>
+            </ul>
+            <br>
+            <p>Think of it like this: If a fluid speeds up (kinetic energy goes up), and height stays the same, the pressure must go down to keep the total constant.</p>
+            <button class="btn btn-primary close-modal" onclick="closeModal('explanation-modal')">Got it</button>
+        </div>
+    </div>
+
+    <!-- Modal: Formula Lab -->
+    <div class="modal-overlay" id="lab-modal">
+        <div class="modal">
+            <h2 class="modal-title">Formula Lab</h2>
+            <p style="margin-bottom: 1rem; color: var(--text-muted);">Adjust the velocity to see how pressure changes (assuming constant height).</p>
+            
+            <div class="lab-controls">
+                <label>Fluid Velocity (<span id="vel-display">10</span> m/s)</label>
+                <input type="range" id="velocity-slider" min="1" max="50" value="10" step="1">
+            </div>
+            
+            <div class="lab-controls">
+                <label>Fluid Density (ρ) <span id="rho-display">1000</span> kg/m³ (Water)</label>
+                <input type="range" id="density-slider" min="800" max="1200" value="1000" step="10">
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Kinetic Energy Component ($$ \frac{1}{2}\rho v^2 $$):</p>
+                <div class="lab-result" id="ke-result">50000 Pa</div>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Resulting Pressure Drop (assuming constant total energy):</p>
+                <div class="lab-result" id="pressure-result" style="color: var(--primary); font-weight: bold;">-50000 Pa</div>
+            </div>
+
+            <button class="btn btn-outline close-modal" onclick="closeModal('lab-modal')">Close Lab</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize KaTeX
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\[", right: "\\]", display: true},
+                    {left: "$", right: "$", display: false},
+                    {left: "\\(", right: "\\)", display: false}
+                ]
+            });
+
+            // Initialize Formula Data for Lab
+            updateLab();
+        });
+
+        // Simple helper to render KaTeX manually if needed, 
+        // but typically we use the auto-render extension.
+        // Here we rely on the CDN auto-render script loaded implicitly by standard usage,
+        // or we call katex.render specifically if needed.
+        // For this implementation, we will assume the renderMathInElement is available 
+        // or we implement a simple render loop.
+        
+        // Since we are using the auto-render extension script usually, 
+        // let's ensure we have a robust way to render if the extension isn't fully loaded 
+        // or if we want to be explicit.
+        
+        function renderMathInElement(element, options) {
+            // Check if renderMathInElement exists (from auto-render extension)
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(element, options);
+            } else {
+                // Fallback: manual search for $$ blocks
+                const texBlocks = element.querySelectorAll('.formula-display');
+                texBlocks.forEach(block => {
+                    const tex = block.innerHTML.replace(/\$\$/g, '').trim();
+                    try {
+                        katex.render(tex, block, { displayMode: true, throwOnError: false });
+                    } catch (e) {
+                        console.error(e);
+                    }
+                });
+            }
+        }
+
+        // Modal Logic
+        function openExplanation() {
+            document.getElementById('explanation-modal').classList.add('active');
+        }
+
+        function openLab() {
+            document.getElementById('lab-modal').classList.add('active');
+            // Re-render any math inside the modal if necessary
+            renderMathInElement(document.getElementById('lab-modal'), {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true}
+                ]
+            });
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Formula Lab Logic
+        const velSlider = document.getElementById('velocity-slider');
+        const rhoSlider = document.getElementById('density-slider');
+        const velDisplay = document.getElementById('vel-display');
+        const rhoDisplay = document.getElementById('rho-display');
+        const keResult = document.getElementById('ke-result');
+        const pressureResult = document.getElementById('pressure-result');
+
+        function updateLab() {
+            const v = parseFloat(velSlider.value);
+            const rho = parseFloat(rhoSlider.value);
+
+            // Update Labels
+            velDisplay.textContent = v;
+            rhoDisplay.textContent = rho;
+
+            // Calculate Kinetic Energy per unit volume: 0.5 * rho * v^2
+            const ke = 0.5 * rho * Math.pow(v, 2);
+
+            // Update Display
+            keResult.textContent = ke.toLocaleString() + " Pa";
+            pressureResult.textContent = "-" + ke.toLocaleString() + " Pa";
+        }
+
+        velSlider.addEventListener('input', updateLab);
+        rhoSlider.addEventListener('input', updateLab);
+
+    </script>
+    
+    <!-- Load Auto-Render Extension for easier parsing -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
+</body>
+</html>
+```

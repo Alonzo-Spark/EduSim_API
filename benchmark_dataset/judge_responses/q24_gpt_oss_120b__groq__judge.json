@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 24,
+  "question": "Calculate the gravitational force between two masses of 5 kg each placed 2 m apart.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Gravitational Field Problem\n\n### Problem\nCalculate the gravitational force between two identical masses of $5 \\text{ kg}$ each placed at a center-to-center distance of $2 \\text{ m}$ apart.\n\n### Given\n* First mass ($m_1$) = $5 \\text{ kg}$\n* Second mass ($m_2$) = $5 \\text{ kg}$\n* Distance apart ($r$) = $2 \\text{ m}$\n* Gravitational Constant ($G$) = $6.67 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$\n\n### Formula\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\n### Substitution\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{5 \\times 5}{2^2}$$\n\n### Calculation\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{25}{4}$$\n\n$$F = (6.67 \\times 10^{-11}) \\times 6.25$$\n\n$$F = 4.16875 \\times 10^{-10} \\text{ N}$$\n\n### Final Answer\n**Gravitational Force ($F$) = $4.17 \\times 10^{-10} \\text{ N}$**\n\n### Interpretation\nThis reflects an incredibly weak mutual attraction force, demonstrating why gravity is imperceptible between everyday objects and only becomes significant with planetary-scale masses.",
+  "candidate_response": "┌─────────────────────────────────────────────┐  \n│ **Introduction**                            │  \n│                                             │  \n│ In this example we will determine the       │  \n│ gravitational attraction between two identical│  \n│ point masses using Newton’s law of universal │  \n│ gravitation.                                 │  \n└─────────────────────────────────────────────┘  \n\n┌─────────────────────────────────────────────┐  \n│ **Formula Card**                            │  \n│                                             │  \n│ **Newton’s Law of Universal Gravitation**   │  \n│                                             │  \n│ $$F = G\\;\\frac{m_{1}\\,m_{2}}{r^{2}}$$        │  \n│                                             │  \n│ • **G** – gravitational constant,           │  \n│   \\(6.67430\\times10^{-11}\\ \\text{N·m}^2\\!/\\text{kg}^2\\) │  \n│ • \\(m_{1}, m_{2}\\) – the two masses (kg)    │  \n│ • \\(r\\) – distance between their centres (m)│  \n│                                             │  \n│ [ Explain Formula ]   [ Open Formula Lab ]  │  \n└─────────────────────────────────────────────┘  \n\n┌─────────────────────────────────────────────┐  \n│ **Given Data**                              │  \n│                                             │  \n│ • \\(m_{1}=5\\ \\text{kg}\\)                     │  \n│ • \\(m_{2}=5\\ \\text{kg}\\)                     │  \n│ • \\(r = 2\\ \\text{m}\\)                        │  \n│ • \\(G = 6.67430\\times10^{-11}\\ \\text{N·m}^2\\!/\\text{kg}^2\\) │  \n└─────────────────────────────────────────────┘  \n\n┌─────────────────────────────────────────────┐  \n│ **Step‑by‑Step Calculation**                │  \n│                                             │  \n│ 1. Plug the values into the formula:        │  \n│    $$F = 6.67430\\times10^{-11}\\;\\frac{5\\times5}{2^{2}}$$ │  \n│                                             │  \n│ 2. Compute the numerator:                   │  \n│    \\(5\\times5 = 25\\)                         │  \n│                                             │  \n│ 3. Compute the denominator:                 │  \n│    \\(2^{2}=4\\)                               │  \n│                                             │  \n│ 4. Combine:                                 │  \n│    $$F = 6.67430\\times10^{-11}\\;\\frac{25}{4}$$ │  \n│                                             │  \n│ 5. Evaluate the fraction:                   │  \n│    \\(\\frac{25}{4}=6.25\\)                     │  \n│                                             │  \n│ 6. Final multiplication:                    │  \n│    $$F = 6.67430\\times10^{-11}\\times6.25$$   │  \n│    $$F \\approx 4.17144\\times10^{-10}\\ \\text{N}$$ │  \n└─────────────────────────────────────────────┘  \n\n┌─────────────────────────────────────────────┐  \n│ **Result**                                   │  \n│                                             │  \n│ The gravitational force between the two     │  \n│ 5‑kg masses separated by 2 m is               │  \n│ $$\\boxed{F \\approx 4.2\\times10^{-10}\\ \\text{N}}$$ │  \n│ (approximately 0.42 nanonewtons).           │  \n└─────────────────────────────────────────────┘  \n\n┌─────────────────────────────────────────────┐  \n│ **Summary**                                  │  \n│                                             │  \n│ • Use \\(F = G\\,m_{1}m_{2}/r^{2}\\).           │  \n│ • Insert the given masses and distance.     │  \n│ • The force is extremely weak at everyday   │  \n│   scales – on the order of \\(10^{-10}\\) N.   │  \n└─────────────────────────────────────────────┘  \n\n┌─────────────────────────────────────────────┐  \n│ **Suggested Questions**                      │  \n│                                             │  \n│ 1. How would the force change if the distance │  \n│    were halved?                              │  \n│ 2. What force results when the masses are     │  \n│    increased to 10 kg each, keeping the same  │  \n│    separation?                               │  \n│ 3. Explain why gravitational forces between   │  \n│    everyday objects are usually ignored.    │  \n└─────────────────────────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational value. It correctly applies Newton's law of universal gravitation, provides a clear step-by-step calculation, and presents the result in a well-structured format. The use of boxes to highlight key information and the inclusion of suggested questions for further exploration are particularly effective. The only area for improvement is in the final answer, where the candidate response rounds the result to 4.2 x 10^-10 N, whereas the gold reference answer rounds it to 4.17 x 10^-10 N. However, this is a minor discrepancy and does not significantly impact the overall quality of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 435,
+    "completionTokens": 1179,
+    "totalTokens": 1614
+  },
+  "candidate_latency_ms": 2966,
+  "candidate_cost_usd": 0.00077265,
+  "judge_token_usage": {
+    "promptTokens": 1714,
+    "completionTokens": 195,
+    "totalTokens": 1909
+  },
+  "judge_latency_ms": 9502,
+  "judge_cost_usd": 0.0014964000000000002,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:46:10.846Z"
+}

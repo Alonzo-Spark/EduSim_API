@@ -1,0 +1,150 @@
+┌───────────────────────────┐  
+│      Quick Definition     │  
+│                           │  
+│ The **Work-Energy Theorem** states that the net work done on an object is equal to the change in its kinetic energy. │  
+└───────────────────────────┘  
+
+---
+
+### Key Concept
+
+The work-energy theorem provides a powerful link between **force**, **motion**, and **energy**. Instead of analyzing motion through Newton's laws and kinematics, this theorem allows us to understand how energy changes due to work performed by forces.
+
+---
+
+┌───────────────────────────┐  
+│      Main Formula         │  
+│                           │  
+│   $$                      │  
+│   W_{\text{net}} = \Delta K = K_f - K_i  $$  
+│                           │  
+│   where                   │  
+│   - $W_{\text{net}}$: Net work done on the object  │  
+│   - $\Delta K$: Change in kinetic energy         │  
+│   - $K = \frac{1}{2}mv^2$: Kinetic energy         │  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+---
+
+### Derivation of the Work-Energy Theorem
+
+We begin with the definition of **work** done by a net force and combine it with **Newton’s Second Law** and **kinematic equations**.
+
+#### Step 1: Work Done by a Constant Net Force
+
+For a constant net force $ F_{\text{net}} $ acting along a straight line, the work done over a displacement $ d $ is:
+
+$$
+W = F_{\text{net}} \cdot d
+$$
+
+From **Newton’s Second Law**:
+
+$$
+F_{\text{net}} = ma
+$$
+
+Substitute into the work equation:
+
+$$
+W = mad
+$$
+
+#### Step 2: Use Kinematic Equation (Without Time)
+
+We use the kinematic equation that relates initial velocity $ v_i $, final velocity $ v_f $, acceleration $ a $, and displacement $ d $:
+
+$$
+v_f^2 = v_i^2 + 2ad
+$$
+
+Solve for $ ad $:
+
+$$
+ad = \frac{v_f^2 - v_i^2}{2}
+$$
+
+Now substitute into the work expression:
+
+$$
+W = m \cdot ad = m \cdot \left( \frac{v_f^2 - v_i^2}{2} \right)
+$$
+
+$$
+W = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2
+$$
+
+#### Final Result:
+
+$$
+W_{\text{net}} = K_f - K_i = \Delta K
+$$
+
+✅ Thus, the **net work done on an object equals the change in its kinetic energy**.
+
+---
+
+### Important Notes
+
+- This derivation assumed a **constant net force** and **straight-line motion**, but the theorem holds **even for variable forces** and **curved paths** when using calculus.
+- For variable forces, work is calculated as:
+  $$
+  W_{\text{net}} = \int_{x_i}^{x_f} F_{\text{net}}(x)\, dx
+  $$
+  Combining with $ F = ma $ and chain rule leads to the same result: $ W_{\text{net}} = \Delta K $.
+
+---
+
+### Applications
+
+- Calculating speed of an object after a force acts over a distance.
+- Analyzing motion on frictionless surfaces.
+- Solving problems in mechanics without needing time or acceleration explicitly.
+- Foundation for conservation of mechanical energy (when only conservative forces act).
+
+---
+
+### Advantages
+
+- Avoids vector analysis of forces at every instant.
+- Simplifies problem-solving in dynamics.
+- Works well with variable forces via integration.
+
+### Disadvantages
+
+- Does **not** give directional information or time details.
+- Cannot determine trajectories directly.
+- Only accounts for kinetic energy — other forms (potential, thermal) must be handled separately.
+
+---
+
+### Summary
+
+┌───────────────────────────┐  
+│         Summary           │  
+│                           │  
+│ The Work-Energy Theorem   │  
+│ connects work and kinetic │  
+│ energy:                   │  
+│                           │  
+│ $$                        │  
+│ W_{\text{net}} = \Delta K │  
+$$                          │  
+│                           │  
+│ It is derived from        │  
+│ Newton’s laws and         │  
+│ kinematics, and applies   │  
+│ broadly in physics.       │  
+└───────────────────────────┘  
+
+---
+
+### Suggested Questions
+
+- How does the work-energy theorem apply when friction is present?
+- Can the theorem be used in rotational motion?
+- What is the difference between work-energy theorem and conservation of energy?
+- How is work calculated for a spring force using this theorem?

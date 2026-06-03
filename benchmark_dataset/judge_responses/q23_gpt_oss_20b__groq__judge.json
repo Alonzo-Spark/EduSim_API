@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 23,
+  "question": "Explain the difference between mass and weight.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nMass and weight are distinct physical parameters that describe different structural qualities of matter.\n\nMass is a measure of the total quantity of matter contained within an object and reflects its inherent inertial resistance to acceleration.\n\nWeight is the gravitational force vector exerted on an object by a massive central body, such as the Earth.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Mass | Weight |\n| --- | --- | --- |\n| **Quantity Type** | Scalar property (Magnitude only). | Vector property (Magnitude and direction). |\n| **Location Factor** | Invariant; remains identical across all locations in the universe. | Variable; changes depending on the local gravitational acceleration field. |\n| **Measurement Instrument** | Measured using a balance scale. | Measured using a calibrated spring scale. |\n| **SI System Unit** | Kilogram ($\\text{kg}$). | Newton ($\\text{N}$). |\n\n---\n\n## Real-world Example\n\nAn astronaut has a mass of $60 \\text{ kg}$ on Earth.\n* **On Earth's Surface:** Their mass is $60 \\text{ kg}$, and their weight force is approximately $$60 \\times 9.8 = 588 \\text{ N}$$.\n* **On Moon's Surface:** Their mass remains exactly $60 \\text{ kg}$, but their weight drops to one-sixth of its Earth value ($98 \\text{ N}$) because the Moon's local gravitational pull is weaker.\n\n---\n\n## Summary\n\nMass is an unchanging scalar property intrinsic to an object, whereas weight is a variable vector force that scales with the strength of the surrounding gravitational field.",
+  "candidate_response": "┌───────────────────────────┐\n│ Introduction          │\n│                       │\n│ Mass and weight are related │\n│ but distinct concepts in   │\n│ physics.                 │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Definition            │\n│                       │\n│ Mass measures the amount   │\n│ of matter.                 │\n│                       │\n│ Weight is the force exerted │\n│ on an object due to gravity │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts          │\n│                       │\n│ Mass is a property         │\n│                       │\n│ Weight is a force that     │\n│ depends on gravity.        │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics      │\n│                       │\n│ Mass is constant regardless │\n│ of location; weight varies │\n│ with gravitational field.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes      │\n│                       │\n│ On Earth, weight is often │\n│                       │\n│ approximated as mass times │\n│ 9.81 m/s².           │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary              │\n│                       │\n│ Mass is measure of matter │\n│                       │\n│ weight is the gravitational │\n│ force on that mass.       │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions │\n│                       │\n│ 1. If an object has a mass │\n│ of 10 kg,               │\n│                       │\n│ 2. How does weight change │\n│ on the Moon?            │\n│                       │\n│ 3. Is mass affected       │\n│ by gravity?               │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a good understanding of the concepts of mass and weight, but lacks the clarity and depth of the gold reference answer. The use of a unique formatting style with boxes and headings, while creative, detracts from the readability and makes the content harder to follow compared to a standard, well-structured text. The definitions of mass and weight are correct, and the distinction between them is properly explained. However, the response could benefit from more detailed examples, such as the one provided in the gold answer about the astronaut on Earth and the Moon, to help illustrate the concepts more effectively. Additionally, the inclusion of suggested questions at the end, while potentially useful for prompting further thought, feels somewhat out of place and disrupts the flow of the explanatory text. To improve, the candidate should focus on enhancing the clarity of their explanations, incorporating more illustrative examples, and adopting a more conventional formatting approach to improve readability and educational effectiveness.",
+  "candidate_token_usage": {
+    "promptTokens": 425,
+    "completionTokens": 10179,
+    "totalTokens": 10604
+  },
+  "candidate_latency_ms": 12409,
+  "candidate_cost_usd": 0.00308557,
+  "judge_token_usage": {
+    "promptTokens": 1154,
+    "completionTokens": 248,
+    "totalTokens": 1402
+  },
+  "judge_latency_ms": 63147,
+  "judge_cost_usd": 0.0012875999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:44:01.381Z"
+}

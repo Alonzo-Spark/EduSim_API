@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 8,
+  "question": "A ball is projected at an angle of 45° with velocity 20 m/s. Find its range.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Projectile Tracking\n\n### Problem\nA ball is projected at an angle of $45^\\circ$ with a velocity of $20 \\text{ m/s}$. Find its horizontal range.\n\n### Given\n* Initial launch velocity ($u$) = $20 \\text{ m/s}$\n* Projection angle ($\\theta$) = $45^\\circ$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$R = \\frac{u^2 \\sin(2\\theta)}{g}$$\n\n### Substitution\n$$R = \\frac{(20)^2 \\times \\sin(2 \\times 45^\\circ)}{9.8}$$\n\n### Calculation\n$$R = \\frac{400 \\times \\sin(90^\\circ)}{9.8}$$\n\nSince $\\sin(90^\\circ) = 1$:\n$$R = \\frac{400 \\times 1}{9.8}$$\n\n$$R = 40.82 \\text{ m}$$\n\n### Final Answer\n**Horizontal Range ($R$) = $40.82 \\text{ m}$**\n\n### Interpretation\nThis means the ball travels a total horizontal ground shortcut distance of $40.82 \\text{ meters}$ away from its initial launch spot before striking the earth baseline.",
+  "candidate_response": "┌───────────────────────────────────────────────┐\n│ 📘 Problem Statement                              │\n│                                                   │\n│ A ball is projected at an angle of 45° with       │\n│ an initial speed of 20 m s⁻¹. Determine the       │\n│ horizontal range of the projectile.              │\n└───────────────────────────────────────────────┘\n\n\n┌───────────────────────────────────────────────┐\n│ 📚 Key Concepts                                   │\n│                                                   │\n│ • Projectile motion is a two‑dimensional         │\n│   problem that can be split into independent       │\n│   horizontal and vertical components.             │\n│ • The horizontal range \\(R\\) is the total         │\n│   horizontal distance traveled until the projectile│\n│   returns to the launch height.                   │\n│ • For launch and landing at the same height, the   │\n│   range formula simplifies to                     │\n│   \\(R = \\dfrac{v^{2}\\sin 2\\theta}{g}\\).            │\n└───────────────────────────────────────────────┘\n\n\n┌───────────────────────────────────────────────┐\n│ 📐 Formula Card – Range Formula                    │\n│                                                   │\n│   ┌─────────────────────────────────────────────┐ │\n│   │ Main Formula                                 │ │\n│   │                                             │ │\n│   │  \\(R = \\dfrac{v^{2}\\sin 2\\theta}{g}\\)       │ │\n│   │                                             │ │\n│   └─────────────────────────────────────────────┘ │\n│                                                   │\n│   [ Explain Formula ]   [ Open Formula Lab ]      │\n└───────────────────────────────────────────────┘\n\n\n┌───────────────────────────────────────────────┐\n│ 📊 Given Data (Responsive Table)                  │\n│                                                   │\n│   ┌───────────────────────┬───────────────┐    │\n│   │ Parameter              │ Value         │    │\n│   ├───────────────────────┼───────────────┤    │\n│   │ Initial speed \\(v\\)    │ 20 m s⁻¹      │    │\n│   │ Launch angle \\(\\theta\\)│ 45°           │    │\n│   │ Acceleration due to   │ 9.81 m s⁻¹²    │    │\n│   │ gravity \\(g\\)          │               │    │\n│   └───────────────────────┴───────────────┘    │\n│                                                   │\n└───────────────────────────────────────────────┘\n\n\n┌───────────────────────────────────────────────┐\n│ 🧮 Calculation Steps                               │\n│                                                   │\n│ 1. Compute \\(\\sin 2\\theta\\):                      │\n│    \\[\n│    \\sin 2\\theta = \\sin(2 \\times 45°) = \\sin 90° = 1\n│    \\]                                            │\n│                                                   │\n│ 2. Square the speed:                              │\n│    \\[\n│    v^{2} = (20\\ \\text{m s}^{-1})^{2} = 400\\ \\text{m}^{2}\\text{s}^{-2}\n│    \\]                                            │\n│                                                   │\n│ 3. Insert into the range formula:                │\n│    \\[\n│    R = \\frac{400 \\times 1}{9.81}\n│      \\approx 40.77\\ \\text{m}\n│    \\]                                            │\n└───────────────────────────────────────────────┘\n\n\n┌───────────────────────────────────────────────┐\n│ ✅ Result                                         │\n│                                                   │\n│ The projectile travels a horizontal distance of   │\n│ **≈ 40.8 m** before landing.                       │\n└───────────────────────────────────────────────┘\n\n\n┌───────────────────────────────────────────────┐\n│ 📖 Summary                                        │\n│                                                   │\n│ • For a launch angle of 45°, \\(\\sin 2\\theta = 1\\) │\n│   which maximises the range for a given speed.    │\n│ • The range formula \\(R = v^{2}\\sin 2\\theta/g\\)  │\n│   directly relates speed, angle, and gravity.    │\n│ • Plugging \\(v = 20\\ \\text{m s}^{-1}\\),           │\n│   \\(\\theta = 45°\\), and \\(g = 9.81\\ \\text{m s}^{-2}\\) │\n│   yields \\(R \\approx 40.8\\) m.                    │\n└───────────────────────────────────────────────┘\n\n\n┌───────────────────────────────────────────────┐\n│ ❓ Suggested Questions                             │\n│                                                   │\n│ 1. How would the range change if the launch angle │\n│    were 30° instead of 45°?                        │\n│ 2. What is the effect of using a different value   │\n│    for \\(g\\) (e.g., on the Moon)?                 │\n│ 3. Derive the range formula starting from the      │\n│    kinematic equations for projectile motion.     │\n│ 4. If the projectile lands at a different height   │\n│    than the launch point, how does the range       │\n│    expression modify?                              │\n└───────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts involved in projectile motion, correctly applying the range formula and calculating the horizontal range. The use of a structured format with clear headings and explanations enhances readability and educational value. However, minor points of improvement could include providing more detailed explanations for the derivation of the range formula and exploring additional scenarios or questions related to projectile motion in the suggested questions section. Overall, the response is well-structured, accurate, and effective in teaching the concept.",
+  "candidate_token_usage": {
+    "promptTokens": 439,
+    "completionTokens": 1543,
+    "totalTokens": 1982
+  },
+  "candidate_latency_ms": 1028,
+  "candidate_cost_usd": 0.00099165,
+  "judge_token_usage": {
+    "promptTokens": 1922,
+    "completionTokens": 157,
+    "totalTokens": 2079
+  },
+  "judge_latency_ms": 4833,
+  "judge_cost_usd": 0.00153,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:07:44.525Z"
+}

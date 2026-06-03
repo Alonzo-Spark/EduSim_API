@@ -1,0 +1,84 @@
+### 🔬 Interactive Physics Lab: Inclined Plane Dynamics
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Introduction: The Gravity Variable**                            │
+│                                                                   │
+│ In a simulated sandbox environment, adjusting the "Gravity        │
+│ Preset" (e.g., Earth $9.8 \, m/s^2$ vs. Moon $1.6 \, m/s^2$)      │
+│ fundamentally alters the force vectors acting on a sliding block. │
+│ This experiment tracks how scaling $g$ influences the final       │
+│ horizontal displacement (range) after the block leaves the ramp.  │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Main Formula: Acceleration on Incline**                         │
+│                                                                   │
+│ $$a = g(\sin\theta - \mu\cos\theta)$$                             │
+│                                                                   │
+│ **[ Explain Formula ]**                                           │
+│ The acceleration is directly proportional to the gravity constant  │
+│ $g$. If you double the gravity preset, the acceleration down the  │
+│ ramp doubles (assuming friction $\mu$ is constant).               │
+│                                                                   │
+│ **[ Open Formula Lab ]**                                          │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Key Concepts**                                                  │
+│                                                                   │
+│ • **Gravitational Scaling:** Changing the magnitude of the        │
+│   downward acceleration vector.                                   │
+│ • **Normal Force:** $F_n = mg\cos\theta$. Higher gravity          │
+│   increases friction, but also increases the driving force.       │
+│ • **Exit Velocity:** The speed $v$ at the bottom of the incline   │
+│   prior to entering the projectile phase.                         │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Formula Card: Projectile Range (Horizontal)**                   │
+│                                                                   │
+│ $$R = \frac{v^2 \sin(2\theta)}{g}$$                               │
+│                                                                   │
+│ **[ Explain Formula ]**                                           │
+│ This is the "Gravity Paradox" of the sandbox. While higher $g$    │
+│ gives you a higher exit velocity $v$, it also pulls the block     │
+│ to the ground faster during flight.                               │
+│                                                                   │
+│ **[ Open Formula Lab ]**                                          │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Comparison: Earth vs. Low-G Presets**                           │
+│                                                                   │
+│ | Feature          | Earth (9.8)     | Moon (1.6)      | Impact   |
+│ |:-----------------|:----------------|:----------------|:---------|
+│ | Potential Energy | High            | Low             | Velocity |
+│ | Friction Force   | High            | Low             | Drag     |
+│ | Hang Time        | Low             | High            | Duration |
+│ | Final Range      | Standard        | Extended        | Distance |
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Important Notes: The Scaling Effect**                           │
+│                                                                   │
+│ In a perfect vacuum (no air resistance), the horizontal range     │
+│ of a block sliding down a ramp of height $h$ and then launching   │
+│ is actually **independent** of gravity.                           │
+│                                                                   │
+│ Why? Because $v^2$ is proportional to $g$, and the range formula  │
+│ divides by $g$. They cancel out. However, in sandbox games with   │
+│ **Air Resistance** enabled, lower gravity presets result in       │
+│ significantly further ranges because the object stays in the air  │
+│ longer, allowing horizontal velocity more time to act.            │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Suggested Questions**                                           │
+│                                                                   │
+│ 1. How does the coefficient of friction $\mu$ interact with $g$   │
+│    to change the "critical angle" of sliding?                     │
+│ 2. If gravity is set to zero, why does the block's range become   │
+│    theoretically infinite?                                        │
+│ 3. Does the mass of the block change the range when gravity       │
+│    presets are scaled?                                            │
+└───────────────────────────────────────────────────────────────────┘

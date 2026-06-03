@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 54,
+  "question": "Live Sandbox: Explain the orbital behavior when a planet's tangential velocity is reduced below stable circular speed.",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nA satellite is in a circular orbit around a central gravitational mass. We can reduce its forward tangential velocity vector mid-flight to observe how its orbital path updates in real time.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nThe satellite immediately drops out of its stable circular path and plunges inward toward the central body. Its trajectory changes into an eccentric elliptical path, speeding up rapidly as it falls closer to the gravity source.\n\n### ✦ WHY IT HAPPENS\nA stable circular orbit requires a specific tangential velocity where the inward gravitational pull provides the exact centripetal acceleration needed for that radius. Reducing this speed means gravity overpowers the inertia of the satellite, pulling it inward.\n\n### ✦ WHAT TO NOTICE\nObserve the change in speed. The satellite moves slowest at its highest point (aphelion) and accelerates to its highest speed at its closest approach (perihelion).\n\n### ✦ FORMULA\nThe stable circular orbit velocity constraint is defined as:\n\n$$v_c = \\sqrt{\\frac{GM}{r}}$$\n\n* If the actual tracking velocity vector magnitude ($v$) drops below $v_c$, the orbit shifts from circular to eccentric elliptical ($e > 0$).\n\n### ✦ DEEPER UNDERSTANDING\nThis interaction demonstrates Kepler's Second Law. As the satellite falls down the gravitational potential well, it trades potential energy for kinetic energy, sweeping out equal areas in equal intervals of time.\n\n### ✦ TRY THIS\n1. Click the **Velocity subtract button** while the satellite orbits to observe it drop into an elliptical path.\n2. Lower the speed too much and observe the satellite collide with the central planet asset.",
+  "candidate_response": "┌───────────────────────────┐\n│ Planet slows below speed   │\n│ Orbit becomes elliptical    │\n│ with apocenter at          │\n│ initial radius.            │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts               │\n│ Reduced velocity < circular│\n│ speed → elliptical orbit.   │\n│ Initial radius is apocenter.│\n│ Pericenter occurs at       │\n│ closest approach.          │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula               │\n│ Circular orbital speed     │\n│ $$v_c = \\sqrt{GM/r}$$     │\n│ [ Explain Formula ]         │\n│ [ Open Formula Lab ]        │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Specific Orbital Energy    │\n│ $$E = \\frac{v^2}{2} - \\frac{GM}{r}$$ │\n│ [ Explain Formula ]         │\n│ [ Open Formula Lab ]        │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics             │\n│ Orbit becomes elliptical    │\n│ with varying radial        │\n│ distance.                 │\n│ Speed increases at         │\n│ pericenter,               │\n│ decreases at apocenter.    │\n│ Period increases relative  │\n│ to circular orbit at      │\n│ same radius.               │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                     │\n│ Orbit transitions from      │\n│ circular to elliptical.   │\n│ Initial point becomes      │\n│ apocenter.                 │\n│ Pericenter is closest      │\n│ point.                     │\n│ Speed highest at           │\n│ pericenter.                │\n│ Period longer than circular│\n│ orbit at same radius.      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions         │\n│ 1. What is the expression  │\n│ for the circular orbital   │\n│ speed?                    │\n│ 2. How does the orbital   │\n│ period change when the     │\n│ velocity is reduced below  │\n│ circular speed?           │\n│ 3. What is the shape of the│\n│ orbit when v < v_c at a    │\n│ given radius?              │\n│ 4. Explain why the speed   │\n│ is highest at pericenter.  │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Judge evaluation failed: Bad escaped character in JSON at position 394 (line 8 column 249)",
+  "candidate_token_usage": {
+    "promptTokens": 438,
+    "completionTokens": 15730,
+    "totalTokens": 16168
+  },
+  "candidate_latency_ms": 19195,
+  "candidate_cost_usd": 0.00475185,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 8456,
+  "judge_cost_usd": 0,
+  "retry_count": 0,
+  "success": false,
+  "error": "Bad escaped character in JSON at position 394 (line 8 column 249)",
+  "timestamp": "2026-06-01T10:18:12.372Z"
+}

@@ -1,0 +1,154 @@
+Okay, I understand. You want to transform the AI Tutor from a plain Markdown document into an interactive textbook experience with structured UI blocks, specifically cards, for sections, formulas, and tables.  The goal is to avoid the typical ChatGPT note look and feel and create something more engaging and educational.  Here's a breakdown of how I will implement this, along with examples and considerations.
+
+**Core Principles:**
+
+*   **Structured UI Blocks:**  The primary building blocks are cards, each representing a distinct piece of information (section, formula, table).
+*   **Automatic Section Detection:**  Identify logical sections based on headings and keywords.
+*   **Formula Cards:** Dedicated cards for displaying formulas, with options for explanation and interactive exploration (Formula Lab).
+*   **Formula Extraction:**  Efficiently extract all LaTeX formulas for later use with the Formula Lab.
+*   **Responsive Tables:** Convert Markdown tables to responsive table cards.
+*   **No Floating Formulas:**  All formulas will be embedded within Formula Cards.
+
+
+
+**Implementation Strategy:**
+
+1.  **Markdown Parsing with Structure:**  I will parse the input Markdown, not just sequentially, but to identify headings, formulas, and tables.
+2.  **Card Generation:**  Based on the parsed content, I will generate the appropriate card components.
+3.  **Formula Extraction and Storage:**  I will extract LaTeX formulas and store them in the specified format (list of dictionaries).
+4.  **Rendering:**  I will output the structured content as HTML (or a suitable format for a UI framework) that renders the cards.
+
+
+
+**Example Transformation**
+
+Let's take a snippet of Markdown and see how it would be transformed:
+
+**Original Markdown:**
+
+```markdown
+# Introduction
+
+This is an introduction to the concept of momentum. Momentum is a fundamental quantity in physics.
+
+## Definition
+
+Momentum (p) is defined as the product of an object's mass (m) and its velocity (v).
+
+$$
+p = mv
+$$
+
+## Key Concepts
+
+*   Linear Momentum
+*   Angular Momentum
+
+## Formula
+
+The formula for momentum is:
+
+$$
+p = mv
+$$
+
+## Applications
+
+Momentum is used in many areas, including collisions and explosions.
+
+```
+
+**Transformed Output (Conceptual - HTML-like):**
+
+```html
+┌───────────────────────────┐
+│ Introduction              │
+│                           │
+│ This is an introduction ...│
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Definition                │
+│                           │
+│ Momentum (p) is defined as...│
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Main Formula              │
+│                           │
+│     p = mv                │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Key Concepts              │
+│                           │
+│ * Linear Momentum         │
+│ * Angular Momentum        │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Formula                   │
+│                           │
+│     p = mv                │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Applications              │
+│                           │
+│ Momentum is used in...     │
+└───────────────────────────┘
+```
+
+**Details on each card type:**
+
+*   **Section Card:**  Displays the section title and content.
+*   **Formula Card:** Displays the formula, a button to explain it, and a button to "open the Formula Lab."
+*   **Table Card:**  Displays the table as a responsive table.
+
+
+
+**Formula Lab:**
+
+The "Open Formula Lab" button will link to a separate interactive component where users can:
+
+*   Input values for variables in the formula.
+*   See the calculated result.
+*   Visualize the formula's effect (e.g., a graph).
+
+**Formula Extraction Example:**
+
+For the formula `$$p = mv$$`, the extracted data would be:
+
+```json
+{
+  "formula": "p = mv",
+  "title": "Momentum",
+  "surroundingContext": "Definition",
+  "variables": ["p", "m", "v"]
+}
+```
+
+
+
+**Table Rendering:**
+
+Markdown tables will be converted to responsive HTML tables using CSS for styling.  I'll use a simple CSS framework for the layout.
+
+**Next Steps**
+
+1.  **Code Implementation:** I will now start implementing the parsing and card generation logic. This will involve using a Markdown parsing library, and implementing components for the different card types.
+2.  **Formula Lab Implementation:** I will design the interactive Formula Lab component.
+3.  **Testing:** Rigorous testing will be performed to ensure accurate parsing, correct card rendering, and proper function of the Formula Lab.
+
+
+
+**To proceed, please provide the Markdown content you want me to transform.  I will then generate the structured output.**  I'm ready to begin once you provide the content!
+
+
+

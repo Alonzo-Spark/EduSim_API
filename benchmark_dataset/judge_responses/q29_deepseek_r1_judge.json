@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 29,
+  "question": "Define surface tension and mention factors affecting it.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nSurface tension is the property of a liquid surface that causes it to behave like a stretched elastic membrane, minimizing its surface area. \n\nThis behavior is caused by cohesive forces, as liquid molecules at the surface experience a net inward pull from the molecules beneath them.\n\n---\n\n## Factors Affecting Surface Tension\n\n* **Temperature Inversion:** Raising the temperature increases the kinetic energy of the molecules, weakening cohesive bonds and reducing surface tension.\n* **Chemical Impurities:** Adding highly soluble materials like salt increases surface tension, whereas adding surfactants like soap lowers it significantly.\n\n---\n\n## Formula\n\nThe surface tension scalar definition is given by:\n\n$$T = \\frac{F}{L}$$\n\nWhere:\n* $T$ represents the surface tension factor\n* $F$ represents the force acting parallel to the surface along a line segment\n* $L$ represents the total length of the line segment over which the force acts\n\n---\n\n## Summary\n\nSurface tension arises from unbalanced molecular attraction at a liquid's surface, causing it to minimize its area. This property decreases with heat and surfactant additives.",
+  "candidate_response": "### Surface Tension: Definition and Factors\n\n#### 🧪 Quick Definition  \n**Surface tension** is the elastic tendency of a liquid surface to minimize its area, caused by cohesive forces between molecules at the interface. It acts like an invisible \"skin\" that resists external forces.  \n**Units**: Newtons per meter (N/m) or joules per square meter (J/m²).\n\n---\n\n#### 🔍 Key Characteristics  \n- Arises from **imbalanced cohesive forces** at the liquid-air interface.  \n- Explains phenomena like water droplets, capillary action, and insect locomotion on water.  \n- Higher in polar liquids (e.g., water) than non-polar liquids (e.g., ethanol).\n\n---\n\n#### 📉 Factors Affecting Surface Temperature  \n\n| Factor                  | Effect on Surface Tension | Reason                                                                 |\n|-------------------------|---------------------------|------------------------------------------------------------------------|\n| **Temperature**         | ↓ Decreases               | Higher kinetic energy weakens intermolecular forces.                  |\n| **Surfactants** (e.g., soap) | ↓ Decreases               | Disrupt hydrogen bonding; accumulate at the interface.                |\n| **Solute Type**         |                           |                                                                        |\n| &nbsp;&nbsp;- Ionic (e.g., NaCl) | ↑ Slightly increases      | Strengthens water structure via ion-dipole interactions.              |\n| &nbsp;&nbsp;- Organic (e.g., phenol) | ↓ Decreases               | Disrupts hydrogen bonding networks.                                   |\n| **pH**                  | Varies                    | Alters molecular charge (e.g., low pH reduces tension in fatty acids). |\n| **Liquid Composition**  | ↓ Non-polar < Polar       | Weaker cohesive forces in non-polar liquids (e.g., ethanol: 22 mN/m vs. water: 72 mN/m). |\n\n---\n\n#### ⚖️ Formula  \nThe fundamental equation for surface tension (\\(\\gamma\\)):  \n\n$$\n\\gamma = \\frac{F}{L}\n$$  \n\nWhere:  \n- \\(F\\) = Force acting perpendicular to the surface (N)  \n- \\(L\\) = Length over which the force acts (m)  \n\n**Example**: A 0.05 N force on a 0.1 m wire gives \\(\\gamma = \\frac{0.05}{0.1} = 0.5 \\ \\text{N/m}\\).\n\n---\n\n#### 💡 Important Notes  \n1. **Critical Temperature**: Surface tension → 0 as temperature approaches critical point.  \n2. **Dynamic Measurement**: Affected by surface age due to molecular rearrangement.  \n3. **Anomaly in Water**: High surface tension (72.8 mN/m at 20°C) enables capillary rise in plants.\n\n---\n\n#### ❓ Test Your Understanding  \n1. Why does soap reduce surface tension more effectively than salt?  \n2. How would surface tension change if water molecules had weaker hydrogen bonds?  \n3. Calculate the surface tension if a 0.02 N force stretches a liquid film over 5 cm.  \n\n*Need clarification? Ask a follow-up!*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and educational. It correctly defines surface tension, explains the factors affecting it, and provides a clear formula. The use of tables, examples, and notes enhances readability and understanding. However, minor suggestions for improvement include adding more visual aids, such as diagrams, to illustrate complex concepts like the molecular structure of liquids and the effect of surfactants. Additionally, providing more practice problems or interactive elements could further enhance the educational value of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 360,
+    "completionTokens": 1217,
+    "totalTokens": 1577
+  },
+  "candidate_latency_ms": 53272,
+  "candidate_cost_usd": 0.00286323,
+  "judge_token_usage": {
+    "promptTokens": 1271,
+    "completionTokens": 159,
+    "totalTokens": 1430
+  },
+  "judge_latency_ms": 5869,
+  "judge_cost_usd": 0.0011442,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:56:01.424Z"
+}

@@ -1,0 +1,84 @@
+┌───────────────────────────────────────────────┐
+│                SPRING_STRETCHED               │
+│               PEAK LIMIT EVENT                │
+│───────────────────────────────────────────────│
+│ **Overview**                                    │
+│ The system has detected that the spring’s       │
+│ stretch displacement has reached its configured │
+│ peak limit. This event is emitted to prevent     │
+│ overload and potential damage.                  │
+│                                                 │
+│ **Event Payload**                               │
+│   • `event_id`   : `"spring_stretched"`          │
+│   • `timestamp`  : ISO‑8601 string               │
+│   • `stretch_mm` : numeric (current stretch)    │
+│   • `limit_mm`   : numeric (configured limit)   │
+│   • `sensor_id`  : identifier of the spring sensor│
+│                                                 │
+│ **Trigger Condition**                           │
+│   `stretch_mm >= limit_mm`                      │
+│   (evaluated on each sensor update)             │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                RESPONSE OPTIONS                │
+│───────────────────────────────────────────────│
+│ 1️⃣ **Immediate Mitigation**                     │
+│    - Activate spring‑release actuator          │
+│    - Log mitigation action with `action_id`    │
+│                                                 │
+│ 2️⃣ **Soft Alert**                               │
+│    - Push notification to UI dashboard          │
+│    - Highlight sensor in red on the monitor     │
+│                                                 │
+│ 3️⃣ **Escalation**                               │
+│    - If limit breached > 3 times in 5 min →     │
+│      trigger `system_overload` alarm            │
+│                                                 │
+│ Choose one or combine as appropriate for your │
+│ safety policy.                                  │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                SAMPLE CODE SNIPPET             │
+│───────────────────────────────────────────────│
+│ ```javascript                                     │
+│ // Listener for spring_stretched events        │
+│ onEvent('spring_stretched', (payload) => {      │
+│   if (payload.stretch_mm >= payload.limit_mm) {│
+│     // Immediate mitigation                    │
+│     activateActuator(payload.sensor_id);       │
+│     logAction({                                 │
+│       type: 'mitigation',                       │
+│       eventId: payload.event_id,                │
+│       timestamp: new Date().toISOString()       │
+│     });                                         │
+│   }                                             │
+│ });                                            │
+│ ```                                             │
+│                                                 │
+│ **Key Functions**                               │
+│   `activateActuator(sensorId)` – engages the    │
+│   mechanical release for the given sensor.      │
+│   `logAction(details)` – persists the action in │
+│   the system audit log.                         │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│                IMPORTANT NOTES                  │
+│───────────────────────────────────────────────│
+│ • Ensure the actuator is calibrated before       │
+│   deployment; an un‑calibrated release may cause │
+│   additional stress.                             │
+│ • Verify that the sensor’s firmware version ≥ 2.1│
+│   for accurate stretch reporting.                │
+│ • If the event repeats within a short interval, │
+│   consider raising the `limit_mm` threshold or  │
+│   inspecting the spring for fatigue.            │
+│                                                 │
+│ **Next Steps**                                   │
+│   1. Review the latest sensor diagnostics.      │
+│   2. Confirm actuator health status.            │
+│   3. Update the `limit_mm` if the spring has    │
+│      been replaced.                              │
+└───────────────────────────────────────────────┘

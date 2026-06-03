@@ -1,0 +1,60 @@
+{
+  "type": "overlay",
+  "event": "object_attached",
+  "subject": "flying pendulum bob",
+  "timestamp": "2026-06-01T12:34:56Z",
+  "details": {
+    "attachedObject": {
+      "id": "obj_42",
+      "name": "steel rod",
+      "mass": 0.5,
+      "dimensions": {
+        "length": 0.2,
+        "diameter": 0.02
+      },
+      "attachmentPoint": "top",
+      "attachmentMethod": "magnetic clamp"
+    },
+    "pendulum": {
+      "id": "pend_07",
+      "mass": 1.2,
+      "length": 1.5,
+      "initialAngle": 30,
+      "currentVelocity": 0.8
+    }
+  },
+  "message": "A steel rod (0.5 kg) has been attached to the top of the flying pendulum bob, increasing its total mass to 1.7 kg. This will lengthen the period of oscillation and alter the energy distribution during flight.",
+  "suggestions": [
+    {
+      "label": "Recompute Period",
+      "action": "recalculate",
+      "params": {
+        "formula": "T = 2π√(L/g)",
+        "variables": {
+          "L": 1.5,
+          "g": 9.81
+        }
+      }
+    },
+    {
+      "label": "Observe Amplitude Change",
+      "action": "monitor",
+      "params": {
+        "property": "amplitude",
+        "threshold": "±5°"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "label": "Open Pendulum Lab",
+      "type": "openLab",
+      "target": "pendulumSimulation"
+    },
+    {
+      "label": "View Updated State",
+      "type": "viewState",
+      "target": "pend_07"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "zai-glm-4.7 (Cerebras)",
+  "question_id": 25,
+  "question": "Why do astronauts experience weightlessness in space?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWeightlessness is the sensation of having no weight, experienced when there is an absence of contact forces or support reactions acting on the body. \n\nIn orbit, this state is called microgravity, occurring because the spacecraft and its occupants are in a continuous state of free fall.\n\n---\n\n## The Free Fall Mechanism\n\n* **Continuous Trajectory Fall:** A spacecraft in orbit accelerates toward the Earth due to gravity, but its high forward speed matches the curve of the planet, causing it to fall around the Earth indefinitely.\n* **Zero Normal Force Interaction:** Because both the astronaut and the spacecraft fall together at the exact same rate, there is no floor pushing upward against the astronaut's feet, creating a sensation of weightlessness.\n\n---\n\n## Formula\n\nThe apparent weight relationship inside an accelerating capsule frame:\n\n$$N = m(g - a)$$\n\nWhen in a stable free-fall orbit, the downward acceleration matches gravity ($a = g$):\n\n$$N = m(g - g) = 0$$\n\nWhere:\n* $N$ represents the normal contact reaction force\n* $m$ represents the astronaut's mass\n* $g$ represents the local acceleration due to gravity\n* $a$ represents the centripetal orbital acceleration of the vehicle\n\n---\n\n## Summary\n\nAstronauts retain nearly all of their gravitational weight in low orbit, but they experience weightlessness because they are in a state of continuous free fall alongside their spacecraft, removing all upward contact forces.",
+  "candidate_response": "┌─────────────────────────────────────────────────────────────┐\n│ Quick Definition                                            │\n│                                                             │\n│ **Weightlessness** (or microgravity) is not the absence of  │\n│ gravity. It is the state where an object is in a constant   │\n│ state of **freefall**. Because the spacecraft and the       │\n│ astronaut are falling at the same rate, the astronaut does  │\n│ not push against the floor, creating the sensation of       │\n│ floating.                                                    │\n└─────────────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────────────┐\n│ Key Concepts                                                │\n│                                                             │\n│ • **Gravity is Present:** At the altitude of the ISS        │\n│   (approx. 400 km), Earth's gravity is still about 90% as   │\n│   strong as it is on the surface.                           │\n│                                                             │\n│ • **Freefall:** The spacecraft is constantly falling toward  │\n│   Earth. However, it is also moving sideways at a very      │\n│   high velocity (approx. 28,000 km/h).                      │\n│                                                             │\n│ • **The Curve:** As the spacecraft falls, the Earth curves  │\n│   away beneath it. The spacecraft never gets closer to the  │\n│   ground; it continuously \"misses\" the Earth.               │\n└─────────────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────────────┐\n│ Main Formula                                                │\n│                                                             │\n│                  $$F = G \\frac{m_1 m_2}{r^2}$$              │\n│                                                             │\n│ [ Explain Formula ]       [ Open Formula Lab ]              │\n└─────────────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────────────┐\n│ Characteristics                                             │\n│                                                             │\n│ **Why do they feel weightless?**                            │\n│                                                             │\n│ On Earth, you feel your weight because the floor pushes     │\n│ up against you (Normal Force). In orbit, the floor is       │\n│ falling away at the same speed you are. You are not         │\n│ pressing against the floor, so you feel no weight.          │\n└─────────────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────────────┐\n│ Summary                                                     │\n│                                                             │\n│ 1. Astronauts are not \"outside\" the pull of gravity.        │\n│ 2. They are in a constant state of freefall around the      │\n│    planet.                                                   │\n│ 3. Weightlessness occurs because they and their ship fall   │\n│    at the same rate, eliminating the sensation of support.  │\n└─────────────────────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────────────────────┐\n│ Suggested Questions                                         │\n│                                                             │\n│ • Why do objects float in the International Space Station?  │\n│ • Does gravity exist in space?                              │\n│ • What is the difference between mass and weight?           │\n└─────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is largely accurate and well-structured, effectively conveying the concept of weightlessness in space. However, there are a few areas for improvement. The formula provided, $$F = G \frac{m_1 m_2}{r^2}$$, is the universal law of gravitation, not directly related to the sensation of weightlessness. The correct formula to explain weightlessness, as seen in the gold reference answer, is $$N = m(g - a)$$. Additionally, while the candidate response mentions that gravity is still present at the altitude of the ISS, it could further emphasize that astronauts retain nearly all of their gravitational weight but experience weightlessness due to the free fall mechanism. The use of boxes and sections enhances readability, but some sections, such as 'Suggested Questions', feel somewhat tangential to the main explanation. Overall, the response is clear, well-organized, and effectively teaches the concept of weightlessness, making it suitable for educational purposes.",
+  "candidate_token_usage": {
+    "promptTokens": 356,
+    "completionTokens": 2148,
+    "totalTokens": 2504
+  },
+  "candidate_latency_ms": 3580,
+  "candidate_cost_usd": 0.004652,
+  "judge_token_usage": {
+    "promptTokens": 1415,
+    "completionTokens": 258,
+    "totalTokens": 1673
+  },
+  "judge_latency_ms": 7296,
+  "judge_cost_usd": 0.0014681999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:47:57.949Z"
+}

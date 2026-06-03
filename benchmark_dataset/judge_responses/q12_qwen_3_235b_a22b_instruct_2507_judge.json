@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 12,
+  "question": "Define inertia and explain its types.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nInertia is the inherent property of an object by virtue of which it resists any change to its state of rest or uniform motion along a straight line. Inertia is an intrinsic quality of matter directly proportional to its mass.\n\n---\n\n## Types of Inertia\n\n* **Inertia of Rest:** The inability of an object to change its state of rest by itself.\n* **Inertia of Motion:** The inability of an object to modify its steady uniform linear velocity by itself.\n* **Inertia of Direction:** The inability of a moving mass to change its directional travel alignment without an external intervention force.\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Ensures mechanical stability in structures without continuous power inputs. | Requires substantial energy expenditures to overcome when launching transit systems. |\n\n---\n\n## Real-world Examples\n\n* **Rest Example:** Shaking a tree branch vigorously causes ripe fruits to break free and drop because they resist moving along with the branches.\n* **Motion Example:** An athlete runs a short distance past the finish line because their body's inertia resists an instantaneous stop.\n* **Direction Example:** A car turning sharply left causes passengers to slide toward the right door as their bodies attempt to continue tracking in a straight line.\n\n---\n\n## Summary\n\nInertia is matter's fundamental resistance to acceleration, manifesting as separate tracking constraints across rest states, velocity continuities, and orientation axes.",
+  "candidate_response": "# Inertia: Definition and Types\n\n---\n\n## Quick Definition\n\n**Inertia** is the inherent property of matter that resists changes in its state of motion. An object at rest tends to stay at rest, and an object in motion tends to stay in motion—unless acted upon by an external force.\n\nThis principle forms the foundation of **Newton’s First Law of Motion**, also known as the **Law of Inertia**.\n\n---\n\n## Key Concept\n\n┌───────────────────────────┐  \n│ **Core Idea**             │  \n│                           │  \n│ Objects \"resist\" changes │  \n│ in their motion due to    │  \n│ their inertia.            │  \n└───────────────────────────┘\n\nThe greater the mass of an object, the greater its inertia.\n\n---\n\n## Types of Inertia\n\nThere are **three main types** of inertia, categorized based on the state of motion:\n\n| Type | Description | Example |\n|------|-------------|--------|\n| **Inertia of Rest** | The tendency of a body to remain at rest unless acted upon by a force. | A book lying on a table doesn't move unless pushed. |\n| **Inertia of Motion** | The tendency of a body in motion to continue moving with uniform velocity. | A cyclist doesn't stop instantly after stopping pedaling. |\n| **Inertia of Direction** | The tendency of a body to resist changes in its direction of motion. | Passengers are thrown outward when a car takes a sharp turn. |\n\n---\n\n## Formula Card\n\n$$\n\\vec{F} = m\\vec{a}\n$$\n\n┌───────────────────────────┐  \n│ **Newton’s Second Law**   │  \n│                           │  \n│     $$ \\vec{F} = m\\vec{a} $$ │  \n│                           │  \n│ • **F** = Net force applied  \n│ • **m** = Mass (measure of inertia)  \n│ • **a** = Acceleration produced  \n│  \n│ [ Explain Formula ]  \n│ [ Open Formula Lab ]  \n└───────────────────────────┘\n\n> While inertia itself isn't quantified by a formula, **mass** is the quantitative measure of translational inertia.\n\n---\n\n## Important Notes\n\n⚠️ **Misconception Alert**\n\n- Inertia is **not a force** — it's a **property** of matter.\n- It depends only on **mass**, not speed or location.\n- There is **no unit** for inertia itself, but mass is measured in kilograms (kg).\n\n---\n\n## Real-World Applications\n\n- **Seatbelts** counteract inertia during sudden braking.\n- **Shaking a ketchup bottle** uses inertia to dislodge contents.\n- **Spacecraft in deep space** continue moving without propulsion due to inertia.\n\n---\n\n## Summary\n\n- Inertia is the resistance to change in motion.\n- It has **three types**: rest, motion, and direction.\n- **Mass** is the measure of inertia.\n- Expressed qualitatively through **Newton’s First Law**.\n- Critical in understanding motion, safety systems, and space travel.\n\n---\n\n## Suggested Questions\n\n1. Why is it harder to push a heavy boulder than a small stone?  \n2. Explain why passengers lurch forward when a bus stops suddenly.  \n3. How does inertia affect planetary orbits?  \n4. Can an object have zero inertia? Why or why not?\n\nLet me know if you'd like interactive simulations or a Formula Lab exploration!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly defines inertia, explains its types, and provides relevant examples and formulas. The use of tables, formulas, and notes enhances the readability and understandability of the response. However, to further improve, the candidate could consider adding more real-world applications, interactive simulations, or diagrams to illustrate complex concepts. Additionally, some minor formatting adjustments could enhance the overall presentation quality.",
+  "candidate_token_usage": {
+    "promptTokens": 353,
+    "completionTokens": 715,
+    "totalTokens": 1068
+  },
+  "candidate_latency_ms": 36529,
+  "candidate_cost_usd": 0.001783,
+  "judge_token_usage": {
+    "promptTokens": 1434,
+    "completionTokens": 149,
+    "totalTokens": 1583
+  },
+  "judge_latency_ms": 6041,
+  "judge_cost_usd": 0.001218,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:18:19.025Z"
+}

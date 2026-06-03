@@ -1,0 +1,128 @@
+Here's the interactive lesson on **Projectile Motion**:
+
+---
+
+## 📖 Quick Definition
+
+> **Projectile Motion** is a form of motion experienced by an object that is launched into the air and moves under the influence of gravity alone (after the initial launch), following a curved path called a **trajectory**.
+
+---
+
+## ⚡ Key Characteristics
+
+| # | Characteristic | Details |
+|---|---------------|---------|
+| 1 | **Path Shape** | Always a **parabola** |
+| 2 | **Acceleration** | Only gravity acts → $a_x = 0$, $a_y = -g$ |
+| 3 | **Horizontal Motion** | Uniform (constant velocity) |
+| 4 | **Vertical Motion** | Uniformly accelerated (like free fall) |
+| 5 | **Independence** | Horizontal & vertical motions are **independent** |
+| 6 | **Launch Angle** | Determines range, height, and time of flight |
+
+---
+
+## 🔢 Core Equations
+
+### Horizontal Motion
+
+$$x = u\cos\theta \cdot t$$
+
+### Vertical Motion
+
+$$y = u\sin\theta \cdot t - \frac{1}{2}gt^2$$
+
+### Velocity Components at time *t*
+
+$$v_x = u\cos\theta \qquad v_y = u\sin\theta - gt$$
+
+---
+
+## 📐 Derived Formulas
+
+### 🔹 Time of Flight
+
+$$T = \frac{2u\sin\theta}{g}$$
+
+> Total time the projectile stays in the air.
+
+---
+
+### 🔹 Maximum Height
+
+$$H = \frac{u^2\sin^2\theta}{2g}$$
+
+> Reached when vertical velocity becomes **zero**.
+
+---
+
+### 🔹 Horizontal Range
+
+$$R = \frac{u^2\sin 2\theta}{g}$$
+
+> Maximum when $\theta = 45°$
+
+---
+
+## 🏆 Special Angle Results
+
+| Launch Angle $\theta$ | Range $R$ | Height $H$ | Notes |
+|----------------------|-----------|------------|-------|
+| $15°$ | $\frac{u^2}{2g}$ | Low | Short range |
+| $30°$ | $\frac{u^2\sqrt{3}}{2g}$ | Medium | — |
+| $45°$ | $\frac{u^2}{g}$ | Medium | **Maximum Range** ✓ |
+| $60°$ | $\frac{u^2\sqrt{3}}{2g}$ | High | Same range as 30° |
+| $90°$ | $0$ | Maximum | Straight up, falls back |
+
+> **Note:** Angles that are **complementary** (add to 90°) give the **same horizontal range**.
+
+---
+
+## 🔗 Equation of Trajectory
+
+Eliminating $t$ from the $x$ and $y$ equations:
+
+$$y = x\tan\theta - \frac{gx^2}{2u^2\cos^2\theta}$$
+
+This is of the form $y = ax - bx^2$ → a **downward parabola**, confirming the parabolic path.
+
+---
+
+## 📦 Variable Reference
+
+| Symbol | Meaning | SI Unit |
+|--------|---------|---------|
+| $u$ | Initial speed | m/s |
+| $\theta$ | Launch angle | degrees / radians |
+| $g$ | Acceleration due to gravity ($9.8$) | m/s² |
+| $t$ | Time elapsed | s |
+| $T$ | Time of flight | s |
+| $H$ | Maximum height | m |
+| $R$ | Horizontal range | m |
+
+---
+
+## 🌍 Real-World Applications
+
+- 🏏 Cricket ball / baseball trajectory
+- 💣 Artillery and ballistics
+- 🚀 Rocket launches (initial phase)
+- ⚽ Kicking a football
+- 🎯 Long jump in athletics
+
+---
+
+## ⚠️ Important Assumptions
+
+> 1. Air resistance is **neglected**
+> 2. $g$ is **constant** throughout the motion
+> 3. The Earth's surface is **flat** (valid for short ranges)
+> 4. The projectile is treated as a **point mass**
+
+---
+
+## 💡 Quick Memory Tips
+
+- **Horizontal** → Think *train on flat track* → constant speed
+- **Vertical** → Think *free fall* → gravity pulls it down
+- **45°** → Always gives **maximum range**
+- **Complementary angles** → **Same range**

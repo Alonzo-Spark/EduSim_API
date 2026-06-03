@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 53,
+  "question": "Live Sandbox: What happens visually when the stiffness constant of a spring oscillator is doubled?",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nA block attached to a horizontal spring oscillates back and forth about an equilibrium line. We can adjust the spring stiffness parameter ($k$) to observe how the restoring force scales the oscillation speed.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nThe block transitions into a much faster, higher-frequency oscillation. It cycles back and forth rapidly across the center point, showing sharp direction changes at its maximum extension limits.\n\n### ✦ WHY IT HAPPENS\nDoubling the stiffness constant ($k$) means the spring exerts twice as much restoring force for the exact same displacement distance. A larger restoring force generates a higher acceleration vector, driving the mass back to equilibrium much faster.\n\n### ✦ WHAT TO NOTICE\nWatch the velocity telemetry indicators. The peak velocity at the center equilibrium point climbs significantly higher, while the time required to complete one full cycle decreases.\n\n### ✦ FORMULA\nThe angular frequency of a simple harmonic oscillator is defined as:\n\n$$\\omega = \\sqrt{\\frac{k}{m}}$$\n\n* $k$ represents the spring stiffness parameter value.\n* $m$ represents the mass value of the attached block.\n* Increasing $k$ increases the angular frequency ($\\omega$), which decreases the time period ($T = \\frac{2\\pi}{\\omega}$).\n\n### ✦ DEEPER UNDERSTANDING\nA stiffer spring stores and releases potential energy much faster, accelerating the attached mass more aggressively and reducing the time required for each cycle.\n\n### ✦ TRY THIS\n1. Set the **Stiffness slider ($k$)** to a low value and count the cycles over a ten-second window.\n2. Drag the **Stiffness slider** to maximum and observe the rapid pulse tracking profile.",
+  "candidate_response": "### 🧪 Live Sandbox: Oscillator Dynamics\n\n| Parameter | Initial State | Modified State |\n| :--- | :--- | :--- |\n| **Stiffness ($k$)** | $k$ | $2k$ |\n| **Mass ($m$)** | $m$ | $m$ |\n\n---\n\n### 📘 Introduction\nIn a simple harmonic oscillator, the stiffness constant ($k$)—also known as the spring constant—represents the \"restoring force\" per unit of displacement. When we double this value, we are essentially making the spring twice as \"stiff,\" requiring twice the force to stretch it the same distance.\n\n---\n\n### 💡 Key Concepts\n*   **Restoring Force:** $F = -kx$. Doubling $k$ doubles the pull-back force at any given position.\n*   **Inertia vs. Restoring Force:** The mass ($m$) provides resistance to change in motion, while $k$ drives the motion. Increasing $k$ tips the balance toward faster motion.\n\n---\n\n### 📉 Formula Card: Angular Frequency\n┌──────────────────────────────────────────────────────────┐\n│ **System Frequency Analysis**                            │\n│                                                          │\n│ $$\\omega = \\sqrt{\\frac{k}{m}}$$                          │\n│                                                          │\n│ **Effect of $2k$:**                                      │\n│ The frequency increases by a factor of $\\sqrt{2} \\approx 1.41$. │\n│                                                          │\n│ [ 🔬 Open Formula Lab ]                                  │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n### 📉 Formula Card: Oscillation Period\n┌──────────────────────────────────────────────────────────┐\n│ **Time for One Cycle**                                   │\n│                                                          │\n│ $$T = 2\\pi \\sqrt{\\frac{m}{k}}$$                          │\n│                                                          │\n│ **Effect of $2k$:**                                      │\n│ The period decreases. $T_{new} = \\frac{T_{old}}{\\sqrt{2}}$.   │\n│                                                          │\n│ [ 🔬 Open Formula Lab ]                                  │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n### 👁️ Visual Characteristics\nWhen you \"Run\" the sandbox with $2k$, look for these three specific visual changes:\n\n1.  **Increased \"Snappiness\":** The mass will move much faster through the equilibrium position. It will look more \"aggressive\" and less \"lazy.\"\n2.  **Higher Frequency:** You will count more full oscillations in a 10-second window than you did previously.\n3.  **Smaller Amplitude (Energy Dependent):** If you provide the same initial **Potential Energy**, the spring will not stretch as far ($x = \\sqrt{2E/k}$). The \"swing\" will appear tighter and more compact.\n\n---\n\n### 📊 Comparison Table\n┌──────────────────────────────────────────────────────────┐\n│ **Impact of Doubling Stiffness ($k \\rightarrow 2k$)**      │\n│                                                          │\n│ | Feature | Change Factor | Visual Result |            │\n│ | :--- | :--- | :--- |                                  │\n│ | **Frequency** | $\\times 1.41$ | Faster cycles |          │\n│ | **Period** | $\\times 0.707$ | Shorter duration per cycle |│\n│ | **Velocity (max)** | $\\times 1.41$ | Faster crossing at center | │\n│ | **Acceleration** | $\\times 2.0$ | Sharper turns at edges |   │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n### ❓ Suggested Questions\n*   How does the total energy of the system change if we double $k$ but keep the displacement amplitude the same?\n*   What happens if we double both the mass ($m$) and the stiffness ($k$) simultaneously?\n*   How does the damping ratio change in a real-world scenario when stiffness is increased?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts related to the stiffness constant of a spring oscillator. The use of formulas, such as the angular frequency and oscillation period, is accurate and well-explained. The response also provides a clear and structured presentation of the information, making it easy to follow. However, there are some minor areas for improvement. For example, the candidate could have provided more detailed explanations of the visual characteristics of the oscillator when the stiffness constant is doubled. Additionally, the response could have benefited from more explicit connections to the gold reference answer. Overall, the response is of high quality, but could be further improved with more attention to detail and clarity in explanations.",
+  "candidate_token_usage": {
+    "promptTokens": 387,
+    "completionTokens": 842,
+    "totalTokens": 1229
+  },
+  "candidate_latency_ms": 5734,
+  "candidate_cost_usd": 0.0027195,
+  "judge_token_usage": {
+    "promptTokens": 1637,
+    "completionTokens": 200,
+    "totalTokens": 1837
+  },
+  "judge_latency_ms": 5415,
+  "judge_cost_usd": 0.0014621999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:11:00.406Z"
+}

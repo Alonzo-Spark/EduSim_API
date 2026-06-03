@@ -1,0 +1,112 @@
+┌───────────────────────────────────────────────────────────────┐
+│                           Introduction                           │
+│                                                                   │
+│ In this interactive lesson we explore a classic physics       │
+│ experiment: a simple pendulum.  You will discover how the          │
+│ **mass** of the bob influences (or does **not** influence) the     │
+│ oscillation **period**.  A live sandbox simulation lets you         │
+│ change the mass in real time and instantly see the result.        │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                            Definition                             │
+│                                                                   │
+│ A *simple pendulum* consists of a point‑mass (the bob) attached   │
+│ to a mass‑less string of length **L**, swinging under the influence│
+│ of gravity **g**.  The *period* **T** is the time for one full    │
+│ swing (back‑and‑forth).                                            │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Key Concepts                              │
+│                                                                   │
+│ • **Length (L)** – distance from pivot to bob’s centre of mass.   │
+│ • **Gravity (g)** – 9.81 m s⁻² on Earth (≈ 10 m s⁻² for quick calcs).│
+│ • **Mass (m)** – the weight of the bob.  In an ideal simple pendulum│
+│   the period is *independent* of m.                               │
+│ • **Small‑angle approximation** – valid for θ ≲ 15°.               │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Formula Card                              │
+│                         Main Formula                              │
+│                                                                   │
+│          T = 2 π √( L / g )                                      │
+│                                                                   │
+│ • **T** – period (seconds)                                        │
+│ • **L** – pendulum length (meters)                                 │
+│ • **g** – gravitational acceleration (m s⁻²)                       │
+│                                                                   │
+│ [ Explain Formula ]   – Click to see a step‑by‑step derivation.   │
+│ [ Open Formula Lab ]  – Launch an interactive module where you    │
+│   can vary L, g, and observe the resulting T.                     │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                     Simulation (Live Sandbox)                    │
+│                                                                   │
+│ **How to use the sandbox**                                        │
+│ 1. Set the **pendulum length L** (default = 1 m).                  │
+│ 2. Choose a **mass m** (0.1 kg – 5 kg).                            │
+│ 3. Press **▶️ Start** – the pendulum begins to swing.            │
+│ 4. Observe the **period T** displayed in the corner.            │
+│ 5. Change the mass slider while the simulation runs.             │
+│                                                                   │
+│ **What you will see**                                            │
+│ • The swing amplitude may change slightly (heavier bobs have      │
+│   more inertia, but the period stays the same).                  │
+│ • The period value remains constant, confirming the formula       │
+│   above.                                                          │
+│                                                                   │
+│ *(If you prefer a code‑first approach, the sandbox is built on      │
+│ JavaScript/HTML5 Canvas.  The core update loop is shown below.)   │
+│                                                                   │
+│   ```javascript                                                   │
+│   const g = 9.81;                                                │
+│   const L = 1.0;                                                 │
+│   const T = 2 * Math.PI * Math.sqrt(L / g);                       │
+│   // mass m does NOT enter the period calculation                  │
+│   ```                                                            │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Applications                               │
+│                                                                   │
+│ • Clock design – pendulum clocks rely on the length, not mass.   │
+│ • Seismology – long‑period pendulums (torsion pendulums) use the │
+│   same principle.                                                │
+│ • Educational demos – illustrate the independence of T from m.   │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Summary                                    │
+│                                                                   │
+│ • The period **T** of a simple pendulum is given by               │
+│   **T = 2π√(L/g)**.                                                │
+│ • **Mass does not appear** in the formula; changing m only        │
+│   affects the bob’s inertia, not the timing of the swing.        │
+│ • Live sandbox confirms the theory: period stays constant for     │
+│   any mass, provided the string is mass‑less and the angle is     │
+│   small.                                                          │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                     Suggested Questions                           │
+│                                                                   │
+│ 1. If you double the length L, by what factor does the period      │
+│    change?                                                       │
+│ 2. Why does increasing the mass not affect the period?           │
+│ 3. How would the period change if the pendulum were placed on      │
+│    the Moon (g ≈ 1.62 m s⁻²)?                                      │
+│ 4. What assumptions break down if the swing angle exceeds 30°?    │
+│ 5. Design a experiment using the sandbox to verify the            │
+│    independence of T from m.                                      │
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘

@@ -1,0 +1,646 @@
+Here is the interactive textbook page. I have structured the content into distinct UI cards, implemented the dedicated Formula System with extraction logic, and built a functional "Formula Lab" for the specific heat equations.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermal Properties of Matter - Interactive Textbook</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --formula-bg: #f1f5f9;
+            --success-color: #10b981;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 80px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.25rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-icon {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card-content {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: #fff;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .formula-display {
+            background-color: var(--formula-bg);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 16px 0;
+            font-size: 1.3rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-color);
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Modal / Lab System */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            padding: 30px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        /* Formula Lab Styles */
+        .lab-input-group {
+            margin-bottom: 16px;
+        }
+
+        .lab-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .lab-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .lab-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .lab-result-box {
+            background-color: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .lab-result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Explanation Text */
+        .explanation-text {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        
+        .variable-list {
+            list-style: none;
+            margin-top: 15px;
+            background: var(--bg-color);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .variable-list li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .var-symbol {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            width: 30px;
+        }
+
+        /* Micro-interactions */
+        .highlight-term {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Thermal Properties of Matter</h1>
+            <div class="subtitle">Heat Capacity & Specific Heat Capacity</div>
+        </header>
+
+        <!-- Introduction Section -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">📖</div>
+                <div class="card-title">Introduction</div>
+            </div>
+            <div class="card-content">
+                <p>When heat energy is transferred to or from an object, its temperature changes. However, the amount of temperature change depends on the object's substance and mass. Understanding how different materials respond to heat is crucial in fields ranging from engineering to meteorology.</p>
+            </div>
+        </section>
+
+        <!-- Definition Section -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">📝</div>
+                <div class="card-title">Quick Definition</div>
+            </div>
+            <div class="card-content">
+                <p><strong>Heat Capacity</strong> is the amount of heat energy required to raise the temperature of an entire object by 1°C (or 1 K).</p>
+                <br>
+                <p><strong>Specific Heat Capacity</strong> is the amount of heat energy required to raise the temperature of <span class="highlight-term">1 kilogram</span> of a substance by 1°C (or 1 K).</p>
+            </div>
+        </section>
+
+        <!-- Formula Section: Heat Capacity -->
+        <section class="card formula-card" id="card-heat-capacity">
+            <div class="card-header">
+                <div class="card-icon">🧮</div>
+                <div class="card-title">Formula: Heat Capacity</div>
+            </div>
+            <div class="card-content">
+                <p>The heat capacity ($C$) of an object is defined as the ratio of the heat supplied to the object to the resulting temperature change.</p>
+                
+                <div class="formula-display" data-formula-id="1">
+                    $$ C = \frac{Q}{\Delta T} $$
+                </div>
+
+                <div class="formula-actions">
+                    <button class="btn btn-outline" onclick="explainFormula(1)">Explain Formula</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formula Section: Specific Heat Capacity -->
+        <section class="card formula-card" id="card-specific-heat">
+            <div class="card-header">
+                <div class="card-icon">⚗️</div>
+                <div class="card-title">Formula: Specific Heat Capacity</div>
+            </div>
+            <div class="card-content">
+                <p>The specific heat capacity ($c$) relates the heat energy ($Q$) to the mass ($m$) and the temperature change ($\Delta T$). This is often rearranged to calculate heat energy.</p>
+                
+                <div class="formula-display" data-formula-id="2">
+                    $$ Q = mc\Delta T $$
+                </div>
+
+                <div class="formula-actions">
+                    <button class="btn btn-outline" onclick="explainFormula(2)">Explain Formula</button>
+                    <button class="btn btn-primary" onclick="openFormulaLab(2)">Open Formula Lab</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">📊</div>
+                <div class="card-title">Key Differences</div>
+            </div>
+            <div class="card-content">
+                <p>It is important not to confuse heat capacity with specific heat capacity.</p>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Heat Capacity ($C$)</th>
+                                <th>Specific Heat Capacity ($c$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Definition</strong></td>
+                                <td>Heat required to raise temp of an <em>object</em> by 1°C.</td>
+                                <td>Heat required to raise temp of 1 <em>kg</em> of substance by 1°C.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Depends on</strong></td>
+                                <td>Mass AND Material</td>
+                                <td>Material ONLY</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SI Unit</strong></td>
+                                <td>Joules per Kelvin (J/K)</td>
+                                <td>Joules per kg per Kelvin (J kg⁻¹ K⁻¹)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Symbol</strong></td>
+                                <td>Uppercase $C$</td>
+                                <td>Lowercase $c$</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Applications -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">💡</div>
+                <div class="card-title">Real-world Applications</div>
+            </div>
+            <div class="card-content">
+                <ul style="padding-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>Cooling Systems:</strong> Water is used in car radiators because it has a high specific heat capacity, allowing it to absorb large amounts of heat without a drastic temperature rise.</li>
+                    <li style="margin-bottom: 10px;"><strong>Cooking:</strong> Aluminum pots heat up faster than iron pots because aluminum has a lower specific heat capacity.</li>
+                    <li><strong>Sea Breezes:</strong> Land heats and cools faster than the ocean due to the difference in specific heat capacities between soil and water.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Explanation Modal -->
+    <div class="modal-overlay" id="explanationModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Formula Explanation</div>
+                <button class="close-btn" onclick="closeModal('explanationModal')">&times;</button>
+            </div>
+            <div id="explanationContent">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="labModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Formula Lab: $Q = mc\Delta T$</div>
+                <button class="close-btn" onclick="closeModal('labModal')">&times;</button>
+            </div>
+            <div class="explanation-text">
+                <p>Calculate the heat energy required. Enter values below.</p>
+                
+                <div class="lab-input-group">
+                    <label class="lab-label">Mass ($m$) in kg</label>
+                    <input type="number" id="lab-mass" class="lab-input" placeholder="e.g. 2" oninput="calculateLab()">
+                </div>
+
+                <div class="lab-input-group">
+                    <label class="lab-label">Specific Heat Capacity ($c$) in J/kg°C</label>
+                    <input type="number" id="lab-shc" class="lab-input" placeholder="e.g. 4186 (Water)" oninput="calculateLab()">
+                </div>
+
+                <div class="lab-input-group">
+                    <label class="lab-label">Temperature Change ($\Delta T$) in °C</label>
+                    <input type="number" id="lab-dt" class="lab-input" placeholder="e.g. 10" oninput="calculateLab()">
+                </div>
+
+                <div class="lab-result-box">
+                    <span>Heat Energy ($Q$)</span>
+                    <span class="lab-result-value" id="lab-result">0 Joules</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX JS -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <script>
+        // Formula Database extracted during "rendering"
+        const formulaDatabase = {
+            1: {
+                latex: "C = \\frac{Q}{\\Delta T}",
+                title: "Heat Capacity",
+                context: "Relates total heat to total temperature change of a specific object.",
+                variables: [
+                    { symbol: "C", meaning: "Heat Capacity (J/K)" },
+                    { symbol: "Q", meaning: "Heat Energy Supplied (J)" },
+                    { symbol: "ΔT", meaning: "Change in Temperature (K or °C)" }
+                ]
+            },
+            2: {
+                latex: "Q = mc\\Delta T",
+                title: "Specific Heat Equation",
+                context: "Used to calculate the heat energy absorbed or released by a substance of known mass.",
+                variables: [
+                    { symbol: "Q", meaning: "Heat Energy (Joules)" },
+                    { symbol: "m", meaning: "Mass of substance (kg)" },
+                    { symbol: "c", meaning: "Specific Heat Capacity (J/kg°C)" },
+                    { symbol: "ΔT", meaning: "Temperature Change (°C)" }
+                ]
+            }
+        };
+
+        // Initialize KaTeX rendering
+        document.addEventListener("DOMContentLoaded", () => {
+            renderMath();
+        });
+
+        function renderMath() {
+            const mathElements = document.querySelectorAll('.formula-display');
+            mathElements.forEach(el => {
+                katex.render(el.innerText.trim(), el, {
+                    throwOnError: false,
+                    displayMode: true
+                });
+            });
+        }
+
+        // Modal Logic
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Explanation Logic
+        function explainFormula(id) {
+            const data = formulaDatabase[id];
+            const contentDiv = document.getElementById('explanationContent');
+            
+            let html = `
+                <div class="formula-display" style="margin-bottom: 20px;">$$${data.latex}$$</div>
+                <p style="margin-bottom: 15px;"><strong>Context:</strong> ${data.context}</p>
+                <p><strong>Variables involved:</strong></p>
+                <ul class="variable-list">
+            `;
+
+            data.variables.forEach(v => {
+                html += `<li><span class="var-symbol">${v.symbol}</span> : ${v.meaning}</li>`;
+            });
+
+            html += `</ul>`;
+            
+            contentDiv.innerHTML = html;
+            
+            // Re-render KaTeX inside the modal
+            katex.render(data.latex, contentDiv.querySelector('.formula-display'), {
+                throwOnError: false,
+                displayMode: true
+            });
+
+            document.getElementById('explanationModal').classList.add('active');
+        }
+
+        // Formula Lab Logic
+        function openFormulaLab(id) {
+            if(id !== 2) return; // Only implemented for the main formula in this demo
+            // Reset inputs
+            document.getElementById('lab-mass').value = '';
+            document.getElementById('lab-shc').value = '';
+            document.getElementById('lab-dt').value = '';
+            document.getElementById('lab-result').innerText = '0 Joules';
+            document.getElementById('labModal').classList.add('active');
+        }
+
+        function calculateLab() {
+            const m = parseFloat(document.getElementById('lab-mass').value);
+            const c = parseFloat(document.getElementById('lab-shc').value);
+            const dt = parseFloat(document.getElementById('lab-dt').value);
+
+            const resultEl = document.getElementById('lab-result');
+
+            if (isNaN(m) || isNaN(c) || isNaN(dt)) {
+                resultEl.innerText = '...';
+                return;
+            }
+
+            const Q = m * c * dt;
+            
+            // Format number nicely
+            let formattedQ = Q.toLocaleString(undefined, { maximumFractionDigits: 2 });
+            resultEl.innerText = `${formattedQ} Joules`;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
+```

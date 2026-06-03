@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "zai-glm-4.7 (Cerebras)",
+  "question_id": 48,
+  "question": "Derive the expression for equivalent resistance in parallel combination.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nA parallel combination is a circuit configuration where multiple resistors are connected across the same two electrical nodes, creating separate, independent branches for current flow.\n\n---\n\n## Formula\n\nThe inverse equivalent resistance relationship is given by:\n\n$$\\frac{1}{R_{\\text{eq}}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3}$$\n\nWhere:\n* $R_{\\text{eq}}$ represents the total equivalent circuit resistance\n* $R_1, R_2, R_3$ represent the individual branch resistors\n\n---\n\n## Derivations\n\nConsider three resistors with values $R_1$, $R_2$, and $R_3$ connected in parallel branches across a voltage source $V$.\n\nBecause all branches are connected directly to the same electrical nodes, the voltage drop ($V$) across each resistor is identical:\n$$V_1 = V_2 = V_3 = V$$\n\nThe total current ($I$) leaving the source divides among the available parallel paths:\n$$I = I_1 + I_2 + I_3$$\n\nApplying Ohm's Law in its current form ($I = \\frac{V}{R}$) to each branch component:\n$$I_1 = \\frac{V}{R_1}$$\n\n$$I_2 = \\frac{V}{R_2}$$\n\n$$I_3 = \\frac{V}{R_3}$$\n\nSubstitute these individual branch current expressions into the total current equation:\n$$I = \\frac{V}{R_1} + \\frac{V}{R_2} + \\frac{V}{R_3}$$\n\nFactor out the common voltage parameter ($V$):\n$$I = V \\left(\\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3}\\right)$$\n\nIf the parallel network is replaced by a single equivalent resistor ($R_{\\text{eq}}$), total current is $I = \\frac{V}{R_{\\text{eq}}}$. Equating these terms:\n$$\\frac{V}{R_{\\text{eq}}} = V \\left(\\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3}\\right)$$\n\nDivide both sides by the voltage parameter ($V$) to yield the final parallel relation:\n$$\\frac{1}{R_{\\text{eq}}} = \\frac{1}{R_1} + \\frac{1}{R_2} + \\frac{1}{R_3}$$\n\nThis completes the analytical derivation for parallel equivalent resistance.\n\n---\n\n## Summary\n\nResistors in parallel share the same voltage drop across branches, meaning their branch currents add up. This results in an equivalent resistance smaller than the smallest individual branch resistor.",
+  "candidate_response": "<failed>",
+  "judge_model": "N/A",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Model generation failed: OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"z-ai/glm-4.7 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Cerebras\",\"is_byok\":false}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "candidate_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "candidate_latency_ms": 379,
+  "candidate_cost_usd": 0,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 0,
+  "judge_cost_usd": 0,
+  "retry_count": 2,
+  "success": false,
+  "error": "OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"z-ai/glm-4.7 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Cerebras\",\"is_byok\":false}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "timestamp": "2026-06-01T09:49:56.388Z"
+}

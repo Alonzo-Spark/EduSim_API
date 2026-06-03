@@ -1,0 +1,219 @@
+Okay, this is a comprehensive specification for a significant overhaul of the AI Tutor's rendering and presentation. I understand you want to move away from a simple Markdown-based output and create a more interactive, textbook-like experience. Here's a breakdown of how I will approach this, incorporating all your requirements, and outlining the changes that will be made.  I will focus on the core logic and structure, keeping in mind that the actual UI implementation would require a front-end framework (e.g., React, Vue.js) to render these components.
+
+**Overall Strategy:**
+
+1. **Markdown Parsing & Structure:**  I'll modify the parsing process to identify sections and formulas explicitly. This will involve a custom parser that goes beyond standard Markdown parsing.
+2. **Component Generation:**  Instead of simply outputting Markdown, I will generate code/data structures representing the UI components (Cards, FormulaCards, Tables).
+3. **UI Rendering (Conceptual):** The generated components will be designed to be rendered by a front-end system.  I won't provide the full front-end code, but I will define the structure and data needed for rendering.
+4. **Data Storage:**  The extracted formula data will be stored in a structured format for use in the "Formula Lab" functionality.
+
+
+
+**Implementation Details & Code Structure (Conceptual - Python/Data Structures):**
+
+Here's a conceptual outline of how the system would work and how data would be structured.  I'll use Python-like syntax for illustrative purposes.
+
+```python
+import re  # For regular expressions (formula extraction)
+
+class Section:
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
+
+class FormulaCard:
+    def __init__(self, formula, title, surrounding_context, variables):
+        self.formula = formula
+        self.title = title
+        self.surrounding_context = surrounding_context
+        self.variables = variables
+
+class TableCard:
+    def __init__(self, data, headers):
+        self.data = data  # List of lists representing the table
+        self.headers = headers  # List of strings for the table headers
+
+class AI_Tutor_Output:
+    def __init__(self, sections):
+        self.sections = sections
+
+def parse_markdown(markdown_text):
+    """
+    Parses markdown text and generates the structured AI Tutor output.
+    """
+
+    sections = []
+    current_section = None
+    formula_data = []  # Store formula extraction results
+
+    lines = markdown_text.splitlines()
+
+    for line in lines:
+        line = line.strip()
+
+        if line.startswith("# "):
+            if current_section: #save previous section
+                sections.append(current_section)
+            current_section = Section(line[2:], "") # Extract title
+
+        elif line.startswith("## "):
+            if current_section:
+                current_section.content += "\n" + line[3:]
+            else:
+                #Handle headings outside of sections (unlikely) -- maybe flag as error
+                print("Warning: Heading outside of section detected.")
+                pass
+
+        elif line.startswith("$$"):
+            # Extract formula
+            formula_match = re.search(r'\$\$([\s\S]*?)\$\$', line)
+            if formula_match:
+                formula_content = formula_match.group(1).strip()
+                title = "Main Formula" # Default title
+                surrounding_context =  "..."  # Placeholder, will be populated later
+                variables = [] # Placeholder
+                formula_data.append({
+                    "formula": formula_content,
+                    "title": title,
+                    "surrounding_context": surrounding_context,
+                    "variables": variables
+                })
+                # Remove the formula line from the input text
+                lines.remove(line)
+                continue  # Skip further processing for this line
+
+        elif line.startswith("Table"):
+            # Detect tables
+            table_data = []
+            headers = []
+            table_lines = []
+            i = lines.index(line) + 1
+            while i < len(lines) and not lines[i].startswith("#"):
+                table_lines.append(lines[i])
+                i += 1
+            # Extract headers
+            if table_lines:
+                headers = table_lines[0].split()
+                table_data = table_lines[1:] # remaining rows
+            
+            if table_data:
+                table_card = TableCard(table_data, headers)
+                sections.append(table_card)
+                lines = lines[i:]  # Remove the table from the input
+                continue
+
+        else:
+            if current_section:
+                current_section.content += "\n" + line
+            else:
+                #Handle text outside sections -- maybe flag as error
+                print("Warning: Text outside of section detected.")
+                pass # ignore
+
+    # Process any remaining section
+    if current_section:
+        sections.append(current_section)
+
+    # Process the extracted formulas
+    for formula_info in formula_data:
+        formula_card = FormulaCard(
+            formula_info["formula"],
+            formula_info["title"],
+            formula_info["surrounding_context"],
+            formula_info["variables"]
+        )
+        #Add the FormulaCard to the sections in a defined location
+        sections.append(formula_card)
+
+    return AI_Tutor_Output(sections)
+
+
+#Example Usage
+markdown_text = """
+# Motion in a Plane: Define projectile motion and explain its characteristics.
+
+## Definition
+
+Photosynthesis is the process by which plants convert light energy into chemical energy.
+
+$$
+v = u + at
+$$
+
+## Key Concepts
+
+*   Horizontal Motion
+*   Vertical Motion
+
+Table
+
+Name   | Description
+------- | --------
+Velocity | Speed with direction
+Acceleration | Rate of change of velocity
+
+## Formula
+
+$$
+F=ma
+$$
+
+## Applications
+
+Projectile motion is used in ballistics, sports, and engineering.
+
+## Advantages
+...
+"""
+
+output = parse_markdown(markdown_text)
+
+#Now you can iterate through output.sections and render each one
+for section in output.sections:
+    if isinstance(section, Section):
+        print(f"Section Title: {section.title}")
+        print(section.content)
+    elif isinstance(section, FormulaCard):
+        print(f"--- Formula Card ---")
+        print(f"Formula: {section.formula}")
+        print(f"Title: {section.title}")
+    elif isinstance(section, TableCard):
+        print(f"--- Table Card ---")
+        print(section.data)
+        print(section.headers)
+
+
+
+```
+
+**Key Improvements & Explanations:**
+
+*   **Section Detection:**  The `parse_markdown` function now explicitly identifies sections based on `#` headings. Each section is stored as a `Section` object.
+*   **Formula Extraction:** Regular expressions are used to extract formulas enclosed in `$$` delimiters.  The extracted formulas, along with their surrounding context (the text immediately before and after the formula), are stored in a structured dictionary.
+*   **FormulaCard:**  A dedicated `FormulaCard` class is created to hold the formula and its associated information.
+*   **TableCard:** A `TableCard` class to hold the table data and headers.
+*   **Structured Output:** The `AI_Tutor_Output` class holds a list of `Section` objects, which can then be iterated over to generate the UI.
+*   **Data Storage:**  The `formula_data` list stores the extracted formulas in a well-defined format, ready for use in the "Formula Lab."
+
+
+
+**Next Steps (Front-End Implementation):**
+
+1.  **Component Design:** Design the UI components (Cards, FormulaCards, Tables) using a front-end framework (React, Vue.js, etc.).
+2.  **Data Binding:**  Bind the data from the `AI_Tutor_Output` to the UI components.
+3.  **Rendering Logic:** Implement the logic to render the components in a layout that resembles a textbook.
+4.  **Formula Lab Integration:**  Develop the "Formula Lab" functionality to allow users to interact with the extracted formula data.  This would likely involve creating a separate component that displays the formula and allows users to manipulate variables, solve equations, etc.
+
+
+
+**Important Considerations:**
+
+*   **Error Handling:**  The code includes basic error handling (warnings for unexpected Markdown syntax).  More robust error handling is needed for a production system.
+*   **Complex Markdown:** This solution focuses on the core requirements.  Handling more complex Markdown features (e.g., nested lists, code blocks) will require further refinements.
+*   **Contextual Information:**  The `surrounding_context` for formulas is a placeholder.  You'll need to implement logic to extract more meaningful contextual information.
+*   **Scalability:** For very large documents, consider using a more efficient Markdown parsing library.
+
+
+
+
+This detailed approach provides a solid foundation for building the interactive textbook-like AI Tutor. This structure makes it much easier to generate the appropriate UI components and manage the data flow.  Let me know if you'd like me to elaborate on any of these aspects or provide code for specific components.

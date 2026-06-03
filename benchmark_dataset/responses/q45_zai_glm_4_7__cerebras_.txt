@@ -1,0 +1,67 @@
+```json
+{
+  "meta": {
+    "topic": "Electrostatic Shielding",
+    "extractedFormulas": [
+      {
+        "id": "gauss-law",
+        "formula": "\\oint \\mathbf{E} \\cdot d\\mathbf{A} = \\frac{Q_{\\text{enc}}}{\\epsilon_0}",
+        "title": "Gauss's Law",
+        "variables": [
+          {"symbol": "\\mathbf{E}", "meaning": "Electric Field"},
+          {"symbol": "d\\mathbf{A}", "meaning": "Differential Area Vector"},
+          {"symbol": "Q_{\\text{enc}}", "meaning": "Enclosed Charge"},
+          {"symbol": "\\epsilon_0", "meaning": "Vacuum Permittivity"}
+        ]
+      }
+    ]
+  },
+  "ui_blocks": [
+    {
+      "type": "card",
+      "title": "Quick Definition",
+      "content": "<p><strong>Electrostatic shielding</strong> is the phenomenon observed when a conductor (hollow or solid) blocks the effects of an external electric field. Inside the cavity of a conductor, the electric field is zero, regardless of the strength of the external field.</p>"
+    },
+    {
+      "type": "card",
+      "title": "How It Works",
+      "content": "<ul><li><strong>Charge Redistribution:</strong> When an external electric field is applied, free electrons in the conductor move instantly.</li><li><strong>Induced Field:</strong> This movement creates an induced electric field that opposes the external field.</li><li><strong>Equilibrium:</strong> The two fields cancel each other perfectly inside the conductor, resulting in a net electric field of zero.</li></ul>"
+    },
+    {
+      "type": "formula_card",
+      "title": "Underlying Principle",
+      "formula_id": "gauss-law",
+      "rendered_latex": "$$\\oint \\mathbf{E} \\cdot d\\mathbf{A} = \\frac{Q_{\\text{enc}}}{\\epsilon_0}$$",
+      "actions": [
+        "[ Explain Formula ]",
+        "[ Open Formula Lab ]"
+      ]
+    },
+    {
+      "type": "card",
+      "title": "Real-World Applications",
+      "content": {
+        "table": {
+          "headers": ["Application", "Description"],
+          "rows": [
+            ["Faraday Cage", "A room or enclosure made of conducting mesh that blocks external static and non-static electric fields."],
+            ["Coaxial Cables", "The outer braided shield protects the inner signal carrier from external electrical noise."],
+            ["Cars & Airplanes", "During a lightning storm, the metal body acts as a shield, keeping the passengers safe inside."],
+            ["Microwave Ovens", "The metal mesh on the door prevents the high-frequency electromagnetic waves from escaping."],
+            ["Electronic Shielding", "Sensitive components are wrapped in foil to prevent interference."]]
+        }
+      }
+    },
+    {
+      "type": "card",
+      "title": "Important Notes",
+      "content": "<ul><li>⚠️ <strong>Static vs. Dynamic:</strong> This shielding is perfect for <em>electrostatic</em> fields. For changing electromagnetic fields (like radio waves), the shield's effectiveness depends on the thickness and frequency.</li><li>⚠️ <strong>No Field Inside:</strong> The electric field inside the material of the conductor is zero in electrostatic equilibrium.</li><li>⚠️ <strong>Mesh Size:</strong> For shielding against high-frequency waves, the holes in the mesh must be significantly smaller than the wavelength.</li></ul>"
+    },
+    {
+      "type": "card",
+      "title": "Suggested Questions",
+      "content": "<ol><li>Why are you safe inside a car during a thunderstorm?</li><li>Does electrostatic shielding work with non-conducting materials?</li><li>How does the thickness of a conductor affect its shielding ability against low-frequency magnetic fields?</li></ol>"
+    }
+  ]
+}
+```

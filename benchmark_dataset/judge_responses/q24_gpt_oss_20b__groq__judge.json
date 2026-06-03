@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 24,
+  "question": "Calculate the gravitational force between two masses of 5 kg each placed 2 m apart.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Gravitational Field Problem\n\n### Problem\nCalculate the gravitational force between two identical masses of $5 \\text{ kg}$ each placed at a center-to-center distance of $2 \\text{ m}$ apart.\n\n### Given\n* First mass ($m_1$) = $5 \\text{ kg}$\n* Second mass ($m_2$) = $5 \\text{ kg}$\n* Distance apart ($r$) = $2 \\text{ m}$\n* Gravitational Constant ($G$) = $6.67 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$\n\n### Formula\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\n### Substitution\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{5 \\times 5}{2^2}$$\n\n### Calculation\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{25}{4}$$\n\n$$F = (6.67 \\times 10^{-11}) \\times 6.25$$\n\n$$F = 4.16875 \\times 10^{-10} \\text{ N}$$\n\n### Final Answer\n**Gravitational Force ($F$) = $4.17 \\times 10^{-10} \\text{ N}$**\n\n### Interpretation\nThis reflects an incredibly weak mutual attraction force, demonstrating why gravity is imperceptible between everyday objects and only becomes significant with planetary-scale masses.",
+  "candidate_response": "<failed>",
+  "judge_model": "N/A",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Model generation failed: OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "candidate_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "candidate_latency_ms": 519,
+  "candidate_cost_usd": 0,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 0,
+  "judge_cost_usd": 0,
+  "retry_count": 2,
+  "success": false,
+  "error": "OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "timestamp": "2026-06-01T07:46:10.828Z"
+}

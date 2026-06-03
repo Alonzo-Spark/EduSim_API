@@ -1,0 +1,107 @@
+Okay, I understand. You want a significant overhaul of how the AI Tutor's content is rendered, moving away from a simple markdown presentation and towards a more interactive, textbook-like experience. Here's a breakdown of how I will implement the new rendering system, incorporating all your specifications.
+
+**Core Principles:**
+
+*   **Structured UI Blocks:** Content will be parsed and converted into distinct UI blocks (cards) for improved readability and interactivity.
+*   **Section Cards:** Each section (Introduction, Definition, etc.) will be rendered as a card.
+*   **Formula Cards:**  All formulas will be encapsulated in dedicated Formula Cards with explanation and lab links.
+*   **Responsive Tables:** Tables will be rendered as responsive cards.
+*   **No Floating Formulas:** Formulas will never appear directly within the text flow.
+*   **Efficiency:** The formula extraction process will be performed only once during parsing for performance.
+
+**Implementation Details:**
+
+I will modify my internal markdown parser and rendering engine to follow these steps:
+
+1.  **Markdown Parsing:**  I will continue to parse the input markdown content.
+2.  **Section Detection:**  I will use the predefined section markers (e.g., `## Introduction`, `### Key Concepts`) to identify and group content into sections.
+3.  **Content Transformation:** For each section:
+    *   I will create a `SectionCard` component.
+    *   I will populate the card with the section title and the associated content.
+4.  **Formula Handling:**
+    *   When a LaTeX formula is detected (`$$...$$`), I will extract the formula itself, any surrounding text (context), and identify the variables within the formula.
+    *   I will create a `FormulaCard` component.
+    *   The `FormulaCard` will display the rendered formula and include buttons for "Explain Formula" and "Open Formula Lab".
+    *   The original formula block in the markdown will be replaced with the `FormulaCard` component.
+5.  **Table Handling:**
+    *   I will identify markdown tables.
+    *   I will render each table as a `TableCard` component, which will be responsive and adapt to different screen sizes.
+6.  **Textual Content:**
+    *   Paragraphs and other regular text will be rendered within their respective `SectionCard` components.  I will pay special attention to formatting (bold, italics, lists) to maintain readability.
+7.  **Output:** The final output will be a structured UI representation of the content, composed of interconnected cards.
+
+**Data Structure for Formula Extraction:**
+
+The `formula` data structure will contain the following:
+
+```json
+{
+  "formula": "F=ma",
+  "title": "Newton's Second Law of Motion",
+  "surroundingContext": "This law describes the relationship between force, mass, and acceleration.",
+  "variables": ["F", "m", "a"]
+}
+```
+
+This structure will be used to populate the `FormulaCard` component and provide data for the "Explain Formula" and "Open Formula Lab" functions.
+
+**Example Transformation:**
+
+**Input Markdown:**
+
+```markdown
+# Newton's Second Law of Motion
+
+This law describes the relationship between force, mass, and acceleration.
+
+The formula is:
+
+$$F=ma$$
+
+This means that the acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass.
+
+## Key Concepts
+
+*   Force
+*   Mass
+*   Acceleration
+```
+
+**Output (Conceptual - Not actual HTML/UI):**
+
+```html
+<div>
+  <SectionCard title="Newton's Second Law of Motion">
+    <p>This law describes the relationship between force, mass, and acceleration.</p>
+    <FormulaCard
+      formula="F=ma"
+      title="Newton's Second Law of Motion"
+      surroundingContext="This law describes the relationship between force, mass, and acceleration."
+      variables=["F", "m", "a"]
+      explainButton="Explain Formula"
+      labButton="Open Formula Lab"
+    />
+    <p>This means that the acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass.</p>
+  </SectionCard>
+
+  <SectionCard title="Key Concepts">
+    <ul>
+      <li>Force</li>
+      <li>Mass</li>
+      <li>Acceleration</li>
+    </ul>
+  </SectionCard>
+</div>
+```
+
+**Next Steps:**
+
+1.  **Code Implementation:** I will begin implementing the parsing and rendering logic based on the described architecture.
+2.  **Formula Extraction Implementation:** I will implement the formula extraction logic during markdown parsing.
+3.  **UI Component Development:** I will create the `SectionCard`, `FormulaCard`, and `TableCard` components.
+4.  **Testing and Refinement:** I will thoroughly test the system with various markdown documents to ensure accuracy and responsiveness.
+
+I'm ready to start implementing this new rendering system. Please let me know if you have any specific requirements or modifications you would like me to incorporate.  I'll focus on delivering a user experience that feels much more interactive and resembles a textbook.
+
+
+

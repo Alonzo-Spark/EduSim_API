@@ -1,0 +1,531 @@
+I'll build this as a structured interactive textbook experience with cards, formula labs, and visual components.
+
+```tsx
+import { useState, useRef, useEffect } from "react";
+
+const katex = window.katex;
+
+function renderLatex(str: string, display = false): string {
+  try {
+    return katex.renderToString(str, { throwOnError: false, displayMode: display });
+  } catch {
+    return str;
+  }
+}
+
+function InlineMath({ math }: { math: string }) {
+  return <span dangerouslySetInnerHTML={{ __html: renderLatex(math, false) }} />;
+}
+
+function DisplayMath({ math }: { math: string }) {
+  return <div dangerouslySetInnerHTML={{ __html: renderLatex(math, true) }} />;
+}
+
+// ─── FormulaCard ──────────────────────────────────────────────────────────────
+function FormulaCard({
+  title,
+  formula,
+  variables,
+  context,
+}: {
+  title: string;
+  formula: string;
+  variables: { symbol: string; meaning: string }[];
+  context: string;
+}) {
+  const [tab, setTab] = useState<"formula" | "explain" | "lab">("formula");
+
+  // Lab state
+  const [v0, setV0] = useState(30);
+  const [angle, setAngle] = useState(45);
+  const [k, setK] = useState(0.05);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (tab !== "lab") return;
+    drawTrajectories(canvasRef.current, v0, angle, k);
+  }, [tab, v0, angle, k]);
+
+  return (
+    <div style={{
+      background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+      border: "1px solid #334155",
+      borderRadius: 16,
+      overflow: "hidden",
+      marginBottom: 24,
+      boxShadow: "0 4px 24px rgba(0,0,0,0.4)"
+    }}>
+      {/* Header */}
+      <div style={{
+        background: "linear-gradient(90deg, #6366f1, #8b5cf6)",
+        padding: "12px 20px",
+        display: "flex",
+        alignItems: "center",
+        gap: 10
+      }}>
+        <span style={{ fontSize: 18 }}>⚡</span>
+        <span style={{ color: "#fff", fontWeight: 700, fontSize: 15, letterSpacing: 0.5 }}>{title}</span>
+      </div>
+
+      {/* Tabs */}
+      <div style={{ display: "flex", borderBottom: "1px solid #334155" }}>
+        {(["formula", "explain", "lab"] as const).map(t => (
+          <button key={t} onClick={() => setTab(t)} style={{
+            flex: 1,
+            padding: "10px 0",
+            background: tab === t ? "#1e293b" : "transparent",
+            border: "none",
+            borderBottom: tab === t ? "2px solid #6366f1" : "2px solid transparent",
+            color: tab === t ? "#a5b4fc" : "#64748b",
+            fontWeight: tab === t ? 700 : 400,
+            fontSize: 13,
+            cursor: "pointer",
+            textTransform: "capitalize",
+            transition: "all 0.2s"
+          }}>
+            {t === "formula" ? "📐 Formula" : t === "explain" ? "💡 Explain" : "🔬 Lab"}
+          </button>
+        ))}
+      </div>
+
+      {/* Content */}
+      <div style={{ padding: "24px 20px" }}>
+        {tab === "formula" && (
+          <div style={{ textAlign: "center" }}>
+            <div style={{
+              background: "#0f172a",
+              borderRadius: 12,
+              padding: "24px 16px",
+              border: "1px solid #334155",
+              fontSize: 20
+            }}>
+              <DisplayMath math={formula} />
+            </div>
+            <p style={{ color: "#94a3b8", fontSize: 13, marginTop: 12 }}>{context}</p>
+          </div>
+        )}
+
+        {tab === "explain" && (
+          <div>
+            <p style={{ color: "#cbd5e1", fontSize: 14, marginBottom: 16, lineHeight: 1.7 }}>
+              Each symbol in this equation represents a physical quantity:
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {variables.map(v => (
+                <div key={v.symbol} style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  background: "#0f172a",
+                  borderRadius: 10,
+                  padding: "10px 14px",
+                  border: "1px solid #1e293b"
+                }}>
+                  <span style={{
+                    minWidth: 48,
+                    textAlign: "center",
+                    background: "#1e293b",
+                    borderRadius: 8,
+                    padding: "4px 8px",
+                    fontSize: 15
+                  }}>
+                    <InlineMath math={v.symbol} />
+                  </span>
+                  <span style={{ color: "#94a3b8", fontSize: 13 }}>{v.meaning}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {tab === "lab" && (
+          <div>
+            <p style={{ color: "#94a3b8", fontSize: 13, marginBottom: 16 }}>
+              Adjust parameters to see how air resistance reshapes the trajectory in real time.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 16 }}>
+              <Slider label="Initial Speed (m/s)" symbol="v_0" min={10} max={60} value={v0} onChange={setV0} color="#6366f1" />
+              <Slider label="Launch Angle (°)" symbol="\theta" min={10} max={80} value={angle} onChange={setAngle} color="#8b5cf6" />
+              <Slider label="Drag Coefficient" symbol="k" min={0} max={0.2} step={0.005} value={k} onChange={setK} color="#ec4899" />
+            </div>
+            <canvas ref={canvasRef} width={560} height={260}
+              style={{ width: "100%", borderRadius: 10, border: "1px solid #334155", background: "#0f172a" }} />
+            <div style={{ display: "flex", gap: 20, marginTop: 10, justifyContent: "center" }}>
+              <LegendDot color="#6366f1" label="No air resistance (ideal)" />
+              <LegendDot color="#f97316" label={`With drag  k = ${k.toFixed(3)}`} />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Slider({ label, symbol, min, max, step = 1, value, onChange, color }: any) {
+  return (
+    <div style={{ flex: "1 1 160px", minWidth: 140 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+        <span style={{ color: "#94a3b8", fontSize: 12 }}>{label}</span>
+        <span style={{ color, fontSize: 12, fontWeight: 700 }}>{value}</span>
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value}
+        onChange={e => onChange(Number(e.target.value))}
+        style={{ width: "100%", accentColor: color }} />
+    </div>
+  );
+}
+
+function LegendDot({ color, label }: { color: string; label: string }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+      <div style={{ width: 12, height: 4, borderRadius: 2, background: color }} />
+      <span style={{ color: "#94a3b8", fontSize: 12 }}>{label}</span>
+    </div>
+  );
+}
+
+// ─── Physics simulation ────────────────────────────────────────────────────────
+function simulateTrajectory(v0: number, angleDeg: number, k: number, g = 9.81, dt = 0.02) {
+  const rad = (angleDeg * Math.PI) / 180;
+  let vx = v0 * Math.cos(rad);
+  let vy = v0 * Math.sin(rad);
+  let x = 0, y = 0;
+  const pts: [number, number][] = [[0, 0]];
+  for (let i = 0; i < 5000; i++) {
+    const v = Math.sqrt(vx * vx + vy * vy);
+    const ax = -k * v * vx;
+    const ay = -g - k * v * vy;
+    vx += ax * dt;
+    vy += ay * dt;
+    x += vx * dt;
+    y += vy * dt;
+    if (y < 0 && i > 2) break;
+    pts.push([x, y]);
+  }
+  return pts;
+}
+
+function drawTrajectories(canvas: HTMLCanvasElement | null, v0: number, angle: number, k: number) {
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = "#1e293b";
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (let y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+  const ideal = simulateTrajectory(v0, angle, 0);
+  const drag = simulateTrajectory(v0, angle, k);
+
+  const allPts = [...ideal, ...drag];
+  const maxX = Math.max(...allPts.map(p => p[0]), 1);
+  const maxY = Math.max(...allPts.map(p => p[1]), 1);
+  const pad = 30;
+  const scaleX = (W - pad * 2) / maxX;
+  const scaleY = (H - pad * 2) / maxY;
+
+  function toCanvas(x: number, y: number): [number, number] {
+    return [pad + x * scaleX, H - pad - y * scaleY];
+  }
+
+  function drawPath(pts: [number, number][], color: string, dash: number[] = []) {
+    ctx!.beginPath();
+    ctx!.setLineDash(dash);
+    ctx!.strokeStyle = color;
+    ctx!.lineWidth = 2.5;
+    pts.forEach(([x, y], i) => {
+      const [cx, cy] = toCanvas(x, y);
+      i === 0 ? ctx!.moveTo(cx, cy) : ctx!.lineTo(cx, cy);
+    });
+    ctx!.stroke();
+    ctx!.setLineDash([]);
+  }
+
+  drawPath(ideal, "#6366f1", [6, 4]);
+  drawPath(drag, "#f97316");
+
+  // Ground line
+  ctx.strokeStyle = "#334155";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(pad, H - pad);
+  ctx.lineTo(W - pad, H - pad);
+  ctx.stroke();
+
+  // Apex markers
+  const idealApex = ideal.reduce((a, b) => b[1] > a[1] ? b : a);
+  const dragApex = drag.reduce((a, b) => b[1] > a[1] ? b : a);
+
+  function drawApex(pt: [number, number], color: string) {
+    const [cx, cy] = toCanvas(pt[0], pt[1]);
+    ctx!.beginPath();
+    ctx!.arc(cx, cy, 4, 0, Math.PI * 2);
+    ctx!.fillStyle = color;
+    ctx!.fill();
+  }
+  drawApex(idealApex, "#6366f1");
+  drawApex(dragApex, "#f97316");
+
+  // Range labels
+  const idealRange = ideal[ideal.length - 1][0];
+  const dragRange = drag[drag.length - 1][0];
+  ctx.font = "11px monospace";
+  ctx.fillStyle = "#6366f1";
+  ctx.fillText(`R = ${idealRange.toFixed(1)}m`, pad + idealRange * scaleX - 40, H - pad + 18);
+  ctx.fillStyle = "#f97316";
+  ctx.fillText(`R = ${dragRange.toFixed(1)}m`, pad + dragRange * scaleX - 40, H - pad + 30);
+}
+
+// ─── Section Cards ─────────────────────────────────────────────────────────────
+function SectionCard({ icon, title, accent, children }: any) {
+  return (
+    <div style={{
+      background: "#1e293b",
+      border: `1px solid #334155`,
+      borderLeft: `4px solid ${accent}`,
+      borderRadius: 14,
+      padding: "20px 22px",
+      marginBottom: 20,
+      boxShadow: "0 2px 12px rgba(0,0,0,0.2)"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+        <span style={{ fontSize: 20 }}>{icon}</span>
+        <h2 style={{ margin: 0, color: "#f1f5f9", fontSize: 16, fontWeight: 700 }}>{title}</h2>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function DefinitionCard({ term, definition }: { term: string; definition: string }) {
+  return (
+    <div style={{
+      background: "linear-gradient(135deg, #0f172a, #1a1f35)",
+      border: "1px solid #4f46e5",
+      borderRadius: 12,
+      padding: "18px 20px",
+      marginBottom: 20,
+      boxShadow: "0 0 20px rgba(99,102,241,0.15)"
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+        <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#6366f1" }} />
+        <span style={{ color: "#a5b4fc", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Quick Definition</span>
+      </div>
+      <div style={{ color: "#e2e8f0", fontSize: 15, fontWeight: 600, marginBottom: 6 }}>{term}</div>
+      <div style={{ color: "#94a3b8", fontSize: 14, lineHeight: 1.7 }}>{definition}</div>
+    </div>
+  );
+}
+
+function ComparisonTable() {
+  const rows = [
+    { prop: "Trajectory shape", ideal: "Symmetric parabola", drag: "Asymmetric — steeper descent" },
+    { prop: "Maximum range", ideal: "Achieved at 45°", drag: "Optimal angle < 45°" },
+    { prop: "Maximum height", ideal: "Higher", drag: "Lower (energy lost)" },
+    { prop: "Time of flight", ideal: "Longer", drag: "Shorter" },
+    { prop: "Horizontal speed", ideal: "Constant", drag: "Continuously decreasing" },
+    { prop: "Vertical speed (up)", ideal: "Linear decrease", drag: "Faster decrease" },
+  ];
+
+  return (
+    <div style={{ overflowX: "auto", borderRadius: 12, border: "1px solid #334155" }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+        <thead>
+          <tr style={{ background: "#0f172a" }}>
+            {["Property", "Ideal (no drag)", "With Air Resistance"].map((h, i) => (
+              <th key={h} style={{
+                padding: "12px 16px",
+                textAlign: "left",
+                color: i === 0 ? "#94a3b8" : i === 1 ? "#6366f1" : "#f97316",
+                fontWeight: 700,
+                borderBottom: "1px solid #334155",
+                fontSize: 12,
+                textTransform: "uppercase",
+                letterSpacing: 0.5
+              }}>{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={r.prop} style={{ background: i % 2 === 0 ? "#1e293b" : "#172033" }}>
+              <td style={{ padding: "11px 16px", color: "#cbd5e1", fontWeight: 600 }}>{r.prop}</td>
+              <td style={{ padding: "11px 16px", color: "#a5b4fc" }}>{r.ideal}</td>
+              <td style={{ padding: "11px 16px", color: "#fb923c" }}>{r.drag}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function VisualEffectItem({ icon, title, desc }: { icon: string; title: string; desc: string }) {
+  return (
+    <div style={{
+      display: "flex", gap: 14, alignItems: "flex-start",
+      background: "#0f172a", borderRadius: 10, padding: "14px 16px",
+      border: "1px solid #1e293b", marginBottom: 10
+    }}>
+      <span style={{ fontSize: 22, lineHeight: 1 }}>{icon}</span>
+      <div>
+        <div style={{ color: "#e2e8f0", fontWeight: 600, fontSize: 14, marginBottom: 3 }}>{title}</div>
+        <div style={{ color: "#94a3b8", fontSize: 13, lineHeight: 1.6 }}>{desc}</div>
+      </div>
+    </div>
+  );
+}
+
+function Badge({ text, color }: { text: string; color: string }) {
+  return (
+    <span style={{
+      display: "inline-block",
+      background: color + "22",
+      color,
+      border: `1px solid ${color}55`,
+      borderRadius: 20,
+      padding: "3px 12px",
+      fontSize: 12,
+      fontWeight: 600,
+      marginRight: 8,
+      marginBottom: 6
+    }}>{text}</span>
+  );
+}
+
+// ─── Main App ──────────────────────────────────────────────────────────────────
+export default function App() {
+  return (
+    <div style={{
+      fontFamily: "'Inter', 'Segoe UI', sans-serif",
+      background: "#0f172a",
+      minHeight: "100vh",
+      padding: "28px 20px",
+      maxWidth: 680,
+      margin: "0 auto",
+      color: "#f1f5f9"
+    }}>
+
+      {/* Page Header */}
+      <div style={{ marginBottom: 28, paddingBottom: 20, borderBottom: "1px solid #1e293b" }}>
+        <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
+          <Badge text="Physics" color="#6366f1" />
+          <Badge text="Mechanics" color="#8b5cf6" />
+          <Badge text="Projectile Motion" color="#ec4899" />
+        </div>
+        <h1 style={{ margin: "0 0 8px", fontSize: 26, fontWeight: 800, lineHeight: 1.3,
+          background: "linear-gradient(90deg, #e2e8f0, #a5b4fc)", WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent" }}>
+          Air Resistance in Projectile Motion
+        </h1>
+        <p style={{ margin: 0, color: "#64748b", fontSize: 14, lineHeight: 1.6 }}>
+          How drag forces distort the ideal parabolic trajectory — visually and mathematically.
+        </p>
+      </div>
+
+      {/* Definition */}
+      <DefinitionCard
+        term="Air Resistance (Drag Force)"
+        definition="A velocity-dependent retarding force that opposes the motion of a projectile through a fluid medium. Unlike gravity, drag acts against the direction of travel and grows stronger as the object moves faster."
+      />
+
+      {/* Equations of Motion */}
+      <FormulaCard
+        title="Equations of Motion with Drag"
+        formula="\ddot{x} = -\frac{k}{m}v\,v_x \qquad \ddot{y} = -g - \frac{k}{m}v\,v_y"
+        context="The drag force is proportional to velocity squared (quadratic drag). It acts in both x and y directions, coupling the two components of motion — unlike the ideal case."
+        variables={[
+          { symbol: "k", meaning: "Drag coefficient (depends on shape, fluid, cross-section)" },
+          { symbol: "m", meaning: "Mass of the projectile" },
+          { symbol: "v", meaning: "Total speed — magnitude of velocity vector" },
+          { symbol: "v_x,\\, v_y", meaning: "Horizontal and vertical velocity components" },
+          { symbol: "g", meaning: "Gravitational acceleration (9.81 m/s²)" },
+        ]}
+      />
+
+      {/* Visual Effects */}
+      <SectionCard icon="👁️" title="Visual Effects of Adding Air Resistance" accent="#f97316">
+        <VisualEffectItem
+          icon="📉"
+          title="Shorter Range"
+          desc="The projectile lands significantly closer to the launch point. Drag continuously bleeds horizontal momentum, so the object decelerates throughout flight."
+        />
+        <VisualEffectItem
+          icon="🔺"
+          title="Lower Maximum Height"
+          desc="The apex drops because drag opposes upward motion, causing the projectile to lose vertical speed faster than gravity alone would."
+        />
+        <VisualEffectItem
+          icon="🔀"
+          title="Asymmetric Trajectory"
+          desc="The ideal parabola is left-right symmetric about the apex. With drag, the descent side is steeper and shorter — the projectile falls more steeply than it rose."
+        />
+        <VisualEffectItem
+          icon="📐"
+          title="Optimal Angle Shifts Below 45°"
+          desc="Without drag, 45° maximises range. With drag, the optimal angle is lower (typically 30°–40°) because a flatter trajectory reduces the time spent fighting drag."
+        />
+        <VisualEffectItem
+          icon="⏱️"
+          title="Reduced Time of Flight"
+          desc="The projectile spends less time in the air. Both horizontal and vertical velocity components are reduced throughout, shortening the overall journey."
+        />
+      </SectionCard>
+
+      {/* Comparison Table */}
+      <SectionCard icon="📊" title="Side-by-Side Comparison" accent="#6366f1">
+        <ComparisonTable />
+      </SectionCard>
+
+      {/* Terminal Velocity Note */}
+      <SectionCard icon="⚠️" title="Important Note: Terminal Velocity" accent="#f59e0b">
+        <p style={{ color: "#cbd5e1", fontSize: 14, lineHeight: 1.7, margin: 0 }}>
+          At very high speeds or long falls, drag can grow large enough to balance gravity. 
+          The projectile then reaches <strong style={{ color: "#fbbf24" }}>terminal velocity</strong> — 
+          a constant downward speed where net vertical force is zero. This is only relevant for 
+          high-speed or very long-range projectiles (e.g. cannon shells, raindrops), not typical 
+          classroom problems.
+        </p>
+        <div style={{
+          marginTop: 14, padding: "10px 14px",
+          background: "#0f172a", borderRadius: 8,
+          border: "1px solid #f59e0b44"
+        }}>
+          <DisplayMath math="v_t = \sqrt{\frac{mg}{k}}" />
+          <p style={{ color: "#94a3b8", fontSize: 12, margin: "8px 0 0", textAlign: "center" }}>
+            Terminal velocity — where drag force equals gravitational force
+          </p>
+        </div>
+      </SectionCard>
+
+      {/* Summary */}
+      <SectionCard icon="📝" title="Summary" accent="#22d3ee">
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {[
+            ["Drag couples x and y motion", "making the system non-linear and unsolvable analytically"],
+            ["Range decreases", "because horizontal speed is no longer constant"],
+            ["The curve becomes asymmetric", "with a steeper descent than ascent"],
+            ["Optimal launch angle drops below 45°", "to minimise time fighting drag"],
+            ["Use the Formula Lab above", "to explore these effects interactively"],
+          ].map(([bold, rest]) => (
+            <div key={bold} style={{
+              display: "flex", gap: 10, alignItems: "flex-start",
+              background: "#0f172a", borderRadius: 8, padding: "10px 14px"
+            }}>
+              <span style={{ color: "#22d3ee", fontSize: 16, marginTop: 1 }}>›</span>
+              <span style={{ color: "#cbd5e1", fontSize: 13, lineHeight: 1.6 }}>
+                <strong style={{ color: "#e2e8f0" }}>{bold}</strong> — {rest}
+              </span>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+    </div>
+  );
+}
+```

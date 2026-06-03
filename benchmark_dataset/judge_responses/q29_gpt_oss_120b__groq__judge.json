@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 29,
+  "question": "Define surface tension and mention factors affecting it.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nSurface tension is the property of a liquid surface that causes it to behave like a stretched elastic membrane, minimizing its surface area. \n\nThis behavior is caused by cohesive forces, as liquid molecules at the surface experience a net inward pull from the molecules beneath them.\n\n---\n\n## Factors Affecting Surface Tension\n\n* **Temperature Inversion:** Raising the temperature increases the kinetic energy of the molecules, weakening cohesive bonds and reducing surface tension.\n* **Chemical Impurities:** Adding highly soluble materials like salt increases surface tension, whereas adding surfactants like soap lowers it significantly.\n\n---\n\n## Formula\n\nThe surface tension scalar definition is given by:\n\n$$T = \\frac{F}{L}$$\n\nWhere:\n* $T$ represents the surface tension factor\n* $F$ represents the force acting parallel to the surface along a line segment\n* $L$ represents the total length of the line segment over which the force acts\n\n---\n\n## Summary\n\nSurface tension arises from unbalanced molecular attraction at a liquid's surface, causing it to minimize its area. This property decreases with heat and surfactant additives.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│ Definition                            │\n│                                       │\n│ Surface tension is the tendency of a   │\n│ liquid’s surface to contract so as to   │\n│ minimize its surface area.  It arises   │\n│ from cohesive forces between molecules   │\n│ at the liquid‑air interface; molecules   │\n│ within the bulk experience balanced       │\n│ attractions, while those at the surface   │\n│ experience a net inward pull, creating   │\n│ a “skin‑like” film that resists external │\n│ deformation.                            │\n└───────────────────────────────────────┘\n\n\n┌───────────────────────────────────────┐\n│ Factors Affecting Surface Tension      │\n│                                       │\n│ • **Temperature** – Raising temperature│\n│   increases molecular motion, reducing │\n│   cohesive forces and thus lowering     │\n│   surface tension.                     │\n│                                       │\n│ • **Impurities / Surfactants** – Substances│\n│   that adsorb at the interface (e.g.,   │\n│   soaps, detergents, oils) disrupt        │\n│   intermolecular attractions, dramatically│\n│   decreasing surface tension.          │\n│                                       │\n│ • **Nature of the Liquid** – Liquids with │\n│   stronger intermolecular forces (hydrogen│\n│   bonding, dipole‑dipole) exhibit higher │\n│   surface tension (e.g., water) than    │\n│   non‑polar liquids (e.g., hexane).      │\n│                                       │\n│ • **Presence of Dissolved Gases** – Gases │\n│   can either increase or decrease tension│\n│   depending on how they alter the liquid’s│\n│   cohesive network.                     │\n│                                       │\n│ • **Electrical Fields** – In polar liquids│\n│   an external electric field can align   │\n│   dipoles, modifying intermolecular      │\n│   attractions and thus surface tension. │\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively teaches the concept of surface tension. It correctly defines surface tension, explains the factors affecting it, and provides additional relevant information such as the effect of the nature of the liquid, presence of dissolved gases, and electrical fields. The use of a clear and organized format, with sections and bullet points, enhances readability. However, the response could be improved by including the formula for surface tension, as provided in the gold reference answer, to further support the conceptual explanation. Additionally, some minor formatting adjustments could enhance the overall presentation quality.",
+  "candidate_token_usage": {
+    "promptTokens": 426,
+    "completionTokens": 642,
+    "totalTokens": 1068
+  },
+  "candidate_latency_ms": 2259,
+  "candidate_cost_usd": 0.0004491,
+  "judge_token_usage": {
+    "promptTokens": 1108,
+    "completionTokens": 178,
+    "totalTokens": 1286
+  },
+  "judge_latency_ms": 12999,
+  "judge_cost_usd": 0.001092,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:56:01.401Z"
+}

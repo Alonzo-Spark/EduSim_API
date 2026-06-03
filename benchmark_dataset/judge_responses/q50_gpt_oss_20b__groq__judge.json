@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 50,
+  "question": "Define electrical power and derive the relation P = VI.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectrical power is the rate at which electrical energy is consumed or converted into other forms of energy, such as heat, light, or mechanical work, within an electric circuit.\n\n---\n\n## Formula\n\nThe primary electrical power expression is stated as:\n\n$$P = VI$$\n\nWhere:\n* $P$ represents the electrical power measured in Watts ($\\text{W}$)\n* $V$ represents the potential difference across the circuit element\n* $I$ represents the electric current passing through the element\n\n---\n\n## Derivations\n\nConsider a constant current $I$ flowing through an electrical component across a potential difference $V$ over an interval of time $t$.\n\nBy definition, electric current is the rate of charge flow through a conductor:\n$$I = \\frac{Q}{t}$$\n\n$$Q = I \\cdot t$$\n\nThe potential difference ($V$) represents the mechanical work performed ($W$) per unit charge to move that charge through the component:\n$$V = \\frac{W}{Q}$$\n\n$$W = V \\cdot Q$$\n\nSubstitute our charge flow expression ($Q = I \\cdot t$) directly into the work equation:\n$$W = V \\cdot (I \\cdot t)$$\n\n$$W = VIt$$\n\nElectrical power ($P$) is defined as the rate at which work is performed:\n$$P = \\frac{W}{t}$$\n\nSubstitute the work expression ($VIt$) into the power template:\n$$P = \\frac{VIt}{t}$$\n\nCancel out the time parameter ($t$) from the numerator and denominator:\n$$P = VI$$\n\nThis completes the derivation of the fundamental electrical power relation.\n\n---\n\n## Summary\n\nElectrical power measures the rate of energy conversion within a circuit element, calculated as the product of the voltage across the component and the current flowing through it ($P=VI$).",
+  "candidate_response": "───────────────────────────────────────────────────────────────────────  \n│                           Introduction                                 │  \n│                                                                 │  \n│ In electricity, power is the rate at which electrical energy is   │  \n│ transferred or converted. It tells us how quickly work can be     │  \n│ done or heat can be generated in a circuit.                       │  \n───────────────────────────────────────────────────────────────────────  \n\n───────────────────────────────────────────────────────────────────────  \n│                           Definition                                    │  \n│                                                                 │  \n│ **Electrical power** (P) is defined as the amount of energy (E)    │  \n│ transferred per unit time (t). Mathematically, it is expressed as: │  \n│                                                                 │  \n│ *P = dE/dt*                                                    │  \n│                                                                 │  \n│ where *E* is energy in joules and *t* is time in seconds.         │  \n───────────────────────────────────────────────────────────────────────  \n\n───────────────────────────────────────────────────────────────────────  \n│                           Key Concepts                                 │  \n│                                                                 │  \n│ • **Voltage (V)** – the electric potential difference that drives │  \n│   electrons through a circuit.                                   │  \n│ • **Current (I)** – the flow rate of electric charge, measured in  │  \n│   amperes (A).                                                    │  \n│ • **Power (P)** – the product of voltage and current, indicating │  \n│   how much electrical energy is being used per second.            │  \n───────────────────────────────────────────────────────────────────────  \n\n───────────────────────────────────────────────────────────────────────  \n│                           Main Formula                                 │  \n│                                                                 │  \n│     P = V · I                                                  │  \n│                                                                 │  \n│ [ Explain Formula ]                                            │  \n│ [ Open Formula Lab ]                                           │  \n───────────────────────────────────────────────────────────────────────  \n\n───────────────────────────────────────────────────────────────────────  \n│                           Summary                                      │  \n│                                                                 │  \n│ Electrical power quantifies the rate of energy transfer in a     │  \n│ circuit. By definition, power equals the product of the voltage   │  \n│ across a component and the current flowing through it:           │  \n│                                                                 │  \n│ *P = V · I*                                                     │  \n│                                                                 │  \n│ This simple yet powerful relationship underlies all electrical   │  \n│ engineering, from household wiring to high‑speed computing.      │  \n───────────────────────────────────────────────────────────────────────  \n\n───────────────────────────────────────────────────────────────────────  \n│                           Suggested Questions                         │  \n│                                                                 │  \n│ 1. If a device operates at 12 V and draws 2 A, what is its power? │  \n│ 2. How does increasing the voltage affect power if current is    │  \n│    constant?                                                      │  \n│ 3. Explain why a resistor dissipates power as heat.               │  \n───────────────────────────────────────────────────────────────────────",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is generally accurate and well-structured. However, it lacks a detailed derivation of the formula P = VI, which is present in the gold reference answer. The response also does not explicitly define the units of measurement for power, voltage, and current. Additionally, the suggested questions at the end are not directly related to the derivation of the formula and could be more relevant to the topic. To improve, the candidate should include a step-by-step derivation of the formula and provide more context for the suggested questions. The layout and formatting are clear and easy to follow, making it a good educational resource. Overall, the response is a good introduction to electrical power, but could benefit from more detailed explanations and relevant examples.",
+  "candidate_token_usage": {
+    "promptTokens": 428,
+    "completionTokens": 1508,
+    "totalTokens": 1936
+  },
+  "candidate_latency_ms": 4013,
+  "candidate_cost_usd": 0.0004845,
+  "judge_token_usage": {
+    "promptTokens": 1416,
+    "completionTokens": 205,
+    "totalTokens": 1621
+  },
+  "judge_latency_ms": 10762,
+  "judge_cost_usd": 0.0013415999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:57:23.053Z"
+}

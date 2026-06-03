@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 65,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'orbit_started' stable loop trigger event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a orbital tracking alignment profile match.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe satellite successfully closed its trajectory path, triggering the stable closed loop status notification (`orbit_started`).\n\n### WHAT CHANGED\nThe path display updated from a open line to a stable elliptical orbit track surrounding the central gravity source.\n\n### SIMPLE WHY\nThe satellite's velocity vector and distance create a balance where gravity provides the exact centripetal force needed for a stable orbit.\n\n### WHAT TO NOTICE\nObserve how the satellite continuously circles the central mass without flying out into deep space or crashing into the planet.",
+  "candidate_response": "To generate a runtime overlay response for an 'orbit_started' stable loop trigger event, we will create an interactive card that presents key information about the event, its characteristics, and possible actions. \n\nHere’s how the overlay response would look:\n\n┌───────────────────────────────────────────┐\n│           Orbit Started Event            │\n│                                           │\n│ The orbit has commenced successfully.     │\n│ This indicates the stable loop is now     │\n│ operational, executing as expected.       │\n│                                           │\n│ Key Characteristics:                      │\n│ - Stability confirmed                      │\n│ - Loop parameters set                     │\n│ - Initial conditions met                   │\n│                                           │\n│ Actions:                                  │\n│ [ Monitor Orbit Status ]                  │\n│ [ Adjust Parameters ]                     │\n│ [ Log Event Details ]                     │\n└───────────────────────────────────────────┘\n\n### Explanation of the Overlay\n\n- **Title**: Clearly states the event type.\n- **Description**: Provides a brief overview of what the event signifies.\n- **Key Characteristics**: Lists important aspects of the event, confirming its stability and readiness.\n- **Actions**: Offers interactive options for users to monitor the orbit, adjust parameters, or log details for further analysis.\n\nThis format ensures that users can quickly grasp the essential information and take appropriate actions in response to the 'orbit_started' event.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 6,
+    "quality": 8,
+    "educational": 5,
+    "overall_average": "6.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": true,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks conceptual correctness and semantic alignment with the gold reference answer. It fails to explain the physics behind the 'orbit_started' event, such as the balance between the satellite's velocity vector and the centripetal force provided by gravity. The response also introduces unrelated concepts, such as an 'interactive card' and 'loop parameters,' which are not present in the gold reference answer. Furthermore, the response does not provide a clear explanation of the event's characteristics and implications, making it difficult for beginners to understand the topic. The quality of presentation is good, with proper formatting and readability, but the content itself is inaccurate and misleading. To improve, the candidate should focus on providing a clear and concise explanation of the physics behind the event, avoiding fabricated concepts and unrelated information.",
+  "candidate_token_usage": {
+    "promptTokens": 372,
+    "completionTokens": 282,
+    "totalTokens": 654
+  },
+  "candidate_latency_ms": 4833,
+  "candidate_cost_usd": 0.000225,
+  "judge_token_usage": {
+    "promptTokens": 855,
+    "completionTokens": 216,
+    "totalTokens": 1071
+  },
+  "judge_latency_ms": 3803,
+  "judge_cost_usd": 0.0010314,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:09:13.723Z"
+}

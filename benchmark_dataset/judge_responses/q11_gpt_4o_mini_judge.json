@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 11,
+  "question": "Laws of Motion: State Newton’s three laws of motion with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's laws of motion are three fundamental physical axioms that define the relationships linking the forces acting on a body to its resulting structural dynamic motion.\n\n---\n\n## The Three Axioms\n\n### 1. Newton's First Law (Law of Inertia)\nAn object will remain at rest or continue moving at a constant velocity in a straight line unless acted upon by an external net unbalanced force.\n\n### 2. Newton's Second Law (Law of Force and Acceleration)\nThe acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, occurring in the direction of the applied net force.\n\n### 3. Newton's Third Law (Law of Action and Reaction)\nWhen one body exerts a force on a second body, the second body simultaneously exerts a force equal in magnitude and opposite in direction on the first body.\n\n---\n\n## Formula\n\nThe mathematical expression summarizing the second law of motion:\n\n$$F = ma$$\n\nWhere:\n* $F$ represents the net force vector acting on the mass\n* $m$ represents the invariant inertial mass value\n* $a$ represents the resulting uniform acceleration vector\n\n---\n\n## Real-world Examples\n\n* **First Law Application:** A passenger jolts forward when a speeding transit bus hits the brakes suddenly because their body maintains its forward inertial velocity.\n* **Second Law Application:** Pushing an empty shopping cart causes it to accelerate much faster than pushing a cart filled with heavy grocery items using the same effort.\n* **Third Law Application:** A swimmer pushes water backward with their hands, and the water simultaneously pushes the swimmer forward with an equal force vector.\n\n---\n\n## Summary\n\nNewton's laws form the structural core of classical mechanics, defining force as the fundamental driver that disrupts rest states, generates linear acceleration profiles, and generates equal reactions.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Introduction              │  \n│                           │  \n│ Newton's laws of motion   │  \n│ describe the relationship  │  \n│ between the motion of an  │  \n│ object and the forces     │  \n│ acting on it.            │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Newton's First Law        │  \n│                           │  \n│ An object at rest will    │  \n│ remain at rest, and an    │  \n│ object in motion will     │  \n│ continue in motion with   │  \n│ the same speed and in a   │  \n│ straight line unless acted │  \n│ upon by a net external     │  \n│ force.                   │  \n│                           │  \n│ Example: A book lying    │  \n│ on a table will stay      │  \n│ there until someone       │  \n│ pushes it.               │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Newton's Second Law       │  \n│                           │  \n│ The acceleration of an    │  \n│ object is directly        │  \n│ proportional to the net   │  \n│ force acting on it and    │  \n│ inversely proportional to  │  \n│ its mass. This is often   │  \n│ expressed with the formula:│  \n│                           │  \n│ $$ F = ma $$              │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│     Rendered Formula      │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n│ Example: If a 10 kg object │  \n│ experiences a force of 50  │  \n│ N, its acceleration will be │  \n│ 5 m/s² (using the formula: │  \n│ 50 N = 10 kg * a).        │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Newton's Third Law        │  \n│                           │  \n│ For every action, there   │  \n│ is an equal and opposite   │  \n│ reaction.                │  \n│                           │  \n│ Example: When you jump    │  \n│ off a small boat, the     │  \n│ boat moves backward as you │  \n│ push down on it.         │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Summary                   │  \n│                           │  \n│ Newton's three laws of    │  \n│ motion provide a framework │  \n│ for understanding how      │  \n│ forces affect the motion   │  \n│ of objects. They apply to  │  \n│ a range of everyday        │  \n│ situations in physics.     │  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a good understanding of Newton's laws of motion, including the first, second, and third laws, along with relevant examples. However, the quality of presentation is somewhat compromised due to the unconventional use of ASCII art boxes, which may hinder readability. The educational score is decent because the explanations are straightforward and easy to follow, but the presentation could be improved for better pedagogical effectiveness. To improve, consider using standard formatting techniques and avoiding unnecessary elements that do not contribute to the clarity of the explanation. Additionally, providing more detailed examples or elaborating on the implications of each law could enhance the educational value of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 369,
+    "completionTokens": 604,
+    "totalTokens": 973
+  },
+  "candidate_latency_ms": 6823,
+  "candidate_cost_usd": 0.00041775,
+  "judge_token_usage": {
+    "promptTokens": 1380,
+    "completionTokens": 188,
+    "totalTokens": 1568
+  },
+  "judge_latency_ms": 4807,
+  "judge_cost_usd": 0.0012791999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:16:31.451Z"
+}

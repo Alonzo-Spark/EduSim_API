@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 64,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'spring_stretched' peak limit event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on an elastic deformation threshold benchmark.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe spring joint reached its maximum length extension threshold (`spring_stretched`) at the outer limit of its oscillation path.\n\n### WHAT CHANGED\nThe velocity vector dropped to zero, and the inward acceleration vector reached its maximum value.\n\n### SIMPLE WHY\nAt maximum extension, all kinetic energy has converted into elastic potential energy, creating a powerful inward restoring force.\n\n### WHAT TO NOTICE\nWatch how the block pauses for a fraction of a second at this outer limit before changing direction and accelerating backward.",
+  "candidate_response": "```json\n{\n  \"runtime_overlay\": {\n    \"event_type\": \"spring_stretched\",\n    \"severity\": \"peak_limit\",\n    \"trigger_time\": \"2023-11-29T14:22:15.782Z\",\n    \"duration_ms\": 127,\n    \"source_component\": \"physics.spring_system\",\n    \"impacted_entities\": [\n      \"object_A\",\n      \"object_B\"\n    ],\n    \"parameters\": {\n      \"rest_length\": \"0.5 m\",\n      \"current_length\": \"1.8 m\",\n      \"elastic_limit\": \"1.5 m\",\n      \"force_applied\": \"420 N\",\n      \"yield_threshold_exceeded\": true\n    },\n    \"action_taken\": \"clamped_displacement\",\n    \"suggested_follow_up\": [\n      \"Inspect material stress levels\",\n      \"Adjust damping ratio\",\n      \"Review spring constant calibration\"\n    ],\n    \"debug_hint\": \"Event triggered due to extension beyond 150% of rest length. Consider enabling soft limits or increasing stiffness.\"\n  }\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 6,
+    "quality": 8,
+    "educational": 4,
+    "overall_average": "6.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": true,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks conceptual correctness and semantic alignment with the gold reference answer. It provides a JSON object with various parameters and suggestions but fails to explain the physics behind the 'spring_stretched' event in a clear and educational manner. The response includes fabricated concepts such as 'yield_threshold_exceeded' and 'clamped_displacement' without proper explanation. The 'debug_hint' seems to introduce a new concept (soft limits or increasing stiffness) without connecting it to the event. The response does not follow the structure and content of the gold reference answer, which focuses on explaining the event in simple terms and highlighting what happened, what changed, and why. To improve, the candidate should focus on providing a clear, step-by-step explanation of the physics involved, avoiding unnecessary technical jargon and fabricated concepts. The response should be restructured to align with the gold reference answer, including an introduction to the event, an explanation of what happened and why, and suggestions for what to notice or further investigate.",
+  "candidate_token_usage": {
+    "promptTokens": 365,
+    "completionTokens": 234,
+    "totalTokens": 599
+  },
+  "candidate_latency_ms": 17954,
+  "candidate_cost_usd": 0.000833,
+  "judge_token_usage": {
+    "promptTokens": 767,
+    "completionTokens": 259,
+    "totalTokens": 1026
+  },
+  "judge_latency_ms": 6407,
+  "judge_cost_usd": 0.0010818,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:04:32.742Z"
+}

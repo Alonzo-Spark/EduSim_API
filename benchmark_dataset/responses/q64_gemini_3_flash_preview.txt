@@ -1,0 +1,70 @@
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ 🟢 SYSTEM STATUS: RUNTIME OVERLAY GENERATED                                    │
+│ EVENT: `SPRING_STRETCHED` (PEAK LIMIT REACHED)                                 │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ 📘 Quick Definition                                                            │
+│                                                                                │
+│ The **Spring Stretched Peak Limit** occurs when a mechanical or simulated      │
+│ spring reaches its **Elastic Limit**. Beyond this point, the material will no  │
+│ longer return to its original shape, entering the phase of plastic deformation.│
+└────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ 📐 Main Formula: Hooke's Law (Limit State)                                     │
+│                                                                                │
+│                     $$F_{max} = k \cdot \Delta x_{peak}$$                      │
+│                                                                                │
+│ ℹ️ **Explanation**: This formula calculates the maximum restorative force      │
+│ exerted by the spring at the exact moment the peak displacement is triggered.  │
+│                                                                                │
+│ [ 🔬 Open Formula Lab ]                                                        │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ 🔑 Key Concepts                                                                │
+│                                                                                │
+│ ● **Restoring Force ($F$):** The counter-force acting against the stretch.      │
+│ ● **Spring Constant ($k$):** The stiffness of the spring (N/m).                │
+│ ● **Displacement ($x$):** The distance from the equilibrium position.          │
+│ ● **Elastic Potential Energy ($U$):** The energy stored at the peak limit.     │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ 📊 Technical Specifications                                                    │
+│                                                                                │
+│ | Parameter          | Value (at Peak) | Unit         | Status               | │
+│ |:-------------------|:----------------|:-------------|:---------------------| │
+│ | Current Stretch    | 0.45            | meters (m)   | **CRITICAL**         | │
+│ | Restoring Force    | 225.0           | Newtons (N)  | **LIMIT**            | │
+│ | Energy Stored      | 50.62           | Joules (J)   | **MAX**              | │
+│ | Material Integrity | 98.2            | %            | **STABLE**           | │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ ⚡ Energy Calculation                                                          │
+│                                                                                │
+│                     $$U_e = \frac{1}{2} k x^2$$                                │
+│                                                                                │
+│ ℹ️ **Explanation**: Represents the total work done to stretch the spring to    │
+│ the current peak. Any further displacement results in energy loss via heat.    │
+│                                                                                │
+│ [ 🔬 Open Formula Lab ]                                                        │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ ⚠️ Important Notes                                                             │
+│                                                                                │
+│ > **Safety Warning:** Exceeding the `peak_limit` trigger may result in         │
+│ > permanent "set" (deformation). If $x > x_{peak}$, the linear relationship    │
+│ > of Hooke's Law is no longer valid.                                          │
+└────────────────────────────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────────────────────────────┐
+│ ❓ Suggested Questions                                                         │
+│                                                                                │
+│ 1. What happens to the spring constant ($k$) if the material overheats?        │
+│ 2. How does the peak limit change in a zero-gravity environment?               │
+│ 3. Can we calculate the "Young's Modulus" from this peak displacement data?    │
+└────────────────────────────────────────────────────────────────────────────────┘

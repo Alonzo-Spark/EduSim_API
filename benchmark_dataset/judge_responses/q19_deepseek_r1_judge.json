@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 19,
+  "question": "Define kinetic energy and derive its expression.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nKinetic energy is the capacity of an object to perform mechanical work by virtue of its state of motion. Every moving mass possesses kinetic energy, which scales relative to its mass and speed.\n\n---\n\n## Formula\n\nThe classical expression for kinetic energy is stated as:\n\n$$K = \\frac{1}{2}mv^2$$\n\nWhere:\n* $K$ represents the kinetic energy scalar value\n* $m$ represents the total mass of the object\n* $v$ represents the magnitude of its velocity vector\n\n---\n\n## Derivations\n\nConsider a body of mass $m$ initially resting at a standstill on a frictionless horizontal plane.\n\nLet its initial velocity be zero:\n$$u = 0$$\n\nLet a constant net horizontal force $F$ act on the body, displacing it through a straight distance $s$. The work performed by this force during displacement transfers energy to the body, appearing completely as kinetic energy ($K$):\n$$K = W = F \\cdot s$$\n\nFrom Newton's Second Law, the force parameter can be written as:\n$$F = ma$$\n\nSubstitute this force expression directly into the work tracking template:\n$$K = (ma) \\cdot s = m(as)$$\n\nUsing the kinematic relation linking velocity components across distance $s$:\n$$v^2 = u^2 + 2as$$\n\nSince the object started from rest ($u = 0$), the equation simplifies to:\n$$v^2 = 0 + 2as$$\n\n$$as = \\frac{v^2}{2}$$\n\nSubstitute this ($as$) expression back into our kinetic energy equation:\n$$K = m \\left(\\frac{v^2}{2}\\right)$$\n\nRearrange the expression into its final form:\n$$K = \\frac{1}{2}mv^2$$\n\nThis completes the mechanical derivation of the kinetic energy equation.\n\n---\n\n## Summary\n\nKinetic energy represents the work required to accelerate a mass from rest to a specific velocity, climbing linearly with mass but quadratically with velocity.",
+  "candidate_response": "### Kinetic Energy: Definition and Derivation\n\n#### 📘 **Definition**\n**Kinetic energy** is the energy possessed by an object due to its motion. It depends on the object's **mass** (\\(m\\)) and its **velocity** (\\(v\\)). The faster an object moves or the heavier it is, the greater its kinetic energy.\n\n---\n\n#### 🔍 **Step-by-Step Derivation**\nWe derive the kinetic energy formula \\(KE = \\frac{1}{2}mv^2\\) using **work-energy theorem** and **Newton's laws of motion**. Consider an object of mass \\(m\\) initially at rest (\\(u = 0\\)). A constant force \\(F\\) acts on it over a distance \\(s\\), accelerating it to velocity \\(v\\).\n\n1. **Work done by the force** (force applied in the direction of motion):  \n   \\[\n   W = F \\cdot s\n   \\]\n\n2. **Force in terms of acceleration** (Newton's second law):  \n   \\[\n   F = m \\cdot a\n   \\]  \n   Substitute into the work equation:  \n   \\[\n   W = m \\cdot a \\cdot s\n   \\]\n\n3. **Relate acceleration and displacement** (using kinematics):  \n   \\[\n   v^2 = u^2 + 2as\n   \\]  \n   Since initial velocity \\(u = 0\\):  \n   \\[\n   v^2 = 2as \\quad \\Rightarrow \\quad a s = \\frac{v^2}{2}\n   \\]\n\n4. **Substitute \\(a s\\) into the work equation**:  \n   \\[\n   W = m \\cdot \\left( \\frac{v^2}{2} \\right) = \\frac{1}{2} m v^2\n   \\]\n\n5. **Work-energy equivalence**:  \n   The work done \\(W\\) is converted into kinetic energy (\\(KE\\)):  \n   \\[\n   KE = W = \\frac{1}{2} m v^2\n   \\]\n\n---\n\n#### ⚡ **The Kinetic Energy Formula**\n\\[\n\\boxed{KE = \\dfrac{1}{2}mv^{2}}\n\\]\n\n| **Symbol** | **Quantity**         | **Unit (SI)** |\n|------------|----------------------|---------------|\n| \\(m\\)      | Mass                 | kilogram (kg) |\n| \\(v\\)      | Velocity             | meter/second (m/s) |\n| \\(KE\\)     | Kinetic energy       | joule (J)     |\n\n---\n\n#### 🔬 **Key Insights**\n- Kinetic energy scales with the **square of velocity**: Doubling velocity quadruples KE (e.g., a car at 60 mph has 4× the KE of the same car at 30 mph).\n- **Work-energy theorem**: The net work done on an object equals its change in kinetic energy (\\(\\Delta KE = W_{\\text{net}}\\)).\n- Kinetic energy is a **scalar**—direction of motion does not matter.\n\n---\n\n#### 🌎 **Applications**\n- **Vehicle safety**: Crash tests analyze KE dissipation during collisions.\n- **Renewable energy**: Wind turbines convert kinetic energy of wind into electricity.\n- **Space missions**: Calculating escape velocity requires kinetic energy analysis.\n\n---\n\n#### ⚖️ **Limitations**\n- **Non-relativistic**: The formula \\(KE = \\frac{1}{2}mv^2\\) fails near light speeds (use \\(E = \\gamma mc^2 - mc^2\\) instead).\n- **Assumes point masses**: For rotating objects, rotational KE (\\(\\frac{1}{2}I\\omega^2\\)) must be added.\n\n---\n\n#### 💡 **Summary**\nKinetic energy quantifies motion-based energy, derived from the work done to accelerate an object. Its quadratic dependence on velocity explains why high-speed collisions are devastating. Master this concept—it bridges mechanics, energy conservation, and modern physics!\n\n#### ❓ **Suggested Questions**\n1. How does kinetic energy change if mass is doubled and velocity halved?  \n2. Why is kinetic energy always positive?  \n3. Derive kinetic energy for an object starting from velocity \\(u\\) to \\(v\\).  \n\nLet me know if you’d like to explore these questions or see a simulation!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of kinetic energy, accurately defining it and deriving its expression through the work-energy theorem and Newton's laws of motion. The layout is well-formatted, readable, and effectively presents the concept. The use of step-by-step derivation, key insights, applications, and limitations enhances the educational value. However, minor improvements could include more explicitly stating the assumption of a non-relativistic context in the derivation and providing more detailed explanations for the applications and limitations sections. Overall, the response is of high quality, accurate, and educational.",
+  "candidate_token_usage": {
+    "promptTokens": 359,
+    "completionTokens": 1237,
+    "totalTokens": 1596
+  },
+  "candidate_latency_ms": 53146,
+  "candidate_cost_usd": 0.00290648,
+  "judge_token_usage": {
+    "promptTokens": 1763,
+    "completionTokens": 172,
+    "totalTokens": 1935
+  },
+  "judge_latency_ms": 4812,
+  "judge_cost_usd": 0.0014706,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:33:08.929Z"
+}

@@ -1,0 +1,35 @@
+┌───────────────────────────────────────────────────────┐
+│ **Bounce Event Overlay**                              │
+│                                                       │
+│ • **Time**: 1.234 s                                    │
+│ • **Position**: (x = 5.0, y = 3.2)                     │
+│ • **Incoming Velocity**: (vx = 2.0, vy = –4.0)         │
+│ • **Outgoing Velocity**: (vx = 1.8, vy = 3.6)          │
+│ • **Incidence Angle**: 45°                             │
+│ • **Reflection Angle**: 45°                            │
+│ • **Restitution Coefficient (e)**: 0.9                 │
+│ • **Energy Loss**: 10%                                 │
+│                                                       │
+│ *This card updates in real‑time whenever a boundary   │
+│ reflection occurs, displaying key kinematic          │
+│ parameters for debugging and analysis.*               │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Reflection Law**                                     │
+│                                                       │
+│     v'  =  – e · v                                     │
+│                                                       │
+│ [Explain Formula]  [Open Formula Lab]                 │
+└───────────────────────────────────────────────────────┘
+
+Card  
+  → Responsive table
+
+| Symbol | Description                     | Value                 |
+|--------|---------------------------------|-----------------------|
+| e      | Restitution coefficient         | 0.9                   |
+| v      | Incoming velocity vector        | (2.0, –4.0)           |
+| v'     | Outgoing velocity vector        | (1.8, 3.6)            |
+| θ_i    | Incidence angle                 | 45°                   |
+| θ_r    | Reflection angle                | 45°                   |

@@ -1,0 +1,718 @@
+I'll build this as a structured interactive textbook experience with live simulation.
+
+```tsx
+import { useState, useEffect, useRef, useCallback } from "react";
+
+const CARD_STYLE: React.CSSProperties = {
+  background: "linear-gradient(135deg, #1e1e2e 0%, #16213e 100%)",
+  border: "1px solid rgba(99, 102, 241, 0.3)",
+  borderRadius: "16px",
+  padding: "24px",
+  marginBottom: "20px",
+  boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
+};
+
+const FORMULA_CARD_STYLE: React.CSSProperties = {
+  background: "linear-gradient(135deg, #0f3460 0%, #16213e 100%)",
+  border: "1px solid rgba(139, 92, 246, 0.5)",
+  borderRadius: "16px",
+  padding: "24px",
+  marginBottom: "20px",
+  boxShadow: "0 4px 24px rgba(99,102,241,0.2)",
+};
+
+const BADGE: React.CSSProperties = {
+  display: "inline-block",
+  background: "rgba(99,102,241,0.2)",
+  border: "1px solid rgba(99,102,241,0.5)",
+  borderRadius: "20px",
+  padding: "4px 14px",
+  fontSize: "12px",
+  color: "#a5b4fc",
+  marginBottom: "12px",
+  letterSpacing: "0.08em",
+  textTransform: "uppercase" as const,
+};
+
+// ── Spring Canvas ──────────────────────────────────────────────────────────────
+function SpringCanvas({
+  k,
+  label,
+  color,
+  phaseOffset = 0,
+  running,
+}: {
+  k: number;
+  label: string;
+  color: string;
+  phaseOffset?: number;
+  running: boolean;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animRef = useRef<number>(0);
+  const startRef = useRef<number | null>(null);
+  const pausedAtRef = useRef<number>(0);
+
+  const W = 320, H = 200;
+  const m = 1;
+  const A = 55;
+  const equilibriumX = W / 2;
+  const wallX = 30;
+  const massSize = 28;
+
+  const omega = Math.sqrt(k / m);
+  const T = (2 * Math.PI) / omega;
+
+  const drawSpring = useCallback(
+    (ctx: CanvasRenderingContext2D, massX: number) => {
+      const coils = 10;
+      const coilH = 8;
+      const springStart = wallX + 8;
+      const springEnd = massX - massSize / 2;
+      const segLen = (springEnd - springStart) / (coils * 2);
+
+      ctx.beginPath();
+      ctx.moveTo(springStart, H / 2);
+      for (let i = 0; i <= coils * 2; i++) {
+        const x = springStart + i * segLen;
+        const y = i % 2 === 0 ? H / 2 : H / 2 + (i % 4 === 1 ? coilH : -coilH);
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(springEnd, H / 2);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+    },
+    [color]
+  );
+
+  const draw = useCallback(
+    (t: number) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d")!;
+      ctx.clearRect(0, 0, W, H);
+
+      // Background grid
+      ctx.strokeStyle = "rgba(255,255,255,0.04)";
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 30) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += 30) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      // Wall
+      ctx.fillStyle = "rgba(99,102,241,0.6)";
+      ctx.fillRect(wallX - 8, 20, 8, H - 40);
+      ctx.fillStyle = "rgba(99,102,241,0.2)";
+      for (let y = 20; y < H - 40; y += 12) {
+        ctx.beginPath();
+        ctx.moveTo(wallX - 8, y);
+        ctx.lineTo(wallX - 18, y + 8);
+        ctx.strokeStyle = "rgba(99,102,241,0.4)";
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      // Equilibrium line
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = "rgba(255,255,255,0.15)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(equilibriumX, 20);
+      ctx.lineTo(equilibriumX, H - 20);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      const displacement = A * Math.cos(omega * t + phaseOffset);
+      const massX = equilibriumX + displacement;
+
+      drawSpring(ctx, massX);
+
+      // Mass shadow
+      ctx.fillStyle = "rgba(0,0,0,0.3)";
+      ctx.beginPath();
+      ctx.ellipse(massX, H / 2 + massSize / 2 + 6, massSize / 2, 5, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Mass
+      const grad = ctx.createRadialGradient(
+        massX - 4, H / 2 - 4, 2,
+        massX, H / 2, massSize / 2
+      );
+      grad.addColorStop(0, color + "ff");
+      grad.addColorStop(1, color + "88");
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.roundRect(
+        massX - massSize / 2,
+        H / 2 - massSize / 2,
+        massSize,
+        massSize,
+        6
+      );
+      ctx.fill();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Velocity arrow
+      const vel = -A * omega * Math.sin(omega * t + phaseOffset);
+      const arrowLen = vel * 0.5;
+      if (Math.abs(arrowLen) > 3) {
+        ctx.strokeStyle = "#fbbf24";
+        ctx.fillStyle = "#fbbf24";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(massX, H / 2 - massSize);
+        ctx.lineTo(massX + arrowLen, H / 2 - massSize);
+        ctx.stroke();
+        const dir = arrowLen > 0 ? 1 : -1;
+        ctx.beginPath();
+        ctx.moveTo(massX + arrowLen, H / 2 - massSize);
+        ctx.lineTo(massX + arrowLen - dir * 8, H / 2 - massSize - 4);
+        ctx.lineTo(massX + arrowLen - dir * 8, H / 2 - massSize + 4);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // Info overlay
+      ctx.fillStyle = "rgba(0,0,0,0.5)";
+      ctx.beginPath();
+      ctx.roundRect(8, 8, 160, 52, 8);
+      ctx.fill();
+      ctx.fillStyle = color;
+      ctx.font = "bold 13px monospace";
+      ctx.fillText(`k = ${k} N/m`, 16, 26);
+      ctx.fillStyle = "#94a3b8";
+      ctx.font = "11px monospace";
+      ctx.fillText(`ω = ${omega.toFixed(2)} rad/s`, 16, 42);
+      ctx.fillText(`T = ${T.toFixed(2)} s`, 90, 42);
+
+      // Displacement indicator
+      ctx.fillStyle = "rgba(0,0,0,0.5)";
+      ctx.beginPath();
+      ctx.roundRect(W - 110, 8, 102, 30, 8);
+      ctx.fill();
+      ctx.fillStyle = displacement >= 0 ? "#34d399" : "#f87171";
+      ctx.font = "11px monospace";
+      ctx.fillText(`x = ${displacement.toFixed(1)} cm`, W - 104, 27);
+    },
+    [k, omega, T, color, phaseOffset, drawSpring]
+  );
+
+  useEffect(() => {
+    if (!running) {
+      cancelAnimationFrame(animRef.current);
+      draw(pausedAtRef.current);
+      return;
+    }
+
+    const loop = (timestamp: number) => {
+      if (startRef.current === null) startRef.current = timestamp - pausedAtRef.current * 1000;
+      const elapsed = (timestamp - startRef.current) / 1000;
+      pausedAtRef.current = elapsed;
+      draw(elapsed);
+      animRef.current = requestAnimationFrame(loop);
+    };
+
+    startRef.current = null;
+    animRef.current = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(animRef.current);
+  }, [running, draw]);
+
+  return (
+    <div style={{ textAlign: "center" }}>
+      <div style={{ ...BADGE, borderColor: color + "80", color }}>{label}</div>
+      <canvas
+        ref={canvasRef}
+        width={W}
+        height={H}
+        style={{
+          borderRadius: "12px",
+          border: `1px solid ${color}40`,
+          background: "#0a0a1a",
+          display: "block",
+          margin: "0 auto",
+        }}
+      />
+    </div>
+  );
+}
+
+// ── Phase Space Plot ───────────────────────────────────────────────────────────
+function PhaseSpacePlot({ k1, k2 }: { k1: number; k2: number }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
+    const W = 300, H = 200;
+    ctx.clearRect(0, 0, W, H);
+
+    ctx.fillStyle = "#0a0a1a";
+    ctx.fillRect(0, 0, W, H);
+
+    // Axes
+    ctx.strokeStyle = "rgba(255,255,255,0.2)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(W / 2, 10); ctx.lineTo(W / 2, H - 10); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(10, H / 2); ctx.lineTo(W - 10, H / 2); ctx.stroke();
+
+    ctx.fillStyle = "rgba(255,255,255,0.3)";
+    ctx.font = "10px monospace";
+    ctx.fillText("x →", W - 24, H / 2 - 4);
+    ctx.fillText("v ↑", W / 2 + 4, 18);
+
+    const drawEllipse = (k: number, color: string) => {
+      const A = 55, m = 1;
+      const omega = Math.sqrt(k / m);
+      const scaleX = (W / 2 - 20) / A;
+      const scaleY = (H / 2 - 20) / (A * omega);
+
+      ctx.beginPath();
+      for (let i = 0; i <= 360; i++) {
+        const angle = (i * Math.PI) / 180;
+        const x = W / 2 + A * Math.cos(angle) * scaleX;
+        const y = H / 2 - A * omega * Math.sin(angle) * scaleY;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    };
+
+    drawEllipse(k1, "#6366f1");
+    drawEllipse(k2, "#f472b6");
+
+    ctx.font = "10px monospace";
+    ctx.fillStyle = "#6366f1";
+    ctx.fillText(`k=${k1}`, 14, 18);
+    ctx.fillStyle = "#f472b6";
+    ctx.fillText(`k=${k2}`, 14, 32);
+  }, [k1, k2]);
+
+  return (
+    <div>
+      <div style={BADGE}>Phase Space Portrait</div>
+      <canvas
+        ref={canvasRef}
+        width={300}
+        height={200}
+        style={{
+          borderRadius: "12px",
+          border: "1px solid rgba(255,255,255,0.1)",
+          display: "block",
+        }}
+      />
+    </div>
+  );
+}
+
+// ── Period Bar Chart ───────────────────────────────────────────────────────────
+function PeriodChart({ k1, k2 }: { k1: number; k2: number }) {
+  const T1 = (2 * Math.PI) / Math.sqrt(k1);
+  const T2 = (2 * Math.PI) / Math.sqrt(k2);
+  const maxT = Math.max(T1, T2);
+
+  const Bar = ({ value, max, color, label }: { value: number; max: number; color: string; label: string }) => (
+    <div style={{ marginBottom: "12px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
+        <span style={{ color: "#94a3b8", fontSize: "12px" }}>{label}</span>
+        <span style={{ color, fontSize: "12px", fontFamily: "monospace" }}>{value.toFixed(3)} s</span>
+      </div>
+      <div style={{ background: "rgba(255,255,255,0.08)", borderRadius: "6px", height: "20px", overflow: "hidden" }}>
+        <div
+          style={{
+            width: `${(value / max) * 100}%`,
+            height: "100%",
+            background: `linear-gradient(90deg, ${color}cc, ${color}44)`,
+            borderRadius: "6px",
+            transition: "width 0.5s ease",
+          }}
+        />
+      </div>
+    </div>
+  );
+
+  return (
+    <div>
+      <div style={BADGE}>Period Comparison</div>
+      <Bar value={T1} max={maxT * 1.1} color="#6366f1" label={`k = ${k1} N/m`} />
+      <Bar value={T2} max={maxT * 1.1} color="#f472b6" label={`k = ${k2} N/m`} />
+      <div
+        style={{
+          marginTop: "12px",
+          padding: "10px 14px",
+          background: "rgba(251,191,36,0.1)",
+          border: "1px solid rgba(251,191,36,0.3)",
+          borderRadius: "8px",
+          fontSize: "12px",
+          color: "#fbbf24",
+          fontFamily: "monospace",
+        }}
+      >
+        T₂ / T₁ = {(T2 / T1).toFixed(4)} ≈ 1/√2 ≈ {(1 / Math.sqrt(2)).toFixed(4)}
+      </div>
+    </div>
+  );
+}
+
+// ── Main Component ─────────────────────────────────────────────────────────────
+export default function SpringLab() {
+  const [k1, setK1] = useState(4);
+  const [running, setRunning] = useState(true);
+  const [showPhase, setShowPhase] = useState(false);
+  const [activeTab, setActiveTab] = useState<"sim" | "formula" | "data">("sim");
+
+  const k2 = k1 * 2;
+  const omega1 = Math.sqrt(k1);
+  const omega2 = Math.sqrt(k2);
+  const T1 = (2 * Math.PI) / omega1;
+  const T2 = (2 * Math.PI) / omega2;
+
+  const tabBtn = (id: typeof activeTab, label: string) => (
+    <button
+      onClick={() => setActiveTab(id)}
+      style={{
+        padding: "8px 20px",
+        borderRadius: "8px",
+        border: "none",
+        cursor: "pointer",
+        fontSize: "13px",
+        fontWeight: 600,
+        background: activeTab === id ? "rgba(99,102,241,0.3)" : "transparent",
+        color: activeTab === id ? "#a5b4fc" : "#64748b",
+        borderBottom: activeTab === id ? "2px solid #6366f1" : "2px solid transparent",
+        transition: "all 0.2s",
+      }}
+    >
+      {label}
+    </button>
+  );
+
+  return (
+    <div style={{ fontFamily: "'Inter', sans-serif", color: "#e2e8f0", maxWidth: "780px", margin: "0 auto", padding: "16px" }}>
+
+      {/* ── Hero Card ── */}
+      <div style={{ ...CARD_STYLE, background: "linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%)", borderColor: "rgba(139,92,246,0.4)" }}>
+        <div style={{ display: "flex", alignItems: "flex-start", gap: "16px" }}>
+          <div style={{ fontSize: "36px" }}>🌀</div>
+          <div>
+            <div style={{ fontSize: "11px", color: "#6366f1", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "6px" }}>
+              Interactive Physics Lab · Simple Harmonic Motion
+            </div>
+            <h1 style={{ margin: 0, fontSize: "22px", fontWeight: 700, lineHeight: 1.3 }}>
+              What Happens When You Double the Spring Constant?
+            </h1>
+            <p style={{ margin: "8px 0 0", color: "#94a3b8", fontSize: "14px", lineHeight: 1.6 }}>
+              Observe in real-time how stiffness reshapes oscillation — frequency, period, and phase portrait.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Key Concept Card ── */}
+      <div style={CARD_STYLE}>
+        <div style={BADGE}>Core Concept</div>
+        <h2 style={{ margin: "0 0 12px", fontSize: "16px", color: "#c7d2fe" }}>Spring Stiffness &amp; Oscillation</h2>
+        <p style={{ margin: 0, color: "#94a3b8", fontSize: "14px", lineHeight: 1.7 }}>
+          The <strong style={{ color: "#a5b4fc" }}>spring constant k</strong> measures how stiff a spring is.
+          A stiffer spring pulls the mass back more forcefully, causing it to oscillate <em>faster</em> —
+          with a higher angular frequency and shorter period. Crucially, the <strong style={{ color: "#a5b4fc" }}>amplitude stays the same</strong> if
+          you don't change the initial displacement.
+        </p>
+      </div>
+
+      {/* ── Formula Card ── */}
+      <div style={FORMULA_CARD_STYLE}>
+        <div style={{ ...BADGE, borderColor: "rgba(139,92,246,0.5)", color: "#c4b5fd" }}>Main Formula</div>
+        <div style={{ textAlign: "center", margin: "16px 0 20px" }}>
+          <div style={{ fontSize: "28px", color: "#e2e8f0", fontFamily: "serif", letterSpacing: "2px" }}>
+            ω = √(k / m)
+          </div>
+          <div style={{ fontSize: "20px", color: "#94a3b8", fontFamily: "serif", marginTop: "10px" }}>
+            T = 2π / ω = 2π√(m / k)
+          </div>
+        </div>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "10px",
+          marginTop: "16px",
+        }}>
+          {[
+            { sym: "ω", name: "Angular Frequency", unit: "rad/s", color: "#a5b4fc" },
+            { sym: "k", name: "Spring Constant", unit: "N/m", color: "#f472b6" },
+            { sym: "T", name: "Period", unit: "seconds", color: "#34d399" },
+          ].map((v) => (
+            <div key={v.sym} style={{
+              background: "rgba(0,0,0,0.3)",
+              borderRadius: "10px",
+              padding: "12px",
+              textAlign: "center",
+              border: `1px solid ${v.color}30`,
+            }}>
+              <div style={{ fontSize: "22px", color: v.color, fontFamily: "serif", fontWeight: 700 }}>{v.sym}</div>
+              <div style={{ fontSize: "11px", color: "#64748b", marginTop: "4px" }}>{v.name}</div>
+              <div style={{ fontSize: "11px", color: v.color + "aa", fontFamily: "monospace" }}>{v.unit}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* What doubling does */}
+        <div style={{
+          marginTop: "16px",
+          padding: "14px",
+          background: "rgba(251,191,36,0.08)",
+          border: "1px solid rgba(251,191,36,0.25)",
+          borderRadius: "10px",
+        }}>
+          <div style={{ fontSize: "12px", color: "#fbbf24", fontWeight: 700, marginBottom: "8px" }}>⚡ When k → 2k</div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", fontSize: "13px", color: "#94a3b8", fontFamily: "monospace" }}>
+            <div>ω → ω × √2 ≈ ω × 1.414</div>
+            <div>T → T / √2 ≈ T × 0.707</div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── k Slider ── */}
+      <div style={CARD_STYLE}>
+        <div style={BADGE}>Control Panel</div>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
+          <div style={{ flex: 1, minWidth: "200px" }}>
+            <label style={{ fontSize: "13px", color: "#94a3b8", display: "block", marginBottom: "8px" }}>
+              Base Spring Constant k₁ = <strong style={{ color: "#a5b4fc" }}>{k1} N/m</strong>
+              &nbsp;→ k₂ = <strong style={{ color: "#f472b6" }}>{k2} N/m</strong>
+            </label>
+            <input
+              type="range" min={1} max={16} step={1} value={k1}
+              onChange={(e) => setK1(Number(e.target.value))}
+              style={{ width: "100%", accentColor: "#6366f1" }}
+            />
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "10px", color: "#475569" }}>
+              <span>1</span><span>8</span><span>16</span>
+            </div>
+          </div>
+          <button
+            onClick={() => setRunning((r) => !r)}
+            style={{
+              padding: "10px 20px",
+              borderRadius: "10px",
+              border: "none",
+              cursor: "pointer",
+              fontWeight: 700,
+              fontSize: "14px",
+              background: running ? "rgba(239,68,68,0.2)" : "rgba(34,197,94,0.2)",
+              color: running ? "#f87171" : "#4ade80",
+              borderColor: running ? "#f87171" : "#4ade80",
+              borderWidth: "1px",
+              borderStyle: "solid",
+            }}
+          >
+            {running ? "⏸ Pause" : "▶ Play"}
+          </button>
+        </div>
+      </div>
+
+      {/* ── Tabs ── */}
+      <div style={{ display: "flex", gap: "4px", marginBottom: "16px", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "0" }}>
+        {tabBtn("sim", "🔬 Live Simulation")}
+        {tabBtn("data", "📊 Data & Charts")}
+        {tabBtn("formula", "📐 Derivation")}
+      </div>
+
+      {/* ── Tab: Simulation ── */}
+      {activeTab === "sim" && (
+        <div style={CARD_STYLE}>
+          <div style={BADGE}>Side-by-Side Oscillators</div>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "16px",
+          }}>
+            <SpringCanvas k={k1} label={`Original  k=${k1}`} color="#6366f1" running={running} />
+            <SpringCanvas k={k2} label={`Doubled  k=${k2}`} color="#f472b6" phaseOffset={0} running={running} />
+          </div>
+          <div style={{
+            marginTop: "16px",
+            padding: "12px 16px",
+            background: "rgba(0,0,0,0.3)",
+            borderRadius: "10px",
+            fontSize: "13px",
+            color: "#94a3b8",
+            lineHeight: 1.7,
+          }}>
+            🟡 <strong style={{ color: "#fbbf24" }}>Yellow arrows</strong> show instantaneous velocity.
+            Notice the <strong style={{ color: "#f472b6" }}>pink oscillator</strong> completes cycles
+            faster — it has a higher frequency by a factor of <strong style={{ color: "#e2e8f0" }}>√2</strong>.
+            Both masses travel the same maximum displacement (amplitude).
+          </div>
+        </div>
+      )}
+
+      {/* ── Tab: Data ── */}
+      {activeTab === "data" && (
+        <div style={{ display: "grid", gap: "16px" }}>
+          <div style={{ ...CARD_STYLE, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+            <PeriodChart k1={k1} k2={k2} />
+            <PhaseSpacePlot k1={k1} k2={k2} />
+          </div>
+
+          {/* Comparison Table */}
+          <div style={CARD_STYLE}>
+            <div style={BADGE}>Numerical Comparison</div>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
+                <thead>
+                  <tr>
+                    {["Property", `k₁ = ${k1} N/m`, `k₂ = ${k2} N/m`, "Ratio k₂/k₁"].map((h, i) => (
+                      <th key={i} style={{
+                        padding: "10px 14px",
+                        textAlign: "left",
+                        color: "#64748b",
+                        borderBottom: "1px solid rgba(255,255,255,0.08)",
+                        fontWeight: 600,
+                        fontSize: "11px",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.06em",
+                      }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Spring Constant (k)", `${k1} N/m`, `${k2} N/m`, "2.000"],
+                    ["Angular Freq. (ω)", `${omega1.toFixed(3)} rad/s`, `${omega2.toFixed(3)} rad/s`, `${(omega2 / omega1).toFixed(4)} ≈ √2`],
+                    ["Period (T)", `${T1.toFixed(3)} s`, `${T2.toFixed(3)} s`, `${(T2 / T1).toFixed(4)} ≈ 1/√2`],
+                    ["Frequency (f)", `${(1 / T1).toFixed(3)} Hz`, `${(1 / T2).toFixed(3)} Hz`, `${(T1 / T2).toFixed(4)} ≈ √2`],
+                    ["Amplitude (A)", "55 cm", "55 cm", "1.000 (unchanged)"],
+                  ].map((row, i) => (
+                    <tr key={i} style={{ background: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent" }}>
+                      {row.map((cell, j) => (
+                        <td key={j} style={{
+                          padding: "10px 14px",
+                          color: j === 0 ? "#94a3b8" : j === 3 ? "#fbbf24" : j === 1 ? "#a5b4fc" : "#f472b6",
+                          fontFamily: j > 0 ? "monospace" : "inherit",
+                          borderBottom: "1px solid rgba(255,255,255,0.04)",
+                        }}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Tab: Derivation ── */}
+      {activeTab === "formula" && (
+        <div style={{ display: "grid", gap: "16px" }}>
+          {[
+            {
+              step: "01",
+              title: "Newton's Second Law",
+              content: "Apply F = ma to the mass on the spring. The restoring force is F = −kx.",
+              formula: "m·ẍ = −kx",
+              color: "#6366f1",
+            },
+            {
+              step: "02",
+              title: "Differential Equation",
+              content: "Rearrange to the standard SHM form. This is a second-order linear ODE.",
+              formula: "ẍ + (k/m)·x = 0",
+              color: "#8b5cf6",
+            },
+            {
+              step: "03",
+              title: "Define Angular Frequency",
+              content: "Let ω² = k/m. The solution is sinusoidal with angular frequency ω.",
+              formula: "ω = √(k/m)",
+              color: "#a855f7",
+            },
+            {
+              step: "04",
+              title: "Period from Frequency",
+              content: "One full oscillation takes T seconds. Higher ω means shorter T.",
+              formula: "T = 2π/ω = 2π√(m/k)",
+              color: "#f472b6",
+            },
+            {
+              step: "05",
+              title: "Doubling k",
+              content: "Substitute k → 2k. The √2 factor scales frequency up and period down.",
+              formula: "ω_new = √(2k/m) = √2 · ω",
+              color: "#fb923c",
+            },
+          ].map(({ step, title, content, formula, color }) => (
+            <div key={step} style={{
+              ...CARD_STYLE,
+              borderColor: color + "40",
+              display: "flex",
+              gap: "16px",
+              alignItems: "flex-start",
+              marginBottom: "12px",
+            }}>
+              <div style={{
+                fontSize: "24px",
+                fontWeight: 900,
+                color: color + "60",
+                fontFamily: "monospace",
+                minWidth: "40px",
+                lineHeight: 1,
+              }}>{step}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 700, color, marginBottom: "6px", fontSize: "15px" }}>{title}</div>
+                <div style={{ color: "#94a3b8", fontSize: "13px", marginBottom: "12px", lineHeight: 1.6 }}>{content}</div>
+                <div style={{
+                  background: "rgba(0,0,0,0.4)",
+                  border: `1px solid ${color}30`,
+                  borderRadius: "8px",
+                  padding: "12px 16px",
+                  fontFamily: "monospace",
+                  fontSize: "18px",
+                  color: "#e2e8f0",
+                  textAlign: "center",
+                  letterSpacing: "1px",
+                }}>
+                  {formula}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* ── Summary Card ── */}
+      <div style={{
+        ...CARD_STYLE,
+        background: "linear-gradient(135deg, #064e3b 0%, #0f172a 100%)",
+        borderColor: "rgba(52,211,153,0.3)",
+        marginTop: "8px",
+      }}>
+        <div style={{ ...BADGE, borderColor: "rgba(52,211,153,0.4)", color: "#34d399" }}>Key Takeaways</div>
+        <div style={{ display: "grid", gap: "10px" }}>
+          {[
+            { icon: "⚡", text: "Angular frequency increases by √2 ≈ 1.414×", color: "#34d399" },
+            { icon: "⏱️", text: "Period decreases by factor 1/√2 ≈ 0.707×", color: "#6ee7b7" },
+            { icon: "📏", text: "Amplitude is unchanged — it depends on initial conditions, not k", color: "#a7f3d0" },
+            { icon: "🌀", text: "Phase portrait ellipse becomes taller (higher max velocity)", color: "#d1fae5" },
+          ].map(({ icon, text, color }) => (
+            <div key={text} style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+              <span style={{ fontSize: "18px" }}>{icon}</span>
+              <span style={{ color, fontSize: "13px", lineHeight: 1.5 }}>{text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  );
+}
+```

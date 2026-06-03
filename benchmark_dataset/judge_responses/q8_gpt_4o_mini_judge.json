@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 8,
+  "question": "A ball is projected at an angle of 45° with velocity 20 m/s. Find its range.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Projectile Tracking\n\n### Problem\nA ball is projected at an angle of $45^\\circ$ with a velocity of $20 \\text{ m/s}$. Find its horizontal range.\n\n### Given\n* Initial launch velocity ($u$) = $20 \\text{ m/s}$\n* Projection angle ($\\theta$) = $45^\\circ$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$R = \\frac{u^2 \\sin(2\\theta)}{g}$$\n\n### Substitution\n$$R = \\frac{(20)^2 \\times \\sin(2 \\times 45^\\circ)}{9.8}$$\n\n### Calculation\n$$R = \\frac{400 \\times \\sin(90^\\circ)}{9.8}$$\n\nSince $\\sin(90^\\circ) = 1$:\n$$R = \\frac{400 \\times 1}{9.8}$$\n\n$$R = 40.82 \\text{ m}$$\n\n### Final Answer\n**Horizontal Range ($R$) = $40.82 \\text{ m}$**\n\n### Interpretation\nThis means the ball travels a total horizontal ground shortcut distance of $40.82 \\text{ meters}$ away from its initial launch spot before striking the earth baseline.",
+  "candidate_response": "To find the range of a projectile launched at an angle, we can use the formula:\n\n\\[\nR = \\frac{v^2 \\sin(2\\theta)}{g}\n\\]\n\nwhere:\n- \\( R \\) is the range,\n- \\( v \\) is the initial velocity,\n- \\( \\theta \\) is the launch angle,\n- \\( g \\) is the acceleration due to gravity (approximately \\( 9.81 \\, \\text{m/s}^2 \\)).\n\n### Step-by-step Calculation\n\n1. **Given Data**:\n   - Initial velocity, \\( v = 20 \\, \\text{m/s} \\)\n   - Launch angle, \\( \\theta = 45^\\circ \\)\n   - Acceleration due to gravity, \\( g = 9.81 \\, \\text{m/s}^2 \\)\n\n2. **Calculate the Range**:\n\n   Using the formula:\n   \\[\n   R = \\frac{(20)^2 \\sin(2 \\times 45^\\circ)}{9.81}\n   \\]\n\n   We know that \\( \\sin(90^\\circ) = 1 \\), thus:\n   \\[\n   R = \\frac{400 \\times 1}{9.81} \\approx \\frac{400}{9.81} \\approx 40.8 \\, \\text{m}\n   \\]\n\n### Result\nThe range of the projectile is approximately **40.8 meters**. \n\nNow, let's render the equation in a structured format.\n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│     \\( R = \\frac{v^2 \\sin(2\\theta)}{g} \\)      │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n### Summary\n- **Initial Velocity**: 20 m/s\n- **Launch Angle**: 45°\n- **Range**: 40.8 m\n\nWould you like to explore any specific aspect of this calculation further?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is largely accurate and well-formatted, with a clear step-by-step calculation and proper use of formulas. However, there are minor discrepancies in formatting and a slight difference in the acceleration due to gravity value used (9.81 m/s^2 instead of 9.8 m/s^2). The educational score is slightly lower due to the lack of an explicit interpretation of the result, as seen in the gold reference answer. Additionally, the inclusion of unnecessary elements like the 'Main Formula' box and 'Explain Formula' and 'Open Formula Lab' links detract from the overall clarity and focus of the response. To improve, the candidate should ensure consistency in formatting and physical constants, and consider adding a brief interpretation of the calculated range to enhance educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 376,
+    "completionTokens": 440,
+    "totalTokens": 816
+  },
+  "candidate_latency_ms": 4708,
+  "candidate_cost_usd": 0.0003204,
+  "judge_token_usage": {
+    "promptTokens": 1137,
+    "completionTokens": 217,
+    "totalTokens": 1354
+  },
+  "judge_latency_ms": 5806,
+  "judge_cost_usd": 0.001203,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:07:44.514Z"
+}

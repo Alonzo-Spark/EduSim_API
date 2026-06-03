@@ -1,0 +1,73 @@
+┌─────────────────────────────────────────────────────────┐
+│ Event Notification: Object Attached                     │
+│                                                         │
+│ The simulation has detected a new mass fused to the     │
+│ pendulum bob during its flight path.                    │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│ Key Concepts                                            │
+│                                                         │
+│ • **Inelastic Interaction**: The attachment is modeled   │
+│   as a perfectly inelastic collision where the two      │
+│   objects merge.                                        │
+│                                                         │
+│ • **Conservation of Momentum**: The total momentum of   │
+│   the system remains constant immediately before and    │
+│   after the attachment.                                 │
+│                                                         │
+│ • **Velocity Reduction**: As the total mass ($m$)       │
+│   increases, the velocity ($v$) must decrease to        │
+│   conserve momentum.                                    │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│ Velocity Update Formula                                 │
+│                                                         │
+│                                                         │
+│           $$ v_{new} = \frac{m_{old} \cdot v_{old}}{m_{total}} $$ │
+│                                                         │
+│                                                         │
+│ [ Explain Formula ]           [ Open Formula Lab ]      │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│ Periodicity Analysis                                    │
+│                                                         │
+│ For a simple pendulum, the period ($T$) is independent  │
+│ of mass. However, the amplitude has effectively changed │
+│ due to energy loss during the attachment.               │
+│                                                         │
+│                                                         │
+│                $$ T \approx 2\pi \sqrt{\frac{L}{g}} $$  │
+│                                                         │
+│                                                         │
+│ [ Explain Formula ]           [ Open Formula Lab ]      │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│ System State Comparison                                 │
+│                                                         │
+│ ┌──────────────┬─────────────────┬─────────────────┐   │
+│ │ Parameter    │ Before Event    │ After Event     │   │
+│ ├──────────────┼─────────────────┼─────────────────┤   │
+│ │ Mass ($m$)   │ 2.0 kg          │ 3.5 kg          │   │
+│ │ Velocity ($v$)│ 5.0 m/s        │ 2.86 m/s        │   │
+│ │ Kinetic Energy│ 25.0 J         │ 14.3 J          │   │
+│ │ Period ($T$)  │ 2.0 s          │ 2.0 s           │   │
+│ └──────────────┴─────────────────┴─────────────────┘   │
+│                                                         │
+│ *Note: Kinetic energy is not conserved in inelastic     │
+│ collisions; energy is lost to heat/deformation.         │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│ Important Notes                                         │
+│                                                         │
+│ • The pendulum will now swing with a lower maximum      │
+│   height due to the loss of kinetic energy.             │
+│                                                         │
+│ • While the swing period remains constant, the damping  │
+│   effect of air resistance may increase slightly due    │
+│   to the larger surface area of the new object.         │
+└─────────────────────────────────────────────────────────┘

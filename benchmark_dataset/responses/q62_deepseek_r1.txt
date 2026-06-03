@@ -1,0 +1,229 @@
+Here's a runtime overlay response for an `object_attached` event on a flying pendulum bob, featuring interactive physics visualizations and real-time data:
+
+```python
+import pygame
+import numpy as np
+from pygame.locals import *
+
+class PendulumOverlay:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.screen = pygame.display.set_mode((width, height))
+        pygame.display.set_caption("Pendulum Physics: Object Attachment Event")
+        
+        # Physics state
+        self.pendulum_length = 200
+        self.bob_radius = 20
+        self.original_mass = 1.0
+        self.added_mass = 0.5
+        self.theta = np.pi/4
+        self.omega = 0.0
+        self.alpha = 0.0
+        self.gravity = 9.8
+        self.time = 0
+        self.event_triggered = False
+        self.event_time = 0
+        
+        # Visualization
+        self.pivot = (width//2, 100)
+        self.trail = []
+        self.font = pygame.font.SysFont('Arial', 16)
+        self.large_font = pygame.font.SysFont('Arial', 24, bold=True)
+        
+        # Data recording
+        self.time_data = []
+        self.theta_data = []
+        self.omega_data = []
+        self.alpha_data = []
+
+    def calculate_position(self):
+        return (
+            int(self.pivot[0] + self.pendulum_length * np.sin(self.theta)),
+            int(self.pivot[1] + self.pendulum_length * np.cos(self.theta))
+        )
+
+    def update_physics(self, dt):
+        # Before event: original pendulum motion
+        if not self.event_triggered:
+            self.alpha = - (self.gravity / self.pendulum_length) * np.sin(self.theta)
+        
+        # After event: modified physics
+        else:
+            total_mass = self.original_mass + self.added_mass
+            self.alpha = - (self.gravity / self.pendulum_length) * np.sin(self.theta) * (total_mass / self.original_mass)
+        
+        self.omega += self.alpha * dt
+        self.theta += self.omega * dt
+        self.time += dt
+        
+        # Record data for visualization
+        self.time_data.append(self.time)
+        self.theta_data.append(self.theta)
+        self.omega_data.append(self.omega)
+        self.alpha_data.append(self.alpha)
+        
+        # Keep last 100 points
+        if len(self.time_data) > 100:
+            self.time_data.pop(0)
+            self.theta_data.pop(0)
+            self.omega_data.pop(0)
+            self.alpha_data.pop(0)
+
+    def trigger_event(self):
+        if not self.event_triggered:
+            self.event_triggered = True
+            self.event_time = self.time
+            # Conservation of angular momentum: ω_new = (m₁ω)/(m₁ + m₂)
+            self.omega *= self.original_mass / (self.original_mass + self.added_mass)
+
+    def draw(self):
+        self.screen.fill((20, 20, 35))  # Dark blue background
+        
+        # Draw pendulum trail
+        bob_pos = self.calculate_position()
+        self.trail.append(bob_pos)
+        if len(self.trail) > 2:
+            pygame.draw.lines(self.screen, (100, 150, 255), False, self.trail[-50:], 2)
+        
+        # Draw pendulum components
+        pygame.draw.line(self.screen, (200, 200, 220), self.pivot, bob_pos, 3)
+        pygame.draw.circle(self.screen, (40, 120, 180), self.pivot, 8)
+        
+        # Draw original bob
+        pygame.draw.circle(self.screen, (70, 170, 240), bob_pos, self.bob_radius)
+        
+        # Draw attached object if event triggered
+        if self.event_triggered:
+            offset = 25
+            attach_pos = (
+                bob_pos[0] + int(offset * np.sin(self.theta + np.pi/2)),
+                bob_pos[1] + int(offset * np.cos(self.theta + np.pi/2))
+            )
+            pygame.draw.circle(self.screen, (220, 90, 90), attach_pos, 15)
+            pygame.draw.line(self.screen, (220, 160, 160), bob_pos, attach_pos, 2)
+        
+        # Draw information panel
+        self.draw_info_panel()
+        
+        # Draw graphs
+        self.draw_graph((50, 300), self.theta_data, "Angle (rad)", (0, 200, 255))
+        self.draw_graph((300, 300), self.omega_data, "Angular Velocity", (150, 255, 150))
+        self.draw_graph((550, 300), self.alpha_data, "Angular Acceleration", (255, 150, 100))
+
+    def draw_info_panel(self):
+        # Physics info box
+        pygame.draw.rect(self.screen, (30, 40, 60), (10, 10, 250, 150), border_radius=8)
+        pygame.draw.rect(self.screen, (60, 80, 120), (10, 10, 250, 150), 2, border_radius=8)
+        
+        title = self.large_font.render("PENDULUM STATE", True, (220, 220, 255))
+        self.screen.blit(title, (20, 15))
+        
+        # Physics parameters
+        mass = self.original_mass + (self.added_mass if self.event_triggered else 0)
+        params = [
+            f"Time: {self.time:.2f}s",
+            f"Angle: {np.degrees(self.theta):.1f}°",
+            f"Angular Velocity: {self.omega:.2f} rad/s",
+            f"Mass: {mass:.2f} kg",
+            f"Event: {'TRIGGERED' if self.event_triggered else 'PENDING'}"
+        ]
+        
+        for i, text in enumerate(params):
+            surf = self.font.render(text, True, (200, 220, 255))
+            self.screen.blit(surf, (20, 50 + i*20))
+        
+        # Event indicator
+        color = (220, 90, 90) if self.event_triggered else (120, 200, 120)
+        pygame.draw.circle(self.screen, color, (240, 140), 10)
+
+    def draw_graph(self, pos, data, title, color):
+        width, height = 220, 150
+        pygame.draw.rect(self.screen, (25, 30, 45), (pos[0], pos[1], width, height), border_radius=6)
+        pygame.draw.rect(self.screen, (80, 100, 140), (pos[0], pos[1], width, height), 1, border_radius=6)
+        
+        # Title
+        title_surf = self.font.render(title, True, (180, 200, 255))
+        self.screen.blit(title_surf, (pos[0] + 10, pos[1] + 5))
+        
+        # Draw graph if we have data
+        if len(data) > 1:
+            points = []
+            max_val = max(1, max(map(abs, data)) * 1.2)
+            
+            for i, val in enumerate(data):
+                x = pos[0] + 10 + i * (200 / len(data))
+                y = pos[1] + 130 - (val / max_val) * 100
+                points.append((x, y))
+            
+            pygame.draw.lines(self.screen, color, False, points, 2)
+            
+            # Draw zero line
+            zero_y = pos[1] + 130
+            pygame.draw.line(self.screen, (100, 120, 160), 
+                            (pos[0] + 10, zero_y), 
+                            (pos[0] + 210, zero_y), 1)
+
+# Main simulation loop
+def main():
+    pygame.init()
+    overlay = PendulumOverlay(800, 500)
+    clock = pygame.time.Clock()
+    running = True
+    
+    while running:
+        dt = 0.01
+        
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                running = False
+            elif event.type == KEYDOWN:
+                if event.key == K_SPACE:
+                    overlay.trigger_event()
+        
+        overlay.update_physics(dt)
+        overlay.draw()
+        pygame.display.flip()
+        clock.tick(60)
+    
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
+```
+
+This interactive overlay features:
+
+1. **Real-time Physics Visualization**:
+   - Pendulum with attachable mass (press SPACE to trigger attachment)
+   - Motion trail showing path history
+   - Color-coded components (blue = original bob, red = attached mass)
+
+2. **Dynamic Physics Simulation**:
+   - Conservation of angular momentum during attachment
+   - Mass-dependent acceleration changes
+   - Real-time parameter adjustments
+
+3. **Multi-panel Data Display**:
+   - State panel showing time, angle, velocity, and mass
+   - Triple-graph display for angle, velocity, and acceleration
+   - Event status indicator (red when triggered)
+
+4. **Interactive Controls**:
+   - SPACE key triggers attachment event
+   - Automatic physics parameter adjustment post-attachment
+   - Live data recording and visualization
+
+5. **Visual Design**:
+   - Dark theme for clear contrast
+   - Color-coded data streams
+   - Smooth animation at 60 FPS
+   - Clean, technical aesthetic
+
+The simulation demonstrates how attaching mass affects pendulum dynamics through:
+- Instantaneous angular velocity reduction (momentum conservation)
+- Increased moment of inertia
+- Amplitude reduction in oscillations
+- Modified acceleration profile
+
+The graphs clearly show the discontinuity in angular velocity at the moment of attachment, followed by modified acceleration behavior.

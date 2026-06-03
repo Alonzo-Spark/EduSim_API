@@ -1,0 +1,165 @@
+┌───────────────────────────────────────┐
+│ Introduction                           │
+│                                       │
+│ A simple pendulum consists of a point   │
+│ mass *m* attached to the end of a mass‑ │
+│ less string of length *L*, swinging   │
+│ under the influence of gravity.  Its   │
+│ motion is a classic example of         │
+│ harmonic oscillation and is widely     │
+│ used to illustrate the concepts of     │
+│ periodic motion.                       │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Definition                             │
+│                                       │
+│ **Simple Pendulum** – a point mass *m* │
+│ suspended from a fixed pivot by a      │
+│ mass‑less, inextensible string of       │
+│ length *L*, allowed to swing freely   │
+│ in a vertical plane.                   │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Key Concepts                           │
+│                                       │
+│ • Restoring torque  τ = – m g L sinθ   │
+│ • Small‑angle approximation: sinθ≈θ   │
+│ • Equation of motion becomes linear   │
+│   → simple harmonic motion (SHM)      │
+│ • Period *T* is the time for one full │
+│   oscillation.                         │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Derivation – Equation of Motion         │
+│                                       │
+│ The torque about the pivot is           │
+│                                       │
+│   τ = – m g L sinθ                       │
+│                                       │
+│ Using τ = I α and I = m L² (point mass) │
+│                                       │
+│   – m g L sinθ = m L² α                  │
+│   → α + (g/L) sinθ = 0                  │
+│                                       │
+│ [ Explain Formula ]                    │
+│ [ Open Formula Lab ]                   │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Derivation – Small‑Angle Approximation  │
+│                                       │
+│ For θ ≪ 1 rad, sinθ ≈ θ, so the          │
+│ differential equation simplifies to     │
+│                                       │
+│   α + (g/L) θ = 0                        │
+│   → d²θ/dt² + (g/L) θ = 0                │
+│                                       │
+│ This is the standard form of SHM:       │
+│ d²θ/dt² + ω²θ = 0,  with ω = √(g/L).    │
+│                                       │
+│ [ Explain Formula ]                    │
+│ [ Open Formula Lab ]                   │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Derivation – Solution & Period           │
+│                                       │
+│ The general solution of SHM is           │
+│                                       │
+│   θ(t) = θ₀ cos(ωt + φ)                  │
+│                                       │
+│ The angular frequency ω is               │
+│   ω = √(g/L)                             │
+│ The period *T* is related to ω by        │
+│   T = 2π/ω                               │
+│   → T = 2π √(L/g)                         │
+│                                       │
+│ [ Explain Formula ]                    │
+│ [ Open Formula Lab ]                   │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Main Formula                            │
+│                                       │
+│   T = 2π √(L/g)                         │
+│                                       │
+│ **Variables**                           │
+│   • *T* – time period (s)               │
+│   • *L* – pendulum length (m)            │
+│   • *g* – acceleration due to gravity    │
+│     (≈ 9.81 m s⁻² near Earth’s surface)   │
+│                                       │
+│ [ Explain Formula ]                    │
+│ [ Open Formula Lab ]                   │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Applications                            │
+│                                       │
+│ • Historical time‑keeping devices (      │
+│   pendulum clocks)                     │
+│ • Measuring local *g* with a gravimeter│
+│ • Seismology – as a simple model for   │
+│   oscillatory ground motion            │
+│ • Educational demonstrations of SHM    │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Important Notes                         │
+│                                       │
+│ • Assumes a point mass and mass‑less   │
+│   string.                               │
+│ • Small‑angle approximation (θ ≲ 10°)   │
+│   is required for the simple formula. │
+│ • Air resistance and string stiffness  │
+│   are neglected.                        │
+│ • For larger amplitudes the exact period│
+│   involves an elliptic integral.       │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Summary                                 │
+│                                       │
+│ The simple pendulum behaves as a       │
+│ simple harmonic oscillator when its    │
+│ swing angle is small.  Starting from   │
+│ τ = – m g L sinθ, applying the          │
+│ small‑angle approximation reduces the  │
+│ motion to d²θ/dt² + (g/L)θ = 0, whose   │
+│ solution yields the period            │
+│   T = 2π √(L/g).                         │
+│ This relationship links the period to  │
+│ only the pendulum length and local      │
+│ gravity, making the pendulum a useful   │
+│ tool for time‑keeping and *g* measurement│
+│ under appropriate conditions.          │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ Suggested Questions                     │
+│                                       │
+│ 1. How does the period change if the    │
+│    pendulum length is doubled?          │
+│ 2. Derive the first‑order correction to │
+│    the period for a larger amplitude   │
+│    using the elliptic integral.        │
+│ 3. If the pendulum swings in a fluid of │
+│    density ρ, how would the period be   │
+│    be modified?                        │
+│ 4. Explain why a pendulum is less       │
+│    accurate as a clock on other planets│
+│    with different gravitational values.│
+└───────────────────────────────────────┘

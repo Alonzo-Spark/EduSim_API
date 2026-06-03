@@ -1,0 +1,72 @@
+┌───────────────────────────┐
+│ Problem Statement         │
+│                           │
+│ A train moving at 20 m/s  │
+│ applies brakes and stops  │
+│ after 10 seconds.         │
+│ Calculate retardation.    │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Given Data                │
+│                           │
+• Initial Velocity (u)      │
+  = 20 m/s                  │
+                           │
+• Final Velocity (v)        │
+  = 0 m/s                   │
+  (Since the train stops)   │
+                           │
+• Time (t)                 │
+  = 10 s                    │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Main Formula              │
+│                           │
+│   $$a = \frac{v - u}{t}$$ │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Calculation               │
+│                           │
+│ Substitute the known      │
+│ values into the formula:  │
+│                           │
+│ $$a = \frac{0 - 20}{10}$$ │
+│                           │
+│ $$a = \frac{-20}{10}$$    │
+│                           │
+│ $$a = -2 \, \text{m/s}^2$$│
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Result                    │
+│                           │
+│ The acceleration is       │
+│ -2 m/s².                  │
+│                           │
+│ Since the acceleration is │
+│ opposite to the direction │
+│ of motion, it is called   │
+│ retardation.              │
+│                           │
+│ **Retardation = 2 m/s²**  │
+└───────────────────────────┘
+
+```json
+{
+  "formula": "a = \\frac{v - u}{t}",
+  "title": "Acceleration Formula",
+  "surroundingContext": "Used to calculate constant acceleration given change in velocity and time.",
+  "variables": [
+    {"symbol": "a", "meaning": "Acceleration (Retardation if negative)"},
+    {"symbol": "v", "meaning": "Final Velocity"},
+    {"symbol": "u", "meaning": "Initial Velocity"},
+    {"symbol": "t", "meaning": "Time"}
+  ]
+}
+```

@@ -1,0 +1,62 @@
+┌───────────────────────────────────────────────────────────────────────┐
+│                        MECHANICAL PROPERTIES OF FLUIDS                │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│ ▶ Definition                                                          │
+│                                                                       │
+│ Pressure is defined as the physical force exerted on an object. It is  │
+│ the force applied perpendicular to the surface of the object per unit │
+│ area over which that force is distributed.                            │
+│                                                                       │
+│ Mathematically, it describes the internal distribution of force       │
+│ within a fluid (liquid or gas) at rest.                               │
+│                                                                       │
+│ **SI Unit:**                                                           │
+│ The SI unit of pressure is the **Pascal (Pa)**.                        │
+│                                                                       │
+│ $$ 1 \text{ Pa} = 1 \text{ N/m}^2 $$                                  │
+│                                                                       │
+│ (Other common units include atm, bar, and torr.)                      │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│ ▶ Main Formula                                                        │
+│                                                                       │
+│                                                                       │
+│                        $$ P = \frac{F}{A} $$                          │
+│                                                                       │
+│                                                                       │
+│  [ 📖 Explain Formula ]  [ 🧪 Open Formula Lab ]                     │
+└───────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────┐
+│ ▶ Important Notes                                                     │
+│                                                                       │
+│ • **Scalar Quantity:** Pressure is a scalar quantity. While force is  │
+│   a vector, pressure acts equally in all directions at a point within │
+│   a fluid.                                                            │
+│                                                                       │
+│ • **Inverse Relationship:** For a constant force, pressure is         │
+│   inversely proportional to the area ($P \propto \frac{1}{A}$).       │
+│   Smaller area = Higher pressure.                                     │
+│                                                                       │
+│ • **Fluid Depth:** In a fluid at rest, pressure increases with depth  │
+│   due to the weight of the fluid above.                               │
+└───────────────────────────────────────────────────────────────────────┘
+
+```json
+// FORMULA_EXTRACTION_DATA
+[
+  {
+    "formula": "P = \\frac{F}{A}",
+    "title": "Pressure Formula",
+    "surroundingContext": "Pressure is defined as the force applied perpendicular to the surface of the object per unit area over which that force is distributed.",
+    "variables": {
+      "P": "Pressure",
+      "F": "Magnitude of the normal force (Newton)",
+      "A": "Area of the surface (Square meter)"
+    }
+  }
+]
+```

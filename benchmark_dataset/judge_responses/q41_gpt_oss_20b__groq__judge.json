@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 41,
+  "question": "Electrostatics: State Coulomb’s law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nCoulomb's Law states that the electrostatic force of attraction or repulsion between two stationary point charges is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance separating them.\n\n---\n\n## Characteristics\n\n* **Action-Reaction Interaction:** The forces exerted by the charges on each other are equal in magnitude and opposite in direction, acting along the straight line connecting them.\n* **Charge Dependency:** Like charges repel each other, whereas opposite charges experience a mutual attraction force.\n\n---\n\n## Formula\n\nThe mathematical equation for the electrostatic force:\n\n$$F = k_e \\frac{|q_1 q_2|}{r^2}$$\n\nIn a vacuum, the proportionality constant ($k_e$) is expressed as:\n\n$$k_e = \\frac{1}{4\\pi\\varepsilon_0} \\approx 8.988 \\times 10^9 \\text{ N}\\cdot\\text{m}^2/\\text{C}^2$$\n\nWhere:\n* $F$ represents the electrostatic force magnitude\n* $q_1, q_2$ represent the magnitudes of the point charges\n* $r$ represents the distance separating the two charges\n* $\\varepsilon_0$ represents the permittivity of free space ($8.854 \\times 10^{-12} \\text{ C}^2/\\text{N}\\cdot\\text{m}^2$)\n\n---\n\n## Summary\n\nCoulomb's Law describes the electrostatic force between charges, showing that it increases with charge magnitude but decreases according to an inverse-square relationship with distance.",
+  "candidate_response": "┌───────────────────────────────────────────────────────┐\n│                     Definition                        │\n│                                                       │\n│ Coulomb’s Law states that the electrostatic force      │\n│ between two point charges is directly proportional to │\n│ the product of the charges and inversely proportional │\n│ to the square of the distance between them.           │\n└───────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────┐\n│                    Main Formula                       │\n│                                                       │\n│                $$F = k\\,\\frac{q_1\\,q_2}{r^2}$$         │\n│                                                       │\n│ [ Explain Formula ]                                   │\n│ [ Open Formula Lab ]                                  │\n└───────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately captures the core concept of Coulomb's Law, including the definition and the main formula. However, it lacks detailed explanations, characteristics of the law (such as action-reaction interaction and charge dependency), and the full mathematical formulation including the constant $k_e$ and its relation to the permittivity of free space. The quality of presentation is somewhat compromised by the use of ASCII art boxes, which, while visually appealing, do not contribute to the clarity or readability of the content in a standard academic or professional context. The educational score is decent because the response does provide a clear, beginner-friendly introduction to Coulomb's Law, but it falls short in providing a comprehensive understanding or pedagogical effectiveness due to the omission of crucial details and explanations. To improve, the candidate should focus on providing a more comprehensive explanation of Coulomb's Law, including its characteristics and the full mathematical formulation, and consider a more standard formatting approach to enhance readability and clarity.",
+  "candidate_token_usage": {
+    "promptTokens": 428,
+    "completionTokens": 708,
+    "totalTokens": 1136
+  },
+  "candidate_latency_ms": 2288,
+  "candidate_cost_usd": 0.0002445,
+  "judge_token_usage": {
+    "promptTokens": 939,
+    "completionTokens": 252,
+    "totalTokens": 1191
+  },
+  "judge_latency_ms": 3685,
+  "judge_cost_usd": 0.0011681999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:32:56.916Z"
+}

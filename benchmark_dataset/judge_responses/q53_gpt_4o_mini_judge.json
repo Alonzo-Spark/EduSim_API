@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 53,
+  "question": "Live Sandbox: What happens visually when the stiffness constant of a spring oscillator is doubled?",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nA block attached to a horizontal spring oscillates back and forth about an equilibrium line. We can adjust the spring stiffness parameter ($k$) to observe how the restoring force scales the oscillation speed.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nThe block transitions into a much faster, higher-frequency oscillation. It cycles back and forth rapidly across the center point, showing sharp direction changes at its maximum extension limits.\n\n### ✦ WHY IT HAPPENS\nDoubling the stiffness constant ($k$) means the spring exerts twice as much restoring force for the exact same displacement distance. A larger restoring force generates a higher acceleration vector, driving the mass back to equilibrium much faster.\n\n### ✦ WHAT TO NOTICE\nWatch the velocity telemetry indicators. The peak velocity at the center equilibrium point climbs significantly higher, while the time required to complete one full cycle decreases.\n\n### ✦ FORMULA\nThe angular frequency of a simple harmonic oscillator is defined as:\n\n$$\\omega = \\sqrt{\\frac{k}{m}}$$\n\n* $k$ represents the spring stiffness parameter value.\n* $m$ represents the mass value of the attached block.\n* Increasing $k$ increases the angular frequency ($\\omega$), which decreases the time period ($T = \\frac{2\\pi}{\\omega}$).\n\n### ✦ DEEPER UNDERSTANDING\nA stiffer spring stores and releases potential energy much faster, accelerating the attached mass more aggressively and reducing the time required for each cycle.\n\n### ✦ TRY THIS\n1. Set the **Stiffness slider ($k$)** to a low value and count the cycles over a ten-second window.\n2. Drag the **Stiffness slider** to maximum and observe the rapid pulse tracking profile.",
+  "candidate_response": "Let's explore the effects of doubling the stiffness constant of a spring oscillator. We'll break this down into structured sections for clarity.\n\n┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ A spring oscillator is a  │\n│ system that consists of a  │\n│ mass attached to a spring. │\n│ The behavior of this system│\n│ is governed by Hooke's law,│\n│ which states that the force │\n│ exerted by the spring is   │\n│ proportional to the         │\n│ displacement from the      │\n│ equilibrium position.      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concept               │\n│                           │\n│ The stiffness constant,    │\n│ denoted as \\( k \\),       │\n│ determines how stiff the   │\n│ spring is. Doubling the    │\n│ stiffness constant will    │\n│ affect the oscillation     │\n│ frequency and amplitude.   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│ The angular frequency of   │\n│ a spring oscillator is     │\n│ given by the formula:      │\n│                           │\n│ $$ \\omega = \\sqrt{\\frac{k}{m}} $$  │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Effects of Doubling \\( k \\)│\n│                           │\n│ 1. **Increased Frequency** │\n│   - The angular frequency   │\n│     \\( \\omega \\) will       │\n│     increase. Specifically,  │\n│     if \\( k \\) is doubled,  │\n│     \\( \\omega \\) becomes     │\n│     \\( \\sqrt{2} \\) times    │\n│     the original frequency.  │\n│                           │\n│ 2. **Reduced Amplitude**   │\n│   - If the system is       │\n│     driven at a frequency   │\n│     near the natural frequency,│\n│     the amplitude of        │\n│     oscillation may decrease.│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Applications              │\n│                           │\n│ Understanding the effects  │\n│ of changing the stiffness   │\n│ constant is crucial in      │\n│ fields like mechanical      │\n│ engineering, seismology,    │\n│ and material science, as it │\n│ helps in designing systems   │\n│ that require specific       │\n│ oscillation characteristics. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                  │\n│                           │\n│ Doubling the stiffness     │\n│ constant of a spring      │\n│ oscillator results in an   │\n│ increased angular frequency │\n│ and potentially reduced    │\n│ amplitude of oscillation.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions       │\n│                           │\n│ 1. How does changing the   │\n│    mass of the oscillator   │\n│    affect its frequency?    │\n│ 2. What are real-world      │\n│    applications of spring   │\n│    oscillators?            │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is well-structured and easy to follow, with clear explanations of the key concepts. However, there are a few areas where it could be improved. Firstly, the response does not explicitly state what happens visually when the stiffness constant is doubled, which is the main question being asked. It does provide a detailed explanation of the effects of doubling the stiffness constant on the angular frequency and amplitude of the oscillation, but it could be more directly relevant to the question. Additionally, the response includes some extraneous information, such as the applications of spring oscillators and suggested questions, which while useful, are not directly relevant to the question. The formula for the angular frequency is correctly stated, but it could be more clearly explained and derived. Overall, the response demonstrates a good understanding of the physics concepts, but could be more focused and directly relevant to the question.",
+  "candidate_token_usage": {
+    "promptTokens": 371,
+    "completionTokens": 755,
+    "totalTokens": 1126
+  },
+  "candidate_latency_ms": 8505,
+  "candidate_cost_usd": 0.00050865,
+  "judge_token_usage": {
+    "promptTokens": 1547,
+    "completionTokens": 234,
+    "totalTokens": 1781
+  },
+  "judge_latency_ms": 1283,
+  "judge_cost_usd": 0.0014898,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:11:00.369Z"
+}

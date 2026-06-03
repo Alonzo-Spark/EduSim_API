@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 26,
+  "question": "Mechanical Properties of Fluids: Define pressure and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nFluid pressure is defined as the normal compressive force exerted by a fluid per unit surface area of a container or object. \n\nPressure acts perpendicular to the surface at every point, distributing uniformly across a level horizontal plane within a static fluid column.\n\n---\n\n## Characteristics\n\n* **Isotropic Distribution:** At any given depth within a continuous static fluid body, pressure acts with equal intensity in all directions.\n* **Scalar Nature:** Pressure is a scalar parameter because the force it produces acts in whatever direction face the surface points.\n\n---\n\n## Formula\n\nThe mechanical definition of surface pressure:\n\n$$P = \\frac{F}{A}$$\n\nWhere:\n* $P$ represents the fluid pressure\n* $F$ represents the normal force component acting perpendicular to the surface\n* $A$ represents the total boundary area of the surface interface\n\n---\n\n## Metric System Units\n\nThe standard SI unit of pressure is the **Pascal ($\\text{Pas}$)**, which is equivalent to a force of $1 \\text{ Newton}$ acting uniformly over a surface area of $1 \\text{ square meter}$.\n\n$$1 \\text{ Pa} = 1 \\text{ N}/\\text{m}^2 = 1 \\text{ kg}/(\\text{m}\\cdot\\text{s}^2)$$\n\n---\n\n## Summary\n\nPressure measures force distribution across a surface area, acting isotropically within fluid systems and measured internationally in Pascals.",
+  "candidate_response": "┌──────────────────────────────────────────────────────────────────────────┐\n│ **Introduction: Fluid Pressure**                                         │\n├──────────────────────────────────────────────────────────────────────────┤\n│ When a fluid (liquid or gas) is at rest, it exerts a force perpendicular │\n│ to any surface in contact with it. This distributed force is what we    │\n│ perceive as pressure. Unlike solids, fluids cannot sustain shear stress  │\n│ at rest, so the force is always normal (perpendicular) to the surface.   │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Definition: Pressure**                                                 │\n├──────────────────────────────────────────────────────────────────────────┤\n│ **Pressure** is defined as the normal force (thrust) acting per unit     │\n│ area of a surface. It is a scalar quantity because at any point inside   │\n│ a fluid, pressure acts equally in all directions.                        │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Main Formula: Mathematical Expression**                                 │\n│                                                                          │\n│                 $$P = \\frac{F_{\\perp}}{A}$$                              │\n│                                                                          │\n│ **[ Explain Formula ]**                                                  │\n│ • $P$: Pressure                                                          │\n│ • $F_{\\perp}$: Normal force (Thrust) acting on the surface               │\n│ • $A$: Area of the surface over which the force is distributed           │\n│                                                                          │\n│ **[ Open Formula Lab ]**                                                 │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Units and Dimensions**                                                 │\n├──────────────────────────────────────────────────────────────────────────┤\n│ **SI Unit:** Pascal ($Pa$)                                               │\n│ 1 Pascal is equivalent to 1 Newton per square meter ($N/m^2$).           │\n│                                                                          │\n│ **Dimensional Formula:** $[M^1 L^{-1} T^{-2}]$                           │\n└──────────────────────────────────────────────────────────────────────────┤\n│ **Other Common Units:**                                                  │\n│ • **Atmosphere (atm):** $1 \\, atm = 1.013 \\times 10^5 \\, Pa$             │\n│ • **Bar:** $1 \\, bar = 10^5 \\, Pa$                                       │\n│ • **Torr:** $1 \\, torr = 133.3 \\, Pa$                                    │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Key Characteristics**                                                  │\n├──────────────────────────────────────────────────────────────────────────┤\n│ 1. **Direction:** Pressure acts perpendicular to the boundary of the     │\n│    fluid.                                                                │\n│ 2. **Scalar Nature:** Even though force is a vector, pressure is a      │\n│    scalar because it relates to the magnitude of the normal component.   │\n│ 3. **Depth Dependency:** In a static fluid, pressure increases linearly  │\n│    with depth due to the weight of the fluid column above.               │\n└──────────────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Suggested Questions**                                                  │\n├──────────────────────────────────────────────────────────────────────────┤\n│ • Why do sharp needles penetrate surfaces more easily than blunt ones?   │\n│ • How does atmospheric pressure change with altitude?                    │\n│ • Derive the expression for pressure at a depth $h$ in a liquid.         │\n└──────────────────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of pressure, its definition, formula, and characteristics. The use of boxes and tables to organize the information is visually appealing and easy to follow. However, there are some minor issues with formatting, such as inconsistent spacing and indentation. Additionally, the inclusion of 'Suggested Questions' at the end, while potentially useful for educational purposes, feels somewhat out of place in a definition-focused response. To improve, consider streamlining the formatting for better consistency and removing or integrating the 'Suggested Questions' section more seamlessly into the educational content.",
+  "candidate_token_usage": {
+    "promptTokens": 383,
+    "completionTokens": 757,
+    "totalTokens": 1140
+  },
+  "candidate_latency_ms": 5565,
+  "candidate_cost_usd": 0.0024625,
+  "judge_token_usage": {
+    "promptTokens": 1548,
+    "completionTokens": 177,
+    "totalTokens": 1725
+  },
+  "judge_latency_ms": 7563,
+  "judge_cost_usd": 0.0013536,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:49:34.579Z"
+}

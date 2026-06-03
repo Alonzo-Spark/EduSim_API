@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 42,
+  "question": "Define electric field and electric potential.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectric field and electric potential describe how a distribution of electric charge influences the surrounding space.\n\nAn electric field is a vector field surrounding a charged particle, representing the electrostatic force experienced per unit positive charge placed at that point.\n\nAn electric potential is a scalar field representing the electrostatic potential energy per unit charge at a specific point relative to a reference location.\n\n---\n\n## Characteristics\n\n* **Vector vs. Scalar:** The electric field is a vector quantity that points in the direction a positive test charge would move. Electric potential is a scalar quantity measuring energy states.\n\n---\n\n## Formula\n\nThe mathematical definitions for electric field ($E$) and potential ($V$) are written as:\n\n$$E = \\frac{F}{q}$$\n\n$$V = \\frac{W}{q}$$\n\nWhere:\n* $E$ represents the electric field vector intensity\n* $V$ represents the electric potential scalar value\n* $F$ represents the electrostatic force vector\n* $W$ represents the work performed moving a charge from infinity\n* $q$ represents the magnitude of the test charge\n\n---\n\n## Summary\n\nThe electric field measures the electrostatic force vector per unit charge, whereas electric potential tracks the energy scalar state per unit charge.",
+  "candidate_response": "┌───────────────────────────────────────────────────────────────────────┐\n│ Definition: Electric Field                                                │\n│                                                                             │\n│ The electric field at a point is the force per unit positive test charge │\n│ experienced by a small test charge placed at that point. It is a vector   │\n│ field denoted by **E**.                                                    │\n└───────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────┐\n│ Definition: Electric Potential                                            │\n│                                                                             │\n│ Electric potential is the potential energy per unit charge at a point in │\n│ an electric field. It is a scalar quantity denoted by **V**.              │\n└───────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────┐\n│ Main Formula                                                               │\n│                                                                             │\n│     $$ \\mathbf{E} = \\frac{\\mathbf{F}}{q} $$                                │\n│                                                                             │\n│ [ Explain Formula ] [ Open Formula Lab ]                                   │\n└───────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────┐\n│ Main Formula                                                               │\n│                                                                             │\n│     $$ V = \\frac{U}{q} $$                                                  │\n│                                                                             │\n│ [ Explain Formula ] [ Open Formula Lab ]                                   │\n└───────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────┐\n│ Key Concepts                                                              │\n│                                                                             │\n│ • **E** is a vector; **V** is a scalar.                                    │\n│ • The electric field is the negative gradient of the potential:            │\n│   $$ \\mathbf{E} = -\\nabla V $$                                            │\n│ • Potential difference equals work done per unit charge.                   │\n└───────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────┐\n│ Summary                                                                    │\n│                                                                             │\n│ The electric field describes the force exerted on a unit charge in a      │\n│ region, while the electric potential describes the energy per unit charge │\n│ at that point. They are intrinsically linked through the relationship     │\n│ **E = -∇V**.                                                               │\n└───────────────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, with correct definitions of electric field and electric potential, and proper use of formulas. The layout is well-structured and readable. However, the quality score is slightly lower due to the use of a non-standard formatting with boxes and tables, which may not be suitable for all audiences. The educational score is high due to the clear explanations and concise language used. One minor suggestion for improvement is to include a brief introduction to provide context for the definitions and formulas presented.",
+  "candidate_token_usage": {
+    "promptTokens": 424,
+    "completionTokens": 1651,
+    "totalTokens": 2075
+  },
+  "candidate_latency_ms": 4388,
+  "candidate_cost_usd": 0.0005271,
+  "judge_token_usage": {
+    "promptTokens": 1180,
+    "completionTokens": 159,
+    "totalTokens": 1339
+  },
+  "judge_latency_ms": 4292,
+  "judge_cost_usd": 0.0010896,
+  "retry_count": 1,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:35:00.419Z"
+}

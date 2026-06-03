@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 42,
+  "question": "Define electric field and electric potential.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectric field and electric potential describe how a distribution of electric charge influences the surrounding space.\n\nAn electric field is a vector field surrounding a charged particle, representing the electrostatic force experienced per unit positive charge placed at that point.\n\nAn electric potential is a scalar field representing the electrostatic potential energy per unit charge at a specific point relative to a reference location.\n\n---\n\n## Characteristics\n\n* **Vector vs. Scalar:** The electric field is a vector quantity that points in the direction a positive test charge would move. Electric potential is a scalar quantity measuring energy states.\n\n---\n\n## Formula\n\nThe mathematical definitions for electric field ($E$) and potential ($V$) are written as:\n\n$$E = \\frac{F}{q}$$\n\n$$V = \\frac{W}{q}$$\n\nWhere:\n* $E$ represents the electric field vector intensity\n* $V$ represents the electric potential scalar value\n* $F$ represents the electrostatic force vector\n* $W$ represents the work performed moving a charge from infinity\n* $q$ represents the magnitude of the test charge\n\n---\n\n## Summary\n\nThe electric field measures the electrostatic force vector per unit charge, whereas electric potential tracks the energy scalar state per unit charge.",
+  "candidate_response": "┌─────────────────────────────────────────────┐\n│ 📚 Introduction                              │\n│                                             │\n│ In electrostatics we describe how charges   │\n│ influence the space around them. Two central │\n│ ideas are the **electric field** and the     │\n│ **electric potential**. Understanding these │\n│ concepts lets us predict forces on charges  │\n│ and the energy changes when charges move.   │\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ 📖 Definition – Electric Field               │\n│                                             │\n│ The **electric field** **E** at a point in    │\n│ space is the force **F** that a **positive**  │\n│ test charge **q** would experience, divided  │\n│ by the magnitude of that test charge:        │\n│                                             │\n│   **E** = **F** / **q**                      │\n│                                             │\n│ It is a vector quantity, pointing in the     │\n│ direction a positive charge would be pushed  │\n│ and measured in newtons per coulomb (N/C)    │\n│ or volts per meter (V·m⁻¹).                  │\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ 🧮 Formula Card – Electric Field              │\n│                                             │\n│ $$\\displaystyle \\mathbf{E} = \\frac{\\mathbf{F}}{q}$$ │\n│                                             │\n│ **Variables**                               │\n│ • **E** – electric field (N C⁻¹ or V m⁻¹)    │\n│ • **F** – force on the test charge (N)      │\n│ • **q** – magnitude of the test charge (C)  │\n│                                             │\n│ [ Explain Formula ]   [ Open Formula Lab ]  │\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ 📖 Definition – Electric Potential           │\n│                                             │\n│ The **electric potential** **V** at a point │\n│ is the electric potential energy **U** per   │\n│ unit charge **q**:                           │\n│                                             │\n│   **V** = **U** / **q**                      │\n│                                             │\n│ It represents how much work is needed to     │\n│ bring a unit positive charge from a reference│\n│ point (often infinity) to the location,     │\n│ without acceleration. Measured in volts (V).│\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ 🧮 Formula Card – Electric Potential          │\n│                                             │\n│ $$\\displaystyle V = -\\int_{\\text{ref}}^{\\mathbf{r}} \\mathbf{E}\\!\\cdot\\!d\\mathbf{l}$$ │\n│                                             │\n│ **Variables**                               │\n│ • **V** – electric potential (V)            │\n│ • **E** – electric field (V m⁻¹)            │\n│ • **dl** – infinitesimal displacement vector│\n│ • **ref** – reference point (commonly ∞)    │\n│                                             │\n│ [ Explain Formula ]   [ Open Formula Lab ]  │\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ 📌 Summary                                   │\n│                                             │\n│ • **Electric field** describes the **force** │\n│   per unit charge at a point.               │\n│ • **Electric potential** describes the **energy│\n│   per unit charge** relative to a reference.│\n│ • Both are related: the field is the spatial│\n│   gradient of the potential ( E = –∇V ).      │\n│                                             │\n│ Understanding these links lets us analyze   │\n│ electrostatic phenomena, from capacitors to  │\n│ charge distributions, with clear physical   │\n│ intuition.                                   │\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ ❓ Suggested Questions                        │\n│                                             │\n│ 1. How does the direction of **E** relate to │\n│    the sign of the source charge?           │\n│ 2. Why is the electric potential often taken │\n│    as zero at infinity for isolated charges?│\n│ 3. Derive the electric field of a point      │\n│    charge from its potential.                │\n│ 4. Explain how equipotential surfaces are   │\n│    oriented relative to electric field lines.│\n└─────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational value. It correctly defines electric field and electric potential, provides relevant formulas, and offers a clear summary. The use of boxes and formatting enhances readability. However, minor suggestions for improvement include providing more detailed explanations for certain concepts, such as the relationship between electric field and potential, and offering additional examples or illustrations to support learning. Overall, the response effectively communicates complex physics concepts in an accessible manner.",
+  "candidate_token_usage": {
+    "promptTokens": 424,
+    "completionTokens": 1455,
+    "totalTokens": 1879
+  },
+  "candidate_latency_ms": 3770,
+  "candidate_cost_usd": 0.0009366,
+  "judge_token_usage": {
+    "promptTokens": 1713,
+    "completionTokens": 153,
+    "totalTokens": 1866
+  },
+  "judge_latency_ms": 12336,
+  "judge_cost_usd": 0.001395,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:35:00.448Z"
+}

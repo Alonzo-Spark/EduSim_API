@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 42,
+  "question": "Define electric field and electric potential.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectric field and electric potential describe how a distribution of electric charge influences the surrounding space.\n\nAn electric field is a vector field surrounding a charged particle, representing the electrostatic force experienced per unit positive charge placed at that point.\n\nAn electric potential is a scalar field representing the electrostatic potential energy per unit charge at a specific point relative to a reference location.\n\n---\n\n## Characteristics\n\n* **Vector vs. Scalar:** The electric field is a vector quantity that points in the direction a positive test charge would move. Electric potential is a scalar quantity measuring energy states.\n\n---\n\n## Formula\n\nThe mathematical definitions for electric field ($E$) and potential ($V$) are written as:\n\n$$E = \\frac{F}{q}$$\n\n$$V = \\frac{W}{q}$$\n\nWhere:\n* $E$ represents the electric field vector intensity\n* $V$ represents the electric potential scalar value\n* $F$ represents the electrostatic force vector\n* $W$ represents the work performed moving a charge from infinity\n* $q$ represents the magnitude of the test charge\n\n---\n\n## Summary\n\nThe electric field measures the electrostatic force vector per unit charge, whereas electric potential tracks the energy scalar state per unit charge.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ An electric field is a    │  \n│ region around a charged    │  \n│ particle where a force is  │  \n│ experienced by other       │  \n│ charged particles.         │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Electric potential is the  │  \n│ amount of work done per    │  \n│ unit charge to move a      │  \n│ charge from a reference     │  \n│ point to a specific point  │  \n│ in an electric field.      │  \n└───────────────────────────└  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 6,
+    "quality": 4,
+    "educational": 5,
+    "overall_average": "5.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks conceptual depth and does not fully align with the gold reference answer. The definition of electric field is incomplete, missing the crucial aspect that it is a vector field representing the force per unit positive charge. The definition of electric potential, while mentioning work done per unit charge, does not explicitly state that it is a scalar field representing the potential energy per unit charge. Furthermore, the response does not provide any mathematical definitions or formulas for electric field and potential, which are essential for a comprehensive understanding. The layout and formatting are also not conducive to readability, with the use of ASCII art boxes that do not enhance the clarity of the explanation. To improve, the candidate should provide more detailed and accurate definitions, include the mathematical formulas, and enhance the presentation for better readability and educational effectiveness.",
+  "candidate_token_usage": {
+    "promptTokens": 361,
+    "completionTokens": 149,
+    "totalTokens": 510
+  },
+  "candidate_latency_ms": 2846,
+  "candidate_cost_usd": 0.00014355,
+  "judge_token_usage": {
+    "promptTokens": 823,
+    "completionTokens": 215,
+    "totalTokens": 1038
+  },
+  "judge_latency_ms": 7165,
+  "judge_cost_usd": 0.0010098,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:35:00.430Z"
+}

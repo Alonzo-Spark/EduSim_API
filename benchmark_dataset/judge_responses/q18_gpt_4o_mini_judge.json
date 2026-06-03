@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 18,
+  "question": "A body of mass 5 kg is lifted to a height of 10 m. Calculate potential energy.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Potential Energy Assessment\n\n### Problem\nA body of mass $5 \\text{ kg}$ is lifted vertically to a height of $10 \\text{ m}$. Calculate its gravitational potential energy.\n\n### Given\n* Mass of the body ($m$) = $5 \\text{ kg}$\n* Vertical height ($h$) = $10 \\text{ m}$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$U = mgh$$\n\n### Substitution\n$$U = 5 \\times 9.8 \\times 10$$\n\n### Calculation\n$$U = 49 \\times 10$$\n\n$$U = 490 \\text{ J}$$\n\n### Final Answer\n**Potential Energy ($U$) = $490 \\text{ J}$**\n\n### Interpretation\nThis indicates that lifting the object stores $490 \\text{ Joules}$ of mechanical energy within the gravity field, which can convert back into kinetic energy if the object is released.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Potential energy is the   │  \n│ energy possessed by an    │  \n│ object due to its position │  \n│ relative to other objects. │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│     $$PE = mgh$$         │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n### Given Data:\n- Mass (m) = 5 kg  \n- Height (h) = 10 m  \n- Acceleration due to gravity (g) ≈ 9.81 m/s² (standard value)  \n\n### Calculation:\nUsing the formula for potential energy:\n\n\\[\nPE = mgh\n\\]\n\nSubstituting the values:\n\n\\[\nPE = 5 \\, \\text{kg} \\times 9.81 \\, \\text{m/s}^2 \\times 10 \\, \\text{m}\n\\]\n\nCalculating this gives:\n\n\\[\nPE = 5 \\times 9.81 \\times 10 = 490.5 \\, \\text{J}\n\\]\n\n┌───────────────────────────┐  \n│ Summary                  │  \n│                           │  \n│ The potential energy of   │  \n│ the body is 490.5 J.     │  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is largely accurate and well-structured. However, there are a few areas for improvement. The use of boxes to separate sections, while visually appealing, may not be necessary and could be replaced with simpler formatting. Additionally, the explanation of the formula could be more detailed, and the summary could be more concise. The calculation is correct, but the use of the approximate value of g as 9.81 m/s^2 could be noted as an approximation. Overall, the response demonstrates a good understanding of the concept of potential energy and its calculation, but could benefit from some refinement in presentation and clarity.",
+  "candidate_token_usage": {
+    "promptTokens": 375,
+    "completionTokens": 318,
+    "totalTokens": 693
+  },
+  "candidate_latency_ms": 4180,
+  "candidate_cost_usd": 0.00024705,
+  "judge_token_usage": {
+    "promptTokens": 973,
+    "completionTokens": 184,
+    "totalTokens": 1157
+  },
+  "judge_latency_ms": 5320,
+  "judge_cost_usd": 0.0010254,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:29:12.199Z"
+}

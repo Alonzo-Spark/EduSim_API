@@ -1,0 +1,65 @@
+### Distance vs. Displacement: Physics Module
+
+:::section{title="Quick Definition"}
+In physics, while both terms describe how far an object has moved, they represent fundamentally different types of quantities. **Distance** is the total ground covered, whereas **Displacement** is the net change in position.
+:::
+
+:::section{title="Key Concepts"}
+| Feature | Distance | Displacement |
+| :--- | :--- | :--- |
+| **Definition** | Total length of the actual path traveled. | The shortest straight-line distance between start and end. |
+| **Quantity Type** | Scalar (Magnitude only) | Vector (Magnitude + Direction) |
+| **Path Dependency** | Depends on the path taken. | Independent of path; depends only on endpoints. |
+| **Value** | Always positive or zero. | Can be positive, negative, or zero. |
+| **Symbol** | $d$ | $\Delta x$ or $\vec{s}$ |
+:::
+
+:::section{title="Formula Card"}
+**The Displacement Equation**
+$$
+\Delta x = x_f - x_i
+$$
+
+**[ Explain Formula ]**
+*   $\Delta x$: Displacement (change in position).
+*   $x_f$: Final position coordinate.
+*   $x_i$: Initial position coordinate.
+
+**[ Open Formula Lab ]**
+*   *Scenario A:* If you walk 5m East and 5m West, $x_f = x_i$, making displacement $0$.
+*   *Scenario B:* Distance is calculated by $|d_1| + |d_2| + ... + |d_n|$.
+:::
+
+:::section{title="Characteristics"}
+*   **Distance** can never be less than the magnitude of displacement.
+*   If an object moves in a straight line in a single direction, **Distance = Displacement**.
+*   If an object returns to its starting point (like a lap around a track), the **Distance** is the track length, but **Displacement** is exactly **zero**.
+:::
+
+:::section{title="Comparative Example"}
+**The Circular Track Scenario**
+Imagine an athlete running one complete lap around a circular track with a radius of $50m$.
+
+**1. Distance Calculation:**
+The athlete covered the circumference of the circle.
+$$
+d = 2\pi r = 2 \times 3.14 \times 50 = 314m
+$$
+
+**2. Displacement Calculation:**
+The athlete started and ended at the exact same point.
+$$
+\Delta x = 0m
+$$
+:::
+
+:::section{title="Important Notes"}
+> **Direction Matters:** When stating displacement, you must include direction (e.g., "5 meters **North**"). Distance does not require this.
+> 
+> **Odometer vs. GPS:** A car's odometer measures **distance**. A GPS displacement calculation measures the "as the crow flies" straight line between two coordinates.
+:::
+
+:::section{title="Suggested Questions"}
+1. Can the displacement of a moving object be zero? Explain with an example.
+2. A particle moves in a semi-circle of radius $R$. What is the ratio of distance to displacement?
+3. Under what condition is the magnitude of average velocity equal to average speed?

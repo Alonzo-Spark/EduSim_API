@@ -1,0 +1,723 @@
+I'll build a proper interactive textbook layout for this. Let me structure this as UI blocks, not markdown notes.
+
+```jsx
+import { useState, useEffect, useRef } from "react";
+import katex from "katex";
+
+const KaTeX = ({ math, display = false }) => {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current) {
+      try {
+        katex.render(math, ref.current, {
+          throwOnError: false,
+          displayMode: display,
+        });
+      } catch (e) {}
+    }
+  }, [math, display]);
+  return <span ref={ref} />;
+};
+
+const SECTIONS = [
+  {
+    id: "definition",
+    label: "What Is a Forced Harmonic Oscillator?",
+    icon: "📖",
+  },
+  { id: "formula", label: "Amplitude Formula", icon: "🔢" },
+  { id: "visual", label: "Live Frequency Lab", icon: "🎛️" },
+  { id: "regions", label: "Frequency Regions", icon: "📊" },
+  { id: "summary", label: "Key Takeaways", icon: "✅" },
+];
+
+const FormulaCard = ({ onOpenLab }) => {
+  const [showExplain, setShowExplain] = useState(false);
+  const titleRef = useRef(null);
+  const formulaRef = useRef(null);
+
+  useEffect(() => {
+    if (formulaRef.current) {
+      katex.render(
+        "A(\\omega) = \\frac{F_0/m}{\\sqrt{(\\omega_0^2 - \\omega^2)^2 + (\\gamma\\omega)^2}}",
+        formulaRef.current,
+        { throwOnError: false, displayMode: true }
+      );
+    }
+  }, []);
+
+  const variables = [
+    { sym: "A(\\omega)", desc: "Amplitude of steady-state oscillation" },
+    { sym: "F_0", desc: "Magnitude of the driving force" },
+    { sym: "m", desc: "Mass of the oscillator" },
+    { sym: "\\omega_0", desc: "Natural (resonant) frequency of the system" },
+    { sym: "\\omega", desc: "Driven frequency (what we vary)" },
+    { sym: "\\gamma", desc: "Damping coefficient" },
+  ];
+
+  return (
+    <div
+      style={{
+        background: "linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)",
+        borderRadius: 16,
+        padding: 28,
+        border: "1px solid #4338ca",
+        boxShadow: "0 4px 32px rgba(99,102,241,0.18)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          marginBottom: 20,
+        }}
+      >
+        <span
+          style={{
+            background: "#4338ca",
+            borderRadius: 8,
+            padding: "4px 12px",
+            color: "#a5b4fc",
+            fontSize: 12,
+            fontWeight: 700,
+            letterSpacing: 1,
+            textTransform: "uppercase",
+          }}
+        >
+          Main Formula
+        </span>
+        <span style={{ color: "#6366f1", fontSize: 13 }}>
+          Steady-State Amplitude
+        </span>
+      </div>
+
+      <div
+        style={{
+          background: "rgba(0,0,0,0.3)",
+          borderRadius: 12,
+          padding: "24px 16px",
+          textAlign: "center",
+          marginBottom: 20,
+          border: "1px solid #4338ca55",
+        }}
+      >
+        <div
+          ref={formulaRef}
+          style={{ color: "#e0e7ff", fontSize: 18, overflowX: "auto" }}
+        />
+      </div>
+
+      <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+        <button
+          onClick={() => setShowExplain((v) => !v)}
+          style={{
+            background: showExplain ? "#4338ca" : "transparent",
+            border: "1px solid #4338ca",
+            borderRadius: 8,
+            color: "#a5b4fc",
+            padding: "8px 18px",
+            cursor: "pointer",
+            fontWeight: 600,
+            fontSize: 13,
+            transition: "all 0.2s",
+          }}
+        >
+          {showExplain ? "Hide Explanation" : "Explain Formula"}
+        </button>
+        <button
+          onClick={onOpenLab}
+          style={{
+            background: "linear-gradient(90deg, #6366f1, #8b5cf6)",
+            border: "none",
+            borderRadius: 8,
+            color: "#fff",
+            padding: "8px 18px",
+            cursor: "pointer",
+            fontWeight: 600,
+            fontSize: 13,
+            boxShadow: "0 2px 12px rgba(99,102,241,0.4)",
+          }}
+        >
+          Open Formula Lab ↗
+        </button>
+      </div>
+
+      {showExplain && (
+        <div
+          style={{
+            marginTop: 20,
+            background: "rgba(0,0,0,0.25)",
+            borderRadius: 10,
+            padding: 18,
+            border: "1px solid #4338ca44",
+          }}
+        >
+          <div
+            style={{
+              color: "#a5b4fc",
+              fontSize: 13,
+              fontWeight: 700,
+              marginBottom: 12,
+              textTransform: "uppercase",
+              letterSpacing: 1,
+            }}
+          >
+            Variable Reference
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {variables.map((v, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  padding: "6px 0",
+                  borderBottom:
+                    i < variables.length - 1
+                      ? "1px solid #4338ca22"
+                      : "none",
+                }}
+              >
+                <span
+                  style={{
+                    minWidth: 90,
+                    color: "#c7d2fe",
+                    fontFamily: "monospace",
+                  }}
+                >
+                  <KaTeX math={v.sym} />
+                </span>
+                <span style={{ color: "#94a3b8", fontSize: 13 }}>
+                  {v.desc}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const AnimatedWave = ({ omega, omega0, gamma, playing }) => {
+  const canvasRef = useRef(null);
+  const animRef = useRef(null);
+  const tRef = useRef(0);
+
+  const A =
+    1 /
+    Math.sqrt(
+      Math.pow(omega0 * omega0 - omega * omega, 2) +
+        Math.pow(gamma * omega, 2)
+    );
+  const Anorm = Math.min(A * omega0 * omega0, 3.5);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const W = canvas.width;
+    const H = canvas.height;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+
+      // Grid
+      ctx.strokeStyle = "rgba(99,102,241,0.08)";
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 40) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+      }
+      for (let y = 0; y < H; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(W, y);
+        ctx.stroke();
+      }
+
+      // Axis
+      ctx.strokeStyle = "rgba(148,163,184,0.3)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, H / 2);
+      ctx.lineTo(W, H / 2);
+      ctx.stroke();
+
+      // Wave
+      const grad = ctx.createLinearGradient(0, 0, W, 0);
+      const ratio = omega / omega0;
+      if (ratio < 0.85) {
+        grad.addColorStop(0, "#6366f1");
+        grad.addColorStop(1, "#818cf8");
+      } else if (ratio < 1.15) {
+        grad.addColorStop(0, "#f59e0b");
+        grad.addColorStop(1, "#fbbf24");
+      } else {
+        grad.addColorStop(0, "#10b981");
+        grad.addColorStop(1, "#34d399");
+      }
+
+      ctx.beginPath();
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor =
+        ratio >= 0.85 && ratio <= 1.15 ? "#f59e0b" : "#6366f1";
+      ctx.shadowBlur = Anorm > 2 ? 18 : 6;
+
+      for (let px = 0; px < W; px++) {
+        const t = tRef.current;
+        const xPos = px / W;
+        const y =
+          H / 2 -
+          (Anorm / 3.5) * (H / 2 - 20) * Math.sin(2 * Math.PI * xPos * 3 - omega * t);
+        if (px === 0) ctx.moveTo(px, y);
+        else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      if (playing) {
+        tRef.current += 0.03;
+        animRef.current = requestAnimationFrame(draw);
+      }
+    };
+
+    draw();
+    return () => cancelAnimationFrame(animRef.current);
+  }, [omega, omega0, gamma, playing, Anorm]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={560}
+      height={160}
+      style={{ width: "100%", borderRadius: 10 }}
+    />
+  );
+};
+
+const AmplitudeCurve = ({ omega, omega0, gamma }) => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const W = canvas.width;
+    const H = canvas.height;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // Grid
+    ctx.strokeStyle = "rgba(99,102,241,0.08)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 40) {
+      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+    }
+    for (let y = 0; y < H; y += 30) {
+      ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+    }
+
+    // Axes
+    ctx.strokeStyle = "rgba(148,163,184,0.4)";
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(30, H-20); ctx.lineTo(W-10, H-20); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(30, 10); ctx.lineTo(30, H-20); ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = "#64748b";
+    ctx.font = "11px sans-serif";
+    ctx.fillText("ω", W - 18, H - 8);
+    ctx.fillText("A", 8, 18);
+
+    // Resonance line
+    const rx = 30 + (omega0 / (2 * omega0)) * (W - 40);
+    ctx.strokeStyle = "rgba(245,158,11,0.25)";
+    ctx.setLineDash([4, 4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(rx, 10); ctx.lineTo(rx, H-20); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#f59e0b55";
+    ctx.font = "10px sans-serif";
+    ctx.fillText("ω₀", rx - 8, H - 6);
+
+    // Curve
+    const maxA = 1 / (gamma * omega0);
+    ctx.beginPath();
+    ctx.strokeStyle = "#6366f1";
+    ctx.lineWidth = 2;
+    let first = true;
+    for (let px = 31; px < W - 10; px++) {
+      const w = ((px - 30) / (W - 40)) * 2 * omega0;
+      const denom = Math.sqrt(
+        Math.pow(omega0 * omega0 - w * w, 2) + Math.pow(gamma * w, 2)
+      );
+      const a = denom > 0 ? (1 / denom) / maxA : 0;
+      const py = H - 20 - Math.min(a, 1) * (H - 36);
+      if (first) { ctx.moveTo(px, py); first = false; }
+      else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    // Current point
+    const curX = 30 + (omega / (2 * omega0)) * (W - 40);
+    const denom = Math.sqrt(
+      Math.pow(omega0 * omega0 - omega * omega, 2) + Math.pow(gamma * omega, 2)
+    );
+    const curA = denom > 0 ? (1 / denom) / maxA : 0;
+    const curY = H - 20 - Math.min(curA, 1) * (H - 36);
+
+    ctx.beginPath();
+    ctx.arc(curX, curY, 6, 0, Math.PI * 2);
+    ctx.fillStyle = "#f59e0b";
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }, [omega, omega0, gamma]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={560}
+      height={160}
+      style={{ width: "100%", borderRadius: 10 }}
+    />
+  );
+};
+
+const FrequencyLab = ({ onClose }) => {
+  const [omega, setOmega] = useState(1.0);
+  const [gamma, setGamma] = useState(0.3);
+  const omega0 = 2.0;
+  const [playing, setPlaying] = useState(true);
+
+  const A = 1 / Math.sqrt(
+    Math.pow(omega0 * omega0 - omega * omega, 2) +
+      Math.pow(gamma * omega, 2)
+  );
+  const Anorm = Math.min(A * omega0 * omega0, 3.5);
+  const ratio = omega / omega0;
+
+  const region =
+    ratio < 0.75
+      ? { label: "Sub-resonant", color: "#6366f1", desc: "Amplitude is moderate. Oscillator follows the driving force closely in phase." }
+      : ratio < 1.25
+      ? { label: "Near Resonance", color: "#f59e0b", desc: "Amplitude peaks sharply. Phase lag approaches 90°. Energy transfer is maximum." }
+      : { label: "Super-resonant", color: "#10b981", desc: "Amplitude drops rapidly. Oscillator cannot keep up with the fast driving frequency. Phase lag → 180°." };
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "rgba(0,0,0,0.75)",
+        zIndex: 1000,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 16,
+      }}
+    >
+      <div
+        style={{
+          background: "#0f172a",
+          borderRadius: 20,
+          padding: 28,
+          maxWidth: 640,
+          width: "100%",
+          border: "1px solid #1e293b",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.6)",
+          maxHeight: "90vh",
+          overflowY: "auto",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <div>
+            <div style={{ color: "#e2e8f0", fontWeight: 700, fontSize: 18 }}>Formula Lab</div>
+            <div style={{ color: "#64748b", fontSize: 12, marginTop: 2 }}>Forced Harmonic Oscillator — Amplitude Response</div>
+          </div>
+          <button onClick={onClose} style={{ background: "#1e293b", border: "none", borderRadius: 8, color: "#94a3b8", padding: "6px 14px", cursor: "pointer", fontSize: 14 }}>✕ Close</button>
+        </div>
+
+        {/* Region Badge */}
+        <div style={{ background: region.color + "18", border: `1px solid ${region.color}44`, borderRadius: 10, padding: "10px 16px", marginBottom: 20, display: "flex", alignItems: "center", gap: 12 }}>
+          <span style={{ background: region.color, borderRadius: 6, padding: "2px 10px", color: "#fff", fontWeight: 700, fontSize: 12 }}>{region.label}</span>
+          <span style={{ color: "#94a3b8", fontSize: 13 }}>{region.desc}</span>
+        </div>
+
+        {/* Wave Viz */}
+        <div style={{ background: "#0a0f1e", borderRadius: 12, padding: 12, marginBottom: 12, border: "1px solid #1e293b" }}>
+          <div style={{ color: "#475569", fontSize: 11, marginBottom: 6, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>Live Wave</div>
+          <AnimatedWave omega={omega} omega0={omega0} gamma={gamma} playing={playing} />
+        </div>
+
+        {/* Amplitude Curve */}
+        <div style={{ background: "#0a0f1e", borderRadius: 12, padding: 12, marginBottom: 20, border: "1px solid #1e293b" }}>
+          <div style={{ color: "#475569", fontSize: 11, marginBottom: 6, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1 }}>Amplitude vs Frequency — Current Position ●</div>
+          <AmplitudeCurve omega={omega} omega0={omega0} gamma={gamma} />
+        </div>
+
+        {/* Metrics */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 20 }}>
+          {[
+            { label: "ω / ω₀", value: ratio.toFixed(2), color: region.color },
+            { label: "Amplitude", value: Anorm.toFixed(3), color: "#e2e8f0" },
+            { label: "Damping γ", value: gamma.toFixed(2), color: "#94a3b8" },
+          ].map((m) => (
+            <div key={m.label} style={{ background: "#1e293b", borderRadius: 10, padding: "12px 14px", textAlign: "center" }}>
+              <div style={{ color: m.color, fontWeight: 700, fontSize: 20 }}>{m.value}</div>
+              <div style={{ color: "#475569", fontSize: 11, marginTop: 4 }}>{m.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Sliders */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {[
+            { label: "Driven Frequency", sym: "ω", val: omega, min: 0.2, max: 3.8, step: 0.05, set: setOmega, color: "#6366f1" },
+            { label: "Damping Coefficient", sym: "γ", val: gamma, min: 0.05, max: 1.5, step: 0.05, set: setGamma, color: "#8b5cf6" },
+          ].map((s) => (
+            <div key={s.sym}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+                <span style={{ color: "#94a3b8", fontSize: 13 }}>{s.label} <span style={{ color: s.color }}>({s.sym})</span></span>
+                <span style={{ color: "#e2e8f0", fontWeight: 700, fontSize: 13 }}>{s.val.toFixed(2)}</span>
+              </div>
+              <input
+                type="range"
+                min={s.min}
+                max={s.max}
+                step={s.step}
+                value={s.val}
+                onChange={(e) => s.set(parseFloat(e.target.value))}
+                style={{ width: "100%", accentColor: s.color }}
+              />
+              <div style={{ display: "flex", justifyContent: "space-between", color: "#334155", fontSize: 10, marginTop: 2 }}>
+                <span>{s.min}</span><span>{s.max}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: "flex", gap: 10, marginTop: 20 }}>
+          <button
+            onClick={() => setPlaying((v) => !v)}
+            style={{ background: playing ? "#1e293b" : "#6366f1", border: "1px solid #334155", borderRadius: 8, color: "#e2e8f0", padding: "8px 18px", cursor: "pointer", fontWeight: 600, fontSize: 13 }}
+          >
+            {playing ? "⏸ Pause" : "▶ Play"}
+          </button>
+          <button
+            onClick={() => { setOmega(omega0); }}
+            style={{ background: "#1e293b", border: "1px solid #f59e0b44", borderRadius: 8, color: "#f59e0b", padding: "8px 18px", cursor: "pointer", fontWeight: 600, fontSize: 13 }}
+          >
+            Set ω = ω₀ (Resonance)
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RegionsTable = () => {
+  const rows = [
+    { region: "ω ≪ ω₀", label: "Sub-resonant", amplitude: "Low → Moderate", phase: "≈ 0°", color: "#6366f1", effect: "Oscillator follows force in phase" },
+    { region: "ω → ω₀", label: "Resonance", amplitude: "Maximum (peaks)", phase: "= 90°", color: "#f59e0b", effect: "Max energy transfer, large oscillations" },
+    { region: "ω ≫ ω₀", label: "Super-resonant", amplitude: "Drops to zero", phase: "→ 180°", color: "#10b981", effect: "Oscillator lags, cannot follow force" },
+  ];
+
+  return (
+    <div style={{ background: "#0f172a", borderRadius: 16, padding: 24, border: "1px solid #1e293b" }}>
+      <div style={{ color: "#94a3b8", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, marginBottom: 16 }}>Frequency Region Reference</div>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: "0 8px" }}>
+          <thead>
+            <tr>
+              {["Region", "Regime", "Amplitude", "Phase Lag", "Physical Effect"].map((h) => (
+                <th key={h} style={{ color: "#475569", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1, padding: "4px 12px", textAlign: "left" }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.region} style={{ background: "#1e293b" }}>
+                <td style={{ padding: "12px 14px", borderRadius: "8px 0 0 8px", fontFamily: "monospace", color: r.color, fontWeight: 700, fontSize: 13 }}>{r.region}</td>
+                <td style={{ padding: "12px 14px" }}>
+                  <span style={{ background: r.color + "22", color: r.color, borderRadius: 6, padding: "2px 10px", fontSize: 12, fontWeight: 600 }}>{r.label}</span>
+                </td>
+                <td style={{ padding: "12px 14px", color: "#e2e8f0", fontSize: 13 }}>{r.amplitude}</td>
+                <td style={{ padding: "12px 14px", color: "#e2e8f0", fontFamily: "monospace", fontSize: 13 }}>{r.phase}</td>
+                <td style={{ padding: "12px 14px", borderRadius: "0 8px 8px 0", color: "#94a3b8", fontSize: 13 }}>{r.effect}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default function App() {
+  const [activeSection, setActiveSection] = useState("definition");
+  const [labOpen, setLabOpen] = useState(false);
+
+  const sectionRefs = {
+    definition: useRef(null),
+    formula: useRef(null),
+    visual: useRef(null),
+    regions: useRef(null),
+    summary: useRef(null),
+  };
+
+  const scrollTo = (id) => {
+    setActiveSection(id);
+    sectionRefs[id]?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <div style={{ background: "#060b18", minHeight: "100vh", fontFamily: "'Inter', system-ui, sans-serif", color: "#e2e8f0" }}>
+      {labOpen && <FrequencyLab onClose={() => setLabOpen(false)} />}
+
+      {/* Header */}
+      <div style={{ background: "linear-gradient(180deg, #0f172a 0%, #060b18 100%)", borderBottom: "1px solid #1e293b", padding: "20px 24px 0" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+            <span style={{ background: "#6366f122", border: "1px solid #6366f144", borderRadius: 6, padding: "2px 10px", color: "#818cf8", fontSize: 11, fontWeight: 700, letterSpacing: 1 }}>PHYSICS · OSCILLATIONS</span>
+          </div>
+          <h1 style={{ fontSize: 26, fontWeight: 800, color: "#f1f5f9", margin: "0 0 6px", lineHeight: 1.2 }}>
+            Forced Harmonic Oscillator
+          </h1>
+          <p style={{ color: "#64748b", fontSize: 14, margin: "0 0 20px" }}>
+            Visual effects of varying the driven frequency — from sub-resonance to super-resonance
+          </p>
+
+          {/* Nav Tabs */}
+          <div style={{ display: "flex", gap: 4, overflowX: "auto", paddingBottom: 0 }}>
+            {SECTIONS.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => scrollTo(s.id)}
+                style={{
+                  background: activeSection === s.id ? "#6366f1" : "transparent",
+                  border: "none",
+                  borderBottom: activeSection === s.id ? "2px solid #818cf8" : "2px solid transparent",
+                  borderRadius: "8px 8px 0 0",
+                  color: activeSection === s.id ? "#fff" : "#64748b",
+                  padding: "8px 16px",
+                  cursor: "pointer",
+                  fontWeight: 600,
+                  fontSize: 13,
+                  whiteSpace: "nowrap",
+                  transition: "all 0.2s",
+                }}
+              >
+                {s.icon} {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div style={{ maxWidth: 800, margin: "0 auto", padding: "32px 24px", display: "flex", flexDirection: "column", gap: 28 }}>
+
+        {/* Definition Card */}
+        <div ref={sectionRefs.definition}>
+          <div style={{ background: "#0f172a", borderRadius: 16, padding: 24, border: "1px solid #1e293b" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+              <span style={{ fontSize: 20 }}>📖</span>
+              <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Quick Definition</span>
+            </div>
+            <p style={{ color: "#cbd5e1", fontSize: 15, lineHeight: 1.8, margin: 0 }}>
+              A <strong style={{ color: "#a5b4fc" }}>forced harmonic oscillator</strong> is a mass-spring system driven by an external periodic force. Unlike a free oscillator, its motion is sustained by this force at the <strong style={{ color: "#a5b4fc" }}>driven frequency ω</strong> rather than the system's own <strong style={{ color: "#f59e0b" }}>natural frequency ω₀</strong>.
+            </p>
+            <div style={{ marginTop: 16, background: "#1e293b", borderRadius: 10, padding: "12px 16px", display: "flex", gap: 24, flexWrap: "wrap" }}>
+              {[
+                { label: "Natural frequency", sym: "ω₀", color: "#f59e0b" },
+                { label: "Driven frequency", sym: "ω", color: "#6366f1" },
+                { label: "Key ratio", sym: "ω / ω₀", color: "#10b981" },
+              ].map((item) => (
+                <div key={item.sym} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ color: item.color, fontFamily: "monospace", fontWeight: 700 }}>{item.sym}</span>
+                  <span style={{ color: "#475569", fontSize: 12 }}>{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Formula Card */}
+        <div ref={sectionRefs.formula}>
+          <FormulaCard onOpenLab={() => setLabOpen(true)} />
+        </div>
+
+        {/* Visual Section */}
+        <div ref={sectionRefs.visual}>
+          <div style={{ background: "#0f172a", borderRadius: 16, padding: 24, border: "1px solid #1e293b" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+              <span style={{ fontSize: 20 }}>🎛️</span>
+              <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Live Frequency Lab</span>
+            </div>
+            <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>
+              Open the interactive lab to drag the frequency slider and observe amplitude and phase changes in real time.
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 20 }}>
+              {[
+                { emoji: "📉", title: "Low ω", text: "Small amplitude, in-phase motion" },
+                { emoji: "🔥", title: "ω = ω₀", text: "Maximum amplitude, 90° lag" },
+                { emoji: "📈", title: "High ω", text: "Amplitude collapses, 180° lag" },
+              ].map((c) => (
+                <div key={c.title} style={{ background: "#1e293b", borderRadius: 10, padding: "14px 12px", textAlign: "center" }}>
+                  <div style={{ fontSize: 22, marginBottom: 6 }}>{c.emoji}</div>
+                  <div style={{ color: "#e2e8f0", fontWeight: 700, fontSize: 13 }}>{c.title}</div>
+                  <div style={{ color: "#64748b", fontSize: 11, marginTop: 4 }}>{c.text}</div>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => setLabOpen(true)}
+              style={{ background: "linear-gradient(90deg, #6366f1, #8b5cf6)", border: "none", borderRadius: 10, color: "#fff", padding: "12px 28px", cursor: "pointer", fontWeight: 700, fontSize: 14, boxShadow: "0 4px 20px rgba(99,102,241,0.4)", width: "100%" }}
+            >
+              🎛️ Open Interactive Formula Lab
+            </button>
+          </div>
+        </div>
+
+        {/* Regions Table */}
+        <div ref={sectionRefs.regions}>
+          <RegionsTable />
+        </div>
+
+        {/* Summary */}
+        <div ref={sectionRefs.summary}>
+          <div style={{ background: "#0f172a", borderRadius: 16, padding: 24, border: "1px solid #1e293b" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+              <span style={{ fontSize: 20 }}>✅</span>
+              <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1 }}>Key Takeaways</span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {[
+                { point: "As ω increases from zero, amplitude rises and peaks at ω ≈ ω₀.", color: "#6366f1" },
+                { point: "At resonance (ω = ω₀), amplitude is maximum and limited only by damping γ.", color: "#f59e0b" },
+                { point: "Beyond resonance, amplitude falls sharply as the system cannot respond fast enough.", color: "#10b981" },
+                { point: "Phase lag increases from 0° → 90° (at resonance) → 180° (high frequency).", color: "#8b5cf6" },
+                { point: "Lower damping γ produces a sharper, taller resonance peak.", color: "#ec4899" },
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", background: "#1e293b", borderRadius: 10, padding: "12px 14px" }}>
+                  <span style={{ background: item.color, borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: 11, flexShrink: 0 }}>{i + 1}</span>
+                  <span style={{ color: "#cbd5e1", fontSize: 14, lineHeight: 1.6 }}>{item.point}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+```

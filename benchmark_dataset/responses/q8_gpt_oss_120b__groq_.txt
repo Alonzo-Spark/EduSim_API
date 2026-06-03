@@ -1,0 +1,102 @@
+┌───────────────────────────────────────────────┐
+│ Introduction                                    │
+│                                                   │
+│ A ball is launched from ground level with an      │
+│ initial speed of **20 m s⁻¹** at an angle of      │
+│ **45°** above the horizontal. We are asked to     │
+│ determine how far it will travel before it lands, │
+│ i.e., its horizontal **range**.                   │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ Definition                                      │
+│                                                   │
+│ *Projectile motion* describes the two‑dimensional │
+│ motion of an object that is launched into the air  │
+│ and moves under the influence of gravity alone.   │
+│ The motion can be separated into independent      │
+│ horizontal (constant velocity) and vertical       │
+│ (uniformly accelerated) components.               │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ Key Concepts                                    │
+│                                                   │
+│ • **Initial speed (v₀)** – 20 m s⁻¹                │
+│ • **Launch angle (θ)** – 45°                       │
+│ • **Acceleration due to gravity (g)** – 9.81 m s⁻¹│
+│ • **Range (R)** – horizontal distance traveled    │
+│ • **Sin 2θ** – appears because horizontal and     │
+│   vertical components are coupled.               │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ Formula                                         │
+│                                                   │
+│ ┌─────────────────────────────────────────────┐ │
+│ │ Main Formula                                 │ │
+│ │                                             │ │
+│ │ \[ R = \frac{v_0^{\,2}\,\sin(2\theta)}{g} \] │ │
+│ │                                             │ │
+│ │ [ Explain Formula ]   [ Open Formula Lab ]  │ │
+│ └─────────────────────────────────────────────┘ │
+│                                                   │
+│ **Extracted Data**                               │
+│ {                                                │
+│   "formula": "R = v_0^2 * sin(2θ) / g",          │
+│   "title": "Range of a Projectile",             │
+│   "surroundingContext": "Used to compute the     │
+│       horizontal distance for a projectile",    │
+│   "variables": {                                 │
+│       "R": "range (m)",                          │
+│       "v_0": "initial speed (m s⁻¹)",            │
+│       "θ": "launch angle (rad)",                 │
+│       "g": "acceleration due to gravity (m s⁻¹)" │
+│   }                                              │
+│ }                                                │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ Solution                                        │
+│                                                   │
+│ 1. Convert the launch angle to radians (optional)│
+│    \(\theta = 45^\circ = \pi/4\) rad.             │
+│                                                   │
+│ 2. Compute \(\sin(2\theta)\):                     │
+│    \(\sin(2\theta) = \sin(90^\circ) = 1\).        │
+│                                                   │
+│ 3. Insert the known values into the range formula:│
+│    \[ R = \frac{(20\ \text{m s}^{-1})^{2} \times 1}{9.81\ \text{m s}^{-2}} \] │
+│                                                   │
+│ 4. Perform the arithmetic:                       │
+│    \((20)^2 = 400\)                               │
+│    \(R = \frac{400}{9.81} \approx 40.8\) m.      │
+│                                                   │
+│ **Result:** The ball lands approximately **40.8 m**   │
+│ from the launch point.                           │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ Summary                                         │
+│                                                   │
+│ • Launch speed: 20 m s⁻¹                         │
+│ • Launch angle: 45°                              │
+│ • Gravity: 9.81 m s⁻²                            │
+│ • Range formula: \(R = v_0^{2}\sin(2θ)/g\)       │
+│ • Calculated range: **≈ 40.8 m**                  │
+└───────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────┐
+│ Suggested Questions                             │
+│                                                   │
+│ 1. How does the range change if the launch angle   │
+│    is 30° while keeping the speed at 20 m s⁻¹?    │
+│ 2. What is the maximum possible range for a given │
+│    speed, and at what angle does it occur?       │
+│ 3. If air resistance is considered, how is the   │
+│    formula modified?                             │
+│ 4. Compute the time of flight for the original    │
+│    problem.                                      │
+│ 5. Determine the maximum height reached by the    │
+│    projectile.                                   │
+└───────────────────────────────────────────────┘

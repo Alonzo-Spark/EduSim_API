@@ -1,0 +1,79 @@
+### Equivalent Resistance in Series Combination
+
+#### Key Concept: Series Circuit
+In a series circuit, resistors are connected end-to-end, forming a single path for current flow. The **same current** passes through each resistor, but the voltage across each resistor depends on its resistance.
+
+---
+
+#### Derivation of Equivalent Resistance
+
+Consider three resistors \(R_1\), \(R_2\), and \(R_3\) connected in series to a voltage source \(V\):
+
+```mermaid
+circuit LR
+    B(( )) -->|I| R1[R₁] -->|I| R2[R₂] -->|I| R3[R₃] --> E(( ))
+    B --> V[Voltage V] --> E
+    style B fill:none,stroke:none;
+    style E fill:none,stroke:none;
+```
+
+##### Step 1: Current Flow
+- The current \(I\) is identical through all resistors:  
+  \[ I_{\text{total}} = I_{R_1} = I_{R_2} = I_{R_3} \]
+
+##### Step 2: Voltage Distribution (Kirchhoff's Voltage Law)
+- The total voltage \(V\) equals the sum of voltages across each resistor:  
+  \[ V = V_1 + V_2 + V_3 \]
+
+##### Step 3: Apply Ohm's Law (\(V = IR\))
+- Substitute Ohm's Law for each resistor:  
+  \[ V_1 = I R_1, \quad V_2 = I R_2, \quad V_3 = I R_3 \]
+- Combine with Step 2:  
+  \[ V = I R_1 + I R_2 + I R_3 \]  
+  \[ V = I (R_1 + R_2 + R_3) \]
+
+##### Step 4: Define Equivalent Resistance (\(R_{\text{eq}}\))
+- For a single equivalent resistor \(R_{\text{eq}}\) connected to voltage \(V\):  
+  \[ V = I R_{\text{eq}} \]
+- Equate to Step 3:  
+  \[ I R_{\text{eq}} = I (R_1 + R_2 + R_3) \]
+- Solve for \(R_{\text{eq}}\) (canceling \(I \neq 0\)):  
+  \[ \boxed{R_{\text{eq}} = R_1 + R_2 + R_3} \]
+
+---
+
+#### General Formula
+For \(n\) resistors in series:  
+\[
+\boxed{R_{\text{eq}} = R_1 + R_2 + R_3 + \cdots + R_n}
+\]
+
+---
+
+#### Key Properties
+1. **Current Uniformity**:  
+   Current remains constant throughout the circuit.
+2. **Voltage Division**:  
+   Voltage across each resistor is proportional to its resistance:  
+   \[ V_k = I R_k = \left( \frac{V}{R_{\text{eq}}} \right) R_k \]
+3. **Additive Resistance**:  
+   Total resistance increases with each added resistor.
+
+---
+
+#### Practical Example
+If \(R_1 = 2\ \Omega\), \(R_2 = 3\ \Omega\), and \(R_3 = 5\ \Omega\) are in series:  
+\[ R_{\text{eq}} = 2 + 3 + 5 = 10\ \Omega \]
+
+---
+
+#### Why Does Resistance Add?
+- Resistors in series increase the total path length for electrons.
+- Each resistor contributes to opposing the current flow, leading to cumulative resistance.
+
+---
+
+### Summary
+- **Equivalent resistance** in series is the **arithmetic sum** of individual resistances.
+- **Current** is identical through all components.
+- **Total voltage** is the sum of voltages across each resistor.

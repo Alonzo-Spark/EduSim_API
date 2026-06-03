@@ -1,0 +1,100 @@
+To derive the expression for the time period of a simple pendulum, we analyze the motion of a pendulum bob under the influence of gravity using **simple harmonic motion (SHM)** principles. Here's the step-by-step derivation:
+
+---
+
+### **Step 1: Define the System**
+- A simple pendulum consists of a **point mass (bob)** suspended by a **massless, inextensible string** of length \(L\).
+- The bob is displaced by a small angle \(\theta\) from its equilibrium position.
+- Forces acting on the bob:
+  - **Gravity**: \(mg\) (downward),
+  - **Tension**: \(T\) (along the string).
+
+---
+
+### **Step 2: Identify the Restoring Force**
+- The **restoring force** \(F\) is the tangential component of gravity:
+  \[
+  F = -mg \sin\theta
+  \]
+  The negative sign indicates that \(F\) opposes the displacement.
+
+---
+
+### **Step 3: Apply Small-Angle Approximation**
+- For small \(\theta\) (typically \(\theta < 10^\circ\)):
+  \[
+  \sin\theta \approx \theta
+  \]
+  Thus:
+  \[
+  F = -mg\theta
+  \]
+
+---
+
+### **Step 4: Relate \(\theta\) to Displacement**
+- The arc length displacement \(s\) is:
+  \[
+  s = L\theta \implies \theta = \frac{s}{L}
+  \]
+- Substitute into the restoring force:
+  \[
+  F = -mg \left(\frac{s}{L}\right) = -\left(\frac{mg}{L}\right)s
+  \]
+
+---
+
+### **Step 5: Apply Newton's Second Law**
+\[
+F = ma \implies m \frac{d^2s}{dt^2} = -\left(\frac{mg}{L}\right)s
+\]
+- Simplify by canceling \(m\):
+  \[
+  \frac{d^2s}{dt^2} = -\left(\frac{g}{L}\right)s
+  \]
+
+---
+
+### **Step 6: Recognize the SHM Equation**
+- The equation \(\frac{d^2s}{dt^2} = -\omega^2 s\) defines SHM, where \(\omega\) is the **angular frequency**.
+- Compare to Step 5:
+  \[
+  \omega^2 = \frac{g}{L} \implies \omega = \sqrt{\frac{g}{L}}
+  \]
+
+---
+
+### **Step 7: Derive the Time Period**
+- The time period \(T\) is the time for one complete oscillation:
+  \[
+  T = \frac{2\pi}{\omega} = 2\pi \sqrt{\frac{L}{g}}
+  \]
+
+---
+
+### **Final Formula**
+\[
+\boxed{T = 2\pi \sqrt{\frac{L}{g}}}
+\]
+
+---
+
+### **Key Notes**
+1. **Small-Angle Assumption**:  
+   The derivation assumes \(\theta\) is small (\(\sin\theta \approx \theta\)). For larger \(\theta\), the period increases slightly.
+2. **Independence of Mass**:  
+   \(T\) depends only on \(L\) and \(g\), **not** on the bob's mass or amplitude (for small \(\theta\)).
+3. **Practical Applications**:  
+   - Measuring \(g\) using \(T\) and \(L\).  
+   - Designing pendulum clocks.
+
+---
+
+### **Formula Lab**
+Explore the relationship between \(T\), \(L\), and \(g\):
+- If \(L\) **doubles**, \(T\) increases by \(\sqrt{2} \approx 1.414\).
+- On the Moon (\(g_{\text{moon}} \approx \frac{g}{6}\)), \(T\) increases by \(\sqrt{6} \approx 2.45\).
+
+---
+
+**Summary**: The time period of a simple pendulum is governed by gravity and string length, following \(T = 2\pi \sqrt{L/g}\). This result highlights the elegance of SHM in idealized mechanical systems.

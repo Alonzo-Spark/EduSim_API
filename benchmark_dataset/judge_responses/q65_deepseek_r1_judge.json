@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 65,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'orbit_started' stable loop trigger event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a orbital tracking alignment profile match.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe satellite successfully closed its trajectory path, triggering the stable closed loop status notification (`orbit_started`).\n\n### WHAT CHANGED\nThe path display updated from a open line to a stable elliptical orbit track surrounding the central gravity source.\n\n### SIMPLE WHY\nThe satellite's velocity vector and distance create a balance where gravity provides the exact centripetal force needed for a stable orbit.\n\n### WHAT TO NOTICE\nObserve how the satellite continuously circles the central mass without flying out into deep space or crashing into the planet.",
+  "candidate_response": "Based on the `orbit_started` trigger event in the physics sandbox, here's an interactive overlay with orbital mechanics visualization and controls:\n\n```json\n{\n  \"overlay\": {\n    \"title\": \"Orbital Mechanics Simulator\",\n    \"sections\": [\n      {\n        \"type\": \"visualization\",\n        \"content\": {\n          \"model\": \"keplerian_orbit\",\n          \"parameters\": {\n            \"semi_major_axis\": 15000,\n            \"eccentricity\": 0.2,\n            \"inclination\": 30,\n            \"periapsis\": 45,\n            \"ascending_node\": 60,\n            \"true_anomaly\": 30\n          },\n          \"view\": \"3d\",\n          \"target_body\": \"Earth\",\n          \"satellite\": {\n            \"mass\": 500,\n            \"velocity_vector\": [3.2, -1.1, 0.8]\n          }\n        }\n      },\n      {\n        \"type\": \"formula_card\",\n        \"title\": \"Orbital Energy Equation\",\n        \"content\": \"$$\\\\large E = -\\\\frac{GMm}{2a}$$\",\n        \"variables\": {\n          \"E\": \"Total orbital energy (J)\",\n          \"G\": \"Gravitational constant\",\n          \"M\": \"Central body mass (kg)\",\n          \"m\": \"Satellite mass (kg)\",\n          \"a\": \"Semi-major axis (m)\"\n        }\n      },\n      {\n        \"type\": \"control_panel\",\n        \"controls\": [\n          {\n            \"name\": \"eccentricity\",\n            \"type\": \"slider\",\n            \"label\": \"Eccentricity\",\n            \"min\": 0,\n            \"max\": 0.9,\n            \"step\": 0.01,\n            \"value\": 0.2\n          },\n          {\n            \"name\": \"inclination\",\n            \"type\": \"slider\",\n            \"label\": \"Inclination (°)\",\n            \"min\": 0,\n            \"max\": 90,\n            \"step\": 1,\n            \"value\": 30\n          },\n          {\n            \"name\": \"simulation_speed\",\n            \"type\": \"selector\",\n            \"label\": \"Time Scale\",\n            \"options\": [\n              {\"label\": \"Real-time\", \"value\": 1},\n              {\"label\": \"10×\", \"value\": 10},\n              {\"label\": \"100×\", \"value\": 100}\n            ],\n            \"default\": 10\n          }\n        ],\n        \"actions\": [\n          {\"id\": \"apply_impulse\", \"label\": \"Apply Radial Impulse\"},\n          {\"id\": \"change_plane\", \"label\": \"Orbital Plane Change\"}\n        ]\n      },\n      {\n        \"type\": \"data_panel\",\n        \"metrics\": [\n          {\"name\": \"apogee\", \"value\": \"18,540 km\", \"trend\": \"stable\"},\n          {\"name\": \"perigee\", \"value\": \"11,460 km\", \"trend\": \"stable\"},\n          {\"name\": \"orbital_period\", \"value\": \"5.8 hrs\"},\n          {\"name\": \"angular_momentum\", \"value\": \"7.2e9 kg·m²/s\"}\n        ],\n        \"graphs\": [\n          {\"type\": \"energy_distribution\", \"title\": \"Energy Balance\"},\n          {\"type\": \"ground_track\", \"title\": \"Ground Trace\"}\n        ]\n      }\n    ],\n    \"actions\": [\n      {\"id\": \"export_data\", \"label\": \"Export Telemetry\"},\n      {\"id\": \"new_trajectory\", \"label\": \"Compute Transfer Orbit\"},\n      {\"id\": \"close_overlay\", \"label\": \"Return to Sandbox\"}\n    ]\n  }\n}\n```\n\n### Key Features:\n1. **Real-time 3D Visualization**:\n   - Keplerian orbital path with Earth as central body\n   - Velocity vector visualization\n   - Coordinate system reference (ECI frame)\n\n2. **Dynamic Controls**:\n   - Adjust orbital parameters with live feedback\n   - Time scaling controls\n   - Execute orbital maneuvers\n\n3. **Physics Insights**:\n   - Orbital energy equation with interactive variables\n   - Real-time telemetry metrics\n   - Energy distribution graphs\n\n4. **Interactive Tools**:\n   - Apply velocity impulses\n   - Calculate Hohmann transfers\n   - Export orbital data\n\nThe visualization maintains the satellite's current state while allowing parametric exploration. All orbital calculations use standard two-body mechanics with J2 perturbation for realism. The \"Apply Radial Impulse\" action demonstrates conservation of angular momentum by modifying eccentricity without changing semi-major axis.\n\nWould you like to focus on any particular orbital mechanics concept? I can adjust the overlay to highlight:\n- Vis-viva equation applications\n- Inclination change maneuvers\n- Lagrange point stability\n- Atmospheric drag effects",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of orbital mechanics and provides a comprehensive overlay with interactive features. However, the accuracy score is not perfect due to minor issues with the presentation of some formulas and the lack of explicit explanation for certain concepts, such as the vis-viva equation. The quality score is high due to the well-structured and readable format, but could be improved with more concise section headings and clearer separation between different topics. The educational score is good, but could be improved by providing more explicit explanations and examples for beginners, particularly in the context of orbital energy and momentum conservation. Overall, the response is well-written and effectively communicates complex concepts, but could benefit from minor refinements in presentation and pedagogy.",
+  "candidate_token_usage": {
+    "promptTokens": 372,
+    "completionTokens": 5548,
+    "totalTokens": 5920
+  },
+  "candidate_latency_ms": 234511,
+  "candidate_cost_usd": 0.01235472,
+  "judge_token_usage": {
+    "promptTokens": 1558,
+    "completionTokens": 204,
+    "totalTokens": 1762
+  },
+  "judge_latency_ms": 7835,
+  "judge_cost_usd": 0.0014244,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:09:13.766Z"
+}

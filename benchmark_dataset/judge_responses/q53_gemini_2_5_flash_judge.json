@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 53,
+  "question": "Live Sandbox: What happens visually when the stiffness constant of a spring oscillator is doubled?",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nA block attached to a horizontal spring oscillates back and forth about an equilibrium line. We can adjust the spring stiffness parameter ($k$) to observe how the restoring force scales the oscillation speed.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nThe block transitions into a much faster, higher-frequency oscillation. It cycles back and forth rapidly across the center point, showing sharp direction changes at its maximum extension limits.\n\n### ✦ WHY IT HAPPENS\nDoubling the stiffness constant ($k$) means the spring exerts twice as much restoring force for the exact same displacement distance. A larger restoring force generates a higher acceleration vector, driving the mass back to equilibrium much faster.\n\n### ✦ WHAT TO NOTICE\nWatch the velocity telemetry indicators. The peak velocity at the center equilibrium point climbs significantly higher, while the time required to complete one full cycle decreases.\n\n### ✦ FORMULA\nThe angular frequency of a simple harmonic oscillator is defined as:\n\n$$\\omega = \\sqrt{\\frac{k}{m}}$$\n\n* $k$ represents the spring stiffness parameter value.\n* $m$ represents the mass value of the attached block.\n* Increasing $k$ increases the angular frequency ($\\omega$), which decreases the time period ($T = \\frac{2\\pi}{\\omega}$).\n\n### ✦ DEEPER UNDERSTANDING\nA stiffer spring stores and releases potential energy much faster, accelerating the attached mass more aggressively and reducing the time required for each cycle.\n\n### ✦ TRY THIS\n1. Set the **Stiffness slider ($k$)** to a low value and count the cycles over a ten-second window.\n2. Drag the **Stiffness slider** to maximum and observe the rapid pulse tracking profile.",
+  "candidate_response": "The stiffness constant, often denoted by $k$, is a crucial parameter in understanding the behavior of a spring-mass oscillator. Let's explore its effect.\n\n***\n\n### Quick Definition\n\nThe **stiffness constant** ($k$) of a spring is a measure of how much force is required to deform it by a certain amount. A higher stiffness constant means a stiffer spring.\n\n***\n\n### Main Formula: Period of Oscillation\n\nThe period ($T$) of a simple spring-mass oscillator, which is the time it takes for one complete oscillation, is given by:\n\n$$\nT = 2\\pi \\sqrt{\\frac{m}{k}}\n$$\n\n\\[ Explain Formula ] \\[ Open Formula Lab ]\n\n***\n\n### Key Concepts\n\n*   **Period ($T$)**: The time taken for one complete oscillation. Measured in seconds (s).\n*   **Mass ($m$)**: The mass attached to the spring. Measured in kilograms (kg).\n*   **Stiffness Constant ($k$)**: A measure of the spring's resistance to deformation. Measured in Newtons per meter (N/m).\n*   **Frequency ($f$)**: The number of oscillations per unit time. It is the reciprocal of the period ($f = 1/T$).\n\n***\n\n### Visualizing the Change\n\nLet's consider a spring oscillator with an initial stiffness constant $k_1$. Its period would be:\n\n$$\nT_1 = 2\\pi \\sqrt{\\frac{m}{k_1}}\n$$\n\nNow, if the stiffness constant is doubled, the new stiffness constant becomes $k_2 = 2k_1$. The new period $T_2$ will be:\n\n$$\nT_2 = 2\\pi \\sqrt{\\frac{m}{k_2}} = 2\\pi \\sqrt{\\frac{m}{2k_1}}\n$$\n\nWe can relate $T_2$ to $T_1$:\n\n$$\nT_2 = 2\\pi \\sqrt{\\frac{1}{2} \\cdot \\frac{m}{k_1}} = \\frac{1}{\\sqrt{2}} \\cdot \\left( 2\\pi \\sqrt{\\frac{m}{k_1}} \\right) = \\frac{T_1}{\\sqrt{2}}\n$$\n\nSince $\\sqrt{2} \\approx 1.414$, then $T_2 \\approx \\frac{T_1}{1.414} \\approx 0.707 T_1$.\n\n***\n\n### Conclusion\n\nWhen the stiffness constant ($k$) of a spring oscillator is doubled:\n\n*   The **period of oscillation ($T$) decreases** by a factor of $\\sqrt{2}$ (approximately 0.707). This means the oscillations become faster.\n*   The **frequency of oscillation ($f$) increases** by a factor of $\\sqrt{2}$. Since $f = 1/T$, if $T$ decreases, $f$ must increase.\n\n***\n\n### Summary of Effects\n\n| Parameter            | Initial State                      | Doubled Stiffness ($k \\rightarrow 2k$) | Visual Effect                                    |\n| :------------------- | :--------------------------------- | :------------------------------------- | :----------------------------------------------- |\n| **Stiffness ($k$)**  | $k$                                | $2k$                                   | Spring becomes harder to stretch/compress        |\n| **Period ($T$)**     | $2\\pi \\sqrt{\\frac{m}{k}}$          | $2\\pi \\sqrt{\\frac{m}{2k}} = \\frac{T}{\\sqrt{2}}$ | Oscillations become faster (shorter period)      |\n| **Frequency ($f$)**  | $\\frac{1}{2\\pi} \\sqrt{\\frac{k}{m}}$ | $\\frac{1}{2\\pi} \\sqrt{\\frac{2k}{m}} = f\\sqrt{2}$ | Oscillations become more frequent (higher frequency) |\n\n***\n\n### Suggested Questions\n\n*   What happens to the period if the mass attached to the spring is doubled?\n*   How does damping affect the oscillations of a spring-mass system?\n*   Can you think of real-world examples where varying the stiffness of a spring is important?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts related to spring oscillators, including the relationship between stiffness constant, period, and frequency. The formulas provided are correct, and the explanation of how doubling the stiffness constant affects the period and frequency is accurate. The response is well-structured and easy to follow, with clear headings and concise language. However, the educational score is slightly lower because the response could benefit from more visual aids, such as diagrams or graphs, to help illustrate the concepts. Additionally, some of the language is somewhat technical, which may make it difficult for beginners to understand. Overall, the response is of high quality, but could be improved with additional pedagogical support.",
+  "candidate_token_usage": {
+    "promptTokens": 387,
+    "completionTokens": 912,
+    "totalTokens": 1299
+  },
+  "candidate_latency_ms": 5544,
+  "candidate_cost_usd": 0.0023961,
+  "judge_token_usage": {
+    "promptTokens": 1691,
+    "completionTokens": 200,
+    "totalTokens": 1891
+  },
+  "judge_latency_ms": 5746,
+  "judge_cost_usd": 0.0014946,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:11:00.403Z"
+}

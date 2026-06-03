@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 20,
+  "question": "Explain conservation of mechanical energy with an example.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe Principle of Conservation of Mechanical Energy states that if only conservative forces (like gravity or spring forces) perform work within an isolated system, the total mechanical energy (the sum of kinetic and potential energies) remains completely constant over time.\n\n---\n\n## Formula\n\nThe conservation rule is expressed mathematically as:\n\n$$E_{\\text{total}} = K + U = \\text{Constant}$$\n\n$$K_i + U_i = K_f + U_f$$\n\nWhere:\n* $K_i, K_f$ represent the initial and final kinetic energy states\n* $U_i, U_f$ represent the initial and final potential energy states\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Simplifies tracking positions and speeds without requiring precise force-time integrations. | Fails in non-conservative tracking configurations involving friction or air resistance. |\n\n---\n\n## Real-world Example: Free-Falling Object\n\nConsider a heavy steel ball held stationary at a height $h$ above the floor.\n* **At Peak Height:** The ball has zero velocity, so kinetic energy is zero ($K = 0$), and total mechanical energy equals maximum potential energy ($E = mgh$).\n* **During Mid-Descent:** As the ball drops, its height decreases, causing potential energy to drop, while its speed climbs, increasing kinetic energy by an identical amount.\n* **At Floor Impact Point:** Just before striking the ground, height becomes zero ($U = 0$), and potential energy converts completely into kinetic energy ($K = \\frac{1}{2}mv^2 = mgh$).\n\n---\n\n## Summary\n\nMechanical energy conservation demonstrates that kinetic and potential energy act as balanced components within a closed system, transforming into one another while keeping the total energy constant.",
+  "candidate_response": "┌───────────────────────────┐  \n│ **Quick Definition**      │  \n│                           │  \n│ Mechanical energy—the sum of kinetic and potential energy in a system—remains constant in the absence of non-conservative forces like friction or air resistance. This is the **principle of conservation of mechanical energy**. │  \n└───────────────────────────┘  \n\n---\n\n### 🔍 **Key Concepts**  \n\n- **Mechanical Energy (E)** = Kinetic Energy (KE) + Potential Energy (PE)  \n- **Conservation Principle**: If only conservative forces (like gravity) act, total mechanical energy stays constant.  \n- Applies in idealized, frictionless environments.  \n\n---\n\n### 📐 **Main Formula**  \n\n$$\nKE_i + PE_i = KE_f + PE_f\n$$\n\n┌───────────────────────────┐  \n│ **Formula Card**          │  \n│                           │  \n│ $ KE_i + PE_i = KE_f + PE_f $ │  \n│                           │  \n│ - $ KE = \\frac{1}{2}mv^2 $: Kinetic Energy  \n│ - $ PE = mgh $: Gravitational Potential Energy  \n│ - $ i $: initial state, $ f $: final state  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n---\n\n### 🌟 **Example: Roller Coaster Drop**  \n\nImagine a roller coaster car at the top of a hill:  \n\n- **Mass**: 500 kg  \n- **Height**: 40 m  \n- **Initial speed**: 0 m/s (starts from rest)  \n- **Bottom height**: 0 m  \n- **Assume no friction or air resistance**  \n\n#### Step 1: Top of the Hill  \n$$\nPE_i = mgh = 500 \\times 9.8 \\times 40 = 196,000\\ \\text{J}  \n$$  \n$$\nKE_i = \\frac{1}{2}mv^2 = \\frac{1}{2} \\times 500 \\times 0^2 = 0\\ \\text{J}  \n$$  \n$$\nE_i = 196,000\\ \\text{J}\n$$\n\n#### Step 2: Bottom of the Hill  \n$$\nPE_f = mgh = 500 \\times 9.8 \\times 0 = 0\\ \\text{J}  \n$$  \nAll potential energy converts to kinetic energy:  \n$$\nKE_f = 196,000\\ \\text{J} = \\frac{1}{2}mv^2  \n$$  \nSolve for $ v $:  \n$$\n196,000 = \\frac{1}{2} \\times 500 \\times v^2  \n\\Rightarrow v^2 = \\frac{196,000 \\times 2}{500} = 784  \n\\Rightarrow v = \\sqrt{784} = 28\\ \\text{m/s}\n$$\n\n✅ **Energy is conserved**:  \nInitial mechanical energy = Final mechanical energy  \n196,000 J = 196,000 J\n\n---\n\n### 🧩 **Energy Transformation**  \n\n┌─────────────────────────────┐  \n│ **Energy Conversion Chain** │  \n├─────────────────────────────┤  \n│ Potential Energy → Kinetic Energy  \n│ (At top)             → (At bottom)  \n└─────────────────────────────┘  \n\nNo energy is lost—only transformed.\n\n---\n\n### ⚠️ **Important Notes**  \n\n- **Real-world systems** lose some mechanical energy to heat and sound (non-conservative forces).  \n- Conservation **only holds perfectly** when friction, air resistance, and other dissipative forces are negligible.  \n- This principle is foundational in physics, engineering, and design of rides, pendulums, and orbital mechanics.\n\n---\n\n### ✅ **Summary**  \n\n- Mechanical energy is conserved when only conservative forces act.  \n- Energy transforms between kinetic and potential forms.  \n- Total amount remains constant: $ KE + PE = \\text{constant} $.  \n\n---\n\n### 💡 **Suggested Questions**  \n\n1. What happens to mechanical energy when friction is present?  \n2. How would doubling the mass affect the final speed in the roller coaster example?  \n3. Can potential energy ever be negative? Why or why not?  \n4. Why does the conservation of mechanical energy not violate the second law of thermodynamics?  \n\n[ Continue to Practice Problems ]  \n[ Explore Formula Lab: Energy Conversion Simulator ]",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately explains the concept of conservation of mechanical energy, provides a clear and relevant example, and correctly applies the formula. The layout and formatting are well-structured and readable. The response effectively teaches the concept, making it beginner-friendly. However, minor improvements could be made, such as adding more details on the implications of non-conservative forces or providing additional examples to further illustrate the concept. Overall, the response demonstrates a strong understanding of the subject matter and effectively communicates it.",
+  "candidate_token_usage": {
+    "promptTokens": 356,
+    "completionTokens": 988,
+    "totalTokens": 1344
+  },
+  "candidate_latency_ms": 17211,
+  "candidate_cost_usd": 0.002332,
+  "judge_token_usage": {
+    "promptTokens": 1723,
+    "completionTokens": 158,
+    "totalTokens": 1881
+  },
+  "judge_latency_ms": 2779,
+  "judge_cost_usd": 0.0014129999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:34:52.847Z"
+}

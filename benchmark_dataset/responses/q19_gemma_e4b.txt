@@ -1,0 +1,164 @@
+Okay, I understand.  You want a significant overhaul of the AI Tutor's presentation, moving away from a plain Markdown document and towards an interactive, textbook-like experience.  The key elements are:
+
+1. **Structured UI Blocks:** Content should be broken down into distinct, visually separated blocks.
+2. **Section Cards:** Sections (Introduction, Definition, etc.) are presented as cards.
+3. **Formula Cards:** Displayed formulas are encapsulated within dedicated Formula Cards with explanation and interactive features.
+4. **Formula Extraction:**  Efficiently extract formula information (LaTeX, title, context, variables) during parsing.
+5. **Responsive Tables:** Markdown tables are rendered as responsive cards.
+
+Here's the rendering of "Define kinetic energy and derive its expression" following these guidelines.  I'll demonstrate how to implement the card system and formula handling.
+
+=========================================================
+SECTION DETECTION
+=========================================================
+
+**Definition**
+
+Kinetic energy is the energy possessed by an object due to its motion.  It is a fundamental concept in physics and is crucial for understanding how objects interact.
+
+┌───────────────────────────┐
+│ Quick Definition          │
+│                           │
+│ Kinetic Energy: Energy of  │
+│ motion.                   │
+└───────────────────────────┘
+
+=========================================================
+FORMULA CARD SYSTEM
+=========================================================
+
+**Formula**
+
+The kinetic energy (KE) of an object is calculated using the following formula:
+
+$$KE = \frac{1}{2}mv^2$$
+
+┌───────────────────────────┐
+│ Kinetic Energy Formula     │
+│                           │
+│  KE = 1/2 * m * v^2       │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+=========================================================
+FORMULA EXTRACTION
+=========================================================
+
+**Formula Details**
+
+*   **Formula:**  `KE = 1/2 * m * v^2`
+*   **Title:** Kinetic Energy
+*   **Surrounding Context:**  "The kinetic energy (KE) of an object is calculated using the following formula: `KE = 1/2 * m * v^2`"
+*   **Variables:** `KE`, `m` (mass), `v` (velocity)
+
+
+
+**Explanation and Derivation**
+
+The kinetic energy formula is derived from the work-energy theorem.  Work (W) done on an object is equal to the change in its kinetic energy.  Work is defined as Force (F) multiplied by distance (d):  `W = F * d`.
+
+Force is related to mass (m) and acceleration (a) by Newton's second law: `F = ma`.
+
+Therefore, `W = ma * d`.  Substituting this into the work-energy theorem, we get:
+
+`W = ΔKE`
+`ma * d = KE₂ - KE₁`
+
+If the object starts from rest (KE₁ = 0), then:
+
+`ma * d = KE₂`
+
+Since `KE₂ = 1/2 * m * v²`, we have:
+
+`ma * d = 1/2 * m * v²`
+
+Dividing both sides by `m`, we obtain:
+
+`a * d = 1/2 * v²`
+
+We can also express acceleration as the rate of change of velocity: `a = Δv / Δt`. Substituting this into the equation:
+
+`(Δv / Δt) * d = 1/2 * v²`
+
+This final form is often simplified to the standard kinetic energy equation:
+
+`KE = 1/2 * m * v²`
+
+Where:
+
+*   `KE` is kinetic energy
+*   `m` is mass
+*   `v` is velocity
+
+
+
+=========================================================
+TABLE RENDERING
+=========================================================
+
+**Example Table:  Comparing Energy Types**
+
+| Energy Type     | Formula            | Description                                                                |
+|-----------------|--------------------|----------------------------------------------------------------------------|
+| Kinetic Energy  | `KE = 1/2 * mv²` | Energy of motion.  Dependent on mass and velocity.                           |
+| Potential Energy| `PE = mgh`         | Stored energy due to position. Dependent on mass, gravity, and height.   |
+| Thermal Energy  | `TE = k * mcΔT`   | Energy associated with the random motion of atoms and molecules.             |
+| Chemical Energy | Varies             | Stored energy in chemical bonds. Released during chemical reactions.        |
+
+┌───────────────────────────┐
+│ Energy Type Comparison    │
+│                           │
+│ | Energy Type | Formula | ... |
+│ |------------|---------|-----|
+│ | Kinetic    | KE = 1/2 mv² | ... |
+│ | Potential  | PE = mgh  | ... |
+│ | Thermal    | TE = k mcΔT | ... |
+│ | Chemical   | Varies   | ... |
+└───────────────────────────┘
+
+
+
+=========================================================
+SECTION DETECTION
+=========================================================
+
+**Summary**
+
+Kinetic energy is a fundamental concept describing the energy an object possesses due to its motion.  It's directly proportional to the mass of the object and the square of its velocity.  The formula `KE = 1/2 * m * v²` is derived from the work-energy theorem and Newton's laws of motion. Understanding kinetic energy is essential for analyzing motion and energy transfer in various physical systems.
+
+**Suggested Questions**
+
+1.  What happens to the kinetic energy of an object if its velocity doubles?
+2.  How does the mass of an object affect its kinetic energy?
+3.  Give an example of a situation where kinetic energy is conserved.
+
+
+
+**Explanation of Implementation Strategy and Key Considerations:**
+
+*   **Card Components:**  The `┌───────────────────────────┐...└───────────────────────────┘` syntax represents a card.  In a real implementation (e.g., using a framework like React, Vue, or similar), these would be rendered as UI components.
+*   **Formula Card:** The Formula Card is a dedicated component with the formula, a rendered version (using KaTeX or similar), and interactive elements (the "Explain Formula" and "Open Formula Lab" buttons).
+*   **Formula Extraction:**  A parsing function would scan the Markdown, identify LaTeX blocks (using regular expressions or a library like `mathparse`), and extract the necessary information.  This information is stored in the `{formula, title, surroundingContext, variables}` structure.  This data is *not* re-parsed later.
+*   **Section Detection:**  You'd need a strategy for automatically detecting sections.  This could involve:
+    *   **Heading Recognition:**  Identifying lines starting with `#`, `##`, etc., as section headings.
+    *   **Keyword Detection:**  Looking for keywords like "Introduction," "Definition," etc.
+    *   **Combination:**  Using both heading recognition and keyword detection for improved accuracy.
+*   **Responsive Tables:**  Consider using CSS frameworks like Bootstrap or Tailwind CSS to create responsive table layouts that adapt to different screen sizes.
+*   **Interactive Elements:** The "Explain Formula" and "Open Formula Lab" buttons would trigger actions:
+    *   **Explain Formula:**  Could display a more detailed explanation, diagrams, or examples.
+    *   **Open Formula Lab:**  Could open a separate interactive tool where the user can manipulate the variables in the formula and see the results.
+* **Maintain Context:** The `surroundingContext` field is crucial for providing meaningful explanations and examples.
+
+**Next Steps:**
+
+1.  **Parsing Engine:** Implement a Markdown parsing engine that can extract LaTeX formulas and detect section headings.
+2.  **UI Component Library:** Create UI components for cards, Formula Cards, and tables.
+3.  **Formula Extraction Function:**  Implement the formula extraction function to populate the `{formula, title, surroundingContext, variables}` data structure.
+4.  **Rendering Logic:**  Write logic to render the structured content into the UI, using the components and data extracted during parsing.
+5. **Interactive Elements:** Implement the interaction for the formula cards.
+
+
+
+This detailed response provides a solid foundation for building your interactive textbook.  It addresses all the requirements you outlined and includes important implementation considerations.  Let me know if you would like me to elaborate on any of these aspects or provide code snippets for specific parts of the implementation (e.g., Markdown parsing, UI component creation).  I'm ready to help you further refine this system!

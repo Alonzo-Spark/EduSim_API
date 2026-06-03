@@ -1,0 +1,86 @@
+### Momentum and Conservation of Momentum
+
+#### ⚡ Quick Definition  
+**Momentum** is a measure of an object's motion, combining its mass and velocity. **Conservation of Momentum** states that in a closed system with no external forces, total momentum remains constant.
+
+---
+
+#### 📖 Core Concept  
+- **Momentum (\( \vec{p} \))** is a vector quantity:  
+  \[
+  \vec{p} = m \vec{v}
+  \]  
+  - \( m \): Mass (kg)  
+  - \( \vec{v} \): Velocity (m/s)  
+- **Direction matters**: Momentum points in the direction of velocity.
+
+---
+
+#### 🔍 Conservation of Momentum  
+**Law**: For a system with **no net external force**, total momentum before and after an interaction (e.g., collision) is conserved:  
+\[
+\sum \vec{p}_{\text{initial}} = \sum \vec{p}_{\text{final}}
+\]
+
+**Derivation** (Using Newton’s Laws):  
+1. **Newton’s Third Law**: Forces between two objects are equal and opposite:  
+   \[
+   \vec{F}_{1 \to 2} = -\vec{F}_{2 \to 1}
+   \]  
+2. **Newton’s Second Law**: Force changes momentum (\( \vec{F} = \frac{d\vec{p}}{dt} \)).  
+3. For two colliding objects:  
+   \[
+   \frac{d\vec{p}_1}{dt} = -\frac{d\vec{p}_2}{dt} \quad \text{or} \quad \frac{d}{dt}(\vec{p}_1 + \vec{p}_2) = 0
+   \]  
+4. Integrate over time:  
+   \[
+   \vec{p}_1 + \vec{p}_2 = \text{constant}
+   \]  
+   ∴ **Total momentum is conserved**.
+
+---
+
+#### 🌟 Key Applications  
+1. **Collisions**:  
+   - Elastic (kinetic energy conserved).  
+   - Inelastic (kinetic energy not conserved, but momentum is).  
+2. **Rocket Propulsion**:  
+   Fuel ejection creates equal-and-opposite momentum change.  
+3. **Physics Problems**:  
+   Solve for unknown velocities post-collision.
+
+---
+
+#### 📊 Momentum in Different Collisions  
+| **Collision Type** | **Momentum Conserved?** | **Kinetic Energy Conserved?** |  
+|-------------------|------------------------|------------------------------|  
+| Elastic           | ✅ Yes                 | ✅ Yes                       |  
+| Inelastic         | ✅ Yes                 | ❌ No                        |  
+| Perfectly Inelastic | ✅ Yes                 | ❌ No (objects stick together) |  
+
+---
+
+#### ⚠️ Important Notes  
+- **Closed System Required**: External forces (e.g., friction) invalidate conservation.  
+- **Vector Addition**: Momentum components (\( p_x, p_y, p_z \)) are independently conserved.  
+- **Real-World Example**: Airbags increase collision time, reducing force (same momentum change).
+
+---
+
+#### 💡 Formula Lab: Momentum Calculator  
+\[
+\vec{p} = m \vec{v}
+\]  
+- **Try it**:  
+  - Mass \( m = 2 \, \text{kg} \), Velocity \( v_x = 3 \, \text{m/s} \) → \( p_x = 6 \, \text{kg·m/s} \).  
+  - For collisions: \( m_1v_{1i} + m_2v_{2i} = m_1v_{1f} + m_2v_{2f} \).
+
+---
+
+#### ❓ Practice Questions  
+1. A 5 kg ball moving east at 4 m/s hits a stationary 2 kg ball. If they stick together, what is their final velocity?  
+2. Why does a gun recoil when fired? (Answer using momentum conservation.)
+
+---
+
+**Summary**: Momentum links mass and velocity to quantify motion. Its conservation—derived from Newton’s laws—solves collision dynamics and underpins physics from rockets to sports.

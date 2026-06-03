@@ -1,0 +1,158 @@
+┌─────────────────────────────────────┐  
+│ Introduction                        │  
+│                                     │  
+│ When a solid material is heated, its      │  
+│ constituent atoms vibrate more vigorously, │  
+│ causing the average distance between them │  
+│ to increase. This macroscopic increase   │  
+│ in size is called **thermal expansion**. │  
+│ For a metal rod, the length grows as the │  
+│ temperature rises.                       │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ Definition                          │  
+│                                     │  
+│ **Thermal expansion** is the tendency of │  
+│ matter to change its shape, area, or     │  
+│ volume in response to a change in       │  
+│ temperature. For solids, the change is   │  
+│ usually linear (length) or volumetric.   │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ Key Concepts                        │  
+│                                     │  
+│ • **Coefficient of linear expansion (α)** – │  
+│   material‑specific constant (°C⁻¹) that │  
+│   relates temperature change to length  │  
+│   change.                                 │  
+│ • **Coefficient of volumetric expansion (β)** – │  
+│   ≈ 3α for isotropic solids.               │  
+│ • Expansion is **reversible** if the material │  
+│   stays within its elastic limit.          │  
+│ • Constraints (fixed ends, joints) lead to   │  
+│   thermal stress.                           │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ Main Formula – Linear Expansion      │  
+│                                     │  
+│      ΔL = α L₀ ΔT                 │  
+│                                     │  
+│ [ Explain Formula ]                 │  
+│ [ Open Formula Lab ]                │  
+└─────────────────────────────────────┘  
+
+*Formula metadata*  
+```json
+{
+  "formula": "ΔL = α L₀ ΔT",
+  "title": "Linear Expansion",
+  "surroundingContext": "Change in length of a metal rod when heated.",
+  "variables": {
+    "ΔL": "Change in length (m)",
+    "α": "Coefficient of linear expansion (°C⁻¹)",
+    "L₀": "Original length (m)",
+    "ΔT": "Temperature change (°C)"
+  }
+}
+```  
+
+┌─────────────────────────────────────┐  
+│ Main Formula – Volumetric Expansion │  
+│                                     │  
+│      ΔV = β V₀ ΔT                 │  
+│                                     │  
+│ [ Explain Formula ]                 │  
+│ [ Open Formula Lab ]                │  
+└─────────────────────────────────────┘  
+
+*Formula metadata*  
+```json
+{
+  "formula": "ΔV = β V₀ ΔT",
+  "title": "Volumetric Expansion",
+  "surroundingContext": "Change in volume of a solid (or liquid) when heated.",
+  "variables": {
+    "ΔV": "Change in volume (m³)",
+    "β": "Coefficient of volumetric expansion (°C⁻¹) ≈ 3α",
+    "V₀": "Original volume (m³)",
+    "ΔT": "Temperature change (°C)"
+  }
+}
+```  
+
+┌─────────────────────────────────────┐  
+│ Table – Typical α Values for Metals │  
+│                                     │  
+│ ┌─────────────────────┬─────────────┐ │
+│ │ Material            │ α (10⁻⁶ °C⁻¹)│ │
+│ ├─────────────────────┼─────────────┤ │
+│ │ Aluminum            │ 23.1        │ │
+│ │ Copper              │ 16.5        │ │
+│ │ Steel (carbon)      │ 11.7        │ │
+│ │ Brass               │ 19.0        │ │
+│ │ Iron                │ 11.8        │ │
+│ └─────────────────────┴─────────────┘ │
+│                                     │  
+│ (Responsive table – scroll horizontally │
+│ on narrow screens)                 │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ Applications                        │  
+│                                     │  
+│ • **Railways** – Gaps between rails are │  
+│   provided to accommodate expansion. │  
+│ • **Bridges & Pipelines** – Expansion │  
+│   joints prevent buckling.            │  
+│ • **Precision Instruments** – Materials│  
+│   with low α (e.g., Invar) are chosen │  
+│   to maintain dimensional stability. │  
+│ • **Thermometers** – Mercury column │  
+│   rises with temperature due to volume │  
+│   expansion.                         │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ Important Notes                     │  
+│                                     │  
+│ • The linear approximation ΔL = α L₀ ΔT holds   │
+│   only for modest temperature ranges; │  
+│   α itself can vary with temperature. │  
+│ • If a rod is **fixed at both ends**, │  
+│   heating creates compressive stress │  
+│   σ = α E ΔT (E = Young’s modulus).   │  
+│ • Sudden temperature changes can cause │  
+│   thermal shock and fracture.         │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ Summary                             │  
+│                                     │  
+│ • Heating a metal rod makes it longer. │  
+│ • Linear expansion is quantified by │  
+│   ΔL = α L₀ ΔT, where α is material‑specific. │  
+│ • Volumetric expansion uses β ≈ 3α. │  
+│ • Engineers design gaps, joints, and │  
+│   select low‑α materials to manage │  
+│   the effects.                       │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ Suggested Questions                 │  
+│                                     │  
+│ 1. A 2.0 m steel rod (α = 11.7 × 10⁻⁶ °C⁻¹) is heated │  
+│    from 20 °C to 120 °C. How much does its │  
+│    length increase?                     │  
+│ 2. Explain why a bimetallic strip bends when │  
+│    heated.                               │  
+│ 3. If a concrete bridge span is 30 m long │  
+│    and the average α is 12 × 10⁻⁶ °C⁻¹, │  
+│    calculate the expansion for a 40 °C │  
+│    temperature rise.                     │  
+│ 4. Discuss the consequences of ignoring │  
+│    thermal expansion in precision │  
+│    optical instruments.                │  
+└─────────────────────────────────────┘

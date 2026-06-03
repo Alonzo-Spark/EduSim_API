@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 61,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'spring_connected' event linking a anchor to a mass.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a structural connection update within the workspace.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nA new elastic joint constraint (`spring_connected`) was created, linking the static pin anchor `p1` to the moving circular mass `c1`.\n\n### WHAT CHANGED\nThe free-floating mass was brought under a positional constraint, causing it to pull backward as it moved away from the anchor point.\n\n### SIMPLE WHY\nThe newly initialized spring joint applies an elastic restoring force that pulls the mass back toward the anchor whenever the constraint is stretched.\n\n### WHAT TO NOTICE\nWatch how the distance between the anchor and the mass determines the strength of the restoring force vector.",
+  "candidate_response": "```json\n{\n  \"type\": \"overlay\",\n  \"event\": \"spring_connected\",\n  \"anchor\": {\n    \"id\": \"anchor_001\",\n    \"position\": [0.0, 0.0, 0.0]\n  },\n  \"mass\": {\n    \"id\": \"mass_001\",\n    \"position\": [0.0, -1.0, 0.0]\n  },\n  \"spring\": {\n    \"k\": 150.0,           // N/m\n    \"rest_length\": 0.5,   // meters\n    \"damping\": 0.05       // Ns/m\n  },\n  \"message\": \"Spring successfully connected between anchor_001 and mass_001. Simulation ready to run.\"\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 6,
+    "quality": 8,
+    "educational": 4,
+    "overall_average": "6.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks conceptual correctness and semantic alignment with the gold reference answer. It focuses on providing a JSON object with technical details about the spring connection, but fails to explain the underlying physics and the implications of the spring_connected event. The response does not discuss the elastic joint constraint, the restoring force, or the effects on the mass's motion. The quality of the response is good in terms of layout and formatting, but the educational value is low due to the lack of explanatory content. To improve, the candidate should provide a clear and concise explanation of the physics behind the spring_connected event, including the concepts of elastic joint constraints, restoring forces, and their effects on the motion of the mass.",
+  "candidate_token_usage": {
+    "promptTokens": 438,
+    "completionTokens": 989,
+    "totalTokens": 1427
+  },
+  "candidate_latency_ms": 1448,
+  "candidate_cost_usd": 0.00032955,
+  "judge_token_usage": {
+    "promptTokens": 884,
+    "completionTokens": 249,
+    "totalTokens": 1133
+  },
+  "judge_latency_ms": 3372,
+  "judge_cost_usd": 0.001128,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:54:12.636Z"
+}

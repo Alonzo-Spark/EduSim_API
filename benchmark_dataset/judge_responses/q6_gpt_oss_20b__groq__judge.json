@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 6,
+  "question": "Motion in a Plane: Define projectile motion and explain its characteristics.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nProjectile motion is a form of motion experienced by an object or particle that is projected near the Earth's surface and moves along a curved path under the action of gravity alone. \n\nThe path followed by the projectile is called its trajectory, which always takes the geometric shape of a parabola.\n\n---\n\n## Characteristics\n\n* **Two-Dimensional Independent Motion:** The motion can be split into a horizontal component (constant velocity) and a vertical component (uniform acceleration due to gravity).\n* **Constant Horizontal Velocity:** Neglecting air resistance, there is no horizontal acceleration.\n* **Symmetrical Path:** The time taken to reach maximum height equals the time taken to descend back to the initial launch impact level.\n\n---\n\n## Formula\n\nThe initial velocity vector ($u$) broken down into its rectangular components:\n\n$$u_x = u \\cos(\\theta)$$\n\n$$u_y = u \\sin(\\theta)$$\n\nWhere:\n* $u_x$ represents the constant horizontal velocity component\n* $u_y$ represents the initial vertical velocity component\n* $\\theta$ represents the angle of projection with the horizontal plane\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Offers precise tracking vectors for basic structural ballistics projections. | Fails to incorporate atmospheric fluid dynamics or crosswinds. |\n| Breaks complex curved trajectories down into basic orthogonal linear equations. | The assumption of a flat Earth baseline fails over long, intercontinental ranges. |\n\n---\n\n## Summary\n\nProjectile motion combines steady horizontal cruise with uniform vertical gravitational acceleration. These components act simultaneously yet function independently, defining a clean parabolic trajectory profile.",
+  "candidate_response": "┌───────────────────────────────────────────────┐  \n│ Quick Definition                              │  \n│                                               │  \n│ Projectile motion is the two‑dimensional      │  \n│ trajectory of an object that is launched      │  \n│ into the air and moves under the influence   │  \n│ of gravity alone (ignoring air resistance). │  \n│                                               │  \n│ The motion can be decomposed into a horizontal│  \n│ component that moves at constant velocity and │  \n│ a vertical component that accelerates          │  \n│ downward at 9.81 m s⁻².                       │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Key Concepts                                  │  \n│                                               │  \n│ • Initial speed \\(v_0\\) and launch angle      │  \n│   \\(\\theta\\) determine the trajectory.        │  \n│ • Horizontal distance (range) depends on      │  \n│   \\(v_0^2\\sin 2\\theta\\).                      │  \n│ • Maximum height occurs when vertical speed   │  \n│   becomes zero.                               │  \n│ • Time of flight is independent of horizontal │  \n│   motion.                                     │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Characteristics of Projectile Motion          │  \n│                                               │  \n│ 1. Parabolic trajectory: The path is a       │  \n│    parabola described by quadratic equations.│  \n│ 2. Independent horizontal and vertical        │  \n│    motions: horizontal velocity is constant,  │  \n│    vertical velocity changes linearly.        │  \n│ 3. Symmetry: The ascent and descent are        │  \n│    mirror images if air resistance is ignored.│  \n│ 4. Range and height are maximized at 45°      │  \n│    launch angle for a given initial speed.    │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Main Formula                                   │  \n│                                               │  \n│ \\[ y = v_0 \\sin\\theta \\, t \\;-\\; \\tfrac12 g t^2 \\] │  \n│ \\[ x = v_0 \\cos\\theta \\, t \\]                 │  \n│                                               │  \n│ [ Explain Formula ]   |   [ Open Formula Lab ]│  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Range Formula                                 │  \n│                                               │  \n│ \\[ R = \\frac{v_0^2 \\sin 2\\theta}{g} \\]        │  \n│                                               │  \n│ [ Explain Formula ]   |   [ Open Formula Lab ]│  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Summary                                        │  \n│                                               │  \n│ Projectile motion is governed by simple        │  \n│ kinematic equations once the initial speed     │  \n│ and angle are known. The motion splits into    │  \n│ independent horizontal and vertical motions,  │  \n│ yielding a parabolic path. Key metrics such as │  \n│ maximum height, time of flight, and range can  │  \n│ be derived directly from the equations above. │  \n└───────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines projectile motion, correctly identifies its characteristics, and provides relevant formulas. The use of boxes to organize information is visually appealing but could be improved for better readability. The response effectively explains key concepts, such as the decomposition of motion into horizontal and vertical components, the parabolic trajectory, and the independence of horizontal and vertical motions. However, it lacks a detailed explanation of the advantages and disadvantages of the projectile motion model, which is present in the gold reference answer. Additionally, the candidate response could benefit from more detailed derivations of the formulas and a clearer explanation of how the launch angle affects the range and maximum height. Overall, the response demonstrates a strong understanding of projectile motion but could be enhanced with more comprehensive explanations and improved formatting for better clarity and readability.",
+  "candidate_token_usage": {
+    "promptTokens": 430,
+    "completionTokens": 1202,
+    "totalTokens": 1632
+  },
+  "candidate_latency_ms": 1986,
+  "candidate_cost_usd": 0.00039285,
+  "judge_token_usage": {
+    "promptTokens": 1478,
+    "completionTokens": 215,
+    "totalTokens": 1693
+  },
+  "judge_latency_ms": 4956,
+  "judge_cost_usd": 0.0014028,
+  "retry_count": 2,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:03:53.897Z"
+}

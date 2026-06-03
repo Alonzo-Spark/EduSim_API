@@ -1,0 +1,83 @@
+### 🌌 Orbital Mechanics Lab: Velocity Reduction
+
+When a planet's tangential velocity $v_t$ is reduced below the required circular orbital speed $v_c$, the balance between **inertia** and **gravitational pull** is disrupted. The system transitions from a circular path to an elliptical decay or atmospheric reentry.
+
+---
+
+### 📘 Quick Definition
+**Orbital Decay / Elliptical Transition** occurs when the kinetic energy of an orbiting body is no longer sufficient to maintain a constant radius. Gravity "wins" the instantaneous tug-of-war, pulling the object into a lower, faster, and more eccentric path.
+
+---
+
+### 🗝️ Key Concepts
+
+*   **Circular Velocity ($v_c$):** The precise speed where centripetal acceleration exactly matches gravitational acceleration.
+*   **Perigee/Periapsis:** The new "closest point" created immediately at the location where the velocity was reduced.
+*   **Conservation of Angular Momentum:** As the planet falls closer to the star, it must spin faster to conserve momentum.
+*   **Potential vs. Kinetic Energy:** Potential energy is traded for kinetic energy as the planet "falls" into the gravity well.
+
+---
+
+### 📉 Formula Card: Orbital Velocity Requirement
+
+┌──────────────────────────────────────────────────────────┐
+│ **Main Formula: Circular Velocity**                      │
+│                                                          │
+│ $$v_c = \sqrt{\frac{GM}{r}}$$                            │
+│                                                          │
+│ **Variables:**                                           │
+│ $G$: Gravitational Constant                              │
+│ $M$: Mass of the Central Body                            │
+│ $r$: Current Orbital Radius                              │
+│                                                          │
+│ [ 🔬 **Open Formula Lab: Stability Analysis** ]          │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### ⚙️ Characteristics of Reduced Velocity
+
+| Property | Change Direction | Scientific Explanation |
+| :--- | :--- | :--- |
+| **Orbit Shape** | Circular $\rightarrow$ Elliptical | The path becomes an ellipse with the point of deceleration as the **Aphelion**. |
+| **Total Energy** | Decrease | Lower velocity means lower Kinetic Energy ($K$), reducing Total Mechanical Energy. |
+| **Orbital Period** | Decrease | According to Kepler’s 3rd Law, a smaller semi-major axis leads to a shorter year. |
+| **Velocity at Perihelion** | Increase | The planet accelerates as it falls inward, eventually exceeding its original speed. |
+
+---
+
+### 🚀 Formula Card: The Vis-Viva Equation
+
+┌──────────────────────────────────────────────────────────┐
+│ **Main Formula: Velocity at any Point**                  │
+│                                                          │
+│ $$v^2 = GM \left( \frac{2}{r} - \frac{1}{a} \right)$$    │
+│                                                          │
+│ **Context:**                                             │
+│ If $v < v_c$, then the semi-major axis $a$ must decrease  │
+│ to satisfy the energy balance of the new elliptical path.│
+│                                                          │
+│ [ 🛠️ **Simulator: Adjust Velocity Vector** ]             │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### ⚠️ Important Notes
+
+> [!IMPORTANT]
+> **The Paradox of Falling:** When you slow a planet down, it eventually ends up moving **faster** than it was before. This is because it drops into a deeper part of the gravity well where the gravitational potential energy is converted into high kinetic energy at the perihelion.
+
+---
+
+### 🏁 Summary
+1.  **Immediate Effect:** The planet begins to "fall" toward the star.
+2.  **Path Change:** The circular orbit collapses into an elliptical orbit.
+3.  **New Extremes:** The point where you slowed down becomes the **highest point** (Apoapsis) of the new orbit.
+4.  **Final Result:** If the velocity is reduced significantly (below the "impact" threshold), the ellipse will intersect the star's surface or atmosphere.
+
+---
+
+### ❓ Suggested Questions
+*   "How much velocity must be lost to cause atmospheric reentry?"
+*   "What happens if the velocity is reduced to zero instantaneously?"
+*   "How does Kepler's Second Law explain the speed increase at the lower point of the ellipse?"

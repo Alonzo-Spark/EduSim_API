@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 10,
+  "question": "Differentiate between scalar and vector quantities with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nPhysical quantities in classical mechanics are categorized into two structural classes based on their directional dependence properties.\n\nA scalar quantity is a physical property that is completely described by its magnitude (a numerical value with its matching measurement unit) without any directional tracking context.\n\nA vector quantity is a physical property that requires both a defined magnitude and a clear spatial direction descriptor to be fully specified.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Scalar Quantities | Vector Quantities |\n| --- | --- | --- |\n| **Components** | Possess magnitude descriptors exclusively. | Require both magnitude and direction vectors. |\n| **Mathematical Logic** | Combine via basic algebraic addition. | Require vector addition laws (triangle law). |\n| **Graphic Profile** | Represented simply by static numbers. | Represented graphically by directed straight arrows. |\n\n---\n\n## Real-world Examples\n\n* **Scalar Class:** Speed ($50 \\text{ km/h}$), mass ($10 \\text{ kg}$), temperature ($37^\\circ\\text{C}$), and time interval ($12 \\text{ s}$).\n* **Vector Class:** Velocity ($50 \\text{ km/h due North}$), weight ($98 \\text{ N downward}$), and force ($15 \\text{ N applied East}$).\n\n---\n\n## Summary\n\nScalars maintain total independence from spatial alignment changes, while vectors update their identity if either their magnitude scales or their orientation axes shift.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│ Introduction                           │\n│                                       │\n│ In physics and engineering, quantities   │\n│ are classified by how they are described │\n│ and how they behave in calculations.   │\n│ Two fundamental categories are          │\n│ **scalar** and **vector** quantities.   │\n│ Understanding the difference is        │\n│ essential for solving problems that     │\n│ involve magnitude alone or both magnitude│\n│ and direction.                         │\n└───────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────┐\n│ Definition                             │\n│                                       │\n│ **Scalar Quantity**: A physical quantity│\n│ described completely by a single number│\n│ (its magnitude) and a unit. No direction│\n│ information is needed.                  │\n│                                       │\n│ **Vector Quantity**: A physical quantity│\n│ that requires both a magnitude and a    │\n│ direction to be fully described. It is │\n│ often represented by an arrow.          │\n└───────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────┐\n│ Key Concepts                           │\n│                                       │\n│ • **Magnitude** – the size or amount of │\n│   the quantity (e.g., 5 kg, 20 m).      │\n│ • **Direction** – the orientation in   │\n│   space (e.g., north, upward, 30° from│\n│   the x‑axis).                         │\n│ • **Addition** – scalars add algebraically│\n│   (5 kg + 3 kg = 8 kg). Vectors add using│\n│   tip‑to‑tail or component‑wise methods.│\n│ • **Multiplication** – scalars multiply│\n│   like ordinary numbers. Vectors can   │\n│   be multiplied by scalars (scaling)   │\n│   or combined via dot and cross products│\n│   (different results).                 │\n└───────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────┐\n│ Scalar Examples                        │\n│                                       │\n│ • **Mass** – 12 kg (no direction)      │\n│ • **Temperature** – 25 °C              │\n│ • **Speed (magnitude of velocity)** – │\n│   60 km/h (direction ignored)          │\n│ • **Energy** – 500 J                   │\n│ • **Time** – 15 s                      │\n└───────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────┐\n│ Vector Examples                        │\n│                                       │\n│ • **Displacement** – 10 m east         │\n│ • **Velocity** – 30 m/s north‑west      │\n│ • **Force** – 15 N upward               │\n│ • **Acceleration** – 9.8 m/s² downward │\n│ • **Momentum** – 5 kg·m/s east          │\n└───────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────┐\n│ Summary                                 │\n│                                       │\n│ • Scalars have only magnitude; vectors   │\n│   have magnitude *and* direction.        │\n│ • Scalars are added/subtracted like       │\n│   ordinary numbers; vectors require       │\n│   component‑wise or tip‑to‑tail methods. │\n│ • Many physical quantities (mass, energy)│\n│   are scalars, while quantities involving │\n│   spatial orientation (force, velocity)  │\n│   are vectors.                           │\n└───────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────┐\n│ Suggested Questions                     │\n│                                       │\n│ 1. Is temperature a scalar or a vector?│\n│ 2. Represent the vector 5 N at 30°     │\n│    above the horizontal in component    │\n│    form.                               │\n│ 3. Convert a speed of 20 m/s to a      │\n│    velocity vector assuming motion due │\n│    north.                               │\n│ 4. Explain why work (force·displacement)│\n│    is a scalar despite involving vectors│\n│    internally.                         │\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of scalar and vector quantities, providing clear definitions, examples, and explanations. The use of tables and bullet points enhances readability. However, there are some minor formatting issues, such as the use of ASCII art boxes, which could be improved for better presentation. Additionally, some of the examples could be further elaborated upon for enhanced clarity. Overall, the response is well-structured, accurate, and effective in conveying the concepts to beginners.",
+  "candidate_token_usage": {
+    "promptTokens": 427,
+    "completionTokens": 1172,
+    "totalTokens": 1599
+  },
+  "candidate_latency_ms": 1461,
+  "candidate_cost_usd": 0.00076725,
+  "judge_token_usage": {
+    "promptTokens": 1663,
+    "completionTokens": 154,
+    "totalTokens": 1817
+  },
+  "judge_latency_ms": 2466,
+  "judge_cost_usd": 0.0013674,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:12:40.876Z"
+}

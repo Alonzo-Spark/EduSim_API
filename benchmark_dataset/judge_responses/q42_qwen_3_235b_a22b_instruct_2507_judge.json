@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 42,
+  "question": "Define electric field and electric potential.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectric field and electric potential describe how a distribution of electric charge influences the surrounding space.\n\nAn electric field is a vector field surrounding a charged particle, representing the electrostatic force experienced per unit positive charge placed at that point.\n\nAn electric potential is a scalar field representing the electrostatic potential energy per unit charge at a specific point relative to a reference location.\n\n---\n\n## Characteristics\n\n* **Vector vs. Scalar:** The electric field is a vector quantity that points in the direction a positive test charge would move. Electric potential is a scalar quantity measuring energy states.\n\n---\n\n## Formula\n\nThe mathematical definitions for electric field ($E$) and potential ($V$) are written as:\n\n$$E = \\frac{F}{q}$$\n\n$$V = \\frac{W}{q}$$\n\nWhere:\n* $E$ represents the electric field vector intensity\n* $V$ represents the electric potential scalar value\n* $F$ represents the electrostatic force vector\n* $W$ represents the work performed moving a charge from infinity\n* $q$ represents the magnitude of the test charge\n\n---\n\n## Summary\n\nThe electric field measures the electrostatic force vector per unit charge, whereas electric potential tracks the energy scalar state per unit charge.",
+  "candidate_response": "# Electric Field and Electric Potential\n\n---\n\n## Quick Definition\n\n**Electric Field**:  \nA region around a charged particle where a force would be exerted on other charged particles. It is a vector quantity.\n\n**Electric Potential**:  \nThe amount of work needed to move a unit positive charge from infinity to a specific point in an electric field without acceleration. It is a scalar quantity.\n\n---\n\n## Key Concepts\n\n### Electric Field\n\n- Denoted by **E**\n- Measured in **volts per meter (V/m)** or **newtons per coulomb (N/C)**\n- Acts in the direction a positive test charge would move\n- Created by electric charges or changing magnetic fields\n\n### Electric Potential\n\n- Denoted by **V**\n- Measured in **volts (V)** or **joules per coulomb (J/C)**\n- Describes the potential energy per unit charge at a point\n- Independent of direction\n\n---\n\n## Formula Card\n\n$$\n\\vec{E} = \\frac{\\vec{F}}{q}\n$$\n\n**Electric Field Definition Formula**\n\n$$\nV = \\frac{U}{q}\n$$\n\n**Electric Potential Definition Formula**\n\n$$\nV = \\frac{kQ}{r}\n$$\n\n**Electric Potential due to a Point Charge**\n\n$$\nE = \\frac{kQ}{r^2}\n$$\n\n**Electric Field due to a Point Charge**\n\n> **Note:** $ k = \\frac{1}{4\\pi\\varepsilon_0} $, $ Q $ = source charge, $ r $ = distance, $ q $ = test charge\n\n---\n\n## Characteristics Comparison\n\n| Feature | Electric Field | Electric Potential |\n|--------|----------------|--------------------|\n| **Nature** | Vector | Scalar |\n| **Units** | N/C or V/m | Volts (V) |\n| **Direction** | Yes (force on + charge) | No (only magnitude) |\n| **Zero Reference** | No absolute zero | Zero at infinity |\n| **Superposition** | Vector sum | Algebraic sum |\n\n---\n\n## Relationship Between E and V\n\nThe electric field is the negative gradient of electric potential:\n\n$$\n\\vec{E} = -\\nabla V\n$$\n\nIn one dimension:\n$$\nE = -\\frac{dV}{dr}\n$$\n\nThis means:\n- The electric field points in the direction of **decreasing potential**\n- A strong electric field exists where the potential changes rapidly with distance\n\n---\n\n## Important Notes\n\n- The electric field tells you **how strong** the force is and **which way** it acts.\n- The electric potential tells you **how much energy** a charge has at a point.\n- You can have a non-zero electric potential even when the electric field is zero (e.g., inside a charged spherical shell).\n- Conversely, electric field can be high while potential is low — depends on the reference point.\n\n---\n\n## Applications\n\n- **Capacitors**: Use electric fields to store energy\n- **Cathode Ray Tubes (CRTs)**: Use electric fields to steer electrons\n- **Electrostatic Precipitators**: Remove particles from air using electric fields\n- **Voltage Measurement**: Based on differences in electric potential\n\n---\n\n## Summary\n\n> The **electric field** describes the **force** experienced by a charge in space, while **electric potential** describes the **energy** associated with placing a charge at a point. They are fundamentally related — the electric field is the rate of change of potential with distance.\n\n---\n\n## Suggested Questions\n\n1. How does the electric field relate to the electric potential?\n2. Why is electric potential a scalar while electric field is a vector?\n3. Can the electric field be zero when electric potential is not zero? Give an example.\n4. Derive the electric field from the potential of a point charge.\n5. Sketch electric field lines and equipotential surfaces for a dipole.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational effectiveness. It provides clear definitions, formulas, and explanations of electric field and electric potential, aligning well with the gold reference answer. The layout is well-structured, and the use of headings, bullet points, and tables enhances readability. The response effectively addresses key concepts, characteristics, and applications, making it suitable for educational purposes. Minor suggestions for improvement include adding more visual aids, such as diagrams or graphs, to illustrate complex concepts and providing additional examples or practice problems to reinforce learning. Overall, the response is comprehensive, well-organized, and free of hallucinations, making it an excellent resource for learning about electric field and electric potential.",
+  "candidate_token_usage": {
+    "promptTokens": 353,
+    "completionTokens": 810,
+    "totalTokens": 1163
+  },
+  "candidate_latency_ms": 62057,
+  "candidate_cost_usd": 0.001973,
+  "judge_token_usage": {
+    "promptTokens": 1459,
+    "completionTokens": 204,
+    "totalTokens": 1663
+  },
+  "judge_latency_ms": 19357,
+  "judge_cost_usd": 0.001365,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:35:00.482Z"
+}

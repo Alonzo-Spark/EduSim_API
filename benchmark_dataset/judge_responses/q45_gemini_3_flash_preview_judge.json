@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 45,
+  "question": "What is electrostatic shielding?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectrostatic shielding is the physical phenomenon where a specific region of space is isolated from the influence of external electric fields. This shielding is achieved by enclosing the region within a hollow conducting shell, creating a Faraday cage.\n\n---\n\n## Operating Principle\n\n* **Zero Cavity Field:** When an external electric field is applied to a conductor, its free electrons redistribute along the outer surface to cancel out the field internally, ensuring the net electric field inside the cavity remains exactly zero.\n\n---\n\n## Formula\n\nThe mathematical field constraint inside a hollow conductor:\n\n$$E_{\\text{internal}} = 0$$\n\n---\n\n## Real-world Examples\n\n* **Car in a Lightning Storm:** A car acts as an electrostatic shield; if struck by lightning, the charge travels along the conductive outer metal body to the ground, leaving the passengers inside unharmed.\n* **Coaxial Electronics Cables:** Critical signal wires are wrapped in a braided metal mesh shield to protect data transfers from external electrical interference.\n\n---\n\n## Summary\n\nElectrostatic shielding uses a conducting shell to isolate an internal space from external electric fields, as charges redistribute along the outer surface to keep the internal field at zero.",
+  "candidate_response": "### Interactive Lesson: Electrostatic Shielding\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Quick Definition**                                             │\n│                                                                  │\n│ **Electrostatic Shielding** is the phenomenon of creating a      │\n│ cavity or region within a conductor where the electric field is  │\n│ zero, regardless of any external charges or fields.              │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Key Concepts**                                                 │\n│                                                                  │\n│ • **The Faraday Cage:** A hollow conductor acts as a barrier.    │\n│ • **Charge Distribution:** Excess charges reside only on the     │\n│   outer surface of a conductor.                                  │\n│ • **Interior Field:** Inside a closed conducting shell, the      │\n│   net electric field ($E$) is always null.                       │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Main Formula**                                                 │\n│                                                                  │\n│                  $$E_{inside} = 0$$                              │\n│                                                                  │\n│ **[ Explain Formula ]**                                          │\n│ According to Gauss's Law, if there is no enclosed charge inside  │\n│ a Gaussian surface drawn within the conductor's walls, the net   │\n│ flux and therefore the electric field must be zero.              │\n│                                                                  │\n│ **[ Open Formula Lab ]**                                         │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **How it Works**                                                 │\n│                                                                  │\n│ 1. When an external electric field is applied, electrons in the  │\n│    conductor shift.                                              │\n│ 2. They accumulate on one side, leaving the other side positive. │\n│ 3. This creates an **internal induced field** that perfectly     │\n│    cancels the external field inside the material.                │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Real-World Applications**                                      │\n│                                                                  │\n│ | Application          | Mechanism                               |\n│ |:---------------------|:----------------------------------------|\n│ | **Car in a Storm**   | A car acts as a shield; lightning stays |\n│ |                      | on the outer metal skin.                |\n│ | **Coaxial Cables**   | The outer copper braid shields the inner|\n│ |                      | signal wire from interference.          |\n│ | **Lab Equipment**    | Sensitive meters are housed in metal    |\n│ |                      | boxes to prevent false readings.        |\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Important Notes**                                              │\n│                                                                  │\n│ > **Note:** The shielding effect works even if the conductor is  │\n│ > not grounded. However, grounding ensures that the potential    │\n│ > of the shield remains at zero.                                 │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Suggested Questions**                                          │\n│                                                                  │\n│ 1. Why is it safer to stay inside a car during a thunderstorm?   │\n│ 2. Does a bird sitting on a high-voltage wire experience         │\n│    electrostatic shielding?                                      │\n│ 3. Can a plastic box provide electrostatic shielding? Why?       │\n└──────────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of electrostatic shielding, accurately covering key concepts such as the Faraday cage, charge distribution, and the interior field. The use of formulas, particularly Gauss's Law, is correct and well-explained. The response is well-structured, readable, and effectively teaches the concept, making it suitable for beginners. The inclusion of real-world applications and suggested questions enhances its educational value. Minor improvements could include more detailed explanations of certain concepts, such as the role of grounding in shielding, but overall, the response is comprehensive and accurate.",
+  "candidate_token_usage": {
+    "promptTokens": 375,
+    "completionTokens": 748,
+    "totalTokens": 1123
+  },
+  "candidate_latency_ms": 5430,
+  "candidate_cost_usd": 0.0024315,
+  "judge_token_usage": {
+    "promptTokens": 2822,
+    "completionTokens": 216,
+    "totalTokens": 3038
+  },
+  "judge_latency_ms": 10829,
+  "judge_cost_usd": 0.0022116,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:41:43.753Z"
+}

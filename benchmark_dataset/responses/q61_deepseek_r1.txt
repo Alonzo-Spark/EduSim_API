@@ -1,0 +1,711 @@
+# Spring-Mass System Simulation: Anchor to Mass
+
+I'll create an interactive simulation of a spring connecting an anchor to a mass. This visualization will help understand the physics of spring-mass systems with real-time interaction.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring-Mass System Simulation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(90deg, #00c9ff, #92fe9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .simulation-container {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(30, 30, 50, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .controls-container {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .panel {
+            background: rgba(30, 30, 50, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .panel-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #00c9ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .canvas-container {
+            background: rgba(0, 0, 20, 0.5);
+            border-radius: 10px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid rgba(100, 200, 255, 0.2);
+        }
+        
+        canvas {
+            display: block;
+        }
+        
+        .slider-control {
+            margin-bottom: 20px;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .slider-label span {
+            font-weight: bold;
+            color: #92fe9d;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(100, 200, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00c9ff;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 201, 255, 0.5);
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        button {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #00c9ff, #92fe9d);
+            color: #1a2a6c;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 201, 255, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .reset-btn {
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+        }
+        
+        .physics-card {
+            background: rgba(0, 20, 40, 0.6);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid #00c9ff;
+        }
+        
+        .formula {
+            text-align: center;
+            font-size: 1.4rem;
+            padding: 15px;
+            background: rgba(0, 30, 60, 0.7);
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            color: #92fe9d;
+            border: 1px solid rgba(100, 200, 255, 0.3);
+        }
+        
+        .variables {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .variable {
+            background: rgba(0, 40, 80, 0.5);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .variable span {
+            color: #00c9ff;
+            font-weight: bold;
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin-top: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-weight-hanging"></i> Spring-Mass System</h1>
+            <p class="subtitle">Interactive simulation of a spring connecting a fixed anchor to a movable mass. Adjust parameters to see how the system behaves according to Hooke's Law and harmonic motion principles.</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="simulation-container">
+                <h2 class="panel-title"><i class="fas fa-cogs"></i> Simulation</h2>
+                <div class="canvas-container">
+                    <canvas id="springCanvas" width="600" height="400"></canvas>
+                </div>
+                
+                <div class="physics-card">
+                    <h3><i class="fas fa-atom"></i> Physics Principles</h3>
+                    <p>This simulation demonstrates Hooke's Law: the force exerted by a spring is proportional to its displacement from equilibrium.</p>
+                    
+                    <div class="formula">
+                        F = -k · x
+                    </div>
+                    
+                    <div class="variables">
+                        <div class="variable"><span>F</span> = Restoring force (N)</div>
+                        <div class="variable"><span>k</span> = Spring constant (N/m)</div>
+                        <div class="variable"><span>x</span> = Displacement from equilibrium (m)</div>
+                        <div class="variable"><span>T</span> = 2π√(m/k) = Oscillation period (s)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls-container">
+                <div class="panel">
+                    <h2 class="panel-title"><i class="fas fa-sliders-h"></i> Controls</h2>
+                    
+                    <div class="slider-control">
+                        <div class="slider-label">
+                            <span>Spring Stiffness (k)</span>
+                            <span id="stiffness-value">50 N/m</span>
+                        </div>
+                        <input type="range" id="stiffness" min="10" max="200" value="50">
+                    </div>
+                    
+                    <div class="slider-control">
+                        <div class="slider-label">
+                            <span>Mass Weight (m)</span>
+                            <span id="mass-value">2.0 kg</span>
+                        </div>
+                        <input type="range" id="mass" min="0.5" max="10" step="0.1" value="2.0">
+                    </div>
+                    
+                    <div class="slider-control">
+                        <div class="slider-label">
+                            <span>Damping Factor</span>
+                            <span id="damping-value">0.2</span>
+                        </div>
+                        <input type="range" id="damping" min="0" max="0.5" step="0.01" value="0.2">
+                    </div>
+                    
+                    <div class="slider-control">
+                        <div class="slider-label">
+                            <span>Initial Displacement</span>
+                            <span id="displacement-value">1.5 m</span>
+                        </div>
+                        <input type="range" id="displacement" min="0.5" max="3" step="0.1" value="1.5">
+                    </div>
+                    
+                    <div class="buttons">
+                        <button id="start-btn"><i class="fas fa-play"></i> Start Oscillation</button>
+                        <button id="stop-btn"><i class="fas fa-stop"></i> Stop</button>
+                        <button id="reset-btn" class="reset-btn"><i class="fas fa-redo"></i> Reset System</button>
+                        <button id="gravity-btn"><i class="fas fa-globe"></i> Toggle Gravity</button>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <h2 class="panel-title"><i class="fas fa-chart-line"></i> Motion Analysis</h2>
+                    <div class="chart-container">
+                        <canvas id="motionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Spring-Mass System Simulation | Physics Interactive Lab | Created with HTML5 Canvas</p>
+        </footer>
+    </div>
+
+    <script>
+        // Get canvas context
+        const canvas = document.getElementById('springCanvas');
+        const ctx = canvas.getContext('2d');
+        const motionChartCtx = document.getElementById('motionChart').getContext('2d');
+        
+        // Simulation parameters
+        let params = {
+            stiffness: 50,       // Spring constant (N/m)
+            mass: 2.0,           // Mass (kg)
+            damping: 0.2,        // Damping factor
+            displacement: 1.5,   // Initial displacement (m)
+            gravity: true,       // Gravity enabled
+            isRunning: false,
+            time: 0
+        };
+        
+        // System state
+        let system = {
+            anchorX: 100,
+            anchorY: 200,
+            massX: 400,
+            massY: 200,
+            velocity: 0,
+            equilibriumX: 400,
+            acceleration: 0
+        };
+        
+        // Position history for chart
+        let positionHistory = [];
+        const maxHistory = 100;
+        
+        // Initialize motion chart
+        const motionChart = new Chart(motionChartCtx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Mass Position (m)',
+                    data: [],
+                    borderColor: '#00c9ff',
+                    backgroundColor: 'rgba(0, 201, 255, 0.1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time (s)',
+                            color: '#aaa'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#aaa'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Displacement (m)',
+                            color: '#aaa'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: '#aaa'
+                        },
+                        suggestedMin: -3,
+                        suggestedMax: 3
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ddd'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Update slider value displays
+        function updateSliderValues() {
+            document.getElementById('stiffness-value').textContent = params.stiffness + ' N/m';
+            document.getElementById('mass-value').textContent = params.mass.toFixed(1) + ' kg';
+            document.getElementById('damping-value').textContent = params.damping.toFixed(2);
+            document.getElementById('displacement-value').textContent = params.displacement.toFixed(1) + ' m';
+        }
+        
+        // Initialize system
+        function initSystem() {
+            system.equilibriumX = canvas.width - 150;
+            system.massX = system.equilibriumX + params.displacement * 50;
+            system.velocity = 0;
+            system.acceleration = 0;
+            params.time = 0;
+            positionHistory = [];
+            updateChart();
+            drawSystem();
+        }
+        
+        // Draw the spring-mass system
+        function drawSystem() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw anchor
+            ctx.fillStyle = '#888';
+            ctx.fillRect(system.anchorX - 15, system.anchorY - 40, 30, 40);
+            ctx.fillStyle = '#555';
+            ctx.beginPath();
+            ctx.arc(system.anchorX, system.anchorY, 15, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Draw spring
+            drawSpring(system.anchorX, system.anchorY, system.massX, system.massY);
+            
+            // Draw mass
+            const massWidth = 60 + params.mass * 5;
+            const massHeight = 60 + params.mass * 5;
+            
+            ctx.fillStyle = '#00c9ff';
+            ctx.fillRect(system.massX - massWidth/2, system.massY - massHeight/2, massWidth, massHeight);
+            
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(params.mass.toFixed(1) + ' kg', system.massX, system.massY + 5);
+            
+            // Draw equilibrium position
+            ctx.strokeStyle = 'rgba(146, 254, 157, 0.5)';
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(system.equilibriumX, system.massY - 100);
+            ctx.lineTo(system.equilibriumX, system.massY + 100);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Draw info
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText(`Displacement: ${((system.massX - system.equilibriumX)/50).toFixed(2)} m`, 20, 30);
+            ctx.fillText(`Velocity: ${system.velocity.toFixed(2)} m/s`, 20, 50);
+            ctx.fillText(`Acceleration: ${system.acceleration.toFixed(2)} m/s²`, 20, 70);
+            
+            // Draw legend
+            ctx.fillStyle = 'rgba(146, 254, 157, 0.7)';
+            ctx.fillText('Equilibrium Position', system.equilibriumX + 10, 30);
+        }
+        
+        // Draw spring as a coil
+        function drawSpring(x1, y1, x2, y2) {
+            const dx = x2 - x1;
+            const dy = y2 - y1;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const coils = 10;
+            const coilRadius = 8;
+            
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            
+            // Draw coils
+            for (let i = 0; i < coils; i++) {
+                const percent = (i + 0.5) / coils;
+                const coilX = x1 + dx * percent;
+                const coilY = y1 + dy * percent;
+                
+                // Alternate coil direction
+                const angle = Math.atan2(dy, dx) + Math.PI/2;
+                const offsetX = Math.cos(angle) * coilRadius * (i % 2 === 0 ? 1 : -1);
+                const offsetY = Math.sin(angle) * coilRadius * (i % 2 === 0 ? 1 : -1);
+                
+                ctx.lineTo(coilX + offsetX, coilY + offsetY);
+            }
+            
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = '#ff9d00';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+        
+        // Update the system physics
+        function updatePhysics(deltaTime) {
+            if (!params.isRunning) return;
+            
+            // Calculate spring force (Hooke's Law)
+            const displacement = system.massX - system.equilibriumX;
+            const springForce = -params.stiffness * displacement / 50;
+            
+            // Calculate damping force
+            const dampingForce = -params.damping * system.velocity * 10;
+            
+            // Calculate gravity force
+            const gravityForce = params.gravity ? 0.5 * params.mass : 0;
+            
+            // Total force
+            const totalForce = springForce + dampingForce + gravityForce;
+            
+            // Calculate acceleration (F = ma)
+            system.acceleration = totalForce / params.mass;
+            
+            // Update velocity and position
+            system.velocity += system.acceleration * deltaTime;
+            system.massX += system.velocity * deltaTime * 50;
+            
+            // Update time
+            params.time += deltaTime;
+            
+            // Record position for chart
+            positionHistory.push({
+                time: params.time,
+                position: (system.massX - system.equilibriumX) / 50
+            });
+            
+            // Keep only recent history
+            if (positionHistory.length > maxHistory) {
+                positionHistory.shift();
+            }
+            
+            // Update chart
+            updateChart();
+        }
+        
+        // Update the motion chart
+        function updateChart() {
+            const labels = [];
+            const data = [];
+            
+            for (const point of positionHistory) {
+                labels.push(point.time.toFixed(1));
+                data.push(point.position);
+            }
+            
+            motionChart.data.labels = labels;
+            motionChart.data.datasets[0].data = data;
+            motionChart.update();
+        }
+        
+        // Animation loop
+        function animate() {
+            updatePhysics(0.05);
+            drawSystem();
+            requestAnimationFrame(animate);
+        }
+        
+        // Event listeners for sliders
+        document.getElementById('stiffness').addEventListener('input', function() {
+            params.stiffness = parseInt(this.value);
+            updateSliderValues();
+        });
+        
+        document.getElementById('mass').addEventListener('input', function() {
+            params.mass = parseFloat(this.value);
+            updateSliderValues();
+        });
+        
+        document.getElementById('damping').addEventListener('input', function() {
+            params.damping = parseFloat(this.value);
+            updateSliderValues();
+        });
+        
+        document.getElementById('displacement').addEventListener('input', function() {
+            params.displacement = parseFloat(this.value);
+            if (!params.isRunning) {
+                initSystem();
+            }
+        });
+        
+        // Event listeners for buttons
+        document.getElementById('start-btn').addEventListener('click', function() {
+            params.isRunning = true;
+        });
+        
+        document.getElementById('stop-btn').addEventListener('click', function() {
+            params.isRunning = false;
+        });
+        
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            initSystem();
+        });
+        
+        document.getElementById('gravity-btn').addEventListener('click', function() {
+            params.gravity = !params.gravity;
+            this.innerHTML = params.gravity ? 
+                '<i class="fas fa-globe"></i> Gravity: ON' : 
+                '<i class="fas fa-globe"></i> Gravity: OFF';
+        });
+        
+        // Initialize
+        updateSliderValues();
+        initSystem();
+        animate();
+        
+        // Make mass draggable
+        let isDragging = false;
+        
+        canvas.addEventListener('mousedown', function(e) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            
+            const massWidth = 60 + params.mass * 5;
+            const massHeight = 60 + params.mass * 5;
+            
+            if (mouseX > system.massX - massWidth/2 && 
+                mouseX < system.massX + massWidth/2 &&
+                mouseY > system.massY - massHeight/2 && 
+                mouseY < system.massY + massHeight/2) {
+                isDragging = true;
+                params.isRunning = false;
+            }
+        });
+        
+        canvas.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                const rect = canvas.getBoundingClientRect();
+                system.massX = e.clientX - rect.left;
+                drawSystem();
+            }
+        });
+        
+        canvas.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+        
+        canvas.addEventListener('mouseleave', function() {
+            isDragging = false;
+        });
+    </script>
+</body>
+</html>
+```
+
+## Features of This Spring-Mass Simulation
+
+This interactive simulation includes:
+
+1. **Physics Visualization**:
+   - Spring connecting a fixed anchor to a movable mass
+   - Realistic spring animation with coil rendering
+   - Equilibrium position indicator
+
+2. **Interactive Controls**:
+   - Adjust spring stiffness (k) from 10-200 N/m
+   - Set mass from 0.5-10 kg
+   - Control damping factor to see overdamped/critically damped/underdamped systems
+   - Set initial displacement
+   - Toggle gravity on/off
+
+3. **Real-time Physics**:
+   - Implements Hooke's Law (F = -k·x)
+   - Simulates harmonic motion with damping
+   - Calculates acceleration based on net force
+
+4. **Data Visualization**:
+   - Real-time chart showing displacement over time
+   - Visual indicators for velocity and acceleration
+
+5. **Interactive Elements**:
+   - Drag the mass to any position
+   - Start/stop oscillation
+   - Reset system to initial conditions
+
+The simulation runs entirely in your browser using HTML5 Canvas and JavaScript. You can interact with the mass, adjust parameters, and observe how the system behaves according to the principles of physics.

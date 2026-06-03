@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 41,
+  "question": "Electrostatics: State Coulomb’s law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nCoulomb's Law states that the electrostatic force of attraction or repulsion between two stationary point charges is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance separating them.\n\n---\n\n## Characteristics\n\n* **Action-Reaction Interaction:** The forces exerted by the charges on each other are equal in magnitude and opposite in direction, acting along the straight line connecting them.\n* **Charge Dependency:** Like charges repel each other, whereas opposite charges experience a mutual attraction force.\n\n---\n\n## Formula\n\nThe mathematical equation for the electrostatic force:\n\n$$F = k_e \\frac{|q_1 q_2|}{r^2}$$\n\nIn a vacuum, the proportionality constant ($k_e$) is expressed as:\n\n$$k_e = \\frac{1}{4\\pi\\varepsilon_0} \\approx 8.988 \\times 10^9 \\text{ N}\\cdot\\text{m}^2/\\text{C}^2$$\n\nWhere:\n* $F$ represents the electrostatic force magnitude\n* $q_1, q_2$ represent the magnitudes of the point charges\n* $r$ represents the distance separating the two charges\n* $\\varepsilon_0$ represents the permittivity of free space ($8.854 \\times 10^{-12} \\text{ C}^2/\\text{N}\\cdot\\text{m}^2$)\n\n---\n\n## Summary\n\nCoulomb's Law describes the electrostatic force between charges, showing that it increases with charge magnitude but decreases according to an inverse-square relationship with distance.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Coulomb’s law describes the │  \n│ force between two charged  │  \n│ objects.                  │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│     $$F = k \\frac{|q_1 q_2|}{r^2}$$      │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n### Important Notes\n- **Variables**:\n  - \\( F \\): Magnitude of the electrostatic force between two charges.\n  - \\( k \\): Coulomb's constant (\\( 8.99 \\times 10^9 \\, \\text{N m}^2/\\text{C}^2 \\)).\n  - \\( q_1 \\) and \\( q_2 \\): Magnitudes of the charges.\n  - \\( r \\): Distance between the centers of the two charges.\n\n### Summary\nCoulomb's law quantifies the electrostatic force between two charged particles, showing that the force is directly proportional to the product of the charges and inversely proportional to the square of the distance between them.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately captures the essence of Coulomb's Law, including the formula and the relationship between force, charge, and distance. However, it lacks the detailed explanation and characteristics section present in the gold reference answer, such as the action-reaction interaction and charge dependency. The formatting is clear and readable, but the use of boxes and links ([ Explain Formula ] and [ Open Formula Lab ]) is not standard and may not be suitable for all platforms. To improve, the candidate should consider adding more explanatory text to help beginners understand the concepts and provide a more comprehensive overview of Coulomb's Law.",
+  "candidate_token_usage": {
+    "promptTokens": 365,
+    "completionTokens": 273,
+    "totalTokens": 638
+  },
+  "candidate_latency_ms": 3616,
+  "candidate_cost_usd": 0.00021855,
+  "judge_token_usage": {
+    "promptTokens": 1016,
+    "completionTokens": 180,
+    "totalTokens": 1196
+  },
+  "judge_latency_ms": 5632,
+  "judge_cost_usd": 0.0010416,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:32:56.922Z"
+}

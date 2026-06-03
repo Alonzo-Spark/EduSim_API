@@ -1,0 +1,116 @@
+## Projectile Motion: Maximum Height
+
+This section will guide you through the derivation of the expression for the maximum height attained by a projectile launched with an initial velocity at a certain angle.
+
+### Quick Definition
+
+A **projectile** is any object that is thrown into the air or dropped, and is then subject to only the force of gravity. **Projectile motion** is the motion of such an object.
+
+### Key Concepts
+
+Before we derive the expression, let's recall some fundamental concepts of projectile motion:
+
+*   **Initial Velocity ($\vec{v_0}$):** The velocity of the projectile at the moment it is launched. It can be resolved into horizontal and vertical components.
+*   **Angle of Projection ($\theta$):** The angle at which the projectile is launched with respect to the horizontal.
+*   **Acceleration due to Gravity ($g$):** The constant downward acceleration experienced by the projectile, approximately $9.8 \, \text{m/s}^2$. We will consider motion only in the vertical plane.
+*   **Velocity at Maximum Height:** At the maximum height of its trajectory, the vertical component of the projectile's velocity becomes instantaneously zero. The horizontal component of velocity remains constant throughout the flight (neglecting air resistance).
+
+### Derivation
+
+Let's consider a projectile launched with an initial velocity $v_0$ at an angle $\theta$ with the horizontal.
+
+#### Step 1: Resolve Initial Velocity
+
+The initial velocity $v_0$ can be resolved into its horizontal ($v_{0x}$) and vertical ($v_{0y}$) components:
+
+*   **Horizontal component:** $v_{0x} = v_0 \cos \theta$
+*   **Vertical component:** $v_{0y} = v_0 \sin \theta$
+
+#### Step 2: Apply Kinematic Equation for Vertical Motion
+
+We are interested in the vertical motion to find the maximum height. We can use the following kinematic equation:
+
+$$
+v_y^2 = v_{0y}^2 + 2ay
+$$
+
+Where:
+*   $v_y$ is the final vertical velocity.
+*   $v_{0y}$ is the initial vertical velocity.
+*   $a$ is the vertical acceleration.
+*   $y$ is the vertical displacement (maximum height, $H$).
+
+#### Step 3: Substitute Known Values at Maximum Height
+
+At the maximum height ($H$):
+*   The final vertical velocity $v_y = 0$.
+*   The initial vertical velocity $v_{0y} = v_0 \sin \theta$.
+*   The vertical acceleration $a = -g$ (negative because gravity acts downwards, opposing the initial upward motion).
+*   The vertical displacement $y = H$.
+
+Substituting these into the kinematic equation:
+
+$$
+0^2 = (v_0 \sin \theta)^2 + 2(-g)H
+$$
+
+#### Step 4: Solve for H
+
+Simplify the equation:
+
+$$
+0 = v_0^2 \sin^2 \theta - 2gH
+$$
+
+Rearrange to solve for $H$:
+
+$$
+2gH = v_0^2 \sin^2 \theta
+$$
+
+$$
+H = \frac{v_0^2 \sin^2 \theta}{2g}
+$$
+
+### Main Formula
+
+┌───────────────────────────┐
+│ Main Formula              │
+│                           │
+│ $$ H = \frac{v_0^2 \sin^2 \theta}{2g} $$ │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+### Explanation of Formula Variables
+
+| Variable | Description                                    | Units (SI) |
+| :------- | :--------------------------------------------- | :--------- |
+| $H$      | Maximum height attained by the projectile      | meters (m) |
+| $v_0$    | Initial velocity of the projectile             | meters/second (m/s) |
+| $\theta$ | Angle of projection with the horizontal        | radians or degrees |
+| $g$      | Acceleration due to gravity (approx. 9.8 m/s²) | meters/second² (m/s²) |
+
+### Important Notes
+
+*   This derivation assumes ideal projectile motion, meaning **air resistance is negligible**.
+*   The acceleration due to gravity ($g$) is considered constant throughout the motion.
+*   The maximum height occurs when the vertical component of velocity is momentarily zero.
+
+### Summary
+
+The maximum height ($H$) of a projectile launched with an initial velocity $v_0$ at an angle $\theta$ to the horizontal is given by the formula:
+
+$$
+H = \frac{v_0^2 \sin^2 \theta}{2g}
+$$
+
+This formula is derived by applying the kinematic equations of motion to the vertical component of the projectile's velocity, considering that the vertical velocity is zero at the peak of its trajectory.
+
+### Suggested Questions
+
+1.  How would the maximum height change if the initial velocity were doubled?
+2.  What launch angle would result in the maximum possible height for a given initial velocity?
+3.  How does air resistance affect the actual maximum height compared to the theoretical value?
+4.  Derive the expression for the time taken to reach the maximum height.

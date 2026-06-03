@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 24,
+  "question": "Calculate the gravitational force between two masses of 5 kg each placed 2 m apart.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Gravitational Field Problem\n\n### Problem\nCalculate the gravitational force between two identical masses of $5 \\text{ kg}$ each placed at a center-to-center distance of $2 \\text{ m}$ apart.\n\n### Given\n* First mass ($m_1$) = $5 \\text{ kg}$\n* Second mass ($m_2$) = $5 \\text{ kg}$\n* Distance apart ($r$) = $2 \\text{ m}$\n* Gravitational Constant ($G$) = $6.67 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$\n\n### Formula\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\n### Substitution\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{5 \\times 5}{2^2}$$\n\n### Calculation\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{25}{4}$$\n\n$$F = (6.67 \\times 10^{-11}) \\times 6.25$$\n\n$$F = 4.16875 \\times 10^{-10} \\text{ N}$$\n\n### Final Answer\n**Gravitational Force ($F$) = $4.17 \\times 10^{-10} \\text{ N}$**\n\n### Interpretation\nThis reflects an incredibly weak mutual attraction force, demonstrating why gravity is imperceptible between everyday objects and only becomes significant with planetary-scale masses.",
+  "candidate_response": "```json\n{\n  \"action\": \"render_ui\",\n  \"layout\": \"interactive_textbook\",\n  \"sections\": [\n    {\n      \"type\": \"Introduction\",\n      \"content\": \"To find the gravitational force between two objects, we apply **Newton's Law of Universal Gravitation**. This law states that every particle attracts every other particle in the universe with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers.\"\n    },\n    {\n      \"type\": \"Formula\",\n      \"data\": {\n        \"title\": \"Newton's Law of Gravitation\",\n        \"formula\": \"F = G \\\\frac{m_1 m_2}{r^2}\",\n        \"variables\": [\n          { \"symbol\": \"F\", \"description\": \"Gravitational Force (Newtons)\" },\n          { \"symbol\": \"G\", \"description\": \"Gravitational Constant (6.674 \\\\times 10^{-11} \\\\, Nm^2/kg^2)\" },\n          { \"symbol\": \"m_1, m_2\", \"description\": \"Masses of the objects (kg)\" },\n          { \"symbol\": \"r\", \"description\": \"Distance between centers (m)\" }\n        ],\n        \"context\": \"This formula calculates the mutual attraction between two point masses.\"\n      }\n    },\n    {\n      \"type\": \"Key Concepts\",\n      \"content\": \"### Given Parameters\\n| Parameter | Value |\\n| :--- | :--- |\\n| Mass 1 ($m_1$) | $5 \\\\, \\\\text{kg}$ |\\n| Mass 2 ($m_2$) | $5 \\\\, \\\\text{kg}$ |\\n| Distance ($r$) | $2 \\\\, \\\\text{m}$ |\\n| Constant ($G$) | $6.674 \\\\times 10^{-11} \\\\, \\\\text{Nm}^2/\\\\text{kg}^2$ |\"\n    },\n    {\n      \"type\": \"Step-by-Step Calculation\",\n      \"content\": \"1. **Identify the values**: $m_1 = 5$, $m_2 = 5$, $r = 2$.\\n2. **Square the distance**: $r^2 = 2^2 = 4$.\\n3. **Multiply the masses**: $m_1 \\\\times m_2 = 25$.\\n4. **Substitute into the formula**: \\n\\n$$F = (6.674 \\\\times 10^{-11}) \\\\times \\\\frac{25}{4}$$\"\n    },\n    {\n      \"type\": \"Formula\",\n      \"data\": {\n        \"title\": \"Final Result Calculation\",\n        \"formula\": \"F = 4.17125 \\\\times 10^{-10} \\\\, \\\\text{N}\",\n        \"variables\": [],\n        \"context\": \"The resulting force is extremely small because the masses are small compared to planetary scales.\"\n      }\n    },\n    {\n      \"type\": \"Important Notes\",\n      \"content\": \"- **Weak Force**: Notice the exponent is $10^{-10}$. Gravity is the weakest of the four fundamental forces.\\n- **Inverse Square Law**: If you doubled the distance to 4m, the force would decrease by a factor of 4 (becoming 1/4th of the original).\"\n    },\n    {\n      \"type\": \"Suggested Questions\",\n      \"questions\": [\n        \"How would the force change if one mass was doubled?\",\n        \"What happens to the force if the distance is halved?\",\n        \"Why don't we feel this force between everyday objects?\"\n      ]\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of Newton's Law of Universal Gravitation, accurately applying the formula and calculating the gravitational force between the two masses. The response is well-structured, readable, and effectively teaches the concept. Minor suggestions for improvement include using the exact value of the gravitational constant as in the gold reference answer and considering additional examples or applications to further illustrate the concept. Overall, the response is of high quality and effectively communicates the physics principle.",
+  "candidate_token_usage": {
+    "promptTokens": 388,
+    "completionTokens": 837,
+    "totalTokens": 1225
+  },
+  "candidate_latency_ms": 5156,
+  "candidate_cost_usd": 0.002705,
+  "judge_token_usage": {
+    "promptTokens": 1526,
+    "completionTokens": 152,
+    "totalTokens": 1678
+  },
+  "judge_latency_ms": 9435,
+  "judge_cost_usd": 0.0012804,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:46:10.861Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 27,
+  "question": "State Pascal’s law and mention its applications.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nPascal's Law states that any change in pressure applied to an enclosed, incompressible fluid at rest is transmitted undiminished to every portion of the fluid and to the walls of its containing vessel.\n\n---\n\n## Operating Principle\n\n* **Undiminished Transmission:** When pressure increases at one point in a hydraulic circuit, that exact same pressure change propagates instantly through the entire connected fluid volume.\n* **Force Amplification:** Applying a small force over a narrow piston creates a pressure that can generate a much larger output force when transmitted to a wider piston.\n\n---\n\n## Formula\n\nThe pressure equality expression within a hydraulic link:\n\n$$P_1 = P_2$$\n\n$$\\frac{F_1}{A_1} = \\frac{F_2}{A_2}$$\n\nWhere:\n* $F_1$ represents the input force applied to the small piston\n* $A_1$ represents the cross-sectional area of the small input piston\n* $F_2$ represents the output force generated at the large piston\n* $A_2$ represents the cross-sectional area of the large output piston\n\n---\n\n## Applications\n\n* **Hydraulic Braking Systems:** Transmitting foot pedal force evenly through fluid lines to clamp brake pads onto all wheels simultaneously.\n* **Hydraulic Lifts:** Allowing a small compressor to raise heavy industrial vehicles by pushing fluid into a wide cylinder lift.\n* **Hydraulic Presses:** Generating massive compressive forces for metal forming and material crushing operations.\n\n---\n\n## Summary\n\nPascal's Law reveals that pressure applied to an enclosed fluid transmits equally in all directions, providing a foundation for hydraulic force amplification systems.",
+  "candidate_response": "┌─────────────────────────────────────┐\n│ 📘 Definition                       │\n│                                     │\n│ **Pascal’s Law** (or Pascal’s principle) states that a   │\n│ pressure change applied to an incompressible, confined   │\n│ fluid is transmitted uniformly in all directions,      │\n│ without loss. In other words, any increase in pressure   │\n│ at any point in a closed fluid system is felt equally   │\n│ throughout the fluid.                                      │\n└─────────────────────────────────────┘\n\n\n\n┌─────────────────────────────────────┐\n│ 📐 Formula Card                      │\n│                                     │\n│            p = \\frac{F}{A}          │\n│                                     │\n│ [ Explain Formula ]   [ Open Lab ] │\n└─────────────────────────────────────┘\n\n\n\n┌─────────────────────────────────────┐\n│ 🚀 Applications                     │\n│                                     │\n│ • **Hydraulic Presses** – Used to amplify force  │\n│   in metal forming, car jacks, and industrial    │\n│   presses.                                         │\n│ • **Brake Systems** – Car and bicycle brakes      │\n│   employ hydraulic fluid to transmit pressure     │\n│   from the pedal to the brake pads.                │\n│ • **Hydraulic Lifts** – Elevators and          │\n│   platform lifts that raise heavy loads.          │\n│ • **Dental and Medical Syringes** – Small‑scale │\n│   fluid pressure devices for precise delivery.   │\n│ • **Water Supply Networks** – Pressure regulation│\n│   in municipal pipelines ensures uniform flow.    │\n│ • **Hydraulic Shock Absorbers** – Dampen motion │\n│   in vehicle suspensions.                         │\n└─────────────────────────────────────┘\n\n\n\n┌─────────────────────────────────────┐\n│ 📖 Summary                           │\n│                                     │\n│ Pascal’s law tells us that pressure changes   │\n│ in a confined fluid are transmitted equally in │\n│ all directions. This simple principle underlies│\n│ many everyday technologies that rely on       │\n│ hydraulic force multiplication.               │\n└─────────────────────────────────────┘\n\n\n\n┌─────────────────────────────────────┐\n│ ❓ Suggested Questions                │\n│                                     │\n│ 1. How does Pascal’s law enable a hydraulic │\n│    press to lift a load many times heavier   │\n│    than the input force?                     │\n│ 2. Why must the fluid be incompressible for    │\n│    the law to hold true?                      │\n│ 3. Compare the efficiency of hydraulic vs.    │\n│    pneumatic systems in terms of pressure     │\n│    transmission.                               │\n│ 4. Explain how a car brake system uses Pascal’s│\n│    principle to stop a moving vehicle.        │\n└─────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately covers Pascal's Law, including its definition, formula, and applications. The use of a structured format with clear headings and concise descriptions enhances readability. However, there are a few areas for improvement. Firstly, the formula section could be more detailed, including the relationship between pressure, force, and area (P = F/A) and how it applies to hydraulic systems. Additionally, while the applications section is comprehensive, it could benefit from more specific examples or explanations of how Pascal's Law is utilized in each application. The inclusion of suggested questions is a valuable educational tool, promoting further exploration and understanding of the concept. To improve the quality score, consider enhancing the visual presentation, such as using diagrams or illustrations to supplement the text, especially in explaining complex concepts like hydraulic presses or brake systems. Overall, the response effectively communicates the principles of Pascal's Law and its practical applications, making it a valuable educational resource.",
+  "candidate_token_usage": {
+    "promptTokens": 426,
+    "completionTokens": 990,
+    "totalTokens": 1416
+  },
+  "candidate_latency_ms": 1112,
+  "candidate_cost_usd": 0.0006579,
+  "judge_token_usage": {
+    "promptTokens": 1396,
+    "completionTokens": 245,
+    "totalTokens": 1641
+  },
+  "judge_latency_ms": 9735,
+  "judge_cost_usd": 0.0014256,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:51:49.037Z"
+}

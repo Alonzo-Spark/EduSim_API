@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 8,
+  "question": "A ball is projected at an angle of 45° with velocity 20 m/s. Find its range.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Projectile Tracking\n\n### Problem\nA ball is projected at an angle of $45^\\circ$ with a velocity of $20 \\text{ m/s}$. Find its horizontal range.\n\n### Given\n* Initial launch velocity ($u$) = $20 \\text{ m/s}$\n* Projection angle ($\\theta$) = $45^\\circ$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$R = \\frac{u^2 \\sin(2\\theta)}{g}$$\n\n### Substitution\n$$R = \\frac{(20)^2 \\times \\sin(2 \\times 45^\\circ)}{9.8}$$\n\n### Calculation\n$$R = \\frac{400 \\times \\sin(90^\\circ)}{9.8}$$\n\nSince $\\sin(90^\\circ) = 1$:\n$$R = \\frac{400 \\times 1}{9.8}$$\n\n$$R = 40.82 \\text{ m}$$\n\n### Final Answer\n**Horizontal Range ($R$) = $40.82 \\text{ m}$**\n\n### Interpretation\nThis means the ball travels a total horizontal ground shortcut distance of $40.82 \\text{ meters}$ away from its initial launch spot before striking the earth baseline.",
+  "candidate_response": "┌───────────────────────────┐  \n│   Projectile Motion       │  \n│       Introduction        │  \n└───────────────────────────┘  \n\nWhen a ball is launched into the air at an angle, it follows a curved path known as a **projectile motion**. The horizontal distance it travels before returning to the same vertical level is called the **range**.\n\nIn this case, the ball is projected at an angle of $ 45^\\circ $ with an initial velocity of $ 20 \\,\\text{m/s} $. We can calculate the range using a standard formula from kinematics, assuming no air resistance and constant gravitational acceleration.\n\n---\n\n┌───────────────────────────┐  \n│      Key Formula          │  \n│                           │  \n│   $ R = \\dfrac{u^2 \\sin(2\\theta)}{g} $   │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\nWhere:  \n- $ R $ = horizontal range (in meters)  \n- $ u $ = initial velocity = $ 20 \\,\\text{m/s} $  \n- $ \\theta $ = angle of projection = $ 45^\\circ $  \n- $ g $ = acceleration due to gravity ≈ $ 9.8 \\,\\text{m/s}^2 $  \n\n---\n\n┌───────────────────────────┐  \n│      Step-by-Step         │  \n│     Calculation            │  \n└───────────────────────────┘  \n\n1. Plug in the values:  \n$$\nR = \\frac{(20)^2 \\sin(2 \\times 45^\\circ)}{9.8}\n$$\n\n2. Simplify:  \n$$\nR = \\frac{400 \\cdot \\sin(90^\\circ)}{9.8}\n$$\n\n3. Since $ \\sin(90^\\circ) = 1 $:  \n$$\nR = \\frac{400 \\cdot 1}{9.8} = \\frac{400}{9.8}\n$$\n\n4. Final result:  \n$$\nR \\approx 40.82\\,\\text{m}\n$$\n\n---\n\n┌───────────────────────────┐  \n│       Final Answer        │  \n│                           │  \n│   $ \\boxed{40.82} \\,\\text{m} $   │  \n│                           │  \n│ The range of the ball is  │  \n│ approximately 40.82 meters.│  \n└───────────────────────────┘  \n\n---\n\n### ✅ Important Notes  \n- The maximum range for a given speed occurs at $ 45^\\circ $, which is why this angle was chosen.  \n- This result assumes ideal conditions: no air resistance, flat ground, and constant $ g $.  \n- The time of flight could also be calculated if needed, but wasn't required here.\n\n---\n\n### 📚 Suggested Questions  \n- What would the range be if the angle was $ 30^\\circ $?  \n- How does air resistance affect the range of a projectile?  \n- At what two angles will the range be the same for a given speed?  \n\nLet me know if you'd like to explore them interactively!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 10,
+    "quality": 10,
+    "educational": 10,
+    "overall_average": "10.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately solves the problem using the correct formula and provides a clear, step-by-step calculation. The response is well-structured, easy to follow, and includes important notes about assumptions and potential extensions. The use of formatting and visual elements enhances readability. Overall, the response demonstrates a strong understanding of projectile motion and effectively communicates the solution.",
+  "candidate_token_usage": {
+    "promptTokens": 370,
+    "completionTokens": 686,
+    "totalTokens": 1056
+  },
+  "candidate_latency_ms": 22350,
+  "candidate_cost_usd": 0.001742,
+  "judge_token_usage": {
+    "promptTokens": 1392,
+    "completionTokens": 129,
+    "totalTokens": 1521
+  },
+  "judge_latency_ms": 3802,
+  "judge_cost_usd": 0.0011447999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:07:44.551Z"
+}

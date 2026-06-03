@@ -1,0 +1,137 @@
+┌───────────────────────────┐  
+│ **Derivation of** $ s = ut + \frac{1}{2}at^2 $ │  
+└───────────────────────────┘  
+
+This equation describes the **displacement** ($ s $) of an object undergoing **uniform acceleration**. Let's derive it step by step using a velocity-time graph approach.
+
+---
+
+### ▪️ **Introduction**
+
+When an object moves with constant acceleration, its velocity changes uniformly with time. We can use the area under a **velocity-time graph** to find the displacement.
+
+This derivation is based on **kinematics** and graphical analysis.
+
+---
+
+### ▪️ **Key Concepts**
+
+- $ s $: displacement  
+- $ u $: initial velocity  
+- $ v $: final velocity  
+- $ a $: acceleration  
+- $ t $: time  
+
+We assume **constant (uniform) acceleration**.
+
+---
+
+### ▪️ **Graphical Setup**
+
+Consider a **velocity-time graph** for an object starting with initial velocity $ u $ and accelerating uniformly to final velocity $ v $ in time $ t $.
+
+The graph is a **straight line** with positive slope.
+
+```
+Velocity (v)
+│     /--------
+│    /
+│   / 
+│  / 
+│ / 
+│/________________> Time (t)
+O     t
+```
+
+The **area under this graph** gives the **displacement** $ s $.
+
+---
+
+### ▪️ **Break the Area**
+
+The area under the graph forms a **trapezoid**, which can be split into:
+1. A **rectangle** (representing motion at constant initial velocity)
+2. A **triangle** (representing the increase in velocity due to acceleration)
+
+- Rectangle: height = $ u $, width = $ t $ → Area = $ u \cdot t $
+- Triangle: base = $ t $, height = $ v - u $
+
+From acceleration definition:
+$$
+a = \frac{v - u}{t} \quad \Rightarrow \quad v - u = at
+$$
+
+So, height of triangle = $ at $
+
+Area of triangle:
+$$
+\frac{1}{2} \times \text{base} \times \text{height} = \frac{1}{2} \times t \times at = \frac{1}{2}at^2
+$$
+
+---
+
+### ▪️ **Add the Areas**
+
+Total displacement = area of rectangle + area of triangle
+
+$$
+s = ut + \frac{1}{2}at^2
+$$
+
+---
+
+### ┌───────────────────────────┐  
+│ **Main Formula**              │  
+│                               │  
+│ $$                            │  
+│ s = ut + \frac{1}{2}at^2      │  
+│ $$                            │  
+│                               │  
+│ [ Explain Formula ]           │  
+│ [ Open Formula Lab ]          │  
+└───────────────────────────┘  
+
+---
+
+### ▪️ **Explain Formula**
+
+- $ ut $: displacement due to initial velocity over time $ t $  
+- $ \frac{1}{2}at^2 $: additional displacement due to acceleration  
+- The $ \frac{1}{2} $ appears because velocity increases **linearly**, so average velocity during acceleration is $ \frac{u + v}{2} $
+
+---
+
+### ▪️ **Important Notes**
+
+- This equation is valid **only for constant acceleration**
+- If $ u = 0 $, the equation simplifies to $ s = \frac{1}{2}at^2 $
+- Applies to motion in a straight line (1D)
+
+---
+
+### ▪️ **Applications**
+
+- Free-fall under gravity (e.g., dropping a ball)
+- Car accelerating uniformly from initial speed
+- Projectile motion (horizontal or vertical components)
+
+---
+
+### ▪️ **Summary**
+
+We derived $ s = ut + \frac{1}{2}at^2 $ using the **area under a velocity-time graph**, combining:
+- Uniform motion ($ ut $)
+- Accelerated motion ($ \frac{1}{2}at^2 $)
+
+This is the **second equation of motion**.
+
+---
+
+### ▪️ **Suggested Questions**
+
+1. How does this equation change if acceleration is zero?  
+2. Can this formula be used for deceleration? How?  
+3. Derive the same equation using calculus.  
+4. A car starts at 5 m/s and accelerates at 2 m/s² for 10 seconds. Find its displacement.  
+
+Let me know if you'd like to explore any of these!

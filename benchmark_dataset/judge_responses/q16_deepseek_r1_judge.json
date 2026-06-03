@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 16,
+  "question": "Work, Energy and Power: Define work and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWork is defined as the measure of energy transfer that occurs when an external force acts on an object and causes it to move through a displacement distance. \n\nWork is a scalar quantity calculated as the dot product of the applied force vector and the displacement vector.\n\n---\n\n## Characteristics\n\n* **Directional Orientation Dependency:** Work value can scale as positive, negative, or zero depending on the angle between the force and displacement vectors.\n* **Zero Work Scenarios:** No work is performed if the object remains stationary ($\\Delta x = 0$) or if the applied force vector acts at a right angle ($90^\\circ$) relative to the motion.\n\n---\n\n## Formula\n\nThe mathematical dot product defining mechanical work:\n\n$$W = Fs \\cos(\\theta)$$\n\nWhere:\n* $W$ represents the work scalar value\n* $F$ represents the magnitude of the applied force vector\n* $s$ represents the magnitude of the displacement vector\n* $\\theta$ represents the angle between the force and displacement paths\n\n---\n\n## Metric System Units\n\nThe standard SI unit of work is the **Joule ($\\text{J}$)**, which is defined as the work performed when a constant force of $1 \\text{ Newton}$ displaces an object through a distance of $1 \\text{ meter}$ along its line of action.\n\n$$1 \\text{ J} = 1 \\text{ N} \\cdot \\text{m} = 1 \\text{ kg} \\cdot \\text{m}^2/\\text{s}^2$$\n\n---\n\n## Summary\n\nWork measures mechanical energy conversion, directly proportional to force intensity and displacement length, with a dependency on their mutual vector alignment angle.",
+  "candidate_response": "### Work: Definition and SI Unit  \n\n#### 📘 Quick Definition  \n**Work** is defined as the process of energy transfer that occurs when a force acts upon an object, causing it to move in the direction of the force.  \n\n---\n\n#### 🔢 Formula for Work  \nThe mathematical expression for work is:  \n\n$$  \n\\boxed{W = F \\cdot d \\cdot \\cos\\theta}  \n$$  \n\n**Where**:  \n- \\(W\\) = Work done (in joules, J)  \n- \\(F\\) = Magnitude of the force applied (in newtons, N)  \n- \\(d\\) = Displacement of the object (in meters, m)  \n- \\(\\theta\\) = Angle between the force vector and displacement vector  \n\n**Key Insight**:  \n- Work is **only done** when:  \n  - A force is applied, **and**  \n  - The object moves in the direction (or partial direction) of the force.  \n- If \\(\\theta = 90^\\circ\\) (force perpendicular to displacement), \\(W = 0\\) (e.g., carrying a box horizontally).  \n\n---\n\n#### ⚖️ SI Unit of Work  \n- The **SI unit** of work is the **joule (J)**.  \n- **Definition**:  \n  \\[\n  1 \\, \\text{joule} = 1 \\, \\text{newton} \\times 1 \\, \\text{meter} \\quad \\text{or} \\quad 1 \\, \\text{J} = 1 \\, \\text{N} \\cdot \\text{m}\n  \\]  \n  *Example*: Lifting a 1 N apple upward by 1 m requires 1 J of work.  \n\n---\n\n#### 🎯 Key Characteristics  \n1. **Scalar Quantity**: Work has magnitude but no direction.  \n2. **Positive/Negative Work**:  \n   - \\(W > 0\\) if \\(\\theta < 90^\\circ\\) (force aids motion).  \n   - \\(W < 0\\) if \\(\\theta > 90^\\circ\\) (force opposes motion, e.g., friction).  \n3. **Zero Work Cases**:  \n   - Force applied but no displacement (\\(d = 0\\)).  \n   - Force perpendicular to displacement (\\(\\cos 90^\\circ = 0\\)).  \n\n---\n\n#### 💡 Practical Insight  \n> \"Work bridges force and energy: it quantifies how much energy is transferred *to* or *from* an object via mechanical means.\"  \n\n---\n\n### Suggested Thought Exercises ❓  \n1. If you push a wall with 50 N of force but it doesn’t move, how much work is done?  \n2. Why does gravity do *positive work* when an apple falls but *negative work* when you throw it upward?  \n3. Calculate the work done when pulling a suitcase at a \\(30^\\circ\\) angle with a force of 40 N over 10 m.  \n\nLet me know if you’d like to explore any of these!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of work, its definition, formula, and SI unit. The layout is well-structured, and the use of emojis and headings enhances readability. The response effectively conveys key characteristics of work, such as its scalar nature and the conditions under which work is done. The suggested thought exercises are also helpful for reinforcing understanding. However, to reach perfection, the candidate could further elaborate on the implications of work in various physical contexts or provide more detailed examples to illustrate the concept's practical applications.",
+  "candidate_token_usage": {
+    "promptTokens": 365,
+    "completionTokens": 960,
+    "totalTokens": 1325
+  },
+  "candidate_latency_ms": 42908,
+  "candidate_cost_usd": 0.00230315,
+  "judge_token_usage": {
+    "promptTokens": 1390,
+    "completionTokens": 167,
+    "totalTokens": 1557
+  },
+  "judge_latency_ms": 8197,
+  "judge_cost_usd": 0.0012347999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:25:27.280Z"
+}

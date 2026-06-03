@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 31,
+  "question": "Thermal Properties of Matter: Define heat capacity and specific heat capacity.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nHeat capacity and specific heat capacity describe how a material changes temperature when it absorbs or releases thermal energy.\n\nHeat capacity is the total amount of heat energy required to raise the temperature of an entire object by exactly $1 \\text{ Degree Celsius}$ or Kelvin.\n\nSpecific heat capacity is the amount of heat energy required to raise the temperature of exactly $1 \\text{ kilogram}$ of a pure substance by $1 \\text{ Degree Celsius}$ or Kelvin.\n\n---\n\n## Characteristics\n\n* **Extensive vs. Intensive:** Heat capacity is an extensive property that scales with the size and mass of an object. Specific heat capacity is an intensive property inherent to the material itself, regardless of mass.\n\n---\n\n## Formula\n\nThe equations for thermal tracking are defined as:\n\n$$\\text{Heat Capacity } (C) = \\frac{Q}{\\Delta T}$$\n\n$$\\text{Specific Heat Capacity } (c) = \\frac{Q}{m \\Delta T}$$\n\nWhere:\n* $Q$ represents the total heat energy transferred\n* $\\Delta T$ represents the resulting change in temperature\n* $m$ represents the mass of the substance sample\n\n---\n\n## Summary\n\nHeat capacity measures the thermal response of an entire object, whereas specific heat capacity standardizes this property per unit mass, providing an intensive material constant.",
+  "candidate_response": "### Thermal Properties of Matter: Heat Capacity and Specific Heat Capacity\n\n#### 🔥 Quick Definition  \n**Heat Capacity (C)** is the amount of thermal energy required to raise the temperature of an entire object by 1°C (or 1 K).  \n**Specific Heat Capacity (c)** is the thermal energy needed to raise the temperature of 1 kg of a substance by 1°C (or 1 K).  \n\n---\n\n#### 🧠 Key Concepts  \n1. **Heat Capacity (C)**  \n   - **Property of an object** (depends on mass and material).  \n   - **Formula**:  \n     $$\n     C = \\frac{Q}{\\Delta T}\n     $$\n     - \\(C\\): Heat capacity (J/°C or J/K)  \n     - \\(Q\\): Thermal energy absorbed/released (Joules)  \n     - \\(\\Delta T\\): Temperature change (°C or K).  \n\n2. **Specific Heat Capacity (c)**  \n   - **Property of a material** (intensive, mass-independent).  \n   - **Formula**:  \n     $$\n     c = \\frac{Q}{m \\Delta T} = \\frac{C}{m}\n     $$\n     - \\(c\\): Specific heat capacity (J/kg·K)  \n     - \\(m\\): Mass of the substance (kg).  \n\n---\n\n#### ⚖️ Formula Breakdown  \n\n| **Formula**               | **Variables**                      | **Units**        | **Significance**                  |\n|---------------------------|-----------------------------------|------------------|----------------------------------|\n| \\( C = \\frac{Q}{\\Delta T} \\) | \\(C\\): Heat capacity             | J/K or J/°C      | Total energy \"stored\" per object |\n| \\( c = \\frac{Q}{m \\Delta T} \\) | \\(c\\): Specific heat capacity    | J/kg·K           | Energy \"stored\" per unit mass    |\n\n---\n\n#### 🌡️ Characteristics  \n- **High specific heat capacity** → Substance heats/cools slowly (e.g., water, \\(c = 4186  \\text{J/kg·K}\\)).  \n- **Low specific heat capacity** → Substance heats/cools quickly (e.g., copper, \\(c = 385  \\text{J/kg·K}\\)).  \n- **Units**: Specific heat capacity always includes mass (e.g., J/kg·K). Heat capacity does not.  \n\n---\n\n#### 📊 Specific Heat Capacities of Common Materials  \n\n| Substance      | Specific Heat Capacity (J/kg·K) |  \n|----------------|----------------------------------|  \n| Water          | 4186                             |  \n| Ice            | 2100                             |  \n| Aluminum       | 900                              |  \n| Iron           | 450                              |  \n| Copper         | 385                              |  \n| Gold           | 129                              |  \n\n> 💡 **Why water is special**: High \\(c\\) stabilizes climate, buffers temperature changes in living organisms.  \n\n---\n\n#### 🚀 Applications  \n1. **Cooling Systems**: Water used in radiators (high \\(c\\) absorbs heat without rapid ΔT).  \n2. **Cooking**: Oil (low \\(c\\)) heats faster than water.  \n3. **Thermal Storage**: Materials with high \\(c\\) store solar energy efficiently.  \n\n---\n\n#### ⚠️ Common Misconceptions  \n- ❌ \"Heat capacity and specific heat capacity are interchangeable.\"  \n  ✅ *Heat capacity depends on object mass; specific heat capacity is per unit mass.*  \n- ❌ \"Substances with high \\(c\\) get hotter faster.\"  \n  ✅ *High \\(c\\) means **slower** temperature change for the same energy input.*  \n\n---\n\n#### 💎 Summary  \n| **Term**                | **Symbol** | **Definition**                                  |  \n|--------------------------|------------|------------------------------------------------|  \n| Heat Capacity            | \\(C\\)      | Energy to raise object’s temperature by 1 K.   |  \n| Specific Heat Capacity   | \\(c\\)      | Energy to raise 1 kg of substance by 1 K.      |  \n\n---\n\n#### ❓ Suggested Questions  \n1. *Why does a metal spoon feel hotter than a wooden spoon at the same temperature?*  \n   → Metal has lower \\(c\\), transferring heat faster to your skin.  \n2. *Calculate the energy needed to heat 2 kg of water from 20°C to 100°C.*  \n   → \\(Q = m c \\Delta T = 2 \\times 4186 \\times 80 = 669,760  \\text{J}\\).  \n3. *If Object A has twice the mass of Object B but the same \\(c\\), how do their heat capacities compare?*  \n   → \\(C_A = 2C_B\\) (since \\(C = m c\\)).  \n\n---\n\n**💡 Real-World Insight**: Water’s high \\(c\\) is why coastal areas have milder climates than inland deserts!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of heat capacity and specific heat capacity, aligning well with the gold reference answer. The definitions, formulas, and characteristics are accurately presented. The use of tables, examples, and real-world applications enhances the educational value. However, minor improvements could be made in formatting consistency and the addition of more visual aids to further clarify complex concepts. Overall, the response is well-structured, clear, and effective in teaching the subject matter.",
+  "candidate_token_usage": {
+    "promptTokens": 365,
+    "completionTokens": 1187,
+    "totalTokens": 1552
+  },
+  "candidate_latency_ms": 48381,
+  "candidate_cost_usd": 0.00280028,
+  "judge_token_usage": {
+    "promptTokens": 1750,
+    "completionTokens": 153,
+    "totalTokens": 1903
+  },
+  "judge_latency_ms": 3034,
+  "judge_cost_usd": 0.0014172,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:02:42.276Z"
+}

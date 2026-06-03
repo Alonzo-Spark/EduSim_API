@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 45,
+  "question": "What is electrostatic shielding?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectrostatic shielding is the physical phenomenon where a specific region of space is isolated from the influence of external electric fields. This shielding is achieved by enclosing the region within a hollow conducting shell, creating a Faraday cage.\n\n---\n\n## Operating Principle\n\n* **Zero Cavity Field:** When an external electric field is applied to a conductor, its free electrons redistribute along the outer surface to cancel out the field internally, ensuring the net electric field inside the cavity remains exactly zero.\n\n---\n\n## Formula\n\nThe mathematical field constraint inside a hollow conductor:\n\n$$E_{\\text{internal}} = 0$$\n\n---\n\n## Real-world Examples\n\n* **Car in a Lightning Storm:** A car acts as an electrostatic shield; if struck by lightning, the charge travels along the conductive outer metal body to the ground, leaving the passengers inside unharmed.\n* **Coaxial Electronics Cables:** Critical signal wires are wrapped in a braided metal mesh shield to protect data transfers from external electrical interference.\n\n---\n\n## Summary\n\nElectrostatic shielding uses a conducting shell to isolate an internal space from external electric fields, as charges redistribute along the outer surface to keep the internal field at zero.",
+  "candidate_response": "Electrostatic shielding (also called **Faraday shielding**) is a phenomenon where a conductive enclosure blocks external electric fields from reaching its interior. Here's a structured breakdown:\n\n---\n\n### 🛡️ Quick Definition  \nA conductive barrier (e.g., metal cage) that isolates its interior from external electric fields. Used to protect sensitive equipment or create field-free regions.\n\n---\n\n### ⚙️ **How It Works**  \n1. **Conductor Response**:  \n   When an external electric field is applied to a conductor, free electrons move instantly to the surface.  \n2. **Induced Charges**:  \n   Electrons redistribute to create an **internal counter-field** that exactly cancels the external field.  \n3. **Net Zero Field**:  \n   The induced surface charges generate an electric field inside the conductor that is equal and opposite to the external field, resulting in:  \n\n   **Formula**:  \n   $$\n   \\vec{E}_{\\text{inside}} = 0\n   $$  \n   *(Electric field inside an ideal conductor is zero)*  \n\n   | Property               | Outside Conductor               | Inside Conductor              |\n   |------------------------|----------------------------------|-------------------------------|\n   | Electric Field (\\(\\vec{E}\\)) | Non-zero                        | Zero                          |\n   | Charges                | On the surface only             | None                          |\n   | Potential              | Varies                          | Constant (**Equipotential**)  |\n\n---\n\n### 🔑 **Key Principles**  \n- **Continuous Shielding**: Works for both static (DC) and low-frequency AC fields.  \n- **Hole Limitations**: Small openings (e.g., mesh) still shield effectively if holes are ≪ wavelength of the field.  \n- **Grounding**: Not required for electrostatic shielding (unlike electromagnetic shielding).  \n\n---\n\n### 🧪 **Applications**  \n- **Faraday Cages**: Enclosures for MRI machines, microwave ovens, and electronic labs.  \n- **Sensitive Electronics**: Shielding for amplifiers, sensors, and microchips.  \n- **High-Voltage Safety**: Protective suits for electricians working on live wires.  \n- **Aerospace**: Shielding spacecraft from cosmic electric fields.  \n\n---\n\n### ⚠️ **Important Notes**  \n- **Not for Magnetic Fields**: Electrostatic shielding blocks **electric fields only** (magnetic fields require ferromagnetic materials).  \n- **Material Matters**: Works best with high-conductivity metals (copper, aluminum).  \n- **Real-World Imperfections**: Non-ideal conductors may allow weak fields due to finite conductivity or gaps.  \n\n---\n\n### ❓ **Suggested Questions**  \n1. Why does the electric field inside a conductor vanish?  \n2. How does electrostatic shielding differ from electromagnetic shielding?  \n3. Can electrostatic shielding block lightning?  \n4. Why are cars safe during thunderstorms?  \n\nLet me know which aspect you'd like to explore deeper!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of electrostatic shielding, accurately explaining the concept, its operating principle, and providing relevant examples. The use of formulas, such as the electric field inside an ideal conductor being zero, is correct and well-presented. The response is well-structured, making it easy to follow and understand. The inclusion of key principles, applications, and important notes adds depth to the explanation. However, to further improve, the candidate could consider adding more visual aids, such as diagrams of Faraday cages or examples of electrostatic shielding in real-world scenarios, to enhance the educational value and clarity of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 356,
+    "completionTokens": 876,
+    "totalTokens": 1232
+  },
+  "candidate_latency_ms": 39527,
+  "candidate_cost_usd": 0.00211424,
+  "judge_token_usage": {
+    "promptTokens": 1268,
+    "completionTokens": 186,
+    "totalTokens": 1454
+  },
+  "judge_latency_ms": 1599,
+  "judge_cost_usd": 0.0012071999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:41:43.759Z"
+}

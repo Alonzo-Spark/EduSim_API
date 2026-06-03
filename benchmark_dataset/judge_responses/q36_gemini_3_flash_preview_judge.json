@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 36,
+  "question": "Oscillations and Waves: Define simple harmonic motion (SHM).",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nSimple Harmonic Motion (SHM) is a special type of periodic oscillatory motion in which the restoring force acting on a moving object is directly proportional to the magnitude of its displacement from its equilibrium position and acts in the opposite direction to that displacement.\n\n---\n\n## Characteristics\n\n* **Proportional Restoring Force:** The farther the object is displaced from equilibrium, the stronger the inward pulling force becomes.\n* **Sinusoidal Position Tracking:** The position-time profile forms a smooth, continuous sine or cosine wave over time.\n\n---\n\n## Formula\n\nThe defining dynamic equation for Simple Harmonic Motion:\n\n$$F = -kx$$\n\nThe resulting differential equation of motion is stated as:\n\n$$\\frac{d^2x}{dt^2} + \\omega^2 x = 0$$\n\nWhere:\n* $F$ represents the restoring force vector\n* $k$ represents the positive spring or stiffness constant\n* $x$ represents the displacement vector from equilibrium\n* $\\omega$ represents the angular frequency ($\\sqrt{k/m}$)\n\n---\n\n## Summary\n\nSimple Harmonic Motion is an ideal oscillation driven by a restoring force proportional to displacement, creating a continuous, stable sinusoidal motion cycle.",
+  "candidate_response": ":::section{title=\"Introduction\"}\nOscillations and waves form the basis of many physical phenomena, from the ticking of a grandfather clock to the transmission of radio signals. At the heart of these periodic movements lies **Simple Harmonic Motion (SHM)**, a specific type of periodic motion where the restoring force is directly proportional to the displacement.\n:::\n\n:::section{title=\"Quick Definition\"}\n**Simple Harmonic Motion (SHM)** is defined as a periodic motion in which the acceleration of the object is directly proportional to its displacement from a fixed equilibrium position and is always directed toward that position.\n:::\n\n:::section{title=\"Key Concepts\"}\n*   **Equilibrium Position:** The central point where no net force acts on the object ($x = 0$).\n*   **Restoring Force:** A force that always acts to push or pull the object back toward the equilibrium position.\n*   **Displacement ($x$):** The distance and direction of the object from its equilibrium position.\n*   **Amplitude ($A$):** The maximum displacement from the equilibrium position.\n:::\n\n:::formula-card{title=\"The Governing Law (Hooke's Law Form)\"}\n$$\nF = -kx\n$$\n**Where:**\n*   $F$ is the Restoring Force (N)\n*   $k$ is the Force Constant (N/m)\n*   $x$ is the Displacement (m)\n*   The **negative sign** indicates the force is always opposite to the direction of displacement.\n\n[ Explore Formula Lab ]\n:::\n\n:::section{title=\"Characteristics of SHM\"}\nTo qualify as Simple Harmonic Motion, the system must exhibit these three specific traits:\n1.  **Periodic Nature:** The motion repeats itself in equal intervals of time (Period, $T$).\n2.  **Proportionality:** The magnitude of acceleration/force is proportional to the distance from the center.\n3.  **Directionality:** The acceleration is always directed toward the equilibrium point (opposite to displacement).\n:::\n\n:::formula-card{title=\"The Equation of Acceleration\"}\n$$\na = -\\omega^2 x\n$$\n**Where:**\n*   $a$ is Acceleration ($m/s^2$)\n*   $\\omega$ is Angular Frequency ($rad/s$)\n*   $x$ is Displacement ($m$)\n\n[ Open Formula Lab ]\n:::\n\n:::section{title=\"Comparison: SHM vs. Periodic Motion\"}\n| Feature | Periodic Motion | Simple Harmonic Motion (SHM) |\n| :--- | :--- | :--- |\n| **Repetition** | Repeats at fixed intervals | Repeats at fixed intervals |\n| **Path** | Can be any closed path (e.g., Earth's orbit) | Must be back-and-forth (oscillatory) |\n| **Force Requirement** | Net force varies | Force must be proportional to $-x$ |\n| **Example** | Uniform Circular Motion | A vibrating tuning fork |\n:::\n\n:::section{title=\"Important Notes\"}\n> [!IMPORTANT]\n> Not all oscillations are SHM. For example, a bouncing ball is periodic, but because the force (gravity) is constant and doesn't change with displacement, it is **not** performing Simple Harmonic Motion.\n:::\n\n:::section{title=\"Suggested Questions\"}\n1.  **Conceptual:** Why is the acceleration in SHM maximum at the amplitude and zero at the equilibrium position?\n2.  **Mathematical:** If the displacement of a particle is given by $x = A \\sin(\\omega t)$, derive the expression for its velocity.\n3.  **Application:** Describe how a simple pendulum approximates SHM only at small angles.\n:::",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines Simple Harmonic Motion (SHM) and provides a clear explanation of its characteristics, including the proportional restoring force, sinusoidal position tracking, and the governing law (Hooke's Law). The response also effectively distinguishes SHM from periodic motion and provides relevant examples. The layout and formatting are well-structured, making the content easily readable and understandable. However, to further improve, the candidate could consider adding more visual aids, such as diagrams or graphs, to enhance the pedagogical effectiveness and beginner-friendliness of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 384,
+    "completionTokens": 785,
+    "totalTokens": 1169
+  },
+  "candidate_latency_ms": 7965,
+  "candidate_cost_usd": 0.002547,
+  "judge_token_usage": {
+    "promptTokens": 1450,
+    "completionTokens": 173,
+    "totalTokens": 1623
+  },
+  "judge_latency_ms": 4800,
+  "judge_cost_usd": 0.0012852,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:15:28.699Z"
+}

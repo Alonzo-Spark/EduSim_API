@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 46,
+  "question": "Current Electricity: State Ohm’s law and explain its limitations.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nOhm's Law states that the electric current flowing through a conductor is directly proportional to the potential difference applied across its ends, provided all physical conditions, such as temperature, remain completely constant.\n\n---\n\n## Limitations of the Law\n\n* **Temperature Dependency:** As current increases, temperature often rises due to Joule heating, which changes the material's resistance and causes the relationship to become non-linear.\n* **Non-Ohmic Devices:** The law does not apply to semiconductor components like diodes or transistors, where current does not scale linearly with voltage.\n\n---\n\n## Formula\n\nThe mathematical relation is stated as:\n\n$$V = IR$$\n\nWhere:\n* $V$ represents the potential difference (voltage) across the conductor\n* $I$ represents the electric current flowing through it\n* $R$ represents the electrical resistance of the material\n\n---\n\n## Summary\n\nOhm's Law defines a linear relationship between voltage and current ($V=IR$), but it is limited to materials that maintain a stable temperature and does not apply to non-ohmic semiconductor devices.",
+  "candidate_response": "### Ohm's Law: Core Principles and Limitations  \n\n#### ⚡ Quick Definition  \nOhm's Law states that the electric current (\\(I\\)) flowing through a conductor is **directly proportional** to the voltage (\\(V\\)) applied across it and **inversely proportional** to its resistance (\\(R\\)), provided physical conditions (e.g., temperature) remain constant.  \n\n---\n\n#### 📜 Statement of Ohm's Law  \n> **\"The current through a conductor between two points is directly proportional to the voltage across the two points and inversely proportional to the resistance between them.\"**  \n\n---\n\n#### 🧮 Formula Card: Ohm's Law  \n<div class=\"formula-card\">  \n  <div class=\"formula-header\">  \n    <span class=\"formula-title\">Ohm's Law Equation</span>  \n  </div>  \n  <div class=\"formula-content\">  \n    \\[ \\boxed{V = I \\times R} \\]  \n  </div>  \n  <div class=\"formula-variables\">  \n    <div class=\"variable\">  \n      <div class=\"symbol\">\\(V\\)</div>  \n      <div class=\"meaning\">Voltage (volts)</div>  \n    </div>  \n    <div class=\"variable\">  \n      <div class=\"symbol\">\\(I\\)</div>  \n      <div class=\"meaning\">Current (amperes)</div>  \n    </div>  \n    <div class=\"variable\">  \n      <div class=\"symbol\">\\(R\\)</div>  \n      <div class=\"meaning\">Resistance (ohms)</div>  \n    </div>  \n  </div>  \n  <div class=\"formula-actions\">  \n    <button class=\"explain-btn\">Explain Formula</button>  \n    <button class=\"lab-btn\">Open Formula Lab</button>  \n  </div>  \n</div>  \n\n---\n\n#### ⚠️ Limitations of Ohm's Law  \nOhm's Law is **not universal**. It fails for components where resistance varies with external factors:  \n\n| **Scenario**               | **Behavior**                                                                 | **Examples**                          |  \n|----------------------------|-----------------------------------------------------------------------------|---------------------------------------|  \n| **Non-Ohmic Materials**    | Resistance changes with voltage/current; \\(V\\) vs. \\(I\\) graph is non-linear | Diodes, Transistors, Semiconductors   |  \n| **Temperature Changes**    | Heating alters resistance (e.g., filament bulbs)                            | Incandescent bulbs, Thermistors       |  \n| **High Voltage/Current**  | Excessive energy breaks down material properties                            | Insulators under breakdown voltage    |  \n| **AC at High Frequency**   | Skin effect, capacitance, inductance dominate                               | RF circuits, Transmission lines       |  \n\n---\n\n#### 🔑 Key Characteristics of Ohmic vs. Non-Ohmic Conductors  \n| **Property**           | **Ohmic Conductors**                  | **Non-Ohmic Conductors**             |  \n|------------------------|---------------------------------------|---------------------------------------|  \n| **\\(V-I\\) Graph**      | Straight line through origin          | Curve (e.g., exponential, parabolic)  |  \n| **Resistance**         | Constant (\\(R = \\frac{V}{I}\\))        | Variable (depends on \\(V\\), \\(I\\))    |  \n| **Examples**           | Copper, Aluminum, Resistors           | LEDs, Transistors, Vacuum tubes       |  \n\n---\n\n#### 💡 Applications  \n- **Circuit Design:** Calculate voltage, current, or resistance in DC circuits.  \n- **Power Management:** Determine power dissipation (\\(P = I^2 R\\)).  \n- **Sensor Calibration:** Standardize resistive sensors (e.g., strain gauges).  \n\n---\n\n#### ⚖️ Advantages & Disadvantages  \n| **Advantages**                     | **Disadvantages**                          |  \n|------------------------------------|-------------------------------------------|  \n| Simplicity for DC analysis         | Only valid for ohmic materials            |  \n| Foundation for circuit laws (e.g., Kirchhoff) | Fails under dynamic conditions (AC, temp shifts) |  \n\n---\n\n#### 📝 Important Notes  \n1. **Ohmic Materials:** Metals obey Ohm's Law only if temperature is constant.  \n2. **Non-Linearity:** Semiconductors exhibit exponential \\(V-I\\) relationships (e.g., Shockley diode equation).  \n3. **Dynamic Resistance:** Defined as \\(r = \\frac{dV}{dI}\\), not \\(V/I\\).  \n\n---\n\n#### 🔍 Summary  \n- **Core Principle:** \\(V = IR\\) for ohmic conductors under stable conditions.  \n- **Fails When:** Resistance depends on \\(V\\), \\(I\\), temperature, or frequency.  \n- **Real-World Use:** Primarily for idealized resistors and DC analysis.  \n\n---\n\n#### ❓ Suggested Questions  \n1. Why does an LED not obey Ohm's Law?  \n2. How does temperature affect the resistance of a copper wire?  \n3. Calculate the current through a \\(10\\ \\Omega\\) resistor at \\(5\\ \\text{V}\\). Verify Ohm's Law.  \n\nLet me know which topic you'd like to explore next!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of Ohm's Law, including its definition, formula, and limitations. The response is well-structured, readable, and effectively uses formatting to convey complex information. The use of tables, formulas, and explanations enhances the pedagogical effectiveness of the response. However, minor suggestions for improvement include providing more detailed explanations for certain concepts, such as the skin effect and capacitance in AC circuits, and considering additional examples or applications to further illustrate the law's relevance. Overall, the response excels in accuracy, quality, and educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 364,
+    "completionTokens": 1302,
+    "totalTokens": 1666
+  },
+  "candidate_latency_ms": 58635,
+  "candidate_cost_usd": 0.00305158,
+  "judge_token_usage": {
+    "promptTokens": 1760,
+    "completionTokens": 175,
+    "totalTokens": 1935
+  },
+  "judge_latency_ms": 4152,
+  "judge_cost_usd": 0.0014759999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:45:16.745Z"
+}

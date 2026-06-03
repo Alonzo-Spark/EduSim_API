@@ -1,0 +1,158 @@
+Here's the full interactive breakdown of **Parallel Resistance Derivation**:
+
+---
+
+## ⚡ The Setup
+
+<div style="background: linear-gradient(135deg, #1e3a5f, #0d2137); border-radius: 16px; padding: 24px; margin: 16px 0; border: 1px solid #2a5298; color: white;">
+
+<div style="font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #64b5f6; margin-bottom: 12px;">🔌 Circuit Configuration</div>
+
+<div style="font-size: 16px; line-height: 1.8;">
+When resistors are connected in <strong style="color: #ffd54f;">parallel</strong>, they share the <strong style="color: #81c784;">same voltage</strong> across their terminals, but the current <strong style="color: #ef9a9a;">splits</strong> among them.
+</div>
+
+<div style="margin-top: 20px; font-family: monospace; font-size: 15px; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 16px; border-left: 4px solid #64b5f6;">
+<pre style="color: #e0e0e0; margin: 0;">
+    ┌────[ R₁ ]────┐
+    │              │
+A ──┤────[ R₂ ]────├── B
+    │              │
+    └────[ R₃ ]────┘
+         V (same across all)
+</pre>
+</div>
+</div>
+
+---
+
+## 📌 Known Conditions
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0;">
+
+<div style="background: #1a237e; border-radius: 12px; padding: 18px; border-top: 3px solid #42a5f5;">
+<div style="color: #90caf9; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Voltage</div>
+<div style="color: white; font-size: 15px; margin-top: 8px;">Same across all resistors</div>
+<div style="color: #ffd54f; font-size: 20px; margin-top: 8px; font-weight: bold;">V₁ = V₂ = V₃ = V</div>
+</div>
+
+<div style="background: #1b5e20; border-radius: 12px; padding: 18px; border-top: 3px solid #66bb6a;">
+<div style="color: #a5d6a7; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">Current</div>
+<div style="color: white; font-size: 15px; margin-top: 8px;">Total current splits into branches</div>
+<div style="color: #ffd54f; font-size: 20px; margin-top: 8px; font-weight: bold;">I = I₁ + I₂ + I₃</div>
+</div>
+
+</div>
+
+---
+
+## 🔢 Step-by-Step Derivation
+
+<div style="margin: 16px 0;">
+
+<!-- Step 1 -->
+<div style="background: #212121; border-radius: 12px; padding: 20px; margin-bottom: 12px; border-left: 5px solid #ff7043;">
+<div style="color: #ff7043; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Step 1 — Apply Ohm's Law to Each Branch</div>
+<div style="color: #e0e0e0; margin-bottom: 14px;">Each resistor obeys Ohm's Law: <code style="background: #333; padding: 2px 6px; border-radius: 4px;">V = IR</code>, so current through each is:</div>
+
+$$I_1 = \frac{V}{R_1}, \quad I_2 = \frac{V}{R_2}, \quad I_3 = \frac{V}{R_3}$$
+
+</div>
+
+<!-- Step 2 -->
+<div style="background: #212121; border-radius: 12px; padding: 20px; margin-bottom: 12px; border-left: 5px solid #ffa726;">
+<div style="color: #ffa726; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Step 2 — Substitute into KCL Equation</div>
+<div style="color: #e0e0e0; margin-bottom: 14px;">Total current <strong>I = I₁ + I₂ + I₃</strong>, so substituting:</div>
+
+$$I = \frac{V}{R_1} + \frac{V}{R_2} + \frac{V}{R_3}$$
+
+</div>
+
+<!-- Step 3 -->
+<div style="background: #212121; border-radius: 12px; padding: 20px; margin-bottom: 12px; border-left: 5px solid #ab47bc;">
+<div style="color: #ab47bc; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Step 3 — Factor Out V</div>
+<div style="color: #e0e0e0; margin-bottom: 14px;">Since V is common to all terms:</div>
+
+$$I = V \left( \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} \right)$$
+
+</div>
+
+<!-- Step 4 -->
+<div style="background: #212121; border-radius: 12px; padding: 20px; margin-bottom: 12px; border-left: 5px solid #26c6da;">
+<div style="color: #26c6da; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Step 4 — Define Equivalent Resistance</div>
+<div style="color: #e0e0e0; margin-bottom: 14px;">By definition, the equivalent resistance R<sub>eq</sub> satisfies:</div>
+
+$$I = \frac{V}{R_{eq}} \implies \frac{V}{R_{eq}} = V\left(\frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}\right)$$
+
+<div style="color: #e0e0e0; margin-top: 14px;">Dividing both sides by V:</div>
+
+$$\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}$$
+
+</div>
+
+</div>
+
+---
+
+## 🏆 Final Result
+
+<div style="background: linear-gradient(135deg, #4a148c, #1a237e); border-radius: 16px; padding: 28px; margin: 16px 0; text-align: center; border: 2px solid #7c4dff; box-shadow: 0 4px 20px rgba(124,77,255,0.3);">
+
+<div style="color: #ce93d8; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">✦ Equivalent Resistance — Parallel Combination ✦</div>
+
+$$\boxed{\dfrac{1}{R_{eq}} = \dfrac{1}{R_1} + \dfrac{1}{R_2} + \dfrac{1}{R_3} + \cdots + \dfrac{1}{R_n}}$$
+
+<div style="color: #b0bec5; margin-top: 16px; font-size: 14px;">For <em>n</em> resistors in parallel</div>
+
+</div>
+
+---
+
+## 📊 Key Properties
+
+<div style="background: #1c1c1c; border-radius: 12px; overflow: hidden; margin: 16px 0;">
+
+| Property | Parallel Combination |
+|---|---|
+| Voltage across each resistor | **Same** (= V) |
+| Current through each resistor | **Different** |
+| R_eq vs smallest resistor | **Always smaller** |
+| Adding more resistors | **Decreases** R_eq |
+| Special case: 2 resistors | $R_{eq} = \dfrac{R_1 R_2}{R_1 + R_2}$ |
+
+</div>
+
+---
+
+## 💡 Important Insight
+
+<div style="background: #1a3a2a; border-radius: 12px; padding: 20px; margin: 16px 0; border: 1px solid #2e7d52;">
+<div style="color: #69f0ae; font-size: 14px; font-weight: bold; margin-bottom: 10px;">⚠️ Why is R_eq always less than the smallest resistor?</div>
+<div style="color: #c8e6c9; line-height: 1.8;">
+Adding more parallel paths gives the current <strong>more routes to flow</strong> — this effectively <em>reduces</em> the total opposition. Even adding a very large resistor in parallel will slightly <strong>decrease</strong> the equivalent resistance.
+</div>
+</div>
+
+---
+
+## 🧠 Special Cases
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0;">
+
+<div style="background: #263238; border-radius: 12px; padding: 18px; border-top: 3px solid #ffd54f;">
+<div style="color: #ffd54f; font-weight: bold; margin-bottom: 10px;">Two Resistors</div>
+
+$$R_{eq} = \frac{R_1 R_2}{R_1 + R_2}$$
+
+<div style="color: #90a4ae; font-size: 13px; margin-top: 8px;">Product over Sum formula</div>
+</div>
+
+<div style="background: #263238; border-radius: 12px; padding: 18px; border-top: 3px solid #80cbc4;">
+<div style="color: #80cbc4; font-weight: bold; margin-bottom: 10px;">n Equal Resistors (each R)</div>
+
+$$R_{eq} = \frac{R}{n}$$
+
+<div style="color: #90a4ae; font-size: 13px; margin-top: 8px;">Resistance divides equally</div>
+</div>
+
+</div>

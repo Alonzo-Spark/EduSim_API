@@ -1,0 +1,128 @@
+```json
+[
+  {
+    "type": "Card",
+    "title": "Introduction to Electric Force",
+    "content": "The fundamental interaction between charged particles is governed by the electric force. Understanding its derivation is crucial for comprehending electromagnetism and its vast applications, from electronics to the behavior of atoms and molecules. This derivation will lead us to Coulomb's Law, a cornerstone of electrostatics."
+  },
+  {
+    "type": "Card",
+    "title": "Key Concepts",
+    "content": "Before diving into the derivation, let's recall some essential concepts:\n\n*   **Electric Charge (q):** An intrinsic property of matter that gives rise to electric force. It can be positive or negative, and its SI unit is the Coulomb (C).\n*   **Point Charge:** An idealized charge concentrated at a single point in space.\n*   **Electric Field (E):** A region around a charged object where another charged object experiences a force. It's a vector quantity.\n*   **Permittivity of Free Space (ε₀):** A physical constant representing the ability of a vacuum to permit electric field lines. Its value is approximately $8.854 \\times 10^{-12} \\text{ F/m}$ (Farads per meter)."
+  },
+  {
+    "type": "Card",
+    "title": "Historical Context: Coulomb's Torsion Balance",
+    "content": "Charles-Augustin de Coulomb experimentally determined the relationship between electric force, charge, and distance using a torsion balance in the late 18th century. His experiments showed that:\n\n1.  The force is directly proportional to the product of the magnitudes of the charges.\n2.  The force is inversely proportional to the square of the distance between the charges.\n3.  The force acts along the line joining the two charges."
+  },
+  {
+    "type": "Card",
+    "title": "Derivation of Electric Force (Coulomb's Law)",
+    "content": "Let's consider two point charges, $q_1$ and $q_2$, separated by a distance $r$. Based on Coulomb's experimental observations, we can propose a mathematical relationship for the magnitude of the electric force ($F_e$) between them.\n\n**Step 1: Proportionality to charges**\nThe force is directly proportional to the product of the magnitudes of the charges:\n\n$F_e \\propto |q_1 q_2|$\n\n**Step 2: Proportionality to distance**\nThe force is inversely proportional to the square of the distance between the charges:\n\n$F_e \\propto \\frac{1}{r^2}$\n\n**Step 3: Combining Proportionalities**\nCombining these two proportionalities, we get:\n\n$F_e \\propto \\frac{|q_1 q_2|}{r^2}$\n\n**Step 4: Introducing the Constant of Proportionality**\nTo convert this proportionality into an equality, we introduce a constant of proportionality, often denoted as $k_e$, known as Coulomb's constant:\n\n$F_e = k_e \\frac{|q_1 q_2|}{r^2}$\n\n**Step 5: Expressing Coulomb's Constant**\nIn SI units, Coulomb's constant $k_e$ is defined in terms of the permittivity of free space (ε₀):\n\n$k_e = \\frac{1}{4\\pi\\epsilon_0}$\n\nSubstituting this into the equation for $F_e$, we arrive at the standard form of Coulomb's Law."
+  },
+  {
+    "type": "FormulaCard",
+    "title": "Coulomb's Law (Scalar Form)",
+    "formula": "F_e = \\frac{1}{4\\pi\\epsilon_0} \\frac{|q_1 q_2|}{r^2}",
+    "explanation": "This formula provides the magnitude of the electric force between two point charges. The absolute value signs around $q_1 q_2$ indicate that the force magnitude is always positive. The direction of the force depends on the signs of the charges: like charges repel, and opposite charges attract.",
+    "variables": [
+      {"symbol": "$F_e$", "description": "Magnitude of the electric force (Newtons, N)"},
+      {"symbol": "$q_1, q_2$", "description": "Magnitudes of the two point charges (Coulombs, C)"},
+      {"symbol": "$r$", "description": "Distance between the centers of the two charges (meters, m)"},
+      {"symbol": "$\\epsilon_0$", "description": "Permittivity of free space ($8.854 \\times 10^{-12} \\text{ F/m}$)"},
+      {"symbol": "$\\frac{1}{4\\pi\\epsilon_0}$", "description": "Coulomb's constant, $k_e \\approx 8.9875 \\times 10^9 \\text{ N} \\cdot \\text{m}^2/\\text{C}^2$"}
+    ]
+  },
+  {
+    "type": "Card",
+    "title": "Vector Form of Coulomb's Law",
+    "content": "To fully describe the electric force, we need to consider its direction. The force is a vector quantity. Let $\\vec{r}_{12}$ be the displacement vector from charge $q_1$ to charge $q_2$, and $\\hat{r}_{12}$ be the unit vector in that direction. The force exerted by $q_1$ on $q_2$, denoted as $\\vec{F}_{12}$, is given by:"
+  },
+  {
+    "type": "FormulaCard",
+    "title": "Coulomb's Law (Vector Form)",
+    "formula": "\\vec{F}_{12} = \\frac{1}{4\\pi\\epsilon_0} \\frac{q_1 q_2}{r^2} \\hat{r}_{12}",
+    "explanation": "This is the vector form of Coulomb's Law. If $q_1$ and $q_2$ have the same sign (both positive or both negative), their product is positive, and $\\vec{F}_{12}$ points in the same direction as $\\hat{r}_{12}$ (repulsion). If they have opposite signs, their product is negative, and $\\vec{F}_{12}$ points in the opposite direction to $\\hat{r}_{12}$ (attraction). Note that the absolute value signs are removed from the charges as their signs now determine the direction.",
+    "variables": [
+      {"symbol": "$\\vec{F}_{12}$", "description": "Electric force vector exerted by $q_1$ on $q_2$ (Newtons, N)"},
+      {"symbol": "$q_1, q_2$", "description": "Magnitudes and signs of the two point charges (Coulombs, C)"},
+      {"symbol": "$r$", "description": "Distance between the charges (meters, m)"},
+      {"symbol": "$\\hat{r}_{12}$", "description": "Unit vector pointing from $q_1$ to $q_2$ (dimensionless)"},
+      {"symbol": "$\\epsilon_0$", "description": "Permittivity of free space ($8.854 \\times 10^{-12} \\text{ F/m}$)"}
+    ]
+  },
+  {
+    "type": "Card",
+    "title": "Characteristics of Electric Force",
+    "content": [
+      {"type": "table",
+        "headers": ["Characteristic", "Description"],
+        "rows": [
+          ["**Inverse Square Law**", "The force decreases rapidly with increasing distance between charges."],
+          ["**Direct Proportionality to Charge Product**", "Larger charges exert stronger forces."],
+          ["**Repulsive or Attractive**", "Like charges repel; opposite charges attract."],
+          ["**Conservative Force**", "The work done by the electric force is independent of the path taken."],
+          ["**Acts Along the Line Joining Charges**", "The force is central, meaning it acts along the line connecting the two point charges."]
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Card",
+    "title": "Analogy with Gravitational Force",
+    "content": "It's often helpful to draw parallels between electric force and gravitational force due to their similar mathematical forms. Both are inverse-square laws."
+  },
+  {
+    "type": "FormulaCard",
+    "title": "Gravitational Force",
+    "formula": "F_g = G \\frac{m_1 m_2}{r^2}",
+    "explanation": "This is Newton's Law of Universal Gravitation, describing the attractive force between two masses. Compare its structure to Coulomb's Law.",
+    "variables": [
+      {"symbol": "$F_g$", "description": "Magnitude of the gravitational force (Newtons, N)"},
+      {"symbol": "$m_1, m_2$", "description": "Magnitudes of the two masses (kilograms, kg)"},
+      {"symbol": "$r$", "description": "Distance between the centers of the two masses (meters, m)"},
+      {"symbol": "$G$", "description": "Gravitational constant ($6.674 \\times 10^{-11} \\text{ N} \\cdot \\text{m}^2/\\text{kg}^2$)"}
+    ]
+  },
+  {
+    "type": "Card",
+    "title": "Comparison Table: Electric vs. Gravitational Force",
+    "content": [
+      {"type": "table",
+        "headers": ["Feature", "Electric Force", "Gravitational Force"],
+        "rows": [
+          ["**Governing Property**", "Electric Charge", "Mass"],
+          ["**Nature of Force**", "Attractive or Repulsive", "Always Attractive"],
+          ["**Strength**", "Much Stronger", "Much Weaker"],
+          ["**Constant**", "$\\frac{1}{4\\pi\\epsilon_0}$", "$G$"],
+          ["**Mediating Field**", "Electric Field", "Gravitational Field"]
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Card",
+    "title": "Important Notes",
+    "content": [
+      "**Superposition Principle:** For systems with more than two charges, the net force on any single charge is the vector sum of the forces exerted by all other individual charges.",
+      "**Limitations:** Coulomb's Law is strictly valid for point charges in a vacuum or a uniform, isotropic medium. For continuous charge distributions, integration is required.",
+      "**Quantum Electrodynamics (QED):** At a more fundamental level, the electric force is mediated by the exchange of virtual photons, as described by QED."
+    ]
+  },
+  {
+    "type": "Card",
+    "title": "Summary",
+    "content": "The electric force between two point charges is described by Coulomb's Law, directly proportional to the product of their magnitudes and inversely proportional to the square of the distance between them. This fundamental law is the basis for understanding all electrostatic phenomena and is a critical component of classical electromagnetism."
+  },
+  {
+    "type": "Card",
+    "title": "Suggested Questions",
+    "content": [
+      "How would the electric force change if the distance between two charges was doubled?",
+      "Explain why the absolute value is used for charges in the scalar form of Coulomb's Law but not in the vector form.",
+      "Describe a scenario where the superposition principle would be necessary to calculate the electric force.",
+      "What are the key differences between electric force and gravitational force, despite their similar mathematical forms?"
+    ]
+  }
+]
+```

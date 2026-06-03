@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 8,
+  "question": "A ball is projected at an angle of 45° with velocity 20 m/s. Find its range.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Projectile Tracking\n\n### Problem\nA ball is projected at an angle of $45^\\circ$ with a velocity of $20 \\text{ m/s}$. Find its horizontal range.\n\n### Given\n* Initial launch velocity ($u$) = $20 \\text{ m/s}$\n* Projection angle ($\\theta$) = $45^\\circ$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$R = \\frac{u^2 \\sin(2\\theta)}{g}$$\n\n### Substitution\n$$R = \\frac{(20)^2 \\times \\sin(2 \\times 45^\\circ)}{9.8}$$\n\n### Calculation\n$$R = \\frac{400 \\times \\sin(90^\\circ)}{9.8}$$\n\nSince $\\sin(90^\\circ) = 1$:\n$$R = \\frac{400 \\times 1}{9.8}$$\n\n$$R = 40.82 \\text{ m}$$\n\n### Final Answer\n**Horizontal Range ($R$) = $40.82 \\text{ m}$**\n\n### Interpretation\nThis means the ball travels a total horizontal ground shortcut distance of $40.82 \\text{ meters}$ away from its initial launch spot before striking the earth baseline.",
+  "candidate_response": "```json\n{\n  \"action\": \"render_ui\",\n  \"layout\": \"interactive_textbook\",\n  \"sections\": [\n    {\n      \"type\": \"Introduction\",\n      \"title\": \"Projectile Motion Overview\",\n      \"content\": \"When an object is projected into the air at an angle, it follows a parabolic path known as projectile motion. The horizontal distance covered by the object from the point of projection to the point where it returns to the same horizontal level is called the **Horizontal Range**.\"\n    },\n    {\n      \"type\": \"Key Concepts\",\n      \"title\": \"Given Parameters\",\n      \"content\": \"To solve this problem, we identify the initial physical conditions provided:\",\n      \"list\": [\n        \"**Initial Velocity ($u$):** $20\\\\text{ m/s}$\",\n        \"**Angle of Projection ($\\\\theta$):** $45^\\\\circ$\",\n        \"**Acceleration due to gravity ($g$):** Standard value is $9.8\\\\text{ m/s}^2$ (often approximated as $10\\\\text{ m/s}^2$ for simplicity).\"\n      ]\n    },\n    {\n      \"type\": \"Formula\",\n      \"title\": \"Horizontal Range Formula\",\n      \"formula_data\": {\n        \"formula\": \"R = \\\\frac{u^2 \\\\sin(2\\\\theta)}{g}\",\n        \"variables\": [\n          {\"symbol\": \"R\", \"description\": \"Horizontal Range\"},\n          {\"symbol\": \"u\", \"description\": \"Initial Velocity\"},\n          {\"symbol\": \"θ\", \"description\": \"Angle of projection\"},\n          {\"symbol\": \"g\", \"description\": \"Acceleration due to gravity\"}\n        ],\n        \"context\": \"The range is maximized when the angle of projection is $45^\\\\circ$ because $\\\\sin(2 \\\\times 45^\\\\circ) = \\\\sin(90^\\\\circ) = 1$.\"\n      }\n    },\n    {\n      \"type\": \"Step-by-Step Calculation\",\n      \"title\": \"Solution Path\",\n      \"content\": \"Let's substitute the values into the range equation:\",\n      \"table\": {\n        \"headers\": [\"Step\", \"Operation\", \"Result\"],\n        \"rows\": [\n          [\"1\", \"Calculate $u^2$\", \"$20^2 = 400$\"],\n          [\"2\", \"Calculate $\\\\sin(2\\\\theta)$\", \"$\\\\sin(2 \\\\times 45^\\\\circ) = \\\\sin(90^\\\\circ) = 1$\"],\n          [\"3\", \"Multiply $u^2$ and $\\\\sin(2\\\\theta)$\", \"$400 \\\\times 1 = 400$\"],\n          [\"4\", \"Divide by $g$ ($9.8$)\", \"$400 / 9.8 \\\\approx 40.82\\\\text{ m}$\"]\n        ]\n      }\n    },\n    {\n      \"type\": \"Summary\",\n      \"title\": \"Final Result\",\n      \"content\": \"The horizontal range of the ball projected at $45^\\\\circ$ with a velocity of $20\\\\text{ m/s}$ is approximately **$40.82\\\\text{ meters}$** (or $40\\\\text{ m}$ if using $g = 10\\\\text{ m/s}^2$).\"\n    },\n    {\n      \"type\": \"Suggested Questions\",\n      \"title\": \"Test Your Understanding\",\n      \"list\": [\n        \"How would the range change if the angle was increased to $60^\\\\circ$?\",\n        \"Calculate the maximum height reached by the ball during this flight.\",\n        \"What is the total time of flight for this projectile?\"\n      ]\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts involved in projectile motion, accurately applying the formula for horizontal range and providing clear step-by-step calculations. The use of JSON formatting enhances the readability and structure of the response. However, to further improve, consider adding more visual aids such as diagrams or graphs to illustrate the trajectory of the projectile and make the explanation more engaging for beginners. Additionally, providing a brief discussion on the assumptions made, such as neglecting air resistance, could enhance the educational value of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 395,
+    "completionTokens": 855,
+    "totalTokens": 1250
+  },
+  "candidate_latency_ms": 4970,
+  "candidate_cost_usd": 0.0027625,
+  "judge_token_usage": {
+    "promptTokens": 1492,
+    "completionTokens": 164,
+    "totalTokens": 1656
+  },
+  "judge_latency_ms": 4974,
+  "judge_cost_usd": 0.0012887999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:07:44.541Z"
+}

@@ -1,0 +1,88 @@
+### Zero-Gravity Environment Overlay  
+**Trigger Event:** `gravity_changed → zero_g`  
+
+---
+
+### 🚨 Critical Alert: Gravity Systems Offline  
+<div style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #ff4d4d;">
+⚠️ **WARNING**  
+All artificial gravity generators have disengaged. Objects and personnel are now in freefall.  
+</div>
+
+---
+
+### 🔧 Immediate Actions  
+| Priority | Action                          | Keybind       | Visual Cue                     |
+|----------|---------------------------------|---------------|--------------------------------|
+| 1        | Secure loose objects            | `F`           | Flashing red highlights        |
+| 2        | Activate mag-boots              | `B`           | Blue boot icon (HUD)           |
+| 3        | Anchor to handrail              | `Hold E`      | Green rail overlay             |
+| 4        | Deploy tethers                  | `T`           | Yellow tether lines            |
+
+---
+
+### 🚀 Movement Mechanics  
+```python
+# Physics update (zero-g vector model)
+velocity_vector = (thrust_input * orientation) * delta_time
+rotation = (torque_input * MOI⁻¹) * delta_time  # MOI = Moment of Inertia
+```
+**Key Changes:**  
+- ⬆️ **Vertical thrusters** now control *all* directional movement  
+- 🔄 **Rotation sensitivity** increased 300% (use small inputs)  
+- 🎯 **Momentum conservation**: Objects drift until collision  
+
+---
+
+### ⚠️ Hazard Indicators  
+| Icon | Meaning                     | Response Protocol               |
+|------|-----------------------------|---------------------------------|
+| 🔴   | Unsecured object trajectory | Evade path (dashed red line)    |
+| 🟡   | Spin > 2 RPM                | Counter-rotation jets (auto)    |
+| 🔵   | Critical system drift       | Anchor point suggested (HUD)    |
+
+---
+
+### 🛠️ Environment Tools  
+```lua
+-- Enable zero-G assist mode
+simulation.setGravity(0)
+player.enableStabilizers(true)
+HUD.showVectorArrows(true)
+physics.setDragCoefficient(0.02)
+```
+**New HUD Elements:**  
+- 3D trajectory predictor (purple dotted lines)  
+- Angular velocity gauge (bottom-right)  
+- Collision alert spheres (pulsing orange)  
+
+---
+
+### 🧠 Adaptation Protocol  
+```mermaid
+graph LR
+A[Disorientation] -->|Trigger| B[Auto-gyro stabilization]
+C[Nausea] -->|Trigger| D[Inject anti-motion sickness]
+E[Task Failure] -->|3 attempts| F[Enable AI pilot takeover]
+```
+
+**Countdown Timer:**  
+`ADAPTATION PHASE: 04:27`  
+*Complete tasks to reduce time*
+
+---
+
+### 🔚 Reversion Procedure  
+```diff
+! Gravity will NOT auto-restart
++ Manually trigger reboot sequence:
+  1. Reach engineering bay (yellow nav marker)
+  2. Override safety (code: 767θ)
+  3. Initiate spin-up (hold ⏻ for 5s)
+```
+
+<div style="text-align: center; margin-top: 20px;">
+<button style="background: linear-gradient(to right, #4facfe, #00f2fe); border: none; padding: 12px 24px; border-radius: 6px; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+  ACKNOWLEDGE ZERO-G PROTOCOL
+</button>
+</div>

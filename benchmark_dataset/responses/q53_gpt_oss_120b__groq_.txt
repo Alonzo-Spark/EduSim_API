@@ -1,0 +1,117 @@
+┌───────────────────────────────────────────────┐  
+│ **Live Sandbox – Spring Oscillator**            │  
+│                                                   │  
+│ Explore how changing the **stiffness constant** │  
+│ \(k\) of a mass‑spring system affects its motion. │  
+│ Use the sliders below to modify parameters and    │  
+│ watch the animation update in real time.          │  
+└───────────────────────────────────────────────┘  
+
+---
+
+### 📖 Introduction  
+A mass‑spring system is a classic example of simple harmonic motion (SHM).  
+When the spring’s stiffness (spring constant) changes, the **frequency** of the oscillation changes, while the **amplitude** (if the initial displacement is unchanged) stays the same.
+
+---
+
+### 📚 Definition  
+**Spring constant \(k\)** – a measure of the stiffness of a spring.  
+Larger \(k\) → stiffer spring → greater restoring force for a given displacement.
+
+---
+
+### 🔑 Key Concepts  
+
+| Concept | Description |
+|---------|-------------|
+| **Restoring Force** | \(F = -k\,x\) (Hooke’s law) |
+| **Angular Frequency** | \(\omega = \sqrt{k/m}\) |
+| **Period** | \(T = 2\pi\sqrt{m/k}\) |
+| **Amplitude** | Determined by initial conditions; unchanged by \(k\) if the same initial displacement is used. |
+
+---
+
+┌─────────────────────────────┐  
+│ **Main Formula**            │  
+│                             │  
+│ \(\displaystyle \omega = \sqrt{\frac{k}{m}}\) │  
+│                             │  
+│ [ Explain Formula ]         │  
+│ [ Open Formula Lab ]        │  
+└─────────────────────────────┘  
+
+*Explanation*: The angular frequency \(\omega\) grows with the square‑root of the stiffness \(k\). Doubling \(k\) multiplies \(\omega\) by \(\sqrt{2}\).
+
+---
+
+┌─────────────────────────────┐  
+│ **Period Formula**          │  
+│                             │  
+│ \(\displaystyle T = 2\pi\sqrt{\frac{m}{k}}\) │  
+│                             │  
+│ [ Explain Formula ]         │  
+│ [ Open Formula Lab ]        │  
+└─────────────────────────────┘  
+
+*Explanation*: The period \(T\) is inversely proportional to \(\sqrt{k}\). Doubling \(k\) shortens the period by a factor of \(\sqrt{2}\).
+
+---
+
+### 🎬 Visual Effect of Doubling \(k\)
+
+| Before (original \(k\)) | After (2 × \(k\)) |
+|--------------------------|-------------------|
+| **Frequency**: \(\omega\) | **Frequency**: \(\sqrt{2}\,\omega\) |
+| **Period**: \(T\) | **Period**: \(T/\sqrt{2}\) |
+| **Oscillation speed**: slower | **Oscillation speed**: faster (≈ 41 % faster) |
+| **Amplitude** (same initial displacement) | **Amplitude** (unchanged) |
+| **Animation**: broader, slower loops | **Animation**: tighter, quicker loops |
+
+*Result*: The spring oscillates **twice as fast** in terms of angular frequency, but the **shape of the motion** (amplitude) remains identical.
+
+---
+
+### 🛠 Interactive Sandbox (Conceptual Layout)
+
+```
++-----------------------------------------------------------+
+|  [Slider] Mass (m)      : 0.5 kg – 5 kg   (default 1 kg)   |
+|  [Slider] Spring constant (k) : 10 N/m – 200 N/m (default 50 N/m) |
+|  [Slider] Initial displacement (x₀) : 0.1 m – 0.5 m (default 0.2 m) |
+|                                                             |
+|  [Button] ▶ Play / ⏸ Pause                                 |
+|                                                             |
+|  +-------------------+   +-------------------------------+ |
+|  |   Animation Panel |   |   Real‑time Graph (x vs. t)   | |
+|  +-------------------+   +-------------------------------+ |
++-----------------------------------------------------------+
+```
+
+**How to use**
+
+1. **Set a baseline**: Choose \(m = 1\) kg, \(k = 50\) N/m, \(x_0 = 0.2\) m. Press **Play** – observe the oscillation period.  
+2. **Double the stiffness**: Move the \(k\) slider to **100 N/m** (exactly twice the original). The animation speeds up instantly; the period shortens by \(\sqrt{2}\).  
+3. **Compare**: Toggle **Pause**, then switch back to the original \(k\) to see the slower motion again.  
+
+*Note*: The sandbox internally recomputes \(\omega = \sqrt{k/m}\) and updates both the animation speed and the plotted sinusoid in real time.
+
+---
+
+### ✅ Summary  
+
+* Doubling the spring constant **increases** the angular frequency by \(\sqrt{2}\) and **decreases** the period by the same factor.  
+* The **amplitude** stays the same if the initial displacement is unchanged.  
+* Visually, the oscillation appears **faster** (more cycles per unit time) while retaining the same peak‑to‑peak distance.
+
+---
+
+### ❓ Suggested Questions  
+
+1. If the mass is also doubled while the spring constant is doubled, how does the frequency change?  
+2. How would the system’s energy (kinetic + potential) be affected by changing \(k\) but keeping the same initial displacement?  
+3. In a damped oscillator, does increasing \(k\) have the same effect on the period? Explain.  
+
+---  
+
+*All interactive elements are conceptual; in a real implementation they would be powered by JavaScript/Canvas or a physics‑engine library.*

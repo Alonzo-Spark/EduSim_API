@@ -1,0 +1,158 @@
+Okay, I understand. You want a completely revamped rendering system for the AI Tutor, moving away from a plain markdown document aesthetic and towards an interactive textbook experience.  Here's a breakdown of the changes required, focusing on the structured UI blocks, section cards, formula cards, and formula extraction.  I'll outline the logic and considerations for implementing this.
+
+**Core Principles:**
+
+*   **Structured UI:**  The entire content will be parsed and converted into a series of discrete UI components (cards, sections).
+*   **Section Cards:** Each section (Introduction, Definition, etc.) gets its own card with a clear title.
+*   **Formula Cards:**  Every formula gets a dedicated card with the formula itself, a rendered version, and links to explanation and a simulator (Formula Lab).
+*   **No Floating Formulas:** Formulas are *never* rendered directly within the text.
+*   **Efficient Parsing:**  Formula extraction happens during the initial markdown parse and stored for later use (Formula Lab).
+
+
+
+**Implementation Steps & Logic**
+
+1.  **Markdown Parsing & Section Detection:**
+
+    *   **Libraries:** Use a robust markdown parsing library.  Python's `markdown` library is a good starting point, but consider a more advanced one if needed.
+    *   **Section Markers:** Implement a system to identify section headings (Introduction, Definition, etc.). This could be done using regular expressions or by analyzing the markdown heading levels (e.g., `# Introduction`, `## Key Concepts`).
+    *   **Section Card Creation:**  For each detected section, create a `SectionCard` object.  This object will contain:
+        *   `title`: The section heading.
+        *   `content`: The text content of the section.
+        *   `type`: A string identifying the section type (e.g., "Introduction", "Definition").
+    *   **Handling Content within Sections:** Handle paragraphs, lists, and other markdown elements within each section card.
+
+2.  **Formula Extraction:**
+
+    *   **Regex:** Use a regular expression to identify all LaTeX formula blocks (`$$ ... $$`).
+    *   **Extraction Data:** For each formula block, extract the following:
+        *   `formula`: The LaTeX string itself.
+        *   `title`:  (Potentially) Extract the text immediately preceding the formula block as the title (if any).  This could be a challenge, as it might not always be present.  A default title could be used if no preceding text is found.
+        *   `surroundingContext`: A snippet of text before and after the formula (e.g., a sentence or two) to provide context.
+        *   `variables`:  (Optional, more advanced)  Use a parsing library (like `sympy` in Python) to identify variables within the formula. This would be useful for the "Explain Formula" functionality.
+    *   **Data Structure:** Store the extracted data in a list of dictionaries, as specified in your requirements:
+
+        ```python
+        [
+            {
+                "formula": r"F=ma",
+                "title": "Newton's Second Law",
+                "surroundingContext": "Newton's Second Law of Motion describes...",
+                "variables": ["F", "m", "a"]
+            },
+            # ... more formulas
+        ]
+        ```
+
+3.  **Formula Card Generation:**
+
+    *   **Card Creation:** For each extracted formula, create a `FormulaCard` object.
+    *   **Content:** The `FormulaCard` will contain:
+        *   `main_formula`:  The LaTeX string.
+        *   `rendered_formula`: The rendered formula (using KaTeX).
+        *   `explain_formula_link`: A link to a page or section that explains the formula.
+        *   `open_formula_lab_link`: A link to the Formula Lab simulator.
+    *   **Rendering:**  Use KaTeX to render the LaTeX string into a visually appealing formula representation.
+
+4.  **Table Rendering:**
+
+    *   **Markdown to HTML:** Use a library to convert Markdown tables to HTML.
+    *   **Responsive Design:**  Ensure the HTML table is responsive, meaning it adapts to different screen sizes.  Use CSS to achieve this (e.g., `width: 100%;`).
+    *   **Card Wrapping:** Wrap the HTML table in a `TableCard` component.
+
+5.  **UI Component Design:**
+
+    *   **Card Component:** Create a reusable `Card` component that can display any of the section cards or formula cards.  This component should handle basic styling (borders, padding, etc.).
+    *   **Layout:** Use a grid layout (e.g., CSS Grid or Flexbox) to arrange the cards on the screen.  This will allow for a flexible and responsive layout.
+
+6. **Sandboxing (Friction Change Overlay)**
+
+    *   This component is specific to your "friction_changed" event. Implement the logic to receive the event data and generate a runtime overlay response. This likely requires a separate JavaScript component and communication between the backend and frontend.  This is outside the scope of the markdown processing, but important to note.
+
+**Example (Conceptual Python Code)**
+
+```python
+import markdown
+import re
+
+def parse_markdown(markdown_text):
+    """Parses markdown and converts it into a structured data format."""
+
+    sections = []
+    current_section = None
+    lines = markdown_text.splitlines()
+
+    for line in lines:
+        if line.startswith("# "):  # Section Heading
+            if current_section:
+                sections.append(current_section)
+            current_section = {
+                "title": line[2:],
+                "content": "",
+                "type": "Section"  # Or "Introduction", "Definition", etc.
+            }
+        elif current_section:
+            current_section["content"] += line + "\n"
+        else:
+            # Handle content outside of sections (e.g., introductory text)
+            pass # or append to a default section
+
+    if current_section:
+        sections.append(current_section)
+
+    #Formula Extraction
+    formulas = []
+    for section in sections:
+        latex_matches = re.findall(r'\$\$(.*?)\$\$', section["content"])
+        for formula_latex in latex_matches:
+            formulas.append({
+                "formula": formula_latex,
+                "title": section["title"],
+                "surroundingContext": section["content"],
+                "variables": [] #TODO: Implement variable extraction
+            })
+
+    return sections, formulas
+
+
+# Example Usage
+markdown_content = """
+# Introduction
+
+This is an introduction to physics.  $$F=ma$$
+
+# Newton's Second Law
+
+Newton's Second Law of Motion describes...
+
+$$v = u + at$$
+"""
+
+sections, formulas = parse_markdown(markdown_content)
+
+print("Sections:", sections)
+print("Formulas:", formulas)
+```
+
+**Key Technologies/Libraries:**
+
+*   **Python:** For parsing and processing the markdown.
+*   **Markdown Library:** `markdown` (Python) or similar.
+*   **KaTeX:** For rendering LaTeX formulas.
+*   **HTML/CSS:** For the UI structure and styling.
+*   **JavaScript:** For the interactive elements (Formula Lab, explanations, etc.).
+*   **Potentially `sympy`:** For variable extraction from formulas (advanced).
+
+**Challenges:**
+
+*   **Contextual Title Extraction:** Accurately extracting titles for formulas that aren't directly preceded by a heading.
+*   **Complex Markdown:**  Handling more complex markdown features (lists, code blocks, etc.) correctly.
+*   **Formula Lab Integration:**  Building the Formula Lab simulator and linking it to the formula cards.
+*   **Responsiveness:** Ensuring the UI looks good on all screen sizes.
+
+
+
+This is a comprehensive plan, and the actual implementation would involve significant coding effort. Let me know if you'd like me to elaborate on any specific aspect or provide code examples for a particular component.  I can also help with suggesting appropriate libraries for different tasks.
+
+
+

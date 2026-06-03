@@ -1,0 +1,135 @@
+We're going to explore the fundamental concepts of electric fields and electric potential. Let's dive in!
+
+***
+
+### Quick Definition
+
+An **electric field** is a region around an electrically charged particle or object in which a charged object experiences a force. It's a way of visualizing and quantifying the influence of charges on their surroundings.
+
+An **electric potential** (also known as electrostatic potential) is the amount of work needed to move a unit positive charge from a reference point (usually infinity) to a specific point in an electric field without producing an acceleration. It's a scalar quantity, meaning it only has magnitude, not direction.
+
+***
+
+### Key Concepts
+
+#### Electric Field
+
+The electric field is a vector quantity, meaning it has both magnitude and direction. It's often represented by electric field lines, which originate from positive charges and terminate on negative charges. The density of these lines indicates the strength of the field.
+
+#### Electric Potential
+
+Electric potential is a scalar quantity. The difference in electric potential between two points is called the **potential difference** or **voltage**. This potential difference is what drives the flow of charge (current) in an electric circuit.
+
+***
+
+### Main Formula
+
+Here are the primary formulas for electric field and electric potential due to a point charge:
+
+$$
+\mathbf{E} = \frac{1}{4\pi\epsilon_0} \frac{q}{r^2} \mathbf{\hat{r}}
+$$
+
+<details>
+<summary>Explain Formula</summary>
+This formula describes the electric field ($\mathbf{E}$) at a distance ($r$) from a point charge ($q$).
+
+*   $\mathbf{E}$: Electric field vector (measured in Newtons per Coulomb, N/C, or Volts per meter, V/m).
+*   $q$: The source charge creating the electric field (measured in Coulombs, C).
+*   $r$: The distance from the source charge to the point where the electric field is being measured (measured in meters, m).
+*   $\mathbf{\hat{r}}$: A unit vector pointing radially outward from the source charge. This indicates the direction of the electric field.
+*   $\epsilon_0$: The permittivity of free space, a fundamental physical constant approximately equal to $8.854 \times 10^{-12} \text{ C}^2/\text{N}\cdot\text{m}^2$.
+*   $\frac{1}{4\pi\epsilon_0}$: Coulomb's constant, often denoted as $k$, approximately $8.987 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2$.
+</details>
+
+<details>
+<summary>Open Formula Lab</summary>
+The formula lab would allow you to manipulate values for $q$ and $r$ to see how the electric field strength changes. You could also visualize the field lines.
+</details>
+
+$$
+V = \frac{1}{4\pi\epsilon_0} \frac{q}{r}
+$$
+
+<details>
+<summary>Explain Formula</summary>
+This formula describes the electric potential ($V$) at a distance ($r$) from a point charge ($q$).
+
+*   $V$: Electric potential (measured in Volts, V, or Joules per Coulomb, J/C).
+*   $q$: The source charge creating the electric potential (measured in Coulombs, C).
+*   $r$: The distance from the source charge to the point where the electric potential is being measured (measured in meters, m).
+*   $\epsilon_0$: The permittivity of free space, approximately $8.854 \times 10^{-12} \text{ C}^2/\text{N}\cdot\text{m}^2$.
+*   $\frac{1}{4\pi\epsilon_0}$: Coulomb's constant, often denoted as $k$, approximately $8.987 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2$.
+</details>
+
+<details>
+<summary>Open Formula Lab</summary>
+The formula lab would allow you to manipulate values for $q$ and $r$ to see how the electric potential changes. You could also plot potential surfaces.
+</details>
+
+***
+
+### Relationship Between Electric Field and Electric Potential
+
+The electric field is the negative gradient of the electric potential. This means that the electric field points in the direction of the steepest decrease in electric potential.
+
+$$
+\mathbf{E} = -\nabla V
+$$
+
+<details>
+<summary>Explain Formula</summary>
+This formula shows the relationship between the electric field ($\mathbf{E}$) and the electric potential ($V$).
+
+*   $\mathbf{E}$: Electric field vector.
+*   $-\nabla$: The negative gradient operator. In Cartesian coordinates, for a 3D potential $V(x,y,z)$, the gradient is given by:
+    $$
+    \nabla V = \left( \frac{\partial V}{\partial x} \right) \mathbf{\hat{i}} + \left( \frac{\partial V}{\partial y} \right) \mathbf{\hat{j}} + \left( \frac{\partial V}{\partial z} \right) \mathbf{\hat{k}}
+    $$
+    This means the x-component of the electric field is $E_x = -\frac{\partial V}{\partial x}$, and similarly for y and z.
+*   The negative sign indicates that the electric field points in the direction where the electric potential decreases most rapidly.
+</details>
+
+<details>
+<summary>Open Formula Lab</summary>
+The formula lab would allow you to input a potential function $V(x,y,z)$ and visualize the resulting electric field vectors, demonstrating how $\mathbf{E}$ points down the potential gradient.
+</details>
+
+***
+
+### Characteristics
+
+Here's a comparison of the characteristics of electric field and electric potential:
+
+| Feature           | Electric Field ($\mathbf{E}$)                               | Electric Potential ($V$)                                   |
+| :---------------- | :---------------------------------------------------------- | :--------------------------------------------------------- |
+| **Type**          | Vector quantity (magnitude and direction)                   | Scalar quantity (magnitude only)                           |
+| **Unit**          | Newtons per Coulomb (N/C) or Volts per meter (V/m)          | Volts (V) or Joules per Coulomb (J/C)                      |
+| **Source**        | Charges (positive charges are sources, negative are sinks)  | Charges (positive charges create positive potential)       |
+| **Measurement**   | Force experienced by a unit positive test charge            | Work done to move a unit positive charge from infinity     |
+| **Representation** | Electric field lines                                        | Equipotential lines/surfaces                               |
+| **Direction**     | From higher potential to lower potential                    | No inherent direction; it's a value at a point             |
+| **Superposition** | Vector sum of individual fields                             | Algebraic sum of individual potentials                     |
+
+***
+
+### Important Notes
+
+*   **Test Charge:** When defining the electric field, we imagine a small, positive "test charge" that does not significantly alter the existing field.
+*   **Reference Point:** Electric potential is always defined relative to a reference point. For a point charge, this reference is usually taken to be infinity, where the potential is zero.
+*   **Energy:** Electric potential is directly related to potential energy. The electric potential energy ($U$) of a charge ($q$) at a point with electric potential ($V$) is given by $U = qV$.
+
+***
+
+### Summary
+
+Electric fields describe the force per unit charge at a point in space, acting as a vector quantity. Electric potential, on the other hand, describes the potential energy per unit charge at a point, making it a scalar quantity. They are intimately related, with the electric field being the negative gradient of the electric potential, meaning charges naturally move from regions of higher potential to lower potential.
+
+***
+
+### Suggested Questions
+
+*   How would the electric field and potential change if the source charge were negative instead of positive?
+*   What are equipotential lines, and how do they relate to electric field lines?
+*   Explain the concept of potential difference and its importance in circuits.
+*   How is the work done by an electric field related to the change in electric potential?

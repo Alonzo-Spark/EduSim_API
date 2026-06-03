@@ -1,0 +1,193 @@
+┌───────────────────────────────────────────────┐
+│                 Overview (Intro)               │
+│                                               │
+│ An **object_attached** event occurs when a   │
+│ secondary mass (the “object”) collides with │
+│ and sticks to the bob of a flying pendulum.│
+│ The simulation must instantly update the     │
+│ pendulum’s dynamic state (mass, centre of    │
+│ mass, angular velocity, tension, and period).│
+│ This overlay provides the runtime logic to   │
+│ handle the event and keep the physics          │
+│ consistent.                                    │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│            Event Detection & Trigger           │
+│                                               │
+│ 1. **Collision Check** – Detect when the object│
+│    intersects the bob’s collision sphere.    │
+│ 2. **Attachment Confirmation** – Verify that │
+│    the object’s material property `sticky =   │
+│    true`.                                      │
+│ 3. **State Capture** – Record pre‑event values│
+│    of:                                         │
+│    • Bob mass `m_b`                           │
+│    • Object mass `m_o`                        │
+│    • Angular velocity `ω_i` (rad/s)           │
+│    • Current length `L` (m)                   │
+│    • Pendulum swing angle `θ_i` (rad).        │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Physical Model                  │
+│                                               │
+│ The pendulum is treated as a point mass at the│
+│ end of a massless rod. After attachment the    │
+│ system becomes a single rigid body with        │
+│ combined mass `M = m_b + m_o`.                 │
+│                                               │
+│ • The centre of mass moves outward:            │
+│   `r_cm = (m_b·L + m_o·L_o) / M`               │
+│   where `L_o` is the distance from the pivot  │
+│   to the object’s attachment point (≈ L).       │
+│ • Angular momentum about the pivot is conserved│
+│   (no external torques).                       │
+│                                               │
+│ The new angular velocity `ω_f` is obtained from│
+│ the conservation law (see Formula Card).      │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│               Key Formulas (Formula Card)      │
+│                                               │
+│ ┌───────────────────────────────────────────┐ │
+│ │ Main Formula                              │ │
+│ │                                           │ │
+│ │   **Angular‑Momentum Conservation**       │ │
+│ │   L_i = L_f                               │ │
+│ │                                           │ │
+│ │   (m_b L) ω_i = (M r_cm) ω_f               │ │
+│ │                                           │ │
+│ │   ⇒ ω_f = (m_b L ω_i) / (M r_cm)           │ │
+│ │                                           │ │
+│ │ [ Explain Formula ]  [ Open Formula Lab ]│ │
+│ └───────────────────────────────────────────┘ │
+│                                               │
+│ ┌───────────────────────────────────────────┐ │
+│ │ Additional Formulas                       │ │
+│ │                                           │ │
+│ │ 1. **New Length (effective radius)**      │ │
+│ │    r_cm = (m_b·L + m_o·L) / (m_b + m_o)   │ │
+│ │                                           │ │
+│ │ 2. **Period of Small Oscillations**       │ │
+│ │    T = 2π √(r_cm / g)                     │ │
+│ │                                           │ │
+│ │ 3. **Tension after attachment**           │ │
+│ │    τ = M g cosθ_f + M r_cm ω_f²           │ │
+│ │                                           │ │
+│ │ [ Explain Formulas ]  [ Open Formula Lab ]│ │
+│ └───────────────────────────────────────────┘ │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Computation Steps               │
+│                                               │
+│ 1. **Gather Pre‑Event Data**                  │
+│    `m_b, m_o, L, ω_i, θ_i, g = 9.81 m/s²`.    │
+│                                               │
+│ 2. **Compute Combined Mass**                  │
+│    `M = m_b + m_o`.                           │
+│                                               │
+│ 3. **Determine New Centre‑of‑Mass Radius**   │
+│    `r_cm = (m_b·L + m_o·L) / M`.              │
+│                                               │
+│ 4. **Apply Angular‑Momentum Conservation**    │
+│    `ω_f = (m_b·L·ω_i) / (M·r_cm)`.            │
+│                                               │
+│ 5. **Update Swing Angle (if needed)**         │
+│    Assuming the attachment is instantaneous, │
+│    the angle remains `θ_f = θ_i`.             │
+│                                               │
+│ 6. **Re‑calculate Period**                    │
+│    `T_f = 2π √(r_cm / g)`.                     │
+│                                               │
+│ 7. **Compute New Tension**                    │
+│    `τ_f = M·g·cosθ_f + M·r_cm·ω_f²`.           │
+│                                               │
+│ 8. **Store Updated State**                    │
+│    `{M, r_cm, ω_f, T_f, τ_f, θ_f}` for the    │
+│    next simulation tick.                     │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│               Resulting State (Card)           │
+│                                               │
+│ | Parameter | Value | Units                  │
+│ |-----------|-------|----------------------│
+│ | M         | 1.35  | kg (example)          │
+│ | r_cm      | 0.78  | m                     │
+│ | ω_f       | 4.12  | rad s⁻¹               │
+│ | T_f       | 1.78  | s                     │
+│ | τ_f       | 12.4  | N                     │
+│ | θ_f       | 0.30  | rad                   │
+│                                               │
+│ (Values shown for a sample input where       │
+│ `m_b = 0.9 kg`, `m_o = 0.45 kg`, `L = 0.75 m`,│
+│ `ω_i = 5 rad s⁻¹`).                           │
+│                                               │
+│ [ View Full State Log ]  [ Export to JSON ] │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                 Visualization (Card)           │
+│                                               │
+│ • **Live Diagram** – Animated pendulum showing│
+│   the bob, the newly attached object, and the │
+│   shifted centre of mass.                     │
+│ • **Graph** – Angular velocity vs. time before│
+│   and after attachment.                      │
+│ • **Gauge** – Real‑time tension reading.      │
+│                                               │
+│ [ Play Animation ]  [ Open Graph Panel ]      │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                     Summary                     │
+│                                               │
+│ • The attachment event is handled by          │
+│   conserving angular momentum about the pivot.│
+│ • All derived quantities (new radius, angular   │
+│   velocity, period, tension) are updated      │
+│   instantly to keep the simulation coherent.  │
+│ • Formula Card(s) provide the exact equations   │
+│   used, and the Formula Lab allows interactive│
+│   exploration of parameter changes.           │
+│                                               │
+│ This ensures a physically accurate response   │
+│ while keeping the runtime overhead minimal.   │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│               Suggested Questions (Card)       │
+│                                               │
+│ 1. How does the attachment point distance `L_o`│
+│    affect the new period `T_f`?               │
+│ 2. What would change if the object bounced off│
+│    instead of sticking?                       │
+│ 3. How does energy dissipation influence the   │
+│    post‑attachment swing amplitude?           │
+│ 4. If the pendulum were driven by an external │
+│    torque, how would the conservation law need│
+│    to be modified?                            │
+│ 5. Explore the sensitivity of tension `τ_f`   │
+│    to variations in `θ_f`.                    │
+│                                               │
+│ [ Open Quiz ]  [ Explore with Formula Lab ]    │
+└───────────────────────────────────────────────┘

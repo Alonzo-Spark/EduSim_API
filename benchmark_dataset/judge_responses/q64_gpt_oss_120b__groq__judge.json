@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 64,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'spring_stretched' peak limit event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on an elastic deformation threshold benchmark.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe spring joint reached its maximum length extension threshold (`spring_stretched`) at the outer limit of its oscillation path.\n\n### WHAT CHANGED\nThe velocity vector dropped to zero, and the inward acceleration vector reached its maximum value.\n\n### SIMPLE WHY\nAt maximum extension, all kinetic energy has converted into elastic potential energy, creating a powerful inward restoring force.\n\n### WHAT TO NOTICE\nWatch how the block pauses for a fraction of a second at this outer limit before changing direction and accelerating backward.",
+  "candidate_response": "┌───────────────────────────────────────────────┐\n│               **Spring Stretched Peak**        │\n│               Runtime Overlay Response          │\n│                                               │\n│  • **Event ID**: spring_stretched               │\n│  • **Trigger Condition**: spring length > Lₘₐₓ │\n│  • **Timestamp**: {{CURRENT_TIME}}             │\n│  • **Source Module**: Physics Sandbox Engine    │\n│                                               │\n│  [▶️ View Full Log]   [⚙️ Reset Spring]        │\n└───────────────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────────────┐\n│               **Event Details**                │\n│                                               │\n│  **Current Length (x)**      : {{x}} m          │\n│  **Maximum Allowed Length**  : {{Lₘₐₓ}} m      │\n│  **Extension beyond limit**  : {{Δx}} m        │\n│  **Spring Constant (k)**     : {{k}} N/m      │\n│  **Rest Length (x₀)**         : {{x₀}} m       │\n│                                               │\n│  • The spring has exceeded its designed stretch │\n│    limit, potentially causing structural failure│\n│  • Immediate actions recommended:               │\n│      – Pause simulation                         │\n│      – Reset spring to safe length              │\n│                                               │\n│  [⏸️ Pause Simulation]   [🔄 Reset Spring]     │\n└───────────────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────────────┐\n│               **Formula Card**                 │\n│               Hooke’s Law (Force)              │\n│                                               │\n│        **F = -k · (x – x₀)**                   │\n│                                               │\n│  • **F** – Restoring force (N)                 │\n│  • **k** – Spring constant (N/m)               │\n│  • **x** – Current length (m)                  │\n│  • **x₀** – Rest length (m)                    │\n│                                               │\n│  [🔎 Explain Formula]   [🧪 Open Formula Lab]   │\n└───────────────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────────────┐\n│               **Formula Card**                 │\n│        Elastic Potential Energy (U)            │\n│                                               │\n│        **U = ½ k · (x – x₀)²**                 │\n│                                               │\n│  • Energy stored due to spring extension        │\n│  • Useful for assessing impact of over‑stretch │\n│                                               │\n│  [🔎 Explain Formula]   [🧪 Open Formula Lab]   │\n└───────────────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────────────┐\n│               **Parameter Table**              │\n│                                               │\n│  ┌───────────────┬───────────────┬────────────┐ │\n│  │ Parameter     │ Symbol        │ Value      │ │\n│  ├───────────────┼───────────────┼────────────┤ │\n│  │ Spring Constant│ k            │ {{k}} N/m │ │\n│  │ Rest Length    │ x₀           │ {{x₀}} m  │ │\n│  │ Max Length     │ Lₘₐₓ         │ {{Lₘₐₓ}} m│ │\n│  │ Current Length │ x            │ {{x}} m   │ │\n│  │ Over‑stretch   │ Δx = x‑Lₘₐₓ  │ {{Δx}} m  │ │\n│  └───────────────┴───────────────┴────────────┘ │\n│                                               │\n│  [💾 Export Table]   [🔍 Inspect Values]       │\n└───────────────────────────────────────────────┘\n\n\n\n┌───────────────────────────────────────────────┐\n│               **Suggested Actions**            │\n│                                               │\n│  1️⃣ **Pause** the simulation to prevent       │\n│      further stress on the spring.            │\n│  2️⃣ **Reset** the spring length to ≤ Lₘₐₓ.     │\n│  3️⃣ **Log** the event details for analysis.   │\n│  4️⃣ **Adjust** spring parameters (k, Lₘₐₓ) if │\n│      the design limits are too restrictive.   │\n│                                               │\n│  [✅ Action Completed]   [❓ Need Help?]       │\n└───────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the spring_stretched peak limit event, providing accurate formulas and explanations. However, it lacks a clear and concise introduction to the event, instead opting for a more technical and detailed approach. The quality of presentation is high, with a well-structured and readable format. To improve, the candidate could focus on providing a more beginner-friendly introduction to the topic, and consider adding more visual aids or diagrams to support the explanations. Additionally, some of the language and terminology used may be unfamiliar to beginners, so providing definitions or explanations for these terms could enhance the educational value of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 435,
+    "completionTokens": 1595,
+    "totalTokens": 2030
+  },
+  "candidate_latency_ms": 4581,
+  "candidate_cost_usd": 0.00102225,
+  "judge_token_usage": {
+    "promptTokens": 1622,
+    "completionTokens": 184,
+    "totalTokens": 1806
+  },
+  "judge_latency_ms": 5649,
+  "judge_cost_usd": 0.0014148,
+  "retry_count": 1,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:04:32.647Z"
+}

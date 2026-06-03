@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 64,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'spring_stretched' peak limit event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on an elastic deformation threshold benchmark.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe spring joint reached its maximum length extension threshold (`spring_stretched`) at the outer limit of its oscillation path.\n\n### WHAT CHANGED\nThe velocity vector dropped to zero, and the inward acceleration vector reached its maximum value.\n\n### SIMPLE WHY\nAt maximum extension, all kinetic energy has converted into elastic potential energy, creating a powerful inward restoring force.\n\n### WHAT TO NOTICE\nWatch how the block pauses for a fraction of a second at this outer limit before changing direction and accelerating backward.",
+  "candidate_response": "┌───────────────────────────────────────────────┐\n│                SPRING_STRETCHED               │\n│               PEAK LIMIT EVENT                │\n│───────────────────────────────────────────────│\n│ **Overview**                                    │\n│ The system has detected that the spring’s       │\n│ stretch displacement has reached its configured │\n│ peak limit. This event is emitted to prevent     │\n│ overload and potential damage.                  │\n│                                                 │\n│ **Event Payload**                               │\n│   • `event_id`   : `\"spring_stretched\"`          │\n│   • `timestamp`  : ISO‑8601 string               │\n│   • `stretch_mm` : numeric (current stretch)    │\n│   • `limit_mm`   : numeric (configured limit)   │\n│   • `sensor_id`  : identifier of the spring sensor│\n│                                                 │\n│ **Trigger Condition**                           │\n│   `stretch_mm >= limit_mm`                      │\n│   (evaluated on each sensor update)             │\n└───────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────┐\n│                RESPONSE OPTIONS                │\n│───────────────────────────────────────────────│\n│ 1️⃣ **Immediate Mitigation**                     │\n│    - Activate spring‑release actuator          │\n│    - Log mitigation action with `action_id`    │\n│                                                 │\n│ 2️⃣ **Soft Alert**                               │\n│    - Push notification to UI dashboard          │\n│    - Highlight sensor in red on the monitor     │\n│                                                 │\n│ 3️⃣ **Escalation**                               │\n│    - If limit breached > 3 times in 5 min →     │\n│      trigger `system_overload` alarm            │\n│                                                 │\n│ Choose one or combine as appropriate for your │\n│ safety policy.                                  │\n└───────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────┐\n│                SAMPLE CODE SNIPPET             │\n│───────────────────────────────────────────────│\n│ ```javascript                                     │\n│ // Listener for spring_stretched events        │\n│ onEvent('spring_stretched', (payload) => {      │\n│   if (payload.stretch_mm >= payload.limit_mm) {│\n│     // Immediate mitigation                    │\n│     activateActuator(payload.sensor_id);       │\n│     logAction({                                 │\n│       type: 'mitigation',                       │\n│       eventId: payload.event_id,                │\n│       timestamp: new Date().toISOString()       │\n│     });                                         │\n│   }                                             │\n│ });                                            │\n│ ```                                             │\n│                                                 │\n│ **Key Functions**                               │\n│   `activateActuator(sensorId)` – engages the    │\n│   mechanical release for the given sensor.      │\n│   `logAction(details)` – persists the action in │\n│   the system audit log.                         │\n└───────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────┐\n│                IMPORTANT NOTES                  │\n│───────────────────────────────────────────────│\n│ • Ensure the actuator is calibrated before       │\n│   deployment; an un‑calibrated release may cause │\n│   additional stress.                             │\n│ • Verify that the sensor’s firmware version ≥ 2.1│\n│   for accurate stretch reporting.                │\n│ • If the event repeats within a short interval, │\n│   consider raising the `limit_mm` threshold or  │\n│   inspecting the spring for fatigue.            │\n│                                                 │\n│ **Next Steps**                                   │\n│   1. Review the latest sensor diagnostics.      │\n│   2. Confirm actuator health status.            │\n│   3. Update the `limit_mm` if the spring has    │\n│      been replaced.                              │\n└───────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 6,
+    "quality": 8,
+    "educational": 5,
+    "overall_average": "6.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": true,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks conceptual correctness and semantic alignment with the gold reference answer. It introduces unrelated concepts such as event payload, trigger condition, response options, and sample code snippet, which are not relevant to the physics of a spring-stretched peak limit event. The response also fails to explain the physics behind the event, such as the conversion of kinetic energy to elastic potential energy and the resulting inward restoring force. The quality of presentation is good, with a clear and structured layout, but the content is not accurate or educational. The response is not suitable for a beginner and does not effectively teach the concept. Hallucination is detected in the form of fabricated concepts and unsupported reasoning. To improve, the candidate should focus on explaining the physics behind the spring-stretched peak limit event, using correct formulas and concepts, and providing a clear and concise explanation of the phenomenon.",
+  "candidate_token_usage": {
+    "promptTokens": 435,
+    "completionTokens": 1224,
+    "totalTokens": 1659
+  },
+  "candidate_latency_ms": 1112,
+  "candidate_cost_usd": 0.00079965,
+  "judge_token_usage": {
+    "promptTokens": 1423,
+    "completionTokens": 232,
+    "totalTokens": 1655
+  },
+  "judge_latency_ms": 7258,
+  "judge_cost_usd": 0.0014106,
+  "retry_count": 1,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:04:32.703Z"
+}

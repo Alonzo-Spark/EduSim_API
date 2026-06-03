@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 21,
+  "question": "Gravitation: State Newton’s law of gravitation.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's Law of Universal Gravitation states that every particle of matter in the universe attracts every other particle with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers.\n\n---\n\n## Characteristics\n\n* **Universal Action Range:** The attraction acts between all scale profiles, from small atomic fields up to massive galactic cluster structures.\n* **Inverse Square Law:** Doubling the distance separating two objects cuts their mutual gravitational pull down to one-fourth of its initial value.\n* **Central Force Property:** The force acts along the imaginary straight line connecting the centers of mass of the two interacting bodies.\n\n---\n\n## Formula\n\nThe gravitational force equation is written as:\n\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\nWhere:\n* $F$ represents the gravitational attraction force magnitude\n* $m_1, m_2$ represent the masses of the interacting bodies\n* $r$ represents the distance separating the mass centers\n* $G$ represents the Universal Gravitational Constant ($6.674 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$)\n\n---\n\n## Summary\n\nUniversal gravitation is a long-range mutual attraction force that links all matter, scaling up with mass density but dropping off sharply with distance.",
+  "candidate_response": "┌─────────────────────────────────────┐\n│ Definition                          │\n│                                     │\n│ Newton’s law of universal gravitation │\n│ states that every two point masses   │\n│ attract each other with a force that │\n│ is directly proportional to the     │\n│ product of their masses and inversely│\n│ proportional to the square of the   │\n│ distance between them.               │\n└─────────────────────────────────────┘\n\n\n┌─────────────────────────────────────┐\n│ Main Formula                        │\n│                                     │\n│   F = G \\frac{m_{1}\\,m_{2}}{r^{2}}   │\n│                                     │\n│ [ Explain Formula ]                 │\n│ [ Open Formula Lab ]                │\n└─────────────────────────────────────┘\n\n\n┌─────────────────────────────────────┐\n│ Key Concepts                        │\n│                                     │\n│ • **F** – Gravitational force (vector)│\n│ • **G** – Gravitational constant (≈ 6.674×10⁻¹¹ N·m²·kg⁻²)│\n│ • **m₁, m₂** – Masses of the two bodies│\n│ • **r** – Distance between the centers│\n│ • Force is attractive and acts along │\n│   the line joining the two masses.   │\n└─────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately states Newton's law of universal gravitation, including the correct formula and key concepts. However, it lacks the detailed explanation and characteristics of the law, such as the universal action range and inverse square law, which are present in the gold reference answer. Additionally, the formatting is mostly clear, but the use of ASCII art tables may not be the most effective way to present the information. To improve, the candidate could expand on the explanation of the law and its characteristics, and consider using a more traditional formatting approach.",
+  "candidate_token_usage": {
+    "promptTokens": 429,
+    "completionTokens": 739,
+    "totalTokens": 1168
+  },
+  "candidate_latency_ms": 1892,
+  "candidate_cost_usd": 0.00050775,
+  "judge_token_usage": {
+    "promptTokens": 1015,
+    "completionTokens": 167,
+    "totalTokens": 1182
+  },
+  "judge_latency_ms": 5473,
+  "judge_cost_usd": 0.0010098,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:38:43.079Z"
+}

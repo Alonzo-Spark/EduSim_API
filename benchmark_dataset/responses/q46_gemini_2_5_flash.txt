@@ -1,0 +1,103 @@
+This lesson will guide you through understanding Ohm's Law and its practical implications.
+
+## Ohm's Law
+
+### Quick Definition
+
+Ohm's law is a fundamental principle in electrical engineering that establishes a direct relationship between the voltage across a conductor, the current flowing through it, and its resistance.
+
+### Main Formula
+
+$$ V = IR $$
+
+This formula is the cornerstone of Ohm's Law.
+
+[Explain Formula]
+[Open Formula Lab]
+
+Where:
+*   $V$ is the voltage across the conductor, measured in volts (V).
+*   $I$ is the current flowing through the conductor, measured in amperes (A).
+*   $R$ is the resistance of the conductor, measured in ohms ($\Omega$).
+
+### Key Concepts
+
+*   **Voltage ($V$)**: Also known as electric potential difference, it is the force that pushes the electric current through a conductor.
+*   **Current ($I$)**: The flow of electric charge (electrons) through a conductor.
+*   **Resistance ($R$)**: The opposition to the flow of electric current.
+
+### Characteristics
+
+Ohm's Law describes the behavior of many common electrical components, especially resistors. It implies that for a given resistance, doubling the voltage will double the current.
+
+### Applications
+
+Ohm's Law is widely used in:
+
+*   **Circuit Analysis**: To calculate unknown values of voltage, current, or resistance in a circuit.
+*   **Resistor Design**: To determine appropriate resistor values for specific applications.
+*   **Troubleshooting**: To diagnose issues in electrical circuits by checking if the voltage, current, and resistance relationships hold true.
+
+## Limitations of Ohm's Law
+
+While incredibly useful, Ohm's Law is not universally applicable to all materials and conditions. Here are its primary limitations:
+
+### Non-Ohmic Materials
+
+Ohm's law is primarily applicable to **Ohmic materials**, which are materials where resistance remains constant regardless of the applied voltage or current. However, many materials are **non-Ohmic**.
+
+#### Characteristics of Non-Ohmic Materials
+
+*   **Non-linear V-I Relationship**: For these materials, the graph of voltage (V) versus current (I) is not a straight line, indicating that the resistance changes with varying voltage or current.
+*   **Examples**: Diodes, transistors, and vacuum tubes are classic examples of non-Ohmic devices. Their resistance varies significantly with the applied voltage or temperature.
+
+### Temperature Dependence
+
+The resistance of most conductors changes with temperature.
+
+#### Explanation
+
+*   **Increased Resistance with Temperature**: As the temperature of a conductor increases, the atoms within the material vibrate more vigorously. This increased vibration leads to more frequent collisions with the flowing electrons, thereby impeding their movement and increasing the resistance.
+*   **Ohm's Law Assumption**: Ohm's Law implicitly assumes a constant temperature. If the temperature changes, the resistance will change, and the linear relationship between V and I will no longer hold true with the original resistance value.
+
+### Unilateral Networks
+
+Ohm's Law does not apply to unilateral networks.
+
+#### Explanation
+
+*   **Directional Current Flow**: Unilateral networks are circuits where the current flows in one direction only. Diodes are excellent examples of components that create unilateral networks.
+*   **Varying Resistance**: The resistance offered by a diode, for instance, is very low when current flows in the forward direction (forward bias) and extremely high (ideally infinite) when current tries to flow in the reverse direction (reverse bias). This directional dependence of resistance means Ohm's Law, with a single constant 'R', cannot accurately describe its behavior.
+
+### Non-Linear Elements
+
+Ohm's Law is not applicable to non-linear elements.
+
+#### Explanation
+
+*   **Definition**: Non-linear elements are those whose current-voltage characteristics are not linear. Their resistance is not constant but varies with the applied voltage, current, or other factors.
+*   **Examples**:
+    *   **Thyristors**: Semiconductor devices used for power control that exhibit complex V-I characteristics.
+    *   **Arc Lamps**: The resistance of an arc lamp changes significantly with the voltage across it, leading to a non-linear relationship.
+    *   **Zener Diodes**: These diodes maintain a constant voltage across them over a wide range of currents in their breakdown region, which is a non-Ohmic characteristic.
+
+### Important Considerations
+
+*   **Ideal vs. Real-World**: Ohm's Law is an idealization that works very well for many practical applications involving simple resistors and conductors under stable conditions.
+*   **Advanced Analysis**: For non-Ohmic materials and complex circuits, more advanced analytical tools and models are required beyond simple Ohm's Law.
+
+### Summary
+
+| Feature                 | Ohmic Materials/Conditions | Non-Ohmic Materials/Conditions |
+| :---------------------- | :------------------------- | :----------------------------- |
+| **V-I Graph**           | Straight line              | Non-linear curve               |
+| **Resistance (R)**      | Constant                   | Varies with V, I, or other factors |
+| **Temperature**         | Assumed constant           | Significant impact on R        |
+| **Examples**            | Resistors, copper wire     | Diodes, transistors, arc lamps |
+| **Applicability**       | Simple DC circuits         | Advanced electronics, power devices |
+
+### Suggested Questions
+
+1.  Describe a scenario where Ohm's Law would be directly applicable and explain how you would use it.
+2.  Can a light bulb be considered an Ohmic device? Justify your answer.
+3.  Why is it important to understand the limitations of Ohm's Law in practical circuit design?

@@ -1,0 +1,192 @@
+┌─────────────────────────────────────┐
+│ **Introduction**                    │
+│                                     │
+│ Resonance is a phenomenon where a │
+│ system oscillates with larger │
+│ amplitude when driven at a particular│
+│ frequency called its **natural** or │
+│ **resonant** frequency.  It appears│
+│ in many domains – mechanical, acoustic│
+│ and electrical – and is essential│
+│ for both useful applications (e.g.,│
+│ musical instruments, radios) and │
+│ hazardous failures (e.g., bridge│
+│ collapses).                           │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Definition**                      │
+│                                     │
+│ *Resonance* = the tendency of a system│
+│ to store and easily transfer energy │
+│ between two or more storage modes   │
+│ when the frequency of external forcing│
+│ matches the system’s natural frequency.│
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Key Concepts**                    │
+│                                     │
+│ • **Natural Frequency (f₀)** – the│
+│   frequency at which a system would│
+│   oscillate if not driven or damped.│
+│ • **Driving Frequency (f)** – the│
+│   frequency of the external force.│
+│ • **Amplitude Amplification** –│
+│   near f₀ the response amplitude can│
+│   become many times larger than the│
+│   input amplitude.│
+│ • **Quality Factor (Q)** – a measure│
+│   of how sharp the resonance peak is;│
+│   high Q → narrow, high peak.│
+│ • **Damping** – energy loss that │
+│   reduces the peak height and widens│
+│   the resonance.│
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Characteristics**                 │
+│                                     │
+│ 1️⃣ **Peak Response** – maximum at   │
+│    f ≈ f₀.                           │
+│ 2️⃣ **Phase Shift** – 0° far below f₀,│
+│    90° at f₀, 180° far above f₀.     │
+│ 3️⃣ **Energy Transfer** – efficient │
+│    between kinetic and potential │
+│    forms (mechanical) or electric │
+│    and magnetic fields (electrical).│
+│ 4️⃣ **Sensitivity to Damping** –    │
+│    more damping → lower peak,      │
+│    broader response.                │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Formula: Mechanical Resonance**   │
+│                                     │
+│     f = \frac{1}{2\pi}\sqrt{\frac{k}{m}}   │
+│                                     │
+│ [ Explain Formula ]                 │
+│ [ Open Formula Lab ]                │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Formula: Electrical LC Resonance**│
+│                                     │
+│     \omega = \frac{1}{\sqrt{LC}}   │
+│     f = \frac{1}{2\pi\sqrt{LC}}     │
+│                                     │
+│ [ Explain Formula ]                 │
+│ [ Open Formula Lab ]                │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Formula: Damped RLC Circuit**     │
+│                                     │
+│     \omega_d = \sqrt{\frac{1}{LC} - \left(\frac{R}{2L}\right)^2} │
+│                                     │
+│ [ Explain Formula ]                 │
+│ [ Open Formula Lab ]                │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Applications**                    │
+│                                     │
+│ • **Musical Instruments** – strings│
+│   and air columns vibrate at resonant│
+│   frequencies to produce notes.    │
+│ • **Radio & TV Receivers** – LC circuits│
+│   select a narrow band of frequencies.│
+│ • **Medical Imaging** – MRI uses│
+│   resonant nuclear spin frequencies.│
+│ • **Structural Engineering** – designers│
+│   avoid resonant frequencies of bridges│
+│   and skyscrapers.                 │
+│ • **Sensors** – quartz crystal oscillators│
+│   rely on precise resonant frequency.│
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Advantages**                      │
+│                                     │
+│ ✔️ **High Energy Efficiency** – at│
+│    resonance, small inputs produce│
+│    large outputs.                  │
+│ ✔️ **Selectivity** – narrow bandwidth│
+│    filters (e.g., radio tuners).   │
+│ ✔️ **Sensitivity** – useful for│
+│    detection (e.g., mass‑sensing).│
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Disadvantages / Risks**           │
+│                                     │
+│ ⚠️ **Structural Failure** – if a│
+│    structure is excited near its│
+│    natural frequency (e.g., Tacoma│
+│    Narrows Bridge), catastrophic│
+│    damage can occur.               │
+│ ⚠️ **Unwanted Noise** – resonant│
+│    peaks can cause audible hum in│
+│    audio equipment.                │
+│ ⚠️ **Energy Loss in Damping** – too│
+│    much damping reduces useful│
+│    amplification.                 │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Important Notes**                 │
+│                                     │
+│ • Resonance magnitude depends on   │
+│   the **Quality Factor (Q)**.│
+│ • Damping can be intentional (e.g.,│
+│   shock absorbers) or accidental.│
+│ • In multi‑degree‑of‑freedom systems│
+│   there are multiple resonant modes.│
+│ • Safety design often includes│
+│   **detuning** or **dampers** to│
+│   shift f₀ away from operating frequencies.│
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Summary**                         │
+│                                     │
+│ Resonance amplifies oscillations when│
+│ the driving frequency matches the│
+│ natural frequency.  It is described│
+│ by simple formulas for mechanical│
+│ (f = 1/2π√(k/m)) and electrical (f =│
+│ 1/2π√(LC)) systems, modified by│
+│ damping.  Applications range from│
+│ music to radios, while risks include│
+│ structural failures if not controlled.│
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ **Suggested Questions**             │
+│                                     │
+│ 1️⃣ What determines the natural frequency│
+│    of a mass‑spring system?         │
+│ 2️⃣ How does increasing the damping│
+│    coefficient affect the resonance│
+│    peak?                            │
+│ 3️⃣ Why are LC circuits used as tunable│
+│    filters in radios?               │
+│ 4️⃣ Explain how the Tacoma Narrows│
+│    Bridge disaster illustrates│
+│    mechanical resonance.           │
+│ 5️⃣ How does the quality factor (Q)│
+│    influence the bandwidth of a│
+│    resonant sensor?                 │
+└─────────────────────────────────────┘

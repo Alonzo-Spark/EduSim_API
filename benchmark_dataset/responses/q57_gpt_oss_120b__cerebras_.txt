@@ -1,0 +1,138 @@
+┌───────────────────────────────────────────────────────┐
+│ Introduction                                            │
+│                                                       │
+│ In a forced (driven) harmonic oscillator a sinusoidal   │
+│ external force pushes the mass back and forth.  The    │
+│ system’s response depends strongly on the **driven     │
+│ frequency** (ω_d).  By varying ω_d you can watch the    │
+│ motion change dramatically – from gentle wiggles to   │
+│ dramatic resonant swings and back again.               │
+└───────────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────────────┐
+│ Definition                                              │
+│                                                       │
+│ A *forced harmonic oscillator* consists of a mass      │
+│ m attached to a spring (constant k) and a damper       │
+│ (damping coefficient b), subjected to an external       │
+│ sinusoidal force F(t)=F₀ cos(ω_d t).                     │
+│                                                       │
+│ The governing equation is                               │
+│                                                       │
+│     m x¨ + b x˙ + k x = F₀ cos(ω_d t)                    │
+│                                                       │
+│ where x(t) is the displacement.                        │
+└───────────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────────────┐
+│ Key Concepts                                            │
+│                                                       │
+│ • **Natural frequency** ω₀ = √(k/m)                     │
+│ • **Damping ratio** ζ = b/(2√(km))                     │
+│ • **Driven frequency** ω_d – frequency of the          │
+│   external force.                                      │
+│ • **Resonance** – when ω_d ≈ ω₀ (low damping) the      │
+│   amplitude peaks.                                     │
+│ • **Phase shift** – the lag between force and           │
+│   displacement grows from 0° to 180° as ω_d increases. │
+└───────────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────────────┐
+│ Main Formula                                            │
+│                                                       │
+│   m x¨ + b x˙ + k x = F₀ cos(ω_d t)                    │
+│                                                       │
+│   • **Amplitude**   A(ω_d) =                           │
+│       F₀ / √[(k − m ω_d²)² + (b ω_d)²]                │
+│   • **Phase**       φ(ω_d) = arctan( b ω_d / (k − m ω_d²) )│
+│                                                       │
+│   [ Explain Formula ]   [ Open Formula Lab ]          │
+└───────────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────────────┐
+│ Visual Effect of Increasing Driven Frequency             │
+│                                                       │
+│ 1️⃣ **Very low ω_d (ω_d << ω₀)**                       │
+│    • Motion follows the driving force slowly.          │
+│    • Small amplitude, displacement in‑phase with force.│
+│                                                       │
+│ 2️⃣ **Approaching resonance (ω_d → ω₀)**                │
+│    • Amplitude grows dramatically – the system “      │
+│      “rings”.                                          │
+│    • Phase lag approaches 90°.                         │
+│                                                       │
+│ 3️⃣ **At resonance (ω_d = ω₀, low damping)**           │
+│    • Peak amplitude (the highest visible swing).      │
+│    • The system appears to “beat” if the drive is      │
+│      slightly off‑center.                               │
+│                                                       │
+│ 4️⃣ **Beyond resonance (ω_d > ω₀)**                    │
+│    • Amplitude declines again.                         │
+│    • Phase lag moves toward 180° – the mass moves       │
+│      opposite to the force.                            │
+│                                                       │
+│ 5️⃣ **Very high ω_d (ω_d >> ω₀)**                      │
+│    • The mass can barely keep up, producing tiny,      │
+│      rapid vibrations.                                 │
+│    • Motion is nearly 180° out of phase.               │
+└───────────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────────────┐
+│ Amplitude vs. Driven Frequency (Sample Data)            │
+│                                                       │
+│ ┌─────────────────────────────────────────────────────┐ │
+│ │ ω_d/ω₀ │   A/A_max   │ Phase (°)                     │ │
+│ ├────────┼────────────┼───────────────────────────────┤ │
+│ │ 0.5    │   0.20     │   10                           │ │
+│ │ 0.8    │   0.55     │   45                           │ │
+│ │ 0.9    │   0.80     │   70                           │ │
+│ │ 1.0    │   1.00     │   90   ← **Resonance**          │ │
+│ │ 1.1    │   0.85     │  110                           │ │
+│ │ 1.5    │   0.40     │  150                           │ │
+│ │ 2.0    │   0.15     │  170                           │ │
+│ └─────────────────────────────────────────────────────┘ │
+│                                                       │
+│   [ Interactive Plot ]   [ Export Table ]             │
+└───────────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────────────┐
+│ Summary                                                 │
+│                                                       │
+│ • Increasing the driven frequency moves the system    │
+│   through three visual regimes: low‑amplitude,        │
+│   resonant high‑amplitude, and high‑frequency low‑     │
+│   amplitude.                                           │
+│ • The phase shift evolves from 0° → 90° → 180° as ω_d  │
+│   sweeps past the natural frequency.                  │
+│ • Damping controls how sharp the resonance peak is;   │
+│   stronger damping smooths the transition.            │
+└───────────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────────────┐
+│ Suggested Questions                                     │
+│                                                       │
+│ 1️⃣ What happens to the energy stored in the oscillator │
+│    as the driven frequency passes through resonance?   │
+│ 2️⃣ How does increasing the damping coefficient b affect │
+│    the visual amplitude curve?                         │
+│ 3️⃣ If the driving force is a square wave instead of    │
+│    sinusoidal, how would the visual response change?   │
+│ 4️⃣ Explain why the phase lag cannot exceed 180° in a   │
+│    linear forced oscillator.                           │
+│                                                       │
+│   [ Show Answers ]   [ Try a Simulation ]              │
+└───────────────────────────────────────────────────────┘

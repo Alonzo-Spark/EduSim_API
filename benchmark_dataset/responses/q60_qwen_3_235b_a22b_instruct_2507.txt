@@ -1,0 +1,74 @@
+┌─────────────────────────────────────┐
+│  Sandbox Runtime Overlay            │
+│  Event: gravity_changed → zero-g   │
+└─────────────────────────────────────┘
+
+⚙️ **System State Update**  
+Gravity magnitude set to **0.0 m/s²**  
+Environment transitioning to microgravity (free-fall equilibrium)
+
+---
+
+┌─────────────────────────────────────┐
+│  Physics Engine Reconfiguration     │
+│  Applying zero-g behavioral rules   │
+└─────────────────────────────────────┘
+
+🔄 Affected Systems:
+- [x] Rigid body dynamics → inertial drift mode
+- [x] Collision response → momentum-preserving bounce
+- [x] Joint constraints → floating anchor stabilization
+- [x] Fluid simulation → surface-tension dominant
+
+⚠️ Note: Friction-based locomotion disabled. Activate thruster or tether systems for mobility.
+
+---
+
+📌 **Key Behavioral Changes**
+
+| System              | Pre-Event (9.8 m/s²)     | Post-Event (0.0 m/s²)         |
+|---------------------|--------------------------|-------------------------------|
+| Object Trajectory   | Parabolic arcs           | Linear inertia paths          |
+| Resting Contact     | Stable support            | Persistent float or adhesion  |
+| Rotational Motion   | Torque + gravity tilt     | Pure angular momentum         |
+| Character Movement  | Walking/jumping           | Push-recoil translation       |
+
+---
+
+💡 **Recommended Actions**
+1. Enable `impulse_control` for navigation
+2. Activate magnetic anchoring where needed
+3. Update AI pathfinding to 3D volumetric navigation
+4. Calibrate sensor fusion (accelerometer bias reset)
+
+---
+
+🧪 **Formula Card: Inertial Drift Velocity**
+
+$$
+\vec{v}(t) = \vec{v}_0 + \vec{a}_{\text{net}} \cdot t
+$$
+
+In zero-g: $\vec{a}_{\text{net}} = 0$ → $\vec{v}(t) = \vec{v}_0$
+
+┌───────────────────────────┐
+│ Drift Motion Model        │
+│                           │
+│     $$\vec{v}(t) = \vec{v}_0$$     │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+> Without external forces, all objects maintain constant velocity. "Falling" ceases; "floating" becomes default state.
+
+---
+
+📡 **Overlay Status**  
+✅ Gravity field deactivated  
+✅ Dynamics rebalanced  
+✅ User notification broadcast  
+🔁 Monitoring for secondary events: `air_resistance_changed`, `magnetic_field_active`
+
+🔁 **Sandbox stabilized in zero-g mode**  
+Ready for next instruction.

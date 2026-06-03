@@ -1,0 +1,75 @@
+### 📘 Interactive Lesson: Projectile Motion Dynamics
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Introduction**                                                         │
+│                                                                          │
+│ When an object is thrown into the air at an angle, it follows a parabolic│
+│ path. The **Maximum Height ($H$)** is the highest vertical point reached │
+│ by the projectile relative to the launch level. At this specific peak,   │
+│ the vertical component of velocity momentarily becomes zero.             │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Key Concepts**                                                         │
+│                                                                          │
+│ • **Initial Velocity ($u$):** The speed at which the object is launched.  │
+│ • **Launch Angle ($\theta$):** The angle relative to the horizontal.      │
+│ • **Vertical Component ($u_y$):** $u \sin\theta$                         │
+│ • **Acceleration ($a_y$):** $-g$ (acting downwards).                     │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **The Derivation Process**                                               │
+│                                                                          │
+│ We use the third equation of kinematics for the vertical motion:         │
+│                                                                          │
+│ 1. At the peak, final vertical velocity $v_y = 0$.                       │
+│ 2. Use the formula: $v_y^2 = u_y^2 + 2a_y s$.                            │
+│ 3. Substitute $s = H$, $u_y = u \sin\theta$, and $a_y = -g$.             │
+│ 4. $0 = (u \sin\theta)^2 - 2gH$.                                         │
+│ 5. Rearrange to solve for $H$.                                           │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Main Formula: Maximum Height**                                         │
+│                                                                          │
+│ $$H = \frac{u^2 \sin^2\theta}{2g}$$                                      │
+│                                                                          │
+│ **[ Variable Definitions ]**                                             │
+│ • $u$: Initial launch velocity ($m/s$)                                   │
+│ • $\theta$: Launch angle (degrees/radians)                               │
+│ • $g$: Acceleration due to gravity ($\approx 9.8 \, m/s^2$)              │
+│                                                                          │
+│ **[ Open Formula Lab ]**                                                 │
+│ *Note: Increasing $\theta$ towards $90^\circ$ increases $H$.*            │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Characteristics of Maximum Height**                                    │
+│                                                                          │
+│ | Parameter | Value at $H$ | Effect on Height |                          │
+│ | :--- | :--- | :--- |                                                   │
+│ | Vertical Velocity | $0$ | Defines the turning point |                   │
+│ | Horizontal Velocity | $u \cos\theta$ | Remains constant |                │
+│ | Kinetic Energy | Minimum | Only horizontal KE remains |                 │
+│ | Potential Energy | Maximum | $mgh$ is at its peak |                      │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Important Notes**                                                      │
+│                                                                          │
+│ ⚠️ **Maximum Possible Height:** For a given velocity, the height is      │
+│ maximum when $\sin\theta = 1$, which occurs at $\theta = 90^\circ$       │
+│ (vertical launch).                                                       │
+│                                                                          │
+│ ⚠️ **Gravity Dependency:** $H$ is inversely proportional to gravity. On   │
+│ the Moon ($1/6g$), a projectile will go 6 times higher than on Earth.    │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Suggested Questions**                                                  │
+│                                                                          │
+│ 1. What happens to the maximum height if the launch velocity is doubled? │
+│ 2. Show that at $\theta = 45^\circ$, the Range is four times the Height. │
+│ 3. Does the mass of the projectile affect the maximum height reached?    │
+└──────────────────────────────────────────────────────────────────────────┘

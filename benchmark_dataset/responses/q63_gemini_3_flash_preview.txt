@@ -1,0 +1,73 @@
+```json
+{
+  "action": "RENDER_INTERACTIVE_TEXTBOOK",
+  "layout": "DASHBOARD",
+  "sections": [
+    {
+      "type": "INTRODUCTION",
+      "title": "System Update: Friction Coefficient Change",
+      "content": "The simulation has detected a change in the surface interaction between the braking platform and the vehicle. This adjustment directly impacts the deceleration rate and stopping distance."
+    },
+    {
+      "type": "DEFINITION",
+      "title": "Kinetic Friction ($\mu_k$)",
+      "content": "Kinetic friction is the force that opposes the relative moving motion of two surfaces. In this braking track context, it determines how effectively kinetic energy is converted into thermal energy."
+    },
+    {
+      "type": "FORMULA_CARD",
+      "title": "Braking Force Equation",
+      "formula": "F_{friction} = \mu_k \cdot N",
+      "variables": {
+        "F_{friction}": "Total frictional force (Newtons)",
+        "\mu_k": "Coefficient of kinetic friction (dimensionless)",
+        "N": "Normal force ($m \cdot g$)"
+      },
+      "context": "Calculates the instantaneous force available to counteract the vehicle's forward momentum."
+    },
+    {
+      "type": "FORMULA_CARD",
+      "title": "Stopping Distance (Work-Energy)",
+      "formula": "d = \frac{v^2}{2\mu_k g}",
+      "variables": {
+        "d": "Stopping distance (meters)",
+        "v": "Initial velocity (m/s)",
+        "g": "Gravity (9.81 m/s²)"
+      },
+      "context": "Predicts the required track length based on the new friction value."
+    },
+    {
+      "type": "TABLE",
+      "title": "Impact Analysis: Surface Material Presets",
+      "headers": ["Surface Type", "Estimated $\mu_k$", "Braking Efficiency", "Heat Generation"],
+      "rows": [
+        ["Dry Concrete", "0.70", "High", "High"],
+        ["Wet Asphalt", "0.40", "Moderate", "Medium"],
+        ["Icy Track", "0.10", "Critical Low", "Low"],
+        ["Rubberized Pad", "0.90", "Maximum", "Extreme"]
+      ]
+    },
+    {
+      "type": "CHARACTERISTICS",
+      "title": "Dynamic Effects",
+      "items": [
+        "**Heat Dissipation:** Lower friction requires longer durations of contact, spreading heat over more surface area.",
+        "**Deceleration Rate:** Directly proportional to the friction coefficient ($a = \mu \cdot g$).",
+        "**Tire Wear:** Higher friction coefficients generally correlate with increased material ablation."
+      ]
+    },
+    {
+      "type": "IMPORTANT_NOTES",
+      "title": "Safety Thresholds",
+      "content": "If $\mu_k$ drops below 0.15, the braking track length must be extended by 200% to prevent platform overshoot. Ensure ABS (Anti-lock Braking System) logic is recalibrated for the current surface value."
+    },
+    {
+      "type": "SUGGESTED_QUESTIONS",
+      "questions": [
+        "How does doubling the initial velocity affect the stopping distance given the new friction value?",
+        "Why does the mass of the vehicle cancel out in the basic stopping distance formula?",
+        "What is the difference between static and kinetic friction in emergency braking?"
+      ]
+    }
+  ]
+}
+```

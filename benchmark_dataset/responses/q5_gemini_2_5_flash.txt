@@ -1,0 +1,79 @@
+## Analyzing Train Retardation
+
+Let's break down this problem to understand how to calculate the train's retardation.
+
+### Quick Definition
+
+Retardation, also known as deceleration, is the rate at which an object slows down. It's essentially negative acceleration.
+
+### Given Values
+
+Here's what we know from the problem statement:
+
+*   **Initial Velocity ($u$)**: The train's speed before applying brakes.
+    *   $u = 20 \text{ m/s}$
+*   **Final Velocity ($v$)**: The train's speed after stopping.
+    *   $v = 0 \text{ m/s}$ (since the train stops)
+*   **Time Taken ($t$)**: The duration over which the train slows down.
+    *   $t = 10 \text{ s}$
+
+### Main Formula
+
+To calculate the retardation (which is acceleration in the opposite direction of motion), we can use the first equation of motion:
+
+$$
+v = u + at
+$$
+
+Where:
+*   $v$ = final velocity
+*   $u$ = initial velocity
+*   $a$ = acceleration
+*   $t$ = time
+
+We need to rearrange this formula to solve for $a$:
+
+$$
+a = \frac{v - u}{t}
+$$
+
+┌───────────────────────────┐
+│ **Main Formula**          │
+│                           │
+│ $$ a = \frac{v - u}{t} $$ │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+### Calculation
+
+Now, let's substitute the given values into the formula:
+
+1.  **Substitute values**:
+    $a = \frac{0 \text{ m/s} - 20 \text{ m/s}}{10 \text{ s}}$
+
+2.  **Perform subtraction**:
+    $a = \frac{-20 \text{ m/s}}{10 \text{ s}}$
+
+3.  **Perform division**:
+    $a = -2 \text{ m/s}^2$
+
+### Interpretation
+
+The calculated acceleration is $-2 \text{ m/s}^2$. The negative sign indicates that the acceleration is in the opposite direction of the initial motion, meaning the train is slowing down.
+
+### Conclusion
+
+Therefore, the retardation of the train is $2 \text{ m/s}^2$.
+
+### Important Notes
+
+*   **Units**: Always pay attention to units. In this case, velocity is in meters per second (m/s) and time is in seconds (s), so acceleration is in meters per second squared (m/s$^2$).
+*   **Retardation vs. Acceleration**: Retardation is simply the magnitude of negative acceleration. If the acceleration is $-X \text{ m/s}^2$, the retardation is $X \text{ m/s}^2$.
+
+### Suggested Questions
+
+*   How would the retardation change if the train stopped in 5 seconds instead of 10 seconds?
+*   What distance would the train cover during this braking period?
+*   Describe a real-world scenario where understanding retardation is crucial.

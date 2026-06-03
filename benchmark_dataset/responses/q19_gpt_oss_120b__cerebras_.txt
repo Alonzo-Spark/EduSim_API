@@ -1,0 +1,121 @@
+┌───────────────────────────────────────────────┐  
+│ Introduction                                    │  
+│                                               │  
+│ Kinetic energy is a core concept in physics   │  
+│ that measures the amount of energy an object   │  
+│ possesses because of its motion. It plays a   │  
+│ vital role in mechanics, engineering, and      │  
+│ everyday phenomena such as vehicles, project- │  
+│ ils, and sports. Understanding its definition   │  
+│ and how it is derived lays the groundwork for   │  
+│ deeper studies of work, power, and energy      │  
+│ conservation.                                   │  
+└───────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────┐  
+│ Definition                                      │  
+│                                               │  
+│ **Kinetic Energy (KE)** is the energy associated│  
+│ with the motion of a body of mass *m* moving   │  
+│ with speed *v*. It is a scalar quantity, always│  
+│ non‑negative, and depends only on the magnitude │  
+│ of the velocity, not its direction.             │  
+└───────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────┐  
+│ Derivation                                      │  
+│                                               │  
+│ The derivation starts from the **work‑energy   │  
+│ principle**: the work *W* done by a net force   │  
+│ on an object equals the change in its kinetic   │  
+│ energy.                                           │  
+│                                               │  
+│ 1. Consider a particle of constant mass *m* that│  
+│    experiences a constant net force **F**     │  
+│    along the direction of motion.               │  
+│                                               │  
+│ 2. The infinitesimal work *dW* done over a      │  
+│    small displacement *dx* is                     │  
+│    \[ dW = F \, dx \]                           │  
+│                                               │  
+│ 3. By Newton’s second law, **F = m a**, where   │  
+│    *a* is the acceleration. Substituting gives   │  
+│    \[ dW = m\,a\,dx \]                         │  
+│                                               │  
+│ 4. Acceleration *a* can be written as          │  
+│    \[ a = \frac{dv}{dt} \] and the displacement │  
+│    *dx* as \[ dx = v\,dt \]. Hence               │  
+│    \[ dW = m\,\frac{dv}{dt}\,v\,dt = m\,v\,dv \] │  
+│                                               │  
+│ 5. Integrate both sides from an initial speed   │  
+│    *v₀* (often zero) to a final speed *v*:       │  
+│    \[ \int_{W_0}^{W} dW = \int_{v_0}^{v} m\,v\,dv \] │  
+│    \[ W - W_0 = \frac{1}{2} m (v^{2} - v_0^{2}) \] │  
+│                                               │  
+│ 6. If the object starts from rest (*v₀ = 0*) and │  
+│    we set the reference work *W₀ = 0*, the net   │  
+│    work equals the kinetic energy acquired:     │  
+│    \[ KE = \frac{1}{2} m v^{2} \]                │  
+│                                               │  
+│ This result shows that kinetic energy grows     │  
+│ with the square of the speed and linearly with   │  
+│ the mass of the object.                         │  
+└───────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────┐  
+│ Main Formula                                     │  
+│                                               │  
+│      \displaystyle KE = \frac{1}{2} \, m \, v^{2} │  
+│                                               │  
+│ [ Explain Formula ]   [ Open Formula Lab ]      │  
+└───────────────────────────────────────────────┘  
+
+<!--
+{
+  "formula": "KE = \\frac{1}{2} m v^{2}",
+  "title": "Kinetic Energy",
+  "surroundingContext": "Derived from the work‑energy principle for a particle of constant mass moving under a net force.",
+  "variables": {
+    "KE": "kinetic energy (joules)",
+    "m": "mass of the object (kilograms)",
+    "v": "speed of the object (meters per second)"
+  }
+}
+-->
+
+┌───────────────────────────────────────────────┐  
+│ Applications                                    │  
+│                                               │  
+│ • Vehicle dynamics – estimating fuel consumption│  
+│ • Sports – analyzing projectile motion         │  
+│ • Engineering – designing safety systems       │  
+│ • Astronomy – calculating orbital energies      │  
+│ • Medicine – kinetic energy of particles in     │  
+│   radiation therapy                             │  
+└───────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────┐  
+│ Summary                                         │  
+│                                               │  
+│ • Kinetic energy quantifies motion‑related      │  
+│   energy.                                      │  
+│ • For a body of mass *m* moving at speed *v*,   │  
+│   KE = ½ m v².                                 │  
+│ • It follows from the work‑energy principle     │  
+│   and depends only on speed magnitude.          │  
+└───────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────┐  
+│ Suggested Questions                              │  
+│                                               │  
+│ 1. How does kinetic energy change if the speed  │  
+│    of an object is doubled?                     │  
+│ 2. Why does kinetic energy not depend on the   │  
+│    direction of motion?                        │  
+│ 3. A 1500 kg car traveling at 20 m/s collides   │  
+│    with a stationary truck. What is the kinetic │  
+│    energy of the car before impact?             │  
+│ 4. How would the formula be modified for a       │  
+│    relativistic particle moving at speeds close │  
+│    to the speed of light?                        │  
+└───────────────────────────────────────────────┘  

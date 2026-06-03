@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 5,
+  "question": "A train moving at 20 m/s applies brakes and stops after 10 seconds. Calculate retardation.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Kinematics Problem\n\n### Problem\nA train moving at $20 \\text{ m/s}$ applies brakes and stops after $10 \\text{ seconds}$. Calculate retardation.\n\n### Given\n* Initial velocity ($u$) = $20 \\text{ m/s}$\n* Final velocity ($v$) = $0 \\text{ m/s}$ (since it stops)\n* Time taken ($t$) = $10 \\text{ s}$\n\n### Formula\n$$a = \\frac{v - u}{t}$$\n\n### Substitution\n$$a = \\frac{0 - 20}{10}$$\n\n### Calculation\n$$a = \\frac{-20}{10}$$\n\n$$a = -2 \\text{ m/s}^2$$\n\nRetardation is the magnitude of negative acceleration:\n$$\\text{Retardation} = -a$$\n\n### Final Answer\n**Retardation = $2 \\text{ m/s}^2$**\n\n### Interpretation\nThis indicates that the brakes cause the train's velocity to decrease uniformly at a steady rate of $2 \\text{ meters per second}$ every single second until it reaches a complete standstill.",
+  "candidate_response": "┌───────────────────────────────┐  \n│ Introduction                     │  \n│                                   │  \n│ A train is travelling at a constant  │  \n│ speed of **20 m s⁻¹**. The driver     │  \n│ applies the brakes and brings the   │  \n│ train to a complete stop in **10 s**. │  \n│ We need to determine the constant   │  \n│ **retardation** (negative acceleration) │  \n│ that produces this motion.          │  \n└───────────────────────────────┘  \n\n┌───────────────────────────────┐  \n│ Given Data                       │  \n│                                   │  \n│ • Initial speed,  u = 20 m s⁻¹     │  \n│ • Final speed,    v = 0 m s⁻¹      │  \n│ • Time,           t = 10 s        │  \n└───────────────────────────────┘  \n\n┌───────────────────────────────┐  \n│ Main Formula                     │  \n│                                   │  \n│          a = \\frac{v - u}{t}      │  \n│                                   │  \n│ [ Explain Formula ]               │  \n│ [ Open Formula Lab ]               │  \n└───────────────────────────────┘  \n\n┌───────────────────────────────┐  \n│ Calculation Steps                │  \n│                                   │  \n│ 1️⃣ Insert the known values:      │  \n│    a = (0 m s⁻¹ − 20 m s⁻¹) / 10 s   │  \n│                                   │  \n│ 2️⃣ Perform the subtraction:      │  \n│    a = (‑20 m s⁻¹) / 10 s          │  \n│                                   │  \n│ 3️⃣ Divide:                        │  \n│    a = ‑2 m s⁻²                  │  \n│                                   │  \n│ The negative sign indicates that │  \n│ the acceleration is opposite to   │  \n│ the direction of motion – i.e., a  │  \n│ **retardation**.                  │  \n└───────────────────────────────┘  \n\n┌───────────────────────────────┐  \n│ Answer                           │  \n│                                   │  \n│ The train’s retardation is **‑2 m s⁻²**. │  \n│ (Magnitude = 2 m s⁻², direction opposite to motion) │  \n└───────────────────────────────┘  \n\n┌───────────────────────────────┐  \n│ Summary                          │  \n│                                   │  \n│ • Use the linear motion equation   │  \n│   \\(a = (v-u)/t\\) when initial and │  \n│   final speeds and time are known. │  \n│ • Plugging the train’s data gives │  \n│   a = ‑2 m s⁻², meaning the train   │  \n│   decelerates at 2 m s⁻².          │  \n└───────────────────────────────┘  \n\n┌───────────────────────────────┐  \n│ Suggested Questions              │  \n│                                   │  \n│ 1️⃣ If the train had stopped in 5 s, │  \n│    what would the retardation be? │  \n│ 2️⃣ How far does the train travel │  \n│    while stopping?                │  \n│ 3️⃣ If the brakes provide a constant │  \n│    retardation of 1.5 m s⁻², how   │  \n│    long would it take to stop?    │  \n└───────────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, with correct application of the formula for acceleration and proper interpretation of the negative sign as retardation. The layout and formatting are also well-structured, making it easy to follow. However, the quality score is slightly lower due to the excessive use of boxes and numbered steps, which, while helpful, could be simplified for better readability. The educational score is high because the response clearly explains the concept of retardation, provides a step-by-step solution, and even suggests additional questions for further exploration, making it very beginner-friendly and pedagogically effective. Overall, the response demonstrates a strong understanding of the physics concept and effectively communicates it.",
+  "candidate_token_usage": {
+    "promptTokens": 438,
+    "completionTokens": 1118,
+    "totalTokens": 1556
+  },
+  "candidate_latency_ms": 6446,
+  "candidate_cost_usd": 0.0007365,
+  "judge_token_usage": {
+    "promptTokens": 1469,
+    "completionTokens": 193,
+    "totalTokens": 1662
+  },
+  "judge_latency_ms": 6262,
+  "judge_cost_usd": 0.0013446,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:01:47.336Z"
+}

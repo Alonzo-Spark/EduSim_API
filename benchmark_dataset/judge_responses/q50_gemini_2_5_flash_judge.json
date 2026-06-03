@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 50,
+  "question": "Define electrical power and derive the relation P = VI.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectrical power is the rate at which electrical energy is consumed or converted into other forms of energy, such as heat, light, or mechanical work, within an electric circuit.\n\n---\n\n## Formula\n\nThe primary electrical power expression is stated as:\n\n$$P = VI$$\n\nWhere:\n* $P$ represents the electrical power measured in Watts ($\\text{W}$)\n* $V$ represents the potential difference across the circuit element\n* $I$ represents the electric current passing through the element\n\n---\n\n## Derivations\n\nConsider a constant current $I$ flowing through an electrical component across a potential difference $V$ over an interval of time $t$.\n\nBy definition, electric current is the rate of charge flow through a conductor:\n$$I = \\frac{Q}{t}$$\n\n$$Q = I \\cdot t$$\n\nThe potential difference ($V$) represents the mechanical work performed ($W$) per unit charge to move that charge through the component:\n$$V = \\frac{W}{Q}$$\n\n$$W = V \\cdot Q$$\n\nSubstitute our charge flow expression ($Q = I \\cdot t$) directly into the work equation:\n$$W = V \\cdot (I \\cdot t)$$\n\n$$W = VIt$$\n\nElectrical power ($P$) is defined as the rate at which work is performed:\n$$P = \\frac{W}{t}$$\n\nSubstitute the work expression ($VIt$) into the power template:\n$$P = \\frac{VIt}{t}$$\n\nCancel out the time parameter ($t$) from the numerator and denominator:\n$$P = VI$$\n\nThis completes the derivation of the fundamental electrical power relation.\n\n---\n\n## Summary\n\nElectrical power measures the rate of energy conversion within a circuit element, calculated as the product of the voltage across the component and the current flowing through it ($P=VI$).",
+  "candidate_response": "## Electrical Power\n\nElectrical power is the rate at which electrical energy is transferred by an electrical circuit. In simpler terms, it's how quickly electrical energy is used or produced.\n\n### Main Formula\n\n$$P = \\frac{W}{t}$$\n\nWhere:\n*   $P$ is power, measured in watts (W)\n*   $W$ is energy (work done), measured in joules (J)\n*   $t$ is time, measured in seconds (s)\n\n[ Explain Formula ] [ Open Formula Lab ]\n\n### Derivation of P = VI\n\nTo derive the relationship $P = VI$, we start with the fundamental definitions of electrical quantities.\n\n#### Key Concepts\n\n1.  **Electric Potential Difference (Voltage, V):** The work done per unit positive charge in moving the charge from one point to another in an electric field.\n    $$V = \\frac{W}{Q}$$\n    Where:\n    *   $V$ is the potential difference (voltage), measured in volts (V)\n    *   $W$ is the work done (energy), measured in joules (J)\n    *   $Q$ is the electric charge, measured in coulombs (C)\n\n2.  **Electric Current (I):** The rate of flow of electric charge.\n    $$I = \\frac{Q}{t}$$\n    Where:\n    *   $I$ is the current, measured in amperes (A)\n    *   $Q$ is the electric charge, measured in coulombs (C)\n    *   $t$ is time, measured in seconds (s)\n\n#### Step-by-Step Derivation\n\nFrom the definition of voltage, we can express the work done ($W$) as:\n\n$$W = V \\times Q$$\n\nNow, substitute this expression for $W$ into the general power formula ($P = \\frac{W}{t}$):\n\n$$P = \\frac{V \\times Q}{t}$$\n\nWe know from the definition of current that $I = \\frac{Q}{t}$. We can substitute $I$ into the equation for power:\n\n$$P = V \\times I$$\n\nTherefore, the electrical power ($P$) dissipated in a circuit is the product of the voltage ($V$) across it and the current ($I$) flowing through it.\n\n### Main Formula\n\n$$P = VI$$\n\nWhere:\n*   $P$ is electrical power, measured in watts (W)\n*   $V$ is the potential difference (voltage), measured in volts (V)\n*   $I$ is the electric current, measured in amperes (A)\n\n[ Explain Formula ] [ Open Formula Lab ]\n\n### Units\n\nThe unit of electrical power is the **watt (W)**.\n\nFrom $P = VI$:\n$1 \\text{ Watt} = 1 \\text{ Volt} \\times 1 \\text{ Ampere}$\n\nThis means that if a device has a voltage of 1 Volt across it and a current of 1 Ampere flowing through it, it consumes or produces 1 Watt of power.\n\n### Important Notes\n\n*   This formula applies to both DC (direct current) and instantaneous power in AC (alternating current) circuits. For average power in AC circuits, power factor needs to be considered.\n*   Power can also be expressed using Ohm's Law ($V = IR$):\n    *   Substituting $V = IR$ into $P = VI$:\n        $$P = (IR)I \\implies P = I^2R$$\n    *   Substituting $I = \\frac{V}{R}$ into $P = VI$:\n        $$P = V\\left(\\frac{V}{R}\\right) \\implies P = \\frac{V^2}{R}$$\n\n### Summary\n\nElectrical power is the rate at which electrical energy is transferred. It is fundamentally defined as work done per unit time. By combining the definitions of voltage (work per unit charge) and current (charge per unit time), we derive the essential relationship $P = VI$, which states that electrical power is the product of voltage and current.\n\n### Suggested Questions\n\n*   How does electrical power relate to the brightness of a light bulb?\n*   What is the difference between power and energy?\n*   If a device has a power rating of 100W and operates at 220V, what is the current it draws?\n*   Explain how resistive heating (Joule heating) is related to electrical power.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly defines electrical power, derives the relation P = VI, and provides additional relevant information such as units and important notes. The response is well-formatted, easy to read, and suitable for beginners. Minor suggestions for improvement could include adding more visual aids or examples to enhance pedagogical effectiveness.",
+  "candidate_token_usage": {
+    "promptTokens": 381,
+    "completionTokens": 957,
+    "totalTokens": 1338
+  },
+  "candidate_latency_ms": 7808,
+  "candidate_cost_usd": 0.0025068,
+  "judge_token_usage": {
+    "promptTokens": 1769,
+    "completionTokens": 135,
+    "totalTokens": 1904
+  },
+  "judge_latency_ms": 7610,
+  "judge_cost_usd": 0.0013853999999999997,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:57:23.074Z"
+}

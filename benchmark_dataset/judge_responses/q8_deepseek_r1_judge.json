@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 8,
+  "question": "A ball is projected at an angle of 45° with velocity 20 m/s. Find its range.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Projectile Tracking\n\n### Problem\nA ball is projected at an angle of $45^\\circ$ with a velocity of $20 \\text{ m/s}$. Find its horizontal range.\n\n### Given\n* Initial launch velocity ($u$) = $20 \\text{ m/s}$\n* Projection angle ($\\theta$) = $45^\\circ$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$R = \\frac{u^2 \\sin(2\\theta)}{g}$$\n\n### Substitution\n$$R = \\frac{(20)^2 \\times \\sin(2 \\times 45^\\circ)}{9.8}$$\n\n### Calculation\n$$R = \\frac{400 \\times \\sin(90^\\circ)}{9.8}$$\n\nSince $\\sin(90^\\circ) = 1$:\n$$R = \\frac{400 \\times 1}{9.8}$$\n\n$$R = 40.82 \\text{ m}$$\n\n### Final Answer\n**Horizontal Range ($R$) = $40.82 \\text{ m}$**\n\n### Interpretation\nThis means the ball travels a total horizontal ground shortcut distance of $40.82 \\text{ meters}$ away from its initial launch spot before striking the earth baseline.",
+  "candidate_response": "To find the range of a ball projected at a 45° angle with an initial velocity of 20 m/s, we use the **range formula** for projectile motion:\n\n### Formula\nThe range \\(R\\) of a projectile is given by:  \n\\[\nR = \\frac{u^2 \\sin(2\\theta)}{g}\n\\]  \nwhere:  \n- \\(u\\) is the initial velocity,  \n- \\(\\theta\\) is the angle of projection,  \n- \\(g\\) is the acceleration due to gravity (\\(g \\approx 9.8 \\, \\text{m/s}^2\\)).\n\n### Step-by-Step Solution\n1. **Identify values**:  \n   - \\(u = 20 \\, \\text{m/s}\\),  \n   - \\(\\theta = 45^\\circ\\),  \n   - \\(g = 9.8 \\, \\text{m/s}^2\\) (standard value).  \n\n2. **Calculate \\(\\sin(2\\theta)\\)**:  \n   \\[\n   2\\theta = 2 \\times 45^\\circ = 90^\\circ, \\quad \\sin(90^\\circ) = 1.\n   \\]  \n\n3. **Substitute into the formula**:  \n   \\[\n   R = \\frac{(20)^2 \\times 1}{9.8} = \\frac{400}{9.8}.\n   \\]  \n\n4. **Compute the result**:  \n   \\[\n   R \\approx \\frac{400}{9.8} \\approx 40.82 \\, \\text{m}.\n   \\]  \n\n### Final Answer\nThe range of the ball is approximately **40.82 meters**.\n\n### Key Notes\n- **Angle impact**: At \\(\\theta = 45^\\circ\\), \\(\\sin(2\\theta) = \\sin(90^\\circ) = 1\\) (maximizing the range).  \n- **Gravity assumption**: We used \\(g = 9.8 \\, \\text{m/s}^2\\). If \\(g = 10 \\, \\text{m/s}^2\\) is assumed (simplified), the range would be \\(R = \\frac{400}{10} = 40 \\, \\text{m}\\).  \n- **Units**: Ensure velocity is in m/s and \\(g\\) in m/s² for consistent units (meters).  \n\n### Suggested Practice Questions\n1. How does the range change if the angle is increased to \\(60^\\circ\\)?  \n2. What initial velocity is needed to achieve a range of 50 m at \\(45^\\circ\\)?  \n3. Why does \\(45^\\circ\\) give the maximum range for a given velocity?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 10,
+    "quality": 10,
+    "educational": 10,
+    "overall_average": "10.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately solves the problem using the correct formula for the range of a projectile. The step-by-step solution is clear, and the final answer matches the gold reference answer. The response also includes additional notes and suggested practice questions, which enhances its educational value. The layout and formatting are well-structured and readable. Overall, the response demonstrates a strong understanding of the concept and effectively communicates the solution.",
+  "candidate_token_usage": {
+    "promptTokens": 373,
+    "completionTokens": 1043,
+    "totalTokens": 1416
+  },
+  "candidate_latency_ms": 43155,
+  "candidate_cost_usd": 0.00248932,
+  "judge_token_usage": {
+    "promptTokens": 1301,
+    "completionTokens": 141,
+    "totalTokens": 1442
+  },
+  "judge_latency_ms": 4194,
+  "judge_cost_usd": 0.001119,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:07:44.558Z"
+}

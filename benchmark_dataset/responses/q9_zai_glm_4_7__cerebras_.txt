@@ -1,0 +1,598 @@
+Here is the complete, self-contained HTML file. It transforms the physics content into an "Interactive Textbook" layout using the specific Card and Formula Card system you requested.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Textbook: Uniform Circular Motion</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    
+    <!-- Google Fonts for Textbook Feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Design Tokens */
+            --bg-color: #f0f2f5;
+            --text-main: #1f2937;
+            --text-secondary: #4b5563;
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --card-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            
+            --primary-color: #3b82f6; /* Academic Blue */
+            --primary-dark: #1d4ed8;
+            --accent-green: #10b981; /* For Formulas */
+            --accent-purple: #8b5cf6;
+            
+            --border-radius: 12px;
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Merriweather', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding: 2rem 1rem;
+        }
+
+        /* Layout Container */
+        .textbook-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .textbook-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .textbook-header h1 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .textbook-header .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #f3f4f6;
+            padding-bottom: 0.75rem;
+        }
+
+        .card-icon {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .card-body {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .card-body p {
+            margin-bottom: 1rem;
+        }
+
+        .card-body ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: linear-gradient(to bottom right, #ffffff, #f0fdf4);
+            border-left: 5px solid var(--accent-green);
+        }
+
+        .formula-display {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 1.2rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-explain {
+            background-color: #e0e7ff;
+            color: var(--primary-dark);
+        }
+        .btn-explain:hover { background-color: #c7d2fe; }
+
+        .btn-lab {
+            background-color: var(--accent-green);
+            color: white;
+        }
+        .btn-lab:hover { background-color: #059669; }
+
+        /* Interactive Sections (Hidden by default) */
+        .interactive-panel {
+            display: none;
+            margin-top: 1.5rem;
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .interactive-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Formula Lab Controls */
+        .lab-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+        .control-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+        }
+        .lab-result {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--accent-green);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        tr:hover td {
+            background-color: #f9fafb;
+        }
+
+        /* Highlighting */
+        .highlight {
+            background-color: #fef3c7;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        /* Footer */
+        .textbook-footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .textbook-header h1 { font-size: 1.8rem; }
+            .card { padding: 1.5rem; }
+            .formula-actions { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="textbook-container">
+        
+        <header class="textbook-header">
+            <h1>Uniform Circular Motion</h1>
+            <div class="subtitle">Chapter 4: Kinematics in Two Dimensions</div>
+        </header>
+
+        <!-- Introduction Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">1</div>
+                <h2 class="card-title">Introduction</h2>
+            </div>
+            <div class="card-body">
+                <p>
+                    In our study of motion so far, we have primarily dealt with linear motion along a straight path. However, the universe is full of rotating objects—from electrons orbiting an atom to planets orbiting stars.
+                </p>
+                <p>
+                    <strong>Uniform Circular Motion (UCM)</strong> occurs when an object moves in a circular path at a constant speed. While the speed is constant, the velocity is not. This distinction is the key to understanding the forces at play.
+                </p>
+            </div>
+        </section>
+
+        <!-- Definition Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">D</div>
+                <h2 class="card-title">Quick Definition</h2>
+            </div>
+            <div class="card-body">
+                <p>
+                    <em>Uniform Circular Motion</em> is the motion of an object traveling at a constant (uniform) speed on a circular path.
+                </p>
+                <p>
+                    Even though the speed ($v$) remains constant, the direction of the velocity vector changes continuously. Because velocity is a vector quantity (magnitude + direction), a change in direction means the object is <strong>accelerating</strong>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Formula Card 1: Centripetal Acceleration -->
+        <section class="card formula-card" id="formula-1">
+            <div class="card-header">
+                <div class="card-icon">F</div>
+                <h2 class="card-title">Main Formula: Centripetal Acceleration</h2>
+            </div>
+            <div class="card-body">
+                <p>Since the direction of velocity changes, there must be an acceleration directed toward the center of the circle. This is called <strong>centripetal acceleration</strong> ($a_c$).</p>
+                
+                <div class="formula-display">
+                    $$ a_c = \frac{v^2}{r} $$
+                </div>
+
+                <div class="formula-actions">
+                    <button class="btn btn-explain" onclick="toggleExplanation('explain-1', this)">
+                        <span>ℹ️ Explain Formula</span>
+                    </button>
+                    <button class="btn btn-lab" onclick="toggleLab('lab-1', this)">
+                        <span>🧪 Open Formula Lab</span>
+                    </button>
+                </div>
+
+                <!-- Hidden Explanation Panel -->
+                <div id="explain-1" class="interactive-panel">
+                    <h4>Understanding the Variables</h4>
+                    <ul>
+                        <li><strong>$a_c$:</strong> Centripetal acceleration (meters per second squared, $m/s^2$).</li>
+                        <li><strong>$v$:</strong> Tangential speed (meters per second, $m/s$). This is the constant speed of the object along the curve.</li>
+                        <li><strong>$r$:</strong> Radius of the circular path (meters, $m$).</li>
+                    </ul>
+                    <p><strong>Key Insight:</strong> The acceleration is inversely proportional to the radius ($r$). This means for a tight turn (small $r$), the acceleration required to stay on the path is much larger than for a gentle turn (large $r$).</p>
+                </div>
+
+                <!-- Hidden Lab Panel -->
+                <div id="lab-1" class="interactive-panel">
+                    <h4>Formula Lab: Calculate $a_c$</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;">Adjust the values to see how centripetal acceleration changes.</p>
+                    <div class="lab-controls">
+                        <div class="control-group">
+                            <label>Velocity ($v$) [m/s]</label>
+                            <input type="range" min="1" max="50" value="10" id="input-v" oninput="calculateAC()">
+                            <span id="val-v">10</span> m/s
+                        </div>
+                        <div class="control-group">
+                            <label>Radius ($r$) [m]</label>
+                            <input type="range" min="1" max="100" value="20" id="input-r" oninput="calculateAC()">
+                            <span id="val-r">20</span> m
+                        </div>
+                    </div>
+                    <div class="lab-result">
+                        $a_c = $ <span id="result-ac">5.00</span> $m/s^2$
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Concepts Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">K</div>
+                <h2 class="card-title">Key Concepts</h2>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Period ($T$):</strong> The time it takes to complete one full revolution. Measured in seconds.</li>
+                    <li><strong>Frequency ($f$):</strong> The number of revolutions per unit time (usually Hertz, Hz). $f = \frac{1}{T}$.</li>
+                    <li><strong>Tangential Velocity:</strong> The velocity vector at any point is tangent to the circle. Its magnitude is constant, but direction changes.</li>
+                    <li><strong>Centripetal Force:</strong> The net force causing the centripetal acceleration. It is not a new "type" of force, but the role played by tension, gravity, or friction.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Formula Card 2: Centripetal Force -->
+        <section class="card formula-card" id="formula-2">
+            <div class="card-header">
+                <div class="card-icon">F</div>
+                <h2 class="card-title">Main Formula: Newton's Second Law in Rotation</h2>
+            </div>
+            <div class="card-body">
+                <p>According to Newton's Second Law ($F=ma$), if there is a centripetal acceleration, there must be a centripetal force ($F_c$).</p>
+                
+                <div class="formula-display">
+                    $$ F_c = \frac{mv^2}{r} $$
+                </div>
+
+                <div class="formula-actions">
+                    <button class="btn btn-explain" onclick="toggleExplanation('explain-2', this)">
+                        <span>ℹ️ Explain Formula</span>
+                    </button>
+                </div>
+
+                <!-- Hidden Explanation Panel -->
+                <div id="explain-2" class="interactive-panel">
+                    <h4>Understanding the Variables</h4>
+                    <ul>
+                        <li><strong>$F_c$:</strong> Centripetal force (Newtons, $N$).</li>
+                        <li><strong>$m$:</strong> Mass of the object (kilograms, $kg$).</li>
+                        <li><strong>$v$:</strong> Tangential speed ($m/s$).</li>
+                        <li><strong>$r$:</strong> Radius ($m$).</li>
+                    </ul>
+                    <p><strong>Direction:</strong> The force is always directed inward, toward the center of the circle. Without this inward force, the object would continue in a straight line (Newton's First Law).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Characteristics Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">C</div>
+                <h2 class="card-title">Characteristics of UCM</h2>
+            </div>
+            <div class="card-body">
+                <p>To fully understand UCM, we must distinguish between what changes and what stays the same:</p>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Behavior in UCM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Speed ($|v|$)</td>
+                                <td>Constant</td>
+                            </tr>
+                            <tr>
+                                <td>Velocity ($\vec{v}$)</td>
+                                <td>Changes (Direction)</td>
+                            </tr>
+                            <tr>
+                                <td>Acceleration ($\vec{a}$)</td>
+                                <td>Constant magnitude, directed toward center</td>
+                            </tr>
+                            <tr>
+                                <td>Net Force ($\Sigma \vec{F}$)</td>
+                                <td>Constant magnitude, directed toward center</td>
+                            </tr>
+                            <tr>
+                                <td>Kinetic Energy ($KE$)</td>
+                                <td>Constant ($\frac{1}{2}mv^2$)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Applications Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">A</div>
+                <h2 class="card-title">Real-World Applications</h2>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Satellites:</strong> Earth's gravity provides the centripetal force keeping satellites in orbit.</li>
+                    <li><strong>Banked Curves:</strong> Roads are tilted on curves so that the normal force from the road helps provide the centripetal force, reducing reliance on friction.</li>
+                    <li><strong>Centrifuges:</strong> Machines that spin samples at high speeds to separate components of different densities based on the required centripetal force.</li>
+                    <li><strong>Gravitron Rides:</strong> Amusement park rides where the walls push inward on riders to keep them pinned in place as the floor drops.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Important Notes Card -->
+        <section class="card" style="border-left: 5px solid #f59e0b;">
+            <div class="card-header">
+                <div class="card-icon" style="color: #f59e0b; background-color: #fffbeb;">!</div>
+                <h2 class="card-title">Important Notes</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Centrifugal vs. Centripetal:</strong></p>
+                <p>
+                    Students often confuse <strong>Centripetal Force</strong> (real, inward force) with <strong>Centrifugal Force</strong> (fictitious, outward force). 
+                </p>
+                <p>
+                    "Centrifugal force" is simply the sensation of inertia you feel when your body wants to continue in a straight line while the car turns underneath you. In an inertial frame of reference, <strong>centrifugal force does not exist</strong>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Summary Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">S</div>
+                <h2 class="card-title">Summary</h2>
+            </div>
+            <div class="card-body">
+                <p>Uniform Circular Motion describes an object moving at a constant speed along a circular path. Because the direction of the velocity vector is constantly changing, the object experiences an acceleration directed toward the center of the circle, known as centripetal acceleration ($a_c = v^2/r$). This requires a corresponding net force directed inward, the centripetal force ($F_c = mv^2/r$).</p>
+            </div>
+        </section>
+
+        <!-- Suggested Questions Card -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">Q</div>
+                <h2 class="card-title">Suggested Questions</h2>
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li>What happens to the centripetal acceleration if the speed of the object is doubled?</li>
+                    <li>Why does the centripetal force do no work on the object?</li>
+                    <li>Draw a free-body diagram for a car making a right turn on a flat road. Which force provides the centripetal force?</li>
+                </ol>
+            </div>
+        </section>
+
+        <footer class="textbook-footer">
+            &copy; 2023 Interactive Physics Textbook. Generated by AI Tutor.
+        </footer>
+    </div>
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    <!-- Interactive Logic -->
+    <script>
+        // Toggle Explanation Panels
+        function toggleExplanation(id, btn) {
+            const panel = document.getElementById(id);
+            const isActive = panel.classList.contains('active');
+            
+            // Close all other panels first (optional, keeps it clean)
+            document.querySelectorAll('.interactive-panel').forEach(p => p.classList.remove('active'));
+            
+            if (!isActive) {
+                panel.classList.add('active');
+                btn.innerHTML = '<span>🔼 Hide Explanation</span>';
+            } else {
+                btn.innerHTML = '<span>ℹ️ Explain Formula</span>';
+            }
+        }
+
+        // Toggle Lab Panels
+        function toggleLab(id, btn) {
+            const panel = document.getElementById(id);
+            const isActive = panel.classList.contains('active');
+            
+            if (!isActive) {
+                panel.classList.add('active');
+                btn.innerHTML = '<span>🔼 Close Formula Lab</span>';
+            } else {
+                panel.classList.remove('active');
+                btn.innerHTML = '<span>🧪 Open Formula Lab</span>';
+            }
+        }
+
+        // Formula Lab Logic for a_c = v^2 / r
+        function calculateAC() {
+            const v = parseFloat(document.getElementById('input-v').value);
+            const r = parseFloat(document.getElementById('input-r').value);
+            
+            // Update labels
+            document.getElementById('val-v').textContent = v;
+            document.getElementById('val-r').textContent = r;
+            
+            // Calculate
+            const ac = (Math.pow(v, 2) / r).toFixed(2);
+            
+            // Update Result
+            document.getElementById('result-ac').textContent = ac;
+        }
+    </script>
+</body>
+</html>
+```

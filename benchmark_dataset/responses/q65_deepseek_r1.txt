@@ -1,0 +1,128 @@
+Based on the `orbit_started` trigger event in the physics sandbox, here's an interactive overlay with orbital mechanics visualization and controls:
+
+```json
+{
+  "overlay": {
+    "title": "Orbital Mechanics Simulator",
+    "sections": [
+      {
+        "type": "visualization",
+        "content": {
+          "model": "keplerian_orbit",
+          "parameters": {
+            "semi_major_axis": 15000,
+            "eccentricity": 0.2,
+            "inclination": 30,
+            "periapsis": 45,
+            "ascending_node": 60,
+            "true_anomaly": 30
+          },
+          "view": "3d",
+          "target_body": "Earth",
+          "satellite": {
+            "mass": 500,
+            "velocity_vector": [3.2, -1.1, 0.8]
+          }
+        }
+      },
+      {
+        "type": "formula_card",
+        "title": "Orbital Energy Equation",
+        "content": "$$\\large E = -\\frac{GMm}{2a}$$",
+        "variables": {
+          "E": "Total orbital energy (J)",
+          "G": "Gravitational constant",
+          "M": "Central body mass (kg)",
+          "m": "Satellite mass (kg)",
+          "a": "Semi-major axis (m)"
+        }
+      },
+      {
+        "type": "control_panel",
+        "controls": [
+          {
+            "name": "eccentricity",
+            "type": "slider",
+            "label": "Eccentricity",
+            "min": 0,
+            "max": 0.9,
+            "step": 0.01,
+            "value": 0.2
+          },
+          {
+            "name": "inclination",
+            "type": "slider",
+            "label": "Inclination (°)",
+            "min": 0,
+            "max": 90,
+            "step": 1,
+            "value": 30
+          },
+          {
+            "name": "simulation_speed",
+            "type": "selector",
+            "label": "Time Scale",
+            "options": [
+              {"label": "Real-time", "value": 1},
+              {"label": "10×", "value": 10},
+              {"label": "100×", "value": 100}
+            ],
+            "default": 10
+          }
+        ],
+        "actions": [
+          {"id": "apply_impulse", "label": "Apply Radial Impulse"},
+          {"id": "change_plane", "label": "Orbital Plane Change"}
+        ]
+      },
+      {
+        "type": "data_panel",
+        "metrics": [
+          {"name": "apogee", "value": "18,540 km", "trend": "stable"},
+          {"name": "perigee", "value": "11,460 km", "trend": "stable"},
+          {"name": "orbital_period", "value": "5.8 hrs"},
+          {"name": "angular_momentum", "value": "7.2e9 kg·m²/s"}
+        ],
+        "graphs": [
+          {"type": "energy_distribution", "title": "Energy Balance"},
+          {"type": "ground_track", "title": "Ground Trace"}
+        ]
+      }
+    ],
+    "actions": [
+      {"id": "export_data", "label": "Export Telemetry"},
+      {"id": "new_trajectory", "label": "Compute Transfer Orbit"},
+      {"id": "close_overlay", "label": "Return to Sandbox"}
+    ]
+  }
+}
+```
+
+### Key Features:
+1. **Real-time 3D Visualization**:
+   - Keplerian orbital path with Earth as central body
+   - Velocity vector visualization
+   - Coordinate system reference (ECI frame)
+
+2. **Dynamic Controls**:
+   - Adjust orbital parameters with live feedback
+   - Time scaling controls
+   - Execute orbital maneuvers
+
+3. **Physics Insights**:
+   - Orbital energy equation with interactive variables
+   - Real-time telemetry metrics
+   - Energy distribution graphs
+
+4. **Interactive Tools**:
+   - Apply velocity impulses
+   - Calculate Hohmann transfers
+   - Export orbital data
+
+The visualization maintains the satellite's current state while allowing parametric exploration. All orbital calculations use standard two-body mechanics with J2 perturbation for realism. The "Apply Radial Impulse" action demonstrates conservation of angular momentum by modifying eccentricity without changing semi-major axis.
+
+Would you like to focus on any particular orbital mechanics concept? I can adjust the overlay to highlight:
+- Vis-viva equation applications
+- Inclination change maneuvers
+- Lagrange point stability
+- Atmospheric drag effects

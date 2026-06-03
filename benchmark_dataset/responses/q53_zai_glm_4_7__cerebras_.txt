@@ -1,0 +1,760 @@
+Here is the complete, self-contained HTML file acting as an **Interactive Textbook** module. It includes the physics simulation, structured content cards, and the specific formula rendering system requested.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Physics: Spring Oscillator</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Color System */
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0f172a;
+            --accent: #f59e0b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            
+            /* Spacing */
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            
+            /* Radius */
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        header {
+            margin-bottom: var(--space-xl);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: var(--space-lg);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: var(--secondary);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        header .meta {
+            margin-top: var(--space-sm);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            margin-bottom: var(--space-lg);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            background-color: #f1f5f9;
+            padding: var(--space-sm) var(--space-lg);
+            border-bottom: 1px solid var(--border);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header .icon {
+            margin-right: var(--space-sm);
+        }
+
+        .card-body {
+            padding: var(--space-lg);
+        }
+
+        /* Typography inside cards */
+        .card-body h2 {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-md);
+            color: var(--secondary);
+        }
+
+        .card-body p {
+            margin-bottom: var(--space-md);
+            font-family: 'Merriweather', serif;
+            color: var(--text-main);
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: linear-gradient(to bottom, #ffffff, #f8fafc);
+            border: 1px solid #bfdbfe;
+        }
+
+        .formula-card .card-header {
+            background-color: #eff6ff;
+            color: var(--primary-dark);
+        }
+
+        .formula-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-xl) 0;
+            background-color: #fff;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+            border: 1px solid var(--border);
+        }
+
+        .formula-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: #f1f5f9;
+            border-color: var(--text-light);
+        }
+
+        /* Simulation Card */
+        .sim-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-lg);
+        }
+
+        @media (max-width: 768px) {
+            .sim-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .canvas-wrapper {
+            background: #0f172a;
+            border-radius: var(--radius-md);
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .control-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .value-badge {
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+
+        .graph-wrapper {
+            margin-top: var(--space-md);
+            height: 100px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            position: relative;
+        }
+        
+        .graph-label {
+            position: absolute;
+            top: 4px;
+            left: 8px;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            pointer-events: none;
+        }
+
+        /* Toast / Modal */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(150%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .toast.active {
+            transform: translateY(0);
+        }
+
+        .toast h4 {
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .toast p {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        th, td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            background-color: #f8fafc;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Simple Harmonic Motion</h1>
+            <div class="meta">
+                <span>Module 2.4</span>
+                <span>•</span>
+                <span>Spring Oscillators</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Section: Introduction -->
+            <article class="card">
+                <div class="card-header">
+                    <span><i class="icon">📘</i> Introduction</span>
+                </div>
+                <div class="card-body">
+                    <p>A spring-mass system is a classic model used in physics to demonstrate <strong>Simple Harmonic Motion (SHM)</strong>. When a mass attached to a spring is displaced from its equilibrium position, a restoring force pulls it back, causing it to oscillate.</p>
+                </div>
+            </article>
+
+            <!-- Section: Definition -->
+            <article class="card">
+                <div class="card-header">
+                    <span><i class="icon">📌</i> Quick Definition</span>
+                </div>
+                <div class="card-body">
+                    <h2>Stiffness Constant ($k$)</h2>
+                    <p>The <strong>stiffness constant</strong> (or spring constant) denoted by $k$, measures the rigidity of the spring. It defines the relationship between the force applied to the spring and the distance it stretches (Hooke's Law).</p>
+                    <p>A higher $k$ value means a stiffer spring that is harder to stretch, while a lower $k$ means a looser spring.</p>
+                </div>
+            </article>
+
+            <!-- Section: Formula -->
+            <article class="card formula-card">
+                <div class="card-header">
+                    <span><i class="icon">📐</i> Main Formula</span>
+                </div>
+                <div class="card-body">
+                    <p>The period of oscillation ($T$), which is the time taken to complete one full cycle, depends on the mass ($m$) and the stiffness constant ($k$).</p>
+                    
+                    <div class="formula-display" id="period-formula">
+                        <!-- KaTeX rendered here -->
+                        $$ T = 2\pi \sqrt{\frac{m}{k}} $$
+                    </div>
+
+                    <div class="formula-actions">
+                        <button class="btn btn-outline" onclick="showExplanation()">
+                            Explain Formula
+                        </button>
+                        <button class="btn btn-primary" onclick="openFormulaLab()">
+                            Open Formula Lab
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Section: Analysis -->
+            <article class="card">
+                <div class="card-header">
+                    <span><i class="icon">🔍</i> Analysis</span>
+                </div>
+                <div class="card-body">
+                    <h2>What happens if $k$ is doubled?</h2>
+                    <p>Let's substitute $k$ with $2k$ in the period formula:</p>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto;">
+                        $$ T_{new} = 2\pi \sqrt{\frac{m}{2k}} = \frac{1}{\sqrt{2}} \left( 2\pi \sqrt{\frac{m}{k}} \right) $$
+                        $$ T_{new} \approx 0.707 \times T_{original} $$
+                    </div>
+                    <p>When the stiffness constant is doubled, the period of oscillation decreases by a factor of $\sqrt{2}$ (approximately 0.707). This means the spring will oscillate <strong>faster</strong>, completing cycles in less time.</p>
+                </div>
+            </article>
+
+            <!-- Section: Live Sandbox -->
+            <article class="card">
+                <div class="card-header">
+                    <span><i class="icon">🧪</i> Live Sandbox</span>
+                    <span style="color: var(--accent);">Interactive</span>
+                </div>
+                <div class="card-body">
+                    <p>Adjust the <strong>Stiffness ($k$)</strong> slider below to see the effect on the oscillation speed visually.</p>
+                    
+                    <div class="sim-container">
+                        <!-- Visualization -->
+                        <div>
+                            <div class="canvas-wrapper">
+                                <canvas id="simCanvas"></canvas>
+                            </div>
+                            <div class="graph-wrapper">
+                                <canvas id="graphCanvas"></canvas>
+                                <span class="graph-label">Position vs Time</span>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="controls">
+                            <div class="control-group">
+                                <label>
+                                    Stiffness ($k$)
+                                    <span class="value-badge" id="k-val">50 N/m</span>
+                                </label>
+                                <input type="range" id="k-slider" min="10" max="200" value="50" step="1">
+                            </div>
+
+                            <div class="control-group">
+                                <label>
+                                    Mass ($m$)
+                                    <span class="value-badge" id="m-val">2.0 kg</span>
+                                </label>
+                                <input type="range" id="m-slider" min="0.5" max="10" value="2.0" step="0.1">
+                            </div>
+
+                            <div class="control-group">
+                                <label>
+                                    Damping ($c$)
+                                    <span class="value-badge" id="c-val">0.10</span>
+                                </label>
+                                <input type="range" id="c-slider" min="0" max="1" value="0.1" step="0.01">
+                            </div>
+                            
+                            <div style="margin-top: auto;">
+                                <button class="btn btn-outline" style="width: 100%" id="reset-btn">Displace Mass</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Section: Comparison Table -->
+            <article class="card">
+                <div class="card-header">
+                    <span><i class="icon">📊</i> Comparison Data</span>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Original State ($k$)</th>
+                                    <th>Doubled Stiffness ($2k$)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Stiffness</td>
+                                    <td>$k$</td>
+                                    <td>$2k$</td>
+                                </tr>
+                                <tr>
+                                    <td>Period ($T$)</td>
+                                    <td>$T$</td>
+                                    <td>$T / \sqrt{2}$</td>
+                                </tr>
+                                <tr>
+                                    <td>Frequency ($f$)</td>
+                                    <td>$f$</td>
+                                    <td>$f \times \sqrt{2}$</td>
+                                </tr>
+                                <tr>
+                                    <td>Visual Speed</td>
+                                    <td>Normal</td>
+                                    <td>Faster (~1.41x)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Section: Summary -->
+            <article class="card">
+                <div class="card-header">
+                    <span><i class="icon">📝</i> Summary</span>
+                </div>
+                <div class="card-body">
+                    <p>In a spring-mass system, the stiffness constant ($k$) is inversely proportional to the square root of the period ($T$). Increasing the stiffness makes the restoring force stronger, causing the mass to accelerate more rapidly towards equilibrium, thereby increasing the frequency of oscillation.</p>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div id="toast" class="toast">
+        <h4 id="toast-title">Title</h4>
+        <p id="toast-msg">Message goes here.</p>
+    </div>
+
+    <!-- KaTeX Script -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    
+    <script>
+        // ==========================================
+        // 1. RENDERING SYSTEM (KaTeX)
+        // ==========================================
+        document.addEventListener("DOMContentLoaded", function() {
+            // Render all KaTeX formulas
+            if (typeof katex !== "undefined") {
+                const formulas = document.querySelectorAll(".formula-display, [style*='overflow-x: auto']");
+                formulas.forEach(el => {
+                    katex.render(el.textContent.trim(), el, {
+                        throwOnError: false,
+                        displayMode: true
+                    });
+                });
+            }
+        });
+
+        // ==========================================
+        // 2. INTERACTION LOGIC (Toast)
+        // ==========================================
+        function showExplanation() {
+            showToast(
+                "Formula Explained", 
+                "The period $T$ depends on mass and stiffness. Since $k$ is in the denominator under the square root, increasing $k$ decreases $T$. The mass acts as inertia (resisting change), while stiffness acts as the driving force."
+            );
+        }
+
+        function openFormulaLab() {
+            showToast(
+                "Formula Lab", 
+                "In a full lab environment, you would be able to rearrange this formula to solve for Mass ($m$) or Stiffness ($k$) given a specific Frequency. For now, use the Live Sandbox to experiment."
+            );
+        }
+
+        function showToast(title, msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-msg').innerHTML = msg; // innerHTML to allow simple latex if needed, though text is safer
+            toast.classList.add('active');
+            
+            // Auto hide after 4 seconds
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 4000);
+        }
+
+        // ==========================================
+        // 3. PHYSICS SIMULATION (The Sandbox)
+        // ==========================================
+        
+        // Physics State
+        const state = {
+            k: 50,      // Stiffness
+            m: 2.0,     // Mass
+            c: 0.1,     // Damping
+            y: 100,     // Position (displacement from rest)
+            v: 0,       // Velocity
+            restY: 150, // Pixel position of equilibrium
+            t: 0,       // Time accumulator
+            history: [] // For graph
+        };
+
+        // DOM Elements
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+        const graphCanvas = document.getElementById('graphCanvas');
+        const graphCtx = graphCanvas.getContext('2d');
+        
+        const kSlider = document.getElementById('k-slider');
+        const mSlider = document.getElementById('m-slider');
+        const cSlider = document.getElementById('c-slider');
+        const kVal = document.getElementById('k-val');
+        const mVal = document.getElementById('m-val');
+        const cVal = document.getElementById('c-val');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // Resize Canvas
+        function resize() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            graphCanvas.width = graphCanvas.parentElement.offsetWidth;
+            graphCanvas.height = graphCanvas.parentElement.offsetHeight;
+            state.restY = canvas.height / 2;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Update Physics Parameters
+        kSlider.addEventListener('input', (e) => {
+            state.k = parseFloat(e.target.value);
+            kVal.innerText = state.k + " N/m";
+        });
+
+        mSlider.addEventListener('input', (e) => {
+            state.m = parseFloat(e.target.value);
+            mVal.innerText = state.m.toFixed(1) + " kg";
+        });
+
+        cSlider.addEventListener('input', (e) => {
+            state.c = parseFloat(e.target.value);
+            cVal.innerText = state.c.toFixed(2);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            state.y = 100; // Pull down
+            state.v = 0;
+            state.history = [];
+        });
+
+        // Physics Loop
+        function updatePhysics() {
+            // F_spring = -k * y
+            // F_damping = -c * v
+            // a = F / m
+            
+            const F_spring = -state.k * state.y;
+            const F_damping = -state.c * state.v * 5; // Multiplier to make damping slider feel right
+            
+            const a = (F_spring + F_damping) / state.m;
+            
+            state.v += a * 0.16; // dt approximation
+            state.y += state.v * 0.16;
+            
+            state.t += 0.016;
+
+            // Store history for graph
+            state.history.push(state.y);
+            if (state.history.length > graphCanvas.width / 2) {
+                state.history.shift();
+            }
+        }
+
+        // Drawing Loop
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const centerX = canvas.width / 2;
+            const anchorY = 20;
+            const massY = state.restY + state.y;
+            const massRadius = 20 + (state.m * 2); // Visual size based on mass
+
+            // Draw Ceiling
+            ctx.fillStyle = "#334155";
+            ctx.fillRect(centerX - 40, 0, 80, 10);
+
+            // Draw Spring
+            ctx.beginPath();
+            ctx.moveTo(centerX, anchorY);
+            
+            const segments = 12;
+            const springLength = massY - anchorY - massRadius;
+            const segmentHeight = springLength / segments;
+            
+            for (let i = 1; i <= segments; i++) {
+                const x = (i % 2 === 0) ? centerX - 15 : centerX + 15;
+                const y = anchorY + (i * segmentHeight);
+                // Taper the ends
+                const currentX = (i === segments) ? centerX : x;
+                ctx.lineTo(currentX, y);
+            }
+            ctx.lineTo(centerX, massY);
+            
+            ctx.strokeStyle = "#94a3b8";
+            ctx.lineWidth = 3;
+            ctx.lineJoin = "round";
+            ctx.stroke();
+
+            // Draw Mass
+            ctx.beginPath();
+            ctx.arc(centerX, massY, massRadius, 0, Math.PI * 2);
+            ctx.fillStyle = "#2563eb";
+            ctx.fill();
+            ctx.strokeStyle = "#1e40af";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw Equilibrium Line (Ghost)
+            ctx.beginPath();
+            ctx.moveTo(centerX - 60, state.restY);
+            ctx.lineTo(centerX + 60, state.restY);
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+            ctx.setLineDash([5, 5]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        function drawGraph() {
+            graphCtx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
+            
+            const centerY = graphCanvas.height / 2;
+            
+            graphCtx.beginPath();
+            graphCtx.moveTo(0, centerY + state.history[0]);
+            
+            for (let i = 1; i < state.history.length; i++) {
+                // Scale Y for visibility in graph
+                const graphY = centerY + state.history[i];
+                graphCtx.lineTo(i * 2, graphY);
+            }
+            
+            graphCtx.strokeStyle = "#f59e0b";
+            graphCtx.lineWidth = 2;
+            graphCtx.stroke();
+
+            // Center line
+            graphCtx.beginPath();
+            graphCtx.moveTo(0, centerY);
+            graphCtx.lineTo(graphCanvas.width, centerY);
+            graphCtx.strokeStyle = "#e2e8f0";
+            graphCtx.stroke();
+        }
+
+        function loop() {
+            updatePhysics();
+            draw();
+            drawGraph();
+            requestAnimationFrame(loop);
+        }
+
+        // Start Simulation
+        loop();
+
+    </script>
+</body>
+</html>
+```

@@ -1,0 +1,787 @@
+Here is the complete, self-contained HTML file. It functions as an **Interactive Textbook**, converting structured data into UI cards, rendering formulas with KaTeX, and featuring a functional Formula Lab simulation.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscillations and Waves: Simple Harmonic Motion</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0KOVEMeaPo0gTgwW6+H5S8g/xtE6S4CV8zG5h4gIYsB+HtA1c8c2F" crossorigin="anonymous">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --secondary-color: #64748b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-color);
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Typography within cards */
+        .card-body p {
+            margin-bottom: 1rem;
+        }
+        
+        .card-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-term {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Formula Card Specifics */
+        .formula-card .card-body {
+            text-align: center;
+            background: #fafbfc;
+        }
+
+        .formula-display {
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-outline {
+            background: white;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Formula Explanation Section */
+        .formula-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: white;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .formula-details.open {
+            max-height: 500px; /* Arbitrary large height */
+        }
+
+        .details-content {
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .variable-list {
+            list-style: none;
+            margin-top: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .variable-item {
+            background: #f1f5f9;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .variable-symbol {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
+
+        /* Table Card */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Modal / Formula Lab */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 700px;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+        }
+
+        .modal-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        /* Lab Canvas */
+        #labCanvas {
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            height: 300px;
+            cursor: grab;
+        }
+        
+        #labCanvas:active {
+            cursor: grabbing;
+        }
+
+        .lab-controls {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .control-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        input[type="range"] {
+            width: 120px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Oscillations and Waves</h1>
+            <div class="subtitle">Chapter 1: Simple Harmonic Motion</div>
+        </header>
+
+        <!-- Content Area: Blocks will be injected here via JS -->
+        <main id="content-root"></main>
+    </div>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="labModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="card-title">Formula Lab: Spring-Mass System</h3>
+                <button class="close-btn" onclick="closeLab()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                    Interact with the simulation below. Drag the mass to displace it and observe the oscillation. Adjust the Mass ($m$) and Spring Constant ($k$) to see how they affect the period.
+                </p>
+                
+                <canvas id="labCanvas" width="600" height="300"></canvas>
+                
+                <div class="lab-controls">
+                    <div class="control-group">
+                        <label>Mass ($m$): <span id="massVal">2.0</span> kg</label>
+                        <input type="range" id="massRange" min="0.5" max="5.0" step="0.1" value="2.0">
+                    </div>
+                    <div class="control-group">
+                        <label>Spring Constant ($k$): <span id="kVal">1.0</span></label>
+                        <input type="range" id="kRange" min="0.1" max="3.0" step="0.1" value="1.0">
+                    </div>
+                    <div class="control-group">
+                        <label>Damping ($b$)</label>
+                        <input type="range" id="dampingRange" min="0.0" max="0.1" step="0.001" value="0.01">
+                    </div>
+                    <button class="btn btn-outline" onclick="resetSimulation()" style="margin-left: auto;">Reset</button>
+                </div>
+
+                <div style="margin-top: 1rem; padding: 1rem; background: #fff; border: 1px solid var(--border-color); border-radius: 8px;">
+                    <strong>Live Data:</strong>
+                    <div id="liveData">Displacement ($x$): 0.00 m | Velocity ($v$): 0.00 m/s</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX Script -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+    <script>
+        // ==========================================================
+        // DATA SOURCE (Simulating Parsed Content)
+        // ==========================================================
+        const courseData = [
+            {
+                type: 'text',
+                title: 'Introduction',
+                icon: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>', // Info icon
+                content: `
+                    <p>Simple Harmonic Motion (SHM) is a fundamental concept in physics describing a type of periodic motion where the <span class="highlight-term">restoring force</span> is directly proportional to the displacement and acts in the direction opposite to that of displacement.</p>
+                    <p>Think of a swinging pendulum or a vibrating guitar string. These systems oscillate back and forth through an equilibrium position.</p>
+                `
+            },
+            {
+                type: 'formula',
+                title: 'Defining Equation (Hooke\'s Law)',
+                id: 'f_hooke',
+                formula: 'F = -kx',
+                explanation: 'This is the fundamental condition for Simple Harmonic Motion. The negative sign indicates that the force is a restoring force, meaning it always tries to bring the object back to the equilibrium position ($x=0$).',
+                variables: [
+                    { symbol: 'F', meaning: 'Restoring Force (Newtons)' },
+                    { symbol: 'k', meaning: 'Spring Constant (N/m)' },
+                    { symbol: 'x', meaning: 'Displacement from equilibrium (m)' }
+                ]
+            },
+            {
+                type: 'text',
+                title: 'Key Characteristics',
+                icon: '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>', // Check icon
+                content: `
+                    <p>For a motion to be classified as SHM, it must possess the following characteristics:</p>
+                    <ul>
+                        <li style="margin-left: 1.5rem; margin-bottom: 0.5rem;"><strong>Periodicity:</strong> The motion repeats itself at regular intervals (Time Period, $T$).</li>
+                        <li style="margin-left: 1.5rem; margin-bottom: 0.5rem;"><strong>Amplitude:</strong> The maximum displacement from the equilibrium position.</li>
+                        <li style="margin-left: 1.5rem;"><strong>Isochronism:</strong> The time period is independent of the amplitude (for small amplitudes).</li>
+                    </ul>
+                `
+            },
+            {
+                type: 'formula',
+                title: 'Displacement over Time',
+                id: 'f_disp',
+                formula: 'x(t) = A \\cos(\\omega t + \\phi)',
+                explanation: 'This equation describes the position of the object at any given time $t$. It follows a sinusoidal pattern (sine or cosine wave).',
+                variables: [
+                    { symbol: 'x(t)', meaning: 'Position at time t' },
+                    { symbol: 'A', meaning: 'Amplitude (max displacement)' },
+                    { symbol: '\\omega', meaning: 'Angular frequency (rad/s)' },
+                    { symbol: 't', meaning: 'Time' },
+                    { symbol: '\\phi', meaning: 'Phase constant' }
+                ]
+            },
+            {
+                type: 'table',
+                title: 'Comparison of Quantities',
+                headers: ['Quantity', 'Symbol', 'Unit', 'Relation'],
+                rows: [
+                    ['Frequency', 'f', 'Hertz (Hz)', 'f = 1/T'],
+                    ['Time Period', 'T', 'Seconds (s)', 'T = 2\\pi \\sqrt{m/k}'],
+                    ['Angular Frequency', '\\omega', 'rad/s', '\\omega = 2\\pi f']
+                ]
+            },
+            {
+                type: 'text',
+                title: 'Important Notes',
+                icon: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>',
+                content: `
+                    <p>SHM is not just a theoretical abstraction; it is the basis for understanding waves (sound, light) and complex vibrations in engineering structures.</p>
+                    <p>Energy in SHM constantly transforms between <strong>kinetic energy</strong> (at equilibrium) and <strong>potential energy</strong> (at maximum displacement).</p>
+                `
+            }
+        ];
+
+        // ==========================================================
+        // RENDERING ENGINE
+        // ==========================================================
+
+        const root = document.getElementById('content-root');
+
+        function renderContent() {
+            courseData.forEach(section => {
+                const card = document.createElement('article');
+                card.className = 'card';
+
+                // Header
+                const header = document.createElement('div');
+                header.className = 'card-header';
+                if(section.icon) {
+                    header.innerHTML = `<svg class="card-icon" viewBox="0 0 24 24">${section.icon}</svg>`;
+                }
+                header.innerHTML += `<div class="card-title">${section.title}</div>`;
+                card.appendChild(header);
+
+                // Body
+                const body = document.createElement('div');
+                body.className = 'card-body';
+
+                if (section.type === 'text') {
+                    body.innerHTML = section.content;
+                } 
+                else if (section.type === 'formula') {
+                    card.classList.add('formula-card');
+                    // Math container
+                    const mathDiv = document.createElement('div');
+                    mathDiv.className = 'formula-display';
+                    mathDiv.innerHTML = `$$${section.formula}$$`;
+                    
+                    // Action Buttons
+                    const actions = document.createElement('div');
+                    actions.className = 'formula-actions';
+                    
+                    // Explain Button
+                    const explainBtn = document.createElement('button');
+                    explainBtn.className = 'btn btn-outline';
+                    explainBtn.innerHTML = 'Explain Formula';
+                    explainBtn.onclick = () => toggleFormulaDetails(section.id);
+
+                    // Lab Button
+                    const labBtn = document.createElement('button');
+                    labBtn.className = 'btn btn-primary';
+                    labBtn.innerHTML = 'Open Formula Lab';
+                    labBtn.onclick = () => openLab();
+
+                    actions.appendChild(explainBtn);
+                    actions.appendChild(labBtn);
+
+                    // Details Panel (Hidden by default)
+                    const details = document.createElement('div');
+                    details.className = 'formula-details';
+                    details.id = `details-${section.id}`;
+                    
+                    let varsHtml = section.variables.map(v => 
+                        `<li class="variable-item"><span class="variable-symbol">${v.symbol}</span>: ${v.meaning}</li>`
+                    ).join('');
+
+                    details.innerHTML = `
+                        <div class="details-content">
+                            <p>${section.explanation}</p>
+                            <strong>Variables:</strong>
+                            <ul class="variable-list">
+                                ${varsHtml}
+                            </ul>
+                        </div>
+                    `;
+
+                    body.appendChild(mathDiv);
+                    body.appendChild(actions);
+                    body.appendChild(details);
+                } 
+                else if (section.type === 'table') {
+                    const tableWrapper = document.createElement('div');
+                    tableWrapper.className = 'table-responsive';
+                    
+                    let headerHtml = section.headers.map(h => `<th>${h}</th>`).join('');
+                    let rowsHtml = section.rows.map(row => {
+                        let cells = row.map(cell => `<td>${cell.includes('\\') ? `$$${cell}$$` : cell}</td>`).join('');
+                        return `<tr>${cells}</tr>`;
+                    }).join('');
+
+                    tableWrapper.innerHTML = `
+                        <table>
+                            <thead><tr>${headerHtml}</tr></thead>
+                            <tbody>${rowsHtml}</tbody>
+                        </table>
+                    `;
+                    body.appendChild(tableWrapper);
+                }
+
+                card.appendChild(body);
+                root.appendChild(card);
+            });
+
+            // Trigger KaTeX rendering for the new content
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(root);
+            }
+        }
+
+        // Toggle Formula Details
+        function toggleFormulaDetails(id) {
+            const el = document.getElementById(`details-${id}`);
+            el.classList.toggle('open');
+        }
+
+        // ==========================================================
+        // FORMULA LAB (Interactive Simulation)
+        // ==========================================================
+        
+        let animationId;
+        const canvas = document.getElementById('labCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDragging = false;
+        
+        // Physics State
+        let physics = {
+            mass: 2.0,
+            k: 1.0,
+            damping: 0.01,
+            positionX: 100, // Displacement from center (0)
+            velocity: 0,
+            anchorX: 300, // Center of canvas
+            anchorY: 150
+        };
+
+        // Inputs
+        const massRange = document.getElementById('massRange');
+        const kRange = document.getElementById('kRange');
+        const dampingRange = document.getElementById('dampingRange');
+        const massVal = document.getElementById('massVal');
+        const kVal = document.getElementById('kVal');
+        const liveData = document.getElementById('liveData');
+
+        function updatePhysicsParams() {
+            physics.mass = parseFloat(massRange.value);
+            physics.k = parseFloat(kRange.value);
+            physics.damping = parseFloat(dampingRange.value);
+            massVal.textContent = physics.mass.toFixed(1);
+            kVal.textContent = physics.k.toFixed(1);
+        }
+
+        massRange.addEventListener('input', updatePhysicsParams);
+        kRange.addEventListener('input', updatePhysicsParams);
+        dampingRange.addEventListener('input', updatePhysicsParams);
+
+        function drawSpring(x, y, stretch) {
+            ctx.beginPath();
+            ctx.strokeStyle = '#64748b';
+            ctx.lineWidth = 2;
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+
+            const startX = 0; // Wall at left
+            const endX = x - 20; // Connect to block left side
+            const segments = 12;
+            const width = 20;
+            
+            ctx.moveTo(startX, y);
+            
+            for (let i = 0; i <= segments; i++) {
+                const px = startX + (endX - startX) * (i / segments);
+                // Zigzag offset
+                const py = y + (i % 2 === 0 ? 0 : (i % 4 === 1 ? width : -width));
+                // Flatten ends
+                const offset = (i === 0 || i === segments) ? 0 : (i % 2 === 0 ? 0 : (i % 4 === 1 ? width : -width));
+                
+                // Actually let's do a simple coil visual
+                const coilY = y + (i === 0 || i === segments ? 0 : (i % 2 === 1 ? 15 : -15));
+                
+                ctx.lineTo(px, coilY);
+            }
+            ctx.stroke();
+        }
+
+        function drawBlock(x, y) {
+            ctx.fillStyle = '#3b82f6';
+            ctx.shadowColor = 'rgba(0,0,0,0.2)';
+            ctx.shadowBlur = 10;
+            ctx.shadowOffsetY = 4;
+            ctx.fillRect(x, y - 20, 40, 40); // 40x40 block
+            
+            // Reset shadow
+            ctx.shadowColor = 'transparent';
+            
+            // Mass label
+            ctx.fillStyle = 'white';
+            ctx.font = '12px Inter';
+            ctx.textAlign = 'center';
+            ctx.fillText('m', x + 20, y + 5);
+        }
+
+        function drawEnvironment() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw Floor
+            ctx.beginPath();
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 2;
+            ctx.moveTo(0, physics.anchorY + 21);
+            ctx.lineTo(canvas.width, physics.anchorY + 21);
+            ctx.stroke();
+
+            // Draw Wall
+            ctx.fillStyle = '#cbd5e1';
+            ctx.fillRect(0, physics.anchorY - 50, 10, 100);
+            
+            // Draw Equilibrium Line
+            ctx.beginPath();
+            ctx.strokeStyle = '#ef4444'; // Red line for equilibrium
+            ctx.setLineDash([5, 5]);
+            ctx.moveTo(physics.anchorX, physics.anchorY - 60);
+            ctx.lineTo(physics.anchorX, physics.anchorY + 60);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            ctx.fillStyle = '#ef4444';
+            ctx.font = '10px Inter';
+            ctx.fillText('x = 0', physics.anchorX, physics.anchorY - 65);
+        }
+
+        function loop() {
+            if (!isDragging) {
+                // Physics logic: F = -kx - cv
+                const force = -physics.k * physics.positionX;
+                const dampingForce = -physics.damping * physics.velocity;
+                const acceleration = (force + dampingForce) / physics.mass;
+
+                physics.velocity += acceleration;
+                physics.positionX += physics.velocity;
+            }
+
+            drawEnvironment();
+            
+            const currentX = physics.anchorX + physics.positionX;
+            drawSpring(currentX, physics.anchorY, physics.positionX);
+            drawBlock(currentX, physics.anchorY);
+
+            // Update text
+            liveData.innerHTML = `Displacement ($x$): ${(physics.positionX/100).toFixed(2)} m | Velocity ($v$): ${(physics.velocity).toFixed(2)} m/s`;
+
+            animationId = requestAnimationFrame(loop);
+        }
+
+        // Mouse Interaction for Lab
+        function getMousePos(evt) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: evt.clientX - rect.left,
+                y: evt.clientY - rect.top
+            };
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            const pos = getMousePos(e);
+            const blockX = physics.anchorX + physics.positionX;
+            // Check if clicking inside block
+            if (pos.x >= blockX && pos.x <= blockX + 40 && pos.y >= physics.anchorY - 20 && pos.y <= physics.anchorY + 20) {
+                isDragging = true;
+                physics.velocity = 0; // Stop movement when grabbing
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const pos = getMousePos(e);
+                // Update position based on mouse
+                physics.positionX = pos.x - physics.anchorX - 20; // Center offset
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        function resetSimulation() {
+            physics.positionX = 100;
+            physics.velocity = 0;
+            physics.damping = parseFloat(dampingRange.value);
+        }
+
+        // Modal Logic
+        const modalOverlay = document.getElementById('labModal');
+
+        function openLab() {
+            modalOverlay.classList.add('active');
+            // Start loop if not running
+            if (!animationId) loop();
+        }
+
+        function closeLab() {
+            modalOverlay.classList.remove('active');
+        }
+
+        // Close modal on outside click
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeLab();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderContent();
+            // Pre-render formula lab background
+            drawEnvironment();
+        });
+
+    </script>
+</body>
+</html>
+```

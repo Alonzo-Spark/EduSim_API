@@ -1,0 +1,132 @@
+## Motion in a Plane: Projectile Motion
+
+### Quick Definition
+
+Projectile motion is a form of motion experienced by an object or particle (a projectile) that is thrown near the Earth's surface and moves along a curved path under the action of gravity only. The only force of significance that acts on the object is gravity, which acts downward to cause a downward acceleration.
+
+### Key Concepts
+
+Projectile motion can be analyzed by considering the horizontal and vertical components of its motion independently.
+
+*   **Horizontal Motion:** In the absence of air resistance, the horizontal velocity of the projectile remains constant throughout its flight. This is because there is no horizontal force acting on the projectile.
+*   **Vertical Motion:** The vertical motion of the projectile is influenced by gravity, resulting in a constant downward acceleration ($g$). This is similar to the motion of an object thrown vertically upwards or downwards.
+
+### Characteristics of Projectile Motion
+
+Here are the key characteristics that define projectile motion:
+
+1.  **Parabolic Trajectory:** The path followed by a projectile is a parabola. This is a direct consequence of the constant horizontal velocity and the uniformly accelerated vertical motion.
+
+    **Mathematical Representation of Trajectory**
+
+    For a projectile launched with initial velocity $v_0$ at an angle $\theta$ with the horizontal:
+
+    The horizontal position $x$ at time $t$ is given by:
+    $$
+    x = (v_0 \cos \theta) t
+    $$
+    The vertical position $y$ at time $t$ is given by:
+    $$
+    y = (v_0 \sin \theta) t - \frac{1}{2} g t^2
+    $$
+    Eliminating $t$ from these equations gives the equation of the trajectory:
+    $$
+    y = (\tan \theta) x - \frac{g}{2 (v_0 \cos \theta)^2} x^2
+    $$
+    This equation is in the form $y = Ax - Bx^2$, which represents a parabola.
+
+    ┌───────────────────────────┐
+    │ Main Formula              │
+    │                           │
+    │ $$ y = (\tan \theta) x - \frac{g}{2 (v_0 \cos \theta)^2} x^2 $$ │
+    │                           │
+    │ [ Explain Formula ]       │
+    │ [ Open Formula Lab ]      │
+    └───────────────────────────┘
+
+2.  **Constant Horizontal Velocity:** As mentioned, assuming no air resistance, the horizontal component of the velocity ($v_x$) remains constant.
+    $$
+    v_x = v_0 \cos \theta
+    $$
+    ┌───────────────────────────┐
+    │ Main Formula              │
+    │                           │
+    │ $$ v_x = v_0 \cos \theta $$ │
+    │                           │
+    │ [ Explain Formula ]       │
+    │ [ Open Formula Lab ]      │
+    └───────────────────────────┘
+
+3.  **Varying Vertical Velocity:** The vertical component of the velocity ($v_y$) changes due to gravity. It decreases as the projectile rises, becomes zero at the highest point, and then increases in the downward direction.
+    $$
+    v_y = v_0 \sin \theta - g t
+    $$
+    ┌───────────────────────────┐
+    │ Main Formula              │
+    │                           │
+    │ $$ v_y = v_0 \sin \theta - g t $$ │
+    │                           │
+    │ [ Explain Formula ]       │
+    │ [ Open Formula Lab ]      │
+    └───────────────────────────┘
+
+4.  **Constant Vertical Acceleration:** The acceleration acting on the projectile is solely due to gravity, which is constant and directed downwards ($a_y = -g$). The horizontal acceleration ($a_x$) is zero.
+
+5.  **Time of Flight ($T$):** The total time for which the projectile remains in the air.
+    $$
+    T = \frac{2 v_0 \sin \theta}{g}
+    $$
+    ┌───────────────────────────┐
+    │ Main Formula              │
+    │                           │
+    │ $$ T = \frac{2 v_0 \sin \theta}{g} $$ │
+    │                           │
+    │ [ Explain Formula ]       │
+    │ [ Open Formula Lab ]      │
+    └───────────────────────────┘
+
+6.  **Maximum Height ($H$):** The greatest vertical distance reached by the projectile from its point of projection.
+    $$
+    H = \frac{v_0^2 \sin^2 \theta}{2g}
+    $$
+    ┌───────────────────────────┐
+    │ Main Formula              │
+    │                           │
+    │ $$ H = \frac{v_0^2 \sin^2 \theta}{2g} $$ │
+    │                           │
+    │ [ Explain Formula ]       │
+    │ [ Open Formula Lab ]      │
+    └───────────────────────────┘
+
+7.  **Horizontal Range ($R$):** The total horizontal distance covered by the projectile from its point of projection until it returns to the same horizontal level.
+    $$
+    R = \frac{v_0^2 \sin (2\theta)}{g}
+    $$
+    ┌───────────────────────────┐
+    │ Main Formula              │
+    │                           │
+    │ $$ R = \frac{v_0^2 \sin (2\theta)}{g} $$ │
+    │                           │
+    │ [ Explain Formula ]       │
+    │ [ Open Formula Lab ]      │
+    └───────────────────────────┘
+
+### Important Notes
+
+*   **Assumptions:** The analysis of projectile motion usually makes several simplifying assumptions:
+    *   Air resistance is negligible.
+    *   The acceleration due to gravity ($g$) is constant in both magnitude and direction throughout the motion.
+    *   The Earth's curvature is negligible (valid for short ranges).
+*   **Angle for Maximum Range:** The maximum horizontal range is achieved when the projection angle $\theta = 45^\circ$.
+*   **Complementary Angles:** For a given initial speed, two projection angles that are complementary (i.e., $\theta$ and $90^\circ - \theta$) will result in the same horizontal range, provided the initial speed is the same. However, their maximum heights and time of flights will be different.
+
+### Summary
+
+Projectile motion is a fundamental concept in kinematics, illustrating the independent nature of horizontal and vertical motion under gravity. Its characteristics, such as parabolic trajectory, constant horizontal velocity, and varying vertical velocity, are crucial for understanding the movement of objects in two dimensions.
+
+### Suggested Questions
+
+1.  A football is kicked with an initial velocity of $20 \, \text{m/s}$ at an angle of $30^\circ$ above the horizontal. Calculate its time of flight, maximum height, and horizontal range. (Assume $g = 9.8 \, \text{m/s}^2$).
+2.  Explain why the horizontal velocity of a projectile remains constant in the absence of air resistance, while its vertical velocity changes.
+3.  How would the trajectory of a projectile change if it were launched on the Moon, where the acceleration due to gravity is approximately one-sixth of that on Earth?
+4.  Derive the equation for the parabolic trajectory of a projectile from its horizontal and vertical position equations.

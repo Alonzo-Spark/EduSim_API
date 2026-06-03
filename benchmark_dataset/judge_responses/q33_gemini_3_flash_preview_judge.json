@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 33,
+  "question": "Explain the difference between conduction, convection, and radiation.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nConduction, convection, and radiation represent the three distinct physical mechanisms through which thermal energy transfers between regions of differing temperatures.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Conduction | Convection | Radiation |\n| --- | --- | --- | --- |\n| **Medium Requirement** | Requires a solid or static fluid medium. | Requires a fluid medium (liquid or gas). | Can propagate through a vacuum without a medium. |\n| **Mechanism** | Kinetic energy transfer via direct molecular collisions. | Macro-scale fluid movement driven by density changes. | Energy transport via electromagnetic waves. |\n| **Transfer Speed** | Relatively slow material propagation. | Moderate speed driven by fluid flow rates. | Occurs at the speed of light. |\n\n---\n\n## Real-world Examples\n\n* **Conduction:** A metal spoon left in a bowl of hot soup quickly becomes warm along its entire handle via direct atomic vibration transfer.\n* **Convection:** Water at the bottom of a pot heated on a stove expands, becomes less dense, and rises, creating a continuous circulation loop.\n* **Radiation:** Standing near a campfire or under direct sunlight warms the skin through incoming infrared electromagnetic waves.\n\n---\n\n## Summary\n\nConduction transfers heat through direct microscopic contact, convection relies on bulk fluid movement, and radiation uses electromagnetic waves to transfer energy across empty space.",
+  "candidate_response": ":::section{title=\"Introduction\"}\nHeat transfer is the movement of thermal energy from a warmer object to a cooler one. This process occurs through three distinct physical mechanisms: **Conduction**, **Convection**, and **Radiation**. While they all aim to reach thermal equilibrium, they operate through different mediums and physical principles.\n:::\n\n:::section{title=\"Quick Definition\"}\n| Mechanism | Primary Medium | Physical Action |\n| :--- | :--- | :--- |\n| **Conduction** | Solids | Direct contact and molecular vibration. |\n| **Convection** | Liquids & Gases | Bulk movement of fluid currents. |\n| **Radiation** | Vacuum & Transparent Media | Electromagnetic waves (no medium required). |\n:::\n\n:::section{title=\"Key Concepts\"}\n### 1. Conduction (The Touch)\nEnergy is transferred via direct physical contact. Faster-moving (hotter) particles collide with slower-moving (cooler) neighbors, passing kinetic energy along the chain.\n*   **Example:** A metal spoon getting hot in a cup of coffee.\n\n### 2. Convection (The Flow)\nEnergy is transferred by the actual movement of heated particles. As a fluid heats up, it becomes less dense and rises, while cooler, denser fluid sinks, creating a \"convection current.\"\n*   **Example:** Boiling water in a pot or warm air rising in a room.\n\n### 3. Radiation (The Wave)\nEnergy is transferred through electromagnetic waves (specifically infrared). This is the only form of heat transfer that can travel through the vacuum of space.\n*   **Example:** Feeling the warmth of the sun or a campfire from a distance.\n:::\n\n:::formula-card{title=\"Fourier's Law of Heat Conduction\"}\n$$\nq = -k \\nabla T\n$$\n\n**Variables:**\n*   $q$: Heat flux (amount of heat flowing per unit area)\n*   $k$: Thermal conductivity of the material\n*   $\\nabla T$: Temperature gradient\n\n[ This formula calculates the rate at which heat moves through a solid material based on its conductivity and the temperature difference. ]\n[ Open Formula Lab ]\n:::\n\n:::section{title=\"Characteristics Comparison\"}\n| Feature | Conduction | Convection | Radiation |\n| :--- | :--- | :--- | :--- |\n| **Medium** | Necessary (best in solids) | Necessary (fluids only) | Not necessary (vacuum) |\n| **Mechanism** | Molecular collision | Mass motion of molecules | Electromagnetic waves |\n| **Speed** | Slowest | Medium | Speed of Light |\n| **Direction** | From hot to cold | Primarily upwards | In all directions |\n:::\n\n:::formula-card{title=\"Stefan-Boltzmann Law (Radiation)\"}\n$$\nP = e \\sigma A T^4\n$$\n\n**Variables:**\n*   $P$: Radiant power\n*   $e$: Emissivity of the object\n*   $\\sigma$: Stefan-Boltzmann constant ($5.67 \\times 10^{-8} W/m^2K^4$)\n*   $A$: Surface area\n*   $T$: Absolute temperature (Kelvin)\n\n[ This explains why radiation increases exponentially as an object gets hotter. ]\n[ Open Formula Lab ]\n:::\n\n:::section{title=\"Important Notes\"}\n*   **Vacuum Insulation:** A thermos (vacuum flask) prevents heat loss by removing the medium required for conduction and convection, and using reflective linings to bounce radiation back.\n*   **Thermal Conductivity:** Metals are excellent conductors because they have \"free electrons\" that help transport energy quickly.\n*   **Fluid Dynamics:** Convection cannot happen in space (microgravity) effectively because there is no \"up\" or \"down\" for density differences to drive the flow.\n:::\n\n:::section{title=\"Suggested Questions\"}\n1. Why do we wear wool sweaters in winter? (Hint: Think about trapped air and conduction).\n2. How does the Earth receive heat from the Sun if space is a vacuum?\n3. In a house with a fireplace, why does the second floor often feel warmer than the first?\n:::",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the concepts of conduction, convection, and radiation, with accurate definitions, mechanisms, and examples. The use of tables, formulas, and sections enhances the readability and structure of the response. The inclusion of real-world examples, such as the metal spoon and the thermos, helps to illustrate the concepts and make them more accessible to beginners. The response also provides additional information, such as Fourier's Law of Heat Conduction and the Stefan-Boltzmann Law, which demonstrates a deeper understanding of the subject matter. However, there are some minor areas for improvement, such as the use of consistent formatting and the addition of more visual aids to support the explanations. Overall, the response is well-organized, clear, and effective in conveying the concepts of heat transfer.",
+  "candidate_token_usage": {
+    "promptTokens": 381,
+    "completionTokens": 875,
+    "totalTokens": 1256
+  },
+  "candidate_latency_ms": 6349,
+  "candidate_cost_usd": 0.0028155,
+  "judge_token_usage": {
+    "promptTokens": 1554,
+    "completionTokens": 222,
+    "totalTokens": 1776
+  },
+  "judge_latency_ms": 9956,
+  "judge_cost_usd": 0.0014651999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:08:43.162Z"
+}

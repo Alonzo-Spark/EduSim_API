@@ -1,0 +1,113 @@
+┌───────────────────────────────────────────────────────────────┐
+│ Introduction                                                      │
+│                                                                   │
+│ The simple pendulum is a classic physics system that        │
+│ illustrates harmonic motion.  It consists of a mass (the      │
+│ bob) attached to the end of a light, inextensible string that   │
+│ swings back and forth under the influence of gravity.          │
+│                                                                   │
+│ Understanding its time period – the time required for one       │
+│ complete oscillation – is a foundational step toward mastering   │
+│ oscillatory dynamics.                                            │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ Definition                                                       │
+│                                                                   │
+│ A **simple pendulum** is defined as a point mass *m* suspended   │
+│ from a fixed pivot by a mass‑less string of length *L*,           │
+│ displaced by a small angle *θ* from the vertical and released.   │
+│                                                                   │
+│ The analysis assumes:                                            │
+│   • The string is inextensible and massless.                     │
+│   • Air resistance is negligible.                                 │
+│   • Oscillations are of small amplitude (θ ≲ 10°) so that        │
+│     sin θ ≈ θ (small‑angle approximation).                      │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ Key Concepts                                                     │
+│                                                                   │
+│ • **Restoring torque**: Gravity provides a torque τ = –mgL sinθ.   │
+│ • **Equation of motion** (small‑angle):                         │
+│     τ ≈ –mgL θ  →  I α = –mgL θ                                   │
+│   where I = mL² is the moment of inertia about the pivot and      │
+│   α = d²θ/dt².                                                    │
+│ • **Simple harmonic motion**: The resulting differential equation │
+│   d²θ/dt² + (g/L)θ = 0 has the standard form d²θ/dt² + ω²θ = 0,   │
+│   identifying the angular frequency ω = √(g/L).                 │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ Main Formula                                                     │
+│                                                                   │
+│                T = 2π √( L / g )                                 │
+│                                                                   │
+│ [ Explain Formula ]       [ Open Formula Lab ]                    │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ Variables Table                                                   │
+│                                                                   │
+│ ┌───────────────────────┬───────┬───────────────────────────────┐ │
+│ │ Symbol                │ Units │ Description                     │ │
+│ ├───────────────────────┼───────┼───────────────────────────────┤ │
+│ │ T                     │ s     │ Time period of one oscillation   │ │
+│ │ L                     │ m     │ Length of the pendulum string     │ │
+│ │ g                     │ m/s²  │ Acceleration due to gravity      │ │
+│ │ θ                     │ rad   │ Angular displacement (small)    │ │
+│ │ m                     │ kg    │ Mass of the bob (cancels out)    │ │
+│ └───────────────────────┴───────┴───────────────────────────────┘ │
+│                                                                   │
+│ *All symbols follow the SI convention.*                           │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ Derivation Steps                                                 │
+│                                                                   │
+│ 1️⃣ **Torque balance**: τ = –mgL sinθ.                           │
+│ 2️⃣ **Small‑angle approximation**: sinθ ≈ θ → τ ≈ –mgL θ.         │
+│ 3️⃣ **Moment of inertia**: I = mL² → I α = mL² d²θ/dt².          │
+│ 4️⃣ **Equation of motion**: mL² d²θ/dt² + mgL θ = 0               │
+│    → d²θ/dt² + (g/L)θ = 0.                                        │
+│ 5️⃣ **Identify ω**: Compare with d²θ/dt² + ω²θ = 0 → ω = √(g/L). │
+│ 6️⃣ **Period**: T = 2π/ω = 2π √(L/g).                             │
+│                                                                   │
+│ The result shows that *T* depends only on *L* and *g*; the mass   │
+│ of the bob does not affect the period under the stated assumptions│
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ Important Notes                                                  │
+│                                                                   │
+│ • The formula is accurate only for small amplitudes (θ ≲ 10°).   │
+│ • For larger angles, the period increases and must be expressed  │
+│   using elliptic integrals.                                      │
+│ • Air resistance and string mass introduce damping, slightly     │
+│   lengthening the period.                                         │
+│ • The derivation assumes a uniform gravitational field *g*.      │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ Summary                                                          │
+│                                                                   │
+│ The time period *T* of a simple pendulum undergoing small‑angle  │
+│ oscillations is given by **T = 2π √(L/g)**.  It emerges from the  │
+│ balance of gravitational torque and the pendulum’s moment of     │
+│ inertia, leading to simple harmonic motion with angular frequency │
+│ ω = √(g/L).  The period is independent of the bob’s mass and      │
+│ depends only on the pendulum length and the local gravitational │
+│ acceleration.                                                     │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ Suggested Questions                                              │
+│                                                                   │
+│ 1️⃣ How does the period change if the pendulum length is doubled? │
+│ 2️⃣ What correction factor is needed for a 30° swing amplitude?  │
+│ 3️⃣ How would you experimentally determine *g* using a pendulum? │
+│ 4️⃣ Explain why the mass of the bob cancels out of the period     │
+│    expression.                                                    │
+│ 5️⃣ Discuss the effect of air resistance on the pendulum’s       │
+│    damping and period.                                            │
+└───────────────────────────────────────────────────────────────────┘

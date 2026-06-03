@@ -1,0 +1,725 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics I: Coulomb's Law Derivation</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0KOVEMeaPoFgVp2J0Gp/3rZ8W4m3pU/1Z0WjP/9aQoXmV9mFV4M2g" crossorigin="anonymous">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #475569;
+            --accent: #f59e0b;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            color: var(--text-main);
+            margin-bottom: 0.5em;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 840px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-icon {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            font-family: 'Merriweather', serif;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Specific Card Styles */
+        .card.derivation ol {
+            padding-left: 1.5rem;
+        }
+        
+        .card.derivation li {
+            margin-bottom: 1rem;
+        }
+
+        /* Formula Card */
+        .formula-card {
+            background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+            border-left: 5px solid var(--primary);
+        }
+
+        .formula-display {
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: #eff6ff;
+        }
+
+        /* Formula Explanation Section (Collapsible) */
+        .formula-explanation {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--border);
+            display: none; /* Hidden by default */
+        }
+        
+        .formula-explanation.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        /* Modal / Lab Overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lab-container {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        .close-lab {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        /* Lab Interface */
+        .lab-visual {
+            background: #f8fafc;
+            border-radius: 8px;
+            height: 300px;
+            position: relative;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .charge {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            transition: all 0.3s ease-out;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .charge.q1 { background: #ef4444; } /* Negative/Red */
+        .charge.q2 { background: #3b82f6; } /* Positive/Blue */
+
+        .force-arrow {
+            position: absolute;
+            height: 4px;
+            background: var(--accent);
+            transform-origin: left center;
+            display: flex;
+            align-items: center;
+            transition: width 0.3s, opacity 0.3s;
+        }
+        
+        .force-arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -6px;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 10px solid var(--accent);
+        }
+
+        .lab-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary);
+        }
+
+        .lab-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Merriweather', serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        /* Utility */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: #e2e8f0;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .note-box {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="tag">Chapter 2.1</div>
+            <h1>Electrostatics</h1>
+            <p>Derivation of Coulomb's Law and Vector Analysis</p>
+        </header>
+
+        <main>
+            <!-- Introduction Card -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon">I</div>
+                    <h2 class="card-title">Introduction</h2>
+                </div>
+                <p>
+                    The interaction between charged particles is a fundamental force in nature, responsible for holding atoms together and governing the behavior of electricity. Before quantifying this force, we observe that like charges repel and opposite charges attract.
+                </p>
+                <br>
+                <p>
+                    The goal of this derivation is to express the electric force <strong>F</strong> as a function of the magnitude of the charges and the distance separating them.
+                </p>
+            </article>
+
+            <!-- Derivation Card -->
+            <article class="card derivation">
+                <div class="card-header">
+                    <div class="card-icon">D</div>
+                    <h2 class="card-title">Step-by-Step Derivation</h2>
+                </div>
+                
+                <p><strong>1. Dependence on Charge Magnitude:</strong><br>
+                Experimental evidence (such as the torsion balance experiment by Charles-Augustin de Coulomb) suggests that the force is directly proportional to the product of the magnitudes of the charges.
+                $$ F \propto q_1 q_2 $$
+                If either charge is doubled, the force doubles. If both are doubled, the force quadruples.</p>
+                
+                <br>
+
+                <p><strong>2. Dependence on Distance:</strong><br>
+                Similar to Newton's Law of Universal Gravitation, the force decreases as the distance between charges increases. Specifically, it follows an inverse-square law relative to the distance $r$.
+                $$ F \propto \frac{1}{r^2} $$
+                This means if the distance doubles, the force becomes one-fourth.</p>
+
+                <br>
+
+                <p><strong>3. Combining Proportionalities:</strong><br>
+                Combining the two observations, we get the scalar relationship:
+                $$ F \propto \frac{q_1 q_2}{r^2} $$</p>
+
+                <br>
+
+                <p><strong>4. Introducing the Proportionality Constant ($k$):</strong><br>
+                To convert the proportionality into an equation, we introduce a constant $k$. In the SI system, this is often written in terms of the permittivity of free space ($\epsilon_0$).
+                $$ k = \frac{1}{4\pi\epsilon_0} $$</p>
+            </article>
+
+            <!-- Formula Card (The Core Requirement) -->
+            <article class="card formula-card" id="main-formula-card">
+                <div class="card-header">
+                    <div class="card-icon">F</div>
+                    <h2 class="card-title">Coulomb's Law (Vector Form)</h2>
+                </div>
+
+                <div class="formula-display">
+                    $$ \vec{F}_{12} = k \frac{q_1 q_2}{r^2} \hat{r}_{12} $$
+                </div>
+
+                <div class="formula-actions">
+                    <button class="btn btn-outline" onclick="toggleExplanation()">Explain Formula</button>
+                    <button class="btn btn-primary" onclick="openFormulaLab()">Open Formula Lab</button>
+                </div>
+
+                <div class="formula-explanation" id="formula-explanation">
+                    <h4>Variable Breakdown</h4>
+                    <table style="margin-top: 1rem;">
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Description</th>
+                                <th>SI Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$\vec{F}_{12}$</td>
+                                <td>Force exerted on $q_1$ by $q_2$</td>
+                                <td>Newton (N)</td>
+                            </tr>
+                            <tr>
+                                <td>$k$</td>
+                                <td>Coulomb constant ($\approx 8.99 \times 10^9 \, \text{N m}^2/\text{C}^2$)</td>
+                                <td>N m² C⁻²</td>
+                            </tr>
+                            <tr>
+                                <td>$q_1, q_2$</td>
+                                <td>Magnitudes of the electric charges</td>
+                                <td>Coulomb (C)</td>
+                            </tr>
+                            <tr>
+                                <td>$r$</td>
+                                <td>Distance between the centers of the charges</td>
+                                <td>Meter (m)</td>
+                            </tr>
+                            <tr>
+                                <td>$\hat{r}_{12}$</td>
+                                <td>Unit vector pointing from $q_2$ to $q_1$</td>
+                                <td>Dimensionless</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="note-box">
+                        <strong>Note on Direction:</strong> The vector $\hat{r}_{12}$ indicates the direction is along the line joining the charges. If $q_1 q_2$ is negative (opposite charges), the force is attractive (opposite to $\hat{r}_{12}$). If positive (like charges), the force is repulsive (same direction as $\hat{r}_{12}$).
+                    </div>
+                </div>
+            </article>
+
+            <!-- Characteristics Card -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon">C</div>
+                    <h2 class="card-title">Key Characteristics</h2>
+                </div>
+                <ul>
+                    <li><strong>Central Force:</strong> Acts along the line joining the centers of two charges.</li>
+                    <li><strong>Conservative:</strong> Work done in moving a charge in an electrostatic field is path independent.</li>
+                    <li><strong>Long Range:</strong> Although it follows the inverse square law, it has infinite range, unlike nuclear forces.</li>
+                </ul>
+            </article>
+
+            <!-- Suggested Questions Card -->
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon">Q</div>
+                    <h2 class="card-title">Suggested Questions</h2>
+                </div>
+                <ol style="padding-left: 1.5rem;">
+                    <li>Two charges of $+2\mu C$ and $-3\mu C$ are placed 0.5 m apart. Calculate the magnitude of the force between them.</li>
+                    <li>What happens to the force if the distance between two point charges is reduced to one-third?</li>
+                    <li>Why is the Coulomb constant $k$ written as $\frac{1}{4\pi\epsilon_0}$ in rationalized units?</li>
+                </ol>
+            </article>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2023 Interactive Physics Textbook. Generated for Demonstration.</p>
+        </footer>
+    </div>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="lab-modal">
+        <div class="lab-container">
+            <button class="close-lab" onclick="closeFormulaLab()">&times;</button>
+            <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Coulomb's Law Interactive Lab</h2>
+            
+            <div class="lab-visual" id="lab-visual">
+                <!-- Charge 1 -->
+                <div class="charge q1" id="vis-q1">q1</div>
+                
+                <!-- Force Arrow -->
+                <div class="force-arrow" id="vis-arrow"></div>
+                
+                <!-- Charge 2 -->
+                <div class="charge q2" id="vis-q2">q2</div>
+                
+                <!-- Distance Label -->
+                <div style="position: absolute; bottom: 20px; width: 100%; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+                    r = <span id="vis-r-text">5.0</span> m
+                </div>
+            </div>
+
+            <div class="lab-controls">
+                <div class="control-group">
+                    <label>Charge 1 ($q_1$): <span id="val-q1">5</span> µC</label>
+                    <input type="range" id="input-q1" min="-10" max="10" step="1" value="5">
+                </div>
+                <div class="control-group">
+                    <label>Charge 2 ($q_2$): <span id="val-q2">5</span> µC</label>
+                    <input type="range" id="input-q2" min="-10" max="10" step="1" value="5">
+                </div>
+                <div class="control-group">
+                    <label>Distance ($r$): <span id="val-r">5.0</span> m</label>
+                    <input type="range" id="input-r" min="1" max="10" step="0.1" value="5.0">
+                </div>
+            </div>
+
+            <div class="lab-result">
+                Force $F = $ <span id="calc-result">0.00</span> N
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+    <script>
+        // 1. RENDER MATH
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ]
+            });
+        });
+
+        // 2. FORMULA DATA EXTRACTION (Simulated)
+        // In a real app, this would parse the DOM. Here we define the structured object 
+        // as requested by the "Formula Extraction" requirement.
+        const formulaData = {
+            id: 'coulombs-law-vector',
+            latex: '\\vec{F}_{12} = k \\frac{q_1 q_2}{r^2} \\hat{r}_{12}',
+            title: 'Coulomb\'s Law (Vector Form)',
+            variables: [
+                { symbol: 'F', name: 'Force', unit: 'N' },
+                { symbol: 'k', name: 'Coulomb Constant', unit: 'N·m²/C²' },
+                { symbol: 'q', name: 'Charge', unit: 'C' },
+                { symbol: 'r', name: 'Distance', unit: 'm' }
+            ]
+        };
+
+        // 3. UI INTERACTION LOGIC
+        
+        // Toggle Explanation
+        function toggleExplanation() {
+            const el = document.getElementById('formula-explanation');
+            el.classList.toggle('active');
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('lab-modal');
+        
+        function openFormulaLab() {
+            modal.classList.add('open');
+            updateLab(); // Initialize visuals
+        }
+
+        function closeFormulaLab() {
+            modal.classList.remove('open');
+        }
+
+        // Close on clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeFormulaLab();
+        });
+
+        // 4. FORMULA LAB SIMULATION LOGIC
+        
+        const k_const = 8.99; // Scaled down for visual simulation (Real k is 9e9)
+        // To make numbers readable in the demo without scientific notation clutter, 
+        // we treat inputs as MicroCoulombs and output directly, scaling k effectively.
+        
+        const inputs = {
+            q1: document.getElementById('input-q1'),
+            q2: document.getElementById('input-q2'),
+            r: document.getElementById('input-r')
+        };
+
+        const displays = {
+            q1: document.getElementById('val-q1'),
+            q2: document.getElementById('val-q2'),
+            r: document.getElementById('val-r'),
+            result: document.getElementById('calc-result'),
+            rText: document.getElementById('vis-r-text')
+        };
+
+        const visuals = {
+            q1: document.getElementById('vis-q1'),
+            q2: document.getElementById('vis-q2'),
+            arrow: document.getElementById('vis-arrow')
+        };
+
+        // Add listeners
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', updateLab);
+        });
+
+        function updateLab() {
+            // Get values
+            let q1 = parseFloat(inputs.q1.value);
+            let q2 = parseFloat(inputs.q2.value);
+            let r = parseFloat(inputs.r.value);
+
+            // Update text displays
+            displays.q1.textContent = q1;
+            displays.q2.textContent = q2;
+            displays.r.textContent = r.toFixed(1);
+            displays.rText.textContent = r.toFixed(1);
+
+            // Calculate Force (Magnitude)
+            // F = k * |q1*q2| / r^2
+            // Using a scaled k for visualization purposes so the number isn't huge
+            const force = k_const * Math.abs(q1 * q2) / (r * r);
+            displays.result.textContent = force.toFixed(2);
+
+            // Update Visuals
+            
+            // 1. Positioning (Center them, separate by r)
+            // Map r (1 to 10) to pixels (e.g., 50px to 250px separation)
+            const centerOffset = (r / 10) * 120; 
+            
+            visuals.q1.style.transform = `translateX(-${centerOffset}px)`;
+            visuals.q2.style.transform = `translateX(${centerOffset}px)`;
+
+            // 2. Color/Sign
+            visuals.q1.style.background = q1 < 0 ? '#ef4444' : '#3b82f6'; // Red for neg, Blue for pos
+            visuals.q2.style.background = q2 < 0 ? '#ef4444' : '#3b82f6';
+            
+            // Update text inside balls
+            visuals.q1.textContent = q1 > 0 ? `+${q1}` : q1;
+            visuals.q2.textContent = q2 > 0 ? `+${q2}` : q2;
+
+            // 3. Force Arrow
+            const product = q1 * q2;
+            
+            if (product === 0) {
+                visuals.arrow.style.opacity = '0';
+            } else {
+                visuals.arrow.style.opacity = '1';
+                
+                // Width of arrow based on force magnitude (clamped)
+                const arrowWidth = Math.min(Math.max(force * 2, 20), 100); 
+                visuals.arrow.style.width = `${arrowWidth}px`;
+
+                // Direction Logic
+                // If product > 0 (Like charges): Repel. Arrows point outward.
+                // If product < 0 (Opposite): Attract. Arrows point inward.
+                
+                // We only draw one arrow on q1 for simplicity
+                if (product > 0) {
+                    // Repel: Arrow points Left (away from q2)
+                    visuals.arrow.style.left = `calc(50% - ${centerOffset}px - ${arrowWidth}px)`;
+                    visuals.arrow.style.transform = 'rotate(0deg)';
+                    visuals.arrow.style.background = '#ef4444'; // Repulsive color
+                } else {
+                    // Attract: Arrow points Right (towards q2)
+                    visuals.arrow.style.left = `calc(50% - ${centerOffset}px)`;
+                    visuals.arrow.style.transform = 'rotate(0deg)';
+                    visuals.arrow.style.background = '#10b981'; // Attractive color
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+```

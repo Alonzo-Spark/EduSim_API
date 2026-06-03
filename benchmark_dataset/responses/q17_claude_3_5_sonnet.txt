@@ -1,0 +1,108 @@
+I'll render this as a structured interactive textbook experience.
+
+```json
+{
+  "type": "textbook_response",
+  "topic": "Work-Energy Theorem",
+  "subject": "Classical Mechanics"
+}
+```
+
+---
+
+**RENDERING: Work-Energy Theorem — Interactive Textbook**
+
+---
+
+## 📘 Statement
+
+> **The net work done on an object equals the change in its kinetic energy.**
+
+$$W_{\text{net}} = \Delta KE = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2$$
+
+---
+
+## 🔑 Key Definitions
+
+| Term | Symbol | Definition |
+|------|--------|------------|
+| Work | $W$ | Energy transferred by a force over displacement |
+| Kinetic Energy | $KE$ | Energy due to motion: $\frac{1}{2}mv^2$ |
+| Net Work | $W_{\text{net}}$ | Total work done by **all** forces |
+| Mass | $m$ | Inertia of the object (kg) |
+| Velocity | $v$ | Speed of the object (m/s) |
+
+---
+
+## 📐 Derivation
+
+### Step 1 — Start with Newton's Second Law
+
+$$F_{\text{net}} = ma$$
+
+### Step 2 — Express acceleration using kinematics
+
+From $v_f^2 = v_i^2 + 2as$, solve for $as$:
+
+$$as = \frac{v_f^2 - v_i^2}{2}$$
+
+### Step 3 — Define Work
+
+Work done by net force over displacement $s$:
+
+$$W_{\text{net}} = F_{\text{net}} \cdot s = ma \cdot s$$
+
+### Step 4 — Substitute
+
+$$W_{\text{net}} = m \cdot (as) = m \cdot \frac{v_f^2 - v_i^2}{2}$$
+
+$$\boxed{W_{\text{net}} = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2}$$
+
+---
+
+## 🔬 Calculus-Based Derivation (Rigorous)
+
+For variable forces, work is:
+
+$$W_{\text{net}} = \int_{x_i}^{x_f} F_{\text{net}}\, dx$$
+
+Apply Newton's second law $F = ma = m\dfrac{dv}{dt}$, and use the chain rule:
+
+$$\frac{dv}{dt} = \frac{dv}{dx}\cdot\frac{dx}{dt} = v\frac{dv}{dx}$$
+
+So:
+
+$$W_{\text{net}} = \int_{x_i}^{x_f} m\,v\,\frac{dv}{dx}\,dx = \int_{v_i}^{v_f} mv\,dv$$
+
+$$W_{\text{net}} = m \cdot \frac{v^2}{2}\Bigg|_{v_i}^{v_f}$$
+
+$$\boxed{W_{\text{net}} = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2}$$
+
+---
+
+## ⚡ Important Notes
+
+- Only **net work** (by all forces combined) equals $\Delta KE$
+- If $W_{\text{net}} > 0$ → object **speeds up**
+- If $W_{\text{net}} < 0$ → object **slows down**
+- If $W_{\text{net}} = 0$ → **no change** in speed (e.g. circular motion)
+- The theorem holds for **variable forces** (calculus form)
+- It is a **scalar** equation — direction doesn't appear explicitly
+
+---
+
+## 📊 Sign Convention Summary
+
+| Condition | $W_{\text{net}}$ | Effect |
+|-----------|-----------------|--------|
+| Force and displacement in same direction | $+$ | KE increases |
+| Force and displacement in opposite direction | $-$ | KE decreases |
+| Force perpendicular to displacement | $0$ | KE unchanged |
+
+---
+
+## 🧪 Quick Example
+
+A 2 kg block accelerates from rest to 6 m/s. Find net work done.
+
+$$W_{\text{net}} = \frac{1}{2}(2)(6)^2 - \frac{1}{2}(2)(0)^2 = 36 - 0 = \boxed{36 \text{ J}}$$

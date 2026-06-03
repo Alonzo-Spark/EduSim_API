@@ -1,0 +1,63 @@
+:::section{title="Introduction"}
+Kinetic energy is the energy possessed by an object due to its **motion**. Every moving object, from a celestial body to a subatomic particle, carries this form of energy. The faster an object moves or the more massive it is, the greater its kinetic energy.
+:::
+
+:::section{title="Quick Definition"}
+**Kinetic Energy ($E_k$)** is defined as the work needed to accelerate a body of a given mass from rest to its stated velocity. Having gained this energy during its acceleration, the body maintains this kinetic energy unless its speed changes.
+:::
+
+:::section{title="Formula Card"}
+### Main Kinetic Energy Equation
+
+$$
+K.E. = \frac{1}{2}mv^2
+$$
+
+**Variables:**
+*   **$m$**: Mass of the object (measured in $kg$)
+*   **$v$**: Velocity of the object (measured in $m/s$)
+*   **$K.E.$**: Kinetic Energy (measured in Joules, $J$)
+
+[ Explaining the Relationship: Energy scales linearly with mass but quadratically with velocity. Doubling the speed quadruples the energy. ]
+:::
+
+:::section{title="Derivation of Expression"}
+To derive the expression for Kinetic Energy, we calculate the **Work Done** ($W$) by a constant force ($F$) in displacing an object from rest to a velocity $v$.
+
+1.  **From Newton's Second Law:**
+    $$F = ma$$
+2.  **From the Work-Energy Theorem:**
+    $$W = F \cdot s$$
+    Substituting $F$: $W = (ma)s$
+3.  **Using the Third Equation of Motion:**
+    $$v^2 = u^2 + 2as$$
+    Since the object starts from rest, $u = 0$:
+    $$v^2 = 2as \implies s = \frac{v^2}{2a}$$
+4.  **Substituting $s$ back into the Work equation:**
+    $$W = ma \left( \frac{v^2}{2a} \right)$$
+    The '$a$' cancels out:
+    $$W = \frac{1}{2}mv^2$$
+5.  **Conclusion:**
+    Since the work done is stored as kinetic energy:
+    $$E_k = \frac{1}{2}mv^2$$
+:::
+
+:::section{title="Characteristics"}
+| Property | Description |
+| :--- | :--- |
+| **Scalar Nature** | Kinetic energy has magnitude but no direction. |
+| **Always Positive** | Since $m$ is positive and $v^2$ is always positive, $E_k$ cannot be negative. |
+| **Frame Dependent** | The value of $E_k$ depends on the observer's frame of reference. |
+| **SI Unit** | Joule ($J$), where $1 J = 1 kg \cdot m^2/s^2$. |
+:::
+
+:::section{title="Important Notes"}
+> [!IMPORTANT]
+> **The Work-Energy Theorem:** The net work done on an object is equal to the change in its kinetic energy ($W_{net} = \Delta K.E.$). This is the fundamental principle used to solve most dynamics problems involving energy.
+:::
+
+:::section{title="Suggested Questions"}
+*   How does the kinetic energy of an object change if its velocity is tripled?
+*   Can an object have negative kinetic energy? Explain.
+*   Derive the relationship between Kinetic Energy ($K.E.$) and Linear Momentum ($p$).
+:::

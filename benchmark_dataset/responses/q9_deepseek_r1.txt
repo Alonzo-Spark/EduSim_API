@@ -1,0 +1,72 @@
+Here's the structured explanation of uniform circular motion and centripetal acceleration:
+
+```jsx
+<QuickDefinition title="Uniform Circular Motion">
+An object moving in a circular path with constant tangential speed. While speed remains constant, velocity continuously changes direction, creating centripetal acceleration.
+</QuickDefinition>
+
+<KeyConcepts>
+1. Direction-changing velocity despite constant speed
+2. Requires centripetal (center-seeking) force
+3. Acceleration always points toward circle center
+4. Fundamental in rotational dynamics
+</KeyConcepts>
+
+<FormulaCard title="Centripetal Acceleration Formula" equation="a_c = \frac{v^2}{r} = \omega^2 r">
+- **a_c**: Centripetal acceleration (m/s²)
+- **v**: Tangential speed (m/s)
+- **r**: Circle radius (m)
+- **ω**: Angular velocity (rad/s)
+
+<FormulaExplanation>
+The acceleration required to keep an object in circular motion increases with the square of speed and decreases with larger radius. The angular velocity form shows dependence on rotation rate.
+</FormulaExplanation>
+</FormulaCard>
+
+<CharacteristicCards>
+  <Characteristic title="Constant Quantity">
+  Tangential speed (magnitude of velocity)
+  </Characteristic>
+
+  <Characteristic title="Changing Quantity">
+  Velocity direction (causing acceleration)
+  </Characteristic>
+
+  <Characteristic title="Force Type">
+  Centripetal force - not a separate force but the net force component toward center
+  </Characteristic>
+</CharacteristicCards>
+
+<ApplicationExamples>
+1. **Planetary Orbits**: Gravity provides centripetal force
+2. **Car Turning**: Friction between tires and road
+3. **Centrifuges**: Medical equipment separating substances
+4. **Amusement Rides**: Roller coaster loops
+</ApplicationExamples>
+
+<CommonMisconception>
+"Centrifugal force pushes objects outward"  
+**Reality**: What's observed is inertia - objects tend to move tangent to the circle when centripetal force is removed.
+</CommonMisconception>
+
+<InteractiveLab type="CentripetalForceSimulator">
+Adjust parameters to see how radius, mass, and speed affect required centripetal force:
+- [Radius Slider] 0.5m - 5m
+- [Mass Control] 1kg - 10kg
+- [Speed Control] 1m/s - 20m/s
+</InteractiveLab>
+
+<SummaryBox>
+- Uniform circular motion: Constant speed, changing direction
+- Centripetal acceleration: a_c = v²/r = ω²r
+- Requires continuous center-directed force
+- Applications range from atomic scales to galactic motion
+</SummaryBox>
+
+<PracticeProblem difficulty="medium">
+A 1200kg car takes a 50m radius turn at 20m/s.  
+a) Calculate centripetal acceleration  
+b) Determine minimum friction coefficient needed  
+c) What happens if speed doubles?
+</PracticeProblem>
+```

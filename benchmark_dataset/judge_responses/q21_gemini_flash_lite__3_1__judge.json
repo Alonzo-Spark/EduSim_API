@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 21,
+  "question": "Gravitation: State Newton’s law of gravitation.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's Law of Universal Gravitation states that every particle of matter in the universe attracts every other particle with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers.\n\n---\n\n## Characteristics\n\n* **Universal Action Range:** The attraction acts between all scale profiles, from small atomic fields up to massive galactic cluster structures.\n* **Inverse Square Law:** Doubling the distance separating two objects cuts their mutual gravitational pull down to one-fourth of its initial value.\n* **Central Force Property:** The force acts along the imaginary straight line connecting the centers of mass of the two interacting bodies.\n\n---\n\n## Formula\n\nThe gravitational force equation is written as:\n\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\nWhere:\n* $F$ represents the gravitational attraction force magnitude\n* $m_1, m_2$ represent the masses of the interacting bodies\n* $r$ represents the distance separating the mass centers\n* $G$ represents the Universal Gravitational Constant ($6.674 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$)\n\n---\n\n## Summary\n\nUniversal gravitation is a long-range mutual attraction force that links all matter, scaling up with mass density but dropping off sharply with distance.",
+  "candidate_response": "Here's the information about Newton's Law of Gravitation, presented in an interactive textbook format:\n\n## Introduction\n\nWelcome to the study of gravitation! This fundamental force governs the attraction between objects with mass. Understanding gravitation is crucial to comprehending the motion of planets, the behavior of satellites, and even the structure of the universe.\n\n## Definition\n\nNewton's Law of Universal Gravitation describes the gravitational force between any two objects with mass. It states that every particle of matter in the universe attracts every other particle with a force that is:\n\n*   **Directly proportional** to the product of their masses.\n*   **Inversely proportional** to the square of the distance between their centers.\n\n## Formula\n\nHere's the core formula for Newton's Law of Gravitation:\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│  $$F = G \\frac{m_1 m_2}{r^2}$$      │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n## Key Concepts\n\n*   **Gravitational Force (F):** The force of attraction between the two masses, measured in Newtons (N).\n*   **Gravitational Constant (G):** A fundamental physical constant, approximately equal to 6.674 × 10⁻¹¹ N⋅m²/kg².\n*   **Masses (m₁ and m₂):** The masses of the two objects, measured in kilograms (kg).\n*   **Distance (r):** The distance between the centers of the two masses, measured in meters (m).\n\n## Characteristics\n\n*   **Always Attractive:** Gravity is always an attractive force; it pulls objects together.\n*   **Long-Range Force:** Gravity acts over vast distances, influencing the motion of celestial bodies.\n*   **Weakest Fundamental Force:** Compared to the other fundamental forces (strong nuclear, weak nuclear, and electromagnetic), gravity is the weakest. However, due to its long-range nature and the immense masses of celestial objects, it's very significant on a cosmic scale.\n\n## Applications\n\nNewton's Law of Gravitation has numerous applications:\n\n*   **Predicting Planetary Motion:** Calculating the orbits of planets around the Sun.\n*   **Satellite Orbits:** Determining the paths of artificial satellites around Earth.\n*   **Tidal Forces:** Explaining the tides caused by the Moon's gravitational pull on Earth's oceans.\n*   **Understanding the Formation of Galaxies:** Gravitational forces play a crucial role in the formation and evolution of galaxies.\n\n## Advantages\n\n*   **Universality:** Applies to all objects with mass in the universe.\n*   **Predictive Power:** Allows for accurate predictions of gravitational interactions.\n*   **Foundation for Further Theories:** Served as a cornerstone for Einstein's theory of General Relativity.\n\n## Disadvantages\n\n*   **Incomplete:** Does not fully explain gravity at extremely high speeds or in the presence of very strong gravitational fields (General Relativity provides a more complete model).\n*   **Doesn't Explain the Cause:** Doesn't explain *why* gravity exists, only how it behaves.\n*   **Difficulty at Quantum Level:** It's challenging to reconcile Newtonian gravity with quantum mechanics.\n\n## Important Notes\n\n*   Remember that the distance 'r' is measured from the *centers* of the masses. For spherical objects, this simplifies to the distance between their centers.\n*   The gravitational constant, G, is a fundamental constant of nature and does not change.\n*   The force of gravity is a vector quantity, meaning it has both magnitude and direction. The direction is always along the line connecting the centers of the two masses.\n\n## Summary\n\nNewton's Law of Universal Gravitation is a foundational principle in physics, describing the attractive force between any two objects with mass. It is a cornerstone for understanding the motion of celestial bodies and a critical concept in various fields of science and engineering.\n\n## Suggested Questions\n\n1.  What is the relationship between mass and gravitational force?\n2.  How does the distance between two objects affect the gravitational force between them?\n3.  Why is Newton's Law considered \"universal\"?\n4.  How does Newton's Law of Gravitation relate to Einstein's theory of General Relativity?\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational effectiveness. It provides a clear and comprehensive explanation of Newton's Law of Gravitation, including its definition, formula, characteristics, and applications. The response is well-structured, easy to follow, and includes interactive elements that enhance the learning experience. However, to further improve, the candidate could consider adding more visual aids, such as diagrams or illustrations, to help illustrate complex concepts. Additionally, some of the sections, such as the 'Advantages' and 'Disadvantages' sections, could be expanded upon to provide more depth and insight. Overall, the response is excellent and demonstrates a strong understanding of the subject matter.",
+  "candidate_token_usage": {
+    "promptTokens": 381,
+    "completionTokens": 918,
+    "totalTokens": 1299
+  },
+  "candidate_latency_ms": 7327,
+  "candidate_cost_usd": 0.00265005,
+  "judge_token_usage": {
+    "promptTokens": 1593,
+    "completionTokens": 200,
+    "totalTokens": 1793
+  },
+  "judge_latency_ms": 37990,
+  "judge_cost_usd": 0.0014357999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:38:43.165Z"
+}

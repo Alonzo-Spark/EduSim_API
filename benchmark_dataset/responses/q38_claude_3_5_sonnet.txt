@@ -1,0 +1,1962 @@
+<thinking>
+The user wants an explanation of resonance with examples. I need to render this as structured UI blocks - cards, formula cards, etc. - rather than a markdown document. Let me think about what content to include and how to structure it.
+
+Let me think about the content:
+
+1. Introduction/Definition of Resonance
+2. Key Concepts
+3. Conditions for Resonance
+4. Types of Resonance
+5. Examples
+6. Formula Card (resonance frequency)
+7. Applications
+8. Summary
+
+Now, I need to render this as interactive UI blocks using React components. Let me create a proper React component that renders as an interactive textbook.
+
+Let me design the UI properly with cards, formula cards with explain/lab buttons, etc.
+
+I'll write a React component that uses the existing KaTeX rendering and creates a proper card-based layout.
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+// Helper to render LaTeX inline
+function InlineMath({ math }) {
+  return (
+    <span
+      dangerouslySetInnerHTML={{
+        __html: katex.renderToString(math, { throwOnError: false }),
+      }}
+    />
+  );
+}
+
+// Helper to render display LaTeX
+function DisplayMath({ math }) {
+  return (
+    <div
+      className="my-2 overflow-x-auto"
+      dangerouslySetInnerHTML={{
+        __html: katex.renderToString(math, {
+          throwOnError: false,
+          displayMode: true,
+        }),
+      }}
+    />
+  );
+}
+
+// Section Card
+function SectionCard({ icon, title, children, color = "blue" }) {
+  const colors = {
+    blue: "border-blue-200 bg-blue-50",
+    green: "border-green-200 bg-green-50",
+    purple: "border-purple-200 bg-purple-50",
+    orange: "border-orange-200 bg-orange-50",
+    red: "border-red-200 bg-red-50",
+    gray: "border-gray-200 bg-gray-50",
+    teal: "border-teal-200 bg-teal-50",
+    yellow: "border-yellow-200 bg-yellow-50",
+  };
+  const headerColors = {
+    blue: "bg-blue-100 border-blue-200 text-blue-800",
+    green: "bg-green-100 border-green-200 text-green-800",
+    purple: "bg-purple-100 border-purple-200 text-purple-800",
+    orange: "bg-orange-100 border-orange-200 text-orange-800",
+    red: "bg-red-100 border-red-200 text-red-800",
+    gray: "bg-gray-100 border-gray-200 text-gray-800",
+    teal: "bg-teal-100 border-teal-200 text-teal-800",
+    yellow: "bg-yellow-100 border-yellow-200 text-yellow-800",
+  };
+  return (
+    <div className={`rounded-xl border-2 ${colors[color]} mb-4 overflow-hidden shadow-sm`}>
+      <div className={`px-4 py-2 border-b ${headerColors[color]} font-semibold text-sm flex items-center gap-2`}>
+        <span>{icon}</span>
+        <span>{title}</span>
+      </div>
+      <div className="px-4 py-3 text-gray-700 text-sm leading-relaxed">{children}</div>
+    </div>
+  );
+}
+
+// Formula Card
+function FormulaCard({ title, formula, variables, context }) {
+  const [showExplain, setShowExplain] = useState(false);
+  const [showLab, setShowLab] = useState(false);
+  const [labValues, setLabValues] = useState({});
+
+  return (
+    <div className="rounded-xl border-2 border-indigo-300 bg-gradient-to-br from-indigo-50 to-purple-50 mb-4 overflow-hidden shadow-md">
+      <div className="px-4 py-2 bg-indigo-600 text-white font-semibold text-sm flex items-center gap-2">
+        <span>🔢</span>
+        <span>{title}</span>
+      </div>
+      <div className="px-4 py-4">
+        <div className="bg-white rounded-lg p-4 border border-indigo-100 shadow-inner mb-3">
+          <DisplayMath math={formula} />
+        </div>
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => { setShowExplain(!showExplain); setShowLab(false); }}
+            className="px-3 py-1.5 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 rounded-lg text-xs font-medium transition-colors border border-indigo-200"
+          >
+            {showExplain ? "▼ Hide Explanation" : "▶ Explain Formula"}
+          </button>
+          <button
+            onClick={() => { setShowLab(!showLab); setShowExplain(false); }}
+            className="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg text-xs font-medium transition-colors border border-purple-200"
+          >
+            {showLab ? "▼ Close Lab" : "⚗️ Open Formula Lab"}
+          </button>
+        </div>
+
+        {showExplain && (
+          <div className="mt-3 bg-white rounded-lg p-3 border border-indigo-100">
+            <p className="text-xs text-gray-600 mb-2">{context}</p>
+            <div className="space-y-1">
+              {variables.map((v, i) => (
+                <div key={i} className="flex items-start gap-2 text-xs">
+                  <span className="font-mono bg-indigo-50 px-1.5 py-0.5 rounded text-indigo-700 border border-indigo-100 shrink-0">
+                    <InlineMath math={v.symbol} />
+                  </span>
+                  <span className="text-gray-600">— {v.description}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {showLab && (
+          <FormulaLab formula={formula} variables={variables} labValues={labValues} setLabValues={setLabValues} />
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Formula Lab component
+function FormulaLab({ variables, labValues, setLabValues }) {
+  // Simple lab for resonance frequency: f0 = 1/(2π√(LC))
+  const inputVars = variables.filter(v => v.input);
+  
+  const handleChange = (symbol, value) => {
+    setLabValues(prev => ({ ...prev, [symbol]: parseFloat(value) }));
+  };
+
+  const L = labValues['L'] || 0.1;
+  const C = labValues['C'] || 0.0001;
+  const result = 1 / (2 * Math.PI * Math.sqrt(L * C));
+
+  return (
+    <div className="mt-3 bg-white rounded-lg p-3 border border-purple-100">
+      <p className="text-xs font-semibold text-purple-700 mb-2">⚗️ Formula Lab — Adjust values:</p>
+      <div className="grid grid-cols-2 gap-2 mb-3">
+        {inputVars.map((v, i) => (
+          <div key={i} className="flex flex-col gap-1">
+            <label className="text-xs text-gray-500">
+              <InlineMath math={v.symbol} /> ({v.unit})
+            </label>
+            <input
+              type="number"
+              step="any"
+              defaultValue={v.default}
+              onChange={(e) => handleChange(v.symbol, e.target.value)}
+              className="border border-gray-200 rounded px-2 py-1 text-xs w-full"
+            />
+          </div>
+        ))}
+      </div>
+      <div className="bg-indigo-50 rounded-lg p-2 text-center">
+        <span className="text-xs text-gray-500">Resonant Frequency </span>
+        <span className="font-bold text-indigo-700 text-sm">{isNaN(result) || !isFinite(result) ? "—" : result.toFixed(2)} Hz</span>
+      </div>
+    </div>
+  );
+}
+
+// Example Card
+function ExampleCard({ number, title, icon, description, detail }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="rounded-lg border border-gray-200 bg-white mb-2 overflow-hidden shadow-sm">
+      <div
+        className="px-4 py-3 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors"
+        onClick={() => setExpanded(!expanded)}
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-xl">{icon}</span>
+          <div>
+            <span className="text-xs text-gray-400 font-medium">Example {number}</span>
+            <p className="font-semibold text-gray-800 text-sm">{title}</p>
+          </div>
+        </div>
+        <span className="text-gray-400 text-xs">{expanded ? "▲" : "▼"}</span>
+      </div>
+      {expanded && (
+        <div className="px-4 pb-3 text-sm text-gray-600 border-t border-gray-100 pt-3">
+          <p className="mb-2">{description}</p>
+          <div className="bg-amber-50 rounded-lg p-3 border border-amber-100 text-xs text-amber-800">
+            💡 {detail}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Responsive Table Card
+function TableCard({ title, headers, rows, color = "blue" }) {
+  return (
+    <div className="rounded-xl border-2 border-gray-200 mb-4 overflow-hidden shadow-sm">
+      <div className="px-4 py-2 bg-gray-100 border-b border-gray-200 font-semibold text-sm text-gray-700 flex items-center gap-2">
+        <span>📊</span>
+        <span>{title}</span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-gray-50">
+              {headers.map((h, i) => (
+                <th key={i} className="px-4 py-2 text-left text-xs font-semibold text-gray-600 border-b border-gray-200">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                {row.map((cell, j) => (
+                  <td key={j} className="px-4 py-2 text-gray-700 text-xs border-b border-gray-100">
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// Progress Indicator
+function ChapterNav({ sections, active, setActive }) {
+  return (
+    <div className="flex gap-1 flex-wrap mb-4">
+      {sections.map((s, i) => (
+        <button
+          key={i}
+          onClick={() => setActive(i)}
+          className={`px-2 py-1 rounded-full text-xs font-medium transition-colors ${
+            active === i
+              ? "bg-indigo-600 text-white"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+          }`}
+        >
+          {s}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default function ResonanceTutor() {
+  const [activeSection, setActiveSection] = useState(0);
+
+  const sections = ["Definition", "Conditions", "Formula", "Examples", "Types", "Applications", "Summary"];
+
+  return (
+    <div className="max-w-2xl mx-auto p-4 font-sans">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-5 mb-5 text-white shadow-lg">
+        <div className="flex items-center gap-3 mb-1">
+          <span className="text-2xl">🔔</span>
+          <div>
+            <p className="text-indigo-200 text-xs font-medium uppercase tracking-wider">Physics · Waves & Oscillations</p>
+            <h1 className="text-xl font-bold">Resonance</h1>
+          </div>
+        </div>
+        <p className="text-indigo-100 text-sm mt-2">
+          When a system vibrates with maximum amplitude at its natural frequency.
+        </p>
+      </div>
+
+      {/* Section Navigation */}
+      <ChapterNav sections={sections} active={activeSection} setActive={setActiveSection} />
+
+      {/* SECTION 0: Definition */}
+      {activeSection === 0 && (
+        <div>
+          <SectionCard icon="📖" title="Quick Definition" color="blue">
+            <p>
+              <strong>Resonance</strong> is the phenomenon where a system oscillates with
+              <strong> maximum amplitude</strong> when driven at its{" "}
+              <strong>natural frequency</strong> (<InlineMath math="f_0" />).
+            </p>
+            <p className="mt-2">
+              When the driving frequency matches the system's natural frequency, energy transfer
+              becomes most efficient — causing a dramatic increase in amplitude.
+            </p>
+          </SectionCard>
+
+          <SectionCard icon="🧠" title="Intuitive Idea" color="green">
+            <p>
+              Imagine pushing a child on a swing. If you push <em>at the right moment</em> — in
+              sync with the swing's natural back-and-forth — the swing goes higher and higher.
+              That's resonance in action.
+            </p>
+          </SectionCard>
+
+          <SectionCard icon="⚙️" title="Key Terms" color="purple">
+            <ul className="space-y-2">
+              {[
+                { term: "Natural Frequency (f₀)", def: "The frequency at which a system naturally oscillates without any external force." },
+                { term: "Driving Frequency (f)", def: "The frequency of the external periodic force applied to the system." },
+                { term: "Amplitude", def: "The maximum displacement from the equilibrium position." },
+                { term: "Damping", def: "Energy loss due to friction or resistance, which reduces amplitude over time." },
+              ].map((item, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="text-purple-500 mt-0.5">▸</span>
+                  <span><strong>{item.term}</strong> — {item.def}</span>
+                </li>
+              ))}
+            </ul>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* SECTION 1: Conditions */}
+      {activeSection === 1 && (
+        <div>
+          <SectionCard icon="✅" title="Conditions for Resonance" color="teal">
+            <ol className="space-y-3 list-none">
+              {[
+                { n: "01", title: "Matching Frequencies", desc: "The driving frequency must equal the natural frequency of the system: f = f₀" },
+                { n: "02", title: "Periodic External Force", desc: "An external periodic driving force must be continuously applied to the system." },
+                { n: "03", title: "Low Damping", desc: "Resonance is most pronounced when damping is minimal. High damping reduces the amplitude peak." },
+              ].map((c, i) => (
+                <li key={i} className="flex gap-3 items-start">
+                  <span className="bg-teal-600 text-white text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center shrink-0">{c.n}</span>
+                  <div>
+                    <p className="font-semibold text-gray-800">{c.title}</p>
+                    <p className="text-gray-600 text-xs mt-0.5">{c.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </SectionCard>
+
+          <SectionCard icon="📉" title="Effect of Damping on Resonance" color="orange">
+            <p className="mb-2">Damping affects the sharpness of resonance:</p>
+            <ul className="space-y-1 text-xs">
+              <li className="flex gap-2"><span className="text-green-600">●</span> <strong>Low damping</strong> → Sharp, tall resonance peak</li>
+              <li className="flex gap-2"><span className="text-yellow-600">●</span> <strong>Medium damping</strong> → Broader, shorter peak</li>
+              <li className="flex gap-2"><span className="text-red-600">●</span> <strong>High damping</strong> → Very flat response, resonance barely visible</li>
+            </ul>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* SECTION 2: Formula */}
+      {activeSection === 2 && (
+        <div>
+          <FormulaCard
+            title="Resonant Frequency (LC Circuit)"
+            formula="f_0 = \\frac{1}{2\\pi\\sqrt{LC}}"
+            context="This formula gives the natural resonant frequency of an LC (inductor-capacitor) circuit, where energy oscillates between the inductor and capacitor."
+            variables={[
+              { symbol: "f_0", description: "Resonant frequency in Hertz (Hz)", input: false },
+              { symbol: "L", description: "Inductance in Henrys (H)", unit: "H", input: true, default: 0.1 },
+              { symbol: "C", description: "Capacitance in Farads (F)", unit: "F", input: true, default: 0.0001 },
+              { symbol: "\\pi", description: "Mathematical constant ≈ 3.14159", input: false },
+            ]}
+          />
+
+          <FormulaCard
+            title="Resonant Frequency (Mass-Spring System)"
+            formula="f_0 = \\frac{1}{2\\pi}\\sqrt{\\frac{k}{m}}"
+            context="This formula gives the natural frequency of a mass-spring system — the foundation of mechanical resonance."
+            variables={[
+              { symbol: "f_0", description: "Natural frequency in Hz", input: false },
+              { symbol: "k", description: "Spring constant in N/m", unit: "N/m", input: true, default: 100 },
+              { symbol: "m", description: "Mass in kilograms (kg)", unit: "kg", input: true, default: 1 },
+            ]}
+          />
+
+          <FormulaCard
+            title="Angular Resonant Frequency"
+            formula="\\omega_0 = \\sqrt{\\frac{k}{m}} = \\frac{1}{\\sqrt{LC}}"
+            context="Angular frequency is related to regular frequency by ω₀ = 2πf₀. It's used in wave equations and circuit analysis."
+            variables={[
+              { symbol: "\\omega_0", description: "Angular resonant frequency in rad/s", input: false },
+              { symbol: "k", description: "Spring constant (N/m)", input: false },
+              { symbol: "m", description: "Mass (kg)", input: false },
+              { symbol: "L", description: "Inductance (H)", input: false },
+              { symbol: "C", description: "Capacitance (F)", input: false },
+            ]}
+          />
+        </div>
+      )}
+
+      {/* SECTION 3: Examples */}
+      {activeSection === 3 && (
+        <div>
+          <SectionCard icon="💡" title="Real-World Examples" color="yellow">
+            <p>Click each example to expand the explanation.</p>
+          </SectionCard>
+
+          <ExampleCard
+            number="1"
+            icon="🎵"
+            title="Tuning Fork & Sound Box"
+            description="When a tuning fork vibrates near a hollow box tuned to the same frequency, the box begins to resonate — producing a much louder sound."
+            detail="The sound box's natural frequency matches the tuning fork's frequency. Energy transfers efficiently, amplifying the sound without any additional energy input."
+          />
+          <ExampleCard
+            number="2"
+            icon="🌉"
+            title="Tacoma Narrows Bridge Collapse (1940)"
+            description="Wind created periodic vortices that matched the bridge's natural frequency, causing resonance. The bridge oscillated with increasing amplitude until it collapsed."
+            detail="This is a famous example of destructive resonance. Engineers now design bridges with aerodynamic shapes and damping systems to prevent such resonance."
+          />
+          <ExampleCard
+            number="3"
+            icon="🎸"
+            title="Guitar String"
+            description="Each guitar string has a natural frequency determined by its length, tension, and mass. Plucking it causes it to vibrate at that frequency, producing a musical note."
+            detail="The hollow body of the guitar resonates with the string frequencies, amplifying the sound. Changing string tension (tuning) changes the natural frequency."
+          />
+          <ExampleCard
+            number="4"
+            icon="📻"
+            title="Radio Tuning (LC Circuit)"
+            description="A radio receiver has an LC circuit whose resonant frequency can be adjusted by changing capacitance. When f₀ matches the broadcast frequency, the circuit resonates and picks up that station."
+            detail="This is electrical resonance. The circuit selectively amplifies signals at its resonant frequency, filtering out all other frequencies — allowing you to tune to a specific channel."
+          />
+          <ExampleCard
+            number="5"
+            icon="🏥"
+            title="MRI (Magnetic Resonance Imaging)"
+            description="MRI machines use nuclear magnetic resonance. Hydrogen atoms in the body are excited by radio waves at their resonant frequency, then emit signals as they return to equilibrium."
+            detail="Different tissues have different hydrogen densities, producing different signal intensities. This allows detailed imaging of soft tissues without using harmful radiation."
+          />
+          <ExampleCard
+            number="6"
+            icon="🍳"
+            title="Microwave Oven"
+            description="Microwaves are tuned to a frequency (~2.45 GHz) that causes water molecules to resonate — rotating and vibrating rapidly, generating heat."
+            detail="Only molecules with matching natural frequencies absorb the microwave energy efficiently. This is why dry materials (with no water) don't heat up in a microwave."
+          />
+        </div>
+      )}
+
+      {/* SECTION 4: Types */}
+      {activeSection === 4 && (
+        <div>
+          <TableCard
+            title="Types of Resonance"
+            headers={["Type", "System", "Example"]}
+            rows={[
+              ["Mechanical", "Mass-spring, pendulums", "Swing, bridge vibration"],
+              ["Acoustic", "Air columns, strings", "Musical instruments, singing glasses"],
+              ["Electrical", "LC circuits", "Radio tuning, filters"],
+              ["Optical", "Laser cavities", "Lasers, fiber optics"],
+              ["Nuclear (NMR)", "Atomic nuclei in magnetic field", "MRI scanners"],
+              ["Orbital", "Gravitational systems", "Asteroid belt gaps (Kirkwood gaps)"],
+            ]}
+          />
+
+          <SectionCard icon="🔊" title="Acoustic Resonance" color="blue">
+            <p>
+              In pipes and strings, resonance occurs when standing waves form. The length of the
+              pipe/string must be a specific multiple of the wavelength.
+            </p>
+            <div className="mt-2 bg-white rounded-lg p-3 border border-blue-100">
+              <DisplayMath math="L = n \cdot \frac{\lambda}{2} \quad (n = 1, 2, 3, \ldots)" />
+              <p className="text-xs text-gray-500 text-center">For a string fixed at both ends</p>
+            </div>
+          </SectionCard>
+
+          <SectionCard icon="⚡" title="Electrical Resonance" color="purple">
+            <p>
+              In an RLC circuit, resonance occurs when inductive reactance equals capacitive
+              reactance:
+            </p>
+            <div className="mt-2 bg-white rounded-lg p-3 border border-purple-100">
+              <DisplayMath math="X_L = X_C \implies \omega L = \frac{1}{\omega C}" />
+            </div>
+            <p className="mt-2 text-xs text-gray-600">
+              At resonance, impedance is purely resistive (minimum), and current is maximum.
+            </p>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* SECTION 5: Applications */}
+      {activeSection === 5 && (
+        <div>
+          <SectionCard icon="🚀" title="Useful Applications" color="green">
+            <ul className="space-y-2">
+              {[
+                { icon: "📡", app: "Radio & TV Broadcasting", desc: "LC circuits select specific broadcast frequencies" },
+                { icon: "🏥", app: "Medical Imaging (MRI)", desc: "Nuclear magnetic resonance for body scanning" },
+                { icon: "🎵", app: "Musical Instruments", desc: "Resonance amplifies and shapes sound" },
+                { icon: "⚡", app: "Wireless Charging", desc: "Resonant inductive coupling transfers power" },
+                { icon: "🔬", app: "Spectroscopy", desc: "Atoms absorb light at resonant frequencies — used to identify elements" },
+                { icon: "🏗️", app: "Structural Engineering", desc: "Buildings designed with tuned mass dampers to counter resonance" },
+              ].map((item, i) => (
+                <li key={i} className="flex gap-3 items-start">
+                  <span className="text-lg">{item.icon}</span>
+                  <div>
+                    <p className="font-semibold text-gray-800 text-sm">{item.app}</p>
+                    <p className="text-xs text-gray-500">{item.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </SectionCard>
+
+          <SectionCard icon="⚠️" title="Destructive Effects" color="red">
+            <ul className="space-y-2 text-sm">
+              {[
+                "Bridge collapse due to wind-induced resonance (Tacoma Narrows)",
+                "Building damage during earthquakes when seismic frequency matches natural frequency",
+                "Mechanical failure of engine parts due to vibration resonance",
+                "Wine glass shattering from a loud musical note at its resonant frequency",
+              ].map((item, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="text-red-500 shrink-0">✗</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* SECTION 6: Summary */}
+      {activeSection === 6 && (
+        <div>
+          <SectionCard icon="📋" title="Summary" color="gray">
+            <ul className="space-y-2 text-sm">
+              {[
+                "Resonance occurs when driving frequency = natural frequency",
+                "Results in maximum amplitude oscillation",
+                "Low damping → sharper, higher resonance peak",
+                "Resonant frequency: f₀ = 1/(2π√(LC)) for electrical circuits",
+                "Resonant frequency: f₀ = (1/2π)√(k/m) for mechanical systems",
+                "Can be useful (MRI, radio) or destructive (bridge collapse)",
+              ].map((point, i) => (
+                <li key={i} className="flex gap-2 items-start">
+                  <span className="bg-gray-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          </SectionCard>
+
+          <SectionCard icon="❓" title="Suggested Practice Questions" color="blue">
+            <ol className="space-y-2 text-sm list-none">
+              {[
+                "What is the resonant frequency of an LC circuit with L = 0.5 H and C = 200 μF?",
+                "Explain why the Tacoma Narrows Bridge collapsed using the concept of resonance.",
+                "How does damping affect the amplitude at resonance? Sketch the resonance curve.",
+                "A mass of 2 kg is attached to a spring with k = 50 N/m. Find its natural frequency.",
+                "Differentiate between forced vibration and resonance.",
+              ].map((q, i) => (
+                <li key={i} className="flex gap-2 items-start">
+                  <span className="text-blue-500 font-bold shrink-0">Q{i + 1}.</span>
+                  <span className="text-gray-700">{q}</span>
+                </li>
+              ))}
+            </ol>
+          </SectionCard>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+Wait, I need to think about the Formula Lab more carefully. The current implementation hard-codes the LC circuit calculation. Let me make it more generic or just keep it specific per formula.
+
+Actually, let me reconsider the FormulaLab for the mass-spring system too. I'll make separate labs for each formula.
+
+Let me refine the component and make sure the FormulaLab works for each formula independently.
+
+For the LC circuit formula: f₀ = 1/(2π√(LC))
+For the mass-spring formula: f₀ = (1/2π)√(k/m)
+
+I'll add a `calculate` function to each formula's data.
+
+Let me rewrite this more cleanly:
+
+```jsx
+function FormulaCard({ title, formula, variables, context, calculate }) {
+  const [showExplain, setShowExplain] = useState(false);
+  const [showLab, setShowLab] = useState(false);
+  const [labValues, setLabValues] = useState(() => {
+    const defaults = {};
+    variables.filter(v => v.input).forEach(v => { defaults[v.key] = v.default; });
+    return defaults;
+  });
+
+  const inputVars = variables.filter(v => v.input);
+  const result = calculate ? calculate(labValues) : null;
+
+  return (
+    // ...
+  );
+}
+```
+
+This is cleaner. Let me write the full component now.
+
+Actually, I realize I should be careful about the complexity here. Let me write a clean, well-structured component.
+
+One more thing - I need to handle the case where the FormulaLab might not have a calculate function. Let me make it optional.
+
+Here's my final plan for the component:
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+function InlineMath({ math }) { ... }
+function DisplayMath({ math }) { ... }
+function SectionCard({ icon, title, children, color }) { ... }
+function FormulaCard({ title, formula, variables, context, calculate, resultLabel, resultUnit }) { ... }
+function ExampleCard({ number, title, icon, description, detail }) { ... }
+function TableCard({ title, headers, rows }) { ... }
+function ChapterNav({ sections, active, setActive }) { ... }
+
+export default function ResonanceTutor() {
+  const [activeSection, setActiveSection] = useState(0);
+  // ... render sections
+}
+```
+
+Let me write the complete, clean version now.
+
+Actually, I want to make sure the Formula Lab is interactive and actually computes results. Let me be careful:
+
+For LC circuit: `f0 = 1 / (2 * Math.PI * Math.sqrt(L * C))`
+For mass-spring: `f0 = (1 / (2 * Math.PI)) * Math.sqrt(k / m)`
+
+I'll pass these as `calculate` functions.
+
+Let me write the full component:
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+function InlineMath({ math }) {
+  return (
+    <span
+      dangerouslySetInnerHTML={{
+        __html: katex.renderToString(math, { throwOnError: false }),
+      }}
+    />
+  );
+}
+
+function DisplayMath({ math }) {
+  return (
+    <div
+      className="my-2 overflow-x-auto text-center"
+      dangerouslySetInnerHTML={{
+        __html: katex.renderToString(math, {
+          throwOnError: false,
+          displayMode: true,
+        }),
+      }}
+    />
+  );
+}
+
+const colorMap = {
+  blue: {
+    card: "border-blue-200 bg-blue-50",
+    header: "bg-blue-100 border-blue-200 text-blue-800",
+  },
+  green: {
+    card: "border-green-200 bg-green-50",
+    header: "bg-green-100 border-green-200 text-green-800",
+  },
+  purple: {
+    card: "border-purple-200 bg-purple-50",
+    header: "bg-purple-100 border-purple-200 text-purple-800",
+  },
+  orange: {
+    card: "border-orange-200 bg-orange-50",
+    header: "bg-orange-100 border-orange-200 text-orange-800",
+  },
+  red: {
+    card: "border-red-200 bg-red-50",
+    header: "bg-red-100 border-red-200 text-red-800",
+  },
+  gray: {
+    card: "border-gray-200 bg-gray-50",
+    header: "bg-gray-100 border-gray-200 text-gray-800",
+  },
+  teal: {
+    card: "border-teal-200 bg-teal-50",
+    header: "bg-teal-100 border-teal-200 text-teal-800",
+  },
+  yellow: {
+    card: "border-yellow-200 bg-yellow-50",
+    header: "bg-yellow-100 border-yellow-200 text-yellow-800",
+  },
+};
+
+function SectionCard({ icon, title, children, color = "blue" }) {
+  const c = colorMap[color];
+  return (
+    <div className={`rounded-xl border-2 ${c.card} mb-4 overflow-hidden shadow-sm`}>
+      <div className={`px-4 py-2 border-b ${c.header} font-semibold text-sm flex items-center gap-2`}>
+        <span>{icon}</span>
+        <span>{title}</span>
+      </div>
+      <div className="px-4 py-3 text-gray-700 text-sm leading-relaxed">{children}</div>
+    </div>
+  );
+}
+
+function FormulaCard({ title, formula, variables, context, calculate, resultLabel = "Result", resultUnit = "" }) {
+  const [showExplain, setShowExplain] = useState(false);
+  const [showLab, setShowLab] = useState(false);
+  const [labValues, setLabValues] = useState(() => {
+    const defaults = {};
+    variables.filter(v => v.input).forEach(v => { defaults[v.key] = v.default; });
+    return defaults;
+  });
+
+  const inputVars = variables.filter(v => v.input);
+  const result = calculate ? calculate(labValues) : null;
+
+  const handleChange = (key, value) => {
+    setLabValues(prev => ({ ...prev, [key]: parseFloat(value) || 0 }));
+  };
+
+  return (
+    <div className="rounded-xl border-2 border-indigo-300 bg-gradient-to-br from-indigo-50 to-purple-50 mb-4 overflow-hidden shadow-md">
+      <div className="px-4 py-2 bg-indigo-600 text-white font-semibold text-sm flex items-center gap-2">
+        <span>🔢</span>
+        <span>{title}</span>
+      </div>
+      <div className="px-4 py-4">
+        <div className="bg-white rounded-lg p-4 border border-indigo-100 shadow-inner mb-3">
+          <DisplayMath math={formula} />
+        </div>
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => { setShowExplain(!showExplain); if (showLab) setShowLab(false); }}
+            className="px-3 py-1.5 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 rounded-lg text-xs font-medium transition-colors border border-indigo-200"
+          >
+            {showExplain ? "▼ Hide Explanation" : "▶ Explain Formula"}
+          </button>
+          {calculate && (
+            <button
+              onClick={() => { setShowLab(!showLab); if (showExplain) setShowExplain(false); }}
+              className="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg text-xs font-medium transition-colors border border-purple-200"
+            >
+              {showLab ? "▼ Close Lab" : "⚗️ Open Formula Lab"}
+            </button>
+          )}
+        </div>
+
+        {showExplain && (
+          <div className="mt-3 bg-white rounded-lg p-3 border border-indigo-100">
+            <p className="text-xs text-gray-600 mb-3">{context}</p>
+            <div className="space-y-2">
+              {variables.map((v, i) => (
+                <div key={i} className="flex items-center gap-2 text-xs">
+                  <span className="font-mono bg-indigo-50 px-2 py-1 rounded text-indigo-700 border border-indigo-100 min-w-8 text-center">
+                    <InlineMath math={v.symbol} />
+                  </span>
+                  <span className="text-gray-500">—</span>
+                  <span className="text-gray-600">{v.description}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {showLab && calculate && (
+          <div className="mt-3 bg-white rounded-lg p-3 border border-purple-100">
+            <p className="text-xs font-semibold text-purple-700 mb-3">⚗️ Formula Lab — Adjust values to compute:</p>
+            <div className="grid grid-cols-2 gap-3 mb-3">
+              {inputVars.map((v, i) => (
+                <div key={i}>
+                  <label className="text-xs text-gray-500 mb-1 block">
+                    <InlineMath math={v.symbol} /> — {v.unit}
+                  </label>
+                  <input
+                    type="number"
+                    step="any"
+                    defaultValue={v.default}
+                    onChange={(e) => handleChange(v.key, e.target.value)}
+                    className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm w-full focus:outline-none focus:border-purple-300"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-3 border border-indigo-100 text-center">
+              <span className="text-xs text-gray-500">{resultLabel} = </span>
+              <span className="font-bold text-indigo-700 text-lg">
+                {result !== null && !isNaN(result) && isFinite(result)
+                  ? result.toFixed(4)
+                  : "—"}
+              </span>
+              <span className="text-xs text-gray-500 ml-1">{resultUnit}</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ExampleCard({ number, title, icon, description, detail }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="rounded-xl border border-gray-200 bg-white mb-3 overflow-hidden shadow-sm">
+      <button
+        className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors text-left"
+        onClick={() => setExpanded(!expanded)}
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">{icon}</span>
+          <div>
+            <span className="text-xs text-gray-400 font-medium uppercase tracking-wide">Example {number}</span>
+            <p className="font-semibold text-gray-800 text-sm">{title}</p>
+          </div>
+        </div>
+        <span className={`text-gray-400 transition-transform ${expanded ? "rotate-180" : ""}`}>▼</span>
+      </button>
+      {expanded && (
+        <div className="px-4 pb-4 border-t border-gray-100 pt-3">
+          <p className="text-sm text-gray-600 mb-3">{description}</p>
+          <div className="bg-amber-50 rounded-lg p-3 border border-amber-100 flex gap-2">
+            <span className="text-amber-500 shrink-0">💡</span>
+            <p className="text-xs text-amber-800">{detail}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TableCard({ title, headers, rows }) {
+  return (
+    <div className="rounded-xl border-2 border-gray-200 mb-4 overflow-hidden shadow-sm">
+      <div className="px-4 py-2 bg-gray-100 border-b border-gray-200 font-semibold text-sm text-gray-700 flex items-center gap-2">
+        <span>📊</span>
+        <span>{title}</span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-gray-50">
+              {headers.map((h, i) => (
+                <th key={i} className="px-4 py-2.5 text-left text-xs font-semibold text-gray-600 border-b border-gray-200 whitespace-nowrap">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i} className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} hover:bg-blue-50 transition-colors`}>
+                {row.map((cell, j) => (
+                  <td key={j} className="px-4 py-2.5 text-gray-700 text-xs border-b border-gray-100">
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function ChapterNav({ sections, active, setActive }) {
+  return (
+    <div className="flex gap-1.5 flex-wrap mb-5">
+      {sections.map((s, i) => (
+        <button
+          key={i}
+          onClick={() => setActive(i)}
+          className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+            active === i
+              ? "bg-indigo-600 text-white shadow-sm"
+              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+          }`}
+        >
+          {s}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default function ResonanceTutor() {
+  const [activeSection, setActiveSection] = useState(0);
+
+  const navSections = ["📖 Definition", "✅ Conditions", "🔢 Formulas", "💡 Examples", "🗂️ Types", "🚀 Applications", "📋 Summary"];
+
+  return (
+    <div className="max-w-2xl mx-auto p-4 font-sans">
+      {/* Hero Header */}
+      <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 rounded-2xl p-5 mb-5 text-white shadow-lg">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="bg-white/20 rounded-xl p-2">
+            <span className="text-2xl">🔔</span>
+          </div>
+          <div>
+            <p className="text-indigo-200 text-xs font-medium uppercase tracking-wider">Physics · Waves & Oscillations</p>
+            <h1 className="text-2xl font-bold">Resonance</h1>
+          </div>
+        </div>
+        <p className="text-indigo-100 text-sm leading-relaxed">
+          The phenomenon where a system oscillates at <strong className="text-white">maximum amplitude</strong> when 
+          driven at its <strong className="text-white">natural frequency</strong>.
+        </p>
+        <div className="flex gap-3 mt-3">
+          {["7 Sections", "3 Formulas", "6 Examples"].map((tag, i) => (
+            <span key={i} className="bg-white/20 text-white text-xs px-2 py-1 rounded-full">{tag}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <ChapterNav sections={navSections} active={activeSection} setActive={setActiveSection} />
+
+      {/* Sections */}
+      {activeSection === 0 && (
+        <div>
+          <SectionCard icon="📖" title="Quick Definition" color="blue">
+            <p>
+              <strong>Resonance</strong> is the phenomenon where a system oscillates with{" "}
+              <strong>maximum amplitude</strong> when an external periodic force drives it at its{" "}
+              <strong>natural frequency</strong> (<InlineMath math="f_0" />).
+            </p>
+            <p className="mt-2">
+              At resonance, energy transfer from the driving force to the system is maximally 
+              efficient — leading to a dramatic buildup of amplitude.
+            </p>
+          </SectionCard>
+
+          <SectionCard icon="🧠" title="Intuitive Analogy" color="green">
+            <p>
+              Imagine pushing a child on a swing. If you push <em>in sync with the swing's natural rhythm</em>, 
+              the swing goes higher and higher with each push — even with small forces.
+            </p>
+            <p className="mt-2 text-xs bg-green-100 rounded-lg p-2 border border-green-200">
+              🎯 <strong>Key insight:</strong> It's not about how hard you push — it's about <em>when</em> you push. 
+              Timing (frequency matching) is everything in resonance.
+            </p>
+          </SectionCard>
+
+          <SectionCard icon="⚙️" title="Key Terminology" color="purple">
+            <div className="space-y-3">
+              {[
+                { term: "Natural Frequency (f₀)", symbol: "f_0", def: "Frequency at which a system oscillates freely without external force." },
+                { term: "Driving Frequency (f)", symbol: "f", def: "Frequency of the external periodic force applied to the system." },
+                { term: "Amplitude", symbol: "A", def: "Maximum displacement from equilibrium. Peaks at resonance." },
+                { term: "Damping", symbol: "b", def: "Energy dissipation due to friction/resistance. Reduces amplitude over time." },
+                { term: "Quality Factor (Q)", symbol: "Q", def: "Measure of resonance sharpness. High Q = sharp resonance peak." },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-3 items-start">
+                  <span className="bg-purple-100 border border-purple-200 rounded-lg px-2 py-1 text-xs font-mono text-purple-700 shrink-0">
+                    <InlineMath math={item.symbol} />
+                  </span>
+                  <div>
+                    <span className="font-semibold text-gray-800 text-sm">{item.term}</span>
+                    <p className="text-xs text-gray-500 mt-0.5">{item.def}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+
+      {activeSection === 1 && (
+        <div>
+          <SectionCard icon="✅" title="Conditions for Resonance" color="teal">
+            <div className="space-y-4">
+              {[
+                {
+                  n: "01", color: "bg-teal-600",
+                  title: "Frequency Matching",
+                  desc: "The driving frequency must equal the system's natural frequency.",
+                  formula: "f_{\\text{drive}} = f_0",
+                },
+                {
+                  n: "02", color: "bg-blue-600",
+                  title: "Continuous Periodic Force",
+                  desc: "An external periodic driving force must be continuously applied.",
+                  formula: null,
+                },
+                {
+                  n: "03", color: "bg-purple-600",
+                  title: "Minimal Damping",
+                  desc: "Low damping allows amplitude to build up. Heavy damping suppresses resonance.",
+                  formula: null,
+                },
+              ].map((c, i) => (
+                <div key={i} className="flex gap-3 items-start">
+                  <span className={`${c.color} text-white text-xs font-bold rounded-full w-8 h-8 flex items-center justify-center shrink-0`}>
+                    {c.n}
+                  </span>
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-800">{c.title}</p>
+                    <p className="text-gray-600 text-xs mt-0.5">{c.desc}</p>
+                    {c.formula && (
+                      <div className="mt-2 bg-white rounded-lg px-3 py-2 border border-gray-200 inline-block">
+                        <InlineMath math={c.formula} />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+
+          <SectionCard icon="📉" title="Effect of Damping" color="orange">
+            <p className="mb-3">The resonance curve (amplitude vs frequency) changes shape with damping:</p>
+            <div className="space-y-2">
+              {[
+                { color: "bg-green-500", label: "Low Damping", desc: "Tall, narrow peak. Resonance is sharp and pronounced." },
+                { color: "bg-yellow-500", label: "Medium Damping", desc: "Shorter, broader peak. Resonance is less dramatic." },
+                { color: "bg-red-500", label: "High Damping", desc: "Very flat curve. Resonance is barely noticeable." },
+              ].map((d, i) => (
+                <div key={i} className="flex items-center gap-3 bg-white rounded-lg p-2 border border-orange-100">
+                  <div className={`w-3 h-8 ${d.color} rounded-full shrink-0`}></div>
+                  <div>
+                    <span className="font-semibold text-sm text-gray-800">{d.label}</span>
+                    <p className="text-xs text-gray-500">{d.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+
+      {activeSection === 2 && (
+        <div>
+          <FormulaCard
+            title="Resonant Frequency — LC Circuit"
+            formula="f_0 = \frac{1}{2\pi\sqrt{LC}}"
+            context="The natural resonant frequency of an LC (inductor-capacitor) electrical circuit. Energy oscillates between the magnetic field of the inductor and the electric field of the capacitor."
+            variables={[
+              { symbol: "f_0", key: "f0", description: "Resonant frequency (Hz)" },
+              { symbol: "L", key: "L", description: "Inductance in Henrys (H)", input: true, unit: "H", default: 0.1 },
+              { symbol: "C", key: "C", description: "Capacitance in Farads (F)", input: true, unit: "F", default: 0.0001 },
+              { symbol: "\\pi", key: "pi", description: "Mathematical constant ≈ 3.14159" },
+            ]}
+            calculate={({ L, C }) => 1 / (2 * Math.PI * Math.sqrt(L * C))}
+            resultLabel="f₀"
+            resultUnit="Hz"
+          />
+
+          <FormulaCard
+            title="Resonant Frequency — Mass-Spring System"
+            formula="f_0 = \frac{1}{2\pi}\sqrt{\frac{k}{m}}"
+            context="The natural frequency of a simple harmonic oscillator (mass on a spring). Increasing spring stiffness raises frequency; increasing mass lowers it."
+            variables={[
+              { symbol: "f_0", key: "f0", description: "Natural frequency (Hz)" },
+              { symbol: "k", key: "k", description: "Spring constant (N/m)", input: true, unit: "N/m", default: 100 },
+              { symbol: "m", key: "m", description: "Mass in kilograms (kg)", input: true, unit: "kg", default: 1 },
+            ]}
+            calculate={({ k, m }) => (1 / (2 * Math.PI)) * Math.sqrt(k / m)}
+            resultLabel="f₀"
+            resultUnit="Hz"
+          />
+
+          <FormulaCard
+            title="Angular Resonant Frequency"
+            formula="\omega_0 = \sqrt{\frac{k}{m}} = \frac{1}{\sqrt{LC}}"
+            context="Angular frequency (rad/s) is related to regular frequency by ω₀ = 2πf₀. Commonly used in wave equations and circuit analysis."
+            variables={[
+              { symbol: "\\omega_0", key: "w0", description: "Angular resonant frequency (rad/s)" },
+              { symbol: "k", key: "k", description: "Spring constant (N/m)", input: true, unit: "N/m", default: 100 },
+              { symbol: "m", key: "m", description: "Mass (kg)", input: true, unit: "kg", default: 1 },
+            ]}
+            calculate={({ k, m }) => Math.sqrt(k / m)}
+            resultLabel="ω₀"
+            resultUnit="rad/s"
+          />
+        </div>
+      )}
+
+      {activeSection === 3 && (
+        <div>
+          <SectionCard icon="💡" title="Real-World Examples" color="yellow">
+            <p className="text-xs text-gray-500">Tap any example to expand the explanation.</p>
+          </SectionCard>
+
+          {[
+            {
+              icon: "🎵", title: "Tuning Fork & Sound Box",
+              description: "When a vibrating tuning fork is held near a hollow box tuned to the same frequency, the box resonates and produces a much louder sound.",
+              detail: "The sound box's natural frequency matches the tuning fork's frequency. Energy transfers efficiently, amplifying the sound without additional energy input.",
+            },
+            {
+              icon: "🌉", title: "Tacoma Narrows Bridge Collapse (1940)",
+              description: "Wind created periodic vortices that matched the bridge's natural torsional frequency, causing resonance. Amplitude grew until the bridge twisted apart and collapsed.",
+              detail: "This is the most famous example of destructive mechanical resonance. Modern bridges use aerodynamic designs and tuned mass dampers to prevent such failures.",
+            },
+            {
+              icon: "🎸", title: "Guitar String",
+              description: "Each string has a natural frequency determined by its length, tension, and linear density. Plucking causes resonant vibration, producing a musical note.",
+              detail: "The hollow guitar body resonates with the string frequencies, acting as an acoustic amplifier. Tuning pegs adjust string tension to change the natural frequency.",
+            },
+            {
+              icon: "📻", title: "Radio Tuning (LC Circuit)",
+              description: "A radio's LC circuit is adjusted (by changing capacitance) so its resonant frequency matches a broadcast station's frequency, allowing selective reception.",
+              detail: "At resonance, the circuit's impedance is purely resistive and current is maximum — the circuit 'locks onto' that frequency and rejects all others.",
+            },
+            {
+              icon: "🏥", title: "MRI Scanner",
+              description: "MRI uses nuclear magnetic resonance. Hydrogen nuclei are excited by radio waves at their Larmor frequency; as they relax, they emit signals used to form images.",
+              detail: "Different tissues have different hydrogen densities, creating contrast in the image. MRI provides detailed soft-tissue imaging without ionizing radiation.",
+            },
+            {
+              icon: "🍳", title: "Microwave Oven",
+              description: "Microwaves at ~2.45 GHz cause water molecules to rotate and vibrate at their resonant frequency, converting electromagnetic energy into heat.",
+              detail: "Dry materials without water molecules don't absorb microwave energy efficiently — that's why a dry ceramic plate stays cool while the food heats up.",
+            },
+          ].map((ex, i) => (
+            <ExampleCard key={i} number={i + 1} {...ex} />
+          ))}
+        </div>
+      )}
+
+      {activeSection === 4 && (
+        <div>
+          <TableCard
+            title="Types of Resonance"
+            headers={["Type", "Physical System", "Key Example"]}
+            rows={[
+              ["⚙️ Mechanical", "Mass-spring, pendulums, beams", "Swing, Tacoma Bridge"],
+              ["🔊 Acoustic", "Air columns, strings, membranes", "Musical instruments, singing glass"],
+              ["⚡ Electrical", "LC & RLC circuits", "Radio tuning, filters"],
+              ["💡 Optical", "Laser cavities, Fabry-Pérot", "Lasers, optical sensors"],
+              ["🔬 Nuclear (NMR)", "Atomic nuclei in B-field", "MRI scanners"],
+              ["🌍 Orbital", "Gravitational systems", "Kirkwood gaps in asteroid belt"],
+            ]}
+          />
+
+          <SectionCard icon="🔊" title="Acoustic Resonance — Standing Waves" color="blue">
+            <p className="mb-2">
+              In strings and pipes, resonance occurs when <strong>standing waves</strong> form. 
+              This requires the length to be a specific multiple of the half-wavelength.
+            </p>
+            <div className="bg-white rounded-lg p-3 border border-blue-100 mb-2">
+              <DisplayMath math="L = n \cdot \frac{\lambda}{2}, \quad n = 1, 2, 3, \ldots" />
+              <p className="text-xs text-center text-gray-400">String fixed at both ends (harmonics)</p>
+            </div>
+            <p className="text-xs text-gray-600">
+              Each value of <InlineMath math="n" /> gives a different <strong>harmonic</strong> (mode of vibration).
+              <InlineMath math="n=1" /> is the fundamental frequency; higher <InlineMath math="n" /> are overtones.
+            </p>
+          </SectionCard>
+
+          <SectionCard icon="⚡" title="Electrical Resonance — RLC Circuit" color="purple">
+            <p className="mb-2">
+              In an RLC circuit, resonance occurs when inductive reactance equals capacitive reactance:
+            </p>
+            <div className="bg-white rounded-lg p-3 border border-purple-100 mb-2">
+              <DisplayMath math="X_L = X_C \implies \omega L = \frac{1}{\omega C}" />
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-xs text-center">
+              {[
+                { label: "Impedance", val: "Minimum (= R)" },
+                { label: "Current", val: "Maximum" },
+                { label: "Phase", val: "Zero (pure resistive)" },
+              ].map((item, i) => (
+                <div key={i} className="bg-purple-50 rounded-lg p-2 border border-purple-100">
+                  <p className="text-purple-600 font-medium">{item.label}</p>
+                  <p className="text-gray-600 mt-0.5">{item.val}</p>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+
+      {activeSection === 5 && (
+        <div>
+          <SectionCard icon="🚀" title="Beneficial Applications" color="green">
+            <div className="space-y-3">
+              {[
+                { icon: "📡", app: "Radio & TV Broadcasting", desc: "LC circuits tune to specific broadcast frequencies by adjusting capacitance." },
+                { icon: "🏥", app: "MRI Imaging", desc: "Nuclear magnetic resonance produces detailed images of soft tissue without radiation." },
+                { icon: "🎵", app: "Musical Instruments", desc: "Resonance amplifies and shapes sound in strings, pipes, and percussion." },
+                { icon: "⚡", app: "Wireless Charging", desc: "Resonant inductive coupling efficiently transfers power between coils." },
+                { icon: "🔬", app: "Spectroscopy", desc: "Atoms absorb light at resonant frequencies — used to identify chemical elements." },
+                { icon: "📱", app: "Quartz Oscillators", desc: "Quartz crystals resonate at precise frequencies — used in clocks and electronics." },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-3 items-start bg-green-50 rounded-lg p-2 border border-green-100">
+                  <span className="text-xl shrink-0">{item.icon}</span>
+                  <div>
+                    <p className="font-semibold text-gray-800 text-sm">{item.app}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+
+          <SectionCard icon="⚠️" title="Destructive Effects" color="red">
+            <div className="space-y-2">
+              {[
+                "Bridge collapse due to wind-induced resonance (Tacoma Narrows, 1940)",
+                "Building damage during earthquakes when seismic frequency matches natural frequency",
+                "Engine component failure due to resonant vibrations at certain RPMs",
+                "Wine glass shattering from a loud note at its resonant frequency",
+                "Electrical equipment damage from power line resonance",
+              ].map((item, i) => (
+                <div key={i} className="flex gap-2 items-start text-sm">
+                  <span className="text-red-500 shrink-0 mt-0.5">✗</span>
+                  <span className="text-gray-700">{item}</span>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+
+      {activeSection === 6 && (
+        <div>
+          <SectionCard icon="📋" title="Summary" color="gray">
+            <div className="space-y-2">
+              {[
+                { n: "1", point: "Resonance occurs when driving frequency equals natural frequency (f = f₀)" },
+                { n: "2", point: "Results in maximum amplitude oscillation and peak energy transfer" },
+                { n: "3", point: "Low damping → sharp, tall resonance peak; High damping → flat response" },
+                { n: "4", point: "LC circuit: f₀ = 1/(2π√(LC))" },
+                { n: "5", point: "Mass-spring: f₀ = (1/2π)√(k/m)" },
+                { n: "6", point: "At resonance in RLC: X_L = X_C, impedance is minimum, current is maximum" },
+                { n: "7", point: "Applications: radio, MRI, musical instruments, wireless charging" },
+                { n: "8", point: "Destructive examples: bridge collapse, earthquake damage" },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-3 items-start">
+                  <span className="bg-gray-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">
+                    {item.n}
+                  </span>
+                  <p className="text-sm text-gray-700">{item.point}</p>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+
+          <SectionCard icon="❓" title="Practice Questions" color="blue">
+            <div className="space-y-3">
+              {[
+                "Calculate the resonant frequency of an LC circuit with L = 0.5 H and C = 200 μF.",
+                "Explain why the Tacoma Narrows Bridge collapsed using the concept of resonance.",
+                "How does damping affect the amplitude at resonance? Sketch the resonance curve for three damping levels.",
+                "A 2 kg mass is attached to a spring with k = 50 N/m. Find its natural frequency.",
+                "Differentiate between forced vibration and resonance with examples.",
+                "Why is resonance useful in radio tuning but dangerous in bridge engineering?",
+              ].map((q, i) => (
+                <div key={i} className="flex gap-3 items-start bg-blue-50 rounded-lg p-2 border border-blue-100">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">
+                    Q{i + 1}
+                  </span>
+                  <p className="text-sm text-gray-700">{q}</p>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+This looks good! Let me review it once more...
+
+I think this is solid. Let me make sure:
+1. ✅ Hero header card
+2. ✅ Section navigation (tabs/pills)
+3. ✅ Definition section with cards
+4. ✅ Conditions section
+5. ✅ Formula cards with Explain and Formula Lab buttons
+6. ✅ Interactive Formula Lab with calculations
+7. ✅ Collapsible example cards
+8. ✅ Types section with responsive table
+9. ✅ Applications section
+10. ✅ Summary section with practice questions
+
+One issue - in the FormulaCard, I need to escape the backslashes properly in JSX. Let me double check the formula strings:
+
+- `"f_0 = \\frac{1}{2\\pi\\sqrt{LC}}"` ✅
+- `"f_0 = \\frac{1}{2\\pi}\\sqrt{\\frac{k}{m}}"` ✅
+- `"\\omega_0 = \\sqrt{\\frac{k}{m}} = \\frac{1}{\\sqrt{LC}}"` ✅
+
+For the acoustic resonance formula in the Types section:
+- `"L = n \\cdot \\frac{\\lambda}{2}, \\quad n = 1, 2, 3, \\ldots"` ✅
+
+For the electrical resonance:
+- `"X_L = X_C \\implies \\omega L = \\frac{1}{\\omega C}"` ✅
+
+Looks good. Let me finalize the component.
+
+Wait, I also need to handle the `calculate` function for the LC circuit formula. The variables have `key` properties:
+- LC circuit: `L` and `C` → `calculate={({ L, C }) => 1 / (2 * Math.PI * Math.sqrt(L * C))}`
+- Mass-spring: `k` and `m` → `calculate={({ k, m }) => (1 / (2 * Math.PI)) * Math.sqrt(k / m)}`
+- Angular: `k` and `m` → `calculate={({ k, m }) => Math.sqrt(k / m)}`
+
+These match the `key` properties in the variables arrays. ✅
+
+The initial `labValues` state is initialized from `variables.filter(v => v.input).forEach(v => { defaults[v.key] = v.default; })`. ✅
+
+The `handleChange` uses `key` to update: `setLabValues(prev => ({ ...prev, [key]: parseFloat(value) || 0 }))`. ✅
+
+Looks good! Let me write the final clean version.
+
+Actually, I realize there might be an issue with the `calculate` function for the LC circuit. The initial values are L=0.1 and C=0.0001, so:
+f₀ = 1 / (2π√(0.1 × 0.0001)) = 1 / (2π√(0.00001)) = 1 / (2π × 0.00316...) = 1 / 0.01987... ≈ 50.33 Hz
+
+That seems reasonable for a demo.
+
+For mass-spring with k=100, m=1:
+f₀ = (1/2π)√(100/1) = (1/2π) × 10 = 10/6.28... ≈ 1.59 Hz ✅
+
+For angular with k=100, m=1:
+ω₀ = √(100/1) = 10 rad/s ✅
+
+All good. Let me write the final component now.
+</thinking>
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+function InlineMath({ math }) {
+  return (
+    <span
+      dangerouslySetInnerHTML={{
+        __html: katex.renderToString(math, { throwOnError: false }),
+      }}
+    />
+  );
+}
+
+function DisplayMath({ math }) {
+  return (
+    <div
+      className="my-2 overflow-x-auto text-center"
+      dangerouslySetInnerHTML={{
+        __html: katex.renderToString(math, {
+          throwOnError: false,
+          displayMode: true,
+        }),
+      }}
+    />
+  );
+}
+
+const colorMap = {
+  blue:   { card: "border-blue-200 bg-blue-50",     header: "bg-blue-100 border-blue-200 text-blue-800" },
+  green:  { card: "border-green-200 bg-green-50",   header: "bg-green-100 border-green-200 text-green-800" },
+  purple: { card: "border-purple-200 bg-purple-50", header: "bg-purple-100 border-purple-200 text-purple-800" },
+  orange: { card: "border-orange-200 bg-orange-50", header: "bg-orange-100 border-orange-200 text-orange-800" },
+  red:    { card: "border-red-200 bg-red-50",       header: "bg-red-100 border-red-200 text-red-800" },
+  gray:   { card: "border-gray-200 bg-gray-50",     header: "bg-gray-100 border-gray-200 text-gray-800" },
+  teal:   { card: "border-teal-200 bg-teal-50",     header: "bg-teal-100 border-teal-200 text-teal-800" },
+  yellow: { card: "border-yellow-200 bg-yellow-50", header: "bg-yellow-100 border-yellow-200 text-yellow-800" },
+};
+
+function SectionCard({ icon, title, children, color = "blue" }) {
+  const c = colorMap[color];
+  return (
+    <div className={`rounded-xl border-2 ${c.card} mb-4 overflow-hidden shadow-sm`}>
+      <div className={`px-4 py-2 border-b ${c.header} font-semibold text-sm flex items-center gap-2`}>
+        <span>{icon}</span><span>{title}</span>
+      </div>
+      <div className="px-4 py-3 text-gray-700 text-sm leading-relaxed">{children}</div>
+    </div>
+  );
+}
+
+function FormulaCard({ title, formula, variables, context, calculate, resultLabel = "Result", resultUnit = "" }) {
+  const [showExplain, setShowExplain] = useState(false);
+  const [showLab, setShowLab]         = useState(false);
+  const [labValues, setLabValues]     = useState(() => {
+    const d = {};
+    variables.filter(v => v.input).forEach(v => { d[v.key] = v.default; });
+    return d;
+  });
+
+  const inputVars = variables.filter(v => v.input);
+  const result    = calculate ? calculate(labValues) : null;
+
+  const handleChange = (key, val) =>
+    setLabValues(prev => ({ ...prev, [key]: parseFloat(val) || 0 }));
+
+  return (
+    <div className="rounded-xl border-2 border-indigo-300 bg-gradient-to-br from-indigo-50 to-purple-50 mb-4 overflow-hidden shadow-md">
+      <div className="px-4 py-2 bg-indigo-600 text-white font-semibold text-sm flex items-center gap-2">
+        <span>🔢</span><span>{title}</span>
+      </div>
+      <div className="px-4 py-4">
+        <div className="bg-white rounded-lg p-4 border border-indigo-100 shadow-inner mb-3">
+          <DisplayMath math={formula} />
+        </div>
+
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => { setShowExplain(!showExplain); setShowLab(false); }}
+            className="px-3 py-1.5 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 rounded-lg text-xs font-medium transition-colors border border-indigo-200"
+          >
+            {showExplain ? "▼ Hide Explanation" : "▶ Explain Formula"}
+          </button>
+          {calculate && (
+            <button
+              onClick={() => { setShowLab(!showLab); setShowExplain(false); }}
+              className="px-3 py-1.5 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg text-xs font-medium transition-colors border border-purple-200"
+            >
+              {showLab ? "▼ Close Lab" : "⚗️ Open Formula Lab"}
+            </button>
+          )}
+        </div>
+
+        {showExplain && (
+          <div className="mt-3 bg-white rounded-lg p-3 border border-indigo-100">
+            <p className="text-xs text-gray-600 mb-3">{context}</p>
+            <div className="space-y-2">
+              {variables.map((v, i) => (
+                <div key={i} className="flex items-center gap-2 text-xs">
+                  <span className="font-mono bg-indigo-50 px-2 py-1 rounded text-indigo-700 border border-indigo-100 min-w-10 text-center">
+                    <InlineMath math={v.symbol} />
+                  </span>
+                  <span className="text-gray-400">—</span>
+                  <span className="text-gray-600">{v.description}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {showLab && calculate && (
+          <div className="mt-3 bg-white rounded-lg p-3 border border-purple-100">
+            <p className="text-xs font-semibold text-purple-700 mb-3">⚗️ Formula Lab — Adjust values:</p>
+            <div className="grid grid-cols-2 gap-3 mb-3">
+              {inputVars.map((v, i) => (
+                <div key={i}>
+                  <label className="text-xs text-gray-500 mb-1 block">
+                    <InlineMath math={v.symbol} /> &nbsp;({v.unit})
+                  </label>
+                  <input
+                    type="number" step="any" defaultValue={v.default}
+                    onChange={e => handleChange(v.key, e.target.value)}
+                    className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm w-full focus:outline-none focus:border-purple-300"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-3 border border-indigo-100 text-center">
+              <span className="text-xs text-gray-500">{resultLabel} = </span>
+              <span className="font-bold text-indigo-700 text-xl">
+                {result !== null && !isNaN(result) && isFinite(result) ? result.toFixed(4) : "—"}
+              </span>
+              <span className="text-xs text-gray-500 ml-1">{resultUnit}</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ExampleCard({ number, title, icon, description, detail }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-xl border border-gray-200 bg-white mb-3 overflow-hidden shadow-sm">
+      <button
+        className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors text-left"
+        onClick={() => setOpen(!open)}
+      >
+        <div className="flex items-center gap-3">
+          <span className="text-2xl">{icon}</span>
+          <div>
+            <span className="text-xs text-gray-400 font-medium uppercase tracking-wide">Example {number}</span>
+            <p className="font-semibold text-gray-800 text-sm">{title}</p>
+          </div>
+        </div>
+        <span className={`text-gray-400 text-xs transition-transform duration-200 ${open ? "rotate-180" : ""}`}>▼</span>
+      </button>
+      {open && (
+        <div className="px-4 pb-4 border-t border-gray-100 pt-3">
+          <p className="text-sm text-gray-600 mb-3">{description}</p>
+          <div className="bg-amber-50 rounded-lg p-3 border border-amber-100 flex gap-2">
+            <span className="text-amber-500 shrink-0">💡</span>
+            <p className="text-xs text-amber-800">{detail}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TableCard({ title, headers, rows }) {
+  return (
+    <div className="rounded-xl border-2 border-gray-200 mb-4 overflow-hidden shadow-sm">
+      <div className="px-4 py-2 bg-gray-100 border-b border-gray-200 font-semibold text-sm text-gray-700 flex items-center gap-2">
+        <span>📊</span><span>{title}</span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-gray-50">
+              {headers.map((h, i) => (
+                <th key={i} className="px-4 py-2.5 text-left text-xs font-semibold text-gray-600 border-b border-gray-200 whitespace-nowrap">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i} className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} hover:bg-blue-50 transition-colors`}>
+                {row.map((cell, j) => (
+                  <td key={j} className="px-4 py-2.5 text-gray-700 text-xs border-b border-gray-100">{cell}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function ChapterNav({ sections, active, setActive }) {
+  return (
+    <div className="flex gap-1.5 flex-wrap mb-5">
+      {sections.map((s, i) => (
+        <button
+          key={i} onClick={() => setActive(i)}
+          className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+            active === i ? "bg-indigo-600 text-white shadow-sm" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+          }`}
+        >
+          {s}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default function ResonanceTutor() {
+  const [sec, setSec] = useState(0);
+  const nav = ["📖 Definition", "✅ Conditions", "🔢 Formulas", "💡 Examples", "🗂️ Types", "🚀 Applications", "📋 Summary"];
+
+  return (
+    <div className="max-w-2xl mx-auto p-4 font-sans">
+
+      {/* ── Hero ── */}
+      <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 rounded-2xl p-5 mb-5 text-white shadow-lg">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="bg-white/20 rounded-xl p-2"><span className="text-2xl">🔔</span></div>
+          <div>
+            <p className="text-indigo-200 text-xs font-medium uppercase tracking-wider">Physics · Waves & Oscillations</p>
+            <h1 className="text-2xl font-bold">Resonance</h1>
+          </div>
+        </div>
+        <p className="text-indigo-100 text-sm leading-relaxed">
+          When a system oscillates at <strong className="text-white">maximum amplitude</strong> because it is driven at its{" "}
+          <strong className="text-white">natural frequency</strong>.
+        </p>
+        <div className="flex gap-2 mt-3 flex-wrap">
+          {["7 Sections", "3 Formula Labs", "6 Examples"].map((t, i) => (
+            <span key={i} className="bg-white/20 text-white text-xs px-2.5 py-1 rounded-full">{t}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Nav ── */}
+      <ChapterNav sections={nav} active={sec} setActive={setSec} />
+
+      {/* ══════════════════════════════════════
+          SECTION 0 — DEFINITION
+      ══════════════════════════════════════ */}
+      {sec === 0 && (
+        <div>
+          <SectionCard icon="📖" title="Quick Definition" color="blue">
+            <p>
+              <strong>Resonance</strong> is the phenomenon where a system oscillates with{" "}
+              <strong>maximum amplitude</strong> when an external periodic force drives it at
+              exactly its <strong>natural frequency</strong>{" "}
+              (<InlineMath math="f_0" />).
+            </p>
+            <p className="mt-2">
+              At resonance, energy transfer from the driving force to the system is maximally
+              efficient — leading to a dramatic buildup of oscillation amplitude.
+            </p>
+          </SectionCard>
+
+          <SectionCard icon="🧠" title="Intuitive Analogy" color="green">
+            <p>
+              Imagine pushing a child on a swing. If you push <em>in sync with the swing's
+              natural rhythm</em>, the swing goes higher and higher — even with very small forces.
+            </p>
+            <div className="mt-2 bg-green-100 rounded-lg p-2.5 border border-green-200 text-xs">
+              🎯 <strong>Key insight:</strong> It's not about how <em>hard</em> you push — it's
+              about <em>when</em> you push. Frequency matching is everything.
+            </div>
+          </SectionCard>
+
+          <SectionCard icon="⚙️" title="Key Terminology" color="purple">
+            <div className="space-y-3">
+              {[
+                { sym: "f_0",     term: "Natural Frequency",    def: "Frequency at which a system oscillates freely without any external force." },
+                { sym: "f",       term: "Driving Frequency",    def: "Frequency of the external periodic force applied to the system." },
+                { sym: "A",       term: "Amplitude",            def: "Maximum displacement from equilibrium. Peaks sharply at resonance." },
+                { sym: "b",       term: "Damping Coefficient",  def: "Measures energy dissipation. High damping suppresses resonance." },
+                { sym: "Q",       term: "Quality Factor",       def: "Sharpness of the resonance peak. High Q = narrow, tall peak." },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-3 items-start">
+                  <span className="bg-purple-100 border border-purple-200 rounded-lg px-2 py-1 text-xs font-mono text-purple-700 shrink-0 min-w-10 text-center">
+                    <InlineMath math={item.sym} />
+                  </span>
+                  <div>
+                    <p className="font-semibold text-gray-800 text-sm">{item.term}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">{item.def}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          SECTION 1 — CONDITIONS
+      ══════════════════════════════════════ */}
+      {sec === 1 && (
+        <div>
+          <SectionCard icon="✅" title="Conditions for Resonance" color="teal">
+            <div className="space-y-4">
+              {[
+                {
+                  n: "01", bg: "bg-teal-600",
+                  title: "Frequency Matching",
+                  desc: "The driving frequency must equal the system's natural frequency.",
+                  formula: "f_{\\text{drive}} = f_0",
+                },
+                {
+                  n: "02", bg: "bg-blue-600",
+                  title: "Continuous Periodic Force",
+                  desc: "An external periodic driving force must be continuously applied.",
+                  formula: null,
+                },
+                {
+                  n: "03", bg: "bg-purple-600",
+                  title: "Minimal Damping",
+                  desc: "Low damping allows amplitude to build up. Heavy damping suppresses resonance.",
+                  formula: null,
+                },
+              ].map((c, i) => (
+                <div key={i} className="flex gap-3 items-start">
+                  <span className={`${c.bg} text-white text-xs font-bold rounded-full w-8 h-8 flex items-center justify-center shrink-0`}>
+                    {c.n}
+                  </span>
+                  <div className="flex-1">
+                    <p className="font-semibold text-gray-800">{c.title}</p>
+                    <p className="text-gray-600 text-xs mt-0.5">{c.desc}</p>
+                    {c.formula && (
+                      <div className="mt-2 bg-white rounded-lg px-3 py-1 border border-gray-200 inline-block text-sm">
+                        <InlineMath math={c.formula} />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+
+          <SectionCard icon="📉" title="Effect of Damping on Resonance" color="orange">
+            <p className="mb-3 text-xs text-gray-500">
+              The resonance curve (amplitude vs. frequency) changes shape with damping level:
+            </p>
+            <div className="space-y-2">
+              {[
+                { bar: "bg-green-500", h: "h-10", label: "Low Damping",    desc: "Tall, narrow peak. Resonance is sharp and pronounced." },
+                { bar: "bg-yellow-500", h: "h-6",  label: "Medium Damping", desc: "Shorter, broader peak. Less dramatic resonance." },
+                { bar: "bg-red-500",   h: "h-3",  label: "High Damping",   desc: "Very flat curve. Resonance is barely noticeable." },
+              ].map((d, i) => (
+                <div key={i} className="flex items-center gap-3 bg-white rounded-lg p-2.5 border border-orange-100">
+                  <div className={`w-4 ${d.h} ${d.bar} rounded-sm shrink-0`} />
+                  <div>
+                    <p className="font-semibold text-sm text-gray-800">{d.label}</p>
+                    <p className="text-xs text-gray-500">{d.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          SECTION 2 — FORMULAS
+      ══════════════════════════════════════ */}
+      {sec === 2 && (
+        <div>
+          <FormulaCard
+            title="Resonant Frequency — LC Circuit"
+            formula="f_0 = \frac{1}{2\pi\sqrt{LC}}"
+            context="The natural resonant frequency of an LC (inductor-capacitor) circuit. Energy oscillates between the magnetic field of the inductor and the electric field of the capacitor."
+            variables={[
+              { symbol: "f_0", key: "f0",  description: "Resonant frequency (Hz)" },
+              { symbol: "L",   key: "L",   description: "Inductance in Henrys (H)",    input: true, unit: "H", default: 0.1 },
+              { symbol: "C",   key: "C",   description: "Capacitance in Farads (F)",   input: true, unit: "F", default: 0.0001 },
+              { symbol: "\\pi", key: "pi", description: "Mathematical constant ≈ 3.14159" },
+            ]}
+            calculate={({ L, C }) => 1 / (2 * Math.PI * Math.sqrt(L * C))}
+            resultLabel="f₀"
+            resultUnit="Hz"
+          />
+
+          <FormulaCard
+            title="Resonant Frequency — Mass-Spring System"
+            formula="f_0 = \frac{1}{2\pi}\sqrt{\frac{k}{m}}"
+            context="The natural frequency of a simple harmonic oscillator. Increasing spring stiffness raises the frequency; increasing mass lowers it."
+            variables={[
+              { symbol: "f_0", key: "f0", description: "Natural frequency (Hz)" },
+              { symbol: "k",   key: "k",  description: "Spring constant (N/m)",  input: true, unit: "N/m", default: 100 },
+              { symbol: "m",   key: "m",  description: "Mass in kilograms (kg)", input: true, unit: "kg",  default: 1 },
+            ]}
+            calculate={({ k, m }) => (1 / (2 * Math.PI)) * Math.sqrt(k / m)}
+            resultLabel="f₀"
+            resultUnit="Hz"
+          />
+
+          <FormulaCard
+            title="Angular Resonant Frequency"
+            formula="\omega_0 = \sqrt{\frac{k}{m}} = \frac{1}{\sqrt{LC}}"
+            context="Angular frequency (rad/s) relates to regular frequency by ω₀ = 2πf₀. Widely used in wave equations and circuit analysis."
+            variables={[
+              { symbol: "\\omega_0", key: "w0", description: "Angular resonant frequency (rad/s)" },
+              { symbol: "k",         key: "k",  description: "Spring constant (N/m)", input: true, unit: "N/m", default: 100 },
+              { symbol: "m",         key: "m",  description: "Mass (kg)",             input: true, unit: "kg",  default: 1 },
+            ]}
+            calculate={({ k, m }) => Math.sqrt(k / m)}
+            resultLabel="ω₀"
+            resultUnit="rad/s"
+          />
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          SECTION 3 — EXAMPLES
+      ══════════════════════════════════════ */}
+      {sec === 3 && (
+        <div>
+          <SectionCard icon="💡" title="Real-World Examples" color="yellow">
+            <p className="text-xs text-gray-500">Tap any card to expand the full explanation.</p>
+          </SectionCard>
+
+          {[
+            {
+              icon: "🎵", title: "Tuning Fork & Sound Box",
+              description: "When a vibrating tuning fork is placed near a hollow box tuned to the same frequency, the box resonates and produces a much louder sound.",
+              detail: "Energy transfers maximally because the box's natural frequency matches the fork's frequency. No additional energy input is needed — the box amplifies through resonance.",
+            },
+            {
+              icon: "🌉", title: "Tacoma Narrows Bridge Collapse (1940)",
+              description: "Wind created periodic vortices that matched the bridge's natural torsional frequency. Amplitude grew with each cycle until the bridge twisted apart and collapsed.",
+              detail: "The most famous example of destructive mechanical resonance. Modern bridges use aerodynamic deck shapes and tuned mass dampers to prevent resonant buildup.",
+            },
+            {
+              icon: "🎸", title: "Guitar String",
+              description: "Each string has a natural frequency set by its length, tension, and mass per unit length. Plucking causes resonant vibration, producing a sustained musical note.",
+              detail: "The hollow guitar body resonates with the string frequencies, acting as an acoustic amplifier. Tuning pegs change string tension, shifting the natural frequency.",
+            },
+            {
+              icon: "📻", title: "Radio Tuning (LC Circuit)",
+              description: "A radio's LC circuit is adjusted (by varying capacitance) so its resonant frequency matches a broadcast station's carrier frequency, enabling selective reception.",
+              detail: "At resonance, impedance is purely resistive and current is maximum — the circuit locks onto that frequency and rejects all others. This is how channel selection works.",
+            },
+            {
+              icon: "🏥", title: "MRI Scanner",
+              description: "MRI uses nuclear magnetic resonance. Hydrogen nuclei are excited by radio waves at their Larmor frequency; as they relax they emit signals used to form images.",
+              detail: "Different tissues have different hydrogen densities, creating image contrast. MRI provides detailed soft-tissue imaging without any ionizing radiation.",
+            },
+            {
+              icon: "🍳", title: "Microwave Oven",
+              description: "Microwaves at ~2.45 GHz cause water molecules to rotate and vibrate at their resonant frequency, converting electromagnetic energy directly into heat.",
+              detail: "Dry materials without water molecules absorb very little microwave energy — that's why a dry ceramic plate stays cool while the food heats up.",
+            },
+          ].map((ex, i) => (
+            <ExampleCard key={i} number={i + 1} {...ex} />
+          ))}
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          SECTION 4 — TYPES
+      ══════════════════════════════════════ */}
+      {sec === 4 && (
+        <div>
+          <TableCard
+            title="Types of Resonance"
+            headers={["Type", "Physical System", "Key Example"]}
+            rows={[
+              ["⚙️ Mechanical",      "Mass-spring, pendulums, beams",     "Swing, Tacoma Bridge"],
+              ["🔊 Acoustic",         "Air columns, strings, membranes",   "Musical instruments, singing glass"],
+              ["⚡ Electrical",       "LC and RLC circuits",               "Radio tuning, bandpass filters"],
+              ["💡 Optical",          "Laser cavities, Fabry-Pérot",       "Lasers, optical sensors"],
+              ["🔬 Nuclear (NMR)",    "Atomic nuclei in magnetic field",   "MRI scanners"],
+              ["🌍 Orbital",          "Gravitational systems",             "Kirkwood gaps in asteroid belt"],
+            ]}
+          />
+
+          <SectionCard icon="🔊" title="Acoustic Resonance — Standing Waves" color="blue">
+            <p className="mb-2">
+              Resonance in strings and pipes occurs when <strong>standing waves</strong> form.
+              The length must be an integer multiple of half-wavelengths:
+            </p>
+            <div className="bg-white rounded-lg p-3 border border-blue-100 mb-2">
+              <DisplayMath math="L = n \cdot \frac{\lambda}{2}, \quad n = 1,\, 2,\, 3,\, \ldots" />
+              <p className="text-xs text-center text-gray-400">String fixed at both ends</p>
+            </div>
+            <p className="text-xs text-gray-600">
+              <InlineMath math="n = 1" /> is the <strong>fundamental</strong> (lowest) frequency.
+              Higher values of <InlineMath math="n" /> are <strong>harmonics</strong> (overtones).
+            </p>
+          </SectionCard>
+
+          <SectionCard icon="⚡" title="Electrical Resonance — RLC Circuit" color="purple">
+            <p className="mb-2">
+              Resonance occurs when inductive reactance equals capacitive reactance:
+            </p>
+            <div className="bg-white rounded-lg p-3 border border-purple-100 mb-3">
+              <DisplayMath math="X_L = X_C \implies \omega L = \frac{1}{\omega C}" />
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-xs text-center">
+              {[
+                { label: "Impedance",   val: "Minimum (= R)" },
+                { label: "Current",     val: "Maximum"       },
+                { label: "Phase Angle", val: "Zero"          },
+              ].map((item, i) => (
+                <div key={i} className="bg-purple-50 rounded-lg p-2 border border-purple-100">
+                  <p className="text-purple-700 font-semibold">{item.label}</p>
+                  <p className="text-gray-600 mt-0.5">{item.val}</p>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          SECTION 5 — APPLICATIONS
+      ══════════════════════════════════════ */}
+      {sec === 5 && (
+        <div>
+          <SectionCard icon="🚀" title="Beneficial Applications" color="green">
+            <div className="space-y-2">
+              {[
+                { icon: "📡", app: "Radio & TV Broadcasting",  desc: "LC circuits tune to specific broadcast frequencies by adjusting capacitance." },
+                { icon: "🏥", app: "MRI Imaging",              desc: "Nuclear magnetic resonance produces detailed soft-tissue images without radiation." },
+                { icon: "🎵", app: "Musical Instruments",      desc: "Resonance amplifies and shapes sound in strings, pipes, and percussion bodies." },
+                { icon: "⚡", app: "Wireless Charging",        desc: "Resonant inductive coupling transfers power efficiently between coils." },
+                { icon: "🔬", app: "Spectroscopy",             desc: "Atoms absorb light at resonant frequencies — used to identify chemical elements." },
+                { icon: "📱", app: "Quartz Oscillators",       desc: "Quartz crystals resonate at precise frequencies — used in clocks and processors." },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-3 items-start bg-green-50 rounded-lg p-2.5 border border-green-100">
+                  <span className="text-xl shrink-0">{item.icon}</span>
+                  <div>
+                    <p className="font-semibold text-gray-800 text-sm">{item.app}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+
+          <SectionCard icon="⚠️" title="Destructive Effects" color="red">
+            <div className="space-y-2">
+              {[
+                "Bridge collapse from wind-induced resonance (Tacoma Narrows, 1940)",
+                "Building damage during earthquakes when seismic frequency matches natural frequency",
+                "Engine component failure due to resonant vibrations at certain RPM ranges",
+                "Wine glass shattering from a loud note played at its resonant frequency",
+                "Electrical equipment damage from power-line harmonic resonance",
+              ].map((item, i) => (
+                <div key={i} className="flex gap-2 items-start text-sm">
+                  <span className="text-red-500 shrink-0 mt-0.5">✗</span>
+                  <span className="text-gray-700">{item}</span>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════
+          SECTION 6 — SUMMARY
+      ══════════════════════════════════════ */}
+      {sec === 6 && (
+        <div>
+          <SectionCard icon="📋" title="Summary" color="gray">
+            <div className="space-y-2">
+              {[
+                "Resonance occurs when driving frequency = natural frequency (f = f₀)",
+                "Results in maximum amplitude and peak energy transfer",
+                "Low damping → sharp, tall peak;  High damping → flat, broad response",
+                "LC circuit resonance:  f₀ = 1 / (2π√LC)",
+                "Mass-spring resonance:  f₀ = (1/2π) √(k/m)",
+                "In RLC at resonance:  X_L = X_C, impedance is minimum, current is maximum",
+                "Useful in: radio tuning, MRI, instruments, wireless charging",
+                "Destructive in: bridges, buildings during earthquakes, machinery",
+              ].map((point, i) => (
+                <div key={i} className="flex gap-3 items-start">
+                  <span className="bg-gray-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">
+                    {i + 1}
+                  </span>
+                  <p className="text-sm text-gray-700">{point}</p>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+
+          <SectionCard icon="❓" title="Practice Questions" color="blue">
+            <div className="space-y-2">
+              {[
+                "Calculate the resonant frequency of an LC circuit with L = 0.5 H and C = 200 μF.",
+                "Explain why the Tacoma Narrows Bridge collapsed using the concept of resonance.",
+                "How does damping affect the amplitude at resonance? Sketch the curve for three damping levels.",
+                "A 2 kg mass is attached to a spring (k = 50 N/m). Find its natural frequency.",
+                "Differentiate between forced vibration and resonance with examples.",
+                "Why is resonance useful in radio tuning but dangerous in bridge engineering?",
+              ].map((q, i) => (
+                <div key={i} className="flex gap-3 items-start bg-blue-50 rounded-lg p-2.5 border border-blue-100">
+                  <span className="bg-blue-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shrink-0 mt-0.5">
+                    Q{i + 1}
+                  </span>
+                  <p className="text-sm text-gray-700">{q}</p>
+                </div>
+              ))}
+            </div>
+          </SectionCard>
+        </div>
+      )}
+
+    </div>
+  );
+}
+```

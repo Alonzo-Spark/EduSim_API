@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 51,
+  "question": "Live Sandbox: How does changing mass affect the period of a simple pendulum simulation?",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nIn our active simulation workspace, we observe a mass suspended from a fixed anchor swinging back and forth. This setup allows us to modify the mass parameter dynamically while keeping the string length fixed to observe the impact on structural timing.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nThe pendulum bob sweeps through its arc at a completely unchanged rate when we alter its weight profile. Even if we scale the mass slider to maximum or drop it to zero, the clock cycles required to finish one full oscillation remain identical.\n\n### ✦ WHY IT HAPPENS\nGravitational acceleration acts equally on all objects regardless of mass. While a heavier bob experiences a stronger downward gravitational pull (action force), it also possesses a proportionally larger inertial mass (resistance to motion). These two properties cancel each other out perfectly within the kinematic track.\n\n### ✦ WHAT TO NOTICE\nLook closely at the simulation speed and timer. Notice that whether the mass configuration reads $1 \\text{ kg}$ or $10 \\text{ kg}$, the pendulum crosses the vertical equilibrium marker at the exact same time intervals.\n\n### ✦ FORMULA\nThe structural time period is given by:\n\n$$T = 2\\pi \\sqrt{\\frac{L}{g}}$$\n\n* $L$ represents the length of the suspension string axis.\n* $g$ represents the constant local gravity preset field.\n* Notice that the mass variable ($m$) is completely absent from the governing equation.\n\n### ✦ DEEPER UNDERSTANDING\nThis demonstrates Galileo's principle of equivalence in free fall. Because gravity scales in direct proportion to inertia, mass does not dictate the acceleration rate along the constraint path, keeping the period invariant.\n\n### ✦ TRY THIS\n1. Slide the **Mass parameter slider** from $1 \\text{ kg}$ up to $5 \\text{ kg}$ while the simulation runs and observe the timing log.\n2. Next, adjust the **Length slider ($L$)** and notice how the swing rate immediately slows down as the path length increases.",
+  "candidate_response": ":::section{title=\"Introduction\"}\nIn classical mechanics, a **Simple Pendulum** consists of a point mass (bob) suspended by a massless, unstretchable string. A common misconception is that a heavier \"bob\" will swing faster or slower. Today, we analyze the relationship between **Mass ($m$)** and the **Period ($T$)**.\n:::\n\n:::section{title=\"Quick Definition\"}\n**The Period ($T$)** is the total time taken for the pendulum to complete one full back-and-forth cycle (oscillation).\n:::\n\n:::section{title=\"Formula Card\"}\n### The Period of a Simple Pendulum\n$$\nT = 2\\pi \\sqrt{\\frac{L}{g}}\n$$\n\n**Variable Breakdown:**\n*   $T$: Period (seconds)\n*   $L$: Length of the string (meters)\n*   $g$: Acceleration due to gravity ($\\approx 9.81 \\, m/s^2$)\n*   $m$: Mass of the bob (kilograms) — *Note its absence in the formula.*\n\n[ 🔬 Open Formula Lab: Period Analysis ]\n:::\n\n:::section{title=\"Key Concepts: The Role of Mass\"}\nContrary to intuition, **changing the mass does not affect the period** of a simple pendulum (assuming air resistance is negligible and the angle is small).\n\n*   **Gravitational Force:** A larger mass experiences a stronger gravitational pull ($F = mg$).\n*   **Inertia:** A larger mass also has greater resistance to changes in motion ($F = ma$).\n*   **The Cancellation:** These two effects cancel each other out perfectly. The acceleration of the bob is independent of its mass.\n:::\n\n:::section{title=\"Data Comparison Table\"}\n| Mass ($kg$) | Length ($m$) | Gravity ($m/s^2$) | Calculated Period ($s$) |\n| :--- | :--- | :--- | :--- |\n| 0.5 | 1.0 | 9.81 | ~2.01 |\n| 1.0 | 1.0 | 9.81 | ~2.01 |\n| 5.0 | 1.0 | 9.81 | ~2.01 |\n| 10.0 | 1.0 | 9.81 | ~2.01 |\n\n**Observation:** As mass increases by a factor of 20, the period remains constant at $\\approx 2.01$ seconds.\n:::\n\n:::section{title=\"Important Notes\"}\n*   **Small Angle Approximation:** This independence holds true primarily for small angles (usually $< 15^\\circ$).\n*   **Air Resistance:** In a real-world \"Live Sandbox,\" a very light object with a large surface area (like a balloon) will be slowed by air resistance, making it *appear* that mass matters.\n*   **Center of Mass:** If changing the mass changes the *effective length* (e.g., using a very large physical sphere), the period will change because $L$ changed, not because of the mass itself.\n:::\n\n:::section{title=\"Suggested Questions\"}\n1.  **If mass doesn't affect the period, what happens if we move the pendulum to the Moon?**\n2.  **How does the period change if we quadruple the length of the string?**\n3.  **Why does a pendulum eventually stop swinging in a real-world simulation?**\n:::",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the relationship between mass and the period of a simple pendulum, accurately explaining the concept, formula, and underlying physics. The response is well-structured, easy to follow, and effectively conveys the information to the reader. The inclusion of a data comparison table and suggested questions enhances the educational value of the response. However, to further improve, the candidate could consider adding more interactive elements or visual aids to supplement the explanation, such as diagrams or animations, to make the content more engaging and accessible to a wider audience.",
+  "candidate_token_usage": {
+    "promptTokens": 386,
+    "completionTokens": 747,
+    "totalTokens": 1133
+  },
+  "candidate_latency_ms": 5544,
+  "candidate_cost_usd": 0.002434,
+  "judge_token_usage": {
+    "promptTokens": 1581,
+    "completionTokens": 172,
+    "totalTokens": 1753
+  },
+  "judge_latency_ms": 6997,
+  "judge_cost_usd": 0.0013614,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:04:09.026Z"
+}

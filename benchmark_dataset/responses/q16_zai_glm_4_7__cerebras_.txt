@@ -1,0 +1,588 @@
+Here is the complete, self-contained HTML solution. It implements the **New Rendering System** you described, converting content into structured UI blocks, dedicated Formula Cards, and an interactive Formula Lab.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Textbook: Work, Energy and Power</title>
+    
+    <!-- KaTeX CSS for rendering mathematics -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --secondary: #475569;
+            --accent: #0ea5e9;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Layout Structure */
+        header {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .chapter-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            background: var(--primary-light);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* Typography & Elements inside Cards */
+        p {
+            margin-bottom: 1rem;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            text-align: center;
+            background: #fff;
+            border-left: 5px solid var(--accent);
+        }
+
+        .formula-display {
+            font-size: 1.5rem;
+            padding: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--secondary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-page);
+            border-color: var(--text-muted);
+        }
+
+        /* Responsive Table Card */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--bg-page);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Formula Lab Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .lab-input-group {
+            margin-bottom: 1rem;
+        }
+
+        .lab-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .lab-input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .lab-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--primary-light);
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            min-height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Explain Section (Hidden by default) */
+        .formula-explanation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #92400e;
+            display: none;
+        }
+        
+        .formula-explanation.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Icons SVG */
+        svg {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <div class="breadcrumb">Physics &bull; Mechanics</div>
+            <div class="chapter-title">Work, Energy and Power</div>
+        </div>
+        <!-- User Avatar Placeholder -->
+        <img src="https://picsum.photos/seed/student/40/40" alt="User" style="border-radius: 50%;">
+    </header>
+
+    <main id="content-root">
+        <!-- Content will be injected here via JavaScript -->
+    </main>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="lab-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">Formula Lab</div>
+                <button class="close-btn" onclick="closeLab()">&times;</button>
+            </div>
+            
+            <div id="lab-content">
+                <!-- Lab inputs injected dynamically -->
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="calculateWork()">
+                Calculate
+            </button>
+
+            <div class="lab-result" id="lab-result">
+                Enter values to calculate Work.
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX Script -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    <script>
+        // ==========================================
+        // DATA STRUCTURE (Simulating Parsed Content)
+        // ==========================================
+        
+        const sections = [
+            {
+                type: 'definition',
+                title: 'Quick Definition',
+                content: `
+                    <p><strong>Work</strong> is defined as the measure of energy transfer that occurs when an object is moved over a distance by an external force.</p>
+                    <p>For work to be done, two conditions must be met:</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>A force must be applied to the object.</li>
+                        <li>The object must be displaced (move) in the direction of the force.</li>
+                    </ul>
+                `
+            },
+            {
+                type: 'formula',
+                title: 'The Work Formula',
+                latex: 'W = F \\cdot s \\cdot \\cos(\\theta)',
+                variables: [
+                    { name: 'F', label: 'Force (Newtons)', type: 'number' },
+                    { name: 's', label: 'Displacement (Meters)', type: 'number' },
+                    { name: 'θ', label: 'Angle (Degrees)', type: 'number' }
+                ],
+                explanation: `
+                    <ul style="margin-left: 1.5rem;">
+                        <li><strong>W</strong>: Work done (Joules)</li>
+                        <li><strong>F</strong>: Magnitude of the force applied (Newtons)</li>
+                        <li><strong>s</strong>: Magnitude of displacement (Meters)</li>
+                        <li><strong>θ</strong>: Angle between the force vector and the displacement vector</li>
+                    </ul>
+                `
+            },
+            {
+                type: 'unit',
+                title: 'SI Unit',
+                content: `
+                    <p>The SI unit of work is the <strong>Joule</strong> (symbol: <strong>J</strong>).</p>
+                    <p style="margin-top: 0.5rem">1 Joule is defined as the work done when a force of 1 Newton displaces an object by 1 meter in the direction of the force.</p>
+                    <div style="background: var(--bg-page); padding: 0.75rem; border-radius: 6px; margin-top: 1rem; text-align: center; font-family: monospace;">
+                        1 J = 1 N &middot; m
+                    </div>
+                `
+            },
+            {
+                type: 'table',
+                title: 'Work Scenarios',
+                headers: ['Scenario', 'Force Direction', 'Work Done'],
+                rows: [
+                    ['Pushing a box forward', 'Same as motion', 'Positive (+)'],
+                    ['Friction acting on box', 'Opposite to motion', 'Negative (-)'],
+                    ['Carrying a bag horizontally', 'Perpendicular to motion (Up)', 'Zero (0)']
+                ]
+            },
+            {
+                type: 'summary',
+                title: 'Important Notes',
+                content: `
+                    <p>Work is a scalar quantity, meaning it has magnitude but no direction.</p>
+                    <p>If the force and displacement are perpendicular ($\\theta = 90^\\circ$), $\\cos(90^\\circ) = 0$, so no work is done.</p>
+                `
+            }
+        ];
+
+        // ==========================================
+        // RENDERING SYSTEM
+        // ==========================================
+
+        const root = document.getElementById('content-root');
+
+        // Icons
+        const icons = {
+            definition: `<svg class="card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>`,
+            formula: `<svg class="card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`,
+            unit: `<svg class="card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 4H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm-7 0v18m-7-9h14" /></svg>`,
+            table: `<svg class="card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>`,
+            summary: `<svg class="card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`
+        };
+
+        function renderSections() {
+            sections.forEach(section => {
+                const card = document.createElement('article');
+                card.className = `card ${section.type === 'formula' ? 'formula-card' : ''}`;
+
+                // Header
+                const header = document.createElement('div');
+                header.className = 'card-header';
+                header.innerHTML = `${icons[section.type]} <div class="card-title">${section.title}</div>`;
+                card.appendChild(header);
+
+                // Body
+                const body = document.createElement('div');
+                body.className = 'card-body';
+
+                if (section.type === 'formula') {
+                    // Formula Card Logic
+                    body.innerHTML = `
+                        <div class="formula-display">$$${section.latex}$$</div>
+                        <div class="formula-explanation" id="explain-${section.title.replace(/\s/g, '')}">
+                            <strong>Variables:</strong><br>
+                            ${section.explanation}
+                        </div>
+                        <div class="formula-actions">
+                            <button class="btn btn-outline" onclick="toggleExplanation('${section.title.replace(/\s/g, '')}')">
+                                Explain Formula
+                            </button>
+                            <button class="btn btn-primary" onclick="openLab('${section.latex}', ${JSON.stringify(section.variables).replace(/"/g, '&quot;')})">
+                                Open Formula Lab
+                            </button>
+                        </div>
+                    `;
+                } else if (section.type === 'table') {
+                    // Table Card Logic
+                    let tableHTML = '<div class="table-container"><table><thead><tr>';
+                    section.headers.forEach(h => tableHTML += `<th>${h}</th>`);
+                    tableHTML += '</tr></thead><tbody>';
+                    section.rows.forEach(row => {
+                        tableHTML += '<tr>';
+                        row.forEach(cell => tableHTML += `<td>${cell}</td>`);
+                        tableHTML += '</tr>';
+                    });
+                    tableHTML += '</tbody></table></div>';
+                    body.innerHTML = tableHTML;
+                } else {
+                    // Standard Text Card
+                    body.innerHTML = section.content;
+                }
+
+                card.appendChild(body);
+                root.appendChild(card);
+            });
+
+            // Trigger Math Rendering
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(root);
+            }
+        }
+
+        // ==========================================
+        // INTERACTION LOGIC
+        // ==========================================
+
+        function toggleExplanation(id) {
+            const el = document.getElementById('explain-' + id);
+            el.classList.toggle('visible');
+        }
+
+        // Formula Lab State
+        let currentFormula = null;
+        let currentVariables = [];
+
+        function openLab(formula, variables) {
+            currentFormula = formula;
+            currentVariables = variables;
+            
+            const labContent = document.getElementById('lab-content');
+            labContent.innerHTML = '';
+            
+            // Generate Inputs based on extracted variables
+            variables.forEach(v => {
+                const group = document.createElement('div');
+                group.className = 'lab-input-group';
+                group.innerHTML = `
+                    <label>${v.label} (${v.name})</label>
+                    <input type="number" id="input-${v.name}" placeholder="0">
+                `;
+                labContent.appendChild(group);
+            });
+
+            // Reset Result
+            document.getElementById('lab-result').innerText = 'Enter values to calculate Work.';
+            
+            // Show Modal
+            document.getElementById('lab-modal').classList.add('active');
+        }
+
+        function closeLab() {
+            document.getElementById('lab-modal').classList.remove('active');
+        }
+
+        function calculateWork() {
+            // Extract values
+            const F = parseFloat(document.getElementById('input-F').value) || 0;
+            const s = parseFloat(document.getElementById('input-s').value) || 0;
+            const theta = parseFloat(document.getElementById('input-θ').value) || 0;
+
+            // Physics Calculation
+            // Convert degrees to radians for JS Math.cos
+            const radians = theta * (Math.PI / 180);
+            const work = F * s * Math.cos(radians);
+
+            // Format Output
+            const resultEl = document.getElementById('lab-result');
+            
+            // Simple check for significant figures logic
+            const formattedWork = Math.abs(work) < 0.001 && work !== 0 ? work.toExponential(2) : work.toFixed(2);
+            
+            resultEl.innerHTML = `
+                Work Done (W) = <span style="font-size: 1.2em; margin-left: 8px;">${formattedWork} J</span>
+            `;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', renderSections);
+
+    </script>
+</body>
+</html>
+```

@@ -1,0 +1,92 @@
+```html
+<div class="section-card">
+  <div class="section-title">
+    Definition
+  </div>
+  <div class="section-content">
+    <p>Pressure is defined as the force applied perpendicular to the surface of an object per unit area over which that force is distributed.</p>
+  </div>
+</div>
+
+<div class="formula-card">
+  <div class="formula-card-title">
+    Pressure Formula
+  </div>
+  <div class="formula-card-formula">
+    $$P = \frac{F}{A}$$
+  </div>
+  <div class="formula-card-buttons">
+    <button class="formula-card-button">Explain Formula</button>
+    <button class="formula-card-button">Open Formula Lab</button>
+  </div>
+</div>
+
+<div class="section-card">
+  <div class="section-title">
+    SI Unit
+  </div>
+  <div class="section-content">
+    <p>The SI unit of pressure is the Pascal (Pa), which is equivalent to one Newton per square meter (N/m²).</p>
+  </div>
+</div>
+```
+
+```css
+/* Basic styling for the UI cards */
+.section-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.section-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.section-content {
+  line-height: 1.6;
+}
+
+/* Formula Card Styling */
+.formula-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fafafa;
+}
+
+.formula-card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.formula-card-formula {
+  font-size: 1.4em;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.formula-card-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.formula-card-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+```

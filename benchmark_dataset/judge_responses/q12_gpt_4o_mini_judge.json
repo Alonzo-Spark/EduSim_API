@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 12,
+  "question": "Define inertia and explain its types.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nInertia is the inherent property of an object by virtue of which it resists any change to its state of rest or uniform motion along a straight line. Inertia is an intrinsic quality of matter directly proportional to its mass.\n\n---\n\n## Types of Inertia\n\n* **Inertia of Rest:** The inability of an object to change its state of rest by itself.\n* **Inertia of Motion:** The inability of an object to modify its steady uniform linear velocity by itself.\n* **Inertia of Direction:** The inability of a moving mass to change its directional travel alignment without an external intervention force.\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Ensures mechanical stability in structures without continuous power inputs. | Requires substantial energy expenditures to overcome when launching transit systems. |\n\n---\n\n## Real-world Examples\n\n* **Rest Example:** Shaking a tree branch vigorously causes ripe fruits to break free and drop because they resist moving along with the branches.\n* **Motion Example:** An athlete runs a short distance past the finish line because their body's inertia resists an instantaneous stop.\n* **Direction Example:** A car turning sharply left causes passengers to slide toward the right door as their bodies attempt to continue tracking in a straight line.\n\n---\n\n## Summary\n\nInertia is matter's fundamental resistance to acceleration, manifesting as separate tracking constraints across rest states, velocity continuities, and orientation axes.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Inertia is the property   │  \n│ of an object to resist any│  \n│ change in its state of    │  \n│ motion.                  │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Types of Inertia          │  \n│                           │  \n│ 1. **Inertia of Rest**   │  \n│    - This refers to the   │  \n│      tendency of an object│  \n│      to remain at rest    │  \n│      unless acted upon by │  \n│      an external force.   │  \n│                           │  \n│ 2. **Inertia of Motion**  │  \n│    - This is the tendency  │  \n│      of an object in motion│  \n│      to continue moving at │  \n│      a constant velocity   │  \n│      in a straight line    │  \n│      unless acted upon by  │  \n│      an external force.   │  \n│                           │  \n│ 3. **Inertia of Direction**│  \n│    - This refers to the    │  \n│      tendency of an object │  \n│      to maintain its      │  \n│      direction of motion.  │  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines inertia and explains its types, aligning with the gold reference answer. However, it lacks additional details such as the relationship between inertia and mass, advantages and disadvantages, and real-world examples, which are present in the gold reference answer. The layout and formatting are well-structured and readable. To improve, the candidate could provide more comprehensive information and examples to enhance the educational value of the response. Additionally, the response could benefit from a summary or conclusion to reinforce the key concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 361,
+    "completionTokens": 278,
+    "totalTokens": 639
+  },
+  "candidate_latency_ms": 4028,
+  "candidate_cost_usd": 0.00022095,
+  "judge_token_usage": {
+    "promptTokens": 994,
+    "completionTokens": 158,
+    "totalTokens": 1152
+  },
+  "judge_latency_ms": 3065,
+  "judge_cost_usd": 0.0009756,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:18:18.981Z"
+}

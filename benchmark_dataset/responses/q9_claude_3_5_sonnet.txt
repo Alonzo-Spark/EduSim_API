@@ -1,0 +1,755 @@
+I'll render this as structured UI blocks. Let me design the full interactive textbook layout.
+
+```tsx
+import { useState } from "react";
+import katex from "katex";
+
+const renderMath = (tex: string, display = false): string => {
+  try {
+    return katex.renderToString(tex, { displayMode: display, throwOnError: false });
+  } catch {
+    return tex;
+  }
+};
+
+const InlineMath = ({ tex }: { tex: string }) => (
+  <span dangerouslySetInnerHTML={{ __html: renderMath(tex, false) }} />
+);
+
+const DisplayMath = ({ tex }: { tex: string }) => (
+  <div dangerouslySetInnerHTML={{ __html: renderMath(tex, true) }} />
+);
+
+// ── Colour tokens ──────────────────────────────────────────────
+const colours = {
+  bg: "#0f1117",
+  surface: "#1a1d27",
+  surfaceHover: "#1f2235",
+  border: "#2a2d3e",
+  accent: "#6c8fff",
+  accentSoft: "#6c8fff18",
+  accentGlow: "#6c8fff30",
+  green: "#4ade80",
+  greenSoft: "#4ade8018",
+  amber: "#fbbf24",
+  amberSoft: "#fbbf2418",
+  red: "#f87171",
+  redSoft: "#f8717118",
+  purple: "#a78bfa",
+  purpleSoft: "#a78bfa18",
+  cyan: "#22d3ee",
+  cyanSoft: "#22d3ee18",
+  text: "#e2e8f0",
+  textMuted: "#94a3b8",
+  textDim: "#64748b",
+};
+
+// ── Shared card shell ──────────────────────────────────────────
+const Card = ({
+  children,
+  style = {},
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}) => (
+  <div
+    style={{
+      background: colours.surface,
+      border: `1px solid ${colours.border}`,
+      borderRadius: 16,
+      padding: "24px 28px",
+      marginBottom: 20,
+      ...style,
+    }}
+  >
+    {children}
+  </div>
+);
+
+const SectionLabel = ({
+  text,
+  color = colours.accent,
+}: {
+  text: string;
+  color?: string;
+}) => (
+  <div
+    style={{
+      fontSize: 11,
+      fontWeight: 700,
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      color,
+      marginBottom: 10,
+    }}
+  >
+    {text}
+  </div>
+);
+
+// ── Formula Lab modal ──────────────────────────────────────────
+interface FormulaData {
+  title: string;
+  tex: string;
+  variables: { sym: string; name: string; unit: string; default: number; min: number; max: number; step: number }[];
+  derive: (vals: Record<string, number>) => { label: string; value: string };
+}
+
+const FormulaLab = ({
+  data,
+  onClose,
+}: {
+  data: FormulaData;
+  onClose: () => void;
+}) => {
+  const init: Record<string, number> = {};
+  data.variables.forEach((v) => (init[v.sym] = v.default));
+  const [vals, setVals] = useState(init);
+  const result = data.derive(vals);
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        background: "#00000090",
+        backdropFilter: "blur(6px)",
+        zIndex: 1000,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 20,
+      }}
+      onClick={onClose}
+    >
+      <div
+        style={{
+          background: colours.surface,
+          border: `1px solid ${colours.accent}50`,
+          borderRadius: 20,
+          padding: 32,
+          width: "100%",
+          maxWidth: 520,
+          boxShadow: `0 0 60px ${colours.accentGlow}`,
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+          <div>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: colours.accent, marginBottom: 4 }}>
+              Formula Lab
+            </div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: colours.text }}>{data.title}</div>
+          </div>
+          <button
+            onClick={onClose}
+            style={{ background: colours.border, border: "none", borderRadius: 8, color: colours.textMuted, cursor: "pointer", padding: "6px 12px", fontSize: 13 }}
+          >
+            ✕ Close
+          </button>
+        </div>
+
+        {/* Formula display */}
+        <div
+          style={{
+            background: colours.accentSoft,
+            border: `1px solid ${colours.accent}30`,
+            borderRadius: 12,
+            padding: "18px 24px",
+            textAlign: "center",
+            marginBottom: 24,
+          }}
+        >
+          <DisplayMath tex={data.tex} />
+        </div>
+
+        {/* Sliders */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 24 }}>
+          {data.variables.map((v) => (
+            <div key={v.sym}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+                <span style={{ color: colours.textMuted, fontSize: 13 }}>
+                  <InlineMath tex={v.sym} /> — {v.name}
+                </span>
+                <span style={{ color: colours.accent, fontWeight: 700, fontSize: 13 }}>
+                  {vals[v.sym]} {v.unit}
+                </span>
+              </div>
+              <input
+                type="range"
+                min={v.min}
+                max={v.max}
+                step={v.step}
+                value={vals[v.sym]}
+                onChange={(e) => setVals({ ...vals, [v.sym]: parseFloat(e.target.value) })}
+                style={{ width: "100%", accentColor: colours.accent }}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Result */}
+        <div
+          style={{
+            background: colours.greenSoft,
+            border: `1px solid ${colours.green}40`,
+            borderRadius: 12,
+            padding: "16px 20px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <span style={{ color: colours.textMuted, fontSize: 14 }}>{result.label}</span>
+          <span style={{ color: colours.green, fontWeight: 800, fontSize: 20 }}>{result.value}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ── Explain panel ──────────────────────────────────────────────
+const ExplainPanel = ({ lines }: { lines: { sym: string; meaning: string; unit: string }[] }) => (
+  <div
+    style={{
+      background: colours.bg,
+      border: `1px solid ${colours.border}`,
+      borderRadius: 10,
+      padding: "14px 18px",
+      marginTop: 14,
+    }}
+  >
+    <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: colours.textDim, marginBottom: 10 }}>
+      Variable Breakdown
+    </div>
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      {lines.map((l) => (
+        <div key={l.sym} style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
+          <span
+            style={{
+              background: colours.accentSoft,
+              border: `1px solid ${colours.accent}30`,
+              borderRadius: 6,
+              padding: "2px 8px",
+              minWidth: 36,
+              textAlign: "center",
+            }}
+          >
+            <InlineMath tex={l.sym} />
+          </span>
+          <span style={{ color: colours.text, fontSize: 13, flex: 1 }}>{l.meaning}</span>
+          <span style={{ color: colours.textDim, fontSize: 12, fontFamily: "monospace" }}>{l.unit}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+// ── FormulaCard ────────────────────────────────────────────────
+const FormulaCard = ({
+  title,
+  tex,
+  explain,
+  labData,
+  accentColor = colours.accent,
+}: {
+  title: string;
+  tex: string;
+  explain: { sym: string; meaning: string; unit: string }[];
+  labData: FormulaData;
+  accentColor?: string;
+}) => {
+  const [showExplain, setShowExplain] = useState(false);
+  const [showLab, setShowLab] = useState(false);
+
+  return (
+    <>
+      {showLab && <FormulaLab data={labData} onClose={() => setShowLab(false)} />}
+      <Card style={{ borderColor: `${accentColor}40`, background: `linear-gradient(135deg, ${colours.surface} 80%, ${accentColor}08)` }}>
+        <SectionLabel text={title} color={accentColor} />
+
+        {/* Formula display */}
+        <div
+          style={{
+            background: colours.bg,
+            border: `1px solid ${accentColor}25`,
+            borderRadius: 12,
+            padding: "20px 16px",
+            textAlign: "center",
+            marginBottom: 16,
+            fontSize: 18,
+          }}
+        >
+          <DisplayMath tex={tex} />
+        </div>
+
+        {/* Buttons */}
+        <div style={{ display: "flex", gap: 10 }}>
+          <button
+            onClick={() => setShowExplain(!showExplain)}
+            style={{
+              flex: 1,
+              padding: "9px 0",
+              borderRadius: 8,
+              border: `1px solid ${accentColor}40`,
+              background: showExplain ? `${accentColor}20` : "transparent",
+              color: accentColor,
+              fontWeight: 600,
+              fontSize: 13,
+              cursor: "pointer",
+              transition: "all 0.2s",
+            }}
+          >
+            {showExplain ? "▲ Hide Breakdown" : "▼ Explain Formula"}
+          </button>
+          <button
+            onClick={() => setShowLab(true)}
+            style={{
+              flex: 1,
+              padding: "9px 0",
+              borderRadius: 8,
+              border: "none",
+              background: accentColor,
+              color: "#0f1117",
+              fontWeight: 700,
+              fontSize: 13,
+              cursor: "pointer",
+              boxShadow: `0 0 16px ${accentColor}40`,
+            }}
+          >
+            ⚗ Open Formula Lab
+          </button>
+        </div>
+
+        {showExplain && <ExplainPanel lines={explain} />}
+      </Card>
+    </>
+  );
+};
+
+// ── Concept chip ───────────────────────────────────────────────
+const Chip = ({ label, color }: { label: string; color: string }) => (
+  <span
+    style={{
+      background: `${color}18`,
+      border: `1px solid ${color}40`,
+      color,
+      borderRadius: 20,
+      padding: "4px 12px",
+      fontSize: 12,
+      fontWeight: 600,
+    }}
+  >
+    {label}
+  </span>
+);
+
+// ── Comparison table ───────────────────────────────────────────
+const CompareTable = () => {
+  const rows = [
+    { prop: "Speed", linear: "Changes freely", circular: "Constant" },
+    { prop: "Velocity", linear: "Constant direction", circular: "Direction always changing" },
+    { prop: "Acceleration", linear: "Zero (if uniform)", circular: "Centripetal — toward centre" },
+    { prop: "Net Force", linear: "Zero", circular: "Centripetal force required" },
+    { prop: "Path", linear: "Straight line", circular: "Circle" },
+    { prop: "Period", linear: "—", circular: "T = 2πr / v" },
+  ];
+
+  return (
+    <Card>
+      <SectionLabel text="Comparison — Linear vs Circular Motion" color={colours.purple} />
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+          <thead>
+            <tr>
+              {["Property", "Uniform Linear Motion", "Uniform Circular Motion"].map((h) => (
+                <th
+                  key={h}
+                  style={{
+                    padding: "10px 14px",
+                    textAlign: "left",
+                    background: colours.bg,
+                    color: colours.textMuted,
+                    fontWeight: 700,
+                    fontSize: 12,
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    borderBottom: `1px solid ${colours.border}`,
+                  }}
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, i) => (
+              <tr
+                key={r.prop}
+                style={{ background: i % 2 === 0 ? "transparent" : colours.bg }}
+              >
+                <td style={{ padding: "11px 14px", color: colours.accent, fontWeight: 600, borderBottom: `1px solid ${colours.border}` }}>
+                  {r.prop}
+                </td>
+                <td style={{ padding: "11px 14px", color: colours.textMuted, borderBottom: `1px solid ${colours.border}` }}>
+                  {r.linear}
+                </td>
+                <td style={{ padding: "11px 14px", color: colours.text, borderBottom: `1px solid ${colours.border}` }}>
+                  {r.circular}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Card>
+  );
+};
+
+// ── Applications grid ──────────────────────────────────────────
+const apps = [
+  { icon: "🛰️", title: "Orbital Satellites", desc: "Gravity provides centripetal force keeping satellites in circular orbit." },
+  { icon: "🎡", title: "Ferris Wheels", desc: "Normal force and gravity combine to provide centripetal acceleration." },
+  { icon: "🏎️", title: "Car on a Curve", desc: "Friction acts as centripetal force preventing the car from sliding out." },
+  { icon: "🧪", title: "Centrifuge", desc: "Rapid rotation creates large centripetal acceleration to separate substances." },
+  { icon: "🌍", title: "Earth's Rotation", desc: "Objects on Earth's surface undergo circular motion around Earth's axis." },
+  { icon: "⚛️", title: "Particle Accelerators", desc: "Magnetic fields supply centripetal force curving charged particle paths." },
+];
+
+const ApplicationsGrid = () => (
+  <Card>
+    <SectionLabel text="Real-World Applications" color={colours.cyan} />
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 12 }}>
+      {apps.map((a) => (
+        <div
+          key={a.title}
+          style={{
+            background: colours.bg,
+            border: `1px solid ${colours.border}`,
+            borderRadius: 12,
+            padding: "14px 16px",
+          }}
+        >
+          <div style={{ fontSize: 24, marginBottom: 8 }}>{a.icon}</div>
+          <div style={{ color: colours.text, fontWeight: 700, fontSize: 14, marginBottom: 4 }}>{a.title}</div>
+          <div style={{ color: colours.textMuted, fontSize: 12, lineHeight: 1.5 }}>{a.desc}</div>
+        </div>
+      ))}
+    </div>
+  </Card>
+);
+
+// ── Key insight callout ────────────────────────────────────────
+const Callout = ({
+  icon,
+  title,
+  children,
+  color = colours.amber,
+}: {
+  icon: string;
+  title: string;
+  children: React.ReactNode;
+  color?: string;
+}) => (
+  <div
+    style={{
+      background: `${color}10`,
+      border: `1px solid ${color}40`,
+      borderLeft: `4px solid ${color}`,
+      borderRadius: 12,
+      padding: "16px 20px",
+      marginBottom: 20,
+      display: "flex",
+      gap: 14,
+      alignItems: "flex-start",
+    }}
+  >
+    <span style={{ fontSize: 22, lineHeight: 1 }}>{icon}</span>
+    <div>
+      <div style={{ color, fontWeight: 700, fontSize: 14, marginBottom: 4 }}>{title}</div>
+      <div style={{ color: colours.textMuted, fontSize: 13, lineHeight: 1.7 }}>{children}</div>
+    </div>
+  </div>
+);
+
+// ── Suggested questions ────────────────────────────────────────
+const questions = [
+  "A 2 kg ball moves in a circle of radius 3 m at 6 m/s. Find the centripetal force.",
+  "Why does a satellite not fall to Earth despite gravity pulling it?",
+  "What happens to centripetal acceleration if speed doubles but radius stays the same?",
+  "Derive the relationship between period T and centripetal acceleration.",
+  "A car rounds a 50 m curve at 20 m/s. What minimum friction coefficient is needed?",
+];
+
+const SuggestedQuestions = ({ onAsk }: { onAsk: (q: string) => void }) => (
+  <Card style={{ borderColor: `${colours.purple}40` }}>
+    <SectionLabel text="Suggested Practice Questions" color={colours.purple} />
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      {questions.map((q, i) => (
+        <button
+          key={i}
+          onClick={() => onAsk(q)}
+          style={{
+            background: "transparent",
+            border: `1px solid ${colours.border}`,
+            borderRadius: 10,
+            padding: "12px 16px",
+            color: colours.text,
+            fontSize: 13,
+            textAlign: "left",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            transition: "all 0.2s",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.borderColor = colours.purple + "80";
+            (e.currentTarget as HTMLButtonElement).style.background = colours.purpleSoft;
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.borderColor = colours.border;
+            (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+          }}
+        >
+          <span
+            style={{
+              background: colours.purpleSoft,
+              border: `1px solid ${colours.purple}40`,
+              color: colours.purple,
+              borderRadius: 6,
+              padding: "2px 8px",
+              fontSize: 11,
+              fontWeight: 700,
+              minWidth: 24,
+              textAlign: "center",
+            }}
+          >
+            {i + 1}
+          </span>
+          {q}
+        </button>
+      ))}
+    </div>
+  </Card>
+);
+
+// ══════════════════════════════════════════════════════════════
+// MAIN PAGE
+// ══════════════════════════════════════════════════════════════
+export default function UCMPage() {
+  const [asked, setAsked] = useState<string | null>(null);
+
+  return (
+    <div
+      style={{
+        background: colours.bg,
+        minHeight: "100vh",
+        padding: "32px 20px",
+        fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
+        color: colours.text,
+        maxWidth: 780,
+        margin: "0 auto",
+      }}
+    >
+      {/* ── PAGE HEADER ── */}
+      <div style={{ marginBottom: 32 }}>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 14 }}>
+          <Chip label="Classical Mechanics" color={colours.accent} />
+          <Chip label="Kinematics" color={colours.cyan} />
+          <Chip label="Grade 11–12 Physics" color={colours.purple} />
+        </div>
+        <h1 style={{ fontSize: 32, fontWeight: 800, margin: 0, lineHeight: 1.2, letterSpacing: "-0.02em" }}>
+          Uniform Circular Motion
+        </h1>
+        <p style={{ color: colours.textMuted, marginTop: 10, fontSize: 15, lineHeight: 1.7, maxWidth: 620 }}>
+          An object moving at constant speed along a circular path — where direction changes
+          continuously, producing a persistent inward acceleration.
+        </p>
+      </div>
+
+      {/* ── QUICK DEFINITION ── */}
+      <Card style={{ borderColor: `${colours.accent}40`, background: `linear-gradient(135deg, ${colours.surface}, ${colours.accent}08)` }}>
+        <SectionLabel text="Quick Definition" color={colours.accent} />
+        <p style={{ margin: 0, fontSize: 15, lineHeight: 1.8, color: colours.text }}>
+          <strong style={{ color: colours.accent }}>Uniform Circular Motion (UCM)</strong> is motion
+          along a circular path where the <em>speed remains constant</em> but the{" "}
+          <em>velocity vector continuously changes direction</em>. Because velocity changes, there
+          must be a non-zero acceleration — always directed toward the centre of the circle.
+        </p>
+      </Card>
+
+      {/* ── KEY INSIGHT CALLOUTS ── */}
+      <Callout icon="⚡" title="Speed ≠ Velocity" color={colours.amber}>
+        In UCM, speed (magnitude) is constant. But velocity is a vector — its direction rotates
+        every instant. A changing velocity means acceleration exists even at constant speed.
+      </Callout>
+
+      <Callout icon="🎯" title="The Centripetal Direction" color={colours.cyan}>
+        Centripetal means <em>"centre-seeking"</em>. The acceleration always points from the
+        object <strong>toward the centre</strong> of the circular path — perpendicular to the
+        velocity at every point.
+      </Callout>
+
+      {/* ── FORMULA 1: Centripetal Acceleration ── */}
+      <FormulaCard
+        title="Formula — Centripetal Acceleration"
+        tex={String.raw`a_c = \frac{v^2}{r}`}
+        accentColor={colours.accent}
+        explain={[
+          { sym: "a_c", meaning: "Centripetal acceleration — directed toward the centre", unit: "m/s²" },
+          { sym: "v", meaning: "Speed of the object along the circular path", unit: "m/s" },
+          { sym: "r", meaning: "Radius of the circular path", unit: "m" },
+        ]}
+        labData={{
+          title: "Centripetal Acceleration",
+          tex: String.raw`a_c = \frac{v^2}{r}`,
+          variables: [
+            { sym: "v", name: "Speed", unit: "m/s", default: 10, min: 1, max: 50, step: 0.5 },
+            { sym: "r", name: "Radius", unit: "m", default: 5, min: 0.5, max: 100, step: 0.5 },
+          ],
+          derive: (vals) => ({
+            label: "Centripetal Acceleration aₒ",
+            value: `${(vals.v ** 2 / vals.r).toFixed(3)} m/s²`,
+          }),
+        }}
+      />
+
+      {/* ── FORMULA 2: Centripetal Force ── */}
+      <FormulaCard
+        title="Formula — Centripetal Force"
+        tex={String.raw`F_c = \frac{mv^2}{r}`}
+        accentColor={colours.green}
+        explain={[
+          { sym: "F_c", meaning: "Net centripetal force — directed toward the centre", unit: "N" },
+          { sym: "m", meaning: "Mass of the object", unit: "kg" },
+          { sym: "v", meaning: "Speed of the object", unit: "m/s" },
+          { sym: "r", meaning: "Radius of the circular path", unit: "m" },
+        ]}
+        labData={{
+          title: "Centripetal Force",
+          tex: String.raw`F_c = \frac{mv^2}{r}`,
+          variables: [
+            { sym: "m", name: "Mass", unit: "kg", default: 2, min: 0.1, max: 100, step: 0.1 },
+            { sym: "v", name: "Speed", unit: "m/s", default: 10, min: 1, max: 50, step: 0.5 },
+            { sym: "r", name: "Radius", unit: "m", default: 5, min: 0.5, max: 100, step: 0.5 },
+          ],
+          derive: (vals) => ({
+            label: "Centripetal Force Fₒ",
+            value: `${((vals.m * vals.v ** 2) / vals.r).toFixed(3)} N`,
+          }),
+        }}
+      />
+
+      {/* ── FORMULA 3: Period ── */}
+      <FormulaCard
+        title="Formula — Period of Revolution"
+        tex={String.raw`T = \frac{2\pi r}{v}`}
+        accentColor={colours.cyan}
+        explain={[
+          { sym: "T", meaning: "Period — time for one complete revolution", unit: "s" },
+          { sym: "r", meaning: "Radius of the circular path", unit: "m" },
+          { sym: "v", meaning: "Speed of the object", unit: "m/s" },
+          { sym: "2\\pi r", meaning: "Circumference of the circle (full path length)", unit: "m" },
+        ]}
+        labData={{
+          title: "Period of Revolution",
+          tex: String.raw`T = \frac{2\pi r}{v}`,
+          variables: [
+            { sym: "r", name: "Radius", unit: "m", default: 5, min: 0.5, max: 200, step: 0.5 },
+            { sym: "v", name: "Speed", unit: "m/s", default: 10, min: 0.5, max: 100, step: 0.5 },
+          ],
+          derive: (vals) => ({
+            label: "Period T",
+            value: `${((2 * Math.PI * vals.r) / vals.v).toFixed(4)} s`,
+          }),
+        }}
+      />
+
+      {/* ── COMPARISON TABLE ── */}
+      <CompareTable />
+
+      {/* ── IMPORTANT NOTE ── */}
+      <Callout icon="🚫" title="Common Misconception — Centrifugal Force" color={colours.red}>
+        There is <strong>no outward centrifugal force</strong> in an inertial frame. What you feel
+        being "pushed outward" in a turning car is simply your inertia resisting the inward
+        centripetal force. Centrifugal force is a <em>fictitious force</em> that appears only in
+        rotating (non-inertial) reference frames.
+      </Callout>
+
+      {/* ── APPLICATIONS ── */}
+      <ApplicationsGrid />
+
+      {/* ── SUMMARY ── */}
+      <Card style={{ borderColor: `${colours.amber}40` }}>
+        <SectionLabel text="Summary" color={colours.amber} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {[
+            ["Speed", "Constant — magnitude of velocity never changes"],
+            ["Velocity", "Continuously changing direction — tangent to the circle"],
+            ["Acceleration", "Centripetal — always directed toward the centre"],
+            ["Force", "A real net force must act inward to maintain circular motion"],
+            ["Energy", "Kinetic energy is constant (speed is constant)"],
+          ].map(([term, desc]) => (
+            <div
+              key={term}
+              style={{
+                display: "flex",
+                gap: 12,
+                alignItems: "flex-start",
+                padding: "10px 14px",
+                background: colours.bg,
+                borderRadius: 10,
+                border: `1px solid ${colours.border}`,
+              }}
+            >
+              <span style={{ color: colours.amber, fontWeight: 700, minWidth: 90, fontSize: 13 }}>{term}</span>
+              <span style={{ color: colours.textMuted, fontSize: 13, lineHeight: 1.6 }}>{desc}</span>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      {/* ── SUGGESTED QUESTIONS ── */}
+      <SuggestedQuestions onAsk={(q) => setAsked(q)} />
+
+      {/* Asked question toast */}
+      {asked && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: 24,
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: colours.surface,
+            border: `1px solid ${colours.purple}60`,
+            borderRadius: 12,
+            padding: "14px 20px",
+            maxWidth: 500,
+            width: "90%",
+            boxShadow: `0 8px 40px ${colours.purple}30`,
+            display: "flex",
+            gap: 12,
+            alignItems: "center",
+          }}
+        >
+          <span style={{ fontSize: 18 }}>💬</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ color: colours.purple, fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 2 }}>
+              Question Selected
+            </div>
+            <div style={{ color: colours.text, fontSize: 13 }}>{asked}</div>
+          </div>
+          <button
+            onClick={() => setAsked(null)}
+            style={{ background: "none", border: "none", color: colours.textDim, cursor: "pointer", fontSize: 16 }}
+          >
+            ✕
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+```

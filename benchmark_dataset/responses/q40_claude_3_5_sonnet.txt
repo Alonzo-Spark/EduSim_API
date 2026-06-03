@@ -1,0 +1,513 @@
+<thinking>
+The user wants me to differentiate between transverse and longitudinal waves. I need to render this as structured UI blocks - cards, formula cards, tables in cards, etc. - not as a sequential markdown document.
+
+Let me think about the content and structure:
+
+1. Introduction/Overview card
+2. Quick Definitions (two cards side by side)
+3. Key Characteristics comparison
+4. Formula cards for wave speed, wavelength, frequency
+5. Visual representation
+6. Examples card
+7. Table comparison card
+8. Summary card
+
+Let me structure this properly with React components using Tailwind CSS.
+
+I'll create a comprehensive, interactive textbook-style response with:
+- Definition cards for both wave types
+- Visual ASCII/Unicode representations
+- Formula cards
+- Comparison table in a card
+- Examples card
+- Key differences card
+
+Let me write the JSX component.
+</thinking>
+
+```jsx
+import { useState } from "react";
+import katex from "katex";
+
+const KTeX = ({ math, display = false }) => {
+  const html = katex.renderToString(math, {
+    throwOnError: false,
+    displayMode: display,
+  });
+  return (
+    <span
+      dangerouslySetInnerHTML={{ __html: html }}
+      className={display ? "block my-2" : "inline"}
+    />
+  );
+};
+
+const FormulaCard = ({ title, formula, variables, context }) => {
+  const [showExplain, setShowExplain] = useState(false);
+  const [showLab, setShowLab] = useState(false);
+  const [labValues, setLabValues] = useState({});
+  const [labResult, setLabResult] = useState(null);
+
+  const computeLab = () => {
+    if (title === "Wave Speed") {
+      const f = parseFloat(labValues.f);
+      const λ = parseFloat(labValues.λ);
+      if (!isNaN(f) && !isNaN(λ)) setLabResult((f * λ).toFixed(3));
+    } else if (title === "Wave Period") {
+      const f = parseFloat(labValues.f);
+      if (!isNaN(f) && f !== 0) setLabResult((1 / f).toFixed(4));
+    }
+  };
+
+  return (
+    <div className="rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-white shadow-md overflow-hidden">
+      <div className="bg-indigo-600 px-5 py-2 flex items-center gap-2">
+        <span className="text-white font-semibold text-sm tracking-wide">⚗️ {title}</span>
+      </div>
+      <div className="px-6 py-5">
+        <div className="bg-white rounded-xl border border-indigo-100 px-4 py-4 text-center shadow-inner mb-4">
+          <KTeX math={formula} display={true} />
+        </div>
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => { setShowExplain(!showExplain); setShowLab(false); }}
+            className="px-4 py-1.5 rounded-full bg-indigo-100 hover:bg-indigo-200 text-indigo-700 text-xs font-semibold transition"
+          >
+            {showExplain ? "▲ Hide Explanation" : "▼ Explain Formula"}
+          </button>
+          {(title === "Wave Speed" || title === "Wave Period") && (
+            <button
+              onClick={() => { setShowLab(!showLab); setShowExplain(false); setLabResult(null); }}
+              className="px-4 py-1.5 rounded-full bg-emerald-100 hover:bg-emerald-200 text-emerald-700 text-xs font-semibold transition"
+            >
+              🧪 Open Formula Lab
+            </button>
+          )}
+        </div>
+
+        {showExplain && (
+          <div className="mt-4 bg-indigo-50 rounded-xl p-4 border border-indigo-100 text-sm text-slate-700 space-y-1">
+            <p className="font-semibold text-indigo-700 mb-2">Variable Guide</p>
+            {variables.map((v, i) => (
+              <div key={i} className="flex gap-2">
+                <span className="font-mono text-indigo-600 w-8 shrink-0"><KTeX math={v.sym} /></span>
+                <span className="text-slate-500">—</span>
+                <span>{v.desc}</span>
+              </div>
+            ))}
+            {context && <p className="mt-3 text-slate-600 italic border-t border-indigo-100 pt-2">{context}</p>}
+          </div>
+        )}
+
+        {showLab && (
+          <div className="mt-4 bg-emerald-50 rounded-xl p-4 border border-emerald-100 text-sm space-y-3">
+            <p className="font-semibold text-emerald-700">🧪 Formula Lab — Try it yourself</p>
+            {title === "Wave Speed" && (
+              <>
+                <div className="flex gap-3 flex-wrap">
+                  <label className="flex flex-col gap-1">
+                    <span className="text-xs text-slate-500">Frequency <KTeX math="f" /> (Hz)</span>
+                    <input type="number" placeholder="e.g. 440" className="border rounded-lg px-3 py-1.5 w-36 text-sm focus:outline-indigo-400"
+                      onChange={e => setLabValues(p => ({ ...p, f: e.target.value }))} />
+                  </label>
+                  <label className="flex flex-col gap-1">
+                    <span className="text-xs text-slate-500">Wavelength <KTeX math="\lambda" /> (m)</span>
+                    <input type="number" placeholder="e.g. 0.78" className="border rounded-lg px-3 py-1.5 w-36 text-sm focus:outline-indigo-400"
+                      onChange={e => setLabValues(p => ({ ...p, λ: e.target.value }))} />
+                  </label>
+                </div>
+                <button onClick={computeLab} className="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-full transition">
+                  Calculate Wave Speed
+                </button>
+              </>
+            )}
+            {title === "Wave Period" && (
+              <>
+                <label className="flex flex-col gap-1 w-fit">
+                  <span className="text-xs text-slate-500">Frequency <KTeX math="f" /> (Hz)</span>
+                  <input type="number" placeholder="e.g. 50" className="border rounded-lg px-3 py-1.5 w-36 text-sm focus:outline-indigo-400"
+                    onChange={e => setLabValues(p => ({ ...p, f: e.target.value }))} />
+                </label>
+                <button onClick={computeLab} className="px-4 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-full transition">
+                  Calculate Period
+                </button>
+              </>
+            )}
+            {labResult !== null && (
+              <div className="bg-white rounded-lg border border-emerald-200 px-4 py-2 text-emerald-800 font-semibold">
+                Result: <span className="text-2xl">{labResult}</span>
+                <span className="text-sm ml-1">{title === "Wave Speed" ? "m/s" : "s"}</span>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const Badge = ({ children, color = "indigo" }) => {
+  const colors = {
+    indigo: "bg-indigo-100 text-indigo-700",
+    amber: "bg-amber-100 text-amber-700",
+    emerald: "bg-emerald-100 text-emerald-700",
+    rose: "bg-rose-100 text-rose-700",
+    sky: "bg-sky-100 text-sky-700",
+  };
+  return (
+    <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold ${colors[color]}`}>
+      {children}
+    </span>
+  );
+};
+
+const SectionCard = ({ icon, title, accent = "indigo", children }) => {
+  const accents = {
+    indigo: "border-indigo-200 bg-indigo-50/40",
+    amber: "border-amber-200 bg-amber-50/40",
+    emerald: "border-emerald-200 bg-emerald-50/40",
+    rose: "border-rose-200 bg-rose-50/40",
+    sky: "border-sky-200 bg-sky-50/40",
+    slate: "border-slate-200 bg-slate-50/40",
+  };
+  const headerAccents = {
+    indigo: "text-indigo-700",
+    amber: "text-amber-700",
+    emerald: "text-emerald-700",
+    rose: "text-rose-700",
+    sky: "text-sky-700",
+    slate: "text-slate-700",
+  };
+  return (
+    <div className={`rounded-2xl border ${accents[accent]} shadow-sm overflow-hidden`}>
+      <div className="px-5 pt-4 pb-1 flex items-center gap-2">
+        <span className="text-lg">{icon}</span>
+        <h3 className={`font-bold text-base ${headerAccents[accent]}`}>{title}</h3>
+      </div>
+      <div className="px-5 pb-5 pt-2">{children}</div>
+    </div>
+  );
+};
+
+const WaveVisual = ({ type }) => {
+  if (type === "transverse") {
+    return (
+      <div className="bg-white rounded-xl border border-indigo-100 p-4 font-mono text-xs text-indigo-700 leading-tight overflow-x-auto">
+        <div className="text-slate-400 text-[10px] mb-1 tracking-widest">TRANSVERSE WAVE — particles oscillate ⊥ to direction of travel</div>
+        <pre className="text-indigo-500">{`
+  ↑ displacement
+  │
+  │    ╭───╮           ╭───╮
+  │   ╱     ╲         ╱     ╲
+──┼──╱───────╲───────╱───────╲──→ direction of travel
+  │            ╲     ╱
+  │             ╰───╯
+  │
+  ↓
+        `}</pre>
+        <div className="flex gap-4 mt-2 text-[10px] text-slate-500">
+          <span>↕ Crest (peak)</span>
+          <span>↕ Trough (valley)</span>
+          <span>↔ Wavelength λ = crest to crest</span>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="bg-white rounded-xl border border-amber-100 p-4 font-mono text-xs text-amber-700 leading-tight overflow-x-auto">
+      <div className="text-slate-400 text-[10px] mb-1 tracking-widest">LONGITUDINAL WAVE — particles oscillate ∥ to direction of travel</div>
+      <pre className="text-amber-600">{`
+  → direction of travel
+
+  ║ ║ ║   ║   ║ ║ ║   ║   ║ ║ ║
+  ║ ║ ║   ║   ║ ║ ║   ║   ║ ║ ║
+  ║ ║ ║   ║   ║ ║ ║   ║   ║ ║ ║
+  ▓▓▓   ░░░   ▓▓▓   ░░░   ▓▓▓
+ [comp] [rare] [comp] [rare] [comp]
+      `}</pre>
+      <div className="flex gap-4 mt-2 text-[10px] text-slate-500">
+        <span>▓ Compression (high pressure)</span>
+        <span>░ Rarefaction (low pressure)</span>
+      </div>
+    </div>
+  );
+};
+
+export default function WavesPage() {
+  const [activeTab, setActiveTab] = useState("transverse");
+
+  const comparisonData = [
+    { property: "Particle Motion", transverse: "Perpendicular (⊥) to wave travel", longitudinal: "Parallel (∥) to wave travel" },
+    { property: "Regions Formed", transverse: "Crests & Troughs", longitudinal: "Compressions & Rarefactions" },
+    { property: "Medium Required", transverse: "Not always (EM waves don't need one)", longitudinal: "Always requires a medium" },
+    { property: "Travel in Vacuum", transverse: "✅ Yes (electromagnetic waves)", longitudinal: "❌ No" },
+    { property: "Polarization", transverse: "✅ Can be polarized", longitudinal: "❌ Cannot be polarized" },
+    { property: "Speed in Air", transverse: "3 × 10⁸ m/s (light)", longitudinal: "~343 m/s (sound)" },
+    { property: "Examples", transverse: "Light, water waves, seismic S-waves", longitudinal: "Sound, seismic P-waves, ultrasound" },
+    { property: "Visualization", transverse: "Sine curve", longitudinal: "Alternating dense/sparse regions" },
+  ];
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-8 space-y-6 font-sans">
+
+      {/* Hero */}
+      <div className="rounded-2xl bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 p-6 text-white shadow-xl">
+        <div className="text-xs font-semibold tracking-widest opacity-70 mb-1">PHYSICS · WAVES</div>
+        <h1 className="text-2xl font-extrabold mb-2">Transverse vs Longitudinal Waves</h1>
+        <p className="text-sm opacity-90 max-w-xl">
+          All waves transfer energy through oscillations — but the <em>direction</em> of those oscillations
+          defines whether a wave is transverse or longitudinal. This distinction shapes everything from
+          how sound travels to how light behaves.
+        </p>
+        <div className="flex gap-2 mt-4 flex-wrap">
+          <Badge color="indigo">Mechanical Waves</Badge>
+          <Badge color="sky">Electromagnetic Waves</Badge>
+          <Badge color="emerald">Wave Mechanics</Badge>
+        </div>
+      </div>
+
+      {/* Definitions Side by Side */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="rounded-2xl border-2 border-indigo-300 bg-indigo-50 p-5 shadow-sm">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-2xl">〰️</span>
+            <h2 className="text-indigo-800 font-bold text-base">Transverse Wave</h2>
+          </div>
+          <p className="text-slate-700 text-sm leading-relaxed">
+            A wave in which the particles of the medium oscillate
+            <strong className="text-indigo-700"> perpendicular (at right angles)</strong> to the
+            direction of wave propagation.
+          </p>
+          <div className="mt-3 bg-indigo-100 rounded-xl px-4 py-2 text-indigo-700 text-xs font-mono">
+            Particle motion ⊥ Wave travel direction
+          </div>
+        </div>
+
+        <div className="rounded-2xl border-2 border-amber-300 bg-amber-50 p-5 shadow-sm">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-2xl">📢</span>
+            <h2 className="text-amber-800 font-bold text-base">Longitudinal Wave</h2>
+          </div>
+          <p className="text-slate-700 text-sm leading-relaxed">
+            A wave in which the particles of the medium oscillate
+            <strong className="text-amber-700"> parallel (along the same line)</strong> to the
+            direction of wave propagation.
+          </p>
+          <div className="mt-3 bg-amber-100 rounded-xl px-4 py-2 text-amber-700 text-xs font-mono">
+            Particle motion ∥ Wave travel direction
+          </div>
+        </div>
+      </div>
+
+      {/* Visual Diagrams */}
+      <SectionCard icon="🖼️" title="Wave Diagrams" accent="slate">
+        <div className="flex gap-2 mb-4">
+          {["transverse", "longitudinal"].map(t => (
+            <button
+              key={t}
+              onClick={() => setActiveTab(t)}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition ${
+                activeTab === t
+                  ? t === "transverse" ? "bg-indigo-600 text-white" : "bg-amber-500 text-white"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+              }`}
+            >
+              {t.charAt(0).toUpperCase() + t.slice(1)}
+            </button>
+          ))}
+        </div>
+        <WaveVisual type={activeTab} />
+      </SectionCard>
+
+      {/* Formula Cards */}
+      <div>
+        <h2 className="text-slate-600 text-xs font-bold tracking-widest uppercase mb-3 px-1">📐 Core Formulas</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FormulaCard
+            title="Wave Speed"
+            formula="v = f\lambda"
+            variables={[
+              { sym: "v", desc: "Wave speed (m/s)" },
+              { sym: "f", desc: "Frequency — oscillations per second (Hz)" },
+              { sym: "\\lambda", desc: "Wavelength — distance between two crests or compressions (m)" },
+            ]}
+            context="This equation applies to BOTH transverse and longitudinal waves. The speed depends on the medium, not the wave type."
+          />
+          <FormulaCard
+            title="Wave Period"
+            formula="T = \dfrac{1}{f}"
+            variables={[
+              { sym: "T", desc: "Time period — time for one complete oscillation (s)" },
+              { sym: "f", desc: "Frequency (Hz)" },
+            ]}
+            context="Period and frequency are reciprocals. A higher frequency means a shorter period."
+          />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <FormulaCard
+            title="Wave Intensity"
+            formula="I \propto A^2"
+            variables={[
+              { sym: "I", desc: "Intensity — energy per unit area per second (W/m²)" },
+              { sym: "A", desc: "Amplitude — maximum displacement from equilibrium (m)" },
+            ]}
+            context="Intensity is proportional to the square of amplitude. Doubling amplitude quadruples intensity — valid for both wave types."
+          />
+          <FormulaCard
+            title="Snell's Law (Transverse — Light)"
+            formula="n_1 \sin\theta_1 = n_2 \sin\theta_2"
+            variables={[
+              { sym: "n_1, n_2", desc: "Refractive indices of medium 1 and 2" },
+              { sym: "\\theta_1", desc: "Angle of incidence" },
+              { sym: "\\theta_2", desc: "Angle of refraction" },
+            ]}
+            context="Applies specifically to transverse electromagnetic waves (light) when crossing boundaries between media."
+          />
+        </div>
+      </div>
+
+      {/* Comparison Table */}
+      <SectionCard icon="📊" title="Full Comparison Table" accent="sky">
+        <div className="overflow-x-auto rounded-xl border border-sky-100 shadow-sm">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-sky-600 text-white">
+                <th className="text-left px-4 py-3 font-semibold rounded-tl-xl w-1/3">Property</th>
+                <th className="text-left px-4 py-3 font-semibold">
+                  〰️ Transverse Wave
+                </th>
+                <th className="text-left px-4 py-3 font-semibold rounded-tr-xl">
+                  📢 Longitudinal Wave
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonData.map((row, i) => (
+                <tr
+                  key={i}
+                  className={i % 2 === 0 ? "bg-white" : "bg-sky-50/60"}
+                >
+                  <td className="px-4 py-3 font-semibold text-slate-700 border-r border-sky-100">
+                    {row.property}
+                  </td>
+                  <td className="px-4 py-3 text-indigo-800 border-r border-sky-100">
+                    {row.transverse}
+                  </td>
+                  <td className="px-4 py-3 text-amber-800">{row.longitudinal}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </SectionCard>
+
+      {/* Key Characteristics */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <SectionCard icon="〰️" title="Transverse — Key Features" accent="indigo">
+          <ul className="space-y-2 text-sm text-slate-700">
+            {[
+              ["Crests & Troughs", "Highest and lowest points of displacement"],
+              ["Polarization", "Can be polarized — oscillations restricted to one plane"],
+              ["Vacuum Travel", "Electromagnetic transverse waves travel through vacuum"],
+              ["Seismic S-waves", "Secondary seismic waves are transverse; can't pass through liquid core"],
+              ["Examples", "Visible light, radio waves, microwaves, water ripples, guitar strings"],
+            ].map(([title, desc], i) => (
+              <li key={i} className="flex gap-2 items-start">
+                <span className="text-indigo-400 mt-0.5">▸</span>
+                <span><strong className="text-indigo-700">{title}:</strong> {desc}</span>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+
+        <SectionCard icon="📢" title="Longitudinal — Key Features" accent="amber">
+          <ul className="space-y-2 text-sm text-slate-700">
+            {[
+              ["Compressions", "Regions where particles are pushed together (high pressure)"],
+              ["Rarefactions", "Regions where particles spread apart (low pressure)"],
+              ["Medium Required", "Always needs a material medium — cannot travel in vacuum"],
+              ["Seismic P-waves", "Primary seismic waves are longitudinal; pass through solid & liquid"],
+              ["Examples", "Sound waves, ultrasound, sonar, seismic P-waves, spring oscillations"],
+            ].map(([title, desc], i) => (
+              <li key={i} className="flex gap-2 items-start">
+                <span className="text-amber-400 mt-0.5">▸</span>
+                <span><strong className="text-amber-700">{title}:</strong> {desc}</span>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+      </div>
+
+      {/* Important Note */}
+      <div className="rounded-2xl border-l-4 border-rose-400 bg-rose-50 px-5 py-4 flex gap-3 shadow-sm">
+        <span className="text-rose-500 text-xl mt-0.5">⚠️</span>
+        <div>
+          <p className="font-bold text-rose-700 text-sm mb-1">Important Note — Water Waves</p>
+          <p className="text-sm text-slate-700">
+            Water surface waves are <strong>neither purely transverse nor purely longitudinal</strong> —
+            they are <strong>elliptical (orbital)</strong>. Water particles move in circular/elliptical
+            paths, combining both up-down and back-forth motion. They are often <em>approximated</em> as
+            transverse for simplicity.
+          </p>
+        </div>
+      </div>
+
+      {/* Real-World Applications */}
+      <SectionCard icon="🌍" title="Real-World Applications" accent="emerald">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          {[
+            { wave: "Transverse", app: "Fiber Optic Communication", detail: "Light (transverse EM wave) carries data through glass fibers", icon: "💡" },
+            { wave: "Longitudinal", app: "Medical Ultrasound", detail: "Sound waves reflect off tissues to create body images", icon: "🏥" },
+            { wave: "Transverse", app: "Polarized Sunglasses", detail: "Block horizontally polarized glare using polarization property", icon: "🕶️" },
+            { wave: "Longitudinal", app: "Earthquake Detection", detail: "P-waves (longitudinal) arrive first, used to locate epicenters", icon: "🌏" },
+            { wave: "Transverse", app: "Microwave Ovens", detail: "Microwave EM radiation heats food by exciting water molecules", icon: "📡" },
+            { wave: "Longitudinal", app: "SONAR / Echolocation", detail: "Bats and submarines use sound wave reflections to navigate", icon: "🦇" },
+          ].map((item, i) => (
+            <div key={i} className="bg-white rounded-xl border border-emerald-100 p-3 flex gap-3 items-start">
+              <span className="text-2xl">{item.icon}</span>
+              <div>
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="font-bold text-slate-800 text-sm">{item.app}</span>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${item.wave === "Transverse" ? "bg-indigo-100 text-indigo-600" : "bg-amber-100 text-amber-600"}`}>
+                    {item.wave}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500">{item.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* Summary */}
+      <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 text-white p-6 shadow-xl">
+        <h3 className="font-extrabold text-base mb-4 flex items-center gap-2">
+          <span>📋</span> Summary — The One-Line Rule
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-white/10 rounded-xl p-4 border border-white/10">
+            <p className="text-indigo-300 font-bold text-xs tracking-widest mb-2">TRANSVERSE</p>
+            <p className="text-white text-sm">
+              Oscillation is <KTeX math="\perp" /> to propagation.
+              Forms <strong>crests & troughs</strong>. Can travel in vacuum.
+              Can be <strong>polarized</strong>.
+            </p>
+          </div>
+          <div className="bg-white/10 rounded-xl p-4 border border-white/10">
+            <p className="text-amber-300 font-bold text-xs tracking-widest mb-2">LONGITUDINAL</p>
+            <p className="text-white text-sm">
+              Oscillation is <KTeX math="\parallel" /> to propagation.
+              Forms <strong>compressions & rarefactions</strong>. Needs a medium.
+              Cannot be <strong>polarized</strong>.
+            </p>
+          </div>
+        </div>
+        <p className="mt-4 text-slate-400 text-xs text-center">
+          Both obey <KTeX math="v = f\lambda" /> and carry energy without transferring matter.
+        </p>
+      </div>
+
+    </div>
+  );
+}
+```

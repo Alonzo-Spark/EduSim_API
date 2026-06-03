@@ -1,0 +1,92 @@
+### Understanding Electrical Power
+
+#### Quick Definition
+**Electrical power** is the rate at which electrical energy is transferred or consumed in an electric circuit, measured in **watts (W)**. It quantifies how quickly work is done by an electric current.
+
+---
+
+#### Derivation of \( P = VI \)
+1. **Fundamental Concepts**:
+   - **Voltage (\( V \))**: Work done per unit charge to move it between two points (joules/coulomb).
+   - **Current (\( I \))**: Rate of charge flow (coulombs/second).
+   - **Energy (\( E \))**: Work done by voltage to move charge:  
+     \[
+     E = V \cdot Q \quad \text{(where \( Q \) is charge)}
+     \]
+
+2. **Power Formula**:
+   - Power is energy consumed per unit time:  
+     \[
+     P = \frac{dE}{dt}
+     \]
+   - Substitute \( E = V \cdot Q \):  
+     \[
+     P = \frac{d}{dt}(V \cdot Q)
+     \]
+   - If voltage \( V \) is constant:  
+     \[
+     P = V \cdot \frac{dQ}{dt}
+     \]
+   - Since \( \frac{dQ}{dt} = I \) (current):  
+     \[
+     \boxed{P = V \cdot I}
+     \]
+
+---
+
+#### Formula Card: \( P = VI \)
+<div style="border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin: 15px 0; background-color: #f9f9f9; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+  <div style="text-align: center; font-size: 20px; margin-bottom: 10px;">
+    Electrical Power Formula
+  </div>
+  <div style="text-align: center; font-size: 24px; margin: 15px 0;">
+    \( P = VI \)
+  </div>
+  <div style="margin-top: 15px; padding: 10px; background-color: #e3f2fd; border-radius: 5px;">
+    <strong>Variables:</strong>
+    <ul>
+      <li>\( P \): Power (watts, W)</li>
+      <li>\( V \): Voltage (volts, V)</li>
+      <li>\( I \): Current (amperes, A)</li>
+    </ul>
+  </div>
+  <div style="margin-top: 15px;">
+    <button style="background-color: #4CAF50; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">
+      Explain Formula
+    </button>
+    <button style="background-color: #2196F3; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-left: 10px;">
+      Open Formula Lab
+    </button>
+  </div>
+</div>
+
+---
+
+#### Key Relationships
+| Formula | Application | Equivalent Forms |
+|---------|-------------|------------------|
+| \( P = VI \) | Basic power calculation | \( P = I^2 R \) (using Ohm's law \( V = IR \)) |
+| \( P = \frac{V^2}{R} \) | Used when resistance \( R \) is known | \( P = \frac{E}{t} \) |
+
+---
+
+#### Practical Applications
+1. **Light Bulbs**: A 60W bulb draws more current than a 40W bulb at the same voltage.
+2. **Circuit Design**: Engineers use \( P = VI \) to select wire gauges and components that handle power safely.
+3. **Energy Bills**: Utilities charge for energy (kWh), which is power multiplied by time (\( E = P \cdot t \)).
+
+---
+
+#### Summary
+- **Power Definition**: Rate of energy transfer \( \left( P = \frac{E}{t} \right) \).
+- **Core Equation**: \( P = VI \) links voltage, current, and power.
+- **Units**: 1 watt = 1 joule/second = 1 volt-ampere.
+
+> "Power is the heartbeat of electrical systems – it defines their capability and limitations."
+
+---
+
+#### Suggested Questions
+1. How does power dissipation change if voltage doubles while resistance stays constant?
+2. Why do long-distance power lines use high voltage? (Hint: \( P = VI \), power loss \( \propto I^2 R \))
+3. Calculate the current drawn by a 1200W microwave operating at 120V.

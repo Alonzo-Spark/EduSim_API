@@ -1,0 +1,159 @@
+┌───────────────────────────┐  
+│ **Introduction**          │  
+│                           │  
+│ To understand the electric force between two charged particles, we start from experimental observations and fundamental principles of electrostatics. This force governs how charged objects interact in space and is one of the foundational concepts in electromagnetism. │  
+└───────────────────────────┘  
+
+---
+
+┌───────────────────────────┐  
+│ **Key Concept**           │  
+│                           │  
+│ The electric force between two point charges is described by **Coulomb's Law**, which was experimentally determined by Charles-Augustin de Coulomb in the 18th century. │  
+└───────────────────────────┘  
+
+---
+
+┌───────────────────────────┐  
+│ **Definition**            │  
+│                           │  
+│ **Electric force** is the force exerted by one charged object on another due to their electric charges. It acts along the line joining the two charges and can be either attractive or repulsive depending on the signs of the charges. │  
+└───────────────────────────┘  
+
+---
+
+┌───────────────────────────┐  
+│ **Main Formula**          │  
+│                           │  
+│ $$
+\vec{F} = k \frac{|q_1 q_2|}{r^2} \hat{r}
+$$  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+> **Note**: The vector form (with direction) is more complete:  
+> $$
+\vec{F}_{12} = k \frac{q_1 q_2}{r^2} \hat{r}_{12}
+$$
+
+---
+
+### Derivation of Coulomb’s Law
+
+Coulomb used a torsion balance to measure the force between two charged spheres. From his experiments, he observed:
+
+- The force is proportional to the product of the magnitudes of the charges:  
+  $$
+  F \propto |q_1 q_2|
+  $$
+
+- The force is inversely proportional to the square of the distance between them:  
+  $$
+  F \propto \frac{1}{r^2}
+  $$
+
+Combining these two proportionalities:
+
+$$
+F \propto \frac{|q_1 q_2|}{r^2}
+\quad \Rightarrow \quad
+F = k \frac{|q_1 q_2|}{r^2}
+$$
+
+where $k$ is the **Coulomb's constant**, given by:
+
+$$
+k = \frac{1}{4\pi \varepsilon_0} \approx 8.99 \times 10^9\ \text{N·m}^2/\text{C}^2
+$$
+
+and $\varepsilon_0$ is the **permittivity of free space**.
+
+To express this as a vector quantity (force on charge $q_1$ due to $q_2$):
+
+$$
+\vec{F}_{12} = k \frac{q_1 q_2}{r^2} \hat{r}_{12}
+$$
+
+Here:
+- $\vec{F}_{12}$: force on charge $q_1$ due to $q_2$,
+- $\hat{r}_{12}$: unit vector pointing from $q_2$ to $q_1$,
+- The sign of the product $q_1 q_2$ determines if the force is repulsive (positive) or attractive (negative).
+
+---
+
+┌───────────────────────────┐  
+│ **Characteristics**       │  
+│                           │  
+│ ✅ Acts along the line joining the two charges  
+│ ✅ Obeys Newton’s third law: $\vec{F}_{12} = -\vec{F}_{21}$  
+│ ✅ Follows the inverse-square law  
+│ ✅ Conservative force  
+│ ✅ Much stronger than gravitational force (for atomic-scale particles) │  
+└───────────────────────────┘  
+
+---
+
+┌───────────────────────────┐  
+│ **Important Notes**       │  
+│                           │  
+│ • Applies only to **point charges** at rest (**electrostatics**)  
+│ • Assumes charges are in a vacuum unless otherwise specified  
+│ • Superposition principle applies: net force on a charge due to multiple charges is the vector sum of individual forces │  
+└───────────────────────────┘  
+
+---
+
+┌───────────────────────────┐  
+│ **Applications**          │  
+│                           │  
+│ • Explaining atomic structure (electron-nucleus attraction)  
+│ • Designing capacitors and electrical circuits  
+│ • Understanding intermolecular forces  
+│ • Particle physics and accelerator design │  
+└───────────────────────────┘  
+
+---
+
+┌───────────────────────────┐  
+│ **Advantages**            │  
+│                           │  
+│ • Simple mathematical form for point charges  
+│ • Highly accurate under classical conditions  
+│ • Foundation for Maxwell’s equations of electromagnetism │  
+└───────────────────────────┘  
+
+---
+
+┌───────────────────────────┐  
+│ **Disadvantages**         │  
+│                           │  
+│ • Does not account for relativistic effects  
+│ • Not valid at quantum scales (replaced by quantum electrodynamics)  
+│ • Breaks down near singularities (e.g., r → 0) │  
+└───────────────────────────┘  
+
+---
+
+┌───────────────────────────┐  
+│ **Summary**               │  
+│                           │  
+│ The electric force between two point charges is given by **Coulomb’s Law**:  
+│ $$
+\vec{F} = k \frac{q_1 q_2}{r^2} \hat{r}
+$$  
+│ It depends on the product of the charges and inversely on the square of the distance. The direction is determined by the relative positions and signs of the charges. │  
+└───────────────────────────┘  
+
+---
+
+### Suggested Questions for Practice
+
+1. What happens to the electric force if the distance between two charges is doubled?  
+2. Two charges +3μC and −5μC are placed 10 cm apart. Calculate the magnitude and direction of the force on each.  
+3. How does Coulomb’s force compare to the gravitational force between two electrons?  
+4. Why can’t Coulomb’s law be applied directly to large, extended charged bodies?  
+5. Derive the value of $k$ using $\varepsilon_0 = 8.85 \times 10^{-12}\ \text{C}^2/\text{N·m}^2$.  
+
+Let me know if you’d like to explore any of these!

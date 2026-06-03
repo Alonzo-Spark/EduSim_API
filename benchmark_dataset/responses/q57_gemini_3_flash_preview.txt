@@ -1,0 +1,48 @@
+### Interactive Lesson: Forced Harmonic Oscillators
+
+:::section{title="Introduction"}
+In a forced harmonic oscillator, an external periodic force $F(t) = F_0 \cos(\omega t)$ is applied to a system. Unlike free oscillation, the system eventually settles into a **Steady State** where it vibrates at the frequency of the driving force, not its own natural frequency.
+:::
+
+:::section{title="The Formula Lab"}
+$$
+A(\omega) = \frac{F_0/m}{\sqrt{(\omega_0^2 - \omega^2)^2 + (2\gamma\omega)^2}}
+$$
+
+**Variables:**
+*   $A$: Amplitude of oscillation
+*   $\omega$: Driving frequency (The "Input")
+*   $\omega_0$: Natural frequency of the system
+*   $\gamma$: Damping coefficient (friction/resistance)
+
+[ 🔬 **Open Formula Lab: Adjust $\omega$ to see Amplitude response** ]
+:::
+
+:::section{title="Visual Effects of Increasing Frequency"}
+As you turn the frequency dial from zero to high frequencies, the system passes through three distinct visual phases:
+
+| Phase | Frequency Range | Visual Behavior |
+| :--- | :--- | :--- |
+| **1. Low Frequency** | $\omega \ll \omega_0$ | The mass follows the driver almost perfectly. Motion is slow and in-phase. |
+| **2. Resonance** | $\omega \approx \omega_0$ | **Maximum Displacement.** The oscillations become violent and reach peak amplitude. |
+| **3. High Frequency** | $\omega \gg \omega_0$ | The mass barely moves. It cannot keep up with the rapid changes of the driver. |
+:::
+
+:::section{title="Key Concept: Phase Shift"}
+Increasing the frequency doesn't just change the size of the movement; it changes the **timing**.
+
+*   **At low frequencies:** The mass moves *with* the pusher (In phase).
+*   **At resonance:** The mass lags by $90^\circ$ ($\pi/2$).
+*   **At high frequencies:** The mass moves *opposite* to the pusher (Out of phase).
+:::
+
+:::section{title="Summary Card"}
+**The "Inertia" Effect:**
+As $\omega$ increases beyond resonance, the visual amplitude drops toward zero. This is because the system's mass has **inertia**; it takes time to accelerate. If the force flips direction too fast, the mass simply stutters in place, unable to complete a full swing.
+:::
+
+:::section{title="Suggested Questions"}
+1.  **What happens to the amplitude if we increase damping ($\gamma$) during resonance?**
+2.  **Why does the phase shift reach exactly $180^\circ$ at infinite frequency?**
+3.  **How does the energy transfer change as $\omega$ passes $\omega_0$?**
+:::

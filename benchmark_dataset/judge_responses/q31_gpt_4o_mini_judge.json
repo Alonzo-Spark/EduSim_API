@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 31,
+  "question": "Thermal Properties of Matter: Define heat capacity and specific heat capacity.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nHeat capacity and specific heat capacity describe how a material changes temperature when it absorbs or releases thermal energy.\n\nHeat capacity is the total amount of heat energy required to raise the temperature of an entire object by exactly $1 \\text{ Degree Celsius}$ or Kelvin.\n\nSpecific heat capacity is the amount of heat energy required to raise the temperature of exactly $1 \\text{ kilogram}$ of a pure substance by $1 \\text{ Degree Celsius}$ or Kelvin.\n\n---\n\n## Characteristics\n\n* **Extensive vs. Intensive:** Heat capacity is an extensive property that scales with the size and mass of an object. Specific heat capacity is an intensive property inherent to the material itself, regardless of mass.\n\n---\n\n## Formula\n\nThe equations for thermal tracking are defined as:\n\n$$\\text{Heat Capacity } (C) = \\frac{Q}{\\Delta T}$$\n\n$$\\text{Specific Heat Capacity } (c) = \\frac{Q}{m \\Delta T}$$\n\nWhere:\n* $Q$ represents the total heat energy transferred\n* $\\Delta T$ represents the resulting change in temperature\n* $m$ represents the mass of the substance sample\n\n---\n\n## Summary\n\nHeat capacity measures the thermal response of an entire object, whereas specific heat capacity standardizes this property per unit mass, providing an intensive material constant.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Heat capacity is the     │  \n│ quantity of heat required │  \n│ to change the temperature │  \n│ of an object by 1 degree │  \n│ Celsius.                 │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Specific heat capacity    │  \n│ is the amount of heat     │  \n│ required to change the    │  \n│ temperature of 1 kg of a  │  \n│ substance by 1 degree     │  \n│ Celsius.                 │  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 2,
+    "educational": 4,
+    "overall_average": "4.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks detailed explanations and formulas for heat capacity and specific heat capacity, which are crucial for a comprehensive understanding of the concepts. The definitions provided are brief and do not fully align with the gold reference answer. The response also fails to discuss the characteristics of heat capacity and specific heat capacity, such as extensive vs. intensive properties. Furthermore, the layout formatting is poor, with the use of unnecessary borders and lack of structured readability. The overall quality of presentation is low, making it difficult for beginners to understand the concepts. To improve, the candidate should provide more detailed explanations, include relevant formulas, and enhance the layout formatting for better readability. Additionally, the response should discuss the characteristics of heat capacity and specific heat capacity to provide a more comprehensive understanding of the topics.",
+  "candidate_token_usage": {
+    "promptTokens": 368,
+    "completionTokens": 144,
+    "totalTokens": 512
+  },
+  "candidate_latency_ms": 2885,
+  "candidate_cost_usd": 0.0001416,
+  "judge_token_usage": {
+    "promptTokens": 845,
+    "completionTokens": 211,
+    "totalTokens": 1056
+  },
+  "judge_latency_ms": 3399,
+  "judge_cost_usd": 0.0010133999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:02:42.201Z"
+}

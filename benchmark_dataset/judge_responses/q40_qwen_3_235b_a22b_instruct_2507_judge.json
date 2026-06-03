@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 40,
+  "question": "Differentiate between transverse and longitudinal waves.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWaves are classified into two primary structural types based on how the particles of the medium vibrate relative to the direction of the wave's energy travel.\n\nA transverse wave is a wave in which the particles of the medium oscillate perpendicular to the direction of wave propagation.\n\nA longitudinal wave is a wave in which the particles of the medium oscillate parallel to the direction of wave propagation.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Transverse Waves | Longitudinal Waves |\n| --- | --- | --- |\n| **Structure** | Forms alternating crests (peaks) and troughs (valleys). | Forms alternating compressions (high density) and rarefactions (low density). |\n| **Medium Context** | Can travel through solids and liquid surfaces, but not gases. | Can travel through solids, liquids, and gases. |\n| **Polarization** | Can be polarized. | Cannot be polarized. |\n\n---\n\n## Real-world Examples\n\n* **Transverse Waves:** Light waves, radio waves, seismic S-waves, and surface ripples on a pond.\n* **Longitudinal Waves:** Sound waves traveling through air, seismic P-waves, and ultrasound tracking pulses.\n\n---\n\n## Summary\n\nTransverse waves produce variations perpendicular to their direction of travel, whereas longitudinal waves create pressure pulses that run parallel to their path.",
+  "candidate_response": "┌───────────────────────────┐  \n│ **Quick Definition**      │  \n│                           │  \n│ **Transverse waves**:     │  \n│ Particles of the medium   │  \n│ vibrate perpendicular to  │  \n│ the direction of wave     │  \n│ propagation.              │  \n│                           │  \n│ **Longitudinal waves**:   │  \n│ Particles vibrate parallel│  \n│ (along) the direction of  │  \n│ wave propagation.         │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Key Characteristics**   │  \n│                           │  \n│ **Transverse Waves**:     │  \n│ - Crests and troughs      │  \n│ - Can travel through      │  \n│   solids and on surfaces  │  \n│   of liquids              │  \n│ - Examples: light, ripples│  \n│   on water, guitar strings│  \n│                           │  \n│ **Longitudinal Waves**:   │  \n│ - Compressions and        │  \n│   rarefactions            │  \n│ - Can travel through      │  \n│   solids, liquids, and    │  \n│   gases                   │  \n│ - Examples: sound waves,  │  \n│   seismic P-waves          │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Visual Representation** │  \n│                           │  \n│ **Transverse Wave**:       │  \n│     ʌ                     │  \n│     |  crest               │  \n│ <--→→→→→→→→→→→→→→→→→→→→→→→→ │  \n│     |  trough              │  \n│     ∨                     │  \n│   Direction of wave →      │  \n│   Oscillation ↑↓           │  \n│                           │  \n│ **Longitudinal Wave**:     │  \n│   C  R  C  R  C  R         │  \n│  [ ][  ][ ][  ][ ][  ]     │  \n│   →→→→→→→→→→→→→→→→→→→       │  \n│   Compression (C)         │  \n│   Rarefaction (R)         │  \n│   Direction of wave &     │  \n│   particle motion →       │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Wave Motion Comparison**│  \n│                           │\n│ | Property               | Transverse        | Longitudinal         |  \n│ |------------------------|-------------------|-----------------------|  \n│ | **Direction of**       | Perpendicular     | Parallel              |  \n│ | **vibration**          | to wave direction | to wave direction     |  \n│ | **Wave features**      | Crests, troughs   | Compressions,         |  \n│ |                        |                   | rarefactions          |  \n│ | **Medium required?**   | Solid or surface  | Solid, liquid, gas    |  \n│ | **Polarization**       | Possible          | Not possible          |  \n│ | **Example**            | Light (EM wave)   | Sound in air          |  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Important Notes**       │  \n│                           │  \n│ ✅ **Transverse waves**    │  \n│ - Electromagnetic waves   │  \n│   (like light) are        │  \n│   transverse and do **not**│  \n│   require a medium.        │  \n│                           │  \n│ ❌ **Longitudinal waves**  │  \n│ - Cannot be polarized      │  \n│   because vibrations are  │  \n│   along the direction of  │  \n│   propagation.            │  \n│                           │  \n│ 🌍 **In earthquakes**:    │  \n│ - P-waves = Longitudinal  │  \n│ - S-waves = Transverse    │  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ **Summary**               │  \n│                           │  \n│ **Transverse waves** move │  \n│ side-to-side relative to  │  \n│ their direction of travel,│  \n│ forming peaks and valleys.│  \n│                           │  \n│ **Longitudinal waves**    │  \n│ push and pull in the same │  \n│ direction they travel,    │  \n│ creating dense and sparse │  \n│ regions.                  │  \n│                           │  \n│ The key difference is the │  \n│ **direction of particle  │  \n│ oscillation** relative to │  \n│ wave motion.              │  \n└───────────────────────────┘  \n\n---\n\n**Suggested Questions**  \n- Why can't longitudinal waves be polarized?  \n- How do transverse waves transfer energy without moving matter?  \n- In what media can transverse waves propagate? Why not in gases?  \n- How do seismic waves demonstrate both types in one event?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the concepts of transverse and longitudinal waves, accurately defining and comparing their characteristics. The use of visual representations, tables, and concise summaries enhances the clarity and readability of the response. However, to achieve perfection, it would be beneficial to include more detailed explanations of certain concepts, such as the polarization of transverse waves and the implications of longitudinal waves not being polarizable. Additionally, providing more real-world examples and applications could further enrich the educational value of the response. Overall, the response is well-structured, accurate, and effective in teaching the differentiation between transverse and longitudinal waves.",
+  "candidate_token_usage": {
+    "promptTokens": 355,
+    "completionTokens": 1037,
+    "totalTokens": 1392
+  },
+  "candidate_latency_ms": 17509,
+  "candidate_cost_usd": 0.002429,
+  "judge_token_usage": {
+    "promptTokens": 1698,
+    "completionTokens": 185,
+    "totalTokens": 1883
+  },
+  "judge_latency_ms": 5799,
+  "judge_cost_usd": 0.0014628,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:30:53.471Z"
+}

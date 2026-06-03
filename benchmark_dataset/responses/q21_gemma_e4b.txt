@@ -1,0 +1,82 @@
+Okay, I understand. You want to transform the AI Tutor's output from a plain Markdown document into a more interactive, textbook-like experience with structured UI blocks.  The key elements are section cards, dedicated formula cards, and responsive table rendering.  Here's a breakdown of how I'll approach this, along with how I'll process your input.  I will implement this within the context of responding to your prompts, essentially "translating" your markdown into this new format.
+
+**Here's how I'll process and output your instructions and content:**
+
+1. **Section Detection:** I'll analyze your input for keywords related to section headings (Introduction, Definition, Key Concepts, etc.).  Based on these, I'll create a card for each section.
+2. **Formula Detection & Handling:**  I'll identify LaTeX formula blocks (`$$ ... $$`) and create a `FormulaCard` for each. This card will display the formula and provide links to explanations and a potential "Formula Lab" (which is a placeholder for functionality I can't implement directly, but I'll include the link text). I'll extract the formula, its variables, and the surrounding context.
+3. **Table Rendering:** Markdown tables will be converted into responsive cards.
+4. **Textual Content:**  Paragraphs and other text will be rendered within the section cards.
+5. **Overall Structure:** I'll arrange these cards in a logical sequence, mimicking a textbook.
+
+**Example Output (based on your provided instructions):**
+
+```
+┌───────────────────────────┐
+│ NEW RENDERING SYSTEM     │
+│                           │
+│ Instead of rendering markdown sequentially: │
+│                           │
+│ # Heading                    │
+│ Paragraph                   │
+│                           │
+│ ## Formula                  │
+│ $$F=ma$$                    │
+│ Table                       │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ SECTION DETECTION         │
+│                           │
+│ Detect sections automatically:│
+│                           │
+│ Introduction                │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ FORMULA CARD SYSTEM      │
+│                           │
+│ Whenever a display formula exists:│
+│ $$                           │
+│ ...                           │
+│ $$                           │
+│ Render:                     │
+│                           │
+│ ┌───────────────────────────┐ │
+│ │ Main Formula              │ │
+│ │                           │ │
+│ │     Rendered Formula      │ │
+│ │                           │ │
+│ │ [ Explain Formula ]       │ │
+│ │ [ Open Formula Lab ]      │ │
+│ └───────────────────────────┘ │
+│                           │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ FORMULA EXTRACTION        │
+│                           │
+│ During markdown parsing:    │
+│                           │
+│ Extract all display LaTeX blocks│
+│                           │
+│ Store:                     │
+│ {                            │
+│ formula,                    │
+│ title,                      │
+│ surroundingContext,          │
+│ variables                   │
+│ }                           │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ TABLE RENDERING           │
+│                           │
+│ Markdown tables must render as: │
+│ Card                        │
+│ -> Responsive table         │
+└───────────────────────────┘
+
+Gravitation: State Newton’s law of gravitation.
+```
+
+**Now, please provide me with the actual content you want me to process.  I will use this format to present it.**  I'm ready when you are.  I will maintain this output format for all subsequent responses.  Just paste your markdown content here.  I will then "convert" it into this structured, interactive textbook style.

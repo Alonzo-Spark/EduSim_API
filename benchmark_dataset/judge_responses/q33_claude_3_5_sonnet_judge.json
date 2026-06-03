@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 33,
+  "question": "Explain the difference between conduction, convection, and radiation.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nConduction, convection, and radiation represent the three distinct physical mechanisms through which thermal energy transfers between regions of differing temperatures.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Conduction | Convection | Radiation |\n| --- | --- | --- | --- |\n| **Medium Requirement** | Requires a solid or static fluid medium. | Requires a fluid medium (liquid or gas). | Can propagate through a vacuum without a medium. |\n| **Mechanism** | Kinetic energy transfer via direct molecular collisions. | Macro-scale fluid movement driven by density changes. | Energy transport via electromagnetic waves. |\n| **Transfer Speed** | Relatively slow material propagation. | Moderate speed driven by fluid flow rates. | Occurs at the speed of light. |\n\n---\n\n## Real-world Examples\n\n* **Conduction:** A metal spoon left in a bowl of hot soup quickly becomes warm along its entire handle via direct atomic vibration transfer.\n* **Convection:** Water at the bottom of a pot heated on a stove expands, becomes less dense, and rises, creating a continuous circulation loop.\n* **Radiation:** Standing near a campfire or under direct sunlight warms the skin through incoming infrared electromagnetic waves.\n\n---\n\n## Summary\n\nConduction transfers heat through direct microscopic contact, convection relies on bulk fluid movement, and radiation uses electromagnetic waves to transfer energy across empty space.",
+  "candidate_response": "Here's a structured breakdown of the three modes of heat transfer:\n\n---\n\n## Heat Transfer\n\nHeat energy moves from regions of **higher temperature** to **lower temperature** through three distinct mechanisms.\n\n---\n\n### ⚡ Conduction\n\n**Definition:** Transfer of heat through direct contact between particles of matter, without bulk movement of the material.\n\n**How it works:** Vibrating particles pass energy to neighboring particles through collisions.\n\n| Property | Details |\n|---|---|\n| Medium Required | Yes — solid, liquid, or gas |\n| Best in | Solids (especially metals) |\n| Particle Movement | Vibrate in place — no bulk flow |\n| Speed | Fast in metals, slow in insulators |\n\n**Examples:**\n- A metal spoon heating up in hot soup\n- Heat spreading through a iron pan on a stove\n- Your hand warming when touching a hot mug\n\n**Key Quantity — Thermal Conductivity (k):**\n\n$$Q = \\frac{kA\\Delta T \\cdot t}{d}$$\n\nWhere:\n- $Q$ = heat transferred (Joules)\n- $k$ = thermal conductivity of material\n- $A$ = cross-sectional area\n- $\\Delta T$ = temperature difference\n- $t$ = time\n- $d$ = thickness/distance\n\n---\n\n### 🌊 Convection\n\n**Definition:** Transfer of heat through the **bulk movement** of a fluid (liquid or gas).\n\n**How it works:** Warmer, less dense fluid rises; cooler, denser fluid sinks — creating convection currents.\n\n| Property | Details |\n|---|---|\n| Medium Required | Yes — fluids only (liquid or gas) |\n| Particle Movement | Bulk flow of matter |\n| Types | Natural & Forced convection |\n| Speed | Moderate |\n\n**Examples:**\n- Boiling water circulating in a pot\n- Sea breezes and land breezes\n- Hot air balloons rising\n- Heating systems in buildings\n\n**Key Quantity — Newton's Law of Cooling:**\n\n$$Q = hA(T_s - T_\\infty)$$\n\nWhere:\n- $Q$ = heat transfer rate (Watts)\n- $h$ = convective heat transfer coefficient\n- $A$ = surface area\n- $T_s$ = surface temperature\n- $T_\\infty$ = fluid temperature far from surface\n\n---\n\n### ☀️ Radiation\n\n**Definition:** Transfer of heat through **electromagnetic waves**, requiring **no medium**.\n\n**How it works:** All objects above absolute zero emit electromagnetic radiation. Energy travels as photons through space.\n\n| Property | Details |\n|---|---|\n| Medium Required | **No** — works in vacuum |\n| Wave Type | Infrared electromagnetic waves |\n| Speed | Speed of light ($3 \\times 10^8$ m/s) |\n| Emitter | All objects above 0 K |\n\n**Examples:**\n- Heat from the Sun reaching Earth\n- Heat felt near a campfire without touching it\n- Infrared heaters\n- Thermal imaging cameras\n\n**Key Quantity — Stefan-Boltzmann Law:**\n\n$$P = \\varepsilon \\sigma A T^4$$\n\nWhere:\n- $P$ = power radiated (Watts)\n- $\\varepsilon$ = emissivity (0 to 1)\n- $\\sigma$ = Stefan-Boltzmann constant $= 5.67 \\times 10^{-8}\\ \\text{W m}^{-2}\\text{K}^{-4}$\n- $A$ = surface area\n- $T$ = absolute temperature (Kelvin)\n\n---\n\n### 🔁 Side-by-Side Comparison\n\n| Feature | Conduction | Convection | Radiation |\n|---|---|---|---|\n| Medium needed | Yes | Yes | **No** |\n| Matter moves | No | **Yes** | No |\n| Works in vacuum | No | No | **Yes** |\n| Speed | Slow–Fast | Moderate | Speed of light |\n| Best medium | Solids | Fluids | Any / vacuum |\n| Example | Hot spoon | Boiling water | Sunlight |\n\n---\n\n### 💡 Key Insight\n\n> In most real-world situations, **all three mechanisms occur simultaneously.** For example, a radiator heats a room by conduction through its metal walls, convection of air currents, and radiation of infrared energy — all at once.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly defines conduction, convection, and radiation, providing detailed explanations, formulas, and examples for each. The use of tables, equations, and concise descriptions enhances readability and understanding. However, minor improvements could include adding more real-world examples for convection and radiation, and potentially discussing the interplay between these mechanisms in more complex systems. Overall, the response demonstrates a strong command of the subject matter and presents it in a clear, engaging manner.",
+  "candidate_token_usage": {
+    "promptTokens": 438,
+    "completionTokens": 1035,
+    "totalTokens": 1473
+  },
+  "candidate_latency_ms": 18482,
+  "candidate_cost_usd": 0.002508,
+  "judge_token_usage": {
+    "promptTokens": 1604,
+    "completionTokens": 166,
+    "totalTokens": 1770
+  },
+  "judge_latency_ms": 8080,
+  "judge_cost_usd": 0.0013608,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:08:43.175Z"
+}

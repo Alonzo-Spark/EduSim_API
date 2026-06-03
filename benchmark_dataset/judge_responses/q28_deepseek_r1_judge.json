@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 28,
+  "question": "Explain Archimedes’ principle with an example.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nArchimedes' Principle states that when a body is completely or partially submerged in a fluid at rest, it experiences an upward buoyant force equal to the total weight of the fluid that the body displaces.\n\n---\n\n## Core Characteristics\n\n* **Origin of Buoyancy:** Buoyancy arises because fluid pressure increases with depth, creating a greater upward force on the bottom of an object than the downward force on its top.\n* **Equilibrium Conditions:** An object floats if its total weight matches the buoyant force of the fluid displaced before it fully submerges.\n\n---\n\n## Formula\n\nThe upward buoyant force magnitude is calculated by:\n\n$$F_b = \\rho V g$$\n\nWhere:\n* $F_b$ represents the buoyant force vector magnitude\n* $\\rho$ represents the mass density of the displaced fluid\n* $V$ represents the submerged volume of the object\n* $g$ represents local acceleration due to gravity\n\n---\n\n## Real-world Example: Steel Cargo Ship\n\nA solid block of steel sinks quickly because its weight exceeds the buoyant force of the water it displaces. However, if that same sheet of steel is shaped into a wide, hollow ship hull:\n* The hull encloses a large volume of air, significantly increasing the overall volume of the ship.\n* When placed in water, this large volume displaces a massive amount of liquid, generating a buoyant force equal to the ship's weight and allowing it to float.\n\n---\n\n## Summary\n\nArchimedes' Principle explains buoyancy as an upward force equal to the weight of the displaced fluid, determining whether an object floats or sinks based on its average density.",
+  "candidate_response": "### Explanation of Archimedes' Principle  \n\n#### 🧠 Quick Definition  \n**Archimedes' principle** states that when an object is partially or fully submerged in a fluid (liquid or gas), it experiences an upward buoyant force equal to the weight of the fluid it displaces.  \n\n---\n\n#### 🔍 Key Concept  \n- **Buoyant Force (\\(F_b\\))**: The upward force exerted by the fluid on the object.  \n- **Displaced Fluid**: The volume of fluid pushed aside by the object.  \n- **Mathematical Statement**:  \n  \\[\n  F_b = \\rho_{\\text{fluid}} \\times V_{\\text{displaced}} \\times g\n  \\]  \n  Where:  \n  - \\(\\rho_{\\text{fluid}}\\) = Density of the fluid (kg/m³),  \n  - \\(V_{\\text{displaced}}\\) = Volume of displaced fluid (m³),  \n  - \\(g\\) = Acceleration due to gravity (9.8 m/s²).  \n\n---\n\n#### 🎯 Why It Matters  \n- Determines whether an object **floats**, **sinks**, or remains **neutrally buoyant**:  \n  - **Float**: \\(F_b > \\text{Weight}_{\\text{object}}\\)  \n  - **Sink**: \\(F_b < \\text{Weight}_{\\text{object}}\\)  \n  - **Neutral**: \\(F_b = \\text{Weight}_{\\text{object}}\\).  \n\n---\n\n#### 🌊 Example: Floating Iceberg  \nImagine an iceberg floating in seawater:  \n1. **Given**:  \n   - Density of seawater (\\(\\rho_{\\text{seawater}}\\)) = 1030 kg/m³,  \n   - Density of ice (\\(\\rho_{\\text{ice}}\\)) = 920 kg/m³,  \n   - Volume of iceberg above water = 80 m³.  \n\n2. **Calculate Displaced Volume**:  \n   - Let \\(V_{\\text{total}}\\) = Total volume of iceberg,  \n   - \\(V_{\\text{displaced}}\\) = Volume submerged (displacing seawater).  \n   - By Archimedes' principle:  \n     \\[\n     \\rho_{\\text{ice}} V_{\\text{total}} g = \\rho_{\\text{seawater}} V_{\\text{displaced}} g\n     \\]  \n     \\[\n     \\frac{V_{\\text{displaced}}}{V_{\\text{total}}} = \\frac{\\rho_{\\text{ice}}}{\\rho_{\\text{seawater}}} = \\frac{920}{1030} \\approx 0.893\n     \\]  \n     So, **89.3%** of the iceberg is submerged.  \n\n3. **Volume Above Water**:  \n   \\[\n   V_{\\text{above}} = V_{\\text{total}} - V_{\\text{displaced}} = (1 - 0.893) V_{\\text{total}} = 0.107 V_{\\text{total}}\n   \\]  \n   Given \\(V_{\\text{above}} = 80  \\text{m}^3\\):  \n   \\[\n   V_{\\text{total}} = \\frac{80}{0.107} \\approx 748  \\text{m}^3\n   \\]  \n\n---\n\n#### ⚖️ Practical Applications  \n1. **Ship Design**: Hulls displace water equal to the ship’s weight to float.  \n2. **Hot Air Balloons**: Displace heavier cool air to rise.  \n3. **Hydrometers**: Measure fluid density via buoyancy.  \n\n---\n\n#### 💡 Important Insight  \nBuoyant force depends **only** on the displaced fluid’s properties—**not** the object’s material, shape, or depth (as long as fluid density is uniform).  \n\n❓ **Test Yourself**  \n*A 5 kg iron cube (density 7870 kg/m³) is submerged in water. What buoyant force acts on it?*  \n*(Hint: First find the cube’s volume!)*  \n\n<details>  \n<summary>📝 Answer</summary>  \nVolume of cube = \\(\\frac{5  \\text{kg}}{7870  \\text{kg/m}^3} \\approx 0.000635  \\text{m}^3\\).  \nBuoyant force \\(F_b = \\rho_{\\text{water}} V g = 1000 \\times 0.000635 \\times 9.8 \\approx 6.22  \\text{N}\\).  \n</details>",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of Archimedes' Principle, including its definition, key concepts, mathematical statement, and practical applications. The response is well-structured, readable, and effectively teaches the concept. However, there are minor areas for improvement: the example of the iceberg could be more directly connected to the principle's formula, and some sentences are slightly lengthy. Additionally, while the response includes a test question, providing more varied and challenging practice problems could enhance its educational value. Overall, the response is accurate, well-presented, and effective in teaching Archimedes' Principle.",
+  "candidate_token_usage": {
+    "promptTokens": 361,
+    "completionTokens": 1081,
+    "totalTokens": 1442
+  },
+  "candidate_latency_ms": 46181,
+  "candidate_cost_usd": 0.00256594,
+  "judge_token_usage": {
+    "promptTokens": 1734,
+    "completionTokens": 179,
+    "totalTokens": 1913
+  },
+  "judge_latency_ms": 4940,
+  "judge_cost_usd": 0.00147,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:54:08.725Z"
+}

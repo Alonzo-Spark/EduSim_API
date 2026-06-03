@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 11,
+  "question": "Laws of Motion: State Newton’s three laws of motion with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's laws of motion are three fundamental physical axioms that define the relationships linking the forces acting on a body to its resulting structural dynamic motion.\n\n---\n\n## The Three Axioms\n\n### 1. Newton's First Law (Law of Inertia)\nAn object will remain at rest or continue moving at a constant velocity in a straight line unless acted upon by an external net unbalanced force.\n\n### 2. Newton's Second Law (Law of Force and Acceleration)\nThe acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass, occurring in the direction of the applied net force.\n\n### 3. Newton's Third Law (Law of Action and Reaction)\nWhen one body exerts a force on a second body, the second body simultaneously exerts a force equal in magnitude and opposite in direction on the first body.\n\n---\n\n## Formula\n\nThe mathematical expression summarizing the second law of motion:\n\n$$F = ma$$\n\nWhere:\n* $F$ represents the net force vector acting on the mass\n* $m$ represents the invariant inertial mass value\n* $a$ represents the resulting uniform acceleration vector\n\n---\n\n## Real-world Examples\n\n* **First Law Application:** A passenger jolts forward when a speeding transit bus hits the brakes suddenly because their body maintains its forward inertial velocity.\n* **Second Law Application:** Pushing an empty shopping cart causes it to accelerate much faster than pushing a cart filled with heavy grocery items using the same effort.\n* **Third Law Application:** A swimmer pushes water backward with their hands, and the water simultaneously pushes the swimmer forward with an equal force vector.\n\n---\n\n## Summary\n\nNewton's laws form the structural core of classical mechanics, defining force as the fundamental driver that disrupts rest states, generates linear acceleration profiles, and generates equal reactions.",
+  "candidate_response": "### Newton's Laws of Motion\n\n```mermaid\ngraph LR\nA[Newton's Laws of Motion] --> B[First Law<br>Law of Inertia]\nA --> C[Second Law<br>F=ma]\nA --> D[Third Law<br>Action-Reaction]\n```\n\n---\n\n### 🔵 **First Law: Law of Inertia**\n**Statement**:  \n> \"An object at rest stays at rest, and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced external force.\"\n\n**Key Concept**:  \nInertia (resistance to change in motion).\n\n**Examples**:  \n- 🚗 **Car braking**: Passengers lurch forward when a car stops suddenly (bodies resist change from motion to rest).  \n- 🪑 **Chair push**: A stationary chair won't move until you apply force.  \n- 🪐 **Planetary motion**: Planets orbit indefinitely in space (minimal external forces).\n\n---\n\n### 🧮 **Second Law: Force and Acceleration**\n**Statement**:  \n> \"The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass.\"\n\n**Formula**:  \n```math\n\\vec{F} = m\\vec{a}\n```\n\n| Symbol | Quantity             | Unit           |\n|--------|----------------------|----------------|\n| \\(F\\)  | Net force            | Newton (N)     |\n| \\(m\\)  | Mass                 | Kilogram (kg)  |\n| \\(a\\)  | Acceleration         | m/s²           |\n\n**Examples**:  \n- ⚽ **Kicking a ball**: Light soccer ball accelerates more than a heavy bowling ball with the same force.  \n- 🚚 **Truck acceleration**: A loaded truck accelerates slower than an empty one under identical engine force.  \n- 🪂 **Skydiving**: Gravity (\\(F\\)) causes downward acceleration (\\(a\\)); mass (\\(m\\)) remains constant.\n\n---\n\n### ⚖️ **Third Law: Action-Reaction**\n**Statement**:  \n> \"For every action, there is an equal and opposite reaction.\"\n\n**Key Concept**:  \nForces always occur in pairs (equal magnitude, opposite direction).\n\n**Examples**:  \n- 🚀 **Rocket launch**: Exhaust gases push down (action), rocket pushes up (reaction).  \n- 🏊 **Swimming**: Pushing water backward (action) propels you forward (reaction).  \n- 📚 **Book on table**: Book exerts downward force (action); table exerts upward normal force (reaction).\n\n---\n\n### 📊 **Laws Comparison**\n| Law         | Core Principle                     | Real-World Application         |\n|-------------|------------------------------------|--------------------------------|\n| **First**   | Inertia governs motion             | Seatbelts in vehicles          |\n| **Second**  | \\(F = ma\\) quantifies motion change | Rocket thrust calculations     |\n| **Third**   | Force pairs are inseparable        | Walking/jumping mechanics      |\n\n---\n\n### 💎 **Summary**\n1. **1st Law**: Objects resist motion changes (inertia).  \n2. **2nd Law**: Force accelerates mass (\\(F = ma\\)).  \n3. **3rd Law**: Forces occur in equal/opposite pairs.  \n\n> 🔍 **Think deeper**: Why don’t action-reaction forces cancel each other? *(Hint: They act on different objects!)*\n\nLet me know if you'd like to explore a Formula Lab for \\(F=ma\\) or dive into inertia examples! 🚀",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of Newton's laws of motion, with accurate conceptual explanations, correct formulas, and relevant examples. The use of mermaid graph, math formatting, and tables enhances the readability and presentation quality. The response is well-structured, beginner-friendly, and effective in teaching the concepts. However, minor suggestions for improvement include adding more real-world applications, providing additional diagrams or illustrations to support the explanations, and considering the use of interactive elements or quizzes to engage the learner. Overall, the response is of high quality, accurate, and educational.",
+  "candidate_token_usage": {
+    "promptTokens": 367,
+    "completionTokens": 1902,
+    "totalTokens": 2269
+  },
+  "candidate_latency_ms": 84826,
+  "candidate_cost_usd": 0.00436723,
+  "judge_token_usage": {
+    "promptTokens": 1530,
+    "completionTokens": 174,
+    "totalTokens": 1704
+  },
+  "judge_latency_ms": 9117,
+  "judge_cost_usd": 0.0013356,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:16:31.506Z"
+}

@@ -1,0 +1,123 @@
+<thinking>
+The user wants me to derive the expression for maximum height of a projectile. I need to render this as structured UI blocks - cards, formula cards, etc. - not as a markdown document.
+
+Let me think about the content:
+
+**Projectile Motion - Maximum Height**
+
+A projectile is launched with initial velocity u at angle θ with the horizontal.
+
+The vertical component of initial velocity: u_y = u sin θ
+
+At maximum height, vertical velocity = 0
+
+Using kinematic equation: v² = u² - 2gh (for vertical motion)
+
+At max height, v = 0:
+0 = (u sin θ)² - 2g·H
+
+2g·H = u² sin²θ
+
+H = u² sin²θ / (2g)
+
+Now let me structure this as UI components using React/JSX-style thinking, but I need to render it in a way that looks like an interactive textbook. 
+
+Since I'm working in a chat interface, I'll structure my response using HTML-like card components that can be styled. Let me think about how the system renders things...
+
+The system has KaTeX rendering and table styling working. I need to create structured UI blocks. Let me use a card-based approach with proper HTML/CSS structure that the rendering system can handle.
+
+Let me create a proper structured response with cards, formula cards, and interactive elements.
+
+I'll structure it as:
+
+1. Setup Card (What we know)
+2. Key Insight Card (At max height, vy = 0)
+3. Derivation Steps Card
+4. Formula Card (Main result)
+5. Variables breakdown
+6. Summary/Applications
+
+Let me write this in a way that looks like a textbook UI, using divs and structured components.
+
+Actually, looking at the instructions again - this is about rendering system for the AI Tutor. I need to output structured content that will be rendered as cards. Let me think about what format to use.
+
+The system says "Convert content into structured UI blocks" - so I should output JSX/React components or HTML that gets rendered as cards.
+
+Let me create a proper structured output with card components.
+</thinking>
+
+```tsx
+<LearningPage title="Maximum Height of a Projectile">
+
+<ConceptCard title="🎯 What We're Solving">
+  A projectile is launched with initial speed <Inline>{"u"}</Inline> at angle <Inline>{" \\theta"}</Inline> above the horizontal. We want to find the <strong>highest point</strong> it reaches.
+</ConceptCard>
+
+<SetupCard title="📐 Setting Up the Problem">
+  <StepGrid>
+    <SetupItem label="Initial vertical velocity" value={"u_y = u\\sin\\theta"} />
+    <SetupItem label="Acceleration (vertical)" value={"a = -g"} />
+    <SetupItem label="At maximum height" value={"v_y = 0"} highlight />
+  </StepGrid>
+  <Callout type="insight">
+    At the peak, the projectile momentarily stops moving <em>vertically</em> — only horizontal motion remains.
+  </Callout>
+</SetupCard>
+
+<DerivationCard title="📝 Step-by-Step Derivation">
+  <Step number={1} label="Start with the kinematic equation for vertical motion">
+    <DisplayFormula>{"v_y^2 = u_y^2 + 2a\\,H"}</DisplayFormula>
+  </Step>
+
+  <Step number={2} label="Substitute known values">
+    <DisplayFormula>{"v_y^2 = (u\\sin\\theta)^2 + 2(-g)H"}</DisplayFormula>
+  </Step>
+
+  <Step number={3} label="Apply the peak condition — vertical velocity is zero">
+    <DisplayFormula>{"0 = u^2\\sin^2\\theta - 2gH"}</DisplayFormula>
+  </Step>
+
+  <Step number={4} label="Rearrange and solve for H">
+    <DisplayFormula>{"2gH = u^2\\sin^2\\theta"}</DisplayFormula>
+  </Step>
+</DerivationCard>
+
+<FormulaCard title="⭐ Maximum Height">
+  <MainFormula>{"H = \\dfrac{u^2 \\sin^2\\theta}{2g}"}</MainFormula>
+  <VariableTable>
+    | Symbol | Meaning | Unit |
+    |--------|---------|------|
+    | H | Maximum height | m |
+    | u | Initial speed | m/s |
+    | θ | Launch angle | degrees / rad |
+    | g | Gravitational acceleration | m/s² |
+  </VariableTable>
+  <FormulaActions>
+    <Button>Explain Formula</Button>
+    <Button>Open Formula Lab</Button>
+  </FormulaActions>
+</FormulaCard>
+
+<InsightCard title="💡 Key Observations">
+  <InsightGrid>
+    <Insight icon="📈" label="Maximum angle" body="H is greatest when θ = 90° (straight up), giving H = u²/2g" />
+    <Insight icon="📉" label="Zero height" body="H = 0 when θ = 0° (horizontal launch) — no vertical rise" />
+    <Insight icon="⚡" label="Speed dependence" body="H grows with u² — doubling speed quadruples height" />
+    <Insight icon="🌍" label="Gravity dependence" body="Weaker gravity (e.g. Moon) → much greater height" />
+  </InsightGrid>
+</InsightCard>
+
+<SummaryCard title="✅ Quick Summary">
+  <SummaryRow label="Kinematic equation used" value={"v^2 = u^2 + 2as"} />
+  <SummaryRow label="Condition applied" value={"v_y = 0 \\text{ at peak}"} />
+  <SummaryRow label="Result" value={"H = \\dfrac{u^2\\sin^2\\theta}{2g}"} highlight />
+</SummaryCard>
+
+<SuggestedQuestions>
+  <Question>What is the maximum height if u = 20 m/s and θ = 30°?</Question>
+  <Question>At what angle is the maximum height equal to the range?</Question>
+  <Question>How does maximum height change on the Moon?</Question>
+</SuggestedQuestions>
+
+</LearningPage>
+```

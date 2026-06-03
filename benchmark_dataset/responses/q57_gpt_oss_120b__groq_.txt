@@ -1,0 +1,104 @@
+┌───────────────────────────────────────────────┐
+│ Introduction                                    │
+│                                                   │
+│ A forced (driven) harmonic oscillator consists   │
+│ of a mass‑spring‑damper system that is subject to  │
+│ an external sinusoidal force.  Understanding how │
+│ the system responds as the driving frequency      │
+│ ( ωₙ ) varies is fundamental to many areas of     │
+│ physics and engineering, from vibration analysis │
+│ to electrical circuits.                           │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Key Concepts                                    │
+│                                                   │
+│ • **Natural frequency ( ω₀ )** – the frequency at  │
+│   which the undamped system would oscillate.      │
+│ • **Driving (forced) frequency ( ω_d )** – the    │
+│   frequency of the external sinusoidal force.    │
+│ • **Resonance** – occurs when ω_d ≈ ω₀, producing │
+│   the largest steady‑state amplitude (limited by │
+│   damping).                                       │
+│ • **Phase lag** – the angle by which the response│
+│   lags behind the driving force; it varies from   │
+│   0° (low ω_d) to 180° (high ω_d).                │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Visual Effect of Increasing ω_d                  │
+│                                                   │
+│ 1. **Amplitude envelope**                         │
+│    • At low ω_d ( ω_d ≪ ω₀ ) the system follows   │
+│      the driver closely; the steady‑state       │
+│      amplitude is small.                         │
+│    • As ω_d approaches ω₀ the amplitude rises   │
+│      sharply, reaching a maximum at resonance   │
+│      (the peak height is set by the damping      │
+│      coefficient).                               │
+│    • Past resonance ( ω_d > ω₀ ) the amplitude      │
+│      decreases again, forming the characteristic │
+│      “bell‑shaped” response curve.               │
+│                                                   │
+│ 2. **Phase shift**                               │
+│    • Low ω_d → phase ≈ 0° (response in phase).    │
+│    • At resonance → phase ≈ 90° (quarter‑cycle   │
+│      lag).                                        │
+│    • High ω_d → phase → 180° (response opposite   │
+│      direction).                                 │
+│                                                   │
+│ 3. **Time‑domain waveform**                      │
+│    • When plotted, the steady‑state sinusoid      │
+│      appears stretched (large amplitude) near    │
+│      resonance and compressed (small amplitude)  │
+│      far from resonance.                         │
+│    • The envelope of the oscillation (the         │
+│      amplitude) visibly “bulges” as ω_d passes   │
+│      through ω₀.                                  │
+│                                                   │
+│ 4. **Energy transfer**                           │
+│    • Near resonance the system absorbs energy     │
+│      efficiently, leading to large oscillations. │
+│    • Far from resonance the energy input is       │
+│      mostly dissipated by damping.               │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Equation of Motion                               │
+│                                                   │
+│     m · ẍ + c · ẋ + k · x = F₀ cos(ω_d t)          │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]       │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Summary                                          │
+│                                                   │
+│ • Increasing the driving frequency ω_d moves the │
+│   system along its resonance curve.               │
+│ • Amplitude peaks at ω_d ≈ ω₀ and then falls off. │
+│ • Phase lag evolves from 0° → 90° → 180° as ω_d   │
+│   increases.                                      │
+│ • The visual “bulge” in the time‑domain signal   │
+│   directly reflects the resonance amplification. │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Suggested Questions                              │
+│                                                   │
+│ 1. How does increasing damping affect the height │
+│    and width of the resonance peak?              │
+│ 2. What happens to the phase lag if the driving   │
+│    frequency is exactly twice the natural frequency│
+│    (ω_d = 2 ω₀)?                                   │
+│ 3. Sketch the amplitude‑vs‑frequency curve for a │
+│    lightly damped oscillator and label key points│
+│    (low‑freq, resonance, high‑freq).              │
+│ 4. How would you experimentally determine the     │
+│    natural frequency using a forced oscillator?  │
+└───────────────────────────────────────────────────┘

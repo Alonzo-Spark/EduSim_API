@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 59,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'collision' event between two equal masses.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a physical interaction within the workspace canvas.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nAn instantaneous impact interface event (`collision`) was registered between sphere `c1` and sphere `c2` at the center coordinate intersection.\n\n### WHAT CHANGED\nSphere `c1` came to an immediate halt, transferring its entire velocity vector component directly to sphere `c2`, which shot forward instantly.\n\n### SIMPLE WHY\nBecause the two masses are identical and the restitution parameter is set to maximum, the system undergoes a perfect elastic momentum exchange.\n\n### WHAT TO NOTICE\nObserve the velocity indicator vectors. Watch how the velocity swap occurs instantaneously without any net loss in total system speed.",
+  "candidate_response": "```json\n{\n  \"event\": \"collision\",\n  \"type\": \"elastic\",\n  \"masses\": [\n    {\n      \"id\": \"m1\",\n      \"value\": 2.0,\n      \"unit\": \"kg\",\n      \"initialVelocity\": {\n        \"x\": 3.0,\n        \"y\": 0.0,\n        \"unit\": \"m/s\"\n      },\n      \"finalVelocity\": {\n        \"x\": 0.0,\n        \"y\": 0.0,\n        \"unit\": \"m/s\"\n      }\n    },\n    {\n      \"id\": \"m2\",\n      \"value\": 2.0,\n      \"unit\": \"kg\",\n      \"initialVelocity\": {\n        \"x\": -1.0,\n        \"y\": 0.0,\n        \"unit\": \"m/s\"\n      },\n      \"finalVelocity\": {\n        \"x\": 2.0,\n        \"y\": 0.0,\n        \"unit\": \"m/s\"\n      }\n    }\n  ],\n  \"conservation\": {\n    \"momentum\": {\n      \"initialTotalX\": 4.0,\n      \"finalTotalX\": 4.0,\n      \"isConserved\": true\n    },\n    \"kineticEnergy\": {\n      \"initialTotal\": 10.0,\n      \"finalTotal\": 10.0,\n      \"isConserved\": true\n    }\n  },\n  \"outcome\": \"velocitiesExchanged\",\n  \"timestamp\": \"2025-04-05T12:00:00Z\",\n  \"simulationFrame\": 427\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 6,
+    "overall_average": "7.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is a well-structured JSON object that accurately describes the collision event between two equal masses. It correctly conserves momentum and kinetic energy, and the velocities of the masses are exchanged after the collision. However, the response lacks a clear and concise explanation of the physics concepts involved, which would be beneficial for educational purposes. The quality of the response is high due to its structured readability and adherence to JSON formatting standards. To improve the educational score, the candidate could include additional explanations or comments that clarify the physics behind the collision event, making it more accessible to beginners. For example, the candidate could explain the concept of elastic collisions, the conservation of momentum and kinetic energy, and the relationship between the initial and final velocities of the masses.",
+  "candidate_token_usage": {
+    "promptTokens": 365,
+    "completionTokens": 352,
+    "totalTokens": 717
+  },
+  "candidate_latency_ms": 38268,
+  "candidate_cost_usd": 0.001069,
+  "judge_token_usage": {
+    "promptTokens": 912,
+    "completionTokens": 209,
+    "totalTokens": 1121
+  },
+  "judge_latency_ms": 4656,
+  "judge_cost_usd": 0.0010488,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:44:32.728Z"
+}

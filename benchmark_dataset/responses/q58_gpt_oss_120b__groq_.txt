@@ -1,0 +1,152 @@
+┌───────────────────────────────────────────────────────────────┐
+│                           Introduction                           │
+│                                                                   │
+│ In this sandbox we explore how changing the effective          │
+│ gravitational acceleration – what we call **gravity preset      │
+│ scaling** – affects the distance (range) a block travels on an   │
+│ inclined plane. By adjusting the scaling factor **k**, the      │
+│ acceleration due to gravity becomes **g' = k·g**.               │
+│                                                                   │
+│ Use the sliders below to see the impact in real‑time.            │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                           Definition                             │
+│                                                                   │
+│ *Gravity preset scaling* is a user‑defined multiplier **k** that   │
+│ modifies the standard gravitational constant **g ≈ 9.81 m/s²**   │
+│ to an effective value **g' = k·g**.                               │
+│                                                                   │
+│ When **k = 1**, the system behaves normally. **k > 1** simulates   │
+│ a stronger gravitational field (e.g., Jupiter), while **k < 1**  │
+│ simulates a weaker field (e.g., Moon).                           │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Key Concepts                             │
+│                                                                   │
+│ • **Inclined Plane** – a flat surface tilted at an angle **α**    │
+│   with respect to the horizontal.                                 │
+│ • **Component of Gravity** – the acceleration acting **along**   │
+│   the plane is **a = g'·sinα = k·g·sinα**.                         │
+│ • **Range (s)** – the linear distance the block travels **along** │
+│   the plane, either from rest (sliding down) or after being      │
+│   launched up the plane.                                          │
+│ • **Scaling Factor (k)** – user‑controlled parameter that          │
+│   multiplies **g**.                                                │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                           Formula Card                            │
+│                           ──────────────                         │
+│ Main Formula                                                     │
+│                                                                   │
+│ 1️⃣ **Sliding Down (from rest)**                                   │
+│    s = ½·k·g·sinα·t²                                               │
+│                                                                   │
+│ 2️⃣ **Launching Up the Plane (initial speed v₀)**                  │
+│    s = v₀² / (k·g·sinα)                                            │
+│                                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]                        │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Formula Details                           │
+│                                                                   │
+│ **Derivation – Sliding Down**                                      │
+│   • Acceleration along the plane: a = k·g·sinα                     │
+│   • Starting from rest: v₀ = 0                                    │
+│   • Kinematic relation: s = v₀·t + ½·a·t² → s = ½·k·g·sinα·t²       │
+│                                                                   │
+│ **Derivation – Launch Up**                                         │
+│   • Motion opposite to the component of gravity.                  │
+│   • Using v² = v₀² – 2·a·s with final velocity v = 0 at the apex:  │
+│       0 = v₀² – 2·k·g·sinα·s → s = v₀² / (k·g·sinα)                │
+│                                                                   │
+│ *Variables*                                                       │
+│   - **s** : range along the plane (m)                              │
+│   - **t** : travel time (s)                                        │
+│   - **v₀** : initial speed (m/s)                                   │
+│   - **α** : incline angle (rad)                                    │
+│   - **g** : standard gravity (9.81 m/s²)                           │
+│   - **k** : gravity scaling factor (dimension‑less)               │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                           Applications                            │
+│                                                                   │
+│ • **Engineering** – Designing ramps for different planetary      │
+│   environments (e.g., lunar rovers).                             │
+│ • **Physics Education** – Visualizing how gravity influences      │
+│   motion without changing the physical setup.                     │
+│ • **Game Development** – Tuning slope behavior in low‑gravity      │
+│   levels.                                                          │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Advantages & Disadvantages                │
+│                                                                   │
+│ **Advantages**                                                    │
+│   • Immediate visual feedback on the effect of **k**.             │
+│   • Works for both down‑slope and up‑slope scenarios.            │
+│   • No need for external simulation software.                     │
+│                                                                   │
+│ **Disadvantages**                                                │
+│   • Assumes a frictionless surface – real‑world ramps have       │
+│     rolling resistance.                                           │
+│   • Air resistance is ignored, which can be significant at      │
+│     high speeds.                                                  │
+│   • The model is 2‑D; does not account for lateral forces.        │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Important Notes                           │
+│                                                                   │
+│ 1️⃣ The formulas are valid only for **constant** scaling **k**.   │
+│ 2️⃣ Angle **α** must be expressed in **radians** for the           │
+│    trigonometric functions.                                       │
+│ 3️⃣ If friction **μ** is introduced, replace **k·g·sinα** with    │
+│    **k·g·(sinα – μ·cosα)**.                                        │
+│ 4️⃣ For very large **k**, the block may reach the ground before   │
+│    the simulated time step; the sandbox clamps the range.        │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                           Summary                                 │
+│                                                                   │
+│ • Gravity preset scaling multiplies the gravitational           │
+│   acceleration by **k**, directly scaling the component **g·sinα**│
+│   that drives motion along an incline.                           │
+│ • The range down a frictionless plane grows with **k·t²**, while │
+│   the maximum ascent distance shrinks with **1/k**.              │
+│ • Adjusting **k** lets you explore “what‑if” scenarios for        │
+│   different planetary gravities without changing the geometry.   │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                     Suggested Questions                           │
+│                                                                   │
+│ 1️⃣ If a block is launched up a 30° incline with v₀ = 5 m/s,       │
+│    what distance does it travel when **k = 0.5**?                │
+│ 2️⃣ How does the travel time to the bottom change when **k**      │
+│    doubles?                                                       │
+│ 3️⃣ Incorporate a kinetic friction coefficient μ = 0.1. How does  │
+│    the formula for **s** modify?                                   │
+│ 4️⃣ For a Mars‑like gravity (**k ≈ 0.38**), what incline angle     │
+│    gives the longest possible slide for a given **v₀**?           │
+│ 5️⃣ Design a ramp for a lunar rover (k ≈ 0.165) that limits the   │
+│    maximum speed to 2 m/s after 10 m of travel.                  │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Interactive Controls                      │
+│                                                                   │
+│   [ Slider: Gravity Scaling (k)  0.1 ──────► 2.0 ]                 │
+│   [ Slider: Incline Angle (α)   0° ──────► 60° ]                │
+│   [ Input : Initial Speed v₀ (m/s) ]                             │
+│   [ Button: Run Simulation ]                                      │
+│   [ Button: Reset ]                                               │
+│                                                                   │
+│   *The sandbox updates the Formula Card and the plotted trajectory│
+│   in real time.*                                                  │
+└───────────────────────────────────────────────────────────────────┘

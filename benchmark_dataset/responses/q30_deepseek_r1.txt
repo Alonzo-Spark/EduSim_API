@@ -1,0 +1,92 @@
+Here's the structured explanation of Bernoulli's Theorem and its applications:
+
+```jsx
+<SectionContainer>
+  <QuickDefinition title="Bernoulli's Theorem">
+    In fluid dynamics, Bernoulli's theorem states that for an incompressible, non-viscous fluid in steady flow, the total mechanical energy (pressure energy + kinetic energy + potential energy) remains constant along a streamline.
+  </QuickDefinition>
+
+  <FormulaCard
+    title="Bernoulli's Equation"
+    formula="P + \frac{1}{2}\rho v^2 + \rho gh = \text{constant}"
+    variables={[
+      {symbol: 'P', meaning: 'Fluid pressure'},
+      {symbol: '\\rho', meaning: 'Fluid density'},
+      {symbol: 'v', meaning: 'Flow velocity'},
+      {symbol: 'g', meaning: 'Gravitational acceleration'},
+      {symbol: 'h', meaning: 'Height above reference point'}
+    ]}
+  />
+
+  <KeyConcepts>
+    <ConceptItem title="Energy Conservation">
+      The theorem is a manifestation of energy conservation principle for flowing fluids
+    </ConceptItem>
+    
+    <ConceptItem title="Inverse Relationship">
+      Pressure and velocity are inversely related - faster flow means lower pressure
+    </ConceptItem>
+
+    <ConceptItem title="Streamline Restriction">
+      Applies only along a single streamline in steady (time-invariant) flow
+    </ConceptItem>
+  </KeyConcepts>
+
+  <ApplicationSection>
+    <ApplicationCard title="Aerodynamic Lift">
+      <ul>
+        <li>Airplane wing design (airfoil shape creates pressure difference)</li>
+        <li>Curve ball dynamics in sports</li>
+      </ul>
+    </ApplicationCard>
+
+    <ApplicationCard title="Fluid Measurement">
+      <ul>
+        <li>Venturi meters for flow rate measurement</li>
+        <li>Pitot tubes in aircraft speed indicators</li>
+      </ul>
+    </ApplicationCard>
+
+    <ApplicationCard title="Everyday Devices">
+      <ul>
+        <li>Spray bottles and atomizers</li>
+        <li>Carburetors in engines</li>
+        <li>Chimney ventilation systems</li>
+      </ul>
+    </ApplicationCard>
+  </ApplicationSection>
+
+  <LimitationsCard>
+    <LimitationItem title="Real Fluids">
+      Assumes zero viscosity - real fluids have some energy loss
+    </LimitationItem>
+    
+    <LimitationItem title="Compressibility">
+      Only strictly true for incompressible fluids
+    </LimitationItem>
+
+    <LimitationItem title="Turbulence">
+      Does not account for turbulent flow conditions
+    </LimitationItem>
+  </LimitationsCard>
+
+  <InteractiveLab type="BernoulliSimulator">
+    <LabFeature title="Pressure-Velocity Tradeoff">
+      Adjust pipe diameter and observe pressure changes
+    </LabFeature>
+    
+    <LabFeature title="Lift Visualization">
+      Simulate airflow over different wing profiles
+    </LabFeature>
+  </InteractiveLab>
+</SectionContainer>
+```
+
+This structured presentation features:
+- Clear visual separation of concepts
+- Interactive formula breakdown
+- Practical application examples
+- Limitations disclosure
+- Virtual lab integration
+- Would you like to explore any specific application in more detail?
+- Should I generate practice problems related to Bernoulli's equation?

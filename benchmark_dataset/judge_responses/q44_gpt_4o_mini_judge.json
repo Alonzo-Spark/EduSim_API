@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 44,
+  "question": "Explain the working principle of a capacitor.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nA capacitor is an electrical component designed to store potential energy in an electric field by accumulating opposite charges on two closely spaced, insulated conducting plates.\n\n---\n\n## Working Mechanism\n\n* **Charge Separation:** When connected to a voltage source, electrons accumulate on one plate, giving it a negative charge, while electrons leave the opposite plate, leaving it positively charged.\n* **Electric Field Storage:** This charge separation creates a stable electric field between the plates, storing energy even after the voltage source is disconnected.\n\n---\n\n## Formula\n\nThe relationship governing charge storage capacity is:\n\n$$Q = CV$$\n\nFor a basic parallel-plate capacitor layout:\n\n$$C = \\frac{\\varepsilon_0 A}{d}$$\n\nWhere:\n* $Q$ represents the total stored charge magnitude\n* $C$ represents the capacitance value measured in Farads ($\\text{F}$)\n* $V$ represents the applied voltage across the plates\n* $A$ represents the area of overlapping plates\n* $d$ represents the distance separating the plates\n\n---\n\n## Summary\n\nCapacitors store electrical energy by holding opposite charges on isolated plates, creating an internal electric field with a storage capacity that scales with plate area and proximity.",
+  "candidate_response": "┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ A capacitor is a passive   │\n│ electronic component that   │\n│ stores electrical energy in │\n│ an electric field. It is    │\n│ commonly used in various    │\n│ electronic circuits.        │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Definition                │\n│                           │\n│ A capacitor consists of two │\n│ conductive plates separated │\n│ by an insulating material   │\n│ called a dielectric.       │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ 1. **Capacitance**: The   │\n│    ability of a capacitor   │\n│    to store charge, measured│\n│    in Farads (F).          │\n│ 2. **Voltage (V)**: The    │\n│    potential difference     │\n│    across the plates.      │\n│ 3. **Charge (Q)**: The     │\n│    amount of electrical     │\n│    charge stored, related   │\n│    to capacitance and       │\n│    voltage by the formula:  │\n│    $$ Q = C \\cdot V $$      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     Rendered Formula      │\n│                           │\n│ $$ Q = C \\cdot V $$      │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics           │\n│                           │\n│ - Capacitors can store and │\n│   release energy quickly.  │\n│ - They have a wide range of │\n│   capacitance values, from  │\n│   picofarads to farads.    │\n│ - The efficiency of a      │\n│   capacitor is influenced   │\n│   by the type of dielectric │\n│   used.                    │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Applications              │\n│                           │\n│ - Smoothing out voltage    │\n│   fluctuations in power    │\n│   supplies.                │\n│ - Timing applications in    │\n│   oscillators.             │\n│ - Energy storage in        │\n│   electronic devices.      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Advantages                │\n│                           │\n│ - Fast charging and        │\n│   discharging capabilities.│\n│ - Compact size for energy  │\n│   storage.                │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Disadvantages             │\n│                           │\n│ - Limited energy storage   │\n│   compared to batteries.   │\n│ - Voltage ratings can      │\n│   be exceeded, leading to  │\n│   failure.                │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ - Capacitors can be used in│\n│   series or parallel to    │\n│   achieve desired values.  │\n│ - The behavior of capacitors│\n│   varies with frequency.    │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                   │\n│                           │\n│ Capacitors are essential   │\n│ components in electronic    │\n│ circuits, enabling energy   │\n│ storage and voltage        │\n│ regulation. Understanding    │\n│ their function and            │\n│ characteristics is crucial   │\n│ for designing effective      │\n│ electronic systems.         │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions        │\n│                           │\n│ 1. What is the role of a   │\n│    dielectric in a capacitor?│\n│ 2. How does capacitance     │\n│    change in series vs.     │\n│    parallel configurations? │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the working principle of a capacitor, including its definition, key concepts, and characteristics. The response is well-structured and easy to follow, with clear explanations and relevant examples. However, there are some areas for improvement. The candidate could provide more detailed explanations of the formulas and their derivations, and include more visual aids to illustrate the concepts. Additionally, some of the sections, such as the 'Important Notes' and 'Suggested Questions' sections, feel a bit disconnected from the rest of the response and could be integrated more smoothly. Overall, the response is accurate, well-presented, and effective at conveying the key concepts related to capacitors.",
+  "candidate_token_usage": {
+    "promptTokens": 362,
+    "completionTokens": 936,
+    "totalTokens": 1298
+  },
+  "candidate_latency_ms": 10349,
+  "candidate_cost_usd": 0.0006159,
+  "judge_token_usage": {
+    "promptTokens": 1608,
+    "completionTokens": 199,
+    "totalTokens": 1807
+  },
+  "judge_latency_ms": 2162,
+  "judge_cost_usd": 0.0014424,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:39:51.995Z"
+}

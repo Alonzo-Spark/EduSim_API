@@ -1,0 +1,119 @@
+### Coulomb's Law: Fundamental Electrostatic Principle
+
+#### ⚡ Quick Definition  
+Coulomb's Law quantitatively describes the **electrostatic force** between two stationary point charges. This force is:
+- Proportional to the product of the charge magnitudes  
+- Inversely proportional to the square of the distance between them  
+- Directed along the line connecting the charges  
+
+---
+
+#### 🔬 Main Formula
+```math
+\boxed{F = \frac{1}{4\pi\varepsilon_0} \frac{|q_1 q_2|}{r^2}}
+```
+
+<div class="flex justify-center my-8">
+  <div class="bg-white rounded-xl shadow-lg p-6 max-w-md w-full border border-blue-100">
+    <div class="text-center text-2xl font-bold text-gray-800 mb-4">Coulomb's Law Formula</div>
+    <div class="flex justify-center py-3">
+      <div class="text-3xl">
+        $$ F = k_e \frac{|q_1 q_2|}{r^2} $$
+      </div>
+    </div>
+    <div class="mt-4 space-y-2">
+      <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg transition duration-200">
+        Explain Variables
+      </button>
+      <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg transition duration-200">
+        Open Formula Lab
+      </button>
+    </div>
+  </div>
+</div>
+
+---
+
+#### 📖 Detailed Explanation
+**Force Direction:**  
+- **Like charges** (+,+ or −,−) → **Repulsive force**  
+- **Opposite charges** (+,−) → **Attractive force**  
+
+**Key Variables:**  
+| Symbol | Quantity | SI Unit | Physical Meaning |
+|--------|----------|---------|------------------|
+| \( F \) | Force | Newton (N) | Electrostatic force magnitude |
+| \( q_1, q_2 \) | Charges | Coulomb (C) | Magnitude of point charges |
+| \( r \) | Distance | Meter (m) | Separation between charges |
+| \( \varepsilon_0 \) | Vacuum permittivity | 8.85×10⁻¹² C²/N·m² | Electric constant |
+| \( k_e \) | Coulomb's constant | 8.99×10⁹ N·m²/C² | \( \frac{1}{4\pi\varepsilon_0} \) |
+
+**Mathematical Properties:**  
+- **Inverse-square law**: Force decreases with \( \frac{1}{r^2} \)  
+- **Superposition principle**: For multiple charges, net force is vector sum of individual forces  
+
+---
+
+#### 🌍 Real-World Applications
+1. **Atomic physics**: Electron-nucleus attraction in atoms  
+2. **Capacitor design**: Charge storage in electronic components  
+3. **Electrostatic precipitators**: Pollution control in smokestacks  
+4. **Inkjet printing**: Precise droplet control using charged plates  
+
+---
+
+#### ⚖️ Limitations
+- Applies **only to point charges** (finite-size objects require integration)  
+- Valid for **stationary charges** (moving charges require magnetism corrections)  
+- Assumes **uniform dielectric medium** (vacuum or air approximation)  
+
+---
+
+#### 💎 Core Principles
+```mermaid
+graph LR
+A[Coulomb's Law] --> B[Inverse-square dependence]
+A --> C[Central force]
+A --> D[Conservative field]
+A --> E[Linear superposition]
+```
+
+---
+
+#### 🧪 Formula Lab (Interactive)  
+*Calculate the force between two 1μC charges separated by 1m:*  
+$$ F = (8.99\times10^9) \frac{(10^{-6})(10^{-6})}{(1)^2} = 8.99 \text{ N} $$
+
+<div class="bg-gray-50 p-4 rounded-xl mt-6">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">q₁ (μC)</label>
+      <input type="number" value="1" class="mt-1 p-2 border rounded w-full">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">q₂ (μC)</label>
+      <input type="number" value="1" class="mt-1 p-2 border rounded w-full">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">r (m)</label>
+      <input type="number" value="1" class="mt-1 p-2 border rounded w-full">
+    </div>
+  </div>
+  <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded w-full">
+    Calculate Force
+  </button>
+  <div class="mt-4 text-center text-xl">
+    Result: <span class="font-bold">F = 8.99 N</span> (repulsive)
+  </div>
+</div>
+
+---
+
+#### 📝 Key Takeaways  
+1. Electrostatic force follows inverse-square law  
+2. Coulomb's constant \( k_e = 8.99 \times 10^9 \) N·m²/C²  
+3. Direction determined by charge signs  
+4. Forms foundation for classical electromagnetism  
+
+> "Coulomb's law is the electric counterpart to Newton's law of universal gravitation."  
+> *— Richard Feynman, The Feynman Lectures on Physics*

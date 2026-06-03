@@ -1,0 +1,575 @@
+<thinking>
+The user wants me to explain Simple Harmonic Motion (SHM) in an interactive textbook format with structured UI blocks, formula cards, and proper section detection. Let me create a comprehensive response with all the required components.
+
+Let me structure this properly with:
+1. Quick Definition card
+2. Key Concepts card
+3. Formula Cards (with explain formula and open formula lab options)
+4. Characteristics card
+5. Conditions for SHM card
+6. Applications card
+7. Summary card
+
+I need to render this as React components with Tailwind CSS and KaTeX for math rendering.
+</thinking>
+
+```tsx
+import { useState } from "react";
+import katex from "katex";
+
+const renderMath = (tex: string, display = false) => {
+  try {
+    return katex.renderToString(tex, {
+      displayMode: display,
+      throwOnError: false,
+    });
+  } catch {
+    return tex;
+  }
+};
+
+const InlineMath = ({ tex }: { tex: string }) => (
+  <span dangerouslySetInnerHTML={{ __html: renderMath(tex, false) }} />
+);
+
+const DisplayMath = ({ tex }: { tex: string }) => (
+  <div
+    className="my-2 overflow-x-auto"
+    dangerouslySetInnerHTML={{ __html: renderMath(tex, true) }}
+  />
+);
+
+/* ─── colour tokens ─── */
+const accent = "indigo";
+const accentHex = "#6366f1";
+
+/* ─── reusable section card ─── */
+const SectionCard = ({
+  icon,
+  label,
+  children,
+  colour = "white",
+  border = "#e5e7eb",
+}: {
+  icon: string;
+  label: string;
+  children: React.ReactNode;
+  colour?: string;
+  border?: string;
+}) => (
+  <div
+    className="rounded-2xl p-5 shadow-sm"
+    style={{
+      background: colour,
+      border: `1.5px solid ${border}`,
+    }}
+  >
+    <div className="flex items-center gap-2 mb-3">
+      <span className="text-xl">{icon}</span>
+      <span
+        className="text-xs font-bold uppercase tracking-widest"
+        style={{ color: accentHex }}
+      >
+        {label}
+      </span>
+    </div>
+    {children}
+  </div>
+);
+
+/* ─── formula card ─── */
+const FormulaCard = ({
+  title,
+  tex,
+  variables,
+  context,
+}: {
+  title: string;
+  tex: string;
+  variables: { sym: string; meaning: string }[];
+  context: string;
+}) => {
+  const [tab, setTab] = useState<"formula" | "explain" | "lab">("formula");
+  const [labValues, setLabValues] = useState<Record<string, string>>({});
+
+  const labVars = variables.filter(
+    (v) => v.sym !== "x" && v.sym !== "a" && v.sym !== "F"
+  );
+
+  return (
+    <div
+      className="rounded-2xl shadow-md overflow-hidden"
+      style={{ border: `1.5px solid ${accentHex}` }}
+    >
+      {/* header */}
+      <div
+        className="px-5 py-3 flex items-center justify-between"
+        style={{ background: accentHex }}
+      >
+        <span className="text-white font-bold text-sm tracking-wide">
+          📐 {title}
+        </span>
+      </div>
+
+      {/* tab bar */}
+      <div className="flex border-b" style={{ borderColor: "#e5e7eb" }}>
+        {(["formula", "explain", "lab"] as const).map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className="flex-1 py-2 text-xs font-semibold uppercase tracking-wider transition-all"
+            style={{
+              background: tab === t ? "#eef2ff" : "white",
+              color: tab === t ? accentHex : "#6b7280",
+              borderBottom: tab === t ? `2px solid ${accentHex}` : "none",
+            }}
+          >
+            {t === "formula" ? "Formula" : t === "explain" ? "Explain" : "Lab"}
+          </button>
+        ))}
+      </div>
+
+      {/* panel */}
+      <div className="p-5 bg-white min-h-[120px]">
+        {tab === "formula" && (
+          <div className="text-center">
+            <div
+              className="rounded-xl py-5 px-4 text-center"
+              style={{ background: "#f5f3ff" }}
+            >
+              <DisplayMath tex={tex} />
+            </div>
+            <p className="text-xs text-gray-400 mt-3 italic">{context}</p>
+          </div>
+        )}
+
+        {tab === "explain" && (
+          <div className="space-y-2">
+            <p className="text-sm text-gray-500 mb-3 italic">{context}</p>
+            <div className="grid gap-2">
+              {variables.map((v) => (
+                <div
+                  key={v.sym}
+                  className="flex items-start gap-3 rounded-lg px-3 py-2"
+                  style={{ background: "#f9fafb" }}
+                >
+                  <span
+                    className="font-mono text-sm font-bold min-w-[28px]"
+                    style={{ color: accentHex }}
+                  >
+                    <InlineMath tex={v.sym} />
+                  </span>
+                  <span className="text-sm text-gray-700">{v.meaning}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {tab === "lab" && (
+          <div>
+            <p className="text-xs text-gray-400 mb-3">
+              Enter values to compute the result.
+            </p>
+            <div className="grid grid-cols-2 gap-3 mb-4">
+              {labVars.map((v) => (
+                <label key={v.sym} className="flex flex-col gap-1">
+                  <span className="text-xs text-gray-500 font-medium">
+                    <InlineMath tex={v.sym} /> — {v.meaning.split("(")[0]}
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="0"
+                    value={labValues[v.sym] ?? ""}
+                    onChange={(e) =>
+                      setLabValues((p) => ({ ...p, [v.sym]: e.target.value }))
+                    }
+                    className="rounded-lg border px-3 py-2 text-sm focus:outline-none"
+                    style={{ borderColor: "#d1d5db" }}
+                  />
+                </label>
+              ))}
+            </div>
+            <LabResult labValues={labValues} tex={tex} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const LabResult = ({
+  labValues,
+  tex,
+}: {
+  labValues: Record<string, string>;
+  tex: string;
+}) => {
+  /* Simple result for F = -kx and a = -ω²x */
+  let result: string | null = null;
+
+  if (tex.includes("-kx")) {
+    const k = parseFloat(labValues["k"] ?? "");
+    const x = parseFloat(labValues["x"] ?? "");
+    if (!isNaN(k) && !isNaN(x)) {
+      result = `F = ${(-k * x).toFixed(4)} N`;
+    }
+  } else if (tex.includes("\\omega^2 x")) {
+    const omega = parseFloat(labValues["\\omega"] ?? "");
+    const x = parseFloat(labValues["x"] ?? "");
+    if (!isNaN(omega) && !isNaN(x)) {
+      result = `a = ${(-(omega * omega) * x).toFixed(4)} m/s²`;
+    }
+  } else if (tex.includes("2\\pi")) {
+    const m = parseFloat(labValues["m"] ?? "");
+    const k = parseFloat(labValues["k"] ?? "");
+    if (!isNaN(m) && !isNaN(k) && k > 0) {
+      result = `T = ${(2 * Math.PI * Math.sqrt(m / k)).toFixed(4)} s`;
+    }
+  }
+
+  if (!result)
+    return (
+      <p className="text-xs text-gray-400 italic">
+        Fill in all values to see the result.
+      </p>
+    );
+
+  return (
+    <div
+      className="rounded-xl px-4 py-3 text-center font-bold text-lg"
+      style={{ background: "#eef2ff", color: accentHex }}
+    >
+      {result}
+    </div>
+  );
+};
+
+/* ─── characteristics pill ─── */
+const Pill = ({ text, icon }: { text: string; icon: string }) => (
+  <div
+    className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium"
+    style={{ background: "#eef2ff", color: "#3730a3" }}
+  >
+    <span>{icon}</span>
+    <span>{text}</span>
+  </div>
+);
+
+/* ─── comparison table ─── */
+const CompareTable = () => {
+  const rows = [
+    {
+      property: "Restoring Force",
+      shm: "∝ displacement, opposite direction",
+      nonShm: "Any other relationship",
+    },
+    {
+      property: "Equilibrium",
+      shm: "Force = 0 at equilibrium",
+      nonShm: "May not return to equilibrium",
+    },
+    {
+      property: "Motion",
+      shm: "Periodic & sinusoidal",
+      nonShm: "Non-sinusoidal or aperiodic",
+    },
+    {
+      property: "Energy",
+      shm: "Continuously exchanges KE ↔ PE",
+      nonShm: "No regular exchange",
+    },
+  ];
+
+  return (
+    <div className="overflow-x-auto rounded-xl" style={{ border: "1.5px solid #e5e7eb" }}>
+      <table className="w-full text-sm border-collapse">
+        <thead>
+          <tr style={{ background: accentHex }}>
+            <th className="text-left px-4 py-3 text-white font-semibold">
+              Property
+            </th>
+            <th className="text-left px-4 py-3 text-white font-semibold">
+              ✅ SHM
+            </th>
+            <th className="text-left px-4 py-3 text-white font-semibold">
+              ❌ Non-SHM
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr
+              key={r.property}
+              style={{ background: i % 2 === 0 ? "#f9fafb" : "white" }}
+            >
+              <td
+                className="px-4 py-3 font-semibold"
+                style={{ color: "#374151" }}
+              >
+                {r.property}
+              </td>
+              <td className="px-4 py-3 text-gray-600">{r.shm}</td>
+              <td className="px-4 py-3 text-gray-400 italic">{r.nonShm}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+/* ─── main page ─── */
+export default function SHMPage() {
+  return (
+    <div className="min-h-screen bg-gray-50 py-10 px-4">
+      <div className="max-w-2xl mx-auto space-y-5">
+
+        {/* ── Page Header ── */}
+        <div className="text-center mb-8">
+          <div
+            className="inline-block rounded-full px-4 py-1 text-xs font-bold uppercase tracking-widest mb-3"
+            style={{ background: "#eef2ff", color: accentHex }}
+          >
+            Oscillations & Waves
+          </div>
+          <h1 className="text-3xl font-extrabold text-gray-900 leading-tight">
+            Simple Harmonic Motion
+          </h1>
+          <p className="text-gray-400 text-sm mt-2">
+            The foundation of all periodic motion in physics
+          </p>
+        </div>
+
+        {/* ── 1. Quick Definition ── */}
+        <SectionCard icon="📖" label="Quick Definition" colour="#fafafa" border="#e5e7eb">
+          <p className="text-gray-800 text-base leading-relaxed">
+            <strong>Simple Harmonic Motion (SHM)</strong> is a type of periodic
+            motion where the restoring force acting on an object is{" "}
+            <span
+              className="font-bold px-1 rounded"
+              style={{ color: accentHex, background: "#eef2ff" }}
+            >
+              directly proportional
+            </span>{" "}
+            to its displacement from the equilibrium position and is always
+            directed{" "}
+            <span
+              className="font-bold px-1 rounded"
+              style={{ color: "#dc2626", background: "#fef2f2" }}
+            >
+              opposite to the displacement
+            </span>
+            .
+          </p>
+        </SectionCard>
+
+        {/* ── 2. Core Condition ── */}
+        <SectionCard icon="⚖️" label="The SHM Condition" colour="#fafafa" border="#e5e7eb">
+          <p className="text-sm text-gray-600 mb-1">
+            An object undergoes SHM if and only if:
+          </p>
+          <div
+            className="rounded-xl px-4 py-3 text-sm font-medium"
+            style={{ background: "#fef3c7", border: "1px solid #fcd34d" }}
+          >
+            <span className="text-amber-800">
+              The net force is always directed toward the equilibrium point and
+              its magnitude is proportional to the distance from it.
+            </span>
+          </div>
+        </SectionCard>
+
+        {/* ── 3. Formula Card — Restoring Force ── */}
+        <FormulaCard
+          title="Restoring Force Law"
+          tex="F = -kx"
+          context="This is the defining equation of SHM — Newton's second law applied to a spring-like restoring force."
+          variables={[
+            { sym: "F", meaning: "Restoring force (N) — always toward equilibrium" },
+            { sym: "k", meaning: "Spring constant / stiffness (N/m)" },
+            { sym: "x", meaning: "Displacement from equilibrium (m)" },
+            { sym: "-", meaning: "Negative sign indicates force opposes displacement" },
+          ]}
+        />
+
+        {/* ── 4. Formula Card — Acceleration ── */}
+        <FormulaCard
+          title="Acceleration in SHM"
+          tex="a = -\omega^2 x"
+          context="Derived from F = ma and F = −kx. Acceleration is always directed toward equilibrium."
+          variables={[
+            { sym: "a", meaning: "Instantaneous acceleration (m/s²)" },
+            { sym: "\\omega", meaning: "Angular frequency (rad/s)" },
+            { sym: "x", meaning: "Displacement from equilibrium (m)" },
+          ]}
+        />
+
+        {/* ── 5. Formula Card — Period ── */}
+        <FormulaCard
+          title="Period of SHM"
+          tex="T = 2\pi\sqrt{\dfrac{m}{k}}"
+          context="Time for one complete oscillation. Depends only on mass and stiffness — not on amplitude."
+          variables={[
+            { sym: "T", meaning: "Period — time for one full oscillation (s)" },
+            { sym: "m", meaning: "Mass of the oscillating object (kg)" },
+            { sym: "k", meaning: "Spring constant / restoring force constant (N/m)" },
+          ]}
+        />
+
+        {/* ── 6. Displacement Equation ── */}
+        <SectionCard icon="📈" label="Displacement Equation" colour="#fafafa" border="#e5e7eb">
+          <p className="text-sm text-gray-600 mb-3">
+            The position of the object as a function of time is sinusoidal:
+          </p>
+          <div
+            className="rounded-xl py-4 px-4 text-center"
+            style={{ background: "#f5f3ff" }}
+          >
+            <DisplayMath tex="x(t) = A\cos(\omega t + \phi)" />
+          </div>
+          <div className="grid grid-cols-2 gap-2 mt-3">
+            {[
+              { sym: "A", label: "Amplitude", sub: "Maximum displacement" },
+              { sym: "\\omega", label: "Angular Frequency", sub: "= 2πf" },
+              { sym: "t", label: "Time", sub: "in seconds" },
+              { sym: "\\phi", label: "Phase Constant", sub: "Initial condition" },
+            ].map((v) => (
+              <div
+                key={v.sym}
+                className="rounded-lg px-3 py-2 text-sm"
+                style={{ background: "#f9fafb", border: "1px solid #e5e7eb" }}
+              >
+                <span
+                  className="font-bold font-mono block"
+                  style={{ color: accentHex }}
+                >
+                  <InlineMath tex={v.sym} />
+                </span>
+                <span className="font-semibold text-gray-700">{v.label}</span>
+                <span className="block text-xs text-gray-400">{v.sub}</span>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
+
+        {/* ── 7. Key Characteristics ── */}
+        <SectionCard icon="✨" label="Key Characteristics" colour="#fafafa" border="#e5e7eb">
+          <div className="flex flex-wrap gap-2">
+            <Pill icon="🔄" text="Periodic motion" />
+            <Pill icon="📏" text="Sinusoidal path" />
+            <Pill icon="⚡" text="Constant total energy" />
+            <Pill icon="🎯" text="Fixed equilibrium point" />
+            <Pill icon="📐" text="Amplitude-independent period" />
+            <Pill icon="↩️" text="Restoring force opposes displacement" />
+          </div>
+        </SectionCard>
+
+        {/* ── 8. Energy in SHM ── */}
+        <SectionCard icon="⚡" label="Energy in SHM" colour="#fafafa" border="#e5e7eb">
+          <p className="text-sm text-gray-600 mb-3">
+            Total mechanical energy is conserved and equals:
+          </p>
+          <div
+            className="rounded-xl py-4 px-4 text-center mb-4"
+            style={{ background: "#f0fdf4", border: "1px solid #bbf7d0" }}
+          >
+            <DisplayMath tex="E = \frac{1}{2}kA^2 = \text{constant}" />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div
+              className="rounded-xl p-3 text-center"
+              style={{ background: "#eff6ff", border: "1px solid #bfdbfe" }}
+            >
+              <p className="text-xs font-bold uppercase text-blue-500 mb-1">
+                Kinetic Energy
+              </p>
+              <DisplayMath tex="KE = \tfrac{1}{2}k(A^2 - x^2)" />
+              <p className="text-xs text-gray-500">Max at equilibrium</p>
+            </div>
+            <div
+              className="rounded-xl p-3 text-center"
+              style={{ background: "#fdf4ff", border: "1px solid #e9d5ff" }}
+            >
+              <p className="text-xs font-bold uppercase text-purple-500 mb-1">
+                Potential Energy
+              </p>
+              <DisplayMath tex="PE = \tfrac{1}{2}kx^2" />
+              <p className="text-xs text-gray-500">Max at amplitude</p>
+            </div>
+          </div>
+        </SectionCard>
+
+        {/* ── 9. SHM vs Non-SHM Table ── */}
+        <SectionCard icon="📊" label="SHM vs Non-SHM" colour="#fafafa" border="#e5e7eb">
+          <CompareTable />
+        </SectionCard>
+
+        {/* ── 10. Real-World Examples ── */}
+        <SectionCard icon="🌍" label="Real-World Examples" colour="#fafafa" border="#e5e7eb">
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { icon: "🕰️", name: "Simple Pendulum", note: "For small angles (< 15°)" },
+              { icon: "🔩", name: "Mass-Spring System", note: "Ideal spring (Hooke's Law)" },
+              { icon: "🎵", name: "Tuning Fork", note: "Vibrating tines" },
+              { icon: "🌊", name: "LC Circuit", note: "Electrical oscillations" },
+              { icon: "🎻", name: "String Vibration", note: "Musical instruments" },
+              { icon: "⚛️", name: "Molecular Bonds", note: "Atomic vibrations" },
+            ].map((ex) => (
+              <div
+                key={ex.name}
+                className="rounded-xl px-3 py-3 flex items-start gap-3"
+                style={{ background: "#f9fafb", border: "1px solid #e5e7eb" }}
+              >
+                <span className="text-2xl">{ex.icon}</span>
+                <div>
+                  <p className="text-sm font-bold text-gray-800">{ex.name}</p>
+                  <p className="text-xs text-gray-400">{ex.note}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
+
+        {/* ── 11. Summary Card ── */}
+        <div
+          className="rounded-2xl p-5 shadow-sm"
+          style={{ background: accentHex }}
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xl">📋</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-indigo-200">
+              Summary
+            </span>
+          </div>
+          <div className="space-y-2">
+            {[
+              "SHM requires a restoring force proportional to displacement.",
+              "The motion is always sinusoidal in nature.",
+              "Period is independent of amplitude — only depends on m and k.",
+              "Total energy is conserved; KE and PE continuously interchange.",
+              "Acceleration is always directed toward the equilibrium point.",
+            ].map((point, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span
+                  className="rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
+                  style={{ background: "#4f46e5", color: "white" }}
+                >
+                  {i + 1}
+                </span>
+                <p className="text-sm text-indigo-100">{point}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Footer ── */}
+        <p className="text-center text-xs text-gray-300 pb-4">
+          Tap <strong>Explain</strong> on any formula card to see variable
+          definitions · Tap <strong>Lab</strong> to compute values
+        </p>
+      </div>
+    </div>
+  );
+}
+```

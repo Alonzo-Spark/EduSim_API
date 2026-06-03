@@ -1,0 +1,194 @@
+┌─────────────────────────────┐
+│ Introduction                 │
+│─────────────────────────────│
+│ Bernoulli’s theorem, often   │
+│ called Bernoulli’s principle,│
+│ is a fundamental result in   │
+│ fluid dynamics. It relates the│
+│ pressure, velocity, and      │
+│ elevation of a fluid flowing │
+│ along a streamline. The      │
+│ theorem provides insight into│
+│ how energy is conserved in   │
+│ ideal (inviscid, incompressible│
+│ and non‑viscous) fluid flow. │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Definition                  │
+│─────────────────────────────│
+│ For a steady, incompressible,│
+│ non‑viscous flow along a     │
+│ streamline, the sum of the   │
+│ pressure energy, kinetic    │
+│ energy, and potential energy │
+│ per unit volume remains      │
+│ constant.                    │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Key Concepts                │
+│─────────────────────────────│
+│ • **Streamline** – a path that│
+│   is tangent to the local     │
+│   velocity vector everywhere.│
+│ • **Steady flow** – properties│
+│   at any point do not change │
+│   with time.                  │
+│ • **Incompressible** – density│
+│   ρ is constant.              │
+│ • **Non‑viscous** – no shear │
+│   stresses (no friction).    │
+│ • **Energy per unit volume**  │
+│   = pressure + kinetic +     │
+│   potential.                 │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Characteristics             │
+│─────────────────────────────│
+│ • Applies only to ideal fluids│
+│   (no viscosity, no heat loss).│
+│ • Valid along a single       │
+│   streamline; may differ       │
+│   between streamlines.        │
+│ • Assumes steady flow;       │
+│   transient effects are      │
+│   excluded.                  │
+│ • Works for both liquids and │
+│   gases, provided density is │
+│   treated appropriately.    │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Main Formula                │
+│─────────────────────────────│
+│                               │
+│   \[ P + \tfrac{1}{2}\rho v^{2} + \rho g h = \text{constant} \]│
+│                               │
+│   [ Explain Formula ]        │
+│   [ Open Formula Lab ]       │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Derived Forms               │
+│─────────────────────────────│
+│ • **Horizontal flow** (h = constant): │
+│   \[ P_1 + \tfrac{1}{2}\rho v_1^{2} = P_2 + \tfrac{1}{2}\rho v_2^{2} \]│
+│ • **Venturi effect** (constriction):│
+│   \[ P_{\text{wide}} + \tfrac{1}{2}\rho v_{\text{wide}}^{2} =│
+│      P_{\text{narrow}} + \tfrac{1}{2}\rho v_{\text{narrow}}^{2} \]│
+│   (Δh = 0).                     │
+│ • **Flow through a pipe** (incl. height):│
+│   \[ P_1 + \tfrac{1}{2}\rho v_1^{2} + \rho g h_1 =│
+│      P_2 + \tfrac{1}{2}\rho v_2^{2} + \rho g h_2 \]│
+│                               │
+│   [ Explain Derived Forms ]   │
+│   [ Open Formula Lab ]        │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Applications                │
+│─────────────────────────────│
+│                               │
+│ ┌─────────────────────────┐ │
+│ │  Fluid‑flow devices     │ │
+│ │  • Venturi meters      │ │
+│ │  • Pitot tubes         │ │
+│ │  • Aircraft wings      │ │
+│ │  • Hydraulic lifts     │ │
+│ └─────────────────────────┘ │
+│                               │
+│ ┌─────────────────────────┐ │
+│ │  Engineering & Nature   │ │
+│ │  • Blood flow in arteries│ │
+│ │  • River discharge      │ │
+│ │  • Weather‑system       │ │
+│ │    pressure–velocity   │ │
+│ └─────────────────────────┘ │
+│                               │
+│   [ Explore Applications ]   │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Advantages                  │
+│─────────────────────────────│
+│ • Simple relationship between│
+│   measurable quantities.    │
+│ • Provides quick estimates   │
+│   for pressure changes.      │
+│ • Forms the basis for many    │
+│   engineering instruments.   │
+│ • Works for both liquids and │
+│   gases (with proper ρ).      │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Disadvantages               │
+│─────────────────────────────│
+│ • Assumes ideal fluid; real  │
+│   fluids have viscosity and  │
+│   turbulence.                │
+│ • Not valid for compressible│
+│   high‑speed gas flows (Mach│
+│   > 0.3).                     │
+│ • Requires steady flow;      │
+│   transient phenomena are   │
+│   excluded.                  │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Important Notes             │
+│─────────────────────────────│
+│ • When density varies (e.g.,│
+│   gases at high speed), use  │
+│   the compressible form:     │
+│   \[ P + \tfrac{1}{2}\rho v^{2} = \text{constant} \]│
+│   with ρ = f(P,T).            │
+│ • Always verify that the     │
+│   flow is along a streamline│
+│   and that elevation changes│
+│   are accounted for.         │
+│ • In practice, correction    │
+│   factors (loss coefficients)│
+│   are added to handle friction│
+│   and turbulence.            │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Summary                     │
+│─────────────────────────────│
+│ Bernoulli’s theorem states that│
+│ the total mechanical energy per│
+│ unit volume of an ideal fluid   │
+│ remains constant along a        │
+│ streamline. Its compact form     │
+│ \(P + \frac12\rho v^2 + \rho gh =\)│
+│ constant links pressure, speed, │
+│ and height. The principle under- │
+│ lies many practical devices –   │
+│ from aircraft lift to flow meters│
+│ – but must be applied with      │
+│ awareness of its assumptions.   │
+└─────────────────────────────┘
+
+┌─────────────────────────────┐
+│ Suggested Questions         │
+│─────────────────────────────│
+│ 1. How does Bernoulli’s theorem   │
+│    explain the lift generated by │
+│    an airplane wing?            │
+│ 2. Why does a Venturi meter      │
+│    produce a pressure drop?      │
+│ 3. What modifications are needed│
+│    for compressible (high‑Mach)  │
+│    flows?                        │
+│ 4. How would you incorporate    │
+│    viscous losses into the       │
+│    Bernoulli equation?           │
+│ 5. Design a simple Pitot tube    │
+│    experiment to measure air speed│
+│    using Bernoulli’s principle. │
+│                                 │
+│   [ Try These Questions ]        │
+└─────────────────────────────┘

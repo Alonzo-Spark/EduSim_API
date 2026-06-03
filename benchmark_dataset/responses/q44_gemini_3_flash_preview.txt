@@ -1,0 +1,85 @@
+### 📘 CHAPTER: ELECTROSTATICS
+# Understanding the Capacitor: Theory & Mechanics
+
+---
+
+┌──────────────────────────────────────────────────────────┐
+│ **Quick Definition**                                     │
+│                                                          │
+│ A **Capacitor** is a passive electronic component that   │
+│ stores electrical energy in an **electric field**. It    │
+│ acts like a temporary battery that can charge and        │
+│ discharge almost instantaneously.                        │
+└──────────────────────────────────────────────────────────┘
+
+### 🧩 The Working Principle
+A capacitor works on the principle that the capacitance of a conductor is increased when an earthed conductor is placed near it.
+
+1.  **Charge Accumulation:** When connected to a DC source, electrons flow to one plate (making it negative) and are pulled away from the other (making it positive).
+2.  **Electric Field Creation:** The potential difference between the plates creates an internal electric field.
+3.  **Dielectric Polarization:** The insulating material (dielectric) between the plates polarizes, opposing the electric field and allowing the plates to hold more charge at the same voltage.
+4.  **Saturation:** The flow stops when the potential difference across the plates equals the battery voltage.
+
+---
+
+┌──────────────────────────────────────────────────────────┐
+│ **Main Formula: Capacitance**                            │
+│                                                          │
+│                 $$C = \frac{Q}{V}$$                      │
+│                                                          │
+│ **[ Explain Formula ]**                                  │
+│ C is Capacitance (Farads), Q is Charge (Coulombs),       │
+│ and V is Potential Difference (Volts).                   │
+│                                                          │
+│ **[ Open Formula Lab ]**                                 │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### 📊 Physical Characteristics
+The ability to store charge depends on the physical construction of the device.
+
+| Factor | Relationship | Effect on Capacitance |
+| :--- | :--- | :--- |
+| **Plate Area (A)** | Direct ($$C \propto A$$) | Larger area = More space for charges |
+| **Distance (d)** | Inverse ($$C \propto 1/d$$) | Closer plates = Stronger attraction |
+| **Dielectric ($\epsilon$)** | Direct ($$C \propto \epsilon$$) | Better insulator = Higher storage |
+
+---
+
+┌──────────────────────────────────────────────────────────┐
+│ **Physical Design Formula**                              │
+│                                                          │
+│             $$C = \epsilon_0 \epsilon_r \frac{A}{d}$$    │
+│                                                          │
+│ **[ Explain Formula ]**                                  │
+│ Relates capacitance to the permittivity of space,        │
+│ plate area, and the distance between plates.             │
+│                                                          │
+│ **[ Open Formula Lab ]**                                 │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### 🚀 Applications & Use Cases
+*   **Energy Storage:** Providing bursts of power for camera flashes.
+*   **Filtering:** Removing "noise" from power supplies by smoothing voltage ripples.
+*   **Tuning:** Selecting specific frequencies in radio receivers.
+*   **Timing:** Used with resistors to create delay circuits (RC circuits).
+
+---
+
+┌──────────────────────────────────────────────────────────┐
+│ **Important Notes**                                      │
+│                                                          │
+│ ⚠️ **DC vs AC:** A capacitor blocks Direct Current (DC)  │
+│ once fully charged but allows Alternating Current (AC)   │
+│ to pass through via constant charging/discharging.       │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### 📝 Suggested Questions
+1.  *How does inserting a dielectric material change the capacitance of a parallel plate capacitor?*
+2.  *Why does a capacitor block DC after it is fully charged?*
+3.  *Calculate the charge stored in a 10μF capacitor connected to a 12V battery.*

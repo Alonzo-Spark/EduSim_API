@@ -1,0 +1,65 @@
+```json
+{
+  "action": "render_ui",
+  "layout": "interactive_textbook",
+  "sections": [
+    {
+      "type": "Introduction",
+      "title": "Projectile Motion Overview",
+      "content": "When an object is projected into the air at an angle, it follows a parabolic path known as projectile motion. The horizontal distance covered by the object from the point of projection to the point where it returns to the same horizontal level is called the **Horizontal Range**."
+    },
+    {
+      "type": "Key Concepts",
+      "title": "Given Parameters",
+      "content": "To solve this problem, we identify the initial physical conditions provided:",
+      "list": [
+        "**Initial Velocity ($u$):** $20\\text{ m/s}$",
+        "**Angle of Projection ($\\theta$):** $45^\\circ$",
+        "**Acceleration due to gravity ($g$):** Standard value is $9.8\\text{ m/s}^2$ (often approximated as $10\\text{ m/s}^2$ for simplicity)."
+      ]
+    },
+    {
+      "type": "Formula",
+      "title": "Horizontal Range Formula",
+      "formula_data": {
+        "formula": "R = \\frac{u^2 \\sin(2\\theta)}{g}",
+        "variables": [
+          {"symbol": "R", "description": "Horizontal Range"},
+          {"symbol": "u", "description": "Initial Velocity"},
+          {"symbol": "θ", "description": "Angle of projection"},
+          {"symbol": "g", "description": "Acceleration due to gravity"}
+        ],
+        "context": "The range is maximized when the angle of projection is $45^\\circ$ because $\\sin(2 \\times 45^\\circ) = \\sin(90^\\circ) = 1$."
+      }
+    },
+    {
+      "type": "Step-by-Step Calculation",
+      "title": "Solution Path",
+      "content": "Let's substitute the values into the range equation:",
+      "table": {
+        "headers": ["Step", "Operation", "Result"],
+        "rows": [
+          ["1", "Calculate $u^2$", "$20^2 = 400$"],
+          ["2", "Calculate $\\sin(2\\theta)$", "$\\sin(2 \\times 45^\\circ) = \\sin(90^\\circ) = 1$"],
+          ["3", "Multiply $u^2$ and $\\sin(2\\theta)$", "$400 \\times 1 = 400$"],
+          ["4", "Divide by $g$ ($9.8$)", "$400 / 9.8 \\approx 40.82\\text{ m}$"]
+        ]
+      }
+    },
+    {
+      "type": "Summary",
+      "title": "Final Result",
+      "content": "The horizontal range of the ball projected at $45^\\circ$ with a velocity of $20\\text{ m/s}$ is approximately **$40.82\\text{ meters}$** (or $40\\text{ m}$ if using $g = 10\\text{ m/s}^2$)."
+    },
+    {
+      "type": "Suggested Questions",
+      "title": "Test Your Understanding",
+      "list": [
+        "How would the range change if the angle was increased to $60^\\circ$?",
+        "Calculate the maximum height reached by the ball during this flight.",
+        "What is the total time of flight for this projectile?"
+      ]
+    }
+  ]
+}
+```

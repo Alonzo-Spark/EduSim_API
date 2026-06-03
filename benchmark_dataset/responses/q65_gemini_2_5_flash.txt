@@ -1,0 +1,132 @@
+Here's a structured response for an `orbit_started` stable loop trigger event, designed to look like an interactive textbook entry rather than plain notes.
+
+---
+
+### **Understanding Orbital Mechanics: Orbit Started Event**
+
+Let's explore what happens when an `orbit_started` event is triggered in the context of orbital mechanics. This event signifies the successful initiation of a stable orbital trajectory for a celestial body or spacecraft.
+
+---
+
+### **Quick Definition: Orbit Started**
+
+<div style="background-color: #e6f7ff; border-left: 4px solid #3399ff; padding: 10px; margin-bottom: 15px;">
+An `orbit_started` event in computational or simulation environments indicates that a simulated object has achieved a stable orbit around a central body, satisfying predefined orbital parameters and stability criteria.
+</div>
+
+---
+
+### **Key Concepts: Orbital Elements**
+
+To understand an `orbit_started` event, it's crucial to grasp the fundamental orbital elements that define an orbit. These six classical orbital elements (Keplerian elements) uniquely describe an object's path in space.
+
+<div style="margin-bottom: 20px;">
+<table style="width:100%; border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Orbital Element</th>
+      <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Symbol</th>
+      <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px;">Semi-major Axis</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">$a$</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">Defines the size of the orbit. Half of the longest diameter of the ellipse.</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px;">Eccentricity</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">$e$</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">Defines the shape of the orbit. $e=0$ for circular, $0 < e < 1$ for elliptical.</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px;">Inclination</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">$i$</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">The angle between the orbital plane and a reference plane (e.g., equatorial plane).</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px;">Longitude of the Ascending Node</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">$\Omega$</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">The angle from the reference direction to the ascending node (where the orbit crosses the reference plane from south to north).</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px;">Argument of Periapsis</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">$\omega$</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">The angle from the ascending node to the periapsis (point of closest approach to the central body).</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px;">True Anomaly</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">$\nu$ or $f$</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">The angle from the periapsis to the current position of the orbiting body. (Often replaced by Time of Periapsis Passage for epoch definition).</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+---
+
+### **Main Formula: Orbital Period**
+
+The orbital period is a critical parameter that defines how long it takes for an object to complete one full orbit. For an elliptical orbit, this is given by Kepler's Third Law.
+
+<div style="background-color: #f0f8ff; border: 1px solid #add8e6; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+  <h4 style="color: #2a6496; margin-top: 0;">Orbital Period (Kepler's Third Law)</h4>
+  $$
+  T = 2\pi \sqrt{\frac{a^3}{\mu}}
+  $$
+  <div style="margin-top: 15px;">
+    <button style="background-color: #4CAF50; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; margin-right: 10px;">Explain Formula</button>
+    <button style="background-color: #008CBA; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer;">Open Formula Lab</button>
+  </div>
+</div>
+
+---
+
+### **Characteristics: Stable Orbit**
+
+A `stable orbit` implies certain conditions are met, ensuring the object will continue its trajectory without immediately escaping or crashing.
+
+<div style="background-color: #fffacd; border-left: 4px solid #ffd700; padding: 10px; margin-bottom: 15px;">
+*   **Closed Trajectory:** The object follows a repeatable path, returning to its starting point relative to the central body.
+*   **Positive Energy:** The total mechanical energy (kinetic + potential) of the orbiting body is negative for elliptical/circular orbits. (A common misconception is positive; positive energy implies hyperbolic trajectory and escape).
+*   **Within Hill Sphere:** The object remains gravitationally bound to the central body, staying within its sphere of influence.
+*   **Perturbation Resistance:** While real orbits are always perturbed, a 'stable' orbit in simulation implies it's resistant to minor numerical errors or expected small influences.
+</div>
+
+---
+
+### **Applications: `orbit_started` Trigger**
+
+The `orbit_started` trigger event is invaluable in various simulation and control contexts:
+
+*   **Spacecraft Operations:** Notifying ground control that a spacecraft has successfully achieved its target orbit after a burn.
+*   **Game Development:** Signifying a player's ship has entered a stable orbit around a planet, enabling orbital mechanics gameplay.
+*   **Astrodynamics Simulations:** Marking the point where a propagation calculation can begin from a well-defined orbital state.
+*   **Autonomous Systems:** Triggering subsequent mission phases or checks once orbital insertion is confirmed.
+
+---
+
+### **Important Notes: Event Data**
+
+When an `orbit_started` event triggers, it typically carries associated data to describe the newly established orbit. This data usually includes:
+
+*   **Timestamp:** When the orbit was started.
+*   **Orbital Elements:** The semi-major axis, eccentricity, inclination, etc., at the moment of stabilization.
+*   **Object ID:** Identifier for the orbiting body.
+*   **Central Body ID:** Identifier for the body being orbited.
+*   **Orbital State Vectors:** Position and velocity vectors (Cartesian coordinates) at the epoch.
+
+---
+
+### **Summary: The Beginning of a Journey**
+
+The `orbit_started` event is a crucial milestone, indicating a successful transition from a non-orbital or unstable trajectory to a predictable, stable path around a central gravitational body. It acts as a reliable trigger for subsequent actions, analyses, and simulations in orbital mechanics.
+
+---
+
+### **Suggested Questions:**
+
+1.  How would the `orbit_started` event differ for a geostationary orbit versus a polar orbit?
+2.  What factors could prevent an `orbit_started` event from triggering successfully after a maneuver?
+3.  Beyond the Keplerian elements, what other parameters might be useful to include in an `orbit_started` event payload for a real-world spacecraft?

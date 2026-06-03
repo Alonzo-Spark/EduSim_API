@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "zai-glm-4.7 (Cerebras)",
+  "question_id": 39,
+  "question": "Define wavelength, frequency, and amplitude of a wave.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWavelength, frequency, and amplitude are primary parameters used to quantify and describe the physical properties of wave propagation through space and time.\n\n---\n\n## Core Wave Metrics\n\n### 1. Wavelength ($\\lambda$)\nWavelength is the spatial distance between two consecutive points that are in the same phase of oscillation, such as the distance between two adjacent wave crests or troughs.\n\n### 2. Frequency ($f$)\nFrequency is the number of complete wave cycles or oscillations that pass a fixed reference point per unit of time, measured internationally in Hertz ($\\text{Hz}$).\n\n### 3. Amplitude ($A$)\nAmplitude is the maximum displacement of a medium's particles from their equilibrium position as a wave passes through.\n\n---\n\n## Formula\n\nThe wave speed equation linking these parameters is defined as:\n\n$$v = f\\lambda$$\n\nWhere:\n* $v$ represents the propagation velocity of the wave profile\n* $f$ represents the wave frequency\n* $\\lambda$ represents the wavelength value\n\n---\n\n## Summary\n\nWavelength measures a wave's spatial structure, frequency tracks its speed over time, and amplitude defines its energy intensity and displacement scale.",
+  "candidate_response": "```json\n[\n  {\n    \"type\": \"card\",\n    \"title\": \"Introduction\",\n    \"content\": \"A wave is a disturbance that transfers energy through a medium or space without transferring matter. To describe the physical properties and behavior of a wave, we use three primary characteristics: wavelength, frequency, and amplitude.\"\n  },\n  {\n    \"type\": \"card\",\n    \"title\": \"Wavelength\",\n    \"content\": \"Wavelength is the spatial period of a periodic wave. It represents the distance over which the wave's shape repeats. \\n\\n**Key Points:**\\n*   It is the distance between two consecutive points in phase, such as crest-to-crest or trough-to-trough.\\n*   **Symbol:** The Greek letter lambda ($\\\\lambda$).\\n*   **SI Unit:** Meter (m).\"\n  },\n  {\n    \"type\": \"card\",\n    \"title\": \"Frequency\",\n    \"content\": \"Frequency refers to how often the particles of a medium vibrate when a wave passes through it. It indicates the number of oscillations per unit time.\\n\\n**Key Points:**\\n*   It is the number of complete cycles that pass a specific point in one second.\\n*   **Symbol:** $f$.\\n*   **SI Unit:** Hertz (Hz), where $1 \\\\text{ Hz} = 1 \\\\text{ cycle/second}$.\"\n  },\n  {\n    \"type\": \"card\",\n    \"title\": \"Amplitude\",\n    \"content\": \"Amplitude is a measure of the wave's maximum displacement from its equilibrium (rest) position. It relates to the energy carried by the wave.\\n\\n**Key Points:**\\n*   In sound waves, higher amplitude corresponds to louder sounds.\\n*   In light waves, higher amplitude corresponds to brighter light.\\n*   **Symbol:** $A$.\\n*   **SI Unit:** Meter (m).\"\n  },\n  {\n    \"type\": \"formula_card\",\n    \"data\": {\n      \"title\": \"Wave Speed Relationship\",\n      \"latex\": \"v = f \\\\lambda\",\n      \"context\": \"The speed of a wave is equal to the product of its frequency and its wavelength.\",\n      \"variables\": [\n        {\n          \"symbol\": \"v\",\n          \"meaning\": \"Wave speed\",\n          \"unit\": \"m/s\"\n        },\n        {\n          \"symbol\": \"f\",\n          \"meaning\": \"Frequency\",\n          \"unit\": \"Hz\"\n        },\n        {\n          \"symbol\": \"\\\\lambda\",\n          \"meaning\": \"Wavelength\",\n          \"unit\": \"m\"\n        }\n      ]\n    }\n  },\n  {\n    \"type\": \"card\",\n    \"title\": \"Summary\",\n    \"content\": \"In summary, **wavelength** measures the distance of the wave cycle, **frequency** measures the rate of oscillation, and **amplitude** measures the intensity or energy of the wave. These three properties define the physical nature of all wave phenomena.\"\n  }\n]\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines wavelength, frequency, and amplitude, aligning well with the gold reference answer. The use of JSON format for structured content enhances readability. However, minor improvements could include adding more detailed explanations for beginners, such as visual aids or simple analogies to enhance pedagogical effectiveness. Additionally, the summary could be slightly expanded to reinforce key concepts, but overall, the response is clear, well-structured, and free of hallucinations.",
+  "candidate_token_usage": {
+    "promptTokens": 358,
+    "completionTokens": 2077,
+    "totalTokens": 2435
+  },
+  "candidate_latency_ms": 3219,
+  "candidate_cost_usd": 0.004512,
+  "judge_token_usage": {
+    "promptTokens": 1274,
+    "completionTokens": 151,
+    "totalTokens": 1425
+  },
+  "judge_latency_ms": 3686,
+  "judge_cost_usd": 0.0011267999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:28:09.820Z"
+}

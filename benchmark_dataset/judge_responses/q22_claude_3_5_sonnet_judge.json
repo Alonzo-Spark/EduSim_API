@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 22,
+  "question": "Derive the expression for acceleration due to gravity.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe acceleration due to gravity ($g$) is the uniform acceleration vector experienced by a freely falling object near the surface of a massive celestial body, such as the Earth, produced entirely by gravitational attraction.\n\n---\n\n## Formula\n\nThe surface acceleration value is determined by:\n\n$$g = \\frac{GM}{R^2}$$\n\nWhere:\n* $g$ represents the acceleration due to gravity\n* $G$ represents the Universal Gravitational Constant\n* $M$ represents the total mass of the planet or central body\n* $R$ represents the radius of the planet or central body\n\n---\n\n## Derivations\n\nConsider a small object of mass $m$ resting on or near the surface of the Earth, which has a total mass $M$ and a radius $R$.\n\nAccording to Newton's Law of Universal Gravitation, the attraction force exerted by the Earth on the object is given by:\n$$F = G \\frac{Mm}{R^2}$$\n\nSimultaneously, according to Newton's Second Law of Motion, the weight force causing the object to accelerate downward at a rate of $g$ is defined as:\n$$F = mg$$\n\nSince both expressions define the exact same mutual interaction force, we equate them directly:\n$$mg = G \\frac{Mm}{R^2}$$\n\nDivide both sides of the balance equation by the object's mass parameter ($m$):\n$$g = \\frac{GM}{R^2}$$\n\nThis completes the analytical derivation of acceleration due to gravity.\n\n---\n\n## Summary\n\nThe acceleration due to gravity depends solely on the mass and radius of the planet, meaning all objects fall at the exact same rate regardless of their individual masses when air resistance is absent.",
+  "candidate_response": "# Acceleration Due to Gravity\n\nLet me render this as structured UI blocks with formula cards and section cards.\n\n---\n\n## 🟦 Quick Definition\n\n> **Acceleration due to gravity** is the acceleration experienced by any object due to the gravitational force exerted by the Earth (or any massive body), directed toward the center of that body.\n\n---\n\n## 🟧 Starting Point — Newton's Laws\n\nTwo laws work together here:\n\n**Newton's Law of Universal Gravitation** tells us the force between two masses:\n\n$$F = \\frac{GMm}{r^2}$$\n\n**Newton's Second Law** connects force to acceleration:\n\n$$F = ma$$\n\n---\n\n## 🟩 The Derivation\n\n### Step 1 — Set the two forces equal\n\nAn object of mass $m$ sits on or near Earth's surface. Earth has mass $M$ and radius $R$.\n\nThe gravitational force on the object is:\n\n$$F = \\frac{GMm}{R^2}$$\n\nBy Newton's Second Law, this same force causes acceleration $g$:\n\n$$F = mg$$\n\n### Step 2 — Equate and cancel\n\n$$mg = \\frac{GMm}{R^2}$$\n\nThe mass of the object $m$ appears on **both sides** — it cancels completely:\n\n$$g = \\frac{GM}{R^2}$$\n\n---\n\n## ⭐ Main Formula Card\n\n$$\\boxed{g = \\frac{GM}{R^2}}$$\n\n| Symbol | Meaning | Value / Unit |\n|--------|---------|-------------|\n| $g$ | Acceleration due to gravity | $\\approx 9.8 \\ \\text{m/s}^2$ |\n| $G$ | Universal Gravitational Constant | $6.674 \\times 10^{-11} \\ \\text{N m}^2\\text{kg}^{-2}$ |\n| $M$ | Mass of Earth | $5.972 \\times 10^{24} \\ \\text{kg}$ |\n| $R$ | Radius of Earth | $6.371 \\times 10^{6} \\ \\text{m}$ |\n\n---\n\n## 🟪 Numerical Verification\n\nSubstituting known values:\n\n$$g = \\frac{(6.674 \\times 10^{-11}) \\times (5.972 \\times 10^{24})}{(6.371 \\times 10^{6})^2}$$\n\n$$g = \\frac{3.985 \\times 10^{14}}{4.059 \\times 10^{13}}$$\n\n$$g \\approx 9.8 \\ \\text{m/s}^2 \\checkmark$$\n\n---\n\n## 🔑 Key Insight — Why mass of object doesn't matter\n\n> The mass $m$ of the falling object **cancels out** in the derivation.\n> This means **all objects fall with the same acceleration** regardless of their mass — which is exactly what Galileo demonstrated by dropping objects from the Leaning Tower of Pisa.\n\n---\n\n## 🟥 Variation with Height\n\nIf an object is at height $h$ above Earth's surface, replace $R$ with $(R + h)$:\n\n$$g_h = \\frac{GM}{(R+h)^2}$$\n\nAs $h$ increases → $g_h$ **decreases** (inverse square relationship).\n\n---\n\n## 📊 How g Varies\n\n| Location | Value of $g$ |\n|----------|-------------|\n| Earth's surface (average) | $9.8 \\ \\text{m/s}^2$ |\n| At the poles | $9.83 \\ \\text{m/s}^2$ |\n| At the equator | $9.78 \\ \\text{m/s}^2$ |\n| At height = $R$ (one Earth radius up) | $2.45 \\ \\text{m/s}^2$ |\n| On the Moon | $1.62 \\ \\text{m/s}^2$ |\n\n---\n\n## 📝 Summary of Derivation\n\n```\nNewton's Gravitation Law   +   Newton's 2nd Law\n        ↓                            ↓\n   F = GMm/R²              F = mg\n        ↓\n   Set equal → mg = GMm/R²\n        ↓\n   Cancel m → g = GM/R²\n```\n\n---\n\n## 💡 Suggested Follow-up Questions\n\n- How does $g$ vary with depth inside the Earth?\n- How does Earth's rotation affect the value of $g$?\n- Why is $g$ different at poles vs equator?\n- Derive the expression for escape velocity using $g$.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly derives the expression for acceleration due to gravity, provides a clear and concise formula card, and offers additional insights into the variation of g with height and location. The use of section cards, formula cards, and a summary of the derivation enhances the readability and understandability of the response. The only minor suggestions for improvement would be to consider adding more visual aids, such as diagrams or graphs, to further illustrate the concepts and to provide more explicit connections to real-world applications or historical experiments, like Galileo's demonstration. Overall, the response demonstrates a strong command of the subject matter and a clear commitment to effective pedagogy.",
+  "candidate_token_usage": {
+    "promptTokens": 434,
+    "completionTokens": 1124,
+    "totalTokens": 1558
+  },
+  "candidate_latency_ms": 19183,
+  "candidate_cost_usd": 0.002682,
+  "judge_token_usage": {
+    "promptTokens": 1763,
+    "completionTokens": 201,
+    "totalTokens": 1964
+  },
+  "judge_latency_ms": 1290,
+  "judge_cost_usd": 0.0015402,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:41:11.485Z"
+}

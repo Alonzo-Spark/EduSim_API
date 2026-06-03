@@ -1,0 +1,146 @@
+┌───────────────────────────┐  
+│ **Quick Definition**      │  
+│                           │  
+│ Acceleration due to gravity (\( g \)) is the acceleration experienced by an object due to the gravitational force exerted by a massive body, such as Earth. It is independent of the object’s mass and depends only on the mass and radius of the celestial body. │  
+└───────────────────────────┘  
+
+---
+
+### **Introduction**
+
+All objects near the surface of a planet (like Earth) experience a constant acceleration when falling freely under gravity, assuming no air resistance. This acceleration is known as the **acceleration due to gravity**, denoted by \( g \). Its value on Earth is approximately \( 9.8 \, \text{m/s}^2 \), but it can be derived from fundamental physical laws.
+
+We derive this expression using **Newton’s Law of Universal Gravitation** and **Newton’s Second Law of Motion**.
+
+---
+
+### **Step-by-Step Derivation**
+
+#### **Step 1: Newton’s Law of Universal Gravitation**
+
+The gravitational force \( F \) between two masses is given by:
+
+$$
+F = \frac{G M m}{R^2}
+$$
+
+Where:  
+- \( G \) = Universal gravitational constant (\(6.674 \times 10^{-11} \, \text{N·m}^2/\text{kg}^2\))  
+- \( M \) = Mass of the Earth (or planet)  
+- \( m \) = Mass of the object near the surface  
+- \( R \) = Radius of the Earth (distance from center to surface)
+
+---
+
+#### **Step 2: Newton’s Second Law of Motion**
+
+When this gravitational force acts on mass \( m \), it produces an acceleration \( g \):
+
+$$
+F = m g
+$$
+
+---
+
+#### **Step 3: Equating the Two Expressions for Force**
+
+Since both expressions represent the same force (gravitational pull), equate them:
+
+$$
+m g = \frac{G M m}{R^2}
+$$
+
+---
+
+#### **Step 4: Cancel the mass \( m \)**
+
+The mass of the object cancels out on both sides:
+
+$$
+g = \frac{G M}{R^2}
+$$
+
+---
+
+┌───────────────────────────┐  
+│ **Main Formula**          │  
+│                           │  
+│     $$                     │  
+│     g = \frac{G M}{R^2}   │  
+│     $$                     │  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+---
+
+### **Explanation of the Formula**
+
+- \( g \): Acceleration due to gravity (in \( \text{m/s}^2 \))  
+- \( G \): Universal gravitational constant  
+- \( M \): Mass of the Earth (\( \approx 5.972 \times 10^{24} \, \text{kg} \))  
+- \( R \): Radius of the Earth (\( \approx 6.371 \times 10^6 \, \text{m} \))
+
+This shows that \( g \) depends only on:
+- The mass of the planet,
+- The radius of the planet,
+- The universal gravitational constant.
+
+It **does not depend** on the mass of the falling object — which is why all objects fall at the same rate in a vacuum.
+
+---
+
+### **Key Concepts**
+
+- Gravity is a universal force described by Newton’s inverse-square law.
+- The derived expression applies to any celestial body — just substitute its mass and radius.
+- The cancellation of the object’s mass explains the equivalence principle (a foundation for general relativity).
+
+---
+
+### **Example Calculation (Earth's Surface)**
+
+$$
+g = \frac{(6.674 \times 10^{-11}) (5.972 \times 10^{24})}{(6.371 \times 10^6)^2}
+$$
+
+$$
+g \approx \frac{3.986 \times 10^{14}}{4.058 \times 10^{13}} \approx 9.82 \, \text{m/s}^2
+$$
+
+Matches observed value closely.
+
+---
+
+### **Important Notes**
+
+- This formula assumes:
+  - The object is at or near the surface.
+  - The Earth is a perfect sphere with uniform density (approximation).
+  - No rotational effects (centrifugal force is ignored).
+
+- At higher altitudes: Replace \( R \) with \( R + h \), where \( h \) is height above surface.
+
+---
+
+### **Summary**
+
+The acceleration due to gravity is derived from equating gravitational force and inertial force:
+
+$$
+g = \frac{G M}{R^2}
+$$
+
+This fundamental expression allows us to calculate \( g \) for any planet or moon given its mass and radius.
+
+---
+
+### **Suggested Questions**
+
+- How does \( g \) change with altitude?
+- Why is \( g \) less at the equator than at the poles?
+- What would \( g \) be on Mars or the Moon?
+- How does this derivation change in Einstein’s theory of general relativity?
+
+Let me know if you'd like to explore any of these!

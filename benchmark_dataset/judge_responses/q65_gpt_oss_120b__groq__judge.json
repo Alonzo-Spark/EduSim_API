@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 65,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'orbit_started' stable loop trigger event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a orbital tracking alignment profile match.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe satellite successfully closed its trajectory path, triggering the stable closed loop status notification (`orbit_started`).\n\n### WHAT CHANGED\nThe path display updated from a open line to a stable elliptical orbit track surrounding the central gravity source.\n\n### SIMPLE WHY\nThe satellite's velocity vector and distance create a balance where gravity provides the exact centripetal force needed for a stable orbit.\n\n### WHAT TO NOTICE\nObserve how the satellite continuously circles the central mass without flying out into deep space or crashing into the planet.",
+  "candidate_response": "**🛰️ Orbit Started – Runtime Overlay (Stable Loop Trigger)**  \n\n```\n┌───────────────────────────────────────────────────────────────────────┐\n│                       🚀 Orbit Started Overlay                         │\n├───────────────────────────────────────────────────────────────────────┤\n│ Event ID          : orbit_started_2026_06_01_001                      │\n│ Trigger Type      : stable_loop                                        │\n│ Timestamp (UTC)   : 2026‑06‑01 12:00:00.000                            │\n│ Source System     : Satellite‑Control‑Module (SCM)                     │\n│ Current Phase     : Initiation → Stabilizing → Active                  │\n│ Status            : ✅ Success – Orbit achieved and stable            │\n│ --------------------------------------------------------------------- │\n│ 📊  Key Metrics                                                       │\n│   • Altitude        : 550 km (target 550 km)                           │\n│   • Inclination     : 97.5° (target 97.5°)                            │\n│   • Velocity        : 7.61 km/s (within ±0.02 km/s)                    │\n│   • Fuel Remaining : 78 % (sufficient for 180 days)                  │\n│ --------------------------------------------------------------------- │\n│ 📡  Telemetry Snapshot (last 5 s)                                      │\n│   ────────────────────────────────────────────────────────────────   │\n│   Time (s) | Alt (km) | Vel (km/s) | Fuel (%) | Temp (°C) |  Status │\n│   ---------------------------------------------------------------   │\n│      0.0   |  0.00    | 0.00       | 100.0    |  25.0     |  Init   │\n│      1.0   | 120.5    | 7.20       |  99.2    |  28.1     |  Burn   │\n│      2.0   | 260.8    | 7.45       |  98.4    |  30.2     |  Burn   │\n│      3.0   | 410.2    | 7.58       |  97.6    |  31.8     |  Burn   │\n│      4.0   | 549.7    | 7.61       |  96.8    |  33.0     |  Stable │\n│   ---------------------------------------------------------------   │\n│ --------------------------------------------------------------------- │\n│ 🛠️  Available Actions                                                │\n│   [1] View Full Telemetry Log                                         │\n│   [2] Open Orbit Control Panel                                        │\n│   [3] Schedule Next Maneuver (ΔV)                                      │\n│   [4] Export Event Report (PDF/JSON)                                  │\n│   [5] Dismiss Overlay                                                 │\n└───────────────────────────────────────────────────────────────────────┘\n```\n\n---\n\n### 📄 Structured Payload (for API / Sandbox Integration)\n\n```json\n{\n  \"overlayId\": \"orbit_started_2026_06_01_001\",\n  \"event\": \"orbit_started\",\n  \"triggerType\": \"stable_loop\",\n  \"timestampUtc\": \"2026-06-01T12:00:00.000Z\",\n  \"sourceSystem\": \"Satellite-Control-Module\",\n  \"status\": \"success\",\n  \"metrics\": {\n    \"altitudeKm\": 550,\n    \"inclinationDeg\": 97.5,\n    \"velocityKms\": 7.61,\n    \"fuelRemainingPct\": 78,\n    \"phase\": \"active\"\n  },\n  \"telemetrySnapshot\": [\n    {\"t\":0,\"altKm\":0.00,\"velKms\":0.00,\"fuelPct\":100.0,\"tempC\":25.0,\"status\":\"Init\"},\n    {\"t\":1,\"altKm\":120.5,\"velKms\":7.20,\"fuelPct\":99.2,\"tempC\":28.1,\"status\":\"Burn\"},\n    {\"t\":2,\"altKm\":260.8,\"velKms\":7.45,\"fuelPct\":98.4,\"tempC\":30.2,\"status\":\"Burn\"},\n    {\"t\":3,\"altKm\":410.2,\"velKms\":7.58,\"fuelPct\":97.6,\"tempC\":31.8,\"status\":\"Burn\"},\n    {\"t\":4,\"altKm\":549.7,\"velKms\":7.61,\"fuelPct\":96.8,\"tempC\":33.0,\"status\":\"Stable\"}\n  ],\n  \"actions\": [\n    {\"id\":1,\"label\":\"View Full Telemetry Log\",\"type\":\"modal\"},\n    {\"id\":2,\"label\":\"Open Orbit Control Panel\",\"type\":\"navigate\"},\n    {\"id\":3,\"label\":\"Schedule Next Maneuver (ΔV)\",\"type\":\"dialog\"},\n    {\"id\":4,\"label\":\"Export Event Report (PDF/JSON)\",\"type\":\"download\"},\n    {\"id\":5,\"label\":\"Dismiss Overlay\",\"type\":\"close\"}\n  ]\n}\n```\n\n*Use the JSON payload to feed your sandbox UI framework; the visual card above is a ready‑to‑display overlay for operators.*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 6,
+    "overall_average": "7.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly detailed and provides a structured overlay for the 'orbit_started' event, including key metrics and available actions. However, it lacks a clear explanation of the underlying physics concepts, such as the balance between the satellite's velocity vector and the centripetal force provided by gravity, which is crucial for a stable orbit. The response is well-formatted and easy to read, but its educational effectiveness is limited due to the lack of pedagogical explanations. To improve, the candidate should focus on providing clear and concise explanations of the physics concepts involved, while maintaining the high level of detail and structure in the overlay.",
+  "candidate_token_usage": {
+    "promptTokens": 435,
+    "completionTokens": 1467,
+    "totalTokens": 1902
+  },
+  "candidate_latency_ms": 3295,
+  "candidate_cost_usd": 0.00094545,
+  "judge_token_usage": {
+    "promptTokens": 1696,
+    "completionTokens": 186,
+    "totalTokens": 1882
+  },
+  "judge_latency_ms": 8038,
+  "judge_cost_usd": 0.001464,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:09:13.732Z"
+}

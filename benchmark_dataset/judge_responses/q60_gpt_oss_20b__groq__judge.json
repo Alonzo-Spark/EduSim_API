@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 60,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'gravity_changed' event to zero-g environment.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a user interaction with the global environment controllers.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe environmental gravity parameter was modified by the user from Earth conditions to a weightless state (`gravity_changed`).\n\n### WHAT CHANGED\nThe vertical acceleration vector acting on all active canvas masses dropped to zero, causing floating objects to cease downward travel.\n\n### SIMPLE WHY\nSetting the gravity constant to zero removes the downward gravitational force vector, leaving objects to move purely by their linear inertia.\n\n### WHAT TO NOTICE\nNotice how objects that were falling now drift in straight lines across the grid, unaffected by any downward pull.",
+  "candidate_response": "┌───────────────────────────────────────────────────────┐\n│                     Gravity Changed                    │\n│                                                       │\n│ The environment's gravity has been set to **0 m/s²**.  │\n│ All objects will now float freely; momentum will be    │\n│ conserved in the absence of friction.                 │\n│                                                       │\n│ • Adjust your position to avoid collisions.           │\n│ • Re‑enable propulsion if needed.                     │\n│ • Monitor orientation sensors for stability.          │\n│                                                       │\n│ [Take a moment to adjust your position]               │\n└───────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 6,
+    "overall_average": "7.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is mostly accurate and well-presented, but lacks detailed explanations and pedagogical effectiveness. It correctly states the effect of zero gravity on objects, but does not provide a clear 'why' or underlying physics principles. The response is beginner-friendly in terms of warnings and advice, but could be improved with more educational content. Specifically, it could include more information on the concept of inertia, the role of friction, and the implications of zero gravity on object motion. Additionally, the response could benefit from a clearer structure and more detailed explanations to enhance its educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 436,
+    "completionTokens": 507,
+    "totalTokens": 943
+  },
+  "candidate_latency_ms": 1119,
+  "candidate_cost_usd": 0.0001848,
+  "judge_token_usage": {
+    "promptTokens": 718,
+    "completionTokens": 175,
+    "totalTokens": 893
+  },
+  "judge_latency_ms": 6265,
+  "judge_cost_usd": 0.0008507999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:47:54.859Z"
+}

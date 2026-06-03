@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 34,
+  "question": "A metal rod expands on heating. Explain thermal expansion.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThermal expansion is the tendency of matter to increase in volume, area, or length in response to an increase in temperature. \n\nThis behavior occurs because heating causes atoms to vibrate more vigorously, increasing the average separation distance between them.\n\n---\n\n## Characteristics\n\n* **Reversible Behavior:** The material expands uniformly as temperature rises and contracts back to its initial dimensions when cooled, provided it stays within its elastic limits.\n\n---\n\n## Formula\n\nThe linear thermal expansion equation for a solid rod is defined as:\n\n$$\\Delta L = \\alpha L_0 \\Delta T$$\n\nWhere:\n* $\\Delta L$ represents the net change in length\n* $\\alpha$ represents the coefficient of linear thermal expansion\n* $L_0$ represents the initial length of the rod sample\n* $\\Delta T$ represents the change in temperature\n\n---\n\n## Summary\n\nThermal expansion occurs because heat increases atomic vibrations, forcing atoms further apart and causing macroscopic expansion that scales with temperature changes.",
+  "candidate_response": "┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ Thermal expansion refers  │\n│ to the tendency of matter │\n│ to change its shape, area,│\n│ and volume in response to │\n│ a change in temperature.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Definition                │\n│                           │\n│ Thermal expansion is the  │\n│ increase in the size of   │\n│ an object when it is      │\n│ heated. This occurs due   │\n│ to the increase in        │\n│ kinetic energy of the     │\n│ particles, causing them   │\n│ to move apart.           │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ 1. **Linear Expansion:**   │\n│    - Change in length     │\n│    - Given by the formula  │\n│      $$L = L_0(1 + \\alpha \\Delta T)$$ │\n│                           │\n│ 2. **Area Expansion:**     │\n│    - Change in area       │\n│    - Given by the formula  │\n│      $$A = A_0(1 + 2\\alpha \\Delta T)$$ │\n│                           │\n│ 3. **Volume Expansion:**   │\n│    - Change in volume     │\n│    - Given by the formula  │\n│      $$V = V_0(1 + 3\\alpha \\Delta T)$$ │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics           │\n│                           │\n│ - Different materials     │\n│   expand at different     │\n│   rates.                 │\n│ - The coefficient of      │\n│   linear expansion,       │\n│   denoted as $\\alpha$,    │\n│   is a material-specific   │\n│   constant.               │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     Rendered Formula      │\n│                           │\n│ $$\\Delta L = L_0 \\alpha \\Delta T$$      │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Applications              │\n│                           │\n│ - Used in bridges,       │\n│   railways, and          │\n│   buildings to account    │\n│   for expansion and       │\n│   contraction.            │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Advantages                │\n│                           │\n│ - Predictable behavior    │\n│   allows for design       │\n│   considerations in       │\n│   engineering and         │\n│   construction.           │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Disadvantages             │\n│                           │\n│ - Can lead to structural  │\n│   failure if not          │\n│   properly accounted for.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ - Be mindful of           │\n│   temperature changes in   │\n│   environments.           │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                   │\n│                           │\n│ Thermal expansion is a    │\n│ crucial concept in        │\n│ physics and engineering,  │\n│ influencing the design    │\n│ of structures and         │\n│ materials. Understanding   │\n│ how materials expand      │\n│ with heat is essential for │\n│ safety and efficiency in   │\n│ engineering applications.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions        │\n│                           │\n│ 1. How does thermal       │\n│    expansion vary among   │\n│    different materials?    │\n│ 2. What are some real-life │\n│    examples of thermal     │\n│    expansion?             │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of thermal expansion, including its definition, characteristics, and formulas. The use of boxes to separate sections and the inclusion of multiple formulas for different types of expansion (linear, area, volume) are notable strengths. However, there are some areas for improvement. The response could benefit from more explicit connections to the behavior of atoms and molecules, as mentioned in the gold reference answer. Additionally, some sections, such as 'Advantages' and 'Disadvantages', feel somewhat tangential to the main topic of thermal expansion and could be more tightly integrated into the rest of the response. The 'Main Formula' section could also be clarified, as the formula provided seems to be a simplified version of the linear thermal expansion equation. Overall, the response is well-structured and easy to follow, but could benefit from some refinement in terms of content and clarity.",
+  "candidate_token_usage": {
+    "promptTokens": 365,
+    "completionTokens": 942,
+    "totalTokens": 1307
+  },
+  "candidate_latency_ms": 10299,
+  "candidate_cost_usd": 0.00061995,
+  "judge_token_usage": {
+    "promptTokens": 1559,
+    "completionTokens": 237,
+    "totalTokens": 1796
+  },
+  "judge_latency_ms": 5192,
+  "judge_cost_usd": 0.0015041999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:10:40.487Z"
+}

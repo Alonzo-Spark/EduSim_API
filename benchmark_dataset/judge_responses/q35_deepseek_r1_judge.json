@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 35,
+  "question": "Define latent heat and explain change of state.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nLatent heat is the thermal energy absorbed or released by a substance during a phase change that occurs at a constant, unchanging temperature.\n\nA change of state refers to the transition of matter between solid, liquid, and gaseous phases as internal molecular bonds break or form.\n\n---\n\n## Types of Latent Heat\n\n* **Latent Heat of Fusion:** The heat energy required to transition a substance from a solid to a liquid phase at its melting point.\n* **Latent Heat of Vaporization:** The heat energy required to transition a substance from a liquid to a gaseous phase at its boiling point.\n\n---\n\n## Formula\n\nThe phase change heat transfer equation is written as:\n\n$$Q = mL$$\n\nWhere:\n* $Q$ represents the heat energy transferred during the phase change\n* $m$ represents the total mass of the substance undergoing transformation\n* $L$ represents the specific latent heat constant for that substance\n\n---\n\n## Summary\n\nLatent heat drives phase changes at a constant temperature by breaking or forming molecular bonds rather than changing the system's kinetic temperature.",
+  "candidate_response": "### Understanding Latent Heat and Change of State\n\n#### 🔍 Quick Definition  \n**Latent heat** is the \"hidden\" energy absorbed or released by a substance during a **phase change** (e.g., solid to liquid) *without changing its temperature*.  \n\n---\n\n#### 🧩 Key Concepts  \n1. **Change of State**  \n   - Occurs when matter transitions between **solid, liquid, or gas** phases.  \n   - Driven by **energy transfer** (heating/cooling).  \n   - **Temperature remains constant** during the phase change.  \n\n2. **Latent Heat Types**  \n   | Type                | Symbol | Definition                          | Example                     |  \n   |---------------------|--------|-------------------------------------|-----------------------------|  \n   | **Fusion**          | \\(L_f\\)| Heat to melt/freeze 1 kg of solid   | Ice → Water (0°C)           |  \n   | **Vaporization**    | \\(L_v\\)| Heat to vaporize/condense 1 kg liquid| Water → Steam (100°C)       |  \n   | **Sublimation**     | \\(L_s\\)| Heat for solid → gas directly       | Dry ice → CO₂ gas           |  \n\n---\n\n#### ⚖️ The Physics: Energy Transfer  \n- **Why no temperature change?**  \n  Energy breaks/makes **intermolecular bonds** instead of increasing molecular kinetic energy.  \n  - *Melting*: Breaks rigid bonds → liquid freedom.  \n  - *Vaporization*: Overcomes all bonds → gas expansion.  \n\n---\n\n#### 📐 Formula for Latent Heat  \nThe energy (\\(Q\\)) absorbed/released during a phase change is:  \n\n<div class=\"formula-card\">  \n<h3>Latent Heat Equation</h3>  \n$$ Q = m \\cdot L $$  \n<p>Where:<br>  \n\\(Q\\) = Energy transferred (Joules),<br>  \n\\(m\\) = Mass of substance (kg),<br>  \n\\(L\\) = Specific latent heat (J/kg).  \n</p>  \n</div>  \n\n> ⚡ **Example**: Melting 2 kg of ice (\\(L_f = 334,000  \\text{J/kg}\\)):  \n> $$ Q = 2 \\times 334,000 = 668,000  \\text{J} $$  \n\n---\n\n#### ❄️ Real-World Applications  \n1. **Sweating cools you**: Water absorbs \\(L_v\\) from skin to evaporate.  \n2. **Ice packs**: Ice absorbs \\(L_f\\) from injuries during melting.  \n3. **Pressure cookers**: Raise boiling point → reduces \\(L_v\\) needed.  \n\n---\n\n#### ⚠️ Important Notes  \n- **Cooling curves vs. heating curves**: Temperature plateaus during phase changes.  \n- \\(L_v > L_f\\): Vaporization requires ~7× more energy than fusion (for water).  \n- **Conservation**: Energy released in freezing = energy absorbed in melting.  \n\n---\n\n#### 💎 Summary  \n- **Latent heat** = Energy for phase changes at constant temperature.  \n- **Change of state** involves bond restructuring, not temperature change.  \n- **Formula**: \\( Q = m \\cdot L \\) quantifies the \"hidden\" energy.  \n\n❓ **Suggested Questions**:  \n1. Why does steam at 100°C cause worse burns than water at 100°C?  \n2. How does latent heat influence Earth’s climate systems?  \n3. Calculate energy needed to boil 500g of water (\\(L_v = 2.26 \\times 10^6  \\text{J/kg}\\)).  \n\nLet me know which concept you’d like to explore deeper! 🔬",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Judge evaluation failed: Bad escaped character in JSON at position 687 (line 8 column 541)",
+  "candidate_token_usage": {
+    "promptTokens": 360,
+    "completionTokens": 945,
+    "totalTokens": 1305
+  },
+  "candidate_latency_ms": 41314,
+  "candidate_cost_usd": 0.00226755,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 6450,
+  "judge_cost_usd": 0,
+  "retry_count": 0,
+  "success": false,
+  "error": "Bad escaped character in JSON at position 687 (line 8 column 541)",
+  "timestamp": "2026-06-01T09:12:54.062Z"
+}

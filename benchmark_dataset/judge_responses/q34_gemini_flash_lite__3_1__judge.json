@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 34,
+  "question": "A metal rod expands on heating. Explain thermal expansion.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThermal expansion is the tendency of matter to increase in volume, area, or length in response to an increase in temperature. \n\nThis behavior occurs because heating causes atoms to vibrate more vigorously, increasing the average separation distance between them.\n\n---\n\n## Characteristics\n\n* **Reversible Behavior:** The material expands uniformly as temperature rises and contracts back to its initial dimensions when cooled, provided it stays within its elastic limits.\n\n---\n\n## Formula\n\nThe linear thermal expansion equation for a solid rod is defined as:\n\n$$\\Delta L = \\alpha L_0 \\Delta T$$\n\nWhere:\n* $\\Delta L$ represents the net change in length\n* $\\alpha$ represents the coefficient of linear thermal expansion\n* $L_0$ represents the initial length of the rod sample\n* $\\Delta T$ represents the change in temperature\n\n---\n\n## Summary\n\nThermal expansion occurs because heat increases atomic vibrations, forcing atoms further apart and causing macroscopic expansion that scales with temperature changes.",
+  "candidate_response": "Here's the content, structured as you requested:\n\n┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ Thermal expansion is the  │\n│ tendency of matter to    │\n│ change in volume in       │\n│ response to temperature   │\n│ changes. When a substance │\n│ is heated, its particles  │\n│ move more rapidly, and so │\n│ maintain a greater        │\n│ average separation.       │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ *   **Linear Expansion:**  │\n│     Expansion in one      │\n│     dimension (length).   │\n│ *   **Area Expansion:**    │\n│     Expansion in two      │\n│     dimensions (area).    │\n│ *   **Volume Expansion:**  │\n│     Expansion in three    │\n│     dimensions (volume).  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Formula: Linear Expansion │\n│                           │\n│  $$ \\Delta L = \\alpha L_0 \\Delta T $$ │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Formula: Volume Expansion │\n│                           │\n│  $$ \\Delta V = \\beta V_0 \\Delta T $$ │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Applications              │\n│                           │\n│ *   Bimetallic strips in │\n│     thermostats.          │\n│ *   Expansion joints in   │\n│     bridges and roads.    │\n│ *   Fitting metal rims    │\n│     onto wheels.          │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Advantages                │\n│                           │\n│ *   Predictable behavior  │\n│     based on material     │\n│     properties and        │\n│     temperature change.   │\n│ *   Useful in various     │\n│     engineering designs.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Disadvantages             │\n│                           │\n│ *   Can cause stress and │\n│     damage if not          │\n│     accounted for.        │\n│ *   Expansion can lead to │\n│     inaccuracies          │\n│     in measurements.      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ *   Different materials   │\n│     have different        │\n│     coefficients of       │\n│     thermal expansion.    │\n│ *   Liquids and gases     │\n│     also undergo thermal  │\n│     expansion.            │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                   │\n│                           │\n│ Thermal expansion is the  │\n│ expansion of matter due   │\n│ to temperature changes.   │\n│ It's a key concept in     │\n│ physics and engineering.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions       │\n│                           │\n│ 1.  What are the         │\n│     coefficients of       │\n│     thermal expansion?    │\n│ 2.  How are expansion    │\n│     joints used in        │\n│     bridges?              │\n└───────────────────────────┘\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of thermal expansion, including its definition, characteristics, and formulas. The use of a structured format with clear headings and concise descriptions enhances readability. However, there are a few areas for improvement. Firstly, the introduction could be more concise and directly aligned with the gold reference answer. Secondly, the explanation of the linear thermal expansion formula could be more detailed, including the physical interpretation of each variable. Additionally, the section on applications, advantages, and disadvantages, while informative, could be more closely tied to the fundamental principles of thermal expansion. Lastly, the summary could more effectively synthesize the key points, reiterating the importance of thermal expansion in physics and engineering. Overall, the response is accurate, well-structured, and educational, but could benefit from minor adjustments to enhance clarity and depth.",
+  "candidate_token_usage": {
+    "promptTokens": 381,
+    "completionTokens": 784,
+    "totalTokens": 1165
+  },
+  "candidate_latency_ms": 5186,
+  "candidate_cost_usd": 0.00228825,
+  "judge_token_usage": {
+    "promptTokens": 1416,
+    "completionTokens": 225,
+    "totalTokens": 1641
+  },
+  "judge_latency_ms": 17286,
+  "judge_cost_usd": 0.0013896,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:10:40.534Z"
+}

@@ -1,0 +1,1288 @@
+I'll build this as a proper interactive textbook experience with structured UI cards, formula cards, and a live physics sandbox.
+
+```tsx
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// ============================================================
+// TYPES
+// ============================================================
+interface FormulaData {
+  id: string;
+  title: string;
+  latex: string;
+  variables: { symbol: string; description: string; range?: string }[];
+  context: string;
+}
+
+interface Section {
+  id: string;
+  label: string;
+  icon: string;
+}
+
+interface Ball {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  radius: number;
+  mass: number;
+  color: string;
+  trail: { x: number; y: number }[];
+}
+
+// ============================================================
+// FORMULA DATA
+// ============================================================
+const FORMULAS: FormulaData[] = [
+  {
+    id: "restitution",
+    title: "Coefficient of Restitution",
+    latex: "e = \\frac{v_2' - v_1'}{v_1 - v_2}",
+    variables: [
+      { symbol: "e", description: "Coefficient of restitution", range: "0 ≤ e ≤ 1" },
+      { symbol: "v₁", description: "Initial velocity of body 1", range: "m/s" },
+      { symbol: "v₂", description: "Initial velocity of body 2", range: "m/s" },
+      { symbol: "v₁'", description: "Final velocity of body 1", range: "m/s" },
+      { symbol: "v₂'", description: "Final velocity of body 2", range: "m/s" },
+    ],
+    context: "Defines the ratio of relative separation speed to relative approach speed after collision.",
+  },
+  {
+    id: "momentum",
+    title: "Conservation of Momentum",
+    latex: "m_1 v_1 + m_2 v_2 = m_1 v_1' + m_2 v_2'",
+    variables: [
+      { symbol: "m₁, m₂", description: "Masses of the two bodies", range: "kg" },
+      { symbol: "v₁, v₂", description: "Pre-collision velocities", range: "m/s" },
+      { symbol: "v₁', v₂'", description: "Post-collision velocities", range: "m/s" },
+    ],
+    context: "Total momentum is always conserved regardless of the restitution value.",
+  },
+  {
+    id: "postcollision",
+    title: "Post-Collision Velocities",
+    latex: "v_1' = \\frac{m_1 v_1 + m_2 v_2 - m_2 e(v_1 - v_2)}{m_1 + m_2}",
+    variables: [
+      { symbol: "e", description: "Coefficient of restitution", range: "0 to 1" },
+      { symbol: "m₁, m₂", description: "Masses", range: "kg" },
+      { symbol: "v₁, v₂", description: "Pre-collision velocities", range: "m/s" },
+    ],
+    context: "Derived by combining momentum conservation with the restitution definition.",
+  },
+];
+
+const SECTIONS: Section[] = [
+  { id: "intro", label: "Introduction", icon: "◎" },
+  { id: "definition", label: "Definition", icon: "⬡" },
+  { id: "formula", label: "Formulas", icon: "∑" },
+  { id: "types", label: "Collision Types", icon: "⟷" },
+  { id: "sandbox", label: "Live Sandbox", icon: "▷" },
+  { id: "applications", label: "Applications", icon: "⚙" },
+];
+
+// ============================================================
+// KATEX RENDERER
+// ============================================================
+declare global {
+  interface Window {
+    katex: {
+      renderToString: (latex: string, opts: object) => string;
+    };
+  }
+}
+
+function KaTeX({ latex, display = false }: { latex: string; display?: boolean }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const render = () => {
+      if (ref.current && window.katex) {
+        try {
+          ref.current.innerHTML = window.katex.renderToString(latex, {
+            displayMode: display,
+            throwOnError: false,
+          });
+        } catch {}
+      }
+    };
+    if (window.katex) {
+      render();
+    } else {
+      const interval = setInterval(() => {
+        if (window.katex) {
+          clearInterval(interval);
+          render();
+        }
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [latex, display]);
+  return <span ref={ref} />;
+}
+
+// ============================================================
+// FORMULA CARD
+// ============================================================
+function FormulaCard({ formula }: { formula: FormulaData }) {
+  const [expanded, setExpanded] = useState(false);
+  const [labOpen, setLabOpen] = useState(false);
+
+  return (
+    <div className="rounded-xl overflow-hidden border border-indigo-200 bg-white shadow-sm mb-4">
+      <div className="bg-gradient-to-r from-indigo-50 to-violet-50 px-5 py-3 flex items-center justify-between border-b border-indigo-100">
+        <span className="text-xs font-semibold text-indigo-500 uppercase tracking-widest">
+          {formula.title}
+        </span>
+        <span className="text-xs text-indigo-300">Formula</span>
+      </div>
+      <div className="px-5 py-6 flex flex-col items-center gap-4">
+        <div className="text-2xl">
+          <KaTeX latex={formula.latex} display />
+        </div>
+        <p className="text-xs text-slate-500 text-center max-w-sm">{formula.context}</p>
+        <div className="flex gap-2 flex-wrap justify-center">
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="px-4 py-1.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border border-indigo-200 transition-colors"
+          >
+            {expanded ? "Hide Variables" : "Explain Formula"}
+          </button>
+          <button
+            onClick={() => setLabOpen(!labOpen)}
+            className="px-4 py-1.5 rounded-full text-xs font-medium bg-violet-50 text-violet-600 hover:bg-violet-100 border border-violet-200 transition-colors"
+          >
+            {labOpen ? "Close Lab" : "Open Formula Lab"}
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden border-t border-indigo-100"
+          >
+            <div className="px-5 py-4 bg-slate-50">
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
+                Variable Reference
+              </p>
+              <div className="space-y-2">
+                {formula.variables.map((v) => (
+                  <div key={v.symbol} className="flex items-start gap-3">
+                    <span className="min-w-[3rem] font-mono text-sm text-indigo-600 font-semibold">
+                      {v.symbol}
+                    </span>
+                    <span className="text-sm text-slate-600">{v.description}</span>
+                    {v.range && (
+                      <span className="ml-auto text-xs text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
+                        {v.range}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {labOpen && formula.id === "restitution" && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden border-t border-violet-100"
+          >
+            <FormulaLab />
+          </motion.div>
+        )}
+        {labOpen && formula.id === "postcollision" && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden border-t border-violet-100"
+          >
+            <PostCollisionLab />
+          </motion.div>
+        )}
+        {labOpen && formula.id === "momentum" && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden border-t border-violet-100"
+          >
+            <MomentumLab />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// ============================================================
+// FORMULA LAB - Restitution Calculator
+// ============================================================
+function FormulaLab() {
+  const [v1, setV1] = useState(10);
+  const [v2, setV2] = useState(-5);
+  const [e, setE] = useState(0.7);
+
+  const relApproach = v1 - v2;
+  const result = relApproach !== 0 ? (e * relApproach).toFixed(3) : "∞";
+
+  return (
+    <div className="px-5 py-4 bg-violet-50">
+      <p className="text-xs font-semibold text-violet-500 uppercase tracking-wider mb-4">
+        Formula Lab — Restitution Calculator
+      </p>
+      <div className="grid grid-cols-3 gap-3 mb-4">
+        {[
+          { label: "v₁ (m/s)", val: v1, set: setV1, min: -20, max: 20 },
+          { label: "v₂ (m/s)", val: v2, set: setV2, min: -20, max: 20 },
+          { label: "e", val: e, set: setE, min: 0, max: 1, step: 0.01 },
+        ].map((item) => (
+          <div key={item.label} className="flex flex-col gap-1">
+            <label className="text-xs text-violet-600 font-medium">{item.label}</label>
+            <input
+              type="range"
+              min={item.min}
+              max={item.max}
+              step={item.step ?? 1}
+              value={item.val}
+              onChange={(ev) => item.set(Number(ev.target.value))}
+              className="accent-violet-500"
+            />
+            <span className="text-xs text-center text-slate-600 font-mono">{item.val}</span>
+          </div>
+        ))}
+      </div>
+      <div className="bg-white rounded-lg p-3 border border-violet-200 text-center">
+        <p className="text-xs text-slate-400 mb-1">Relative separation speed (v₂' − v₁')</p>
+        <p className="text-xl font-bold text-violet-600 font-mono">{result} m/s</p>
+        <p className="text-xs text-slate-400 mt-1">
+          = e × (v₁ − v₂) = {e} × {relApproach.toFixed(1)} = {result}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// POST COLLISION LAB
+// ============================================================
+function PostCollisionLab() {
+  const [m1, setM1] = useState(2);
+  const [m2, setM2] = useState(2);
+  const [v1, setV1] = useState(8);
+  const [v2, setV2] = useState(-3);
+  const [e, setE] = useState(0.8);
+
+  const totalM = m1 + m2;
+  const pBefore = m1 * v1 + m2 * v2;
+  const v1f = (m1 * v1 + m2 * v2 - m2 * e * (v1 - v2)) / totalM;
+  const v2f = (m1 * v1 + m2 * v2 + m1 * e * (v1 - v2)) / totalM;
+  const keBefore = 0.5 * m1 * v1 ** 2 + 0.5 * m2 * v2 ** 2;
+  const keAfter = 0.5 * m1 * v1f ** 2 + 0.5 * m2 * v2f ** 2;
+  const keLoss = keBefore - keAfter;
+
+  return (
+    <div className="px-5 py-4 bg-violet-50">
+      <p className="text-xs font-semibold text-violet-500 uppercase tracking-wider mb-4">
+        Formula Lab — Post-Collision Velocities
+      </p>
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        {[
+          { label: "m₁ (kg)", val: m1, set: setM1, min: 0.5, max: 10, step: 0.5 },
+          { label: "m₂ (kg)", val: m2, set: setM2, min: 0.5, max: 10, step: 0.5 },
+          { label: "v₁ (m/s)", val: v1, set: setV1, min: -15, max: 15, step: 1 },
+          { label: "v₂ (m/s)", val: v2, set: setV2, min: -15, max: 15, step: 1 },
+          { label: "e (restitution)", val: e, set: setE, min: 0, max: 1, step: 0.01 },
+        ].map((item) => (
+          <div key={item.label} className="flex flex-col gap-1">
+            <label className="text-xs text-violet-600 font-medium">{item.label}</label>
+            <input
+              type="range"
+              min={item.min}
+              max={item.max}
+              step={item.step}
+              value={item.val}
+              onChange={(ev) => item.set(Number(ev.target.value))}
+              className="accent-violet-500"
+            />
+            <span className="text-xs text-center text-slate-600 font-mono">{item.val}</span>
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="bg-white rounded-lg p-3 border border-violet-200 text-center">
+          <p className="text-xs text-slate-400">v₁' (Body 1 after)</p>
+          <p className="text-lg font-bold text-indigo-600 font-mono">{v1f.toFixed(2)} m/s</p>
+        </div>
+        <div className="bg-white rounded-lg p-3 border border-violet-200 text-center">
+          <p className="text-xs text-slate-400">v₂' (Body 2 after)</p>
+          <p className="text-lg font-bold text-indigo-600 font-mono">{v2f.toFixed(2)} m/s</p>
+        </div>
+        <div className="bg-white rounded-lg p-3 border border-violet-200 text-center">
+          <p className="text-xs text-slate-400">Momentum (conserved)</p>
+          <p className="text-sm font-bold text-green-600 font-mono">{pBefore.toFixed(2)} kg·m/s</p>
+        </div>
+        <div className="bg-white rounded-lg p-3 border border-violet-200 text-center">
+          <p className="text-xs text-slate-400">KE lost</p>
+          <p className="text-sm font-bold text-orange-500 font-mono">{keLoss.toFixed(2)} J</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// MOMENTUM LAB
+// ============================================================
+function MomentumLab() {
+  const [m1, setM1] = useState(3);
+  const [v1, setV1] = useState(6);
+  const [m2, setM2] = useState(2);
+  const [v2, setV2] = useState(-2);
+
+  const p1 = m1 * v1;
+  const p2 = m2 * v2;
+  const total = p1 + p2;
+  const maxBar = Math.max(Math.abs(p1), Math.abs(p2), Math.abs(total), 1);
+
+  const Bar = ({ value, color }: { value: number; color: string }) => (
+    <div className="flex items-center gap-2">
+      <div className="flex-1 h-4 bg-slate-100 rounded-full overflow-hidden relative">
+        <div
+          className={`absolute top-0 h-full rounded-full transition-all ${color}`}
+          style={{
+            width: `${(Math.abs(value) / maxBar) * 100}%`,
+            left: value >= 0 ? "50%" : `${50 - (Math.abs(value) / maxBar) * 50}%`,
+          }}
+        />
+        <div className="absolute left-1/2 top-0 h-full w-px bg-slate-300" />
+      </div>
+      <span className="font-mono text-xs w-16 text-right">{value.toFixed(1)}</span>
+    </div>
+  );
+
+  return (
+    <div className="px-5 py-4 bg-violet-50">
+      <p className="text-xs font-semibold text-violet-500 uppercase tracking-wider mb-4">
+        Formula Lab — Momentum Visualization
+      </p>
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        {[
+          { label: "m₁ (kg)", val: m1, set: setM1, min: 0.5, max: 10, step: 0.5 },
+          { label: "v₁ (m/s)", val: v1, set: setV1, min: -15, max: 15, step: 1 },
+          { label: "m₂ (kg)", val: m2, set: setM2, min: 0.5, max: 10, step: 0.5 },
+          { label: "v₂ (m/s)", val: v2, set: setV2, min: -15, max: 15, step: 1 },
+        ].map((item) => (
+          <div key={item.label} className="flex flex-col gap-1">
+            <label className="text-xs text-violet-600 font-medium">{item.label}</label>
+            <input
+              type="range"
+              min={item.min}
+              max={item.max}
+              step={item.step}
+              value={item.val}
+              onChange={(ev) => item.set(Number(ev.target.value))}
+              className="accent-violet-500"
+            />
+            <span className="text-xs text-center text-slate-600 font-mono">{item.val}</span>
+          </div>
+        ))}
+      </div>
+      <div className="space-y-2">
+        {[
+          { label: "p₁ = m₁v₁", value: p1, color: "bg-indigo-400" },
+          { label: "p₂ = m₂v₂", value: p2, color: "bg-violet-400" },
+          { label: "Total p", value: total, color: "bg-emerald-400" },
+        ].map((row) => (
+          <div key={row.label} className="flex items-center gap-3">
+            <span className="text-xs text-slate-500 w-20 font-mono">{row.label}</span>
+            <div className="flex-1">
+              <Bar value={row.value} color={row.color} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// SECTION CARD
+// ============================================================
+function SectionCard({
+  title,
+  icon,
+  accent = "indigo",
+  children,
+}: {
+  title: string;
+  icon: string;
+  accent?: string;
+  children: React.ReactNode;
+}) {
+  const accents: Record<string, string> = {
+    indigo: "from-indigo-50 to-white border-indigo-100",
+    violet: "from-violet-50 to-white border-violet-100",
+    emerald: "from-emerald-50 to-white border-emerald-100",
+    amber: "from-amber-50 to-white border-amber-100",
+    rose: "from-rose-50 to-white border-rose-100",
+    sky: "from-sky-50 to-white border-sky-100",
+  };
+  const headerAccents: Record<string, string> = {
+    indigo: "text-indigo-500",
+    violet: "text-violet-500",
+    emerald: "text-emerald-500",
+    amber: "text-amber-500",
+    rose: "text-rose-500",
+    sky: "text-sky-500",
+  };
+
+  return (
+    <div
+      className={`rounded-xl border bg-gradient-to-br ${accents[accent] ?? accents.indigo} shadow-sm mb-5 overflow-hidden`}
+    >
+      <div className="px-5 py-3 border-b border-current border-opacity-10 flex items-center gap-2">
+        <span className={`text-lg ${headerAccents[accent] ?? headerAccents.indigo}`}>{icon}</span>
+        <span className={`text-xs font-bold uppercase tracking-widest ${headerAccents[accent] ?? headerAccents.indigo}`}>
+          {title}
+        </span>
+      </div>
+      <div className="px-5 py-4">{children}</div>
+    </div>
+  );
+}
+
+// ============================================================
+// DATA TABLE CARD
+// ============================================================
+function DataTableCard({ title, icon, headers, rows, accent = "indigo" }: {
+  title: string;
+  icon: string;
+  headers: string[];
+  rows: (string | React.ReactNode)[][];
+  accent?: string;
+}) {
+  const headerColors: Record<string, string> = {
+    indigo: "bg-indigo-600",
+    violet: "bg-violet-600",
+    emerald: "bg-emerald-600",
+    amber: "bg-amber-600",
+  };
+
+  return (
+    <SectionCard title={title} icon={icon} accent={accent}>
+      <div className="overflow-x-auto rounded-lg border border-slate-200">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className={`${headerColors[accent] ?? headerColors.indigo} text-white`}>
+              {headers.map((h) => (
+                <th key={h} className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
+                {row.map((cell, j) => (
+                  <td key={j} className="px-4 py-2.5 text-slate-700 text-sm border-b border-slate-100">
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </SectionCard>
+  );
+}
+
+// ============================================================
+// COLLISION TYPE BADGE
+// ============================================================
+function CollisionTypeBadge({ e, label, color }: { e: number; label: string; color: string }) {
+  return (
+    <div className={`rounded-lg border-2 ${color} p-3 text-center`}>
+      <div className="text-2xl font-bold font-mono mb-1">e = {e}</div>
+      <div className="text-xs font-semibold uppercase tracking-wide">{label}</div>
+    </div>
+  );
+}
+
+// ============================================================
+// PHYSICS SANDBOX
+// ============================================================
+function PhysicsSandbox() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animRef = useRef<number>(0);
+  const stateRef = useRef<{
+    balls: Ball[];
+    collided: boolean;
+    collisionData: { v1Before: number; v2Before: number; v1After: number; v2After: number } | null;
+  }>({
+    balls: [],
+    collided: false,
+    collisionData: null,
+  });
+
+  const [e, setE] = useState(0.8);
+  const [mass1, setMass1] = useState(2);
+  const [mass2, setMass2] = useState(2);
+  const [speed1, setSpeed1] = useState(120);
+  const [isRunning, setIsRunning] = useState(false);
+  const [collisionData, setCollisionData] = useState<{
+    v1Before: number;
+    v2Before: number;
+    v1After: number;
+    v2After: number;
+  } | null>(null);
+  const [showTrails, setShowTrails] = useState(true);
+
+  const CANVAS_W = 560;
+  const CANVAS_H = 200;
+  const GRAVITY = 0;
+
+  const initBalls = useCallback(() => {
+    const r1 = 10 + mass1 * 4;
+    const r2 = 10 + mass2 * 4;
+    stateRef.current = {
+      balls: [
+        {
+          x: 80,
+          y: CANVAS_H / 2,
+          vx: speed1,
+          vy: 0,
+          radius: r1,
+          mass: mass1,
+          color: "#6366f1",
+          trail: [],
+        },
+        {
+          x: CANVAS_W - 80,
+          y: CANVAS_H / 2,
+          vx: -speed1 * 0.3,
+          vy: 0,
+          radius: r2,
+          mass: mass2,
+          color: "#8b5cf6",
+          trail: [],
+        },
+      ],
+      collided: false,
+      collisionData: null,
+    };
+    setCollisionData(null);
+  }, [mass1, mass2, speed1]);
+
+  const drawFrame = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const { balls } = stateRef.current;
+
+    ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+
+    // Background
+    ctx.fillStyle = "#f8fafc";
+    ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+
+    // Grid lines
+    ctx.strokeStyle = "#e2e8f0";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < CANVAS_W; x += 40) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, CANVAS_H);
+      ctx.stroke();
+    }
+    for (let y = 0; y < CANVAS_H; y += 40) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(CANVAS_W, y);
+      ctx.stroke();
+    }
+
+    // Trails
+    if (showTrails) {
+      balls.forEach((ball) => {
+        if (ball.trail.length < 2) return;
+        ctx.beginPath();
+        ctx.moveTo(ball.trail[0].x, ball.trail[0].y);
+        ball.trail.forEach((pt, i) => {
+          if (i > 0) ctx.lineTo(pt.x, pt.y);
+        });
+        ctx.strokeStyle = ball.color + "44";
+        ctx.lineWidth = ball.radius * 0.5;
+        ctx.lineCap = "round";
+        ctx.stroke();
+      });
+    }
+
+    // Balls
+    balls.forEach((ball) => {
+      // Shadow
+      ctx.beginPath();
+      ctx.arc(ball.x + 2, ball.y + 2, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(0,0,0,0.08)";
+      ctx.fill();
+
+      // Ball body
+      const grad = ctx.createRadialGradient(
+        ball.x - ball.radius * 0.3,
+        ball.y - ball.radius * 0.3,
+        ball.radius * 0.1,
+        ball.x,
+        ball.y,
+        ball.radius
+      );
+      grad.addColorStop(0, ball.color + "ff");
+      grad.addColorStop(1, ball.color + "99");
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.strokeStyle = ball.color;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Velocity arrow
+      const arrowLen = Math.abs(ball.vx) * 0.25;
+      if (arrowLen > 2) {
+        ctx.beginPath();
+        ctx.moveTo(ball.x, ball.y);
+        ctx.lineTo(ball.x + Math.sign(ball.vx) * (ball.radius + arrowLen), ball.y);
+        ctx.strokeStyle = ball.color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        // Arrowhead
+        const ax = ball.x + Math.sign(ball.vx) * (ball.radius + arrowLen);
+        ctx.beginPath();
+        ctx.moveTo(ax, ball.y);
+        ctx.lineTo(ax - Math.sign(ball.vx) * 8, ball.y - 4);
+        ctx.lineTo(ax - Math.sign(ball.vx) * 8, ball.y + 4);
+        ctx.fillStyle = ball.color;
+        ctx.fill();
+      }
+    });
+
+    // Labels
+    balls.forEach((ball, i) => {
+      ctx.fillStyle = "#1e293b";
+      ctx.font = "bold 11px monospace";
+      ctx.textAlign = "center";
+      ctx.fillText(`m${i + 1}=${ball.mass}kg`, ball.x, ball.y - ball.radius - 6);
+      ctx.fillStyle = "#64748b";
+      ctx.font = "10px monospace";
+      ctx.fillText(`${ball.vx.toFixed(0)} m/s`, ball.x, ball.y + ball.radius + 14);
+    });
+  }, [showTrails]);
+
+  const step = useCallback(() => {
+    const state = stateRef.current;
+    const { balls } = state;
+    const dt = 1 / 60;
+
+    balls.forEach((ball) => {
+      ball.x += ball.vx * dt * 1;
+      ball.y += ball.vy * dt * 1;
+
+      // Trails
+      ball.trail.push({ x: ball.x, y: ball.y });
+      if (ball.trail.length > 40) ball.trail.shift();
+
+      // Wall bounce
+      if (ball.x - ball.radius < 0) {
+        ball.x = ball.radius;
+        ball.vx = Math.abs(ball.vx) * e;
+      }
+      if (ball.x + ball.radius > CANVAS_W) {
+        ball.x = CANVAS_W - ball.radius;
+        ball.vx = -Math.abs(ball.vx) * e;
+      }
+    });
+
+    // Ball-ball collision
+    const [b1, b2] = balls;
+    const dist = Math.abs(b2.x - b1.x);
+    const minDist = b1.radius + b2.radius;
+
+    if (dist <= minDist && !state.collided) {
+      state.collided = true;
+      const v1Before = b1.vx;
+      const v2Before = b2.vx;
+      const m1 = b1.mass;
+      const m2 = b2.mass;
+      const totalM = m1 + m2;
+
+      const v1After = (m1 * v1Before + m2 * v2Before - m2 * e * (v1Before - v2Before)) / totalM;
+      const v2After = (m1 * v1Before + m2 * v2Before + m1 * e * (v1Before - v2Before)) / totalM;
+
+      b1.vx = v1After;
+      b2.vx = v2After;
+
+      // Separate overlapping balls
+      const overlap = minDist - dist;
+      b1.x -= overlap / 2;
+      b2.x += overlap / 2;
+
+      const cd = { v1Before, v2Before, v1After, v2After };
+      state.collisionData = cd;
+      setCollisionData(cd);
+    }
+
+    if (state.collided) {
+      const dist2 = Math.abs(b2.x - b1.x);
+      if (dist2 > minDist + 10) {
+        state.collided = false;
+      }
+    }
+  }, [e]);
+
+  useEffect(() => {
+    initBalls();
+  }, [initBalls]);
+
+  useEffect(() => {
+    drawFrame();
+  }, [drawFrame]);
+
+  useEffect(() => {
+    if (!isRunning) {
+      cancelAnimationFrame(animRef.current);
+      return;
+    }
+    const loop = () => {
+      step();
+      drawFrame();
+      animRef.current = requestAnimationFrame(loop);
+    };
+    animRef.current = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(animRef.current);
+  }, [isRunning, step, drawFrame]);
+
+  const handleReset = () => {
+    setIsRunning(false);
+    setTimeout(() => {
+      initBalls();
+      setTimeout(drawFrame, 50);
+    }, 50);
+  };
+
+  const eLabel =
+    e === 0
+      ? "Perfectly Inelastic"
+      : e < 0.4
+      ? "Highly Inelastic"
+      : e < 0.8
+      ? "Partially Elastic"
+      : e < 1
+      ? "Nearly Elastic"
+      : "Perfectly Elastic";
+
+  const eColor =
+    e === 0
+      ? "text-rose-600"
+      : e < 0.4
+      ? "text-orange-500"
+      : e < 0.8
+      ? "text-amber-500"
+      : "text-emerald-500";
+
+  return (
+    <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+      {/* Canvas */}
+      <div className="bg-slate-50 border-b border-slate-200 p-3">
+        <canvas
+          ref={canvasRef}
+          width={CANVAS_W}
+          height={CANVAS_H}
+          className="w-full rounded-lg"
+          style={{ maxHeight: "200px" }}
+        />
+      </div>
+
+      {/* Controls */}
+      <div className="p-4 space-y-4">
+        {/* Restitution slider - prominent */}
+        <div className="bg-gradient-to-r from-indigo-50 to-violet-50 rounded-xl p-4 border border-indigo-100">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-bold text-slate-700">
+              Coefficient of Restitution <KaTeX latex="(e)" />
+            </span>
+            <span className={`text-sm font-bold ${eColor}`}>{eLabel}</span>
+          </div>
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            value={e}
+            onChange={(ev) => {
+              setE(Number(ev.target.value));
+              handleReset();
+            }}
+            className="w-full accent-indigo-500 h-2"
+          />
+          <div className="flex justify-between mt-1">
+            <span className="text-xs text-slate-400">e = 0 (Inelastic)</span>
+            <span className="text-2xl font-black text-indigo-600 font-mono">{e.toFixed(2)}</span>
+            <span className="text-xs text-slate-400">e = 1 (Elastic)</span>
+          </div>
+        </div>
+
+        {/* Other controls */}
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { label: "Mass 1 (kg)", val: mass1, set: setMass1, min: 1, max: 8, step: 0.5 },
+            { label: "Mass 2 (kg)", val: mass2, set: setMass2, min: 1, max: 8, step: 0.5 },
+            { label: "Initial Speed", val: speed1, set: setSpeed1, min: 40, max: 200, step: 10 },
+          ].map((ctrl) => (
+            <div key={ctrl.label} className="flex flex-col gap-1">
+              <label className="text-xs font-medium text-slate-500">{ctrl.label}</label>
+              <input
+                type="range"
+                min={ctrl.min}
+                max={ctrl.max}
+                step={ctrl.step}
+                value={ctrl.val}
+                onChange={(ev) => {
+                  ctrl.set(Number(ev.target.value));
+                  handleReset();
+                }}
+                className="accent-violet-500"
+              />
+              <span className="text-xs text-center font-mono text-slate-600">{ctrl.val}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => setIsRunning(!isRunning)}
+            className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
+              isRunning
+                ? "bg-rose-100 text-rose-600 hover:bg-rose-200"
+                : "bg-indigo-600 text-white hover:bg-indigo-700"
+            }`}
+          >
+            {isRunning ? "⏸ Pause" : "▷ Launch"}
+          </button>
+          <button
+            onClick={handleReset}
+            className="px-4 py-2 rounded-lg text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200"
+          >
+            ↺ Reset
+          </button>
+          <button
+            onClick={() => setShowTrails(!showTrails)}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+              showTrails ? "bg-violet-100 text-violet-600" : "bg-slate-100 text-slate-600"
+            }`}
+          >
+            {showTrails ? "◌ Trails On" : "◌ Trails Off"}
+          </button>
+        </div>
+      </div>
+
+      {/* Collision readout */}
+      <AnimatePresence>
+        {collisionData && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="border-t border-indigo-100 bg-indigo-50 p-4"
+          >
+            <p className="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-3">
+              ⚡ Collision Detected — e = {e.toFixed(2)}
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { label: "Body 1: Before", val: collisionData.v1Before, color: "text-slate-600" },
+                { label: "Body 2: Before", val: collisionData.v2Before, color: "text-slate-600" },
+                { label: "Body 1: After", val: collisionData.v1After, color: "text-indigo-700" },
+                { label: "Body 2: After", val: collisionData.v2After, color: "text-indigo-700" },
+              ].map((item) => (
+                <div key={item.label} className="bg-white rounded-lg p-2.5 border border-indigo-100">
+                  <p className="text-xs text-slate-400">{item.label}</p>
+                  <p className={`text-base font-bold font-mono ${item.color}`}>
+                    {item.val.toFixed(2)} m/s
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-3 bg-white rounded-lg p-2.5 border border-indigo-100">
+              <p className="text-xs text-slate-400 mb-1">Verification</p>
+              <p className="text-xs font-mono text-slate-600">
+                e_actual ={" "}
+                <span className="text-indigo-600 font-bold">
+                  {Math.abs(
+                    (collisionData.v2After - collisionData.v1After) /
+                      (collisionData.v1Before - collisionData.v2Before)
+                  ).toFixed(3)}
+                </span>{" "}
+                (set: {e.toFixed(2)})
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// ============================================================
+// ENERGY LOSS VISUALIZER
+// ============================================================
+function EnergyLossVisualizer() {
+  const [e, setE] = useState(0.7);
+  const v1 = 10;
+  const v2 = 0;
+  const m1 = 2;
+  const m2 = 2;
+
+  const v1f = (m1 * v1 + m2 * v2 - m2 * e * (v1 - v2)) / (m1 + m2);
+  const v2f = (m1 * v1 + m2 * v2 + m1 * e * (v1 - v2)) / (m1 + m2);
+  const keBefore = 0.5 * m1 * v1 ** 2 + 0.5 * m2 * v2 ** 2;
+  const keAfter = 0.5 * m1 * v1f ** 2 + 0.5 * m2 * v2f ** 2;
+  const keLoss = keBefore - keAfter;
+  const lossPercent = (keLoss / keBefore) * 100;
+
+  return (
+    <div className="bg-white rounded-xl border border-amber-200 overflow-hidden">
+      <div className="bg-gradient-to-r from-amber-50 to-orange-50 px-4 py-3 border-b border-amber-100">
+        <p className="text-xs font-bold text-amber-600 uppercase tracking-wider">
+          ⚡ Energy Loss Visualizer
+        </p>
+      </div>
+      <div className="p-4">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-xs text-slate-500 font-medium w-8">e =</span>
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.01}
+            value={e}
+            onChange={(ev) => setE(Number(ev.target.value))}
+            className="flex-1 accent-amber-500"
+          />
+          <span className="font-mono font-bold text-amber-600 w-10">{e.toFixed(2)}</span>
+        </div>
+
+        <div className="space-y-3">
+          <div>
+            <div className="flex justify-between text-xs text-slate-500 mb-1">
+              <span>KE Before</span>
+              <span className="font-mono">{keBefore.toFixed(1)} J</span>
+            </div>
+            <div className="h-5 bg-emerald-100 rounded-full overflow-hidden">
+              <div className="h-full bg-emerald-400 rounded-full w-full" />
+            </div>
+          </div>
+          <div>
+            <div className="flex justify-between text-xs text-slate-500 mb-1">
+              <span>KE After</span>
+              <span className="font-mono">{keAfter.toFixed(1)} J</span>
+            </div>
+            <div className="h-5 bg-emerald-100 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-emerald-400 rounded-full"
+                animate={{ width: `${(keAfter / keBefore) * 100}%` }}
+                transition={{ type: "spring", stiffness: 200 }}
+              />
+            </div>
+          </div>
+          <div>
+            <div className="flex justify-between text-xs text-slate-500 mb-1">
+              <span>KE Lost ({lossPercent.toFixed(1)}%)</span>
+              <span className="font-mono text-orange-500">{keLoss.toFixed(1)} J</span>
+            </div>
+            <div className="h-5 bg-orange-100 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-orange-400 rounded-full"
+                animate={{ width: `${lossPercent}%` }}
+                transition={{ type: "spring", stiffness: 200 }}
+              />
+            </div>
+          </div>
+        </div>
+
+        <p className="text-xs text-slate-400 mt-3 text-center">
+          {e === 1
+            ? "✓ Perfectly elastic — zero energy lost"
+            : e === 0
+            ? "✗ Perfectly inelastic — maximum energy lost"
+            : `${lossPercent.toFixed(1)}% of kinetic energy converted to heat/sound`}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// MAIN COMPONENT
+// ============================================================
+export default function RestitutionTextbook() {
+  const [activeSection, setActiveSection] = useState("intro");
+
+  const scrollToSection = (id: string) => {
+    setActiveSection(id);
+    document.getElementById(`section-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-100 font-sans">
+      {/* Top Nav */}
+      <div className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm">
+        <div className="max-w-3xl mx-auto px-4 py-0">
+          <div className="flex items-center gap-1 overflow-x-auto scrollbar-hide py-2">
+            {SECTIONS.map((s) => (
+              <button
+                key={s.id}
+                onClick={() => scrollToSection(s.id)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                  activeSection === s.id
+                    ? "bg-indigo-600 text-white"
+                    : "text-slate-500 hover:bg-slate-100"
+                }`}
+              >
+                <span>{s.icon}</span>
+                <span>{s.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="max-w-3xl mx-auto px-4 py-6 space-y-2">
+
+        {/* Hero */}
+        <div className="rounded-2xl bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 text-white p-8 mb-6 shadow-lg">
+          <div className="text-xs font-semibold uppercase tracking-widest text-indigo-200 mb-2">
+            Classical Mechanics · Rigid Body Dynamics
+          </div>
+          <h1 className="text-3xl font-black mb-3 leading-tight">
+            Coefficient of Restitution
+          </h1>
+          <p className="text-indigo-100 text-sm leading-relaxed max-w-xl">
+            How a single dimensionless number between 0 and 1 completely determines
+            the post-collision behaviour of two colliding rigid bodies — from
+            perfectly inelastic clay to perfectly elastic steel.
+          </p>
+          <div className="mt-4 flex gap-2 flex-wrap">
+            {["e = 0 → Inelastic", "e = 1 → Elastic", "Momentum conserved", "KE varies"].map((tag) => (
+              <span key={tag} className="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-medium">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* INTRODUCTION */}
+        <div id="section-intro">
+          <SectionCard title="Introduction" icon="◎" accent="indigo">
+            <p className="text-sm text-slate-600 leading-relaxed mb-3">
+              When two rigid bodies collide, the outcome depends on more than just their masses and
+              velocities. A single material property — the <strong>coefficient of restitution</strong> —
+              governs how much relative velocity is retained after impact.
+            </p>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Intuitively: drop a rubber ball from height <KaTeX latex="h" />. It bounces back
+              to height <KaTeX latex="h' = e^2 h" />. The coefficient{" "}
+              <KaTeX latex="e" /> is the square root of the ratio of rebound height to drop height.
+              A steel ball bearing has <KaTeX latex="e \approx 0.9" />, a lump of clay
+              has <KaTeX latex="e \approx 0" />.
+            </p>
+          </SectionCard>
+        </div>
+
+        {/* DEFINITION */}
+        <div id="section-definition">
+          <SectionCard title="Quick Definition" icon="⬡" accent="violet">
+            <div className="bg-violet-50 border border-violet-200 rounded-lg p-4 mb-3">
+              <p className="text-sm font-semibold text-violet-800 leading-relaxed">
+                The coefficient of restitution <KaTeX latex="e" /> is the ratio of the{" "}
+                <em>relative speed of separation</em> to the <em>relative speed of approach</em> of
+                two colliding bodies, measured along the line of impact.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-3 mt-3">
+              <CollisionTypeBadge e={0} label="Perfectly Inelastic" color="border-rose-400 text-rose-600 bg-rose-50" />
+              <CollisionTypeBadge e={0.7} label="Partially Elastic" color="border-amber-400 text-amber-600 bg-amber-50" />
+              <CollisionTypeBadge e={1} label="Perfectly Elastic" color="border-emerald-400 text-emerald-600 bg-emerald-50" />
+            </div>
+          </SectionCard>
+        </div>
+
+        {/* FORMULAS */}
+        <div id="section-formula">
+          <SectionCard title="Core Formulas" icon="∑" accent="indigo">
+            <p className="text-xs text-slate-400 mb-4 uppercase tracking-wider font-semibold">
+              Click "Explain Formula" or "Open Formula Lab" on any card
+            </p>
+          </SectionCard>
+          {FORMULAS.map((f) => (
+            <FormulaCard key={f.id} formula={f} />
+          ))}
+        </div>
+
+        {/* COLLISION TYPES TABLE */}
+        <div id="section-types">
+          <DataTableCard
+            title="Collision Types Compared"
+            icon="⟷"
+            accent="violet"
+            headers={["Type", "e value", "Momentum", "Kinetic Energy", "Example"]}
+            rows={[
+              [
+                <span className="font-semibold text-emerald-600">Perfectly Elastic</span>,
+                <span className="font-mono font-bold">e = 1</span>,
+                "✓ Conserved",
+                "✓ Conserved",
+                "Billiard balls, atomic collisions",
+              ],
+              [
+                <span className="font-semibold text-amber-600">Partially Elastic</span>,
+                <span className="font-mono font-bold">0 &lt; e &lt; 1</span>,
+                "✓ Conserved",
+                "✗ Partially lost",
+                "Tennis ball, rubber ball",
+              ],
+              [
+                <span className="font-semibold text-rose-600">Perfectly Inelastic</span>,
+                <span className="font-mono font-bold">e = 0</span>,
+                "✓ Conserved",
+                "✗ Maximum loss",
+                "Clay, car crash, bullet in block",
+              ],
+            ]}
+          />
+        </div>
+
+        {/* ENERGY LOSS */}
+        <SectionCard title="Energy Loss vs Restitution" icon="⚡" accent="amber">
+          <p className="text-sm text-slate-600 mb-4">
+            Kinetic energy is <strong>not</strong> conserved unless <KaTeX latex="e = 1" />.
+            Lost energy converts to heat, sound, and deformation. Drag the slider to see how
+            energy loss scales with restitution.
+          </p>
+          <EnergyLossVisualizer />
+        </SectionCard>
+
+        {/* SANDBOX */}
+        <div id="section-sandbox">
+          <SectionCard title="Live Physics Sandbox" icon="▷" accent="indigo">
+            <p className="text-sm text-slate-600 mb-4">
+              Adjust the coefficient of restitution and watch how it changes the post-collision
+              velocities in real time. The collision readout verifies the formula numerically.
+            </p>
+            <PhysicsSandbox />
+          </SectionCard>
+        </div>
+
+        {/* APPLICATIONS */}
+        <div id="section-applications">
+          <DataTableCard
+            title="Real-World Applications"
+            icon="⚙"
+            accent="emerald"
+            headers={["Domain", "Application", "Typical e", "Why it matters"]}
+            rows={[
+              ["Sports", "Golf ball vs club", "0.78", "Distance and spin control"],
+              ["Sports", "Tennis ball", "0.75", "Court bounce consistency"],
+              ["Automotive", "Crash bumpers", "0.1–0.3", "Energy absorption for safety"],
+              ["Manufacturing", "Pile driving", "0.3–0.5", "Ground penetration efficiency"],
+              ["Gaming Physics", "Rigid body engines", "0–1 tunable", "Realistic feel"],
+              ["Ballistics", "Bullet in armor", "~0.0", "Penetration vs deflection"],
+            ]}
+          />
+        </div>
+
+        {/* IMPORTANT NOTES */}
+        <SectionCard title="Important Notes" icon="!" accent="rose">
+          <div className="space-y-3">
+            {[
+              {
+                title: "e > 1 is impossible in classical mechanics",
+                body: "It would imply the bodies gain kinetic energy from the collision alone, violating energy conservation.",
+              },
+              {
+                title: "e depends on both materials and impact speed",
+                body: "At very high speeds, e tends to decrease even for 'elastic' materials due to plastic deformation.",
+              },
+              {
+                title: "Momentum is always conserved",
+                body: "Regardless of e, the total linear momentum of the system is conserved (Newton's 3rd Law).",
+              },
+              {
+                title: "e is defined along the line of impact only",
+                body: "For oblique collisions, the tangential component is handled separately (friction model).",
+              },
+            ].map((note) => (
+              <div key={note.title} className="flex gap-3 items-start">
+                <span className="text-rose-400 mt-0.5 text-sm">▸</span>
+                <div>
+                  <p className="text-sm font-semibold text-slate-700">{note.title}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{note.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
+
+        {/* SUMMARY */}
+        <SectionCard title="Summary" icon="✓" accent="emerald">
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { label: "e = 1", desc: "Elastic — all KE retained, bodies bounce fully", color: "bg-emerald-50 border-emerald-200 text-emerald-700" },
+              { label: "0 < e < 1", desc: "Partial — KE lost, realistic everyday collisions", color: "bg-amber-50 border-amber-200 text-amber-700" },
+              { label: "e = 0", desc: "Inelastic — bodies stick together, max KE loss", color: "bg-rose-50 border-rose-200 text-rose-700" },
+              { label: "Always", desc: "Momentum p = mv is conserved for any value of e", color: "bg-indigo-50 border-indigo-200 text-indigo-700" },
+            ].map((item) => (
+              <div key={item.label} className={`rounded-lg border p-3 ${item.color}`}>
+                <p className="font-bold text-sm font-mono mb-1">{item.label}</p>
+                <p className="text-xs leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </SectionCard>
+
+        {/* Footer */}
+        <div className="text-center py-6 text-xs text-slate-400">
+          Classical Mechanics · Coefficient of Restitution · Interactive Textbook
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+**What's built here:**
+
+| Component | Purpose |
+|---|---|
+| **Top nav bar** | Sticky section navigator — jumps between cards |
+| **Hero card** | Topic overview with tag pills |
+| **Section cards** | Every concept is a bordered, labeled card |
+| **Formula cards** | Each formula has Explain + Formula Lab buttons |
+| **Formula Lab** | Live sliders compute formula outputs inline |
+| **Data table cards** | Responsive tables inside cards |
+| **Live sandbox** | Full physics simulation with trails and collision readout |
+| **Energy visualizer** | Animated bars showing KE loss vs e |
+| **Summary grid** | 4-cell quick-reference grid |

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 22,
+  "question": "Derive the expression for acceleration due to gravity.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe acceleration due to gravity ($g$) is the uniform acceleration vector experienced by a freely falling object near the surface of a massive celestial body, such as the Earth, produced entirely by gravitational attraction.\n\n---\n\n## Formula\n\nThe surface acceleration value is determined by:\n\n$$g = \\frac{GM}{R^2}$$\n\nWhere:\n* $g$ represents the acceleration due to gravity\n* $G$ represents the Universal Gravitational Constant\n* $M$ represents the total mass of the planet or central body\n* $R$ represents the radius of the planet or central body\n\n---\n\n## Derivations\n\nConsider a small object of mass $m$ resting on or near the surface of the Earth, which has a total mass $M$ and a radius $R$.\n\nAccording to Newton's Law of Universal Gravitation, the attraction force exerted by the Earth on the object is given by:\n$$F = G \\frac{Mm}{R^2}$$\n\nSimultaneously, according to Newton's Second Law of Motion, the weight force causing the object to accelerate downward at a rate of $g$ is defined as:\n$$F = mg$$\n\nSince both expressions define the exact same mutual interaction force, we equate them directly:\n$$mg = G \\frac{Mm}{R^2}$$\n\nDivide both sides of the balance equation by the object's mass parameter ($m$):\n$$g = \\frac{GM}{R^2}$$\n\nThis completes the analytical derivation of acceleration due to gravity.\n\n---\n\n## Summary\n\nThe acceleration due to gravity depends solely on the mass and radius of the planet, meaning all objects fall at the exact same rate regardless of their individual masses when air resistance is absent.",
+  "candidate_response": "To derive the expression for acceleration due to gravity, we start with Newton's law of universal gravitation and some fundamental principles of physics.\n\n┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ The acceleration due to gravity is a crucial concept in physics,     │\n│ representing the acceleration that an object experiences due to the   │\n│ gravitational pull of the Earth (or another celestial body).          │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ 1. **Gravitational Force**: The force of attraction between two masses.│\n│ 2. **Newton's Law of Gravitation**: \\( F = \\frac{G \\cdot m_1 \\cdot m_2}{r^2} \\)  │\n│ 3. **Acceleration**: Defined as the rate of change of velocity.       │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Derivation Steps          │\n│                           │\n│ 1. **Identify the Forces**: For an object of mass \\( m \\) near the Earth's surface, the gravitational force acting on it is given by the formula:│\n│                             │\n│    $$ F = \\frac{G \\cdot M \\cdot m}{r^2} $$                             │\n│                             │\n│    where:                                                         │\n│    - \\( F \\) is the gravitational force,                             │\n│    - \\( G \\) is the gravitational constant,                          │\n│    - \\( M \\) is the mass of the Earth, and                          │\n│    - \\( r \\) is the distance from the center of the Earth to the object.│\n│                           │\n│ 2. **Set the Forces Equal**: The gravitational force also equals the weight of the object:│\n│                             │\n│    $$ F = m \\cdot g $$                                               │\n│                             │\n│    where \\( g \\) is the acceleration due to gravity.               │\n│                           │\n│ 3. **Combine the Equations**: Setting the two expressions for \\( F \\) equal gives:│\n│                             │\n│    $$ m \\cdot g = \\frac{G \\cdot M \\cdot m}{r^2} $$                  │\n│                           │\n│ 4. **Solve for \\( g \\)**: Dividing both sides by \\( m \\) (assuming \\( m \\neq 0 \\)) results in:│\n│                             │\n│    $$ g = \\frac{G \\cdot M}{r^2} $$                                   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     Rendered Formula      │\n│                           │\n│    $$ g = \\frac{G \\cdot M}{r^2} $$                                   │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ - \\( g \\) varies slightly over the Earth's surface due to factors like altitude and latitude.│\n│ - Standard value of \\( g \\) at sea level is approximately \\( 9.81 \\, \\text{m/s}^2 \\).│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                   │\n│                           │\n│ The acceleration due to gravity, derived from Newton's law of gravitation, is expressed as:│\n│                             │\n│    $$ g = \\frac{G \\cdot M}{r^2} $$                                   │\n│                           │\n│ This formula demonstrates how gravitational acceleration is dependent on the mass of the Earth and the distance from its center.│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions       │\n│                           │\n│ 1. How does altitude affect the value of \\( g \\)?                  │\n│ 2. What are the implications of gravity on satellite motion?        │\n│ 3. How does the gravitational force change with distance?           │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of acceleration due to gravity, accurately deriving the formula and explaining its components. The structure and formatting are clear and easy to follow, making it accessible to beginners. However, there are minor issues with formatting consistency and some sections feel slightly redundant. To improve, consider streamlining the content and ensuring uniform formatting throughout. Additionally, providing more visual aids or examples to illustrate the concept could enhance pedagogical effectiveness.",
+  "candidate_token_usage": {
+    "promptTokens": 364,
+    "completionTokens": 932,
+    "totalTokens": 1296
+  },
+  "candidate_latency_ms": 10822,
+  "candidate_cost_usd": 0.0006138,
+  "judge_token_usage": {
+    "promptTokens": 1678,
+    "completionTokens": 151,
+    "totalTokens": 1829
+  },
+  "judge_latency_ms": 4408,
+  "judge_cost_usd": 0.0013691999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:41:11.443Z"
+}

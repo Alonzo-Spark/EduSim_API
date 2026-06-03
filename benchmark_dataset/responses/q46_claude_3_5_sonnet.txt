@@ -1,0 +1,457 @@
+I'll render this as a structured interactive textbook response.
+
+---
+
+```tsx
+import { useState } from "react";
+import katex from "katex";
+import "katex/dist/katex.min.css";
+
+const renderMath = (latex, display = false) => {
+  try {
+    return katex.renderToString(latex, {
+      displayMode: display,
+      throwOnError: false,
+    });
+  } catch {
+    return latex;
+  }
+};
+
+const InlineMath = ({ latex }) => (
+  <span dangerouslySetInnerHTML={{ __html: renderMath(latex, false) }} />
+);
+
+const DisplayMath = ({ latex }) => (
+  <div
+    className="my-2 flex justify-center"
+    dangerouslySetInnerHTML={{ __html: renderMath(latex, true) }}
+  />
+);
+
+const FormulaCard = ({ title, formula, variables, context }) => {
+  const [tab, setTab] = useState("formula");
+  const [labValues, setLabValues] = useState({ V: 10, R: 5 });
+
+  const computedI =
+    title === "Ohm's Law"
+      ? (labValues.V / labValues.R).toFixed(3)
+      : null;
+
+  return (
+    <div className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 shadow-md overflow-hidden my-4">
+      <div className="bg-blue-600 text-white px-5 py-3 flex items-center gap-2">
+        <span className="text-lg">🔢</span>
+        <span className="font-bold text-base tracking-wide">{title}</span>
+      </div>
+
+      <div className="flex border-b border-blue-200 bg-white">
+        {["formula", "explain", "lab"].map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`px-4 py-2 text-sm font-semibold capitalize transition-colors ${
+              tab === t
+                ? "border-b-2 border-blue-600 text-blue-700 bg-blue-50"
+                : "text-gray-500 hover:text-blue-600"
+            }`}
+          >
+            {t === "formula" ? "📐 Formula" : t === "explain" ? "💡 Explain" : "🧪 Lab"}
+          </button>
+        ))}
+      </div>
+
+      <div className="p-5">
+        {tab === "formula" && (
+          <div>
+            <div className="bg-white rounded-xl border border-blue-100 px-6 py-6 text-center shadow-inner text-2xl">
+              <DisplayMath latex={formula} />
+            </div>
+            {context && (
+              <p className="text-gray-600 text-sm mt-3 leading-relaxed">{context}</p>
+            )}
+          </div>
+        )}
+
+        {tab === "explain" && (
+          <div className="space-y-2">
+            <p className="text-gray-700 text-sm font-semibold mb-2">Variable Breakdown:</p>
+            {variables.map((v, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 bg-white rounded-lg border border-blue-100 px-4 py-3"
+              >
+                <span className="font-mono font-bold text-blue-700 text-base min-w-[32px]">
+                  <InlineMath latex={v.symbol} />
+                </span>
+                <div>
+                  <span className="font-semibold text-gray-800">{v.name}</span>
+                  <span className="text-gray-500 text-sm ml-2">({v.unit})</span>
+                  {v.note && (
+                    <p className="text-gray-500 text-xs mt-0.5">{v.note}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {tab === "lab" && (
+          <div>
+            <p className="text-sm text-gray-600 mb-4 font-medium">
+              Adjust values and see how current changes:
+            </p>
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-semibold text-gray-700">
+                  Voltage <InlineMath latex="V" /> = {labValues.V} V
+                </label>
+                <input
+                  type="range"
+                  min={1}
+                  max={100}
+                  value={labValues.V}
+                  onChange={(e) =>
+                    setLabValues((p) => ({ ...p, V: Number(e.target.value) }))
+                  }
+                  className="w-full mt-1 accent-blue-600"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-semibold text-gray-700">
+                  Resistance <InlineMath latex="R" /> = {labValues.R} Ω
+                </label>
+                <input
+                  type="range"
+                  min={1}
+                  max={100}
+                  value={labValues.R}
+                  onChange={(e) =>
+                    setLabValues((p) => ({ ...p, R: Number(e.target.value) }))
+                  }
+                  className="w-full mt-1 accent-blue-600"
+                />
+              </div>
+              <div className="bg-blue-600 text-white rounded-xl px-5 py-4 text-center">
+                <p className="text-sm opacity-80 mb-1">Calculated Current</p>
+                <p className="text-3xl font-bold">
+                  {computedI} <span className="text-lg font-normal">A</span>
+                </p>
+                <p className="text-xs opacity-70 mt-1">
+                  I = {labValues.V} / {labValues.R} = {computedI} A
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const SectionCard = ({ icon, title, color, children }) => {
+  const colors = {
+    green: "border-green-200 from-green-50 to-emerald-50",
+    blue: "border-blue-200 from-blue-50 to-indigo-50",
+    amber: "border-amber-200 from-amber-50 to-yellow-50",
+    red: "border-red-200 from-red-50 to-rose-50",
+    purple: "border-purple-200 from-purple-50 to-violet-50",
+    gray: "border-gray-200 from-gray-50 to-slate-50",
+  };
+  const headers = {
+    green: "bg-green-600",
+    blue: "bg-blue-600",
+    amber: "bg-amber-500",
+    red: "bg-red-600",
+    purple: "bg-purple-600",
+    gray: "bg-gray-600",
+  };
+  return (
+    <div
+      className={`rounded-2xl border bg-gradient-to-br shadow-md overflow-hidden my-4 ${colors[color]}`}
+    >
+      <div className={`${headers[color]} text-white px-5 py-3 flex items-center gap-2`}>
+        <span className="text-lg">{icon}</span>
+        <span className="font-bold text-base tracking-wide">{title}</span>
+      </div>
+      <div className="px-5 py-4">{children}</div>
+    </div>
+  );
+};
+
+const Badge = ({ children, color }) => {
+  const c = {
+    blue: "bg-blue-100 text-blue-800 border-blue-200",
+    red: "bg-red-100 text-red-800 border-red-200",
+    green: "bg-green-100 text-green-800 border-green-200",
+    amber: "bg-amber-100 text-amber-800 border-amber-200",
+  };
+  return (
+    <span
+      className={`inline-block border rounded-full px-3 py-0.5 text-xs font-semibold mr-2 mb-1 ${c[color]}`}
+    >
+      {children}
+    </span>
+  );
+};
+
+const LimitationCard = ({ number, title, description, example }) => (
+  <div className="bg-white rounded-xl border border-red-100 p-4 mb-3 shadow-sm">
+    <div className="flex items-start gap-3">
+      <div className="bg-red-600 text-white rounded-full w-7 h-7 flex items-center justify-center font-bold text-sm shrink-0 mt-0.5">
+        {number}
+      </div>
+      <div>
+        <p className="font-bold text-gray-800 text-sm">{title}</p>
+        <p className="text-gray-600 text-sm mt-1 leading-relaxed">{description}</p>
+        {example && (
+          <div className="mt-2 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
+            <span className="text-xs font-semibold text-red-700">Example: </span>
+            <span className="text-xs text-red-700">{example}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+);
+
+const TableCard = ({ title, headers, rows }) => (
+  <div className="rounded-2xl border border-purple-200 bg-gradient-to-br from-purple-50 to-violet-50 shadow-md overflow-hidden my-4">
+    <div className="bg-purple-600 text-white px-5 py-3 flex items-center gap-2">
+      <span>📊</span>
+      <span className="font-bold text-base">{title}</span>
+    </div>
+    <div className="p-4 overflow-x-auto">
+      <table className="w-full text-sm">
+        <thead>
+          <tr>
+            {headers.map((h, i) => (
+              <th
+                key={i}
+                className="text-left bg-purple-100 text-purple-800 font-semibold px-4 py-2 first:rounded-tl-lg last:rounded-tr-lg"
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-purple-50/40"}>
+              {row.map((cell, j) => (
+                <td key={j} className="px-4 py-2.5 text-gray-700 border-t border-purple-100">
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);
+
+export default function OhmsLaw() {
+  return (
+    <div className="max-w-2xl mx-auto px-4 py-6 font-sans">
+
+      {/* Topic Header */}
+      <div className="rounded-2xl bg-gradient-to-r from-blue-700 to-indigo-700 text-white px-6 py-6 mb-6 shadow-lg">
+        <div className="text-xs font-semibold uppercase tracking-widest opacity-70 mb-1">
+          Current Electricity · Class 12 Physics
+        </div>
+        <h1 className="text-2xl font-extrabold leading-tight">Ohm's Law</h1>
+        <p className="text-blue-100 text-sm mt-2">
+          Statement, mathematical form, and limitations
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Badge color="blue">Conductor</Badge>
+          <Badge color="blue">Resistance</Badge>
+          <Badge color="blue">V-I Relationship</Badge>
+        </div>
+      </div>
+
+      {/* Statement */}
+      <SectionCard icon="📜" title="Statement of Ohm's Law" color="green">
+        <div className="bg-white rounded-xl border border-green-200 px-5 py-4 shadow-inner">
+          <p className="text-gray-800 text-sm leading-relaxed">
+            At <span className="font-bold text-green-700">constant physical conditions</span> (temperature, pressure, mechanical strain),
+            the <span className="font-bold">electric current</span> flowing through a conductor is{" "}
+            <span className="font-bold text-green-700">directly proportional</span> to the{" "}
+            <span className="font-bold">potential difference</span> across its ends.
+          </p>
+        </div>
+        <div className="mt-3 bg-green-100 border border-green-200 rounded-lg px-4 py-2 text-sm text-green-800">
+          <span className="font-bold">Key condition:</span> Temperature and other physical conditions must remain constant.
+        </div>
+      </SectionCard>
+
+      {/* Mathematical Form */}
+      <SectionCard icon="➗" title="Mathematical Form" color="blue">
+        <p className="text-gray-600 text-sm mb-1">
+          From the proportionality statement:
+        </p>
+        <div className="bg-white rounded-xl border border-blue-100 px-4 py-3 text-center text-sm text-gray-600 mb-1">
+          <DisplayMath latex="V \propto I" />
+        </div>
+        <p className="text-gray-600 text-sm text-center mb-2">Introducing the constant of proportionality <InlineMath latex="R" />:</p>
+      </SectionCard>
+
+      {/* Formula Card */}
+      <FormulaCard
+        title="Ohm's Law"
+        formula="V = IR \quad \Longrightarrow \quad I = \frac{V}{R}"
+        context="The ratio V/I is always constant for an ohmic conductor, and this constant is called Resistance (R)."
+        variables={[
+          { symbol: "V", name: "Potential Difference", unit: "Volt (V)", note: "Voltage across the conductor" },
+          { symbol: "I", name: "Electric Current", unit: "Ampere (A)", note: "Current through the conductor" },
+          { symbol: "R", name: "Resistance", unit: "Ohm (Ω)", note: "Constant of proportionality; depends on material, length, area, and temperature" },
+        ]}
+      />
+
+      {/* Resistance Formula */}
+      <SectionCard icon="⚡" title="Definition of Resistance" color="purple">
+        <p className="text-sm text-gray-600 mb-2">
+          Resistance is defined as the ratio of potential difference to current:
+        </p>
+        <div className="bg-white rounded-xl border border-purple-100 px-4 py-4 text-center shadow-inner">
+          <DisplayMath latex="R = \frac{V}{I}" />
+        </div>
+        <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+          {[
+            { label: "SI Unit", value: "Ohm (Ω)" },
+            { label: "Dimension", value: "[ML²T⁻³A⁻²]" },
+            { label: "Nature", value: "Scalar quantity" },
+          ].map((item, i) => (
+            <div key={i} className="bg-purple-100 rounded-lg py-2 px-1">
+              <p className="text-purple-600 font-semibold">{item.label}</p>
+              <p className="text-gray-700 mt-0.5 font-bold">{item.value}</p>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* V-I Graph */}
+      <SectionCard icon="📈" title="V-I Characteristic Graph" color="blue">
+        <div className="bg-white rounded-xl border border-blue-100 p-4 shadow-inner">
+          {/* Simple ASCII-style SVG Graph */}
+          <svg viewBox="0 0 260 200" className="w-full max-w-xs mx-auto block">
+            {/* Grid lines */}
+            {[40, 80, 120, 160].map((y) => (
+              <line key={y} x1="40" y1={y} x2="240" y2={y} stroke="#e0e7ff" strokeWidth="1" />
+            ))}
+            {[80, 120, 160, 200].map((x) => (
+              <line key={x} x1={x} y1="20" x2={x} y2="170" stroke="#e0e7ff" strokeWidth="1" />
+            ))}
+            {/* Axes */}
+            <line x1="40" y1="170" x2="240" y2="170" stroke="#374151" strokeWidth="2" />
+            <line x1="40" y1="170" x2="40" y2="20" stroke="#374151" strokeWidth="2" />
+            {/* Ohmic line */}
+            <line x1="40" y1="170" x2="220" y2="30" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" />
+            {/* Labels */}
+            <text x="230" y="175" fontSize="11" fill="#374151" fontWeight="bold">I →</text>
+            <text x="44" y="16" fontSize="11" fill="#374151" fontWeight="bold">V ↑</text>
+            <text x="185" y="45" fontSize="10" fill="#2563eb" fontWeight="bold">Ohmic</text>
+            <text x="185" y="57" fontSize="10" fill="#2563eb">conductor</text>
+            {/* Slope label */}
+            <text x="90" y="140" fontSize="9" fill="#6366f1">slope = R</text>
+            {/* Origin */}
+            <text x="26" y="178" fontSize="10" fill="#374151">O</text>
+          </svg>
+          <p className="text-center text-xs text-gray-500 mt-1">
+            A straight line through the origin confirms Ohm's Law.
+            Slope = <InlineMath latex="\frac{V}{I} = R" /> = constant
+          </p>
+        </div>
+      </SectionCard>
+
+      {/* Ohmic vs Non-Ohmic Table */}
+      <TableCard
+        title="Ohmic vs Non-Ohmic Conductors"
+        headers={["Property", "Ohmic Conductor", "Non-Ohmic Conductor"]}
+        rows={[
+          ["Obeys Ohm's Law", "✅ Yes", "❌ No"],
+          ["V-I Graph", "Straight line", "Curved / non-linear"],
+          ["Resistance", "Constant", "Varies with V or I"],
+          ["Examples", "Copper, Aluminium, Nichrome", "Diode, Transistor, Thermistor"],
+          ["Temperature effect", "Linear increase in R", "Complex, non-linear"],
+        ]}
+      />
+
+      {/* Limitations */}
+      <SectionCard icon="⚠️" title="Limitations of Ohm's Law" color="red">
+        <p className="text-sm text-gray-600 mb-3">
+          Ohm's Law is <span className="font-bold text-red-700">not a universal law</span>. It fails under the following conditions:
+        </p>
+
+        <LimitationCard
+          number="1"
+          title="Non-linear (Non-Ohmic) Devices"
+          description="For devices like diodes, transistors, and thyristors, the V-I relationship is not linear. The resistance changes with applied voltage."
+          example="In a p-n junction diode, current increases exponentially with voltage, not linearly."
+        />
+        <LimitationCard
+          number="2"
+          title="Unidirectional Devices"
+          description="Some devices conduct differently in forward and reverse bias. The V-I graph is not symmetric about the origin, violating Ohm's Law."
+          example="A semiconductor diode allows current in one direction but blocks it in the other."
+        />
+        <LimitationCard
+          number="3"
+          title="Temperature-Sensitive Conductors"
+          description="For materials like thermistors and tungsten filaments, resistance changes significantly with temperature. Since Ohm's Law requires constant physical conditions, it breaks down."
+          example="The resistance of a tungsten filament increases drastically as it heats up in a bulb."
+        />
+        <LimitationCard
+          number="4"
+          title="Electrolytes and Ionized Gases"
+          description="In electrolytic solutions and gas discharge tubes, the V-I relationship is highly non-linear and depends on ion concentration and other factors."
+          example="In a neon gas tube, current flows only after a threshold voltage (breakdown voltage) is reached."
+        />
+        <LimitationCard
+          number="5"
+          title="Superconductors"
+          description="Below the critical temperature, a superconductor has zero resistance regardless of current. The simple V = IR relationship becomes trivial (V = 0 always)."
+          example="Mercury below 4.2 K shows zero resistance — Ohm's Law cannot describe this state."
+        />
+      </SectionCard>
+
+      {/* Summary Card */}
+      <SectionCard icon="📋" title="Quick Summary" color="gray">
+        <div className="space-y-2 text-sm">
+          {[
+            { label: "Law", value: "V ∝ I at constant temperature" },
+            { label: "Formula", value: "V = IR" },
+            { label: "Constant", value: "R = V/I (Resistance in Ohms)" },
+            { label: "Graph", value: "Straight line through origin" },
+            { label: "Valid for", value: "Ohmic conductors only" },
+            { label: "Fails for", value: "Diodes, thermistors, gases, superconductors" },
+          ].map((item, i) => (
+            <div key={i} className="flex gap-3 bg-white rounded-lg border border-gray-100 px-4 py-2.5">
+              <span className="text-gray-500 font-semibold min-w-[90px] shrink-0">{item.label}</span>
+              <span className="text-gray-800">{item.value}</span>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* Exam Tip */}
+      <div className="rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50 to-yellow-50 shadow-md px-5 py-4 my-4">
+        <div className="flex items-start gap-3">
+          <span className="text-2xl">🎯</span>
+          <div>
+            <p className="font-bold text-amber-800 text-sm">Exam Tips</p>
+            <ul className="mt-2 space-y-1 text-sm text-amber-900 list-disc list-inside">
+              <li>Always mention <strong>"constant temperature"</strong> in the statement.</li>
+              <li>Draw the V-I graph — it fetches marks in board exams.</li>
+              <li>Give at least <strong>2 specific examples</strong> for limitations.</li>
+              <li>Distinguish between ohmic and non-ohmic conductors clearly.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+```

@@ -1,0 +1,113 @@
+┌───────────────────────────────────────┐
+│ Introduction                           │
+│                                       │
+│ This overlay is triggered whenever the   │
+│ friction coefficient of a braking track │
+│ platform changes (e.g., due to rain,  │
+│ oil spill, or wear). It provides real‑ │
+│ time data, impact analysis, and actionable │
+│ recommendations for operators and   │
+│ automated control systems.           │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Event Payload                          │
+│                                       │
+│ ──► Timestamp        : 2026‑06‑01 14:23:07 UTC │
+│ ──► Platform ID      : BRK‑T01                     │
+│ ──► Previous μ       : 0.85 (dry steel)            │
+│ ──► New μ            : 0.55 (wet)                  │
+│ ──► Temperature      : 22 °C                       │
+│ ──► Weather          : Light rain                  │
+│ ──► Affected Trains : Train‑A, Train‑B            │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Impact Analysis                        │
+│                                       │
+│ • Braking distance increases by ~30 % │
+│ • Estimated stop‑distance for Train‑A │
+│   (speed 80 km/h) will grow from  ≈ 45 m │
+│   to  ≈ 58 m.                         │
+│ • Schedule delay risk: up to 2 min per │
+│   affected train.                    │
+│ • Safety margin reduced; risk of      │
+│   overshoot on short platforms.      │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Main Formula                           │
+│                                       │
+│   d = \frac{v^{2}}{2 μ g}               │
+│                                       │
+│   • d  – braking distance (m)          │
+│   • v  – train speed (m·s⁻¹)            │
+│   • μ  – friction coefficient          │
+│   • g  – gravitational acceleration (9.81 │
+│          m·s⁻²)                        │
+│                                       │
+│ [ Explain Formula ]                    │
+│ [ Open Formula Lab ]                   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Recommended Actions                    │
+│                                       │
+│ 1️⃣ Adjust braking curves in the       │
+│    control system to use the new μ.   │
+│ 2️⃣ Deploy additional sand/grit       │
+│    dispensers on the platform.       │
+│ 3️⃣ Issue a temporary speed limit of  │
+│    70 km/h for the affected track.    │
+│ 4️⃣ Notify dispatch to re‑evaluate    │
+│    headway for downstream trains.    │
+│ 5️⃣ Schedule a maintenance inspection │
+│    of the rail surface within 24 h.   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Overlay UI Mockup                      │
+│                                       │
+│ ┌─────────────────────────────────────┐ │
+│ │ 🚨 Friction Changed – Platform BRK‑T01 │ │
+│ │---------------------------------------│ │
+│ │ New μ : 0.55 (wet)                     │ │
+│ │ Δ Braking Distance : +30 %              │ │
+│ │ Affected Trains : Train‑A, Train‑B      │ │
+│ │ Recommended Speed : 70 km/h            │ │
+│ │ [Apply Speed Limit]  [Open Control]    │ │
+│ └─────────────────────────────────────┘ │
+│                                       │
+│ • Real‑time graph of μ vs. time (last 10 │
+│   minutes) displayed below the card.   │
+│ • Clicking “Open Control” jumps to the │
+│   braking‑curve editor with μ pre‑filled│
+│   for immediate deployment.            │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Summary                                 │
+│                                       │
+│ • Friction drop detected (0.85 → 0.55).│
+│ • Braking distance ↑ ~30 %.            │
+│ • Immediate UI overlay informs crew,  │
+│   adjusts control parameters, and      │
+│   suggests mitigation steps.           │
+│ • Formula & calculations are logged for│
+│   audit and future predictive models. │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Suggested Questions                     │
+│                                       │
+│ 1️⃣ How does the new μ affect stopping   │
+│    distance for different speeds?       │
+│ 2️⃣ What is the impact on headway for   │
+│    a 5‑minute schedule?                 │
+│ 3️⃣ How can automated sand dispensers be│
+│    optimized for varying weather?       │
+│ 4️⃣ What thresholds should trigger a   │
+│    full platform shutdown?              │
+│ 5️⃣ How to integrate this overlay into │
+│    the existing SCADA dashboard?       │
+└───────────────────────────────────────┘

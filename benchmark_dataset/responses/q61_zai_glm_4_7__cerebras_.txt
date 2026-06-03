@@ -1,0 +1,84 @@
+```json
+{
+  "event": "spring_connected",
+  "timestamp": 1689345678,
+  "overlay_content": {
+    "title": "Physics Engine Update",
+    "blocks": [
+      {
+        "type": "card",
+        "style": "introduction",
+        "title": "Connection Established",
+        "content": "The anchor point has successfully linked to the mass. The system is now constrained and ready for oscillation."
+      },
+      {
+        "type": "card",
+        "style": "definition",
+        "title": "System Definition",
+        "content": "The connection creates a **Spring-Mass System**. The mass is no longer free-moving; it is now subject to a restoring force that attempts to return it to the spring's equilibrium position."
+      },
+      {
+        "type": "formula_card",
+        "title": "Hooke's Law",
+        "rendered_formula": "$$F = -k(x - L_0)$$",
+        "lab_data": {
+          "formula": "F = -k(x - L_0)",
+          "title": "Hooke's Law",
+          "surroundingContext": "Calculates the immediate restoring force exerted by the spring the moment it connects.",
+          "variables": [
+            {
+              "symbol": "F",
+              "name": "Restoring Force",
+              "description": "The force pulling the mass back toward equilibrium."
+            },
+            {
+              "symbol": "k",
+              "name": "Spring Constant",
+              "description": "A measure of the spring's stiffness."
+            },
+            {
+              "symbol": "x",
+              "name": "Current Length",
+              "description": "The current length of the spring."
+            },
+            {
+              "symbol": "L_0",
+              "name": "Rest Length",
+              "description": "The natural length of the spring when no force is applied."
+            }
+          ]
+        }
+      },
+      {
+        "type": "card",
+        "style": "table_container",
+        "title": "Variable Reference",
+        "table": {
+          "headers": ["Symbol", "Quantity", "SI Unit"],
+          "rows": [
+            ["$F$", "Force", "Newton (N)"],
+            ["$k$", "Spring Constant", "N/m"],
+            ["$x$", "Position", "Meter (m)"],
+            ["$L_0$", "Rest Length", "Meter (m)"]
+          ]
+        }
+      },
+      {
+        "type": "card",
+        "style": "key_concepts",
+        "title": "Key Concepts",
+        "content": [
+          {
+            "term": "Restoring Force",
+            "definition": "Always directed opposite to the displacement."
+          },
+          {
+            "term": "Equilibrium",
+            "definition": "The state where the net force is zero ($x = L_0$)."
+          }
+        ]
+      }
+    ]
+  }
+}
+```

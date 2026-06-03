@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 31,
+  "question": "Thermal Properties of Matter: Define heat capacity and specific heat capacity.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nHeat capacity and specific heat capacity describe how a material changes temperature when it absorbs or releases thermal energy.\n\nHeat capacity is the total amount of heat energy required to raise the temperature of an entire object by exactly $1 \\text{ Degree Celsius}$ or Kelvin.\n\nSpecific heat capacity is the amount of heat energy required to raise the temperature of exactly $1 \\text{ kilogram}$ of a pure substance by $1 \\text{ Degree Celsius}$ or Kelvin.\n\n---\n\n## Characteristics\n\n* **Extensive vs. Intensive:** Heat capacity is an extensive property that scales with the size and mass of an object. Specific heat capacity is an intensive property inherent to the material itself, regardless of mass.\n\n---\n\n## Formula\n\nThe equations for thermal tracking are defined as:\n\n$$\\text{Heat Capacity } (C) = \\frac{Q}{\\Delta T}$$\n\n$$\\text{Specific Heat Capacity } (c) = \\frac{Q}{m \\Delta T}$$\n\nWhere:\n* $Q$ represents the total heat energy transferred\n* $\\Delta T$ represents the resulting change in temperature\n* $m$ represents the mass of the substance sample\n\n---\n\n## Summary\n\nHeat capacity measures the thermal response of an entire object, whereas specific heat capacity standardizes this property per unit mass, providing an intensive material constant.",
+  "candidate_response": "┌───────────────────────────────────────────────┐  \n│ Quick Definition – Heat Capacity                │  \n│                                                   │  \n│ **Heat capacity (C)** is the amount of heat       │  \n│ energy that must be added to a body to raise its │  \n│ temperature by **one kelvin (or one °C)**.       │  \n│ It depends on the material, its mass, and its   │  \n│ shape, because all of these affect how the       │  \n│ system stores thermal energy.                     │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Quick Definition – Specific Heat Capacity       │  \n│                                                   │  \n│ **Specific heat capacity (c)** is the heat       │  \n│ required to raise the temperature of **one       │  \n│ kilogram** of a substance by **one kelvin**.    │  \n│ It is an intrinsic property of the material;    │  \n│ unlike C, it does **not** depend on the amount   │  \n│ of material present.                              │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Main Formula                                      │  \n│                                                   │  \n│ $$\\displaystyle Q = C\\,\\Delta T$$                 │  \n│ $$\\displaystyle Q = m\\,c\\,\\Delta T$$              │  \n│                                                   │  \n│ [ Explain Formula ]                               │  \n│ [ Open Formula Lab ]                              │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Key Concepts                                      │  \n│                                                   │  \n│ • **Heat (Q)** – energy transferred due to a      │  \n│   temperature difference.                        │  \n│ • **ΔT** – change in temperature (final – initial).│  \n│ • **m** – mass of the substance.                  │  \n│ • **C = m c** – relationship between total heat   │  \n│   capacity and specific heat capacity.            │  \n│                                                   │  \n│ Understanding these links lets you calculate the │  \n│ heat needed for any temperature change, whether   │  \n│ you work with the whole object (C) or per unit    │  \n│ mass (c).                                          │  \n└───────────────────────────────────────────────┘  \n\n┌───────────────────────────────────────────────┐  \n│ Suggested Questions                               │  \n│                                                   │  \n│ 1. If 500 g of water (c ≈ 4.18 J g⁻¹ K⁻¹) is heated   │  \n│    by 10 K, how much heat is required?            │  \n│ 2. How does the heat capacity of a metal compare   │  \n│    to that of the same mass of water?              │  \n│ 3. Why does specific heat capacity remain          │  \n│    constant for a material over a modest           │  \n│    temperature range?                              │  \n└───────────────────────────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of heat capacity and specific heat capacity, with accurate definitions, formulas, and explanations. The use of tables and clear headings enhances readability. However, minor improvements could be made in formatting consistency and providing more detailed explanations for certain concepts, such as the distinction between extensive and intensive properties. Additionally, the inclusion of suggested questions is beneficial for educational purposes but could be more effectively integrated into the main text. Overall, the response is well-structured, clear, and effective in conveying the key concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 431,
+    "completionTokens": 1121,
+    "totalTokens": 1552
+  },
+  "candidate_latency_ms": 1388,
+  "candidate_cost_usd": 0.00073725,
+  "judge_token_usage": {
+    "promptTokens": 1321,
+    "completionTokens": 165,
+    "totalTokens": 1486
+  },
+  "judge_latency_ms": 10026,
+  "judge_cost_usd": 0.0011886,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:02:42.242Z"
+}

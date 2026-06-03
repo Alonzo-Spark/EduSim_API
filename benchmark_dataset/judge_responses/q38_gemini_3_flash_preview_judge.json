@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 38,
+  "question": "Explain resonance with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nResonance is a physical phenomenon that occurs when a periodic driving force is applied to an oscillatory system at a frequency that matches its natural frequency of vibration, causing a significant increase in the system's amplitude.\n\n---\n\n## Mechanism\n\n* **Frequency Matching:** When the external driving frequency matches the system's natural frequency, energy transfers efficiently, causing the system's structural amplitude to grow larger over time.\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Enhances signal amplification in wireless radios and acoustic instruments. | Can cause structural failure in mechanical systems, bridges, or buildings. |\n\n---\n\n## Real-world Examples\n\n* **Playground Swing:** Pushing a child on a swing at the exact moment the swing reaches its peak height increases the amplitude with minimal effort.\n* **Acoustic Wine Glass:** A singer matching their vocal pitch to the natural resonant frequency of a crystal wine glass can cause it to shatter as the vibrations become too large.\n* **Radio Tuning Circuit:** Adjusting a radio's electrical frequency to match an incoming broadcast wave amplifies that specific signal while filtering out others.\n\n---\n\n## Summary\n\nResonance occurs when a driving force matches a system's natural frequency, maximizing energy transfer and significantly amplifying the vibration scale.",
+  "candidate_response": "### 📘 RE-LEARNING RESONANCE: THE VIBRATION SYNC\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Quick Definition**                                                     │\n│                                                                          │\n│ Resonance is a physical phenomenon where a system oscillates with        │\n│ **maximum amplitude** at a specific frequency, known as the system's      │\n│ **natural frequency**. It occurs when an external periodic force matches │\n│ this internal frequency.                                                 │\n└──────────────────────────────────────────────────────────────────────────┘\n\n### 💡 Key Concepts\n\n*   **Natural Frequency ($f_0$):** Every object has a preferred frequency at which it vibrates based on its shape, size, and material.\n*   **Driving Frequency ($f$):** The frequency of the external force applied to the system.\n*   **Amplitude Spike:** When $f \\approx f_0$, the energy transfer is most efficient, causing the vibration to grow significantly.\n\n### 🧪 Formula Card\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **The Resonance Condition**                                              │\n│                                                                          │\n│ $$ f_{driving} = f_{natural} $$                                          │\n│                                                                          │\n│ **[ Explain Formula ]**                                                  │\n│ When the external frequency matches the natural frequency, the phase     │\n│ difference allows the force to always act in the direction of motion,    │\n│ adding energy continuously.                                              │\n│                                                                          │\n│ **[ Open Formula Lab ]**                                                 │\n└──────────────────────────────────────────────────────────────────────────┘\n\n### 🌍 Real-World Examples\n\n| Example | Mechanism | Result |\n| :--- | :--- | :--- |\n| **The Playground Swing** | Pushing a child at the peak of the arc. | The swing goes higher with very little effort. |\n| **Radio Tuning** | Adjusting the circuit's electrical frequency. | The circuit matches the station's wave, amplifying the signal. |\n| **Shattering Glass** | An opera singer hits a note matching the glass's frequency. | The glass vibrates so violently that it exceeds its elastic limit. |\n| **MRI Imaging** | Magnetic fields sync with the spin of hydrogen nuclei. | Atomic nuclei absorb energy, allowing for detailed body scans. |\n\n### ⚠️ Important Notes: The Tacoma Narrows Bridge\nIn 1940, the Tacoma Narrows Bridge collapsed not just because of high winds, but because the wind created aeroelastic flutter that matched the bridge's natural frequency. This caused the structure to twist and oscillate until it literally tore itself apart.\n\n### 📐 Formula Card: Simple Pendulum Natural Frequency\n\n┌──────────────────────────────────────────────────────────────────────────┐\n│ **Natural Frequency of a Pendulum**                                      │\n│                                                                          │\n│ $$ f_0 = \\frac{1}{2\\pi} \\sqrt{\\frac{g}{L}} $$                            │\n│                                                                          │\n│ **[ Explain Formula ]**                                                  │\n│ $g$ = acceleration due to gravity; $L$ = length of the string.           │\n│ To change the resonance frequency of a pendulum, you must change its     │\n│ length.                                                                  │\n│                                                                          │\n│ **[ Open Formula Lab ]**                                                 │\n└──────────────────────────────────────────────────────────────────────────┘\n\n### ✅ Summary\nResonance is the \"sweet spot\" of vibration. It is a powerful tool used in music and medicine, but a dangerous force that engineers must counteract when building bridges or skyscrapers to prevent structural failure during earthquakes or windstorms.\n\n### ❓ Suggested Questions\n1. How does damping affect the amplitude of a system at resonance?\n2. Why do soldiers \"break step\" (stop marching in unison) when crossing a bridge?\n3. What is the relationship between resonance and the quality of sound in a guitar?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of resonance, including its definition, mechanism, advantages, and disadvantages. The use of real-world examples, such as the playground swing, radio tuning, and shattering glass, effectively illustrates the concept. The inclusion of formulas, like the resonance condition and the natural frequency of a pendulum, adds depth and accuracy to the explanation. The response is well-structured, readable, and beginner-friendly, making it an effective educational tool. However, minor improvements could be made to further enhance clarity and concision, such as condensing some sections or using more concise language.",
+  "candidate_token_usage": {
+    "promptTokens": 375,
+    "completionTokens": 817,
+    "totalTokens": 1192
+  },
+  "candidate_latency_ms": 6774,
+  "candidate_cost_usd": 0.0026385,
+  "judge_token_usage": {
+    "promptTokens": 1490,
+    "completionTokens": 180,
+    "totalTokens": 1670
+  },
+  "judge_latency_ms": 3149,
+  "judge_cost_usd": 0.001326,
+  "retry_count": 1,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:26:41.747Z"
+}

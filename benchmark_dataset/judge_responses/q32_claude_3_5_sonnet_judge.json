@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 32,
+  "question": "State the laws of thermodynamics.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe laws of thermodynamics define the fundamental physical principles that govern the relationships between heat, work, temperature, and energy changes within physical systems.\n\n---\n\n## The Four Core Laws\n\n### 1. Zeroth Law (Thermal Equilibrium)\nIf two thermodynamic systems are each in thermal equilibrium with a third system, they are in thermal equilibrium with each other, defining temperature as a valid physical property.\n\n### 2. First Law (Conservation of Energy)\nThe net change in internal energy of a closed system equals the heat added to the system minus the work performed by the system.\n\n### 3. Second Law (Entropy Accumulation)\nIn an isolated system, the total entropy—a measure of disorder—always increases over time, meaning thermal energy cannot flow spontaneously from a cooler body to a warmer body.\n\n### 4. Third Law (Absolute Zero Limit)\nAs the temperature of a system approaches absolute zero ($0 \\text{ K}$), its entropy approaches a constant minimum value, and it is impossible to cool a system to absolute zero in a finite number of steps.\n\n---\n\n## Formula\n\nThe mathematical statement of the First Law of Thermodynamics:\n\n$$\\Delta U = Q - W$$\n\nWhere:\n* $\\Delta U$ represents the net change in internal energy\n* $Q$ represents the heat energy added to the system\n* $W$ represents the work performed by the system\n\n---\n\n## Summary\n\nThe laws of thermodynamics establish temperature metrics, enforce total energy conservation, determine the direction of heat transfer through entropy, and set absolute zero limits.",
+  "candidate_response": "<div class=\"tutor-response\">\n\n# Laws of Thermodynamics\n\n</div>\n\nI need to render this as a proper interactive textbook. Let me provide the content in a structured way that your rendering system can work with.\n\n---\n\n## TOPIC: Laws of Thermodynamics\n\n---\n\n### [SECTION: Introduction]\n\nThermodynamics is the branch of physics that studies the relationships between **heat**, **work**, and **energy**. Its four fundamental laws govern every physical and chemical process in the universe — from engines to black holes.\n\n---\n\n### [SECTION: The Four Laws]\n\n---\n\n#### [LAW CARD: Zeroth Law]\n\n**The Zeroth Law of Thermodynamics**\n\n> *\"If two systems are each in thermal equilibrium with a third system, they are in thermal equilibrium with each other.\"*\n\n**What it means:** This law defines **temperature** as a measurable, comparable property. It is the logical foundation for thermometers.\n\n**Example:** If object A and object B are both at the same temperature as object C, then A and B are at the same temperature — even without direct contact.\n\n---\n\n#### [LAW CARD: First Law]\n\n**The First Law of Thermodynamics**\n\n> *\"Energy cannot be created or destroyed — only converted from one form to another.\"*\n\n**Also known as:** The Law of Conservation of Energy\n\n### [FORMULA CARD: First Law]\n\n$$\\Delta U = Q - W$$\n\n| Symbol | Meaning | SI Unit |\n|--------|---------|---------|\n| $\\Delta U$ | Change in internal energy of the system | Joules (J) |\n| $Q$ | Heat added **to** the system | Joules (J) |\n| $W$ | Work done **by** the system | Joules (J) |\n\n**What it means:** Any heat energy supplied to a system either increases its internal energy or is used to do work.\n\n---\n\n#### [LAW CARD: Second Law]\n\n**The Second Law of Thermodynamics**\n\n> *\"The total entropy of an isolated system always increases over time, or remains constant in ideal reversible processes.\"*\n\n**Also known as:** The Law of Entropy\n\n### [FORMULA CARD: Second Law — Entropy]\n\n$$\\Delta S \\geq \\frac{Q}{T}$$\n\n| Symbol | Meaning | SI Unit |\n|--------|---------|---------|\n| $\\Delta S$ | Change in entropy | J/K |\n| $Q$ | Heat transferred | Joules (J) |\n| $T$ | Absolute temperature | Kelvin (K) |\n\n**Key implications:**\n\n- Heat naturally flows from **hot → cold**, never the reverse spontaneously\n- No heat engine can be **100% efficient**\n- The universe tends toward **disorder** (increasing entropy)\n\n---\n\n#### [LAW CARD: Third Law]\n\n**The Third Law of Thermodynamics**\n\n> *\"As the temperature of a system approaches absolute zero, the entropy of the system approaches a minimum (constant) value.\"*\n\n### [FORMULA CARD: Third Law]\n\n$$\\lim_{T \\to 0} S = S_0$$\n\n| Symbol | Meaning |\n|--------|---------|\n| $T$ | Absolute temperature (Kelvin) |\n| $S$ | Entropy of the system |\n| $S_0$ | Minimum entropy (often taken as zero for a perfect crystal) |\n\n**What it means:** It is **impossible** to reach absolute zero ($0\\text{ K}$) in a finite number of steps. At $0\\text{ K}$, atomic motion would cease entirely.\n\n---\n\n### [SECTION: Summary Table]\n\n| Law | Name | Core Statement |\n|-----|------|---------------|\n| **Zeroth** | Thermal Equilibrium | Temperature is transitive |\n| **First** | Conservation of Energy | $\\Delta U = Q - W$ |\n| **Second** | Entropy | Disorder always increases |\n| **Third** | Absolute Zero | $S \\to S_0$ as $T \\to 0$ |\n\n---\n\n### [SECTION: Memory Aid]\n\nA famous informal summary of the laws:\n\n| Law | Plain Language Version |\n|-----|----------------------|\n| **Zeroth** | You must play the game |\n| **First** | You can't win |\n| **Second** | You can't even break even |\n| **Third** | You can't quit the game |\n\n---\n\n### [SECTION: Applications]\n\n| Law | Real-World Application |\n|-----|----------------------|\n| Zeroth | Thermometers, temperature sensors |\n| First | Engine design, calorimetry, metabolism |\n| Second | Refrigerators, heat pumps, power plants |\n| Third | Cryogenics, superconductivity research |",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the laws of thermodynamics, accurately presenting the Zeroth, First, Second, and Third Laws. The use of structured sections, law cards, and formula cards enhances readability and comprehension. However, minor improvements could be made in formatting consistency and the addition of more detailed examples or illustrations to further clarify complex concepts for beginners. Overall, the response excels in accuracy, quality, and educational value, providing a clear and well-organized explanation of thermodynamic principles.",
+  "candidate_token_usage": {
+    "promptTokens": 432,
+    "completionTokens": 1116,
+    "totalTokens": 1548
+  },
+  "candidate_latency_ms": 19444,
+  "candidate_cost_usd": 0.002664,
+  "judge_token_usage": {
+    "promptTokens": 1709,
+    "completionTokens": 160,
+    "totalTokens": 1869
+  },
+  "judge_latency_ms": 5683,
+  "judge_cost_usd": 0.0014093999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:05:46.533Z"
+}

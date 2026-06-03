@@ -1,0 +1,279 @@
+<div class="textbook-layout">
+
+  <!-- Introduction Card -->
+  <div class="ui-card section-intro">
+    <div class="card-header">
+      <h2>Introduction</h2>
+    </div>
+    <div class="card-body">
+      <p>Have you ever wondered why your body moves forward when a car suddenly stops, or why it feels like a force is pushing you back when the car accelerates? This resistance to change in motion is not caused by a force, but by a fundamental property of matter itself.</p>
+    </div>
+  </div>
+
+  <!-- Definition Card -->
+  <div class="ui-card section-definition">
+    <div class="card-header">
+      <h2>Quick Definition</h2>
+    </div>
+    <div class="card-body">
+      <p><strong>Inertia</strong> is the natural tendency of an object to resist any change in its state of motion or rest. If an object is at rest, it stays at rest. If it is moving, it continues moving at the same speed and in the same direction unless acted upon by an external unbalanced force.</p>
+    </div>
+  </div>
+
+  <!-- Formula Card -->
+  <div class="ui-card section-formula">
+    <div class="card-header">
+      <h2>Quantitative Measure</h2>
+    </div>
+    <div class="card-body">
+      <p>While inertia itself is a concept, it is quantitatively measured by <strong>mass</strong>. The relationship between force, mass, and acceleration (Newton's Second Law) shows that the greater the mass (inertia), the harder it is to accelerate an object.</p>
+      
+      <div class="formula-display">
+        $$ F = m \cdot a $$
+      </div>
+
+      <div class="formula-actions">
+        <button class="btn-action">[ Explain Formula ]</button>
+        <button class="btn-action primary">[ Open Formula Lab ]</button>
+      </div>
+      
+      <div class="formula-variables">
+        <div class="var-row"><span class="var-symbol">F</span> <span class="var-desc">Net Force applied (Newtons)</span></div>
+        <div class="var-row"><span class="var-symbol">m</span> <span class="var-desc">Mass / Inertia of the object (kg)</span></div>
+        <div class="var-row"><span class="var-symbol">a</span> <span class="var-desc">Acceleration produced ($m/s^2$)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Concepts / Types Card -->
+  <div class="ui-card section-key-concepts">
+    <div class="card-header">
+      <h2>Types of Inertia</h2>
+    </div>
+    <div class="card-body">
+      <p>Inertia is not a one-size-fits-all concept. It manifests differently depending on whether the object is at rest, moving, or changing direction. The three main types are classified below:</p>
+      
+      <div class="responsive-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Definition</th>
+              <th>Real-World Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Inertia of Rest</strong></td>
+              <td>The tendency of a body to remain in its state of rest.</td>
+              <td>Passengers fall back when a bus starts suddenly.</td>
+            </tr>
+            <tr>
+              <td><strong>Inertia of Motion</strong></td>
+              <td>The tendency of a body to remain in uniform motion in a straight line.</td>
+              <td>Passengers lurch forward when a moving bus stops suddenly.</td>
+            </tr>
+            <tr>
+              <td><strong>Inertia of Direction</strong></td>
+              <td>The tendency of a body to maintain its direction of motion.</td>
+              <td>Mud flying off a spinning tire tangent to the wheel.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Applications Card -->
+  <div class="ui-card section-applications">
+    <div class="card-header">
+      <h2>Applications</h2>
+    </div>
+    <div class="card-body">
+      <ul class="styled-list">
+        <li><strong>Seatbelts:</strong> Prevent passengers from continuing forward (inertia of motion) when a car crashes.</li>
+        <li><strong>Shaking a Ketchup Bottle:</strong> You move the bottle down and stop it suddenly; the ketchup keeps moving (inertia of motion) and comes out.</li>
+        <li><strong>Hammering a Nail:</strong> When you swing a hammer, the head keeps moving (inertia of motion) to drive the nail, even after your arm stops.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Summary Card -->
+  <div class="ui-card section-summary">
+    <div class="card-header">
+      <h2>Summary</h2>
+    </div>
+    <div class="card-body">
+      <p>Inertia is the resistance to change in motion. It is directly proportional to mass. We observe it in three forms: Inertia of Rest, Inertia of Motion, and Inertia of Direction. Understanding this concept is crucial for analyzing forces and movement in the physical world.</p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .textbook-layout {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f6f8;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .ui-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e1e4e8;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .ui-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px rgba(0,0,0,0.08);
+  }
+
+  .card-header {
+    background-color: #f8fafc;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #edf2f7;
+  }
+
+  .card-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2d3748;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-body p {
+    margin-bottom: 1rem;
+  }
+
+  /* Formula Card Specifics */
+  .formula-display {
+    background-color: #2d3748;
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'Times New Roman', serif;
+  }
+
+  .formula-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-action {
+    background: white;
+    border: 1px solid #cbd5e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #4a5568;
+    transition: all 0.2s;
+  }
+
+  .btn-action:hover {
+    background: #edf2f7;
+    border-color: #a0aec0;
+  }
+
+  .btn-action.primary {
+    background: #3182ce;
+    color: white;
+    border-color: #3182ce;
+  }
+
+  .btn-action.primary:hover {
+    background: #2b6cb0;
+  }
+
+  .formula-variables {
+    background: #edf2f7;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+  }
+
+  .var-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+  }
+
+  .var-symbol {
+    font-weight: bold;
+    font-family: 'Times New Roman', serif;
+    width: 40px;
+    font-style: italic;
+  }
+
+  /* Table Styling */
+  .responsive-table-wrapper {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  th {
+    background-color: #f7fafc;
+    font-weight: 600;
+    color: #4a5568;
+  }
+
+  tr:hover {
+    background-color: #f8fafc;
+  }
+
+  /* List Styling */
+  .styled-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .styled-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .styled-list li::before {
+    content: "•";
+    color: #3182ce;
+    font-weight: bold;
+    font-size: 1.2rem;
+    position: absolute;
+    left: 0;
+    top: -2px;
+  }
+
+</style>

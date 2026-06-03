@@ -1,0 +1,937 @@
+<thinking>
+The user wants me to explain the working principle of a capacitor in an interactive textbook format with structured UI blocks, formula cards, and proper section detection. Let me create a comprehensive response that looks like an interactive textbook rather than markdown notes.
+
+I need to structure this as:
+1. Quick Definition card
+2. Key Concepts card
+3. Formula cards (with explain formula and formula lab buttons)
+4. How it works card
+5. Characteristics card
+6. Applications card
+7. Important Notes card
+
+Let me think about the content:
+
+A capacitor is a passive electronic component that stores electrical energy in an electric field. It consists of two conductive plates separated by a dielectric material.
+
+Key formulas:
+- Q = CV (charge stored)
+- C = εA/d (capacitance)
+- E = ½CV² (energy stored)
+- U = Q²/2C (energy in terms of charge)
+
+Let me structure this properly with React components that look like an interactive textbook.
+
+I'll create a comprehensive React component with:
+- Section cards with icons
+- Formula cards with interactive buttons
+- Responsive tables
+- Color-coded sections
+- Interactive elements
+
+Let me write the full React component.
+</thinking>
+
+```jsx
+import { useState } from "react";
+import katex from "https://esm.sh/katex";
+
+const KaTeX = ({ math, display = false }) => {
+  const html = katex.renderToString(math, {
+    throwOnError: false,
+    displayMode: display,
+  });
+  return (
+    <span
+      dangerouslySetInnerHTML={{ __html: html }}
+      style={{ fontFamily: "KaTeX_Main, serif" }}
+    />
+  );
+};
+
+const SectionCard = ({ icon, title, accent, children }) => (
+  <div
+    style={{
+      background: "#ffffff",
+      border: `1.5px solid ${accent}33`,
+      borderLeft: `4px solid ${accent}`,
+      borderRadius: "12px",
+      padding: "22px 24px",
+      marginBottom: "18px",
+      boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+    }}
+  >
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        marginBottom: "14px",
+      }}
+    >
+      <span style={{ fontSize: "20px" }}>{icon}</span>
+      <h2
+        style={{
+          margin: 0,
+          fontSize: "15px",
+          fontWeight: "700",
+          color: accent,
+          textTransform: "uppercase",
+          letterSpacing: "0.06em",
+        }}
+      >
+        {title}
+      </h2>
+    </div>
+    <div style={{ color: "#2d2d2d", fontSize: "15px", lineHeight: "1.75" }}>
+      {children}
+    </div>
+  </div>
+);
+
+const FormulaCard = ({ title, formula, variables, context }) => {
+  const [tab, setTab] = useState("formula");
+
+  return (
+    <div
+      style={{
+        background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)",
+        borderRadius: "14px",
+        padding: "24px",
+        marginBottom: "16px",
+        color: "#fff",
+        boxShadow: "0 4px 20px rgba(48,43,99,0.35)",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "11px",
+          textTransform: "uppercase",
+          letterSpacing: "0.12em",
+          color: "#a78bfa",
+          marginBottom: "6px",
+          fontWeight: "600",
+        }}
+      >
+        Formula
+      </div>
+      <div
+        style={{ fontSize: "17px", fontWeight: "700", marginBottom: "18px" }}
+      >
+        {title}
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          marginBottom: "18px",
+          flexWrap: "wrap",
+        }}
+      >
+        {["formula", "explain", "lab"].map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            style={{
+              padding: "6px 16px",
+              borderRadius: "20px",
+              border: "none",
+              cursor: "pointer",
+              fontSize: "12px",
+              fontWeight: "600",
+              background: tab === t ? "#a78bfa" : "rgba(255,255,255,0.1)",
+              color: tab === t ? "#fff" : "#c4b5fd",
+              transition: "all 0.2s",
+            }}
+          >
+            {t === "formula"
+              ? "📐 Formula"
+              : t === "explain"
+              ? "💡 Explain"
+              : "🔬 Lab"}
+          </button>
+        ))}
+      </div>
+
+      {tab === "formula" && (
+        <div
+          style={{
+            background: "rgba(255,255,255,0.08)",
+            borderRadius: "10px",
+            padding: "20px",
+            textAlign: "center",
+            fontSize: "22px",
+          }}
+        >
+          <KaTeX math={formula} display={true} />
+        </div>
+      )}
+
+      {tab === "explain" && (
+        <div
+          style={{
+            background: "rgba(255,255,255,0.06)",
+            borderRadius: "10px",
+            padding: "18px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "13px",
+              color: "#c4b5fd",
+              marginBottom: "12px",
+              fontStyle: "italic",
+            }}
+          >
+            {context}
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+            {variables.map((v, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  padding: "8px 12px",
+                  background: "rgba(167,139,250,0.1)",
+                  borderRadius: "8px",
+                  fontSize: "14px",
+                }}
+              >
+                <span
+                  style={{
+                    minWidth: "50px",
+                    color: "#fbbf24",
+                    fontWeight: "700",
+                  }}
+                >
+                  <KaTeX math={v.symbol} />
+                </span>
+                <span style={{ color: "#e2e8f0" }}>
+                  {v.name}{" "}
+                  <span style={{ color: "#94a3b8", fontSize: "12px" }}>
+                    ({v.unit})
+                  </span>
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {tab === "lab" && (
+        <FormulaLab formula={formula} title={title} variables={variables} />
+      )}
+    </div>
+  );
+};
+
+const FormulaLab = ({ title, variables }) => {
+  const labs = {
+    "Charge Stored — Q = CV": {
+      inputs: [
+        { key: "C", label: "Capacitance C", unit: "F", default: 0.001 },
+        { key: "V", label: "Voltage V", unit: "V", default: 12 },
+      ],
+      compute: ({ C, V }) => ({ label: "Charge Q", value: (C * V).toFixed(6), unit: "C" }),
+    },
+    "Capacitance — C = ε₀A/d": {
+      inputs: [
+        { key: "A", label: "Plate Area A", unit: "m²", default: 0.01 },
+        { key: "d", label: "Separation d", unit: "m", default: 0.001 },
+        { key: "er", label: "Relative Permittivity εᵣ", unit: "", default: 1 },
+      ],
+      compute: ({ A, d, er }) => ({
+        label: "Capacitance C",
+        value: ((8.854e-12 * er * A) / d).toExponential(4),
+        unit: "F",
+      }),
+    },
+    "Energy Stored — E = ½CV²": {
+      inputs: [
+        { key: "C", label: "Capacitance C", unit: "F", default: 0.001 },
+        { key: "V", label: "Voltage V", unit: "V", default: 12 },
+      ],
+      compute: ({ C, V }) => ({
+        label: "Energy E",
+        value: (0.5 * C * V * V).toFixed(6),
+        unit: "J",
+      }),
+    },
+  };
+
+  const lab = labs[title];
+  const [vals, setVals] = useState(
+    lab ? Object.fromEntries(lab.inputs.map((i) => [i.key, i.default])) : {}
+  );
+
+  if (!lab)
+    return (
+      <div
+        style={{
+          color: "#94a3b8",
+          fontSize: "13px",
+          textAlign: "center",
+          padding: "16px",
+        }}
+      >
+        No interactive lab available for this formula.
+      </div>
+    );
+
+  const result = lab.compute(vals);
+
+  return (
+    <div
+      style={{
+        background: "rgba(255,255,255,0.06)",
+        borderRadius: "10px",
+        padding: "18px",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "12px",
+          color: "#a78bfa",
+          marginBottom: "14px",
+          fontWeight: "600",
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+        }}
+      >
+        🔬 Interactive Calculator
+      </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        {lab.inputs.map((inp) => (
+          <div key={inp.key}>
+            <label
+              style={{
+                fontSize: "12px",
+                color: "#c4b5fd",
+                display: "block",
+                marginBottom: "4px",
+              }}
+            >
+              {inp.label} {inp.unit && `(${inp.unit})`}
+            </label>
+            <input
+              type="number"
+              value={vals[inp.key]}
+              onChange={(e) =>
+                setVals((v) => ({
+                  ...v,
+                  [inp.key]: parseFloat(e.target.value) || 0,
+                }))
+              }
+              style={{
+                width: "100%",
+                padding: "8px 12px",
+                borderRadius: "8px",
+                border: "1px solid rgba(167,139,250,0.3)",
+                background: "rgba(255,255,255,0.08)",
+                color: "#fff",
+                fontSize: "14px",
+                outline: "none",
+                boxSizing: "border-box",
+              }}
+            />
+          </div>
+        ))}
+      </div>
+      <div
+        style={{
+          marginTop: "16px",
+          padding: "14px",
+          background: "linear-gradient(135deg, #a78bfa22, #818cf822)",
+          borderRadius: "10px",
+          border: "1px solid #a78bfa44",
+          textAlign: "center",
+        }}
+      >
+        <div style={{ fontSize: "12px", color: "#c4b5fd", marginBottom: "4px" }}>
+          Result
+        </div>
+        <div style={{ fontSize: "22px", fontWeight: "700", color: "#fbbf24" }}>
+          {result.value}{" "}
+          <span style={{ fontSize: "14px", color: "#94a3b8" }}>
+            {result.unit}
+          </span>
+        </div>
+        <div style={{ fontSize: "12px", color: "#94a3b8", marginTop: "2px" }}>
+          {result.label}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const StepCard = ({ steps }) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+    {steps.map((s, i) => (
+      <div
+        key={i}
+        style={{
+          display: "flex",
+          gap: "14px",
+          alignItems: "flex-start",
+          padding: "14px 16px",
+          background: "#f8faff",
+          borderRadius: "10px",
+          border: "1px solid #e0e7ff",
+        }}
+      >
+        <div
+          style={{
+            minWidth: "30px",
+            height: "30px",
+            borderRadius: "50%",
+            background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: "700",
+            fontSize: "13px",
+            flexShrink: 0,
+          }}
+        >
+          {i + 1}
+        </div>
+        <div>
+          <div style={{ fontWeight: "600", color: "#1e1b4b", fontSize: "14px" }}>
+            {s.title}
+          </div>
+          <div style={{ color: "#4b5563", fontSize: "14px", marginTop: "3px" }}>
+            {s.desc}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const DataTable = ({ headers, rows, accent }) => (
+  <div
+    style={{
+      overflowX: "auto",
+      borderRadius: "10px",
+      border: `1px solid ${accent}22`,
+    }}
+  >
+    <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px" }}>
+      <thead>
+        <tr style={{ background: `${accent}18` }}>
+          {headers.map((h, i) => (
+            <th
+              key={i}
+              style={{
+                padding: "12px 16px",
+                textAlign: "left",
+                color: accent,
+                fontWeight: "700",
+                fontSize: "12px",
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
+                borderBottom: `2px solid ${accent}33`,
+              }}
+            >
+              {h}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row, i) => (
+          <tr
+            key={i}
+            style={{ background: i % 2 === 0 ? "#ffffff" : "#f9fafb" }}
+          >
+            {row.map((cell, j) => (
+              <td
+                key={j}
+                style={{
+                  padding: "11px 16px",
+                  color: "#374151",
+                  borderBottom: "1px solid #f0f0f0",
+                  verticalAlign: "top",
+                }}
+              >
+                {cell}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+const Tag = ({ label, color }) => (
+  <span
+    style={{
+      display: "inline-block",
+      padding: "3px 10px",
+      borderRadius: "12px",
+      background: `${color}18`,
+      color: color,
+      fontSize: "12px",
+      fontWeight: "600",
+      marginRight: "6px",
+      marginBottom: "6px",
+      border: `1px solid ${color}33`,
+    }}
+  >
+    {label}
+  </span>
+);
+
+export default function CapacitorTutor() {
+  return (
+    <div
+      style={{
+        maxWidth: "780px",
+        margin: "0 auto",
+        padding: "28px 20px",
+        fontFamily: "'Inter', 'Segoe UI', sans-serif",
+        background: "#f4f6fb",
+        minHeight: "100vh",
+      }}
+    >
+      {/* Hero Header */}
+      <div
+        style={{
+          background: "linear-gradient(135deg, #1e3a8a, #3730a3, #4f46e5)",
+          borderRadius: "16px",
+          padding: "32px 28px",
+          marginBottom: "24px",
+          color: "#fff",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: "-30px",
+            right: "-30px",
+            width: "160px",
+            height: "160px",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.05)",
+          }}
+        />
+        <div
+          style={{
+            fontSize: "11px",
+            textTransform: "uppercase",
+            letterSpacing: "0.15em",
+            color: "#93c5fd",
+            marginBottom: "8px",
+            fontWeight: "600",
+          }}
+        >
+          📘 Physics · Electronics
+        </div>
+        <h1 style={{ margin: "0 0 10px", fontSize: "28px", fontWeight: "800" }}>
+          Capacitor
+        </h1>
+        <p style={{ margin: 0, color: "#bfdbfe", fontSize: "15px", maxWidth: "520px" }}>
+          A passive electronic component that stores electrical energy in an
+          electric field between two conductive plates.
+        </p>
+        <div style={{ marginTop: "16px", display: "flex", flexWrap: "wrap", gap: "8px" }}>
+          {["Energy Storage", "Electric Field", "Dielectric", "AC Circuits"].map(
+            (t) => (
+              <span
+                key={t}
+                style={{
+                  padding: "4px 12px",
+                  background: "rgba(255,255,255,0.12)",
+                  borderRadius: "20px",
+                  fontSize: "12px",
+                  color: "#e0f2fe",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                }}
+              >
+                {t}
+              </span>
+            )
+          )}
+        </div>
+      </div>
+
+      {/* Quick Definition */}
+      <SectionCard icon="📖" title="Quick Definition" accent="#2563eb">
+        A <strong>capacitor</strong> is a two-terminal passive component consisting
+        of <strong>two conductive plates</strong> (conductors) separated by an{" "}
+        <strong>insulating material</strong> called a <em>dielectric</em>. When
+        connected to a voltage source, it accumulates electric charge on its plates
+        and stores energy in the resulting <strong>electric field</strong>.
+        <div
+          style={{
+            marginTop: "14px",
+            padding: "12px 16px",
+            background: "#eff6ff",
+            borderRadius: "8px",
+            border: "1px solid #bfdbfe",
+            fontSize: "14px",
+            color: "#1e40af",
+          }}
+        >
+          💡 Unlike a battery, a capacitor stores energy <em>electrostatically</em>,
+          not chemically — and can release it almost instantaneously.
+        </div>
+      </SectionCard>
+
+      {/* Structure */}
+      <SectionCard icon="🔩" title="Physical Structure" accent="#7c3aed">
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          {[
+            {
+              part: "Plate 1 (Conductor)",
+              desc: "Positive plate — accumulates positive charge (+Q)",
+              color: "#dc2626",
+            },
+            {
+              part: "Dielectric",
+              desc: "Insulating layer between plates — increases capacitance by reducing effective field",
+              color: "#7c3aed",
+            },
+            {
+              part: "Plate 2 (Conductor)",
+              desc: "Negative plate — accumulates equal negative charge (−Q)",
+              color: "#2563eb",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                padding: "10px 14px",
+                background: `${item.color}0d`,
+                borderRadius: "8px",
+                border: `1px solid ${item.color}22`,
+              }}
+            >
+              <div
+                style={{
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "50%",
+                  background: item.color,
+                  flexShrink: 0,
+                }}
+              />
+              <div>
+                <strong style={{ color: item.color, fontSize: "14px" }}>
+                  {item.part}
+                </strong>
+                <div style={{ color: "#4b5563", fontSize: "13px" }}>
+                  {item.desc}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* Working Principle Steps */}
+      <SectionCard icon="⚙️" title="Working Principle — Step by Step" accent="#059669">
+        <StepCard
+          steps={[
+            {
+              title: "Connection to Voltage Source",
+              desc: "When a capacitor is connected to a battery or voltage source, an electric potential difference is applied across its two plates.",
+            },
+            {
+              title: "Charge Accumulation",
+              desc: "Electrons flow from the negative terminal of the source onto one plate (making it negative), while electrons are pulled away from the other plate (making it positive).",
+            },
+            {
+              title: "Electric Field Formation",
+              desc: "As charges accumulate, a uniform electric field E develops between the plates, directed from the positive plate to the negative plate.",
+            },
+            {
+              title: "Dielectric Polarisation",
+              desc: "The dielectric material between the plates gets polarised — its molecules align with the field — which weakens the internal field and allows more charge to accumulate.",
+            },
+            {
+              title: "Equilibrium (Fully Charged)",
+              desc: "Charging stops when the voltage across the capacitor equals the source voltage. No steady-state current flows through the dielectric.",
+            },
+            {
+              title: "Energy Storage",
+              desc: "Energy is stored in the electric field between the plates. When the source is removed, this energy remains stored until the capacitor is discharged.",
+            },
+          ]}
+        />
+      </SectionCard>
+
+      {/* Formula 1 */}
+      <FormulaCard
+        title="Charge Stored — Q = CV"
+        formula="Q = C \cdot V"
+        context="The charge stored on a capacitor is directly proportional to the voltage applied across it. This is the fundamental relationship defining capacitance."
+        variables={[
+          { symbol: "Q", name: "Charge stored", unit: "Coulombs (C)" },
+          { symbol: "C", name: "Capacitance", unit: "Farads (F)" },
+          { symbol: "V", name: "Voltage across plates", unit: "Volts (V)" },
+        ]}
+      />
+
+      {/* Formula 2 */}
+      <FormulaCard
+        title="Capacitance — C = ε₀A/d"
+        formula="C = \frac{\varepsilon_0 \, \varepsilon_r \, A}{d}"
+        context="Capacitance depends on the physical geometry of the capacitor and the dielectric material used. A larger plate area and smaller separation increase capacitance."
+        variables={[
+          { symbol: "\\varepsilon_0", name: "Permittivity of free space", unit: "8.854 × 10⁻¹² F/m" },
+          { symbol: "\\varepsilon_r", name: "Relative permittivity (dielectric constant)", unit: "dimensionless" },
+          { symbol: "A", name: "Plate area", unit: "m²" },
+          { symbol: "d", name: "Separation between plates", unit: "m" },
+        ]}
+      />
+
+      {/* Formula 3 */}
+      <FormulaCard
+        title="Energy Stored — E = ½CV²"
+        formula="E = \frac{1}{2} C V^2 = \frac{Q^2}{2C} = \frac{QV}{2}"
+        context="The energy stored in a capacitor resides in its electric field. Three equivalent forms exist depending on which quantities are known."
+        variables={[
+          { symbol: "E", name: "Energy stored", unit: "Joules (J)" },
+          { symbol: "C", name: "Capacitance", unit: "Farads (F)" },
+          { symbol: "V", name: "Voltage", unit: "Volts (V)" },
+          { symbol: "Q", name: "Charge", unit: "Coulombs (C)" },
+        ]}
+      />
+
+      {/* Types of Capacitors */}
+      <SectionCard icon="🗂️" title="Types of Capacitors" accent="#d97706">
+        <DataTable
+          accent="#d97706"
+          headers={["Type", "Dielectric", "Capacitance Range", "Best Used For"]}
+          rows={[
+            ["Ceramic", "Ceramic material", "1 pF – 100 µF", "High-frequency circuits, decoupling"],
+            ["Electrolytic", "Aluminium oxide", "1 µF – 100,000 µF", "Power supply filtering"],
+            ["Film (Polyester)", "Plastic film", "1 nF – 100 µF", "Audio, timing circuits"],
+            ["Tantalum", "Tantalum pentoxide", "0.1 µF – 2000 µF", "Portable electronics"],
+            ["Supercapacitor", "Electrolyte layer", "1 F – 10,000 F", "Energy storage, EVs"],
+            ["Mica", "Mica mineral", "1 pF – 10 nF", "RF, precision circuits"],
+          ]}
+        />
+      </SectionCard>
+
+      {/* Charging & Discharging */}
+      <SectionCard icon="📈" title="Charging & Discharging Behaviour" accent="#0891b2">
+        <p style={{ marginTop: 0 }}>
+          A capacitor does not charge or discharge instantaneously. The process
+          follows an <strong>exponential curve</strong> governed by the{" "}
+          <strong>RC time constant</strong>.
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "12px",
+            marginTop: "4px",
+          }}
+        >
+          {[
+            {
+              label: "Charging Voltage",
+              formula: "V(t) = V_0\\left(1 - e^{-t/RC}\\right)",
+              color: "#059669",
+            },
+            {
+              label: "Discharging Voltage",
+              formula: "V(t) = V_0 \\, e^{-t/RC}",
+              color: "#dc2626",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              style={{
+                padding: "14px",
+                background: `${item.color}0d`,
+                borderRadius: "10px",
+                border: `1px solid ${item.color}33`,
+                textAlign: "center",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "600",
+                  color: item.color,
+                  marginBottom: "10px",
+                }}
+              >
+                {item.label}
+              </div>
+              <KaTeX math={item.formula} display={true} />
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            marginTop: "14px",
+            padding: "12px 16px",
+            background: "#f0f9ff",
+            borderRadius: "8px",
+            border: "1px solid #bae6fd",
+            fontSize: "14px",
+          }}
+        >
+          <strong style={{ color: "#0369a1" }}>τ = RC</strong> — The{" "}
+          <em>time constant</em>. After one time constant, the capacitor reaches{" "}
+          <strong>~63.2%</strong> of full charge. After 5τ, it is considered{" "}
+          <strong>fully charged (99.3%)</strong>.
+        </div>
+      </SectionCard>
+
+      {/* Applications */}
+      <SectionCard icon="🚀" title="Applications" accent="#7c3aed">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+            gap: "10px",
+          }}
+        >
+          {[
+            { icon: "🔋", title: "Energy Storage", desc: "Flash cameras, UPS systems" },
+            { icon: "🎵", title: "Audio Filtering", desc: "Crossovers, tone controls" },
+            { icon: "⚡", title: "Power Supply", desc: "Smoothing rectified AC to DC" },
+            { icon: "📡", title: "Tuning Circuits", desc: "Radio frequency selection" },
+            { icon: "⏱️", title: "Timing Circuits", desc: "Oscillators, timers (555)" },
+            { icon: "🔌", title: "Signal Coupling", desc: "Blocking DC, passing AC" },
+            { icon: "🛡️", title: "Noise Filtering", desc: "Decoupling in PCBs" },
+            { icon: "🚗", title: "EVs & Hybrids", desc: "Supercapacitors for regen braking" },
+          ].map((app, i) => (
+            <div
+              key={i}
+              style={{
+                padding: "14px",
+                background: "#faf5ff",
+                borderRadius: "10px",
+                border: "1px solid #e9d5ff",
+              }}
+            >
+              <div style={{ fontSize: "22px", marginBottom: "6px" }}>{app.icon}</div>
+              <div style={{ fontWeight: "600", fontSize: "14px", color: "#4c1d95" }}>
+                {app.title}
+              </div>
+              <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "2px" }}>
+                {app.desc}
+              </div>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* Key Properties */}
+      <SectionCard icon="📊" title="Key Characteristics" accent="#0f766e">
+        <DataTable
+          accent="#0f766e"
+          headers={["Property", "In DC Circuit", "In AC Circuit"]}
+          rows={[
+            ["Current Flow", "Only during charging/discharging", "Continuous (displacement current)"],
+            ["Impedance", "Infinite (blocks DC steady state)", "Xc = 1/(2πfC) — decreases with frequency"],
+            ["Phase Shift", "—", "Current leads voltage by 90°"],
+            ["Energy Loss", "None (ideal)", "None (ideal); real caps have ESR"],
+            ["Behaviour", "Open circuit at steady state", "Frequency-dependent element"],
+          ]}
+        />
+      </SectionCard>
+
+      {/* Important Notes */}
+      <SectionCard icon="⚠️" title="Important Notes" accent="#b45309">
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          {[
+            {
+              icon: "⚡",
+              text: "Voltage across a capacitor cannot change instantaneously — it requires time to charge or discharge.",
+            },
+            {
+              icon: "🔒",
+              text: "Electrolytic capacitors are polarised — connecting them in reverse polarity can cause damage or explosion.",
+            },
+            {
+              icon: "📐",
+              text: "Capacitors in parallel: C_total = C₁ + C₂ + … (capacitances add directly)",
+            },
+            {
+              icon: "📐",
+              text: "Capacitors in series: 1/C_total = 1/C₁ + 1/C₂ + … (reciprocals add)",
+            },
+            {
+              icon: "🌡️",
+              text: "Real capacitors have leakage resistance, equivalent series resistance (ESR), and temperature coefficients.",
+            },
+          ].map((note, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                gap: "12px",
+                padding: "11px 14px",
+                background: "#fffbeb",
+                borderRadius: "8px",
+                border: "1px solid #fde68a",
+                fontSize: "14px",
+                color: "#78350f",
+              }}
+            >
+              <span style={{ flexShrink: 0 }}>{note.icon}</span>
+              <span>{note.text}</span>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* Summary */}
+      <div
+        style={{
+          background: "linear-gradient(135deg, #064e3b, #065f46)",
+          borderRadius: "14px",
+          padding: "24px",
+          color: "#fff",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "11px",
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            color: "#6ee7b7",
+            marginBottom: "10px",
+            fontWeight: "600",
+          }}
+        >
+          ✅ Summary
+        </div>
+        <div style={{ fontSize: "15px", lineHeight: "1.8", color: "#d1fae5" }}>
+          A capacitor stores energy by separating charge on two conductive plates
+          via an electric field. Its capacitance <KaTeX math="C" /> depends on
+          plate area, separation, and dielectric material. It charges/discharges
+          exponentially with time constant{" "}
+          <KaTeX math="\tau = RC" />, blocks DC in steady state, and acts as a
+          frequency-dependent impedance in AC circuits. Core to filtering, timing,
+          coupling, and energy storage across all of electronics.
+        </div>
+        <div style={{ marginTop: "16px", display: "flex", flexWrap: "wrap" }}>
+          {["Q = CV", "C = ε₀εᵣA/d", "E = ½CV²", "τ = RC", "Xc = 1/2πfC"].map(
+            (f) => (
+              <Tag key={f} label={f} color="#10b981" />
+            )
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+```

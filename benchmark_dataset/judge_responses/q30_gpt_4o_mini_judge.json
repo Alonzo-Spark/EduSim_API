@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 30,
+  "question": "Explain Bernoulli’s theorem and its applications.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nBernoulli's Theorem states that for an ideal, incompressible fluid undergoing steady, non-viscous flow, the total mechanical energy—comprising pressure energy, kinetic energy, and potential energy—remains constant along any streamline.\n\n---\n\n## Formula\n\nThe conservation expression along a fluid streamline:\n\n$$P + \\frac{1}{2}\\rho v^2 + \\rho g h = \\text{Constant}$$\n\nWhere:\n* $P$ represents the static fluid pressure\n* $\\rho$ represents the constant mass density of the fluid\n* $v$ represents the local flow velocity\n* $g$ represents acceleration due to gravity\n* $h$ represents the elevation height relative to a reference plane\n\n---\n\n## Applications\n\n* **Aerodynamic Lift:** Airplane wings are shaped so that air travels faster over the curved top surface, creating a lower pressure zone that generates upward lift.\n* **Venturi Tube Meters:** Measuring fluid flow rates through pipelines by tracking the pressure drop that occurs when the flow speeds up through a narrowed throat section.\n* **Atomizers and Paint Sprayers:** Passing a fast stream of air over a small draw tube lowers the local pressure, drawing liquid up to be atomized into a fine spray.\n\n---\n\n## Summary\n\nBernoulli's Theorem shows that as a fluid's velocity increases, its static pressure drops simultaneously, a principle widely used in aerodynamics and fluid flow systems.",
+  "candidate_response": "┌─────────────────────────────┐\n│ Introduction                │\n│                             │\n│ Bernoulli’s theorem is a    │\n│ fundamental principle in     │\n│ fluid dynamics that describes │\n│ the behavior of fluid flow.  │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Quick Definition            │\n│                             │\n│ Bernoulli's theorem states   │\n│ that an increase in the     │\n│ speed of a fluid occurs at  │\n│ the expense of its pressure  │\n│ or potential energy.         │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Key Concepts                │\n│                             │\n│ 1. **Fluid Dynamics**: The   │\n│    study of fluids (liquids  │\n│    and gases) in motion.     │\n│ 2. **Conservation of Energy**:│\n│    Energy in a fluid system   │\n│    is conserved.              │\n│ 3. **Pressure Variation**:    │\n│    Pressure decreases when    │\n│    the fluid velocity increases. │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Main Formula                │\n│                             │\n│     Rendered Formula        │\n│                             │\n│ $$ P + \\frac{1}{2} \\rho v^2 + \\rho gh = \\text{constant} $$ │\n│                             │\n│ [ Explain Formula ]         │\n│ [ Open Formula Lab ]        │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Applications                │\n│                             │\n│ 1. **Aviation**: Explains how│\n│    airplane wings generate   │\n│    lift.                     │\n│ 2. **Hydraulics**: Used in  │\n│    designing pipes and pumps.│\n│ 3. **Venturi Effect**: Applied│\n│    in carburetors and atomizers.│\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Advantages                  │\n│                             │\n│ - Helps in predicting fluid  │\n│   behavior in various systems.│\n│ - Essential for engineering  │\n│   applications in aerodynamics  │\n│   and hydraulics.           │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Disadvantages               │\n│                             │\n│ - Assumes incompressible and │\n│   non-viscous fluids, which  │\n│   may not be realistic in all │\n│   scenarios.                │\n│ - Does not account for       │\n│   turbulence in fluid flow.  │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Important Notes             │\n│                             │\n│ - Bernoulli's theorem is    │\n│   derived from the principle │\n│   of conservation of energy. │\n│ - It is applicable in steady,│\n│   incompressible, and non-viscous│\n│   flow conditions.          │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Summary                     │\n│                             │\n│ Bernoulli’s theorem is a    │\n│ crucial concept in fluid     │\n│ dynamics, explaining how      │\n│ fluid speed and pressure are  │\n│ related. Its applications span │\n│ various fields, from aviation  │\n│ to hydraulics, although it has │\n│ limitations in real-world     │\n│ scenarios.                   │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Suggested Questions          │\n│                             │\n│ 1. How does Bernoulli's theorem│\n│    apply to sports like cycling? │\n│ 2. What are real-world examples│\n│    where Bernoulli's principle │\n│    might fail?               │\n└─────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of Bernoulli's theorem, including its definition, formula, and applications. The response is well-structured and easy to follow, with clear explanations and relevant examples. However, the quality score is slightly lower due to the unconventional use of ASCII art tables, which may not be suitable for all audiences. Additionally, some of the sections, such as 'Advantages' and 'Disadvantages', could be more concise and directly related to the theorem itself. Overall, the response is accurate, educational, and of high quality, with minor suggestions for improvement.",
+  "candidate_token_usage": {
+    "promptTokens": 364,
+    "completionTokens": 882,
+    "totalTokens": 1246
+  },
+  "candidate_latency_ms": 10589,
+  "candidate_cost_usd": 0.0005838,
+  "judge_token_usage": {
+    "promptTokens": 1569,
+    "completionTokens": 179,
+    "totalTokens": 1748
+  },
+  "judge_latency_ms": 5284,
+  "judge_cost_usd": 0.001371,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:57:54.614Z"
+}

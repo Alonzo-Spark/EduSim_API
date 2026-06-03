@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 41,
+  "question": "Electrostatics: State Coulomb’s law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nCoulomb's Law states that the electrostatic force of attraction or repulsion between two stationary point charges is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance separating them.\n\n---\n\n## Characteristics\n\n* **Action-Reaction Interaction:** The forces exerted by the charges on each other are equal in magnitude and opposite in direction, acting along the straight line connecting them.\n* **Charge Dependency:** Like charges repel each other, whereas opposite charges experience a mutual attraction force.\n\n---\n\n## Formula\n\nThe mathematical equation for the electrostatic force:\n\n$$F = k_e \\frac{|q_1 q_2|}{r^2}$$\n\nIn a vacuum, the proportionality constant ($k_e$) is expressed as:\n\n$$k_e = \\frac{1}{4\\pi\\varepsilon_0} \\approx 8.988 \\times 10^9 \\text{ N}\\cdot\\text{m}^2/\\text{C}^2$$\n\nWhere:\n* $F$ represents the electrostatic force magnitude\n* $q_1, q_2$ represent the magnitudes of the point charges\n* $r$ represents the distance separating the two charges\n* $\\varepsilon_0$ represents the permittivity of free space ($8.854 \\times 10^{-12} \\text{ C}^2/\\text{N}\\cdot\\text{m}^2$)\n\n---\n\n## Summary\n\nCoulomb's Law describes the electrostatic force between charges, showing that it increases with charge magnitude but decreases according to an inverse-square relationship with distance.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Coulomb’s Law describes   │\n│ the electrostatic force   │\n│ between two point charges │\n│ at rest.                  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│ $$                        │\n│ F = k \\frac{|q_1 q_2|}{r^2}  \n│ $$                        │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n### Key Concepts\n\n- Applies only to **point charges** at rest (electrostatics).\n- The force acts along the line joining the two charges.\n- It is a **central force** and follows Newton's third law (equal and opposite forces).\n\n### Characteristics\n\n- **Inverse-square law**: Force decreases with the square of the distance.\n- **Proportional to product of charges**: Larger charges → stronger force.\n- **Conservative force**: Work done is path-independent; allows definition of electric potential.\n\n### Direction of Force\n\n- **Like charges** (++ or --) → **Repulsive** force\n- **Unlike charges** (+− or −+) → **Attractive** force\n\n### Constant of Proportionality\n\n$$\nk = \\frac{1}{4\\pi \\varepsilon_0}\n$$\n\nwhere:\n- $ \\varepsilon_0 $ = permittivity of free space ≈ $ 8.854 \\times 10^{-12} \\, \\text{C}^2/\\text{N·m}^2 $\n- $ k \\approx 8.99 \\times 10^9 \\, \\text{N·m}^2/\\text{C}^2 $\n\n### Vector Form\n\n$$\n\\vec{F}_{12} = k \\frac{q_1 q_2}{r^2} \\hat{r}_{12}\n$$\n\nwhere:\n- $ \\vec{F}_{12} $: force on charge 1 due to charge 2\n- $ \\hat{r}_{12} $: unit vector from charge 2 to charge 1\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ • Valid only for point    │\n│   charges in vacuum or    │\n│   air (with approximation)│\n│ • Assumes charges are     │\n│   stationary              │\n│ • Superposition applies:  │\n│   net force is vector sum │\n│   over all pairs          │\n└───────────────────────────┘\n\n### Summary\n\nCoulomb’s Law is the foundation of electrostatics, analogous to Newton’s law of gravitation, but for electric charges. It quantifies how charged particles interact in the absence of motion.\n\n---\n\n**Suggested Questions**  \n- How does Coulomb’s law compare to Newton’s law of gravitation?  \n- Why is the inverse-square law significant in field theory?  \n- What is the principle of superposition in electrostatics?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of Coulomb's Law, including its definition, formula, and characteristics. The response is well-structured and easy to follow, with clear explanations and examples. However, there are some minor formatting issues and a lack of explicit connection to the Gold Reference Answer. To improve, the candidate could focus on refining their formatting and explicitly addressing all aspects of the Gold Reference Answer. Additionally, some of the sections, such as 'Important Notes' and 'Suggested Questions', could be more tightly integrated into the main body of the response to enhance its overall coherence and flow.",
+  "candidate_token_usage": {
+    "promptTokens": 357,
+    "completionTokens": 670,
+    "totalTokens": 1027
+  },
+  "candidate_latency_ms": 29482,
+  "candidate_cost_usd": 0.001697,
+  "judge_token_usage": {
+    "promptTokens": 1431,
+    "completionTokens": 180,
+    "totalTokens": 1611
+  },
+  "judge_latency_ms": 7144,
+  "judge_cost_usd": 0.0012905999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:32:56.951Z"
+}

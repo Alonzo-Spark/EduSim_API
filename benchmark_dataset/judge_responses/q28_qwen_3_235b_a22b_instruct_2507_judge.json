@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 28,
+  "question": "Explain Archimedes’ principle with an example.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nArchimedes' Principle states that when a body is completely or partially submerged in a fluid at rest, it experiences an upward buoyant force equal to the total weight of the fluid that the body displaces.\n\n---\n\n## Core Characteristics\n\n* **Origin of Buoyancy:** Buoyancy arises because fluid pressure increases with depth, creating a greater upward force on the bottom of an object than the downward force on its top.\n* **Equilibrium Conditions:** An object floats if its total weight matches the buoyant force of the fluid displaced before it fully submerges.\n\n---\n\n## Formula\n\nThe upward buoyant force magnitude is calculated by:\n\n$$F_b = \\rho V g$$\n\nWhere:\n* $F_b$ represents the buoyant force vector magnitude\n* $\\rho$ represents the mass density of the displaced fluid\n* $V$ represents the submerged volume of the object\n* $g$ represents local acceleration due to gravity\n\n---\n\n## Real-world Example: Steel Cargo Ship\n\nA solid block of steel sinks quickly because its weight exceeds the buoyant force of the water it displaces. However, if that same sheet of steel is shaped into a wide, hollow ship hull:\n* The hull encloses a large volume of air, significantly increasing the overall volume of the ship.\n* When placed in water, this large volume displaces a massive amount of liquid, generating a buoyant force equal to the ship's weight and allowing it to float.\n\n---\n\n## Summary\n\nArchimedes' Principle explains buoyancy as an upward force equal to the weight of the displaced fluid, determining whether an object floats or sinks based on its average density.",
+  "candidate_response": "┌───────────────────────────┐  \n│ **Quick Definition**      │  \n│                           │  \n│ Archimedes’ Principle     │  \n│ states that the upward    │  \n│ buoyant force exerted on  │  \n│ a body immersed in a      │  \n│ fluid is equal to the     │  \n│ weight of the fluid       │  \n│ displaced by the body.    │  \n└───────────────────────────┘  \n\n---\n\n### **Key Concept**\n\nWhen an object is partially or fully submerged in a fluid (liquid or gas), it experiences an upward force called **buoyant force**. This force determines whether the object will float, sink, or remain suspended.\n\n---\n\n┌───────────────────────────┐  \n│ **Main Formula**          │  \n│                           │  \n│ $$                        │  \n│ F_b = \\rho_{\\text{fluid}}│  \n│ \\cdot g \\cdot V_{\\text{d│  \n│ }}                        │  \n│ $$                        │  \n│                           │  \n│ **Buoyant Force**         │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n**Where:**  \n- $ F_b $ = buoyant force (in newtons, N)  \n- $ \\rho_{\\text{fluid}} $ = density of the fluid (kg/m³)  \n- $ g $ = acceleration due to gravity (≈ 9.8 m/s²)  \n- $ V_{\\text{displaced}} $ = volume of fluid displaced (m³)  \n\n---\n\n### **How It Works**\n\n1. When you place an object in water, it pushes water out of the way (displaces it).  \n2. The water pushes back with an upward force equal to the weight of the displaced water.  \n3. If the buoyant force ≥ object’s weight → it floats.  \n4. If the buoyant force < object’s weight → it sinks.\n\n---\n\n### **Real-World Example: A Ship Floating on Water**\n\n🌊 Consider a large steel ship:\n\n- Steel is denser than water, so a solid block of steel would sink.  \n- However, the ship is designed with a hollow shape, so it displaces a **large volume** of water.  \n- The **weight of the displaced water** equals the **total weight of the ship**.  \n- Therefore, the buoyant force balances the ship’s weight → it floats!\n\n> ✅ The ship floats because it displaces enough water to match its own weight — even though it's made of heavy material.\n\n---\n\n### **Simple Experiment: The Crown and the Bathtub**\n\nLegend says Archimedes discovered this principle while bathing. He noticed his body displaced water when he got into the tub. To test if a king’s crown was pure gold, he:\n\n1. Submerged the crown in water and measured displaced volume.  \n2. Compared it to an equal **weight** of pure gold.  \n3. The crown displaced more water → less dense → not pure gold!\n\nThus, buoyancy can be used to measure density without damaging an object.\n\n---\n\n### **Applications of Archimedes’ Principle**\n\n| Application         | How It Works |\n|---------------------|--------------|\n| **Submarines**       | Adjust buoyancy by filling or emptying ballast tanks with water |\n| **Hot Air Balloons** | Rise because heated air is less dense than surrounding air |\n| **Hydrometers**      | Measure liquid density based on how deeply they sink |\n| **Life Jackets**     | Increase volume without much weight, displacing more water to stay afloat |\n\n---\n\n### **Important Notes**\n\n⚠️ **Floating vs. Sinking is not about weight — it's about density and displacement.**  \nA massive ship floats because its **average density** (including air inside) is less than water.\n\n⚠️ **Buoyancy works in gases too!**  \nHelium balloons rise in air because helium is less dense than air.\n\n---\n\n### **Summary**\n\n- Buoyant force = weight of displaced fluid  \n- Determines whether objects float or sink  \n- Depends on volume displaced and fluid density  \n- Applies to liquids and gases  \n- Practical in engineering, navigation, and material testing\n\n---\n\n🔧 **Suggested Questions for Practice**  \n- Why does an iron nail sink but an iron ship float?  \n- How can you use Archimedes’ principle to find the density of an irregular object?  \n- What happens to buoyant force when an object is only partially submerged?  \n- If a boat moves from freshwater to seawater, will it float higher or lower? Why?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of Archimedes' Principle, including its definition, formula, and real-world applications. The layout is well-structured, and the use of examples, such as the steel ship and the crown in the bathtub, effectively illustrates key concepts. However, there are minor areas for improvement. For instance, the candidate could have explicitly stated the conditions under which an object will float, sink, or remain suspended in terms of its density relative to the surrounding fluid. Additionally, while the response mentions that buoyancy works in gases too, a brief explanation or example of how this applies in practice (e.g., helium balloons) would enhance clarity. Overall, the response is accurate, well-presented, and educational, making it an excellent teaching tool for beginners.",
+  "candidate_token_usage": {
+    "promptTokens": 357,
+    "completionTokens": 962,
+    "totalTokens": 1319
+  },
+  "candidate_latency_ms": 18327,
+  "candidate_cost_usd": 0.002281,
+  "judge_token_usage": {
+    "promptTokens": 1712,
+    "completionTokens": 217,
+    "totalTokens": 1929
+  },
+  "judge_latency_ms": 6066,
+  "judge_cost_usd": 0.001548,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:54:08.716Z"
+}

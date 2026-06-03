@@ -1,0 +1,71 @@
+:::section{title="Introduction"}
+In kinematics, the second equation of motion relates the **displacement ($s$)** of an object to its **initial velocity ($u$)**, **time ($t$)**, and constant **acceleration ($a$)**. This derivation assumes motion in a straight line with uniform acceleration.
+:::
+
+:::section{title="Key Concepts"}
+To derive this relation, we utilize two fundamental definitions of velocity:
+1.  **Average Velocity:** The arithmetic mean of initial and final velocity.
+2.  **Displacement:** The product of average velocity and time.
+3.  **First Equation of Motion:** $v = u + at$.
+:::
+
+:::formula-card{title="The Displacement-Time Relation"}
+$$
+s = ut + \frac{1}{2}at^2
+$$
+**Variables:**
+*   $s$: Displacement (meters)
+*   $u$: Initial velocity (m/s)
+*   $a$: Uniform acceleration (m/s²)
+*   $t$: Time interval (seconds)
+
+[ Explain Formula: This equation calculates the total distance covered when an object accelerates uniformly from a starting speed. ]
+[ Open Formula Lab ]
+:::
+
+:::section{title="Step-by-Step Derivation"}
+
+**Step 1: Define Average Velocity**
+For an object moving with uniform acceleration, the average velocity ($v_{avg}$) is given by:
+$$v_{avg} = \frac{u + v}{2}$$
+
+**Step 2: Relate Displacement to Average Velocity**
+Displacement is defined as the product of average velocity and total time:
+$$s = v_{avg} \times t$$
+Substituting the expression from Step 1:
+$$s = \left( \frac{u + v}{2} \right) \times t \quad \text{--- (Equation A)}$$
+
+**Step 3: Substitute the First Equation of Motion**
+We know from the first equation of motion that:
+$$v = u + at$$
+Substitute this value of $v$ into **Equation A**:
+$$s = \left( \frac{u + (u + at)}{2} \right) \times t$$
+
+**Step 4: Simplify the Expression**
+Combine the like terms inside the parentheses:
+$$s = \left( \frac{2u + at}{2} \right) \times t$$
+Divide each term by 2:
+$$s = \left( u + \frac{1}{2}at \right) \times t$$
+Distribute the $t$:
+$$s = ut + \frac{1}{2}at^2$$
+:::
+
+:::section{title="Graphical Interpretation"}
+| Component | Representation on $v-t$ Graph |
+| :--- | :--- |
+| **Area of Rectangle** | Represents the term $ut$ (initial velocity $\times$ time) |
+| **Area of Triangle** | Represents the term $\frac{1}{2}at^2$ (distance due to acceleration) |
+| **Total Area** | The total area under the velocity-time curve equals displacement $s$ |
+:::
+
+:::section{title="Important Notes"}
+*   **Uniform Acceleration:** This formula is **only** valid if acceleration is constant. If acceleration changes, calculus (integration) must be used.
+*   **Vector Nature:** Displacement, velocity, and acceleration are vectors. Ensure consistent signs (e.g., if $u$ is positive, deceleration $a$ must be negative).
+*   **Starting from Rest:** If the object starts from rest, $u = 0$, and the formula simplifies to $s = \frac{1}{2}at^2$.
+:::
+
+:::section{title="Suggested Questions"}
+1.  **Conceptual:** Why does the term $t$ appear as a square ($t^2$) in the displacement formula?
+2.  **Numerical:** A car starts from rest and accelerates at $4 \, \text{m/s}^2$. Calculate the distance traveled in $5$ seconds.
+3.  **Graphical:** Prove the same relation using the area-under-the-curve method on a Velocity-Time graph.
+:::

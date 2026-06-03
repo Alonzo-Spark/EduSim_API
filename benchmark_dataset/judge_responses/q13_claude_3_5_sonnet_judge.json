@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 13,
+  "question": "A force of 50 N acts on a body of mass 10 kg. Find acceleration.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Dynamics Problem\n\n### Problem\nA net force of $50 \\text{ N}$ acts on a body of mass $10 \\text{ kg}$. Find its resulting acceleration.\n\n### Given\n* Force applied ($F$) = $50 \\text{ N}$\n* Mass of the body ($m$) = $10 \\text{ kg}$\n\n### Formula\n$$F = ma$$\n\nRearranging to solve for acceleration ($a$):\n$$a = \\frac{F}{m}$$\n\n### Substitution\n$$a = \\frac{50}{10}$$\n\n### Calculation\n$$a = 5 \\text{ m/s}^2$$\n\n### Final Answer\n**Acceleration ($a$) = $5 \\text{ m/s}^2$**\n\n### Interpretation\nThis indicates that the $50 \\text{ N}$ force causes the $10 \\text{ kg}$ mass to increase its velocity uniformly by $5 \\text{ meters per second}$ every single second in the direction of the applied force vector.",
+  "candidate_response": "<div class=\"tutor-response\">\n\n## Newton's Second Law of Motion\n\n<div class=\"cards-grid\">\n\n<div class=\"card card-definition\">\n  <div class=\"card-label\">📘 Quick Definition</div>\n  <div class=\"card-content\">\n    <strong>Newton's Second Law</strong> states that the acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass.\n  </div>\n</div>\n\n<div class=\"card card-formula\">\n  <div class=\"card-label\">⚡ Core Formula</div>\n  <div class=\"card-content formula-display\">\n\n$$F = ma$$\n\n  </div>\n  <div class=\"formula-vars\">\n    <span class=\"var-chip\"><strong>F</strong> = Net Force (N)</span>\n    <span class=\"var-chip\"><strong>m</strong> = Mass (kg)</span>\n    <span class=\"var-chip\"><strong>a</strong> = Acceleration (m/s²)</span>\n  </div>\n</div>\n\n</div>\n\n---\n\n<div class=\"card card-solution\">\n  <div class=\"card-label\">🔢 Step-by-Step Solution</div>\n  <div class=\"card-content\">\n\n**Given:**\n\n| Quantity | Symbol | Value |\n|----------|--------|-------|\n| Force | F | 50 N |\n| Mass | m | 10 kg |\n| Acceleration | a | ? |\n\n**Rearranging the formula:**\n\n$$a = \\frac{F}{m}$$\n\n**Substituting values:**\n\n$$a = \\frac{50}{10}$$\n\n$$\\boxed{a = 5 \\text{ m/s}^2}$$\n\n  </div>\n</div>\n\n<div class=\"card card-answer\">\n  <div class=\"card-label\">✅ Final Answer</div>\n  <div class=\"card-content\">\n    The acceleration of the body is <strong>5 m/s²</strong> in the direction of the applied force.\n  </div>\n</div>\n\n</div>\n\n<style>\n.tutor-response {\n  font-family: 'Segoe UI', sans-serif;\n  max-width: 720px;\n  color: #1a1a2e;\n}\n\n.cards-grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 16px;\n  margin: 16px 0;\n}\n\n.card {\n  border-radius: 12px;\n  overflow: hidden;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.08);\n}\n\n.card-label {\n  font-size: 0.75rem;\n  font-weight: 700;\n  letter-spacing: 0.08em;\n  text-transform: uppercase;\n  padding: 8px 16px;\n}\n\n.card-content {\n  padding: 14px 16px;\n  font-size: 0.97rem;\n  line-height: 1.6;\n}\n\n.card-definition {\n  background: #f0f4ff;\n  border: 1px solid #c7d7fd;\n}\n.card-definition .card-label {\n  background: #dbe4ff;\n  color: #3b5bdb;\n}\n\n.card-formula {\n  background: #fff9f0;\n  border: 1px solid #ffd8a8;\n}\n.card-formula .card-label {\n  background: #ffe8cc;\n  color: #e67700;\n}\n\n.formula-display {\n  text-align: center;\n  font-size: 1.3rem;\n  padding: 20px 16px 8px;\n}\n\n.formula-vars {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n  padding: 8px 16px 14px;\n}\n\n.var-chip {\n  background: #fff3e0;\n  border: 1px solid #ffd8a8;\n  border-radius: 20px;\n  padding: 3px 10px;\n  font-size: 0.82rem;\n  color: #7c4a00;\n}\n\n.card-solution {\n  background: #f8f9fa;\n  border: 1px solid #dee2e6;\n  margin: 16px 0;\n}\n.card-solution .card-label {\n  background: #e9ecef;\n  color: #495057;\n}\n\n.card-answer {\n  background: #ebfbee;\n  border: 1px solid #8ce99a;\n}\n.card-answer .card-label {\n  background: #d3f9d8;\n  color: #2f9e44;\n}\n\ntable {\n  width: 100%;\n  border-collapse: collapse;\n  margin: 10px 0;\n  font-size: 0.93rem;\n}\nth {\n  background: #e9ecef;\n  padding: 8px 12px;\n  text-align: left;\n  font-weight: 600;\n  border: 1px solid #dee2e6;\n}\ntd {\n  padding: 7px 12px;\n  border: 1px solid #dee2e6;\n}\ntr:nth-child(even) td {\n  background: #f8f9fa;\n}\n\n@media (max-width: 500px) {\n  .cards-grid { grid-template-columns: 1fr; }\n}\n</style>",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 10,
+    "quality": 10,
+    "educational": 10,
+    "overall_average": "10.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately solves the problem using Newton's Second Law of Motion, correctly applying the formula F = ma and rearranging it to solve for acceleration. The response is well-structured, easy to follow, and provides a clear step-by-step solution. The use of tables, formulas, and variable definitions enhances readability and understanding. The final answer is correctly boxed and includes the direction of the applied force, demonstrating a thorough understanding of the concept. Overall, the response demonstrates exceptional accuracy, quality, and educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 445,
+    "completionTokens": 1388,
+    "totalTokens": 1833
+  },
+  "candidate_latency_ms": 18501,
+  "candidate_cost_usd": 0.003221,
+  "judge_token_usage": {
+    "promptTokens": 1792,
+    "completionTokens": 163,
+    "totalTokens": 1955
+  },
+  "judge_latency_ms": 2681,
+  "judge_cost_usd": 0.0014663999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:19:37.544Z"
+}

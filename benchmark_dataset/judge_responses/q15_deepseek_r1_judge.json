@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 15,
+  "question": "A gun recoils after firing a bullet. Explain using Newton’s third law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nGun recoil is the backward velocity vector experienced by a firearm immediately upon discharging a bullet projectile from its barrel assembly. This behavior provides a clear physical demonstration of Newton's Third Law of Motion.\n\n---\n\n## Physical Interaction\n\n* **Action Force Vector:** The expanding high-pressure gas generation inside the chamber drives the bullet forward through the barrel with a powerful action force.\n* **Reaction Force Vector:** Simultaneously, an identical reaction force vector pushes backward on the breech mechanism of the gun body.\n\n---\n\n## Formula\n\nApplying momentum conservation rules from a mutual rest state ($0$):\n\n$$m_b v_b + m_g v_g = 0$$\n\n$$v_g = -\\frac{m_b v_b}{m_g}$$\n\nWhere:\n* $m_b, m_g$ represent the masses of the bullet and gun respectively\n* $v_b$ represents the forward velocity vector of the bullet\n* $v_g$ represents the backward recoil velocity vector of the gun body\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Recoil force can be redirected to cycle automatic reloading mechanisms. | High recoil velocity degrades targeting stability and causes structural operator fatigue. |\n\n---\n\n## Summary\n\nThe backward velocity of a recoiling gun arises directly from an equal and opposite reaction force, with its final velocity scaled down relative to the bullet due to the gun's much larger mass profile.",
+  "candidate_response": "### Explanation of Gun Recoil Using Newton's Third Law\n\n#### 🔍 Quick Definition  \nNewton's third law states:  \n**\"For every action, there is an equal and opposite reaction.\"**  \nThis means forces always occur in pairs. If object A exerts a force on object B, object B simultaneously exerts an equal force in the opposite direction on object A.\n\n---\n\n#### 💥 Action-Reaction Pair in Firing a Bullet  \nWhen a gun fires a bullet:  \n1. **Action Force**: The gun exerts a **forward force** on the bullet (propelling it out of the barrel).  \n2. **Reaction Force**: The bullet exerts an **equal backward force** on the gun.  \n\nThis backward force acts on the gun, causing it to **recoil** (kick backward).\n\n---\n\n#### ⚖️ Formula: Newton's Third Law  \nThe law is mathematically expressed as:  \n$$\n\\vec{F}_{\\text{action}} = -\\vec{F}_{\\text{reaction}}\n$$  \nWhere:  \n- \\(\\vec{F}_{\\text{action}}\\) = Force exerted by the gun on the bullet (forward).  \n- \\(\\vec{F}_{\\text{reaction}}\\) = Force exerted by the bullet on the gun (backward).  \n\n<details>\n<summary>📖 Explanation of Formula</summary>\nThe negative sign indicates that the reaction force is equal in magnitude but opposite in direction to the action force. Both forces:  \n- Act simultaneously,  \n- Act on different objects (bullet and gun),  \n- Are part of the same interaction.\n</details>\n\n---\n\n#### ⚙️ Why Does the Gun Recoil?  \n- The bullet has **low mass**, so the forward force accelerates it to high speed.  \n- The gun has **high mass**, so the same backward force causes a smaller backward acceleration (recoil).  \n- Momentum conservation: The bullet gains forward momentum, so the gun gains equal backward momentum (\\(m_{\\text{gun}} v_{\\text{gun}} = -m_{\\text{bullet}} v_{\\text{bullet}}\\)).\n\n---\n\n#### 🔑 Key Notes  \n1. Recoil is **not** caused by explosions \"pushing back\" but by the bullet pushing on the gun.  \n2. Heavier guns recoil less because acceleration \\(a = F/m\\) is smaller for the same force.  \n3. Without external support (e.g., your shoulder), the gun would fly backward freely.  \n\n---\n\n#### ⚡ Real-World Example  \n- **Rifles**: Shooters brace against recoil to stabilize aim.  \n- **Cannons**: Roll backward on wheels after firing (recoil absorbed mechanically).  \n\n> 💡 **Think Deeper**: If you fire a bullet in space, both the gun and bullet would move apart at speeds inversely proportional to their masses.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately explains the concept of gun recoil using Newton's third law, providing a clear definition, action-reaction pair, and mathematical expression. The response is well-structured, readable, and effectively teaches the concept. Minor suggestions for improvement include adding more details on the advantages and disadvantages of recoil, as seen in the gold reference answer, and potentially providing more real-world examples. Overall, the response demonstrates a strong understanding of the physics concept and effectively communicates it to the reader.",
+  "candidate_token_usage": {
+    "promptTokens": 368,
+    "completionTokens": 979,
+    "totalTokens": 1347
+  },
+  "candidate_latency_ms": 42646,
+  "candidate_cost_usd": 0.00234641,
+  "judge_token_usage": {
+    "promptTokens": 1329,
+    "completionTokens": 157,
+    "totalTokens": 1486
+  },
+  "judge_latency_ms": 4608,
+  "judge_cost_usd": 0.0011742,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:23:34.810Z"
+}

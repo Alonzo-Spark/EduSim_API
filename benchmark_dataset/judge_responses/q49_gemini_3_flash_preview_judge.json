@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 49,
+  "question": "A current of 2 A flows through a resistor of 10 Ω. Calculate voltage.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Ohm's Law Problem\n\n### Problem\nA steady electric current of $2 \\text{ A}$ flows through a resistor with a value of $10 \\ \\Omega$. Calculate the voltage drop across the resistor.\n\n### Given\n* Current tracking ($I$) = $2 \\text{ A}$\n* Resistance value ($R$) = $10 \\ \\Omega$\n\n### Formula\n$$V = IR$$\n\n### Substitution\n$$V = 2 \\times 10$$\n\n### Calculation\n$$V = 20 \\text{ V}$$\n\n### Final Answer\n**Potential Difference ($V$) = $20 \\text{ V}$**\n\n### Interpretation\nThis means that a potential difference of $20 \\text{ Volts}$ must be maintained across the ends of the $10 \\ \\Omega$ resistor to sustain a continuous current flow of $2 \\text{ Amperes}$.",
+  "candidate_response": ":::section{title=\"Introduction\"}\nIn this scenario, we are examining the relationship between electrical current, resistance, and the resulting potential difference (voltage) across a conductor. This relationship is governed by one of the most fundamental laws in physics: **Ohm's Law**.\n:::\n\n:::section{title=\"Key Concepts\"}\n*   **Current ($I$):** The rate of flow of electric charge, measured in Amperes (A).\n*   **Resistance ($R$):** The opposition to the flow of electric current, measured in Ohms ($\\Omega$).\n*   **Voltage ($V$):** The electrical potential difference between two points, measured in Volts (V).\n:::\n\n:::section{title=\"Formula Card\"}\n### Ohm's Law Calculation\n\n$$\nV = I \\times R\n$$\n\n**Variables:**\n*   $V$ = Voltage (Volts)\n*   $I$ = Current (Amperes)\n*   $R$ = Resistance (Ohms)\n\n[ Explain Formula: The voltage across a resistor is directly proportional to the current flowing through it. ]\n[ Open Formula Lab ]\n:::\n\n:::section{title=\"Step-by-Step Solution\"}\nTo find the voltage, we substitute the given values into the formula:\n\n1.  **Identify Given Values:**\n    *   Current ($I$) = $2\\text{ A}$\n    *   Resistance ($R$) = $10\\text{ }\\Omega$\n\n2.  **Apply Formula:**\n    *   $V = 2\\text{ A} \\times 10\\text{ }\\Omega$\n\n3.  **Result:**\n    *   $V = 20\\text{ V}$\n:::\n\n:::section{title=\"Data Summary Table\"}\n| Parameter | Symbol | Value | Unit |\n| :--- | :--- | :--- | :--- |\n| Current | $I$ | 2 | Amperes (A) |\n| Resistance | $R$ | 10 | Ohms ($\\Omega$) |\n| **Calculated Voltage** | **$V$** | **20** | **Volts (V)** |\n:::\n\n:::section{title=\"Important Notes\"}\n*   **Direct Proportionality:** If you double the current while keeping resistance the same, the voltage will also double.\n*   **Standard Units:** Always ensure current is in Amperes and resistance is in Ohms before calculating to get the result in Volts.\n:::\n\n:::section{title=\"Suggested Questions\"}\n1.  What would happen to the voltage if the resistance was increased to $20\\text{ }\\Omega$ while maintaining the same current?\n2.  If the voltage was measured at $50\\text{ V}$ with a $10\\text{ }\\Omega$ resistor, what would the current be?\n:::",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of Ohm's Law and its application to calculate voltage. The use of sections, formulas, and tables enhances readability and clarity. However, to achieve perfection, the candidate could further emphasize the importance of unit consistency and provide more detailed explanations for the direct proportionality concept. Additionally, suggesting more varied and challenging questions in the 'Suggested Questions' section could improve the response's educational value. Overall, the response is well-structured, accurate, and educational, making it an excellent example for learning about Ohm's Law and its practical applications.",
+  "candidate_token_usage": {
+    "promptTokens": 389,
+    "completionTokens": 612,
+    "totalTokens": 1001
+  },
+  "candidate_latency_ms": 4187,
+  "candidate_cost_usd": 0.0020305,
+  "judge_token_usage": {
+    "promptTokens": 1189,
+    "completionTokens": 176,
+    "totalTokens": 1365
+  },
+  "judge_latency_ms": 1631,
+  "judge_cost_usd": 0.0011358,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:51:35.407Z"
+}

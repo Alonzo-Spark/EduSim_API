@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 12,
+  "question": "Define inertia and explain its types.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nInertia is the inherent property of an object by virtue of which it resists any change to its state of rest or uniform motion along a straight line. Inertia is an intrinsic quality of matter directly proportional to its mass.\n\n---\n\n## Types of Inertia\n\n* **Inertia of Rest:** The inability of an object to change its state of rest by itself.\n* **Inertia of Motion:** The inability of an object to modify its steady uniform linear velocity by itself.\n* **Inertia of Direction:** The inability of a moving mass to change its directional travel alignment without an external intervention force.\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Ensures mechanical stability in structures without continuous power inputs. | Requires substantial energy expenditures to overcome when launching transit systems. |\n\n---\n\n## Real-world Examples\n\n* **Rest Example:** Shaking a tree branch vigorously causes ripe fruits to break free and drop because they resist moving along with the branches.\n* **Motion Example:** An athlete runs a short distance past the finish line because their body's inertia resists an instantaneous stop.\n* **Direction Example:** A car turning sharply left causes passengers to slide toward the right door as their bodies attempt to continue tracking in a straight line.\n\n---\n\n## Summary\n\nInertia is matter's fundamental resistance to acceleration, manifesting as separate tracking constraints across rest states, velocity continuities, and orientation axes.",
+  "candidate_response": "```json\n{\n  \"action\": \"render_interactive_textbook\",\n  \"topic\": \"Inertia and Its Types\",\n  \"blocks\": [\n    {\n      \"type\": \"Introduction\",\n      \"title\": \"Understanding Inertia\",\n      \"content\": \"Inertia is an inherent property of all physical matter. It is not a force, but rather a resistance to change. If an object is at rest, it wants to stay at rest; if it is moving, it wants to keep moving at the same speed and in the same direction.\"\n    },\n    {\n      \"type\": \"Definition\",\n      \"title\": \"Formal Definition\",\n      \"content\": \"Inertia is the property of a body by virtue of which it opposes any change in its state of rest or of uniform motion in a straight line.\",\n      \"key_insight\": \"Mass is the quantitative measure of inertia. The more mass an object has, the greater its inertia.\"\n    },\n    {\n      \"type\": \"FormulaCard\",\n      \"title\": \"The Mathematical Relation\",\n      \"formula\": \"I \\\\propto m\",\n      \"explanation\": \"Where 'I' represents Inertia and 'm' represents Mass. This linear relationship implies that doubling the mass of an object doubles its resistance to acceleration.\",\n      \"lab_link\": \"mass-inertia-simulator\"\n    },\n    {\n      \"type\": \"Characteristics\",\n      \"title\": \"The Three Types of Inertia\",\n      \"content\": [\n        {\n          \"label\": \"Inertia of Rest\",\n          \"description\": \"The inability of a body to change its state of rest by itself. Example: When a bus starts suddenly, passengers jerk backwards.\"\n        },\n        {\n          \"label\": \"Inertia of Motion\",\n          \"description\": \"The inability of a body to change its state of uniform motion by itself. Example: When a moving bus stops suddenly, passengers jerk forward.\"\n        },\n        {\n          \"label\": \"Inertia of Direction\",\n          \"description\": \"The inability of a body to change its direction of motion by itself. Example: When a car takes a sharp turn, passengers are thrown outwards.\"\n        }\n      ]\n    },\n    {\n      \"type\": \"Table\",\n      \"title\": \"Comparison: Mass vs. Inertia\",\n      \"headers\": [\"Feature\", \"Mass\", \"Inertia\"],\n      \"rows\": [\n        [\"Nature\", \"A physical quantity (Scalar)\", \"A property of matter\"],\n        [\"Measurement\", \"Measured in Kilograms (kg)\", \"No specific unit (Qualitative)\"],\n        [\"Dependency\", \"Constant regardless of location\", \"Depends solely on mass\"]\n      ]\n    },\n    {\n      \"type\": \"ImportantNotes\",\n      \"notes\": [\n        \"Inertia is described by Newton's First Law of Motion, often called the Law of Inertia.\",\n        \"An object in deep space has the same inertia as it does on Earth, even though it may be weightless.\",\n        \"Inertia does not depend on the speed of the object, only its mass.\"\n      ]\n    },\n    {\n      \"type\": \"SuggestedQuestions\",\n      \"questions\": [\n        \"Why is it dangerous to jump out of a moving bus?\",\n        \"How does the inertia of a 5kg iron ball compare to a 5kg football?\",\n        \"Explain why dust flies off a carpet when it is hit with a stick using the concept of inertia.\"\n      ]\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of inertia and its types, with accurate definitions, formulas, and examples. The structured format using JSON blocks enhances readability and organization. However, minor improvements could be made by including more real-world examples and visual aids to further illustrate the concepts, particularly for the 'Inertia of Direction' type. Additionally, a brief discussion on the historical context or the significance of Newton's First Law of Motion in relation to inertia could enrich the educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 377,
+    "completionTokens": 787,
+    "totalTokens": 1164
+  },
+  "candidate_latency_ms": 6111,
+  "candidate_cost_usd": 0.0025495,
+  "judge_token_usage": {
+    "promptTokens": 1408,
+    "completionTokens": 154,
+    "totalTokens": 1562
+  },
+  "judge_latency_ms": 2129,
+  "judge_cost_usd": 0.0012144,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:18:19.004Z"
+}

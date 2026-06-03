@@ -1,0 +1,152 @@
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                               Event Overview                                   │
+│                                                                               │
+│  A **bounce boundary reflection event** occurs when a moving object (particle, │
+│  rigid body, ray, etc.) collides with a static boundary and its trajectory   │
+│  is redirected according to the physics of elastic or partially elastic      │
+│  collisions.  In a sandbox or game engine this event is typically handled   │
+│  at runtime to keep the simulation stable and visually believable.           │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                               Quick Definition                                 │
+│                                                                               │
+│  **Bounce Reflection** – the instantaneous change of an object’s velocity     │
+│  vector after hitting a boundary, computed by reflecting the incident       │
+│  velocity about the boundary’s surface normal and optionally scaling it     │
+│  by a restitution coefficient ( e ∈[0,1] ).                                   │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                               Key Concepts                                      │
+│                                                                               │
+│  • **Incident Vector (v)** – object's velocity just before impact.            │
+│  • **Surface Normal (n)** – unit vector perpendicular to the boundary surface │
+│    pointing outward from the colliding side.                                 │
+│  • **Restitution (e)** – scalar that controls energy loss (e=1 → perfectly  │
+│    elastic, e=0 → perfectly inelastic).                                      │
+│  • **Reflection Vector (vʹ)** – new velocity after the bounce.                │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                              Main Formula                                        │
+│                                                                               │
+│      vʹ = v − 2 ( v·n ) n · e                                               │
+│                                                                               │
+│  • **v** – incident velocity vector                                          │
+│  • **n** – unit surface normal (pointing outward)                           │
+│  • **v·n** – dot product (scalar projection of v onto n)                    │
+│  • **e** – coefficient of restitution (0 ≤ e ≤ 1)                           │
+│                                                                               │
+│  [ Explain Formula ]   [ Open Formula Lab ]                                   │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                              Implementation Steps                               │
+│                                                                               │
+│  1️⃣ Detect collision → obtain contact point **p**, incident velocity **v**,   │
+│     and surface normal **n**.                                                │
+│                                                                               │
+│  2️⃣ Compute dot product: `dot = v·n`.                                         │
+│                                                                               │
+│  3️⃣ Reflect velocity: `v_reflected = v - 2 * dot * n`.                        │
+│                                                                               │
+│  4️⃣ Apply restitution: `v_new = v_reflected * e`.                            │
+│                                                                               │
+│  5️⃣ Update object's state: position = p + v_new * Δt (or use impulse based │
+│     integration).                                                            │
+│                                                                               │
+│  6️⃣ (Optional) Emit visual overlay: arrows for **v**, **n**, and **vʹ**.    │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                                 Sample Code                                      │
+│                                                                               │
+│  ```cpp                                                               //   │
+│  // Assume Vec3 has .dot() and operator overloads                         │
+│  Vec3 reflect(const Vec3& v, const Vec3& n, float restitution) {           │
+│      float dot = v.dot(n);                                                │
+│      Vec3 v_reflected = v - 2.0f * dot * n;                               │
+│      return v_reflected * restitution;                                    │
+│  }                                                                        │
+│                                                                           │
+│  // Runtime usage                                                          │
+│  if (collisionDetected) {                                                  │
+│      Vec3 v_new = reflect(velocity, normal, restitution);                 │
+│      velocity = v_new;                                                     │
+│      // trigger overlay rendering …                                        │
+│  }                                                                         │
+│  ```                                                                       │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                               Runtime Overlay UI                                 │
+│                                                                               │
+│  ┌───────────────────────┐   ┌───────────────────────┐   ┌───────────────────┐ │
+│  │   Incident Arrow      │   │   Normal Arrow        │   │   Reflected Arrow │ │
+│  │   (red)               │   │   (green)             │   │   (blue)          │ │
+│  └───────────────────────┘   └───────────────────────┘   └───────────────────┘ │
+│                                                                               │
+│  • All arrows originate from the **contact point**.                           │
+│  • Lengths are scaled to velocity magnitude for visual clarity.               │
+│  • Tooltip on hover shows numeric components (vx, vy, vz).                    │
+│  • A small label displays the restitution value **e**.                        │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                                 Parameters                                      │
+│                                                                               │
+│  • `position`  – Vec3 | current object position (updated after bounce)        │
+│  • `velocity`  – Vec3 | incident velocity **v**                               │
+│  • `normal`    – Vec3 | surface normal **n** (must be unit‑length)            │
+│  • `restitution` – float | energy‑preserving factor **e** (0 – 1)            │
+│  • `Δt`        – float | time step for position integration                     │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                              Important Notes                                    │
+│                                                                               │
+│  • **Numerical stability** – Clamp the dot product to [-1, 1] before        │
+│    reflection to avoid drift due to floating‑point errors.                   │
+│  • **Multiple contacts** – Resolve the deepest penetration first, then      │
+│    re‑evaluate remaining contacts within the same frame.                     │
+│  • **Sliding** – If the restitution is zero, the reflected component is     │
+│    removed, leaving only motion tangent to the surface (object slides).      │
+│  • **2‑D vs 3‑D** – In 2‑D the normal is a perpendicular vector (‑y, x)       │
+│    rotated 90°; the same formula applies unchanged.                          │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                                   Summary                                        │
+│                                                                               │
+│  • Detect the collision → obtain **v**, **n**, and restitution **e**.          │
+│  • Compute the reflected velocity with `vʹ = v − 2 (v·n) n · e`.               │
+│  • Update the object’s state and optionally render a runtime overlay that    │
+│    visualizes the incident, normal, and reflected vectors.                   │
+│  • Keep an eye on edge cases (penetration depth, multiple contacts,          │
+│    floating‑point drift) to maintain a robust simulation.                    │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                            Suggested Questions                                 │
+│                                                                               │
+│  1️⃣ How does changing the restitution coefficient affect the bounce height   │
+│     in a gravity‑driven simulation?                                          │
+│  2️⃣ What modifications are needed for an **inelastic** collision where      │
+│     some kinetic energy is converted to heat?                                 │
+│  3️⃣ How would you extend the formula to handle **rotating** bodies that      │
+│     also have angular momentum?                                               │
+│  4️⃣ In a particle system, how can you efficiently batch‑process many          │
+│     bounce events in a single frame?                                          │
+│  5️⃣ What are common pitfalls when the surface normal is not perfectly       │
+│     normalized?                                                               │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘

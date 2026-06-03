@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 7,
+  "question": "Derive the expression for maximum height of a projectile.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe maximum height ($H$) of a projectile is the highest vertical point attained by the object above its structural launching point during its parabolic transit framework. At this peak point, the object's vertical velocity component drops exactly to zero.\n\n---\n\n## Formula\n\nThe equation for maximum vertical displacement is given by:\n\n$$H = \\frac{u^2 \\sin^2(\\theta)}{2g}$$\n\nWhere:\n* $H$ represents the maximum height reached\n* $u$ represents the initial velocity magnitude\n* $\\theta$ represents the launch angle relative to the horizontal\n* $g$ represents acceleration due to gravity\n\n---\n\n## Derivations\n\nTo isolate the maximum height expression, we track the independent vertical motion component from launch up to the peak trajectory location.\n\nThe initial vertical velocity component ($u_y$) is defined as:\n$$u_y = u \\sin(\\theta)$$\n\nAt the highest point ($H$), the final vertical velocity component ($v_y$) becomes zero:\n$$v_y = 0$$\n\nThe uniform vertical acceleration acting on the projectile is directed downward:\n$$a_y = -g$$\n\nWe now utilize the third kinematic equation of motion adapted for vertical tracking coordinates:\n$$v_y^2 = u_y^2 + 2a_y s$$\n\nSubstitute the vertical parameters ($0$, $u \\sin(\\theta)$, $-g$, and $H$) directly into the formula:\n$$0 = (u \\sin(\\theta))^2 + 2(-g)H$$\n\nRearrange the equation to isolate the acceleration term:\n$$2gH = u^2 \\sin^2(\\theta)$$\n\nSolve explicitly for the maximum height parameter ($H$):\n$$H = \\frac{u^2 \\sin^2(\\theta)}{2g}$$\n\nThis completes the mathematical derivation for the maximum height of a projectile.\n\n---\n\n## Summary\n\nThe maximum height of a projectile is directly proportional to the square of its initial velocity and the square of the sine of its launch angle, and inversely proportional to twice the gravitational acceleration field strength.",
+  "candidate_response": "┌──────────────────────────────────┐\n│ Introduction                     │\n│                                  │\n│ We examine projectile motion and │\n│ derive the expression for the    │\n│ maximum vertical height an       │\n│ object can reach when launched   │\n│ at an angle θ with speed v₀.      │\n└──────────────────────────────────┘\n\n┌──────────────────────────────────┐\n│ Definition                       │\n│                                  │\n│ Maximum height (Hₘₐₓ) is the     │\n│ greatest vertical displacement   │\n│ of the projectile measured from  │\n│ its launch point.                │\n└──────────────────────────────────┘\n\n┌──────────────────────────────────┐\n│ Key Concepts                     │\n│                                  │\n│ • Projectile motion = horizontal│\n│   + vertical components.         │\n│ • Vertical motion is uniformly   │\n│   accelerated (g ≈ 9.81 m/s²).    │\n│ • At the top of the trajectory, │\n│   vertical velocity = 0.         │\n└──────────────────────────────────┘\n\n┌──────────────────────────────────┐\n│ Variables                        │\n│                                  │\n│ v₀   – initial speed (m s⁻¹)      │\n│ θ    – launch angle (rad)         │\n│ g    – acceleration due to       │\n│        gravity (m s⁻²)            │\n│ Hₘₐₓ – maximum height (m)        │\n│ v₀ᵧ  – vertical component of v₀   │\n│        (v₀ sinθ)                  │\n└──────────────────────────────────┘\n\n┌──────────────────────────────────┐\n│ Vertical Motion Equation         │\n│                                  │\n│ y(t) = v₀ᵧ·t – ½ g t²              │\n│                                  │\n│ [ Explain Formula ]              │\n│ [ Open Formula Lab ]              │\n└──────────────────────────────────┘\n\n┌──────────────────────────────────┐\n│ Time to Reach Peak                │\n│                                  │\n│ Set vertical velocity = 0:       │\n│ v(t) = v₀ᵧ – g t = 0 ⇒ tₚₑₐₖ =    │\n│ v₀ᵧ / g = (v₀ sinθ)/g            │\n│                                  │\n│ [ Explain Formula ]              │\n│ [ Open Formula Lab ]              │\n└──────────────────────────────────┘\n\n┌──────────────────────────────────┐\n│ Maximum Height Formula            │\n│                                  │\n│ Hₘₐₓ = v₀ᵧ·tₚₑₐₖ – ½ g tₚₑₐₖ²        │\n│      = (v₀ sinθ)·(v₀ sinθ/g) –   │\n│        ½ g·(v₀ sinθ/g)²           │\n│      = (v₀² sin²θ)/(2g)          │\n│                                  │\n│ [ Explain Formula ]              │\n│ [ Open Formula Lab ]              │\n└──────────────────────────────────┘\n\n┌──────────────────────────────────┐\n│ Applications                     │\n│                                  │\n│ • Sports (e.g., basketball,      │\n│   golf) – estimating how high a  │\n│   ball will rise.                │\n│ • Engineering – trajectory       │\n│   planning for rockets or drones.│\n│ • Safety analysis – clearance    │\n│   heights for projectiles.       │\n└──────────────────────────────────┘\n\n┌──────────────────────────────────┐\n│ Summary                          │\n│                                  │\n│ The maximum height of a projectile│\n│ launched with speed v₀ at angle θ │\n│ is Hₘₐₓ = (v₀² sin²θ)/(2g). This   │\n│ follows from the vertical motion │\n│ equations and the condition that  │\n│ vertical velocity is zero at the  │\n│ apex.                            │\n└──────────────────────────────────┘\n\n┌──────────────────────────────────┐\n│ Suggested Questions              │\n│                                  │\n│ 1. How does Hₘₐₓ change if the launch│\n│    angle is increased from 30° to │\n│    60°?                           │\n│ 2. Derive the range formula using │\n│    the same vertical‑horizontal   │\n│    decomposition.                │\n│ 3. If air resistance is considered,│\n│    how would the expression for   │\n│    Hₘₐₓ be modified?            │\n└──────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effective in teaching the concept of maximum height of a projectile. The use of boxes to separate sections and the inclusion of key concepts, variables, and applications are notable strengths. However, there are minor formatting issues, such as the use of non-standard notation (e.g., v₀ instead of u) and the lack of a clear introduction to the kinematic equations. Additionally, some sections (e.g., 'Explain Formula' and 'Open Formula Lab') appear to be incomplete or placeholders. To improve, the candidate should ensure consistency in notation, provide clear explanations for formulas, and remove or complete any incomplete sections.",
+  "candidate_token_usage": {
+    "promptTokens": 428,
+    "completionTokens": 2542,
+    "totalTokens": 2970
+  },
+  "candidate_latency_ms": 7711,
+  "candidate_cost_usd": 0.0015894,
+  "judge_token_usage": {
+    "promptTokens": 1876,
+    "completionTokens": 196,
+    "totalTokens": 2072
+  },
+  "judge_latency_ms": 4547,
+  "judge_cost_usd": 0.001596,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:05:38.258Z"
+}

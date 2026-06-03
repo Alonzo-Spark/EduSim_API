@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 66,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'bounce' boundary reflection event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on an environmental boundary wall collision interface.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nA moving body collided with the solid vertical containment border, triggering a reflection event (`bounce`).\n\n### WHAT CHANGED\nThe horizontal component of the velocity vector reversed direction instantly, causing the object to rebound back toward the center.\n\n### SIMPLE WHY\nThe rigid boundary wall exerts an equal and opposite normal force that reverses the object's horizontal momentum.\n\n### WHAT TO NOTICE\nNotice how the velocity vector arrow flips direction instantly upon impact while maintaining its vertical component.",
+  "candidate_response": "# Bounce Boundary Reflection — Runtime Overlay\n\n---\n\n## Sandbox Event Detected\n\n```\nEVENT_TYPE   : BOUNDARY_REFLECTION\nSUBTYPE      : BOUNCE\nTIMESTAMP    : runtime::now()\nORIGIN       : particle_system_core\n```\n\n---\n\n## Physics Engine Response\n\nWhen a particle hits a boundary wall, the velocity vector is reflected across the wall's normal.\n\n---\n\n### Reflection Formula\n\n$$\n\\vec{v}' = \\vec{v} - 2(\\vec{v} \\cdot \\hat{n})\\hat{n}\n$$\n\n---\n\n### Velocity Component Flip\n\n| Axis Hit | Component Flipped | Preserved |\n|----------|-------------------|-----------|\n| Left / Right Wall | $v_x \\to -v_x$ | $v_y$ |\n| Top / Bottom Wall | $v_y \\to -v_y$ | $v_x$ |\n| Corner | Both flipped | Neither |\n\n---\n\n### Energy Behavior\n\n$$\ne' = e \\cdot C_r\n$$\n\nWhere $C_r$ is the **coefficient of restitution**:\n\n| $C_r$ Value | Behavior |\n|-------------|----------|\n| $C_r = 1.0$ | Perfect elastic bounce |\n| $0 < C_r < 1$ | Energy loss per bounce |\n| $C_r = 0$ | Particle sticks to wall |\n\n---\n\n### Runtime State Patch\n\n```js\nonBoundaryHit(particle, wall) {\n  const normal = wall.getNormal();\n  const dot    = particle.vel.dot(normal);\n\n  // Reflect velocity\n  particle.vel = particle.vel\n    .sub(normal.scale(2 * dot));\n\n  // Apply restitution\n  particle.vel = particle.vel\n    .scale(wall.restitution);\n\n  // Clamp position inside bounds\n  particle.pos = clampToBounds(\n    particle.pos, wall\n  );\n\n  emitEvent('BOUNCE', {\n    particle : particle.id,\n    wall     : wall.id,\n    normal   : normal,\n    energy   : particle.kineticEnergy()\n  });\n}\n```\n\n---\n\n### Overlay Status\n\n```\n[ ✓ ] Velocity reflected\n[ ✓ ] Restitution applied\n[ ✓ ] Position clamped\n[ ✓ ] BOUNCE event emitted\n[ ✓ ] Overlay render complete\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts involved in a bounce boundary reflection event, including the reflection formula and the concept of restitution. The use of a table to illustrate the velocity component flip and the inclusion of a runtime state patch with example code are particularly effective. However, the response could be improved with more explicit explanations of the physics concepts, particularly for beginners. Additionally, some of the formatting and section headings could be more clearly aligned with the gold reference answer. Overall, the response is well-structured and easy to follow, but could benefit from more attention to pedagogical effectiveness and clarity of teaching.",
+  "candidate_token_usage": {
+    "promptTokens": 443,
+    "completionTokens": 595,
+    "totalTokens": 1038
+  },
+  "candidate_latency_ms": 12394,
+  "candidate_cost_usd": 0.001633,
+  "judge_token_usage": {
+    "promptTokens": 1032,
+    "completionTokens": 184,
+    "totalTokens": 1216
+  },
+  "judge_latency_ms": 7165,
+  "judge_cost_usd": 0.0010608,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:14:09.317Z"
+}

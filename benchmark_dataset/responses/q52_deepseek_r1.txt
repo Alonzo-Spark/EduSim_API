@@ -1,0 +1,91 @@
+### Visual Effect of Air Resistance on Projectile Trajectory
+
+#### 🎯 Quick Definition
+**Air resistance** (drag) opposes a projectile's motion, reducing its velocity asymmetrically. This breaks the symmetry of ideal parabolic motion, creating a steeper descent and shorter range.
+
+---
+
+#### 📐 Main Formula Comparison
+**Without Air Resistance**  
+$$ \begin{cases} x(t) = v_{0x}t \\ y(t) = v_{0y}t - \frac{1}{2}gt^2 \end{cases} $$  
+*Symmetric parabola*
+
+**With Air Resistance**  
+$$ m\frac{d\vec{v}}{dt} = m\vec{g} - \frac{1}{2}\rho C_d A v^2 \hat{v} $$  
+*Asymmetric trajectory with faster energy loss*
+
+---
+
+#### 🔍 Key Visual Characteristics
+| Feature               | No Air Resistance          | With Air Resistance         |
+|-----------------------|----------------------------|-----------------------------|
+| **Shape**             | Symmetric parabola         | Asymmetric curve            |
+| **Maximum Height**    | Higher                     | Lower                       |
+| **Range**             | Longer                     | Shorter                     |
+| **Descent Angle**     | Matches launch angle       | Steeper than launch angle   |
+| **Impact Velocity**   | Same as launch velocity    | Lower than launch velocity  |
+
+---
+
+#### 📉 Visual Comparison Sketch
+```
+        Ideal Trajectory (No Drag)        Trajectory with Air Resistance
+                     *                                  *
+                    * *                                * *
+                   *   *                              *   *
+                  *     *                            *     *
+                 *       *                          *       *
+                *         *                        *         *
+               *           *                      *           *
+Launch ➔ *                 *                *                 *
+                                                             * * 
+                                                               * ➔ Impact
+```
+- **Asymmetry**: Descent phase becomes steeper and shorter.
+- **Reduced Range**: Horizontal distance decreases by 20-60% (depending on drag).
+- **Lower Peak**: Maximum height drops significantly.
+
+---
+
+#### ⚙️ Why This Happens
+1. **Horizontal Deceleration**  
+   Drag continuously reduces horizontal velocity (\(v_x\)), shortening flight time.
+2. **Vertical Asymmetry**  
+   - *Ascent*: Drag and gravity **both** oppose upward motion → faster slowdown.
+   - *Descent*: Drag opposes downward motion → slower acceleration than free fall.
+3. **Energy Loss**  
+   Kinetic energy dissipates as heat → total mechanical energy decreases over time.
+
+---
+
+#### 💡 Practical Implications
+- **Sports**: Golf balls with dimples reduce drag to extend range.
+- **Military**: Artillery shells use streamlined shapes to minimize trajectory distortion.
+- **Meteorology**: Raindrop trajectories affect precipitation patterns.
+
+> **Note**: Drag force scales with \(v^2\). Effects are negligible at low speeds (e.g., throwing a paper wad) but dominant at high speeds (e.g., baseball pitch).
+
+---
+
+#### 🧪 Formula Lab (Interactive)
+**Try adjusting drag coefficient** (\(C_d\)):  
+$$ \text{Range } R \approx \frac{v_0^2 \sin 2\theta}{g} \cdot e^{-k R} \quad (k \propto C_d) $$  
+*Higher \(C_d\) → faster exponential decay of range*
+
+---
+
+#### ✅ Summary
+Air resistance:
+1. Shortens range and reduces peak height
+2. Creates a "squashed" trajectory with a steep descent
+3. Breaks time symmetry (ascent time ≠ descent time)
+4. Causes the projectile to land vertically rather than at the launch angle
+
+**Key Insight**: Drag transforms the mathematically elegant parabola into a real-world trajectory dominated by energy dissipation.
+
+---
+
+❓ **Suggested Questions**  
+1. Why does air resistance affect the horizontal and vertical motion differently?  
+2. How would doubling the projectile mass change the trajectory (assuming same initial velocity)?  
+3. Why do golf balls have dimples if drag reduces range?

@@ -1,0 +1,69 @@
+```json
+{
+  "action": "ui_render",
+  "layout": "interactive_textbook",
+  "content": [
+    {
+      "type": "section_card",
+      "title": "Introduction",
+      "content": "Uniform Circular Motion (UCM) describes the motion of an object traveling at a constant speed along a circular path. While the speed remains unchanged, the velocity is constantly shifting because the direction of motion is always changing."
+    },
+    {
+      "type": "section_card",
+      "title": "Key Concepts",
+      "content": "To understand circular motion, we must distinguish between scalar speed and vector velocity:\n\n*   **Constant Speed:** The magnitude of the velocity vector stays the same.\n*   **Changing Velocity:** Since the direction changes at every point on the circle, the object is technically accelerating.\n*   **Period ($T$):** The time taken to complete one full revolution.\n*   **Radius ($r$):** The distance from the center of the circle to the moving object."
+    },
+    {
+      "type": "formula_card",
+      "title": "Orbital Velocity",
+      "formula": "v = \\frac{2\\pi r}{T}",
+      "explanation": "This formula calculates the linear speed of an object. $2\\pi r$ represents the circumference (distance), and $T$ is the time for one lap.",
+      "variables": [
+        {"symbol": "v", "meaning": "Linear Velocity", "unit": "m/s"},
+        {"symbol": "r", "meaning": "Radius of path", "unit": "m"},
+        {"symbol": "T", "meaning": "Time Period", "unit": "s"}
+      ]
+    },
+    {
+      "type": "section_card",
+      "title": "Centripetal Acceleration",
+      "content": "Even though the speed is constant, the change in direction requires acceleration. This acceleration is always directed toward the center of the circle, perpendicular to the velocity vector."
+    },
+    {
+      "type": "formula_card",
+      "title": "Centripetal Acceleration",
+      "formula": "a_c = \\frac{v^2}{r}",
+      "explanation": "Centripetal acceleration increases with the square of the velocity and decreases as the radius of the turn increases.",
+      "variables": [
+        {"symbol": "a_c", "meaning": "Centripetal Acceleration", "unit": "m/s²"},
+        {"symbol": "v", "meaning": "Tangential Velocity", "unit": "m/s"},
+        {"symbol": "r", "meaning": "Radius", "unit": "m"}
+      ]
+    },
+    {
+      "type": "table_card",
+      "title": "Comparison: Linear vs. Circular Motion",
+      "headers": ["Feature", "Linear Motion (Constant v)", "Uniform Circular Motion"],
+      "rows": [
+        ["Speed", "Constant", "Constant"],
+        ["Velocity Direction", "Fixed", "Changing Continuously"],
+        ["Acceleration", "Zero", "Constant Magnitude (toward center)"],
+        ["Net Force", "Zero", "Centripetal Force ($F_c$)"]
+      ]
+    },
+    {
+      "type": "section_card",
+      "title": "Important Notes",
+      "content": "1. **Direction of Force:** Centripetal force is not a 'new' force; it is a label given to whatever force (gravity, tension, friction) keeps the object in the circle.\n2. **Centripetal vs. Centrifugal:** Centripetal is the real force acting toward the center. 'Centrifugal' is a pseudo-force felt by the object due to inertia."
+    },
+    {
+      "type": "suggested_questions",
+      "questions": [
+        "How does doubling the speed of an object affect its centripetal acceleration?",
+        "If the string breaks for a ball in circular motion, what path does the ball take?",
+        "Calculate the acceleration of a car taking a 50m radius turn at 20m/s."
+      ]
+    }
+  ]
+}
+```

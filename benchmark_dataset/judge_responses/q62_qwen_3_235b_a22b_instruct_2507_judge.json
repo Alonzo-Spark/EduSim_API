@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 62,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'object_attached' event on a flying pendulum bob.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a structural mass addition during runtime operations.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nAn auxiliary mass payload component (`object_attached`) was welded directly onto the swinging pendulum bob asset mid-motion.\n\n### WHAT CHANGED\nThe total mass parameter of the swinging body doubled instantly, while its velocity vector experienced a temporary drop to conserve momentum.\n\n### SIMPLE WHY\nAdding mass increases the system's total inertia, requiring an immediate adjustment in velocity to keep the momentum vector balanced.\n\n### WHAT TO NOTICE\nNotice that despite the increased weight, the pendulum continues to follow its original swing timing because the period is independent of mass.",
+  "candidate_response": "┌─────────────────────────────────────┐\n│  Sandbox Runtime Overlay            │\n│  Event: object_attached             │\n│  Target: Flying Pendulum Bob        │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│  Event Context                      │\n│                                     │\n│  • Trigger: A new object has been   │\n│    dynamically attached to the      │\n│    pendulum bob during simulation.  │\n│                                     │\n│  • Runtime State: Simulation is     │\n│    active; physics engine is        │\n│    processing constraints and       │\n│    rigid body interactions.         │\n│                                     │\n│  • Affected Components:             │\n│    - Bob's mass & inertia tensor    │\n│    - Joint constraints (rope/rod)   │\n│    - Collision geometry             │\n│    - Center of mass (COM) shift     │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│  System Response Actions            │\n│                                     │\n│  1. Dynamic Mass Update:            │\n│     - Recalculate total mass:       │\n│         $$                          │\n│         m_{\\text{new}} = m_b + m_a  │\n│         $$                          │\n│     - Adjust inertia based on       │\n│       attachment position.          │\n│                                     │\n│  2. Joint Re-evaluation:            │\n│     - Verify constraint stability   │\n│       under new load.               │\n│     - Apply corrective impulse if   │\n│       oscillation threshold is      │\n│       exceeded.                     │\n│                                     │\n│  3. COM Shift Compensation:         │\n│     - Recompute pendulum length     │\n│       from pivot to new COM.        │\n│     - Update angular dynamics:      │\n│         $$                          │\n│         \\tau = I \\alpha            │\n│         $$                          │\n│                                     │\n│  4. Collision Mesh Merge:           │\n│     - Union bob and attached        │\n│       object colliders.             │\n│     - Enable continuous collision   │\n│       detection (CCD) if velocity   │\n│       > threshold.                  │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│  Formula Card: Effective Length     │\n│                                     │\n│     $$                             │\n│     L_{\\text{eff}} = L + \\Delta r  │\n│     $$                             │\n│                                     │\n│ [ Explain Formula ]   [ Open Lab ]  │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│  Real-Time Diagnostics              │\n│                                     │\n│  • Mass Change: +1.4 kg             │\n│  • COM Shift: +0.12 m downward      │\n│  • Period Change: ΔT = +0.34 s      │\n│  • Damping Ratio: Adjusted to 0.02  │\n│                                     │\n│  ⚠️ Alert: Minor instability         │\n│     detected in roll axis.          │\n│     Recommendation: Apply soft      │\n│     stabilization impulse.          │\n└─────────────────────────────────────┘\n\n┌─────────────────────────────────────┐\n│  Developer Actions                  │\n│                                     │\n│  [ ✔ ] Confirm attachment           │\n│  [ ⧉ ] Detach object                │\n│  [ ⚙ ] Tune damping parameters      │\n│  [ 📊 ] Open dynamics profiler      │\n│  [ 🛑 ] Freeze simulation            │\n└─────────────────────────────────────┘\n\n> **System Note:** This overlay is non-blocking. Physics tick continues unless manual intervention is triggered.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 7,
+    "overall_average": "8.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts involved in the 'object_attached' event on a flying pendulum bob. The use of formulas and technical terms is largely accurate, and the response is well-structured and easy to follow. However, there are some minor issues with the presentation, such as the use of non-standard formatting and the inclusion of some unnecessary details. To improve, the candidate could focus on streamlining the response and ensuring that all technical terms and formulas are used correctly. Additionally, the candidate could provide more explicit explanations of the physics concepts involved, which would improve the educational score. Overall, the response is strong, but could benefit from some refinement to make it more effective as a teaching tool.",
+  "candidate_token_usage": {
+    "promptTokens": 368,
+    "completionTokens": 840,
+    "totalTokens": 1208
+  },
+  "candidate_latency_ms": 27584,
+  "candidate_cost_usd": 0.002048,
+  "judge_token_usage": {
+    "promptTokens": 1427,
+    "completionTokens": 205,
+    "totalTokens": 1632
+  },
+  "judge_latency_ms": 3047,
+  "judge_cost_usd": 0.0013482,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:58:54.813Z"
+}

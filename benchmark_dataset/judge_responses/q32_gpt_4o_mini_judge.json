@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 32,
+  "question": "State the laws of thermodynamics.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe laws of thermodynamics define the fundamental physical principles that govern the relationships between heat, work, temperature, and energy changes within physical systems.\n\n---\n\n## The Four Core Laws\n\n### 1. Zeroth Law (Thermal Equilibrium)\nIf two thermodynamic systems are each in thermal equilibrium with a third system, they are in thermal equilibrium with each other, defining temperature as a valid physical property.\n\n### 2. First Law (Conservation of Energy)\nThe net change in internal energy of a closed system equals the heat added to the system minus the work performed by the system.\n\n### 3. Second Law (Entropy Accumulation)\nIn an isolated system, the total entropy—a measure of disorder—always increases over time, meaning thermal energy cannot flow spontaneously from a cooler body to a warmer body.\n\n### 4. Third Law (Absolute Zero Limit)\nAs the temperature of a system approaches absolute zero ($0 \\text{ K}$), its entropy approaches a constant minimum value, and it is impossible to cool a system to absolute zero in a finite number of steps.\n\n---\n\n## Formula\n\nThe mathematical statement of the First Law of Thermodynamics:\n\n$$\\Delta U = Q - W$$\n\nWhere:\n* $\\Delta U$ represents the net change in internal energy\n* $Q$ represents the heat energy added to the system\n* $W$ represents the work performed by the system\n\n---\n\n## Summary\n\nThe laws of thermodynamics establish temperature metrics, enforce total energy conservation, determine the direction of heat transfer through entropy, and set absolute zero limits.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Laws of Thermodynamics    │  \n│                           │  \n│ 1. **Zeroth Law**: If two systems are each in thermal equilibrium with a third system, then they are in thermal equilibrium with each other.  \n│  \n│ 2. **First Law**: Energy cannot be created or destroyed, only transformed from one form to another. This is often expressed as:  \n│    $$ \\Delta U = Q - W $$  \n│    where \\( \\Delta U \\) is the change in internal energy, \\( Q \\) is the heat added to the system, and \\( W \\) is the work done by the system.  \n│  \n│ 3. **Second Law**: The total entropy of an isolated system can never decrease over time. It states that natural processes tend to move toward a state of maximum disorder or entropy.  \n│  \n│ 4. **Third Law**: As the temperature of a system approaches absolute zero, the entropy of a perfect crystal approaches a constant minimum.  \n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately covers the four laws of thermodynamics, including the Zeroth Law, First Law with the correct formula, Second Law regarding entropy, and Third Law about absolute zero. The presentation is clear and structured, making it easy to follow. However, the quality score is not perfect due to the use of a boxed format which, while readable, does not match the standard formatting used in the gold reference answer. The educational score is also high because the response is beginner-friendly and effectively conveys the concepts. To improve, the candidate could enhance the layout to better match standard academic formatting and potentially include a brief introduction or summary to encapsulate the laws of thermodynamics, similar to the gold reference answer. Additionally, providing examples or further explanations for each law could increase the educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 361,
+    "completionTokens": 226,
+    "totalTokens": 587
+  },
+  "candidate_latency_ms": 3415,
+  "candidate_cost_usd": 0.00018975,
+  "judge_token_usage": {
+    "promptTokens": 938,
+    "completionTokens": 218,
+    "totalTokens": 1156
+  },
+  "judge_latency_ms": 5544,
+  "judge_cost_usd": 0.001086,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:05:46.485Z"
+}

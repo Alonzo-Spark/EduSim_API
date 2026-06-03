@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 49,
+  "question": "A current of 2 A flows through a resistor of 10 Ω. Calculate voltage.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Ohm's Law Problem\n\n### Problem\nA steady electric current of $2 \\text{ A}$ flows through a resistor with a value of $10 \\ \\Omega$. Calculate the voltage drop across the resistor.\n\n### Given\n* Current tracking ($I$) = $2 \\text{ A}$\n* Resistance value ($R$) = $10 \\ \\Omega$\n\n### Formula\n$$V = IR$$\n\n### Substitution\n$$V = 2 \\times 10$$\n\n### Calculation\n$$V = 20 \\text{ V}$$\n\n### Final Answer\n**Potential Difference ($V$) = $20 \\text{ V}$**\n\n### Interpretation\nThis means that a potential difference of $20 \\text{ Volts}$ must be maintained across the ends of the $10 \\ \\Omega$ resistor to sustain a continuous current flow of $2 \\text{ Amperes}$.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Voltage is the electric   │\n│ potential difference      │\n│ across two points in a    │\n│ circuit.                  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     $$ V = I \\times R $$ │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n**Given:**  \n- Current ($I$) = 2 A  \n- Resistance ($R$) = 10 Ω\n\n**To find:**  \n- Voltage ($V$) = ?\n\nUsing Ohm’s Law:\n\n$$\nV = I \\times R = 2\\, \\text{A} \\times 10\\, \\Omega = 20\\, \\text{V}\n$$\n\n┌───────────────────────────┐\n│ Final Answer              │\n│                           │\n│ $$ \\boxed{20\\ \\text{V}} $$│\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is largely accurate and well-structured. It correctly applies Ohm's Law to calculate the voltage drop across the resistor. The use of a formula and step-by-step calculation is clear and easy to follow. However, the response could be improved by adding more interpretive content, similar to the Gold Reference Answer, to help explain the significance of the calculated voltage and how it relates to the physical system. Additionally, the formatting, while generally good, includes some unnecessary elements, such as the 'Quick Definition' and 'Main Formula' sections, which, while not incorrect, do not add significant value to the solution of the problem at hand. Overall, the response demonstrates a good understanding of the concept and its application but could benefit from a more streamlined approach and additional explanatory content to enhance educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 366,
+    "completionTokens": 244,
+    "totalTokens": 610
+  },
+  "candidate_latency_ms": 33206,
+  "candidate_cost_usd": 0.000854,
+  "judge_token_usage": {
+    "promptTokens": 867,
+    "completionTokens": 222,
+    "totalTokens": 1089
+  },
+  "judge_latency_ms": 5386,
+  "judge_cost_usd": 0.001053,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:51:35.431Z"
+}

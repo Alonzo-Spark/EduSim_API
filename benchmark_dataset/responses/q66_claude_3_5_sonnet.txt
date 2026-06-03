@@ -1,0 +1,95 @@
+# Bounce Boundary Reflection — Runtime Overlay
+
+---
+
+## Sandbox Event Detected
+
+```
+EVENT_TYPE   : BOUNDARY_REFLECTION
+SUBTYPE      : BOUNCE
+TIMESTAMP    : runtime::now()
+ORIGIN       : particle_system_core
+```
+
+---
+
+## Physics Engine Response
+
+When a particle hits a boundary wall, the velocity vector is reflected across the wall's normal.
+
+---
+
+### Reflection Formula
+
+$$
+\vec{v}' = \vec{v} - 2(\vec{v} \cdot \hat{n})\hat{n}
+$$
+
+---
+
+### Velocity Component Flip
+
+| Axis Hit | Component Flipped | Preserved |
+|----------|-------------------|-----------|
+| Left / Right Wall | $v_x \to -v_x$ | $v_y$ |
+| Top / Bottom Wall | $v_y \to -v_y$ | $v_x$ |
+| Corner | Both flipped | Neither |
+
+---
+
+### Energy Behavior
+
+$$
+e' = e \cdot C_r
+$$
+
+Where $C_r$ is the **coefficient of restitution**:
+
+| $C_r$ Value | Behavior |
+|-------------|----------|
+| $C_r = 1.0$ | Perfect elastic bounce |
+| $0 < C_r < 1$ | Energy loss per bounce |
+| $C_r = 0$ | Particle sticks to wall |
+
+---
+
+### Runtime State Patch
+
+```js
+onBoundaryHit(particle, wall) {
+  const normal = wall.getNormal();
+  const dot    = particle.vel.dot(normal);
+
+  // Reflect velocity
+  particle.vel = particle.vel
+    .sub(normal.scale(2 * dot));
+
+  // Apply restitution
+  particle.vel = particle.vel
+    .scale(wall.restitution);
+
+  // Clamp position inside bounds
+  particle.pos = clampToBounds(
+    particle.pos, wall
+  );
+
+  emitEvent('BOUNCE', {
+    particle : particle.id,
+    wall     : wall.id,
+    normal   : normal,
+    energy   : particle.kineticEnergy()
+  });
+}
+```
+
+---
+
+### Overlay Status
+
+```
+[ ✓ ] Velocity reflected
+[ ✓ ] Restitution applied
+[ ✓ ] Position clamped
+[ ✓ ] BOUNCE event emitted
+[ ✓ ] Overlay render complete
+```

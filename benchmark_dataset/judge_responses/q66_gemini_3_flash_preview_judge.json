@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 66,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'bounce' boundary reflection event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on an environmental boundary wall collision interface.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nA moving body collided with the solid vertical containment border, triggering a reflection event (`bounce`).\n\n### WHAT CHANGED\nThe horizontal component of the velocity vector reversed direction instantly, causing the object to rebound back toward the center.\n\n### SIMPLE WHY\nThe rigid boundary wall exerts an equal and opposite normal force that reverses the object's horizontal momentum.\n\n### WHAT TO NOTICE\nNotice how the velocity vector arrow flips direction instantly upon impact while maintaining its vertical component.",
+  "candidate_response": ":::section{title=\"Event: Boundary Reflection (Bounce)\"}\nA boundary reflection occurs when a kinetic object's position vector exceeds the defined constraints of the simulation space, requiring an instantaneous inversion of momentum to maintain conservation of energy.\n:::\n\n:::section{title=\"Quick Definition\"}\n**Boundary Reflection** is the process of detecting a collision between a particle and a simulation wall and calculating the new velocity vector based on the angle of incidence and the coefficient of restitution.\n:::\n\n:::section{title=\"Main Formula\"}\n$$\n\\vec{v}_{new} = \\vec{v}_{old} - 2(\\vec{v}_{old} \\cdot \\hat{n})\\hat{n} \\times \\epsilon\n$$\n\n**Variables:**\n*   $\\vec{v}$: Velocity vector of the object.\n*   $\\hat{n}$: Normal vector of the boundary surface.\n*   $\\epsilon$: Coefficient of restitution (energy loss factor).\n\n[ Explain Formula ]\nThe formula reflects the velocity vector across the surface normal. If $\\epsilon = 1$, the bounce is perfectly elastic; if $\\epsilon < 1$, energy is lost to the boundary.\n\n[ Open Formula Lab ]\n:::\n\n:::section{title=\"Key Concepts\"}\n*   **Collision Detection:** Checking if $P_x > W_{width}$ or $P_x < 0$.\n*   **Normal Vector:** A vector perpendicular to the wall (e.g., for a right wall, $\\hat{n} = [-1, 0]$).\n*   **Impulse:** The sudden change in momentum applied at the timestamp of impact.\n:::\n\n:::section{title=\"Runtime Logic Table\"}\n| Boundary | Condition | Response (Velocity) | Normal Vector ($\\hat{n}$) |\n| :--- | :--- | :--- | :--- |\n| **Left Wall** | $x \\le 0$ | $v_x = |v_x| \\cdot \\epsilon$ | $[1, 0]$ |\n| **Right Wall** | $x \\ge W$ | $v_x = -|v_x| \\cdot \\epsilon$ | $[-1, 0]$ |\n| **Ceiling** | $y \\le 0$ | $v_y = |v_y| \\cdot \\epsilon$ | $[0, 1]$ |\n| **Floor** | $y \\ge H$ | $v_y = -|v_y| \\cdot \\epsilon$ | $[0, -1]$ |\n:::\n\n:::section{title=\"Important Notes\"}\n> **Correction Step:** To prevent \"sticky walls,\" the object's position must be reset to the boundary edge exactly at the moment of reflection. If the object penetrates the wall during a frame, move it back by the penetration depth: $P_{corrected} = Boundary \\pm (P_{current} - Boundary)$.\n:::\n\n:::section{title=\"Suggested Questions\"}\n1. How does adding friction ($\\mu$) change the tangential velocity during a bounce?\n2. What happens to the reflection vector if the boundary is a circular arc instead of a flat plane?\n3. How is the \"Time of Impact\" (TOI) calculated for sub-frame accuracy?\n:::",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts related to boundary reflection events, including the formula for calculating the new velocity vector after a collision. The use of sections and tables enhances readability. However, the response could be improved by providing more explicit connections to the 'bounce' event described in the gold reference answer, and some sections feel slightly tangential to the main question. Additionally, the 'Important Notes' section touches on the issue of 'sticky walls' but could be more detailed in its explanation of how this issue arises and how the correction step addresses it. Overall, the response is well-structured and informative, but could benefit from more focused alignment with the question and clearer explanations of certain concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 386,
+    "completionTokens": 689,
+    "totalTokens": 1075
+  },
+  "candidate_latency_ms": 4918,
+  "candidate_cost_usd": 0.00226,
+  "judge_token_usage": {
+    "promptTokens": 1227,
+    "completionTokens": 202,
+    "totalTokens": 1429
+  },
+  "judge_latency_ms": 3678,
+  "judge_cost_usd": 0.0012209999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:14:09.273Z"
+}

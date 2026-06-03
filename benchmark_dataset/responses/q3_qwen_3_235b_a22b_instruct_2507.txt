@@ -1,0 +1,164 @@
+<Section type="Introduction">
+  Understanding motion begins with two fundamental concepts: **distance** and **displacement**. Though often used interchangeably in everyday language, in physics they have distinct meanings. Grasping the difference is crucial for studying kinematics — the branch of physics that describes motion.
+</Section>
+
+<Section type="Definition" title="Distance">
+  <p><strong>Distance</strong> is the total length of the path traveled by an object, regardless of direction. It is a <em>scalar quantity</em>, meaning it only has magnitude (no direction).</p>
+</Section>
+
+<Section type="Definition" title="Displacement">
+  <p><strong>Displacement</strong> is the change in position of an object from its starting point to its final point, measured in a straight line. It is a <em>vector quantity</em>, meaning it has both magnitude and direction.</p>
+</Section>
+
+<Section type="Key Concepts">
+  <ul>
+    <li>Distance depends on the <strong>path taken</strong>.</li>
+    <li>Displacement depends only on the <strong>initial and final positions</strong>.</li>
+    <li>Distance is always <strong>positive or zero</strong>.</li>
+    <li>Displacement can be <strong>positive, negative, or zero</strong>, depending on direction.</li>
+    <li>Distance ≥ |Displacement| — the distance traveled is always greater than or equal to the magnitude of displacement.</li>
+  </ul>
+</Section>
+
+<Section type="Formula">
+  <FormulaCard
+    formula="d = \text{total path length}"
+    title="Distance"
+    description="Sum of all segments of motion along the path."
+  />
+  
+  <FormulaCard
+    formula="\Delta x = x_f - x_i"
+    title="Displacement"
+    description="Final position minus initial position."
+    variables={{
+      "\Delta x": "displacement",
+      "x_f": "final position",
+      "x_i": "initial position"
+    }}
+  />
+</Section>
+
+<Section type="Characteristics">
+  <table>
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Distance</th>
+        <th>Displacement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Type of Quantity</td>
+        <td>Scalar</td>
+        <td>Vector</td>
+      </tr>
+      <tr>
+        <td>Dependence on Path</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>Direction Required?</td>
+        <td>No</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Possible Values</td>
+        <td>Zero or positive</td>
+        <td>Positive, negative, or zero</td>
+      </tr>
+      <tr>
+        <td>SI Unit</td>
+        <td>Meter (m)</td>
+        <td>Meter (m)</td>
+      </tr>
+    </tbody>
+  </table>
+</Section>
+
+<Section type="Examples">
+  <h4>Example 1: Walking in a Straight Line</h4>
+  <p>A person walks 5 meters east in a straight line.</p>
+  <ul>
+    <li><strong>Distance</strong>: 5 m</li>
+    <li><strong>Displacement</strong>: 5 m east</li>
+  </ul>
+  <p>→ Here, distance and displacement are equal in magnitude and direction since the path is straight and unidirectional.</p>
+
+  <h4>Example 2: Round Trip</h4>
+  <p>You walk 3 km to a park and then return home.</p>
+  <ul>
+    <li><strong>Distance</strong>: 3 km + 3 km = 6 km</li>
+    <li><strong>Displacement</strong>: 0 km (you ended where you started)</li>
+  </ul>
+  <p>→ Distance accounts for the full journey; displacement is zero because there's no net change in position.</p>
+
+  <h4>Example 3: Moving in Two Dimensions</h4>
+  <p>A person walks 3 m east, then 4 m north.</p>
+  <ul>
+    <li><strong>Distance</strong>: 3 m + 4 m = 7 m</li>
+    <li><strong>Displacement</strong>: Straight-line distance from start to end.</li>
+  </ul>
+
+  <FormulaCard
+    formula="\text{Displacement} = \sqrt{(3)^2 + (4)^2} = 5\ \text{m}"
+    title="Magnitude of Displacement"
+    description="Using the Pythagorean theorem for perpendicular motion."
+    variables={{
+      "3\ \\text{m}": "eastward movement",
+      "4\ \\text{m}": "northward movement",
+      "5\ \\text{m}": "resultant displacement"
+    }}
+  />
+
+  <p>The displacement is 5 m in a direction 53.1° north of east.</p>
+</Section>
+
+<Section type="Applications">
+  <ul>
+    <li><strong>Navigation systems</strong> use displacement to calculate the shortest route (as the crow flies).</li>
+    <li><strong>Fitness trackers</strong> report distance traveled, not displacement.</li>
+    <li><strong>Physics simulations</strong> rely on displacement to determine velocity and acceleration.</li>
+  </ul>
+</Section>
+
+<Section type="Advantages">
+  <h4>Why Use Distance?</h4>
+  <ul>
+    <li>Useful for measuring fuel consumption (depends on total path length).</li>
+    <li>Important in sports (e.g., marathon runners cover a set distance).</li>
+  </ul>
+
+  <h4>Why Use Displacement?</h4>
+  <ul>
+    <li>Essential for determining net change in position.</li>
+    <li>Used in calculating velocity: <code>v = Δx / t</code>.</li>
+  </ul>
+</Section>
+
+<Section type="Important Notes">
+  <ul>
+    <li>Displacement can be zero even if distance is not (e.g., returning to start).</li>
+    <li>Displacement cannot be greater than distance — only equal or smaller.</li>
+    <li>In one-dimensional motion, direction is indicated by + or − signs.</li>
+  </ul>
+</Section>
+
+<Section type="Summary">
+  <p>
+    <strong>Distance</strong> is "how much ground an object has covered" during its motion.  
+    <strong>Displacement</strong> is "how far out of place an object is" — the object’s overall change in position.
+  </p>
+  <p>Think of distance as the odometer reading in a car, while displacement is the straight-line vector from start to finish.</p>
+</Section>
+
+<Section type="Suggested Questions">
+  <ul>
+    <li>Can displacement be negative? Explain with an example.</li>
+    <li>If a car travels in a circular track and completes one lap, what are its distance and displacement?</li>
+    <li>Under what condition will distance and displacement have the same magnitude?</li>
+    <li>How does direction affect displacement but not distance?</li>
+  </ul>
+</Section>

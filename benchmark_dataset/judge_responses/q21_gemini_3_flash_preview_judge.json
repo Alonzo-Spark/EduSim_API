@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 21,
+  "question": "Gravitation: State Newton’s law of gravitation.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nNewton's Law of Universal Gravitation states that every particle of matter in the universe attracts every other particle with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers.\n\n---\n\n## Characteristics\n\n* **Universal Action Range:** The attraction acts between all scale profiles, from small atomic fields up to massive galactic cluster structures.\n* **Inverse Square Law:** Doubling the distance separating two objects cuts their mutual gravitational pull down to one-fourth of its initial value.\n* **Central Force Property:** The force acts along the imaginary straight line connecting the centers of mass of the two interacting bodies.\n\n---\n\n## Formula\n\nThe gravitational force equation is written as:\n\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\nWhere:\n* $F$ represents the gravitational attraction force magnitude\n* $m_1, m_2$ represent the masses of the interacting bodies\n* $r$ represents the distance separating the mass centers\n* $G$ represents the Universal Gravitational Constant ($6.674 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$)\n\n---\n\n## Summary\n\nUniversal gravitation is a long-range mutual attraction force that links all matter, scaling up with mass density but dropping off sharply with distance.",
+  "candidate_response": "```json\n{\n  \"action\": \"render_interactive_textbook\",\n  \"topic\": \"Newton's Law of Universal Gravitation\",\n  \"sections\": [\n    {\n      \"type\": \"Introduction\",\n      \"content\": \"In 1687, Sir Isaac Newton published the *Principia*, where he formulated a law that governs the motion of everything from falling apples to orbiting planets. This law describes the invisible force that acts between any two objects in the universe.\"\n    },\n    {\n      \"type\": \"Definition\",\n      \"title\": \"The Universal Law\",\n      \"content\": \"Newton's Law of Universal Gravitation states that **every particle in the universe attracts every other particle** with a force that is:\\n\\n1.  **Directly proportional** to the product of their masses.\\n2.  **Inversely proportional** to the square of the distance between their centers.\"\n    },\n    {\n      \"type\": \"Formula\",\n      \"title\": \"The Gravitational Force Equation\",\n      \"formula_data\": {\n        \"formula\": \"F = G \\\\frac{m_1 m_2}{r^2}\",\n        \"variables\": [\n          {\"symbol\": \"F\", \"meaning\": \"Gravitational force between two objects\", \"unit\": \"Newtons (N)\"},\n          {\"symbol\": \"G\", \"meaning\": \"Universal Gravitational Constant\", \"value\": \"6.674 \\\\times 10^{-11} \\\\text{ Nm}^2/\\\\text{kg}^2\"},\n          {\"symbol\": \"m_1, m_2\", \"meaning\": \"Masses of the two objects\", \"unit\": \"Kilograms (kg)\"},\n          {\"symbol\": \"r\", \"meaning\": \"Distance between the centers of the masses\", \"unit\": \"Meters (m)\"}\n        ],\n        \"context\": \"This equation follows the Inverse Square Law. If you double the distance, the force becomes one-fourth of its original strength.\"\n      }\n    },\n    {\n      \"type\": \"Characteristics\",\n      \"title\": \"Properties of Gravitational Force\",\n      \"content\": [\n        \"**Central Force:** It acts along the line joining the centers of the two bodies.\",\n        \"**Conservative Force:** The work done by gravity depends only on initial and final positions, not the path taken.\",\n        \"**Action-Reaction Pair:** The force exerted by mass A on mass B is equal and opposite to the force exerted by mass B on mass A.\",\n        \"**Weak Force:** Gravity is the weakest of the four fundamental forces but dominates on a cosmic scale due to its infinite range.\"\n      ]\n    },\n    {\n      \"type\": \"Table\",\n      \"title\": \"Mass vs. Distance Relationship\",\n      \"table_data\": {\n        \"headers\": [\"Change in Factor\", \"Effect on Force (F)\"],\n        \"rows\": [\n          [\"Mass of one object doubles\", \"Force doubles ($2F$)\"],\n          [\"Both masses double\", \"Force quadruples ($4F$)\"],\n          [\"Distance doubles ($2r$)\", \"Force becomes one-fourth ($F/4$)\"],\n          [\"Distance triples ($3r$)\", \"Force becomes one-ninth ($F/9$)\"]\n        ]\n      }\n    },\n    {\n      \"type\": \"Important Notes\",\n      \"title\": \"Why 'Universal'?\",\n      \"content\": \"The law is called 'Universal' because it applies to all bodies in the universe—whether they are terrestrial (on Earth), celestial (stars and planets), or microscopic particles—regardless of the medium separating them.\"\n    },\n    {\n      \"type\": \"Suggested Questions\",\n      \"questions\": [\n        \"Why don't we feel the gravitational attraction between two people sitting in a room?\",\n        \"What happens to the gravitational force if the distance between two objects is halved?\",\n        \"Explain why G is called a universal constant while 'g' (acceleration due to gravity) is not.\"\n      ]\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and educational. It covers all key aspects of Newton's Law of Universal Gravitation, including the definition, formula, and characteristics. The use of interactive textbook format with sections and subsections enhances readability and understanding. However, minor improvements could be made by explicitly stating the universal action range and providing more visual aids or examples to illustrate the concepts. Additionally, the 'Conservative Force' property mentioned in the characteristics section, while true, is not directly related to the law of gravitation itself but rather a property of the gravitational force. Overall, the response demonstrates a strong grasp of the subject matter and effectively communicates it in an engaging and clear manner.",
+  "candidate_token_usage": {
+    "promptTokens": 381,
+    "completionTokens": 896,
+    "totalTokens": 1277
+  },
+  "candidate_latency_ms": 5353,
+  "candidate_cost_usd": 0.0028785,
+  "judge_token_usage": {
+    "promptTokens": 1529,
+    "completionTokens": 201,
+    "totalTokens": 1730
+  },
+  "judge_latency_ms": 5909,
+  "judge_cost_usd": 0.0013997999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:38:43.118Z"
+}

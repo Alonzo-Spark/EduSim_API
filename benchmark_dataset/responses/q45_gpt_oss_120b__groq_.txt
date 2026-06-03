@@ -1,0 +1,184 @@
+┌───────────────────────────────────────┐
+│ Introduction                           │
+│                                       │
+│ Electrostatic shielding is a fundamental│
+│ principle in electromagnetism that   │
+│ describes how a conductive enclosure   │
+│ can block external static electric     │
+│ fields from reaching its interior, and │
+│ conversely keep internal static fields │
+│ from leaking out. This effect is the   │
+│ basis for many everyday devices such   │
+│ as Faraday cages, cable shielding, and │
+│ protective housings for sensitive      │
+│ electronics.                           │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Definition                             │
+│                                       │
+│ **Electrostatic shielding** is the     │
+│ phenomenon where a conductor redistrib│
+│ utes free charges on its surface in    │
+│ response to an external static electric│
+│ field, creating an induced electric     │
+│ field that exactly cancels the external│
+│ field inside the conductor’s cavity.   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Key Concepts                           │
+│                                       │
+│ • **Conductors contain free electrons**│
+│   that move until the net electric field│
+│   inside the material is zero.         │
+│ • **Surface charge redistribution**    │
+│   creates an opposing field that       │
+│   neutralises the external field.      │
+│ • **Cavity theorem**: any hollow       │
+│   cavity within a conductor experiences│
+│   zero static electric field, regardless│
+│   of external charges.                 │
+│ • **Faraday cage effect**: a closed    │
+│   conductive shell acts as a perfect   │
+│   shield for static fields.            │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Characteristics                        │
+│                                       │
+│ • **Zero internal static field** – The │
+│   electric field inside a closed         │
+│   conducting shell is null.            │
+│ • **Surface charges only** – All induced│
+│   charges reside on the outer surface. │
+│ • **Frequency dependence** – The shield│
+│   works best for low‑frequency (static)│
+│   fields; at high frequencies, skin   │
+│   depth limits effectiveness.          │
+│ • **Material choice** – High conductivity│
+│   metals (copper, aluminum, steel) give│
+│   the best shielding.                  │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Formula                                 │
+│                                       │
+│ ┌───────────────────────────────────┐ │
+│ │ Main Formula                      │ │
+│ │                                   │ │
+│ │  E_inside = 0                      │ │
+│ │                                   │ │
+│ │  σ_induced = −ε₀ ∂E_ext/∂n          │ │
+│ │                                   │ │
+│ │ [ Explain Formula ]               │ │
+│ │ [ Open Formula Lab ]              │ │
+│ └───────────────────────────────────┘ │
+│                                       │
+│ *E_inside* is the electric field inside │
+│ the cavity (zero for perfect shielding).│
+│ *σ_induced* is the surface charge density│
+│ induced on the conductor, ε₀ is the     │
+│ vacuum permittivity, and ∂E_ext/∂n is   │
+│ the normal component of the external   │
+│ field at the surface.                  │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Applications                           │
+│                                       │
+│ • **Faraday cages** – Protect sensitive│
+│   equipment (radios, computers) from  │
+│   lightning and electromagnetic pulses│
+│   (EMPs).                              │
+│ • **Cable shielding** – Twisted‑pair   │
+│   and coaxial cables use conductive   │
+│   sheaths to block external interference│
+│   and prevent signal loss.             │
+│ • **Medical devices** – MRI rooms are  │
+│   enclosed in copper mesh to keep the  │
+│   strong static fields from escaping.  │
+│ • **Electrostatic discharge (ESD)      │
+│   protection** – Workstations are      │
+│   grounded metal enclosures that       │
+│   divert static charge away from       │
+│   components.                          │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Advantages                             │
+│                                       │
+│ • **Complete static shielding** – When│
+│   the enclosure is continuous, the     │
+│   interior experiences essentially no │
+│   static electric field.               │
+│ • **Simple construction** – A sheet of │
+│   metal or a mesh can provide the effect│
+│ • **Low cost for common metals** –     │
+│   copper, aluminum, or steel are cheap │
+│   and readily available.               │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Disadvantages                          │
+│                                       │
+│ • **Limited high‑frequency shielding**│
+│   – At radio frequencies, skin depth │
+│   reduces effectiveness; additional  │
+│   materials (e.g., ferrites) may be   │
+│   required.                            │
+│ • **Weight and space** – A solid metal│
+│   shield can be heavy and bulky.       │
+│ • **Grounding required** – For dynamic│
+│   fields, improper grounding can reduce│
+│   performance.                         │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Important Notes                        │
+│                                       │
+│ • The shielding is *perfect only for   │
+│   static or very low‑frequency fields.*│
+│ • Any gaps, seams, or apertures allow   │
+│   field penetration; they must be       │
+│   minimized or filtered (e.g., with      │
+│   conductive gaskets).                 │
+│ • The interior remains field‑free only │
+│   if the conductor is *continuous* and  │
+│   properly grounded.                   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Summary                                │
+│                                       │
+│ Electrostatic shielding exploits the   │
+│ ability of conductors to rearrange free │
+│ charges, cancelling external static     │
+│ fields inside a closed cavity. The      │
+│ result is a zero internal electric field│
+│ – the basis for Faraday cages, cable    │
+│ shielding, and many protective enclosures│
+│ used in electronics, medicine, and      │
+│ industry. Proper design (continuous      │
+│ conductors, minimal gaps, adequate       │
+│ grounding) is essential for optimal      │
+│ performance.                            │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Suggested Questions                    │
+│                                       │
+│ 1. Why does a hollow metal sphere block   │
+│    static electric fields?               │
+│ 2. How does the skin depth affect the     │
+│    shielding efficiency at high          │
+│    frequencies?                          │
+│ 3. What design considerations are needed │
+│    for a Faraday cage used in a laboratory│
+│    setting?                               │
+│ 4. Compare the shielding effectiveness of │
+│    solid metal versus a mesh.            │
+│ 5. How would you test whether a shield is│
+│    providing adequate electrostatic       │
+│    protection?                           │
+└───────────────────────────────────────┘

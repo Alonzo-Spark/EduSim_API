@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 23,
+  "question": "Explain the difference between mass and weight.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nMass and weight are distinct physical parameters that describe different structural qualities of matter.\n\nMass is a measure of the total quantity of matter contained within an object and reflects its inherent inertial resistance to acceleration.\n\nWeight is the gravitational force vector exerted on an object by a massive central body, such as the Earth.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Mass | Weight |\n| --- | --- | --- |\n| **Quantity Type** | Scalar property (Magnitude only). | Vector property (Magnitude and direction). |\n| **Location Factor** | Invariant; remains identical across all locations in the universe. | Variable; changes depending on the local gravitational acceleration field. |\n| **Measurement Instrument** | Measured using a balance scale. | Measured using a calibrated spring scale. |\n| **SI System Unit** | Kilogram ($\\text{kg}$). | Newton ($\\text{N}$). |\n\n---\n\n## Real-world Example\n\nAn astronaut has a mass of $60 \\text{ kg}$ on Earth.\n* **On Earth's Surface:** Their mass is $60 \\text{ kg}$, and their weight force is approximately $$60 \\times 9.8 = 588 \\text{ N}$$.\n* **On Moon's Surface:** Their mass remains exactly $60 \\text{ kg}$, but their weight drops to one-sixth of its Earth value ($98 \\text{ N}$) because the Moon's local gravitational pull is weaker.\n\n---\n\n## Summary\n\nMass is an unchanging scalar property intrinsic to an object, whereas weight is a variable vector force that scales with the strength of the surrounding gravitational field.",
+  "candidate_response": "Here's a clear explanation of the difference between mass and weight, presented in a structured textbook format:\n\n### 🏗️ Quick Definition\n| Property         | Mass                            | Weight                          |\n|------------------|---------------------------------|---------------------------------|\n| **Nature**       | Intrinsic property of matter    | Force dependent on gravity      |\n| **Measurement**  | Constant (same everywhere)      | Varies with location            |\n| **Units**        | Kilograms (kg), grams (g)       | Newtons (N), pounds (lb)        |\n| **Device**       | Balance scale                   | Spring scale                    |\n| **Direction**    | Scalar (no direction)           | Vector (points toward gravity source) |\n\n---\n\n### 🔬 Key Concepts\n\n#### **Mass**\n- **Definition**: Amount of matter in an object  \n- **Characteristics**:  \n  - Independent of gravity (same on Earth, Moon, or space)  \n  - Measured by comparing with standard masses  \n  - Determines *inertia* (resistance to motion changes)  \n- **Analogy**: Like counting atoms in a brick—quantity doesn't change when moved.\n\n#### **Weight**\n- **Definition**: Gravitational force acting on an object  \n- **Characteristics**:  \n  - Directly proportional to mass but depends on gravity  \n  - Changes with location (e.g., Earth vs. Moon)  \n  - Requires both magnitude *and* direction  \n- **Analogy**: Like the pressure a brick exerts on a scale—changes if you weigh it underwater or on a mountain.\n\n---\n\n### ⚖️ Formula Card: Weight Calculation\n**Weight–Mass Relationship**  \n$$\n\\vec{W} = m \\cdot \\vec{g}\n$$\n\n| Symbol | Meaning                          | Typical Values               |\n|--------|----------------------------------|------------------------------|\n| \\(W\\)  | Weight (vector)                  | 98 N (for 10 kg on Earth)    |\n| \\(m\\)  | Mass (scalar)                    | 10 kg                        |\n| \\(g\\)  | Gravitational acceleration       | 9.8 m/s² (Earth)             |\n|        |                                  | 1.6 m/s² (Moon)              |\n\n**Explanation**:  \nWeight equals mass multiplied by local gravitational acceleration.  \n- On Earth (\\(g ≈ 9.8  \\text{m/s}^2\\)): A 10 kg object weighs **98 N**.  \n- On the Moon (\\(g ≈ 1.6  \\text{m/s}^2\\)): The same object weighs **16 N**.  \n\n---\n\n### 🌍 Practical Implications\n1. **Space Travel**:  \n   Astronauts have the same *mass* in orbit, but feel weightless because they're in freefall (near-zero *weight*).  \n   \n2. **Engineering**:  \n   Bridges are designed for *weight* loads (depends on local \\(g\\)), while material strength depends on *mass*.  \n\n3. **Sports**:  \n   A shot put's *mass* affects throw technique, but its *weight* determines how gravity pulls it down.  \n\n---\n\n### ⚠️ Common Misconceptions\n- ❌ \"Weight and mass are interchangeable terms.\"  \n  ✅ *Mass* is universal; *weight* is location-specific.  \n- ❌ \"You lose mass when dieting.\"  \n  ✅ Dieting reduces *mass*, which lowers *weight* proportionally.  \n- ❌ \"Astronauts are massless in space.\"  \n  ✅ Their *mass* is unchanged; only *weight* disappears in freefall.  \n\n---\n\n### 💎 Summary\n| Aspect          | Mass                                      | Weight                                      |\n|-----------------|-------------------------------------------|---------------------------------------------|\n| **Core Idea**   | \"How much stuff?\"                         | \"How hard does gravity pull?\"               |\n| **Governed by** | Atomic composition                        | Gravity + mass                              |\n| **Zero occurs** | Never                                     | In freefall/zero-gravity environments       |\n| **Daily Use**   | Cooking, chemistry (substance quantities) | Fitness, engineering (force calculations)   |\n\n---\n\n### 🧠 Suggested Thought Experiments\n1. Would a gold bar’s *value* change on Mars? (Hint: Value depends on *mass*, not weight.)  \n2. Why can you lift a car on the Moon but not on Earth? (Hint: Weight changes; mass doesn’t.)  \n3. How would you measure mass in zero gravity? (Answer: Use inertia—shake and measure resistance!)",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the difference between mass and weight, presenting accurate definitions, formulas, and examples. The structured format enhances readability, and the inclusion of analogies, practical implications, and common misconceptions improves pedagogical effectiveness. Minor suggestions for improvement include adding more visual aids and considering additional real-world examples to further illustrate key concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 359,
+    "completionTokens": 1411,
+    "totalTokens": 1770
+  },
+  "candidate_latency_ms": 59754,
+  "candidate_cost_usd": 0.00328754,
+  "judge_token_usage": {
+    "promptTokens": 1687,
+    "completionTokens": 132,
+    "totalTokens": 1819
+  },
+  "judge_latency_ms": 7679,
+  "judge_cost_usd": 0.0013289999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:44:01.384Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 15,
+  "question": "A gun recoils after firing a bullet. Explain using Newton’s third law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nGun recoil is the backward velocity vector experienced by a firearm immediately upon discharging a bullet projectile from its barrel assembly. This behavior provides a clear physical demonstration of Newton's Third Law of Motion.\n\n---\n\n## Physical Interaction\n\n* **Action Force Vector:** The expanding high-pressure gas generation inside the chamber drives the bullet forward through the barrel with a powerful action force.\n* **Reaction Force Vector:** Simultaneously, an identical reaction force vector pushes backward on the breech mechanism of the gun body.\n\n---\n\n## Formula\n\nApplying momentum conservation rules from a mutual rest state ($0$):\n\n$$m_b v_b + m_g v_g = 0$$\n\n$$v_g = -\\frac{m_b v_b}{m_g}$$\n\nWhere:\n* $m_b, m_g$ represent the masses of the bullet and gun respectively\n* $v_b$ represents the forward velocity vector of the bullet\n* $v_g$ represents the backward recoil velocity vector of the gun body\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Recoil force can be redirected to cycle automatic reloading mechanisms. | High recoil velocity degrades targeting stability and causes structural operator fatigue. |\n\n---\n\n## Summary\n\nThe backward velocity of a recoiling gun arises directly from an equal and opposite reaction force, with its final velocity scaled down relative to the bullet due to the gun's much larger mass profile.",
+  "candidate_response": "## Understanding Gun Recoil with Newton's Third Law\n\nThis explanation will delve into the phenomenon of gun recoil, illustrating it through the lens of Newton's Third Law of Motion.\n\n---\n\n### Quick Definition\n\nRecoil is the backward movement of a firearm when it is discharged. This motion is a direct consequence of the conservation of momentum.\n\n---\n\n### Key Concept: Newton's Third Law of Motion\n\nNewton's Third Law of Motion states that for every action, there is an equal and opposite reaction.\n\n---\n\n### How it Applies to Gun Recoil\n\nWhen a gun is fired, several forces come into play, all interacting according to Newton's Third Law.\n\n1.  **Action Force:** The expanding gases from the ignited propellant exert a force on the bullet, pushing it forward out of the barrel.\n2.  **Reaction Force:** Simultaneously, and with equal magnitude, these same expanding gases exert a force on the gun in the opposite direction (backward).\n\n---\n\n### Main Formula\n\nThe principle behind recoil is best understood through the conservation of momentum. While Newton's Third Law explains the forces, the resulting motion is quantified by momentum.\n\n$$\nm_1 v_1 = -m_2 v_2\n$$\n\n<details>\n<summary>Explain Formula</summary>\nThis formula represents the conservation of momentum.\n*   $m_1$: Mass of the bullet\n*   $v_1$: Velocity of the bullet\n*   $m_2$: Mass of the gun\n*   $v_2$: Recoil velocity of the gun\n\nThe negative sign indicates that the bullet's velocity and the gun's recoil velocity are in opposite directions.\n</details>\n\n[Open Formula Lab]\n\n---\n\n### Characteristics of Recoil\n\n| Characteristic | Description                                                                                             |\n| :------------- | :------------------------------------------------------------------------------------------------------ |\n| **Magnitude**  | Directly proportional to the mass and velocity of the bullet.                                           |\n| **Direction**  | Always opposite to the direction of the bullet's travel.                                                |\n| **Impact**     | Can affect shooter accuracy and comfort; often mitigated by gun design (e.g., muzzle brakes, recoil pads). |\n\n---\n\n### Important Notes\n\n*   **Conservation of Momentum:** The total momentum of the gun-bullet system remains zero (assuming it starts at rest) before and after firing. The forward momentum of the bullet is exactly balanced by the backward momentum of the gun.\n*   **Mass Matters:** A heavier gun will recoil less than a lighter gun when firing the same bullet, because its larger mass results in a smaller recoil velocity for the same momentum.\n*   **Energy vs. Momentum:** While momentum is conserved, kinetic energy is *not* conserved in this inelastic collision (due to sound, heat, and deformation).\n\n---\n\n### Summary\n\nGun recoil is a classic demonstration of Newton's Third Law. The action of the gun exerting a force on the bullet (and the expanding gases) forward results in an equal and opposite reaction force pushing the gun backward. This interaction ensures the conservation of momentum within the system.\n\n---\n\n### Suggested Questions\n\n1.  How would increasing the mass of a bullet affect the recoil of a gun, assuming the propellant charge remains the same?\n2.  What design features in firearms are intended to reduce the felt recoil for the shooter?\n3.  If a gun is fired in space, how would the recoil differ compared to firing it on Earth?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of Newton's Third Law and its application to gun recoil, with accurate formulas and clear explanations. The layout and formatting are well-structured, making the content easily readable. The response effectively teaches the concept, making it beginner-friendly. Minor suggestions for improvement include adding more visual aids or diagrams to enhance understanding and considering additional factors that might influence recoil, such as the role of the shooter's stance or the firearm's design beyond muzzle brakes and recoil pads. Overall, the response is of high quality, accurate, and educational.",
+  "candidate_token_usage": {
+    "promptTokens": 387,
+    "completionTokens": 734,
+    "totalTokens": 1121
+  },
+  "candidate_latency_ms": 4733,
+  "candidate_cost_usd": 0.0019511,
+  "judge_token_usage": {
+    "promptTokens": 1400,
+    "completionTokens": 172,
+    "totalTokens": 1572
+  },
+  "judge_latency_ms": 6575,
+  "judge_cost_usd": 0.0012527999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:23:34.790Z"
+}

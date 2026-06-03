@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 65,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'orbit_started' stable loop trigger event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a orbital tracking alignment profile match.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe satellite successfully closed its trajectory path, triggering the stable closed loop status notification (`orbit_started`).\n\n### WHAT CHANGED\nThe path display updated from a open line to a stable elliptical orbit track surrounding the central gravity source.\n\n### SIMPLE WHY\nThe satellite's velocity vector and distance create a balance where gravity provides the exact centripetal force needed for a stable orbit.\n\n### WHAT TO NOTICE\nObserve how the satellite continuously circles the central mass without flying out into deep space or crashing into the planet.",
+  "candidate_response": "┌──────────────────────────────────────┐  \n│ **Runtime Overlay Response**         │  \n└──────────────────────────────────────┘  \n\n**Event Type:** `orbit_started`  \n**State:** Stable Loop Trigger  \n**Runtime Mode:** Sandbox Overlay  \n**Timestamp:** `2025-04-05T10:32:15.007Z`  \n**Execution Context:** Isolated Security Domain (ISD-9)  \n\n---\n\n┌──────────────────────────────────────┐  \n│ **Overlay Directive**                │  \n└──────────────────────────────────────┘  \n\n```json\n{\n  \"overlay_id\": \"orb-stable-001\",\n  \"trigger\": \"orbit_started\",\n  \"lifecycle\": \"stable_loop\",\n  \"action\": \"apply_dynamic_overlay\",\n  \"payload\": {\n    \"visual\": {\n      \"type\": \"trajectory_heatmap\",\n      \"intensity\": 0.82,\n      \"phase_sync\": true,\n      \"reference_frame\": \"inertial\",\n      \"opacity_curve\": \"ease-out-cubic\"\n    },\n    \"data\": {\n      \"source\": \"telemetry_stream_orb_7A\",\n      \"buffer_window\": \"120s\",\n      \"resolution\": \"high\",\n      \"include_harmonics\": true\n    },\n    \"controls\": {\n      \"allow_user_override\": true,\n      \"input_map\": [\n        {\n          \"input\": \"knob_3\",\n          \"parameter\": \"phase_offset\",\n          \"range\": [-180, 180],\n          \"unit\": \"degrees\"\n        }\n      ]\n    }\n  },\n  \"permissions\": {\n    \"access_level\": \"overlay.sandboxed\",\n    \"allowed_modules\": [\n      \"renderer/orbit-v3\",\n      \"data/buffer_proxy\",\n      \"input/haptic_feedback\"\n    ],\n    \"timeout\": 30000\n  }\n}\n```\n\n---\n\n┌──────────────────────────────────────┐  \n│ **Execution Status**                 │  \n└──────────────────────────────────────┘  \n\n- ✅ Overlay schema validated  \n- ✅ Security constraints applied  \n- ⏳ Rendering engine initializing  \n- 🔄 Awaiting phase-locked data sync  \n- 🟡 User input binding pending  \n\n---\n\n**Next Steps:**  \n1. Confirm overlay injection into primary HUD layer  \n2. Monitor phase coherence for first 5 orbital cycles  \n3. Log state transition to `orbit_overlay_active`  \n\n**Sandbox Exit Condition:**  \n`phase_drift > 7.2° || user_override || timeout`  \n\n---\n*Overlay managed under Sandbox Policy SP-9.4.1 — Dynamic Runtime Layers*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 6,
+    "overall_average": "7.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the technical aspects of the 'orbit_started' event, including the overlay directive and execution status. However, it lacks clarity and pedagogical effectiveness in explaining the underlying physics concepts, such as the balance between velocity and gravity in achieving a stable orbit. The response assumes a high level of prior knowledge and does not provide a clear, step-by-step explanation of the event, making it less accessible to beginners. To improve, the candidate should focus on breaking down complex concepts into simpler, more intuitive language, and providing more visual aids or analogies to illustrate the physics behind the event.",
+  "candidate_token_usage": {
+    "promptTokens": 365,
+    "completionTokens": 557,
+    "totalTokens": 922
+  },
+  "candidate_latency_ms": 9900,
+  "candidate_cost_usd": 0.001479,
+  "judge_token_usage": {
+    "promptTokens": 1092,
+    "completionTokens": 184,
+    "totalTokens": 1276
+  },
+  "judge_latency_ms": 5190,
+  "judge_cost_usd": 0.0010968,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:09:13.739Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 23,
+  "question": "Explain the difference between mass and weight.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nMass and weight are distinct physical parameters that describe different structural qualities of matter.\n\nMass is a measure of the total quantity of matter contained within an object and reflects its inherent inertial resistance to acceleration.\n\nWeight is the gravitational force vector exerted on an object by a massive central body, such as the Earth.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Mass | Weight |\n| --- | --- | --- |\n| **Quantity Type** | Scalar property (Magnitude only). | Vector property (Magnitude and direction). |\n| **Location Factor** | Invariant; remains identical across all locations in the universe. | Variable; changes depending on the local gravitational acceleration field. |\n| **Measurement Instrument** | Measured using a balance scale. | Measured using a calibrated spring scale. |\n| **SI System Unit** | Kilogram ($\\text{kg}$). | Newton ($\\text{N}$). |\n\n---\n\n## Real-world Example\n\nAn astronaut has a mass of $60 \\text{ kg}$ on Earth.\n* **On Earth's Surface:** Their mass is $60 \\text{ kg}$, and their weight force is approximately $$60 \\times 9.8 = 588 \\text{ N}$$.\n* **On Moon's Surface:** Their mass remains exactly $60 \\text{ kg}$, but their weight drops to one-sixth of its Earth value ($98 \\text{ N}$) because the Moon's local gravitational pull is weaker.\n\n---\n\n## Summary\n\nMass is an unchanging scalar property intrinsic to an object, whereas weight is a variable vector force that scales with the strength of the surrounding gravitational field.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│               Introduction              │\n│                                           │\n│ Mass and weight are fundamental concepts │\n│ in physics and everyday life, but they │\n│ are often confused. This section gives   │\n│ a clear, side‑by‑side explanation of      │\n│ what each term means and how they differ. │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│                Definition                │\n│                                           │\n│ • **Mass** – a measure of the amount of   │\n│   matter contained in an object. It is a  │\n│   scalar quantity, the same everywhere,   │\n│   and does not change with location.      │\n│                                           │\n│ • **Weight** – the force exerted on that   │\n│   mass by gravity. It depends on both the │\n│   object's mass and the local gravitational│\n│   field. Weight can vary from place to     │\n│   place.                                   │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│               Key Concepts               │\n│                                           │\n│ - **Inertia** – Mass quantifies an object │\n│  ’s resistance to changes in its motion.  │\n│ - **Force** – Weight is a force; it has   │\n│   both magnitude and direction (toward    │\n│   the centre of the gravitating body).    │\n│ - **Units** – Mass: kilograms (kg);       │\n│   Weight: newtons (N) or pounds (lb).     │\n│ - **Location Dependence** – Mass is       │\n│   constant; weight changes with           │\n│   gravitational acceleration (g).         │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│               Formula Card               │\n│                                           │\n│               Main Formula                │\n│                                           │\n│          \\[ W = m \\, g \\]                 │\n│                                           │\n│ [ Explain Formula ]   [ Open Formula Lab ]│\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│               Applications               │\n│                                           │\n│ • **Engineering** – Designing structures │\n│   requires knowing the weight (force)    │\n│   that components must support.           │\n│ • **Spaceflight** – Astronauts experience │\n│   micro‑gravity, so their mass stays the   │\n│   same while weight drops to near zero.   │\n│ • **Everyday Life** – Scales measure mass │\n│   (via calibrated weight), but we often   │\n│   talk about “how heavy” (weight).        │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│            Important Notes               │\n│                                           │\n│ 1. **Mass never changes** unless matter   │\n│    is added or removed.                   │\n│ 2. **Weight = mass × local g**. On Earth, │\n│    g ≈ 9.81 m/s², so a 10 kg mass weighs   │\n│    ≈ 98 N.                                 │\n│ 3. On the Moon (g ≈ 1.62 m/s²), the same   │\n│    10 kg mass weighs only ≈ 16 N.         │\n│ 4. In scientific contexts, “weight” often│\n│    refers to **force**, not mass.         │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│                 Summary                  │\n│                                           │\n│ • Mass is an intrinsic property of matter │\n│   measured in kilograms.                  │\n│ • Weight is the gravitational force on that│\n│   mass, measured in newtons, and varies   │\n│   with the local gravitational field.      │\n│ • The relationship is given by W = m g.    │\n│ • Remember: mass = “how much stuff”;      │\n│   weight = “how heavy it feels”.           │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│           Suggested Questions            │\n│                                           │\n│ 1. If an astronaut’s mass is 80 kg, what   │\n│    is his weight on Earth and on Mars?    │\n│ 2. Why do we use mass rather than weight   │\n│    when calculating momentum?            │\n│ 3. How would a bathroom scale give the     │\n│    same reading on the Moon as on Earth?  │\n│ 4. Explain how weightlessness in orbit is │\n│    possible even though the astronaut     │\n│    still has mass.                         │\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts of mass and weight, with accurate definitions, formulas, and examples. The use of a comparison matrix and real-world applications enhances the clarity of the explanation. However, there are some minor formatting issues, such as the use of ASCII art tables, which may not be suitable for all platforms. Additionally, some of the sections, such as the 'Formula Card' and 'Suggested Questions', may not be necessary for a concise explanation. Overall, the response is well-structured, readable, and effective in teaching the concepts of mass and weight.",
+  "candidate_token_usage": {
+    "promptTokens": 425,
+    "completionTokens": 1365,
+    "totalTokens": 1790
+  },
+  "candidate_latency_ms": 3418,
+  "candidate_cost_usd": 0.00088275,
+  "judge_token_usage": {
+    "promptTokens": 1837,
+    "completionTokens": 179,
+    "totalTokens": 2016
+  },
+  "judge_latency_ms": 28256,
+  "judge_cost_usd": 0.0015318,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:44:01.355Z"
+}

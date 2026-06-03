@@ -1,0 +1,760 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Interactive: Collisions of Equal Mass</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+    <style>
+        :root {
+            --bg-color: #f4f6f8;
+            --card-bg: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --accent-color: #2563eb; /* Royal Blue */
+            --accent-hover: #1d4ed8;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding-bottom: 80px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 2.25rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-content p {
+            margin-bottom: 16px;
+        }
+        
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .formula-display {
+            background-color: #f8fafc;
+            padding: 24px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        /* Buttons */
+        .btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
+            background-color: #f9fafb;
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Modals / Overlays */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 32px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        /* Lab Specifics */
+        .lab-canvas-container {
+            width: 100%;
+            background: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 200px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent-color);
+        }
+
+        .value-display {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+        }
+
+        /* Explanation Box */
+        .explanation-content {
+            font-family: 'Merriweather', serif;
+            color: var(--text-secondary);
+        }
+        
+        .variable-list {
+            list-style: none;
+            margin-top: 12px;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        .variable-list li {
+            margin-bottom: 6px;
+        }
+        
+        .variable-symbol {
+            font-weight: bold;
+            color: var(--text-primary);
+            display: inline-block;
+            width: 40px;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        
+        .tag-blue { background: #dbeafe; color: #1e40af; }
+        .tag-green { background: #d1fae5; color: #065f46; }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Collision of Equal Masses</h1>
+            <div class="subtitle">Interactive Physics Module • 1D Kinematics</div>
+        </header>
+
+        <!-- Card 1: Introduction -->
+        <article class="card">
+            <div class="card-header">
+                <span>Introduction</span>
+                <span class="tag tag-blue">Concept</span>
+            </div>
+            <div class="card-content">
+                <p>
+                    When two objects of <strong>equal mass</strong> collide in one dimension, the outcome depends heavily on the elasticity of the collision. This scenario is a classic physics problem that simplifies the laws of conservation of momentum and energy.
+                </p>
+                <p>
+                    Consider two carts or balls on a frictionless track. If Cart A approaches stationary Cart B, what happens after they hit? Do they bounce? Do they stick?
+                </p>
+            </div>
+        </article>
+
+        <!-- Card 2: Key Concepts -->
+        <article class="card">
+            <div class="card-header">
+                <span>Key Concepts</span>
+            </div>
+            <div class="card-content">
+                <p>To understand the outcome, we must define two fundamental conservation laws that govern the system:</p>
+                <ul>
+                    <li style="margin-left: 20px; margin-bottom: 8px;"><strong>Conservation of Momentum:</strong> The total momentum of the system remains constant before and after the collision, provided no external forces act on it.</li>
+                    <li style="margin-left: 20px;"><strong>Conservation of Kinetic Energy:</strong> In a perfectly elastic collision, the total kinetic energy is conserved. In inelastic collisions, some energy is transformed into heat or deformation.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Card 3: Formula Card (Momentum) -->
+        <article class="card formula-card" id="formula-momentum">
+            <div class="card-header">
+                <span>Conservation Law</span>
+                <span class="tag tag-green">Core Formula</span>
+            </div>
+            <div class="card-content">
+                <p>For any collision (elastic or inelastic) between two masses $m_1$ and $m_2$:</p>
+                
+                <div class="formula-display">
+                    $$m_1 v_{1i} + m_2 v_{2i} = m_1 v_{1f} + m_2 v_{2f}$$
+                </div>
+
+                <p>Since the masses are equal ($m_1 = m_2 = m$), the mass terms cancel out, simplifying the relationship between velocities:</p>
+                
+                <div class="formula-display">
+                    $$v_{1i} + v_{2i} = v_{1f} + v_{2f}$$
+                </div>
+
+                <div class="formula-actions">
+                    <button class="btn btn-outline" onclick="openExplanation('momentum')">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Explain Formula
+                    </button>
+                    <button class="btn btn-primary" onclick="openLab()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Open Formula Lab
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- Card 4: Comparison Table -->
+        <article class="card">
+            <div class="card-header">
+                <span>Collision Outcomes</span>
+            </div>
+            <div class="card-content">
+                <p>The behavior of the two masses differs drastically based on elasticity. Assume Mass A moves at velocity $v$ and Mass B is at rest ($0$).</p>
+                <div class="table-responsive" style="margin-top: 16px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Post-Collision Velocities</th>
+                                <th>Energy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Perfectly Elastic</strong></td>
+                                <td>Mass A stops ($0$).<br>Mass B moves at $v$.</td>
+                                <td>Conserved</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Perfectly Inelastic</strong></td>
+                                <td>Both stick together.<br>Move at $v/2$.</td>
+                                <td>Lost (Max loss)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </article>
+
+        <!-- Card 5: Summary -->
+        <article class="card">
+            <div class="card-header">
+                <span>Summary</span>
+            </div>
+            <div class="card-content">
+                <p>
+                    In collisions between equal masses, momentum conservation dictates that the vector sum of velocities remains constant. In the special case of a head-on elastic collision, the objects effectively "exchange" velocities.
+                </p>
+                <p>
+                    If a moving object hits a stationary object of the same mass elastically, the moving object stops dead, and the stationary object flies away with the original speed.
+                </p>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- Modal: Explanation -->
+    <div class="modal-overlay" id="explanation-modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModals()">&times;</button>
+            <h2 class="modal-title">Formula Explanation</h2>
+            <div class="explanation-content" id="explanation-text">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Formula Lab (Sandbox) -->
+    <div class="modal-overlay" id="lab-modal">
+        <div class="modal" style="max-width: 700px;">
+            <button class="modal-close" onclick="closeModals()">&times;</button>
+            <h2 class="modal-title">Collision Sandbox</h2>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px;">
+                Adjust the Coefficient of Restitution to switch between Elastic and Inelastic collisions.
+            </p>
+
+            <div class="lab-canvas-container">
+                <canvas id="simCanvas"></canvas>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label>Restitution (Bounciness): <span id="restitution-val" class="value-display">1.0</span></label>
+                    <input type="range" id="restitution-slider" min="0" max="1" step="0.1" value="1">
+                    <small style="color: #6b7280;">1.0 = Elastic, 0.0 = Inelastic</small>
+                </div>
+                <div class="control-group" style="justify-content: flex-end;">
+                    <button class="btn btn-primary" onclick="resetSimulation()">Restart Collision</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 12px; background: #f0fdf4; border-radius: 6px; font-size: 0.85rem; color: #166534;">
+                <strong>Observation:</strong> <span id="lab-observation">Set restitution to 1.0 and observe the velocity exchange.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <script>
+        // --- Data for Formula Explanation ---
+        const formulaData = {
+            momentum: {
+                title: "Conservation of Momentum",
+                text: `
+                    <p>This formula states that the total momentum of an isolated system remains constant. In the context of equal masses colliding:</p>
+                    <p>Before collision, the total momentum is the sum of individual momentums ($mv$). After collision, it is the sum of the final momentums.</p>
+                    <p>Because mass $m$ is the same for both objects, we can divide the entire equation by $m$, leaving us with a simple relationship between velocities:</p>
+                    <div style="text-align:center; padding: 10px;">$$v_{1i} + v_{2i} = v_{1f} + v_{2f}$$</div>
+                    <p>This means the <em>sum</em> of the velocities must be the same before and after impact.</p>
+                    <ul class="variable-list">
+                        <li><span class="variable-symbol">m</span> Mass of the object (kg)</li>
+                        <li><span class="variable-symbol">v</span> Velocity (m/s)</li>
+                        <li><span class="variable-symbol">i</span> Initial state (before collision)</li>
+                        <li><span class="variable-symbol">f</span> Final state (after collision)</li>
+                    </ul>
+                `
+            }
+        };
+
+        // --- Modal Handling ---
+        function openExplanation(type) {
+            const modal = document.getElementById('explanation-modal');
+            const content = document.getElementById('explanation-text');
+            
+            if (formulaData[type]) {
+                content.innerHTML = formulaData[type].text;
+                // Re-render math in the modal
+                renderMathInElement(content);
+            }
+            
+            modal.classList.add('active');
+        }
+
+        function openLab() {
+            const modal = document.getElementById('lab-modal');
+            modal.classList.add('active');
+            resetSimulation();
+            animate();
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.modal-overlay').forEach(el => el.classList.remove('active'));
+            stopAnimation();
+        }
+
+        // Close modal on click outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModals();
+            }
+        }
+
+        // --- Collision Simulation Logic (Canvas) ---
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+        let animationId;
+        let isRunning = false;
+        
+        // Simulation State
+        let balls = [];
+        const restitutionSlider = document.getElementById('restitution-slider');
+        const restitutionVal = document.getElementById('restitution-val');
+        const observationText = document.getElementById('lab-observation');
+
+        // Setup Canvas Resolution
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 200;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Ball {
+            constructor(x, radius, color, label) {
+                this.x = x;
+                this.y = canvas.height / 2;
+                this.radius = radius;
+                this.color = color;
+                this.label = label;
+                this.vx = 0;
+                this.mass = 1; // Equal mass
+            }
+
+            draw() {
+                // Draw Ball
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                ctx.closePath();
+
+                // Draw Label
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 16px Inter';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(this.label, this.x, this.y);
+
+                // Draw Velocity Vector
+                if (Math.abs(this.vx) > 0.1) {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y - this.radius - 10);
+                    ctx.lineTo(this.x + this.vx * 20, this.y - this.radius - 10); // Scale vector for visibility
+                    ctx.strokeStyle = '#2563eb';
+                    ctx.lineWidth = 3;
+                    ctx.stroke();
+                    
+                    // Arrowhead
+                    ctx.beginPath();
+                    const dir = this.vx > 0 ? 1 : -1;
+                    ctx.moveTo(this.x + this.vx * 20, this.y - this.radius - 10);
+                    ctx.lineTo(this.x + this.vx * 20 - (5 * dir), this.y - this.radius - 15);
+                    ctx.lineTo(this.x + this.vx * 20 - (5 * dir), this.y - this.radius - 5);
+                    ctx.lineTo(this.x + this.vx * 20, this.y - this.radius - 10);
+                    ctx.fillStyle = '#2563eb';
+                    ctx.fill();
+                }
+            }
+
+            update() {
+                this.x += this.vx;
+
+                // Wall Collisions
+                if (this.x - this.radius < 0) {
+                    this.x = this.radius;
+                    this.vx *= -1;
+                }
+                if (this.x + this.radius > canvas.width) {
+                    this.x = canvas.width - this.radius;
+                    this.vx *= -1;
+                }
+            }
+        }
+
+        function resetSimulation() {
+            balls = [
+                new Ball(100, 25, '#ef4444', 'A'), // Red
+                new Ball(400, 25, '#3b82f6', 'B')  // Blue
+            ];
+            
+            // Initial Conditions: A moves right at 4, B is stationary
+            balls[0].vx = 4; 
+            balls[1].vx = 0;
+
+            updateObservation();
+        }
+
+        function updateObservation() {
+            const e = parseFloat(restitutionSlider.value);
+            if (e === 1) {
+                observationText.innerText = "Elastic: Mass A stops, Mass B takes off at A's speed.";
+            } else if (e === 0) {
+                observationText.innerText = "Inelastic: Both masses stick together and move at half speed.";
+            } else {
+                observationText.innerText = `Partially Elastic (e=${e}): Masses separate but lose some speed.`;
+            }
+        }
+
+        restitutionSlider.addEventListener('input', (e) => {
+            restitutionVal.innerText = parseFloat(e.target.value).toFixed(1);
+            updateObservation();
+            // Optional: Reset sim when slider changes to avoid chaos
+            resetSimulation();
+        });
+
+        function checkCollision(b1, b2) {
+            const dx = b2.x - b1.x;
+            const dist = Math.abs(dx);
+            const minDist = b1.radius + b2.radius;
+
+            if (dist < minDist) {
+                // Resolve overlap to prevent sticking
+                const overlap = minDist - dist;
+                b1.x -= overlap / 2;
+                b2.x += overlap / 2;
+
+                // 1D Collision Formula with Coefficient of Restitution (e)
+                // v1_final = ( (m1 - e*m2)*v1 + (1+e)*m2*v2 ) / (m1+m2)
+                // Since m1 = m2 = 1:
+                // v1_final = ( (1 - e)*v1 + (1+e)*v2 ) / 2
+                // v2_final = ( (1+e)*v1 + (1 - e)*v2 ) / 2
+
+                const e = parseFloat(restitutionSlider.value);
+                const v1 = b1.vx;
+                const v2 = b2.vx;
+
+                b1.vx = ((1 - e) * v1 + (1 + e) * v2) / 2;
+                b2.vx = ((1 + e) * v1 + (1 - e) * v2) / 2;
+            }
+        }
+
+        function animate() {
+            if (!isRunning) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Floor Line
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height/2 + 25);
+            ctx.lineTo(canvas.width, canvas.height/2 + 25);
+            ctx.strokeStyle = '#e5e7eb';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            balls.forEach(ball => {
+                ball.update();
+                ball.draw();
+            });
+
+            checkCollision(balls[0], balls[1]);
+
+            animationId = requestAnimationFrame(animate);
+        }
+
+        function startAnimation() {
+            if (!isRunning) {
+                isRunning = true;
+                animate();
+            }
+        }
+
+        function stopAnimation() {
+            isRunning = false;
+            cancelAnimationFrame(animationId);
+        }
+
+        // Initialize simulation but don't start loop until modal opens
+        resizeCanvas();
+        resetSimulation();
+        
+        // Override reset button to ensure animation starts
+        const originalReset = resetSimulation;
+        resetSimulation = function() {
+            originalReset();
+            startAnimation();
+        };
+
+    </script>
+</body>
+</html>
+```

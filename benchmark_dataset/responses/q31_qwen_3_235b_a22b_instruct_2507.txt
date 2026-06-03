@@ -1,0 +1,133 @@
+<div class="section-card introduction">
+  <h2>Introduction</h2>
+  <p>When heat is transferred to a substance, its temperature usually changes. The extent of this change depends on the material's inherent ability to store thermal energy. Two key thermal properties—<strong>heat capacity</strong> and <strong>specific heat capacity</strong>—quantify this behavior. These concepts are essential for understanding how different materials respond to heat input.</p>
+</div>
+
+<div class="section-card definition">
+  <h2>Definition</h2>
+  <p><strong>Heat Capacity</strong> is the amount of heat energy required to raise the temperature of an entire object or substance by one degree Celsius (or one Kelvin).</p>
+  <p><strong>Specific Heat Capacity</strong> is the amount of heat energy required to raise the temperature of <em>one kilogram</em> of a substance by one degree Celsius (or one Kelvin).</p>
+</div>
+
+<div class="section-card formula-card">
+  <h2>Main Formula</h2>
+  <div class="formula-display">
+    $$
+    Q = m c \Delta T
+    $$
+  </div>
+  <div class="formula-actions">
+    <button onclick="explainFormula('Q=mcΔT')">Explain Formula</button>
+    <button onclick="openFormulaLab('Q=mcΔT')">Open Formula Lab</button>
+  </div>
+</div>
+
+<div class="section-card key-concepts">
+  <h2>Key Concepts</h2>
+  <ul>
+    <li><strong>Q</strong>: Heat energy transferred (in joules, J)</li>
+    <li><strong>m</strong>: Mass of the substance (in kilograms, kg)</li>
+    <li><strong>c</strong>: Specific heat capacity (in J/kg·K or J/kg·°C)</li>
+    <li><strong>ΔT</strong>: Change in temperature (in K or °C)</li>
+  </ul>
+</div>
+
+<div class="section-card characteristics">
+  <h2>Characteristics</h2>
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Heat Capacity (C)</th>
+        <th>Specific Heat Capacity (c)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Definition</td>
+        <td>Heat needed to raise the temperature of the entire object by 1°C</td>
+        <td>Heat needed to raise the temperature of 1 kg of substance by 1°C</td>
+      </tr>
+      <tr>
+        <td>Dependence</td>
+        <td>Depends on both material and mass</td>
+        <td>Depends only on the material</td>
+      </tr>
+      <tr>
+        <td>Units</td>
+        <td>J/°C or J/K</td>
+        <td>J/kg·K or J/kg·°C</td>
+      </tr>
+      <tr>
+        <td>Symbol</td>
+        <td>C</td>
+        <td>c</td>
+      </tr>
+      <tr>
+        <td>Relation</td>
+        <td>C = m·c</td>
+        <td>c = C/m</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section-card applications">
+  <h2>Applications</h2>
+  <ul>
+    <li>Designing cooling systems (e.g., car radiators use water due to its high specific heat capacity).</li>
+    <li>Climate science—oceans moderate temperature changes due to high heat capacity.</li>
+    <li>Cooking—materials like aluminum and copper are used in cookware for their thermal properties.</li>
+    <li>Thermal storage systems in solar energy applications.</li>
+  </ul>
+</div>
+
+<div class="section-card advantages">
+  <h2>Advantages of High Specific Heat Capacity</h2>
+  <ul>
+    <li>Stabilizes temperature (e.g., water buffers temperature changes in living organisms).</li>
+    <li>Efficient for heat storage and transport (e.g., water in heating systems).</li>
+  </ul>
+</div>
+
+<div class="section-card disadvantages">
+  <h2>Disadvantages of High Specific Heat Capacity</h2>
+  <ul>
+    <li>Requires more energy to heat up (e.g., heating water consumes more energy than heating metals).</li>
+    <li>Slower response in temperature-sensitive applications.</li>
+  </ul>
+</div>
+
+<div class="section-card important-notes">
+  <h2>Important Notes</h2>
+  <ul>
+    <li>Temperature change in °C is equivalent to change in K.</li>
+    <li>Specific heat capacity is an intrinsic property—same for all samples of a pure substance.</li>
+    <li>Heat capacity is an extensive property—depends on the amount of material.</li>
+    <li>The formula $ Q = m c \Delta T $ assumes no phase change occurs.</li>
+  </ul>
+</div>
+
+<div class="section-card summary">
+  <h2>Summary</h2>
+  <p><strong>Heat capacity</strong> measures how much heat an object can absorb for a given temperature rise and depends on both mass and material. <strong>Specific heat capacity</strong> is a normalized version—per unit mass—making it a material-specific constant. Together, they are fundamental in thermodynamics, engineering, and environmental science.</p>
+</div>
+
+<div class="section-card suggested-questions">
+  <h2>Suggested Questions</h2>
+  <ul>
+    <li>Why does water take longer to heat up than oil?</li>
+    <li>How does specific heat capacity affect coastal climates?</li>
+    <li>Calculate the heat required to raise 2 kg of aluminum from 20°C to 100°C. (c_Al = 900 J/kg·K)</li>
+    <li>Explain why metals feel colder than wood at room temperature.</li>
+  </ul>
+</div>
+
+<script>
+  function explainFormula(formula) {
+    alert("Formula: Q = m c ΔT\n\nThis equation calculates the heat energy (Q) transferred to or from a substance. It depends on the mass (m), the material's specific heat capacity (c), and the temperature change (ΔT).");
+  }
+  function openFormulaLab(formula) {
+    alert("Opening Formula Lab for: " + formula);
+  }
+</script>

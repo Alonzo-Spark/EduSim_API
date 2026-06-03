@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 65,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'orbit_started' stable loop trigger event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a orbital tracking alignment profile match.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe satellite successfully closed its trajectory path, triggering the stable closed loop status notification (`orbit_started`).\n\n### WHAT CHANGED\nThe path display updated from a open line to a stable elliptical orbit track surrounding the central gravity source.\n\n### SIMPLE WHY\nThe satellite's velocity vector and distance create a balance where gravity provides the exact centripetal force needed for a stable orbit.\n\n### WHAT TO NOTICE\nObserve how the satellite continuously circles the central mass without flying out into deep space or crashing into the planet.",
+  "candidate_response": ":::section{title=\"System Status: Orbit Initialized\"}\nThe stable loop trigger event `orbit_started` has been successfully captured. The following runtime overlay provides the physical parameters and governing dynamics for the current orbital simulation.\n:::\n\n:::section{title=\"Quick Definition\"}\n**Orbital Motion** occurs when an object's forward velocity is perfectly balanced by the gravitational pull of a central mass, resulting in a continuous, stable falling path known as a **stable loop**.\n:::\n\n:::section{title=\"Main Formula\"}\n$$\nv_c = \\sqrt{\\frac{GM}{r}}\n$$\n**Title:** Circular Orbital Velocity  \n**Variables:**  \n*   $v_c$: Velocity required to maintain orbit ($m/s$)\n*   $G$: Gravitational Constant ($6.674 \\times 10^{-11} \\, m^3kg^{-1}s^{-2}$)\n*   $M$: Mass of the central body ($kg$)\n*   $r$: Radius from the center of mass ($m$)\n\n[ **Explain Formula**: This formula determines the exact speed required for an object to stay in a circular orbit at a specific distance. If velocity decreases, the orbit decays; if it increases, the orbit becomes elliptical. ]  \n[ **Open Formula Lab** ]\n:::\n\n:::section{title=\"Key Concepts\"}\n*   **Centripetal Force:** The \"center-seeking\" force provided by gravity that keeps the satellite from flying off in a straight line.\n*   **Freefall State:** An orbiting body is technically in a state of perpetual freefall toward the center, but its tangential velocity causes it to miss the surface constantly.\n*   **Orbital Period:** The time taken for one full revolution, determined by the altitude and mass of the primary body.\n:::\n\n:::section{title=\"Comparative Dynamics\"}\n| Orbit Type | Altitude (km) | Velocity (km/s) | Common Use |\n| :--- | :--- | :--- | :--- |\n| **LEO** (Low Earth) | 160 – 2,000 | ~7.8 | ISS, Starlink |\n| **MEO** (Medium Earth) | 2,000 – 35,786 | ~3.1 | GPS Satellites |\n| **GEO** (Geostationary) | 35,786 | ~3.07 | TV, Weather |\n:::\n\n:::section{title=\"The Period-Radius Relationship\"}\n$$\nT = 2\\pi \\sqrt{\\frac{r^3}{GM}}\n$$\n**Title:** Kepler's Third Law (Period)  \n**Variables:**  \n*   $T$: Orbital Period (seconds)\n*   $r$: Semi-major axis/Radius\n*   $GM$: Standard gravitational parameter\n\n[ **Explain Formula**: This shows that the time it takes to complete an orbit is proportional to the cube of the distance from the center. Higher orbits move slower. ]  \n[ **Open Formula Lab** ]\n:::\n\n:::section{title=\"Important Notes\"}\n> [!WARNING]\n> **Atmospheric Drag:** In Low Earth Orbit (LEO), trace gases create friction. Without periodic \"re-boosts,\" the `orbit_started` state will eventually transition to an `orbital_decay` event.\n:::\n\n:::section{title=\"Suggested Questions\"}\n1. How does the mass of the satellite itself affect the required orbital velocity?\n2. What happens to the stable loop if the velocity exceeds the \"Escape Velocity\" $(\\sqrt{2} \\times v_c)$?\n3. Why do geostationary satellites appear stationary from the Earth's surface?\n:::",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts related to orbital motion, including the balance between velocity and gravitational force, centripetal force, and orbital periods. The use of formulas, such as the circular orbital velocity and Kepler's Third Law, is accurate and well-explained. The response is well-structured and easy to follow, with clear headings and concise descriptions. However, there are some areas where the response could be improved. For example, the candidate could have provided more context about the specific event trigger 'orbit_started' and its implications. Additionally, some of the sections, such as 'Comparative Dynamics' and 'Important Notes', feel a bit disconnected from the main topic and could be more effectively integrated into the rest of the response. Overall, the response is of high quality, but could benefit from some minor adjustments to improve its clarity and coherence.",
+  "candidate_token_usage": {
+    "promptTokens": 389,
+    "completionTokens": 798,
+    "totalTokens": 1187
+  },
+  "candidate_latency_ms": 5660,
+  "candidate_cost_usd": 0.0025885,
+  "judge_token_usage": {
+    "promptTokens": 1304,
+    "completionTokens": 235,
+    "totalTokens": 1539
+  },
+  "judge_latency_ms": 7249,
+  "judge_cost_usd": 0.0013463999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:09:13.746Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 41,
+  "question": "Electrostatics: State Coulomb’s law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nCoulomb's Law states that the electrostatic force of attraction or repulsion between two stationary point charges is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance separating them.\n\n---\n\n## Characteristics\n\n* **Action-Reaction Interaction:** The forces exerted by the charges on each other are equal in magnitude and opposite in direction, acting along the straight line connecting them.\n* **Charge Dependency:** Like charges repel each other, whereas opposite charges experience a mutual attraction force.\n\n---\n\n## Formula\n\nThe mathematical equation for the electrostatic force:\n\n$$F = k_e \\frac{|q_1 q_2|}{r^2}$$\n\nIn a vacuum, the proportionality constant ($k_e$) is expressed as:\n\n$$k_e = \\frac{1}{4\\pi\\varepsilon_0} \\approx 8.988 \\times 10^9 \\text{ N}\\cdot\\text{m}^2/\\text{C}^2$$\n\nWhere:\n* $F$ represents the electrostatic force magnitude\n* $q_1, q_2$ represent the magnitudes of the point charges\n* $r$ represents the distance separating the two charges\n* $\\varepsilon_0$ represents the permittivity of free space ($8.854 \\times 10^{-12} \\text{ C}^2/\\text{N}\\cdot\\text{m}^2$)\n\n---\n\n## Summary\n\nCoulomb's Law describes the electrostatic force between charges, showing that it increases with charge magnitude but decreases according to an inverse-square relationship with distance.",
+  "candidate_response": ":::section{title=\"Introduction\"}\nIn the study of electrostatics, the interaction between stationary electric charges is governed by a fundamental principle known as **Coulomb's Law**. Formulated by Charles-Augustin de Coulomb in 1785, it quantifies the force of attraction or repulsion between two point charges.\n:::\n\n:::section{title=\"Definition\"}\n**Coulomb's Law** states that the magnitude of the electrostatic force of attraction or repulsion between two point charges is:\n1.  **Directly proportional** to the product of the magnitudes of the charges.\n2.  **Inversely proportional** to the square of the distance between them.\n3.  **Directed along the line** joining the centers of the two charges.\n:::\n\n:::formula{title=\"Main Formula: Coulomb's Law\"}\n$$F = k \\frac{|q_1 q_2|}{r^2}$$\n\n**Variable Breakdown:**\n*   $F$: Electrostatic force (Newtons, $N$)\n*   $q_1, q_2$: Magnitudes of the two point charges (Coulombs, $C$)\n*   $r$: Distance between the centers of the charges (Meters, $m$)\n*   $k$: Coulomb's constant ($\\approx 8.987 \\times 10^9 \\, N \\cdot m^2/C^2$)\n\n[ **Open Formula Lab** ]\n:::\n\n:::section{title=\"Key Concepts\"}\n*   **Point Charges:** The law strictly applies to \"point charges\"—charged objects where the size is negligible compared to the distance between them.\n*   **Permittivity of Free Space:** The constant $k$ is often written as $\\frac{1}{4\\pi\\epsilon_0}$, where $\\epsilon_0$ is the permittivity of a vacuum.\n*   **Vector Nature:** Force is a vector. Like charges repel (+ force direction), and opposite charges attract (- force direction).\n:::\n\n:::section{title=\"Characteristics of the Force\"}\n| Feature | Description |\n| :--- | :--- |\n| **Medium Dependence** | The force decreases when charges are placed in a dielectric medium (like water or oil). |\n| **Inverse Square Law** | If the distance $r$ is doubled, the force $F$ becomes one-fourth ($1/4$) of its original value. |\n| **Central Force** | The force acts along the line connecting the two charges. |\n| **Newton's Third Law** | The force exerted by $q_1$ on $q_2$ is equal and opposite to the force exerted by $q_2$ on $q_1$. |\n:::\n\n:::section{title=\"Important Notes\"}\n> [!IMPORTANT]\n> Coulomb's Law is only strictly valid for charges at rest (electrostatics). If charges are moving at high speeds, magnetic forces and relativistic effects must be considered.\n:::\n\n:::section{title=\"Suggested Questions\"}\n1. **Conceptual:** How does the force change if the distance between two charges is halved?\n2. **Calculation:** Calculate the force between two $1C$ charges separated by $1m$ in a vacuum.\n3. **Comparison:** Compare Coulomb's Law with Newton's Law of Universal Gravitation. What are the similarities and differences?\n:::",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It covers all key aspects of Coulomb's Law, including its definition, formula, and characteristics. The use of sections, formulas, and tables enhances readability and understanding. However, minor improvements could include adding more visual aids, such as diagrams, to illustrate the concepts and providing additional examples or practice problems to reinforce learning. Overall, the response demonstrates a strong command of the subject matter and presents it in a clear, engaging manner.",
+  "candidate_token_usage": {
+    "promptTokens": 379,
+    "completionTokens": 713,
+    "totalTokens": 1092
+  },
+  "candidate_latency_ms": 5240,
+  "candidate_cost_usd": 0.0023285,
+  "judge_token_usage": {
+    "promptTokens": 1453,
+    "completionTokens": 162,
+    "totalTokens": 1615
+  },
+  "judge_latency_ms": 5582,
+  "judge_cost_usd": 0.0012606,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:32:56.934Z"
+}

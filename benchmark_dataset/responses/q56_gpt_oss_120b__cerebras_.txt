@@ -1,0 +1,140 @@
+┌───────────────────────────────────────┐
+│ Introduction                           │
+│                                       │
+│ In physics simulations, the *restitution*   │
+│ coefficient determines how “bouncy” a collision │
+│ feels.  It is a single scalar that tells the   │
+│ engine how much kinetic energy is preserved   │
+│ after two rigid bodies hit each other.        │
+│ Changing this value lets you dial from a      │
+│ perfectly inelastic slap (no bounce) to a     │
+│ perfectly elastic ping‑pong (full bounce).   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Definition                             │
+│                                       │
+│ **Restitution (e)** – a dimension‑less      │
+│ number in the range **0 ≤ e ≤ 1** that        │
+│ relates the relative velocity of two bodies │
+│ before impact to that after impact.          │
+│                                           │
+│ * e = 0  →  completely inelastic (objects stick) │
+│ * e = 1  →  perfectly elastic (no energy loss)   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Key Concepts                           │
+│                                       │
+│ • **Relative velocity** – the velocity of   │
+│   one body as seen from the other.          │
+│ • **Normal direction** – the line joining   │
+│   the contact points; restitution only      │
+│   acts along this normal.                    │
+│ • **Impulse** – the force‑time integral that │
+│   changes momentum; restitution scales the   │
+│   impulse applied by the collision solver.   │
+│ • **Energy loss** – lower e means more       │
+│   kinetic energy converted to heat or sound.│
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Main Formula                           │
+│                                       │
+│   $$                                   │
+│   v'_{rel} = -\,e\,v_{rel}               │
+│   $$                                   │
+│                                       │
+│ [ Explain Formula ]                    │
+│ [ Open Formula Lab ]                    │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Restitution Table                       │
+│                                       │
+│ ┌─────────────┬───────────────────────┐ │
+│ │ e (value)   │ Typical Behaviour      │ │
+│ ├─────────────┼───────────────────────┤ │
+│ │ 0.0         │ Sticky, no bounce      │ │
+│ │ 0.2 – 0.4   │ Dull thud, small bounce│ │
+│ │ 0.5 – 0.7   │ Noticeable bounce      │ │
+│ │ 0.8 – 0.9   │ Bouncy, like a rubber  │ │
+│ │ 1.0         │ Perfectly elastic,    │ │
+│ │             │ no energy loss         │ │
+│ └─────────────┴───────────────────────┘ │
+│                                       │
+│ *Responsive*: the table adapts to the   │
+│ width of the display – on narrow screens │
+│ it will stack columns vertically.        │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Applications                           │
+│                                       │
+│ • Game physics – control how “bouncy”   │
+│   a ball, a car crash, or a ragdoll is  │
+│   perceived.                            │
+│ • Robotics – simulate material impacts │
+│   for testing grippers.                 │
+│ • Engineering – model collision         │
+│   response of structures (e.g., crash   │
+│   test dummies).                        │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Advantages                             │
+│                                       │
+│ • Simple single‑parameter control      │
+│ • Works with any convex rigid body      │
+│ • Integrated into most physics engines  │
+│   (Box2D, Bullet, PhysX, etc.)          │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Disadvantages                          │
+│                                       │
+│ • Only affects normal impulse; tangential │
+│   friction is separate.                │
+│ • Does not capture complex material       │
+│   hysteresis (e.g., visco‑elastic).       │
+│ • Extreme values (e ≈ 1) can cause        │
+│   numerical instability if not damped.   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Important Notes                        │
+│                                       │
+│ • Most engines clamp e to [0, 1] to avoid │
+│   non‑physical energy gain.               │
+│ • Changing e at runtime is safe – the      │
+│   solver reads the value each step.        │
+│ • For stacked objects, low e can cause     │
+│   “jamming” because energy never leaves the │
+│   system.                                   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Summary                                │
+│                                       │
+│ Restitution is the single knob that     │
+│ controls bounce.  A value of 0 makes     │
+│ collisions stick; 1 makes them perfectly │
+│ elastic.  The core formula `v' = -e·v`   │
+│ updates the relative normal velocity.   │
+│ Adjusting e lets you tune feel, realism, │
+│ and stability of any rigid‑body contact. │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Suggested Questions                    │
+│                                       │
+│ 1. What visual effect does increasing e   │
+│    from 0.3 to 0.8 have on a falling ball?│
+│ 2. How might you mitigate instability   │
+│    when e is set close to 1?              │
+│ 3. Why does restitution not affect      │
+│    tangential friction?                  │
+│ 4. In a stack of crates, what happens    │
+│    if one crate has e = 1 while the rest │
+│    have e = 0?                           │
+└───────────────────────────────────────┘

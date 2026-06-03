@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 31,
+  "question": "Thermal Properties of Matter: Define heat capacity and specific heat capacity.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nHeat capacity and specific heat capacity describe how a material changes temperature when it absorbs or releases thermal energy.\n\nHeat capacity is the total amount of heat energy required to raise the temperature of an entire object by exactly $1 \\text{ Degree Celsius}$ or Kelvin.\n\nSpecific heat capacity is the amount of heat energy required to raise the temperature of exactly $1 \\text{ kilogram}$ of a pure substance by $1 \\text{ Degree Celsius}$ or Kelvin.\n\n---\n\n## Characteristics\n\n* **Extensive vs. Intensive:** Heat capacity is an extensive property that scales with the size and mass of an object. Specific heat capacity is an intensive property inherent to the material itself, regardless of mass.\n\n---\n\n## Formula\n\nThe equations for thermal tracking are defined as:\n\n$$\\text{Heat Capacity } (C) = \\frac{Q}{\\Delta T}$$\n\n$$\\text{Specific Heat Capacity } (c) = \\frac{Q}{m \\Delta T}$$\n\nWhere:\n* $Q$ represents the total heat energy transferred\n* $\\Delta T$ represents the resulting change in temperature\n* $m$ represents the mass of the substance sample\n\n---\n\n## Summary\n\nHeat capacity measures the thermal response of an entire object, whereas specific heat capacity standardizes this property per unit mass, providing an intensive material constant.",
+  "candidate_response": "┌─────────────────────────────────────────────────────────────┐\n│                     Thermal Properties of Matter              │\n│                                                               │\n│  ┌───────────────────────┐  ┌───────────────────────┐        │\n│  │ Introduction           │  │ Quick Definition      │        │\n│  │                       │  │                       │        │\n│  │ Thermal properties    │  │ Heat capacity is the │        │\n│  │ describe how a material│  │ amount of heat needed│        │\n│  │ stores or releases     │  │ to change its temperature│    │\n│  │ energy when its temperature││ by a given amount.   │        │\n│  │ changes.                │  │                       │        │\n│  └───────────────────────┘  └───────────────────────┘        │\n│                                                               │\n│  ┌───────────────────────┐  ┌───────────────────────┐        │\n│  │ Heat Capacity          │  │ Specific Heat Capacity│        │\n│  │                       │  │                       │        │\n│  │ The *heat capacity* (C)│  │ The *specific heat*   │        │\n│  │ of a body is the amount│  │ capacity (c) is the  │        │\n│  │ of heat (Q) required   │  │ heat needed per unit │        │\n│  │ to raise its temperature│ │ mass to raise its    │        │\n│  │ by one kelvin (ΔT).    │  │ temperature by one   │        │\n│  │                       │  │ kelvin.               │        │\n│  └───────────────────────┘  └───────────────────────┘        │\n│                                                               │\n│  ┌───────────────────────────────────────────────────────┐ │\n│  │ Formula: Heat Capacity                                 │ │\n│  │                                                       │ │\n│  │   C = \\frac{dQ}{dT}                                   │ │\n│  │                                                       │ │\n│  │   [ Explain Formula ]   [ Open Formula Lab ]          │ │\n│  └───────────────────────────────────────────────────────┘ │\n│                                                               │\n│  ┌───────────────────────────────────────────────────────┐ │\n│  │ Formula: Specific Heat Capacity                         │ │\n│  │                                                       │ │\n│  │   c = \\frac{1}{m}\\,\\frac{dQ}{dT}                      │ │\n│  │   \\;\\;\\text{or}\\;\\; Q = mc\\Delta T                    │ │\n│  │                                                       │ │\n│  │   [ Explain Formula ]   [ Open Formula Lab ]          │ │\n│  └───────────────────────────────────────────────────────┘ │\n│                                                               │\n│  ┌───────────────────────┐                                    │\n│  │ Summary               │                                    │\n│  │                       │                                    │\n│  │ • Heat capacity (C)   │                                    │\n│  │   – total heat needed│                                    │\n│  │   – units: J·K⁻¹      │                                    │\n│  │ • Specific heat (c)   │                                    │\n│  │   – per‑unit‑mass heat│                                    │\n│  │   – units: J·kg⁻¹·K⁻¹│                                    │\n│  │   – relates Q, m, c, ΔT via Q = mcΔT                         │\n│  └───────────────────────┘                                    │\n│                                                               │\n│  ┌───────────────────────┐                                    │\n│  │ Suggested Questions   │                                    │\n│  │                       │                                    │\n│  │ 1. How does heat capacity differ from specific heat?        │\n│  │ 2. Why is specific heat useful for comparing materials?   │\n│  │ 3. Calculate the heat required to raise 2 kg of water      │\n│  │    from 20 °C to 80 °C (c_water = 4184 J·kg⁻¹·K⁻¹).        │\n│  └───────────────────────┘                                    │\n└─────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts of heat capacity and specific heat capacity, with accurate formulas and clear explanations. The use of a structured format with introductions, definitions, and summaries enhances readability. However, the quality score is slightly reduced due to the unconventional use of ASCII art for formatting, which may not be suitable for all platforms or readers. The educational score is high due to the clarity of explanations and the inclusion of suggested questions for further exploration. Overall, the response effectively teaches the concepts and provides a good learning experience. Minor improvements could include using more standard formatting techniques and providing additional examples or illustrations to support the explanations.",
+  "candidate_token_usage": {
+    "promptTokens": 431,
+    "completionTokens": 1399,
+    "totalTokens": 1830
+  },
+  "candidate_latency_ms": 3456,
+  "candidate_cost_usd": 0.00090405,
+  "judge_token_usage": {
+    "promptTokens": 1605,
+    "completionTokens": 188,
+    "totalTokens": 1793
+  },
+  "judge_latency_ms": 10662,
+  "judge_cost_usd": 0.0014142,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:02:42.247Z"
+}

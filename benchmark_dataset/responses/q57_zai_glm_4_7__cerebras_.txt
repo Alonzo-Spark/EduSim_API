@@ -1,0 +1,279 @@
+### Introduction Card
+Imagine a child on a swing. You are the "driving force." If you push the swing at the right rhythm, it goes higher and higher. This is a **forced harmonic oscillator**. The "driven frequency" is how often you push.
+
+### The Main Formula Card
+The behavior of the system is governed by the amplitude of the steady-state oscillation, which depends on the driving frequency.
+
+$$
+A(\omega) = \frac{F_0}{\sqrt{(m(\omega_0^2 - \omega^2))^2 + (b\omega)^2}}
+$$
+
+| Variable | Meaning |
+| :--- | :--- |
+| $A(\omega)$ | Amplitude of the oscillator's motion. |
+| $F_0$ | Amplitude of the driving force. |
+| $\omega$ | The angular frequency of the driver (what you control). |
+| $\omega_0$ | The natural frequency of the oscillator ($\sqrt{k/m}$). |
+| $m$ | Mass of the oscillator. |
+| $b$ | Damping coefficient (a measure of friction/air resistance). |
+
+[ Explain Formula ]
+[ Open Formula Lab ]
+
+---
+
+### Live Sandbox: Visualizing the Effect
+
+This interactive card demonstrates the system's response as you change the driving frequency ($\omega$).
+
+**Instructions:**
+1.  Observe the **Oscillator** (the mass) and the **Driver** (the moving wall).
+2.  Use the slider to change the **Driving Frequency**.
+3.  Watch how the Amplitude and Phase relationship change in real-time on the graph below.
+
+<div class="sandbox-container">
+  <canvas id="oscillatorCanvas" width="600" height="300"></canvas>
+  <div class="controls">
+    <label for="freqSlider">Driving Frequency (ω): <span id="freqValue">1.0</span> rad/s</label>
+    <input type="range" id="freqSlider" min="0.1" max="5.0" step="0.1" value="1.0">
+    <p><strong>Natural Frequency (ω₀):</strong> 2.0 rad/s</p>
+  </div>
+  <div class="graph-container">
+    <canvas id="phaseCanvas" width="600" height="150"></canvas>
+    <div class="legend">
+      <span style="color: #3b82f6;">● Driver</span>
+      <span style="color: #ef4444;">● Oscillator</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // --- Physics Constants ---
+  const m = 1.0;       // Mass
+  const k = 4.0;       // Spring constant
+  const b = 0.5;       // Damping coefficient
+  const w0 = Math.sqrt(k / m); // Natural frequency = 2.0 rad/s
+  const F0 = 10.0;     // Driving force amplitude
+
+  // --- State Variables ---
+  let w = 1.0;         // Initial driving frequency
+  let t = 0;           // Time
+  const dt = 0.05;     // Time step
+
+  // --- DOM Elements ---
+  const canvas = document.getElementById('oscillatorCanvas');
+  const ctx = canvas.getContext('2d');
+  const phaseCanvas = document.getElementById('phaseCanvas');
+  const phaseCtx = phaseCanvas.getContext('2d');
+  const freqSlider = document.getElementById('freqSlider');
+  const freqValueDisplay = document.getElementById('freqValue');
+
+  // --- Event Listeners ---
+  freqSlider.addEventListener('input', (e) => {
+    w = parseFloat(e.target.value);
+    freqValueDisplay.textContent = w.toFixed(1);
+  });
+
+  // --- Helper Function: Calculate Steady-State Amplitude ---
+  function getAmplitude(omega) {
+    const denominator = Math.sqrt(Math.pow(m * (w0*w0 - omega*omega), 2) + Math.pow(b * omega, 2));
+    return F0 / denominator;
+  }
+
+  // --- Helper Function: Calculate Phase Lag ---
+  function getPhase(omega) {
+    // tan(phi) = (b * omega) / (m * (w0^2 - omega^2))
+    // We use atan2 to handle the sign correctly for all quadrants
+    return Math.atan2(b * omega, m * (w0*w0 - omega*omega));
+  }
+
+  // --- Main Animation Loop ---
+  function animate() {
+    t += dt;
+
+    // 1. Clear Canvases
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    phaseCtx.clearRect(0, 0, phaseCanvas.width, phaseCanvas.height);
+
+    // 2. Calculate Physics
+    const A = getAmplitude(w);
+    const phi = getPhase(w);
+
+    // Driver position (simple sine wave)
+    const driverPos = 20 * Math.sin(w * t); 
+
+    // Oscillator position (steady-state solution)
+    // x(t) = A * sin(w*t - phi)
+    const oscillatorPos = A * Math.sin(w * t - phi);
+
+    // --- Draw Oscillator System ---
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    // Draw equilibrium line
+    ctx.beginPath();
+    ctx.setLineDash([5, 5]);
+    ctx.moveTo(0, centerY);
+    ctx.lineTo(canvas.width, centerY);
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Draw Driver (Wall)
+    const driverX = 50;
+    const driverY = centerY + driverPos;
+    ctx.fillStyle = '#3b82f6'; // Blue
+    ctx.fillRect(driverX, driverY - 40, 20, 80);
+    ctx.font = '12px sans-serif';
+    ctx.fillStyle = '#1e3a8a';
+    ctx.fillText('Driver', driverX, driverY - 50);
+
+    // Draw Spring
+    ctx.beginPath();
+    ctx.moveTo(driverX + 20, driverY);
+    const springEndX = centerX - 40 + oscillatorPos;
+    const springEndY = centerY;
+    const numCoils = 10;
+    const springWidth = springEndX - (driverX + 20);
+    for (let i = 0; i <= numCoils; i++) {
+      const x = (driverX + 20) + (springWidth / numCoils) * i;
+      const yOffset = (i === 0 || i === numCoils) ? 0 : (i % 2 === 0 ? -15 : 15);
+      ctx.lineTo(x, centerY + yOffset);
+    }
+    ctx.strokeStyle = '#4b5563';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw Mass (Oscillator)
+    const massX = springEndX;
+    ctx.fillStyle = '#ef4444'; // Red
+    ctx.fillRect(massX, centerY - 25, 80, 50);
+    ctx.fillStyle = '#7f1d1d';
+    ctx.fillText('Oscillator', massX, centerY - 35);
+    
+    // Draw Amplitude Indicator
+    ctx.fillStyle = '#9ca3af';
+    ctx.fillText(`Amplitude: ${A.toFixed(2)}`, massX, centerY + 50);
+    ctx.fillText(`Phase Lag: ${(phi * 180 / Math.PI).toFixed(1)}°`, massX, centerY + 65);
+
+
+    // --- Draw Phase Graph ---
+    // Draw a scrolling graph of Driver vs. Oscillator
+    const graphWidth = phaseCanvas.width;
+    const graphHeight = phaseCanvas.height;
+    const graphCenterY = graphHeight / 2;
+    
+    // We'll draw the last N points
+    const numPoints = 200;
+    const pointSpacing = graphWidth / numPoints;
+    
+    // Draw background grid
+    phaseCtx.beginPath();
+    phaseCtx.moveTo(0, graphCenterY);
+    phaseCtx.lineTo(graphWidth, graphCenterY);
+    phaseCtx.strokeStyle = '#f3f4f6';
+    phaseCtx.lineWidth = 1;
+    phaseCtx.stroke();
+
+    // Draw Driver trace (Blue)
+    phaseCtx.beginPath();
+    phaseCtx.strokeStyle = '#3b82f6';
+    phaseCtx.lineWidth = 2;
+    for (let i = 0; i < numPoints; i++) {
+        const timeOffset = (numPoints - i) * dt;
+        const y = 20 * Math.sin(w * (t - timeOffset));
+        const x = i * pointSpacing;
+        if (i === 0) phaseCtx.moveTo(x, graphCenterY + y);
+        else phaseCtx.lineTo(x, graphCenterY + y);
+    }
+    phaseCtx.stroke();
+
+    // Draw Oscillator trace (Red)
+    phaseCtx.beginPath();
+    phaseCtx.strokeStyle = '#ef4444';
+    phaseCtx.lineWidth = 2;
+    for (let i = 0; i < numPoints; i++) {
+        const timeOffset = (numPoints - i) * dt;
+        const y = A * Math.sin(w * (t - timeOffset) - phi);
+        const x = i * pointSpacing;
+        if (i === 0) phaseCtx.moveTo(x, graphCenterY + y);
+        else phaseCtx.lineTo(x, graphCenterY + y);
+    }
+    phaseCtx.stroke();
+
+    requestAnimationFrame(animate);
+  }
+
+  // Start animation
+  animate();
+</script>
+
+<style>
+  .sandbox-container {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9fafb;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  canvas {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    display: block;
+  }
+  .controls {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+  }
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #374151;
+  }
+  input[type=range] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 0.9em;
+    color: #6b7280;
+    margin: 0;
+  }
+  .graph-container {
+    position: relative;
+  }
+  .legend {
+    text-align: center;
+    font-size: 0.85em;
+    color: #4b5563;
+    margin-top: 5px;
+  }
+  .legend span {
+    margin: 0 10px;
+  }
+</style>
+
+---
+
+### Key Observations Card
+
+| Frequency Regime | Visual Effect | Phase Relationship |
+| :--- | :--- | :--- |
+| **Low Frequency**<br>($\omega \ll \omega_0$) | The oscillator follows the driver almost perfectly. The amplitude is small, determined mostly by the spring constant ($k$). | **In Phase** ($\phi \approx 0^\circ$). The mass moves in the same direction as the driver. |
+| **Resonance**<br>($\omega \approx \omega_0$) | The amplitude becomes **very large**. The system is absorbing energy most efficiently from the driver. The motion is dramatic. | **90° Out of Phase** ($\phi \approx 90^\circ$). The mass reaches its maximum speed when the driver is at its maximum displacement. |
+| **High Frequency**<br>($\omega \gg \omega_0$) | The driver is moving too fast for the mass to keep up. The amplitude becomes very small, and the mass barely moves. | **180° Out of Phase** ($\phi \approx 180^\circ$). The mass moves in the *opposite* direction to the driver. |
+
+### Summary Card
+
+The visual effect of increasing the driven frequency is not linear. It's characterized by a dramatic peak in amplitude at the system's natural frequency (**resonance**).
+
+*   **Below resonance:** The system is "stiff" and follows the driver.
+*   **At resonance:** The system is "loose" and responds maximally.
+*   **Above resonance:** The system is "heavy" and cannot respond to the rapid changes, becoming out of phase.

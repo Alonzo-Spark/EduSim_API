@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 27,
+  "question": "State Pascal’s law and mention its applications.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nPascal's Law states that any change in pressure applied to an enclosed, incompressible fluid at rest is transmitted undiminished to every portion of the fluid and to the walls of its containing vessel.\n\n---\n\n## Operating Principle\n\n* **Undiminished Transmission:** When pressure increases at one point in a hydraulic circuit, that exact same pressure change propagates instantly through the entire connected fluid volume.\n* **Force Amplification:** Applying a small force over a narrow piston creates a pressure that can generate a much larger output force when transmitted to a wider piston.\n\n---\n\n## Formula\n\nThe pressure equality expression within a hydraulic link:\n\n$$P_1 = P_2$$\n\n$$\\frac{F_1}{A_1} = \\frac{F_2}{A_2}$$\n\nWhere:\n* $F_1$ represents the input force applied to the small piston\n* $A_1$ represents the cross-sectional area of the small input piston\n* $F_2$ represents the output force generated at the large piston\n* $A_2$ represents the cross-sectional area of the large output piston\n\n---\n\n## Applications\n\n* **Hydraulic Braking Systems:** Transmitting foot pedal force evenly through fluid lines to clamp brake pads onto all wheels simultaneously.\n* **Hydraulic Lifts:** Allowing a small compressor to raise heavy industrial vehicles by pushing fluid into a wide cylinder lift.\n* **Hydraulic Presses:** Generating massive compressive forces for metal forming and material crushing operations.\n\n---\n\n## Summary\n\nPascal's Law reveals that pressure applied to an enclosed fluid transmits equally in all directions, providing a foundation for hydraulic force amplification systems.",
+  "candidate_response": "┌───────────────────────────────────────────────────────────────────────┐\n│ Definition                                                                       │\n│                                                                                 │\n│ Pascal’s law states that in a fluid at rest, the pressure exerted by the fluid │\n│ is the same in all directions. The pressure at any point is equal to the       │\n│ hydrostatic pressure at that point.                                               │\n└───────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────┐\n│ Main Formula                                                                     │\n│                                                                                 │\n│     P \\;=\\; \\frac{F}{A}                                                         │\n│                                                                                 │\n│ [Explain Formula]   [Open Formula Lab]                                           │\n└───────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────┐\n│ Applications                                                                     │\n│                                                                                 │\n│ • Hydraulic presses                                                             │\n│ • Fluid power systems                                                           │\n│ • Hydraulic brakes in vehicles                                                  │\n│ • Pneumatic tools                                                               │\n│ • Measuring fluid pressure in gauges                                           │\n└───────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────┐\n│ Summary                                                                           │\n│                                                                                 │\n│ Pascal’s law explains that pressure in a fluid is uniform in all directions and │\n│ is proportional to the force applied over a given area. It is fundamental to   │\n│ fluid mechanics and underpins many practical technologies such as hydraulics, │\n│ brakes, and pressure gauges.                                                     │\n└───────────────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is generally accurate and well-structured. However, it lacks the detailed explanation of the operating principle of Pascal's Law, specifically the concept of undiminished transmission and force amplification, which is present in the gold reference answer. Additionally, the formula section in the candidate response only provides the basic formula for pressure (P = F/A) without explaining its relevance to Pascal's Law or providing the pressure equality expression within a hydraulic link, as seen in the gold reference answer. The applications section is mostly accurate but could benefit from more detailed explanations of how Pascal's Law is applied in each technology. Overall, the response is clear and easy to follow, but could be improved with more comprehensive coverage of the topic.",
+  "candidate_token_usage": {
+    "promptTokens": 426,
+    "completionTokens": 1284,
+    "totalTokens": 1710
+  },
+  "candidate_latency_ms": 3180,
+  "candidate_cost_usd": 0.00041715,
+  "judge_token_usage": {
+    "promptTokens": 1118,
+    "completionTokens": 202,
+    "totalTokens": 1320
+  },
+  "judge_latency_ms": 5819,
+  "judge_cost_usd": 0.0011556,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:51:48.999Z"
+}

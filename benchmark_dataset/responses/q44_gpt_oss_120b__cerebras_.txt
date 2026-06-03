@@ -1,0 +1,172 @@
+┌─────────────────────────────────────┐
+│ Introduction                         │
+│─────────────────────────────────────│
+│ A capacitor is a passive electrical │
+│ component that stores energy in an   │
+│ electric field. It consists of two   │
+│ conductive plates separated by an   │
+│ insulating material called the      │
+│ dielectric. When a voltage is applied│
+│ across the plates, charge accumulates│
+│ on them, creating an electric field  │
+│ and storing energy.                  │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Definition                           │
+│─────────────────────────────────────│
+│ **Capacitance (C)** is the ability of │
+│ a capacitor to store charge per unit │
+│ voltage. It is defined as               │
+│                                         │
+│ C = Q / V                               │
+│                                         │
+│ where Q is the stored charge (coulombs)│
+│ and V is the voltage across the plates.│
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Main Formula                         │
+│─────────────────────────────────────│
+│                C = Q ⁄ V              │
+│                                         │
+│ [ Explain Formula ]   [ Open Formula Lab ] │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Energy Stored                        │
+│─────────────────────────────────────│
+│ The energy (U) stored in a capacitor is│
+│ given by                               │
+│                                         │
+│ U = ½ C V²                              │
+│                                         │
+│ [ Explain Energy Formula ]   [ Open Formula Lab ] │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Key Concepts                         │
+│─────────────────────────────────────│
+│ • **Dielectric:** Insulating material │
+│   that increases capacitance by       │
+│   reducing the electric field strength│
+│ • **Plate Area (A):** Larger area →    │
+│   higher capacitance                  │
+│ • **Plate Separation (d):** Smaller   │
+│   distance → higher capacitance        │
+│ • **Permittivity (ε):** Material‑      │
+│   dependent constant (ε = ε₀ εᵣ)        │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Capacitance Formula (Geometry)       │
+│─────────────────────────────────────│
+│ C = ε A ⁄ d                            │
+│                                         │
+│ [ Explain Geometry Formula ]   [ Open Formula Lab ] │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Characteristics                      │
+│─────────────────────────────────────│
+│ • **Capacitance Range:** pF to mF      │
+│ • **Voltage Rating:** Up to several   │
+│   kilovolts                           │
+│ • **Frequency Response:** Good at low │
+│   frequencies; limited at high‑freq. │
+│ • **Leakage Current:** Small but       │
+│   present; depends on dielectric       │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Types of Capacitors (Table)          │
+│─────────────────────────────────────│
+│ ┌───────────────┬───────────────┬───────────────────────┬───────────────┐ │
+│ │ Type          │ Dielectric    │ Capacitance Range      │ Voltage Rating│ │
+│ ├───────────────┼───────────────┼───────────────────────┼───────────────┤ │
+│ │ Ceramic       │ Ceramic       │ 1 pF – 100 µF          │ 50 V – 2 kV   │ │
+│ │ Electrolytic  │ Aluminum Oxide│ 1 µF – 10 mF          │ 6 V – 450 V   │ │
+│ │ Film          │ Polypropylene │ 10 pF – 10 µF         │ 50 V – 10 kV  │ │
+│ │ Tantalum      │ Tantalum Oxide│ 0.1 µF – 100 µF       │ 4 V – 50 V    │ │
+│ │ Supercapacitor│ Carbon‑based  │ 0.1 F – 5 F           │ 2.5 V – 5.5 V │ │
+│ └───────────────┴───────────────┴───────────────────────┴───────────────┘ │
+│                                         │
+│ [ Explore Types ]   [ Open Table Lab ] │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Applications                         │
+│─────────────────────────────────────│
+│ • **Power Supply Filtering:** Smooths   │
+│   voltage ripple in DC supplies.       │
+│ • **Timing Circuits:** Paired with      │
+│   resistors to set RC time constants.   │
+│ • **Energy Storage:** In flash cameras │
+│   and electric‑vehicle regenerative      │
+│   braking (supercapacitors).            │
+│ • **Coupling/Decoupling:** Blocks DC   │
+│   while passing AC signals.             │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Advantages                           │
+│─────────────────────────────────────│
+│ • Simple, reliable, no moving parts   │
+│ • Wide range of capacitance values    │
+│ • Low cost for many types (ceramic)   │
+│ • Fast response time                  │
+│ • Can store energy quickly (supercaps)│
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Disadvantages                        │
+│─────────────────────────────────────│
+│ • Limited energy density vs. batteries│
+│ • Voltage rating can be low for       │
+│   electrolytic types                  │
+│ • Leakage current in electrolytic     │
+│   capacitors                           │
+│ • Size can be large for high capacitance│
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Important Notes                      │
+│─────────────────────────────────────│
+│ • Always observe voltage rating;      │
+│   exceeding it can cause dielectric    │
+│   breakdown.                           │
+│ • Polarity matters for electrolytic   │
+│   and tantalum capacitors.             │
+│ • Temperature affects capacitance and │
+│   leakage; check datasheets.            │
+│ • Supercapacitors have limited cycle   │
+│   life compared to traditional caps.   │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Summary                              │
+│─────────────────────────────────────│
+│ A capacitor stores electrical energy   │
+│ in an electric field between two plates.│
+│ Capacitance depends on plate area,      │
+│ separation, and dielectric material.   │
+│ Core formulas: C = Q/V and C = εA/d.    │
+│ Used in filtering, timing, coupling,   │
+│ and energy‑storage applications.        │
+└─────────────────────────────────────┘
+
+┌─────────────────────────────────────┐
+│ Suggested Questions                  │
+│─────────────────────────────────────│
+│ 1. How does increasing plate area affect│
+│    capacitance?                         │
+│ 2. Why must electrolytic capacitors be  │
+│    connected with correct polarity?    │
+│ 3. Compare energy density of a          │
+│    supercapacitor with a lithium‑ion    │
+│    battery.                             │
+│ 4. What role does the dielectric constant│
+│    play in determining capacitance?    │
+│ 5. How does leakage current impact       │
+│    capacitor performance over time?     │
+└─────────────────────────────────────┘

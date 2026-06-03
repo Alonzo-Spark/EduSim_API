@@ -1,0 +1,103 @@
+## Surface Tension
+
+<QuickDefinitionCard
+  definition="Surface tension is the tendency of liquid surfaces to shrink into the minimum surface area possible. It's a macroscopic effect caused by the imbalance of intermolecular forces at the liquid-gas interface."
+/>
+
+<KeyConceptsCard
+  title="Key Concepts"
+  concepts={[
+    "**Cohesive Forces:** Attractive forces between molecules of the *same* substance.",
+    "**Adhesive Forces:** Attractive forces between molecules of *different* substances.",
+    "**Surface Energy:** The energy required to increase the surface area of a liquid by a unit amount.",
+    "**Interface:** The boundary between two phases (e.g., liquid and gas)."
+  ]}
+/>
+
+<ExplanationCard
+  title="Mechanism of Surface Tension"
+  explanation="Inside the bulk of a liquid, each molecule is surrounded by other molecules in all directions. The intermolecular forces (like van der Waals forces or hydrogen bonds) acting on these molecules are balanced. However, molecules at the surface of the liquid are only attracted to other liquid molecules below and to the sides, not above (assuming a liquid-gas interface). This net inward pull creates a tension in the surface, making it behave like a stretched elastic membrane. The liquid tries to minimize this surface area to reduce its potential energy, leading to phenomena like droplet formation and capillary action."
+/>
+
+<FormulaCard
+  title="Main Formula"
+  formula="$\gamma = \frac{F}{L}$"
+  variables={[
+    "$\gamma$: Surface tension (often denoted as $\sigma$ or $T$)",
+    "$F$: Force acting parallel to the surface",
+    "$L$: Length of the surface over which the force acts"
+  ]}
+  explanation="This formula defines surface tension as the force per unit length acting parallel to the surface of a liquid. It quantifies the 'strength' of the surface film."
+/>
+
+<FormulaCard
+  title="Alternative Definition: Surface Energy"
+  formula="$\gamma = \frac{W}{\Delta A}$"
+  variables={[
+    "$\gamma$: Surface tension",
+    "$W$: Work done to increase surface area",
+    "$\Delta A$: Change in surface area"
+  ]}
+  explanation="This formula defines surface tension as the work done per unit increase in surface area. This highlights the energetic aspect of surface tension, as liquids tend to minimize their surface potential energy."
+/>
+
+## Factors Affecting Surface Tension
+
+<FactorsCard
+  factors={[
+    {
+      title: "Temperature",
+      effect: "Surface tension decreases with increasing temperature.",
+      explanation: "As temperature rises, the kinetic energy of liquid molecules increases, weakening the intermolecular cohesive forces. This makes it easier for molecules to escape the bulk and reduces the net inward pull at the surface."
+    },
+    {
+      title: "Nature of the Liquid",
+      effect: "Different liquids have different surface tensions.",
+      explanation: "Liquids with stronger intermolecular forces (e.g., water with hydrogen bonds) exhibit higher surface tension compared to liquids with weaker forces (e.g., alcohol). For instance, water has a significantly higher surface tension than ethanol."
+    },
+    {
+      title: "Presence of Solutes/Impurities",
+      effect: "Can either increase or decrease surface tension depending on the solute.",
+      explanation: "**Surfactants (Surface Active Agents):** Substances like detergents significantly *decrease* surface tension. They accumulate at the surface, disrupting the cohesive forces between liquid molecules. **Inorganic Salts:** Often *increase* surface tension, as they tend to strengthen the cohesive forces of the solvent or are repelled from the surface."
+    },
+    {
+      title: "Pressure (Gas Phase)",
+      effect: "Generally has a minor effect, but very high pressures can slightly decrease surface tension.",
+      explanation: "For most practical purposes, changes in the pressure of the gas phase above the liquid have a negligible effect on surface tension, especially compared to temperature or solute effects. At extremely high pressures, some gas molecules might dissolve, slightly altering intermolecular interactions."
+    },
+    {
+      title: "Adsorbed Gases",
+      effect: "Presence of adsorbed gas molecules at the interface can slightly alter surface tension.",
+      explanation: "Similar to solutes, gas molecules adsorbed onto the liquid surface can interfere with the cohesive forces, leading to minor changes in surface tension."
+    }
+  ]}
+/>
+
+<TableCard
+  title="Typical Surface Tension Values (at 20°C)"
+  columns={[
+    { header: "Liquid", accessor: "liquid" },
+    { header: "Surface Tension ($\gamma$) (mN/m or dyn/cm)", accessor: "value" }
+  ]}
+  data={[
+    { liquid: "Water", value: "72.8" },
+    { liquid: "Ethanol", value: "22.3" },
+    { liquid: "Mercury", value: "485" },
+    { liquid: "Benzene", value: "28.9" },
+    { liquid: "Glycerol", value: "63.0" }
+  ]}
+/>
+
+<SummaryCard
+  summary="Surface tension is a crucial property of liquids, arising from the unbalanced cohesive forces experienced by molecules at the liquid-gas interface. It can be quantified as force per unit length or work per unit area. Key factors influencing surface tension include temperature (inverse relationship), the nature of the liquid (stronger intermolecular forces lead to higher surface tension), and the presence of solutes, particularly surfactants which dramatically reduce it."
+/>
+
+<SuggestedQuestionsCard
+  questions={[
+    "Why do small insects like water striders walk on water?",
+    "Explain the phenomenon of capillary action in terms of surface tension and adhesive/cohesive forces.",
+    "How do detergents clean clothes, considering their effect on surface tension?",
+    "What would happen to the surface tension of water if you added salt to it? Why?",
+    "Describe an experiment to measure the surface tension of a liquid."
+  ]}
+/>

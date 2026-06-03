@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 16,
+  "question": "Work, Energy and Power: Define work and write its SI unit.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWork is defined as the measure of energy transfer that occurs when an external force acts on an object and causes it to move through a displacement distance. \n\nWork is a scalar quantity calculated as the dot product of the applied force vector and the displacement vector.\n\n---\n\n## Characteristics\n\n* **Directional Orientation Dependency:** Work value can scale as positive, negative, or zero depending on the angle between the force and displacement vectors.\n* **Zero Work Scenarios:** No work is performed if the object remains stationary ($\\Delta x = 0$) or if the applied force vector acts at a right angle ($90^\\circ$) relative to the motion.\n\n---\n\n## Formula\n\nThe mathematical dot product defining mechanical work:\n\n$$W = Fs \\cos(\\theta)$$\n\nWhere:\n* $W$ represents the work scalar value\n* $F$ represents the magnitude of the applied force vector\n* $s$ represents the magnitude of the displacement vector\n* $\\theta$ represents the angle between the force and displacement paths\n\n---\n\n## Metric System Units\n\nThe standard SI unit of work is the **Joule ($\\text{J}$)**, which is defined as the work performed when a constant force of $1 \\text{ Newton}$ displaces an object through a distance of $1 \\text{ meter}$ along its line of action.\n\n$$1 \\text{ J} = 1 \\text{ N} \\cdot \\text{m} = 1 \\text{ kg} \\cdot \\text{m}^2/\\text{s}^2$$\n\n---\n\n## Summary\n\nWork measures mechanical energy conversion, directly proportional to force intensity and displacement length, with a dependency on their mutual vector alignment angle.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Work is defined as the    │\n│ measure of energy transfer  │\n│ that occurs when an object │\n│ is moved over a distance   │\n│ by an external force.      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ SI Unit of Work          │\n│                           │\n│ The SI unit of work is    │\n│ the Joule (J), which is   │\n│ defined as the amount of   │\n│ energy transferred when    │\n│ a force of one newton     │\n│ moves an object one meter. │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 6,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately defines work and its SI unit, aligning with the gold reference answer. However, it lacks detailed explanations, formulas, and characteristics of work, which are crucial for a comprehensive understanding. The quality score is lower due to the unconventional use of ASCII art for formatting, which may not be readable or accessible for all users. To improve, the candidate should focus on providing clear, structured, and detailed explanations, including relevant formulas and examples. Additionally, using standard formatting techniques, such as headings and paragraphs, would enhance the overall quality and readability of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 368,
+    "completionTokens": 158,
+    "totalTokens": 526
+  },
+  "candidate_latency_ms": 3116,
+  "candidate_cost_usd": 0.00015,
+  "judge_token_usage": {
+    "promptTokens": 937,
+    "completionTokens": 172,
+    "totalTokens": 1109
+  },
+  "judge_latency_ms": 3070,
+  "judge_cost_usd": 0.000975,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:25:26.341Z"
+}

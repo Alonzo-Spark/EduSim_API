@@ -1,0 +1,624 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Textbook: Derivation of s = ut + 1/2 at²</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --accent-hover: #2980b9;
+            --bg-body: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --border: 1px solid #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: var(--border);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .card-icon {
+            background: var(--bg-body);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        .card-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Typography inside cards */
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            text-align: center;
+            background: #fdfdfd;
+            border-left: 5px solid var(--accent);
+        }
+
+        .formula-display {
+            font-size: 1.5rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px dashed #cbd5e0;
+        }
+
+        .formula-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            background-color: #ebf5ff;
+        }
+
+        /* Graphical Derivation Visuals */
+        .graph-container {
+            width: 100%;
+            height: 300px;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        svg.vt-graph {
+            width: 100%;
+            height: 100%;
+        }
+
+        .axis { stroke: #333; stroke-width: 2; }
+        .line-velocity { stroke: var(--accent); stroke-width: 3; fill: none; }
+        .area-shape { fill: rgba(52, 152, 219, 0.2); stroke: none; }
+        .label-text { font-family: 'Inter', sans-serif; font-size: 14px; fill: #555; }
+        .annotation { font-size: 12px; fill: #666; font-style: italic; }
+
+        /* Modal / Drawer System */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Formula Lab Styles */
+        .lab-input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .lab-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .lab-input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .lab-input-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .lab-result {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .lab-result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .card { padding: 1.5rem; }
+            .formula-actions { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Kinematics: Equations of Motion</h1>
+            <p class="subtitle">Deriving the Second Equation of Motion</p>
+        </header>
+
+        <!-- Introduction Card -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">📘</div>
+                <h2 class="card-title">Introduction</h2>
+            </div>
+            <p>
+                In classical mechanics, equations of motion describe the behavior of a physical system in terms of its motion as a function of time. 
+                Specifically, we are looking to derive the relationship between <strong>displacement</strong> ($s$), <strong>initial velocity</strong> ($u$), <strong>acceleration</strong> ($a$), and <strong>time</strong> ($t$).
+            </p>
+            <p>
+                This equation is crucial when we do not know the final velocity of an object but need to calculate how far it has traveled under constant acceleration.
+            </p>
+        </article>
+
+        <!-- Definition Card -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">📝</div>
+                <h2 class="card-title">Variable Definitions</h2>
+            </div>
+            <p>Before deriving, let's define the physical quantities involved:</p>
+            <ul>
+                <li><strong>s</strong>: Displacement (the distance traveled in a straight line).</li>
+                <li><strong>u</strong>: Initial velocity (speed at time $t = 0$).</li>
+                <li><strong>v</strong>: Final velocity (speed at time $t$).</li>
+                <li><strong>a</strong>: Constant acceleration.</li>
+                <li><strong>t</strong>: Time interval.</li>
+            </ul>
+        </article>
+
+        <!-- Derivation Card (Graphical Method) -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">📈</div>
+                <h2 class="card-title">Graphical Derivation</h2>
+            </div>
+            <p>
+                We will derive this equation using the <strong>Velocity-Time Graph</strong> method. 
+                The area under a velocity-time graph represents the displacement of the object.
+            </p>
+            
+            <div class="graph-container">
+                <svg class="vt-graph" viewBox="0 0 400 250">
+                    <!-- Axes -->
+                    <line x1="40" y1="220" x2="380" y2="220" class="axis" /> <!-- Time axis -->
+                    <line x1="40" y1="220" x2="40" y2="20" class="axis" />   <!-- Velocity axis -->
+                    
+                    <!-- Labels -->
+                    <text x="370" y="240" class="label-text">t (Time)</text>
+                    <text x="10" y="30" class="label-text">v</text>
+                    
+                    <!-- The Velocity Line -->
+                    <!-- Start at (40, 180) representing u, End at (340, 60) representing v -->
+                    <line x1="40" y1="180" x2="340" y2="60" class="line-velocity" />
+                    
+                    <!-- The Area (Trapezium) -->
+                    <path d="M 40 180 L 340 60 L 340 220 L 40 220 Z" class="area-shape" />
+                    
+                    <!-- Projections -->
+                    <line x1="40" y1="180" x2="40" y2="220" stroke="#ccc" stroke-dasharray="4" />
+                    <line x1="340" y1="60" x2="340" y2="220" stroke="#ccc" stroke-dasharray="4" />
+                    
+                    <!-- Annotations -->
+                    <text x="25" y="185" class="label-text">u</text>
+                    <text x="345" y="65" class="label-text">v</text>
+                    <text x="40" y="240" class="label-text">0</text>
+                    <text x="340" y="240" class="label-text">t</text>
+                    
+                    <!-- Area Labels -->
+                    <text x="190" y="150" class="annotation" font-weight="bold">Displacement = Area</text>
+                </svg>
+            </div>
+
+            <p>
+                The graph shows velocity increasing linearly with time (constant acceleration). The shape under the line is a <strong>trapezium</strong>. 
+                The area of this trapezium is equal to the total displacement ($s$).
+            </p>
+            
+            <p>
+                The area of a trapezium is given by:
+                $$ \text{Area} = \frac{\text{Sum of parallel sides}}{2} \times \text{Height} $$
+            </p>
+
+            <p>Applying this to our graph:</p>
+            <ul>
+                <li>Parallel sides are initial velocity ($u$) and final velocity ($v$).</li>
+                <li>Height is the time interval ($t$).</li>
+            </ul>
+            
+            <p>Therefore:</p>
+            <div class="formula-display" style="font-size: 1.2rem; margin: 1rem 0;">
+                $$ s = \left( \frac{u + v}{2} \right) t $$
+            </div>
+            
+            <p>
+                However, our target formula does not contain final velocity ($v$). We must eliminate $v$. 
+                We use the <strong>First Equation of Motion</strong>:
+            </p>
+             <div class="formula-display" style="font-size: 1.2rem; margin: 1rem 0;">
+                $$ v = u + at $$
+            </div>
+            
+            <p>Substitute $(u + at)$ for $v$ in the area equation:</p>
+            <div class="formula-display" style="font-size: 1.2rem; margin: 1rem 0;">
+                $$ s = \left( \frac{u + (u + at)}{2} \right) t $$
+            </div>
+            
+            <p>Simplify the numerator:</p>
+            <div class="formula-display" style="font-size: 1.2rem; margin: 1rem 0;">
+                $$ s = \left( \frac{2u + at}{2} \right) t $$
+            </div>
+            
+            <p>Distribute $t$ across the terms:</p>
+            <div class="formula-display" style="font-size: 1.2rem; margin: 1rem 0;">
+                $$ s = \frac{2ut}{2} + \frac{at^2}{2} $$
+            </div>
+            
+            <p>Final simplification:</p>
+        </article>
+
+        <!-- Main Formula Card -->
+        <article class="card formula-card" id="main-formula-card">
+            <div class="card-header" style="justify-content: center; border-bottom: none;">
+                <h2 class="card-title">Second Equation of Motion</h2>
+            </div>
+            
+            <div class="formula-display" id="render-target">
+                $$ s = ut + \frac{1}{2}at^2 $$
+            </div>
+
+            <p style="margin-bottom: 2rem; color: var(--text-secondary);">
+                Relates displacement to initial velocity, acceleration, and time.
+            </p>
+
+            <div class="formula-actions">
+                <button class="btn btn-outline" onclick="openExplanation()">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Explain Formula
+                </button>
+                <button class="btn" onclick="openFormulaLab()">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    Open Formula Lab
+                </button>
+            </div>
+        </article>
+
+        <!-- Important Notes Card -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">⚠️</div>
+                <h2 class="card-title">Important Notes</h2>
+            </div>
+            <ul>
+                <li>This equation is valid only for <strong>constant acceleration</strong>.</li>
+                <li>If acceleration is zero ($a=0$), the equation reduces to $s = ut$ (uniform motion).</li>
+                <li>The term $\frac{1}{2}at^2$ represents the displacement contributed solely by the acceleration.</li>
+            </ul>
+        </article>
+
+        <!-- Summary Card -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">📌</div>
+                <h2 class="card-title">Summary</h2>
+            </div>
+            <p>
+                We derived the second equation of motion ($s = ut + \frac{1}{2}at^2$) by calculating the area under a velocity-time graph (a trapezium) and substituting the first equation of motion to eliminate the final velocity variable.
+            </p>
+        </article>
+
+        <footer>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+                &copy; 2023 Physics Interactive Textbook
+            </p>
+        </footer>
+    </div>
+
+    <!-- Modal: Explanation -->
+    <div class="modal-overlay" id="explanation-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModals()">&times;</button>
+            <h3 style="margin-bottom: 1rem; color: var(--primary);">Formula Breakdown</h3>
+            <div id="explanation-content">
+                <p>The formula <strong>s = ut + ½at²</strong> is essentially a sum of two parts:</p>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li style="margin-bottom: 0.8rem;">
+                        <strong>ut</strong>: The distance the object would have traveled if it continued at its initial velocity without any acceleration.
+                    </li>
+                    <li>
+                        <strong>½at²</strong>: The additional distance gained because the object was speeding up (accelerating) over time $t$.
+                    </li>
+                </ol>
+                <p style="margin-top: 1rem;">
+                    Think of it as: <em>"Total Distance = Distance due to initial speed + Distance due to speeding up."</em>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Formula Lab -->
+    <div class="modal-overlay" id="lab-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModals()">&times;</button>
+            <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Formula Lab</h3>
+            <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">Enter values to calculate displacement (s).</p>
+            
+            <div class="lab-input-group">
+                <label>Initial Velocity (u) [m/s]</label>
+                <input type="number" id="input-u" placeholder="e.g. 0" value="0">
+            </div>
+            
+            <div class="lab-input-group">
+                <label>Acceleration (a) [m/s²]</label>
+                <input type="number" id="input-a" placeholder="e.g. 9.8" value="9.8">
+            </div>
+            
+            <div class="lab-input-group">
+                <label>Time (t) [s]</label>
+                <input type="number" id="input-t" placeholder="e.g. 5" value="5">
+            </div>
+            
+            <button class="btn" style="width: 100%; justify-content: center;" onclick="calculateDisplacement()">Calculate Displacement</button>
+            
+            <div class="lab-result">
+                <span>Displacement (s)</span>
+                <span class="lab-result-value" id="result-s">0.00 m</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <script>
+        // ==========================================================
+        // FORMULA EXTRACTION SYSTEM
+        // ==========================================================
+        // As requested, we extract formula data into a structured object.
+        // This simulates parsing the markdown content.
+        
+        const formulaLibrary = [
+            {
+                id: "eq_motion_2",
+                latex: "s = ut + \\frac{1}{2}at^2",
+                title: "Second Equation of Motion",
+                variables: {
+                    s: "Displacement",
+                    u: "Initial Velocity",
+                    a: "Acceleration",
+                    t: "Time"
+                },
+                context: "Derived from the area under the velocity-time graph assuming constant acceleration.",
+                category: "Kinematics"
+            }
+        ];
+
+        // ==========================================================
+        // UI INTERACTION LOGIC
+        // ==========================================================
+
+        function openExplanation() {
+            const modal = document.getElementById('explanation-modal');
+            modal.classList.add('active');
+        }
+
+        function openFormulaLab() {
+            const modal = document.getElementById('lab-modal');
+            modal.classList.add('active');
+            // Auto-calculate on open with default values
+            calculateDisplacement();
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+        }
+
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModals();
+            }
+        }
+
+        // ==========================================================
+        // FORMULA LAB LOGIC
+        // ==========================================================
+
+        function calculateDisplacement() {
+            // Get inputs
+            const u = parseFloat(document.getElementById('input-u').value) || 0;
+            const a = parseFloat(document.getElementById('input-a').value) || 0;
+            const t = parseFloat(document.getElementById('input-t').value) || 0;
+
+            // Formula: s = ut + 0.5 * a * t^2
+            const s = (u * t) + (0.5 * a * Math.pow(t, 2));
+
+            // Display result
+            const resultElement = document.getElementById('result-s');
+            
+            // Animate number change slightly for effect
+            resultElement.style.opacity = 0;
+            setTimeout(() => {
+                resultElement.innerText = s.toFixed(2) + " m";
+                resultElement.style.opacity = 1;
+            }, 150);
+        }
+    </script>
+</body>
+</html>
+```

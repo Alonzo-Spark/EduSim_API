@@ -1,0 +1,143 @@
+┌─────────────────────────────────────┐  
+│               Introduction           │  
+│                                     │  
+│ This overlay is displayed each time   │  
+│ the **orbit_started** stable‑loop      │  
+│ trigger fires. It provides real‑time   │  
+│ feedback to the user, confirming that │  
+│ the orbit has begun and offering quick │  
+│ controls for monitoring and interaction│  
+│ with the running simulation.          │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│                Definition            │  
+│                                     │  
+│ **orbit_started** – a system event that│  
+│ signals the commencement of a          │  
+│ periodic orbital process. When the    │  
+│ event is emitted, the sandbox overlay │  
+│ becomes visible and stays until the    │  
+│ orbit ends or the user dismisses it.   │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│               Key Concepts           │  
+│                                     │  
+│ • **Stable Loop** – the orbit repeats │  
+│   without drift, guaranteeing consistent│  
+│   timing for the overlay.               │  
+│ • **Runtime Overlay** – a transient UI│  
+│   layer that floats above the main      │  
+│   application canvas.                   │  
+│ • **Event Payload** – data attached to │  
+│   the trigger (e.g., orbit ID, start    │  
+│   timestamp, orbital parameters).      │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│            Characteristics           │  
+│                                     │  
+│ - **Visibility**: Auto‑show on event,│  
+│   auto‑hide after 8 s or on manual     │  
+│   dismiss.                              │  
+│ - **Position**: Center‑top, offset 10px│  
+│   from the viewport edge.               │  
+│ - **Responsive**: Scales for mobile   │  
+│   and desktop screens.                 │  
+│ - **Accessibility**: ARIA live region │  
+│   announcing “Orbit started”.          │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│                Applications           │  
+│                                     │  
+│ • Debugging orbital simulations.      │  
+│ • User onboarding – confirms that     │  
+│   the system is ready.                │  
+│ • Real‑time telemetry dashboards.     │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│               Advantages              │  
+│                                     │  
+│ • Immediate visual cue, reducing      │  
+│   uncertainty.                        │  
+│ • No page reload required – pure       │  
+│   client‑side.                         │  
+│ • Customizable content via payload.   │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│               Disadvantages           │  
+│                                     │  
+│ • May occlude underlying UI if not     │  
+│   positioned carefully.               │  
+│ • Requires additional CSS/JS to manage│  
+│   lifecycle.                           │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│            Important Notes            │  
+│                                     │  
+│ • Ensure the overlay container has a   │  
+│   higher **z‑index** than all other    │  
+│   elements.                             │  
+│ • Debounce rapid successive triggers   │  
+│   to avoid overlay flicker.            │  
+│ • Provide a fallback for browsers that │  
+│   lack `requestAnimationFrame`.        │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│                 Summary                │  
+│                                     │  
+│ The **orbit_started** overlay is a     │  
+│ lightweight, accessible UI component   │  
+│ that appears automatically when the    │  
+│ orbit begins. It delivers essential     │  
+│ context (orbit ID, start time) and      │  
+│ offers a dismiss button. Its design     │  
+│ follows responsive and ARIA best‑       │  
+│ practices, making it suitable for both │  
+│ debugging and end‑user scenarios.       │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│            Suggested Questions         │  
+│                                     │  
+│ 1. How can the overlay be themed to match│  
+│    the host application?                 │  
+│ 2. What payload fields are most useful   │  
+│    for end‑users?                         │  
+│ 3. How would you throttle the overlay     │  
+│    if the orbit can restart frequently?   │  
+│ 4. Which accessibility tests should be   │  
+│    performed on the live region?         │  
+└─────────────────────────────────────┘  
+
+
+
+┌─────────────────────────────────────┐  
+│               Overlay Layout          │  
+│                                     │  
+│ ┌───────────────────────────────────┐ │  
+│ │   🚀  Orbit Started!               │ │  
+│ │   ID: <orbit_id>                   │ │  
+│ │   Started at: <timestamp>          │ │  
+│ │   Period: <period> s                │ │  
+│ │                                     │ │  
+│ │   [ Details ]   [ Dismiss ]          │ │  
+│ └───────────────────────────────────┘ │  
+│                                     │  
+│ **Responsive Table of Payload**      │  
+│                                     │  
+│ ┌─────────────┬──────────────────────┐ │  
+│ │ Field       │ Description          │ │  
+│ ├─────────────┼──────────────────────┤ │  
+│ │ orbit_id    │ Unique identifier    │ │  
+│ │ timestamp   │ ISO‑8601 start time  │ │  
+│ │ period      │ Orbital period (s)   │ │  
+│ │ altitude    │ Current altitude (km)│ │  
+│ └─────────────┴──────────────────────┘ │  
+└─────────────────────────────────────┘  

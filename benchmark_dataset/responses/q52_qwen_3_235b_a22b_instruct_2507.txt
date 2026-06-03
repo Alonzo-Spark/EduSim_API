@@ -1,0 +1,113 @@
+```json
+{
+  "type": "InteractiveLesson",
+  "title": "Live Sandbox: Visual Effect of Air Resistance on Projectile Trajectory",
+  "sections": [
+    {
+      "type": "IntroductionCard",
+      "title": "Introduction",
+      "content": "When analyzing projectile motion, we often start with idealized conditions — no air resistance, constant gravity, and a flat Earth approximation. But in real-world scenarios, air resistance plays a significant role in altering the path of a projectile. This sandbox explores how adding air resistance changes the visual trajectory compared to ideal motion."
+    },
+    {
+      "type": "KeyConceptsCard",
+      "title": "Key Concepts",
+      "concepts": [
+        "Ideal projectile motion (no air resistance)",
+        "Real-world projectile motion (with air resistance)",
+        "Drag force and its dependence on velocity",
+        "Non-symmetric trajectory",
+        "Reduced range and maximum height"
+      ]
+    },
+    {
+      "type": "VisualComparisonCard",
+      "title": "Side-by-Side Trajectory Comparison",
+      "description": "Imagine two identical projectiles launched at the same angle and speed:",
+      "leftSide": {
+        "label": "Without Air Resistance",
+        "trajectory": "Perfect parabola",
+        "range": "Maximum possible",
+        "height": "Higher apex",
+        "symmetry": "Symmetric path"
+      },
+      "rightSide": {
+        "label": "With Air Resistance",
+        "trajectory": "Shortened, lopsided curve",
+        "range": "Reduced by 30–50% depending on speed",
+        "height": "Lower peak",
+        "symmetry": "Asymmetric: steeper descent"
+      },
+      "visualHint": "The trajectory with air resistance falls more sharply and doesn't mirror its ascent."
+    },
+    {
+      "type": "FormulaCard",
+      "title": "Drag Force Approximation",
+      "formula": "F_d = \\frac{1}{2} C_d \\rho A v^2",
+      "variables": [
+        { "symbol": "F_d", "description": "Drag force (opposes motion)" },
+        { "symbol": "C_d", "description": "Drag coefficient (shape-dependent)" },
+        { "symbol": "ρ", "description": "Air density (~1.2 kg/m³ at sea level)" },
+        { "symbol": "A", "description": "Cross-sectional area" },
+        { "symbol": "v", "description": "Speed of the object" }
+      ],
+      "footnote": "Force increases with the square of velocity — most significant at high speeds."
+    },
+    {
+      "type": "CharacteristicsCard",
+      "title": "How Air Resistance Alters the Path",
+      "characteristics": [
+        {
+          "title": "Shorter Range",
+          "description": "The projectile slows down faster horizontally, landing closer than predicted by ideal equations."
+        },
+        {
+          "title": "Lower Apex",
+          "description": "Vertical speed decreases more rapidly, reducing maximum height."
+        },
+        {
+          "title": "Asymmetric Trajectory",
+          "description": "The descent is steeper than the ascent — the curve is no longer a perfect parabola."
+        },
+        {
+          "title": "Terminal Behavior",
+          "description": "At high velocities, drag quickly limits speed; for long falls, objects approach terminal velocity."
+        }
+      ]
+    },
+    {
+      "type": "SimulationPromptCard",
+      "title": "Try It Yourself",
+      "prompt": "In a physics simulator (like PhET or Algodoo), launch a ball with and without air resistance. Observe:",
+      "tasks": [
+        "Compare landing points",
+        "Trace the shape difference",
+        "Note when drag has the greatest effect (hint: high speed, large surface area)"
+      ]
+    },
+    {
+      "type": "ImportantNotesCard",
+      "title": "Important Notes",
+      "notes": [
+        "Air resistance is negligible for slow, dense objects (e.g., a cannonball at low speed).",
+        "It becomes dominant for light, fast, or large objects (e.g., a feather, baseball, or arrow).",
+        "The drag model used here is quadratic — appropriate for most real-world speeds."
+      ]
+    },
+    {
+      "type": "SummaryCard",
+      "title": "Summary",
+      "summary": "Adding air resistance shortens the projectile's range, lowers its peak, and distorts the trajectory from a symmetric parabola into a lopsided curve. This reflects real-world behavior more accurately than idealized models."
+    },
+    {
+      "type": "SuggestedQuestionsCard",
+      "title": "Suggested Questions for Deeper Learning",
+      "questions": [
+        "Why is the trajectory with air resistance asymmetric?",
+        "How would a headwind or tailwind further affect the path?",
+        "What happens to the optimal launch angle for maximum range when air resistance is included?",
+        "How does the size of the projectile affect its path in air?"
+      ]
+    }
+  ]
+}
+```

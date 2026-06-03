@@ -1,0 +1,547 @@
+Here is the complete, self-contained HTML file. It implements the "Interactive Textbook" design system, utilizing structured UI cards, a dedicated Formula Card system with KaTeX, and a functional "Formula Lab" for experimentation.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Module: Ohm's Law</title>
+    
+    <!-- KaTeX CSS for rendering mathematics -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #10b981;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --font-sans: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-serif: 'Georgia', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 4rem;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 2.25rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Generic Card System */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            border-radius: 6px;
+            margin-right: 0.75rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .formula-display {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            margin: 1.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .formula-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        /* Explanation Section (Hidden by default) */
+        .explanation-box {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #f0f9ff;
+            border-radius: var(--radius-md);
+            color: #334155;
+            font-size: 0.95rem;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .explanation-box.active {
+            display: block;
+        }
+
+        /* Table Styling inside Cards */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .data-table th, .data-table td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+            width: 40%;
+        }
+
+        /* Interactive Lab Section */
+        .lab-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 600px) {
+            .lab-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background .15s ease-in-out;
+        }
+
+        .lab-visual {
+            background: #1e293b;
+            color: white;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .lab-result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success-color);
+            font-family: var(--font-serif);
+        }
+
+        .lab-result-label {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Ohm's Law Calculation</h1>
+            <div class="subtitle">Module 2.1: Voltage, Current, and Resistance</div>
+        </header>
+
+        <!-- Introduction Card -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">1</div>
+                <h2 class="card-title">Problem Statement</h2>
+            </div>
+            <p>
+                We are presented with a simple resistive circuit. A specific amount of electric charge flows through a component that opposes the flow. Our goal is to determine the potential difference (voltage) across this component.
+            </p>
+        </article>
+
+        <!-- Data Card -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">📋</div>
+                <h2 class="card-title">Given Data</h2>
+            </div>
+            <table class="data-table">
+                <tbody>
+                    <tr>
+                        <th>Current ($I$)</th>
+                        <td>2 Amperes (2 A)</td>
+                    </tr>
+                    <tr>
+                        <th>Resistance ($R$)</th>
+                        <td>10 Ohms (10 Ω)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+
+        <!-- Formula Card System -->
+        <article class="card formula-card" id="formula-section">
+            <div class="card-header">
+                <div class="card-icon">∑</div>
+                <h2 class="card-title">Main Formula</h2>
+            </div>
+            
+            <div class="formula-display" id="main-formula-display">
+                <!-- KaTeX renders here -->
+            </div>
+
+            <div class="formula-actions">
+                <button class="btn btn-outline" onclick="toggleExplanation()">
+                    <span style="margin-right: 8px;">💡</span> Explain Formula
+                </button>
+                <button class="btn btn-primary" onclick="scrollToLab()">
+                    <span style="margin-right: 8px;">🧪</span> Open Formula Lab
+                </button>
+            </div>
+
+            <!-- Hidden Explanation -->
+            <div class="explanation-box" id="formula-explanation">
+                <strong>Ohm's Law</strong> states that the voltage across a conductor is directly proportional to the current flowing through it, provided all physical conditions and temperature remain constant.
+                <br><br>
+                <ul>
+                    <li><strong>V</strong> = Voltage (Volts)</li>
+                    <li><strong>I</strong> = Current (Amperes)</li>
+                    <li><strong>R</strong> = Resistance (Ohms)</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Calculation Card -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">✏️</div>
+                <h2 class="card-title">Step-by-Step Calculation</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div>
+                    1. Write down the formula:<br>
+                    <span id="calc-step-1"></span>
+                </div>
+                <div>
+                    2. Substitute the given values:<br>
+                    <span id="calc-step-2"></span>
+                </div>
+                <div>
+                    3. Calculate the result:<br>
+                    <span id="calc-step-3"></span>
+                </div>
+            </div>
+        </article>
+
+        <!-- Result Card -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">✓</div>
+                <h2 class="card-title">Final Result</h2>
+            </div>
+            <p style="font-size: 1.1rem;">
+                The voltage across the resistor is <strong>20 Volts</strong>.
+            </p>
+        </article>
+
+        <!-- Formula Lab -->
+        <article class="card" id="lab-section">
+            <div class="card-header">
+                <div class="card-icon">🧪</div>
+                <h2 class="card-title">Formula Lab</h2>
+            </div>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                Experiment with the variables below to see how Voltage changes in real-time.
+            </p>
+
+            <div class="lab-container">
+                <!-- Controls -->
+                <div class="lab-controls">
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>Current ($I$)</span>
+                            <span id="label-current">2 A</span>
+                        </div>
+                        <input type="range" min="0.1" max="10" step="0.1" value="2" class="slider" id="input-current">
+                    </div>
+
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>Resistance ($R$)</span>
+                            <span id="label-resistance">10 Ω</span>
+                        </div>
+                        <input type="range" min="1" max="100" step="1" value="10" class="slider" id="input-resistance">
+                    </div>
+                    
+                    <div style="font-size: 0.85rem; color: var(--text-muted); background: #f1f5f9; padding: 0.75rem; border-radius: 6px;">
+                        Live Equation:<br>
+                        <span id="live-equation"></span>
+                    </div>
+                </div>
+
+                <!-- Visual Output -->
+                <div class="lab-visual">
+                    <div class="lab-result-label">Calculated Voltage</div>
+                    <div class="lab-result-value"><span id="output-voltage">20</span> <span style="font-size: 1rem; color: #94a3b8;">V</span></div>
+                </div>
+            </div>
+        </article>
+
+        <footer>
+            Interactive Physics Textbook &copy; 2023
+        </footer>
+    </div>
+
+    <!-- KaTeX JS Library -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+    <script>
+        // Define the content logic
+        const physicsData = {
+            formula: "V = I \\cdot R",
+            originalI: 2,
+            originalR: 10,
+            originalV: 20
+        };
+
+        // Initialize the page once KaTeX is loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            // Small delay to ensure KaTeX script is parsed if not deferred correctly, 
+            // though defer usually handles it.
+            setTimeout(renderMath, 100);
+            setupLab();
+        });
+
+        function renderMath() {
+            if (typeof katex === "undefined") {
+                console.error("KaTeX not loaded");
+                return;
+            }
+
+            // 1. Render Main Formula Card
+            katex.render(physicsData.formula, document.getElementById('main-formula-display'), {
+                throwOnError: false,
+                displayMode: true
+            });
+
+            // 2. Render Calculation Steps
+            katex.render("V = I \\cdot R", document.getElementById('calc-step-1'), { throwOnError: false });
+            katex.render("V = 2 \\, \\text{A} \\cdot 10 \\, \\Omega", document.getElementById('calc-step-2'), { throwOnError: false });
+            katex.render("V = 20 \\, \\text{V}", document.getElementById('calc-step-3'), { throwOnError: false });
+            
+            // 3. Render Lab Equation
+            updateLabEquation();
+        }
+
+        // Interaction: Toggle Explanation
+        function toggleExplanation() {
+            const box = document.getElementById('formula-explanation');
+            box.classList.toggle('active');
+        }
+
+        // Interaction: Scroll to Lab
+        function scrollToLab() {
+            const lab = document.getElementById('lab-section');
+            lab.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Visual feedback on the lab card
+            lab.style.borderColor = 'var(--primary-color)';
+            setTimeout(() => {
+                lab.style.borderColor = 'var(--border-color)';
+            }, 1000);
+        }
+
+        // Formula Lab Logic
+        function setupLab() {
+            const inputI = document.getElementById('input-current');
+            const inputR = document.getElementById('input-resistance');
+            const labelI = document.getElementById('label-current');
+            const labelR = document.getElementById('label-resistance');
+            const outputV = document.getElementById('output-voltage');
+
+            function updateLab() {
+                const I = parseFloat(inputI.value);
+                const R = parseFloat(inputR.value);
+                const V = I * R;
+
+                // Update Labels
+                labelI.textContent = `${I} A`;
+                labelR.textContent = `${R} Ω`;
+                
+                // Update Result
+                outputV.textContent = V.toFixed(2);
+
+                // Update Live Equation
+                updateLabEquation(I, R);
+            }
+
+            inputI.addEventListener('input', updateLab);
+            inputR.addEventListener('input', updateLab);
+            
+            // Initial call
+            updateLab();
+        }
+
+        function updateLabEquation(I, R) {
+            // If arguments not provided, use current input values
+            if (I === undefined) I = document.getElementById('input-current').value;
+            if (R === undefined) R = document.getElementById('input-resistance').value;
+
+            const V = (I * R).toFixed(2);
+            const texString = `V = ${I} \\times ${R} = ${V}`;
+            
+            katex.render(texString, document.getElementById('live-equation'), { throwOnError: false });
+        }
+    </script>
+</body>
+</html>
+```

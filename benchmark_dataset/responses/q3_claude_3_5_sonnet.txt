@@ -1,0 +1,209 @@
+<thinking>
+The user wants me to explain the difference between distance and displacement. I need to render this as structured UI blocks like an interactive textbook, not like ChatGPT markdown notes. Let me think about how to present this with proper section cards, formula cards, and tables.
+
+Let me structure the content:
+
+1. Quick Definition (card for distance, card for displacement)
+2. Key Differences
+3. Formula Cards
+4. Examples
+5. Visual analogy
+6. Table comparison
+7. Important Notes
+8. Summary
+
+I need to use proper React/JSX components or HTML-styled cards. Since I'm in a chat interface, I'll use a combination of HTML and structured content to make it look like an interactive textbook.
+
+Wait, I need to think about what rendering capabilities are available. The user mentioned KaTeX rendering is working and table styling is working. They want structured UI blocks. Let me use HTML with inline styles to create card-like components.
+
+Let me create a rich, structured response using HTML cards.
+</thinking>
+
+<div style="font-family: 'Segoe UI', sans-serif; max-width: 860px; margin: 0 auto; padding: 8px;">
+
+<!-- TOPIC HEADER -->
+<div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 16px; padding: 32px; margin-bottom: 20px; color: white;">
+  <div style="font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #a78bfa; margin-bottom: 8px;">Chapter · Kinematics</div>
+  <div style="font-size: 28px; font-weight: 800; margin-bottom: 10px;">Distance vs Displacement</div>
+  <div style="font-size: 14px; color: #cbd5e1; line-height: 1.6;">Two fundamental ways to measure motion — one ignores direction, one doesn't.</div>
+</div>
+
+<!-- DEFINITION ROW -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+
+  <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 14px; padding: 24px;">
+    <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #16a34a; text-transform: uppercase; margin-bottom: 10px;">📏 Distance</div>
+    <div style="font-size: 15px; font-weight: 700; color: #14532d; margin-bottom: 10px;">Total path length travelled</div>
+    <div style="font-size: 13px; color: #166534; line-height: 1.7;">The <strong>actual length</strong> of the path covered by an object, regardless of direction. It only has magnitude.</div>
+    <div style="margin-top: 14px; background: #dcfce7; border-radius: 8px; padding: 10px 14px;">
+      <span style="font-size: 12px; font-weight: 700; color: #15803d;">Type →</span>
+      <span style="font-size: 12px; color: #166534; margin-left: 6px;">Scalar Quantity</span>
+    </div>
+  </div>
+
+  <div style="background: #eff6ff; border: 1.5px solid #93c5fd; border-radius: 14px; padding: 24px;">
+    <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #2563eb; text-transform: uppercase; margin-bottom: 10px;">🧭 Displacement</div>
+    <div style="font-size: 15px; font-weight: 700; color: #1e3a8a; margin-bottom: 10px;">Shortest path from start to end</div>
+    <div style="font-size: 13px; color: #1e40af; line-height: 1.7;">The <strong>straight-line distance</strong> between the initial and final positions, along with direction.</div>
+    <div style="margin-top: 14px; background: #dbeafe; border-radius: 8px; padding: 10px 14px;">
+      <span style="font-size: 12px; font-weight: 700; color: #1d4ed8;">Type →</span>
+      <span style="font-size: 12px; color: #1e40af; margin-left: 6px;">Vector Quantity</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- FORMULA CARDS -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+
+  <div style="background: #fafafa; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 24px;">
+    <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #64748b; text-transform: uppercase; margin-bottom: 14px;">⚗️ Formula · Distance</div>
+    <div style="background: #f1f5f9; border-radius: 10px; padding: 18px; text-align: center; margin-bottom: 14px;">
+
+$$d = \sum \Delta s = s_1 + s_2 + s_3 + \cdots$$
+
+</div>
+    <div style="font-size: 12px; color: #64748b; line-height: 1.7;">
+      <strong>d</strong> = total distance &nbsp;|&nbsp; <strong>Δs</strong> = each path segment<br>
+      Distance is always <strong>positive</strong> and never zero (unless stationary).
+    </div>
+  </div>
+
+  <div style="background: #fafafa; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 24px;">
+    <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #64748b; text-transform: uppercase; margin-bottom: 14px;">⚗️ Formula · Displacement</div>
+    <div style="background: #f1f5f9; border-radius: 10px; padding: 18px; text-align: center; margin-bottom: 14px;">
+
+$$\vec{s} = \vec{x_f} - \vec{x_i}$$
+
+</div>
+    <div style="font-size: 12px; color: #64748b; line-height: 1.7;">
+      <strong>x<sub>f</sub></strong> = final position &nbsp;|&nbsp; <strong>x<sub>i</sub></strong> = initial position<br>
+      Displacement can be <strong>zero, positive, or negative</strong>.
+    </div>
+  </div>
+
+</div>
+
+<!-- VISUAL EXAMPLE -->
+<div style="background: #fffbeb; border: 1.5px solid #fcd34d; border-radius: 14px; padding: 28px; margin-bottom: 20px;">
+  <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #d97706; text-transform: uppercase; margin-bottom: 16px;">🚶 Example 1 · Walking in a Park</div>
+  
+  <div style="background: white; border-radius: 10px; padding: 20px; margin-bottom: 16px; border: 1px solid #fde68a;">
+    <div style="font-size: 13px; color: #92400e; line-height: 1.8;">
+      Riya walks <strong>4 m East</strong>, then <strong>3 m North</strong>.
+    </div>
+    <!-- Simple path diagram using text -->
+    <div style="font-family: monospace; font-size: 13px; color: #78350f; background: #fef3c7; border-radius: 8px; padding: 16px; margin-top: 12px; line-height: 2;">
+      <div>N ↑</div>
+      <div>&nbsp;&nbsp;&nbsp;B ←←←←← (3 m North)</div>
+      <div>&nbsp;&nbsp;&nbsp;↑</div>
+      <div>&nbsp;&nbsp;&nbsp;↑ 3m</div>
+      <div>&nbsp;&nbsp;&nbsp;↑</div>
+      <div>&nbsp;&nbsp;&nbsp;A ——————→ (4 m East)</div>
+      <div>&nbsp;&nbsp;&nbsp;Start</div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+    <div style="background: #dcfce7; border-radius: 10px; padding: 16px;">
+      <div style="font-size: 11px; font-weight: 800; color: #15803d; margin-bottom: 8px;">📏 DISTANCE</div>
+      <div style="font-size: 13px; color: #14532d;">Path taken = 4 m + 3 m</div>
+
+$$d = 7 \text{ m}$$
+
+</div>
+    <div style="background: #dbeafe; border-radius: 10px; padding: 16px;">
+      <div style="font-size: 11px; font-weight: 800; color: #1d4ed8; margin-bottom: 8px;">🧭 DISPLACEMENT</div>
+      <div style="font-size: 13px; color: #1e3a8a;">Straight line A → B</div>
+
+$$|\vec{s}| = \sqrt{4^2 + 3^2} = 5 \text{ m (NE)}$$
+
+</div>
+  </div>
+</div>
+
+<!-- EXAMPLE 2: ROUND TRIP -->
+<div style="background: #fdf4ff; border: 1.5px solid #d8b4fe; border-radius: 14px; padding: 28px; margin-bottom: 20px;">
+  <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #7c3aed; text-transform: uppercase; margin-bottom: 16px;">🔄 Example 2 · Round Trip</div>
+
+  <div style="font-size: 13px; color: #4c1d95; line-height: 1.8; margin-bottom: 16px;">
+    Arjun runs <strong>100 m East</strong> from his house to a shop, then returns <strong>100 m West</strong> back home.
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+    <div style="background: #f0fdf4; border-radius: 10px; padding: 16px; border: 1px solid #86efac;">
+      <div style="font-size: 11px; font-weight: 800; color: #15803d; margin-bottom: 8px;">📏 DISTANCE</div>
+      <div style="font-size: 13px; color: #14532d; line-height: 1.7;">He covered 100 m going + 100 m returning</div>
+
+$$d = 100 + 100 = 200 \text{ m}$$
+
+</div>
+    <div style="background: #eff6ff; border-radius: 10px; padding: 16px; border: 1px solid #93c5fd;">
+      <div style="font-size: 11px; font-weight: 800; color: #1d4ed8; margin-bottom: 8px;">🧭 DISPLACEMENT</div>
+      <div style="font-size: 13px; color: #1e3a8a; line-height: 1.7;">Start and end at same point</div>
+
+$$\vec{s} = x_f - x_i = 0 - 0 = 0 \text{ m}$$
+
+</div>
+  </div>
+
+  <div style="background: #7c3aed; border-radius: 10px; padding: 14px 18px; margin-top: 16px;">
+    <div style="font-size: 13px; color: white; line-height: 1.7;">
+      💡 <strong>Key Insight:</strong> Displacement can be <strong>zero</strong> even when distance is large. This happens whenever an object returns to its starting point.
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div style="background: white; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 24px; margin-bottom: 20px; overflow-x: auto;">
+  <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #64748b; text-transform: uppercase; margin-bottom: 16px;">📊 Side-by-Side Comparison</div>
+
+| Property | Distance | Displacement |
+|---|---|---|
+| **Definition** | Total path length | Shortest path from start to end |
+| **Type** | Scalar | Vector |
+| **Direction** | ✗ Not considered | ✓ Must be specified |
+| **Value** | Always positive (≥ 0) | Can be +, −, or 0 |
+| **Symbol** | $d$ | $\vec{s}$ or $\Delta x$ |
+| **SI Unit** | metre (m) | metre (m) |
+| **Depends on path?** | ✓ Yes | ✗ No — only on endpoints |
+| **Can it be zero?** | Only if no movement | Yes, even with movement |
+
+</div>
+
+<!-- IMPORTANT NOTES -->
+<div style="background: #fff1f2; border: 1.5px solid #fda4af; border-radius: 14px; padding: 24px; margin-bottom: 20px;">
+  <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #be123c; text-transform: uppercase; margin-bottom: 16px;">⚠️ Important Rules</div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; align-items: flex-start; gap: 12px; background: white; border-radius: 10px; padding: 14px 16px;">
+      <div style="font-size: 18px;">📌</div>
+      <div style="font-size: 13px; color: #881337; line-height: 1.7;"><strong>Distance ≥ |Displacement|</strong> — The magnitude of displacement is always less than or equal to distance. They are equal only when motion is in a straight line without reversal.</div>
+    </div>
+    <div style="display: flex; align-items: flex-start; gap: 12px; background: white; border-radius: 10px; padding: 14px 16px;">
+      <div style="font-size: 18px;">📌</div>
+      <div style="font-size: 13px; color: #881337; line-height: 1.7;"><strong>Distance is never negative</strong> — Since it measures path length, it is always ≥ 0. Displacement, however, can be negative depending on the chosen reference direction.</div>
+    </div>
+    <div style="display: flex; align-items: flex-start; gap: 12px; background: white; border-radius: 10px; padding: 14px 16px;">
+      <div style="font-size: 18px;">📌</div>
+      <div style="font-size: 13px; color: #881337; line-height: 1.7;"><strong>Units are the same</strong> — Both are measured in metres (m), but displacement always requires a direction (e.g., 5 m North-East).</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY CARD -->
+<div style="background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 14px; padding: 28px; color: white;">
+  <div style="font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #94a3b8; text-transform: uppercase; margin-bottom: 16px;">✅ Chapter Summary</div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div>
+      <div style="font-size: 12px; color: #86efac; font-weight: 700; margin-bottom: 8px;">Distance tells you…</div>
+      <div style="font-size: 13px; color: #cbd5e1; line-height: 1.8;">How much ground was covered in total. Like the odometer in a car.</div>
+    </div>
+    <div>
+      <div style="font-size: 12px; color: #93c5fd; font-weight: 700; margin-bottom: 8px;">Displacement tells you…</div>
+      <div style="font-size: 13px; color: #cbd5e1; line-height: 1.8;">How far and in what direction you are from where you started. Like a GPS coordinate change.</div>
+    </div>
+  </div>
+</div>
+
+</div>

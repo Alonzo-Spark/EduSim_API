@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 2,
+  "question": "A car starts from rest and accelerates uniformly at 2m/s. Find its velocity after 10 seconds.",
+  "gold_answer": "```python\nu = 0\na = 2\nt = 10\nv = u + a * t\nprint(f\"v = {v}\")\n\n\n\n```\n\n```text\nv = 20\n\n\n```\n\n# Solved Numerical\n\n---\n\n## Kinematics Problem\n\n### Problem\n\nA car starts from rest and accelerates uniformly at $2 \\text{ m/s}^2$. Find its velocity after 10 seconds.\n\n### Given\n\n* Initial velocity ($u$) = $0 \\text{ m/s}$\n* Uniform acceleration ($a$) = $2 \\text{ m/s}^2$\n* Time taken ($t$) = $10 \\text{ s}$\n\n### Formula\n\n$$v = u + at$$\n\n### Substitution\n\n$$v = 0 + (2 \\times 10)$$\n\n### Calculation\n\n$$v = 0 + 20$$\n\n$$v = 20$$\n\n### Final Answer\n\n**Final Velocity ($v$) = $20 \\text{ m/s}$**\n\n### Interpretation\n\nThis means that after starting from a complete standstill and accelerating steadily at a rate of $2 \\text{ m/s}^2$ for $10 \\text{ seconds}$, the car reaches a speed of $20 \\text{ meters per second}$ in its direction of motion.",
+  "candidate_response": "<failed>",
+  "judge_model": "N/A",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Model generation failed: OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "candidate_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "candidate_latency_ms": 110,
+  "candidate_cost_usd": 0,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 0,
+  "judge_cost_usd": 0,
+  "retry_count": 2,
+  "success": false,
+  "error": "OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "timestamp": "2026-06-01T06:55:10.396Z"
+}

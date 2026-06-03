@@ -1,0 +1,670 @@
+Here is the interactive textbook page for **Kinetic Energy**. It is designed as a single, self-contained HTML file featuring structured cards, a dedicated Formula Card with a functional "Formula Lab," and responsive styling.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinetic Energy | Interactive Physics</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Grid System */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
+
+        .card-icon {
+            background: #eff6ff;
+            color: var(--primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card-content {
+            font-size: 1rem;
+            color: #374151;
+        }
+
+        /* Typography & Elements inside Cards */
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-top: 4px solid var(--primary);
+        }
+
+        .formula-display {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 16px 0;
+            font-size: 1.5rem;
+            border: 1px dashed var(--border);
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 10px 16px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: #eff6ff;
+        }
+
+        .explanation-box {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #ecfdf5;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+            display: none; /* Hidden by default */
+            font-size: 0.95rem;
+        }
+
+        .explanation-box.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        tr:hover {
+            background-color: #f9fafb;
+        }
+
+        /* Formula Lab Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .lab-modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            flex: 0;
+            padding: 0;
+        }
+
+        .lab-controls {
+            margin: 20px 0;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            transition: background .15s ease-in-out;
+        }
+
+        .lab-result {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .result-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .visual-bar-container {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .visual-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .formula-actions { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Kinetic Energy</h1>
+            <p class="subtitle">Physics • Classical Mechanics • Work & Energy</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- Introduction Section -->
+        <div class="grid">
+            
+            <!-- Definition Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📖</div>
+                    <div class="card-title">Quick Definition</div>
+                </div>
+                <div class="card-content">
+                    <p><strong>Kinetic Energy (KE)</strong> is the energy possessed by an object due to its motion. It is the work needed to accelerate a body of a given mass from rest to its stated velocity.</p>
+                    <br>
+                    <p>Anything that is moving has kinetic energy. The faster the object moves, the more kinetic energy it possesses.</p>
+                </div>
+            </div>
+
+            <!-- Characteristics Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚡</div>
+                    <div class="card-title">Characteristics</div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><strong>Scalar Quantity:</strong> It has magnitude but no direction.</li>
+                        <li><strong>Dependence:</strong> Depends on mass ($m$) and velocity ($v$).</li>
+                        <li><strong>Translational:</strong> Energy due to linear motion of the center of mass.</li>
+                        <li><strong>Always Positive:</strong> $KE \geq 0$ because mass and squared velocity are always positive.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Formula Card -->
+            <div class="card formula-card full-width" id="main-formula-card">
+                <div class="card-header">
+                    <div class="card-icon">∑</div>
+                    <div class="card-title">Main Formula</div>
+                </div>
+                <div class="card-content">
+                    <p>The translational kinetic energy of an object of mass $m$ moving at speed $v$ is given by:</p>
+                    
+                    <div class="formula-display">
+                        $$ KE = \frac{1}{2}mv^2 $$
+                    </div>
+
+                    <div id="formula-explanation" class="explanation-box">
+                        <strong>Explanation:</strong><br>
+                        The energy is directly proportional to the mass ($m$). If you double the mass, you double the energy. However, it is proportional to the square of the velocity ($v^2$). If you double the speed, the energy increases by four times ($2^2 = 4$).
+                    </div>
+
+                    <div class="formula-actions">
+                        <button class="btn-outline" onclick="toggleExplanation()">Explain Formula</button>
+                        <button class="btn-primary" onclick="openFormulaLab()">Open Formula Lab 🧪</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Derivation Card -->
+            <div class="card full-width">
+                <div class="card-header">
+                    <div class="card-icon">📐</div>
+                    <div class="card-title">Derivation</div>
+                </div>
+                <div class="card-content">
+                    <p>We can derive the formula using the <strong>Work-Energy Theorem</strong>, which states that the net work done on an object equals its change in kinetic energy.</p>
+                    
+                    <h3>Step 1: Work Done</h3>
+                    <p>Consider an object of mass $m$ accelerating from rest to velocity $v$ under constant force $F$ over displacement $s$.</p>
+                    $$ W = F \cdot s $$
+
+                    <h3>Step 2: Newton's Second Law</h3>
+                    <p>Substitute $F = ma$ into the work equation:</p>
+                    $$ W = (ma) \cdot s $$
+
+                    <h3>Step 3: Kinematics</h3>
+                    <p>Use the third equation of motion ($v^2 = u^2 + 2as$). Since the object starts from rest, initial velocity $u = 0$:</p>
+                    $$ v^2 = 2as \implies s = \frac{v^2}{2a} $$
+
+                    <h3>Step 4: Substitution</h3>
+                    <p>Substitute $s$ back into the work equation:</p>
+                    $$ W = ma \cdot \left( \frac{v^2}{2a} \right) $$
+                    
+                    <p>The mass $m$ cancels out partially, and acceleration $a$ cancels out completely:</p>
+                    $$ W = \frac{1}{2}mv^2 $$
+
+                    <p>Since this work done equals the change in kinetic energy (from 0 to KE), we conclude:</p>
+                    $$ KE = \frac{1}{2}mv^2 $$
+                </div>
+            </div>
+
+            <!-- Variables Table Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔤</div>
+                    <div class="card-title">Variables</div>
+                </div>
+                <div class="card-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Quantity</th>
+                                    <th>SI Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>$KE$</td>
+                                    <td>Kinetic Energy</td>
+                                    <td>Joule (J)</td>
+                                </tr>
+                                <tr>
+                                    <td>$m$</td>
+                                    <td>Mass</td>
+                                    <td>Kilogram (kg)</td>
+                                </tr>
+                                <tr>
+                                    <td>$v$</td>
+                                    <td>Velocity</td>
+                                    <td>m/s</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🚀</div>
+                    <div class="card-title">Applications</div>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li><strong>Hydroelectric Power:</strong> Converting the KE of flowing water into electricity.</li>
+                        <li><strong>Automobile Safety:</strong> Crumple zones work to increase the distance over which KE is dissipated, reducing force.</li>
+                        <li><strong>Pendulums:</strong> Continuous interchange between Potential Energy and Kinetic Energy.</li>
+                        <li><strong>Rail Guns:</strong> Using electromagnetic force to accelerate projectiles to high KE.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="lab-modal">
+        <div class="lab-modal">
+            <button class="close-modal" onclick="closeFormulaLab()">&times;</button>
+            <h2 style="margin-bottom: 5px;">Formula Lab</h2>
+            <p style="color: var(--text-muted); margin-bottom: 20px;">Manipulate mass and velocity to observe changes in Kinetic Energy.</p>
+
+            <div class="lab-controls">
+                <!-- Mass Input -->
+                <div class="control-group">
+                    <label>
+                        <span>Mass ($m$)</span>
+                        <span id="label-m">10 kg</span>
+                    </label>
+                    <input type="range" id="input-m" min="1" max="100" value="10" step="1">
+                </div>
+
+                <!-- Velocity Input -->
+                <div class="control-group">
+                    <label>
+                        <span>Velocity ($v$)</span>
+                        <span id="label-v">10 m/s</span>
+                    </label>
+                    <input type="range" id="input-v" min="0" max="50" value="10" step="1">
+                </div>
+            </div>
+
+            <div class="lab-result">
+                <div class="result-label">Kinetic Energy</div>
+                <div class="result-value"><span id="result-ke">500</span> J</div>
+                
+                <!-- Dynamic Math Display -->
+                <div style="margin-top: 15px; font-size: 1.1rem;">
+                    $$ KE = \frac{1}{2} (<span id="math-m">10</span>)(<span id="math-v">10</span>)^2 $$
+                </div>
+
+                <div class="visual-bar-container">
+                    <div class="visual-bar" id="energy-bar"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #9ca3af; margin-top: 5px;">
+                    <span>0 J</span>
+                    <span>125,000 J (Max)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ]
+        });">
+    </script>
+
+    <!-- Interactive Logic -->
+    <script>
+        // Formula Extraction Logic (Simulated based on DOM content)
+        // In a dynamic app, this would parse the markdown. Here we define the structure.
+        const formulaData = {
+            latex: "KE = \\frac{1}{2}mv^2",
+            variables: {
+                m: { name: "Mass", unit: "kg", min: 1, max: 100, default: 10 },
+                v: { name: "Velocity", unit: "m/s", min: 0, max: 50, default: 10 }
+            }
+        };
+
+        // UI Interaction Logic
+        function toggleExplanation() {
+            const box = document.getElementById('formula-explanation');
+            box.classList.toggle('active');
+        }
+
+        // Formula Lab Logic
+        const modal = document.getElementById('lab-modal');
+        const inputM = document.getElementById('input-m');
+        const inputV = document.getElementById('input-v');
+        const labelM = document.getElementById('label-m');
+        const labelV = document.getElementById('label-v');
+        const resultKE = document.getElementById('result-ke');
+        const mathM = document.getElementById('math-m');
+        const mathV = document.getElementById('math-v');
+        const energyBar = document.getElementById('energy-bar');
+
+        // Max KE for bar visualization (100kg * 50^2 * 0.5)
+        const MAX_POSSIBLE_KE = 125000; 
+
+        function openFormulaLab() {
+            modal.classList.add('active');
+            calculateLab(); // Initial calculation
+        }
+
+        function closeFormulaLab() {
+            modal.classList.remove('active');
+        }
+
+        function calculateLab() {
+            const m = parseFloat(inputM.value);
+            const v = parseFloat(inputV.value);
+
+            // Update Labels
+            labelM.textContent = `${m} kg`;
+            labelV.textContent = `${v} m/s`;
+
+            // Update Math Text inside Modal
+            mathM.textContent = m;
+            mathV.textContent = v;
+
+            // Calculate KE
+            const ke = 0.5 * m * Math.pow(v, 2);
+
+            // Update Result Display
+            // Format with commas for readability
+            resultKE.textContent = ke.toLocaleString(undefined, { maximumFractionDigits: 1 });
+
+            // Update Visual Bar
+            const percentage = Math.min((ke / MAX_POSSIBLE_KE) * 100, 100);
+            energyBar.style.width = `${percentage}%`;
+            
+            // Change color based on intensity
+            if(percentage > 80) energyBar.style.backgroundColor = '#ef4444'; // Red
+            else if(percentage > 40) energyBar.style.backgroundColor = '#f59e0b'; // Orange
+            else energyBar.style.backgroundColor = '#2563eb'; // Blue
+        }
+
+        // Event Listeners for Sliders
+        inputM.addEventListener('input', calculateLab);
+        inputV.addEventListener('input', calculateLab);
+
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeFormulaLab();
+        });
+
+    </script>
+</body>
+</html>
+```

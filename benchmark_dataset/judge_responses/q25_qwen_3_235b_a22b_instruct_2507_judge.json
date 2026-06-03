@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 25,
+  "question": "Why do astronauts experience weightlessness in space?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWeightlessness is the sensation of having no weight, experienced when there is an absence of contact forces or support reactions acting on the body. \n\nIn orbit, this state is called microgravity, occurring because the spacecraft and its occupants are in a continuous state of free fall.\n\n---\n\n## The Free Fall Mechanism\n\n* **Continuous Trajectory Fall:** A spacecraft in orbit accelerates toward the Earth due to gravity, but its high forward speed matches the curve of the planet, causing it to fall around the Earth indefinitely.\n* **Zero Normal Force Interaction:** Because both the astronaut and the spacecraft fall together at the exact same rate, there is no floor pushing upward against the astronaut's feet, creating a sensation of weightlessness.\n\n---\n\n## Formula\n\nThe apparent weight relationship inside an accelerating capsule frame:\n\n$$N = m(g - a)$$\n\nWhen in a stable free-fall orbit, the downward acceleration matches gravity ($a = g$):\n\n$$N = m(g - g) = 0$$\n\nWhere:\n* $N$ represents the normal contact reaction force\n* $m$ represents the astronaut's mass\n* $g$ represents the local acceleration due to gravity\n* $a$ represents the centripetal orbital acceleration of the vehicle\n\n---\n\n## Summary\n\nAstronauts retain nearly all of their gravitational weight in low orbit, but they experience weightlessness because they are in a state of continuous free fall alongside their spacecraft, removing all upward contact forces.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Astronauts experience     │  \n│ weightlessness not because│  \n│ there's no gravity in     │  \n│ space, but because they   │  \n│ are in continuous free    │  \n│ fall around Earth.        │  \n└───────────────────────────┘  \n\n### Introduction  \nA common misconception is that astronauts float in space because there's \"no gravity.\" In reality, gravity is very much present—even in orbit. The International Space Station (ISS), for example, experiences about 90% of Earth’s surface gravity. So why do astronauts appear weightless?\n\nThe answer lies in the physics of motion and reference frames.\n\n---\n\n### Key Concept: Free Fall and Orbit  \n\nOrbiting is a state of perpetual free fall. The ISS and everything inside it are falling toward Earth due to gravity—but they’re also moving sideways so fast (about 7.66 km/s) that the Earth’s surface curves away at the same rate they fall.\n\nThis balance creates a continuous fall around the planet, resulting in the sensation of weightlessness.\n\n┌───────────────────────────┐\n│ Core Principle            │\n│                           │\n│ Weightlessness = Free Fall│\n│ (Not absence of gravity)  │\n└───────────────────────────┘\n\n---\n\n### Formula\n\n$$\na = \\frac{v^2}{r}\n$$\n\n┌───────────────────────────┐\n│ Centripetal Acceleration  │\n│                           │\n│     $$ a = \\frac{v^2}{r} $$     │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n- $a$: centripetal acceleration needed to stay in orbit  \n- $v$: orbital velocity (~7,660 m/s for ISS)  \n- $r$: distance from Earth's center (~6,771 km)\n\nWhen this acceleration equals gravitational acceleration ($g$), the net force felt inside the spacecraft is zero—leading to apparent weightlessness.\n\n---\n\n### Characteristics of Weightlessness  \n\n| Feature                  | Explanation |\n|--------------------------|-----------|\n| **Microgravity Environment** | Gravity is still present; the term \"microgravity\" reflects near-zero apparent weight. |\n| **Objects float together**  | All objects fall at the same rate, so astronauts, tools, and spacecraft move in sync. |\n| **No normal force**         | Weight is the force we exert on a surface (like the ground). In free fall, no surface pushes back—so we feel weightless. |\n\n---\n\n### Analogy: The Falling Elevator  \n\nImagine you're in an elevator when the cable snaps. As the elevator accelerates downward at $9.8\\ \\text{m/s}^2$, you would float inside it—just like astronauts.\n\nYou’re both falling at the same rate. No floor pushes up on your feet → no sensation of weight.\n\nThis is exactly what happens in orbit—except the spacecraft never hits the ground because of its horizontal speed.\n\n---\n\n### Important Notes  \n\n⚠️ **Gravity in Space? Yes!**  \n- Gravity keeps the Moon orbiting Earth and Earth orbiting the Sun.  \n- At the ISS's altitude, gravity is about 90% as strong as on Earth’s surface.\n\n⚠️ **Weight vs. Mass**  \n- **Mass** is the amount of matter (unchanged in space).  \n- **Weight** is the force of gravity *acting on* mass. In free fall, weight *appears* to be zero.\n\n---\n\n### Summary  \n\nAstronauts feel weightless because:\n\n1. They are in constant free fall toward Earth.  \n2. Their high horizontal speed keeps them missing the Earth.  \n3. Everything in the spacecraft falls together—no relative force creates the sensation of weight.\n\nIt’s not the absence of gravity—it’s the absence of resistance to gravity.\n\n---\n\n### Suggested Questions  \n\n1. If gravity exists in space, why don’t satellites crash into Earth?  \n2. How do astronauts train for weightlessness on Earth?  \n3. Can artificial gravity be created in space? How?  \n4. What happens to human physiology in long-term microgravity?\n\nLet me know which one you'd like to explore next.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly explains the concept of weightlessness in space, provides relevant formulas, and offers analogies for better understanding. The use of tables, clear headings, and concise explanations enhances readability and learning. Minor improvements could include more detailed explanations of the centripetal acceleration formula and its direct application to weightlessness, but overall, the response is excellent. It correctly addresses common misconceptions about gravity in space and distinguishes between mass and weight, providing a comprehensive overview of the topic.",
+  "candidate_token_usage": {
+    "promptTokens": 355,
+    "completionTokens": 897,
+    "totalTokens": 1252
+  },
+  "candidate_latency_ms": 9894,
+  "candidate_cost_usd": 0.002149,
+  "judge_token_usage": {
+    "promptTokens": 1596,
+    "completionTokens": 170,
+    "totalTokens": 1766
+  },
+  "judge_latency_ms": 4721,
+  "judge_cost_usd": 0.0013656,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:47:57.905Z"
+}

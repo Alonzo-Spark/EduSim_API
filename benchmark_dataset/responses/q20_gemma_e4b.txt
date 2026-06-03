@@ -1,0 +1,199 @@
+Okay, I understand. You want a significant overhaul of the AI Tutor's rendering to move away from a plain Markdown document and towards an interactive textbook experience. The key is structured UI blocks, section-based cards, dedicated formula cards, and proper table rendering.  I will implement these changes.
+
+Here's how I'll approach this, along with the code structure and considerations. I'll provide a Python-based example using a hypothetical rendering function and a simplified data structure to illustrate the logic.  (Note:  I'll need a rendering library like `markdown` and potentially a UI library like `streamlit` or `gradio` for a fully functional application).
+
+**Conceptual Structure:**
+
+1.  **Markdown Parsing:** Parse the input Markdown content.
+2.  **Section Detection:**  Identify sections (Introduction, Definition, etc.) using keywords.
+3.  **Formula Extraction:**  Extract all LaTeX formulas and associated metadata.
+4.  **Table Detection:** Identify Markdown tables.
+5.  **UI Block Generation:**  Convert the Markdown content into a sequence of UI blocks (cards).
+6.  **Rendering:**  Render the UI blocks into HTML (or use a UI library to create the interactive elements).
+
+**Data Structure for Content:**
+
+A dictionary-like structure will hold the parsed content. This will be instrumental in managing the different elements.
+
+```python
+class ContentBlock:
+    def __init__(self, type, content):
+        self.type = type  # e.g., "heading", "paragraph", "formula", "table", "section", "card"
+        self.content = content
+
+def parse_markdown_to_ui_blocks(markdown_text):
+    """
+    Parses Markdown text and converts it into a list of ContentBlock objects.
+    """
+    blocks = []
+    lines = markdown_text.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+        if line.startswith("# "):
+            blocks.append(ContentBlock("heading", line[2:]))
+            i += 1
+        elif line.startswith("## "):
+            blocks.append(ContentBlock("heading", line[3:]))
+            i += 1
+        elif line.startswith("$$"):
+            # Extract formula
+            formula = line[2:-2]  # Remove $$
+            blocks.append(ContentBlock("formula", {"formula": formula, "title": "Main Formula", "surroundingContext": "Not yet defined", "variables": []}))
+            i += 1
+        elif line.startswith("|"):
+            # Extract table
+            table = parse_table(line)
+            blocks.append(ContentBlock("table", table))
+            i += 1
+        elif line.startswith("### Introduction"):
+          blocks.append(ContentBlock("section", "Introduction"))
+          i+=1
+        # Add more section detection logic here
+        else:
+            blocks.append(ContentBlock("paragraph", line))
+            i += 1
+    return blocks
+```
+
+**Example Implementation (Illustrative):**
+
+```python
+import re
+
+def parse_table(markdown_table_string):
+    """Parses a Markdown table string and returns a list of lists representing the table."""
+    lines = markdown_table_string.strip().split('\n')
+    header = [h.strip() for h in re.split(r"\|", lines[0])[1:-1]]
+    data = []
+    for line in lines[2:]:
+        row = [d.strip() for d in re.split(r"\|", line)[1:-1]]
+        data.append(row)
+    return header, data
+
+def render_content(blocks):
+    """Renders the content blocks into a simple HTML structure."""
+    html = ""
+    for block in blocks:
+        if block.type == "heading":
+            html += f"<h1>{block.content}</h1>\n"
+        elif block.type == "paragraph":
+            html += f"<p>{block.content}</p>\n"
+        elif block.type == "formula":
+            html += f"<h2>{block.content['title']}</h2>\n"
+            html += f"<p><strong>{block.content['formula']}</strong></p>\n"
+            html += "<p><em>{block.content['surroundingContext']}</em></p>\n"
+            html += "<ul>"
+            for var in block.content['variables']:
+              html += f"<li>{var}</li>"
+            html += "</ul>"
+            html += "<a href='#'>[ Explain Formula ]</a>\n"
+            html += "<a href='#'>[ Open Formula Lab ]</a>\n"
+        elif block.type == "table":
+            header, data = block.content
+            html += "<table>\n"
+            html += "  <thead>\n"
+            html += "    <tr>\n"
+            for h in header:
+                html += f"      <th>{h}</th>\n"
+            html += "    </tr>\n"
+            html += "  </thead>\n"
+            html += "  <tbody>\n"
+            for row in data:
+                html += "    <tr>\n"
+                for cell in row:
+                    html += f"      <td>{cell}</td>\n"
+                html += "    </tr>\n"
+            html += "  </tbody>\n"
+            html += "</table>\n"
+        elif block.type == "section":
+            html += f"<div><h2>{block.content}</h2></div>\n"
+        else:
+            html += f"<p>Unknown block type: {block.type}</p>\n"
+    return html
+
+#Example Usage
+markdown_content = """
+# Conservation of Mechanical Energy
+
+## Introduction
+
+This section introduces the concept...
+
+## Definition
+
+Conservation of mechanical energy states that...
+
+## Key Concepts
+
+Kinetic Energy: 1/2 * m * v^2
+Potential Energy: m * g * h
+
+## Formula
+
+$$
+E = KE + PE
+$$
+
+## Table of Values
+
+| Mass (kg) | Velocity (m/s) | Kinetic Energy (J) |
+|---|---|---|
+| 1 | 2 | 2 |
+| 2 | 3 | 12 |
+
+## Applications
+
+Conservation of mechanical energy is used in...
+
+## Advantages
+
+Advantages of this concept include...
+
+## Disadvantages
+
+Disadvantages of this concept include...
+
+## Important Notes
+
+Important notes about this concept are...
+
+## Summary
+
+Summary of the concept...
+
+## Suggested Questions
+
+What happens if friction is present?
+"""
+
+blocks = parse_markdown_to_ui_blocks(markdown_content)
+html_output = render_content(blocks)
+print(html_output)
+```
+
+**Explanation and Key Considerations:**
+
+*   **`ContentBlock` Class:**  This is the foundation for representing each piece of information extracted from the Markdown.
+*   **`parse_markdown_to_ui_blocks()`:** This function takes the Markdown string as input, splits it into lines, and identifies different types of content (headings, paragraphs, formulas, tables, sections). It then creates `ContentBlock` objects for each piece of content.
+*   **`parse_table()`:**  This helper function parses a Markdown table string into a list of lists, representing the table data.
+*   **`render_content()`:** This function iterates through the `ContentBlock` objects and generates HTML markup to display them. This is where you would integrate a UI library to create interactive components.
+*   **Formula Extraction:** The code now correctly extracts formulas enclosed in `$$` delimiters.
+*   **Table Rendering:**  The table rendering is more structured and uses HTML `<table>` elements.
+*   **Section Detection:**  Basic section detection is implemented using keywords like "Introduction", "Definition", etc.  This should be expanded to handle more section headings.
+*   **Formula Lab/Explanation Links:**  The code now includes placeholder links for "Explain Formula" and "Open Formula Lab." These would need to be linked to appropriate functions or components.
+*   **Variables in Formula Cards:** The formula card now includes a section for variables used in the formula.
+*   **Error Handling:**  The example includes a basic `else` case in `render_content` to handle unknown block types.  More robust error handling would be needed for a production system.
+
+**Next Steps and Enhancements:**
+
+1.  **UI Library Integration:**  Replace the simple HTML generation in `render_content()` with HTML generated with a UI library like Streamlit or Gradio to create interactive components.
+2.  **Advanced Section Detection:** Implement more sophisticated section detection using regular expressions or other techniques.
+3.  **Formula Lab/Explanation:** Implement the "Explain Formula" and "Open Formula Lab" functionality.  This might involve creating separate components or linking to external resources.
+4.  **Styling:**  Apply CSS or a UI library's styling options to create a visually appealing and consistent textbook appearance.
+5. **MathJax/KaTeX:** Ensure KaTeX is correctly rendering the formulas.
+6.  **Error Handling:** Implement robust error handling to gracefully handle invalid Markdown input.
+7.  **Dynamic Content:**  Allow the AI Tutor to dynamically generate content (e.g., based on user input or a knowledge base).
+8.  **Interactive Elements:** Add interactive elements like quizzes, simulations, or visualizations to enhance the learning experience.
+
+This detailed response provides a solid foundation for building the interactive textbook experience you envision.  The key is to break down the content into structured UI blocks and use a UI library to create the interactive elements.  Let me know if you'd like me to elaborate on any specific aspects of this implementation or provide code examples for UI library integration.  I can also help with implementing more advanced features like formula explanation and the Formula Lab.

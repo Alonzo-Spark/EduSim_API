@@ -1,0 +1,66 @@
+To understand the visual effect of increasing the driven frequency in a **forced harmonic oscillator**, let’s break it down:
+
+---
+
+### Quick Definition
+A **forced harmonic oscillator** is a system (e.g., a mass-spring or pendulum) subjected to an external periodic force. The system oscillates at the **driven frequency** (\( \omega_d \)) of the external force, not just its natural frequency (\( \omega_0 \)).
+
+---
+
+### Key Observations When Increasing Driven Frequency
+1. **Amplitude Response**:
+   - **Below Resonance** (\( \omega_d < \omega_0 \)):  
+     The oscillator follows the driver closely. Amplitude increases as \( \omega_d \) approaches \( \omega_0 \).
+   - **At Resonance** (\( \omega_d = \omega_0 \)):  
+     Amplitude peaks dramatically (resonance). Energy transfer is maximized.
+   - **Above Resonance** (\( \omega_d > \omega_0 \)):  
+     Amplitude decreases sharply. The system struggles to keep up with the driver.
+
+   ```math
+   \text{Amplitude } A \propto \frac{1}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + (2\beta\omega_d)^2}}
+   ```
+   *(\( \beta \): damping coefficient)*
+
+2. **Phase Shift**:
+   - **Low \( \omega_d \)** → Oscillator moves **in phase** with the driver.
+   - **At \( \omega_d = \omega_0 \)** → Phase lag is **90°**.
+   - **High \( \omega_d \)** → Oscillator lags by **180°** (out of phase).
+
+---
+
+### Visual Effects
+- **Amplitude Changes**:  
+  - Starting from low \( \omega_d \), oscillations grow larger until resonance, then shrink.  
+  - Example: Pushing a swing—gentle pushes at its natural frequency make it swing high; pushing too fast reduces the effect.  
+
+- **Phase Behavior**:  
+  - Below resonance, the system moves in sync with the driver.  
+  - Above resonance, it moves oppositely (e.g., driver pushes left while the mass moves right).
+
+---
+
+### Formula Card: Resonance Amplitude
+\boxed{A = \frac{F_0/m}{\sqrt{(\omega_0^2 - \omega_d^2)^2 + (2\beta\omega_d)^2}}}
+- \( F_0 \): Amplitude of driving force  
+- \( m \): Mass of the oscillator  
+
+| Parameter       | Effect on Amplitude          |
+|-----------------|------------------------------|
+| \( \omega_d ≈ \omega_0 \) | **Max amplitude** (resonance) |
+| High damping (\( \beta \)) | Reduces peak amplitude       |
+
+---
+
+### Summary
+Increasing \( \omega_d \) causes:
+1. **Amplitude** to rise, peak at resonance, then fall.
+2. **Phase shift** from 0° to 180°, with a 90° lag at resonance.
+
+---
+
+### Suggested Questions
+1. How does damping affect the resonance peak?  
+2. Why does phase shift occur in forced oscillations?  
+3. What happens if \( \omega_d \) is much greater than \( \omega_0 \)?  
+
+Let me know if you’d like to explore these! 🎢

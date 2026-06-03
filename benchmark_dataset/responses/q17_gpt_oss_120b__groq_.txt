@@ -1,0 +1,177 @@
+┌───────────────────────────────────────────────┐
+│ Introduction                                    │
+│                                                   │
+│ The work‑energy theorem links the mechanical      │
+│ concept of **work** performed by forces to the   │
+│ change in a particle’s **kinetic energy**. It is │
+│ a cornerstone of classical mechanics and        │
+│ provides a powerful tool for solving many        │
+│ dynamics problems without solving the full       │
+│ vector equations of motion.                     │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Definition                                      │
+│                                                   │
+│ **Work‑Energy Theorem**: The net work done by    │
+│ all forces acting on a particle equals the       │
+│ change in its kinetic energy.                    │
+│                                                   │
+│ \[ W_{\text{net}} = \Delta K \]                  │
+│                                                   │
+│ where \(W_{\text{net}}\) is the total work and   │
+│ \(\Delta K = K_{2}-K_{1}\) is the difference      │
+│ between the final and initial kinetic energies.  │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Key Concepts                                    │
+│                                                   │
+│ • **Work** – the line integral of force along a   │
+│   displacement.                                   │
+│ • **Kinetic Energy** – the energy associated with  │
+│   motion of a mass.                               │
+│ • **Net Work** – sum of work done by all forces   │
+│   acting on the particle.                         │
+│ • **Conservative vs. Non‑conservative Forces** – │
+│   Only conservative forces have path‑independent  │
+│   work, which leads to potential‑energy concepts. │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Main Formula                                     │
+│                                                   │
+│          Rendered Formula                         │
+│                                                   │
+│          \[ W = \int_{\mathbf{r}_1}^{\mathbf{r}_2} │
+│                \mathbf{F}\!\cdot\!d\mathbf{r} \]   │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]        │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Kinetic Energy                                   │
+│                                                   │
+│          Rendered Formula                         │
+│                                                   │
+│          \[ K = \tfrac{1}{2} m v^{2} \]          │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]        │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Work‑Energy Theorem (Formal Statement)          │
+│                                                   │
+│          Rendered Formula                         │
+│                                                   │
+│          \[ W_{\text{net}} = \Delta K =          │
+│                \tfrac{1}{2} m v_{2}^{2} -         │
+│                \tfrac{1}{2} m v_{1}^{2} \]        │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]        │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Derivation                                       │
+│                                                   │
+│ 1. **Start with Newton’s second law**           │
+│    \(\mathbf{F}=m\mathbf{a}\).                    │
+│                                                   │
+│ 2. **Dot‑multiply by the instantaneous velocity**│
+│    \(\mathbf{v}\):                                 │
+│    \(\mathbf{F}\!\cdot\!\mathbf{v}=m\mathbf{a}\!\cdot\!\mathbf{v}\). │
+│                                                   │
+│ 3. **Recognize that**                           │
+│    \(\mathbf{a} = \dfrac{d\mathbf{v}}{dt}\) and │
+│    \(\mathbf{v}\!\cdot\!d\mathbf{v}= \dfrac{1}{2} d(v^{2})\). │
+│                                                   │
+│ 4. **Rewrite the dot product**                  │
+│    \(\mathbf{F}\!\cdot\!\mathbf{v}=m\dfrac{1}{2} \dfrac{d(v^{2})}{dt}\). │
+│                                                   │
+│ 5. **Integrate over time from \(t_{1}\) to \(t_{2}\)** │
+│    \(\displaystyle \int_{t_{1}}^{t_{2}} \mathbf{F}\!\cdot\!\mathbf{v}\,dt =   │
+│    \tfrac{1}{2}m\bigl(v_{2}^{2}-v_{1}^{2}\bigr)\). │
+│                                                   │
+│ 6. **Use \(d\mathbf{r}= \mathbf{v}\,dt\)** to      │
+│    replace \(\mathbf{v}\,dt\) with \(d\mathbf{r}\): │
+│    \(\displaystyle \int_{t_{1}}^{t_{2}} \mathbf{F}\!\cdot\!\mathbf{v}\,dt =   │
+│    \int_{\mathbf{r}_{1}}^{\mathbf{r}_{2}} \mathbf{F}\!\cdot\!d\mathbf{r}=W_{\text{net}}\). │
+│                                                   │
+│ 7. **Combine results**                           │
+│    \(\displaystyle W_{\text{net}} = \tfrac{1}{2}m v_{2}^{2} - \tfrac{1}{2}m v_{1}^{2}\) │
+│    → \(W_{\text{net}} = \Delta K\).               │
+│                                                   │
+│ The theorem follows directly from Newton’s law   │
+│ and the definition of kinetic energy.            │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Applications                                     │
+│                                                   │
+│ • Analyzing projectile motion without solving    │
+│   vector equations.                               │
+│ • Determining speed of a roller‑coaster car after │
+│   a descent (using gravitational work).           │
+│ • Solving collision problems where forces are     │
+│   impulsive.                                      │
+│ • Energy‑based design of machines (e.g., turbines)│
+│   where work input equals kinetic‑energy output.  │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Important Notes                                  │
+│                                                   │
+│ • The theorem holds **only for the net work**    │
+│   done by *all* forces (both conservative and     │
+│   non‑conservative).                              │
+│ • If only conservative forces act, the net work   │
+│   can be expressed as the negative change in       │
+│   potential energy: \(W_{\text{cons}} = -\Delta U\). │
+│ • For systems of many particles, the theorem     │
+│   applies to the *total* kinetic energy of the    │
+│   system.                                         │
+│ • Work done by a force perpendicular to motion is │
+│   zero (e.g., centripetal force).                │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Summary                                          │
+│                                                   │
+│ • **Work** is the line integral of force along a   │
+│   displacement.                                   │
+│ • **Kinetic Energy** is \(\tfrac{1}{2}mv^{2}\).     │
+│ • **Work‑Energy Theorem**: \(W_{\text{net}}=\Delta K\). │
+│ • The theorem is derived by dot‑multiplying       │
+│   Newton’s second law with velocity and integrating│
+│   over the particle’s path.                       │
+│ • It provides a shortcut to solve dynamics        │
+│   problems where forces and displacements are known│
+│   but detailed motion equations are cumbersome.   │
+└───────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Suggested Questions                              │
+│                                                   │
+│ 1. A 2 kg block slides down a frictionless ramp   │
+│    5 m high. What is its speed at the bottom?    │
+│ 2. A car of mass 1500 kg accelerates from 0 to 20 │
+│    m s⁻¹ in 10 s. Compute the average power     │
+│    delivered by the engine.                      │
+│ 3. A particle experiences a variable force        │
+│    \(F(x)=3x^{2}\) N along the x‑axis from        │
+│    \(x=0\) m to \(x=2\) m. Find the work done.   │
+│ 4. Explain why the normal force does no work on   │
+│    a block moving horizontally on a table.       │
+│ 5. Derive the work‑energy theorem for a system    │
+│    of two interacting particles.                 │
+└───────────────────────────────────────────────────┘

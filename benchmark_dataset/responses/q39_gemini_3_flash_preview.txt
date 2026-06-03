@@ -1,0 +1,91 @@
+<div id="textbook-container" style="font-family: 'Inter', system-ui, sans-serif; color: #2d3436; line-height: 1.6; max-width: 900px; margin: auto;">
+
+  <!-- INTRODUCTION SECTION -->
+  <section style="background: #ffffff; border: 1px solid #e1e8ed; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+    <h2 style="margin-top: 0; color: #0984e3; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;">Introduction</h2>
+    <p>A wave is a disturbance that transfers energy through matter or space. To describe these disturbances mathematically, we use three fundamental properties: <strong>Wavelength</strong>, <strong>Frequency</strong>, and <strong>Amplitude</strong>.</p>
+  </section>
+
+  <!-- DEFINITION CARD: WAVELENGTH -->
+  <section style="background: #ffffff; border: 1px solid #e1e8ed; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+    <h3 style="margin-top: 0; color: #2d3436;">1. Wavelength ($\lambda$)</h3>
+    <p>The spatial period of a periodic wave—the distance over which the wave's shape repeats. It is typically measured from one crest to the next crest or one trough to the next trough.</p>
+    <div style="background: #f8f9fa; border-left: 4px solid #0984e3; padding: 12px; margin-top: 10px;">
+      <strong>SI Unit:</strong> Meters ($m$)
+    </div>
+  </section>
+
+  <!-- FORMULA CARD: WAVE SPEED -->
+  <div style="background: #1e272e; color: #ffffff; border-radius: 12px; padding: 30px; margin-bottom: 20px; text-align: center;">
+    <span style="font-size: 0.8rem; text-transform: uppercase; color: #00d2d3;">Main Formula: Wave Relationship</span>
+    <div style="font-size: 2rem; margin: 20px 0;">
+      $$ v = f \cdot \lambda $$
+    </div>
+    <div style="text-align: left; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; font-size: 0.9rem;">
+      <strong>Variables:</strong><br>
+      $v$ = Wave Velocity ($m/s$)<br>
+      $f$ = Frequency ($Hz$)<br>
+      $\lambda$ = Wavelength ($m$)
+    </div>
+    <button style="margin-top: 15px; background: #00d2d3; border: none; padding: 10px 20px; border-radius: 5px; color: #1e272e; font-weight: bold; cursor: pointer;">Open Formula Lab</button>
+  </div>
+
+  <!-- DEFINITION CARD: FREQUENCY -->
+  <section style="background: #ffffff; border: 1px solid #e1e8ed; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+    <h3 style="margin-top: 0; color: #2d3436;">2. Frequency ($f$)</h3>
+    <p>The number of occurrences of a repeating event per unit of time. In waves, it refers to how many wave cycles pass a fixed point in one second.</p>
+    <div style="background: #f8f9fa; border-left: 4px solid #e17055; padding: 12px; margin-top: 10px;">
+      <strong>SI Unit:</strong> Hertz ($Hz$), where $1 Hz = 1 \text{ cycle/second}$
+    </div>
+  </section>
+
+  <!-- DEFINITION CARD: AMPLITUDE -->
+  <section style="background: #ffffff; border: 1px solid #e1e8ed; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+    <h3 style="margin-top: 0; color: #2d3436;">3. Amplitude ($A$)</h3>
+    <p>The maximum displacement or distance moved by a point on a vibrating body or wave measured from its equilibrium position. It represents the <strong>intensity</strong> or <strong>energy</strong> of the wave.</p>
+    <div style="background: #f8f9fa; border-left: 4px solid #6c5ce7; padding: 12px; margin-top: 10px;">
+      <strong>Key Note:</strong> In sound, higher amplitude means higher volume. In light, it means higher brightness.
+    </div>
+  </section>
+
+  <!-- TABLE CARD -->
+  <section style="background: #ffffff; border: 1px solid #e1e8ed; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); overflow-x: auto;">
+    <h3 style="margin-top: 0; color: #2d3436;">Comparison Summary</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+      <thead>
+        <tr style="background: #f1f2f6; text-align: left;">
+          <th style="padding: 12px; border-bottom: 2px solid #dfe4ea;">Property</th>
+          <th style="padding: 12px; border-bottom: 2px solid #dfe4ea;">Symbol</th>
+          <th style="padding: 12px; border-bottom: 2px solid #dfe4ea;">Measures...</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 12px; border-bottom: 1px solid #f1f2f6;">Wavelength</td>
+          <td style="padding: 12px; border-bottom: 1px solid #f1f2f6;">$\lambda$</td>
+          <td style="padding: 12px; border-bottom: 1px solid #f1f2f6;">Distance (Length)</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; border-bottom: 1px solid #f1f2f6;">Frequency</td>
+          <td style="padding: 12px; border-bottom: 1px solid #f1f2f6;">$f$</td>
+          <td style="padding: 12px; border-bottom: 1px solid #f1f2f6;">Rate (Cycles/Time)</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px; border-bottom: 1px solid #f1f2f6;">Amplitude</td>
+          <td style="padding: 12px; border-bottom: 1px solid #f1f2f6;">$A$</td>
+          <td style="padding: 12px; border-bottom: 1px solid #f1f2f6;">Strength (Displacement)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SUGGESTED QUESTIONS -->
+  <section style="background: #fdf2f2; border: 1px dashed #fab1a0; border-radius: 12px; padding: 24px; margin-bottom: 20px;">
+    <h3 style="margin-top: 0; color: #d63031; font-size: 1rem;">Suggested Practice</h3>
+    <ul style="padding-left: 20px; color: #2d3436;">
+      <li>How does the frequency change if the wavelength is doubled while the wave speed stays constant?</li>
+      <li>What is the mathematical relationship between Frequency and Period ($T$)?</li>
+    </ul>
+  </section>
+
+</div>

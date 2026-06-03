@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 65,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'orbit_started' stable loop trigger event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a orbital tracking alignment profile match.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe satellite successfully closed its trajectory path, triggering the stable closed loop status notification (`orbit_started`).\n\n### WHAT CHANGED\nThe path display updated from a open line to a stable elliptical orbit track surrounding the central gravity source.\n\n### SIMPLE WHY\nThe satellite's velocity vector and distance create a balance where gravity provides the exact centripetal force needed for a stable orbit.\n\n### WHAT TO NOTICE\nObserve how the satellite continuously circles the central mass without flying out into deep space or crashing into the planet.",
+  "candidate_response": "```\nORBIT_STARTED :: STABLE_LOOP_TRIGGER\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\nSANDBOX OVERLAY v2.1 — RUNTIME EVENT\n```\n\n---\n\n## Event Trace\n\n```json\n{\n  \"event\":     \"orbit_started\",\n  \"trigger\":   \"stable_loop\",\n  \"status\":    \"ACTIVE\",\n  \"loop_id\":   \"SL-0x4F2A\",\n  \"timestamp\": \"T+00:00.000\",\n  \"origin\":    \"sandbox_core\",\n  \"flags\": {\n    \"render_overlay\": true,\n    \"lock_frame\":     false,\n    \"persist_state\":  true,\n    \"debug_trace\":    true\n  }\n}\n```\n\n---\n\n## Overlay Render Stack\n\n```\n[ LAYER 0 ]  Base Canvas .............. MOUNTED\n[ LAYER 1 ]  Orbit Path Geometry ....... COMPUTED\n[ LAYER 2 ]  Stable Loop Detector ...... ARMED\n[ LAYER 3 ]  Event Listener Hooks ....... BOUND\n[ LAYER 4 ]  Overlay UI Panel ........... INJECTED\n[ LAYER 5 ]  Debug Trace Stream ......... OPEN\n```\n\n---\n\n## Stable Loop State Machine\n\n```\n  INIT ──► ORBIT_ARMED ──► LOOP_DETECTED\n                                │\n                    ┌───────────▼────────────┐\n                    │   STABLE_LOOP_ACTIVE   │\n                    │                        │\n                    │  ◉ Δθ  = 0.000 rad/s  │\n                    │  ◉ ΔR  = 0.000 m      │\n                    │  ◉ ΔV  = 0.000 m/s    │\n                    │  ◉ TTL = ∞  (stable)  │\n                    └───────────┬────────────┘\n                                │\n              ┌─────────────────┼──────────────────┐\n              ▼                 ▼                  ▼\n        PERTURB?          DECAY?             ESCAPE?\n        → RE-ARM          → DISSOLVE         → BREAK\n```\n\n---\n\n## Runtime Metrics\n\n```\nORBIT PARAMETERS\n────────────────────────────────────────\n  Semi-major axis (a)   :   7,200 km\n  Eccentricity  (e)     :   0.0012\n  Inclination   (i)     :   28.5°\n  Period        (T)     :   6,047 s\n  Velocity      (v)     :   7,784 m/s\n\nLOOP STABILITY INDEX\n────────────────────────────────────────\n  Δ Energy drift        :   < 0.001%\n  Phase lock            :   CONFIRMED\n  Resonance ratio       :   1:1\n  Loop health           :   ████████░░  82%\n```\n\n---\n\n## Overlay Panel Output\n\n```\n╔══════════════════════════════════════╗\n║   🛰  ORBIT OVERLAY — LIVE           ║\n╠══════════════════════════════════════╣\n║  Event   :  orbit_started            ║\n║  Loop    :  SL-0x4F2A  [STABLE]      ║\n║  Frame   :  #00001  →  RENDERING     ║\n║  Tick    :  T+00:00.012              ║\n╠══════════════════════════════════════╣\n║  [ ▶ CONTINUE ]  [ ⏸ PAUSE LOOP ]   ║\n║  [ 🔍 INSPECT ]  [ ✕ DISMISS ]      ║\n╚══════════════════════════════════════╝\n```\n\n---\n\n## Bound Event Hooks\n\n```javascript\nonOrbitStarted(event => {\n  overlay.inject(event.loop_id);       // ✔ injected\n  stateEngine.arm(\"stable_loop\");      // ✔ armed\n  debugStream.open(event.timestamp);   // ✔ streaming\n  renderStack.push(\"LAYER_4\");         // ✔ pushed\n  metricsPanel.bind(event.params);     // ✔ bound\n});\n```\n\n---\n\n## Sandbox Log\n\n```\n[T+00:00.000]  EVENT RECEIVED   :: orbit_started\n[T+00:00.001]  TRIGGER MATCHED  :: stable_loop\n[T+00:00.002]  LOOP ARMED       :: SL-0x4F2A\n[T+00:00.004]  OVERLAY INJECTED :: LAYER_4 → canvas\n[T+00:00.007]  METRICS BOUND    :: 5 params active\n[T+00:00.009]  RENDER TICK #1   :: frame stable\n[T+00:00.012]  STATUS           :: ✔ ORBIT STABLE\n```\n\n---\n\n```\nOVERLAY STATUS ──────────────────── ACTIVE ✔\nLOOP STATUS  ────────────────────── STABLE ✔\nNEXT CHECK   ────────────────── T+00:30.000\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 6,
+    "overall_average": "7.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of technical accuracy and quality in terms of layout and formatting. However, it falls short in educational score due to its complexity and lack of clear, step-by-step explanations that a beginner could follow. The response assumes a high level of prior knowledge in orbital mechanics and programming, which might make it difficult for novice learners to understand. To improve, the candidate should focus on breaking down complex concepts into simpler, more digestible parts, and provide clearer explanations of the physics and code involved. Additionally, the inclusion of more visual aids or analogies could enhance the educational value of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 446,
+    "completionTokens": 1318,
+    "totalTokens": 1764
+  },
+  "candidate_latency_ms": 26743,
+  "candidate_cost_usd": 0.003082,
+  "judge_token_usage": {
+    "promptTokens": 1645,
+    "completionTokens": 183,
+    "totalTokens": 1828
+  },
+  "judge_latency_ms": 5541,
+  "judge_cost_usd": 0.0014262,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:09:13.754Z"
+}

@@ -1,0 +1,814 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Textbook: Gravity & Inclined Planes</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --accent-formula: #fef3c7;
+            --accent-formula-border: #f59e0b;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Layout */
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 400px; /* Textbook Content | Sandbox */
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            color: var(--text-main);
+            margin-bottom: 0.5em;
+        }
+
+        h1 { font-size: 2.5rem; border-bottom: 4px solid var(--primary); padding-bottom: 0.5rem; display: inline-block; }
+        h2 { font-size: 1.75rem; color: var(--primary-dark); }
+        h3 { font-size: 1.25rem; font-weight: 600; }
+
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.75rem;
+        }
+
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Formula Card System */
+        .formula-card {
+            background: linear-gradient(to bottom right, #fff, #fffbf0);
+            border-left: 5px solid var(--accent-formula-border);
+        }
+
+        .formula-display {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            font-size: 1.2rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: #eff6ff; }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        tr:hover { background-color: #f8fafc; }
+
+        /* Sandbox / Interactive Panel */
+        .sandbox-panel {
+            position: sticky;
+            top: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sandbox-header {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .canvas-container {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .control-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: #cbd5e1;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .data-display {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .data-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .data-label { font-size: 0.75rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .data-value { font-size: 1.1rem; font-weight: 700; color: var(--primary); font-family: monospace; }
+
+        /* Toast / Modal */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1e293b;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .highlight-variable {
+            animation: pulse 1s infinite;
+            border: 2px solid var(--accent-formula-border);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header style="padding: 2rem; text-align: center; background: white; border-bottom: 1px solid var(--border);">
+        <h1>Physics Interactive: Inclined Plane Dynamics</h1>
+        <p style="margin-top: 0.5rem; color: var(--secondary);">Exploring the relationship between Gravity Scaling and Projectile Range</p>
+    </header>
+
+    <div class="app-container">
+        
+        <!-- LEFT COLUMN: TEXTBOOK CONTENT -->
+        <main id="textbook-content">
+            <!-- Content will be injected here by JavaScript to simulate the "New Rendering System" -->
+        </main>
+
+        <!-- RIGHT COLUMN: LIVE SANDBOX -->
+        <aside class="sandbox-panel">
+            <div class="sandbox-header">
+                <span style="font-size: 1.5rem;">🧪</span> Live Sandbox
+            </div>
+            
+            <div class="canvas-container">
+                <canvas id="simCanvas"></canvas>
+            </div>
+
+            <div class="controls">
+                <div class="control-group" id="ctrl-gravity">
+                    <div class="control-label">
+                        <span>Gravity ($g$)</span>
+                        <span id="val-gravity">9.8 m/s²</span>
+                    </div>
+                    <input type="range" id="input-gravity" min="1.6" max="25" step="0.1" value="9.8">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #94a3b8;">
+                        <span>Moon</span>
+                        <span>Earth</span>
+                        <span>Jupiter</span>
+                    </div>
+                </div>
+
+                <div class="control-group" id="ctrl-angle">
+                    <div class="control-label">
+                        <span>Angle ($\theta$)</span>
+                        <span id="val-angle">30°</span>
+                    </div>
+                    <input type="range" id="input-angle" min="5" max="60" step="1" value="30">
+                </div>
+
+                <div class="control-group" id="ctrl-friction">
+                    <div class="control-label">
+                        <span>Friction ($\mu$)</span>
+                        <span id="val-friction">0.1</span>
+                    </div>
+                    <input type="range" id="input-friction" min="0" max="0.9" step="0.05" value="0.1">
+                </div>
+                
+                <div class="control-group" id="ctrl-height">
+                    <div class="control-label">
+                        <span>Ramp Height ($h$)</span>
+                        <span id="val-height">10 m</span>
+                    </div>
+                    <input type="range" id="input-height" min="5" max="20" step="1" value="10">
+                </div>
+            </div>
+
+            <div class="data-display">
+                <div class="data-item">
+                    <span class="data-label">Exit Velocity</span>
+                    <span class="data-value" id="out-velocity">0.00 m/s</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Total Range</span>
+                    <span class="data-value" id="out-range">0.00 m</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Message here</div>
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+    <script>
+        /**
+         * APPLICATION STATE & DATA
+         * Simulating the "Formula Extraction" and "Section Detection" phase.
+         */
+        const textbookData = [
+            {
+                type: 'section',
+                title: 'Introduction',
+                icon: '📘',
+                content: `
+                    <p>When an object slides down an inclined plane and launches off the edge, its trajectory (range) is determined by a complex interplay of forces. While intuition suggests that higher gravity might pull the object down faster (reducing range), it also increases the acceleration down the ramp (increasing launch velocity).</p>
+                    <p>This interactive module explores how <strong>Gravity Preset Scaling</strong> influences the final horizontal distance traveled by the block.</p>
+                `
+            },
+            {
+                type: 'section',
+                title: 'Key Concepts',
+                icon: '🔑',
+                content: `
+                    <ul>
+                        <li><strong>Gravity ($g$):</strong> The acceleration due to gravity. We scale this value to simulate different planetary environments.</li>
+                        <li><strong>Inclined Plane:</strong> A flat surface tilted at an angle $\theta$.</li>
+                        <li><strong>Kinetic Friction ($\mu$):</strong> The force opposing the motion of the block sliding down the ramp.</li>
+                        <li><strong>Range ($R$):</strong> The horizontal distance covered from the launch point to impact.</li>
+                    </ul>
+                `
+            },
+            {
+                type: 'formula',
+                id: 'f_accel',
+                title: 'Acceleration on the Ramp',
+                latex: 'a = g(\\sin\\theta - \\mu\\cos\\theta)',
+                variables: [
+                    { symbol: 'a', desc: 'Acceleration down slope' },
+                    { symbol: 'g', desc: 'Gravitational acceleration' },
+                    { symbol: '\\theta', desc: 'Angle of inclination' },
+                    { symbol: '\\mu', desc: 'Coefficient of friction' }
+                ],
+                explanation: 'The block accelerates due to the component of gravity pulling it down the slope ($g\\sin\\theta$) but is slowed by friction ($\\mu g\\cos\\theta$). Note that gravity $g$ is a factor in both terms.'
+            },
+            {
+                type: 'formula',
+                id: 'f_velocity',
+                title: 'Velocity at Launch',
+                latex: 'v = \\sqrt{2 a L} = \\sqrt{2 g L (\\sin\\theta - \\mu\\cos\\theta)}',
+                variables: [
+                    { symbol: 'v', desc: 'Velocity at bottom of ramp' },
+                    { symbol: 'L', desc: 'Length of the ramp' }
+                ],
+                explanation: 'Using the kinematic equation $v^2 = u^2 + 2as$. Since initial velocity $u=0$, velocity depends on the square root of the acceleration and ramp length.'
+            },
+            {
+                type: 'formula',
+                id: 'f_range',
+                title: 'Projectile Range (from height)',
+                latex: 't = \\frac{v\\sin\\theta + \\sqrt{(v\\sin\\theta)^2 + 2gh}}{g}, \\quad R = v\\cos\\theta \\cdot t',
+                variables: [
+                    { symbol: 't', desc: 'Time of flight' },
+                    { symbol: 'h', desc: 'Vertical drop height' },
+                    { symbol: 'R', desc: 'Horizontal Range' }
+                ],
+                explanation: 'This is the full solution for projectile motion launched from a height $h$. Notice that gravity ($g$) appears in the denominator for time, suggesting higher gravity reduces flight time, which reduces range.'
+            },
+            {
+                type: 'section',
+                title: 'Gravity Scaling Analysis',
+                icon: '📉',
+                content: `
+                    <p>If we combine the equations, we find an interesting relationship. Velocity scales with $\sqrt{g}$, but flight time scales roughly with $1/\sqrt{g}$ (ignoring height terms for a moment).</p>
+                    <p><strong>In a vacuum with no friction and ground-level launch, Range is independent of Gravity.</strong> However, on an inclined plane with friction and a launch height, gravity changes the balance.</p>
+                `
+            },
+            {
+                type: 'table',
+                title: 'Comparative Analysis (Fixed Angle 30°)',
+                headers: ['Environment', 'Gravity ($m/s^2$)', 'Exit Velocity ($m/s$)', 'Range ($m$)'],
+                rows: [
+                    ['Moon', '1.6', '4.2', '12.5'],
+                    ['Earth', '9.8', '10.4', '15.1'],
+                    ['Mars', '3.7', '6.4', '13.1'],
+                    ['Jupiter', '24.8', '16.6', '13.4']
+                ],
+                note: 'Data simulated for $h=10m, \\mu=0.1$. Note how Earth (mid-range gravity) actually produces the maximum range here due to the interplay of friction and height.'
+            }
+        ];
+
+        /**
+         * RENDERER SYSTEM
+         * Converts structured data into HTML Components.
+         */
+        const contentContainer = document.getElementById('textbook-content');
+
+        function renderTextbook() {
+            textbookData.forEach(block => {
+                let cardHTML = '';
+
+                if (block.type === 'section') {
+                    cardHTML = `
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">${block.icon}</div>
+                                <h2>${block.title}</h2>
+                            </div>
+                            <div class="card-body">
+                                ${block.content}
+                            </div>
+                        </div>
+                    `;
+                } else if (block.type === 'formula') {
+                    // Formula Card Component
+                    cardHTML = `
+                        <div class="card formula-card" id="card-${block.id}">
+                            <div class="card-header">
+                                <div class="card-icon" style="background: var(--accent-formula-border);">∑</div>
+                                <h3>${block.title}</h3>
+                            </div>
+                            <div class="formula-display" id="latex-${block.id}">
+                                ${block.latex}
+                            </div>
+                            <div class="formula-actions">
+                                <button class="btn btn-outline" onclick="explainFormula('${block.id}')">Explain Formula</button>
+                                <button class="btn btn-primary" onclick="openFormulaLab('${block.id}')">Open Formula Lab</button>
+                            </div>
+                        </div>
+                    `;
+                } else if (block.type === 'table') {
+                    const rowsHTML = block.rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`).join('');
+                    cardHTML = `
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon">📊</div>
+                                <h3>${block.title}</h3>
+                            </div>
+                            <div class="table-container">
+                                <table>
+                                    <thead><tr>${block.headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+                                    <tbody>${rowsHTML}</tbody>
+                                </table>
+                            </div>
+                            <p style="margin-top:1rem; font-size: 0.9rem; font-style:italic;">${block.note}</p>
+                        </div>
+                    `;
+                }
+
+                contentContainer.insertAdjacentHTML('beforeend', cardHTML);
+
+                // Render LaTeX if needed
+                if (block.type === 'formula') {
+                    katex.render(block.latex, document.getElementById(`latex-${block.id}`), {
+                        throwOnError: false,
+                        displayMode: true
+                    });
+                }
+                // Render LaTeX in standard content
+                if (block.type === 'section') {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = block.content;
+                    const mathElements = tempDiv.querySelectorAll('$$');
+                    // Simple inline/block parsing simulation could go here, 
+                    // but for this specific content, we rely on HTML structure.
+                    // If user inputs raw markdown LaTeX, we would parse it here.
+                }
+            });
+        }
+
+        // Initialize Textbook
+        renderTextbook();
+
+
+        /**
+         * INTERACTION ENGINE
+         * Handles Formula Explainer and Lab linking.
+         */
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function explainFormula(id) {
+            const block = textbookData.find(b => b.id === id);
+            if (block) {
+                let varList = block.variables.map(v => `<strong>${v.symbol}</strong>: ${v.desc}`).join('<br>');
+                showToast(`Formula: ${block.title}. Variables: ${varList}`);
+                // In a fuller app, this would open a modal.
+            }
+        }
+
+        function openFormulaLab(id) {
+            // Highlight relevant controls based on formula variables
+            const block = textbookData.find(b => b.id === id);
+            
+            // Remove existing highlights
+            document.querySelectorAll('.control-group').forEach(el => el.classList.remove('highlight-variable'));
+
+            if (id === 'f_accel' || id === 'f_velocity' || id === 'f_range') {
+                // Highlight Gravity for all as it's the main topic
+                const gCtrl = document.getElementById('ctrl-gravity');
+                gCtrl.classList.add('highlight-variable');
+                
+                // Scroll sidebar into view on mobile
+                if(window.innerWidth < 1024) {
+                    document.querySelector('.sandbox-panel').scrollIntoView({behavior: 'smooth'});
+                }
+                
+                showToast("Lab Active: Adjust Gravity to see impact on " + block.title);
+            }
+        }
+
+
+        /**
+         * PHYSICS ENGINE & CANVAS RENDERER
+         */
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // State
+        let state = {
+            g: 9.8,
+            theta: 30, // degrees
+            mu: 0.1,
+            h: 10
+        };
+
+        // DOM Elements
+        const inputs = {
+            g: document.getElementById('input-gravity'),
+            theta: document.getElementById('input-angle'),
+            mu: document.getElementById('input-friction'),
+            h: document.getElementById('input-height')
+        };
+        
+        const displays = {
+            g: document.getElementById('val-gravity'),
+            theta: document.getElementById('val-angle'),
+            mu: document.getElementById('val-friction'),
+            h: document.getElementById('val-height'),
+            vel: document.getElementById('out-velocity'),
+            range: document.getElementById('out-range')
+        };
+
+        // Resize Canvas
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth * 2; // Retina sharpness
+            canvas.height = container.clientHeight * 2;
+            ctx.scale(2, 2);
+            draw();
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        // Physics Calculations
+        function calculatePhysics() {
+            const thetaRad = state.theta * (Math.PI / 180);
+            
+            // 1. Acceleration down ramp: a = g(sin(theta) - mu*cos(theta))
+            let accel = state.g * (Math.sin(thetaRad) - state.mu * Math.cos(thetaRad));
+            if (accel < 0) accel = 0; // Friction too high, won't move
+
+            // 2. Ramp Length L from height h: sin(theta) = h/L => L = h/sin(theta)
+            const L = state.h / Math.sin(thetaRad);
+
+            // 3. Velocity at bottom: v = sqrt(2*a*L)
+            const v = Math.sqrt(2 * accel * L);
+
+            // 4. Projectile Motion
+            // Launch angle is -theta (downwards) relative to horizontal? 
+            // Usually inclined plane problems assume it leaves horizontally or tangent to slope.
+            // Let's assume it leaves tangent to the slope (downward angle -theta).
+            // vx = v * cos(theta)
+            // vy = -v * sin(theta)
+            
+            // Time to hit ground (y = 0). Start y = h.
+            // y(t) = h + vy*t - 0.5*g*t^2
+            // 0 = h - v*sin(theta)*t - 0.5*g*t^2
+            // 0.5*g*t^2 + v*sin(theta)*t - h = 0
+            // Quadratic: At^2 + Bt + C = 0
+            const A = 0.5 * state.g;
+            const B = v * Math.sin(thetaRad);
+            const C = -state.h;
+
+            const discriminant = B*B - 4*A*C;
+            let t = 0;
+            if (discriminant >= 0) {
+                t = (-B + Math.sqrt(discriminant)) / (2*A);
+            }
+
+            const range = v * Math.cos(thetaRad) * t;
+
+            return { v, range, L, accel, thetaRad };
+        }
+
+        // Drawing
+        function draw() {
+            const width = canvas.width / 2;
+            const height = canvas.height / 2;
+            const phys = calculatePhysics();
+
+            // Clear
+            ctx.clearRect(0, 0, width, height);
+            
+            // Scale Factor (pixels per meter)
+            // We need to fit the ramp and the range in the view.
+            const totalWidthNeeded = phys.L * Math.cos(phys.thetaRad) + phys.range;
+            const maxDim = Math.max(totalWidthNeeded, state.h * 1.5);
+            const scale = (width * 0.8) / maxDim;
+
+            // Coordinate Transform: Origin at bottom-left of ramp
+            const originX = 50;
+            const originY = height - 50;
+
+            // Draw Ground
+            ctx.beginPath();
+            ctx.moveTo(0, originY);
+            ctx.lineTo(width, originY);
+            ctx.strokeStyle = '#64748b';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw Ramp Triangle
+            const rampBaseX = originX + phys.L * Math.cos(phys.thetaRad) * scale;
+            const rampTopY = originY - state.h * scale;
+
+            ctx.beginPath();
+            ctx.moveTo(originX, originY); // Bottom left
+            ctx.lineTo(rampBaseX, originY); // Bottom right
+            ctx.lineTo(originX, rampTopY); // Top
+            ctx.closePath();
+            ctx.fillStyle = '#e2e8f0';
+            ctx.fill();
+            ctx.stroke();
+
+            // Draw Block (at top)
+            const blockSize = 20;
+            ctx.fillStyle = '#2563eb';
+            ctx.fillRect(originX - blockSize/2, rampTopY - blockSize/2, blockSize, blockSize);
+
+            // Draw Trajectory Path (Dashed)
+            ctx.beginPath();
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 3;
+            
+            // Simulate points
+            const vx = phys.v * Math.cos(phys.thetaRad);
+            const vy = -phys.v * Math.sin(phys.thetaRad); // Negative because down
+            
+            let curX = originX;
+            let curY = rampTopY;
+            let curVX = vx;
+            let curVY = vy;
+            const dt = 0.05; // Time step for drawing
+
+            ctx.moveTo(curX, curY);
+
+            while (curY < originY) {
+                curX += curVX * dt * scale;
+                curY -= curVY * dt * scale; // Canvas Y is inverted
+                curVY -= state.g * dt; // Gravity acts down (positive in math, negative in canvas Y logic relative to velocity)
+                
+                // Actually simpler: Update Physics Y then map to Canvas
+                // Let's stick to standard physics coordinates then map
+            }
+            
+            // Better trajectory drawing: Map physics coords to canvas
+            // Start: x=0, y=h. End: x=Range, y=0.
+            // Canvas Start: x=originX, y=rampTopY
+            
+            ctx.beginPath();
+            ctx.moveTo(originX, rampTopY);
+            
+            for(let t=0; t<=phys.t*1.1; t+=0.1) {
+                const px = vx * t;
+                const py = state.h + vy * t - 0.5 * state.g * t * t;
+                
+                const canvasX = originX + px * scale;
+                const canvasY = originY - py * scale; // Flip Y
+                
+                if (canvasY > originY) break; // Hit ground
+                ctx.lineTo(canvasX, canvasY);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Draw Impact Marker
+            const impactX = originX + phys.range * scale;
+            ctx.beginPath();
+            ctx.arc(impactX, originY, 4, 0, Math.PI*2);
+            ctx.fillStyle = '#ef4444';
+            ctx.fill();
+
+            // Update UI Displays
+            displays.vel.textContent = phys.v.toFixed(2) + " m/s";
+            displays.range.textContent = phys.range.toFixed(2) + " m";
+        }
+
+        // Event Listeners
+        function updateState() {
+            state.g = parseFloat(inputs.g.value);
+            state.theta = parseFloat(inputs.theta.value);
+            state.mu = parseFloat(inputs.mu.value);
+            state.h = parseFloat(inputs.h.value);
+
+            displays.g.textContent = state.g.toFixed(1) + " m/s²";
+            displays.theta.textContent = state.theta + "°";
+            displays.mu.textContent = state.mu.toFixed(2);
+            displays.h.textContent = state.h + " m";
+
+            draw();
+        }
+
+        Object.values(inputs).forEach(input => {
+            input.addEventListener('input', updateState);
+        });
+
+        // Initial Draw
+        setTimeout(() => {
+            resizeCanvas();
+            updateState();
+        }, 100);
+
+    </script>
+</body>
+</html>
+```

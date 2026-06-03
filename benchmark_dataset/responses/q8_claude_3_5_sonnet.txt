@@ -1,0 +1,422 @@
+<thinking>
+The user wants to find the range of a projectile launched at 45° with velocity 20 m/s. Let me calculate this and present it in the new structured UI block format.
+
+Range formula: R = v²sin(2θ)/g
+
+R = (20)² × sin(90°) / 10
+R = 400 × 1 / 10
+R = 40 m
+
+Let me structure this as a proper interactive textbook response with cards.
+</thinking>
+
+import { useState } from "react";
+
+const g = 9.8;
+
+function FormulaCard({ title, formula, variables, children }) {
+  const [showExplain, setShowExplain] = useState(false);
+  const [openLab, setOpenLab] = useState(false);
+  const [v, setV] = useState(20);
+  const [angle, setAngle] = useState(45);
+
+  const labRange = ((v * v * Math.sin((2 * angle * Math.PI) / 180)) / g).toFixed(2);
+
+  return (
+    <div style={{
+      border: "1.5px solid #6366f1",
+      borderRadius: 14,
+      padding: "20px 24px",
+      background: "linear-gradient(135deg,#1e1b4b 0%,#312e81 100%)",
+      color: "#e0e7ff",
+      marginBottom: 18,
+      boxShadow: "0 4px 24px #6366f133"
+    }}>
+      <div style={{ fontSize: 11, letterSpacing: 2, color: "#a5b4fc", textTransform: "uppercase", marginBottom: 8 }}>
+        📐 {title}
+      </div>
+      <div style={{
+        background: "#0f0a2e",
+        borderRadius: 10,
+        padding: "16px",
+        textAlign: "center",
+        fontSize: 22,
+        margin: "10px 0 16px",
+        border: "1px solid #4338ca"
+      }}>
+        {formula}
+      </div>
+
+      <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 10 }}>
+        <button
+          onClick={() => { setShowExplain(s => !s); setOpenLab(false); }}
+          style={{
+            background: showExplain ? "#6366f1" : "transparent",
+            border: "1.5px solid #6366f1",
+            color: "#e0e7ff",
+            borderRadius: 8,
+            padding: "7px 18px",
+            cursor: "pointer",
+            fontWeight: 600,
+            fontSize: 13,
+            transition: "background 0.2s"
+          }}>
+          {showExplain ? "▼ Hide Explanation" : "▶ Explain Formula"}
+        </button>
+        <button
+          onClick={() => { setOpenLab(s => !s); setShowExplain(false); }}
+          style={{
+            background: openLab ? "#7c3aed" : "transparent",
+            border: "1.5px solid #7c3aed",
+            color: "#e0e7ff",
+            borderRadius: 8,
+            padding: "7px 18px",
+            cursor: "pointer",
+            fontWeight: 600,
+            fontSize: 13,
+            transition: "background 0.2s"
+          }}>
+          {openLab ? "✕ Close Lab" : "⚗ Open Formula Lab"}
+        </button>
+      </div>
+
+      {showExplain && (
+        <div style={{
+          background: "#1e1b4b",
+          borderRadius: 10,
+          padding: "14px 18px",
+          marginTop: 8,
+          borderLeft: "3px solid #6366f1",
+          fontSize: 14,
+          lineHeight: 1.8
+        }}>
+          {variables.map((v, i) => (
+            <div key={i} style={{ marginBottom: 4 }}>
+              <span style={{ color: "#a5b4fc", fontWeight: 700 }}>{v.symbol}</span>
+              <span style={{ color: "#c7d2fe" }}> — {v.meaning}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {openLab && (
+        <div style={{
+          background: "#0f0a2e",
+          borderRadius: 10,
+          padding: "16px 18px",
+          marginTop: 8,
+          border: "1px dashed #7c3aed"
+        }}>
+          <div style={{ fontSize: 12, color: "#a5b4fc", letterSpacing: 1, marginBottom: 12, textTransform: "uppercase" }}>
+            ⚗ Interactive Formula Lab
+          </div>
+          <div style={{ display: "flex", gap: 24, flexWrap: "wrap", marginBottom: 14 }}>
+            <label style={{ fontSize: 13, color: "#c7d2fe" }}>
+              Velocity (m/s)
+              <br />
+              <input
+                type="range" min={5} max={100} value={v}
+                onChange={e => setV(Number(e.target.value))}
+                style={{ width: 140, accentColor: "#6366f1", marginTop: 4 }}
+              />
+              <span style={{ marginLeft: 8, fontWeight: 700, color: "#a5b4fc" }}>{v} m/s</span>
+            </label>
+            <label style={{ fontSize: 13, color: "#c7d2fe" }}>
+              Angle (°)
+              <br />
+              <input
+                type="range" min={1} max={89} value={angle}
+                onChange={e => setAngle(Number(e.target.value))}
+                style={{ width: 140, accentColor: "#7c3aed", marginTop: 4 }}
+              />
+              <span style={{ marginLeft: 8, fontWeight: 700, color: "#a5b4fc" }}>{angle}°</span>
+            </label>
+          </div>
+          <div style={{
+            background: "#1e1b4b",
+            borderRadius: 8,
+            padding: "12px 16px",
+            fontSize: 15,
+            color: "#e0e7ff"
+          }}>
+            Range &nbsp;=&nbsp;
+            <span style={{ color: "#facc15", fontWeight: 700, fontSize: 20 }}>{labRange} m</span>
+            <span style={{ fontSize: 11, color: "#818cf8", marginLeft: 10 }}>
+              (g = {g} m/s²)
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SectionCard({ icon, title, color, children }) {
+  return (
+    <div style={{
+      border: `1.5px solid ${color}33`,
+      borderRadius: 14,
+      padding: "18px 22px",
+      background: "#0f172a",
+      marginBottom: 16,
+      boxShadow: `0 2px 12px ${color}18`
+    }}>
+      <div style={{
+        fontSize: 11,
+        letterSpacing: 2,
+        color: color,
+        textTransform: "uppercase",
+        fontWeight: 700,
+        marginBottom: 10
+      }}>
+        {icon} {title}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function StepRow({ num, label, value, highlight }) {
+  return (
+    <div style={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 14,
+      padding: "10px 0",
+      borderBottom: "1px solid #1e293b"
+    }}>
+      <div style={{
+        minWidth: 28, height: 28,
+        background: highlight ? "#6366f1" : "#1e293b",
+        borderRadius: "50%",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontWeight: 700, fontSize: 13, color: "#e0e7ff", flexShrink: 0
+      }}>
+        {num}
+      </div>
+      <div>
+        <div style={{ fontSize: 13, color: "#94a3b8", marginBottom: 3 }}>{label}</div>
+        <div style={{ fontSize: 15, color: "#e0e7ff", fontWeight: highlight ? 700 : 400 }}>{value}</div>
+      </div>
+    </div>
+  );
+}
+
+export default function ProjectileRange() {
+  const R = ((20 * 20 * Math.sin(Math.PI / 2)) / g).toFixed(2);
+
+  return (
+    <div style={{
+      fontFamily: "'Inter', sans-serif",
+      maxWidth: 680,
+      margin: "0 auto",
+      padding: "24px 16px",
+      background: "#060b18",
+      minHeight: "100vh",
+      color: "#e2e8f0"
+    }}>
+
+      {/* Topic Header */}
+      <div style={{
+        background: "linear-gradient(135deg,#1e1b4b,#0f172a)",
+        borderRadius: 16,
+        padding: "22px 26px",
+        marginBottom: 20,
+        borderLeft: "4px solid #6366f1"
+      }}>
+        <div style={{ fontSize: 11, color: "#818cf8", letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>
+          Chapter · Projectile Motion
+        </div>
+        <div style={{ fontSize: 22, fontWeight: 700, color: "#e0e7ff", marginBottom: 6 }}>
+          Range of a Projectile
+        </div>
+        <div style={{ fontSize: 14, color: "#94a3b8" }}>
+          Given: Initial velocity <strong style={{color:"#a5b4fc"}}>u = 20 m/s</strong>, Angle <strong style={{color:"#a5b4fc"}}>θ = 45°</strong>
+        </div>
+      </div>
+
+      {/* Quick Definition */}
+      <SectionCard icon="📖" title="Quick Definition" color="#38bdf8">
+        <p style={{ fontSize: 14, color: "#cbd5e1", lineHeight: 1.8, margin: 0 }}>
+          The <strong style={{color:"#38bdf8"}}>Range</strong> of a projectile is the <em>horizontal distance</em> it
+          travels from the launch point until it returns to the same vertical level.
+          It depends on the initial speed and the launch angle.
+        </p>
+      </SectionCard>
+
+      {/* Formula Card */}
+      <FormulaCard
+        title="Range Formula"
+        formula={
+          <span>
+            {katex ? null : null}
+            R = u²·sin(2θ) / g
+          </span>
+        }
+        variables={[
+          { symbol: "R", meaning: "Horizontal range (metres)" },
+          { symbol: "u", meaning: "Initial velocity (m/s)" },
+          { symbol: "θ", meaning: "Projection angle (degrees)" },
+          { symbol: "g", meaning: "Acceleration due to gravity = 9.8 m/s²" },
+          { symbol: "sin(2θ)", meaning: "Sine of twice the launch angle" },
+        ]}
+      />
+
+      {/* Step-by-Step Solution */}
+      <SectionCard icon="🧮" title="Step-by-Step Solution" color="#34d399">
+        <StepRow num={1} label="Write known values"
+          value="u = 20 m/s,  θ = 45°,  g = 9.8 m/s²" />
+        <StepRow num={2} label="Compute 2θ"
+          value="2 × 45° = 90°" />
+        <StepRow num={3} label="Find sin(2θ)"
+          value="sin(90°) = 1  ← maximum possible value" />
+        <StepRow num={4} label="Substitute into R = u²·sin(2θ) / g"
+          value="R = (20)² × 1 / 9.8 = 400 / 9.8" />
+        <StepRow num={5} highlight label="Final Answer"
+          value={`R ≈ ${R} metres`} />
+      </SectionCard>
+
+      {/* Result Banner */}
+      <div style={{
+        background: "linear-gradient(90deg,#064e3b,#065f46)",
+        border: "1.5px solid #34d399",
+        borderRadius: 14,
+        padding: "18px 24px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginBottom: 18,
+        flexWrap: "wrap",
+        gap: 12
+      }}>
+        <div>
+          <div style={{ fontSize: 11, color: "#6ee7b7", letterSpacing: 2, textTransform: "uppercase" }}>
+            ✅ Result
+          </div>
+          <div style={{ fontSize: 28, fontWeight: 800, color: "#ecfdf5", marginTop: 4 }}>
+            R ≈ {R} m
+          </div>
+        </div>
+        <div style={{
+          background: "#065f46",
+          borderRadius: 10,
+          padding: "10px 16px",
+          fontSize: 13,
+          color: "#a7f3d0",
+          lineHeight: 1.7
+        }}>
+          <div>u² = 400</div>
+          <div>sin(90°) = 1</div>
+          <div>g = 9.8 m/s²</div>
+        </div>
+      </div>
+
+      {/* Key Insight */}
+      <SectionCard icon="💡" title="Key Insight" color="#fbbf24">
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {[
+            ["45° gives maximum range", "At θ = 45°, sin(2θ) = sin(90°) = 1, which is the maximum value of sine."],
+            ["Complementary angles give equal range", "A ball at 30° and 60° will land at the same spot."],
+            ["Range ∝ u²", "Doubling speed quadruples the range."],
+          ].map(([title, desc], i) => (
+            <div key={i} style={{
+              background: "#1c1a0a",
+              borderRadius: 8,
+              padding: "10px 14px",
+              borderLeft: "3px solid #fbbf24"
+            }}>
+              <div style={{ fontWeight: 700, color: "#fde68a", fontSize: 13 }}>{title}</div>
+              <div style={{ color: "#d1d5db", fontSize: 13, marginTop: 3 }}>{desc}</div>
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+      {/* Comparison Table */}
+      <SectionCard icon="📊" title="Range at Different Angles (u = 20 m/s)" color="#a78bfa">
+        <div style={{ overflowX: "auto" }}>
+          <table style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            fontSize: 13,
+            color: "#e2e8f0"
+          }}>
+            <thead>
+              <tr style={{ background: "#1e1b4b" }}>
+                {["Angle (θ)", "sin(2θ)", "Range (m)"].map(h => (
+                  <th key={h} style={{
+                    padding: "10px 14px",
+                    textAlign: "center",
+                    color: "#a78bfa",
+                    fontWeight: 700,
+                    borderBottom: "2px solid #4338ca",
+                    letterSpacing: 0.5
+                  }}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                [30, Math.sin(60 * Math.PI / 180)],
+                [45, 1],
+                [60, Math.sin(120 * Math.PI / 180)],
+                [75, Math.sin(150 * Math.PI / 180)],
+              ].map(([angle, sinVal], i) => {
+                const range = ((400 * sinVal) / g).toFixed(2);
+                const isHighlight = angle === 45;
+                return (
+                  <tr key={i} style={{
+                    background: isHighlight ? "#1e1b4b" : i % 2 === 0 ? "#0f172a" : "#111827",
+                    borderLeft: isHighlight ? "3px solid #6366f1" : "3px solid transparent"
+                  }}>
+                    <td style={{ padding: "10px 14px", textAlign: "center", fontWeight: isHighlight ? 700 : 400, color: isHighlight ? "#a5b4fc" : "#e2e8f0" }}>
+                      {angle}° {isHighlight ? "★" : ""}
+                    </td>
+                    <td style={{ padding: "10px 14px", textAlign: "center", color: "#94a3b8" }}>
+                      {sinVal.toFixed(3)}
+                    </td>
+                    <td style={{ padding: "10px 14px", textAlign: "center", fontWeight: isHighlight ? 700 : 400, color: isHighlight ? "#34d399" : "#e2e8f0" }}>
+                      {range} m
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <div style={{ fontSize: 11, color: "#6b7280", marginTop: 8, textAlign: "right" }}>
+          ★ = This problem's angle
+        </div>
+      </SectionCard>
+
+      {/* Suggested Questions */}
+      <SectionCard icon="🎯" title="Try These Next" color="#f472b6">
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {[
+            "A ball is thrown at 30° with 40 m/s. Find its range.",
+            "At what angle should a ball be thrown to achieve maximum range?",
+            "Find the time of flight for this projectile.",
+            "What is the maximum height reached?",
+          ].map((q, i) => (
+            <div key={i} style={{
+              background: "#1a0a14",
+              borderRadius: 8,
+              padding: "10px 14px",
+              borderLeft: "3px solid #f472b6",
+              fontSize: 13,
+              color: "#fce7f3",
+              cursor: "pointer",
+              display: "flex",
+              gap: 10,
+              alignItems: "center"
+            }}>
+              <span style={{ color: "#f472b6", fontWeight: 700 }}>Q{i + 1}.</span>
+              {q}
+            </div>
+          ))}
+        </div>
+      </SectionCard>
+
+    </div>
+  );
+}

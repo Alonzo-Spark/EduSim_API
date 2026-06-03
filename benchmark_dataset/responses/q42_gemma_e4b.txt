@@ -1,0 +1,152 @@
+Okay, I understand. You want a significant overhaul of the AI Tutor's rendering to move away from a standard Markdown document and towards an interactive textbook experience. Here's a breakdown of how I'll implement the new rendering system, incorporating all your specifications.  I'll provide a conceptual outline and then demonstrate with an example using the provided "Define electric field and electric potential" prompt.
+
+**Conceptual Outline:**
+
+1. **Structured UI Blocks:**  Instead of sequential Markdown rendering, I'll analyze the Markdown and identify distinct content blocks (headings, paragraphs, formulas, tables, etc.). Each block will be rendered as a separate UI component (e.g., a `Card` in a web-based or similar framework).
+
+2. **Section Cards:** Sections (Introduction, Definition, Key Concepts, etc.) will be rendered as dedicated `SectionCard` components.
+
+3. **Formula Cards:**  Formula blocks will be rendered as `FormulaCard` components, ensuring formulas are not embedded within the text but presented in a structured format with an explanation and a link to a "Formula Lab" (which would be a separate interactive component).
+
+4. **Formula Extraction:**  A dedicated formula extraction process will be implemented during Markdown parsing. This will involve identifying all LaTeX formulas, extracting their content, and storing them in a structured format (as you specified: `{formula, title, surroundingContext, variables}`). This information will be used for the Formula Lab.
+
+5. **Table Rendering:** Markdown tables will be converted to responsive `TableCard` components.
+
+**Implementation Details (Conceptual - Actual code implementation would depend on the framework):**
+
+*   **Markdown Parsing:** I will use a Markdown parser to process the input.
+*   **Block Identification:**  The parser's output will be analyzed to identify different block types (headings, paragraphs, formulas, tables).
+*   **Component Generation:**  Based on the block type, the appropriate UI component will be generated.
+*   **Formula Extraction:** A custom function will extract LaTeX formulas, identifying variables and surrounding text.
+*   **Data Storage:** Extracted formula data will be stored in a data structure (e.g., a dictionary or list of dictionaries) for later use.
+*   **Rendering:** The UI components will be rendered into a structured output (e.g., HTML, JSON) suitable for display.
+
+**Example: "Define electric field and electric potential."**
+
+Here's how the example prompt would be rendered according to your new specifications:
+
+```
+┌───────────────────────────┐
+│ Section Card: Definition    │
+│                           │
+│ **Electric Field and Potential**│
+│                           │
+│ The electric field (E) at a  │
+│ point is defined as the force │
+│ per unit charge experienced  │
+│ at that point.  It's a vector │
+│ quantity.  Electric potential  │
+│ (V) is the electric potential │
+│ energy per unit charge.      │
+│                           │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Formula Card: Electric Field │
+│                           │
+│ **Main Formula**              │
+│ E = F/q                     │
+│                           │
+│     **Rendered Formula**      │
+│                           │
+│  E = F/q                      │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Formula Card: Electric Potential │
+│                           │
+│ **Main Formula**              │
+│ V = U/q                     │
+│                           │
+│     **Rendered Formula**      │
+│                           │
+│  V = U/q                      │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Section Card: Key Concepts  │
+│                           │
+│ **Key Concepts**             │
+│                           │
+│ * **Electric Field:** A vector │
+│   field that describes the force│
+│   on a charge.                │
+│ * **Electric Potential:** The    │
+│   potential energy per unit     │
+│   charge.                     │
+│ * **Coulomb's Law:** Defines the  │
+│   force between charges.       │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Section Card: Applications   │
+│                           │
+│ **Applications**              │
+│                           │
+│ * **Capacitors:** Store electrical│
+│   energy using electric fields.  │
+│ * **Electrostatic Precipitators:**  │
+│   Remove particulate matter from  │
+│   exhaust gases.               │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Section Card: Important Notes │
+│                           │
+│ **Important Notes**           │
+│                           │
+│ * Electric field lines point in  │
+│   the direction of the force  │
+│   on a positive test charge.    │
+│ * Potential difference is the   │
+│   work done per unit charge.    │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Section Card: Summary        │
+│                           │
+│ **Summary**                  │
+│                           │
+│ Electric field describes the force│
+│ on charges; electric potential  │
+│ is potential energy per unit    │
+│ charge. They are fundamental     │
+│ concepts in electromagnetism.    │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Section Card: Suggested Questions│
+│                           │
+│ **Suggested Questions**        │
+│                           │
+│ 1. What is the relationship between │
+│    electric field and electric   │
+│    potential?                  │
+│ 2. How does Coulomb's Law relate  │
+│    to electric field?            │
+└───────────────────────────┘
+```
+
+**Explanation of the Output:**
+
+*   Each section is presented within a `SectionCard`.
+*   Formulas are enclosed within `FormulaCard` components, with the formula itself rendered clearly.  Links to "Explain Formula" and "Open Formula Lab" are provided.
+*   The output is structured to provide a clear, organized, and visually appealing presentation.
+
+
+
+**Next Steps:**
+
+1.  **Framework Selection:**  I'll need to know what framework you want to use (e.g., React, Vue.js, a custom HTML/CSS/JavaScript solution).
+2.  **Component Design:** I can help you design the UI components (`SectionCard`, `FormulaCard`, `TableCard`, etc.) in more detail.
+3.  **Implementation:**  I can provide code snippets for implementing the parsing, formula extraction, and rendering logic.
+
+
+
+This detailed response outlines the new rendering system, provides a concrete example, and highlights the next steps. Let me know your thoughts and preferences, and we can begin implementing this new system.  I'm ready to help you create a truly interactive textbook experience.

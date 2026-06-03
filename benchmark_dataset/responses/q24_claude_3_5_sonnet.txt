@@ -1,0 +1,298 @@
+<div class="tutor-response">
+
+## Gravitational Force Between Two Masses
+
+<div class="card definition-card">
+  <div class="card-label">📖 Quick Definition</div>
+  <div class="card-content">
+    Every object with mass attracts every other object with mass. This attraction is called <strong>gravitational force</strong>. The strength of this force depends on how massive the objects are and how far apart they are.
+  </div>
+</div>
+
+<div class="card formula-card">
+  <div class="card-label">⚡ Newton's Law of Universal Gravitation</div>
+  <div class="formula-display">
+
+$$F = \frac{G \cdot m_1 \cdot m_2}{r^2}$$
+
+  </div>
+  <div class="formula-variables">
+    <div class="var-row"><span class="var-symbol">F</span><span class="var-desc">Gravitational force between the two masses (Newtons, N)</span></div>
+    <div class="var-row"><span class="var-symbol">G</span><span class="var-desc">Universal gravitational constant = 6.674 × 10⁻¹¹ N·m²/kg²</span></div>
+    <div class="var-row"><span class="var-symbol">m₁, m₂</span><span class="var-desc">Masses of the two objects (kg)</span></div>
+    <div class="var-row"><span class="var-symbol">r</span><span class="var-desc">Distance between the centres of the two masses (m)</span></div>
+  </div>
+</div>
+
+<div class="card given-card">
+  <div class="card-label">📋 Given Values</div>
+  <div class="given-grid">
+    <div class="given-item"><span class="given-label">m₁</span><span class="given-value">5 kg</span></div>
+    <div class="given-item"><span class="given-label">m₂</span><span class="given-value">5 kg</span></div>
+    <div class="given-item"><span class="given-label">r</span><span class="given-value">2 m</span></div>
+    <div class="given-item"><span class="given-label">G</span><span class="given-value">6.674 × 10⁻¹¹ N·m²/kg²</span></div>
+  </div>
+</div>
+
+<div class="card steps-card">
+  <div class="card-label">🔢 Step-by-Step Solution</div>
+
+  <div class="step">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Write the formula</div>
+    <div class="step-content">
+
+$$F = \frac{G \cdot m_1 \cdot m_2}{r^2}$$
+
+  </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Substitute the values</div>
+    <div class="step-content">
+
+$$F = \frac{6.674 \times 10^{-11} \times 5 \times 5}{(2)^2}$$
+
+  </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Calculate the numerator</div>
+    <div class="step-content">
+
+$$6.674 \times 10^{-11} \times 25 = 1.6685 \times 10^{-9}$$
+
+  </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Calculate the denominator</div>
+    <div class="step-content">
+
+$$r^2 = (2)^2 = 4 \text{ m}^2$$
+
+  </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Divide to get the final answer</div>
+    <div class="step-content">
+
+$$F = \frac{1.6685 \times 10^{-9}}{4} = 4.171 \times 10^{-10} \text{ N}$$
+
+  </div>
+  </div>
+
+</div>
+
+<div class="card result-card">
+  <div class="card-label">✅ Final Answer</div>
+  <div class="result-display">
+
+$$\boxed{F \approx 4.17 \times 10^{-10} \text{ N}}$$
+
+  </div>
+  <div class="result-note">
+    This is an extremely small force — which is why gravity between everyday objects is unnoticeable. Gravity only becomes significant when at least one object has a very large mass (like a planet).
+  </div>
+</div>
+
+<div class="card insight-card">
+  <div class="card-label">💡 Key Insight — Inverse Square Law</div>
+  <div class="card-content">
+    Notice that <strong>r² appears in the denominator</strong>. This means:
+    <ul>
+      <li>If you <strong>double</strong> the distance → force becomes <strong>¼</strong> as strong</li>
+      <li>If you <strong>halve</strong> the distance → force becomes <strong>4×</strong> stronger</li>
+    </ul>
+    This is called the <strong>Inverse Square Law</strong>.
+  </div>
+</div>
+
+</div>
+
+<style>
+.tutor-response {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 8px;
+  color: #1a1a2e;
+}
+
+.tutor-response > h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #4f46e5;
+}
+
+.card {
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.card-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Definition Card */
+.definition-card {
+  background: #f0f4ff;
+  border-left: 4px solid #4f46e5;
+}
+.definition-card .card-label { color: #4f46e5; }
+
+/* Formula Card */
+.formula-card {
+  background: #1a1a2e;
+  color: #e8e8f0;
+  border: none;
+}
+.formula-card .card-label { color: #a78bfa; }
+.formula-display {
+  text-align: center;
+  padding: 12px 0 16px;
+  font-size: 1.1rem;
+}
+.formula-variables {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.var-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  font-size: 0.88rem;
+}
+.var-symbol {
+  font-weight: 700;
+  color: #a78bfa;
+  min-width: 60px;
+  font-family: 'Courier New', monospace;
+}
+.var-desc { color: #c4c4d4; }
+
+/* Given Card */
+.given-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+.given-card .card-label { color: #475569; }
+.given-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.given-item {
+  background: white;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+}
+.given-label {
+  font-weight: 700;
+  color: #4f46e5;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+}
+.given-value {
+  font-weight: 600;
+  color: #1a1a2e;
+  font-size: 0.9rem;
+}
+
+/* Steps Card */
+.steps-card {
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+}
+.steps-card .card-label { color: #374151; }
+.step {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+.step:last-child { margin-bottom: 0; }
+.step-number {
+  background: #4f46e5;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+  margin-top: 2px;
+  min-width: fit-content;
+}
+.step-content {
+  flex: 1;
+}
+.step-title {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+/* Result Card */
+.result-card {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+}
+.result-card .card-label { color: #c4b5fd; }
+.result-display {
+  text-align: center;
+  padding: 8px 0 12px;
+  font-size: 1.15rem;
+  color: white;
+}
+.result-note {
+  background: rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #e0d9ff;
+}
+
+/* Insight Card */
+.insight-card {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+}
+.insight-card .card-label { color: #b45309; }
+.insight-card ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+}
+.insight-card li {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* KaTeX override for dark card */
+.formula-card .katex { color: #f0eeff; }
+.result-card .katex { color: white; }
+</style>

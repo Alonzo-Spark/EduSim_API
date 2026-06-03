@@ -1,0 +1,601 @@
+# Simple Pendulum Simulation: Mass vs. Period
+
+I'll create an interactive simulation to demonstrate how mass affects the period of a simple pendulum. The simulation will show that mass doesn't affect the pendulum's period - a key physics concept.
+
+## The Physics Behind Pendulums
+
+The period of a simple pendulum is given by:
+
+$$T = 2\pi\sqrt{\frac{L}{g}}$$
+
+Where:
+- $T$ = period (time for one complete swing)
+- $L$ = length of the pendulum
+- $g$ = acceleration due to gravity (9.8 m/s² on Earth)
+
+Notice that mass ($m$) is not in the equation! Let's verify this through simulation.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendulum Simulation: Mass vs. Period</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .simulation-container {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .explanation {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .controls {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        canvas {
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: inline-block;
+            width: 180px;
+            font-weight: 500;
+        }
+        
+        input[type="range"] {
+            width: 200px;
+            vertical-align: middle;
+        }
+        
+        .value-display {
+            display: inline-block;
+            width: 60px;
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        .formula-card {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .conclusion {
+            background: #e8f5e9;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            margin-right: 10px;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        .data-panel {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .key-concept {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Simple Pendulum Simulation: Mass vs. Period</h1>
+        <p>Explore how changing mass affects the period of a pendulum</p>
+    </header>
+    
+    <div class="container">
+        <div class="simulation-container">
+            <h2>Interactive Simulation</h2>
+            <canvas id="pendulumCanvas" width="500" height="400"></canvas>
+            <div id="simulationData" style="text-align: center; margin-top: 15px;">
+                <p>Current Period: <span id="periodValue">2.01</span> seconds</p>
+                <p>Angle: <span id="angleValue">0.00</span>° | Angular Velocity: <span id="velocityValue">0.00</span> rad/s</p>
+            </div>
+        </div>
+        
+        <div class="explanation">
+            <h2>Physics of Pendulums</h2>
+            
+            <div class="formula-card">
+                <h3>Pendulum Period Formula</h3>
+                <p>$$T = 2\pi\sqrt{\frac{L}{g}}$$</p>
+                <p>Where:</p>
+                <ul style="text-align: left;">
+                    <li>$T$ = Period (seconds)</li>
+                    <li>$L$ = Length of pendulum (meters)</li>
+                    <li>$g$ = Acceleration due to gravity (9.8 m/s²)</li>
+                </ul>
+            </div>
+            
+            <div class="key-concept">
+                <h3>Key Insight</h3>
+                <p>Notice that mass ($m$) does not appear in the equation! The period of a pendulum depends only on its length and gravity, not on its mass.</p>
+            </div>
+            
+            <h3>Why Mass Doesn't Affect Period</h3>
+            <p>The restoring force that brings the pendulum back to equilibrium is gravity:</p>
+            <p>$$F = -mg\sin\theta$$</p>
+            <p>But the acceleration of the pendulum is:</p>
+            <p>$$a = \frac{F}{m} = -g\sin\theta$$</p>
+            <p>The mass cancels out! Therefore, the motion is independent of mass.</p>
+            
+            <div class="conclusion">
+                <h3>Conclusion</h3>
+                <p>Changing the mass of a pendulum bob will <strong>not</strong> affect the period of its swing. This simulation allows you to verify this principle experimentally.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <h2>Simulation Controls</h2>
+        
+        <div class="control-group">
+            <label for="massSlider">Mass (kg):</label>
+            <input type="range" id="massSlider" min="1" max="20" value="5">
+            <span class="value-display" id="massValue">5</span>
+        </div>
+        
+        <div class="control-group">
+            <label for="lengthSlider">Length (m):</label>
+            <input type="range" id="lengthSlider" min="0.5" max="3" step="0.1" value="1.0">
+            <span class="value-display" id="lengthValue">1.0</span>
+        </div>
+        
+        <div class="control-group">
+            <label for="gravitySlider">Gravity (m/s²):</label>
+            <input type="range" id="gravitySlider" min="1" max="20" value="9.8">
+            <span class="value-display" id="gravityValue">9.8</span>
+        </div>
+        
+        <div class="control-group">
+            <label for="angleSlider">Initial Angle (°):</label>
+            <input type="range" id="angleSlider" min="5" max="80" value="30">
+            <span class="value-display" id="angleSliderValue">30</span>
+        </div>
+        
+        <div class="control-group">
+            <button id="startBtn">Start</button>
+            <button id="resetBtn">Reset</button>
+            <button id="pauseBtn">Pause</button>
+        </div>
+    </div>
+    
+    <div class="data-panel">
+        <h2>Experimental Data</h2>
+        <p>This table shows how changing mass affects the period:</p>
+        
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Mass (kg)</th>
+                    <th>Measured Period (s)</th>
+                    <th>Theoretical Period (s)</th>
+                    <th>Difference</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated by JavaScript -->
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 20px; text-align: center;">
+            <button id="runExperiment">Run Mass Experiment</button>
+            <p>This experiment will test pendulum periods with masses from 1kg to 20kg.</p>
+        </div>
+    </div>
+
+    <script>
+        // DOM elements
+        const canvas = document.getElementById('pendulumCanvas');
+        const ctx = canvas.getContext('2d');
+        const massSlider = document.getElementById('massSlider');
+        const lengthSlider = document.getElementById('lengthSlider');
+        const gravitySlider = document.getElementById('gravitySlider');
+        const angleSlider = document.getElementById('angleSlider');
+        const massValue = document.getElementById('massValue');
+        const lengthValue = document.getElementById('lengthValue');
+        const gravityValue = document.getElementById('gravityValue');
+        const angleSliderValue = document.getElementById('angleSliderValue');
+        const periodValue = document.getElementById('periodValue');
+        const angleValue = document.getElementById('angleValue');
+        const velocityValue = document.getElementById('velocityValue');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const runExperimentBtn = document.getElementById('runExperiment');
+        const dataTableBody = document.querySelector('#dataTable tbody');
+
+        // Pendulum parameters
+        let pendulum = {
+            angle: 30 * Math.PI / 180, // Initial angle in radians
+            angularVelocity: 0,
+            length: 1.0, // meters
+            mass: 5, // kg
+            gravity: 9.8, // m/s²
+            pivotX: 250,
+            pivotY: 100,
+            bobRadius: 20,
+            isRunning: false,
+            lastTime: 0,
+            periodMeasurements: [],
+            currentPeriod: 0,
+            lastZeroCrossing: 0
+        };
+
+        // Update displays
+        function updateDisplays() {
+            massValue.textContent = pendulum.mass;
+            lengthValue.textContent = pendulum.length.toFixed(1);
+            gravityValue.textContent = pendulum.gravity.toFixed(1);
+            angleSliderValue.textContent = (pendulum.angle * 180 / Math.PI).toFixed(0);
+            
+            // Update bob size based on mass (visual only)
+            pendulum.bobRadius = 15 + pendulum.mass / 2;
+        }
+
+        // Calculate theoretical period
+        function calculateTheoreticalPeriod() {
+            return 2 * Math.PI * Math.sqrt(pendulum.length / pendulum.gravity);
+        }
+
+        // Draw the pendulum
+        function drawPendulum() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw pivot
+            ctx.beginPath();
+            ctx.arc(pendulum.pivotX, pendulum.pivotY, 5, 0, Math.PI * 2);
+            ctx.fillStyle = '#333';
+            ctx.fill();
+            
+            // Calculate bob position
+            const bobX = pendulum.pivotX + pendulum.length * 100 * Math.sin(pendulum.angle);
+            const bobY = pendulum.pivotY + pendulum.length * 100 * Math.cos(pendulum.angle);
+            
+            // Draw string
+            ctx.beginPath();
+            ctx.moveTo(pendulum.pivotX, pendulum.pivotY);
+            ctx.lineTo(bobX, bobY);
+            ctx.strokeStyle = '#666';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Draw bob with color based on mass
+            const hue = 200 - (pendulum.mass * 5);
+            ctx.beginPath();
+            ctx.arc(bobX, bobY, pendulum.bobRadius, 0, Math.PI * 2);
+            ctx.fillStyle = `hsl(${hue}, 70%, 50%)`;
+            ctx.fill();
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Draw mass text
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(`${pendulum.mass}kg`, bobX, bobY);
+            
+            // Draw scale
+            ctx.beginPath();
+            ctx.moveTo(pendulum.pivotX - 150, pendulum.pivotY);
+            ctx.lineTo(pendulum.pivotX + 150, pendulum.pivotY);
+            ctx.strokeStyle = '#999';
+            ctx.setLineDash([5, 3]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Update data displays
+            angleValue.textContent = (pendulum.angle * 180 / Math.PI).toFixed(2);
+            velocityValue.textContent = pendulum.angularVelocity.toFixed(2);
+            periodValue.textContent = pendulum.currentPeriod.toFixed(2);
+        }
+
+        // Update pendulum physics
+        function updatePendulum(timestamp) {
+            if (!pendulum.isRunning) return;
+            
+            if (!pendulum.lastTime) pendulum.lastTime = timestamp;
+            const deltaTime = (timestamp - pendulum.lastTime) / 1000; // Convert to seconds
+            pendulum.lastTime = timestamp;
+            
+            // Calculate angular acceleration (damping included)
+            const damping = 0.995; // To prevent perpetual motion
+            const angularAcceleration = -pendulum.gravity / pendulum.length * Math.sin(pendulum.angle);
+            
+            // Update angular velocity and angle
+            pendulum.angularVelocity += angularAcceleration * deltaTime;
+            pendulum.angularVelocity *= damping;
+            pendulum.angle += pendulum.angularVelocity * deltaTime;
+            
+            // Period measurement
+            measurePeriod();
+            
+            drawPendulum();
+            requestAnimationFrame(updatePendulum);
+        }
+
+        // Measure the period by tracking zero crossings
+        function measurePeriod() {
+            const now = Date.now();
+            
+            // Check for crossing equilibrium (angle = 0) with positive velocity
+            if (Math.sign(pendulum.angle) !== Math.sign(pendulum.angle - pendulum.angularVelocity) && 
+                pendulum.angularVelocity > 0) {
+                
+                if (pendulum.lastZeroCrossing) {
+                    const period = (now - pendulum.lastZeroCrossing) / 1000; // Convert to seconds
+                    pendulum.currentPeriod = period;
+                }
+                pendulum.lastZeroCrossing = now;
+            }
+        }
+
+        // Reset the simulation
+        function resetSimulation() {
+            pendulum.angle = parseFloat(angleSlider.value) * Math.PI / 180;
+            pendulum.angularVelocity = 0;
+            pendulum.lastZeroCrossing = 0;
+            pendulum.currentPeriod = 0;
+            pendulum.lastTime = 0;
+            drawPendulum();
+        }
+
+        // Run experiment with different masses
+        function runMassExperiment() {
+            const originalMass = pendulum.mass;
+            const originalAngle = pendulum.angle;
+            const originalRunning = pendulum.isRunning;
+            
+            // Clear table
+            dataTableBody.innerHTML = '';
+            
+            // Pause simulation if running
+            if (pendulum.isRunning) {
+                pendulum.isRunning = false;
+                startBtn.textContent = 'Start';
+            }
+            
+            // Run tests for masses from 1kg to 20kg
+            for (let mass = 1; mass <= 20; mass += 2) {
+                pendulum.mass = mass;
+                resetSimulation();
+                
+                // Run simulation briefly to measure period
+                pendulum.isRunning = true;
+                const startTime = Date.now();
+                let periodMeasurements = [];
+                
+                // Run for 5 seconds to get stable measurement
+                const interval = setInterval(() => {
+                    if (pendulum.currentPeriod > 0) {
+                        periodMeasurements.push(pendulum.currentPeriod);
+                    }
+                    
+                    if (Date.now() - startTime > 5000) {
+                        clearInterval(interval);
+                        pendulum.isRunning = false;
+                        
+                        // Calculate average period
+                        const avgPeriod = periodMeasurements.length > 0 ? 
+                            periodMeasurements.reduce((a, b) => a + b, 0) / periodMeasurements.length : 0;
+                        
+                        // Calculate theoretical period
+                        const theoreticalPeriod = calculateTheoreticalPeriod();
+                        
+                        // Add row to table
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${mass}</td>
+                            <td>${avgPeriod.toFixed(3)}</td>
+                            <td>${theoreticalPeriod.toFixed(3)}</td>
+                            <td>${Math.abs(avgPeriod - theoreticalPeriod).toFixed(3)}</td>
+                        `;
+                        dataTableBody.appendChild(row);
+                        
+                        // Restore original state after last test
+                        if (mass >= 19) {
+                            pendulum.mass = originalMass;
+                            pendulum.angle = originalAngle;
+                            pendulum.isRunning = originalRunning;
+                            updateDisplays();
+                            drawPendulum();
+                        }
+                    }
+                }, 50);
+            }
+        }
+
+        // Event listeners
+        massSlider.addEventListener('input', () => {
+            pendulum.mass = parseFloat(massSlider.value);
+            updateDisplays();
+            drawPendulum();
+        });
+
+        lengthSlider.addEventListener('input', () => {
+            pendulum.length = parseFloat(lengthSlider.value);
+            updateDisplays();
+            drawPendulum();
+        });
+
+        gravitySlider.addEventListener('input', () => {
+            pendulum.gravity = parseFloat(gravitySlider.value);
+            updateDisplays();
+            drawPendulum();
+        });
+
+        angleSlider.addEventListener('input', () => {
+            pendulum.angle = parseFloat(angleSlider.value) * Math.PI / 180;
+            updateDisplays();
+            drawPendulum();
+        });
+
+        startBtn.addEventListener('click', () => {
+            if (!pendulum.isRunning) {
+                pendulum.isRunning = true;
+                pendulum.lastTime = 0;
+                startBtn.textContent = 'Running...';
+                requestAnimationFrame(updatePendulum);
+            }
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            pendulum.isRunning = false;
+            startBtn.textContent = 'Start';
+        });
+
+        resetBtn.addEventListener('click', resetSimulation);
+        runExperimentBtn.addEventListener('click', runMassExperiment);
+
+        // Initialize
+        updateDisplays();
+        drawPendulum();
+        
+        // Add initial data to table
+        const initialRow = document.createElement('tr');
+        initialRow.innerHTML = `
+            <td colspan="4" style="text-align: center; font-style: italic;">
+                Run the experiment to see how mass affects the period
+            </td>
+        `;
+        dataTableBody.appendChild(initialRow);
+    </script>
+</body>
+</html>
+```
+
+## Key Features of This Simulation
+
+1. **Interactive Physics Simulation**:
+   - Real-time pendulum motion with accurate physics
+   - Visual representation of the pendulum with mass-based coloring
+   - Continuous period measurement
+
+2. **Parameter Controls**:
+   - Adjust mass (1-20 kg)
+   - Change pendulum length (0.5-3 m)
+   - Modify gravity (1-20 m/s²)
+   - Set initial angle (5-80°)
+
+3. **Experimental Verification**:
+   - "Run Mass Experiment" button tests different masses
+   - Data table compares measured vs. theoretical periods
+   - Visual demonstration that mass doesn't affect period
+
+4. **Physics Explanation**:
+   - Clear presentation of the period formula
+   - Explanation of why mass is not a factor
+   - Theoretical background with mathematical formulas
+
+The simulation clearly demonstrates that while changing the mass of the pendulum bob, the period remains constant, proving the physics principle that mass does not affect a pendulum's period.

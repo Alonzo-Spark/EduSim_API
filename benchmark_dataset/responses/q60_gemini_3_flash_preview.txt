@@ -1,0 +1,75 @@
+```json
+{
+  "event": "gravity_changed",
+  "environment_state": "zero_g",
+  "ui_layout": "interactive_textbook",
+  "blocks": [
+    {
+      "type": "Introduction",
+      "title": "State Change: Microgravity Transition",
+      "content": "The sandbox environment has transitioned from a standard gravitational constant to **Zero-G**. In this state, the gravitational force vector $\\vec{g}$ is null, leading to weightlessness for all dynamic entities within the simulation."
+    },
+    {
+      "type": "Formula",
+      "title": "Gravitational Force Law",
+      "latex": "F_g = m \\cdot g",
+      "context": "Under Zero-G conditions, the acceleration due to gravity ($g$) becomes 0.",
+      "variables": [
+        {"symbol": "F_g", "label": "Weight (Force)"},
+        {"symbol": "m", "label": "Mass (Constant)"},
+        {"symbol": "g", "label": "Gravitational Acceleration (0 m/s²)"}
+      ],
+      "lab_link": "open_formula_lab_null_gravity"
+    },
+    {
+      "type": "Key Concepts",
+      "items": [
+        {
+          "concept": "Inertia Dominance",
+          "description": "Objects in motion remain in motion at a constant velocity unless acted upon by an external force (Newton's First Law)."
+        },
+        {
+          "concept": "Lack of Hydrostatic Pressure",
+          "description": "Fluid buoyancy is eliminated; bubbles do not rise and heavy particles do not settle."
+        }
+      ]
+    },
+    {
+      "type": "Formula",
+      "title": "Kinetic Energy in Vacuum/Zero-G",
+      "latex": "K_e = \\frac{1}{2}mv^2",
+      "context": "Since potential energy ($mgh$) is now zero, total mechanical energy is derived solely from velocity.",
+      "variables": [
+        {"symbol": "K_e", "label": "Kinetic Energy"},
+        {"symbol": "v", "label": "Velocity"}
+      ],
+      "lab_link": "open_energy_sim"
+    },
+    {
+      "type": "Characteristics",
+      "title": "Environmental Physics Changes",
+      "table": {
+        "headers": ["Property", "Standard Gravity (1g)", "Zero-G (0g)"],
+        "rows": [
+          ["Trajectory", "Parabolic Arc", "Linear Path"],
+          ["Weight", "$m \\times 9.8$", "0"],
+          ["Convection", "Thermal Buoyancy", "Diffusion Limited"],
+          ["Friction", "Normal Force Dependent", "Surface Tension Dependent"]
+        ]
+      }
+    },
+    {
+      "type": "Important Notes",
+      "content": "⚠️ **Collision Detection:** In zero-g, elastic collisions result in significantly higher rebound distances as there is no downward force to provide ground-plane friction."
+    },
+    {
+      "type": "Suggested Questions",
+      "questions": [
+        "How does the absence of a normal force affect friction calculations?",
+        "Predict the behavior of a liquid droplet in this environment.",
+        "Calculate the momentum of a 5kg mass moving at 2m/s in zero-g."
+      ]
+    }
+  ]
+}
+```

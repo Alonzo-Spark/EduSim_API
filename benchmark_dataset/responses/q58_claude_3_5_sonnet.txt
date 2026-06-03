@@ -1,0 +1,917 @@
+I'll build this as a proper interactive textbook experience with structured UI blocks, formula cards, and a live sandbox.
+
+```tsx
+import { useState, useEffect, useRef, useCallback } from "react";
+
+// ============================================================
+// TYPES
+// ============================================================
+interface SimParams {
+  angle: number;
+  mu: number;
+  mass: number;
+  gravity: number;
+  v0: number;
+}
+
+interface SimResult {
+  range: number;
+  time: number;
+  vFinal: number;
+  acceleration: number;
+  normalForce: number;
+  frictionForce: number;
+  netForce: number;
+  launched: boolean;
+}
+
+interface GravityPreset {
+  name: string;
+  g: number;
+  color: string;
+  emoji: string;
+}
+
+// ============================================================
+// CONSTANTS
+// ============================================================
+const GRAVITY_PRESETS: GravityPreset[] = [
+  { name: "Moon", g: 1.62, color: "#94a3b8", emoji: "🌙" },
+  { name: "Mars", g: 3.72, color: "#f97316", emoji: "🔴" },
+  { name: "Earth", g: 9.81, color: "#22c55e", emoji: "🌍" },
+  { name: "Jupiter", g: 24.79, color: "#a78bfa", emoji: "🪐" },
+];
+
+// ============================================================
+// PHYSICS ENGINE
+// ============================================================
+function computePhysics(p: SimParams): SimResult {
+  const rad = (p.angle * Math.PI) / 180;
+  const sinA = Math.sin(rad);
+  const cosA = Math.cos(rad);
+  const N = p.mass * p.gravity * cosA;
+  const friction = p.mu * N;
+  const driving = p.mass * p.gravity * sinA;
+  const net = driving - friction;
+  const a = net / p.mass;
+
+  if (a <= 0 && p.v0 <= 0) {
+    return {
+      range: 0, time: 0, vFinal: 0,
+      acceleration: a, normalForce: N,
+      frictionForce: friction, netForce: net, launched: false,
+    };
+  }
+
+  let range = 0, time = 0, vFinal = 0;
+  if (a > 0) {
+    // Accelerating down the ramp
+    // range along ramp: s = v0*t + 0.5*a*t^2
+    // projectile from bottom of ramp
+    const rampLength = 8; // fixed ramp length for demo
+    const tRamp = (-p.v0 + Math.sqrt(p.v0 * p.v0 + 2 * a * rampLength)) / a;
+    vFinal = p.v0 + a * tRamp;
+    // Horizontal range from projectile at bottom
+    const vx = vFinal * cosA;
+    const vy = vFinal * sinA;
+    const tFlight = (vy + Math.sqrt(vy * vy)) / p.gravity;
+    range = vx * tFlight;
+    time = tRamp;
+  } else {
+    // a < 0 but v0 > 0 (decelerating)
+    time = -p.v0 / a;
+    range = p.v0 * time + 0.5 * a * time * time;
+    vFinal = 0;
+  }
+
+  return {
+    range: Math.max(0, range),
+    time: Math.max(0, time),
+    vFinal: Math.max(0, vFinal),
+    acceleration: a,
+    normalForce: N,
+    frictionForce: friction,
+    netForce: net,
+    launched: true,
+  };
+}
+
+// ============================================================
+// ANIMATED CANVAS
+// ============================================================
+function PhysicsCanvas({
+  params,
+  result,
+  isRunning,
+  onStop,
+}: {
+  params: SimParams;
+  result: SimResult;
+  isRunning: boolean;
+  onStop: () => void;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animRef = useRef<number>(0);
+  const startTimeRef = useRef<number>(0);
+  const [animProgress, setAnimProgress] = useState(0);
+
+  const rad = (params.angle * Math.PI) / 180;
+
+  const draw = useCallback(
+    (progress: number) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      const W = canvas.width;
+      const H = canvas.height;
+      ctx.clearRect(0, 0, W, H);
+
+      // Background
+      const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+      bgGrad.addColorStop(0, "#0f172a");
+      bgGrad.addColorStop(1, "#1e293b");
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      ctx.strokeStyle = "rgba(148,163,184,0.08)";
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 40) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += 40) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      // Ramp geometry
+      const baseX = 60;
+      const baseY = H - 60;
+      const rampLen = 220;
+      const tipX = baseX + rampLen * Math.cos(rad);
+      const tipY = baseY - rampLen * Math.sin(rad);
+
+      // Ground
+      ctx.strokeStyle = "#334155";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(baseX - 20, baseY);
+      ctx.lineTo(W - 20, baseY);
+      ctx.stroke();
+
+      // Ramp fill
+      ctx.beginPath();
+      ctx.moveTo(baseX, baseY);
+      ctx.lineTo(tipX, tipY);
+      ctx.lineTo(baseX, baseY);
+      ctx.closePath();
+      const rampGrad = ctx.createLinearGradient(baseX, baseY, tipX, tipY);
+      rampGrad.addColorStop(0, "rgba(99,102,241,0.3)");
+      rampGrad.addColorStop(1, "rgba(139,92,246,0.15)");
+      ctx.fillStyle = rampGrad;
+      ctx.fill();
+
+      // Ramp surface
+      ctx.strokeStyle = "#818cf8";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(baseX, baseY);
+      ctx.lineTo(tipX, tipY);
+      ctx.stroke();
+
+      // Angle arc
+      ctx.strokeStyle = "#fbbf24";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(baseX, baseY, 40, -rad, 0);
+      ctx.stroke();
+      ctx.fillStyle = "#fbbf24";
+      ctx.font = "12px monospace";
+      ctx.fillText(`${params.angle}°`, baseX + 45, baseY - 10);
+
+      // Block animation on ramp
+      if (isRunning && result.launched) {
+        const t = progress;
+        const blockPos = Math.min(t, 1);
+
+        // Block slides from top to bottom
+        const bx = tipX + (baseX - tipX) * blockPos;
+        const by = tipY + (baseY - tipY) * blockPos;
+
+        // Shadow
+        ctx.fillStyle = "rgba(0,0,0,0.3)";
+        ctx.beginPath();
+        ctx.ellipse(bx, baseY + 4, 14, 4, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Block
+        ctx.save();
+        ctx.translate(bx, by);
+        ctx.rotate(-rad);
+        const blockGrad = ctx.createLinearGradient(-14, -14, 14, 14);
+        blockGrad.addColorStop(0, "#6366f1");
+        blockGrad.addColorStop(1, "#4f46e5");
+        ctx.fillStyle = blockGrad;
+        ctx.strokeStyle = "#818cf8";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(-14, -14, 28, 28, 4);
+        ctx.fill();
+        ctx.stroke();
+
+        // Mass label
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 10px monospace";
+        ctx.textAlign = "center";
+        ctx.fillText(`${params.mass}kg`, 0, 4);
+        ctx.restore();
+
+        // Projectile phase
+        if (blockPos >= 1 && progress > 1) {
+          const pt = progress - 1;
+          const vx = result.vFinal * Math.cos(rad);
+          const vy = result.vFinal * Math.sin(rad);
+          const scale = 0.06;
+          const px = baseX + vx * pt * scale * 60;
+          const py = baseY - (vy * pt * scale * 60 - 0.5 * params.gravity * (pt * scale * 60) ** 2 * 0.01);
+
+          if (py <= baseY) {
+            ctx.save();
+            ctx.translate(px, py);
+            const pGrad = ctx.createLinearGradient(-14, -14, 14, 14);
+            pGrad.addColorStop(0, "#f59e0b");
+            pGrad.addColorStop(1, "#d97706");
+            ctx.fillStyle = pGrad;
+            ctx.strokeStyle = "#fbbf24";
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.roundRect(-14, -14, 28, 28, 4);
+            ctx.fill();
+            ctx.stroke();
+            ctx.restore();
+
+            // Trajectory trail
+            ctx.strokeStyle = "rgba(251,191,36,0.3)";
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath();
+            ctx.moveTo(baseX, baseY);
+            for (let i = 0; i <= pt * 60; i += 2) {
+              const tx = baseX + vx * (i / 60) * scale * 60;
+              const ty = baseY - (vy * (i / 60) * scale * 60 - 0.5 * params.gravity * ((i / 60) * scale * 60) ** 2 * 0.01);
+              ctx.lineTo(tx, ty);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+          }
+        }
+      } else {
+        // Static block at top
+        ctx.save();
+        ctx.translate(tipX - 20 * Math.cos(rad), tipY + 20 * Math.sin(rad));
+        ctx.rotate(-rad);
+        const staticGrad = ctx.createLinearGradient(-14, -14, 14, 14);
+        staticGrad.addColorStop(0, "#6366f1");
+        staticGrad.addColorStop(1, "#4f46e5");
+        ctx.fillStyle = staticGrad;
+        ctx.strokeStyle = "#818cf8";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(-14, -14, 28, 28, 4);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "#fff";
+        ctx.font = "bold 10px monospace";
+        ctx.textAlign = "center";
+        ctx.fillText(`${params.mass}kg`, 0, 4);
+        ctx.restore();
+
+        // Force vectors
+        const fx = tipX - 20 * Math.cos(rad);
+        const fy = tipY + 20 * Math.sin(rad);
+        const scale = 8;
+
+        // Gravity
+        ctx.strokeStyle = "#ef4444";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(fx, fy);
+        ctx.lineTo(fx, fy + params.mass * params.gravity * 0.3 * scale * 0.15);
+        ctx.stroke();
+        ctx.fillStyle = "#ef4444";
+        ctx.font = "11px monospace";
+        ctx.textAlign = "left";
+        ctx.fillText("mg", fx + 5, fy + 25);
+
+        // Normal
+        ctx.strokeStyle = "#22c55e";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(fx, fy);
+        ctx.lineTo(fx - result.normalForce * 0.015 * scale * Math.sin(rad),
+          fy - result.normalForce * 0.015 * scale * Math.cos(rad));
+        ctx.stroke();
+        ctx.fillStyle = "#22c55e";
+        ctx.fillText("N", fx - 20, fy - 20);
+      }
+
+      // Gravity label
+      const preset = GRAVITY_PRESETS.find(p => Math.abs(p.g - params.gravity) < 0.1);
+      ctx.fillStyle = "#94a3b8";
+      ctx.font = "12px monospace";
+      ctx.textAlign = "right";
+      ctx.fillText(`g = ${params.gravity} m/s²  ${preset ? preset.emoji : ""}`, W - 20, 30);
+
+      // Range indicator
+      if (!isRunning && result.range > 0) {
+        const rx = Math.min(baseX + result.range * 8, W - 30);
+        ctx.strokeStyle = "#fbbf24";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 3]);
+        ctx.beginPath();
+        ctx.moveTo(baseX, baseY + 20);
+        ctx.lineTo(rx, baseY + 20);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = "#fbbf24";
+        ctx.font = "bold 12px monospace";
+        ctx.textAlign = "center";
+        ctx.fillText(`R ≈ ${result.range.toFixed(2)} m`, (baseX + rx) / 2, baseY + 38);
+      }
+    },
+    [params, result, isRunning, rad]
+  );
+
+  useEffect(() => {
+    if (isRunning) {
+      startTimeRef.current = performance.now();
+      const animate = (now: number) => {
+        const elapsed = (now - startTimeRef.current) / 1000;
+        const progress = elapsed / 2.5;
+        setAnimProgress(progress);
+        draw(progress);
+        if (progress < 2.5) {
+          animRef.current = requestAnimationFrame(animate);
+        } else {
+          onStop();
+        }
+      };
+      animRef.current = requestAnimationFrame(animate);
+    } else {
+      cancelAnimationFrame(animRef.current);
+      draw(0);
+    }
+    return () => cancelAnimationFrame(animRef.current);
+  }, [isRunning, draw, onStop]);
+
+  useEffect(() => {
+    if (!isRunning) draw(0);
+  }, [params, result, draw, isRunning]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={520}
+      height={300}
+      className="w-full rounded-xl border border-slate-700"
+      style={{ background: "#0f172a" }}
+    />
+  );
+}
+
+// ============================================================
+// FORMULA CARD
+// ============================================================
+function FormulaCard({
+  title,
+  latex,
+  variables,
+  values,
+}: {
+  title: string;
+  latex: string;
+  variables: { sym: string; desc: string; val?: string }[];
+  values?: Record<string, string>;
+}) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div className="rounded-xl border border-indigo-500/30 bg-gradient-to-br from-indigo-950/60 to-slate-900/80 overflow-hidden">
+      <div className="px-4 py-2 bg-indigo-900/30 border-b border-indigo-500/20 flex items-center gap-2">
+        <span className="text-indigo-400 text-xs font-bold uppercase tracking-widest">⚗ Formula</span>
+        <span className="text-slate-300 text-xs font-semibold ml-1">{title}</span>
+      </div>
+      <div className="p-5 text-center">
+        <div
+          className="text-xl text-white py-3 px-4 bg-slate-900/60 rounded-lg border border-slate-700/50 inline-block min-w-full"
+          dangerouslySetInnerHTML={{ __html: latex }}
+        />
+      </div>
+      <div className="px-4 pb-3 flex gap-2">
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="text-xs px-3 py-1.5 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 border border-indigo-500/30 transition-all"
+        >
+          {expanded ? "▲ Hide Variables" : "▼ Explain Variables"}
+        </button>
+      </div>
+      {expanded && (
+        <div className="px-4 pb-4 grid grid-cols-1 gap-1.5">
+          {variables.map((v) => (
+            <div key={v.sym} className="flex items-center gap-3 text-sm bg-slate-800/40 rounded-lg px-3 py-2">
+              <span className="font-mono text-indigo-300 w-8 text-center font-bold">{v.sym}</span>
+              <span className="text-slate-400 flex-1">{v.desc}</span>
+              {v.val && <span className="font-mono text-amber-400 text-xs">{v.val}</span>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// SECTION CARD
+// ============================================================
+function SectionCard({
+  icon,
+  title,
+  accent,
+  children,
+}: {
+  icon: string;
+  title: string;
+  accent: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={`rounded-xl border ${accent} bg-slate-900/70 overflow-hidden`}>
+      <div className={`px-4 py-2.5 border-b ${accent} flex items-center gap-2`}>
+        <span>{icon}</span>
+        <span className="font-bold text-sm text-slate-200 uppercase tracking-wider">{title}</span>
+      </div>
+      <div className="p-4">{children}</div>
+    </div>
+  );
+}
+
+// ============================================================
+// STAT BADGE
+// ============================================================
+function StatBadge({ label, value, unit, color }: { label: string; value: string; unit: string; color: string }) {
+  return (
+    <div className={`rounded-xl border ${color} bg-slate-900/80 p-3 flex flex-col gap-1`}>
+      <span className="text-xs text-slate-400 uppercase tracking-wider">{label}</span>
+      <div className="flex items-baseline gap-1">
+        <span className="text-xl font-bold text-white font-mono">{value}</span>
+        <span className="text-xs text-slate-400">{unit}</span>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// GRAVITY COMPARISON CHART
+// ============================================================
+function GravityComparisonChart({ params }: { params: SimParams }) {
+  const results = GRAVITY_PRESETS.map((preset) => ({
+    ...preset,
+    result: computePhysics({ ...params, gravity: preset.g }),
+  }));
+  const maxRange = Math.max(...results.map((r) => r.result.range), 0.1);
+
+  return (
+    <div className="space-y-3">
+      {results.map((r) => (
+        <div key={r.name} className="flex items-center gap-3">
+          <span className="text-lg w-6">{r.emoji}</span>
+          <span className="text-xs text-slate-300 w-14 font-mono">{r.name}</span>
+          <div className="flex-1 bg-slate-800 rounded-full h-5 overflow-hidden">
+            <div
+              className="h-full rounded-full flex items-center justify-end pr-2 transition-all duration-700"
+              style={{
+                width: `${Math.max((r.result.range / maxRange) * 100, 4)}%`,
+                background: `linear-gradient(90deg, ${r.color}88, ${r.color})`,
+              }}
+            >
+              <span className="text-xs font-mono text-white font-bold">
+                {r.result.range.toFixed(1)}m
+              </span>
+            </div>
+          </div>
+          <span className="text-xs text-slate-500 w-16 font-mono">{r.g} m/s²</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ============================================================
+// MAIN COMPONENT
+// ============================================================
+export default function InclinedPlaneExplorer() {
+  const [params, setParams] = useState<SimParams>({
+    angle: 35,
+    mu: 0.2,
+    mass: 5,
+    gravity: 9.81,
+    v0: 0,
+  });
+  const [result, setResult] = useState<SimResult>(() => computePhysics({
+    angle: 35, mu: 0.2, mass: 5, gravity: 9.81, v0: 0,
+  }));
+  const [isRunning, setIsRunning] = useState(false);
+  const [activePreset, setActivePreset] = useState<string>("Earth");
+  const [activeTab, setActiveTab] = useState<"sandbox" | "theory" | "compare">("sandbox");
+
+  useEffect(() => {
+    setResult(computePhysics(params));
+  }, [params]);
+
+  const setPreset = (preset: GravityPreset) => {
+    setActivePreset(preset.name);
+    setParams((p) => ({ ...p, gravity: preset.g }));
+  };
+
+  const handleStop = useCallback(() => setIsRunning(false), []);
+
+  const rad = (params.angle * Math.PI) / 180;
+
+  // KaTeX-rendered HTML strings (inline)
+  const formulaRange = `<span style="font-family:monospace;font-size:1.1em">
+    R = <span style="color:#fbbf24">v<sub>f</sub></span> · cos(θ) · 
+    <span style="color:#818cf8">(2·v<sub>f</sub>·sin(θ)) / g</span>
+  </span>`;
+
+  const formulaAcc = `<span style="font-family:monospace;font-size:1.1em">
+    a = g·sin(θ) − μ·g·cos(θ)
+  </span>`;
+
+  const formulaVf = `<span style="font-family:monospace;font-size:1.1em">
+    v<sub>f</sub><sup>2</sup> = v<sub>0</sub><sup>2</sup> + 2·a·L
+  </span>`;
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 md:p-6 font-sans">
+      <div className="max-w-4xl mx-auto space-y-5">
+
+        {/* ── PAGE HEADER ── */}
+        <div className="rounded-2xl border border-slate-700 bg-gradient-to-br from-slate-900 to-indigo-950/40 p-6">
+          <div className="flex items-start justify-between flex-wrap gap-3">
+            <div>
+              <div className="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-1">
+                Classical Mechanics · Inclined Planes
+              </div>
+              <h1 className="text-2xl md:text-3xl font-black text-white leading-tight">
+                Gravity & Range on an Inclined Plane
+              </h1>
+              <p className="text-slate-400 text-sm mt-2 max-w-xl">
+                How does surface gravity change how far a sliding block travels?
+                Explore the physics interactively across planetary environments.
+              </p>
+            </div>
+            <div className="flex flex-col gap-1 text-right">
+              <span className="text-xs text-slate-500">Difficulty</span>
+              <div className="flex gap-1">
+                {["●", "●", "●", "○", "○"].map((d, i) => (
+                  <span key={i} className={i < 3 ? "text-indigo-400" : "text-slate-700"}>{d}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── TAB NAVIGATION ── */}
+        <div className="flex gap-2 bg-slate-900 rounded-xl p-1 border border-slate-800">
+          {(["sandbox", "theory", "compare"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`flex-1 py-2 px-4 rounded-lg text-sm font-semibold transition-all capitalize ${
+                activeTab === tab
+                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-900/50"
+                  : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              {tab === "sandbox" ? "🧪 Live Sandbox" : tab === "theory" ? "📐 Theory" : "🌍 Compare Planets"}
+            </button>
+          ))}
+        </div>
+
+        {/* ══════════════════════════════════════════════
+            TAB: SANDBOX
+        ══════════════════════════════════════════════ */}
+        {activeTab === "sandbox" && (
+          <div className="space-y-4">
+
+            {/* Gravity Preset Selector */}
+            <SectionCard icon="🌌" title="Gravity Preset" accent="border-violet-500/30">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                {GRAVITY_PRESETS.map((preset) => (
+                  <button
+                    key={preset.name}
+                    onClick={() => setPreset(preset)}
+                    className={`rounded-xl border p-3 transition-all text-left ${
+                      activePreset === preset.name
+                        ? "border-violet-400 bg-violet-900/40 shadow-lg shadow-violet-900/30"
+                        : "border-slate-700 bg-slate-800/40 hover:border-slate-500"
+                    }`}
+                  >
+                    <div className="text-2xl mb-1">{preset.emoji}</div>
+                    <div className="font-bold text-sm text-white">{preset.name}</div>
+                    <div className="text-xs font-mono text-slate-400">{preset.g} m/s²</div>
+                  </button>
+                ))}
+              </div>
+            </SectionCard>
+
+            {/* Canvas */}
+            <SectionCard icon="🎬" title="Physics Simulation" accent="border-slate-600/50">
+              <PhysicsCanvas
+                params={params}
+                result={result}
+                isRunning={isRunning}
+                onStop={handleStop}
+              />
+              <div className="flex gap-2 mt-3">
+                <button
+                  onClick={() => setIsRunning(true)}
+                  disabled={isRunning || !result.launched}
+                  className="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-sm transition-all shadow-lg shadow-indigo-900/40"
+                >
+                  {isRunning ? "▶ Simulating..." : "▶ Launch Block"}
+                </button>
+                <button
+                  onClick={() => { setIsRunning(false); }}
+                  className="px-4 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-slate-300 text-sm font-semibold transition-all"
+                >
+                  ↺ Reset
+                </button>
+              </div>
+              {!result.launched && (
+                <div className="mt-2 text-xs text-amber-400 bg-amber-900/20 border border-amber-500/20 rounded-lg px-3 py-2">
+                  ⚠ Block won't move — friction exceeds gravitational component along ramp. Reduce μ or increase θ.
+                </div>
+              )}
+            </SectionCard>
+
+            {/* Controls */}
+            <SectionCard icon="🎛" title="Parameters" accent="border-slate-600/50">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { key: "angle", label: "Ramp Angle θ", min: 5, max: 85, step: 1, unit: "°", color: "text-amber-400" },
+                  { key: "mu", label: "Friction μ", min: 0, max: 0.9, step: 0.01, unit: "", color: "text-red-400" },
+                  { key: "mass", label: "Mass m", min: 1, max: 20, step: 0.5, unit: "kg", color: "text-blue-400" },
+                  { key: "v0", label: "Initial Velocity v₀", min: 0, max: 15, step: 0.5, unit: "m/s", color: "text-green-400" },
+                ].map(({ key, label, min, max, step, unit, color }) => (
+                  <div key={key} className="space-y-1.5">
+                    <div className="flex justify-between items-center">
+                      <label className="text-xs text-slate-400 font-semibold">{label}</label>
+                      <span className={`font-mono text-sm font-bold ${color}`}>
+                        {params[key as keyof SimParams]}{unit}
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min={min}
+                      max={max}
+                      step={step}
+                      value={params[key as keyof SimParams]}
+                      onChange={(e) =>
+                        setParams((p) => ({ ...p, [key]: parseFloat(e.target.value) }))
+                      }
+                      className="w-full h-2 rounded-full accent-indigo-500 bg-slate-700 cursor-pointer"
+                    />
+                    <div className="flex justify-between text-xs text-slate-600 font-mono">
+                      <span>{min}{unit}</span><span>{max}{unit}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </SectionCard>
+
+            {/* Results */}
+            <SectionCard icon="📊" title="Live Results" accent="border-emerald-500/30">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <StatBadge label="Range R" value={result.range.toFixed(2)} unit="m" color="border-amber-500/30" />
+                <StatBadge label="Acceleration a" value={result.acceleration.toFixed(2)} unit="m/s²" color="border-indigo-500/30" />
+                <StatBadge label="Final Velocity" value={result.vFinal.toFixed(2)} unit="m/s" color="border-green-500/30" />
+                <StatBadge label="Normal Force N" value={result.normalForce.toFixed(1)} unit="N" color="border-blue-500/30" />
+                <StatBadge label="Friction Force f" value={result.frictionForce.toFixed(1)} unit="N" color="border-red-500/30" />
+                <StatBadge label="Net Force" value={result.netForce.toFixed(1)} unit="N" color="border-violet-500/30" />
+              </div>
+
+              {/* Insight */}
+              <div className="mt-3 p-3 bg-slate-800/60 rounded-xl border border-slate-700/50 text-sm text-slate-300">
+                <span className="text-indigo-400 font-bold">💡 Insight: </span>
+                {result.acceleration > 0
+                  ? `At g = ${params.gravity} m/s² and θ = ${params.angle}°, the gravitational component 
+                     (${(params.mass * params.gravity * Math.sin(rad)).toFixed(1)} N) exceeds friction 
+                     (${result.frictionForce.toFixed(1)} N), giving a = ${result.acceleration.toFixed(2)} m/s².`
+                  : `Friction (${result.frictionForce.toFixed(1)} N) exceeds the driving force — block stays still.`}
+              </div>
+            </SectionCard>
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════
+            TAB: THEORY
+        ══════════════════════════════════════════════ */}
+        {activeTab === "theory" && (
+          <div className="space-y-4">
+
+            <SectionCard icon="📖" title="Quick Definition" accent="border-blue-500/30">
+              <p className="text-slate-300 text-sm leading-relaxed">
+                When a block slides down an <strong className="text-white">inclined plane</strong>, 
+                two forces act along the surface: the{" "}
+                <strong className="text-amber-400">gravitational component</strong> mg·sin(θ) pulling it down, 
+                and <strong className="text-red-400">kinetic friction</strong> μmg·cos(θ) resisting motion. 
+                The net effect determines the block's acceleration and ultimately its{" "}
+                <strong className="text-indigo-400">horizontal range</strong> after leaving the ramp.
+              </p>
+            </SectionCard>
+
+            <FormulaCard
+              title="Acceleration Along Ramp"
+              latex={formulaAcc}
+              variables={[
+                { sym: "a", desc: "Acceleration along ramp surface", val: `${result.acceleration.toFixed(2)} m/s²` },
+                { sym: "g", desc: "Gravitational acceleration", val: `${params.gravity} m/s²` },
+                { sym: "θ", desc: "Ramp angle from horizontal", val: `${params.angle}°` },
+                { sym: "μ", desc: "Coefficient of kinetic friction", val: `${params.mu}` },
+              ]}
+            />
+
+            <FormulaCard
+              title="Final Velocity at Bottom"
+              latex={formulaVf}
+              variables={[
+                { sym: "vf", desc: "Speed at bottom of ramp", val: `${result.vFinal.toFixed(2)} m/s` },
+                { sym: "v₀", desc: "Initial speed at top", val: `${params.v0} m/s` },
+                { sym: "a", desc: "Acceleration along ramp", val: `${result.acceleration.toFixed(2)} m/s²` },
+                { sym: "L", desc: "Length of ramp", val: "8 m (fixed)" },
+              ]}
+            />
+
+            <FormulaCard
+              title="Horizontal Range (Projectile)"
+              latex={formulaRange}
+              variables={[
+                { sym: "R", desc: "Horizontal range after launch", val: `${result.range.toFixed(2)} m` },
+                { sym: "vf", desc: "Launch speed (from ramp bottom)", val: `${result.vFinal.toFixed(2)} m/s` },
+                { sym: "θ", desc: "Launch angle = ramp angle", val: `${params.angle}°` },
+                { sym: "g", desc: "Gravity (affects both ramp and flight)", val: `${params.gravity} m/s²` },
+              ]}
+            />
+
+            <SectionCard icon="⚠️" title="Important Notes" accent="border-amber-500/30">
+              <ul className="space-y-2 text-sm text-slate-300">
+                {[
+                  "Higher gravity increases both the driving force AND friction simultaneously.",
+                  "Range is NOT simply proportional to g — the relationship is complex because g appears in both the acceleration and the projectile equations.",
+                  "Optimal launch angle for maximum range on flat ground is 45°, but the ramp angle also determines exit velocity.",
+                  "Mass cancels out of the acceleration equation — a heavier block has the same acceleration as a lighter one (same μ).",
+                  "On the Moon (low g), friction is also lower, so blocks can still slide — but slower.",
+                ].map((note, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="text-amber-400 mt-0.5">▸</span>
+                    <span>{note}</span>
+                  </li>
+                ))}
+              </ul>
+            </SectionCard>
+
+            <SectionCard icon="🔢" title="Step-by-Step Derivation" accent="border-indigo-500/30">
+              <div className="space-y-3">
+                {[
+                  { step: "1", title: "Resolve forces along the ramp", body: "Gravity component down: F∥ = mg·sin(θ). Normal force: N = mg·cos(θ). Friction: f = μN = μmg·cos(θ)." },
+                  { step: "2", title: "Apply Newton's Second Law", body: "Net force = ma → mg·sin(θ) − μmg·cos(θ) = ma → a = g(sin θ − μcos θ)" },
+                  { step: "3", title: "Find exit speed using kinematics", body: "vf² = v₀² + 2aL → vf = √(v₀² + 2aL)" },
+                  { step: "4", title: "Treat exit as projectile launch", body: "Horizontal: vx = vf·cos θ. Vertical: vy = vf·sin θ. Time of flight: T = 2vy/g. Range: R = vx·T" },
+                ].map(({ step, title, body }) => (
+                  <div key={step} className="flex gap-3 bg-slate-800/40 rounded-xl p-3">
+                    <div className="w-7 h-7 rounded-full bg-indigo-600 flex items-center justify-center text-xs font-black text-white shrink-0 mt-0.5">
+                      {step}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-sm text-white mb-1">{title}</div>
+                      <div className="text-xs text-slate-400 font-mono leading-relaxed">{body}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </SectionCard>
+          </div>
+        )}
+
+        {/* ══════════════════════════════════════════════
+            TAB: COMPARE
+        ══════════════════════════════════════════════ */}
+        {activeTab === "compare" && (
+          <div className="space-y-4">
+
+            <SectionCard icon="📡" title="Planetary Gravity Comparison" accent="border-violet-500/30">
+              <p className="text-sm text-slate-400 mb-4">
+                Using your current settings (θ = {params.angle}°, μ = {params.mu}, m = {params.mass} kg, 
+                v₀ = {params.v0} m/s) across all planetary presets:
+              </p>
+              <GravityComparisonChart params={params} />
+            </SectionCard>
+
+            <SectionCard icon="📋" title="Data Table" accent="border-slate-600/50">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-700">
+                      {["Planet", "g (m/s²)", "Acceleration", "Exit Speed", "Range", "Launched?"].map((h) => (
+                        <th key={h} className="text-left py-2 px-3 text-xs text-slate-400 font-bold uppercase tracking-wider">
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {GRAVITY_PRESETS.map((preset) => {
+                      const r = computePhysics({ ...params, gravity: preset.g });
+                      return (
+                        <tr key={preset.name} className="border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors">
+                          <td className="py-2.5 px-3 font-semibold text-white">
+                            {preset.emoji} {preset.name}
+                          </td>
+                          <td className="py-2.5 px-3 font-mono text-slate-300">{preset.g}</td>
+                          <td className="py-2.5 px-3 font-mono text-indigo-300">{r.acceleration.toFixed(2)}</td>
+                          <td className="py-2.5 px-3 font-mono text-green-300">{r.vFinal.toFixed(2)}</td>
+                          <td className="py-2.5 px-3 font-mono text-amber-300 font-bold">{r.range.toFixed(2)}</td>
+                          <td className="py-2.5 px-3">
+                            <span className={`text-xs px-2 py-0.5 rounded-full font-bold ${r.launched ? "bg-green-900/50 text-green-400 border border-green-700/50" : "bg-red-900/50 text-red-400 border border-red-700/50"}`}>
+                              {r.launched ? "Yes" : "No"}
+                            </span>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </SectionCard>
+
+            <SectionCard icon="💡" title="Key Insight: The Gravity Paradox" accent="border-amber-500/30">
+              <div className="space-y-3 text-sm text-slate-300 leading-relaxed">
+                <p>
+                  You might expect that <strong className="text-white">higher gravity = longer range</strong>. 
+                  But the relationship is more subtle:
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="bg-green-900/20 border border-green-700/30 rounded-xl p-3">
+                    <div className="font-bold text-green-400 mb-1">Higher g increases:</div>
+                    <ul className="text-xs space-y-1 text-slate-300">
+                      <li>▸ Driving force (mg·sinθ)</li>
+                      <li>▸ Acceleration down the ramp</li>
+                      <li>▸ Exit velocity at the bottom</li>
+                    </ul>
+                  </div>
+                  <div className="bg-red-900/20 border border-red-700/30 rounded-xl p-3">
+                    <div className="font-bold text-red-400 mb-1">Higher g also increases:</div>
+                    <ul className="text-xs space-y-1 text-slate-300">
+                      <li>▸ Friction force (μmg·cosθ)</li>
+                      <li>▸ Gravitational pull during flight</li>
+                      <li>▸ Rate of descent in projectile phase</li>
+                    </ul>
+                  </div>
+                </div>
+                <p className="text-slate-400 text-xs">
+                  The net effect: on steeper ramps or low-friction surfaces, higher g does increase range. 
+                  On shallow, high-friction ramps, higher g may not help — or may even prevent motion entirely.
+                </p>
+              </div>
+            </SectionCard>
+
+            <SectionCard icon="❓" title="Suggested Questions" accent="border-slate-600/50">
+              <div className="space-y-2">
+                {[
+                  "At what angle θ does the block achieve maximum range for each planetary gravity?",
+                  "If μ = tan(θ), what happens to the acceleration? Why?",
+                  "Why does mass cancel out of the acceleration equation?",
+                  "On Jupiter, what friction coefficient would prevent any motion at θ = 35°?",
+                  "How would the range change if the ramp were twice as long?",
+                ].map((q, i) => (
+                  <div key={i} className="flex gap-2 bg-slate-800/40 rounded-lg px-3 py-2.5 text-sm text-slate-300">
+                    <span className="text-indigo-400 font-bold shrink-0">Q{i + 1}.</span>
+                    <span>{q}</span>
+                  </div>
+                ))}
+              </div>
+            </SectionCard>
+          </div>
+        )}
+
+        {/* Footer */}
+        <div className="text-center text-xs text-slate-600 py-2">
+          Interactive Physics Explorer · Classical Mechanics · All calculations use Newtonian physics
+        </div>
+      </div>
+    </div>
+  );
+}
+```

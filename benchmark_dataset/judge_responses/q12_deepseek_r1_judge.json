@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 12,
+  "question": "Define inertia and explain its types.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nInertia is the inherent property of an object by virtue of which it resists any change to its state of rest or uniform motion along a straight line. Inertia is an intrinsic quality of matter directly proportional to its mass.\n\n---\n\n## Types of Inertia\n\n* **Inertia of Rest:** The inability of an object to change its state of rest by itself.\n* **Inertia of Motion:** The inability of an object to modify its steady uniform linear velocity by itself.\n* **Inertia of Direction:** The inability of a moving mass to change its directional travel alignment without an external intervention force.\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Ensures mechanical stability in structures without continuous power inputs. | Requires substantial energy expenditures to overcome when launching transit systems. |\n\n---\n\n## Real-world Examples\n\n* **Rest Example:** Shaking a tree branch vigorously causes ripe fruits to break free and drop because they resist moving along with the branches.\n* **Motion Example:** An athlete runs a short distance past the finish line because their body's inertia resists an instantaneous stop.\n* **Direction Example:** A car turning sharply left causes passengers to slide toward the right door as their bodies attempt to continue tracking in a straight line.\n\n---\n\n## Summary\n\nInertia is matter's fundamental resistance to acceleration, manifesting as separate tracking constraints across rest states, velocity continuities, and orientation axes.",
+  "candidate_response": "### Understanding Inertia\n\n```mermaid\ngraph LR\nA[Inertia] --> B[Inertia of Rest]\nA --> C[Inertia of Motion]\nA --> D[Inertia of Direction]\n```\n\n#### 🧠 Core Definition\n**Inertia** is the inherent property of all physical objects to resist changes in their state of motion. This fundamental concept originates from Newton's First Law of Motion:\n> \"An object remains at rest or in uniform motion unless acted upon by an external force.\"\n\n**Key Insight**: Inertia is *not* a force itself, but rather a measure of an object's resistance to acceleration. It depends solely on **mass** – greater mass = greater inertia.\n\n---\n\n### 🔍 Three Types of Inertia\n\n#### 1. **Inertia of Rest**\n- **Definition**: Resistance to initiating motion from a stationary state.\n- **Formula**: \n  $$\n  \\sum \\vec{F} = 0 \\implies \\vec{v} = 0\n  $$\n- **Examples**:\n  - Passengers jerk backward when a bus suddenly starts\n  - Dust particles falling off a carpet when beaten\n  - Difficulty pushing a heavy stationary crate\n\n#### 2. **Inertia of Motion**\n- **Definition**: Resistance to slowing down or stopping while in motion.\n- **Formula**:\n  $$\n  \\sum \\vec{F} = 0 \\implies \\vec{v} = \\text{constant}\n  $$\n- **Examples**:\n  - Passengers lurch forward when brakes are applied\n  - A running player can't instantly stop at a boundary line\n  - Ice skaters coasting frictionlessly after a push\n\n#### 3. **Inertia of Direction**\n- **Definition**: Resistance to changing direction while moving.\n- **Formula**:\n  $$\n  \\Delta \\theta = 0 \\quad \\text{(without external force)}\n  $$\n- **Examples**:\n  - Mud flying tangentially off a spinning bicycle wheel\n  - Passengers swaying sideways when a car turns sharply\n  - Satellites maintaining orbital paths without thrusters\n\n---\n\n### ⚖️ Inertia vs. Mass Comparison\n| Property        | Mass                            | Inertia                          |\n|-----------------|---------------------------------|----------------------------------|\n| **Definition**  | Quantity of matter              | Resistance to motion change      |\n| **SI Unit**     | Kilogram (kg)                   | Kilogram (kg)                    |\n| **Scalar/Vector**| Scalar                          | Scalar                           |\n| **Dependence**  | Constant everywhere             | Proportional to mass             |\n| **Measurement** | Using balances                  | Observed through force required  |\n\n---\n\n### 💡 Important Principles\n1. **Quantifying Inertia**: Measured by mass (kg). Double the mass = double the inertia.\n2. **Relativity Connection**: Einstein showed inertia remains consistent across inertial frames.\n3. **Zero-G Myth**: Inertia persists in space – stopping a moving asteroid requires force despite weightlessness.\n4. **Energy Aspect**: Overcoming inertia requires work (W = F × d), converting to kinetic energy.\n\n> **Real-World Application**: Seatbelts counteract inertia during collisions by applying restraining forces over time (impulse).\n\n---\n\n### ❓ Self-Check Questions\n1. Why does a heavy truck need stronger brakes than a bicycle?\n2. How would inertia manifest differently on the Moon?\n3. Can an object have high mass but low inertia? Explain.\n4. What force overcomes Earth's rotational inertia to keep us moving?\n\n---\n\n**Summary**: Inertia is nature's \"laziness\" principle – matter maintains its motion status until compelled otherwise. Mastering this concept unlocks dynamics, celestial mechanics, and relativity.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of inertia, its types, and related concepts. The use of formulas, examples, and comparisons enhances the clarity of the explanation. The layout is well-structured, and the presentation is of high quality. However, there are minor areas for improvement, such as providing more concise summaries and avoiding overly complex sentences. Additionally, the inclusion of self-check questions and real-world applications is commendable, but some questions could be more directly related to the core concept of inertia. Overall, the response is accurate, well-presented, and effective in teaching the concept of inertia.",
+  "candidate_token_usage": {
+    "promptTokens": 358,
+    "completionTokens": 935,
+    "totalTokens": 1293
+  },
+  "candidate_latency_ms": 45062,
+  "candidate_cost_usd": 0.00224455,
+  "judge_token_usage": {
+    "promptTokens": 1471,
+    "completionTokens": 181,
+    "totalTokens": 1652
+  },
+  "judge_latency_ms": 6676,
+  "judge_cost_usd": 0.001317,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:18:19.032Z"
+}

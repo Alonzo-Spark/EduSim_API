@@ -1,0 +1,794 @@
+# Orbital Velocity Sandbox: Exploring Stable Orbits
+
+I'll create an interactive simulation that demonstrates how changes in tangential velocity affect orbital paths. This will help visualize what happens when a planet's velocity drops below the stable circular speed.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Velocity Sandbox</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #e0f7fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #00b4db, #0083b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4fc3f7;
+        }
+
+        .card-title i {
+            font-size: 1.8rem;
+        }
+
+        .simulation-container {
+            grid-column: 1 / -1;
+            padding: 20px;
+            background: rgba(0, 20, 40, 0.6);
+            border-radius: 15px;
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: #001220;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid rgba(64, 224, 208, 0.3);
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .control-group {
+            background: rgba(0, 40, 60, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .control-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 8px;
+            -webkit-appearance: none;
+            background: rgba(100, 200, 255, 0.2);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            background: #00b4db;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(0, 180, 219, 0.8);
+        }
+
+        .value-display {
+            min-width: 70px;
+            text-align: center;
+            background: rgba(0, 100, 150, 0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(to right, #00b4db, #0083b0);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .info-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .info-box {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(0, 80, 120, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #00b4db;
+        }
+
+        .info-box h3 {
+            margin-bottom: 10px;
+            color: #4fc3f7;
+        }
+
+        .formula-card {
+            background: rgba(0, 40, 80, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #00e5ff;
+        }
+
+        .formula {
+            font-size: 1.8rem;
+            text-align: center;
+            padding: 15px;
+            font-family: 'Cambria Math', serif;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .formula-label {
+            text-align: center;
+            font-style: italic;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .conclusion {
+            background: rgba(0, 60, 100, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 4px solid #00e5ff;
+        }
+
+        .conclusion h2 {
+            color: #4fc3f7;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 30px;
+            border-top: 1px solid rgba(100, 200, 255, 0.2);
+        }
+
+        .orbit-path {
+            stroke: rgba(64, 224, 208, 0.7);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .stable-orbit {
+            stroke: #00c853;
+        }
+
+        .unstable-orbit {
+            stroke: #ff3d00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-orbit"></i> Orbital Velocity Sandbox</h1>
+            <p class="subtitle">Explore how changes in tangential velocity affect a planet's orbital path. Reduce velocity below the stable circular speed to observe orbital decay.</p>
+        </header>
+
+        <div class="content">
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-info-circle"></i> Orbital Mechanics</h2>
+                <p>In celestial mechanics, a stable circular orbit occurs when the gravitational force provides exactly the centripetal force required for circular motion.</p>
+                
+                <div class="formula-card">
+                    <div class="formula">
+                        F<sub>gravity</sub> = F<sub>centripetal</sub>
+                    </div>
+                    <div class="formula">
+                        G\frac{Mm}{r^2} = m\frac{v^2}{r}
+                    </div>
+                    <div class="formula">
+                        v = \sqrt{\frac{GM}{r}}
+                    </div>
+                    <p class="formula-label">Stable Circular Velocity Formula</p>
+                </div>
+                
+                <p>When a planet's tangential velocity is reduced below this critical value:</p>
+                <ul style="padding-left: 20px; margin: 15px 0;">
+                    <li>The gravitational force exceeds the required centripetal force</li>
+                    <li>The planet begins to spiral inward</li>
+                    <li>The orbit becomes elliptical with decreasing periapsis</li>
+                    <li>If velocity is too low, the planet will collide with the star</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title"><i class="fas fa-star"></i> Key Concepts</h2>
+                <div class="info-panel">
+                    <div class="info-box">
+                        <h3>Stable Circular Orbit</h3>
+                        <p>Occurs when tangential velocity exactly matches the orbital velocity required for a circular path.</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Orbital Decay</h3>
+                        <p>When velocity is too low, the orbit decays and the planet spirals inward due to excess gravitational pull.</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Escape Velocity</h3>
+                        <p>The minimum velocity needed to escape the gravitational influence: v<sub>escape</sub> = √(2GM/r)</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>Elliptical Orbits</h3>
+                        <p>At velocities between circular and escape velocity, orbits become elliptical.</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; background: rgba(0, 50, 80, 0.4); padding: 15px; border-radius: 10px;">
+                    <h3><i class="fas fa-lightbulb"></i> Try This Experiment</h3>
+                    <p>1. Set the velocity to 100% for a stable circular orbit</p>
+                    <p>2. Gradually reduce velocity below 100%</p>
+                    <p>3. Observe how the orbit becomes elliptical and eventually decays</p>
+                    <p>4. Reset and try increasing above 100% to create elliptical orbits</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="simulation-container">
+            <h2 class="card-title"><i class="fas fa-satellite"></i> Orbital Simulation</h2>
+            <div class="canvas-container">
+                <canvas id="orbitCanvas" width="800" height="500"></canvas>
+            </div>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label class="control-label">Tangential Velocity (% of stable orbit)</label>
+                    <div class="slider-container">
+                        <input type="range" id="velocitySlider" min="20" max="180" value="100">
+                        <span id="velocityValue" class="value-display">100%</span>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Planet Mass (relative)</label>
+                    <div class="slider-container">
+                        <input type="range" id="massSlider" min="10" max="200" value="100">
+                        <span id="massValue" class="value-display">1.0</span>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Orbital Distance (AU)</label>
+                    <div class="slider-container">
+                        <input type="range" id="distanceSlider" min="50" max="300" value="150">
+                        <span id="distanceValue" class="value-display">1.5</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="startBtn"><i class="fas fa-play"></i> Start Simulation</button>
+                <button id="resetBtn"><i class="fas fa-redo"></i> Reset</button>
+                <button id="stableBtn"><i class="fas fa-circle"></i> Set Stable Orbit</button>
+                <button id="decayBtn"><i class="fas fa-arrow-down"></i> Simulate Decay</button>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <div class="info-box">
+                <h3><i class="fas fa-sync-alt"></i> Current Status</h3>
+                <p>Orbital Shape: <span id="orbitType">Circular</span></p>
+                <p>Orbital Period: <span id="orbitPeriod">1.00 year</span></p>
+                <p>Current Velocity: <span id="currentVel">100%</span> of stable</p>
+                <p>Stable Velocity: <span id="stableVel">1.00 AU/year</span></p>
+            </div>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-chart-line"></i> Energy Analysis</h3>
+                <p>Kinetic Energy: <span id="kinetic">50 units</span></p>
+                <p>Potential Energy: <span id="potential">-100 units</span></p>
+                <p>Total Mechanical Energy: <span id="totalEnergy">-50 units</span></p>
+                <p>Energy State: <span id="energyState">Bound</span></p>
+            </div>
+        </div>
+        
+        <div class="conclusion">
+            <h2><i class="fas fa-graduation-cap"></i> Conclusion: Orbital Velocity Reduction</h2>
+            <p>When a planet's tangential velocity is reduced below the stable circular orbital velocity:</p>
+            <ul style="padding-left: 20px; margin: 15px 0;">
+                <li>The orbit transitions from circular to elliptical with a lower periapsis (closest approach)</li>
+                <li>As velocity decreases further, the orbit becomes increasingly eccentric</li>
+                <li>Below a critical threshold (about 70% of stable velocity), the orbit decays rapidly</li>
+                <li>At very low velocities, the planet enters a collision trajectory with the central body</li>
+                <li>This phenomenon explains why satellites require periodic boosts to maintain orbit</li>
+                <li>In extreme cases, orbital decay leads to atmospheric re-entry or stellar collision</li>
+            </ul>
+        </div>
+        
+        <footer>
+            <p>Orbital Mechanics Simulation | Educational Tool for Astrophysics | Velocity-Dependent Orbital Behavior</p>
+            <p>Adjust parameters to explore the relationship between tangential velocity and orbital stability</p>
+        </footer>
+    </div>
+
+    <script>
+        // Canvas setup
+        const canvas = document.getElementById('orbitCanvas');
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        // Simulation parameters
+        let animationId = null;
+        let simulationRunning = false;
+        let planet = {
+            x: width/2 + 200,
+            y: height/2,
+            vx: 0,
+            vy: 0,
+            radius: 12,
+            mass: 1.0,
+            trail: []
+        };
+        
+        const star = {
+            x: width/2,
+            y: height/2,
+            radius: 30,
+            mass: 1000
+        };
+        
+        // Physics constants
+        const G = 6.67430e-11; // Gravitational constant
+        const scale = 1e9; // Scale for visualization
+        const timeStep = 0.05;
+        
+        // Control elements
+        const velocitySlider = document.getElementById('velocitySlider');
+        const velocityValue = document.getElementById('velocityValue');
+        const massSlider = document.getElementById('massSlider');
+        const massValue = document.getElementById('massValue');
+        const distanceSlider = document.getElementById('distanceSlider');
+        const distanceValue = document.getElementById('distanceValue');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const stableBtn = document.getElementById('stableBtn');
+        const decayBtn = document.getElementById('decayBtn');
+        
+        // Info displays
+        const orbitType = document.getElementById('orbitType');
+        const orbitPeriod = document.getElementById('orbitPeriod');
+        const currentVel = document.getElementById('currentVel');
+        const stableVel = document.getElementById('stableVel');
+        const kinetic = document.getElementById('kinetic');
+        const potential = document.getElementById('potential');
+        const totalEnergy = document.getElementById('totalEnergy');
+        const energyState = document.getElementById('energyState');
+        
+        // Initialize simulation
+        function initSimulation() {
+            // Set initial distance
+            const distance = parseInt(distanceSlider.value) / 100;
+            planet.x = star.x + distance * 100;
+            planet.y = star.y;
+            
+            // Set initial velocity
+            const velocityPercent = parseInt(velocitySlider.value);
+            updateVelocity(velocityPercent);
+            
+            // Reset trail
+            planet.trail = [];
+            for (let i = 0; i < 5; i++) {
+                planet.trail.push({x: planet.x, y: planet.y});
+            }
+            
+            updateDisplays();
+        }
+        
+        // Calculate stable circular velocity
+        function calculateStableVelocity() {
+            const distance = Math.sqrt((planet.x - star.x)**2 + (planet.y - star.y)**2);
+            return Math.sqrt(G * star.mass * planet.mass / (distance / scale)) * scale;
+        }
+        
+        // Update planet velocity based on slider percentage
+        function updateVelocity(percent) {
+            const stableSpeed = calculateStableVelocity();
+            const speed = stableSpeed * percent / 100;
+            
+            // Direction perpendicular to radius vector
+            const dx = planet.x - star.x;
+            const dy = planet.y - star.y;
+            const distance = Math.sqrt(dx*dx + dy*dy);
+            
+            // Normalize and rotate 90 degrees for tangential direction
+            const tx = -dy / distance;
+            const ty = dx / distance;
+            
+            planet.vx = tx * speed;
+            planet.vy = ty * speed;
+        }
+        
+        // Update simulation
+        function update() {
+            // Calculate distance to star
+            const dx = planet.x - star.x;
+            const dy = planet.y - star.y;
+            const distance = Math.sqrt(dx*dx + dy*dy);
+            
+            // Calculate gravitational force
+            const F = G * star.mass * planet.mass / (distance/scale)**2;
+            const Fx = -F * dx / distance * scale;
+            const Fy = -F * dy / distance * scale;
+            
+            // Update velocity (F = ma => a = F/m)
+            planet.vx += Fx / planet.mass * timeStep;
+            planet.vy += Fy / planet.mass * timeStep;
+            
+            // Update position
+            planet.x += planet.vx * timeStep;
+            planet.y += planet.vy * timeStep;
+            
+            // Add current position to trail
+            planet.trail.push({x: planet.x, y: planet.y});
+            if (planet.trail.length > 500) {
+                planet.trail.shift();
+            }
+            
+            // Update displays
+            updateDisplays();
+        }
+        
+        // Update information displays
+        function updateDisplays() {
+            const distance = Math.sqrt((planet.x - star.x)**2 + (planet.y - star.y)**2) / 100;
+            const velocityPercent = parseInt(velocitySlider.value);
+            const stableSpeed = calculateStableVelocity();
+            const currentSpeed = Math.sqrt(planet.vx**2 + planet.vy**2);
+            
+            // Update control displays
+            velocityValue.textContent = velocityPercent + '%';
+            massValue.textContent = (planet.mass).toFixed(1);
+            distanceValue.textContent = (parseInt(distanceSlider.value)/100).toFixed(1);
+            
+            // Update info displays
+            currentVel.textContent = velocityPercent + '%';
+            stableVel.textContent = (stableSpeed / 100).toFixed(2) + ' AU/year';
+            
+            // Determine orbit type
+            const eccentricity = Math.abs(velocityPercent - 100) / 100;
+            if (eccentricity < 0.05) {
+                orbitType.textContent = "Nearly Circular";
+            } else if (eccentricity < 0.3) {
+                orbitType.textContent = "Slightly Elliptical";
+            } else if (velocityPercent > 100) {
+                orbitType.textContent = "Elliptical (High)";
+            } else if (velocityPercent < 70) {
+                orbitType.textContent = "Decaying Orbit";
+            } else {
+                orbitType.textContent = "Elliptical (Low)";
+            }
+            
+            // Update energy displays
+            const kineticVal = 0.5 * planet.mass * currentSpeed**2;
+            const potentialVal = -G * star.mass * planet.mass / (distance/scale) * scale;
+            const total = kineticVal + potentialVal;
+            
+            kinetic.textContent = kineticVal.toFixed(0);
+            potential.textContent = potentialVal.toFixed(0);
+            totalEnergy.textContent = total.toFixed(0);
+            energyState.textContent = total < 0 ? "Bound" : "Unbound";
+        }
+        
+        // Draw simulation
+        function draw() {
+            // Clear canvas
+            ctx.fillStyle = '#001220';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Draw star
+            const starGradient = ctx.createRadialGradient(
+                star.x, star.y, 0, 
+                star.x, star.y, star.radius
+            );
+            starGradient.addColorStop(0, '#ffff00');
+            starGradient.addColorStop(1, '#ff9800');
+            
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+            ctx.fillStyle = starGradient;
+            ctx.fill();
+            
+            // Draw glow effect
+            const glowGradient = ctx.createRadialGradient(
+                star.x, star.y, star.radius,
+                star.x, star.y, star.radius * 4
+            );
+            glowGradient.addColorStop(0, 'rgba(255, 152, 0, 0.6)');
+            glowGradient.addColorStop(1, 'rgba(255, 152, 0, 0)');
+            
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.radius * 4, 0, Math.PI * 2);
+            ctx.fillStyle = glowGradient;
+            ctx.fill();
+            
+            // Draw orbit trail
+            if (planet.trail.length > 2) {
+                ctx.beginPath();
+                ctx.moveTo(planet.trail[0].x, planet.trail[0].y);
+                
+                for (let i = 1; i < planet.trail.length; i++) {
+                    ctx.lineTo(planet.trail[i].x, planet.trail[i].y);
+                }
+                
+                const velocityPercent = parseInt(velocitySlider.value);
+                if (velocityPercent < 70) {
+                    ctx.strokeStyle = '#ff3d00'; // Red for decaying orbits
+                } else if (Math.abs(velocityPercent - 100) < 5) {
+                    ctx.strokeStyle = '#00c853'; // Green for stable orbits
+                } else {
+                    ctx.strokeStyle = '#40e0d0'; // Turquoise for elliptical orbits
+                }
+                
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+            
+            // Draw planet
+            const planetGradient = ctx.createRadialGradient(
+                planet.x, planet.y, 0,
+                planet.x, planet.y, planet.radius
+            );
+            planetGradient.addColorStop(0, '#4fc3f7');
+            planetGradient.addColorStop(1, '#01579b');
+            
+            ctx.beginPath();
+            ctx.arc(planet.x, planet.y, planet.radius, 0, Math.PI * 2);
+            ctx.fillStyle = planetGradient;
+            ctx.fill();
+            
+            // Draw velocity vector
+            const speed = Math.sqrt(planet.vx**2 + planet.vy**2);
+            if (speed > 0) {
+                const vx = planet.vx / speed * 30;
+                const vy = planet.vy / speed * 30;
+                
+                ctx.beginPath();
+                ctx.moveTo(planet.x, planet.y);
+                ctx.lineTo(planet.x + vx, planet.y + vy);
+                ctx.strokeStyle = '#00e5ff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Draw arrowhead
+                ctx.beginPath();
+                ctx.moveTo(planet.x + vx, planet.y + vy);
+                ctx.lineTo(planet.x + vx*0.8 - vy*0.2, planet.y + vy*0.8 + vx*0.2);
+                ctx.lineTo(planet.x + vx*0.8 + vy*0.2, planet.y + vy*0.8 - vx*0.2);
+                ctx.closePath();
+                ctx.fillStyle = '#00e5ff';
+                ctx.fill();
+            }
+            
+            // Draw distance indicator
+            const dist = Math.sqrt((planet.x - star.x)**2 + (planet.y - star.y)**2);
+            ctx.beginPath();
+            ctx.moveTo(star.x, star.y);
+            ctx.lineTo(planet.x, planet.y);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            
+            // Draw distance text
+            ctx.font = '14px Arial';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.fillText(`Distance: ${(dist/100).toFixed(2)} AU`, (star.x + planet.x)/2, (star.y + planet.y)/2 - 10);
+        }
+        
+        // Animation loop
+        function animate() {
+            update();
+            draw();
+            
+            if (simulationRunning) {
+                animationId = requestAnimationFrame(animate);
+            }
+        }
+        
+        // Event listeners
+        velocitySlider.addEventListener('input', () => {
+            updateVelocity(parseInt(velocitySlider.value));
+            updateDisplays();
+        });
+        
+        massSlider.addEventListener('input', () => {
+            planet.mass = parseInt(massSlider.value) / 100;
+            updateVelocity(parseInt(velocitySlider.value));
+            updateDisplays();
+        });
+        
+        distanceSlider.addEventListener('input', () => {
+            const distance = parseInt(distanceSlider.value) / 100;
+            const angle = Math.atan2(planet.y - star.y, planet.x - star.x);
+            planet.x = star.x + Math.cos(angle) * distance * 100;
+            planet.y = star.y + Math.sin(angle) * distance * 100;
+            updateVelocity(parseInt(velocitySlider.value));
+            updateDisplays();
+        });
+        
+        startBtn.addEventListener('click', () => {
+            if (simulationRunning) {
+                simulationRunning = false;
+                startBtn.innerHTML = '<i class="fas fa-play"></i> Start Simulation';
+                cancelAnimationFrame(animationId);
+            } else {
+                simulationRunning = true;
+                startBtn.innerHTML = '<i class="fas fa-pause"></i> Pause Simulation';
+                animate();
+            }
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            simulationRunning = false;
+            startBtn.innerHTML = '<i class="fas fa-play"></i> Start Simulation';
+            cancelAnimationFrame(animationId);
+            initSimulation();
+            draw();
+        });
+        
+        stableBtn.addEventListener('click', () => {
+            velocitySlider.value = 100;
+            updateVelocity(100);
+            updateDisplays();
+        });
+        
+        decayBtn.addEventListener('click', () => {
+            velocitySlider.value = 65;
+            updateVelocity(65);
+            updateDisplays();
+        });
+        
+        // Initialize
+        initSimulation();
+        draw();
+    </script>
+</body>
+</html>
+```
+
+## Features of this Orbital Simulation
+
+This interactive sandbox demonstrates orbital mechanics with a focus on what happens when tangential velocity is reduced below the stable circular speed:
+
+1. **Real-time Physics Simulation**: Visualizes gravitational interactions between a planet and star
+2. **Adjustable Parameters**:
+   - Tangential velocity (% of stable orbit)
+   - Planet mass
+   - Orbital distance
+3. **Visual Feedback**:
+   - Orbit path color-coded based on stability
+   - Velocity vector showing direction and magnitude
+   - Distance indicator with measurement
+4. **Dynamic Information Display**:
+   - Current orbit classification
+   - Energy calculations (kinetic, potential, total)
+   - Stable velocity reference value
+5. **Pre-set Scenarios**:
+   - Set stable circular orbit
+   - Simulate orbital decay
+   - Start/pause/reset controls
+
+When you reduce the tangential velocity below 100% (especially below 70%), you'll see the orbit become elliptical and eventually decay into a collision course with the star, demonstrating the consequences of insufficient orbital velocity.
+
+The simulation uses real physics equations to model gravitational interactions, providing an accurate representation of orbital mechanics principles.

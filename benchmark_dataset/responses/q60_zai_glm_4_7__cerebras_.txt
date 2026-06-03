@@ -1,0 +1,177 @@
+```json
+{
+  "event": "gravity_changed",
+  "payload": {
+    "previous_g": 9.81,
+    "current_g": 0.0,
+    "environment": "microgravity"
+  }
+}
+```
+
+### SYSTEM ALERT: ENVIRONMENT PARAMETER UPDATE
+The simulation environment has transitioned to **Zero-G**. Adjusting physics engine... Rendering interactive content modules.
+
+=========================================================
+UI BLOCK: INTRODUCTION
+=========================================================
+┌───────────────────────────────────────────────────────┐
+│  System Update: Microgravity Detected                 │
+│                                                       │
+│  The gravitational acceleration ($g$) in your current │
+│  sector has dropped to approximately 0 m/s².          │
+│                                                       │
+│  In this state, the sensation of weight is           │
+│  effectively eliminated. Objects no longer rest on    │
+│  surfaces but float freely unless acted upon by       │
+│  another force.                                       │
+│                                                       │
+│  [ View Simulation ]                                  │
+└───────────────────────────────────────────────────────┘
+
+=========================================================
+UI BLOCK: DEFINITION
+=========================================================
+┌───────────────────────────────────────────────────────┐
+│  What is Zero Gravity?                                │
+│                                                       │
+│  Zero gravity (or weightlessness) is a condition      │
+│  where the apparent effect of gravity is absent.      │
+│                                                       │
+│  It is important to distinguish between "true"        │
+│  zero gravity (which only exists in deep space far    │
+│  from masses) and "microgravity," where objects are   │
+│  in a constant state of free fall (like in orbit).    │
+└───────────────────────────────────────────────────────┘
+
+=========================================================
+UI BLOCK: FORMULA CARD
+=========================================================
+┌───────────────────────────────────────────────────────┐
+│  Weight Calculation                                   │
+│                                                       │
+│                  $$ W = m \cdot g $$                  │
+│                                                       │
+│  Where:                                               │
+│  • $W$ is the weight (Force of gravity)               │
+│  • $m$ is the mass (constant)                         │
+│  • $g$ is the acceleration due to gravity             │
+│                                                       │
+│  [ Explain Formula ]  [ Open Formula Lab ]            │
+└───────────────────────────────────────────────────────┘
+
+=========================================================
+UI BLOCK: KEY CONCEPTS
+=========================================================
+┌───────────────────────────────────────────────────────┐
+│  Mass vs. Weight                                      │
+│                                                       │
+│  In a Zero-G environment, the distinction becomes     │
+│  physically obvious:                                  │
+│                                                       │
+│  1. Mass ($m$): The amount of matter in an object.    │
+│     This remains constant. A heavy brick is still     │
+│     hard to throw because of inertia.                 │
+│                                                       │
+│  2. Weight ($W$): The force exerted by gravity.       │
+│     Since $g \approx 0$, the weight becomes 0.        │
+│     The brick floats effortlessly.                    │
+└───────────────────────────────────────────────────────┘
+
+=========================================================
+UI BLOCK: TABLE CARD
+=========================================================
+┌───────────────────────────────────────────────────────┐
+│  Physics Comparison: 1g vs. 0g                        │
+│                                                       │
+│  ┌─────────────────┬───────────────────┬─────────────┐│
+│  │     Phenomena   │      1g (Earth)    │   0g (Space) ││
+│  ├─────────────────┼───────────────────┼─────────────┤│
+│  │ Dropped Object  │ Accelerates down  │ Floats      ││
+│  │                 │ at 9.8 m/s²       │ Stationary  ││
+│  ├─────────────────┼───────────────────┼─────────────┤│
+│  │ Liquid Surface  │ Flat (bottom of   │ Forms       ││
+│  │                 │ container)        │ Spheres     ││
+│  ├─────────────────┼───────────────────┼─────────────┤│
+│  │ Flame Shape     │ Teardrop (pointed │ Spherical   ││
+│  │                 │ up)               │ / Blue      ││
+│  ├─────────────────┼───────────────────┼─────────────┤│
+│  │ Convection      │ Hot air rises     │ None (No    ││
+│  │                 │                   │ buoyancy)   ││
+│  └─────────────────┴───────────────────┴─────────────┘│
+│                                                       │
+│  [ Export Data ]                                      │
+└───────────────────────────────────────────────────────┘
+
+=========================================================
+UI BLOCK: FORMULA CARD
+=========================================================
+┌───────────────────────────────────────────────────────┐
+│  Newton's Law of Universal Gravitation               │
+│                                                       │
+│               $$ F = G \frac{m_1 m_2}{r^2} $$         │
+│                                                       │
+│  Context: While we feel weightless, gravity is not    │
+│  "turned off." In orbit, $r$ (distance from Earth)    │
+│  is large, and the station is in free fall, making    │
+│  the normal force (what we feel as weight) zero.      │
+│                                                       │
+│  [ Explain Formula ]  [ Open Formula Lab ]            │
+└───────────────────────────────────────────────────────┘
+
+=========================================================
+UI BLOCK: SUMMARY
+=========================================================
+┌───────────────────────────────────────────────────────┐
+│  Session Recap                                        │
+│                                                       │
+│  • Gravity ($g$) is now effectively 0.                │
+│  • Weight ($W$) is removed, but Mass ($m$) remains.   │
+│  • Objects float due to the absence of a normal       │
+│    force counteracting gravity.                       │
+│  • Fluids form spheres due to surface tension.        │
+└───────────────────────────────────────────────────────┘
+
+=========================================================
+UI BLOCK: SUGGESTED QUESTIONS
+=========================================================
+┌───────────────────────────────────────────────────────┐
+│  Explore Further                                      │
+│                                                       │
+│  [Q] How do astronauts drink water in zero-g?         │
+│  [Q] What happens to the human body in long-term      │
+│      microgravity?                                    │
+│  [Q] How is the International Space Station           │
+│      kept in orbit if gravity is weaker?              │
+└───────────────────────────────────────────────────────┘
+
+=========================================================
+FORMULA EXTRACTION DATA
+=========================================================
+```json
+[
+  {
+    "id": "formula_weight",
+    "title": "Weight Calculation",
+    "latex": "W = m \\cdot g",
+    "variables": [
+      { "symbol": "W", "meaning": "Weight (Force)", "unit": "Newtons (N)" },
+      { "symbol": "m", "meaning": "Mass", "unit": "Kilograms (kg)" },
+      { "symbol": "g", "meaning": "Gravitational Acceleration", "unit": "m/s²" }
+    ],
+    "surroundingContext": "In a Zero-G environment, the distinction between mass and weight becomes physically obvious. Since g is approximately 0, the weight becomes 0."
+  },
+  {
+    "id": "formula_gravitation",
+    "title": "Newton's Law of Universal Gravitation",
+    "latex": "F = G \\frac{m_1 m_2}{r^2}",
+    "variables": [
+      { "symbol": "F", "meaning": "Gravitational Force", "unit": "Newtons (N)" },
+      { "symbol": "G", "meaning": "Gravitational Constant", "unit": "N·m²/kg²" },
+      { "symbol": "m_1, m_2", "meaning": "Masses of objects", "unit": "kg" },
+      { "symbol": "r", "meaning": "Distance between centers", "unit": "Meters (m)" }
+    ],
+    "surroundingContext": "While we feel weightless, gravity is not 'turned off.' In orbit, r (distance from Earth) is large, and the station is in free fall."
+  }
+]
+```

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 7,
+  "question": "Derive the expression for maximum height of a projectile.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe maximum height ($H$) of a projectile is the highest vertical point attained by the object above its structural launching point during its parabolic transit framework. At this peak point, the object's vertical velocity component drops exactly to zero.\n\n---\n\n## Formula\n\nThe equation for maximum vertical displacement is given by:\n\n$$H = \\frac{u^2 \\sin^2(\\theta)}{2g}$$\n\nWhere:\n* $H$ represents the maximum height reached\n* $u$ represents the initial velocity magnitude\n* $\\theta$ represents the launch angle relative to the horizontal\n* $g$ represents acceleration due to gravity\n\n---\n\n## Derivations\n\nTo isolate the maximum height expression, we track the independent vertical motion component from launch up to the peak trajectory location.\n\nThe initial vertical velocity component ($u_y$) is defined as:\n$$u_y = u \\sin(\\theta)$$\n\nAt the highest point ($H$), the final vertical velocity component ($v_y$) becomes zero:\n$$v_y = 0$$\n\nThe uniform vertical acceleration acting on the projectile is directed downward:\n$$a_y = -g$$\n\nWe now utilize the third kinematic equation of motion adapted for vertical tracking coordinates:\n$$v_y^2 = u_y^2 + 2a_y s$$\n\nSubstitute the vertical parameters ($0$, $u \\sin(\\theta)$, $-g$, and $H$) directly into the formula:\n$$0 = (u \\sin(\\theta))^2 + 2(-g)H$$\n\nRearrange the equation to isolate the acceleration term:\n$$2gH = u^2 \\sin^2(\\theta)$$\n\nSolve explicitly for the maximum height parameter ($H$):\n$$H = \\frac{u^2 \\sin^2(\\theta)}{2g}$$\n\nThis completes the mathematical derivation for the maximum height of a projectile.\n\n---\n\n## Summary\n\nThe maximum height of a projectile is directly proportional to the square of its initial velocity and the square of the sine of its launch angle, and inversely proportional to twice the gravitational acceleration field strength.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ The **maximum height** of a projectile is the highest vertical position reached during its trajectory, occurring when the vertical component of velocity becomes zero. │\n└───────────────────────────┘\n\n---\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ • Projectile motion follows a parabolic path under gravity.  \n│ • Motion can be split into horizontal and vertical components.  \n│ • At maximum height, vertical velocity $ v_y = 0 $.  \n│ • Acceleration in the vertical direction is $ -g $ (downward). │\n└───────────────────────────┘\n\n---\n\n┌───────────────────────────┐\n│ Formula                   │\n│                           │\n│     $$                    │\n│     H_{\\text{max}} = \\frac{u^2 \\sin^2\\theta}{2g}  \n\\\\  \n│     $$                    │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n---\n\n### Step-by-Step Derivation\n\nWe consider a projectile launched with:\n\n- Initial speed: $ u $\n- Launch angle: $ \\theta $\n- Acceleration due to gravity: $ g $ (acting downward)\n\n#### 1. **Resolve Initial Velocity**\n\nBreak the initial velocity into vertical and horizontal components:\n\n- Horizontal component: $ u_x = u \\cos\\theta $\n- Vertical component: $ u_y = u \\sin\\theta $\n\nOnly the vertical component affects the height.\n\n#### 2. **Use Equation of Motion**\n\nWe use the kinematic equation (no time involved):\n\n$$\nv_y^2 = u_y^2 - 2gH\n$$\n\nAt maximum height $ H_{\\text{max}} $, the vertical velocity becomes zero:  \n$ v_y = 0 $\n\nSubstitute:\n\n$$\n0 = (u \\sin\\theta)^2 - 2gH_{\\text{max}}\n$$\n\n#### 3. **Solve for $ H_{\\text{max}} $**\n\n$$\n2gH_{\\text{max}} = u^2 \\sin^2\\theta\n$$\n\n$$\nH_{\\text{max}} = \\frac{u^2 \\sin^2\\theta}{2g}\n$$\n\n---\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ • Maximum height depends only on the vertical component of velocity.  \n│ • For a given speed, height is maximized when $ \\theta = 90^\\circ $ (vertical throw).  \n│ • At $ \\theta = 90^\\circ $, $ \\sin\\theta = 1 $, so $ H_{\\text{max}} = \\frac{u^2}{2g} $.  \n│ • Horizontal motion does not affect maximum height. │\n└───────────────────────────┘\n\n---\n\n┌───────────────────────────┐\n│ Suggested Questions       │\n│                           │\n│ • What launch angle gives the greatest maximum height?  \n│ • How does doubling the initial speed affect maximum height?  \n│ • Why is the horizontal velocity irrelevant in this derivation?  \n│ • Derive the time taken to reach maximum height. │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of maximum height of a projectile, with accurate formulas and derivations. The step-by-step derivation is clear and well-structured. However, the quality score is slightly lower due to the unconventional use of ASCII art tables, which may not be suitable for all readers. Additionally, some of the sections, such as 'Important Notes' and 'Suggested Questions', could be more tightly integrated into the main body of the response. Overall, the response is well-organized, easy to follow, and effective in teaching the concept. Minor suggestions for improvement include using more standard formatting and considering the addition of diagrams or illustrations to enhance the educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 357,
+    "completionTokens": 704,
+    "totalTokens": 1061
+  },
+  "candidate_latency_ms": 20802,
+  "candidate_cost_usd": 0.001765,
+  "judge_token_usage": {
+    "promptTokens": 1548,
+    "completionTokens": 198,
+    "totalTokens": 1746
+  },
+  "judge_latency_ms": 10376,
+  "judge_cost_usd": 0.0014039999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:05:38.293Z"
+}

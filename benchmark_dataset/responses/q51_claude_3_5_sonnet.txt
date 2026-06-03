@@ -1,0 +1,604 @@
+# Simple Pendulum: Mass & Period
+
+Let me build this as a proper interactive textbook experience.
+
+```tsx
+import { useState, useEffect, useRef, useCallback } from "react";
+
+const Card = ({ children, className = "" }) => (
+  <div className={`bg-white rounded-2xl shadow-sm border border-gray-100 ${className}`}>
+    {children}
+  </div>
+);
+
+const SectionHeader = ({ icon, title, subtitle }) => (
+  <div className="flex items-start gap-3 mb-4">
+    <span className="text-2xl">{icon}</span>
+    <div>
+      <h2 className="text-lg font-bold text-gray-800">{title}</h2>
+      {subtitle && <p className="text-sm text-gray-500 mt-0.5">{subtitle}</p>}
+    </div>
+  </div>
+);
+
+const Badge = ({ children, color = "blue" }) => {
+  const colors = {
+    blue: "bg-blue-50 text-blue-700 border-blue-200",
+    green: "bg-green-50 text-green-700 border-green-200",
+    purple: "bg-purple-50 text-purple-700 border-purple-200",
+    amber: "bg-amber-50 text-amber-700 border-amber-200",
+    red: "bg-red-50 text-red-700 border-red-200",
+  };
+  return (
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${colors[color]}`}>
+      {children}
+    </span>
+  );
+};
+
+// ── Pendulum Physics ──────────────────────────────────────
+const G = 9.81;
+const calcPeriod = (L) => 2 * Math.PI * Math.sqrt(L / G);
+
+// ── Formula Card ─────────────────────────────────────────
+const FormulaCard = ({ onOpenLab }) => {
+  const [showBreakdown, setShowBreakdown] = useState(false);
+
+  const variables = [
+    { sym: "T", desc: "Period", unit: "seconds (s)", color: "text-blue-600" },
+    { sym: "π", desc: "Pi (constant)", unit: "≈ 3.14159", color: "text-purple-600" },
+    { sym: "L", desc: "Pendulum length", unit: "meters (m)", color: "text-green-600" },
+    { sym: "g", desc: "Gravitational acceleration", unit: "9.81 m/s²", color: "text-amber-600" },
+  ];
+
+  return (
+    <Card className="overflow-hidden">
+      <div className="bg-gradient-to-br from-indigo-50 via-blue-50 to-white p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-xl">📐</span>
+          <h2 className="text-base font-bold text-gray-700 uppercase tracking-wide">Period Formula</h2>
+          <Badge color="blue">Key Equation</Badge>
+        </div>
+
+        {/* Main Formula */}
+        <div className="bg-white rounded-xl border border-blue-100 shadow-inner px-6 py-5 text-center mb-4">
+          <div
+            className="text-3xl font-light text-gray-800"
+            dangerouslySetInnerHTML={{
+              __html: `<span style="color:#3b82f6">T</span> = 2π <span style="font-size:1.1em">√</span><span style="text-decoration:overline; padding:0 4px"><span style="color:#22c55e">L</span> / <span style="color:#f59e0b">g</span></span>`,
+            }}
+          />
+          <p className="text-xs text-gray-400 mt-2 font-mono">T = 2π √(L/g)</p>
+        </div>
+
+        {/* Notice Box */}
+        <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4">
+          <p className="text-sm text-amber-800 font-semibold flex items-center gap-2">
+            <span>⚠️</span> Mass does not appear in this formula.
+          </p>
+          <p className="text-xs text-amber-700 mt-1">
+            The period depends only on length <strong>L</strong> and gravity <strong>g</strong> — not on mass.
+          </p>
+        </div>
+
+        {/* Variable Breakdown */}
+        {showBreakdown && (
+          <div className="bg-white rounded-xl border border-gray-100 overflow-hidden mb-4">
+            <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Variable Breakdown</p>
+            </div>
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="px-4 py-2 text-left text-xs text-gray-500">Symbol</th>
+                  <th className="px-4 py-2 text-left text-xs text-gray-500">Meaning</th>
+                  <th className="px-4 py-2 text-left text-xs text-gray-500">Unit / Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {variables.map((v, i) => (
+                  <tr key={i} className="border-b border-gray-50 last:border-0">
+                    <td className={`px-4 py-2.5 font-bold font-mono text-base ${v.color}`}>{v.sym}</td>
+                    <td className="px-4 py-2.5 text-gray-700">{v.desc}</td>
+                    <td className="px-4 py-2.5 text-gray-500 text-xs">{v.unit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        <div className="flex gap-2">
+          <button
+            onClick={() => setShowBreakdown(!showBreakdown)}
+            className="flex-1 text-sm font-medium px-4 py-2 rounded-lg bg-white border border-blue-200 text-blue-700 hover:bg-blue-50 transition-colors"
+          >
+            {showBreakdown ? "Hide" : "Explain"} Variables
+          </button>
+          <button
+            onClick={onOpenLab}
+            className="flex-1 text-sm font-medium px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+          >
+            🧪 Open Formula Lab
+          </button>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
+// ── Pendulum Canvas ───────────────────────────────────────
+const PendulumCanvas = ({ length, mass, isRunning, onPeriodMeasured }) => {
+  const canvasRef = useRef(null);
+  const stateRef = useRef({
+    angle: Math.PI / 6,
+    omega: 0,
+    t: 0,
+    lastZeroCross: null,
+    lastZeroDir: null,
+    halfPeriods: [],
+  });
+  const rafRef = useRef(null);
+  const lastTimeRef = useRef(null);
+
+  useEffect(() => {
+    stateRef.current = {
+      angle: Math.PI / 6,
+      omega: 0,
+      t: 0,
+      lastZeroCross: null,
+      lastZeroDir: null,
+      halfPeriods: [],
+    };
+  }, [length, mass]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    const W = canvas.width;
+    const H = canvas.height;
+    const pivotX = W / 2;
+    const pivotY = 40;
+    const scale = (H - 80) / 1.0;
+    const pxLen = Math.min(length * scale, H - 80);
+    const bobR = 8 + mass * 2.5;
+
+    const draw = (angle) => {
+      ctx.clearRect(0, 0, W, H);
+
+      // Background
+      ctx.fillStyle = "#f8fafc";
+      ctx.fillRect(0, 0, W, H);
+
+      // Ceiling
+      ctx.fillStyle = "#e2e8f0";
+      ctx.fillRect(0, 0, W, 8);
+
+      // Pivot
+      ctx.beginPath();
+      ctx.arc(pivotX, pivotY, 5, 0, Math.PI * 2);
+      ctx.fillStyle = "#64748b";
+      ctx.fill();
+
+      // Rod
+      const bx = pivotX + Math.sin(angle) * pxLen;
+      const by = pivotY + Math.cos(angle) * pxLen;
+      ctx.beginPath();
+      ctx.moveTo(pivotX, pivotY);
+      ctx.lineTo(bx, by);
+      ctx.strokeStyle = "#94a3b8";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Bob shadow
+      ctx.beginPath();
+      ctx.arc(bx + 2, by + 2, bobR, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(0,0,0,0.08)";
+      ctx.fill();
+
+      // Bob
+      const grad = ctx.createRadialGradient(bx - 2, by - 2, 1, bx, by, bobR);
+      grad.addColorStop(0, "#818cf8");
+      grad.addColorStop(1, "#4f46e5");
+      ctx.beginPath();
+      ctx.arc(bx, by, bobR, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Mass label
+      ctx.fillStyle = "white";
+      ctx.font = `bold ${bobR > 14 ? 11 : 9}px sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(`${mass}kg`, bx, by);
+    };
+
+    draw(stateRef.current.angle);
+
+    if (!isRunning) {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      lastTimeRef.current = null;
+      return;
+    }
+
+    const step = (timestamp) => {
+      if (!lastTimeRef.current) lastTimeRef.current = timestamp;
+      const dt = Math.min((timestamp - lastTimeRef.current) / 1000, 0.05);
+      lastTimeRef.current = timestamp;
+
+      const s = stateRef.current;
+      const alpha = -(G / length) * Math.sin(s.angle);
+      s.omega += alpha * dt;
+      s.omega *= 0.9995;
+      const prevAngle = s.angle;
+      s.angle += s.omega * dt;
+      s.t += dt;
+
+      // Zero-crossing detection
+      if (prevAngle * s.angle < 0) {
+        const dir = s.angle > 0 ? 1 : -1;
+        if (s.lastZeroCross !== null && dir !== s.lastZeroDir) {
+          s.halfPeriods.push(s.t - s.lastZeroCross);
+          if (s.halfPeriods.length >= 4) {
+            const last4 = s.halfPeriods.slice(-4);
+            const avg = (last4.reduce((a, b) => a + b, 0) / last4.length) * 2;
+            onPeriodMeasured(avg);
+          }
+        }
+        s.lastZeroCross = s.t;
+        s.lastZeroDir = dir;
+      }
+
+      draw(s.angle);
+      rafRef.current = requestAnimationFrame(step);
+    };
+
+    rafRef.current = requestAnimationFrame(step);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      lastTimeRef.current = null;
+    };
+  }, [isRunning, length, mass]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={220}
+      height={240}
+      className="rounded-xl border border-gray-100 bg-slate-50"
+    />
+  );
+};
+
+// ── Formula Lab Modal ─────────────────────────────────────
+const FormulaLab = ({ onClose }) => {
+  const [labL, setLabL] = useState(1.0);
+  const [labG, setLabG] = useState(9.81);
+  const T = 2 * Math.PI * Math.sqrt(labL / labG);
+
+  return (
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+        <div className="bg-gradient-to-r from-indigo-600 to-blue-600 px-6 py-4 flex items-center justify-between">
+          <div>
+            <h2 className="text-white font-bold text-lg">🧪 Formula Lab</h2>
+            <p className="text-blue-100 text-xs mt-0.5">Manipulate variables, see instant results</p>
+          </div>
+          <button onClick={onClose} className="text-white/70 hover:text-white text-xl font-bold">×</button>
+        </div>
+        <div className="p-6 space-y-5">
+          <div className="bg-indigo-50 rounded-xl px-5 py-4 text-center">
+            <p className="text-xs text-indigo-500 uppercase tracking-wide font-semibold mb-1">T = 2π √(L/g)</p>
+            <p className="text-4xl font-bold text-indigo-700">{T.toFixed(4)}<span className="text-lg font-normal text-indigo-400 ml-1">s</span></p>
+          </div>
+
+          {[
+            { label: "Length (L)", unit: "m", val: labL, set: setLabL, min: 0.1, max: 3, step: 0.05, color: "green" },
+            { label: "Gravity (g)", unit: "m/s²", val: labG, set: setLabG, min: 1, max: 25, step: 0.1, color: "amber" },
+          ].map(({ label, unit, val, set, min, max, step, color }) => (
+            <div key={label}>
+              <div className="flex justify-between mb-1.5">
+                <label className="text-sm font-semibold text-gray-700">{label}</label>
+                <span className={`text-sm font-bold text-${color}-600`}>{val.toFixed(2)} {unit}</span>
+              </div>
+              <input
+                type="range" min={min} max={max} step={step} value={val}
+                onChange={(e) => set(parseFloat(e.target.value))}
+                className="w-full accent-indigo-600"
+              />
+              <div className="flex justify-between text-xs text-gray-400 mt-0.5">
+                <span>{min} {unit}</span><span>{max} {unit}</span>
+              </div>
+            </div>
+          ))}
+
+          <div className="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3">
+            <p className="text-xs text-amber-700 font-semibold">💡 Try adding a mass slider — the period won't change!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ── Data Table ────────────────────────────────────────────
+const DataTable = ({ rows }) => (
+  <Card>
+    <div className="px-5 pt-5 pb-3">
+      <SectionHeader icon="📊" title="Experiment Data" subtitle="Theoretical vs. measured period across masses" />
+      <div className="overflow-x-auto rounded-xl border border-gray-100">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-gray-50 border-b border-gray-100">
+              {["Mass (kg)", "Length (m)", "Theoretical T (s)", "Measured T (s)", "Δ Error"].map((h) => (
+                <th key={h} className="px-4 py-2.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, i) => {
+              const err = r.measured ? Math.abs(r.measured - r.theory) : null;
+              return (
+                <tr key={i} className={`border-b border-gray-50 last:border-0 ${r.active ? "bg-blue-50" : "hover:bg-gray-50"}`}>
+                  <td className="px-4 py-2.5 font-bold text-indigo-600">{r.mass}</td>
+                  <td className="px-4 py-2.5 text-gray-600">{r.length}</td>
+                  <td className="px-4 py-2.5 font-mono text-gray-700">{r.theory.toFixed(4)}</td>
+                  <td className="px-4 py-2.5 font-mono">
+                    {r.measured ? (
+                      <span className="text-green-700 font-semibold">{r.measured.toFixed(4)}</span>
+                    ) : (
+                      <span className="text-gray-300 italic">—</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-2.5">
+                    {err !== null ? (
+                      <Badge color={err < 0.05 ? "green" : err < 0.15 ? "amber" : "red"}>
+                        {err.toFixed(3)}s
+                      </Badge>
+                    ) : (
+                      <span className="text-gray-300 text-xs">pending</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </Card>
+);
+
+// ── Main App ──────────────────────────────────────────────
+export default function PendulumApp() {
+  const [mass, setMass] = useState(1);
+  const [length, setLength] = useState(1.0);
+  const [isRunning, setIsRunning] = useState(false);
+  const [measuredPeriod, setMeasuredPeriod] = useState(null);
+  const [labOpen, setLabOpen] = useState(false);
+  const [tableData, setTableData] = useState([
+    { mass: 0.5, length: 1.0, theory: calcPeriod(1.0), measured: null, active: false },
+    { mass: 1.0, length: 1.0, theory: calcPeriod(1.0), measured: null, active: false },
+    { mass: 2.0, length: 1.0, theory: calcPeriod(1.0), measured: null, active: false },
+    { mass: 5.0, length: 1.0, theory: calcPeriod(1.0), measured: null, active: false },
+  ]);
+
+  const theory = calcPeriod(length);
+
+  const handlePeriodMeasured = useCallback((p) => {
+    setMeasuredPeriod(p);
+    setTableData((prev) =>
+      prev.map((row) =>
+        row.mass === mass && row.length === length ? { ...row, measured: p, active: true } : { ...row, active: false }
+      )
+    );
+  }, [mass, length]);
+
+  const handleReset = () => {
+    setIsRunning(false);
+    setMeasuredPeriod(null);
+  };
+
+  const massPresets = [0.5, 1, 2, 5];
+  const lengthPresets = [0.5, 1.0, 1.5, 2.0];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 p-4">
+      {labOpen && <FormulaLab onClose={() => setLabOpen(false)} />}
+
+      <div className="max-w-3xl mx-auto space-y-4">
+
+        {/* ── Page Header ── */}
+        <div className="pt-2 pb-1">
+          <div className="flex items-center gap-2 mb-1">
+            <Badge color="purple">Physics · Mechanics</Badge>
+            <Badge color="blue">Interactive Lab</Badge>
+          </div>
+          <h1 className="text-2xl font-extrabold text-gray-900">Simple Pendulum</h1>
+          <p className="text-gray-500 text-sm mt-1">Does changing mass affect the period? Run the experiment and find out.</p>
+        </div>
+
+        {/* ── Definition Card ── */}
+        <Card>
+          <div className="px-5 py-4">
+            <SectionHeader icon="📖" title="Quick Definition" />
+            <p className="text-sm text-gray-600 leading-relaxed">
+              A <strong>simple pendulum</strong> is a mass (bob) suspended from a fixed point by a massless, inextensible string. 
+              It swings back and forth under gravity. The time for one complete oscillation is called the <strong>period (T)</strong>.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {["Oscillatory motion", "Restoring force = gravity", "SHM for small angles"].map((t) => (
+                <Badge key={t} color="purple">{t}</Badge>
+              ))}
+            </div>
+          </div>
+        </Card>
+
+        {/* ── Formula Card ── */}
+        <FormulaCard onOpenLab={() => setLabOpen(true)} />
+
+        {/* ── Simulation ── */}
+        <Card>
+          <div className="px-5 pt-5 pb-4">
+            <SectionHeader icon="🔬" title="Live Simulation" subtitle="Change mass and length — watch what happens to the period" />
+
+            <div className="flex flex-col md:flex-row gap-5">
+              {/* Controls */}
+              <div className="flex-1 space-y-4">
+                {/* Mass */}
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <label className="text-sm font-semibold text-gray-700">Mass of Bob</label>
+                    <span className="text-sm font-bold text-indigo-600">{mass} kg</span>
+                  </div>
+                  <div className="flex gap-2 flex-wrap">
+                    {massPresets.map((m) => (
+                      <button
+                        key={m}
+                        onClick={() => { setMass(m); handleReset(); }}
+                        className={`flex-1 min-w-[48px] py-2 rounded-lg text-sm font-semibold border transition-all ${
+                          mass === m
+                            ? "bg-indigo-600 text-white border-indigo-600 shadow-sm"
+                            : "bg-white text-gray-600 border-gray-200 hover:border-indigo-300"
+                        }`}
+                      >
+                        {m}kg
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    type="range" min={0.1} max={10} step={0.1} value={mass}
+                    onChange={(e) => { setMass(parseFloat(e.target.value)); handleReset(); }}
+                    className="w-full mt-2 accent-indigo-600"
+                  />
+                </div>
+
+                {/* Length */}
+                <div>
+                  <div className="flex justify-between mb-2">
+                    <label className="text-sm font-semibold text-gray-700">String Length</label>
+                    <span className="text-sm font-bold text-green-600">{length.toFixed(2)} m</span>
+                  </div>
+                  <div className="flex gap-2 flex-wrap">
+                    {lengthPresets.map((l) => (
+                      <button
+                        key={l}
+                        onClick={() => { setLength(l); handleReset(); }}
+                        className={`flex-1 min-w-[48px] py-2 rounded-lg text-sm font-semibold border transition-all ${
+                          length === l
+                            ? "bg-green-600 text-white border-green-600 shadow-sm"
+                            : "bg-white text-gray-600 border-gray-200 hover:border-green-300"
+                        }`}
+                      >
+                        {l}m
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    type="range" min={0.1} max={2.5} step={0.05} value={length}
+                    onChange={(e) => { setLength(parseFloat(e.target.value)); handleReset(); }}
+                    className="w-full mt-2 accent-green-600"
+                  />
+                </div>
+
+                {/* Period Display */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-blue-50 rounded-xl px-4 py-3 border border-blue-100">
+                    <p className="text-xs text-blue-500 font-semibold uppercase tracking-wide">Theoretical T</p>
+                    <p className="text-xl font-bold text-blue-700 mt-0.5">{theory.toFixed(4)}<span className="text-sm font-normal text-blue-400 ml-1">s</span></p>
+                  </div>
+                  <div className="bg-green-50 rounded-xl px-4 py-3 border border-green-100">
+                    <p className="text-xs text-green-500 font-semibold uppercase tracking-wide">Measured T</p>
+                    <p className="text-xl font-bold text-green-700 mt-0.5">
+                      {measuredPeriod ? <>{measuredPeriod.toFixed(4)}<span className="text-sm font-normal text-green-400 ml-1">s</span></> : <span className="text-gray-300 text-base font-normal">—</span>}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Controls */}
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setIsRunning(!isRunning)}
+                    className={`flex-1 py-2.5 rounded-xl font-semibold text-sm transition-all ${
+                      isRunning
+                        ? "bg-red-500 hover:bg-red-600 text-white"
+                        : "bg-indigo-600 hover:bg-indigo-700 text-white"
+                    }`}
+                  >
+                    {isRunning ? "⏸ Pause" : "▶ Start"}
+                  </button>
+                  <button
+                    onClick={handleReset}
+                    className="px-4 py-2.5 rounded-xl font-semibold text-sm bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 transition-all"
+                  >
+                    ↺ Reset
+                  </button>
+                </div>
+              </div>
+
+              {/* Canvas */}
+              <div className="flex flex-col items-center gap-2">
+                <PendulumCanvas
+                  length={length}
+                  mass={mass}
+                  isRunning={isRunning}
+                  onPeriodMeasured={handlePeriodMeasured}
+                />
+                <p className="text-xs text-gray-400">L = {length.toFixed(2)}m · m = {mass}kg</p>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* ── Data Table ── */}
+        <DataTable rows={tableData} />
+
+        {/* ── Key Insight ── */}
+        <Card>
+          <div className="px-5 py-4">
+            <SectionHeader icon="💡" title="Key Insight" subtitle="What the experiment proves" />
+            <div className="space-y-3">
+              {[
+                { icon: "✅", title: "Mass is irrelevant", desc: "Doubling or halving the mass produces zero change in period. The formula confirms this — m doesn't appear.", color: "green" },
+                { icon: "📏", title: "Length is everything", desc: "Increase L → longer period. Decrease L → shorter period. T ∝ √L.", color: "blue" },
+                { icon: "🌍", title: "Gravity matters too", desc: "On the Moon (g = 1.62 m/s²), a 1m pendulum would have T ≈ 4.94s vs 2.0s on Earth.", color: "purple" },
+              ].map(({ icon, title, desc, color }) => (
+                <div key={title} className={`flex gap-3 p-3 rounded-xl bg-${color}-50 border border-${color}-100`}>
+                  <span className="text-xl mt-0.5">{icon}</span>
+                  <div>
+                    <p className={`text-sm font-bold text-${color}-800`}>{title}</p>
+                    <p className={`text-xs text-${color}-700 mt-0.5`}>{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+
+        {/* ── Summary ── */}
+        <Card>
+          <div className="px-5 py-4">
+            <SectionHeader icon="📝" title="Summary" />
+            <div className="grid grid-cols-3 gap-3 text-center">
+              {[
+                { label: "Mass effect", value: "None", sub: "Period unchanged", color: "red" },
+                { label: "Length effect", value: "T ∝ √L", sub: "Dominant factor", color: "green" },
+                { label: "Gravity effect", value: "T ∝ 1/√g", sub: "Location-dependent", color: "blue" },
+              ].map(({ label, value, sub, color }) => (
+                <div key={label} className={`bg-${color}-50 rounded-xl px-3 py-4 border border-${color}-100`}>
+                  <p className={`text-lg font-bold text-${color}-700`}>{value}</p>
+                  <p className="text-xs font-semibold text-gray-600 mt-1">{label}</p>
+                  <p className="text-xs text-gray-400 mt-0.5">{sub}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+
+        <p className="text-center text-xs text-gray-400 pb-4">Simple Pendulum · Physics Interactive Lab · Small angle approximation applies</p>
+      </div>
+    </div>
+  );
+}
+```

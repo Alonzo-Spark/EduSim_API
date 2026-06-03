@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 9,
+  "question": "Explain uniform circular motion and centripetal acceleration.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nUniform circular motion is the continuous movement of an object along a circular path at a constant, unchanging speed. \n\nCentripetal acceleration is the continuous inward acceleration directed perpendicular to the velocity vector, pointing straight toward the center of the circular trajectory loop.\n\n---\n\n## Characteristics\n\n* **Constant Speed, Changing Velocity:** The speed remains constant, but the velocity vector changes continuously because its direction updates at every single position.\n* **Inward Directed Force:** The system requires a continuous inward pull to curve the trajectory away from a straight tangent line.\n\n---\n\n## Formula\n\nThe magnitude of the continuous centripetal acceleration vector is written as:\n\n$$a_c = \\frac{v^2}{r}$$\n\nWhere:\n* $a_c$ represents the centripetal acceleration\n* $v$ represents the linear tracking speed of the object\n* $r$ represents the radius of the circular path curve\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Offers high precision tracking for stable structural satellite orbital modeling. | Fails when paths exhibit eccentric elliptical or highly variable velocity curves. |\n\n---\n\n## Summary\n\nIn uniform circular motion, magnitude tracking remains completely static while spatial direction variations generate an inward acceleration vector known as centripetal acceleration.",
+  "candidate_response": "```json\n{\n  \"action\": \"ui_render\",\n  \"layout\": \"interactive_textbook\",\n  \"content\": [\n    {\n      \"type\": \"section_card\",\n      \"title\": \"Introduction\",\n      \"content\": \"Uniform Circular Motion (UCM) describes the motion of an object traveling at a constant speed along a circular path. While the speed remains unchanged, the velocity is constantly shifting because the direction of motion is always changing.\"\n    },\n    {\n      \"type\": \"section_card\",\n      \"title\": \"Key Concepts\",\n      \"content\": \"To understand circular motion, we must distinguish between scalar speed and vector velocity:\\n\\n*   **Constant Speed:** The magnitude of the velocity vector stays the same.\\n*   **Changing Velocity:** Since the direction changes at every point on the circle, the object is technically accelerating.\\n*   **Period ($T$):** The time taken to complete one full revolution.\\n*   **Radius ($r$):** The distance from the center of the circle to the moving object.\"\n    },\n    {\n      \"type\": \"formula_card\",\n      \"title\": \"Orbital Velocity\",\n      \"formula\": \"v = \\\\frac{2\\\\pi r}{T}\",\n      \"explanation\": \"This formula calculates the linear speed of an object. $2\\\\pi r$ represents the circumference (distance), and $T$ is the time for one lap.\",\n      \"variables\": [\n        {\"symbol\": \"v\", \"meaning\": \"Linear Velocity\", \"unit\": \"m/s\"},\n        {\"symbol\": \"r\", \"meaning\": \"Radius of path\", \"unit\": \"m\"},\n        {\"symbol\": \"T\", \"meaning\": \"Time Period\", \"unit\": \"s\"}\n      ]\n    },\n    {\n      \"type\": \"section_card\",\n      \"title\": \"Centripetal Acceleration\",\n      \"content\": \"Even though the speed is constant, the change in direction requires acceleration. This acceleration is always directed toward the center of the circle, perpendicular to the velocity vector.\"\n    },\n    {\n      \"type\": \"formula_card\",\n      \"title\": \"Centripetal Acceleration\",\n      \"formula\": \"a_c = \\\\frac{v^2}{r}\",\n      \"explanation\": \"Centripetal acceleration increases with the square of the velocity and decreases as the radius of the turn increases.\",\n      \"variables\": [\n        {\"symbol\": \"a_c\", \"meaning\": \"Centripetal Acceleration\", \"unit\": \"m/s²\"},\n        {\"symbol\": \"v\", \"meaning\": \"Tangential Velocity\", \"unit\": \"m/s\"},\n        {\"symbol\": \"r\", \"meaning\": \"Radius\", \"unit\": \"m\"}\n      ]\n    },\n    {\n      \"type\": \"table_card\",\n      \"title\": \"Comparison: Linear vs. Circular Motion\",\n      \"headers\": [\"Feature\", \"Linear Motion (Constant v)\", \"Uniform Circular Motion\"],\n      \"rows\": [\n        [\"Speed\", \"Constant\", \"Constant\"],\n        [\"Velocity Direction\", \"Fixed\", \"Changing Continuously\"],\n        [\"Acceleration\", \"Zero\", \"Constant Magnitude (toward center)\"],\n        [\"Net Force\", \"Zero\", \"Centripetal Force ($F_c$)\"]\n      ]\n    },\n    {\n      \"type\": \"section_card\",\n      \"title\": \"Important Notes\",\n      \"content\": \"1. **Direction of Force:** Centripetal force is not a 'new' force; it is a label given to whatever force (gravity, tension, friction) keeps the object in the circle.\\n2. **Centripetal vs. Centrifugal:** Centripetal is the real force acting toward the center. 'Centrifugal' is a pseudo-force felt by the object due to inertia.\"\n    },\n    {\n      \"type\": \"suggested_questions\",\n      \"questions\": [\n        \"How does doubling the speed of an object affect its centripetal acceleration?\",\n        \"If the string breaks for a ball in circular motion, what path does the ball take?\",\n        \"Calculate the acceleration of a car taking a 50m radius turn at 20m/s.\"\n      ]\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of uniform circular motion and centripetal acceleration, with accurate formulas and conceptual explanations. The JSON format is well-structured and easy to follow, making it a high-quality presentation. The educational value is also high, with clear explanations and relevant examples. However, there are a few minor areas for improvement, such as adding more visual aids or diagrams to enhance the pedagogical effectiveness. Additionally, some of the section titles and variable names could be more descriptive, but overall, the response is well-written and effective in conveying the key concepts.",
+  "candidate_token_usage": {
+    "promptTokens": 380,
+    "completionTokens": 943,
+    "totalTokens": 1323
+  },
+  "candidate_latency_ms": 5819,
+  "candidate_cost_usd": 0.003019,
+  "judge_token_usage": {
+    "promptTokens": 1559,
+    "completionTokens": 175,
+    "totalTokens": 1734
+  },
+  "judge_latency_ms": 5028,
+  "judge_cost_usd": 0.0013553999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:10:34.498Z"
+}

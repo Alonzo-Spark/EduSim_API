@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 12,
+  "question": "Define inertia and explain its types.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nInertia is the inherent property of an object by virtue of which it resists any change to its state of rest or uniform motion along a straight line. Inertia is an intrinsic quality of matter directly proportional to its mass.\n\n---\n\n## Types of Inertia\n\n* **Inertia of Rest:** The inability of an object to change its state of rest by itself.\n* **Inertia of Motion:** The inability of an object to modify its steady uniform linear velocity by itself.\n* **Inertia of Direction:** The inability of a moving mass to change its directional travel alignment without an external intervention force.\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Ensures mechanical stability in structures without continuous power inputs. | Requires substantial energy expenditures to overcome when launching transit systems. |\n\n---\n\n## Real-world Examples\n\n* **Rest Example:** Shaking a tree branch vigorously causes ripe fruits to break free and drop because they resist moving along with the branches.\n* **Motion Example:** An athlete runs a short distance past the finish line because their body's inertia resists an instantaneous stop.\n* **Direction Example:** A car turning sharply left causes passengers to slide toward the right door as their bodies attempt to continue tracking in a straight line.\n\n---\n\n## Summary\n\nInertia is matter's fundamental resistance to acceleration, manifesting as separate tracking constraints across rest states, velocity continuities, and orientation axes.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition           │\n│                           │\n│ Inertia is the property of matter that resists changes in its state of   │\n│ motion. It is the tendency of an object to remain at rest or to keep      │\n│ moving at a constant velocity unless acted upon by an external force.     │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Types of Inertia           │\n│                           │\n│ 1. **Rest Inertia** – The resistance to starting motion. An object at   │\n│    rest will stay at rest until a net external force is applied.          │\n│ 2. **Translational Inertia** – The resistance to changes in linear      │\n│    motion. It is proportional to the mass of the object and determines   │\n│    how much force is needed to accelerate it.                              │\n│ 3. **Rotational Inertia** – The resistance to changes in rotational     │\n│    motion. Also known as the moment of inertia, it depends on both the     │\n│    mass and how that mass is distributed relative to the axis of rotation.│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes            │\n│                           │\n│ • Inertia is directly proportional to mass.                                │\n│ • Newton’s first law (law of inertia) states that an object will remain   │\n│   in uniform motion unless acted upon by a net external force.             │\n│ • Rotational inertia is analogous to mass in linear motion but includes   │\n│   geometry of the object.                                                 │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                    │\n│                           │\n│ Inertia is the innate resistance of matter to changes in motion,          │\n│ encompassing rest, translational, and rotational aspects. It is the       │\n│ foundational concept behind Newton’s first law and governs the dynamics   │\n│ of all physical systems.                                                  │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of inertia, its types, and its relationship with mass and motion. The use of clear headings and concise definitions enhances readability. However, the response could be improved by including more detailed examples, such as real-world scenarios or analogies, to further illustrate the concepts. Additionally, the candidate could have explicitly stated Newton's first law of motion and its direct relation to inertia. The types of inertia listed (rest, translational, rotational) are accurate but differ slightly in naming convention from the gold reference answer. Overall, the response is well-structured, easy to follow, and effectively conveys the fundamental principles of inertia.",
+  "candidate_token_usage": {
+    "promptTokens": 424,
+    "completionTokens": 762,
+    "totalTokens": 1186
+  },
+  "candidate_latency_ms": 1461,
+  "candidate_cost_usd": 0.0002604,
+  "judge_token_usage": {
+    "promptTokens": 1145,
+    "completionTokens": 191,
+    "totalTokens": 1336
+  },
+  "judge_latency_ms": 5697,
+  "judge_cost_usd": 0.0011454,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:18:18.993Z"
+}

@@ -1,0 +1,177 @@
+┌─────────────────────────────────────┐
+│ Introduction                         │
+│                                     │
+│ In many electrical circuits, several │
+│ resistors are connected such that   │
+│ the same voltage is applied across   │
+│ each resistor while the total current│
+│ supplied by the source splits among │
+│ the parallel branches. Understanding│
+│ how to replace this network with a   │
+│ single “equivalent” resistor is a   │
+│ fundamental skill for circuit analysis│
+│ and simplification.                 │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Definition                           │
+│                                     │
+│ **Equivalent resistance (R_eq)** in a │
+│ parallel network is the single      │
+│ resistance that would draw the same │
+│ total current from the same voltage  │
+│ source as the entire set of parallel │
+│ resistors.                           │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Key Concepts                         │
+│                                     │
+│ • **Voltage across each branch** is │
+│   identical (V).                     │
+│ • **Currents add**: the total current│
+│   supplied by the source is the sum │
+│   of the branch currents.            │
+│ • **Conductance** (G = 1/R) is often │
+│   more convenient for parallel sums.│
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Derivation Steps                     │
+│                                     │
+│ 1. Let the circuit contain *n*       │
+│    resistors R₁, R₂, …, Rₙ in       │
+│    parallel, all connected to the   │
+│    same voltage V.                   │
+│                                     │
+│ 2. By Ohm’s law, the current through│
+│    each resistor is                │
+│    Iₖ = V / Rₖ   (k = 1…n).          │
+│                                     │
+│ 3. The total current supplied by the│
+│    source is the sum of branch      │
+│    currents:                       │
+│    I_total = Σₖ Iₖ = Σₖ V / Rₖ.      │
+│                                     │
+│ 4. Define an equivalent resistor   │
+│    R_eq that would draw the same   │
+│    total current from the same     │
+│    voltage V:                      │
+│    I_total = V / R_eq.              │
+│                                     │
+│ 5. Equate the two expressions for   │
+│    I_total and solve for R_eq:      │
+│    V / R_eq = Σₖ V / Rₖ               │
+│    ⇒ 1 / R_eq = Σₖ 1 / Rₖ.            │
+│                                     │
+│ 6. For two resistors (R₁ and R₂) the│
+│    formula simplifies to:           │
+│    R_eq = (R₁·R₂) / (R₁ + R₂).       │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Main Formula                         │
+│                                     │
+│ $$\displaystyle \frac{1}{R_{\text{eq}}}= \sum_{k=1}^{n}\frac{1}{R_k}$$ │
+│                                     │
+│ [ Explain Formula ]   [ Open Formula Lab ] │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Example: Two‑Resistor Parallel      │
+│                                     │
+│ Suppose R₁ = 4 Ω and R₂ = 6 Ω. Using the │
+│ two‑resistor simplification:       │
+│                                     │
+│ $$R_{\text{eq}} = \frac{R_1 R_2}{R_1+R_2}
+│   = \frac{4 \times 6}{4+6}
+│   = \frac{24}{10}
+│   = 2.4\ \Omega$$                │
+│                                     │
+│ The equivalent resistance is lower │
+│ than either individual resistor,    │
+│ illustrating how parallel paths   │
+│ reduce overall opposition to current.│
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Applications                         │
+│                                     │
+│ • Designing load‑sharing networks   │
+│ • Calculating total resistance in    │
+│   PCB trace networks                │
+│ • Determining power distribution in  │
+│   parallel branches of power supplies│
+│ • Simplifying analysis of complex    │
+│   ladder and bridge circuits         │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Advantages                           │
+│                                     │
+│ • Reduces circuit complexity        │
+│ • Enables quick estimation of total │
+│   current draw                      │
+│ • Facilitates modular design        │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Disadvantages                        │
+│                                     │
+│ • Assumes ideal resistors (no       │
+│   temperature or frequency effects)│
+│ • Does not account for parasitic     │
+│   inductance/capacitance in real     │
+│   components                        │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Important Notes                      │
+│                                     │
+│ • The formula works for any number  │
+│   of parallel branches.             │
+│ • When one resistor is 0 Ω (short), │
+│   R_eq = 0 Ω (the network is a short).│
+│ • If any resistor is ∞ Ω (open), it  │
+│   contributes nothing to the sum.   │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Summary                              │
+│                                     │
+│ • Parallel resistors share the same │
+│   voltage; currents add.             │
+│ • Conductances add: 1/R_eq = Σ 1/Rₖ. │
+│ • For two resistors: R_eq = (R₁·R₂)│
+│   /(R₁+R₂).                         │
+│ • The equivalent resistance is always│
+│   less than the smallest individual │
+│   branch resistance.                │
+└─────────────────────────────────────┘
+
+
+┌─────────────────────────────────────┐
+│ Suggested Questions                  │
+│                                     │
+│ 1. If three resistors of 2 Ω, 3 Ω,   │
+│    and 6 Ω are in parallel, what is │
+│    R_eq?                             │
+│ 2. How does adding another parallel │
+│    branch affect the total current? │
+│ 3. Explain why the equivalent        │
+│    resistance can never exceed the   │
+│    smallest branch resistance.      │
+│ 4. Derive the formula for R_eq using │
+│    conductance (G = 1/R) instead of │
+│    resistance.                       │
+└─────────────────────────────────────┘

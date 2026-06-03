@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 24,
+  "question": "Calculate the gravitational force between two masses of 5 kg each placed 2 m apart.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Gravitational Field Problem\n\n### Problem\nCalculate the gravitational force between two identical masses of $5 \\text{ kg}$ each placed at a center-to-center distance of $2 \\text{ m}$ apart.\n\n### Given\n* First mass ($m_1$) = $5 \\text{ kg}$\n* Second mass ($m_2$) = $5 \\text{ kg}$\n* Distance apart ($r$) = $2 \\text{ m}$\n* Gravitational Constant ($G$) = $6.67 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$\n\n### Formula\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\n### Substitution\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{5 \\times 5}{2^2}$$\n\n### Calculation\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{25}{4}$$\n\n$$F = (6.67 \\times 10^{-11}) \\times 6.25$$\n\n$$F = 4.16875 \\times 10^{-10} \\text{ N}$$\n\n### Final Answer\n**Gravitational Force ($F$) = $4.17 \\times 10^{-10} \\text{ N}$**\n\n### Interpretation\nThis reflects an incredibly weak mutual attraction force, demonstrating why gravity is imperceptible between everyday objects and only becomes significant with planetary-scale masses.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ Gravitational force is the attractive force between two masses due to gravity, described by Newton’s Law of Universal Gravitation.  \n└───────────────────────────┘  \n\n---\n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n$$\nF = G \\frac{m_1 m_2}{r^2}\n$$  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n---\n\n### Key Concepts  \n- **Gravitational Constant**: $ G = 6.674 \\times 10^{-11} \\ \\text{N·m}^2/\\text{kg}^2 $  \n- $ m_1, m_2 $: masses of the two objects (in kg)  \n- $ r $: distance between their centers (in m)  \n- The force is always attractive and acts along the line joining the centers.\n\n---\n\n### Given Values  \n| Variable | Value               |  \n|---------|---------------------|  \n| $ m_1 $ | 5 kg                |  \n| $ m_2 $ | 5 kg                |  \n| $ r $   | 2 m                 |  \n| $ G $   | $ 6.674 \\times 10^{-11} $ |  \n\n---\n\n### Step-by-Step Calculation  \n\n1. Substitute values into the formula:  \n$$\nF = (6.674 \\times 10^{-11}) \\frac{(5)(5)}{(2)^2}\n$$\n\n2. Simplify numerator and denominator:  \n$$\nF = (6.674 \\times 10^{-11}) \\frac{25}{4} = (6.674 \\times 10^{-11}) \\times 6.25\n$$\n\n3. Multiply:  \n$$\nF = 4.17125 \\times 10^{-10} \\ \\text{N}\n$$\n\n---\n\n### Final Answer  \n┌───────────────────────────┐  \n│ Result                    │  \n│                           │  \n$$\nF \\approx 4.17 \\times 10^{-10} \\ \\text{N}\n$$  \n│                           │  \n│ This is a very small force — typical for everyday-sized masses.  \n└───────────────────────────┘  \n\n---\n\n### Important Notes  \n- Gravitational force between ordinary objects is extremely weak.  \n- This force becomes significant only when at least one mass is very large (e.g., planets or stars).  \n- The result is rounded to three significant figures, matching the precision of the given data.\n\n---\n\n### Suggested Questions  \n- What happens to the force if the distance is halved?  \n- How does this compare to the weight of one of the masses on Earth?  \n- At what distance would the gravitational force between these masses be $ 1 \\times 10^{-9} \\ \\text{N} $?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the gravitational force concept, correctly applies Newton's Law of Universal Gravitation, and provides a clear step-by-step calculation. The formatting is well-structured, and the presentation is of high quality. The response also includes important notes and suggested questions, making it beginner-friendly and pedagogically effective. However, minor improvements could be made, such as using the exact same gravitational constant value as the gold reference answer. Overall, the response is accurate, well-presented, and effective in teaching the concept.",
+  "candidate_token_usage": {
+    "promptTokens": 364,
+    "completionTokens": 652,
+    "totalTokens": 1016
+  },
+  "candidate_latency_ms": 11067,
+  "candidate_cost_usd": 0.001668,
+  "judge_token_usage": {
+    "promptTokens": 1398,
+    "completionTokens": 169,
+    "totalTokens": 1567
+  },
+  "judge_latency_ms": 5130,
+  "judge_cost_usd": 0.0012444,
+  "retry_count": 1,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:46:10.858Z"
+}

@@ -1,0 +1,197 @@
+I'll render this as a structured interactive textbook experience.
+
+```json
+{
+  "type": "textbook_response",
+  "topic": "Bernoulli's Theorem",
+  "sections": [
+    {
+      "type": "introduction",
+      "title": "What is Bernoulli's Theorem?",
+      "content": "Bernoulli's Theorem is a fundamental principle in fluid mechanics that describes the relationship between the pressure, velocity, and height of a flowing fluid. It was formulated by the Swiss mathematician **Daniel Bernoulli** in 1738.",
+      "icon": "💧"
+    },
+    {
+      "type": "definition",
+      "title": "Quick Definition",
+      "content": "For a **steady, incompressible, non-viscous** fluid flowing along a streamline, the **total mechanical energy per unit volume remains constant** throughout the flow.",
+      "highlight": true
+    },
+    {
+      "type": "formula",
+      "title": "Bernoulli's Equation",
+      "latex": "P + \\frac{1}{2}\\rho v^2 + \\rho g h = \\text{constant}",
+      "variables": [
+        { "symbol": "P", "meaning": "Static Pressure", "unit": "Pa (Pascal)" },
+        { "symbol": "\\rho", "meaning": "Density of fluid", "unit": "kg/m³" },
+        { "symbol": "v", "meaning": "Velocity of fluid", "unit": "m/s" },
+        { "symbol": "g", "meaning": "Acceleration due to gravity", "unit": "9.8 m/s²" },
+        { "symbol": "h", "meaning": "Height above reference", "unit": "m" }
+      ]
+    },
+    {
+      "type": "formula",
+      "title": "Between Two Points (Expanded Form)",
+      "latex": "P_1 + \\frac{1}{2}\\rho v_1^2 + \\rho g h_1 = P_2 + \\frac{1}{2}\\rho v_2^2 + \\rho g h_2",
+      "variables": [
+        { "symbol": "P_1, P_2", "meaning": "Pressure at points 1 and 2", "unit": "Pa" },
+        { "symbol": "v_1, v_2", "meaning": "Velocity at points 1 and 2", "unit": "m/s" },
+        { "symbol": "h_1, h_2", "meaning": "Height at points 1 and 2", "unit": "m" }
+      ]
+    },
+    {
+      "type": "concepts",
+      "title": "Three Energy Components",
+      "items": [
+        {
+          "term": "Pressure Energy",
+          "formula": "P",
+          "description": "Energy due to fluid pressure. When pressure increases, velocity decreases.",
+          "color": "blue"
+        },
+        {
+          "term": "Kinetic Energy",
+          "formula": "\\frac{1}{2}\\rho v^2",
+          "description": "Energy due to motion of the fluid. Increases as fluid speeds up.",
+          "color": "green"
+        },
+        {
+          "term": "Potential Energy",
+          "formula": "\\rho g h",
+          "description": "Energy due to height of the fluid above reference level.",
+          "color": "orange"
+        }
+      ]
+    },
+    {
+      "type": "conditions",
+      "title": "Conditions / Assumptions",
+      "items": [
+        "Flow must be **steady** (not turbulent)",
+        "Fluid must be **incompressible** (constant density)",
+        "Fluid must be **non-viscous** (no internal friction)",
+        "Flow must be along a **streamline**",
+        "No **external work** done on or by the fluid"
+      ]
+    },
+    {
+      "type": "derivation",
+      "title": "Derivation Insight",
+      "content": "Bernoulli's theorem is derived from the **Work-Energy Theorem** applied to fluid flow. The net work done by pressure forces equals the change in kinetic and potential energy of the fluid element.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Work done by pressure forces",
+          "latex": "W = P_1 A_1 \\Delta x_1 - P_2 A_2 \\Delta x_2"
+        },
+        {
+          "step": 2,
+          "title": "By continuity equation",
+          "latex": "A_1 v_1 = A_2 v_2 \\implies A_1 \\Delta x_1 = A_2 \\Delta x_2 = \\Delta V"
+        },
+        {
+          "step": 3,
+          "title": "Applying Work-Energy theorem",
+          "latex": "(P_1 - P_2)\\Delta V = \\frac{1}{2}\\rho \\Delta V(v_2^2 - v_1^2) + \\rho g \\Delta V(h_2 - h_1)"
+        },
+        {
+          "step": 4,
+          "title": "Rearranging gives Bernoulli's equation",
+          "latex": "P_1 + \\frac{1}{2}\\rho v_1^2 + \\rho g h_1 = P_2 + \\frac{1}{2}\\rho v_2^2 + \\rho g h_2"
+        }
+      ]
+    },
+    {
+      "type": "special_cases",
+      "title": "Special Cases",
+      "cases": [
+        {
+          "title": "Horizontal Flow (h = constant)",
+          "latex": "P + \\frac{1}{2}\\rho v^2 = \\text{constant}",
+          "insight": "Pressure decreases where velocity increases — the core idea behind lift and venturi effect."
+        },
+        {
+          "title": "Fluid at Rest (v = 0)",
+          "latex": "P + \\rho g h = \\text{constant}",
+          "insight": "Reduces to the hydrostatic pressure equation."
+        },
+        {
+          "title": "Torricelli's Theorem",
+          "latex": "v = \\sqrt{2gh}",
+          "insight": "Speed of efflux from a hole in a tank at depth h below the surface."
+        }
+      ]
+    },
+    {
+      "type": "applications",
+      "title": "Real-World Applications",
+      "items": [
+        {
+          "name": "Aircraft Wing (Aerofoil)",
+          "icon": "✈️",
+          "description": "Air moves faster over the curved top surface → lower pressure above wing → net upward lift force generated.",
+          "principle": "Higher v → Lower P"
+        },
+        {
+          "name": "Venturi Meter",
+          "icon": "🔧",
+          "description": "Used to measure flow rate of fluids in pipes by measuring pressure difference at a constriction.",
+          "principle": "Constriction → Higher v → Lower P"
+        },
+        {
+          "name": "Carburetor",
+          "icon": "🚗",
+          "description": "Air rushing through a narrow throat creates low pressure, drawing fuel into the airstream automatically.",
+          "principle": "Low P at throat draws fuel"
+        },
+        {
+          "name": "Atomizer / Spray Bottle",
+          "icon": "🧴",
+          "description": "Fast-moving air above a liquid tube creates low pressure, pulling liquid up and spraying it.",
+          "principle": "Fast air → Low P → Liquid rises"
+        },
+        {
+          "name": "Bunsen Burner",
+          "icon": "🔥",
+          "description": "Gas flowing through a narrow nozzle creates low pressure, drawing air in to support combustion.",
+          "principle": "Gas jet → Low P → Air intake"
+        },
+        {
+          "name": "Torricelli's Theorem",
+          "icon": "🪣",
+          "description": "Speed at which liquid exits a hole in a tank depends on the height of liquid above the hole.",
+          "principle": "v = √(2gh)"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Comparison: Pressure vs Velocity",
+      "headers": ["Condition", "Velocity", "Pressure", "Example"],
+      "rows": [
+        ["Narrow pipe / constriction", "High ↑", "Low ↓", "Venturi meter"],
+        ["Wide pipe / open region", "Low ↓", "High ↑", "Normal pipe flow"],
+        ["Top of aircraft wing", "High ↑", "Low ↓", "Lift generation"],
+        ["Bottom of aircraft wing", "Low ↓", "High ↑", "Supports lift"]
+      ]
+    },
+    {
+      "type": "limitations",
+      "title": "Limitations of Bernoulli's Theorem",
+      "items": [
+        "Not valid for **viscous fluids** (real fluids have friction losses)",
+        "Not applicable to **turbulent flow**",
+        "Cannot be used when **compressibility** is significant (e.g., high-speed gas flow)",
+        "Assumes **no heat transfer** between fluid and surroundings",
+        "Only valid along a **single streamline**"
+      ]
+    },
+    {
+      "type": "summary",
+      "title": "Key Takeaway",
+      "content": "Bernoulli's theorem tells us that in a flowing fluid, **speed and pressure trade off** — where the fluid speeds up, pressure drops, and vice versa. This single principle explains flight, fluid measurement, spray mechanisms, and much more.",
+      "formula_reminder": "P + \\frac{1}{2}\\rho v^2 + \\rho g h = \\text{constant}"
+    }
+  ]
+}
+```

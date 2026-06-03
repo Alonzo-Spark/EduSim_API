@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 39,
+  "question": "Define wavelength, frequency, and amplitude of a wave.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWavelength, frequency, and amplitude are primary parameters used to quantify and describe the physical properties of wave propagation through space and time.\n\n---\n\n## Core Wave Metrics\n\n### 1. Wavelength ($\\lambda$)\nWavelength is the spatial distance between two consecutive points that are in the same phase of oscillation, such as the distance between two adjacent wave crests or troughs.\n\n### 2. Frequency ($f$)\nFrequency is the number of complete wave cycles or oscillations that pass a fixed reference point per unit of time, measured internationally in Hertz ($\\text{Hz}$).\n\n### 3. Amplitude ($A$)\nAmplitude is the maximum displacement of a medium's particles from their equilibrium position as a wave passes through.\n\n---\n\n## Formula\n\nThe wave speed equation linking these parameters is defined as:\n\n$$v = f\\lambda$$\n\nWhere:\n* $v$ represents the propagation velocity of the wave profile\n* $f$ represents the wave frequency\n* $\\lambda$ represents the wavelength value\n\n---\n\n## Summary\n\nWavelength measures a wave's spatial structure, frequency tracks its speed over time, and amplitude defines its energy intensity and displacement scale.",
+  "candidate_response": "┌───────────────────────────┐  \n│ **Quick Definition**      │  \n│                           │  \n│ Wavelength, frequency, and amplitude are three fundamental properties that describe the behavior and characteristics of waves. They apply to all types of waves, including sound, light, and water waves. │  \n└───────────────────────────┘  \n\n---\n\n### **Wavelength**\n\n┌───────────────────────────┐  \n│ **Definition**            │  \n│                           │  \n│ Wavelength is the distance between two consecutive identical points on a wave, such as from crest to crest or trough to trough. │  \n└───────────────────────────┘  \n\n- Symbol: $ \\lambda $ (lambda)  \n- Units: meters (m)  \n- Represents the spatial period of the wave — how long one complete cycle is in space.\n\n---\n\n### **Frequency**\n\n┌───────────────────────────┐  \n│ **Definition**            │  \n│                           │  \n│ Frequency is the number of complete wave cycles passing a given point per second. │  \n└───────────────────────────┘  \n\n- Symbol: $ f $  \n- Units: hertz (Hz) = 1 cycle per second  \n- Represents the temporal period of the wave — how often the wave repeats in time.\n\n---\n\n### **Amplitude**\n\n┌───────────────────────────┐  \n│ **Definition**            │  \n│                           │  \n│ Amplitude is the maximum displacement of a wave from its equilibrium (rest) position. │  \n└───────────────────────────┘  \n\n- Related to the energy carried by the wave.\n- Higher amplitude = more energy.\n- For sound waves: higher amplitude means louder sound.  \n- For light waves: higher amplitude means brighter light.\n\n---\n\n### **Formula**\n\n$$\nv = f \\lambda\n$$\n\n┌───────────────────────────┐  \n│ **Main Formula**          │  \n│                           │  \n│ $$ v = f \\lambda $$       │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\nWhere:  \n- $ v $ = wave speed (m/s)  \n- $ f $ = frequency (Hz)  \n- $ \\lambda $ = wavelength (m)\n\nThis equation shows the relationship between wave speed, frequency, and wavelength.\n\n---\n\n### **Visual Summary**\n\n| Property     | Symbol | Definition                                 | Unit         | Determines          |\n|--------------|--------|--------------------------------------------|--------------|---------------------|\n| Wavelength   | $ \\lambda $ | Distance between two identical points on a wave | meters (m)   | Wave's spatial length |\n| Frequency    | $ f $      | Number of waves passing a point per second     | hertz (Hz)   | Pitch (sound), Color (light) |\n| Amplitude    | $ A $      | Maximum displacement from equilibrium          | varies       | Loudness, Brightness, Energy |\n\n---\n\n### **Key Concepts**\n\n✔️ Wavelength and frequency are inversely related when wave speed is constant:  \n$$ \\lambda \\propto \\frac{1}{f} $$\n\n✔️ Amplitude is independent of wavelength and frequency — it relates only to energy.\n\n✔️ In a given medium (like air or vacuum), wave speed is fixed, so changing frequency affects wavelength, and vice versa.\n\n---\n\n### **Applications**\n\n🔊 **Sound Waves**:  \n- High frequency → high pitch  \n- High amplitude → loud sound  \n\n📡 **Electromagnetic Waves**:  \n- Short wavelength (e.g., gamma rays) → high energy  \n- Long wavelength (e.g., radio waves) → low energy  \n\n🌊 **Water Waves**:  \n- Tall waves = high amplitude  \n- Close ripples = high frequency, short wavelength\n\n---\n\n### **Important Notes**\n\n⚠️ Amplitude does **not** affect wave speed in a uniform medium.  \n⚠️ Frequency remains constant when a wave moves from one medium to another — wavelength adjusts instead.\n\n---\n\n### **Suggested Questions**\n\n1. What happens to wavelength if frequency increases and wave speed stays the same?  \n2. Why does a high-amplitude light wave appear brighter?  \n3. If a wave has a frequency of 50 Hz and a wavelength of 2 m, what is its speed?  \n4. How are pitch and loudness related to wave properties?\n\n[ Try solving → ] [ View Hints ] [ Check Answers ]",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational effectiveness. It provides clear and concise definitions of wavelength, frequency, and amplitude, and includes relevant formulas and examples. The use of tables, symbols, and formatting enhances readability and understanding. However, to further improve, the candidate could consider adding more visual aids, such as diagrams or graphs, to illustrate the concepts and relationships between wave properties. Additionally, providing more real-world applications and examples could help to reinforce the learning experience.",
+  "candidate_token_usage": {
+    "promptTokens": 357,
+    "completionTokens": 900,
+    "totalTokens": 1257
+  },
+  "candidate_latency_ms": 41637,
+  "candidate_cost_usd": 0.002157,
+  "judge_token_usage": {
+    "promptTokens": 1558,
+    "completionTokens": 159,
+    "totalTokens": 1717
+  },
+  "judge_latency_ms": 4704,
+  "judge_cost_usd": 0.0013164,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:28:09.840Z"
+}

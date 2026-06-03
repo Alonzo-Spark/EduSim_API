@@ -1,0 +1,554 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Lab: Spring Stretched - Peak Limit Event</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sci-base': '#0f172a',
+                        'sci-card': '#1e293b',
+                        'sci-accent': '#38bdf8',
+                        'sci-danger': '#ef4444',
+                        'sci-warning': '#f59e0b',
+                        'sci-success': '#10b981',
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'flash': 'flash 0.5s',
+                    },
+                    keyframes: {
+                        flash: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.5' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            border-left: 4px solid #38bdf8;
+        }
+
+        /* Canvas Container */
+        #canvas-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        /* Runtime Overlay */
+        #runtime-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(239, 68, 68, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            border: 2px solid #ef4444;
+            box-sizing: border-box;
+        }
+        
+        #runtime-overlay.active {
+            opacity: 1;
+            animation: flash 0.5s infinite;
+        }
+
+        .scan-line {
+            width: 100%;
+            height: 2px;
+            background: #ef4444;
+            position: absolute;
+            top: 0;
+            animation: scan 2s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* Interactive Elements */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #334155;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+    <!-- Header -->
+    <header class="mb-8 flex justify-between items-end border-b border-slate-700 pb-4">
+        <div>
+            <h1 class="text-4xl font-bold text-white tracking-tight">
+                <span class="text-sci-accent">Physics</span> Lab
+            </h1>
+            <p class="text-slate-400 mt-1 text-sm uppercase tracking-widest">Elasticity & Hooke's Law</p>
+        </div>
+        <div class="text-right">
+            <div class="text-xs text-slate-500">SESSION ID</div>
+            <div class="text-sci-accent font-mono">SPR-2024-X99</div>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- LEFT COLUMN: Interactive 3D Lab & Controls -->
+        <div class="lg:col-span-7 space-y-6">
+            
+            <!-- 3D Visualization Card -->
+            <div class="glass-panel rounded-xl p-1 relative">
+                <div id="canvas-container">
+                    <div id="runtime-overlay">
+                        <div class="scan-line"></div>
+                        <h2 class="text-4xl font-black text-red-500 tracking-tighter mb-2 uppercase drop-shadow-md">Critical Limit</h2>
+                        <p class="text-white bg-red-600 px-4 py-1 font-bold text-sm">ELASTIC LIMIT EXCEEDED</p>
+                        <p class="text-red-200 mt-4 font-mono text-sm">STRUCTURAL INTEGRITY COMPROMISED</p>
+                    </div>
+                    <!-- Three.js Canvas injected here -->
+                </div>
+                
+                <!-- Control Bar -->
+                <div class="p-4 bg-slate-900/80 border-t border-slate-700 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="text-xs text-slate-400 uppercase font-bold block mb-2">Applied Force (N)</label>
+                        <input type="range" id="force-slider" min="0" max="100" value="20" step="1">
+                        <div class="flex justify-between text-xs font-mono mt-1">
+                            <span>0N</span>
+                            <span id="force-display" class="text-sci-accent">20N</span>
+                            <span>100N</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-xs text-slate-400 uppercase font-bold block mb-2">Spring Constant (k)</label>
+                        <input type="range" id="k-slider" min="10" max="100" value="50" step="5">
+                        <div class="flex justify-between text-xs font-mono mt-1">
+                            <span>Soft</span>
+                            <span id="k-display" class="text-sci-accent">50</span>
+                            <span>Hard</span>
+                        </div>
+                    </div>
+                    <div class="flex items-end">
+                        <button id="reset-btn" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-2 px-4 rounded font-bold transition-colors border border-slate-600">
+                            RESET SYSTEM
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Data Card -->
+            <div class="glass-panel rounded-xl p-6">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                    Live Telemetry
+                </h3>
+                <div class="grid grid-cols-3 gap-4 text-center">
+                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700">
+                        <div class="text-xs text-slate-400 uppercase">Displacement (x)</div>
+                        <div id="val-x" class="text-2xl font-mono text-white">0.40 m</div>
+                    </div>
+                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700">
+                        <div class="text-xs text-slate-400 uppercase">Potential Energy</div>
+                        <div id="val-u" class="text-2xl font-mono text-sci-accent">4.0 J</div>
+                    </div>
+                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700">
+                        <div class="text-xs text-slate-400 uppercase">Status</div>
+                        <div id="val-status" class="text-xl font-bold text-green-400">ELASTIC</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Interactive Textbook Content -->
+        <div class="lg:col-span-5 space-y-6">
+
+            <!-- Definition Card -->
+            <div class="glass-panel rounded-xl p-6 border-l-4 border-sci-accent">
+                <h3 class="text-xl font-bold text-white mb-2">Quick Definition</h3>
+                <p class="text-slate-300 leading-relaxed text-sm">
+                    <strong class="text-white">Hooke's Law</strong> states that the force needed to extend or compress a spring by some distance scales linearly with respect to that distance. 
+                    <br><br>
+                    However, every material has an <strong class="text-sci-warning">Elastic Limit</strong>. Beyond this point, the spring will not return to its original shape (Plastic Deformation) and may physically break.
+                </p>
+            </div>
+
+            <!-- Formula Card System -->
+            <div class="glass-panel rounded-xl overflow-hidden formula-card">
+                <div class="bg-slate-900/50 p-3 border-b border-slate-700 flex justify-between items-center">
+                    <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Main Formula</span>
+                    <div class="space-x-1">
+                        <button class="text-[10px] bg-slate-800 hover:bg-slate-700 text-sci-accent px-2 py-1 rounded border border-slate-600 transition-colors">
+                            [ Explain Formula ]
+                        </button>
+                        <button class="text-[10px] bg-sci-accent hover:bg-sky-400 text-slate-900 px-2 py-1 rounded font-bold transition-colors">
+                            [ Open Formula Lab ]
+                        </button>
+                    </div>
+                </div>
+                <div class="p-8 flex justify-center items-center bg-gradient-to-br from-slate-800 to-slate-900">
+                    <!-- KaTeX Rendering -->
+                    <div id="formula-render" class="text-2xl md:text-3xl text-white"></div>
+                </div>
+                <div class="p-4 bg-slate-900/80 text-xs text-slate-400 font-mono">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><span class="text-sci-accent">F</span> = Restoring Force (N)</div>
+                        <div><span class="text-sci-accent">k</span> = Spring Constant (N/m)</div>
+                        <div><span class="text-sci-accent">x</span> = Displacement (m)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Card -->
+            <div class="glass-panel rounded-xl overflow-hidden">
+                <div class="p-4 border-b border-slate-700">
+                    <h3 class="text-lg font-bold text-white">Material Limits</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-slate-300">
+                        <thead class="text-xs text-slate-400 uppercase bg-slate-800/50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Material</th>
+                                <th scope="col" class="px-6 py-3">Elastic Limit (N)</th>
+                                <th scope="col" class="px-6 py-3">Behavior</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-700 hover:bg-slate-700/30 transition-colors">
+                                <td class="px-6 py-4 font-medium text-white">Steel Alloy</td>
+                                <td class="px-6 py-4">1500</td>
+                                <td class="px-6 py-4 text-green-400">Linear Elastic</td>
+                            </tr>
+                            <tr class="border-b border-slate-700 hover:bg-slate-700/30 transition-colors">
+                                <td class="px-6 py-4 font-medium text-white">Copper</td>
+                                <td class="px-6 py-4">200</td>
+                                <td class="px-6 py-4 text-green-400">Linear Elastic</td>
+                            </tr>
+                            <tr class="hover:bg-slate-700/30 transition-colors">
+                                <td class="px-6 py-4 font-medium text-white">Rubber (Simulated)</td>
+                                <td class="px-6 py-4 text-sci-warning">80</td>
+                                <td class="px-6 py-4 text-sci-warning">Plastic Deformation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Important Notes -->
+            <div class="glass-panel rounded-xl p-5 border border-sci-warning/30 bg-sci-warning/5">
+                <h4 class="text-sci-warning font-bold mb-2 text-sm uppercase">Warning</h4>
+                <p class="text-xs text-slate-300">
+                    Exceeding the Elastic Limit results in permanent deformation. In this simulation, the spring will turn red and the system will trigger a safety overlay when force exceeds 80N.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. KaTeX Rendering ---
+        document.addEventListener("DOMContentLoaded", function() {
+            katex.render("F = -kx", document.getElementById("formula-render"), {
+                throwOnError: false,
+                displayMode: true
+            });
+        });
+
+        // --- 2. Three.js Scene Setup ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0f172a); // Matches Tailwind bg-slate-900
+        scene.fog = new THREE.Fog(0x0f172a, 10, 50);
+
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.set(0, 5, 12);
+        camera.lookAt(0, 0, 0);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.shadowMap.enabled = true;
+        container.appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 2);
+        scene.add(ambientLight);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+        dirLight.position.set(5, 10, 7);
+        dirLight.castShadow = true;
+        scene.add(dirLight);
+
+        const pointLight = new THREE.PointLight(0x38bdf8, 1, 20); // Sci-fi blue glow
+        pointLight.position.set(0, 0, 0);
+        scene.add(pointLight);
+
+        // Floor Grid
+        const gridHelper = new THREE.GridHelper(30, 30, 0x1e293b, 0x1e293b);
+        scene.add(gridHelper);
+
+        // --- 3. Spring Object ---
+        // We create a custom spring using TubeGeometry along a spiral path
+        let springMesh;
+        const springRadius = 1.5;
+        const springHeight = 6;
+        const springTurns = 8;
+        
+        // Function to generate spring geometry
+        function createSpringGeometry(height) {
+            const points = [];
+            for (let i = 0; i <= 100; i++) {
+                const t = i / 100;
+                const angle = t * Math.PI * 2 * springTurns;
+                const x = springRadius * Math.cos(angle);
+                const y = springRadius * Math.sin(angle);
+                const z = (t - 0.5) * height;
+                points.push(new THREE.Vector3(x, y, z));
+            }
+            const curve = new THREE.CatmullRomCurve3(points);
+            return new THREE.TubeGeometry(curve, 100, 0.2, 12, false);
+        }
+
+        const springMaterial = new THREE.MeshStandardMaterial({
+            color: 0x38bdf8,
+            metalness: 0.8,
+            roughness: 0.2,
+            emissive: 0x0f172a
+        });
+
+        springMesh = new THREE.Mesh(createSpringGeometry(springHeight), springMaterial);
+        springMesh.castShadow = true;
+        scene.add(springMesh);
+
+        // Anchor points (Top and Bottom plates)
+        const plateGeo = new THREE.CylinderGeometry(2, 2, 0.2, 32);
+        const plateMat = new THREE.MeshStandardMaterial({ color: 0x475569 });
+        
+        const topPlate = new THREE.Mesh(plateGeo, plateMat);
+        topPlate.position.y = 2; // Initial top position
+        scene.add(topPlate);
+
+        const bottomPlate = new THREE.Mesh(plateGeo, plateMat);
+        bottomPlate.position.y = -2; // Initial bottom position
+        scene.add(bottomPlate);
+
+        // --- 4. Logic & Physics State ---
+        const state = {
+            force: 20,
+            k: 50,
+            maxForce: 80, // Elastic Limit
+            isBroken: false
+        };
+
+        // UI Elements
+        const forceSlider = document.getElementById('force-slider');
+        const kSlider = document.getElementById('k-slider');
+        const forceDisplay = document.getElementById('force-display');
+        const kDisplay = document.getElementById('k-display');
+        const valX = document.getElementById('val-x');
+        const valU = document.getElementById('val-u');
+        const valStatus = document.getElementById('val-status');
+        const runtimeOverlay = document.getElementById('runtime-overlay');
+        const resetBtn = document.getElementById('reset-btn');
+
+        function updatePhysics() {
+            // Hooke's Law: F = k * x  =>  x = F / k
+            // Scale factor for visual representation (arbitrary units to meters)
+            const scaleFactor = 0.02; 
+            let displacement = (state.force / state.k) * scaleFactor;
+
+            // Check Limit
+            if (state.force > state.maxForce) {
+                if (!state.isBroken) {
+                    state.isBroken = true;
+                    triggerOverlay();
+                }
+                // Non-linear stretch or break simulation
+                displacement += (state.force - state.maxForce) * 0.0005; 
+            } else {
+                state.isBroken = false;
+                hideOverlay();
+            }
+
+            // Update UI Values
+            forceDisplay.innerText = `${state.force}N`;
+            kDisplay.innerText = state.k;
+            valX.innerText = displacement.toFixed(2) + " m";
+            
+            // Potential Energy: U = 0.5 * k * x^2
+            const energy = 0.5 * state.k * Math.pow(displacement, 2);
+            valU.innerText = energy.toFixed(1) + " J";
+
+            // Update Status Color
+            if (state.isBroken) {
+                valStatus.innerText = "CRITICAL";
+                valStatus.className = "text-xl font-bold text-red-500 animate-pulse";
+                springMaterial.color.setHex(0xef4444); // Red
+                springMaterial.emissive.setHex(0x7f1d1d);
+                pointLight.color.setHex(0xef4444);
+            } else if (state.force > state.maxForce * 0.8) {
+                valStatus.innerText = "WARNING";
+                valStatus.className = "text-xl font-bold text-yellow-500";
+                springMaterial.color.setHex(0xf59e0b); // Orange/Yellow
+                springMaterial.emissive.setHex(0x451a03);
+                pointLight.color.setHex(0xf59e0b);
+            } else {
+                valStatus.innerText = "ELASTIC";
+                valStatus.className = "text-xl font-bold text-green-400";
+                springMaterial.color.setHex(0x38bdf8); // Blue
+                springMaterial.emissive.setHex(0x0f172a);
+                pointLight.color.setHex(0x38bdf8);
+            }
+
+            // Update 3D Geometry
+            // We remove old geometry and add new one to simulate stretching cleanly
+            // (For high performance, vertex shader is better, but for this scale, geometry regen is fine)
+            const visualStretch = 6 + (displacement * 10); // Base height + stretch
+            
+            // Update plates
+            topPlate.position.y = visualStretch / 2;
+            bottomPlate.position.y = -visualStretch / 2;
+
+            springMesh.geometry.dispose();
+            springMesh.geometry = createSpringGeometry(visualStretch);
+        }
+
+        function triggerOverlay() {
+            runtimeOverlay.classList.add('active');
+        }
+
+        function hideOverlay() {
+            runtimeOverlay.classList.remove('active');
+        }
+
+        // Event Listeners
+        forceSlider.addEventListener('input', (e) => {
+            state.force = parseInt(e.target.value);
+            updatePhysics();
+        });
+
+        kSlider.addEventListener('input', (e) => {
+            state.k = parseInt(e.target.value);
+            updatePhysics();
+        });
+
+        resetBtn.addEventListener('click', () => {
+            state.force = 20;
+            state.k = 50;
+            forceSlider.value = 20;
+            kSlider.value = 50;
+            state.isBroken = false;
+            hideOverlay();
+            updatePhysics();
+        });
+
+        // --- 5. Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Subtle rotation of the spring for 3D effect
+            if (springMesh) {
+                springMesh.rotation.z += 0.002;
+                topPlate.rotation.z += 0.002;
+                bottomPlate.rotation.z += 0.002;
+            }
+
+            // Particle effect simulation (simple floating particles)
+            // (Skipped complex particle system to keep code within single-file constraints effectively)
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+
+        // Initialize
+        updatePhysics();
+        animate();
+
+    </script>
+</body>
+</html>
+```

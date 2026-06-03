@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 13,
+  "question": "A force of 50 N acts on a body of mass 10 kg. Find acceleration.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Dynamics Problem\n\n### Problem\nA net force of $50 \\text{ N}$ acts on a body of mass $10 \\text{ kg}$. Find its resulting acceleration.\n\n### Given\n* Force applied ($F$) = $50 \\text{ N}$\n* Mass of the body ($m$) = $10 \\text{ kg}$\n\n### Formula\n$$F = ma$$\n\nRearranging to solve for acceleration ($a$):\n$$a = \\frac{F}{m}$$\n\n### Substitution\n$$a = \\frac{50}{10}$$\n\n### Calculation\n$$a = 5 \\text{ m/s}^2$$\n\n### Final Answer\n**Acceleration ($a$) = $5 \\text{ m/s}^2$**\n\n### Interpretation\nThis indicates that the $50 \\text{ N}$ force causes the $10 \\text{ kg}$ mass to increase its velocity uniformly by $5 \\text{ meters per second}$ every single second in the direction of the applied force vector.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Introduction               │  \n│                           │  \n│ A force of 50 N acts on a │  \n│ body of mass 10 kg. Find  │  \n│ the acceleration.         │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Definition                 │  \n│                           │  \n│ • **Force (F)** – a push   │  \n│   or pull measured in new │  \n│   tons (N).                 │  \n│ • **Mass (m)** – amount of │  \n│   matter, measured in kg.  │  \n│ • **Acceleration (a)** –  │  \n│   rate of change of speed, │  \n│   measured in m·s⁻².        │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Key Concepts               │  \n│                           │  \n│ Newton’s Second Law states │  \n│ that the net force on an    │  \n│ object equals its mass times│  \n│ the acceleration it acquires│  \n│ ( F = m a ).                │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Main Formula               │  \n│                           │  \n│   F = m a                 │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Calculation                │  \n│                           │  \n│ Given: F = 50 N, m = 10 kg │  \n│ → a = F / m = 50 N / 10 kg │  \n│ = 5 m·s⁻²                 │  \n│                           │  \n│ The body accelerates at   │  \n│ **5 m·s⁻²**.               │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Important Notes            │  \n│                           │  \n│ • Ensure units are consistent│  \n│   (N, kg, m·s⁻²).          │  \n│ • 1 N = 1 kg·m·s⁻².         │  \n│ • Acceleration is a vector│  \n│   (direction matters).    │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Summary                    │  \n│                           │  \n│ Using Newton’s second law,│  \n│ the acceleration is found│  \n│ by dividing the applied    │  \n│ force by the mass: a = F/m │  \n│ → a = 5 m·s⁻² for this case.│  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Suggested Questions        │  \n│                           │  \n│ 1. If the force were 80 N,│  \n│    what would the acceleration│  \n│    be?                     │  \n│ 2. How would the answer change│  \n│    if the mass were 20 kg?│  \n│ 3. Explain why the direction│  \n│    of acceleration matches the│  \n│    direction of the force. │  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and educational. It correctly applies Newton's Second Law to find the acceleration of the body. The use of boxes to separate sections and the inclusion of definitions, key concepts, and important notes enhance the readability and pedagogical effectiveness of the response. However, the quality score is not perfect due to the unconventional use of boxes and the lack of a clear final answer section, which makes it slightly less readable than the gold reference answer. Additionally, some of the sections, such as 'Main Formula' and 'Important Notes', could be more concise and directly related to the problem at hand. Overall, the response demonstrates a strong understanding of the physics concept and effectively communicates it to the reader.",
+  "candidate_token_usage": {
+    "promptTokens": 436,
+    "completionTokens": 1306,
+    "totalTokens": 1742
+  },
+  "candidate_latency_ms": 1105,
+  "candidate_cost_usd": 0.000849,
+  "judge_token_usage": {
+    "promptTokens": 1333,
+    "completionTokens": 208,
+    "totalTokens": 1541
+  },
+  "judge_latency_ms": 6688,
+  "judge_cost_usd": 0.0012989999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:19:37.523Z"
+}

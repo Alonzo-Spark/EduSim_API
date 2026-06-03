@@ -1,0 +1,108 @@
+### 📘 CONCEPT EXPLORATION: MOMENTUM
+
+┌──────────────────────────────────────────────────────────────────┐
+│ **Introduction**                                                 │
+│                                                                  │
+│ Momentum is a fundamental physical quantity that describes the   │
+│ "quantity of motion" an object possesses. It depends on both how │
+│ much stuff is moving and how fast it is moving.                  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ **Definition**                                                  │
+│                                                                  │
+│ Linear momentum ($\vec{p}$) is defined as the product of an      │
+│ object's mass ($m$) and its velocity ($\vec{v}$).               │
+│                                                                  │
+│ **SI Unit:** $kg \cdot m/s$                                      │
+│ **Vector Nature:** It points in the same direction as velocity.  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ **Main Formula: Linear Momentum**                                │
+│                                                                  │
+│ $$\vec{p} = m\vec{v}$$                                          │
+│                                                                  │
+│ [ **Explain Formula** ]                                          │
+│ - $m$: Mass (Inertial resistance)                                │
+│ - $v$: Velocity (Rate of displacement)                           │
+│ - $p$: Momentum (Impact potential)                               │
+│                                                                  │
+│ [ **Open Formula Lab** ]                                         │
+└──────────────────────────────────────────────────────────────────┘
+
+### ⚖️ THE LAW OF CONSERVATION OF MOMENTUM
+
+┌──────────────────────────────────────────────────────────────────┐
+│ **Key Concept**                                                  │
+│                                                                  │
+│ In an **isolated system** (where no external net force acts),    │
+│ the total momentum of the system remains constant over time,     │
+│ regardless of the internal interactions or collisions occurring.  │
+└──────────────────────────────────────────────────────────────────┘
+
+### 🧪 DERIVATION (FROM NEWTON'S THIRD LAW)
+
+┌──────────────────────────────────────────────────────────────────┐
+│ **Step 1: The Interaction**                                      │
+│                                                                  │
+│ Consider two masses, $m_1$ and $m_2$, colliding. During impact,  │
+│ $m_1$ exerts a force $F_{21}$ on $m_2$, and $m_2$ exerts an      │
+│ equal and opposite force $F_{12}$ on $m_1$.                      │
+│                                                                  │
+│ $$F_{12} = -F_{21}$$                                             │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ **Step 2: Applying Newton's Second Law**                         │
+│                                                                  │
+│ Force is the rate of change of momentum: $F = \frac{\Delta p}{\Delta t}$. │
+│                                                                  │
+│ $$\frac{\Delta p_1}{\Delta t} = -\frac{\Delta p_2}{\Delta t}$$   │
+│                                                                  │
+│ Since the interaction time $\Delta t$ is the same for both:      │
+│ $$\Delta p_1 + \Delta p_2 = 0$$                                  │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│ **Formula: Conservation Law**                                    │
+│                                                                  │
+│ $$m_1u_1 + m_2u_2 = m_1v_1 + m_2v_2$$                            │
+│                                                                  │
+│ [ **Explain Formula** ]                                          │
+│ - $u_1, u_2$: Initial velocities before collision                │
+│ - $v_1, v_2$: Final velocities after collision                   │
+│ - Total Initial Momentum = Total Final Momentum                  │
+│                                                                  │
+│ [ **Open Formula Lab** ]                                         │
+└──────────────────────────────────────────────────────────────────┘
+
+### 📊 COMPARISON TABLE
+
+┌──────────────────────────────────────────────────────────────────┐
+│ **Collision Types**                                              │
+│                                                                  │
+│ | Feature | Elastic Collision | Inelastic Collision |             │
+│ | :--- | :--- | :--- |                                           │
+│ | **Momentum** | Conserved | Conserved |                         │
+│ | **Kinetic Energy** | Conserved | Not Conserved (Heat/Sound) |     │
+│ | **Objects** | Bounce off perfectly | May deform or stick |      │
+└──────────────────────────────────────────────────────────────────┘
+
+### 📝 IMPORTANT NOTES
+
+┌──────────────────────────────────────────────────────────────────┐
+│ **Critical Reminders**                                           │
+│                                                                  │
+│ 1. **System Boundaries:** Only applies if the system is closed.  │
+│ 2. **Vector Addition:** You must account for direction. If one   │
+│    object moves left, its velocity must be negative.             │
+│ 3. **Internal Forces:** Explosions or collisions are internal;   │
+│    they cannot change the total momentum of the system.          │
+└──────────────────────────────────────────────────────────────────┘
+
+### ❓ SUGGESTED QUESTIONS
+
+*   **Conceptual:** Why does a gun recoil when a bullet is fired?
+*   **Calculation:** A 2kg ball moving at 4m/s hits a stationary 3kg ball. If they stick together, what is their final velocity?
+*   **Advanced:** How does the Law of Conservation of Momentum relate to Noether's Theorem and Space Symmetry?

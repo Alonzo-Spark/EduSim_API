@@ -1,0 +1,104 @@
+### Projectile Motion: A Comprehensive Guide
+
+---
+
+<div id="introduction-card">
+  <h4>Introduction</h4>
+  <p>Projectile motion is a form of motion experienced by an object or particle (a projectile) that is projected near the Earth's surface and moves along a curved path under the action of gravity only. The path followed by a projectile is called its <b>trajectory</b>, which takes the shape of a parabola.</p>
+</div>
+
+---
+
+<div id="definition-card">
+  <h4>Quick Definition</h4>
+  <p><strong>Projectile Motion:</strong> The two-dimensional motion of an object thrown into the air, subject only to the acceleration of gravity ($g$) and ignoring air resistance.</p>
+</div>
+
+---
+
+<div id="formula-card-1">
+  <h4>Main Formula: The Trajectory Equation</h4>
+  <div style="text-align: center; padding: 20px 0;">
+    $$ y = x \tan(\theta) - \frac{g x^2}{2 u^2 \cos^2(\theta)} $$
+  </div>
+  <hr>
+  <p><b>Explain Formula:</b> This equation describes the vertical position ($y$) as a function of horizontal distance ($x$), proving the path is a mathematical parabola.</p>
+  <button style="border: 1px solid #007bff; background: none; color: #007bff; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Open Formula Lab</button>
+</div>
+
+---
+
+<div id="characteristics-card">
+  <h4>Key Characteristics</h4>
+  <ul>
+    <li><b>Independence of Motion:</b> The horizontal and vertical components of motion are independent of each other.</li>
+    <li><b>Constant Horizontal Velocity:</b> Since no horizontal force acts on the object (ignoring air friction), $v_x$ remains constant throughout the flight.</li>
+    <li><b>Constant Vertical Acceleration:</b> The object experiences a constant downward acceleration due to gravity ($g \approx 9.8 \, m/s^2$).</li>
+    <li><b>Symmetry:</b> If launched and landed at the same height, the time of ascent equals the time of descent.</li>
+  </ul>
+</div>
+
+---
+
+<div id="table-card">
+  <h4>Motion Components Breakdown</h4>
+  <div style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+      <thead>
+        <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+          <th style="padding: 10px; text-align: left;">Feature</th>
+          <th style="padding: 10px; text-align: left;">Horizontal Component ($x$)</th>
+          <th style="padding: 10px; text-align: left;">Vertical Component ($y$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #eee;">
+          <td style="padding: 10px;">Initial Velocity</td>
+          <td style="padding: 10px;">$u \cos(\theta)$</td>
+          <td style="padding: 10px;">$u \sin(\theta)$</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #eee;">
+          <td style="padding: 10px;">Acceleration</td>
+          <td style="padding: 10px;">$0$</td>
+          <td style="padding: 10px;">$-g$</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #eee;">
+          <td style="padding: 10px;">Velocity at time $t$</td>
+          <td style="padding: 10px;">$v_x = u \cos(\theta)$</td>
+          <td style="padding: 10px;">$v_y = u \sin(\theta) - gt$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+---
+
+<div id="formula-card-2">
+  <h4>Main Formula: Horizontal Range</h4>
+  <div style="text-align: center; padding: 20px 0;">
+    $$ R = \frac{u^2 \sin(2\theta)}{g} $$
+  </div>
+  <hr>
+  <p><b>Explain Formula:</b> Calculates the total horizontal distance covered. Range is maximum when the launch angle $\theta = 45^\circ$.</p>
+  <button style="border: 1px solid #007bff; background: none; color: #007bff; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Open Formula Lab</button>
+</div>
+
+---
+
+<div id="important-notes-card">
+  <h4>Important Notes</h4>
+  <p>⚠️ <b>The "Hidden" Zero:</b> At the highest point of the trajectory, the vertical velocity ($v_y$) is exactly <b>zero</b>, but the horizontal velocity ($v_x$) is still $u \cos(\theta)$.</p>
+  <p>⚠️ <b>Complementary Angles:</b> Two different launch angles $\theta$ and $(90^\circ - \theta)$ will result in the <b>same</b> horizontal range, provided the initial velocity is identical.</p>
+</div>
+
+---
+
+<div id="questions-card">
+  <h4>Suggested Questions</h4>
+  <ol>
+    <li>A ball is kicked at $30^\circ$ with a velocity of $20 \, m/s$. Calculate its maximum height.</li>
+    <li>Why does a projectile follow a parabolic path rather than a straight line?</li>
+    <li>At what point in its flight does a projectile have its minimum speed?</li>
+  </ol>
+</div>

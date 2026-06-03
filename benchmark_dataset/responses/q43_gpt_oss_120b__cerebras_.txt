@@ -1,0 +1,153 @@
+┌─────────────────────────────────────┐  
+│ **Introduction**                     │  
+│                                      │  
+│ The electric force is one of the    │  
+│ fundamental interactions that      │  
+│ governs how charged particles        │  
+│ attract or repel each other.         │  
+│ Understanding its quantitative      │  
+│ expression is essential for          │  
+│ electrostatics, circuit analysis,   │  
+│ and many modern technologies.       │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ **Quick Definition**                 │  
+│                                      │  
+│ *Electric force* is the force       │  
+│ experienced by a point charge due   │  
+│ to the presence of another point     │  
+│ charge. It is a vector quantity that│  
+│ points along the line joining the    │  
+│ two charges.                         │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ **Derivation Steps**                 │  
+│                                      │  
+│ 1. **Start from experimental         │  
+│    observations** – Coulomb’s 1795  │  
+│    experiments showed that the      │  
+│    magnitude of the force \(F\)     │  
+│    between two stationary point      │  
+│    charges is proportional to the   │  
+│    product of the magnitudes of the │  
+│    charges and inversely proportional│  
+│    to the square of the distance     │  
+│    \(r\) separating them.            │  
+│                                      │  
+│ 2. **Express the proportionality**   │  
+│    \[
+│    F \propto \frac{|q_1 q_2|}{r^2}
+│    \]                                 │  
+│                                      │  
+│ 3. **Introduce the constant of       │  
+│    proportionality**. The constant   │  
+│    \(k\) depends on the system of    │  
+│    units. In the SI system,           │  
+│    \(k = \frac{1}{4\pi\varepsilon_0}\)│  
+│    where \(\varepsilon_0\) is the    │  
+│    vacuum permittivity.               │  
+│                                      │  
+│ 4. **Write the complete law**        │  
+│    \[
+│    F = k\,\frac{|q_1 q_2|}{r^2}
+│    \]                                 │  
+│                                      │  
+│ 5. **Vector form** – Include direction│  
+│    using the unit vector \(\hat{r}\) │  
+│    that points from charge \(q_1\)   │  
+│    to charge \(q_2\):                │  
+│    \[
+│    \mathbf{F}_{12}= k\,\frac{q_1 q_2}{r^2}\,\hat{r}_{12}
+│    \]                                 │  
+│                                      │  
+│ 6. **Sign convention** – Positive    │  
+│    \(q_1 q_2\) → repulsive force,    │  
+│    negative → attractive force.      │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ **Formula Card**                     │  
+│                                      │  
+│ **Coulomb’s Law**                    │  
+│                                      │  
+│ $$                                      
+│ F = k \frac{|q_1 q_2|}{r^2}           
+│ $$                                      
+│                                      │  
+│ • **Explain Formula** – The force   │  
+│   magnitude grows with larger charges│  
+│   and shrinks with the square of the │  
+│   separation. The constant \(k\)    │  
+│   encodes the medium’s permittivity.│  
+│                                      │  
+│ • **Open Formula Lab** – Simulate    │  
+│   two point charges, vary \(q_1,\)   │  
+│   \(q_2,\) and \(r\) to see how     │  
+│   the force changes in real time.   │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ **Variable Table**                   │  
+│                                      │  
+│ ┌─────────────┬─────────────────────┬─────────────┐ │  
+│ │ Symbol      │ Meaning             │ Units       │ │  
+│ ├─────────────┼─────────────────────┼─────────────┤ │  
+│ │ \(F\)       │ Electric force      │ N (newton)  │ │  
+│ │ \(k\)       │ Coulomb constant    │ N·m²·C⁻²   │ │  
+│ │ \(q_1\)     │ Charge 1            │ C (coulomb)│ │  
+│ │ \(q_2\)     │ Charge 2            │ C (coulomb)│ │  
+│ │ \(r\)       │ Separation distance │ m (meter)   │ │  
+│ │ \(\varepsilon_0\)│ Vacuum permittivity│ C²·N⁻¹·m⁻² │ │  
+│ └─────────────┴─────────────────────┴─────────────┘ │  
+│                                      │  
+│ *Note*: In SI, \(k = 1/(4\pi\varepsilon_0) \approx 8.99×10^9\) N·m²·C⁻². │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ **Applications**                     │  
+│                                      │  
+│ • Designing capacitors and          │  
+│   electrostatic precipitators.      │  
+│ • Predicting forces in particle     │  
+│   accelerators.                     │  
+│ • Calculating attraction/repulsion  │  
+│   in molecular and atomic physics. │  
+│ • Modeling electric fields in       │  
+│   semiconductor devices.            │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ **Summary**                          │  
+│                                      │  
+│ • Coulomb’s law gives the magnitude  │  
+│   of the electrostatic force between │  
+│   two point charges.                │  
+│ • The force varies directly with the│  
+│   product of the charges and inversely│  
+│   with the square of the distance.   │  
+│ • The constant \(k\) links the law to│  
+│   the vacuum permittivity, making it │  
+│   compatible with the SI system.     │  
+└─────────────────────────────────────┘  
+
+┌─────────────────────────────────────┐  
+│ **Suggested Questions**              │  
+│                                      │  
+│ 1. How does the force change if one   │  
+│    charge is doubled while the other │  
+│    remains the same?                  │  
+│ 2. What is the effect of placing the  │  
+│    charges in a medium with permittivity│  
+│    \(\varepsilon\) instead of vacuum?│  
+│ 3. Derive the expression for the electric │  
+│    field \(\mathbf{E}\) from Coulomb’s │  
+│    law.                               │  
+│ 4. If two charges are 5 µC and -3 µC │  
+│    separated by 0.2 m, compute the    │  
+│    magnitude and direction of the force.│  
+│ 5. Explain why the force is a vector   │  
+│    and how the unit vector \(\hat{r}\)│  
+│    determines its direction.          │  
+└─────────────────────────────────────┘  

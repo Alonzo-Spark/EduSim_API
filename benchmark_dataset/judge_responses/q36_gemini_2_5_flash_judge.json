@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 36,
+  "question": "Oscillations and Waves: Define simple harmonic motion (SHM).",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nSimple Harmonic Motion (SHM) is a special type of periodic oscillatory motion in which the restoring force acting on a moving object is directly proportional to the magnitude of its displacement from its equilibrium position and acts in the opposite direction to that displacement.\n\n---\n\n## Characteristics\n\n* **Proportional Restoring Force:** The farther the object is displaced from equilibrium, the stronger the inward pulling force becomes.\n* **Sinusoidal Position Tracking:** The position-time profile forms a smooth, continuous sine or cosine wave over time.\n\n---\n\n## Formula\n\nThe defining dynamic equation for Simple Harmonic Motion:\n\n$$F = -kx$$\n\nThe resulting differential equation of motion is stated as:\n\n$$\\frac{d^2x}{dt^2} + \\omega^2 x = 0$$\n\nWhere:\n* $F$ represents the restoring force vector\n* $k$ represents the positive spring or stiffness constant\n* $x$ represents the displacement vector from equilibrium\n* $\\omega$ represents the angular frequency ($\\sqrt{k/m}$)\n\n---\n\n## Summary\n\nSimple Harmonic Motion is an ideal oscillation driven by a restoring force proportional to displacement, creating a continuous, stable sinusoidal motion cycle.",
+  "candidate_response": "Here's a breakdown of Simple Harmonic Motion (SHM):\n\n## Quick Definition\n\nSimple Harmonic Motion (SHM) is a special type of periodic motion where the restoring force acting on an object is directly proportional to its displacement from an equilibrium position and acts in the opposite direction.\n\n## Key Characteristics\n\n*   **Periodic Motion:** The motion repeats itself over regular intervals of time.\n*   **Restoring Force:** A force always acts to bring the object back to its equilibrium position.\n*   **Proportionality:** The magnitude of the restoring force is directly proportional to the displacement from equilibrium.\n*   **Direction:** The restoring force always acts in the opposite direction to the displacement.\n*   **Sinusoidal Nature:** The displacement, velocity, and acceleration of the object can be described by sine or cosine functions of time.\n\n## Main Formula\n\n$$\nF = -kx\n$$\n\n## Explanation of Formula\n\nThis is **Hooke's Law**, which is fundamental to understanding SHM.\n\n*   $F$: The restoring force acting on the object (measured in Newtons, N).\n*   $k$: The spring constant or force constant, representing the stiffness of the system (measured in Newtons per meter, N/m). A larger $k$ means a stiffer system.\n*   $x$: The displacement of the object from its equilibrium position (measured in meters, m).\n*   The **negative sign** indicates that the restoring force $F$ always acts in the opposite direction to the displacement $x$. If the object is displaced to the right ($x > 0$), the force acts to the left ($F < 0$), and vice-versa.\n\n## Important Notes\n\n*   **Ideal Conditions:** SHM is often an idealization. Real-world systems usually experience damping (energy loss) and external driving forces.\n*   **Conservation of Energy:** In an ideal SHM system, mechanical energy (kinetic + potential) is conserved. It continuously transforms between kinetic energy (maximum at equilibrium) and potential energy (maximum at extreme displacements).\n*   **Examples:** Common examples include a mass attached to a spring, a simple pendulum (for small angles), and the vibrations of atoms in a crystal lattice.\n\n## Summary\n\nSHM is a fundamental concept in physics, describing many oscillatory phenomena. Its defining characteristic is a linear restoring force that always pulls or pushes the object back towards a stable equilibrium point, leading to sinusoidal oscillations.\n\n## Suggested Questions\n\n*   What is the difference between periodic motion and simple harmonic motion?\n*   How does the period of SHM relate to the spring constant and mass?\n*   Can a pendulum exhibit perfect SHM? Why or why not?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It closely aligns with the gold reference answer in terms of conceptual correctness, formula correctness, and semantic alignment. The use of headings, bullet points, and clear explanations enhances readability and understandability. The inclusion of examples, notes on ideal conditions, and conservation of energy adds depth to the explanation. The only minor suggestion for improvement could be the addition of the differential equation of motion as seen in the gold reference answer, but overall, the response is comprehensive and effectively teaches the concept of Simple Harmonic Motion.",
+  "candidate_token_usage": {
+    "promptTokens": 384,
+    "completionTokens": 563,
+    "totalTokens": 947
+  },
+  "candidate_latency_ms": 6543,
+  "candidate_cost_usd": 0.0015227,
+  "judge_token_usage": {
+    "promptTokens": 1216,
+    "completionTokens": 176,
+    "totalTokens": 1392
+  },
+  "judge_latency_ms": 4170,
+  "judge_cost_usd": 0.0011519999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:15:28.689Z"
+}

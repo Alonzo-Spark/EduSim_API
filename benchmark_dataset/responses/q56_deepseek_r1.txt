@@ -1,0 +1,88 @@
+### Restitution in Rigid Body Collisions
+
+#### 🎯 Quick Definition
+**Restitution** is a measure of how much kinetic energy is conserved after a collision between two rigid bodies. It's quantified by the **coefficient of restitution (COR)**, ranging from **0** (perfectly inelastic, no bounce) to **1** (perfectly elastic, maximum bounce).
+
+---
+
+#### 📐 Restitution Formula
+The coefficient of restitution \( e \) is defined as:  
+$$  
+e = -\frac{v_{\text{rel, after}}}{v_{\text{rel, before}}}  
+$$  
+where:
+- \( v_{\text{rel, before}} \) = Relative velocity **before** collision (\( v_1 - v_2 \)),  
+- \( v_{\text{rel, after}} \) = Relative velocity **after** collision (\( v_1' - v_2' \)).  
+
+```katex
+e = -\frac{v_{1}^{\prime} - v_{2}^{\prime}}{v_{1} - v_{2}}
+```
+
+<details>
+<summary>🧠 **Explain Formula**</summary>
+- **Negative sign**: Ensures \( e \) stays positive (velocities reverse direction after collision).  
+- **Energy link**: For ideal elastic collisions (\( e = 1 \)), kinetic energy is conserved.  
+- **Real-world**: Friction/heat reduce \( e \) below 1.  
+</details>
+
+---
+
+#### ⚖️ How Restitution Changes Collision Behavior
+| Coefficient (\( e \)) | Collision Type          | Bounce Behavior                  | Energy Loss       |
+|-----------------------|-------------------------|----------------------------------|-------------------|
+| **\( e = 0 \)**       | Perfectly Inelastic     | Bodies stick together           | Maximal loss      |
+| **\( 0 < e < 1 \)**   | Inelastic               | Partial bounce (e.g., tennis ball) | Moderate loss    |
+| **\( e = 1 \)**       | Perfectly Elastic       | Full bounce (e.g., superball)     | No energy loss   |
+
+---
+
+#### 🔬 Key Effects of Adjusting Restitution
+1. **Bounce Height**  
+   Higher \( e \) → Greater rebound height.  
+   - *Example*: A basketball (\( e ≈ 0.8 \)) bounces higher than clay (\( e ≈ 0.1 \)).
+
+2. **Collision Duration**  
+   Lower \( e \) → Longer contact time (energy dissipates slowly).
+
+3. **Post-Impact Velocity**  
+   Velocities after collision depend on \( e \):  
+   $$  
+   v_1' = \frac{m_1 v_1 + m_2 v_2 + m_2 e (v_2 - v_1)}{m_1 + m_2}  
+   $$  
+   *(Solve similarly for \( v_2' \))*
+
+---
+
+#### 🛠️ Practical Applications
+- **Game Physics**:  
+  - Low \( e \) → Realistic car crashes (crumple zones).  
+  - High \( e \) → Bouncy platforms (platformer games).  
+- **Sports Equipment**:  
+  Golf balls designed with \( e ≈ 0.8 \) for optimal rebound.  
+- **Engineering Safety**:  
+  Crash barriers use low-\( e \) materials to absorb impact.  
+
+---
+
+#### ⚠️ Important Notes
+- **Material Matters**: Steel has higher \( e \) (0.6–0.8) than rubber (0.3–0.6) despite rubber feeling "bouncier" (due to deformation).  
+- **Speed Dependence**: \( e \) often decreases at high velocities (e.g., bullet impacts).  
+- **Angular Effects**: Restitution combines with friction to influence spin during oblique collisions.  
+
+---
+
+#### 💡 Summary
+> **Restitution directly controls bounce intensity**:  
+> - **Increase \( e \)** → More energetic rebounds, less energy loss.  
+> - **Decrease \( e \)** → "Mushy" collisions, energy converted to heat/sound.  
+>  
+> Adjust \( e \) to simulate materials from putty (\( e ≈ 0 \)) to glass (\( e ≈ 0.95 \)).
+
+---
+
+#### ❓ Suggested Questions
+1. Why does a basketball bounce higher than a clay ball?  
+2. How does restitution affect momentum conservation?  
+3. Can \( e > 1 \) exist? What would it imply?  
+
+Let me know if you'd like to simulate a specific collision! 🚀

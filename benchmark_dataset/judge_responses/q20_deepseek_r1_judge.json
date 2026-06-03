@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 20,
+  "question": "Explain conservation of mechanical energy with an example.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe Principle of Conservation of Mechanical Energy states that if only conservative forces (like gravity or spring forces) perform work within an isolated system, the total mechanical energy (the sum of kinetic and potential energies) remains completely constant over time.\n\n---\n\n## Formula\n\nThe conservation rule is expressed mathematically as:\n\n$$E_{\\text{total}} = K + U = \\text{Constant}$$\n\n$$K_i + U_i = K_f + U_f$$\n\nWhere:\n* $K_i, K_f$ represent the initial and final kinetic energy states\n* $U_i, U_f$ represent the initial and final potential energy states\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Simplifies tracking positions and speeds without requiring precise force-time integrations. | Fails in non-conservative tracking configurations involving friction or air resistance. |\n\n---\n\n## Real-world Example: Free-Falling Object\n\nConsider a heavy steel ball held stationary at a height $h$ above the floor.\n* **At Peak Height:** The ball has zero velocity, so kinetic energy is zero ($K = 0$), and total mechanical energy equals maximum potential energy ($E = mgh$).\n* **During Mid-Descent:** As the ball drops, its height decreases, causing potential energy to drop, while its speed climbs, increasing kinetic energy by an identical amount.\n* **At Floor Impact Point:** Just before striking the ground, height becomes zero ($U = 0$), and potential energy converts completely into kinetic energy ($K = \\frac{1}{2}mv^2 = mgh$).\n\n---\n\n## Summary\n\nMechanical energy conservation demonstrates that kinetic and potential energy act as balanced components within a closed system, transforming into one another while keeping the total energy constant.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition          │\n├───────────────────────────┤\n│ Conservation of mechanical│\n│ energy: Total mechanical  │\n│ energy (KE + PE) remains  │\n│ constant in isolated       │\n│ systems with only          │\n│ conservative forces acting│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n├───────────────────────────┤\n│ 1. Mechanical Energy =    │\n│    Kinetic Energy (KE) +  │\n│    Potential Energy (PE)  │\n│ 2. Applies only when:     │\n│    - No air resistance    │\n│    - No friction          │\n│    - Only conservative    │\n│      forces (gravity,     │\n│      springs)             │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n├───────────────────────────┤\n│ KE₁ + PE₁ = KE₂ + PE₂     │\n│                           │\n│          1                │\n│ KE = ½mv²      PE = mgh   │\n│          2                │\n└───────────────────────────┘\n[ Explain Formula ]  [ Open Formula Lab ]\n\n┌───────────────────────────┐\n│ Practical Example         │\n├───────────────────────────┤\n│ Scenario: Dropping a 5kg  │\n│ mass from 20m height      │\n│                           │\n│ 1. At top (Point A):      │\n│    PE = 5×9.8×20 = 980J   │\n│    KE = 0                 │\n│                           │\n│ 2. Mid-fall (Point B):    │\n│    PE = 5×9.8×10 = 490J   │\n│    KE = 980 - 490 = 490J  │\n│    → v = √(2KE/m) = 14m/s│\n│                           │\n│ 3. At ground (Point C):   │\n│    PE = 0                 │\n│    KE = 980J              │\n│    → v = √(2×980/5)=19.8m/s│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Energy Transformation Map │\n├───────────────────────────┤\n│      (20m)                │\n│      ● A                  │\n│      | ⇩ 100% PE → KE     │\n│      ● B                  │\n│      | ⇩ Energy transfer  │\n│      ● C                  │\n│      (0m)                 │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Common Misconceptions     │\n├───────────────────────────┤\n│ ❌ \"Energy disappears\"    │\n│ ✔ Energy converts between │\n│ forms but total remains   │\n│                           │\n│ ❌ \"Works with friction\"  │\n│ ✔ Only valid when non-    │\n│ conservative forces are   │\n│ negligible                │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Real-World Applications   │\n├───────────────────────────┤\n│ 1. Roller coaster design  │\n│ 2. Pendulum clocks        │\n│ 3. Hydroelectric systems  │\n│ 4. Bungee jumping physics │\n└───────────────────────────┘\n\nWould you like to explore the formula lab to experiment with different mass and height values? [Explore Interactive Simulation]",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of conservation of mechanical energy, accurately defining it, providing the correct formula, and illustrating it with a practical example. The response is well-structured, easy to follow, and effectively teaches the concept. The use of tables, formulas, and step-by-step calculations enhances the clarity and readability of the response. The only area for improvement could be in providing more detailed explanations for the advantages and disadvantages of the conservation of mechanical energy principle, similar to the gold reference answer. However, overall, the response is of high quality and effectively conveys the concept.",
+  "candidate_token_usage": {
+    "promptTokens": 360,
+    "completionTokens": 1463,
+    "totalTokens": 1823
+  },
+  "candidate_latency_ms": 15488,
+  "candidate_cost_usd": 0.00340197,
+  "judge_token_usage": {
+    "promptTokens": 1605,
+    "completionTokens": 180,
+    "totalTokens": 1785
+  },
+  "judge_latency_ms": 5775,
+  "judge_cost_usd": 0.001395,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:34:52.814Z"
+}

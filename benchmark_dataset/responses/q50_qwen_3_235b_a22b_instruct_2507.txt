@@ -1,0 +1,116 @@
+┌───────────────────────────┐  
+│ **Quick Definition**         │  
+│                              │  
+│ Electrical power is the rate at which electrical energy is transferred or consumed in an electric circuit. It measures how much energy is used or supplied per unit time, expressed in **watts (W)**. │  
+└───────────────────────────┘  
+
+---
+
+### **Key Concepts**
+
+- **Energy Transfer**: In electric circuits, moving charges (current) carry energy through a potential difference.
+- **Power as a Rate**: Power is energy per second:  
+  $$
+  P = \frac{W}{t}
+  $$
+  where $W$ is work (or energy) and $t$ is time.
+
+---
+
+$$
+P = VI
+$$
+
+┌───────────────────────────┐  
+│ **Main Formula**           │  
+│                            │  
+│    $$ P = VI $$            │  
+│                            │  
+│ [ Explain Formula ]        │  
+│ [ Open Formula Lab ]       │  
+└───────────────────────────┘  
+
+---
+
+### **Derivation of $ P = VI $**
+
+We begin with the definition of **electric current** and **voltage**:
+
+1. **Current ($I$)**: The rate of flow of electric charge:
+   $$
+   I = \frac{Q}{t} \quad \text{(Charge per unit time)}
+   $$
+
+2. **Voltage ($V$)**: The electrical potential energy per unit charge:
+   $$
+   V = \frac{W}{Q} \quad \text{(Energy per unit charge)}
+   $$
+
+3. **Work Done ($W$)**: Rearranging voltage equation:
+   $$
+   W = VQ
+   $$
+
+4. **Power ($P$)**: Power is the rate at which work is done:
+   $$
+   P = \frac{W}{t} = \frac{VQ}{t}
+   $$
+
+5. Rearranging:
+   $$
+   P = V \cdot \frac{Q}{t} = V \cdot I
+   $$
+
+✅ Therefore:
+$$
+\boxed{P = VI}
+$$
+
+---
+
+### **Characteristics of Electrical Power**
+
+| Feature | Description |
+|--------|-------------|
+| **Unit** | Watt (W) = Joule/second |
+| **Scalar Quantity** | Power has magnitude, no direction |
+| **Dependence** | Depends on both voltage and current |
+| **Energy Conversion** | Represents how fast electrical energy is converted into heat, light, motion, etc. |
+
+---
+
+### **Applications of $P = VI$**
+
+- Calculating power consumption of household appliances (bulbs, heaters, fans).
+- Designing electrical circuits to ensure components can handle power loads.
+- Determining efficiency of power transmission systems.
+
+---
+
+### **Important Notes**
+
+- The formula $P = VI$ applies to **all electrical devices**—resistive, capacitive, or inductive.
+- For **resistors**, Ohm’s Law ($V = IR$) allows derivation of alternative forms:
+  $$
+  P = VI = I^2R = \frac{V^2}{R}
+  $$
+- In AC circuits, $P = VI$ gives **apparent power**; real power involves power factor.
+
+---
+
+### **Summary**
+
+Electrical power is the rate of energy transfer in a circuit. Using fundamental definitions of voltage and current, we derived:
+$$
+P = VI
+$$
+This core equation is essential for analyzing energy usage and circuit performance.
+
+---
+
+### **Suggested Questions**
+
+1. How much power is consumed by a bulb operating at 12 V with a current of 2 A?  
+2. Why is $P = VI$ valid even for non-ohmic materials?  
+3. Derive $P = I^2R$ from $P = VI$ using Ohm’s Law.  
+4. What is the difference between real power and apparent power in AC circuits?

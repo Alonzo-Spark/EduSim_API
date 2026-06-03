@@ -1,0 +1,167 @@
+┌───────────────────────────────────────────────────────────────┐
+│                         Introduction                            │
+│                                                                   │
+│ In physics simulations and real‑world mechanics, the **restitution**│
+│ coefficient determines how “bouncy” a collision is.  When two   │
+│ rigid bodies collide, this single scalar controls how much of the│
+│ relative velocity along the contact normal is preserved after   │
+│ impact.  Adjusting it lets you model everything from perfectly   │
+│ elastic steel balls to completely inelastic clay.                │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Definition                               │
+│                                                                   │
+│ **Restitution (coefficient of restitution, e)** is a dimensionless│
+│ value in the range \[0, 1\] that quantifies the ratio of relative │
+│ speed after a collision to the relative speed before the        │
+│ collision, measured along the line of impact.                     │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Key Concepts                             │
+│                                                                   │
+│ • **e = 1** – perfectly elastic: kinetic energy is conserved; the │
+│   bodies bounce off with the same relative speed they approached│
+│   each other.                                                     │
+│ • **e = 0** – perfectly inelastic: the bodies stick together; no │
+│   relative motion remains after impact.                           │
+│ • **0 < e < 1** – partially elastic: some kinetic energy is lost   │
+│   (usually to heat, deformation, sound).                         │
+│ • Restitution only affects the **normal** component of the        │
+│   collision; tangential (friction) behavior is handled          │
+│   separately.                                                     │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Formula Card                              │
+│                                                                   │
+│ **Main Formula**                                                  │
+│                                                                   │
+│   \[ e \;=\; \frac{v_{2}^{\,'} - v_{1}^{\,'}}{v_{1} - v_{2}} \]    │
+│                                                                   │
+│   *\(v_{1}, v_{2}\)* – pre‑collision velocities of body 1 and 2   │
+│   along the contact normal (positive when moving toward each   │
+│   other).                                                         │
+│   *\(v_{1}^{\,'}, v_{2}^{\,'}\)* – post‑collision velocities along │
+│   the same normal.                                               │
+│                                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]                        │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Characteristics                          │
+│                                                                   │
+│ • **Bounce Height** – For a ball dropped from height *h*, the    │
+│   rebound height *hʹ* ≈ e² · h (ignoring air resistance).       │
+│ • **Velocity Scaling** – After impact, the normal component of   │
+│   each body’s velocity is multiplied by *e* (in the centre‑of‑   │
+│   mass frame).                                                   │
+│ • **Energy Loss** – Fraction of kinetic energy retained:        │
+│   \[ \frac{E_{\text{after}}}{E_{\text{before}}}=e^{2} \]        │
+│   (only for the normal component).                               │
+│                                                                   │
+│ The higher the restitution, the more “bouncy” the interaction.   │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Live Sandbox                              │
+│                                                                   │
+│ **Try it yourself!**                                              │
+│                                                                   │
+│ 1. Open the physics sandbox (link below).                         │
+│ 2. Place two identical spheres on a flat surface.                │
+│ 3. Set the restitution slider to 0.0, 0.5, and 1.0 sequentially. │
+│ 4. Drop the spheres from the same height and observe:            │
+│    • Number of bounces                                            │
+│    • Maximum rebound height                                      │
+│    • Time‑of‑flight after the first impact.                      │
+│                                                                   │
+│ **Sandbox URL:** https://sandbox.physicsengine.io/collisions      │
+│                                                                   │
+│ Use the “Record” button to capture the motion and compare the     │
+│ three runs side‑by‑side.                                          │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Applications                              │
+│                                                                   │
+│ • **Video Games** – Tuning bounce for balls, projectiles,      │
+│   ragdolls, or vehicle suspensions.                               │
+│ • **Robotics** – Simulating contact between gripper pads and      │
+│   objects to predict slip or stick.                               │
+│ • **Engineering** – Impact analysis for crash tests,           │
+│   material selection, and protective padding design.            │
+│ • **Animation** – Controlling exaggerated or subtle bounce       │
+│   for visual storytelling.                                        │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Advantages                                 │
+│                                                                   │
+│ • **Simple Control** – One scalar adjusts bounce for any shape. │
+│ • **Performance Friendly** – No need for complex deformation     │
+│   models when a simple bounce is sufficient.                     │
+│ • **Predictable** – Linear scaling makes debugging easier.       │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Disadvantages                              │
+│                                                                   │
+│ • **Oversimplification** – Real materials exhibit velocity‑      │
+│   dependent restitution (e.g., rubber loses bounce at high      │
+│   speeds).                                                        │
+│ • **No Energy Distribution** – Does not model how energy is     │
+│   transferred to rotation or internal deformation.               │
+│ • **Only Normal Component** – Tangential effects (friction) must│
+│   be handled separately.                                          │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Important Notes                           │
+│                                                                   │
+│ • Most physics engines clamp *e* to \[0, 1\]; values > 1 produce  │
+│   “super‑elastic” effects (useful for cartoons).                 │
+│ • In a multi‑body system, the effective bounce may differ from   │
+│   the nominal *e* due to mass ratios and constraints.            │
+│ • Always pair restitution with an appropriate **friction**      │
+│   coefficient to avoid unrealistic sliding.                      │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                         Summary                                   │
+│                                                                   │
+│ • Restitution *e* ∈ \[0, 1\] controls how much relative normal    │
+│   velocity survives a collision.                                 │
+│ • *e = 1* → perfect bounce, *e = 0* → stick.                       │
+│ • Post‑impact normal velocity = *e* × pre‑impact normal velocity.│
+│ • Energy retained = *e²* of the normal kinetic energy.           │
+│ • Adjusting *e* is the primary way to tune bounce in games,      │
+│   simulations, and engineering analyses.                         │
+└───────────────────────────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────────────────────┐
+│                     Suggested Questions                           │
+│                                                                   │
+│ 1. How does changing the mass ratio of two colliding bodies affect│
+│    the observable bounce when *e* is fixed?                       │
+│ 2. Why might a real‑world material exhibit a restitution that      │
+│    decreases with impact speed?                                   │
+│ 3. Design a simple experiment (real or virtual) to measure *e*   │
+│    for a ball made of rubber.                                      │
+│ 4. How would you combine restitution with a restitution‑dependent│
+│    friction model for more realistic ground contact?              │
+│ 5. In a game, what visual cues could you add to convey low vs high│
+│    restitution without relying on physics alone?                 │
+└───────────────────────────────────────────────────────────────────┘

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 50,
+  "question": "Define electrical power and derive the relation P = VI.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectrical power is the rate at which electrical energy is consumed or converted into other forms of energy, such as heat, light, or mechanical work, within an electric circuit.\n\n---\n\n## Formula\n\nThe primary electrical power expression is stated as:\n\n$$P = VI$$\n\nWhere:\n* $P$ represents the electrical power measured in Watts ($\\text{W}$)\n* $V$ represents the potential difference across the circuit element\n* $I$ represents the electric current passing through the element\n\n---\n\n## Derivations\n\nConsider a constant current $I$ flowing through an electrical component across a potential difference $V$ over an interval of time $t$.\n\nBy definition, electric current is the rate of charge flow through a conductor:\n$$I = \\frac{Q}{t}$$\n\n$$Q = I \\cdot t$$\n\nThe potential difference ($V$) represents the mechanical work performed ($W$) per unit charge to move that charge through the component:\n$$V = \\frac{W}{Q}$$\n\n$$W = V \\cdot Q$$\n\nSubstitute our charge flow expression ($Q = I \\cdot t$) directly into the work equation:\n$$W = V \\cdot (I \\cdot t)$$\n\n$$W = VIt$$\n\nElectrical power ($P$) is defined as the rate at which work is performed:\n$$P = \\frac{W}{t}$$\n\nSubstitute the work expression ($VIt$) into the power template:\n$$P = \\frac{VIt}{t}$$\n\nCancel out the time parameter ($t$) from the numerator and denominator:\n$$P = VI$$\n\nThis completes the derivation of the fundamental electrical power relation.\n\n---\n\n## Summary\n\nElectrical power measures the rate of energy conversion within a circuit element, calculated as the product of the voltage across the component and the current flowing through it ($P=VI$).",
+  "candidate_response": "### Understanding Electrical Power\n\n#### Quick Definition\n**Electrical power** is the rate at which electrical energy is transferred or consumed in an electric circuit, measured in **watts (W)**. It quantifies how quickly work is done by an electric current.\n\n---\n\n#### Derivation of \\( P = VI \\)\n1. **Fundamental Concepts**:\n   - **Voltage (\\( V \\))**: Work done per unit charge to move it between two points (joules/coulomb).\n   - **Current (\\( I \\))**: Rate of charge flow (coulombs/second).\n   - **Energy (\\( E \\))**: Work done by voltage to move charge:  \n     \\[\n     E = V \\cdot Q \\quad \\text{(where \\( Q \\) is charge)}\n     \\]\n\n2. **Power Formula**:\n   - Power is energy consumed per unit time:  \n     \\[\n     P = \\frac{dE}{dt}\n     \\]\n   - Substitute \\( E = V \\cdot Q \\):  \n     \\[\n     P = \\frac{d}{dt}(V \\cdot Q)\n     \\]\n   - If voltage \\( V \\) is constant:  \n     \\[\n     P = V \\cdot \\frac{dQ}{dt}\n     \\]\n   - Since \\( \\frac{dQ}{dt} = I \\) (current):  \n     \\[\n     \\boxed{P = V \\cdot I}\n     \\]\n\n---\n\n#### Formula Card: \\( P = VI \\)\n<div style=\"border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin: 15px 0; background-color: #f9f9f9; box-shadow: 0 2px 4px rgba(0,0,0,0.05);\">\n  <div style=\"text-align: center; font-size: 20px; margin-bottom: 10px;\">\n    Electrical Power Formula\n  </div>\n  <div style=\"text-align: center; font-size: 24px; margin: 15px 0;\">\n    \\( P = VI \\)\n  </div>\n  <div style=\"margin-top: 15px; padding: 10px; background-color: #e3f2fd; border-radius: 5px;\">\n    <strong>Variables:</strong>\n    <ul>\n      <li>\\( P \\): Power (watts, W)</li>\n      <li>\\( V \\): Voltage (volts, V)</li>\n      <li>\\( I \\): Current (amperes, A)</li>\n    </ul>\n  </div>\n  <div style=\"margin-top: 15px;\">\n    <button style=\"background-color: #4CAF50; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;\">\n      Explain Formula\n    </button>\n    <button style=\"background-color: #2196F3; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-left: 10px;\">\n      Open Formula Lab\n    </button>\n  </div>\n</div>\n\n---\n\n#### Key Relationships\n| Formula | Application | Equivalent Forms |\n|---------|-------------|------------------|\n| \\( P = VI \\) | Basic power calculation | \\( P = I^2 R \\) (using Ohm's law \\( V = IR \\)) |\n| \\( P = \\frac{V^2}{R} \\) | Used when resistance \\( R \\) is known | \\( P = \\frac{E}{t} \\) |\n\n---\n\n#### Practical Applications\n1. **Light Bulbs**: A 60W bulb draws more current than a 40W bulb at the same voltage.\n2. **Circuit Design**: Engineers use \\( P = VI \\) to select wire gauges and components that handle power safely.\n3. **Energy Bills**: Utilities charge for energy (kWh), which is power multiplied by time (\\( E = P \\cdot t \\)).\n\n---\n\n#### Summary\n- **Power Definition**: Rate of energy transfer \\( \\left( P = \\frac{E}{t} \\right) \\).\n- **Core Equation**: \\( P = VI \\) links voltage, current, and power.\n- **Units**: 1 watt = 1 joule/second = 1 volt-ampere.\n\n> \"Power is the heartbeat of electrical systems – it defines their capability and limitations.\"\n\n---\n\n#### Suggested Questions\n1. How does power dissipation change if voltage doubles while resistance stays constant?\n2. Why do long-distance power lines use high voltage? (Hint: \\( P = VI \\), power loss \\( \\propto I^2 R \\))\n3. Calculate the current drawn by a 1200W microwave operating at 120V.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of electrical power and its derivation, with accurate formulas and concepts. The layout is well-structured, and the presentation is clear and readable. The use of a 'Formula Card' and 'Key Relationships' table enhances the educational value. However, minor improvements could be made, such as adding more detailed explanations for certain concepts, like the relationship between power, voltage, and current. Additionally, some of the formatting, such as the buttons in the 'Formula Card', may not be necessary for a text-based response. Overall, the response is of high quality and effectively teaches the concept of electrical power.",
+  "candidate_token_usage": {
+    "promptTokens": 362,
+    "completionTokens": 1087,
+    "totalTokens": 1449
+  },
+  "candidate_latency_ms": 46085,
+  "candidate_cost_usd": 0.00257963,
+  "judge_token_usage": {
+    "promptTokens": 1853,
+    "completionTokens": 187,
+    "totalTokens": 2040
+  },
+  "judge_latency_ms": 3531,
+  "judge_cost_usd": 0.0015606,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:57:23.105Z"
+}

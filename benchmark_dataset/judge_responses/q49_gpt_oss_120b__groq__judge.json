@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 49,
+  "question": "A current of 2 A flows through a resistor of 10 Ω. Calculate voltage.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Ohm's Law Problem\n\n### Problem\nA steady electric current of $2 \\text{ A}$ flows through a resistor with a value of $10 \\ \\Omega$. Calculate the voltage drop across the resistor.\n\n### Given\n* Current tracking ($I$) = $2 \\text{ A}$\n* Resistance value ($R$) = $10 \\ \\Omega$\n\n### Formula\n$$V = IR$$\n\n### Substitution\n$$V = 2 \\times 10$$\n\n### Calculation\n$$V = 20 \\text{ V}$$\n\n### Final Answer\n**Potential Difference ($V$) = $20 \\text{ V}$**\n\n### Interpretation\nThis means that a potential difference of $20 \\text{ Volts}$ must be maintained across the ends of the $10 \\ \\Omega$ resistor to sustain a continuous current flow of $2 \\text{ Amperes}$.",
+  "candidate_response": "┌─────────────────────────────────────┐\n│ Problem Statement                    │\n│                                     │\n│ A current of 2 A flows through a      │\n│ resistor of 10 Ω. Calculate the      │\n│ voltage across the resistor.         │\n└─────────────────────────────────────┘\n\n\n┌─────────────────────────────────────┐\n│ Formula Card – Ohm's Law              │\n│                                     │\n│               V = I R                │\n│                                     │\n│ [ Explain Formula ]                  │\n│ [ Open Formula Lab ]                  │\n└─────────────────────────────────────┘\n\n\n┌─────────────────────────────────────┐\n│ Solution Steps                       │\n│                                     │\n│ 1. Identify the known quantities:   │\n│    • Current (I) = 2 A               │\n│    • Resistance (R) = 10 Ω           │\n│                                     │\n│ 2. Use Ohm's Law (V = I R) to find   │\n│    the voltage.                     │\n│                                     │\n│ 3. Substitute the values:            │\n│    V = (2 A) × (10 Ω)                │\n│    V = 20 V                         │\n└─────────────────────────────────────┘\n\n\n┌─────────────────────────────────────┐\n│ Answer                               │\n│                                     │\n│ The voltage across the 10 Ω resistor│\n│ is **20 volts**.                     │\n└─────────────────────────────────────┘\n\n\n┌─────────────────────────────────────┐\n│ Summary                              │\n│                                     │\n│ • Ohm's Law relates voltage, current│\n│   and resistance: V = I R.           │\n│ • Plugging I = 2 A and R = 10 Ω gives │\n│   V = 20 V.                          │\n│ • This is a direct application of   │\n│   the linear relationship in basic   │\n│   circuits.                         │\n└─────────────────────────────────────┘\n\n\n┌─────────────────────────────────────┐\n│ Suggested Questions                  │\n│                                     │\n│ 1. If the voltage across the same    │\n│    resistor is 30 V, what is the     │\n│    current?                         │\n│ 2. What resistance would be needed   │\n│    to produce 12 V with a 3 A current?│\n│ 3. How does power dissipation relate │\n│    to voltage and resistance?       │\n└─────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of Ohm's Law and its application to the given problem. The step-by-step solution is clear, and the use of a formula card and summary section enhances the educational value. However, the quality score is slightly reduced due to the unconventional use of ASCII art for section headers, which may not be suitable for all platforms or devices. Additionally, the suggested questions section, while useful for further learning, does not directly contribute to the solution of the given problem. To improve, consider using standard formatting for headers and ensuring that all sections directly support the problem's solution.",
+  "candidate_token_usage": {
+    "promptTokens": 435,
+    "completionTokens": 807,
+    "totalTokens": 1242
+  },
+  "candidate_latency_ms": 2862,
+  "candidate_cost_usd": 0.00054945,
+  "judge_token_usage": {
+    "promptTokens": 1162,
+    "completionTokens": 180,
+    "totalTokens": 1342
+  },
+  "judge_latency_ms": 6815,
+  "judge_cost_usd": 0.0011292,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:51:35.379Z"
+}

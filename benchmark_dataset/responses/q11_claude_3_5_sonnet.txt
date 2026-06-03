@@ -1,0 +1,593 @@
+I'll render this as a structured interactive textbook. Let me build the component.
+
+```tsx
+import { useState } from "react";
+import katex from "katex";
+
+const laws = [
+  {
+    number: "I",
+    color: "from-violet-600 to-purple-700",
+    accent: "violet",
+    badge: "bg-violet-100 text-violet-700",
+    border: "border-violet-200",
+    icon: "⚖️",
+    title: "Law of Inertia",
+    statement:
+      "An object at rest stays at rest, and an object in motion stays in motion with the same speed and in the same direction, unless acted upon by an unbalanced external force.",
+    keyIdea: "Objects resist changes to their state of motion.",
+    keyword: "Inertia",
+    keywordDef:
+      "The tendency of an object to resist any change in its state of rest or uniform motion.",
+    examples: [
+      {
+        emoji: "🚗",
+        title: "Sudden Braking",
+        desc: "Passengers lurch forward when a car brakes suddenly — their bodies tend to continue moving.",
+      },
+      {
+        emoji: "📚",
+        title: "Books on a Table",
+        desc: "A stack of books stays still indefinitely because no net force acts on them.",
+      },
+      {
+        emoji: "🏀",
+        title: "Ball Rolling",
+        desc: "A ball rolled on a frictionless surface would roll forever — friction is what stops it.",
+      },
+    ],
+    formula: null,
+    formulaLabel: null,
+    variables: null,
+  },
+  {
+    number: "II",
+    color: "from-blue-600 to-cyan-600",
+    accent: "blue",
+    badge: "bg-blue-100 text-blue-700",
+    border: "border-blue-200",
+    icon: "⚡",
+    title: "Law of Acceleration",
+    statement:
+      "The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass.",
+    keyIdea: "Force causes acceleration; more mass means less acceleration.",
+    keyword: "Net Force",
+    keywordDef:
+      "The vector sum of all forces acting on an object at a given instant.",
+    examples: [
+      {
+        emoji: "⚽",
+        title: "Kicking a Ball",
+        desc: "A harder kick (greater force) gives the ball greater acceleration.",
+      },
+      {
+        emoji: "🚀",
+        title: "Rocket Launch",
+        desc: "As fuel burns, mass decreases — so the same thrust produces ever-greater acceleration.",
+      },
+      {
+        emoji: "🛒",
+        title: "Shopping Cart",
+        desc: "An empty cart accelerates easily; a full cart needs more force for the same acceleration.",
+      },
+    ],
+    formula: "F = ma",
+    formulaLabel: "Newton's Second Law",
+    variables: [
+      { sym: "F", desc: "Net Force", unit: "Newtons (N)" },
+      { sym: "m", desc: "Mass of object", unit: "Kilograms (kg)" },
+      { sym: "a", desc: "Acceleration", unit: "m/s²" },
+    ],
+  },
+  {
+    number: "III",
+    color: "from-emerald-600 to-teal-600",
+    accent: "emerald",
+    badge: "bg-emerald-100 text-emerald-700",
+    border: "border-emerald-200",
+    icon: "🔄",
+    title: "Law of Action-Reaction",
+    statement:
+      "For every action, there is an equal and opposite reaction. Forces always occur in pairs.",
+    keyIdea: "Forces come in pairs — equal in magnitude, opposite in direction.",
+    keyword: "Action-Reaction Pair",
+    keywordDef:
+      "Two forces that are equal in magnitude and opposite in direction, acting on two different objects.",
+    examples: [
+      {
+        emoji: "🚀",
+        title: "Rocket Propulsion",
+        desc: "Hot gases are expelled downward (action) → rocket is pushed upward (reaction).",
+      },
+      {
+        emoji: "🏊",
+        title: "Swimming",
+        desc: "Swimmer pushes water backward (action) → water pushes swimmer forward (reaction).",
+      },
+      {
+        emoji: "🔫",
+        title: "Gun Recoil",
+        desc: "Bullet is fired forward (action) → gun kicks backward (reaction).",
+      },
+    ],
+    formula: "F_{12} = -F_{21}",
+    formulaLabel: "Action-Reaction",
+    variables: [
+      { sym: "F_{12}", desc: "Force on object 2 by object 1", unit: "N" },
+      { sym: "F_{21}", desc: "Force on object 1 by object 2", unit: "N" },
+    ],
+  },
+];
+
+const accentColors: Record<string, string> = {
+  violet: "bg-violet-50 border-violet-300 text-violet-800",
+  blue: "bg-blue-50 border-blue-300 text-blue-800",
+  emerald: "bg-emerald-50 border-emerald-300 text-emerald-800",
+};
+
+const noteColors: Record<string, string> = {
+  violet: "bg-violet-50 border-l-4 border-violet-400 text-violet-900",
+  blue: "bg-blue-50 border-l-4 border-blue-400 text-blue-900",
+  emerald: "bg-emerald-50 border-l-4 border-emerald-400 text-emerald-900",
+};
+
+function renderKatex(expr: string): string {
+  try {
+    return katex.renderToString(expr, { throwOnError: false, displayMode: false });
+  } catch {
+    return expr;
+  }
+}
+
+function renderKatexDisplay(expr: string): string {
+  try {
+    return katex.renderToString(expr, { throwOnError: false, displayMode: true });
+  } catch {
+    return expr;
+  }
+}
+
+function FormulaCard({
+  law,
+  formulaOpen,
+  setFormulaOpen,
+  labOpen,
+  setLabOpen,
+}: {
+  law: (typeof laws)[0];
+  formulaOpen: boolean;
+  setFormulaOpen: (v: boolean) => void;
+  labOpen: boolean;
+  setLabOpen: (v: boolean) => void;
+}) {
+  const [mass, setMass] = useState(10);
+  const [force, setForce] = useState(20);
+  const accel = (force / mass).toFixed(2);
+
+  if (!law.formula) return null;
+
+  return (
+    <div className="rounded-xl border-2 border-dashed border-gray-200 bg-white overflow-hidden mt-4">
+      {/* Header */}
+      <div className="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-200">
+        <div className="flex items-center gap-2">
+          <span className="text-lg">🔢</span>
+          <span className="font-bold text-gray-700 text-sm tracking-wide uppercase">
+            {law.formulaLabel}
+          </span>
+        </div>
+        <span className="text-xs text-gray-400 font-mono">Formula Card</span>
+      </div>
+
+      {/* Formula Display */}
+      <div className="flex flex-col items-center justify-center py-6 px-4 bg-gradient-to-br from-gray-50 to-white">
+        <div
+          className="text-2xl"
+          dangerouslySetInnerHTML={{ __html: renderKatexDisplay(law.formula!) }}
+        />
+      </div>
+
+      {/* Buttons */}
+      <div className="flex gap-2 px-5 pb-4">
+        <button
+          onClick={() => { setFormulaOpen(!formulaOpen); setLabOpen(false); }}
+          className={`flex-1 py-2 rounded-lg text-sm font-semibold border transition-all ${
+            formulaOpen
+              ? "bg-gray-800 text-white border-gray-800"
+              : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+          }`}
+        >
+          {formulaOpen ? "▲ Hide Explanation" : "▼ Explain Formula"}
+        </button>
+        {law.number === "II" && (
+          <button
+            onClick={() => { setLabOpen(!labOpen); setFormulaOpen(false); }}
+            className={`flex-1 py-2 rounded-lg text-sm font-semibold border transition-all ${
+              labOpen
+                ? "bg-blue-600 text-white border-blue-600"
+                : "bg-white text-blue-600 border-blue-300 hover:bg-blue-50"
+            }`}
+          >
+            {labOpen ? "▲ Close Lab" : "🧪 Open Formula Lab"}
+          </button>
+        )}
+      </div>
+
+      {/* Formula Explanation */}
+      {formulaOpen && law.variables && (
+        <div className="px-5 pb-5 border-t border-gray-100 bg-white">
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mt-4 mb-3">
+            Variable Breakdown
+          </p>
+          <div className="space-y-2">
+            {law.variables.map((v) => (
+              <div
+                key={v.sym}
+                className="flex items-center gap-3 bg-gray-50 rounded-lg px-4 py-3"
+              >
+                <span
+                  className="font-mono text-base min-w-[40px]"
+                  dangerouslySetInnerHTML={{ __html: renderKatex(v.sym) }}
+                />
+                <span className="text-gray-400">→</span>
+                <span className="text-gray-700 text-sm flex-1">{v.desc}</span>
+                <span className="text-xs text-gray-400 font-mono bg-white border border-gray-200 px-2 py-0.5 rounded">
+                  {v.unit}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Formula Lab (Law II only) */}
+      {labOpen && law.number === "II" && (
+        <div className="px-5 pb-5 border-t border-blue-100 bg-blue-50">
+          <p className="text-xs font-bold text-blue-500 uppercase tracking-widest mt-4 mb-4">
+            🧪 Interactive Formula Lab — F = ma
+          </p>
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between text-sm text-gray-600 mb-1">
+                <label className="font-semibold">
+                  Mass (m) ={" "}
+                  <span className="text-blue-700 font-bold">{mass} kg</span>
+                </label>
+              </div>
+              <input
+                type="range"
+                min={1}
+                max={100}
+                value={mass}
+                onChange={(e) => setMass(Number(e.target.value))}
+                className="w-full accent-blue-600"
+              />
+            </div>
+            <div>
+              <div className="flex justify-between text-sm text-gray-600 mb-1">
+                <label className="font-semibold">
+                  Force (F) ={" "}
+                  <span className="text-blue-700 font-bold">{force} N</span>
+                </label>
+              </div>
+              <input
+                type="range"
+                min={1}
+                max={500}
+                value={force}
+                onChange={(e) => setForce(Number(e.target.value))}
+                className="w-full accent-blue-600"
+              />
+            </div>
+            <div className="bg-white rounded-xl border-2 border-blue-200 p-4 text-center">
+              <p className="text-xs text-gray-400 mb-1">Calculated Acceleration</p>
+              <div className="flex items-center justify-center gap-2">
+                <span
+                  className="text-xl"
+                  dangerouslySetInnerHTML={{ __html: renderKatex("a = F/m =") }}
+                />
+                <span className="text-3xl font-black text-blue-600">
+                  {accel}
+                </span>
+                <span className="text-gray-500 text-sm font-semibold">m/s²</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function LawCard({ law }: { law: (typeof laws)[0] }) {
+  const [tab, setTab] = useState<"statement" | "examples">("statement");
+  const [formulaOpen, setFormulaOpen] = useState(false);
+  const [labOpen, setLabOpen] = useState(false);
+
+  return (
+    <div className={`rounded-2xl border ${law.border} bg-white shadow-sm overflow-hidden`}>
+      {/* Header */}
+      <div className={`bg-gradient-to-r ${law.color} px-6 py-5`}>
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl">
+            {law.icon}
+          </div>
+          <div>
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-white/70 text-xs font-bold uppercase tracking-widest">
+                Newton's {law.number} Law
+              </span>
+            </div>
+            <h2 className="text-white text-xl font-black tracking-tight">
+              {law.title}
+            </h2>
+          </div>
+        </div>
+        {/* Key Idea pill */}
+        <div className="mt-4 bg-white/15 rounded-lg px-4 py-2 text-white text-sm font-medium">
+          💡 {law.keyIdea}
+        </div>
+      </div>
+
+      {/* Tab Bar */}
+      <div className="flex border-b border-gray-100 bg-gray-50">
+        {(["statement", "examples"] as const).map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`flex-1 py-3 text-sm font-semibold capitalize transition-all ${
+              tab === t
+                ? "border-b-2 border-gray-800 text-gray-900 bg-white"
+                : "text-gray-400 hover:text-gray-600"
+            }`}
+          >
+            {t === "statement" ? "📋 Statement" : "🔍 Examples"}
+          </button>
+        ))}
+      </div>
+
+      {/* Tab Content */}
+      <div className="p-5">
+        {tab === "statement" && (
+          <div className="space-y-4">
+            {/* Statement */}
+            <div className={`rounded-xl p-4 ${noteColors[law.accent]}`}>
+              <p className="text-sm leading-relaxed font-medium">{law.statement}</p>
+            </div>
+
+            {/* Keyword */}
+            <div className="flex gap-3 items-start bg-gray-50 rounded-xl p-4">
+              <span
+                className={`text-xs font-bold px-2 py-1 rounded-full shrink-0 mt-0.5 ${law.badge}`}
+              >
+                KEY TERM
+              </span>
+              <div>
+                <p className="font-bold text-gray-800 text-sm">{law.keyword}</p>
+                <p className="text-gray-500 text-sm mt-0.5">{law.keywordDef}</p>
+              </div>
+            </div>
+
+            {/* Formula Card */}
+            {law.formula && (
+              <FormulaCard
+                law={law}
+                formulaOpen={formulaOpen}
+                setFormulaOpen={setFormulaOpen}
+                labOpen={labOpen}
+                setLabOpen={setLabOpen}
+              />
+            )}
+          </div>
+        )}
+
+        {tab === "examples" && (
+          <div className="space-y-3">
+            {law.examples.map((ex, i) => (
+              <div
+                key={i}
+                className="flex gap-4 items-start bg-gray-50 hover:bg-gray-100 transition-colors rounded-xl p-4"
+              >
+                <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-xl shrink-0 shadow-sm">
+                  {ex.emoji}
+                </div>
+                <div>
+                  <p className="font-bold text-gray-800 text-sm">{ex.title}</p>
+                  <p className="text-gray-500 text-sm mt-0.5 leading-relaxed">
+                    {ex.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const comparisonRows = [
+  {
+    aspect: "Core Idea",
+    l1: "Inertia",
+    l2: "F = ma",
+    l3: "Action = Reaction",
+  },
+  {
+    aspect: "Involves Force?",
+    l1: "Only when absent",
+    l2: "Yes — central",
+    l3: "Yes — in pairs",
+  },
+  {
+    aspect: "Key Variable",
+    l1: "Mass",
+    l2: "F, m, a",
+    l3: "Force pairs",
+  },
+  {
+    aspect: "Real-World Use",
+    l1: "Seatbelts, stability",
+    l2: "Engineering, design",
+    l3: "Rockets, swimming",
+  },
+];
+
+export default function App() {
+  const [showCompare, setShowCompare] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 to-gray-200 py-10 px-4">
+      <div className="max-w-2xl mx-auto space-y-6">
+
+        {/* Hero Header */}
+        <div className="rounded-2xl bg-gradient-to-br from-gray-900 to-gray-700 p-8 text-white shadow-xl">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-3xl">🍎</span>
+            <span className="text-sm font-bold text-white/50 uppercase tracking-widest">
+              Classical Mechanics
+            </span>
+          </div>
+          <h1 className="text-4xl font-black tracking-tight leading-tight">
+            Newton's Three<br />Laws of Motion
+          </h1>
+          <p className="mt-3 text-white/60 text-sm leading-relaxed max-w-lg">
+            Published in <em>Principia Mathematica</em> (1687), these three laws form the
+            foundation of classical mechanics — describing how objects move and interact.
+          </p>
+          <div className="flex gap-3 mt-5 flex-wrap">
+            {["Law I: Inertia", "Law II: F=ma", "Law III: Action-Reaction"].map((tag) => (
+              <span
+                key={tag}
+                className="bg-white/10 border border-white/20 text-white/80 text-xs font-semibold px-3 py-1.5 rounded-full"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Quick Context Card */}
+        <div className="rounded-xl bg-amber-50 border border-amber-200 px-5 py-4 flex gap-3">
+          <span className="text-xl shrink-0 mt-0.5">📌</span>
+          <div>
+            <p className="font-bold text-amber-800 text-sm">Before You Begin</p>
+            <p className="text-amber-700 text-sm mt-0.5 leading-relaxed">
+              These laws apply to <strong>macroscopic objects</strong> at{" "}
+              <strong>non-relativistic speeds</strong>. At atomic scales, quantum
+              mechanics applies. At near-light speeds, Einstein's relativity takes over.
+            </p>
+          </div>
+        </div>
+
+        {/* Law Cards */}
+        {laws.map((law) => (
+          <LawCard key={law.number} law={law} />
+        ))}
+
+        {/* Comparison Table Card */}
+        <div className="rounded-2xl bg-white border border-gray-200 shadow-sm overflow-hidden">
+          <button
+            onClick={() => setShowCompare(!showCompare)}
+            className="w-full flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-xl">📊</span>
+              <div className="text-left">
+                <p className="font-bold text-gray-800">Comparison Table</p>
+                <p className="text-xs text-gray-400">All three laws side by side</p>
+              </div>
+            </div>
+            <span className="text-gray-400 text-lg">{showCompare ? "▲" : "▼"}</span>
+          </button>
+
+          {showCompare && (
+            <div className="border-t border-gray-100 overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left px-5 py-3 text-gray-400 font-semibold text-xs uppercase tracking-wider">
+                      Aspect
+                    </th>
+                    <th className="px-4 py-3 text-violet-700 font-bold text-xs uppercase tracking-wider text-center">
+                      Law I
+                    </th>
+                    <th className="px-4 py-3 text-blue-700 font-bold text-xs uppercase tracking-wider text-center">
+                      Law II
+                    </th>
+                    <th className="px-4 py-3 text-emerald-700 font-bold text-xs uppercase tracking-wider text-center">
+                      Law III
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonRows.map((row, i) => (
+                    <tr
+                      key={i}
+                      className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                    >
+                      <td className="px-5 py-3 font-semibold text-gray-600">
+                        {row.aspect}
+                      </td>
+                      <td className="px-4 py-3 text-center text-gray-700">
+                        {row.l1}
+                      </td>
+                      <td className="px-4 py-3 text-center text-gray-700">
+                        {row.l2}
+                      </td>
+                      <td className="px-4 py-3 text-center text-gray-700">
+                        {row.l3}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
+        {/* Summary Card */}
+        <div className="rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 text-white shadow-xl">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xl">✅</span>
+            <p className="font-black text-lg">Chapter Summary</p>
+          </div>
+          <div className="space-y-3">
+            {[
+              {
+                num: "I",
+                color: "bg-violet-500",
+                text: "Objects maintain their state unless acted on by an external force.",
+              },
+              {
+                num: "II",
+                color: "bg-blue-500",
+                text: "Net force equals mass times acceleration — F = ma.",
+              },
+              {
+                num: "III",
+                color: "bg-emerald-500",
+                text: "Every action force has an equal and opposite reaction force.",
+              },
+            ].map((item) => (
+              <div key={item.num} className="flex items-start gap-3">
+                <span
+                  className={`${item.color} text-white text-xs font-black w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5`}
+                >
+                  {item.num}
+                </span>
+                <p className="text-white/80 text-sm leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <p className="text-center text-gray-400 text-xs pb-4">
+          Classical Mechanics · Isaac Newton · Principia Mathematica, 1687
+        </p>
+      </div>
+    </div>
+  );
+}
+```

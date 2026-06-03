@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 61,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'spring_connected' event linking a anchor to a mass.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a structural connection update within the workspace.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nA new elastic joint constraint (`spring_connected`) was created, linking the static pin anchor `p1` to the moving circular mass `c1`.\n\n### WHAT CHANGED\nThe free-floating mass was brought under a positional constraint, causing it to pull backward as it moved away from the anchor point.\n\n### SIMPLE WHY\nThe newly initialized spring joint applies an elastic restoring force that pulls the mass back toward the anchor whenever the constraint is stretched.\n\n### WHAT TO NOTICE\nWatch how the distance between the anchor and the mass determines the strength of the restoring force vector.",
+  "candidate_response": "```json\n{\n  \"layout\": \"interactive-textbook\",\n  \"sections\": [\n    {\n      \"type\": \"Introduction\",\n      \"title\": \"Spring-Mass Connection\",\n      \"content\": \"A spring-mass system is a fundamental harmonic oscillator. When an anchor point is linked to a mass via a spring, the system converts potential energy into kinetic energy through restorative forces.\"\n    },\n    {\n      \"type\": \"Definition\",\n      \"title\": \"Hooke's Law\",\n      \"content\": \"The restorative force exerted by a spring is directly proportional to the displacement from its equilibrium position, acting in the opposite direction of the displacement.\"\n    },\n    {\n      \"type\": \"FormulaCard\",\n      \"title\": \"Restorative Force (Vector)\",\n      \"formula\": \"\\\\vec{F}_s = -k \\\\Delta \\\\vec{x}\",\n      \"variables\": [\n        {\"symbol\": \"F_s\", \"description\": \"Restorative force exerted by the spring\"},\n        {\"symbol\": \"k\", \"description\": \"Spring constant (stiffness) in N/m\"},\n        {\"symbol\": \"\\\\Delta x\", \"description\": \"Displacement from equilibrium position\"}\n      ],\n      \"context\": \"This formula determines the acceleration applied to the mass at any given timestamp in the simulation.\"\n    },\n    {\n      \"type\": \"KeyConcepts\",\n      \"title\": \"System Parameters\",\n      \"concepts\": [\n        {\n          \"term\": \"Stiffness (k)\",\n          \"definition\": \"Determines how 'tight' the spring is. Higher values result in faster oscillations.\"\n        },\n        {\n          \"term\": \"Damping (c)\",\n          \"definition\": \"The friction factor that dissipates energy, eventually bringing the mass to rest.\"\n        },\n        {\n          \"term\": \"Rest Length (L)\",\n          \"definition\": \"The natural length of the spring where no force is applied to the mass.\"\n        }\n      ]\n    },\n    {\n      \"type\": \"FormulaCard\",\n      \"title\": \"Equation of Motion\",\n      \"formula\": \"m\\\\frac{d^2x}{dt^2} + c\\\\frac{dx}{dt} + kx = 0\",\n      \"variables\": [\n        {\"symbol\": \"m\", \"description\": \"Mass of the object\"},\n        {\"symbol\": \"c\", \"description\": \"Damping coefficient\"},\n        {\"symbol\": \"x\", \"description\": \"Position relative to equilibrium\"}\n      ],\n      \"context\": \"Used by the physics engine to calculate the 'runtime overlay' trajectory of the mass.\"\n    },\n    {\n      \"type\": \"Table\",\n      \"title\": \"Simulation States\",\n      \"headers\": [\"State\", \"Condition\", \"Behavior\"],\n      \"rows\": [\n        [\"Equilibrium\", \"Extension = L\", \"Net force is zero; no acceleration.\"],\n        [\"Compression\", \"Extension < L\", \"Spring pushes the mass away from the anchor.\"],\n        [\"Extension\", \"Extension > L\", \"Spring pulls the mass toward the anchor.\"]\n      ]\n    },\n    {\n      \"type\": \"ImportantNotes\",\n      \"content\": \"In a digital sandbox, 'spring_connected' events often initialize a constraint solver. Ensure the 'Anchor' object is set to static (mass = ∞) to prevent the spring from pulling the foundation toward the object.\"\n    },\n    {\n      \"type\": \"SuggestedQuestions\",\n      \"questions\": [\n        \"How does doubling the mass affect the oscillation frequency?\",\n        \"What happens to the system if the damping coefficient is set to zero?\",\n        \"How is the potential energy of the spring calculated at maximum extension?\"\n      ]\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly detailed and provides a comprehensive overview of the spring-mass system, including relevant formulas and concepts. However, it does not directly address the 'spring_connected' event and its implications on the simulation. The response assumes a high level of prior knowledge and may not be suitable for beginners. To improve, the candidate should focus on providing a clear and concise explanation of the event and its effects, while maintaining the technical accuracy and quality of presentation. Additionally, the response could benefit from more visual aids and examples to enhance pedagogical effectiveness.",
+  "candidate_token_usage": {
+    "promptTokens": 392,
+    "completionTokens": 829,
+    "totalTokens": 1221
+  },
+  "candidate_latency_ms": 5613,
+  "candidate_cost_usd": 0.002683,
+  "judge_token_usage": {
+    "promptTokens": 1329,
+    "completionTokens": 171,
+    "totalTokens": 1500
+  },
+  "judge_latency_ms": 4749,
+  "judge_cost_usd": 0.0012078,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:54:12.651Z"
+}

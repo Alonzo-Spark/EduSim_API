@@ -1,0 +1,132 @@
+# Electric Force Between Two Charges
+
+---
+
+## The Core Idea
+
+Before we derive anything, let's understand what we're trying to find.
+
+> Two charged objects exert forces on each other — even without touching. This is the **electric force**, and it acts along the line joining the two charges.
+
+---
+
+## Setting Up the Problem
+
+Place two point charges in space:
+
+| Symbol | Meaning |
+|--------|---------|
+| $q_1$ | First point charge (Coulombs) |
+| $q_2$ | Second point charge (Coulombs) |
+| $r$ | Distance between them (metres) |
+| $F$ | Electric force between them (Newtons) |
+| $k$ | Coulomb's constant $= 8.99 \times 10^9 \ \text{N m}^2\text{C}^{-2}$ |
+
+---
+
+## Step-by-Step Derivation
+
+### Step 1 — Identify what $F$ depends on
+
+From experiments, Coulomb observed three things:
+
+**① Force depends on the charges:**
+
+$$F \propto q_1$$
+
+$$F \propto q_2$$
+
+Combining both:
+
+$$F \propto q_1 q_2$$
+
+---
+
+**② Force depends on distance:**
+
+As $r$ increases, $F$ decreases — and it follows an **inverse square law**:
+
+$$F \propto \frac{1}{r^2}$$
+
+---
+
+### Step 2 — Combine the proportionalities
+
+Putting both dependencies together:
+
+$$F \propto \frac{q_1 q_2}{r^2}$$
+
+---
+
+### Step 3 — Introduce the proportionality constant
+
+$$\boxed{F = k \frac{q_1 q_2}{r^2}}$$
+
+where $k$ is **Coulomb's constant**.
+
+---
+
+### Step 4 — Express $k$ in terms of permittivity
+
+The constant $k$ is not arbitrary. It is defined as:
+
+$$k = \frac{1}{4\pi\varepsilon_0}$$
+
+| Symbol | Meaning | Value |
+|--------|---------|-------|
+| $\varepsilon_0$ | Permittivity of free space | $8.85 \times 10^{-12} \ \text{C}^2\text{N}^{-1}\text{m}^{-2}$ |
+| $4\pi$ | Geometric factor from spherical symmetry | — |
+
+Substituting:
+
+$$\boxed{F = \frac{1}{4\pi\varepsilon_0} \cdot \frac{q_1 q_2}{r^2}}$$
+
+This is the **complete, standard form** of Coulomb's Law.
+
+---
+
+### Step 5 — Write the Vector Form
+
+Force is a vector — it has both magnitude and direction.
+
+Let $\hat{r}$ be the unit vector pointing **from $q_1$ to $q_2$**.
+
+$$\vec{F}_{12} = \frac{1}{4\pi\varepsilon_0} \cdot \frac{q_1 q_2}{r^2} \ \hat{r}$$
+
+| Condition | Sign of $q_1 q_2$ | Direction of Force |
+|-----------|-------------------|--------------------|
+| Both same sign | Positive $(+)$ | Repulsive — away from each other |
+| Opposite signs | Negative $(-)$ | Attractive — toward each other |
+
+---
+
+## Final Result
+
+$$\Large\boxed{F = \frac{1}{4\pi\varepsilon_0} \cdot \frac{q_1 q_2}{r^2}}$$
+
+| Part | Role |
+|------|------|
+| $\frac{1}{4\pi\varepsilon_0}$ | Proportionality constant in SI units |
+| $q_1 q_2$ | Product of the two charges |
+| $r^2$ | Square of separation distance |
+
+---
+
+## Key Properties of the Electric Force
+
+- ✅ Acts along the **line joining** the two charges
+- ✅ Obeys **Newton's Third Law** — equal and opposite on both charges
+- ✅ Is an **inverse square law** — like gravity
+- ✅ Can be **attractive or repulsive** — unlike gravity
+- ✅ Acts through **vacuum/free space** without any medium
+
+---
+
+## Quick Analogy
+
+| Property | Gravitational Force | Electric Force |
+|----------|--------------------|--------------:|
+| Formula | $G\frac{m_1 m_2}{r^2}$ | $k\frac{q_1 q_2}{r^2}$ |
+| Nature | Always attractive | Attractive or repulsive |
+| Constant | $G = 6.67\times10^{-11}$ | $k = 8.99\times10^{9}$ |
+| Source | Mass | Charge |

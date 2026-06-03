@@ -1,0 +1,708 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Textbook: Simple Pendulum</title>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 12px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: 'Georgia', serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* --- Section Cards --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: 15px;
+            background: #eef7fc;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .card-content {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        /* --- Formula Card Component --- */
+        .formula-card {
+            background: #fafbfc;
+            border-left-color: #9b59b6; /* Purple for formulas */
+        }
+
+        .formula-display {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 20px 0;
+            border: 1px solid #e1e4e8;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .btn {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-explain {
+            background: #e8f4f8;
+            color: #2980b9;
+        }
+        .btn-explain:hover { background: #d6eaf8; }
+
+        .btn-lab {
+            background: #f4ecf7;
+            color: #8e44ad;
+        }
+        .btn-lab:hover { background: #e8daef; }
+
+        .formula-explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 6px;
+            color: #856404;
+            font-size: 0.95rem;
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* --- Table Card Component --- */
+        .table-card {
+            padding: 0; /* Remove padding for full width table */
+            overflow: hidden;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-main);
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* --- Formula Lab Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            max-height: 90vh;
+        }
+
+        .modal-header {
+            padding: 20px;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .lab-controls {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .lab-visualization {
+            flex: 1;
+            min-width: 300px;
+            background: #f0f3f4;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .live-result {
+            background: #e8f6f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .live-result h4 { margin: 0 0 10px 0; color: #16a085; }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .card-header { flex-direction: column; align-items: flex-start; }
+            .card-icon { margin-bottom: 10px; }
+            .modal-body { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Simple Pendulum</h1>
+            <div class="subtitle">Physics 101 • Oscillations</div>
+        </header>
+
+        <!-- Dynamic Content Container -->
+        <div id="content-root"></div>
+    </div>
+
+    <!-- Formula Lab Modal (Hidden by default) -->
+    <div id="lab-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-flask"></i> Formula Lab: Time Period</h3>
+                <button class="close-btn" onclick="closeLab()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="lab-controls">
+                    <p>Adjust the variables to see how they affect the Time Period ($T$).</p>
+                    
+                    <div class="control-group">
+                        <label>Length of String ($L$): <span id="val-L">1.0</span> m</label>
+                        <input type="range" id="input-L" min="0.1" max="2.0" step="0.1" value="1.0">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Acceleration due to Gravity ($g$): <span id="val-g">9.8</span> m/s²</label>
+                        <input type="range" id="input-g" min="1.6" max="20.0" step="0.1" value="9.8">
+                        <small style="color: #666; display: block; margin-top: 5px;">
+                            (1.6 = Moon, 9.8 = Earth, 24.8 = Jupiter)
+                        </small>
+                    </div>
+
+                    <div class="live-result">
+                        <h4>Calculated Time Period ($T$)</h4>
+                        <div id="result-display" style="font-size: 1.5rem; font-weight: bold;">2.01 s</div>
+                    </div>
+                </div>
+
+                <div class="lab-visualization">
+                    <canvas id="pendulumCanvas"></canvas>
+                    <div style="margin-top: 10px; font-size: 0.9rem; color: #555;">
+                        <i class="fas fa-info-circle"></i> Simulation speed reflects actual calculated period.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Content Data Structure (Simulating Parsed AI Content) ---
+        // This represents the structured extraction of the derivation.
+        const contentData = [
+            {
+                type: 'section',
+                title: 'Introduction',
+                icon: 'fa-book-open',
+                content: `A <strong>simple pendulum</strong> consists of a point mass (bob) suspended by a massless, inextensible string from a rigid support. It is an idealized physical system that exhibits Simple Harmonic Motion (SHM) under small angular displacements.`
+            },
+            {
+                type: 'section',
+                title: 'Assumptions',
+                icon: 'fa-check-circle',
+                content: `To derive the expression accurately, we make the following standard assumptions:
+                <ul>
+                    <li>The string is massless and inextensible.</li>
+                    <li>The bob is a point mass.</li>
+                    <li>The amplitude of oscillation is very small (small angle approximation).</li>
+                    <li>Air resistance and friction are negligible.</li>
+                </ul>`
+            },
+            {
+                type: 'section',
+                title: 'Forces Acting on the Bob',
+                icon: 'fa-arrows-alt',
+                content: `When the pendulum is displaced by an angle \(\theta\), the forces acting on the bob are:
+                <br>1. <strong>Tension (\(T\))</strong>: Acts along the string towards the support.
+                <br>2. <strong>Weight (\(mg\))</strong>: Acts vertically downward.`,
+            },
+            {
+                type: 'formula',
+                title: 'Restoring Force',
+                latex: 'F = -mg\\sin\\theta',
+                context: 'We resolve the weight into components. The component perpendicular to the string acts as the restoring force, bringing the bob back to the mean position.',
+                variables: [
+                    { symbol: 'F', meaning: 'Restoring Force' },
+                    { symbol: 'm', meaning: 'Mass of the bob' },
+                    { symbol: 'g', meaning: 'Acceleration due to gravity' },
+                    { symbol: '\\theta', meaning: 'Angular displacement' }
+                ]
+            },
+            {
+                type: 'formula',
+                title: 'Small Angle Approximation',
+                latex: '\\sin\\theta \\approx \\theta \\quad (\\text{if } \\theta \\text{ is small})',
+                context: 'If the angle \(\theta\) is small (typically less than 15°), we can approximate \(\sin\theta\) as \(\theta\) (measured in radians). This linearizes the equation of motion.',
+                variables: []
+            },
+            {
+                type: 'formula',
+                title: 'Equation of Motion',
+                latex: 'F = ma \\Rightarrow -mg\\theta = m \\frac{d^2x}{dt^2}',
+                context: 'Using Newton\'s second law. Since the arc length \(x = L\\theta\), the acceleration \(a = L \\frac{d^2\\theta}{dt^2}\). Substituting this gives the differential equation for SHM.',
+                variables: []
+            },
+            {
+                type: 'formula',
+                title: 'Standard SHM Differential Equation',
+                latex: '\\frac{d^2\\theta}{dt^2} + \\frac{g}{L}\\theta = 0',
+                context: 'Comparing this with the standard SHM equation \(\\frac{d^2y}{dt^2} + \\omega^2 y = 0\), we can identify the angular frequency \(\omega\).',
+                variables: []
+            },
+            {
+                type: 'formula',
+                title: 'Angular Frequency',
+                latex: '\\omega = \\sqrt{\\frac{g}{L}}',
+                context: 'From the comparison above, the square of the angular frequency is equal to \(g/L\).',
+                variables: []
+            },
+            {
+                type: 'formula',
+                title: 'Time Period (Final Expression)',
+                latex: 'T = \\frac{2\\pi}{\\omega} = 2\\pi \\sqrt{\\frac{L}{g}}',
+                context: 'The time period \(T\) is the time taken for one complete oscillation. Since \(\omega = 2\\pi/T\), we substitute \(\omega\) to get the final formula. Note that T is independent of mass.',
+                variables: [
+                    { symbol: 'T', meaning: 'Time Period' },
+                    { symbol: 'L', meaning: 'Length of the string' },
+                    { symbol: 'g', meaning: 'Acceleration due to gravity' }
+                ],
+                isMain: true // Flag for the Formula Lab
+            },
+            {
+                type: 'table',
+                title: 'Variable Summary',
+                headers: ['Symbol', 'Quantity', 'SI Unit'],
+                rows: [
+                    ['T', 'Time Period', 'second (s)'],
+                    ['L', 'Length', 'meter (m)'],
+                    ['g', 'Gravity', 'm/s²'],
+                    ['m', 'Mass', 'kilogram (kg)']
+                ]
+            }
+        ];
+
+        // --- 2. Rendering Engine ---
+
+        const root = document.getElementById('content-root');
+
+        function renderContent() {
+            contentData.forEach(block => {
+                if (block.type === 'section') {
+                    root.appendChild(createSectionCard(block));
+                } else if (block.type === 'formula') {
+                    root.appendChild(createFormulaCard(block));
+                } else if (block.type === 'table') {
+                    root.appendChild(createTableCard(block));
+                }
+            });
+            
+            // Trigger KaTeX rendering for the new DOM elements
+            renderMathInElement(root, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "\\(", right: "\\)", display: false},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        }
+
+        function createSectionCard(data) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas ${data.icon}"></i></div>
+                    <h2 class="card-title">${data.title}</h2>
+                </div>
+                <div class="card-content">${data.content}</div>
+            `;
+            return card;
+        }
+
+        function createFormulaCard(data) {
+            const card = document.createElement('div');
+            card.className = 'card formula-card';
+            
+            // Create unique ID for explanation toggle
+            const expId = 'exp-' + Math.random().toString(36).substr(2, 9);
+            
+            // Construct variable list HTML if available
+            let varHtml = '';
+            if(data.variables && data.variables.length > 0) {
+                varHtml = '<div style="margin-top:10px; font-size: 0.9em;"><strong>Variables:</strong> ' + 
+                    data.variables.map(v => `${v.symbol} (${v.meaning})`).join(', ') + '</div>';
+            }
+
+            const labButton = data.isMain ? 
+                `<button class="btn btn-lab" onclick="openFormulaLab()"><i class="fas fa-flask"></i> Open Formula Lab</button>` : '';
+
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="card-icon"><i class="fas fa-square-root-alt"></i></div>
+                    <h2 class="card-title">${data.title}</h2>
+                </div>
+                <div class="card-content">
+                    <p>${data.context}</p>
+                    <div class="formula-display">
+                        $$${data.latex}$$
+                    </div>
+                    ${varHtml}
+                    <div class="formula-actions">
+                        <button class="btn btn-explain" onclick="toggleExplanation('${expId}')">
+                            <i class="fas fa-lightbulb"></i> Explain Formula
+                        </button>
+                        ${labButton}
+                    </div>
+                    <div id="${expId}" class="formula-explanation">
+                        <strong>Explanation:</strong> This equation describes the relationship between the restoring forces and the inertia of the system. 
+                        It allows us to predict how fast the pendulum swings based on its physical properties.
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        function createTableCard(data) {
+            const card = document.createElement('div');
+            card.className = 'card table-card';
+            
+            const rowsHtml = data.rows.map(row => 
+                `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`
+            ).join('');
+
+            card.innerHTML = `
+                <div style="padding: 20px;">
+                    <div class="card-header" style="border:none; margin-bottom:10px; padding-bottom:0;">
+                        <div class="card-icon"><i class="fas fa-table"></i></div>
+                        <h2 class="card-title">${data.title}</h2>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>${data.headers.map(h => `<th>${h}</th>`).join('')}</tr>
+                        </thead>
+                        <tbody>
+                            ${rowsHtml}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            return card;
+        }
+
+        function toggleExplanation(id) {
+            const el = document.getElementById(id);
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+            } else {
+                el.style.display = 'block';
+            }
+        }
+
+        // --- 3. Formula Lab Logic (Interactive Simulation) ---
+
+        let labAnimationId;
+        let labState = {
+            L: 1.0,
+            g: 9.8,
+            angle: Math.PI / 4, // Initial amplitude
+            velocity: 0,
+            time: 0
+        };
+
+        const canvas = document.getElementById('pendulumCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Setup canvas resolution
+        function resizeCanvas() {
+            const parent = canvas.parentElement;
+            canvas.width = parent.clientWidth;
+            canvas.height = 300;
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        function openFormulaLab() {
+            document.getElementById('lab-modal').style.display = 'flex';
+            resizeCanvas();
+            if(!labAnimationId) {
+                labLoop();
+            }
+        }
+
+        function closeLab() {
+            document.getElementById('lab-modal').style.display = 'none';
+            // Optional: cancelAnimationFrame(labAnimationId); 
+            // We keep it running or pause it depending on preference. Let's keep it running for smoothness.
+        }
+
+        // Input Listeners
+        const inputL = document.getElementById('input-L');
+        const inputG = document.getElementById('input-g');
+        const valL = document.getElementById('val-L');
+        const valG = document.getElementById('val-g');
+        const resultDisplay = document.getElementById('result-display');
+
+        function updateLabValues() {
+            labState.L = parseFloat(inputL.value);
+            labState.g = parseFloat(inputG.value);
+            
+            valL.textContent = labState.L.toFixed(1);
+            valG.textContent = labState.g.toFixed(1);
+
+            // Calculate T
+            const T = 2 * Math.PI * Math.sqrt(labState.L / labState.g);
+            resultDisplay.textContent = T.toFixed(2) + ' s';
+        }
+
+        inputL.addEventListener('input', updateLabValues);
+        inputG.addEventListener('input', updateLabValues);
+
+        // Physics Engine for Lab
+        function labLoop() {
+            // Physics update (Simple Euler integration for visualization)
+            // Equation: angular_acceleration = -(g/L) * sin(theta)
+            
+            const dt = 0.05; // Time step for simulation speed
+            const acceleration = -(labState.g / labState.L) * Math.sin(labState.angle);
+            
+            labState.velocity += acceleration * dt;
+            // Apply slight damping so it doesn't explode if integration errors accumulate
+            labState.velocity *= 0.995; 
+            labState.angle += labState.velocity * dt;
+
+            drawPendulum();
+            labAnimationId = requestAnimationFrame(labLoop);
+        }
+
+        function drawPendulum() {
+            const w = canvas.width;
+            const h = canvas.height;
+            const originX = w / 2;
+            const originY = 20;
+            
+            // Scale: Map meters to pixels. Max length 2m should fit in ~250px
+            const scale = 120; 
+            
+            const bobX = originX + (labState.L * scale) * Math.sin(labState.angle);
+            const bobY = originY + (labState.L * scale) * Math.cos(labState.angle);
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Draw Pivot
+            ctx.beginPath();
+            ctx.fillStyle = '#2c3e50';
+            ctx.arc(originX, originY, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw String
+            ctx.beginPath();
+            ctx.moveTo(originX, originY);
+            ctx.lineTo(bobX, bobY);
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw Bob
+            ctx.beginPath();
+            ctx.arc(bobX, bobY, 15, 0, Math.PI * 2);
+            ctx.fillStyle = '#e74c3c';
+            ctx.fill();
+            ctx.strokeStyle = '#c0392b';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Draw Arc (Amplitude guide)
+            ctx.beginPath();
+            ctx.arc(originX, originY, labState.L * scale, Math.PI/2 - 0.5, Math.PI/2 + 0.5);
+            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+            ctx.setLineDash([5, 5]);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        // --- Initialize ---
+        renderContent();
+        updateLabValues(); // Init lab values
+
+    </script>
+</body>
+</html>
+```

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 20,
+  "question": "Explain conservation of mechanical energy with an example.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe Principle of Conservation of Mechanical Energy states that if only conservative forces (like gravity or spring forces) perform work within an isolated system, the total mechanical energy (the sum of kinetic and potential energies) remains completely constant over time.\n\n---\n\n## Formula\n\nThe conservation rule is expressed mathematically as:\n\n$$E_{\\text{total}} = K + U = \\text{Constant}$$\n\n$$K_i + U_i = K_f + U_f$$\n\nWhere:\n* $K_i, K_f$ represent the initial and final kinetic energy states\n* $U_i, U_f$ represent the initial and final potential energy states\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Simplifies tracking positions and speeds without requiring precise force-time integrations. | Fails in non-conservative tracking configurations involving friction or air resistance. |\n\n---\n\n## Real-world Example: Free-Falling Object\n\nConsider a heavy steel ball held stationary at a height $h$ above the floor.\n* **At Peak Height:** The ball has zero velocity, so kinetic energy is zero ($K = 0$), and total mechanical energy equals maximum potential energy ($E = mgh$).\n* **During Mid-Descent:** As the ball drops, its height decreases, causing potential energy to drop, while its speed climbs, increasing kinetic energy by an identical amount.\n* **At Floor Impact Point:** Just before striking the ground, height becomes zero ($U = 0$), and potential energy converts completely into kinetic energy ($K = \\frac{1}{2}mv^2 = mgh$).\n\n---\n\n## Summary\n\nMechanical energy conservation demonstrates that kinetic and potential energy act as balanced components within a closed system, transforming into one another while keeping the total energy constant.",
+  "candidate_response": "Here's an interactive breakdown of Conservation of Mechanical Energy:\n\n---\n\n<div class=\"content-blocks\">\n\n<div class=\"info-card definition-card\">\n<div class=\"card-label\">📖 Core Concept</div>\n\n**Conservation of Mechanical Energy** states that in a system where only **conservative forces** act (like gravity or spring force), the total mechanical energy remains constant throughout the motion.\n\n</div>\n\n---\n\n<div class=\"info-card formula-card\">\n<div class=\"card-label\">⚡ The Law</div>\n\n$$E_{mechanical} = KE + PE = \\text{constant}$$\n\n$$\\frac{1}{2}mv_1^2 + mgh_1 = \\frac{1}{2}mv_2^2 + mgh_2$$\n\n<div class=\"formula-variables\">\n\n| Symbol | Meaning | Unit |\n|--------|---------|------|\n| $m$ | Mass of object | kg |\n| $v_1, v_2$ | Speed at point 1 and 2 | m/s |\n| $g$ | Acceleration due to gravity | m/s² |\n| $h_1, h_2$ | Height at point 1 and 2 | m |\n\n</div>\n</div>\n\n---\n\n<div class=\"info-card example-card\">\n<div class=\"card-label\">🎯 Classic Example — Free Falling Ball</div>\n\nImagine a ball of mass **2 kg** dropped from a height of **10 m**.\n\n**At the Top (Point A):**\n- Height $h_1 = 10\\ m$\n- Velocity $v_1 = 0\\ m/s$\n- $KE_A = \\frac{1}{2}(2)(0)^2 = 0\\ J$\n- $PE_A = mgh_1 = (2)(10)(10) = 200\\ J$\n- $\\boxed{E_{total} = 200\\ J}$\n\n**At the Bottom (Point B):**\n- Height $h_2 = 0\\ m$\n- $PE_B = 0\\ J$\n- By conservation: $KE_B = 200\\ J$\n- $\\frac{1}{2}(2)v^2 = 200 \\Rightarrow v = \\sqrt{200} \\approx 14.1\\ m/s$\n- $\\boxed{E_{total} = 200\\ J}$\n\n</div>\n\n---\n\n<div class=\"info-card visual-card\">\n<div class=\"card-label\">📊 Energy Transformation at Each Stage</div>\n\n| Position | Height | KE | PE | Total Energy |\n|----------|--------|----|----|-------------|\n| Top | 10 m | 0 J | 200 J | 200 J |\n| Midpoint | 5 m | 100 J | 100 J | 200 J |\n| Bottom | 0 m | 200 J | 0 J | 200 J |\n\n> 🔄 Notice how KE and PE trade off perfectly — their **sum never changes**.\n\n</div>\n\n---\n\n<div class=\"info-card condition-card\">\n<div class=\"card-label\">✅ Conditions Required</div>\n\n- No **friction** or **air resistance**\n- Only **conservative forces** do work\n- System is **isolated** (no external energy added or removed)\n\n> ⚠️ If friction acts, mechanical energy is **not** conserved — some converts to heat. We then use the **Work-Energy Theorem** instead.\n\n</div>\n\n---\n\n<div class=\"info-card applications-card\">\n<div class=\"card-label\">🌍 Real-World Applications</div>\n\n| Scenario | Energy Conversion |\n|----------|------------------|\n| Roller coaster | PE → KE → PE (repeating) |\n| Pendulum swing | PE ↔ KE continuously |\n| Hydroelectric dam | PE of water → KE → Electrical |\n| Bow and arrow | Elastic PE → KE of arrow |\n\n</div>\n\n---\n\n<div class=\"info-card summary-card\">\n<div class=\"card-label\">💡 Key Takeaway</div>\n\nEnergy is **never created or destroyed** — it only **transforms** between kinetic and potential forms. The total mechanical energy of an isolated system stays the same at every point in its motion.\n\n$$\\Delta KE + \\Delta PE = 0$$\n\n</div>\n\n</div>",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the concept of conservation of mechanical energy, including its definition, formula, and real-world applications. The use of interactive breakdowns, info-cards, and tables enhances the readability and presentation of the content. However, there are some minor areas for improvement, such as providing more detailed explanations for the advantages and disadvantages of the conservation of mechanical energy principle, and including more visual aids like diagrams or graphs to illustrate the energy transformations. Additionally, the candidate response could benefit from a more concise summary section that effectively ties together the key takeaways from the entire response.",
+  "candidate_token_usage": {
+    "promptTokens": 434,
+    "completionTokens": 1085,
+    "totalTokens": 1519
+  },
+  "candidate_latency_ms": 19858,
+  "candidate_cost_usd": 0.002604,
+  "judge_token_usage": {
+    "promptTokens": 1692,
+    "completionTokens": 179,
+    "totalTokens": 1871
+  },
+  "judge_latency_ms": 3075,
+  "judge_cost_usd": 0.0014448,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:34:52.859Z"
+}

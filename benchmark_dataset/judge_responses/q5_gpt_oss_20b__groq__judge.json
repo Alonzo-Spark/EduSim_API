@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 5,
+  "question": "A train moving at 20 m/s applies brakes and stops after 10 seconds. Calculate retardation.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Kinematics Problem\n\n### Problem\nA train moving at $20 \\text{ m/s}$ applies brakes and stops after $10 \\text{ seconds}$. Calculate retardation.\n\n### Given\n* Initial velocity ($u$) = $20 \\text{ m/s}$\n* Final velocity ($v$) = $0 \\text{ m/s}$ (since it stops)\n* Time taken ($t$) = $10 \\text{ s}$\n\n### Formula\n$$a = \\frac{v - u}{t}$$\n\n### Substitution\n$$a = \\frac{0 - 20}{10}$$\n\n### Calculation\n$$a = \\frac{-20}{10}$$\n\n$$a = -2 \\text{ m/s}^2$$\n\nRetardation is the magnitude of negative acceleration:\n$$\\text{Retardation} = -a$$\n\n### Final Answer\n**Retardation = $2 \\text{ m/s}^2$**\n\n### Interpretation\nThis indicates that the brakes cause the train's velocity to decrease uniformly at a steady rate of $2 \\text{ meters per second}$ every single second until it reaches a complete standstill.",
+  "candidate_response": "┌─────────────────────────────────────────────┐\n│ Quick Definition                            │\n│                                             │\n│ Retardation is the negative acceleration   │\n│ that slows a moving object until it comes   │\n│ to rest. It is measured in meters per second│\n│ squared (m/s²).                             │\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ Main Formula                                │\n│                                             │\n│     a = Δv / Δt                             │\n│                                             │\n│ [ Explain Formula ]  [ Open Formula Lab ]   │\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ Example Problem                             │\n│                                             │\n│ A train is moving at 20 m/s and applies     │\n│ brakes. It comes to a complete stop after   │\n│ 10 s. Find the retardation.                 │\n│                                             │\n│ **Solution**                                │\n│ • Initial velocity, v₀ = 20 m/s              │\n│ • Final velocity, v = 0 m/s                 │\n│ • Time interval, Δt = 10 s                  │\n│                                             │\n│ a = (v – v₀) / Δt = (0 – 20) / 10 = –2      │\n│ m/s²                                       │\n│                                             │\n│ **Answer**                                  │\n│ The train’s retardation is 2 m/s² (negative │\n│ sign indicates slowing).                    │\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ Summary                                     │\n│                                             │\n│ • Retardation is a negative acceleration.   │\n│ • Formula: a = Δv / Δt.                     │\n│ • In the example, a = –2 m/s², magnitude   │\n│   2 m/s².                                   │\n└─────────────────────────────────────────────┘\n\n┌─────────────────────────────────────────────┐\n│ Suggested Questions                         │\n│                                             │\n│ 1. If the train had started at 30 m/s, what │\n│    would the retardation be?                │\n│ 2. How would the stopping distance change if │\n│    the retardation were halved?             │\n│ 3. What units would you use for a           │\n│    braking force on a 10,000 kg train?      │\n└─────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effective in teaching the concept of retardation. The use of a quick definition, main formula, example problem, and summary helps to clarify the concept. However, the quality score is not perfect due to the unconventional use of ASCII art tables, which may not be suitable for all audiences. Additionally, the suggested questions at the end, while helpful for further learning, do not directly contribute to the calculation of retardation in the given problem. To improve, consider using more traditional formatting and focusing on the direct application of the concept to the problem at hand.",
+  "candidate_token_usage": {
+    "promptTokens": 438,
+    "completionTokens": 918,
+    "totalTokens": 1356
+  },
+  "candidate_latency_ms": 1956,
+  "candidate_cost_usd": 0.00030825,
+  "judge_token_usage": {
+    "promptTokens": 1238,
+    "completionTokens": 182,
+    "totalTokens": 1420
+  },
+  "judge_latency_ms": 5371,
+  "judge_cost_usd": 0.0011795999999999998,
+  "retry_count": 1,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:01:47.320Z"
+}

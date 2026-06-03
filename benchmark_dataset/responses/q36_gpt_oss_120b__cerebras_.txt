@@ -1,0 +1,98 @@
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ Introduction                                                                   │
+│                                                                               │
+│ Simple Harmonic Motion (SHM) is the cornerstone concept for understanding   │
+│ many oscillatory phenomena in physics, from the swinging of a pendulum to   │
+│ the vibration of atoms in a crystal lattice.  In an SHM system the restoring│
+│ force is directly proportional to the displacement from equilibrium and     │
+│ always acts toward that equilibrium point.                                    │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ Definition                                                                    │
+│                                                                               │
+│ **Simple Harmonic Motion (SHM)** is a type of periodic motion where the     │
+│ restoring force \(F\) obeys Hooke’s law:                                      │
+│                                                                               │
+│ \[ F = -k\,x \]                                                               │
+│                                                                               │
+│ Here \(x\) is the displacement from equilibrium and \(k\) is a positive      │
+│ constant (the spring constant for a mass‑spring system).                     │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ Key Concepts                                                                  │
+│                                                                               │
+│ • **Restoring Force** – Always points toward the equilibrium position.      │
+│ • **Proportionality** – Magnitude of the force is proportional to the        │
+│   displacement (\(F \propto -x\)).                                            │
+│ • **Linear Differential Equation** – The motion satisfies                    │
+│   \(\displaystyle \frac{d^{2}x}{dt^{2}} + \omega^{2}x = 0\).                 │
+│ • **Angular Frequency** – \(\displaystyle \omega = \sqrt{\frac{k}{m}}\)      │
+│   (for a mass‑spring system) where \(m\) is the oscillating mass.            │
+│ • **Period & Frequency** – \(T = \frac{2\pi}{\omega}\), \(f = \frac{1}{T}\). │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ Main Formula                                                                  │
+│                                                                               │
+│     \[ x(t) = A\cos(\omega t + \phi) \]                                      │
+│                                                                               │
+│ [ Explain Formula ]    [ Open Formula Lab ]                                   │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ Acceleration Formula                                                          │
+│                                                                               │
+│     \[ a(t) = -\omega^{2} x(t) \]                                            │
+│                                                                               │
+│ [ Explain Formula ]    [ Open Formula Lab ]                                   │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ Characteristics                                                               │
+│                                                                               │
+│ • **Sinusoidal Motion** – The displacement follows a sine or cosine function.│
+│ • **Energy Exchange** – Kinetic and potential energies trade perfectly,     │
+│   keeping the total mechanical energy constant (ignoring damping).          │
+│ • **Phase** – The parameter \(\phi\) sets the initial position within the    │
+│   cycle.                                                                      │
+│ • **Amplitude** – \(A\) is the maximum displacement; it remains constant    │
+│   for an ideal (undamped) SHM.                                                │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ Applications                                                                  │
+│                                                                               │
+│ • **Mass‑Spring Systems** – Classic laboratory demonstration of SHM.        │
+│ • **Pendulums** – Small‑angle approximation leads to SHM behavior.           │
+│ • **Acoustics** – Sound waves in air are longitudinal SHM of pressure       │
+│   particles.                                                                  │
+│ • **Molecular Vibrations** – Atoms in a diatomic molecule vibrate as        │
+│   harmonic oscillators.                                                       │
+│ • **Electrical Circuits** – LC circuits exhibit electrical SHM.              │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ Summary                                                                       │
+│                                                                               │
+│ Simple Harmonic Motion describes any oscillation where the restoring force  │
+│ is linearly proportional to displacement and directed toward equilibrium.   │
+│ Its hallmark is a sinusoidal displacement \(x(t)=A\cos(\omega t+\phi)\) with │
+│ constant amplitude, frequency \(\omega\), and phase \(\phi\).  Energy swaps │
+│ between kinetic and potential forms, and the motion is fully characterized │
+│ by the parameters \(A\), \(\omega\), and \(\phi\).                           │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ Suggested Questions                                                            │
+│                                                                               │
+│ 1. Derive the expression for the period \(T\) of a mass‑spring SHM system.   │
+│ 2. How does the small‑angle approximation justify treating a simple pendulum   │
+│    as an SHM system?                                                          │
+│ 3. If the amplitude of an SHM doubles, what happens to the total mechanical   │
+│    energy?                                                                    │
+│ 4. Explain how damping modifies the ideal SHM equations.                     │
+│ 5. In an LC circuit, identify the analogues of mass, spring constant,        │
+│    displacement, and velocity.                                                │
+└───────────────────────────────────────────────────────────────────────────────┘

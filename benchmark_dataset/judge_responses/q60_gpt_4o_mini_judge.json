@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 60,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'gravity_changed' event to zero-g environment.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a user interaction with the global environment controllers.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe environmental gravity parameter was modified by the user from Earth conditions to a weightless state (`gravity_changed`).\n\n### WHAT CHANGED\nThe vertical acceleration vector acting on all active canvas masses dropped to zero, causing floating objects to cease downward travel.\n\n### SIMPLE WHY\nSetting the gravity constant to zero removes the downward gravitational force vector, leaving objects to move purely by their linear inertia.\n\n### WHAT TO NOTICE\nNotice how objects that were falling now drift in straight lines across the grid, unaffected by any downward pull.",
+  "candidate_response": "Here’s a structured interactive response for a \"gravity_changed\" event to a zero-g environment:\n\n┌────────────────────────────────────────────┐\n│ Event Overview                             │\n│                                            │\n│ The gravity of the environment has been    │\n│ changed to zero-g. This transition affects  │\n│ various physical interactions and motion.   │\n└────────────────────────────────────────────┘\n\n┌────────────────────────────────────────────┐\n│ Key Concepts                               │\n│                                            │\n│ 1. **Microgravity**: A condition in which   │\n│    objects appear to be weightless, as they  │\n│    experience free fall at the same rate.   │\n│ 2. **Inertia**: Objects will continue in a   │\n│    state of uniform motion unless acted      │\n│    upon by an external force.                │\n└────────────────────────────────────────────┘\n\n┌────────────────────────────────────────────┐\n│ Effects on Objects                         │\n│                                            │\n│ - Objects will float freely and move in     │\n│   any direction without resistance.         │\n│ - The behavior of liquids will change,      │\n│   forming spherical shapes due to surface    │\n│   tension.                                  │\n└────────────────────────────────────────────┘\n\n┌────────────────────────────────────────────┐\n│ Important Notes                           │\n│                                            │\n│ - Safety precautions must be taken to      │\n│   ensure secure restraints for personnel    │\n│   and equipment to prevent unintended       │\n│   movement.                                 │\n│ - Adjustments in operational protocols are  │\n│   necessary for navigation and control.     │\n└────────────────────────────────────────────┘\n\n┌────────────────────────────────────────────┐\n│ Summary                                    │\n│                                            │\n│ The transition to a zero-g environment     │\n│ presents unique challenges and requires     │\n│ adjustments to how we interact with objects │\n│ and navigate the space. Awareness of these  │\n│ changes is crucial for safety and efficiency.│\n└────────────────────────────────────────────┘\n\n┌────────────────────────────────────────────┐\n│ Suggested Questions                        │\n│                                            │\n│ 1. How does microgravity affect human      │\n│    physiology?                             │\n│ 2. What adaptations are necessary for      │\n│    working in a zero-g environment?       │\n│ 3. In what ways do liquids behave differently│\n│    in microgravity?                        │\n└────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a good understanding of the concepts related to a zero-g environment, including microgravity and inertia. The structured format using boxes and clear headings enhances readability. However, there are a few areas for improvement. Firstly, the response could more directly address the 'gravity_changed' event and its immediate effects on objects in the environment, as seen in the gold reference answer. Secondly, while the candidate mentions safety precautions and operational adjustments, these points could be more explicitly connected to the physics of the situation. Lastly, the suggested questions, although relevant, do not directly follow from the explanation provided and could be more integrated into the main body of the response to enhance pedagogical effectiveness. Overall, the response is accurate, well-presented, and educational, but could benefit from a tighter focus on the event's implications and more cohesive integration of its various components.",
+  "candidate_token_usage": {
+    "promptTokens": 373,
+    "completionTokens": 532,
+    "totalTokens": 905
+  },
+  "candidate_latency_ms": 7586,
+  "candidate_cost_usd": 0.00037515,
+  "judge_token_usage": {
+    "promptTokens": 1095,
+    "completionTokens": 233,
+    "totalTokens": 1328
+  },
+  "judge_latency_ms": 7979,
+  "judge_cost_usd": 0.0012161999999999997,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:47:54.870Z"
+}

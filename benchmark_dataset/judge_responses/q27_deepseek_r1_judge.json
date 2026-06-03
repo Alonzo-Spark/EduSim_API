@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 27,
+  "question": "State Pascal’s law and mention its applications.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nPascal's Law states that any change in pressure applied to an enclosed, incompressible fluid at rest is transmitted undiminished to every portion of the fluid and to the walls of its containing vessel.\n\n---\n\n## Operating Principle\n\n* **Undiminished Transmission:** When pressure increases at one point in a hydraulic circuit, that exact same pressure change propagates instantly through the entire connected fluid volume.\n* **Force Amplification:** Applying a small force over a narrow piston creates a pressure that can generate a much larger output force when transmitted to a wider piston.\n\n---\n\n## Formula\n\nThe pressure equality expression within a hydraulic link:\n\n$$P_1 = P_2$$\n\n$$\\frac{F_1}{A_1} = \\frac{F_2}{A_2}$$\n\nWhere:\n* $F_1$ represents the input force applied to the small piston\n* $A_1$ represents the cross-sectional area of the small input piston\n* $F_2$ represents the output force generated at the large piston\n* $A_2$ represents the cross-sectional area of the large output piston\n\n---\n\n## Applications\n\n* **Hydraulic Braking Systems:** Transmitting foot pedal force evenly through fluid lines to clamp brake pads onto all wheels simultaneously.\n* **Hydraulic Lifts:** Allowing a small compressor to raise heavy industrial vehicles by pushing fluid into a wide cylinder lift.\n* **Hydraulic Presses:** Generating massive compressive forces for metal forming and material crushing operations.\n\n---\n\n## Summary\n\nPascal's Law reveals that pressure applied to an enclosed fluid transmits equally in all directions, providing a foundation for hydraulic force amplification systems.",
+  "candidate_response": "### Pascal's Law: Core Principle and Applications\n\n#### 🎯 Quick Definition  \nPascal's law states that **pressure applied to an enclosed incompressible fluid is transmitted undiminished to every portion of the fluid and the walls of its container**. This principle is foundational in fluid mechanics and hydraulic systems.\n\n---\n\n#### 📜 Formal Statement  \n> *\"A change in pressure at any point in a confined incompressible fluid is transmitted equally throughout the fluid in all directions.\"*\n\n---\n\n#### 🧮 Formula Card  \n<div style=\"background:#f8f9fa;border-radius:12px;padding:16px;margin:12px 0;box-shadow:0 1px 2px rgba(0,0,0,0.1)\">\n  <div style=\"font-size:18px;font-weight:600;margin-bottom:8px\">Pascal's Principle Formula</div>\n  $$ P_1 = P_2 $$\n  <div style=\"margin-top:12px;font-size:15px\">\n    <strong>Where:</strong><br>\n    • \\(P_1\\) = Pressure applied at Point 1 (Pa or N/m²)<br>\n    • \\(P_2\\) = Pressure observed at Point 2 (Pa or N/m²)<br>\n  </div>\n  <div style=\"margin-top:12px;color:#4e5d78\">\n    <strong>Key Insight:</strong> Pressure is transmitted <strong>equally</strong> in all directions. For hydraulic systems, this implies:<br>\n    $$ \\frac{F_1}{A_1} = \\frac{F_2}{A_2} $$\n    (where \\(F\\) = force, \\(A\\) = piston area)\n  </div>\n</div>\n\n---\n\n#### 🛠️ Applications of Pascal's Law  \nPascal's law enables force multiplication in hydraulic systems. Key applications include:\n\n| Application          | How Pascal's Law Applies                                                                 | Example Devices                     |\n|----------------------|------------------------------------------------------------------------------------------|-------------------------------------|\n| **Hydraulic Press**  | Small force on small piston → large force on large piston due to pressure equality.       | Industrial forging machines         |\n| **Hydraulic Brakes** | Driver’s foot force → amplified pressure → equal braking force on all wheels.            | Automotive brake systems            |\n| **Hydraulic Lifts**  | Low input force → high output force by varying piston areas.                             | Car jacks, elevator systems         |\n| **Dentist's Chair**  | Gentle pump pressure → smooth height adjustment via fluid transmission.                  | Dental chairs, patient hoists       |\n| **Hydraulic Jacks**  | Manual lever force → amplified lifting force via pressure transfer.                      | Vehicle repair jacks                |\n| **Aircraft Systems** | Central hydraulic pressure → actuates landing gear/control surfaces uniformly.           | Airplane flaps, landing gear        |\n\n---\n\n#### 💡 Key Characteristics  \n1. **Fluid Requirement**: Only valid for **incompressible fluids** (e.g., oil, water).  \n2. **Direction Independence**: Pressure transmits equally in **all directions** (360°).  \n3. **Force Multiplication**: Output force ∝ Ratio of piston areas (\\(F_2 = F_1 \\frac{A_2}{A_1}\\)).  \n4. **Energy Conservation**: Work done on input piston = Work done by output piston (\\(F_1 d_1 = F_2 d_2\\)).  \n\n---\n\n#### ⚠️ Limitations  \n- **Compressible fluids** (e.g., gases) deviate from Pascal's law.  \n- Requires **sealed systems**; leaks disrupt pressure transmission.  \n- Efficiency reduced by **friction** and **fluid viscosity**.  \n\n---\n\n#### 🌟 Real-World Impact  \nPascal's law underpins **>90% of industrial hydraulic machinery**, enabling tasks from lifting 10-ton vehicles to controlling aircraft wings. Its discovery (Blaise Pascal, 1653) revolutionized mechanical engineering by replacing complex gears with fluid power.\n\n---\n\n#### ❓ Suggested Study Questions  \n1. Why must hydraulic fluids be incompressible?  \n2. How does a hydraulic press achieve mechanical advantage?  \n3. What happens if air bubbles enter a hydraulic brake system?  \n4. Calculate the output force if \\(F_1 = 100\\text{ N}\\), \\(A_1 = 0.1\\text{ m²}\\), and \\(A_2 = 1\\text{ m²}\\).  \n\n---\n\n> 💻 **Try the Formula Lab**: Explore how piston size affects force in hydraulic systems!  \n> *(Click \"Formula Lab\" below to interact with simulations)*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of Pascal's Law, including its definition, formula, and applications. The response is well-structured, easy to follow, and provides clear explanations of key concepts. The use of tables, formulas, and examples enhances the readability and educational value of the response. However, minor improvements could be made to further clarify certain points, such as providing more detailed explanations of the limitations of Pascal's Law. Overall, the response is of high quality and effectively communicates the principles of Pascal's Law.",
+  "candidate_token_usage": {
+    "promptTokens": 361,
+    "completionTokens": 1319,
+    "totalTokens": 1680
+  },
+  "candidate_latency_ms": 58841,
+  "candidate_cost_usd": 0.00308716,
+  "judge_token_usage": {
+    "promptTokens": 1746,
+    "completionTokens": 165,
+    "totalTokens": 1911
+  },
+  "judge_latency_ms": 5222,
+  "judge_cost_usd": 0.0014435999999999997,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:51:49.071Z"
+}

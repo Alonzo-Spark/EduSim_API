@@ -1,0 +1,851 @@
+I'll build a proper interactive textbook UI with structured cards, formula cards with labs, and a live physics sandbox.
+
+```tsx
+import { useState, useEffect, useRef, useCallback } from "react";
+import { BlockMath, InlineMath } from "react-katex";
+import "katex/dist/katex.min.css";
+
+// ============================================================
+// TYPES
+// ============================================================
+interface FormulaData {
+  id: string;
+  title: string;
+  latex: string;
+  variables: { symbol: string; name: string; unit: string }[];
+  context: string;
+}
+
+interface BlockState {
+  x: number;
+  v: number;
+  a: number;
+  t: number;
+  stopped: boolean;
+  distanceTraveled: number;
+}
+
+// ============================================================
+// EXTRACTED FORMULA DATA
+// ============================================================
+const FORMULAS: FormulaData[] = [
+  {
+    id: "friction_force",
+    title: "Friction Force",
+    latex: "f_k = \\mu_k \\cdot N",
+    variables: [
+      { symbol: "f_k", name: "Kinetic Friction Force", unit: "N" },
+      { symbol: "\\mu_k", name: "Kinetic Friction Coefficient", unit: "dimensionless" },
+      { symbol: "N", name: "Normal Force", unit: "N" },
+    ],
+    context: "The friction force opposing motion of a sliding block on a flat surface.",
+  },
+  {
+    id: "normal_force",
+    title: "Normal Force (Flat Surface)",
+    latex: "N = mg",
+    variables: [
+      { symbol: "N", name: "Normal Force", unit: "N" },
+      { symbol: "m", name: "Mass", unit: "kg" },
+      { symbol: "g", name: "Gravitational Acceleration", unit: "m/s²" },
+    ],
+    context: "On a flat horizontal surface, the normal force equals the weight of the object.",
+  },
+  {
+    id: "deceleration",
+    title: "Deceleration Due to Friction",
+    latex: "a = -\\mu_k \\cdot g",
+    variables: [
+      { symbol: "a", name: "Acceleration", unit: "m/s²" },
+      { symbol: "\\mu_k", name: "Kinetic Friction Coefficient", unit: "dimensionless" },
+      { symbol: "g", name: "Gravitational Acceleration", unit: "m/s²" },
+    ],
+    context: "The net deceleration of the block — notice mass cancels completely.",
+  },
+  {
+    id: "stopping_distance",
+    title: "Stopping Distance",
+    latex: "d = \\frac{v_0^2}{2\\mu_k g}",
+    variables: [
+      { symbol: "d", name: "Stopping Distance", unit: "m" },
+      { symbol: "v_0", name: "Initial Velocity", unit: "m/s" },
+      { symbol: "\\mu_k", name: "Kinetic Friction Coefficient", unit: "dimensionless" },
+      { symbol: "g", name: "Gravitational Acceleration", unit: "m/s²" },
+    ],
+    context: "As μ → 0, stopping distance → ∞. The block never stops.",
+  },
+  {
+    id: "velocity",
+    title: "Velocity Over Time",
+    latex: "v(t) = v_0 - \\mu_k g t",
+    variables: [
+      { symbol: "v(t)", name: "Velocity at time t", unit: "m/s" },
+      { symbol: "v_0", name: "Initial Velocity", unit: "m/s" },
+      { symbol: "\\mu_k", name: "Kinetic Friction Coefficient", unit: "dimensionless" },
+      { symbol: "t", name: "Time", unit: "s" },
+    ],
+    context: "Linear velocity decay. When μ=0, v(t) = v₀ forever.",
+  },
+];
+
+// ============================================================
+// PHYSICS ENGINE
+// ============================================================
+function computeStoppingDistance(v0: number, mu: number, g = 9.8): number {
+  if (mu < 0.001) return Infinity;
+  return (v0 * v0) / (2 * mu * g);
+}
+
+function computeStoppingTime(v0: number, mu: number, g = 9.8): number {
+  if (mu < 0.001) return Infinity;
+  return v0 / (mu * g);
+}
+
+// ============================================================
+// SUB-COMPONENTS
+// ============================================================
+
+function SectionLabel({ text }: { text: string }) {
+  return (
+    <div className="flex items-center gap-2 mb-3">
+      <div className="h-px flex-1 bg-gradient-to-r from-transparent to-slate-200" />
+      <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 px-2">
+        {text}
+      </span>
+      <div className="h-px flex-1 bg-gradient-to-l from-transparent to-slate-200" />
+    </div>
+  );
+}
+
+function DefinitionCard() {
+  return (
+    <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-indigo-50 p-5 shadow-sm">
+      <div className="flex items-start gap-3">
+        <div className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-blue-500 text-white text-sm font-bold shadow">
+          μ
+        </div>
+        <div>
+          <h3 className="font-semibold text-slate-800 text-sm mb-1">Kinetic Friction</h3>
+          <p className="text-slate-600 text-sm leading-relaxed">
+            When a block slides across a surface, kinetic friction opposes its motion. The
+            coefficient <InlineMath math="\mu_k" /> captures how "grippy" the surface is —
+            ranging from <strong>0</strong> (perfectly frictionless) to{" "}
+            <strong>~1+</strong> (very rough).
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FormulaCard({
+  formula,
+  onOpenLab,
+}: {
+  formula: FormulaData;
+  onOpenLab: (f: FormulaData) => void;
+}) {
+  const [showExplain, setShowExplain] = useState(false);
+
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+      <div className="bg-gradient-to-r from-slate-800 to-slate-700 px-4 py-2 flex items-center justify-between">
+        <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+          {formula.title}
+        </span>
+        <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+      </div>
+      <div className="px-6 py-5">
+        <div className="flex justify-center py-2">
+          <BlockMath math={formula.latex} />
+        </div>
+        <div className="flex gap-2 mt-4">
+          <button
+            onClick={() => setShowExplain((p) => !p)}
+            className="flex-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-100 transition-colors"
+          >
+            {showExplain ? "Hide" : "Explain Variables"}
+          </button>
+          <button
+            onClick={() => onOpenLab(formula)}
+            className="flex-1 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-700 transition-colors shadow-sm"
+          >
+            Open Formula Lab →
+          </button>
+        </div>
+        {showExplain && (
+          <div className="mt-4 rounded-xl bg-slate-50 border border-slate-100 overflow-hidden">
+            <table className="w-full text-xs">
+              <thead>
+                <tr className="bg-slate-100">
+                  <th className="text-left px-3 py-2 text-slate-500 font-semibold">Symbol</th>
+                  <th className="text-left px-3 py-2 text-slate-500 font-semibold">Meaning</th>
+                  <th className="text-left px-3 py-2 text-slate-500 font-semibold">Unit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {formula.variables.map((v, i) => (
+                  <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-slate-50"}>
+                    <td className="px-3 py-2 font-mono text-indigo-600">
+                      <InlineMath math={v.symbol} />
+                    </td>
+                    <td className="px-3 py-2 text-slate-700">{v.name}</td>
+                    <td className="px-3 py-2 text-slate-500">{v.unit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function FormulaLab({
+  formula,
+  onClose,
+}: {
+  formula: FormulaData;
+  onClose: () => void;
+}) {
+  const [mu, setMu] = useState(0.3);
+  const [v0, setV0] = useState(10);
+  const g = 9.8;
+
+  const a = mu * g;
+  const d = computeStoppingDistance(v0, mu, g);
+  const t = computeStoppingTime(v0, mu, g);
+
+  const isZeroFriction = mu < 0.001;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+      <div className="w-full max-w-lg rounded-2xl bg-white shadow-2xl overflow-hidden">
+        <div className="bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-4 flex items-center justify-between">
+          <div>
+            <p className="text-indigo-200 text-xs font-medium uppercase tracking-wider">Formula Lab</p>
+            <h3 className="text-white font-bold text-base">{formula.title}</h3>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-indigo-200 hover:text-white text-xl font-light w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors"
+          >
+            ×
+          </button>
+        </div>
+        <div className="p-5 space-y-4">
+          <div className="rounded-xl bg-slate-50 px-4 py-3 flex justify-center">
+            <BlockMath math={formula.latex} />
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between mb-1.5">
+                <label className="text-xs font-semibold text-slate-600">
+                  Friction Coefficient <InlineMath math="\mu_k" />
+                </label>
+                <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${isZeroFriction ? "bg-red-100 text-red-600" : "bg-indigo-100 text-indigo-700"}`}>
+                  {mu.toFixed(3)}
+                </span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step={0.001}
+                value={mu}
+                onChange={(e) => setMu(parseFloat(e.target.value))}
+                className="w-full accent-indigo-600"
+              />
+              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5">
+                <span>0 (frictionless)</span>
+                <span>1.0 (very rough)</span>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between mb-1.5">
+                <label className="text-xs font-semibold text-slate-600">
+                  Initial Velocity <InlineMath math="v_0" />
+                </label>
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                  {v0} m/s
+                </span>
+              </div>
+              <input
+                type="range"
+                min={1}
+                max={30}
+                step={0.5}
+                value={v0}
+                onChange={(e) => setV0(parseFloat(e.target.value))}
+                className="w-full accent-indigo-600"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { label: "Deceleration", value: isZeroFriction ? "0" : `${a.toFixed(2)}`, unit: "m/s²", highlight: false },
+              { label: "Stopping Distance", value: isZeroFriction ? "∞" : `${d.toFixed(1)}`, unit: "m", highlight: isZeroFriction },
+              { label: "Stopping Time", value: isZeroFriction ? "∞" : `${t.toFixed(1)}`, unit: "s", highlight: isZeroFriction },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className={`rounded-xl p-3 text-center border ${item.highlight ? "border-red-200 bg-red-50" : "border-slate-100 bg-slate-50"}`}
+              >
+                <p className={`text-xl font-bold ${item.highlight ? "text-red-500" : "text-slate-800"}`}>
+                  {item.value}
+                </p>
+                <p className="text-[10px] text-slate-500 mt-0.5">{item.unit}</p>
+                <p className="text-[10px] font-medium text-slate-600 mt-1">{item.label}</p>
+              </div>
+            ))}
+          </div>
+
+          {isZeroFriction && (
+            <div className="rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 flex gap-2">
+              <span className="text-amber-500 text-base">⚠️</span>
+              <p className="text-xs text-amber-700 leading-relaxed">
+                <strong>Newton's First Law in action:</strong> With no friction, the block slides
+                forever at constant velocity. Stopping distance is mathematically undefined (infinite).
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// PHYSICS SANDBOX
+// ============================================================
+function PhysicsSandbox() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animRef = useRef<number>(0);
+  const stateRef = useRef<BlockState>({ x: 60, v: 0, a: 0, t: 0, stopped: false, distanceTraveled: 0 });
+  const runningRef = useRef(false);
+  const lastTimeRef = useRef<number | null>(null);
+
+  const [mu, setMu] = useState(0.3);
+  const [v0, setV0] = useState(8);
+  const [isRunning, setIsRunning] = useState(false);
+  const [displayState, setDisplayState] = useState<BlockState>({
+    x: 60, v: 0, a: 0, t: 0, stopped: false, distanceTraveled: 0,
+  });
+  const [trailPoints, setTrailPoints] = useState<number[]>([]);
+
+  const g = 9.8;
+  const CANVAS_W = 620;
+  const CANVAS_H = 180;
+  const GROUND_Y = 130;
+  const BLOCK_SIZE = 36;
+  const MAX_X = CANVAS_W - BLOCK_SIZE - 20;
+  const PIXELS_PER_METER = 28;
+
+  const reset = useCallback(() => {
+    cancelAnimationFrame(animRef.current);
+    runningRef.current = false;
+    lastTimeRef.current = null;
+    setIsRunning(false);
+    const s: BlockState = { x: 60, v: v0, a: -(mu * g), t: 0, stopped: mu < 0.001, distanceTraveled: 0 };
+    stateRef.current = s;
+    setDisplayState(s);
+    setTrailPoints([]);
+  }, [mu, v0]);
+
+  useEffect(() => { reset(); }, [mu, v0]);
+
+  const draw = useCallback((state: BlockState, trail: number[]) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+
+    // Background
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, CANVAS_H);
+    bgGrad.addColorStop(0, "#f8fafc");
+    bgGrad.addColorStop(1, "#f1f5f9");
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+
+    // Ground
+    const groundGrad = ctx.createLinearGradient(0, GROUND_Y, 0, CANVAS_H);
+    const muColor = mu < 0.05 ? "#e0f2fe" : mu < 0.3 ? "#d1fae5" : mu < 0.6 ? "#fef3c7" : "#fee2e2";
+    groundGrad.addColorStop(0, muColor);
+    groundGrad.addColorStop(1, "#e2e8f0");
+    ctx.fillStyle = groundGrad;
+    ctx.fillRect(0, GROUND_Y, CANVAS_W, CANVAS_H - GROUND_Y);
+
+    // Ground line
+    ctx.strokeStyle = mu < 0.05 ? "#38bdf8" : mu < 0.3 ? "#34d399" : mu < 0.6 ? "#fbbf24" : "#f87171";
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(0, GROUND_Y);
+    ctx.lineTo(CANVAS_W, GROUND_Y);
+    ctx.stroke();
+
+    // Surface texture lines
+    if (mu > 0.05) {
+      ctx.strokeStyle = "rgba(0,0,0,0.06)";
+      ctx.lineWidth = 1;
+      const spacing = Math.max(8, 40 - mu * 30);
+      for (let x = 0; x < CANVAS_W; x += spacing) {
+        ctx.beginPath();
+        ctx.moveTo(x, GROUND_Y);
+        ctx.lineTo(x - 10, CANVAS_H);
+        ctx.stroke();
+      }
+    }
+
+    // Trail dots
+    trail.forEach((tx, i) => {
+      const alpha = (i / trail.length) * 0.4;
+      ctx.fillStyle = `rgba(99, 102, 241, ${alpha})`;
+      ctx.beginPath();
+      ctx.arc(tx + BLOCK_SIZE / 2, GROUND_Y - 4, 3, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Block shadow
+    ctx.fillStyle = "rgba(0,0,0,0.08)";
+    ctx.beginPath();
+    ctx.ellipse(state.x + BLOCK_SIZE / 2, GROUND_Y + 4, BLOCK_SIZE / 2, 5, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Block body
+    const blockGrad = ctx.createLinearGradient(state.x, GROUND_Y - BLOCK_SIZE, state.x, GROUND_Y);
+    blockGrad.addColorStop(0, "#6366f1");
+    blockGrad.addColorStop(1, "#4338ca");
+    ctx.fillStyle = blockGrad;
+    ctx.beginPath();
+    ctx.roundRect(state.x, GROUND_Y - BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, 6);
+    ctx.fill();
+
+    // Block shine
+    ctx.fillStyle = "rgba(255,255,255,0.15)";
+    ctx.beginPath();
+    ctx.roundRect(state.x + 4, GROUND_Y - BLOCK_SIZE + 4, BLOCK_SIZE - 8, 10, 3);
+    ctx.fill();
+
+    // Velocity arrow
+    if (state.v > 0.2 && !state.stopped) {
+      const arrowLen = Math.min(state.v * 6, 80);
+      const arrowX = state.x + BLOCK_SIZE + 4;
+      const arrowY = GROUND_Y - BLOCK_SIZE / 2;
+      ctx.strokeStyle = "#10b981";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(arrowX, arrowY);
+      ctx.lineTo(arrowX + arrowLen, arrowY);
+      ctx.stroke();
+      ctx.fillStyle = "#10b981";
+      ctx.beginPath();
+      ctx.moveTo(arrowX + arrowLen + 8, arrowY);
+      ctx.lineTo(arrowX + arrowLen, arrowY - 5);
+      ctx.lineTo(arrowX + arrowLen, arrowY + 5);
+      ctx.fill();
+      ctx.fillStyle = "#10b981";
+      ctx.font = "bold 10px system-ui";
+      ctx.fillText(`v = ${state.v.toFixed(1)} m/s`, arrowX + arrowLen / 2 - 20, arrowY - 8);
+    }
+
+    // Friction arrow (opposing)
+    if (mu > 0.01 && state.v > 0.2 && !state.stopped) {
+      const fArrowLen = Math.min(mu * 80, 60);
+      const fArrowX = state.x - 4;
+      const fArrowY = GROUND_Y - 10;
+      ctx.strokeStyle = "#ef4444";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(fArrowX, fArrowY);
+      ctx.lineTo(fArrowX - fArrowLen, fArrowY);
+      ctx.stroke();
+      ctx.fillStyle = "#ef4444";
+      ctx.beginPath();
+      ctx.moveTo(fArrowX - fArrowLen - 8, fArrowY);
+      ctx.lineTo(fArrowX - fArrowLen, fArrowY - 4);
+      ctx.lineTo(fArrowX - fArrowLen, fArrowY + 4);
+      ctx.fill();
+      ctx.font = "bold 9px system-ui";
+      ctx.fillStyle = "#ef4444";
+      ctx.fillText("fₖ", fArrowX - fArrowLen / 2 - 6, fArrowY - 6);
+    }
+
+    // Zero friction badge
+    if (mu < 0.01) {
+      ctx.fillStyle = "#0ea5e9";
+      ctx.font = "bold 11px system-ui";
+      ctx.fillText("✦ Frictionless", 10, GROUND_Y - 8);
+    }
+
+    // Stopped indicator
+    if (state.stopped && mu >= 0.01) {
+      ctx.fillStyle = "#64748b";
+      ctx.font = "bold 11px system-ui";
+      ctx.fillText("STOPPED", state.x - 4, GROUND_Y - BLOCK_SIZE - 10);
+    }
+  }, [mu]);
+
+  const startAnimation = useCallback(() => {
+    if (runningRef.current) return;
+    runningRef.current = true;
+    setIsRunning(true);
+    lastTimeRef.current = null;
+    const trails: number[] = [];
+
+    const tick = (timestamp: number) => {
+      if (!runningRef.current) return;
+      if (lastTimeRef.current === null) lastTimeRef.current = timestamp;
+      const dt = Math.min((timestamp - lastTimeRef.current) / 1000, 0.05);
+      lastTimeRef.current = timestamp;
+
+      const s = stateRef.current;
+      if (s.stopped || s.x >= MAX_X) {
+        runningRef.current = false;
+        setIsRunning(false);
+        return;
+      }
+
+      const newV = mu < 0.001 ? s.v : Math.max(0, s.v - mu * g * dt);
+      const newX = s.x + newV * PIXELS_PER_METER * dt;
+      const clampedX = Math.min(newX, MAX_X);
+      const newT = s.t + dt;
+      const newDist = s.distanceTraveled + (clampedX - s.x) / PIXELS_PER_METER;
+      const stopped = newV < 0.01 || clampedX >= MAX_X;
+
+      if (Math.floor(newT * 10) > Math.floor(s.t * 10)) {
+        trails.push(clampedX);
+        setTrailPoints([...trails]);
+      }
+
+      const newState: BlockState = {
+        x: clampedX,
+        v: newV,
+        a: mu < 0.001 ? 0 : -(mu * g),
+        t: newT,
+        stopped,
+        distanceTraveled: newDist,
+      };
+
+      stateRef.current = newState;
+      setDisplayState({ ...newState });
+      draw(newState, trails);
+
+      if (!stopped) {
+        animRef.current = requestAnimationFrame(tick);
+      } else {
+        runningRef.current = false;
+        setIsRunning(false);
+      }
+    };
+
+    animRef.current = requestAnimationFrame(tick);
+  }, [mu, draw]);
+
+  useEffect(() => {
+    draw(stateRef.current, []);
+  }, [draw]);
+
+  const muLabel = mu < 0.01 ? "Frictionless (Ice)" : mu < 0.2 ? "Very Smooth" : mu < 0.4 ? "Wood / Tile" : mu < 0.7 ? "Rough Concrete" : "Very Rough";
+  const muColor = mu < 0.05 ? "text-sky-600" : mu < 0.3 ? "text-emerald-600" : mu < 0.6 ? "text-amber-600" : "text-red-600";
+
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+      <div className="bg-gradient-to-r from-violet-700 to-indigo-700 px-5 py-3 flex items-center justify-between">
+        <div>
+          <p className="text-violet-300 text-[10px] font-semibold uppercase tracking-widest">Live Sandbox</p>
+          <h3 className="text-white font-bold text-sm">Sliding Block · Friction Scale</h3>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className={`h-2 w-2 rounded-full ${isRunning ? "bg-emerald-400 animate-pulse" : "bg-slate-400"}`} />
+          <span className="text-[10px] text-violet-300">{isRunning ? "Running" : "Ready"}</span>
+        </div>
+      </div>
+
+      {/* Canvas */}
+      <div className="relative bg-slate-50 border-b border-slate-100 overflow-hidden">
+        <canvas
+          ref={canvasRef}
+          width={CANVAS_W}
+          height={CANVAS_H}
+          className="w-full"
+          style={{ maxHeight: 180 }}
+        />
+      </div>
+
+      {/* Live Readouts */}
+      <div className="grid grid-cols-4 border-b border-slate-100">
+        {[
+          { label: "Velocity", value: displayState.stopped ? "0.00" : displayState.v.toFixed(2), unit: "m/s", color: "text-emerald-600" },
+          { label: "Acceleration", value: displayState.a.toFixed(2), unit: "m/s²", color: "text-red-500" },
+          { label: "Time", value: displayState.t.toFixed(2), unit: "s", color: "text-slate-700" },
+          { label: "Distance", value: displayState.distanceTraveled.toFixed(2), unit: "m", color: "text-indigo-600" },
+        ].map((item) => (
+          <div key={item.label} className="px-3 py-3 text-center border-r border-slate-100 last:border-r-0">
+            <p className={`text-lg font-bold font-mono ${item.color}`}>{item.value}</p>
+            <p className="text-[9px] text-slate-400">{item.unit}</p>
+            <p className="text-[10px] font-medium text-slate-500 mt-0.5">{item.label}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Controls */}
+      <div className="p-4 space-y-3">
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <div className="flex justify-between mb-1">
+              <label className="text-xs font-semibold text-slate-600">
+                <InlineMath math="\mu_k" /> — Friction
+              </label>
+              <span className={`text-xs font-bold ${muColor}`}>{mu.toFixed(3)}</span>
+            </div>
+            <input
+              type="range" min={0} max={0.9} step={0.001} value={mu}
+              onChange={(e) => setMu(parseFloat(e.target.value))}
+              className="w-full accent-indigo-600"
+              disabled={isRunning}
+            />
+            <p className={`text-[10px] font-medium mt-0.5 ${muColor}`}>{muLabel}</p>
+          </div>
+          <div>
+            <div className="flex justify-between mb-1">
+              <label className="text-xs font-semibold text-slate-600">
+                <InlineMath math="v_0" /> — Initial Speed
+              </label>
+              <span className="text-xs font-bold text-slate-700">{v0} m/s</span>
+            </div>
+            <input
+              type="range" min={2} max={20} step={0.5} value={v0}
+              onChange={(e) => setV0(parseFloat(e.target.value))}
+              className="w-full accent-indigo-600"
+              disabled={isRunning}
+            />
+          </div>
+        </div>
+
+        {/* Predicted values */}
+        <div className="rounded-xl bg-slate-50 border border-slate-100 px-4 py-2.5 flex gap-6 text-xs">
+          <div>
+            <span className="text-slate-400">Predicted stop dist: </span>
+            <span className="font-bold text-indigo-700">
+              {mu < 0.001 ? "∞" : `${computeStoppingDistance(v0, mu).toFixed(1)} m`}
+            </span>
+          </div>
+          <div>
+            <span className="text-slate-400">Predicted stop time: </span>
+            <span className="font-bold text-indigo-700">
+              {mu < 0.001 ? "∞" : `${computeStoppingTime(v0, mu).toFixed(1)} s`}
+            </span>
+          </div>
+        </div>
+
+        {mu < 0.01 && (
+          <div className="rounded-xl bg-sky-50 border border-sky-200 px-4 py-2.5 flex gap-2 items-start">
+            <span className="text-sky-500 text-sm mt-0.5">🧊</span>
+            <p className="text-xs text-sky-700 leading-relaxed">
+              <strong>μ ≈ 0 — Newton's First Law:</strong> No net force acts on the block. It
+              slides at <InlineMath math="v_0" /> indefinitely. The block exits the canvas and
+              would travel forever in an ideal system.
+            </p>
+          </div>
+        )}
+
+        <div className="flex gap-2">
+          <button
+            onClick={startAnimation}
+            disabled={isRunning}
+            className="flex-1 rounded-xl bg-indigo-600 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
+          >
+            {isRunning ? "Simulating…" : "▶  Launch Block"}
+          </button>
+          <button
+            onClick={reset}
+            className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors"
+          >
+            ↺ Reset
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function KeyConceptsCard() {
+  const concepts = [
+    {
+      mu: "μ = 0",
+      behavior: "Slides forever at v₀",
+      law: "Newton's 1st Law",
+      color: "border-sky-200 bg-sky-50",
+      badge: "bg-sky-100 text-sky-700",
+    },
+    {
+      mu: "0 < μ < 0.3",
+      behavior: "Slow deceleration, long stop",
+      law: "Low friction surface",
+      color: "border-emerald-200 bg-emerald-50",
+      badge: "bg-emerald-100 text-emerald-700",
+    },
+    {
+      mu: "0.3 – 0.6",
+      behavior: "Moderate stop distance",
+      law: "Typical real surface",
+      color: "border-amber-200 bg-amber-50",
+      badge: "bg-amber-100 text-amber-700",
+    },
+    {
+      mu: "> 0.6",
+      behavior: "Stops quickly",
+      law: "High friction surface",
+      color: "border-red-200 bg-red-50",
+      badge: "bg-red-100 text-red-700",
+    },
+  ];
+
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+      <div className="px-5 py-3 border-b border-slate-100 bg-slate-50">
+        <h3 className="font-bold text-slate-700 text-sm">Friction Scale — What Changes?</h3>
+      </div>
+      <div className="p-4">
+        <div className="overflow-x-auto rounded-xl border border-slate-100">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-slate-100">
+                <th className="text-left px-4 py-2.5 text-slate-500 font-semibold">Coefficient</th>
+                <th className="text-left px-4 py-2.5 text-slate-500 font-semibold">Block Behavior</th>
+                <th className="text-left px-4 py-2.5 text-slate-500 font-semibold">Context</th>
+              </tr>
+            </thead>
+            <tbody>
+              {concepts.map((c, i) => (
+                <tr key={i} className={`border-t border-slate-100 ${c.color}`}>
+                  <td className="px-4 py-3 font-mono font-bold text-slate-800">{c.mu}</td>
+                  <td className="px-4 py-3 text-slate-700">{c.behavior}</td>
+                  <td className="px-4 py-3">
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${c.badge}`}>
+                      {c.law}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InsightCard() {
+  return (
+    <div className="rounded-2xl border border-violet-100 bg-gradient-to-br from-violet-50 to-purple-50 p-5 shadow-sm">
+      <div className="flex gap-3">
+        <div className="text-2xl">💡</div>
+        <div>
+          <h3 className="font-bold text-violet-800 text-sm mb-2">The Core Insight</h3>
+          <p className="text-violet-700 text-sm leading-relaxed">
+            Mass <strong>completely cancels</strong> from the equations. A 1 kg block and a
+            1000 kg block on the same surface with the same <InlineMath math="\mu_k" /> and{" "}
+            <InlineMath math="v_0" /> stop at <em>exactly the same distance</em>. Only{" "}
+            <InlineMath math="\mu_k" /> and <InlineMath math="v_0" /> determine the outcome.
+          </p>
+          <div className="mt-3 rounded-xl bg-white/70 border border-violet-100 p-3">
+            <BlockMath math="d = \frac{v_0^2}{2\mu_k g} \quad \text{(no } m \text{ appears)}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// MAIN PAGE
+// ============================================================
+export default function FrictionTextbook() {
+  const [activeLab, setActiveLab] = useState<FormulaData | null>(null);
+
+  return (
+    <div className="min-h-screen bg-slate-100 py-8 px-4">
+      <div className="max-w-2xl mx-auto space-y-6">
+
+        {/* Page Header */}
+        <div className="text-center space-y-1">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-400">
+            Classical Mechanics · Chapter 4
+          </p>
+          <h1 className="text-2xl font-black text-slate-800 tracking-tight">
+            Sliding Block & Friction
+          </h1>
+          <p className="text-slate-500 text-sm">
+            What happens when <InlineMath math="\mu_k \to 0" />?
+          </p>
+        </div>
+
+        {/* Definition */}
+        <div>
+          <SectionLabel text="Definition" />
+          <DefinitionCard />
+        </div>
+
+        {/* Live Sandbox */}
+        <div>
+          <SectionLabel text="Live Sandbox" />
+          <PhysicsSandbox />
+        </div>
+
+        {/* Formulas */}
+        <div>
+          <SectionLabel text="Formulas" />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {FORMULAS.map((f) => (
+              <FormulaCard key={f.id} formula={f} onOpenLab={setActiveLab} />
+            ))}
+          </div>
+        </div>
+
+        {/* Key Insight */}
+        <div>
+          <SectionLabel text="Core Insight" />
+          <InsightCard />
+        </div>
+
+        {/* Key Concepts Table */}
+        <div>
+          <SectionLabel text="Key Concepts" />
+          <KeyConceptsCard />
+        </div>
+
+        {/* Footer */}
+        <div className="text-center py-4">
+          <p className="text-[11px] text-slate-400">
+            Interactive Physics Textbook · All simulations run in real-time
+          </p>
+        </div>
+      </div>
+
+      {/* Formula Lab Modal */}
+      {activeLab && (
+        <FormulaLab formula={activeLab} onClose={() => setActiveLab(null)} />
+      )}
+    </div>
+  );
+}
+```
+
+**What's built here:**
+
+| Component | What it does |
+|---|---|
+| **Live Sandbox** | Canvas physics sim — drag μ to 0 and watch the block escape forever |
+| **FormulaCard** | Every formula is a dedicated card with Explain + Lab button |
+| **Formula Lab Modal** | Interactive sliders compute stopping distance/time live |
+| **Key Concepts Table** | Rendered as a styled card, not raw markdown |
+| **Insight Card** | Highlights the mass-cancellation result with embedded KaTeX |
+
+The core answer to your question: when **μ → 0**, deceleration = 0, stopping distance = ∞, and the block obeys **Newton's First Law** — sliding at constant velocity forever.

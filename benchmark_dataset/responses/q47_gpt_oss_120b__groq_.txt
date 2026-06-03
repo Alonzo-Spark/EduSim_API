@@ -1,0 +1,147 @@
+┌─────────────────────────────────────────────┐
+│ 📖 Introduction                              │
+│                                             │
+│ In electric circuits, resistors can be       │
+│ connected in different ways. One of the      │
+│ simplest configurations is the **series**   │
+│ connection, where the same current flows     │
+│ through each resistor one after another.     │
+│ Understanding how to combine their          │
+│ resistances into a single equivalent value   │
+│ is essential for circuit analysis and design.│
+└─────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────┐
+│ 📚 Definition                               │
+│                                             │
+│ **Series Connection** – A wiring arrangement│
+│ where components share a common node at each  │
+│ end, so the same current passes through each │
+│ element sequentially.                        │
+│                                             │
+│ **Equivalent Resistance (Rₑₛ)** – A single    │
+│ resistance that would draw the same total     │
+│ current from the same voltage source as the   │
+│ entire series network.                       │
+└─────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────┐
+│ 🔑 Key Concepts                              │
+│                                             │
+│ • **Current Continuity** – In series, the    │
+│   current I is identical through every       │
+│   resistor.                                   │
+│ • **Voltage Division** – The source voltage   │
+│   V is split among the resistors:            │
+│   V = V₁ + V₂ + … + Vₙ.                       │
+│ • **Ohm’s Law** – Vᵢ = I·Rᵢ for each resistor.│
+│ • **Additivity** – Because the same I flows, │
+│   the total voltage drop is the sum of the   │
+│   individual drops.                          │
+└─────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────┐
+│ 📐 Main Formula                               │
+│                                             │
+│      Rₑₛ = Σᵢ₌₁ⁿ Rᵢ                         │
+│                                             │
+│ [ Explain Formula ]   [ Open Formula Lab ]  │
+└─────────────────────────────────────────────┘
+*Formula Metadata*
+{
+  "formula": "R_{eq} = \\sum_{i=1}^{n} R_i",
+  "title": "Series Equivalent Resistance",
+  "surroundingContext": "Derivation of the total resistance when n resistors are connected in series.",
+  "variables": {
+    "R_{eq}": "Equivalent resistance of the series network",
+    "R_i": "Resistance of the i‑th resistor (i = 1 … n)",
+    "n": "Number of resistors in series"
+  }
+}
+
+
+
+┌─────────────────────────────────────────────┐
+│ 🧩 Derivation Steps                           │
+│                                             │
+│ 1. **Start with Ohm’s law** for each        │
+│    resistor: Vᵢ = I·Rᵢ.                      │
+│                                             │
+│ 2. **Apply voltage sum** around the loop:   │
+│    V_source = V₁ + V₂ + … + Vₙ.              │
+│                                             │
+│ 3. **Substitute** Vᵢ = I·Rᵢ into the sum:    │
+│    V_source = I·R₁ + I·R₂ + … + I·Rₙ          │
+│    = I·(R₁ + R₂ + … + Rₙ).                   │
+│                                             │
+│ 4. **Define** the equivalent resistance Rₑₛ│
+│    by V_source = I·Rₑₛ.                     │
+│                                             │
+│ 5. **Equate** the two expressions for V_source:│
+│    I·Rₑₛ = I·(R₁ + R₂ + … + Rₙ).            │
+│                                             │
+│ 6. **Cancel** the common current I (I ≠ 0): │
+│    Rₑₛ = R₁ + R₂ + … + Rₙ.                  │
+│                                             │
+│ Hence, the equivalent resistance of n       │
+│ resistors in series is the arithmetic sum   │
+│ of their individual resistances.             │
+└─────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────┐
+│ 🚀 Applications                               │
+│                                             │
+│ • **Designing voltage dividers** – Knowing   │
+│   the total series resistance lets you set   │
+│   the desired output voltage.                │
+│ • **Power budgeting** – Total resistance      │
+│   determines overall power dissipation: P =   │
+│   I²·Rₑₛ.                                     │
+│ • **Simplifying circuit analysis** – Replace  │
+│   a chain of series resistors with a single  │
+│   equivalent resistor to reduce complexity.  │
+└─────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────┐
+│ 📌 Summary                                   │
+│                                             │
+│ • In a series circuit, the same current flows│
+│   through every resistor.                   │
+│ • The source voltage equals the sum of the   │
+│   individual voltage drops.                 │
+│ • By substituting Ohm’s law and cancelling   │
+│   the common current, we obtain:            │
+│   **Rₑₛ = R₁ + R₂ + … + Rₙ**.                │
+│ • This simple additive rule is the basis for│
+│   many practical circuit calculations.      │
+└─────────────────────────────────────────────┘
+
+
+
+┌─────────────────────────────────────────────┐
+│ ❓ Suggested Questions                        │
+│                                             │
+│ 1. If three resistors of 2 Ω, 5 Ω, and 10 Ω   │
+│    are connected in series, what is Rₑₛ?    │
+│ 2. How does the equivalent resistance change │
+│    if one resistor is removed from the series│
+│    network?                                 │
+│ 3. Explain why the current is the same through│
+│    each resistor in a series circuit.       │
+│ 4. A series circuit has a total resistance   │
+│    of 120 Ω and draws 0.5 A. What is the      │
+│    source voltage?                          │
+│ 5. Compare series and parallel combinations   │
+│    of resistors in terms of how they affect  │
+│    total resistance.                         │
+└─────────────────────────────────────────────┘

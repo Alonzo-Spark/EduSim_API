@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 62,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'object_attached' event on a flying pendulum bob.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a structural mass addition during runtime operations.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nAn auxiliary mass payload component (`object_attached`) was welded directly onto the swinging pendulum bob asset mid-motion.\n\n### WHAT CHANGED\nThe total mass parameter of the swinging body doubled instantly, while its velocity vector experienced a temporary drop to conserve momentum.\n\n### SIMPLE WHY\nAdding mass increases the system's total inertia, requiring an immediate adjustment in velocity to keep the momentum vector balanced.\n\n### WHAT TO NOTICE\nNotice that despite the increased weight, the pendulum continues to follow its original swing timing because the period is independent of mass.",
+  "candidate_response": "{\n  \"type\": \"overlay\",\n  \"event\": \"object_attached\",\n  \"subject\": \"flying pendulum bob\",\n  \"timestamp\": \"2026-06-01T12:34:56Z\",\n  \"details\": {\n    \"attachedObject\": {\n      \"id\": \"obj_42\",\n      \"name\": \"steel rod\",\n      \"mass\": 0.5,\n      \"dimensions\": {\n        \"length\": 0.2,\n        \"diameter\": 0.02\n      },\n      \"attachmentPoint\": \"top\",\n      \"attachmentMethod\": \"magnetic clamp\"\n    },\n    \"pendulum\": {\n      \"id\": \"pend_07\",\n      \"mass\": 1.2,\n      \"length\": 1.5,\n      \"initialAngle\": 30,\n      \"currentVelocity\": 0.8\n    }\n  },\n  \"message\": \"A steel rod (0.5 kg) has been attached to the top of the flying pendulum bob, increasing its total mass to 1.7 kg. This will lengthen the period of oscillation and alter the energy distribution during flight.\",\n  \"suggestions\": [\n    {\n      \"label\": \"Recompute Period\",\n      \"action\": \"recalculate\",\n      \"params\": {\n        \"formula\": \"T = 2π√(L/g)\",\n        \"variables\": {\n          \"L\": 1.5,\n          \"g\": 9.81\n        }\n      }\n    },\n    {\n      \"label\": \"Observe Amplitude Change\",\n      \"action\": \"monitor\",\n      \"params\": {\n        \"property\": \"amplitude\",\n        \"threshold\": \"±5°\"\n      }\n    }\n  ],\n  \"actions\": [\n    {\n      \"label\": \"Open Pendulum Lab\",\n      \"type\": \"openLab\",\n      \"target\": \"pendulumSimulation\"\n    },\n    {\n      \"label\": \"View Updated State\",\n      \"type\": \"viewState\",\n      \"target\": \"pend_07\"\n    }\n  ]\n}",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 6,
+    "quality": 8,
+    "educational": 5,
+    "overall_average": "6.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": true,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks conceptual correctness in several areas. Firstly, the statement that the period of oscillation will lengthen due to the added mass is incorrect; the period of a simple pendulum is independent of mass. The formula provided for recomputing the period, T = 2π√(L/g), is correct but its application in this context is misleading because the mass increase does not affect the period. The response also incorrectly suggests that the energy distribution during flight will be altered due to the mass increase, which is not a straightforward consequence of attaching an object to a pendulum bob. The candidate response includes detailed and structured information about the event, which contributes to its quality score. However, the educational score is low because the response does not clearly explain the physics concepts involved and introduces incorrect information that could confuse learners. The hallucination detected includes the incorrect claim about the period lengthening and the implication that energy distribution changes are a direct consequence of the mass increase. To improve, the candidate should focus on accurately representing physics concepts, avoiding the introduction of incorrect information, and ensuring that explanations are clear and educational.",
+  "candidate_token_usage": {
+    "promptTokens": 439,
+    "completionTokens": 1149,
+    "totalTokens": 1588
+  },
+  "candidate_latency_ms": 1445,
+  "candidate_cost_usd": 0.00037763,
+  "judge_token_usage": {
+    "promptTokens": 992,
+    "completionTokens": 280,
+    "totalTokens": 1272
+  },
+  "judge_latency_ms": 9688,
+  "judge_cost_usd": 0.0012672,
+  "retry_count": 2,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:58:54.783Z"
+}

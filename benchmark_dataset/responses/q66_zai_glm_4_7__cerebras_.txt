@@ -1,0 +1,105 @@
+Here is the structured UI response for the **Sandbox Overlay: Boundary Reflection Event**.
+
+This output is parsed into **Interactive Textbook Cards** and **Formula Components**, with the backend extraction data included for the Formula Lab.
+
+```text
+[UI RENDER START]
+
+┌─────────────────────────────────────────────────────────────┐
+│ EVENT ANALYSIS: Boundary Reflection                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ The simulation object has collided with a defined boundary. │
+│ To simulate a realistic "bounce," the system must invert    │
+│ the velocity component perpendicular to the surface while   │
+│ preserving the parallel component (assuming no friction).   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Key Concepts: The Reflection Vector                         │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ 1. Surface Normal (n): A unit vector perpendicular to the   │
+│    collision surface.                                       │
+│                                                             │
+│ 2. Incident Vector (v): The velocity of the object at the   │
+│    moment of impact.                                        │
+│                                                             │
+│ 3. Coefficient of Restitution (e): A value (0 to 1)         │
+│    determining bounciness (energy loss).                    │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Formula Card: Vector Reflection                             │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│               →     →      →     → →                       │
+│               v  =  v  - 2(v · n)n                          │
+│                new   old      old                           │
+│                                                             │
+│ [ Explain Formula ]    [ Open Formula Lab ]                 │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Formula Card: Position Update                               │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│                   →                                         │
+│              P  = P  + v  · Δt                              │
+│               t+1   t    new                                │
+│                                                             │
+│ [ Explain Formula ]    [ Open Formula Lab ]                 │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ Summary                                                     │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ The bounce is calculated by reflecting the velocity vector  │
+│ across the surface normal. The position is then updated     │
+│ using this new velocity for the next time step.             │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+
+[UI RENDER END]
+```
+
+=========================================================
+BACKEND DATA EXTRACTION
+=========================================================
+*Use this data to populate the "Formula Lab" and "Explain" modals.*
+
+**Formula Object 1**
+```json
+{
+  "id": "formula_reflection_001",
+  "title": "Vector Reflection",
+  "latex": "\\vec{v}_{new} = \\vec{v}_{old} - 2(\\vec{v}_{old} \\cdot \\vec{n})\\vec{n}",
+  "variables": [
+    { "symbol": "\\vec{v}_{new}", "meaning": "Reflected Velocity Vector", "unit": "m/s" },
+    { "symbol": "\\vec{v}_{old}", "meaning": "Incident Velocity Vector", "unit": "m/s" },
+    { "symbol": "\\vec{n}", "meaning": "Surface Normal Unit Vector", "unit": "dimensionless" }
+  ],
+  "context": "Calculates the new direction of an object after colliding with a wall or boundary. It assumes a perfectly elastic collision where energy is conserved."
+}
+```
+
+**Formula Object 2**
+```json
+{
+  "id": "formula_position_002",
+  "title": "Position Update",
+  "latex": "P_{t+1} = P_t + \\vec{v}_{new} \\cdot \\Delta t",
+  "variables": [
+    { "symbol": "P_{t+1}", "meaning": "New Position", "unit": "m" },
+    { "symbol": "P_t", "meaning": "Current Position", "unit": "m" },
+    { "symbol": "\\vec{v}_{new}", "meaning": "Velocity Vector (Post-Bounce)", "unit": "m/s" },
+    { "symbol": "\\Delta t", "meaning": "Time Step", "unit": "s" }
+  ],
+  "context": "Euler integration step used to move the object to its next coordinate in the simulation loop."
+}
+```

@@ -1,0 +1,701 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Textbook: Uniform Acceleration</title>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="initKatex()"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary-color: #64748b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Merriweather', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 80px;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Card System */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-bottom-right-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card-content {
+            margin-top: 1rem;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Formula Card */
+        .formula-card {
+            background: #f8fafc;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .formula-display {
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            padding: 0 1rem;
+        }
+
+        .formula-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            border: none;
+            border-radius: 6px;
+            padding: 0.6rem 1.2rem;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .formula-explanation {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--border-color);
+            text-align: left;
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .formula-explanation.active {
+            display: block;
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            background: white;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Modal / Formula Lab */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            padding: 0;
+            line-height: 1;
+        }
+
+        .lab-input-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .lab-input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .lab-input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            transition: border-color 0.2s;
+        }
+
+        .lab-input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .lab-result {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .lab-result-label {
+            font-size: 0.85rem;
+            color: #0369a1;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .lab-result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0c4a6e;
+        }
+
+        .lab-footer {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .section-card { padding: 1.5rem; }
+            .formula-actions { flex-direction: column; }
+            .btn-primary, .btn-secondary { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Uniform Acceleration</h1>
+            <div class="subtitle">Physics 101 • Kinematics</div>
+        </div>
+    </header>
+
+    <main class="container" id="app">
+        <!-- Content will be injected here by JavaScript -->
+    </main>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="labModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Formula Lab</h3>
+                <button class="close-btn" onclick="closeLab()">&times;</button>
+            </div>
+            <div id="modalContent">
+                <!-- Dynamic Inputs go here -->
+            </div>
+            <div class="lab-result" id="labResultBox" style="display: none;">
+                <div class="lab-result-label">Calculated Acceleration</div>
+                <div class="lab-result-value" id="labResultValue">0 m/s²</div>
+            </div>
+            <div class="lab-footer">
+                <button class="btn-secondary" onclick="closeLab()">Close Lab</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. CONTENT DATA (Simulating AI Response)
+        // ==========================================
+        const rawContent = `
+## Introduction
+Uniform acceleration is a specific type of motion where the velocity of an object changes at a constant rate over time. Unlike variable acceleration, where the rate of change fluctuates, uniform acceleration implies a steady increase or decrease in speed.
+
+## Quick Definition
+**Uniform Acceleration** refers to the motion of an object in which the acceleration remains constant and does not change with time. This means the velocity increases or decreases by equal amounts in equal intervals of time, no matter how small those intervals may be.
+
+## Key Characteristics
+*   **Constant Rate:** The acceleration value ($a$) is the same at every point in the journey.
+*   **Direction:** The acceleration is always in a fixed direction.
+*   **Graph:** A velocity-time graph for uniform acceleration is a straight line with a constant slope.
+*   **Units:** It is typically measured in meters per second squared ($m/s^2$).
+
+## The Formula
+The relationship between acceleration, change in velocity, and time is fundamental. The formula for uniform acceleration is derived from the definition of acceleration.
+
+$$
+a = \\frac{v_f - v_i}{t}
+$$
+
+Where:
+*   $a$ is the acceleration
+*   $v_f$ is the final velocity
+*   $v_i$ is the initial velocity
+*   $t$ is the time taken
+
+## Applications
+This concept is widely used in physics to model free-falling objects (ignoring air resistance), cars accelerating on a highway, and braking systems.
+
+## Comparison Table
+
+| Scenario | Acceleration | Velocity Change | Graph Shape |
+| :--- | :--- | :--- | :--- |
+| **Uniform Acceleration** | Constant | Linear (Steady) | Straight Line |
+| **Variable Acceleration** | Changing | Non-linear | Curved |
+| **Zero Acceleration** | Zero | None (Constant) | Horizontal Line |
+
+## Important Notes
+*   If the value of $a$ is positive, the object is speeding up.
+*   If the value of $a$ is negative, the object is slowing down (deceleration).
+*   Remember that acceleration is a vector quantity, meaning direction matters.
+
+## Summary
+Uniform acceleration describes a predictable, steady change in velocity. It is the cornerstone of classical mechanics equations of motion.
+`;
+
+        // ==========================================
+        // 2. PARSING ENGINE
+        // ==========================================
+        
+        // Store extracted formulas globally for the Lab
+        const extractedFormulas = [];
+
+        function parseContent(markdown) {
+            // Split by headers (##)
+            const sections = markdown.split(/^##\s+(.*)$/gm);
+            
+            // The split creates an array like: ['', 'Title', 'Content', 'Title', 'Content']
+            // We iterate in steps of 2
+            const parsedSections = [];
+            
+            for (let i = 1; i < sections.length; i += 2) {
+                const title = sections[i].trim();
+                const content = sections[i+1] ? sections[i+1].trim() : '';
+                
+                if (title && content) {
+                    parsedSections.push({
+                        type: identifySectionType(title),
+                        title: title,
+                        rawContent: content
+                    });
+                }
+            }
+            return parsedSections;
+        }
+
+        function identifySectionType(title) {
+            const t = title.toLowerCase();
+            if (t.includes('definition')) return 'definition';
+            if (t.includes('formula')) return 'formula';
+            if (t.includes('introduction')) return 'intro';
+            if (t.includes('table') || title.includes('|')) return 'table';
+            return 'standard';
+        }
+
+        // ==========================================
+        // 3. RENDERING SYSTEM
+        // ==========================================
+
+        function renderApp() {
+            const app = document.getElementById('app');
+            const sections = parseContent(rawContent);
+
+            sections.forEach(section => {
+                const card = document.createElement('article');
+                card.className = 'section-card';
+
+                // Add Label
+                const label = document.createElement('div');
+                label.className = 'card-label';
+                label.innerText = section.title;
+                card.appendChild(label);
+
+                // Content Area
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'card-content';
+
+                // Process content based on type
+                if (section.type === 'formula') {
+                    // Check if there is a display formula in the content
+                    const formulaMatch = section.rawContent.match(/\$\$([\s\S]*?)\$\$/);
+                    
+                    if (formulaMatch) {
+                        const latex = formulaMatch[1];
+                        const contextText = section.rawContent.replace(formulaMatch[0], '').trim();
+                        
+                        // Store for Lab
+                        const formulaId = extractedFormulas.length;
+                        extractedFormulas.push({
+                            id: formulaId,
+                            latex: latex,
+                            title: section.title,
+                            context: contextText,
+                            variables: ['a', 'v_f', 'v_i', 't'] 
+                        });
+
+                        // Render Formula Card
+                        contentDiv.appendChild(createFormulaCard(latex, contextText, formulaId));
+                    } else {
+                        // Fallback if no math found
+                        contentDiv.innerHTML = `<p>${section.rawContent}</p>`;
+                    }
+                } else if (section.rawContent.includes('|')) {
+                    // Table rendering
+                    const tableHtml = convertMarkdownTable(section.rawContent);
+                    contentDiv.innerHTML = tableHtml;
+                } else {
+                    // Standard text rendering
+                    contentDiv.innerHTML = `<p>${section.rawContent}</p>`;
+                }
+
+                card.appendChild(contentDiv);
+                app.appendChild(card);
+            });
+
+            // Trigger KaTeX render on the whole app
+            renderMathInElement(app, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError : false
+            });
+        }
+
+        function createFormulaCard(latex, context, id) {
+            const container = document.createElement('div');
+            container.className = 'formula-card';
+
+            // Formula Display
+            const mathDiv = document.createElement('div');
+            mathDiv.className = 'formula-display';
+            mathDiv.innerText = `$$${latex}$$`; // KaTeX will pick this up
+
+            // Context Text (Variables list etc)
+            const contextDiv = document.createElement('div');
+            contextDiv.style.marginBottom = '1rem';
+            contextDiv.innerHTML = `<p>${context}</p>`;
+
+            // Actions
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'formula-actions';
+
+            const explainBtn = document.createElement('button');
+            explainBtn.className = 'btn-secondary';
+            explainBtn.innerText = 'Explain Formula';
+            explainBtn.onclick = () => toggleExplanation(id, container);
+
+            const labBtn = document.createElement('button');
+            labBtn.className = 'btn-primary';
+            labBtn.innerText = 'Open Formula Lab';
+            labBtn.onclick = () => openFormulaLab(id);
+
+            actionsDiv.appendChild(explainBtn);
+            actionsDiv.appendChild(labBtn);
+
+            // Hidden Explanation Block
+            const explanationBlock = document.createElement('div');
+            explanationBlock.className = 'formula-explanation';
+            explanationBlock.id = `explanation-${id}`;
+            explanationBlock.innerHTML = `
+                <strong>Understanding the Formula:</strong><br>
+                This equation tells us that acceleration is equal to the change in velocity divided by the time it took for that change to occur. 
+                If velocity increases, acceleration is positive. If it decreases, acceleration is negative.
+            `;
+
+            container.appendChild(mathDiv);
+            container.appendChild(contextDiv);
+            container.appendChild(actionsDiv);
+            container.appendChild(explanationBlock);
+
+            return container;
+        }
+
+        function convertMarkdownTable(md) {
+            // Simple parser for the specific table format in the content
+            const rows = md.trim().split('\n');
+            let html = '<div class="table-container"><table>';
+            
+            rows.forEach((row, index) => {
+                if (row.includes('---')) return; // Skip separator line
+                const cells = row.split('|').filter(c => c.trim() !== '');
+                html += '<tr>';
+                cells.forEach(cell => {
+                    const tag = index === 0 ? 'th' : 'td';
+                    html += `<${tag}>${cell.trim()}</${tag}>`;
+                });
+                html += '</tr>';
+            });
+            
+            html += '</table></div>';
+            return html;
+        }
+
+        function toggleExplanation(id, container) {
+            const el = document.getElementById(`explanation-${id}`);
+            el.classList.toggle('active');
+        }
+
+        // ==========================================
+        // 4. FORMULA LAB LOGIC
+        // ==========================================
+
+        function openFormulaLab(formulaId) {
+            const formulaData = extractedFormulas.find(f => f.id === formulaId);
+            if (!formulaData) return;
+
+            const modal = document.getElementById('labModal');
+            const content = document.getElementById('modalContent');
+            const title = document.getElementById('modalTitle');
+            const resultBox = document.getElementById('labResultBox');
+            
+            title.innerText = "Formula Lab: Acceleration";
+            resultBox.style.display = 'none';
+
+            // Generate Inputs for a = (vf - vi) / t
+            // In a real app, this would be generic. Here we map based on the specific lesson.
+            content.innerHTML = `
+                <div class="lab-input-group">
+                    <label>Final Velocity ($v_f$) in m/s</label>
+                    <input type="number" id="input-vf" placeholder="e.g. 20" oninput="calculateAcceleration()">
+                </div>
+                <div class="lab-input-group">
+                    <label>Initial Velocity ($v_i$) in m/s</label>
+                    <input type="number" id="input-vi" placeholder="e.g. 0" oninput="calculateAcceleration()">
+                </div>
+                <div class="lab-input-group">
+                    <label>Time ($t$) in seconds</label>
+                    <input type="number" id="input-t" placeholder="e.g. 5" min="0.1" oninput="calculateAcceleration()">
+                </div>
+                <p style="font-size: 0.85rem; color: #64748b; margin-top: 10px;">
+                    * Enter values to see the calculation update automatically.
+                </p>
+            `;
+
+            modal.classList.add('open');
+        }
+
+        function calculateAcceleration() {
+            const vf = parseFloat(document.getElementById('input-vf').value);
+            const vi = parseFloat(document.getElementById('input-vi').value);
+            const t = parseFloat(document.getElementById('input-t').value);
+            const resultBox = document.getElementById('labResultBox');
+            const resultValue = document.getElementById('labResultValue');
+
+            if (isNaN(vf) || isNaN(vi) || isNaN(t) || t === 0) {
+                // Don't show result if inputs are invalid
+                return;
+            }
+
+            // Logic: a = (vf - vi) / t
+            const a = (vf - vi) / t;
+            
+            resultBox.style.display = 'block';
+            resultValue.innerText = `${a.toFixed(2)} m/s²`;
+        }
+
+        function closeLab() {
+            document.getElementById('labModal').classList.remove('open');
+        }
+
+        // Close modal on outside click
+        document.getElementById('labModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLab();
+            }
+        });
+
+        // ==========================================
+        // 5. INITIALIZATION
+        // ==========================================
+        
+        function initKatex() {
+            renderApp();
+        }
+
+    </script>
+</body>
+</html>
+```

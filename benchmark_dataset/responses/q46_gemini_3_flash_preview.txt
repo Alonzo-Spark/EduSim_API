@@ -1,0 +1,50 @@
+:::section{title="Introduction"}
+In the study of current electricity, the relationship between the potential difference across a conductor and the current flowing through it is fundamental. This relationship was first established by Georg Simon Ohm in 1827.
+:::
+
+:::section{title="Definition: Ohm's Law"}
+Ohm's Law states that the current flowing through a conductor is **directly proportional** to the potential difference applied across its ends, provided the physical conditions (such as temperature, mechanical strain, etc.) remain constant.
+
+Mathematically, if $I$ is the current and $V$ is the potential difference:
+$$I \propto V \quad \text{or} \quad V \propto I$$
+:::
+
+:::formula-card{title="The Ohm's Law Equation"}
+$$V = I \cdot R$$
+
+**Variables:**
+*   **$V$**: Potential Difference (measured in Volts, $V$)
+*   **$I$**: Electric Current (measured in Amperes, $A$)
+*   **$R$**: Resistance of the conductor (measured in Ohms, $\Omega$)
+
+[ Explain Formula: Resistance $R$ is the constant of proportionality that represents the opposition offered by the material to the flow of current. ]
+:::
+
+:::section{title="Key Concepts: Ohmic vs. Non-Ohmic"}
+| Type | Characteristic | Examples |
+| :--- | :--- | :--- |
+| **Ohmic Conductors** | Follow Ohm's Law; $V-I$ graph is a straight line passing through the origin. | Metals (Copper, Silver) at low temperatures. |
+| **Non-Ohmic Conductors** | Do not follow Ohm's Law; $V-I$ graph is non-linear. | Diodes, Transistors, Electrolytes, Vacuum tubes. |
+:::
+
+:::section{title="Limitations of Ohm's Law"}
+Ohm's Law is not a fundamental law of nature (like Newton's Laws) but rather an empirical relation that holds true only under specific conditions.
+
+1.  **Temperature Dependence:** As current flows through a conductor, it produces heat ($H = I^2Rt$). Increased temperature increases the resistance of metals, making the $V-I$ graph curve away from a straight line.
+2.  **Non-Linear Devices:** Semiconductors (like p-n junction diodes) allow current to flow easily in one direction but block it in the other. The relation between $V$ and $I$ is not linear.
+3.  **Varying Physical Conditions:** If mechanical stress, strain, or pressure on the conductor changes, its resistance changes, violating the "constant conditions" requirement.
+4.  **Negative Resistance Region:** In some materials like Gallium Arsenide (GaAs), there are regions where the current actually *decreases* as voltage increases.
+:::
+
+:::section{title="Summary"}
+*   **Condition:** Temperature and physical state must be constant.
+*   **Relation:** $V$ is proportional to $I$.
+*   **Graph:** Linear for Ohmic materials; Non-linear for Non-Ohmic materials.
+*   **Applicability:** Primarily applies to metallic conductors.
+:::
+
+:::section{title="Suggested Questions"}
+1.  **Conceptual:** Why does the $V-I$ graph for a filament bulb curve at high voltages?
+2.  **Numerical:** If a $12V$ battery is connected across a $4\Omega$ resistor, what is the current flowing through the circuit?
+3.  **Theoretical:** Distinguish between Ohmic and Non-Ohmic devices with one example each.
+:::

@@ -1,0 +1,101 @@
+<div class="section-card introduction">
+  <h2>Introduction</h2>
+  <p>Imagine a mass attached to a spring, bouncing back and forth in smooth, rhythmic motion—this is a classic example of a <strong>spring-mass oscillator</strong>. One of the key properties that governs how this system behaves is the <strong>stiffness constant</strong>, also known as the <strong>spring constant</strong> (<em>k</em>). But what happens when you double it?</p>
+  <p>In this interactive exploration, we’ll examine how increasing the stiffness of the spring affects the motion—visually and mathematically.</p>
+</div>
+
+<div class="section-card definition">
+  <h2>Quick Definition</h2>
+  <p><strong>Spring stiffness constant (k):</strong> A measure of how "stiff" or resistant a spring is to being stretched or compressed. A higher <em>k</em> means the spring is stiffer and requires more force to displace.</p>
+</div>
+
+<div class="section-card formula">
+  <h2>Main Formula</h2>
+  <div class="formula-display">
+    $$
+    T = 2\pi \sqrt{\frac{m}{k}}
+    $$
+  </div>
+  <div class="formula-actions">
+    <button>Explain Formula</button>
+    <button>Open Formula Lab</button>
+  </div>
+</div>
+
+<div class="section-card key-concepts">
+  <h2>Key Concepts</h2>
+  <ul>
+    <li><strong>Period (T):</strong> Time for one complete oscillation (back and forth).</li>
+    <li><strong>Frequency (f):</strong> Number of oscillations per second, <em>f = 1/T</em>.</li>
+    <li><strong>Stiffness (k):</strong> Directly affects how quickly the spring pulls the mass back.</li>
+  </ul>
+</div>
+
+<div class="section-card characteristics">
+  <h2>What Happens When <em>k</em> is Doubled?</h2>
+  <p>Let’s analyze the effect step by step:</p>
+  <ol>
+    <p><strong>1. The spring becomes stiffer.</strong><br>It resists stretching/compressing more strongly, so it pulls the mass back faster.</p>
+    <p><strong>2. The period decreases.</strong><br>Using the formula:</p>
+    <div class="formula-display">
+      $$
+      T_{\text{new}} = 2\pi \sqrt{\frac{m}{2k}} = \frac{1}{\sqrt{2}} \cdot 2\pi \sqrt{\frac{m}{k}} = \frac{T}{\sqrt{2}}
+      $$
+    </div>
+    <p>The new period is about <strong>70.7%</strong> of the original—so oscillations become faster.</p>
+    <p><strong>3. The frequency increases.</strong><br>Since <em>f = 1/T</em>, frequency increases by a factor of <em>√2 ≈ 1.41</em>.</p>
+  </ol>
+</div>
+
+<div class="section-card visualization">
+  <h2>Visual Comparison</h2>
+  <div class="oscillator-comparison">
+    <div class="oscillator-track">
+      <label>Original Spring (k)</label>
+      <div class="oscillator-wave slow"></div>
+    </div>
+    <div class="oscillator-track">
+      <label>Doubled Stiffness (2k)</label>
+      <div class="oscillator-wave fast"></div>
+    </div>
+  </div>
+  <p><em>Notice: The stiffer spring completes more cycles in the same time—its motion is quicker and more compact.</em></p>
+</div>
+
+<div class="section-card applications">
+  <h2>Real-World Applications</h2>
+  <ul>
+    <li><strong>Car suspensions:</strong> Stiffer springs reduce body roll but give a harsher ride.</li>
+    <li><strong>Musical instruments:</strong> Tighter strings (higher k) produce higher-pitched notes.</li>
+    <li><strong>Building design:</strong> Stiffer structures oscillate faster, which can help avoid resonance with earthquakes.</li>
+  </ul>
+</div>
+
+<div class="section-card important-notes">
+  <h2>Important Notes</h2>
+  <ul>
+    <li>Doubling <em>k</em> does<strong> not</strong> change the amplitude (maximum displacement), assuming no energy loss.</li>
+    <li>The mass (<em>m</em>) remains unchanged—only the spring’s resistance increases.</li>
+    <li>Energy stored in the spring increases for the same displacement: <em>U = ½kx²</em>.</li>
+  </ul>
+</div>
+
+<div class="section-card summary">
+  <h2>Summary</h2>
+  <p>When the stiffness constant <em>k</em> is doubled:</p>
+  <ul>
+    <li>Oscillations become <strong>faster</strong>.</li>
+    <li>Period decreases by a factor of <strong>√2</strong>.</li>
+    <li>Frequency increases by <strong>~41%</strong>.</li>
+    <li>Motion appears more "rapid" or "jittery" visually.</li>
+  </ul>
+</div>
+
+<div class="section-card suggested-questions">
+  <h2>Suggested Questions</h2>
+  <ul>
+    <li>What happens if you double the mass instead?</li>
+    <li>How does damping affect this behavior?</li>
+    <li>Can you hear the difference in frequency if this were a vibrating string?</li>
+  </ul>
+</div>

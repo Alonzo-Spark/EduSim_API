@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 49,
+  "question": "A current of 2 A flows through a resistor of 10 Ω. Calculate voltage.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Ohm's Law Problem\n\n### Problem\nA steady electric current of $2 \\text{ A}$ flows through a resistor with a value of $10 \\ \\Omega$. Calculate the voltage drop across the resistor.\n\n### Given\n* Current tracking ($I$) = $2 \\text{ A}$\n* Resistance value ($R$) = $10 \\ \\Omega$\n\n### Formula\n$$V = IR$$\n\n### Substitution\n$$V = 2 \\times 10$$\n\n### Calculation\n$$V = 20 \\text{ V}$$\n\n### Final Answer\n**Potential Difference ($V$) = $20 \\text{ V}$**\n\n### Interpretation\nThis means that a potential difference of $20 \\text{ Volts}$ must be maintained across the ends of the $10 \\ \\Omega$ resistor to sustain a continuous current flow of $2 \\text{ Amperes}$.",
+  "candidate_response": "Here's how to calculate the voltage:\n\n### Quick Definition\n\nOhm's Law describes the relationship between voltage, current, and resistance in an electrical circuit. It states that the current through a conductor between two points is directly proportional to the voltage across the two points and inversely proportional to the resistance between them.\n\n### Main Formula\n\n$$ V = IR $$\n\nWhere:\n*   $V$ is the voltage (measured in volts, V)\n*   $I$ is the current (measured in amperes, A)\n*   $R$ is the resistance (measured in ohms, Ω)\n\n### Given Values\n\n| Quantity   | Symbol | Value | Unit |\n| :--------- | :----- | :---- | :--- |\n| Current    | $I$    | 2     | A    |\n| Resistance | $R$    | 10    | Ω    |\n\n### Calculation\n\nTo find the voltage ($V$), we can use Ohm's Law:\n\n1.  **Substitute the given values into the formula:**\n    $V = (2 \\text{ A}) \\times (10 \\text{ Ω})$\n\n2.  **Perform the multiplication:**\n    $V = 20 \\text{ V}$\n\n### Result\n\nThe voltage across the resistor is 20 Volts.\n\n### Suggested Questions\n\n*   How would the current change if the voltage remained constant but the resistance doubled?\n*   What is the power dissipated by this resistor?\n*   Describe a real-world application where Ohm's Law is crucial for design.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and educational. It correctly applies Ohm's Law to calculate the voltage drop across the resistor. The use of a table to present given values and the step-by-step calculation process enhances readability and understanding. The inclusion of suggested questions at the end promotes further learning and critical thinking. However, to achieve perfection, the candidate could have explicitly stated the final answer in a boxed or highlighted format, as seen in the gold reference answer, to make it stand out clearly. Additionally, while the response is excellent for educational purposes, it could benefit from a brief interpretation of the result, similar to the gold reference answer, to provide context and meaning to the calculated voltage value.",
+  "candidate_token_usage": {
+    "promptTokens": 389,
+    "completionTokens": 333,
+    "totalTokens": 722
+  },
+  "candidate_latency_ms": 2973,
+  "candidate_cost_usd": 0.0009492,
+  "judge_token_usage": {
+    "promptTokens": 948,
+    "completionTokens": 203,
+    "totalTokens": 1151
+  },
+  "judge_latency_ms": 6285,
+  "judge_cost_usd": 0.0010559999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:51:35.413Z"
+}

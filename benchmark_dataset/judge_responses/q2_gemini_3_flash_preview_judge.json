@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 2,
+  "question": "A car starts from rest and accelerates uniformly at 2m/s. Find its velocity after 10 seconds.",
+  "gold_answer": "```python\nu = 0\na = 2\nt = 10\nv = u + a * t\nprint(f\"v = {v}\")\n\n\n\n```\n\n```text\nv = 20\n\n\n```\n\n# Solved Numerical\n\n---\n\n## Kinematics Problem\n\n### Problem\n\nA car starts from rest and accelerates uniformly at $2 \\text{ m/s}^2$. Find its velocity after 10 seconds.\n\n### Given\n\n* Initial velocity ($u$) = $0 \\text{ m/s}$\n* Uniform acceleration ($a$) = $2 \\text{ m/s}^2$\n* Time taken ($t$) = $10 \\text{ s}$\n\n### Formula\n\n$$v = u + at$$\n\n### Substitution\n\n$$v = 0 + (2 \\times 10)$$\n\n### Calculation\n\n$$v = 0 + 20$$\n\n$$v = 20$$\n\n### Final Answer\n\n**Final Velocity ($v$) = $20 \\text{ m/s}$**\n\n### Interpretation\n\nThis means that after starting from a complete standstill and accelerating steadily at a rate of $2 \\text{ m/s}^2$ for $10 \\text{ seconds}$, the car reaches a speed of $20 \\text{ meters per second}$ in its direction of motion.",
+  "candidate_response": "### 📘 Lesson: Uniform Acceleration\n**Topic:** Kinematics (Equations of Motion)\n\n---\n\n┌──────────────────────────────────────────────────────────┐\n│ **Introduction**                                         │\n│                                                          │\n│ When an object changes its velocity at a constant rate,  │\n│ it undergoes **Uniform Acceleration**. To solve for      │\n│ final velocity, we look at the relationship between      │\n│ initial speed, rate of change, and time elapsed.         │\n└──────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────┐\n│ **Main Formula: First Equation of Motion**               │\n│                                                          │\n│                 $$v = u + at$$                           │\n│                                                          │\n│ 💡 **Variable Breakdown:**                                │\n│ • $v$: Final Velocity ($m/s$)                            │\n│ • $u$: Initial Velocity ($m/s$)                          │\n│ • $a$: Acceleration ($m/s^2$)                            │\n│ • $t$: Time interval ($s$)                               │\n│                                                          │\n│ [ 🧪 Open Formula Lab ]                                  │\n└──────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────┐\n│ **Step-by-Step Calculation**                             │\n│                                                          │\n│ **1. Identify Given Values:**                            │\n│ • Initial Velocity ($u$) = $0\\,m/s$ (starts from rest)   │\n│ • Acceleration ($a$) = $2\\,m/s^2$                        │\n│ • Time ($t$) = $10\\,s$                                   │\n│                                                          │\n│ **2. Substitute into Formula:**                          │\n│ $$v = 0 + (2 \\times 10)$$                                │\n│                                                          │\n│ **3. Final Result:**                                     │\n│ $$v = 20\\,m/s$$                                          │\n└──────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────┐\n│ **Key Characteristics**                                  │\n│                                                          │\n│ • **Linear Growth:** The velocity increases by the same  │\n│   amount ($2\\,m/s$) every single second.                 │\n│ • **Direction:** Since acceleration is positive, the car │\n│   is speeding up in the direction of motion.             │\n└──────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────┐\n│ **Data Summary Table**                                   │\n│                                                          │\n│ | Parameter          | Symbol | Value    | Unit    |     │\n│ |--------------------|--------|----------|---------|     │\n│ | Initial Velocity   | $u$    | 0        | $m/s$   |     │\n│ | Acceleration       | $a$    | 2        | $m/s^2$ |     │\n│ | Time               | $t$    | 10       | $s$     |     │\n│ | **Final Velocity** | $v$    | **20**   | $m/s$   |     │\n└──────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────┐\n│ **Suggested Questions**                                  │\n│                                                          │\n│ 1. How far did the car travel during these 10 seconds?   │\n│ 2. If the car then brakes at $4\\,m/s^2$, how long will   │\n│    it take to stop?                                      │\n└──────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 10,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and educational. It correctly applies the formula for uniform acceleration and provides a clear step-by-step calculation. The use of tables, headings, and emphasis on key characteristics enhances readability and understanding. The suggested questions at the end encourage further exploration and application of the concept. The only area for improvement is in the quality score, where the extensive use of ASCII art borders, while visually appealing, may not be necessary for all readers and could potentially distract from the content. Nonetheless, the response effectively teaches the concept of uniform acceleration and its application, making it a valuable educational resource.",
+  "candidate_token_usage": {
+    "promptTokens": 394,
+    "completionTokens": 750,
+    "totalTokens": 1144
+  },
+  "candidate_latency_ms": 5454,
+  "candidate_cost_usd": 0.002447,
+  "judge_token_usage": {
+    "promptTokens": 1470,
+    "completionTokens": 184,
+    "totalTokens": 1654
+  },
+  "judge_latency_ms": 4585,
+  "judge_cost_usd": 0.0013235999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T06:55:10.420Z"
+}

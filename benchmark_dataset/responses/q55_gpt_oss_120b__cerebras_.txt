@@ -1,0 +1,125 @@
+┌───────────────────────────────┐  
+│           Introduction          │  
+│                                   │  
+│ Consider a block of mass *m* that is   │  
+│ placed on a horizontal surface and │  
+│ allowed to slide. The only horizontal │  
+│ force resisting its motion is kinetic │  
+│ friction, whose magnitude is          │  
+│ *fₖ = μ N = μ mg* (with *μ* the kinetic   │  
+│ friction coefficient and *g* the      │  
+│ acceleration due to gravity).       │  
+│                                   │  
+│ This sandbox explores the limiting   │  
+│ behavior as the friction coefficient │  
+│ **μ → 0**.                           │  
+└───────────────────────────────┘  
+
+┌───────────────────────────────┐  
+│            Definition           │  
+│                                   │  
+│ *Sliding Block*: A point‑mass object │  
+│ that moves on a planar surface while  │  
+│ experiencing kinetic friction only.   │  
+│                                   │  
+│ *Friction Coefficient (μ)*: A          │  
+│ dimension‑less factor that quantifies │  
+│ the interaction between the block and  │  
+│ the surface.                           │  
+└───────────────────────────────┘  
+
+┌───────────────────────────────┐  
+│          Key Concepts           │  
+│                                   │  
+│ • **Newton’s 2nd Law**: ΣF = m a     │  
+│ • **Kinetic Friction**: fₖ = μ mg   │  
+│ • **Limiting Process**: Examine the │  
+│   system’s response as μ → 0.        │  
+│ • **Energy Viewpoint**: No non‑con‑  │  
+│   servative work when μ = 0.        │  
+└───────────────────────────────┘  
+
+┌───────────────────────────────┐  
+│            Formula               │  
+│                                   │  
+│   fₖ = μ mg                        │  
+│                                   │  
+│   a = - μ g                        │  
+│                                   │  
+│   [ Explain Formula ]             │  
+│   [ Open Formula Lab ]            │  
+└───────────────────────────────┘  
+
+┌───────────────────────────────┐  
+│          Analysis (µ → 0)       │  
+│                                   │  
+│ From the acceleration formula      │  
+│ **a = – μ g**, the deceleration is   │  
+│ directly proportional to μ.        │  
+│ As μ → 0, a → 0, so the block’s      │  
+│ velocity **v(t) = v₀ + a t**          │  
+│ approaches a constant **v₀**.       │  
+│                                   │  
+│ • **No friction** ⇒ no horizontal   │  
+│   net force → constant velocity.   │  
+│ • **Energy**: Mechanical energy is  │  
+│   conserved; no heat is generated. │  
+│                                   │  
+│ The idealized case μ = 0 is the      │  
+│ textbook “frictionless surface”.   │  
+└───────────────────────────────┘  
+
+┌───────────────────────────────┐  
+│          Table: µ vs a          │  
+│                                   │  
+│ ┌─────────────┬─────────────┐ │  
+│ │ μ (unitless)│ a (m s⁻²)   │ │  
+│ ├─────────────┼─────────────┤ │  
+│ │ 0.30        │ –2.94       │ │  
+│ │ 0.10        │ –0.98       │ │  
+│ │ 0.01        │ –0.10       │ │  
+│ │ 0.001       │ –0.01       │ │  
+│ │ 0.000       │ 0.00        │ │  
+│ └─────────────┴─────────────┘ │  
+│                                   │  
+│ As μ shrinks, the deceleration → 0. │  
+└───────────────────────────────┘  
+
+┌───────────────────────────────┐  
+│           Applications           │  
+│                                   │  
+│ • **Physics textbooks** – idealized │  
+│   problems assume μ = 0 to focus on │  
+│   inertial motion.                  │  
+│ • **Engineering** – designing       │  
+│   low‑friction bearings (μ ≈ 10⁻⁴).   │  
+│ • **Simulation** – setting μ = 0   │  
+│   yields a “perfectly smooth” model.│  
+└───────────────────────────────┘  
+
+┌───────────────────────────────┐  
+│            Summary               │  
+│                                   │  
+│ • Kinetic friction force: **fₖ = μ mg**. │  
+│ • Resulting deceleration: **a = – μ g**.│  
+│ • In the limit **μ → 0**, the block      │  
+│   experiences **no horizontal force**,  │  
+│   thus moves with **constant velocity**.│  
+│ • Energy is conserved; no dissipative   │  
+│   loss occurs.                           │  
+└───────────────────────────────┘  
+
+┌───────────────────────────────┐  
+│        Suggested Questions       │  
+│                                   │  
+│ 1. If the block starts from rest on a   │  
+│    frictionless surface, what motion   │  
+│    will it exhibit?                     │  
+│ 2. How would the presence of air drag    │  
+│    modify the μ → 0 analysis?           │  
+│ 3. Derive the time required for the block│  
+│    to come to rest for a given μ.       │  
+│ 4. In a real‑world experiment, how      │  
+│    could you approximate μ ≈ 0?         │  
+│                                   │  
+└───────────────────────────────┘  

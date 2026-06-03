@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 40,
+  "question": "Differentiate between transverse and longitudinal waves.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWaves are classified into two primary structural types based on how the particles of the medium vibrate relative to the direction of the wave's energy travel.\n\nA transverse wave is a wave in which the particles of the medium oscillate perpendicular to the direction of wave propagation.\n\nA longitudinal wave is a wave in which the particles of the medium oscillate parallel to the direction of wave propagation.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Transverse Waves | Longitudinal Waves |\n| --- | --- | --- |\n| **Structure** | Forms alternating crests (peaks) and troughs (valleys). | Forms alternating compressions (high density) and rarefactions (low density). |\n| **Medium Context** | Can travel through solids and liquid surfaces, but not gases. | Can travel through solids, liquids, and gases. |\n| **Polarization** | Can be polarized. | Cannot be polarized. |\n\n---\n\n## Real-world Examples\n\n* **Transverse Waves:** Light waves, radio waves, seismic S-waves, and surface ripples on a pond.\n* **Longitudinal Waves:** Sound waves traveling through air, seismic P-waves, and ultrasound tracking pulses.\n\n---\n\n## Summary\n\nTransverse waves produce variations perpendicular to their direction of travel, whereas longitudinal waves create pressure pulses that run parallel to their path.",
+  "candidate_response": "Let's explore the fascinating world of waves! We'll break down the key differences between transverse and longitudinal waves.\n\n***\n\n### Quick Definition\n\nWaves are disturbances that transfer energy from one place to another without necessarily transferring matter.\n\n***\n\n### Transverse Waves\n\nIn a transverse wave, the particles of the medium oscillate perpendicular to the direction of the wave's propagation.\n\n*   **Direction of Particle Oscillation:** Perpendicular to wave propagation.\n*   **Examples:** Light waves, water waves (on the surface), waves on a string.\n*   **Visual Representation:** Imagine shaking a rope up and down. The wave travels horizontally, but the rope itself moves vertically.\n\n***\n\n### Longitudinal Waves\n\nIn a longitudinal wave, the particles of the medium oscillate parallel to the direction of the wave's propagation.\n\n*   **Direction of Particle Oscillation:** Parallel to wave propagation.\n*   **Examples:** Sound waves, seismic P-waves.\n*   **Visual Representation:** Imagine pushing and pulling a Slinky. The compression and rarefaction travel along the Slinky, and the coils themselves move back and forth in the same direction.\n\n***\n\n### Key Characteristics Comparison\n\nHere's a table summarizing the main differences:\n\n| Characteristic                  | Transverse Wave                                   | Longitudinal Wave                                     |\n| :------------------------------ | :------------------------------------------------ | :---------------------------------------------------- |\n| **Particle Motion**             | Perpendicular to wave direction                   | Parallel to wave direction                            |\n| **Energy Transfer**             | Via crests and troughs                            | Via compressions and rarefactions                     |\n| **Polarization**                | Can be polarized                                  | Cannot be polarized                                   |\n| **Medium Requirement**          | Can travel through a vacuum (e.g., light)         | Requires a medium (e.g., sound)                       |\n| **Visual Representation**       | Peaks (crests) and valleys (troughs)              | Regions of high density (compressions) and low density (rarefactions) |\n| **Examples**                    | Light, radio waves, water surface waves, S-waves  | Sound, ultrasound, P-waves, waves in a Slinky         |\n\n***\n\n### Important Notes\n\n*   **Polarization:** Only transverse waves can be polarized because their oscillations occur in a plane perpendicular to the direction of travel, allowing for selection of specific oscillation directions. Longitudinal waves oscillate only along the direction of travel, offering no such perpendicular plane for selection.\n*   **Medium:** While many transverse waves (like light) do not require a medium, mechanical transverse waves (like waves on a string) do. All longitudinal waves are mechanical and require a medium to propagate.\n\n***\n\n### Summary\n\nThe fundamental distinction between transverse and longitudinal waves lies in the orientation of the medium's particle oscillation relative to the direction of energy propagation. Understanding this difference is crucial for comprehending various wave phenomena across physics.\n\n***\n\n### Suggested Questions\n\n*   Can sound waves travel through a vacuum? Why or why not?\n*   How does the concept of polarization apply to radio waves?\n*   Describe a real-world scenario where you can observe both transverse and longitudinal wave characteristics simultaneously.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately differentiates between transverse and longitudinal waves, providing clear definitions, examples, and a comparison table. The layout is well-structured, and the presentation is of high quality. The response is beginner-friendly and effectively teaches the concepts. However, to reach a perfect score, the candidate could have included more real-world examples and applications of both types of waves, and provided a brief historical context or interesting facts related to the discovery of wave properties. Additionally, the 'Suggested Questions' section, while useful for engagement, could be more directly tied to the core concepts presented, offering a clearer path for further exploration and learning.",
+  "candidate_token_usage": {
+    "promptTokens": 378,
+    "completionTokens": 671,
+    "totalTokens": 1049
+  },
+  "candidate_latency_ms": 4929,
+  "candidate_cost_usd": 0.0017909,
+  "judge_token_usage": {
+    "promptTokens": 1328,
+    "completionTokens": 188,
+    "totalTokens": 1516
+  },
+  "judge_latency_ms": 4895,
+  "judge_cost_usd": 0.001248,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:30:53.451Z"
+}

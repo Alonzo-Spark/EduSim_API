@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 49,
+  "question": "A current of 2 A flows through a resistor of 10 Ω. Calculate voltage.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Ohm's Law Problem\n\n### Problem\nA steady electric current of $2 \\text{ A}$ flows through a resistor with a value of $10 \\ \\Omega$. Calculate the voltage drop across the resistor.\n\n### Given\n* Current tracking ($I$) = $2 \\text{ A}$\n* Resistance value ($R$) = $10 \\ \\Omega$\n\n### Formula\n$$V = IR$$\n\n### Substitution\n$$V = 2 \\times 10$$\n\n### Calculation\n$$V = 20 \\text{ V}$$\n\n### Final Answer\n**Potential Difference ($V$) = $20 \\text{ V}$**\n\n### Interpretation\nThis means that a potential difference of $20 \\text{ Volts}$ must be maintained across the ends of the $10 \\ \\Omega$ resistor to sustain a continuous current flow of $2 \\text{ Amperes}$.",
+  "candidate_response": "┌───────────────────────────────┐\n│ 📘 Problem Statement            │\n│                                 │\n│ A current of **2 A** flows through │\n│ a resistor of **10 Ω**. Find the │\n│ voltage across the resistor.    │\n└───────────────────────────────┘\n\n┌───────────────────────────────┐\n│ 🧭 Key Concepts                 │\n│                                 │\n│ • **Current (I)** – flow of electric │\n│   charge, measured in amperes (A).   │\n│ • **Resistance (R)** – opposition to │\n│   current, measured in ohms (Ω).      │\n│ • **Voltage (V)** – electric potential │\n│   difference, measured in volts (V). │\n│ • **Ohm’s Law** – fundamental relation │\n│   linking the three quantities.       │\n└───────────────────────────────┘\n\n┌───────────────────────────────┐\n│ 📐 Formula Card – Ohm’s Law    │\n│                                 │\n│          **V = I · R**           │\n│                                 │\n│ [ Explain Formula ]             │\n│   • V – voltage (V)             │\n│   • I – current (A)             │\n│   • R – resistance (Ω)          │\n│                                 │\n│ [ Open Formula Lab ]            │\n│   Interactive sandbox to       │\n│   experiment with I, R, V.      │\n└───────────────────────────────┘\n\n┌───────────────────────────────┐\n│ 🧮 Solution Steps                │\n│                                 │\n│ 1. Identify given values:       │\n│    • I = 2 A                    │\n│    • R = 10 Ω                  │\n│                                 │\n│ 2. Apply Ohm’s Law:             │\n│    V = I · R                    │\n│                                 │\n│ 3. Substitute:                  │\n│    V = (2 A) · (10 Ω)           │\n│                                 │\n│ 4. Compute:                     │\n│    V = 20 V                    │\n└───────────────────────────────┘\n\n┌───────────────────────────────┐\n│ ✅ Answer                       │\n│                                 │\n│ The voltage across the resistor │\n│ is **20 volts (V)**.             │\n└───────────────────────────────┘\n\n┌───────────────────────────────┐\n│ 📚 Summary                      │\n│                                 │\n│ • Ohm’s Law (V = I R) relates   │\n│   voltage, current, and resistance. │\n│ • Plugging I = 2 A and R = 10 Ω  │\n│   yields V = 20 V.               │\n│ • This principle is foundational │\n│   for analyzing electric circuits. │\n└───────────────────────────────┘\n\n┌───────────────────────────────┐\n│ ❓ Suggested Questions           │\n│                                 │\n│ 1. If the voltage were 30 V, what │\n│    would the current be?          │\n│ 2. How does changing resistance │\n│    affect voltage for a fixed    │\n│    current?                       │\n│ 3. What power is dissipated in   │\n│    the 10 Ω resistor?            │\n└───────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 10,
+    "quality": 10,
+    "educational": 10,
+    "overall_average": "10.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately solves the problem using Ohm's Law, with correct formulas and calculations. The response is well-structured, easy to read, and provides a clear explanation of the concepts. The use of boxes and formatting enhances the readability and presentation. The summary and suggested questions demonstrate a good understanding of the topic and its applications. Overall, the response is of high quality, educational, and accurate.",
+  "candidate_token_usage": {
+    "promptTokens": 435,
+    "completionTokens": 1006,
+    "totalTokens": 1441
+  },
+  "candidate_latency_ms": 1732,
+  "candidate_cost_usd": 0.00066885,
+  "judge_token_usage": {
+    "promptTokens": 1382,
+    "completionTokens": 141,
+    "totalTokens": 1523
+  },
+  "judge_latency_ms": 3462,
+  "judge_cost_usd": 0.0011676,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:51:35.391Z"
+}

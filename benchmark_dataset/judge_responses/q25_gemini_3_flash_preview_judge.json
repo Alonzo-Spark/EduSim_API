@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 25,
+  "question": "Why do astronauts experience weightlessness in space?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWeightlessness is the sensation of having no weight, experienced when there is an absence of contact forces or support reactions acting on the body. \n\nIn orbit, this state is called microgravity, occurring because the spacecraft and its occupants are in a continuous state of free fall.\n\n---\n\n## The Free Fall Mechanism\n\n* **Continuous Trajectory Fall:** A spacecraft in orbit accelerates toward the Earth due to gravity, but its high forward speed matches the curve of the planet, causing it to fall around the Earth indefinitely.\n* **Zero Normal Force Interaction:** Because both the astronaut and the spacecraft fall together at the exact same rate, there is no floor pushing upward against the astronaut's feet, creating a sensation of weightlessness.\n\n---\n\n## Formula\n\nThe apparent weight relationship inside an accelerating capsule frame:\n\n$$N = m(g - a)$$\n\nWhen in a stable free-fall orbit, the downward acceleration matches gravity ($a = g$):\n\n$$N = m(g - g) = 0$$\n\nWhere:\n* $N$ represents the normal contact reaction force\n* $m$ represents the astronaut's mass\n* $g$ represents the local acceleration due to gravity\n* $a$ represents the centripetal orbital acceleration of the vehicle\n\n---\n\n## Summary\n\nAstronauts retain nearly all of their gravitational weight in low orbit, but they experience weightlessness because they are in a state of continuous free fall alongside their spacecraft, removing all upward contact forces.",
+  "candidate_response": "### 🌌 Lesson: The Physics of Weightlessness\n***\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Quick Definition**                                             │\n│                                                                  │\n│ Weightlessness (or Microgravity) is not the absence of gravity,  │\n│ but the state of **continuous free-fall**. It occurs when an     │\n│ object and its environment are falling toward Earth at the same  │\n│ rate, eliminating the \"Normal Force\" (the push back from a floor)│\n│ that we perceive as weight.                                      │\n└──────────────────────────────────────────────────────────────────┘\n\n### 💡 Key Concepts\n\n*   **Gravity in Orbit:** At the height of the International Space Station (ISS), Earth's gravity is still about **90%** as strong as it is on the ground. Gravity is very much present.\n*   **Tangential Velocity:** Astronauts are moving sideways at roughly 17,500 mph.\n*   **The Result:** As they fall toward Earth, the Earth curves away beneath them. They are essentially \"missing\" the ground constantly.\n\n### 🧪 Main Formula\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Apparent Weight Formula**                                      │\n│                                                                  │\n│ $$W_{apparent} = m(g - a)$$                                      │\n│                                                                  │\n│ **[ Explain Formula ]**                                          │\n│ When your downward acceleration ($a$) equals the acceleration    │\n│ due to gravity ($g$), the apparent weight becomes zero.          │\n│                                                                  │\n│ **[ Open Formula Lab ]**                                         │\n└──────────────────────────────────────────────────────────────────┘\n\n### 📊 Comparison: Mass vs. Weight in Space\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Physical Property Comparison**                                 │\n│                                                                  │\n│ | Property | On Earth | In Orbit (ISS) |                         │\n│ | :--- | :--- | :--- |                                           │\n│ | **Mass** | 70 kg | 70 kg (Does not change) |                  │\n│ | **Gravity Force** | ~686 N | ~617 N (Still very high) |         │\n│ | **Normal Force** | 686 N | 0 N (The \"Floor\" is falling too) |   │\n│ | **Sensation** | Heavy | Weightless |                           │\n└──────────────────────────────────────────────────────────────────┘\n\n### ⚠️ Important Notes\n\n> [!IMPORTANT]\n> **The Vacuum Myth:** A common misconception is that astronauts float because there is \"no air\" or \"no gravity\" in space. This is false. If gravity disappeared, the ISS would fly off in a straight line into deep space rather than staying in orbit.\n\n### 🛠 Applications: The \"Vomit Comet\"\nScientists simulate this environment on Earth using **Parabolic Flights**. An airplane flies in a steep arc. As the plane tops the arc and dives, everything inside \"falls\" at the same rate as the plane, creating weightlessness for about 20–30 seconds.\n\n### 📝 Summary\n1.  **Gravity** provides the centripetal force to keep the station in orbit.\n2.  **High Speed** prevents the station from crashing into the surface.\n3.  **Free-fall** creates the sensation of weightlessness because there is no surface to push back against the astronaut's body.\n\n***\n\n### ❓ Suggested Questions\n*   *How does long-term weightlessness affect human bone density?*\n*   *If the ISS stopped moving sideways, what would happen to the astronauts?*\n*   *What is the difference between \"G-force\" and \"Microgravity\"?*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the concept of weightlessness in space, accurately explaining the role of continuous free-fall, the balance between gravity and tangential velocity, and the resulting sensation of weightlessness. The use of formulas, such as the apparent weight formula, is correct and well-explained. The response also effectively addresses common misconceptions, like the 'vacuum myth.' The layout and formatting are well-structured, making the content easily readable and understandable. The educational value is high, with clear explanations and examples that would be beneficial for beginners. Minor points of improvement could include further elaboration on the implications of long-term weightlessness or additional examples of applications, but overall, the response is comprehensive and accurate.",
+  "candidate_token_usage": {
+    "promptTokens": 379,
+    "completionTokens": 792,
+    "totalTokens": 1171
+  },
+  "candidate_latency_ms": 6228,
+  "candidate_cost_usd": 0.0025655,
+  "judge_token_usage": {
+    "promptTokens": 1485,
+    "completionTokens": 208,
+    "totalTokens": 1693
+  },
+  "judge_latency_ms": 8926,
+  "judge_cost_usd": 0.0013901999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:47:57.913Z"
+}

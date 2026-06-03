@@ -1,0 +1,68 @@
+Let's derive the expression for equivalent resistance in a parallel combination of resistors.
+
+### Introduction
+When resistors are connected in parallel, the voltage across each resistor is the same, while the total current flowing through the circuit is the sum of the currents flowing through each resistor.
+
+### Key Concepts
+1. **Ohm's Law**: \( V = IR \) where \( V \) is voltage, \( I \) is current, and \( R \) is resistance.
+2. **Parallel Connection**: In a parallel circuit, the total current \( I_{\text{total}} \) is the sum of the individual currents through each resistor.
+
+### Derivation
+Consider \( n \) resistors \( R_1, R_2, R_3, \ldots, R_n \) connected in parallel. The voltage across each resistor is the same and denoted as \( V \).
+
+The current through each resistor can be expressed using Ohm's Law:
+
+- For \( R_1 \): \( I_1 = \frac{V}{R_1} \)
+- For \( R_2 \): \( I_2 = \frac{V}{R_2} \)
+- For \( R_3 \): \( I_3 = \frac{V}{R_3} \)
+- ...
+- For \( R_n \): \( I_n = \frac{V}{R_n} \)
+
+The total current \( I_{\text{total}} \) can be expressed as:
+
+\[
+I_{\text{total}} = I_1 + I_2 + I_3 + \ldots + I_n
+\]
+
+Substituting the expressions for \( I_1, I_2, \ldots, I_n \):
+
+\[
+I_{\text{total}} = \frac{V}{R_1} + \frac{V}{R_2} + \frac{V}{R_3} + \ldots + \frac{V}{R_n}
+\]
+
+Factoring out \( V \):
+
+\[
+I_{\text{total}} = V \left( \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \ldots + \frac{1}{R_n} \right)
+\]
+
+Using Ohm's Law again, we know that \( I_{\text{total}} \) can also be expressed in terms of the equivalent resistance \( R_{\text{eq}} \):
+
+\[
+I_{\text{total}} = \frac{V}{R_{\text{eq}}}
+\]
+
+Equating the two expressions for \( I_{\text{total}} \):
+
+\[
+\frac{V}{R_{\text{eq}}} = V \left( \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \ldots + \frac{1}{R_n} \right)
+\]
+
+Dividing both sides by \( V \) (assuming \( V \neq 0 \)):
+
+\[
+\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \ldots + \frac{1}{R_n}
+\]
+
+### Main Formula
+┌───────────────────────────┐  
+│ Main Formula              │  
+│                           │  
+│  \( \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \ldots + \frac{1}{R_n} \)  │  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+### Summary
+The equivalent resistance \( R_{\text{eq}} \) for resistors in parallel is found by taking the reciprocal of the sum of the reciprocals of each individual resistance. This means that adding more resistors in parallel decreases the total resistance in the circuit.

@@ -1,0 +1,82 @@
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **INTRODUCTION**                                                         │
+├──────────────────────────────────────────────────────────────────────────┤
+│ In a parallel circuit, resistors are connected across the same two nodes,│
+│ providing multiple paths for the electric current to flow. This          │
+│ arrangement ensures that the voltage across each resistor remains        │
+│ identical to the source voltage.                                         │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **KEY CONCEPTS & CHARACTERISTICS**                                       │
+├──────────────────────────────────────────────────────────────────────────┤
+│ • **Voltage ($V$):** Remains constant across all resistors.              │
+│ • **Current ($I$):** Splits across different branches.                   │
+│ • **Total Current:** Sum of individual currents ($I = I_1 + I_2 + ...$). │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **DERIVATION STEPS**                                                     │
+├──────────────────────────────────────────────────────────────────────────┤
+│ 1. **Apply Ohm's Law:** For each resistor $R_1, R_2, R_3$:               │
+│    $I_1 = \frac{V}{R_1}$, $I_2 = \frac{V}{R_2}$, $I_3 = \frac{V}{R_3}$    │
+│                                                                          │
+│ 2. **Conservation of Charge:** Total current $I$ entering the junction   │
+│    must equal the sum of currents leaving:                               │
+│    $I = I_1 + I_2 + I_3$                                                 │
+│                                                                          │
+│ 3. **Equivalent Substitution:** Replace the network with a single        │
+│    resistor $R_p$ such that $I = \frac{V}{R_p}$.                         │
+│                                                                          │
+│ 4. **Combine:** Substitute the values into the current equation:         │
+│    $\frac{V}{R_p} = \frac{V}{R_1} + \frac{V}{R_2} + \frac{V}{R_3}$         │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **MAIN FORMULA: EQUIVALENT RESISTANCE (PARALLEL)**                       │
+│                                                                          │
+│ $$\frac{1}{R_p} = \sum_{i=1}^{n} \frac{1}{R_i} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_n}$$ │
+│                                                                          │
+│ [ **Explanation**: The reciprocal of the equivalent resistance is the    ]
+│ [ sum of the reciprocals of the individual resistances.                  ]
+│ [ **Open Formula Lab** ]                                                 │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **SPECIAL CASE: TWO RESISTORS**                                          │
+│                                                                          │
+│ $$R_p = \frac{R_1 \cdot R_2}{R_1 + R_2}$$                                │
+│                                                                          │
+│ [ **Explanation**: Known as the "Product over Sum" rule, used for        ]
+│ [ quick calculations of two parallel components.                         ]
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **SUMMARY TABLE**                                                        │
+├──────────────────────────────────────────────────────────────────────────┤
+│ | Parameter          | Behavior in Parallel                              |
+│ |:-------------------|:--------------------------------------------------|
+│ | **Voltage**        | Same for all ($V_1 = V_2 = V_n$)                  |
+│ | **Current**        | Inversely proportional to Resistance               |
+│ | **Total Resistance**| Always less than the smallest individual resistor |
+│ | **Failure**        | If one branch breaks, others still function       |
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **IMPORTANT NOTES**                                                      │
+├──────────────────────────────────────────────────────────────────────────┤
+│ • If $n$ identical resistors of resistance $R$ are connected in parallel,│
+│   the equivalent resistance is $R_p = \frac{R}{n}$.                      │
+│ • Parallel circuits are used in home wiring so that appliances can be    │
+│   operated independently.                                                │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **SUGGESTED QUESTIONS**                                                  │
+├──────────────────────────────────────────────────────────────────────────┤
+│ 1. Why does the total resistance decrease when resistors are added in    │
+│    parallel?                                                             │
+│ 2. Find the equivalent resistance of $10\Omega$, $20\Omega$, and         │
+│    $30\Omega$ resistors connected in parallel.                           │
+│ 3. Compare the power dissipation in series vs parallel circuits.         │
+└──────────────────────────────────────────────────────────────────────────┘

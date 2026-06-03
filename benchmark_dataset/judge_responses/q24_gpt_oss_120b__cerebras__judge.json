@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 24,
+  "question": "Calculate the gravitational force between two masses of 5 kg each placed 2 m apart.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Gravitational Field Problem\n\n### Problem\nCalculate the gravitational force between two identical masses of $5 \\text{ kg}$ each placed at a center-to-center distance of $2 \\text{ m}$ apart.\n\n### Given\n* First mass ($m_1$) = $5 \\text{ kg}$\n* Second mass ($m_2$) = $5 \\text{ kg}$\n* Distance apart ($r$) = $2 \\text{ m}$\n* Gravitational Constant ($G$) = $6.67 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$\n\n### Formula\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\n### Substitution\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{5 \\times 5}{2^2}$$\n\n### Calculation\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{25}{4}$$\n\n$$F = (6.67 \\times 10^{-11}) \\times 6.25$$\n\n$$F = 4.16875 \\times 10^{-10} \\text{ N}$$\n\n### Final Answer\n**Gravitational Force ($F$) = $4.17 \\times 10^{-10} \\text{ N}$**\n\n### Interpretation\nThis reflects an incredibly weak mutual attraction force, demonstrating why gravity is imperceptible between everyday objects and only becomes significant with planetary-scale masses.",
+  "candidate_response": "┌───────────────────────────────────────┐  \n│ **Introduction**                       │  \n│                                       │  \n│ Determine the gravitational force that │  \n│ acts between two identical masses of   │  \n│ 5 kg each when they are 2 m apart.      │  \n└───────────────────────────────────────┘  \n\n┌───────────────────────────────────────┐  \n│ **Formula**                             │  \n│                                         │  \n│      **Newton’s Law of Gravitation**    │  \n│                                         │  \n│   $$\\displaystyle F = G\\frac{m_1 m_2}{r^{2}}$$   │  \n│                                         │  \n│   [ Explain Formula ]   [ Open Formula Lab ] │  \n└───────────────────────────────────────┘  \n\n┌───────────────────────────────────────┐  \n│ **Input Parameters**                    │  \n│───────────────────────────────────────│  \n│ **Symbol** │ **Value**                  │  \n│------------│---------------------------│  \n│ $m_1$      │ 5 kg                      │  \n│ $m_2$      │ 5 kg                      │  \n│ $r$        │ 2 m                       │  \n│ $G$        │ $6.674\\times10^{-11}\\,$N·m²·kg⁻² │  \n└───────────────────────────────────────┘  \n\n┌───────────────────────────────────────┐  \n│ **Calculation**                         │  \n│                                         │  \n│ 1️⃣ Insert the numbers into the formula:│  \n│ $$F = 6.674\\times10^{-11}\\frac{(5)(5)}{(2)^{2}}$$ │  \n│                                         │  \n│ 2️⃣ Compute the numerator:               │  \n│ $(5)(5)=25$                              │  \n│                                         │  \n│ 3️⃣ Compute the denominator:             │  \n│ $(2)^{2}=4$                              │  \n│                                         │  \n│ 4️⃣ Combine: $$F = 6.674\\times10^{-11}\\frac{25}{4}$$ │  \n│                                         │  \n│ 5️⃣ Simplify: $$\\frac{25}{4}=6.25$$      │  \n│                                         │  \n│ 6️⃣ Final multiplication: $$F = 6.674\\times10^{-11}\\times6.25$$ │  \n│                                         │  \n│ 7️⃣ Result: $$F \\approx 4.17\\times10^{-10}\\ \\text{N}$$ │  \n└───────────────────────────────────────┘  \n\n┌───────────────────────────────────────┐  \n│ **Result**                              │  \n│                                         │  \n│ The gravitational attraction between   │  \n│ the two 5 kg masses separated by 2 m is │  \n│ **≈ 4.2 × 10⁻¹⁰ N** (to two‑significant‑figures). │  \n└───────────────────────────────────────┘  \n\n┌───────────────────────────────────────┐  \n│ **Summary**                             │  \n│                                         │  \n│ • Newton’s law relates mass, distance, │  \n│   and the universal constant $G$.       │  \n│ • Even modest masses generate extremely │  \n│   tiny forces when the separation is not │  \n│   astronomically small.                 │  \n│ • The computed force is on the order of │  \n│   $10^{-10}$ N, essentially negligible │  \n│   for everyday mechanical interactions.│  \n└───────────────────────────────────────┘  \n\n┌───────────────────────────────────────┐  \n│ **Suggested Questions**                 │  \n│                                         │  \n│ 1. How would the force change if the      │  \n│    distance were halved?                 │  \n│ 2. What distance would be required for   │  \n│    the force to reach 1 N?               │  \n│ 3. How does the gravitational force      │  \n│    compare with the electrostatic force   │  \n│    between two elementary charges?       │  \n│ 4. If one mass were increased to 10 kg, │  \n│    what is the new force?                │  \n└───────────────────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational value. It correctly applies Newton's Law of Gravitation, provides a clear and step-by-step calculation, and offers additional insights and suggestions for further exploration. The formatting is excellent, making the response easy to follow and understand. The only minor suggestion for improvement could be to include a brief discussion on the units of the gravitational constant and the resulting force, but overall, the response is comprehensive and well-presented.",
+  "candidate_token_usage": {
+    "promptTokens": 435,
+    "completionTokens": 1364,
+    "totalTokens": 1799
+  },
+  "candidate_latency_ms": 1434,
+  "candidate_cost_usd": 0.00088365,
+  "judge_token_usage": {
+    "promptTokens": 1663,
+    "completionTokens": 157,
+    "totalTokens": 1820
+  },
+  "judge_latency_ms": 8596,
+  "judge_cost_usd": 0.0013746,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:46:10.840Z"
+}

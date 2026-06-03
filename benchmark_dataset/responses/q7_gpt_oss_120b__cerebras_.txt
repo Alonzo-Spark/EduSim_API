@@ -1,0 +1,110 @@
+┌───────────────────────────────────────────────┐
+│ Introduction                                    │
+│                                               │
+│ In projectile motion the vertical component of   │
+│ the trajectory reaches a peak before the object │
+│ starts descending. Knowing the maximum height   │
+│ (often denoted as **H**) is useful for          │
+│ predicting flight paths, range, and safety      │
+│ considerations in engineering and sports.      │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Definition                                     │
+│                                               │
+│ **Maximum Height (H)** – the greatest vertical │
+│ displacement of a projectile from its launch   │
+│ point, occurring when the vertical velocity is │
+│ momentarily zero.                               │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Key Concepts                                   │
+│                                               │
+│ • Initial speed **v₀**                         │
+│ • Launch angle **θ** (measured from the        │
+│   horizontal)                                   │
+│ • Gravitational acceleration **g** (≈9.81 m/s²) │
+│ • Decomposition of motion into horizontal and │
+│   vertical components                           │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Main Formula                                    │
+│                                               │
+│          H = (v₀² sin²θ)                       │
+│                -------------------              │
+│                     2 g                         │
+│                                               │
+│ [ Explain Formula ]   [ Open Formula Lab ]    │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Derivation Steps                               │
+│                                               │
+│ 1. **Resolve the initial velocity**            │
+│    • Horizontal:  vₓ = v₀ cosθ                │
+│    • Vertical:    vᵧ = v₀ sinθ                │
+│                                               │
+│ 2. **Use the vertical kinematic equation**    │
+│    v² = u² + 2a s                               │
+│    At the top, final vertical speed v = 0.     │
+│    → 0 = (v₀ sinθ)² – 2g H                      │
+│                                               │
+│ 3. **Solve for H**                             │
+│    2g H = (v₀ sinθ)²                           │
+│    H = (v₀² sin²θ) / (2g)                      │
+│                                               │
+│ 4. **Interpretation**                         │
+│    • Height grows with the square of the       │
+│      launch speed and with sin²θ (maximum at   │
+│      90°).                                      │
+│    • Inversely proportional to gravity –      │
+│      stronger g → lower H.                     │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Applications                                   │
+│                                               │
+│ • Determining the optimal launch angle for     │
+│   maximum altitude (θ = 90°).                  │
+│ • Ballistics: estimating peak altitude of      │
+│   artillery shells.                           │
+│ • Sports: calculating the apex of a basketball │
+│   shot or a ski jumper’s flight.               │
+│ • Aerospace: initial ascent of rockets before   │
+│   thrust reduction.                             │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Summary                                        │
+│                                               │
+│ The maximum height of a projectile launched   │
+│ with speed **v₀** at angle **θ** is               │
+│                                               │
+│     H = (v₀² sin²θ) / (2g)                     │
+│                                               │
+│ It follows directly from the vertical motion   │
+│ equation when the vertical velocity becomes zero│
+│ at the apex.                                   │
+└───────────────────────────────────────────────┘
+
+
+┌───────────────────────────────────────────────┐
+│ Suggested Questions                             │
+│                                               │
+│ 1. How does the maximum height change if the    │
+│    launch angle is 45° instead of 30°?         │
+│ 2. What is the effect of a reduced gravity      │
+│    environment (e.g., Moon) on H?              │
+│ 3. Derive the expression for the time to reach  │
+│    the maximum height.                         │
+│ 4. If air resistance is considered, which term │
+│    would modify the simple formula?            │
+└───────────────────────────────────────────────┘

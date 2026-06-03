@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 28,
+  "question": "Explain Archimedes’ principle with an example.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nArchimedes' Principle states that when a body is completely or partially submerged in a fluid at rest, it experiences an upward buoyant force equal to the total weight of the fluid that the body displaces.\n\n---\n\n## Core Characteristics\n\n* **Origin of Buoyancy:** Buoyancy arises because fluid pressure increases with depth, creating a greater upward force on the bottom of an object than the downward force on its top.\n* **Equilibrium Conditions:** An object floats if its total weight matches the buoyant force of the fluid displaced before it fully submerges.\n\n---\n\n## Formula\n\nThe upward buoyant force magnitude is calculated by:\n\n$$F_b = \\rho V g$$\n\nWhere:\n* $F_b$ represents the buoyant force vector magnitude\n* $\\rho$ represents the mass density of the displaced fluid\n* $V$ represents the submerged volume of the object\n* $g$ represents local acceleration due to gravity\n\n---\n\n## Real-world Example: Steel Cargo Ship\n\nA solid block of steel sinks quickly because its weight exceeds the buoyant force of the water it displaces. However, if that same sheet of steel is shaped into a wide, hollow ship hull:\n* The hull encloses a large volume of air, significantly increasing the overall volume of the ship.\n* When placed in water, this large volume displaces a massive amount of liquid, generating a buoyant force equal to the ship's weight and allowing it to float.\n\n---\n\n## Summary\n\nArchimedes' Principle explains buoyancy as an upward force equal to the weight of the displaced fluid, determining whether an object floats or sinks based on its average density.",
+  "candidate_response": "### 📘 ARCHIMEDES' PRINCIPLE\n\n| Topic | Fluid Mechanics |\n| :--- | :--- |\n| **Concept** | Buoyancy & Displacement |\n| **Level** | Introductory Physics |\n\n---\n\n### 📝 QUICK DEFINITION\n> \"Any object, wholly or partially immersed in a fluid, is buoyed up by a force equal to the weight of the fluid displaced by the object.\"\n\nWhen you dip an object into water, it feels lighter. This isn't because the object lost mass, but because the water is pushing back up against gravity.\n\n---\n\n### 🧪 MAIN FORMULA\n\n┌──────────────────────────────────────────────────────────┐\n│ **The Buoyancy Equation**                                  │\n│                                                          │\n│ $$F_b = \\rho \\cdot V \\cdot g$$                           │\n│                                                          │\n│ **[ Explain Formula ]**                                  │\n│ • $F_b$: Buoyant Force (Newtons)                         │\n│ • $\\rho$: Density of the fluid ($kg/m^3$)                │\n│ • $V$: Volume of displaced fluid ($m^3$)                 │\n│ • $g$: Acceleration due to gravity ($9.8 \\, m/s^2$)      │\n│                                                          │\n│ **[ Open Formula Lab ]**                                 │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n### 💡 KEY CONCEPTS\n\n*   **Displacement:** When an object enters water, it moves water out of the way to make room for itself.\n*   **Apparent Weight:** The weight an object seems to have when submerged.\n*   **Equilibrium:** An object floats when the Buoyant Force equals the object's Weight.\n\n---\n\n### 🚢 PRACTICAL EXAMPLE: THE IRON SHIP\nHow can a ship made of heavy iron float, while a small iron nail sinks?\n\n| Feature | The Iron Nail | The Large Ship |\n| :--- | :--- | :--- |\n| **Mass** | Very Small | Massive |\n| **Volume** | Tiny | Huge (hollow hull) |\n| **Displacement** | Displaces very little water | Displaces tons of water |\n| **Result** | $Weight > F_b$ (Sinks) | $Weight = F_b$ (Floats) |\n\n---\n\n### 🛠 APPLICATIONS\n\n1.  **Submarines:** They use ballast tanks to change their weight. By filling tanks with water, they become heavier than the buoyant force and sink.\n2.  **Hot Air Balloons:** Since air is a fluid, the displaced cold air provides an upward force on the lighter hot air inside the balloon.\n3.  **Hydrometers:** Devices used to measure the density of liquids (like testing battery acid or milk purity).\n\n---\n\n### ⚠️ IMPORTANT NOTES\n*   **Fluid Type:** This principle applies to both **liquids and gases**.\n*   **Immersion Depth:** Once an object is fully submerged, the buoyant force does not increase as it goes deeper (because the volume of water displaced remains the same).\n*   **Weight vs. Mass:** Always remember that buoyancy responds to the **weight** of the displaced fluid, not just its mass.\n\n---\n\n### ❓ SUGGESTED QUESTIONS\n1. If an object weighs 10N in air and 7N when submerged in water, what is the Buoyant Force?\n2. Why does a person find it easier to float in the Dead Sea compared to a freshwater swimming pool?\n3. If an object is denser than the fluid it is placed in, will it sink or float?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It covers the definition, formula, and application of Archimedes' Principle with clarity and appropriate examples. The use of tables, formulas, and concise explanations enhances readability and understanding. However, minor improvements could include adding more visual aids like diagrams to illustrate displacement and buoyancy, and providing a brief historical context or biography of Archimedes to enrich the educational experience. Overall, the response demonstrates a strong command of the subject matter and presents it in an engaging and accessible manner.",
+  "candidate_token_usage": {
+    "promptTokens": 379,
+    "completionTokens": 769,
+    "totalTokens": 1148
+  },
+  "candidate_latency_ms": 5780,
+  "candidate_cost_usd": 0.0024965,
+  "judge_token_usage": {
+    "promptTokens": 1501,
+    "completionTokens": 170,
+    "totalTokens": 1671
+  },
+  "judge_latency_ms": 5947,
+  "judge_cost_usd": 0.0013086,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:54:08.708Z"
+}

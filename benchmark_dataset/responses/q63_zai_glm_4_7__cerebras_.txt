@@ -1,0 +1,81 @@
+┌───────────────────────────────────────────────────────┐
+│ SYSTEM EVENT RESPONSE                                 │
+│ Event: friction_changed                               │
+│ Target: braking_track_platform_alpha                  │
+│ Timestamp: 14:02:45.22                                │
+├───────────────────────────────────────────────────────┤
+│ {                                                     │
+│   "eventId": "evt_8821_fx",                           │
+│   "type": "runtime_overlay",                          │
+│   "trigger": "friction_changed",                      │
+│   "payload": {                                        │
+│     "targetId": "brake_track_01",                     │
+│     "parameter": "coefficient_of_friction",           │
+│     "previousValue": 0.85,                            │
+│     "newValue": 0.35,                                 │
+│     "unit": "dimensionless",                          │
+│     "cause": "rain_simulation_start",                 │
+│     "estimatedImpact": {                              │
+│       "stoppingDistanceChange": "+145%",              │
+│       "brakingForceLoss": "58.8%"                     │
+│     }                                                 │
+│   }                                                   │
+│ }                                                     │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ VISUAL OVERLAY RENDER                                 │
+│                                                       │
+│  ┌─────────────────────────────────────────────────┐  │
+│  │ ⚠️  SURFACE FRICTION UPDATED                    │  │
+│  ├─────────────────────────────────────────────────┤  │
+│  │                                                 │  │
+│  │  Current Coefficient ($\mu_k$)                  │  │
+│  │                                                 │  │
+│  │        ████████░░░░░░░░░░░░░░                   │  │
+│  │                                                 │  │
+│  │  0.85  ────────►  0.35                          │  │
+│  │   (Dry)           (Wet)                         │  │
+│  │                                                 │  │
+│  │  Status: Critical braking distance increase.   │  │
+│  │                                                 │  │
+│  │            [ DISMISS ] [ VIEW DATA ]            │  │
+│  └─────────────────────────────────────────────────┘  │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ PHYSICS IMPACT ANALYSIS                               │
+│                                                       │
+│ The reduction in the coefficient of kinetic friction  │
+│ ($\mu_k$) directly decreases the maximum braking      │
+│ force available to the vehicle.                       │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Main Formula                                          │
+│                                                       │
+│         $$F_{max} = \mu_k \cdot N$$                   │
+│                                                       │
+│ Where:                                                │
+│ • $F_{max}$ = Maximum Static Friction Force           │
+│ • $\mu_k$ = Coefficient of Kinetic Friction           │
+│ • $N$ = Normal Force ($m \cdot g$)                    │
+│                                                       │
+│ [ Explain Formula ] [ Open Physics Lab ]              │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Simulation Consequence                                │
+│                                                       │
+│ 1. **Reduced Deceleration:** The vehicle can no       │
+│    longer generate the same deceleration vector.      │
+│                                                       │
+│ 2. **Increased Stopping Distance:**                   │
+│    $$d = \frac{v^2}{2\mu g}$$                         │
+│    Since $\mu$ is in the denominator, a lower $\mu$   │
+│    results in a significantly higher $d$.             │
+│                                                       │
+│ 3. **Skid Probability:** If applied braking force     │
+│    exceeds $F_{max}$, the vehicle enters a kinetic    │
+│    skid state.                                        │
+└───────────────────────────────────────────────────────┘

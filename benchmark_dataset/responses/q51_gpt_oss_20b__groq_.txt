@@ -1,0 +1,92 @@
+┌───────────────────────────────────────────────────────────────────────┐  
+│ **Introduction**                                                        │  
+│                                                                           │  
+│ A simple pendulum is a point mass hanging from a lightweight, rigid     │  
+│ string or rod, swinging under the influence of gravity. It is a classic │  
+│ system used to illustrate the principles of simple harmonic motion.       │  
+└───────────────────────────────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────────────────────────────┐  
+│ **Definition**                                                          │  
+│                                                                           │  
+│ *Simple Pendulum*: A mass \(m\) attached to a mass‑less rod of length     │  
+│ \(L\) that swings with small angular displacements, so the restoring     │  
+│ force is approximately proportional to the displacement.                 │  
+└───────────────────────────────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────────────────────────────┐  
+│ **Key Concepts**                                                        │  
+│                                                                           │  
+│ • **Period (T)** – Time for one complete oscillation.                    │  
+│ • **Length (L)** – Distance from pivot to mass center.                   │  
+│ • **Gravitational Acceleration (g)** – ~9.81 m/s² on Earth.              │  
+│ • **Mass (m)** – Weight of the bob.                                      │  
+│ • **Small‑Angle Approximation** – Valid for angles < ≈ 15°.                │  
+└───────────────────────────────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────────────────────────────┐  
+│ **Formula**                                                             │  
+│                                                                           │  
+│ The period of a simple pendulum (independent of mass) is given by:        │  
+│                                                                           │  
+│ $$ T \;=\; 2\pi \sqrt{\frac{L}{g}} $$                                   │  
+│                                                                           │  
+│ **Variables**:                                                          │  
+│ • \(T\) – Period (s)                                                     │  
+│ • \(L\) – Length (m)                                                     │  
+│ • \(g\) – Gravitational acceleration (m/s²)                              │  
+└───────────────────────────────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────────────────────────────┐  
+│ **Live Sandbox**                                                        │  
+│                                                                           │  
+│ *Experiment*: Vary the mass \(m\) of the pendulum bob while keeping the   │  
+│ length \(L\) fixed, and record the resulting period \(T\).                 │  
+│                                                                           │  
+│ 1. Set \(L = 1.00\,\text{m}\) and \(g = 9.81\,\text{m/s}^2\).              │  
+│ 2. Choose masses: 0.1 kg, 0.5 kg, 1.0 kg, 5.0 kg.                        │  
+│ 3. For each mass, start the pendulum at a small angle (≈ 5°) and time      │  
+│    five complete oscillations.                                           │  
+│ 4. Compute the average period: \(T_{\text{avg}} = \frac{\text{Total Time}}{5}\). │  
+│ 5. Plot the results (mass on the x‑axis, period on the y‑axis).           │  
+│                                                                           │  
+│ **Expected Result**: The period remains essentially constant, confirming │  
+│ that \(T\) does not depend on \(m\).                                      │  
+└───────────────────────────────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────────────────────────────┐  
+│ **Sample Data Table**                                                   │  
+│                                                                           │  
+│ | Mass (kg) | Period (s) | ΔT (s) | Notes |                           │  
+│ |-----------|------------|--------|-------|                           │  
+│ | 0.10      | 2.007      | 0.000  | —     |                           │  
+│ | 0.50      | 2.008      | 0.001  | —     |                           │  
+│ | 1.00      | 2.009      | 0.002  | —     |                           │  
+│ | 5.00      | 2.010      | 0.003  | Slight drift due to air resistance |  
+│ └───────────────────────────────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────────────────────────────┐  
+│ **Summary**                                                             │  
+│                                                                           │  
+│ The period of a simple pendulum is governed solely by its length and the │  
+│ gravitational field; the mass of the bob does not influence the period.  │  
+│ This independence arises because the restoring force and inertial mass │  
+│ both scale linearly with \(m\), cancelling out in the equation of motion. │  
+│                                                                           │  
+│ Thus, varying mass in a simple pendulum experiment will not change the  │  
+│ measured period, provided the small‑angle approximation holds and other  │  
+│ factors (drag, string mass) remain negligible.                           │  
+└───────────────────────────────────────────────────────────────────────┘  
+
+┌───────────────────────────────────────────────────────────────────────┐  
+│ **Suggested Questions**                                                 │  
+│                                                                           │  
+│ 1. Why does the period of a simple pendulum not depend on its mass?      │  
+│ 2. How would air resistance affect the period for very heavy masses?     │  
+│ 3. What happens to the period if the angle of swing exceeds 15°?         │  
+│ 4. How would you modify the experiment to test the period’s independence│  
+│    of mass on a different planet with a different \(g\)?                 │  
+└───────────────────────────────────────────────────────────────────────┘  
+
+**[Explain Formula]** – Click to view a detailed breakdown of the derivation.  
+**[Open Formula Lab]** – Launch an interactive simulation to manipulate \(L\), \(g\), and \(m\) and observe \(T\).

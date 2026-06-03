@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 60,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'gravity_changed' event to zero-g environment.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a user interaction with the global environment controllers.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe environmental gravity parameter was modified by the user from Earth conditions to a weightless state (`gravity_changed`).\n\n### WHAT CHANGED\nThe vertical acceleration vector acting on all active canvas masses dropped to zero, causing floating objects to cease downward travel.\n\n### SIMPLE WHY\nSetting the gravity constant to zero removes the downward gravitational force vector, leaving objects to move purely by their linear inertia.\n\n### WHAT TO NOTICE\nNotice how objects that were falling now drift in straight lines across the grid, unaffected by any downward pull.",
+  "candidate_response": "```json\n{\n  \"event\": \"gravity_changed\",\n  \"environment_state\": \"zero_g\",\n  \"ui_layout\": \"interactive_textbook\",\n  \"blocks\": [\n    {\n      \"type\": \"Introduction\",\n      \"title\": \"State Change: Microgravity Transition\",\n      \"content\": \"The sandbox environment has transitioned from a standard gravitational constant to **Zero-G**. In this state, the gravitational force vector $\\\\vec{g}$ is null, leading to weightlessness for all dynamic entities within the simulation.\"\n    },\n    {\n      \"type\": \"Formula\",\n      \"title\": \"Gravitational Force Law\",\n      \"latex\": \"F_g = m \\\\cdot g\",\n      \"context\": \"Under Zero-G conditions, the acceleration due to gravity ($g$) becomes 0.\",\n      \"variables\": [\n        {\"symbol\": \"F_g\", \"label\": \"Weight (Force)\"},\n        {\"symbol\": \"m\", \"label\": \"Mass (Constant)\"},\n        {\"symbol\": \"g\", \"label\": \"Gravitational Acceleration (0 m/s²)\"}\n      ],\n      \"lab_link\": \"open_formula_lab_null_gravity\"\n    },\n    {\n      \"type\": \"Key Concepts\",\n      \"items\": [\n        {\n          \"concept\": \"Inertia Dominance\",\n          \"description\": \"Objects in motion remain in motion at a constant velocity unless acted upon by an external force (Newton's First Law).\"\n        },\n        {\n          \"concept\": \"Lack of Hydrostatic Pressure\",\n          \"description\": \"Fluid buoyancy is eliminated; bubbles do not rise and heavy particles do not settle.\"\n        }\n      ]\n    },\n    {\n      \"type\": \"Formula\",\n      \"title\": \"Kinetic Energy in Vacuum/Zero-G\",\n      \"latex\": \"K_e = \\\\frac{1}{2}mv^2\",\n      \"context\": \"Since potential energy ($mgh$) is now zero, total mechanical energy is derived solely from velocity.\",\n      \"variables\": [\n        {\"symbol\": \"K_e\", \"label\": \"Kinetic Energy\"},\n        {\"symbol\": \"v\", \"label\": \"Velocity\"}\n      ],\n      \"lab_link\": \"open_energy_sim\"\n    },\n    {\n      \"type\": \"Characteristics\",\n      \"title\": \"Environmental Physics Changes\",\n      \"table\": {\n        \"headers\": [\"Property\", \"Standard Gravity (1g)\", \"Zero-G (0g)\"],\n        \"rows\": [\n          [\"Trajectory\", \"Parabolic Arc\", \"Linear Path\"],\n          [\"Weight\", \"$m \\\\times 9.8$\", \"0\"],\n          [\"Convection\", \"Thermal Buoyancy\", \"Diffusion Limited\"],\n          [\"Friction\", \"Normal Force Dependent\", \"Surface Tension Dependent\"]\n        ]\n      }\n    },\n    {\n      \"type\": \"Important Notes\",\n      \"content\": \"⚠️ **Collision Detection:** In zero-g, elastic collisions result in significantly higher rebound distances as there is no downward force to provide ground-plane friction.\"\n    },\n    {\n      \"type\": \"Suggested Questions\",\n      \"questions\": [\n        \"How does the absence of a normal force affect friction calculations?\",\n        \"Predict the behavior of a liquid droplet in this environment.\",\n        \"Calculate the momentum of a 5kg mass moving at 2m/s in zero-g.\"\n      ]\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts related to a zero-g environment, including the effects on gravity, inertia, and kinetic energy. The use of formulas, such as F_g = m * g and K_e = 1/2 * m * v^2, is accurate and relevant. The response also provides a clear and structured presentation of the information, making it easy to follow and understand. However, some areas for improvement include providing more explicit connections to the gold reference answer, such as discussing the 'gravity_changed' event and its implications in more detail. Additionally, while the response is generally well-structured, some sections, such as the 'Characteristics' table, could be improved with more concise and clear headings. Overall, the response is of high quality and effectively communicates the key concepts related to a zero-g environment.",
+  "candidate_token_usage": {
+    "promptTokens": 391,
+    "completionTokens": 782,
+    "totalTokens": 1173
+  },
+  "candidate_latency_ms": 5509,
+  "candidate_cost_usd": 0.0025415,
+  "judge_token_usage": {
+    "promptTokens": 1259,
+    "completionTokens": 230,
+    "totalTokens": 1489
+  },
+  "judge_latency_ms": 11052,
+  "judge_cost_usd": 0.0013073999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:47:54.895Z"
+}

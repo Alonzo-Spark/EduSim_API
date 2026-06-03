@@ -1,0 +1,92 @@
+### 📘 PHYSICS MODULE: SIMPLE HARMONIC MOTION
+
+---
+
+#### ┌── Introduction ────────────────────────────────────┐
+│ A **Simple Pendulum** consists of a heavy point mass (bob) suspended from a rigid support by a massless, inextensible string. When pulled to one side and released, it executes periodic motion in a vertical plane under the influence of gravity.
+└────────────────────────────────────────────────────────┘
+
+#### ┌── Key Concepts ─────────────────────────────────────┐
+│ • **Restoring Force:** The component of gravity that pulls the bob back to equilibrium.
+│ • **Small Angle Approximation:** For oscillations where $\theta < 10^\circ$, we assume $\sin \theta \approx \theta$.
+│ • **Effective Length ($L$):** Distance from the point of suspension to the center of gravity of the bob.
+└────────────────────────────────────────────────────────┘
+
+#### ┌── Formula Card: Restoring Force ──────────────────────┐
+│ **Title:** Dynamics of the Bob
+│ 
+│ $$ F_{restoring} = -mg \sin \theta $$
+│ 
+│ **Variables:**
+│ • $m$: Mass of the bob
+│ • $g$: Acceleration due to gravity
+│ • $\theta$: Angular displacement
+│ 
+│ [ **Explain:** The negative sign indicates the force acts opposite to displacement. ]
+│ [ **Open Formula Lab** ]
+└────────────────────────────────────────────────────────┘
+
+#### ┌── Derivation Steps ──────────────────────────────────┐
+│ **1. Applying Newton's Second Law:**
+│ The restoring force $F$ is also equal to $ma$. Therefore:
+│ $ma = -mg \sin \theta$
+│ $a = -g \sin \theta$
+│
+│ **2. Small Angle Approximation:**
+│ For small $\theta$, $\sin \theta \approx \theta$ (in radians).
+│ From geometry, $\theta = \frac{x}{L}$ (where $x$ is arc length).
+│ $a = -g \left( \frac{x}{L} \right)$
+│
+│ **3. Relation to SHM:**
+│ Standard SHM equation is $a = -\omega^2 x$.
+│ Comparing the two: $\omega^2 = \frac{g}{L}$
+└────────────────────────────────────────────────────────┘
+
+#### ┌── Formula Card: Angular Velocity ─────────────────────┐
+│ **Title:** System Frequency
+│ 
+│ $$ \omega = \sqrt{\frac{g}{L}} $$
+│ 
+│ **Variables:**
+│ • $\omega$: Angular frequency (rad/s)
+│ • $g$: $9.8 \, m/s^2$
+│ • $L$: Length of string
+│ 
+│ [ **Explain:** Frequency depends only on length and gravity, not mass. ]
+│ [ **Open Formula Lab** ]
+└────────────────────────────────────────────────────────┘
+
+#### ┌── Main Formula: Time Period ─────────────────────────┐
+│ **Title:** Period of Oscillation
+│ 
+│ $$ T = 2\pi \sqrt{\frac{L}{g}} $$
+│ 
+│ **Variables:**
+│ • $T$: Time for one complete oscillation (s)
+│ • $L$: Length of the pendulum (m)
+│ • $g$: Local gravitational acceleration
+│ 
+│ [ **Explain:** This is the "Gallilean" period for small amplitudes. ]
+│ [ **Open Formula Lab** ]
+└────────────────────────────────────────────────────────┘
+
+#### ┌── Characteristics ───────────────────────────────────┐
+│ | Factor | Effect on Time Period ($T$) |
+│ | :--- | :--- |
+│ | **Length ($L$)** | $T \propto \sqrt{L}$ (Longer pendulum = Slower) |
+│ | **Gravity ($g$)** | $T \propto 1/\sqrt{g}$ (Higher gravity = Faster) |
+│ | **Mass ($m$)** | No effect (Independent of mass) |
+│ | **Amplitude** | No effect (for small angles) |
+└────────────────────────────────────────────────────────┘
+
+#### ┌── Important Notes ──────────────────────────────────┐
+│ ⚠️ **The "Second's Pendulum":** A pendulum with a time period of exactly 2 seconds. Its length is approximately 0.994 meters on Earth.
+│ 
+│ ⚠️ **Non-Linearity:** If the angle $\theta$ is large, the formula becomes significantly more complex and the motion is no longer strictly SHM.
+└────────────────────────────────────────────────────────┘
+
+#### ┌── Suggested Questions ───────────────────────────────┐
+│ 1. What happens to the time period if the pendulum is taken to the Moon?
+│ 2. Why does a person on a swing move faster if they stand up (shortening the effective $L$)?
+│ 3. Prove that the motion of a simple pendulum is SHM only for small angles.
+└────────────────────────────────────────────────────────┘

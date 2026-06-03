@@ -1,0 +1,30 @@
+{
+  "name": "edusim_api",
+  "version": "1.0.0",
+  "description": "A clean, lightweight Retrieval-Augmented Generation (RAG) system using Gemini API for LLM inference.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alonzo-Spark/EduSim_API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Alonzo-Spark/EduSim_API/issues"
+  },
+  "homepage": "https://github.com/Alonzo-Spark/EduSim_API#readme",
+  "dependencies": {
+    "@google/genai": "^2.6.0",
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.6.2"
+  }
+}

@@ -1,0 +1,124 @@
+# Acceleration Due to Gravity
+
+Let me render this as structured UI blocks with formula cards and section cards.
+
+---
+
+## 🟦 Quick Definition
+
+> **Acceleration due to gravity** is the acceleration experienced by any object due to the gravitational force exerted by the Earth (or any massive body), directed toward the center of that body.
+
+---
+
+## 🟧 Starting Point — Newton's Laws
+
+Two laws work together here:
+
+**Newton's Law of Universal Gravitation** tells us the force between two masses:
+
+$$F = \frac{GMm}{r^2}$$
+
+**Newton's Second Law** connects force to acceleration:
+
+$$F = ma$$
+
+---
+
+## 🟩 The Derivation
+
+### Step 1 — Set the two forces equal
+
+An object of mass $m$ sits on or near Earth's surface. Earth has mass $M$ and radius $R$.
+
+The gravitational force on the object is:
+
+$$F = \frac{GMm}{R^2}$$
+
+By Newton's Second Law, this same force causes acceleration $g$:
+
+$$F = mg$$
+
+### Step 2 — Equate and cancel
+
+$$mg = \frac{GMm}{R^2}$$
+
+The mass of the object $m$ appears on **both sides** — it cancels completely:
+
+$$g = \frac{GM}{R^2}$$
+
+---
+
+## ⭐ Main Formula Card
+
+$$\boxed{g = \frac{GM}{R^2}}$$
+
+| Symbol | Meaning | Value / Unit |
+|--------|---------|-------------|
+| $g$ | Acceleration due to gravity | $\approx 9.8 \ \text{m/s}^2$ |
+| $G$ | Universal Gravitational Constant | $6.674 \times 10^{-11} \ \text{N m}^2\text{kg}^{-2}$ |
+| $M$ | Mass of Earth | $5.972 \times 10^{24} \ \text{kg}$ |
+| $R$ | Radius of Earth | $6.371 \times 10^{6} \ \text{m}$ |
+
+---
+
+## 🟪 Numerical Verification
+
+Substituting known values:
+
+$$g = \frac{(6.674 \times 10^{-11}) \times (5.972 \times 10^{24})}{(6.371 \times 10^{6})^2}$$
+
+$$g = \frac{3.985 \times 10^{14}}{4.059 \times 10^{13}}$$
+
+$$g \approx 9.8 \ \text{m/s}^2 \checkmark$$
+
+---
+
+## 🔑 Key Insight — Why mass of object doesn't matter
+
+> The mass $m$ of the falling object **cancels out** in the derivation.
+> This means **all objects fall with the same acceleration** regardless of their mass — which is exactly what Galileo demonstrated by dropping objects from the Leaning Tower of Pisa.
+
+---
+
+## 🟥 Variation with Height
+
+If an object is at height $h$ above Earth's surface, replace $R$ with $(R + h)$:
+
+$$g_h = \frac{GM}{(R+h)^2}$$
+
+As $h$ increases → $g_h$ **decreases** (inverse square relationship).
+
+---
+
+## 📊 How g Varies
+
+| Location | Value of $g$ |
+|----------|-------------|
+| Earth's surface (average) | $9.8 \ \text{m/s}^2$ |
+| At the poles | $9.83 \ \text{m/s}^2$ |
+| At the equator | $9.78 \ \text{m/s}^2$ |
+| At height = $R$ (one Earth radius up) | $2.45 \ \text{m/s}^2$ |
+| On the Moon | $1.62 \ \text{m/s}^2$ |
+
+---
+
+## 📝 Summary of Derivation
+
+```
+Newton's Gravitation Law   +   Newton's 2nd Law
+        ↓                            ↓
+   F = GMm/R²              F = mg
+        ↓
+   Set equal → mg = GMm/R²
+        ↓
+   Cancel m → g = GM/R²
+```
+
+---
+
+## 💡 Suggested Follow-up Questions
+
+- How does $g$ vary with depth inside the Earth?
+- How does Earth's rotation affect the value of $g$?
+- Why is $g$ different at poles vs equator?
+- Derive the expression for escape velocity using $g$.

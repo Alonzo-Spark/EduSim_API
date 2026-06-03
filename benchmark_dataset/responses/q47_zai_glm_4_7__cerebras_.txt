@@ -1,0 +1,708 @@
+Here is the complete, self-contained HTML file. It implements the **Interactive Textbook** design system you requested, featuring structured UI blocks, a dedicated Formula Card system, and a fully functional 2D Circuit Simulator.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series Resistance | Interactive Textbook</title>
+    <style>
+        /* =========================================
+           DESIGN SYSTEM & VARIABLES
+           ========================================= */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            
+            /* Math Styling */
+            --math-font: "Times New Roman", Times, serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* =========================================
+           LAYOUT
+           ========================================= */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            gap: 24px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* =========================================
+           UI BLOCKS (CARDS)
+           ========================================= */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-icon {
+            background: #eff6ff;
+            color: var(--primary);
+            padding: 6px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* =========================================
+           FORMULA CARD SYSTEM
+           ========================================= */
+        .formula-card {
+            background: #1e293b; /* Dark theme for formula */
+            color: #f8fafc;
+            border: none;
+        }
+
+        .formula-card .card-header {
+            border-color: #334155;
+        }
+
+        .formula-card .card-title {
+            color: #60a5fa;
+        }
+
+        .formula-display {
+            background: #0f172a;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-family: var(--math-font);
+            font-size: 1.8rem;
+            margin: 16px 0;
+            border: 1px solid #334155;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        /* =========================================
+           INTERACTIVE LAB STYLES
+           ========================================= */
+        .lab-container {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid #cbd5e1;
+        }
+
+        .lab-container.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .lab-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .value-display {
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* =========================================
+           2D CIRCUIT VISUALIZER
+           ========================================= */
+        .circuit-wrapper {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .circuit-path {
+            fill: none;
+            stroke: #374151;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .circuit-component {
+            fill: white;
+            stroke: #374151;
+            stroke-width: 3;
+        }
+
+        .circuit-text {
+            font-family: sans-serif;
+            font-size: 14px;
+            fill: var(--text-muted);
+            text-anchor: middle;
+        }
+
+        .electron-flow {
+            fill: var(--primary);
+            opacity: 0.6;
+        }
+
+        /* =========================================
+           COMPONENTS & UTILITIES
+           ========================================= */
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover { background: var(--primary-dark); }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #94a3b8;
+            color: #cbd5e1;
+        }
+        .btn-outline:hover { border-color: #f8fafc; color: #f8fafc; }
+
+        .derivation-step {
+            margin-bottom: 16px;
+            padding-left: 16px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .math {
+            font-family: var(--math-font);
+            font-style: italic;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f9fafb;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1f2937;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Series Combination</h1>
+            <p class="subtitle">Physics &bull; Electricity &bull; Resistance</p>
+        </header>
+
+        <!-- DEFINITION CARD -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">📖</span>
+                    Quick Definition
+                </div>
+            </div>
+            <p>
+                In a <strong>series combination</strong>, resistors are connected end-to-end such that there is only one path for the electric current to flow. The same current passes through each resistor, but the total voltage is divided across them.
+            </p>
+        </article>
+
+        <!-- 2D INTERACTIVE CIRCUIT SIMULATOR -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">⚡</span>
+                    Visual Simulation
+                </div>
+            </div>
+            
+            <div class="circuit-wrapper">
+                <svg id="circuit-svg" viewBox="0 0 600 250">
+                    <!-- Wires -->
+                    <rect x="50" y="50" width="500" height="150" class="circuit-path" rx="10" />
+                    
+                    <!-- Battery -->
+                    <g transform="translate(280, 190)">
+                        <line x1="-20" y1="0" x2="20" y2="0" stroke="#374151" stroke-width="4" />
+                        <line x1="-10" y1="-10" x2="-10" y2="10" stroke="#374151" stroke-width="4" /> <!-- Short plate -->
+                        <line x1="10" y1="-20" x2="10" y2="20" stroke="#374151" stroke-width="4" /> <!-- Long plate -->
+                        <text x="30" y="5" class="circuit-text" style="font-size: 16px;">V</text>
+                    </g>
+
+                    <!-- Resistor 1 -->
+                    <g transform="translate(100, 50)">
+                        <rect x="-25" y="-10" width="50" height="20" class="circuit-component" />
+                        <text x="0" y="-20" class="circuit-text">R₁</text>
+                        <text x="0" y="35" class="circuit-text" id="label-r1">10Ω</text>
+                    </g>
+
+                    <!-- Resistor 2 -->
+                    <g transform="translate(250, 50)">
+                        <rect x="-25" y="-10" width="50" height="20" class="circuit-component" />
+                        <text x="0" y="-20" class="circuit-text">R₂</text>
+                        <text x="0" y="35" class="circuit-text" id="label-r2">20Ω</text>
+                    </g>
+
+                    <!-- Resistor 3 -->
+                    <g transform="translate(400, 50)">
+                        <rect x="-25" y="-10" width="50" height="20" class="circuit-component" />
+                        <text x="0" y="-20" class="circuit-text">R₃</text>
+                        <text x="0" y="35" class="circuit-text" id="label-r3">30Ω</text>
+                    </g>
+
+                    <!-- Current Arrows (Animated) -->
+                    <circle r="4" class="electron-flow">
+                        <animateMotion dur="4s" repeatCount="indefinite" path="M 50 125 L 100 125 L 100 50 L 250 50 L 250 125 L 400 125 L 400 50 L 550 50 L 550 200 L 50 200 Z" />
+                    </circle>
+                </svg>
+            </div>
+
+            <div class="lab-controls">
+                <div class="control-group">
+                    <label>Resistance R₁ (Ω)</label>
+                    <input type="range" id="input-r1" min="0" max="100" value="10">
+                    <span class="value-display" id="val-r1">10 Ω</span>
+                </div>
+                <div class="control-group">
+                    <label>Resistance R₂ (Ω)</label>
+                    <input type="range" id="input-r2" min="0" max="100" value="20">
+                    <span class="value-display" id="val-r2">20 Ω</span>
+                </div>
+                <div class="control-group">
+                    <label>Resistance R₃ (Ω)</label>
+                    <input type="range" id="input-r3" min="0" max="100" value="30">
+                    <span class="value-display" id="val-r3">30 Ω</span>
+                </div>
+                <div class="control-group" style="background: #eff6ff; padding: 10px; border-radius: 8px;">
+                    <label>Equivalent Resistance (Rₑq)</label>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);" id="display-req">60 Ω</div>
+                </div>
+            </div>
+        </article>
+
+        <!-- DERIVATION SECTION -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">📝</span>
+                    Derivation
+                </div>
+            </div>
+            
+            <div class="derivation-step">
+                <strong>1. Setup:</strong>
+                <p>Consider three resistors <span class="math">R₁, R₂, R₃</span> connected in series to a battery of voltage <span class="math">V</span>. Let the current flowing through the circuit be <span class="math">I</span>.</p>
+            </div>
+
+            <div class="derivation-step">
+                <strong>2. Apply Ohm's Law:</strong>
+                <p>According to Ohm's Law (<span class="math">V = IR</span>), the potential difference across each resistor is:</p>
+                <div style="background: #f3f4f6; padding: 10px; border-radius: 8px; margin-top: 5px; font-family: var(--math-font);">
+                    V₁ = IR₁, &nbsp; V₂ = IR₂, &nbsp; V₃ = IR₃
+                </div>
+            </div>
+
+            <div class="derivation-step">
+                <strong>3. Total Voltage:</strong>
+                <p>In a series circuit, the total voltage is the sum of the individual voltage drops:</p>
+                <div style="background: #f3f4f6; padding: 10px; border-radius: 8px; margin-top: 5px; font-family: var(--math-font);">
+                    V = V₁ + V₂ + V₃
+                </div>
+            </div>
+
+            <div class="derivation-step">
+                <strong>4. Substitute and Simplify:</strong>
+                <p>Substitute the Ohm's law expressions into the voltage equation:</p>
+                <div style="background: #f3f4f6; padding: 10px; border-radius: 8px; margin-top: 5px; font-family: var(--math-font);">
+                    V = IR₁ + IR₂ + IR₃
+                </div>
+                <p>Factor out the current <span class="math">I</span>:</p>
+                <div style="background: #f3f4f6; padding: 10px; border-radius: 8px; margin-top: 5px; font-family: var(--math-font);">
+                    V = I(R₁ + R₂ + R₃)
+                </div>
+            </div>
+
+            <div class="derivation-step">
+                <strong>5. Equivalent Resistance:</strong>
+                <p>If we replace the three resistors with a single equivalent resistor <span class="math">Rₑq</span>, Ohm's Law for the whole circuit is <span class="math">V = IRₑq</span>.</p>
+                <p>Comparing the two equations for <span class="math">V</span>:</p>
+                <div style="background: #f3f4f6; padding: 10px; border-radius: 8px; margin-top: 5px; font-family: var(--math-font);">
+                    IRₑq = I(R₁ + R₂ + R₃)
+                </div>
+                <p>Dividing both sides by <span class="math">I</span>:</p>
+                <div style="background: #ecfdf5; padding: 10px; border-radius: 8px; margin-top: 5px; font-weight: bold; font-family: var(--math-font);">
+                    Rₑq = R₁ + R₂ + R₃
+                </div>
+            </div>
+        </article>
+
+        <!-- FORMULA CARD SYSTEM -->
+        <article class="card formula-card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">🧮</span>
+                    Main Formula
+                </div>
+            </div>
+
+            <div class="formula-display">
+                R<sub>eq</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub> + ... + R<sub>n</sub>
+            </div>
+
+            <div class="formula-actions">
+                <button class="btn btn-outline" onclick="showToast('Formula Explained: Equivalent resistance is the algebraic sum of individual resistances.')">
+                    Explain Formula
+                </button>
+                <button class="btn btn-primary" onclick="toggleFormulaLab()">
+                    Open Formula Lab
+                </button>
+            </div>
+
+            <!-- HIDDEN FORMULA LAB -->
+            <div id="formula-lab" class="lab-container">
+                <h4 style="margin-bottom: 12px; color: #1e293b;">Formula Experiment</h4>
+                <p style="margin-bottom: 16px; font-size: 0.9rem;">
+                    Add resistors to see how they sum up. The total resistance is simply the sum of all parts.
+                </p>
+                
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <button class="btn btn-primary" style="background: #10b981;" onclick="addResistor()">+ Add Resistor</button>
+                    <button class="btn btn-outline" style="color: #ef4444; border-color: #ef4444;" onclick="removeResistor()">- Remove</button>
+                </div>
+
+                <div id="lab-visuals" style="display: flex; align-items: flex-end; height: 100px; gap: 4px; padding-bottom: 5px; border-bottom: 2px solid #94a3b8;">
+                    <!-- Dynamic bars inserted here -->
+                </div>
+                
+                <div style="margin-top: 10px; font-family: monospace;">
+                    <strong>Calculation:</strong> <span id="lab-calc-string">10 + 20 + 30</span> = <span id="lab-total">60</span> Ω
+                </div>
+            </div>
+        </article>
+
+        <!-- CHARACTERISTICS TABLE -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">📊</span>
+                    Key Characteristics
+                </div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Behavior in Series</th>
+                            <th>Explanation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Current (I)</strong></td>
+                            <td style="color: var(--primary);">Constant</td>
+                            <td>Same current flows through all components.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Voltage (V)</strong></td>
+                            <td style="color: var(--primary);">Divides</td>
+                            <td>Total voltage is the sum of individual drops.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Resistance (R)</strong></td>
+                            <td style="color: var(--primary);">Increases</td>
+                            <td>R<sub>eq</sub> is greater than the largest individual resistor.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+
+        <!-- SUMMARY CARD -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">📌</span>
+                    Important Notes
+                </div>
+            </div>
+            <ul style="padding-left: 20px; color: var(--text-main);">
+                <li style="margin-bottom: 8px;">If one resistor burns out (open circuit), the entire circuit stops working.</li>
+                <li style="margin-bottom: 8px;">Series circuits are not commonly used for household wiring due to this single-point failure risk.</li>
+                <li>Used in devices where specific voltage division is required (e.g., potentiometers).</li>
+            </ul>
+        </article>
+    </div>
+
+    <!-- TOAST NOTIFICATION ELEMENT -->
+    <div id="toast" class="toast">Notification Message</div>
+
+    <script>
+        /* =========================================
+           LOGIC: CIRCUIT SIMULATOR
+           ========================================= */
+        const r1Input = document.getElementById('input-r1');
+        const r2Input = document.getElementById('input-r2');
+        const r3Input = document.getElementById('input-r3');
+        
+        const r1Val = document.getElementById('val-r1');
+        const r2Val = document.getElementById('val-r2');
+        const r3Val = document.getElementById('val-r3');
+        
+        const r1Label = document.getElementById('label-r1');
+        const r2Label = document.getElementById('label-r2');
+        const r3Label = document.getElementById('label-r3');
+        
+        const reqDisplay = document.getElementById('display-req');
+
+        function updateCircuit() {
+            const r1 = parseInt(r1Input.value);
+            const r2 = parseInt(r2Input.value);
+            const r3 = parseInt(r3Input.value);
+
+            // Update Text Labels
+            r1Val.textContent = r1 + ' Ω';
+            r2Val.textContent = r2 + ' Ω';
+            r3Val.textContent = r3 + ' Ω';
+
+            r1Label.textContent = r1 + 'Ω';
+            r2Label.textContent = r2 + 'Ω';
+            r3Label.textContent = r3 + 'Ω';
+
+            // Calculate Equivalent Resistance
+            const req = r1 + r2 + r3;
+            reqDisplay.textContent = req + ' Ω';
+
+            // Update Animation Speed based on resistance (Higher R = Slower Current)
+            // Base speed 4s. Max resistance 300.
+            const speed = 1 + (req / 20); 
+            const circle = document.querySelector('.electron-flow animateMotion');
+            circle.setAttribute('dur', speed + 's');
+        }
+
+        // Attach Listeners
+        [r1Input, r2Input, r3Input].forEach(input => {
+            input.addEventListener('input', updateCircuit);
+        });
+
+        /* =========================================
+           LOGIC: FORMULA LAB
+           ========================================= */
+        let labResistors = [10, 20, 30];
+        const labVisuals = document.getElementById('lab-visuals');
+        const labCalcString = document.getElementById('lab-calc-string');
+        const labTotal = document.getElementById('lab-total');
+
+        function renderLab() {
+            labVisuals.innerHTML = '';
+            let total = 0;
+            let calcStr = [];
+
+            labResistors.forEach((r, index) => {
+                total += r;
+                calcStr.push(r);
+
+                // Create visual bar
+                const bar = document.createElement('div');
+                bar.style.width = '30px';
+                // Scale height: assume max 100 for visualization
+                bar.style.height = Math.min(r, 100) + '%'; 
+                bar.style.backgroundColor = '#3b82f6';
+                bar.style.borderRadius = '4px 4px 0 0';
+                bar.style.position = 'relative';
+                
+                // Tooltip/Label
+                const label = document.createElement('span');
+                label.textContent = r;
+                label.style.position = 'absolute';
+                label.style.bottom = '-20px';
+                label.style.left = '50%';
+                label.style.transform = 'translateX(-50%)';
+                label.style.fontSize = '10px';
+                label.style.color = '#64748b';
+                
+                bar.appendChild(label);
+                labVisuals.appendChild(bar);
+            });
+
+            labCalcString.textContent = calcStr.join(' + ');
+            labTotal.textContent = total;
+        }
+
+        function addResistor() {
+            // Add a random resistor between 5 and 50
+            const newR = Math.floor(Math.random() * 45) + 5;
+            labResistors.push(newR);
+            renderLab();
+        }
+
+        function removeResistor() {
+            if (labResistors.length > 1) {
+                labResistors.pop();
+                renderLab();
+            } else {
+                showToast("You need at least one resistor!");
+            }
+        }
+
+        /* =========================================
+           LOGIC: UI UTILITIES
+           ========================================= */
+        function toggleFormulaLab() {
+            const lab = document.getElementById('formula-lab');
+            lab.classList.toggle('active');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize
+        updateCircuit();
+        renderLab();
+
+    </script>
+</body>
+</html>
+```

@@ -1,0 +1,136 @@
+Okay, I will generate a runtime overlay response designed to be displayed as an interactive card, specifically triggered by the "orbit_started" event within a stable loop. This overlay will aim for an interactive textbook style, moving away from a simple markdown presentation.
+
+Here's the structure and content for the overlay:
+
+```json
+{
+  "event": "orbit_started",
+  "overlay": {
+    "type": "card",
+    "title": "Orbit Initiation Confirmed",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "Your spacecraft has successfully initiated its orbital trajectory!  This signifies that the propulsion system has completed its burn and the craft is now under the influence of the primary celestial body's gravity."
+      },
+      {
+        "type": "section",
+        "title": "Key Parameters",
+        "content": [
+          {
+            "type": "table",
+            "headers": ["Parameter", "Value", "Units"],
+            "rows": [
+              ["Altitude", "{{altitude}}", "km"],
+              ["Orbital Velocity", "{{orbital_velocity}}", "km/s"],
+              ["Eccentricity", "{{eccentricity}}", ""],
+              ["Inclination", "{{inclination}}", "degrees"],
+              ["Orbital Period", "{{orbital_period}}", "minutes"]
+            ]
+          }
+        ]
+      },
+      {
+        "type": "formula_card",
+        "formula": "$$v = \\sqrt{GM\\left( \\frac{2}{r} - \\frac{1}{a} \\right)}$$",
+        "title": "Orbital Velocity Calculation",
+        "context": "The orbital velocity (v) is a crucial parameter, determining the speed at which the spacecraft orbits. It is dependent on the gravitational constant (G), the mass of the central body (M), the current distance from the center of the body (r), and the semi-major axis of the orbit (a).",
+        "variables": [
+          {"symbol": "v", "description": "Orbital Velocity"},
+          {"symbol": "G", "description": "Gravitational Constant"},
+          {"symbol": "M", "description": "Mass of Central Body"},
+          {"symbol": "r", "description": "Distance from Center"},
+          {"symbol": "a", "description": "Semi-Major Axis"}
+        ],
+        "buttons": [
+          {
+            "label": "Explain Formula",
+            "action": "show_explanation",
+            "target": "orbital_velocity_explanation"
+          },
+          {
+            "label": "Open Formula Lab",
+            "action": "open_lab",
+            "lab_type": "orbital_velocity"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "text": "The stability of the orbit is continuously monitored.  Any deviations from the planned trajectory will trigger alerts and corrective actions.  Continue to monitor the telemetry data."
+      },
+      {
+        "type": "section",
+        "title": "Next Steps",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "1.  Monitor telemetry for orbital parameters."
+          },
+          {
+            "type": "paragraph",
+            "text": "2.  Assess the stability of the orbit."
+          },
+          {
+            "type": "paragraph",
+            "text": "3.  Prepare for the next mission phase (e.g., station keeping or maneuver)."
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "label": "Acknowledge",
+        "action": "close_overlay"
+      }
+    ],
+    "related_content": [
+      {
+        "type": "explanation",
+        "id": "orbital_velocity_explanation",
+        "title": "Orbital Velocity Explained",
+        "content": [
+          {
+            "type": "paragraph",
+            "text": "The formula calculates the spacecraft's speed in orbit. A higher velocity can mean a less stable orbit or a higher orbit. The distance from the center of the orbit is 'r', and the semi-major axis is 'a'.  These and other parameters are essential for maintaining a stable orbit."
+          },
+          {
+            "type": "button",
+            "label": "Close",
+            "action": "close_related_content"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Key features and explanations:
+
+*   **`event: "orbit_started"`:**  This is the trigger.  The overlay will appear when this event is received.
+*   **`type: "card"`:**  The top-level component, the fundamental UI block.
+*   **`title: "Orbit Initiation Confirmed"`:** The card's primary heading.
+*   **`content` array:**  An array of UI elements to display within the card.
+    *   **`type: "paragraph"`:**  Standard text paragraphs.
+    *   **`type: "section"`:**  Divides content logically.
+        *   **`type: "table"`:**  Displays key orbital parameters.  Uses placeholders like `{{altitude}}` which will be replaced with real-time data from the system.
+    *   **`type: "formula_card"`:**  A dedicated component for displaying formulas.
+        *   **`formula`:** The LaTeX formula to render using KaTeX.
+        *   **`title`:** A title for the formula card.
+        *   **`context`:** Explanatory text surrounding the formula.
+        *   **`variables`:**  An array describing the variables in the formula.  This could be used to create interactive tooltips or a legend within the Formula Lab.
+        *   **`buttons`:**  Interactive buttons associated with the formula.
+            *   **`label`**: Button Text
+            *   **`action`: "show_explanation"**: Triggers the display of related content.
+            *   **`action`: "open_lab"**: Opens a "Formula Lab" (details below).
+    *   **`type: "button"`:** A button for user interaction.
+*   **`related_content` array:** An array of content that can be referenced by the buttons.
+    *   **`type: "explanation"`:** Displays a modal or similar UI element.
+*   **Formula Lab (Conceptual):**  The `open_lab` action isn't implemented within this JSON; it's a placeholder. A Formula Lab would ideally:
+    *   Present the formula in an interactive way.
+    *   Allow users to input values for variables.
+    *   Calculate and display the result.
+    *   Potentially show a graph or visualization.
+    *   Use the `variables` data extracted during parsing for tooltips, variable descriptions, and interactive elements within the lab.
+
+This structure allows for a much richer and more interactive experience than a simple markdown document. It clearly separates the content into UI components, making it easier to manage and update the presentation.  The card-based layout and formula card specifically address the requirements to move away from a markdown-like appearance.

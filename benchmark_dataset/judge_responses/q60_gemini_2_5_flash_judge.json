@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 60,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'gravity_changed' event to zero-g environment.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a user interaction with the global environment controllers.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe environmental gravity parameter was modified by the user from Earth conditions to a weightless state (`gravity_changed`).\n\n### WHAT CHANGED\nThe vertical acceleration vector acting on all active canvas masses dropped to zero, causing floating objects to cease downward travel.\n\n### SIMPLE WHY\nSetting the gravity constant to zero removes the downward gravitational force vector, leaving objects to move purely by their linear inertia.\n\n### WHAT TO NOTICE\nNotice how objects that were falling now drift in straight lines across the grid, unaffected by any downward pull.",
+  "candidate_response": "Here's a sandbox overlay response for a 'gravity_changed' event to a zero-g environment, designed to be structured and interactive.\n\n---\n\n## Zero Gravity Environment Activated!\n\n**Event Triggered:** `gravity_changed`\n**New State:** `zero-g`\n\nThis overlay guides you through understanding and interacting with your new zero-gravity environment.\n\n---\n\n### Quick Definition\n\nPhotosynthesis is the process used by plants, algae, and certain bacteria to convert light energy into chemical energy, stored in organic compounds like sugars. This process uses sunlight, water, and carbon dioxide.\n\n---\n\n### Key Concepts: Understanding Zero-G\n\nZero-gravity, often referred to as weightlessness, is a state where the effect of gravity is not felt. This doesn't mean gravity is absent, but rather that objects are in continuous freefall.\n\n*   **Freefall:** All objects, including you, are accelerating at the same rate due to gravity, creating the sensation of weightlessness.\n*   **Inertia:** Objects in motion tend to stay in motion, and objects at rest tend to stay at rest, unless acted upon by an external force. This becomes very apparent in zero-g.\n*   **Microgravity:** The term \"zero-g\" is often used loosely; in orbit, there's actually still about 90% of Earth's gravity. The weightless sensation comes from constantly \"falling around\" the Earth.\n\n---\n\n### Main Formula\n\n$$ F = ma $$\n\n[ Explain Formula ]\n[ Open Formula Lab ]\n\n---\n\n### Characteristics of Zero-G\n\n| Characteristic        | Description                                                                                             | Impact in Sandbox                                                                      |\n| :-------------------- | :------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------- |\n| **Weightlessness**    | Objects and entities have no apparent weight.                                                           | Objects will float freely unless anchored or propelled.                                |\n| **No Up/Down**        | Without gravity, there's no inherent \"up\" or \"down\" direction.                                          | Orientation becomes relative to your perspective or fixed objects.                      |\n| **Reduced Friction**  | Surfaces no longer press together with weight, significantly reducing friction in many scenarios.         | Movement across surfaces requires less force but also offers less resistance.          |\n| **Fluid Dynamics**    | Liquids form spherical blobs due to surface tension and do not settle.                                  | Spilled liquids will float as globules. Pouring acts differently.                      |\n| **Propulsion Needed** | Any movement requires an initial force; objects will continue moving until another force stops them.    | Use thrusters, pushes, or tethers for movement.                                        |\n\n---\n\n### Applications (Simulated)\n\nIn a real-world zero-g environment, these principles are crucial:\n\n*   **Space Travel:** Essential for astronauts living and working on the International Space Station.\n*   **Material Science:** Growing perfect crystals or mixing immiscible liquids without gravitational settling.\n*   **Biology:** Studying the effects of microgravity on living organisms.\n*   **Manufacturing:** Creating foams or alloys with unique properties.\n\n---\n\n### Important Notes for Interaction\n\n*   **Movement:** Use your directional controls to propel yourself. Remember inertia! A small push can send you a long way.\n*   **Anchoring:** Look for handholds or tethers to stabilize yourself.\n*   **Objects:** Pushing objects will cause both you and the object to move in opposite directions (Newton's Third Law).\n*   **Fluids:** Be cautious with liquids; they will not stay in open containers.\n*   **Orientation:** You can reorient your view freely. There's no \"right side up.\"\n\n---\n\n### Suggested Questions\n\n*   How does the absence of friction affect my movement strategy?\n*   What happens if I try to \"drop\" an object?\n*   How would I retrieve a floating object that's far away?\n*   Can I create a \"spin\" in this environment? What would be its effect?\n\n---",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 4,
+    "quality": 8,
+    "educational": 6,
+    "overall_average": "6.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": true,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks conceptual correctness and semantic alignment with the gold reference answer. The introduction of photosynthesis is unrelated to the topic of zero-gravity environments. The response includes some accurate information about zero-gravity, such as the definition of freefall and inertia, but it also contains incorrect or misleading statements, like the implication that microgravity is exactly 90% of Earth's gravity in all orbits. The formula F = ma is presented without clear explanation of its relevance to the zero-gravity environment. The characteristics of zero-g are listed, but their explanations and impacts in the sandbox are not fully accurate or clear. The response includes applications of zero-g environments, which, while relevant, do not directly address the 'gravity_changed' event. The overall structure and readability are good, but the content suffers from inaccuracies and hallucinations. To improve, the candidate should focus on providing accurate, relevant information about zero-gravity environments and their effects, ensuring that all concepts and formulas are correctly explained and aligned with the topic.",
+  "candidate_token_usage": {
+    "promptTokens": 391,
+    "completionTokens": 857,
+    "totalTokens": 1248
+  },
+  "candidate_latency_ms": 7015,
+  "candidate_cost_usd": 0.0022598,
+  "judge_token_usage": {
+    "promptTokens": 1376,
+    "completionTokens": 264,
+    "totalTokens": 1640
+  },
+  "judge_latency_ms": 8496,
+  "judge_cost_usd": 0.0014592,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:47:54.887Z"
+}

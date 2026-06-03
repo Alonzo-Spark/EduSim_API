@@ -1,0 +1,1068 @@
+question_id,question,gold_answer,model_name,error,timestamp
+2,A car starts from rest and accelerates uniformly at 2m/s. Find its velocity after 10 seconds.,"```python
+u = 0
+a = 2
+t = 10
+v = u + a * t
+print(f""v = {v}"")
+
+
+
+```
+
+```text
+v = 20
+
+
+```
+
+# Solved Numerical
+
+---
+
+## Kinematics Problem
+
+### Problem
+
+A car starts from rest and accelerates uniformly at $2 \text{ m/s}^2$. Find its velocity after 10 seconds.
+
+### Given
+
+* Initial velocity ($u$) = $0 \text{ m/s}$
+* Uniform acceleration ($a$) = $2 \text{ m/s}^2$
+* Time taken ($t$) = $10 \text{ s}$
+
+### Formula
+
+$$v = u + at$$
+
+### Substitution
+
+$$v = 0 + (2 \times 10)$$
+
+### Calculation
+
+$$v = 0 + 20$$
+
+$$v = 20$$
+
+### Final Answer
+
+**Final Velocity ($v$) = $20 \text{ m/s}$**
+
+### Interpretation
+
+This means that after starting from a complete standstill and accelerating steadily at a rate of $2 \text{ m/s}^2$ for $10 \text{ seconds}$, the car reaches a speed of $20 \text{ meters per second}$ in its direction of motion.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T06:54:51.107Z
+3,Explain the difference between distance and displacement with examples.,"# Introduction
+
+---
+
+## Definition
+
+Distance and displacement are fundamental concepts in kinematics used to describe the change in position of an object, but they measure completely different aspects of motion.
+
+Distance is the total length of the actual path traveled by an object during its motion, regardless of the direction taken.
+
+Displacement is the shortest straight-line distance from the initial position to the final position of an object, directed from the starting point to the ending point.
+
+---
+
+## Characteristics
+
+* **Scalar vs. Vector:** Distance is a scalar quantity because it only has magnitude (numerical value) and no specific direction. Displacement is a vector quantity because it possesses both magnitude and a specific direction.
+* **Path Dependence:** Distance depends entirely on the exact path taken by the object. Displacement is completely independent of the path and depends only on the starting and ending coordinates.
+* **Values:** Distance can never be negative or zero if an object has moved. Displacement can be positive, negative, or zero if the object returns to its starting point.
+
+---
+
+## Formula
+
+While distance is found by adding up every segment of a path traveled, displacement is calculated as the change in the position vector.
+
+$$\Delta x = x_f - x_i$$
+
+Where:
+
+* $\Delta x$ represents the displacement
+* $x_f$ represents the final position coordinate
+* $x_i$ represents the initial position coordinate
+
+---
+
+## Comparison Matrix
+
+| Characteristics | Distance | Displacement |
+| --- | --- | --- |
+| **Type of Quantity** | Scalar quantity (Magnitude only). | Vector quantity (Magnitude and direction). |
+| **Path Factor** | Dependent on the path traveled. | Independent of the path traveled. |
+| **Magnitude Relation** | Always greater than or equal to displacement. | Always less than or equal to distance. |
+| **Return to Start** | Increases continuously as motion continues. | Becomes zero if the object returns to the start. |
+
+---
+
+## Real-world Examples
+
+### Example 1: Circular Track Run
+
+An athlete runs exactly one full lap around a circular track with a circumference of $400 \text{ meters}$ and stops at the exact point where they started.
+
+* **Distance:** The athlete physically ran across the track surface, so the total distance traveled is $400 \text{ m}$.
+* **Displacement:** Because the initial starting point and the final stopping point are the exact same location, the straight-line separation is zero. Therefore, the displacement is $0 \text{ m}$.
+
+### Example 2: Delivery Route
+
+A delivery truck drives $5 \text{ km}$ due East down a straight road, turns around, and drives back $3 \text{ km}$ due West along the same path.
+
+* **Distance:** The odometer tracks the total ground covered: 
+$$5 \text{ km} + 3 \text{ km} = 8 \text{ km}$$
+
+
+.
+* **Displacement:** The final position of the truck is only $2 \text{ km}$ away from where it originally started out: 
+$$5 \text{ km} - 3 \text{ km} = 2 \text{ km East}$$
+
+
+.
+
+---
+
+## Step-by-Step Numerical Example
+
+### Problem
+
+A person walks $4 \text{ meters}$ due East and then turns left to walk $3 \text{ meters}$ due North. Find the total distance covered and the magnitude of the final displacement.
+
+### Given
+
+* Distance along East path ($d_1$) = $4 \text{ m}$
+* Distance along North path ($d_2$) = $3 \text{ m}$
+
+### Formula
+
+To find the total distance ($D$):
+
+
+$$D = d_1 + d_2$$
+
+To find the magnitude of displacement ($s$) using the Pythagorean theorem (since East and North paths form a $90^\circ$ angle):
+
+
+$$s = \sqrt{d_1^2 + d_2^2}$$
+
+### Substitution
+
+For distance:
+
+
+$$D = 4 + 3$$
+
+For displacement magnitude:
+
+
+$$s = \sqrt{4^2 + 3^2}$$
+
+### Calculation
+
+For distance:
+
+
+$$D = 7$$
+
+For displacement magnitude:
+
+
+$$s = \sqrt{16 + 9}$$
+
+$$s = \sqrt{25}$$
+
+$$s = 5$$
+
+### Final Answer
+
+**Total Distance ($D$) = $7 \text{ m}$**
+
+**Displacement Magnitude ($s$) = $5 \text{ m}$**
+
+### Interpretation
+
+The person physically walked a total path length of $7 \text{ meters}$. However, because they changed direction, their final position is a straight-line shortcut distance of exactly $5 \text{ meters}$ away from their original starting point.
+
+---
+
+## Summary
+
+Distance tracks the complete history of an object's path, accumulation of ground covered, and is a scalar value. Displacement ignores the winding path entirely, looking strictly at the straight-line vector shortcut connecting the start position to the end position. Displacement will only match distance if the object moves in a single, perfectly straight line without ever reversing direction.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T06:57:05.812Z
+4,Derive the relation s=ut+21	​at2.,"# Introduction
+
+---
+
+## Definition
+
+The second equation of motion, 
+
+$$s = ut + \frac{1}{2}at^2$$
+
+, represents the mathematical relationship between the total displacement, initial velocity, uniform acceleration, and the time elapsed for an object moving in a straight line.
+
+This relation allows us to calculate the precise position or total distance covered by an accelerating object at any specific moment during its journey.
+
+---
+
+## Characteristics
+
+* **Parabolic Position-Time Graph:** Because displacement is proportional to the square of time ($t^2$), a position-time graph for uniform acceleration forms a curve (parabola).
+* **Dependence on Initial Velocity:** Even if an object is accelerating, its total displacement is heavily influenced by its starting speed ($u$).
+* **Constant Acceleration Dependency:** This derivation holds true if and only if the acceleration ($a$) remains completely uniform throughout the timeframe.
+
+---
+
+## Formula
+
+The mathematical relation is stated as:
+
+$$s = ut + \frac{1}{2}at^2$$
+
+Where:
+
+* $s$ represents the displacement of the object
+* $u$ represents the initial velocity
+* $a$ represents the uniform acceleration
+* $t$ represents the total time elapsed
+
+---
+
+## Derivations
+
+### Graphical Derivation Method
+
+Consider an object moving with a uniform acceleration ($a$) along a straight line. Let its initial velocity at time $t = 0$ be $u$, and its final velocity after a time interval $t$ be $v$.
+
+The total displacement ($s$) traveled by an object undergoing uniform acceleration is equal to the geometric area enclosed under its corresponding velocity-time ($v-t$) graph line.
+
+Looking at the graph, the total area under the velocity line from time $0$ to $t$ can be split into two distinct geometric shapes:
+
+1. A rectangle representing steady motion at the initial velocity.
+2. A right-angled triangle representing the continuous velocity gain due to acceleration.
+
+$$\text{Total Displacement } (s) = \text{Area of Rectangle} + \text{Area of Right Triangle}$$
+
+The dimensions of the base rectangle are given by the initial velocity height ($u$) and the time width ($t$):
+
+$$\text{Area of Rectangle} = u \times t$$
+
+The dimensions of the upper triangle consist of a time base width ($t$) and a vertical height representing the change in velocity ($v - u$):
+
+$$\text{Area of Triangle} = \frac{1}{12} \times \text{base} \times \text{height}$$
+
+$$\text{Area of Triangle} = \frac{1}{2} \times t \times (v - u)$$
+
+Adding both individual area expressions together yields the total displacement formula:
+
+$$s = ut + \frac{1}{2}t(v - u)$$
+
+From the first equation of motion, we already know the definitive definition for velocity change:
+
+$$v = u + at$$
+
+$$v - u = at$$
+
+Now, substitute this value of $(v - u)$ directly back into our area accumulation equation:
+
+$$s = ut + \frac{1}{2}t(at)$$
+
+Simplifying the algebraic terms:
+
+$$s = ut + \frac{1}{2}at^2$$
+
+This completes the formal graphical derivation of the second equation of motion.
+
+---
+
+## Applications
+
+* **Civil Engineering:** Evaluating the minimum safe runway length required for aircraft to achieve lift-off acceleration safely.
+* **Accident Reconstruction:** Calculating the initial braking speeds of vehicles based on the length of skid marks left on asphalt surfaces.
+* **Structural Safety:** Determining the drop time and impact speeds of objects falling from specific heights in construction zones.
+
+---
+
+## Real-world Examples
+
+* **Amusement Park Drops:** Calculating how far a free-fall drop tower car drops during the first few seconds before the brakes engage.
+* **Station Takeoff:** Tracking the distance a bullet train travels down the track during its first minute of leaving the platform at a steady throttle setup.
+* **Gravity Lab:** Dropping a small steel bearing down a vacuum tube and charting its downward displacement benchmarks over time.
+
+---
+
+## Advantages and Disadvantages
+
+| Advantages | Disadvantages |
+| --- | --- |
+| Allows calculation of position at any time benchmark without needing to calculate the current velocity first. | Completely invalid if the acceleration fluctuates or changes at different stages of the journey. |
+| Extremely accurate for analyzing clean, low-friction systems like planetary gravity drops. | Fails to track path distances accurately if the object reverses direction during the timeframe. |
+
+---
+
+## Step-by-Step Example
+
+### Problem
+
+A train operating along a straight rail line accelerates uniformly from a complete standstill at a rate of $4 \text{ m/s}^2$. Calculate the total distance the train travels in exactly $6 \text{ seconds}$.
+
+### Given
+
+* Initial velocity ($u$) = $0 \text{ m/s}$ (since it starts from rest)
+* Uniform acceleration ($a$) = $4 \text{ m/s}^2$
+* Time interval ($t$) = $6 \text{ s}$
+
+### Formula
+
+$$s = ut + \frac{1}{2}at^2$$
+
+### Substitution
+
+$$s = (0 \times 6) + \left(\frac{1}{2} \times 4 \times 6^2\right)$$
+
+### Calculation
+
+$$s = 0 + \left(\frac{1}{2} \times 4 \times 36\right)$$
+
+$$s = 0 + (2 \times 36)$$
+
+$$s = 72$$
+
+### Final Answer
+
+**Displacement ($s$) = $72 \text{ m}$**
+
+### Interpretation
+
+This means that by starting from a dead stop and maintaining a steady acceleration of $4 \text{ m/s}^2$, the train will cover a linear distance of exactly $72 \text{ meters}$ by the time the $6\text{-second}$ mark is reached.
+
+---
+
+## Summary
+
+The relation 
+
+$$s = ut + \frac{1}{2}at^2$$
+
+ connects an object's spatial displacement directly to the time elapsed under constant acceleration conditions. Derived by evaluating the geometric area underneath a standard linear velocity-time profile, the formula serves as a pillar of classical kinematics, allowing predictions of moving masses without requiring knowledge of their final velocities.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T06:59:26.156Z
+13,A force of 50 N acts on a body of mass 10 kg. Find acceleration.,"# Solved Numerical
+
+---
+
+## Dynamics Problem
+
+### Problem
+A net force of $50 \text{ N}$ acts on a body of mass $10 \text{ kg}$. Find its resulting acceleration.
+
+### Given
+* Force applied ($F$) = $50 \text{ N}$
+* Mass of the body ($m$) = $10 \text{ kg}$
+
+### Formula
+$$F = ma$$
+
+Rearranging to solve for acceleration ($a$):
+$$a = \frac{F}{m}$$
+
+### Substitution
+$$a = \frac{50}{10}$$
+
+### Calculation
+$$a = 5 \text{ m/s}^2$$
+
+### Final Answer
+**Acceleration ($a$) = $5 \text{ m/s}^2$**
+
+### Interpretation
+This indicates that the $50 \text{ N}$ force causes the $10 \text{ kg}$ mass to increase its velocity uniformly by $5 \text{ meters per second}$ every single second in the direction of the applied force vector.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T07:19:16.614Z
+24,Calculate the gravitational force between two masses of 5 kg each placed 2 m apart.,"# Solved Numerical
+
+---
+
+## Gravitational Field Problem
+
+### Problem
+Calculate the gravitational force between two identical masses of $5 \text{ kg}$ each placed at a center-to-center distance of $2 \text{ m}$ apart.
+
+### Given
+* First mass ($m_1$) = $5 \text{ kg}$
+* Second mass ($m_2$) = $5 \text{ kg}$
+* Distance apart ($r$) = $2 \text{ m}$
+* Gravitational Constant ($G$) = $6.67 \times 10^{-11} \text{ N}\cdot\text{m}^2/\text{kg}^2$
+
+### Formula
+$$F = G \frac{m_1 m_2}{r^2}$$
+
+### Substitution
+$$F = (6.67 \times 10^{-11}) \times \frac{5 \times 5}{2^2}$$
+
+### Calculation
+$$F = (6.67 \times 10^{-11}) \times \frac{25}{4}$$
+
+$$F = (6.67 \times 10^{-11}) \times 6.25$$
+
+$$F = 4.16875 \times 10^{-10} \text{ N}$$
+
+### Final Answer
+**Gravitational Force ($F$) = $4.17 \times 10^{-10} \text{ N}$**
+
+### Interpretation
+This reflects an incredibly weak mutual attraction force, demonstrating why gravity is imperceptible between everyday objects and only becomes significant with planetary-scale masses.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T07:45:43.636Z
+29,Define surface tension and mention factors affecting it.,"# Introduction
+
+---
+
+## Definition
+
+Surface tension is the property of a liquid surface that causes it to behave like a stretched elastic membrane, minimizing its surface area. 
+
+This behavior is caused by cohesive forces, as liquid molecules at the surface experience a net inward pull from the molecules beneath them.
+
+---
+
+## Factors Affecting Surface Tension
+
+* **Temperature Inversion:** Raising the temperature increases the kinetic energy of the molecules, weakening cohesive bonds and reducing surface tension.
+* **Chemical Impurities:** Adding highly soluble materials like salt increases surface tension, whereas adding surfactants like soap lowers it significantly.
+
+---
+
+## Formula
+
+The surface tension scalar definition is given by:
+
+$$T = \frac{F}{L}$$
+
+Where:
+* $T$ represents the surface tension factor
+* $F$ represents the force acting parallel to the surface along a line segment
+* $L$ represents the total length of the line segment over which the force acts
+
+---
+
+## Summary
+
+Surface tension arises from unbalanced molecular attraction at a liquid's surface, causing it to minimize its area. This property decreases with heat and surfactant additives.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T07:55:30.524Z
+30,Explain Bernoulli’s theorem and its applications.,"# Introduction
+
+---
+
+## Definition
+
+Bernoulli's Theorem states that for an ideal, incompressible fluid undergoing steady, non-viscous flow, the total mechanical energy—comprising pressure energy, kinetic energy, and potential energy—remains constant along any streamline.
+
+---
+
+## Formula
+
+The conservation expression along a fluid streamline:
+
+$$P + \frac{1}{2}\rho v^2 + \rho g h = \text{Constant}$$
+
+Where:
+* $P$ represents the static fluid pressure
+* $\rho$ represents the constant mass density of the fluid
+* $v$ represents the local flow velocity
+* $g$ represents acceleration due to gravity
+* $h$ represents the elevation height relative to a reference plane
+
+---
+
+## Applications
+
+* **Aerodynamic Lift:** Airplane wings are shaped so that air travels faster over the curved top surface, creating a lower pressure zone that generates upward lift.
+* **Venturi Tube Meters:** Measuring fluid flow rates through pipelines by tracking the pressure drop that occurs when the flow speeds up through a narrowed throat section.
+* **Atomizers and Paint Sprayers:** Passing a fast stream of air over a small draw tube lowers the local pressure, drawing liquid up to be atomized into a fine spray.
+
+---
+
+## Summary
+
+Bernoulli's Theorem shows that as a fluid's velocity increases, its static pressure drops simultaneously, a principle widely used in aerodynamics and fluid flow systems.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T07:57:22.276Z
+31,Thermal Properties of Matter: Define heat capacity and specific heat capacity.,"# Introduction
+
+---
+
+## Definition
+
+Heat capacity and specific heat capacity describe how a material changes temperature when it absorbs or releases thermal energy.
+
+Heat capacity is the total amount of heat energy required to raise the temperature of an entire object by exactly $1 \text{ Degree Celsius}$ or Kelvin.
+
+Specific heat capacity is the amount of heat energy required to raise the temperature of exactly $1 \text{ kilogram}$ of a pure substance by $1 \text{ Degree Celsius}$ or Kelvin.
+
+---
+
+## Characteristics
+
+* **Extensive vs. Intensive:** Heat capacity is an extensive property that scales with the size and mass of an object. Specific heat capacity is an intensive property inherent to the material itself, regardless of mass.
+
+---
+
+## Formula
+
+The equations for thermal tracking are defined as:
+
+$$\text{Heat Capacity } (C) = \frac{Q}{\Delta T}$$
+
+$$\text{Specific Heat Capacity } (c) = \frac{Q}{m \Delta T}$$
+
+Where:
+* $Q$ represents the total heat energy transferred
+* $\Delta T$ represents the resulting change in temperature
+* $m$ represents the mass of the substance sample
+
+---
+
+## Summary
+
+Heat capacity measures the thermal response of an entire object, whereas specific heat capacity standardizes this property per unit mass, providing an intensive material constant.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:02:15.525Z
+32,State the laws of thermodynamics.,"# Introduction
+
+---
+
+## Definition
+
+The laws of thermodynamics define the fundamental physical principles that govern the relationships between heat, work, temperature, and energy changes within physical systems.
+
+---
+
+## The Four Core Laws
+
+### 1. Zeroth Law (Thermal Equilibrium)
+If two thermodynamic systems are each in thermal equilibrium with a third system, they are in thermal equilibrium with each other, defining temperature as a valid physical property.
+
+### 2. First Law (Conservation of Energy)
+The net change in internal energy of a closed system equals the heat added to the system minus the work performed by the system.
+
+### 3. Second Law (Entropy Accumulation)
+In an isolated system, the total entropy—a measure of disorder—always increases over time, meaning thermal energy cannot flow spontaneously from a cooler body to a warmer body.
+
+### 4. Third Law (Absolute Zero Limit)
+As the temperature of a system approaches absolute zero ($0 \text{ K}$), its entropy approaches a constant minimum value, and it is impossible to cool a system to absolute zero in a finite number of steps.
+
+---
+
+## Formula
+
+The mathematical statement of the First Law of Thermodynamics:
+
+$$\Delta U = Q - W$$
+
+Where:
+* $\Delta U$ represents the net change in internal energy
+* $Q$ represents the heat energy added to the system
+* $W$ represents the work performed by the system
+
+---
+
+## Summary
+
+The laws of thermodynamics establish temperature metrics, enforce total energy conservation, determine the direction of heat transfer through entropy, and set absolute zero limits.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:05:11.352Z
+33,"Explain the difference between conduction, convection, and radiation.","# Introduction
+
+---
+
+## Definition
+
+Conduction, convection, and radiation represent the three distinct physical mechanisms through which thermal energy transfers between regions of differing temperatures.
+
+---
+
+## Comparison Matrix
+
+| Characteristics | Conduction | Convection | Radiation |
+| --- | --- | --- | --- |
+| **Medium Requirement** | Requires a solid or static fluid medium. | Requires a fluid medium (liquid or gas). | Can propagate through a vacuum without a medium. |
+| **Mechanism** | Kinetic energy transfer via direct molecular collisions. | Macro-scale fluid movement driven by density changes. | Energy transport via electromagnetic waves. |
+| **Transfer Speed** | Relatively slow material propagation. | Moderate speed driven by fluid flow rates. | Occurs at the speed of light. |
+
+---
+
+## Real-world Examples
+
+* **Conduction:** A metal spoon left in a bowl of hot soup quickly becomes warm along its entire handle via direct atomic vibration transfer.
+* **Convection:** Water at the bottom of a pot heated on a stove expands, becomes less dense, and rises, creating a continuous circulation loop.
+* **Radiation:** Standing near a campfire or under direct sunlight warms the skin through incoming infrared electromagnetic waves.
+
+---
+
+## Summary
+
+Conduction transfers heat through direct microscopic contact, convection relies on bulk fluid movement, and radiation uses electromagnetic waves to transfer energy across empty space.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:08:13.982Z
+34,A metal rod expands on heating. Explain thermal expansion.,"# Introduction
+
+---
+
+## Definition
+
+Thermal expansion is the tendency of matter to increase in volume, area, or length in response to an increase in temperature. 
+
+This behavior occurs because heating causes atoms to vibrate more vigorously, increasing the average separation distance between them.
+
+---
+
+## Characteristics
+
+* **Reversible Behavior:** The material expands uniformly as temperature rises and contracts back to its initial dimensions when cooled, provided it stays within its elastic limits.
+
+---
+
+## Formula
+
+The linear thermal expansion equation for a solid rod is defined as:
+
+$$\Delta L = \alpha L_0 \Delta T$$
+
+Where:
+* $\Delta L$ represents the net change in length
+* $\alpha$ represents the coefficient of linear thermal expansion
+* $L_0$ represents the initial length of the rod sample
+* $\Delta T$ represents the change in temperature
+
+---
+
+## Summary
+
+Thermal expansion occurs because heat increases atomic vibrations, forcing atoms further apart and causing macroscopic expansion that scales with temperature changes.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:10:08.632Z
+35,Define latent heat and explain change of state.,"# Introduction
+
+---
+
+## Definition
+
+Latent heat is the thermal energy absorbed or released by a substance during a phase change that occurs at a constant, unchanging temperature.
+
+A change of state refers to the transition of matter between solid, liquid, and gaseous phases as internal molecular bonds break or form.
+
+---
+
+## Types of Latent Heat
+
+* **Latent Heat of Fusion:** The heat energy required to transition a substance from a solid to a liquid phase at its melting point.
+* **Latent Heat of Vaporization:** The heat energy required to transition a substance from a liquid to a gaseous phase at its boiling point.
+
+---
+
+## Formula
+
+The phase change heat transfer equation is written as:
+
+$$Q = mL$$
+
+Where:
+* $Q$ represents the heat energy transferred during the phase change
+* $m$ represents the total mass of the substance undergoing transformation
+* $L$ represents the specific latent heat constant for that substance
+
+---
+
+## Summary
+
+Latent heat drives phase changes at a constant temperature by breaking or forming molecular bonds rather than changing the system's kinetic temperature.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:12:30.154Z
+36,Oscillations and Waves: Define simple harmonic motion (SHM).,"# Introduction
+
+---
+
+## Definition
+
+Simple Harmonic Motion (SHM) is a special type of periodic oscillatory motion in which the restoring force acting on a moving object is directly proportional to the magnitude of its displacement from its equilibrium position and acts in the opposite direction to that displacement.
+
+---
+
+## Characteristics
+
+* **Proportional Restoring Force:** The farther the object is displaced from equilibrium, the stronger the inward pulling force becomes.
+* **Sinusoidal Position Tracking:** The position-time profile forms a smooth, continuous sine or cosine wave over time.
+
+---
+
+## Formula
+
+The defining dynamic equation for Simple Harmonic Motion:
+
+$$F = -kx$$
+
+The resulting differential equation of motion is stated as:
+
+$$\frac{d^2x}{dt^2} + \omega^2 x = 0$$
+
+Where:
+* $F$ represents the restoring force vector
+* $k$ represents the positive spring or stiffness constant
+* $x$ represents the displacement vector from equilibrium
+* $\omega$ represents the angular frequency ($\sqrt{k/m}$)
+
+---
+
+## Summary
+
+Simple Harmonic Motion is an ideal oscillation driven by a restoring force proportional to displacement, creating a continuous, stable sinusoidal motion cycle.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:15:06.102Z
+37,Derive the expression for time period of a simple pendulum.,"# Introduction
+
+---
+
+## Definition
+
+A simple pendulum consists of a small mass bob suspended from a fixed, frictionless pivot by a light, inextensible string. When displaced slightly from equilibrium, it undergoes simple harmonic motion.
+
+---
+
+## Formula
+
+The equation for the oscillation period is given by:
+
+$$T = 2\pi \sqrt{\frac{L}{g}}$$
+
+Where:
+* $T$ represents the total time period for one complete swing
+* $L$ represents the length of the suspension string
+* $g$ represents local acceleration due to gravity
+
+---
+
+## Derivations
+
+Consider a bob of mass $m$ suspended by a string of length $L$. Displace the bob through a small angular displacement $\theta$.
+
+The weight force ($mg$) acting downward can be resolved into two orthogonal components:
+1. $mg \cos(\theta)$ acting along the string line, balanced by string tension.
+2. $mg \sin(\theta)$ acting tangentially, serving as the restoring force.
+
+$$\text{Restoring Force } (F) = -mg \sin(\theta)$$
+
+For small angles, we apply the small-angle approximation where $\sin(\theta) \approx \theta$ (in radians):
+$$F \approx -mg\theta$$
+
+The angular displacement can be expressed as the arc length displacement ($x$) divided by string length ($L$):
+$$\theta = \frac{x}{L}$$
+
+Substitute this angular expression back into the restoring force equation:
+$$F = -mg \left(\frac{x}{L}\right) = -\left(\frac{mg}{L}\right)x$$
+
+According to Newton's Second Law ($F = ma$), the acceleration ($a$) can be written as:
+$$ma = -\left(\frac{mg}{L}\right)x$$
+
+$$a = -\left(\frac{g}{L}\right)x$$
+
+In Simple Harmonic Motion, acceleration satisfies the standard relationship $a = -\omega^2 x$. Equating these expressions yields:
+$$\omega^2 = \frac{g}{L}$$
+
+$$\omega = \sqrt{\frac{g}{L}}$$
+
+The total time period ($T$) for one complete oscillation cycle is defined as:
+$$T = \frac{2\pi}{\omega} = \frac{2\pi}{\sqrt{\frac{g}{L}}} = 2\pi \sqrt{\frac{L}{g}}$$
+
+This completes the mathematical derivation for the pendulum time period.
+
+---
+
+## Summary
+
+The time period of a simple pendulum depends solely on its string length and local gravity, remaining independent of the bob's mass or the amplitude of small swings.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:17:42.275Z
+38,Explain resonance with examples.,"# Introduction
+
+---
+
+## Definition
+
+Resonance is a physical phenomenon that occurs when a periodic driving force is applied to an oscillatory system at a frequency that matches its natural frequency of vibration, causing a significant increase in the system's amplitude.
+
+---
+
+## Mechanism
+
+* **Frequency Matching:** When the external driving frequency matches the system's natural frequency, energy transfers efficiently, causing the system's structural amplitude to grow larger over time.
+
+---
+
+## Advantages and Disadvantages
+
+| Advantages | Disadvantages |
+| --- | --- |
+| Enhances signal amplification in wireless radios and acoustic instruments. | Can cause structural failure in mechanical systems, bridges, or buildings. |
+
+---
+
+## Real-world Examples
+
+* **Playground Swing:** Pushing a child on a swing at the exact moment the swing reaches its peak height increases the amplitude with minimal effort.
+* **Acoustic Wine Glass:** A singer matching their vocal pitch to the natural resonant frequency of a crystal wine glass can cause it to shatter as the vibrations become too large.
+* **Radio Tuning Circuit:** Adjusting a radio's electrical frequency to match an incoming broadcast wave amplifies that specific signal while filtering out others.
+
+---
+
+## Summary
+
+Resonance occurs when a driving force matches a system's natural frequency, maximizing energy transfer and significantly amplifying the vibration scale.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:26:15.209Z
+44,Explain the working principle of a capacitor.,"# Introduction
+
+---
+
+## Definition
+
+A capacitor is an electrical component designed to store potential energy in an electric field by accumulating opposite charges on two closely spaced, insulated conducting plates.
+
+---
+
+## Working Mechanism
+
+* **Charge Separation:** When connected to a voltage source, electrons accumulate on one plate, giving it a negative charge, while electrons leave the opposite plate, leaving it positively charged.
+* **Electric Field Storage:** This charge separation creates a stable electric field between the plates, storing energy even after the voltage source is disconnected.
+
+---
+
+## Formula
+
+The relationship governing charge storage capacity is:
+
+$$Q = CV$$
+
+For a basic parallel-plate capacitor layout:
+
+$$C = \frac{\varepsilon_0 A}{d}$$
+
+Where:
+* $Q$ represents the total stored charge magnitude
+* $C$ represents the capacitance value measured in Farads ($\text{F}$)
+* $V$ represents the applied voltage across the plates
+* $A$ represents the area of overlapping plates
+* $d$ represents the distance separating the plates
+
+---
+
+## Summary
+
+Capacitors store electrical energy by holding opposite charges on isolated plates, creating an internal electric field with a storage capacity that scales with plate area and proximity.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:39:28.201Z
+45,What is electrostatic shielding?,"# Introduction
+
+---
+
+## Definition
+
+Electrostatic shielding is the physical phenomenon where a specific region of space is isolated from the influence of external electric fields. This shielding is achieved by enclosing the region within a hollow conducting shell, creating a Faraday cage.
+
+---
+
+## Operating Principle
+
+* **Zero Cavity Field:** When an external electric field is applied to a conductor, its free electrons redistribute along the outer surface to cancel out the field internally, ensuring the net electric field inside the cavity remains exactly zero.
+
+---
+
+## Formula
+
+The mathematical field constraint inside a hollow conductor:
+
+$$E_{\text{internal}} = 0$$
+
+---
+
+## Real-world Examples
+
+* **Car in a Lightning Storm:** A car acts as an electrostatic shield; if struck by lightning, the charge travels along the conductive outer metal body to the ground, leaving the passengers inside unharmed.
+* **Coaxial Electronics Cables:** Critical signal wires are wrapped in a braided metal mesh shield to protect data transfers from external electrical interference.
+
+---
+
+## Summary
+
+Electrostatic shielding uses a conducting shell to isolate an internal space from external electric fields, as charges redistribute along the outer surface to keep the internal field at zero.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:41:04.969Z
+46,Current Electricity: State Ohm’s law and explain its limitations.,"# Introduction
+
+---
+
+## Definition
+
+Ohm's Law states that the electric current flowing through a conductor is directly proportional to the potential difference applied across its ends, provided all physical conditions, such as temperature, remain completely constant.
+
+---
+
+## Limitations of the Law
+
+* **Temperature Dependency:** As current increases, temperature often rises due to Joule heating, which changes the material's resistance and causes the relationship to become non-linear.
+* **Non-Ohmic Devices:** The law does not apply to semiconductor components like diodes or transistors, where current does not scale linearly with voltage.
+
+---
+
+## Formula
+
+The mathematical relation is stated as:
+
+$$V = IR$$
+
+Where:
+* $V$ represents the potential difference (voltage) across the conductor
+* $I$ represents the electric current flowing through it
+* $R$ represents the electrical resistance of the material
+
+---
+
+## Summary
+
+Ohm's Law defines a linear relationship between voltage and current ($V=IR$), but it is limited to materials that maintain a stable temperature and does not apply to non-ohmic semiconductor devices.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:44:40.013Z
+47,Derive the expression for equivalent resistance in series combination.,"# Introduction
+
+---
+
+## Definition
+
+A series combination is a circuit configuration where resistors are connected end-to-end in a single path, ensuring that the same electric current flows through each component sequentially.
+
+---
+
+## Formula
+
+The total equivalent resistance for a series circuit is:
+
+$$R_{\text{eq}} = R_1 + R_2 + R_3$$
+
+Where:
+* $R_{\text{eq}}$ represents the net total circuit resistance
+* $R_1, R_2, R_3$ represent the individual resistor values
+
+---
+
+## Derivations
+
+Consider three resistors with values $R_1$, $R_2$, and $R_3$ connected in a series chain across a voltage source $V$.
+
+Because there is only one path for the electrons to follow, the current ($I$) passing through each resistor is identical:
+$$I_1 = I_2 = I_3 = I$$
+
+The total applied voltage ($V$) divides across the resistors, equal to the sum of the individual voltage drops:
+$$V = V_1 + V_2 + V_3$$
+
+Applying Ohm's Law ($V = IR$) to each individual resistor component:
+$$V_1 = I R_1$$
+
+$$V_2 = I R_2$$
+
+$$V_3 = I R_3$$
+
+Substitute these individual voltage drop expressions into the total voltage equation:
+$$V = I R_1 + I R_2 + I R_3$$
+
+Factor out the common current parameter ($I$) from the terms:
+$$V = I(R_1 + R_2 + R_3)$$
+
+If we replace the entire chain with a single equivalent resistor ($R_{\text{eq}}$), the total voltage is $V = I R_{\text{eq}}$. Equating these expressions:
+$$I R_{\text{eq}} = I(R_1 + R_2 + R_3)$$
+
+Divide both sides by the current parameter ($I$) to yield the final relation:
+$$R_{\text{eq}} = R_1 + R_2 + R_3$$
+
+This completes the derivation for series equivalent resistance.
+
+---
+
+## Summary
+
+Resistors in series share the same current, causing their voltage drops to add up. This results in an equivalent resistance equal to the sum of the individual resistances.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:47:10.745Z
+48,Derive the expression for equivalent resistance in parallel combination.,"# Introduction
+
+---
+
+## Definition
+
+A parallel combination is a circuit configuration where multiple resistors are connected across the same two electrical nodes, creating separate, independent branches for current flow.
+
+---
+
+## Formula
+
+The inverse equivalent resistance relationship is given by:
+
+$$\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}$$
+
+Where:
+* $R_{\text{eq}}$ represents the total equivalent circuit resistance
+* $R_1, R_2, R_3$ represent the individual branch resistors
+
+---
+
+## Derivations
+
+Consider three resistors with values $R_1$, $R_2$, and $R_3$ connected in parallel branches across a voltage source $V$.
+
+Because all branches are connected directly to the same electrical nodes, the voltage drop ($V$) across each resistor is identical:
+$$V_1 = V_2 = V_3 = V$$
+
+The total current ($I$) leaving the source divides among the available parallel paths:
+$$I = I_1 + I_2 + I_3$$
+
+Applying Ohm's Law in its current form ($I = \frac{V}{R}$) to each branch component:
+$$I_1 = \frac{V}{R_1}$$
+
+$$I_2 = \frac{V}{R_2}$$
+
+$$I_3 = \frac{V}{R_3}$$
+
+Substitute these individual branch current expressions into the total current equation:
+$$I = \frac{V}{R_1} + \frac{V}{R_2} + \frac{V}{R_3}$$
+
+Factor out the common voltage parameter ($V$):
+$$I = V \left(\frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}\right)$$
+
+If the parallel network is replaced by a single equivalent resistor ($R_{\text{eq}}$), total current is $I = \frac{V}{R_{\text{eq}}}$. Equating these terms:
+$$\frac{V}{R_{\text{eq}}} = V \left(\frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}\right)$$
+
+Divide both sides by the voltage parameter ($V$) to yield the final parallel relation:
+$$\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}$$
+
+This completes the analytical derivation for parallel equivalent resistance.
+
+---
+
+## Summary
+
+Resistors in parallel share the same voltage drop across branches, meaning their branch currents add up. This results in an equivalent resistance smaller than the smallest individual branch resistor.",zai-glm-4.7 (Cerebras),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""z-ai/glm-4.7 is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Cerebras"",""is_byok"":false}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T09:49:47.957Z
+59,Sandbox Overlay: Generate runtime overlay response for a 'collision' event between two equal masses.,"# Introduction
+
+---
+
+## Event Telemetry Report
+
+The simulation engine has triggered a real-time event notification based on a physical interaction within the workspace canvas.
+
+---
+
+## Real-Time Sandbox Overlay Feed
+
+### WHAT HAPPENED
+An instantaneous impact interface event (`collision`) was registered between sphere `c1` and sphere `c2` at the center coordinate intersection.
+
+### WHAT CHANGED
+Sphere `c1` came to an immediate halt, transferring its entire velocity vector component directly to sphere `c2`, which shot forward instantly.
+
+### SIMPLE WHY
+Because the two masses are identical and the restitution parameter is set to maximum, the system undergoes a perfect elastic momentum exchange.
+
+### WHAT TO NOTICE
+Observe the velocity indicator vectors. Watch how the velocity swap occurs instantaneously without any net loss in total system speed.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T10:44:01.788Z
+65,Sandbox Overlay: Generate runtime overlay response for an 'orbit_started' stable loop trigger event.,"# Introduction
+
+---
+
+## Event Telemetry Report
+
+The simulation engine has triggered a real-time event notification based on a orbital tracking alignment profile match.
+
+---
+
+## Real-Time Sandbox Overlay Feed
+
+### WHAT HAPPENED
+The satellite successfully closed its trajectory path, triggering the stable closed loop status notification (`orbit_started`).
+
+### WHAT CHANGED
+The path display updated from a open line to a stable elliptical orbit track surrounding the central gravity source.
+
+### SIMPLE WHY
+The satellite's velocity vector and distance create a balance where gravity provides the exact centripetal force needed for a stable orbit.
+
+### WHAT TO NOTICE
+Observe how the satellite continuously circles the central mass without flying out into deep space or crashing into the planet.",gpt-oss-20b (Groq),"OpenRouter HTTP 429: {""error"":{""message"":""Provider returned error"",""code"":429,""metadata"":{""raw"":""openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"",""provider_name"":""Groq""}},""user_id"":""user_3DNxbBbJg70Y8qRQxHAydS2iArL""}",2026-06-01T11:08:49.570Z

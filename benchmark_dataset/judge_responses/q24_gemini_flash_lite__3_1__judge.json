@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 24,
+  "question": "Calculate the gravitational force between two masses of 5 kg each placed 2 m apart.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Gravitational Field Problem\n\n### Problem\nCalculate the gravitational force between two identical masses of $5 \\text{ kg}$ each placed at a center-to-center distance of $2 \\text{ m}$ apart.\n\n### Given\n* First mass ($m_1$) = $5 \\text{ kg}$\n* Second mass ($m_2$) = $5 \\text{ kg}$\n* Distance apart ($r$) = $2 \\text{ m}$\n* Gravitational Constant ($G$) = $6.67 \\times 10^{-11} \\text{ N}\\cdot\\text{m}^2/\\text{kg}^2$\n\n### Formula\n$$F = G \\frac{m_1 m_2}{r^2}$$\n\n### Substitution\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{5 \\times 5}{2^2}$$\n\n### Calculation\n$$F = (6.67 \\times 10^{-11}) \\times \\frac{25}{4}$$\n\n$$F = (6.67 \\times 10^{-11}) \\times 6.25$$\n\n$$F = 4.16875 \\times 10^{-10} \\text{ N}$$\n\n### Final Answer\n**Gravitational Force ($F$) = $4.17 \\times 10^{-10} \\text{ N}$**\n\n### Interpretation\nThis reflects an incredibly weak mutual attraction force, demonstrating why gravity is imperceptible between everyday objects and only becomes significant with planetary-scale masses.",
+  "candidate_response": "Here's the information, structured for an interactive textbook experience:\n\n**Introduction**\n\nWe will calculate the gravitational force between two objects. This force is always attractive, pulling objects towards each other.\n\n---\n\n**Formula**\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│  $$F = G \\frac{m_1 m_2}{r^2}$$      │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n---\n\n**Variables and Values**\n\n*   **F**: Gravitational Force (Newtons, N) - *This is what we are calculating.*\n*   **G**: Gravitational Constant = 6.674 × 10⁻¹¹ N⋅m²/kg² - *A fundamental constant.*\n*   **m₁**: Mass of object 1 = 5 kg\n*   **m₂**: Mass of object 2 = 5 kg\n*   **r**: Distance between the centers of the masses = 2 m\n\n---\n\n**Calculation**\n\nLet's plug the values into the formula:\n\n$$F = (6.674 \\times 10^{-11} \\frac{N⋅m^2}{kg^2}) \\frac{(5 kg)(5 kg)}{(2 m)^2}$$\n\n$$F = (6.674 \\times 10^{-11} \\frac{N⋅m^2}{kg^2}) \\frac{25 kg^2}{4 m^2}$$\n\n$$F = 4.171 \\times 10^{-10} N$$\n\n---\n\n**Answer**\n\nThe gravitational force between the two masses is approximately:\n\n$4.171 \\times 10^{-10} N$\n\n---\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, with correct formulas and calculations. The layout and formatting are also well-structured and readable. However, the educational score is slightly lower because the response could benefit from more explanatory text and interactive elements to enhance pedagogical effectiveness. Additionally, the response uses a slightly different value for the gravitational constant (6.674 × 10⁻¹¹) than the gold reference answer (6.67 × 10⁻¹¹), but this difference is negligible and does not affect the overall accuracy. To improve, the candidate could consider adding more explanatory text, diagrams, or interactive elements to make the response more engaging and effective for beginner learners.",
+  "candidate_token_usage": {
+    "promptTokens": 388,
+    "completionTokens": 398,
+    "totalTokens": 786
+  },
+  "candidate_latency_ms": 2785,
+  "candidate_cost_usd": 0.0012492,
+  "judge_token_usage": {
+    "promptTokens": 1150,
+    "completionTokens": 196,
+    "totalTokens": 1346
+  },
+  "judge_latency_ms": 7134,
+  "judge_cost_usd": 0.0011604,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:46:10.849Z"
+}

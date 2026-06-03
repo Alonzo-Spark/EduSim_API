@@ -1,0 +1,66 @@
+┌───────────────────────────────────────────────────────────────────┐
+│ **Problem Overview**                                              │
+│                                                                   │
+│ A train undergoes uniform deceleration (retardation) from an      │
+│ initial velocity to a complete standstill over a specific time    │
+│ interval.                                                         │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Given Parameters**                                              │
+│                                                                   │
+│ • **Initial Velocity ($u$):** $20\text{ m/s}$                     │
+│ • **Final Velocity ($v$):** $0\text{ m/s}$ (The train stops)      │
+│ • **Time Interval ($t$):** $10\text{ s}$                          │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Main Formula: Acceleration**                                    │
+│                                                                   │
+│ $$a = \frac{v - u}{t}$$                                           │
+│                                                                   │
+│ **[ Explain Formula ]**                                           │
+│ This formula defines acceleration as the rate of change of        │
+│ velocity over time. A negative result indicates retardation.      │
+│                                                                   │
+│ **[ Open Formula Lab ]**                                          │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Step-by-Step Calculation**                                      │
+│                                                                   │
+│ 1. **Identify Variables:**                                        │
+│    $u = 20$, $v = 0$, $t = 10$                                    │
+│                                                                   │
+│ 2. **Substitute into Formula:**                                   │
+│    $a = \frac{0 - 20}{10}$                                        │
+│                                                                   │
+│ 3. **Solve for $a$:**                                             │
+│    $a = \frac{-20}{10} = -2\text{ m/s}^2$                         │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Key Concepts: Acceleration vs. Retardation**                    │
+│                                                                   │
+| Term         | Value             | Direction                      |
+|--------------|-------------------|--------------------------------|
+| Acceleration | $-2\text{ m/s}^2$ | Opposite to motion             |
+| Retardation  | $2\text{ m/s}^2$  | Magnitude of slowing down      |
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Final Answer**                                                  │
+│                                                                   │
+│ The retardation of the train is **$2\text{ m/s}^2$**.             │
+│                                                                   │
+│ *(Note: Retardation is the absolute value of negative             │
+│ acceleration.)*                                                   │
+└───────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────┐
+│ **Suggested Questions**                                           │
+│                                                                   │
+│ 1. How far did the train travel while the brakes were applied?    │
+│ 2. What would the retardation be if the train stopped in 5s?      │
+│ 3. If the mass is $5000\text{ kg}$, what was the braking force?   │
+└───────────────────────────────────────────────────────────────────┘

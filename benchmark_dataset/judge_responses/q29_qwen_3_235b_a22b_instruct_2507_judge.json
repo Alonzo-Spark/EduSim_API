@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 29,
+  "question": "Define surface tension and mention factors affecting it.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nSurface tension is the property of a liquid surface that causes it to behave like a stretched elastic membrane, minimizing its surface area. \n\nThis behavior is caused by cohesive forces, as liquid molecules at the surface experience a net inward pull from the molecules beneath them.\n\n---\n\n## Factors Affecting Surface Tension\n\n* **Temperature Inversion:** Raising the temperature increases the kinetic energy of the molecules, weakening cohesive bonds and reducing surface tension.\n* **Chemical Impurities:** Adding highly soluble materials like salt increases surface tension, whereas adding surfactants like soap lowers it significantly.\n\n---\n\n## Formula\n\nThe surface tension scalar definition is given by:\n\n$$T = \\frac{F}{L}$$\n\nWhere:\n* $T$ represents the surface tension factor\n* $F$ represents the force acting parallel to the surface along a line segment\n* $L$ represents the total length of the line segment over which the force acts\n\n---\n\n## Summary\n\nSurface tension arises from unbalanced molecular attraction at a liquid's surface, causing it to minimize its area. This property decreases with heat and surfactant additives.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Quick Definition          │  \n│                           │  \n│ **Surface Tension** is    │  \n│ the property of a liquid  │  \n│ that allows it to resist  │  \n│ external force due to the │  \n│ cohesive nature of its    │  \n│ molecules at the surface. │  \n└───────────────────────────┘  \n\n---\n\n### Introduction\n\nSurface tension is a fundamental concept in fluid physics and chemistry. It arises due to the imbalance of intermolecular forces at the surface of a liquid compared to those in the bulk. Molecules within the liquid experience equal attraction from all sides, but surface molecules are pulled only inward and sideways, creating a net inward force. This causes the liquid surface to behave like a stretched elastic membrane.\n\nThis phenomenon explains everyday observations such as water droplets forming spherical shapes, insects walking on water, and the rise of liquid in narrow capillary tubes.\n\n---\n\n┌───────────────────────────┐  \n│ Key Concept               │  \n│                           │  \n│ Surface tension results   │  \n│ from **cohesive forces**  │  \n│ between liquid molecules, │  \n│ especially strong in      │  \n│ polar liquids like water. │  \n└───────────────────────────┘  \n\n---\n\n### Formula\n\n$$\n\\gamma = \\frac{F}{L}\n$$\n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│     $$ \\gamma = \\frac{F}{L} $$      │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n- **$\\gamma$**: surface tension (N/m)  \n- **$F$**: force acting along the surface (N)  \n- **$L$**: length over which the force acts (m)  \n\nThis formula defines surface tension as the force per unit length acting perpendicular to an imaginary line drawn on the surface.\n\n---\n\n### Characteristics of Surface Tension\n\n- Acts **parallel to the surface** and perpendicular to any line drawn on it.  \n- Always tries to **minimize surface area** (e.g., spherical droplets).  \n- Measured in **newtons per meter (N/m)** or **joules per square meter (J/m²)**.  \n- Stronger in liquids with **strong intermolecular forces**, especially hydrogen bonding.\n\n---\n\n### Factors Affecting Surface Tension\n\n| Factor | Effect on Surface Tension | Explanation |\n|-------|----------------------------|-----------|\n| **Temperature** | Decreases with increasing temperature | Higher thermal energy reduces intermolecular cohesion. |\n| **Impurities** (e.g., soap, detergent) | Decrease surface tension | Disrupt hydrogen bonding; surfactants align at surface and reduce net inward pull. |\n| **Dissolved Substances** | Varies: <br>• **Inorganic salts** → Increase <br>• **Organic compounds** → Decrease | Ions increase cohesion; organic molecules act as surfactants. |\n| **Nature of Liquid** | Water > Alcohol > Ether | Depends on strength of intermolecular forces (H-bonding > dipole-dipole > van der Waals). |\n| **Adjacent Phase** | Slightly affected by vapor or solid contact | Presence of different media alters net molecular attraction. |\n\n---\n\n┌───────────────────────────┐  \n│ Important Notes           │  \n│                           │  \n│ • Surface tension enables │  \n│   capillary action.       │  \n│ • It’s responsible for the│  \n│   spherical shape of      │  \n│   small droplets.         │  \n│ • Critical in biological │  \n│   processes (e.g., lung   │  \n│   alveoli stability).     │  \n└───────────────────────────┘  \n\n---\n\n### Summary\n\nSurface tension is a result of **molecular cohesion** and **surface energy minimization**. It is influenced by:\n\n- Temperature  \n- Impurities and solutes  \n- Molecular structure of the liquid  \n\nUnderstanding surface tension helps explain natural phenomena and is vital in fields like material science, medicine, and engineering.\n\n---\n\n### Suggested Questions\n\n- Why do small drops of mercury form spherical beads?  \n- How does soap help in cleaning clothes?  \n- What happens to surface tension at the critical temperature?  \n- Derive the expression for excess pressure inside a liquid drop using surface tension.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of surface tension, including its definition, factors affecting it, and formula. The response is well-structured, readable, and effectively communicates complex concepts. Minor suggestions for improvement include providing more detailed explanations for certain factors affecting surface tension and considering additional visual aids to enhance pedagogical effectiveness. Overall, the response excels in accuracy, quality, and educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 703,
+    "completionTokens": 1331,
+    "totalTokens": 2034
+  },
+  "candidate_latency_ms": 26244,
+  "candidate_cost_usd": 0.003365,
+  "judge_token_usage": {
+    "promptTokens": 1544,
+    "completionTokens": 140,
+    "totalTokens": 1684
+  },
+  "judge_latency_ms": 6035,
+  "judge_cost_usd": 0.0012624,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:56:01.420Z"
+}

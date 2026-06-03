@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 59,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'collision' event between two equal masses.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a physical interaction within the workspace canvas.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nAn instantaneous impact interface event (`collision`) was registered between sphere `c1` and sphere `c2` at the center coordinate intersection.\n\n### WHAT CHANGED\nSphere `c1` came to an immediate halt, transferring its entire velocity vector component directly to sphere `c2`, which shot forward instantly.\n\n### SIMPLE WHY\nBecause the two masses are identical and the restitution parameter is set to maximum, the system undergoes a perfect elastic momentum exchange.\n\n### WHAT TO NOTICE\nObserve the velocity indicator vectors. Watch how the velocity swap occurs instantaneously without any net loss in total system speed.",
+  "candidate_response": "### 🟢 EVENT DETECTED: ELASTIC COLLISION\n**System State:** `mass_1 == mass_2` | `initial_velocity_2 = 0` | `1D-Manifold`\n\n---\n\n#### 📘 Quick Definition\nA **Perfectly Elastic Collision** between two equal masses is a momentum exchange event where kinetic energy is conserved. In this specific configuration, the system undergoes a complete **Velocity Swap**.\n\n---\n\n#### 🧮 Main Formula: Conservation of Momentum\n┌──────────────────────────────────────────────────────────┐\n│ **Linear Momentum Transfer**                             │\n│                                                          │\n│ $$m_1v_1 + m_2v_2 = m_1v_1' + m_2v_2'$$                  │\n│                                                          │\n│ ℹ️ Since $m_1 = m_2$, the masses cancel out, leaving:    │\n│ $$v_1 + v_2 = v_1' + v_2'$$                              │\n│                                                          │\n│ [ 🔬 Open Formula Lab ]                                  │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n#### 🧮 Main Formula: Kinetic Energy Conservation\n┌──────────────────────────────────────────────────────────┐\n│ **Energy Invariance**                                    │\n│                                                          │\n│ $$\\frac{1}{2}m_1v_1^2 + \\frac{1}{2}m_2v_2^2 = \\text{const}$$ │\n│                                                          │\n│ ℹ️ For equal masses, the relative velocity of approach   │\n│ equals the relative velocity of separation.              │\n│                                                          │\n│ [ 🔬 Open Formula Lab ]                                  │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n#### 📊 Post-Collision State Table\n| Parameter | Object A (Striker) | Object B (Target) |\n| :--- | :--- | :--- |\n| **Initial Velocity** | $v$ | $0$ |\n| **Final Velocity** | $0$ | $v$ |\n| **Momentum Change** | $-mv$ | $+mv$ |\n| **Energy State** | Stationary | Maximum Kinetic |\n\n---\n\n#### 💡 Key Concept: The Velocity Swap\nWhen two identical masses collide elastically:\n1.  **Object A** comes to a complete halt.\n2.  **Object B** takes on the exact velocity and direction Object A had prior to impact.\n3.  **Coefficient of Restitution ($e$):** In this ideal sandbox environment, $e = 1.0$.\n\n---\n\n#### ⚠️ Important Notes\n*   **Frictionless Constraint:** These calculations assume a coefficient of friction $\\mu = 0$.\n*   **Point Mass Approximation:** Rotation and torque are ignored unless \"Rigid Body Dynamics\" is toggled ON.\n*   **Vector Signage:** If Object A moves right (+), the resulting velocity of Object B will remain (+).\n\n---\n\n#### ❓ Suggested Questions\n*   \"What happens if Mass A is twice the size of Mass B?\"\n*   \"How does the 'Inelastic' setting change the energy output?\"\n*   \"Calculate the Impulse $(J)$ during the contact time $\\Delta t$.\"",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts involved in an elastic collision between two equal masses. The use of formulas, such as the conservation of momentum and kinetic energy, is accurate and well-explained. The response is well-structured and easy to follow, with clear headings and concise descriptions. However, there are some areas for improvement. The candidate could have provided more visual aids, such as diagrams or graphs, to help illustrate the concepts. Additionally, some of the language used is somewhat technical and may be difficult for beginners to understand. To improve the educational score, the candidate could have included more explanatory text or examples to help clarify the concepts for a wider range of learners. Overall, the response is of high quality and demonstrates a strong grasp of the physics involved.",
+  "candidate_token_usage": {
+    "promptTokens": 388,
+    "completionTokens": 698,
+    "totalTokens": 1086
+  },
+  "candidate_latency_ms": 5067,
+  "candidate_cost_usd": 0.002288,
+  "judge_token_usage": {
+    "promptTokens": 1265,
+    "completionTokens": 217,
+    "totalTokens": 1482
+  },
+  "judge_latency_ms": 5013,
+  "judge_cost_usd": 0.0012798,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:44:32.715Z"
+}

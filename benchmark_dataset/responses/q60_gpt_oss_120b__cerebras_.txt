@@ -1,0 +1,94 @@
+┌───────────────────────────────────────┐
+│ 🌌  Event Overview                     │
+│                                       │
+│ **Event**: `gravity_changed`          │
+│ **Target State**: Zero‑g (g = 0 m/s²) │
+│ **Trigger**: Runtime change in the   │
+│ sandbox physics engine.               │
+│                                       │
+│ **What Happens**:                     │
+│ • All objects lose the constant        │
+│   downward acceleration.              │
+│ • Existing velocities are preserved, │
+│   so objects continue with their      │
+│   current momentum (inertia).          │
+│ • Collision response switches to     │
+│   elastic‑only unless otherwise       │
+│   specified.                           │
+│ • UI overlay appears to inform the    │
+│   player of the new gravity state.    │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ 📐  Main Formula                        │
+│                                         │
+│           F = m·g                       │
+│                                         │
+│ **Explanation**                        │
+│ • *F* – Force acting on an object.      │
+│ • *m* – Mass of the object.             │
+│ • *g* – Gravitational acceleration.     │
+│   In zero‑g, **g = 0**, so **F = 0**.   │
+│                                         │
+│ [ Explain Formula ]   [ Open Formula Lab ] │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ 📊  Zero‑g Effects Table                │
+│                                         │
+│ ┌─────────────────────┬─────────────────┐ │
+│ │ Property            │ Zero‑g Result   │ │
+│ ├─────────────────────┼─────────────────┤ │
+│ │ Weight (N)          │ 0               │ │
+│ │ Acceleration (m/s²)│ 0               │ │
+│ │ Terminal Velocity   │ Unlimited (no   │ │
+│ │                     │ drag‑induced stop)│ │
+│ │ Object Motion       │ Linear inertia │ │
+│ │ Collision Type      │ Elastic (no   │ │
+│ │                     │ gravity‑bias) │ │
+│ └─────────────────────┴─────────────────┘ │
+│                                         │
+│ *Table adapts to screen size – scroll if│
+│ needed.*                                 │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ 💻  Sample Script (C# for Unity)        │
+│                                         │
+│ ```csharp                               │
+│ using UnityEngine;                     │
+│                                         │
+│ public class GravitySwitcher : MonoBehaviour │
+│ {                                      │
+│     void OnGravityChanged(float newG) │
+│     {                                  │
+│         Physics.gravity = new Vector3(0, newG, 0); │
+│         Debug.Log($"Gravity set to {newG} m/s²"); │
+│         // Trigger UI overlay            │
+│         UIManager.ShowOverlay("Zero‑g activated!"); │
+│     }                                  │
+│ }                                      │
+│ ```                                    │
+│                                         │
+│ [ Run in Sandbox ]   [ Edit Script ]    │
+└───────────────────────────────────────┘
+
+
+┌───────────────────────────────────────┐
+│ 🎮  Runtime Overlay UI                  │
+│                                         │
+│ ┌─────────────────────────────────────┐ │
+│ │  ⚠️  Zero‑g Activated!               │ │
+│ │   • Objects now float                │ │
+│ │   • No downward pull                 │ │
+│ │   • Press **R** to reset gravity     │ │
+│ └─────────────────────────────────────┘ │
+│                                         │
+│ *Overlay fades after 5 seconds or stays│
+│ until gravity is restored.*             │
+│                                         │
+│ [ Dismiss ]   [ Reset Gravity ]          │
+└───────────────────────────────────────┘

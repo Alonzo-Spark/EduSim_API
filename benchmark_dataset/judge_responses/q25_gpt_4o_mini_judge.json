@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 25,
+  "question": "Why do astronauts experience weightlessness in space?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWeightlessness is the sensation of having no weight, experienced when there is an absence of contact forces or support reactions acting on the body. \n\nIn orbit, this state is called microgravity, occurring because the spacecraft and its occupants are in a continuous state of free fall.\n\n---\n\n## The Free Fall Mechanism\n\n* **Continuous Trajectory Fall:** A spacecraft in orbit accelerates toward the Earth due to gravity, but its high forward speed matches the curve of the planet, causing it to fall around the Earth indefinitely.\n* **Zero Normal Force Interaction:** Because both the astronaut and the spacecraft fall together at the exact same rate, there is no floor pushing upward against the astronaut's feet, creating a sensation of weightlessness.\n\n---\n\n## Formula\n\nThe apparent weight relationship inside an accelerating capsule frame:\n\n$$N = m(g - a)$$\n\nWhen in a stable free-fall orbit, the downward acceleration matches gravity ($a = g$):\n\n$$N = m(g - g) = 0$$\n\nWhere:\n* $N$ represents the normal contact reaction force\n* $m$ represents the astronaut's mass\n* $g$ represents the local acceleration due to gravity\n* $a$ represents the centripetal orbital acceleration of the vehicle\n\n---\n\n## Summary\n\nAstronauts retain nearly all of their gravitational weight in low orbit, but they experience weightlessness because they are in a state of continuous free fall alongside their spacecraft, removing all upward contact forces.",
+  "candidate_response": "┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ Astronauts experience     │\n│ weightlessness in space   │\n│ due to the condition of    │\n│ free fall while orbiting  │\n│ Earth.                    │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Weightlessness, or micro- │\n│ gravity, occurs when      │\n│ astronauts and their      │\n│ spacecraft are in free    │\n│ fall, creating the        │\n│ sensation of zero gravity.│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ - **Free Fall**: When an  │\n│   object is in a state of │\n│   continuous free fall,   │\n│   it experiences no force  │\n│   acting upon it, leading  │\n│   to weightlessness.      │\n│ - **Orbiting**: Spacecraft │\n│   in orbit around Earth   │\n│   are constantly falling   │\n│   towards the planet but  │\n│   also moving forward at   │\n│   high speed, creating a   │\n│   circular path.          │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics           │\n│                           │\n│ - Astronauts appear to    │\n│   float inside the        │\n│   spacecraft.            │\n│ - Objects behave as if    │\n│   there is no gravity.    │\n│ - The sensation can cause  │\n│   disorientation.         │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Formula                   │\n│                           │\n│ The gravitational force    │\n│ experienced can be        │\n│ described by:             │\n│                           │\n│ $$ F = \\frac{G \\cdot m_1 \\cdot m_2}{r^2} $$ │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Applications              │\n│                           │\n│ - Research in microgravity │\n│   environments.           │\n│ - Testing of materials    │\n│   and biological systems.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Advantages                │\n│                           │\n│ - Unique conditions for    │\n│   scientific research.    │\n│ - Development of new      │\n│   technologies.           │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Disadvantages             │\n│                           │\n│ - Physical effects on     │\n│   the human body.        │\n│ - Psychological effects    │\n│   due to isolation.      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ - Weightlessness is not   │\n│   the absence of gravity;  │\n│   gravity is still present │\n│   but the effect is       │\n│   counteracted by motion. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                   │\n│                           │\n│ Astronauts experience     │\n│ weightlessness because     │\n│ they and their spacecraft  │\n│ are in a constant state    │\n│ of free fall while        │\n│ orbiting Earth, creating   │\n│ a sensation of zero       │\n│ gravity.                  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions        │\n│                           │\n│ 1. How does microgravity   │\n│    affect human health?    │\n│ 2. What experiments can be  │\n│    conducted in weightless │\n│    environments?           │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of weightlessness in space, accurately describing the state of free fall and its relation to microgravity. The use of a formula, although not the exact same as in the gold reference answer, correctly represents the gravitational force. However, it does not directly address the normal force equation provided in the gold answer, which is crucial for explaining why astronauts feel weightless. The response is well-structured and easy to follow, making it a high-quality presentation. For improvement, incorporating the normal force equation and explicitly stating that the sensation of weightlessness is due to the absence of normal force (as the astronaut and spacecraft fall together) would enhance accuracy and educational value. Additionally, the candidate could benefit from discussing the implications of microgravity on the human body and the importance of research in such environments to further enrich the educational aspect.",
+  "candidate_token_usage": {
+    "promptTokens": 363,
+    "completionTokens": 898,
+    "totalTokens": 1261
+  },
+  "candidate_latency_ms": 8358,
+  "candidate_cost_usd": 0.00059325,
+  "judge_token_usage": {
+    "promptTokens": 1586,
+    "completionTokens": 233,
+    "totalTokens": 1819
+  },
+  "judge_latency_ms": 10357,
+  "judge_cost_usd": 0.0015107999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:47:57.855Z"
+}

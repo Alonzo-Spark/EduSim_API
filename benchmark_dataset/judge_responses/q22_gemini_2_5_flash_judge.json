@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 22,
+  "question": "Derive the expression for acceleration due to gravity.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe acceleration due to gravity ($g$) is the uniform acceleration vector experienced by a freely falling object near the surface of a massive celestial body, such as the Earth, produced entirely by gravitational attraction.\n\n---\n\n## Formula\n\nThe surface acceleration value is determined by:\n\n$$g = \\frac{GM}{R^2}$$\n\nWhere:\n* $g$ represents the acceleration due to gravity\n* $G$ represents the Universal Gravitational Constant\n* $M$ represents the total mass of the planet or central body\n* $R$ represents the radius of the planet or central body\n\n---\n\n## Derivations\n\nConsider a small object of mass $m$ resting on or near the surface of the Earth, which has a total mass $M$ and a radius $R$.\n\nAccording to Newton's Law of Universal Gravitation, the attraction force exerted by the Earth on the object is given by:\n$$F = G \\frac{Mm}{R^2}$$\n\nSimultaneously, according to Newton's Second Law of Motion, the weight force causing the object to accelerate downward at a rate of $g$ is defined as:\n$$F = mg$$\n\nSince both expressions define the exact same mutual interaction force, we equate them directly:\n$$mg = G \\frac{Mm}{R^2}$$\n\nDivide both sides of the balance equation by the object's mass parameter ($m$):\n$$g = \\frac{GM}{R^2}$$\n\nThis completes the analytical derivation of acceleration due to gravity.\n\n---\n\n## Summary\n\nThe acceleration due to gravity depends solely on the mass and radius of the planet, meaning all objects fall at the exact same rate regardless of their individual masses when air resistance is absent.",
+  "candidate_response": "## Understanding Gravitational Acceleration\n\nLet's derive the expression for the acceleration experienced by an object due to Earth's gravity. This fundamental concept helps us understand how objects fall and the forces that govern their motion near a planetary body.\n\n---\n\n### Key Concepts\n\nBefore diving into the derivation, let's establish the foundational principles we'll be using:\n\n*   **Newton's Law of Universal Gravitation:** This law describes the attractive force between any two objects with mass.\n*   **Newton's Second Law of Motion:** This law relates an object's acceleration to the net force acting on it and its mass.\n\n---\n\n### Derivation\n\nWe will combine Newton's Law of Universal Gravitation with Newton's Second Law of Motion to derive the expression for acceleration due to gravity.\n\n**Step 1: Define the Gravitational Force**\n\nConsider an object of mass $m$ near the surface of a planet (e.g., Earth) with mass $M$ and radius $R$. According to Newton's Law of Universal Gravitation, the force of attraction ($F_g$) between the planet and the object is given by:\n\n$$\nF_g = G \\frac{M m}{R^2}\n$$\n\n**Step 2: Define the Force from Newton's Second Law**\n\nAccording to Newton's Second Law of Motion, the force ($F$) acting on an object is equal to its mass ($m$) multiplied by its acceleration ($a$). When the only force acting on the object is gravity, this acceleration is specifically the acceleration due to gravity, denoted as $g$.\n\n$$\nF = m g\n$$\n\n**Step 3: Equate the Forces**\n\nSince the gravitational force is the force causing the acceleration, we can equate the two expressions for force:\n\n$$\nm g = G \\frac{M m}{R^2}\n$$\n\n**Step 4: Solve for Acceleration due to Gravity ($g$)**\n\nNow, we can cancel out the mass of the object ($m$) from both sides of the equation:\n\n$$\ng = G \\frac{M}{R^2}\n$$\n\n---\n\n### Main Formula\n\nThe expression for the acceleration due to gravity ($g$) is:\n\n$$\ng = G \\frac{M}{R^2}\n$$\n\n<div align=\"center\">\n    <button style=\"padding: 10px 20px; font-size: 16px; margin: 5px;\">Explain Formula</button>\n    <button style=\"padding: 10px 20px; font-size: 16px; margin: 5px;\">Open Formula Lab</button>\n</div>\n\n---\n\n### Understanding the Variables\n\nLet's break down what each variable in the formula represents:\n\n| Variable | Description                                 | Standard Unit      |\n| :------- | :------------------------------------------ | :----------------- |\n| $g$      | Acceleration due to gravity                 | $m/s^2$            |\n| $G$      | Universal Gravitational Constant            | $N \\cdot m^2/kg^2$ |\n| $M$      | Mass of the planet (e.g., Earth)            | $kg$               |\n| $R$      | Radius of the planet (distance from center) | $m$                |\n\n---\n\n### Important Notes\n\n*   **Independence of Object's Mass:** The derived formula for $g$ does not depend on the mass of the object ($m$). This means that all objects, regardless of their mass, fall with the same acceleration in a vacuum.\n*   **Altitude Dependence:** The formula assumes the object is at the surface of the planet. If the object is at a height $h$ above the surface, the distance from the center of the planet becomes $(R+h)$. In this case, the acceleration due to gravity would be $g = G \\frac{M}{(R+h)^2}$.\n*   **Non-Uniformity of Earth's Gravity:** The Earth is not a perfect sphere, and its mass distribution is not perfectly uniform. Therefore, the value of $g$ varies slightly from place to place on Earth's surface. However, $9.81 \\, m/s^2$ is a commonly used average value.\n\n---\n\n### Summary\n\nWe have successfully derived the expression for acceleration due to gravity by combining Newton's Law of Universal Gravitation and Newton's Second Law of Motion. This derivation shows that the acceleration due to gravity depends only on the gravitational constant, the mass of the planet, and the distance from the planet's center, not on the mass of the falling object.\n\n---\n\n### Suggested Questions\n\n1.  How would the acceleration due to gravity change if the Earth's radius doubled but its mass remained the same?\n2.  Why do objects of different masses fall at the same rate in a vacuum?\n3.  What factors cause the acceleration due to gravity to vary across the Earth's surface?\n4.  If you were on a planet with twice the mass of Earth but the same radius, how would your weight compare to your weight on Earth?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately derives the expression for acceleration due to gravity, correctly applying Newton's Law of Universal Gravitation and Newton's Second Law of Motion. The layout and formatting are well-structured, making the content easily readable. The explanation is beginner-friendly and effectively teaches the concept. Minor suggestions for improvement include adding more diagrams or illustrations to enhance understanding and providing additional examples or problems for practice. Overall, the response demonstrates a strong understanding of the physics concepts and presents them in a clear, educational manner.",
+  "candidate_token_usage": {
+    "promptTokens": 380,
+    "completionTokens": 1098,
+    "totalTokens": 1478
+  },
+  "candidate_latency_ms": 6471,
+  "candidate_cost_usd": 0.002859,
+  "judge_token_usage": {
+    "promptTokens": 1833,
+    "completionTokens": 162,
+    "totalTokens": 1995
+  },
+  "judge_latency_ms": 4872,
+  "judge_cost_usd": 0.0014885999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:41:11.465Z"
+}

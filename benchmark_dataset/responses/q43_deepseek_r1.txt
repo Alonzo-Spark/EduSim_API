@@ -1,0 +1,68 @@
+To derive the expression for the electric force between two charges, we use **Coulomb's Law**, which describes the electrostatic interaction between point charges. Here's the structured breakdown:
+
+---
+
+### **Coulomb's Law Formula**
+$$
+\boxed{F = k \frac{q_1 q_2}{r^2}}
+$$
+**Where**:
+- \( F \): Magnitude of the electric force (in newtons, N)
+- \( q_1, q_2 \): Charges of the two point charges (in coulombs, C \))
+- \( r \): Distance between the charges (in meters, m)
+- \( k \): Coulomb's constant (\( 8.988 \times 10^9 \, \text{N·m}^2/\text{C}^2 \))
+
+---
+
+### **Key Steps in Derivation**
+
+1. **Proportionality to Charges**  
+   The force is directly proportional to the product of the charges (\( q_1 q_2 \)):  
+   $$ F \propto q_1 q_2 $$
+
+2. **Inverse Square Law**  
+   The force decreases with the square of the distance (\( r \)) between the charges:  
+   $$ F \propto \frac{1}{r^2} $$
+
+3. **Coulomb's Constant (\( k \))**  
+   Combines the above relationships and introduces a proportionality constant:  
+   $$ F = k \frac{q_1 q_2}{r^2} $$  
+   Here, \( k = \frac{1}{4\pi \varepsilon_0} \), where \( \varepsilon_0 \) is the permittivity of free space (\( 8.854 \times 10^{-12} \, \text{C}^2/\text{N·m}^2 \)).
+
+---
+
+### **Vector Form & Direction**
+The force acts along the line joining the two charges. For charges \( q_1 \) and \( q_2 \):  
+- **Like charges** (\( q_1 q_2 > 0 \)): Repulsive force.  
+- **Opposite charges** (\( q_1 q_2 < 0 \)): Attractive force.  
+
+**Vector equation**:  
+$$ \vec{F}_{12} = k \frac{q_1 q_2}{r^2} \hat{r}_{12} $$  
+where \( \hat{r}_{12} \) is the unit vector from \( q_1 \) to \( q_2 \).
+
+---
+
+### **Assumptions**
+1. **Point charges**: Sizes of charges are negligible compared to \( r \).
+2. **Static charges**: Charges are not moving.
+3. **Vacuum**: Formula assumes no external medium (use \( \varepsilon_0 \) for vacuum).
+
+---
+
+### **Example**
+If \( q_1 = 2 \, \text{C} \), \( q_2 = -3 \, \text{C} \), and \( r = 1 \, \text{m} \):  
+$$ F = (8.99 \times 10^9) \frac{(2)(-3)}{1^2} = -5.39 \times 10^{10} \, \text{N} $$  
+The negative sign indicates **attraction**.
+
+---
+
+### **Applications**
+- Calculating forces in atomic nuclei.
+- Designing capacitors and circuits.
+- Understanding molecular bonding.
+
+---
+
+### **Formula Lab**
+Explore how \( F \) changes with \( q_1 \), \( q_2 \), and \( r \):  
+[ Open Coulomb's Law Simulator ]

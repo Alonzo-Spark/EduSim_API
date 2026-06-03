@@ -1,0 +1,798 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Physics: Work-Energy Theorem</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0KOVEMeaPoFgYlRq2hqPFRvXJpWNwSR5cB9b8d0R6R3RJqXk2iRV" crossorigin="anonymous">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #64748b;
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Layout */
+        .layout-container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+        }
+
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: #eff6ff;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            background: #fcfcfc;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title::before {
+            content: '';
+            display: block;
+            width: 4px;
+            height: 1.2em;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-body p {
+            margin-bottom: 1rem;
+        }
+
+        .card-body ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Formula Card System */
+        .formula-card {
+            background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+            border: 1px solid #bfdbfe;
+        }
+
+        .formula-display {
+            background: #f1f5f9;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        /* Responsive Table */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            min-width: 600px; /* Force scroll on small screens */
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Interactive Modal (Formula Lab) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+        }
+
+        .modal-overlay.open .modal {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        /* Lab Controls */
+        .lab-control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .lab-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .lab-slider {
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .lab-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .lab-result {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .lab-result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            background: #f8fafc;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: none;
+        }
+        
+        .explanation-box.visible {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none; /* In a real app, make this a hamburger menu */
+            }
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+            .page-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    
+    <!-- KaTeX JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+
+    <div class="layout-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+                PhysLab
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item"><a href="#intro" class="nav-link active">Introduction</a></li>
+                <li class="nav-item"><a href="#definition" class="nav-link">Definition</a></li>
+                <li class="nav-item"><a href="#formula" class="nav-link">Main Formula</a></li>
+                <li class="nav-item"><a href="#derivation" class="nav-link">Derivation</a></li>
+                <li class="nav-item"><a href="#variables" class="nav-link">Variables</a></li>
+                <li class="nav-item"><a href="#applications" class="nav-link">Applications</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1 class="page-title">Work-Energy Theorem</h1>
+                <p class="page-subtitle">Connecting Force, Motion, and Energy</p>
+            </header>
+
+            <!-- Content will be injected here by JavaScript -->
+            <div id="textbook-content"></div>
+        </main>
+    </div>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="lab-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Interactive Formula Lab</h3>
+                <button class="close-modal" id="close-lab">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
+                    Adjust the mass and velocities to see how the net work done on the object changes.
+                </p>
+                
+                <div class="lab-control-group">
+                    <div class="lab-label">
+                        <span>Mass ($m$)</span>
+                        <span id="val-mass">10 kg</span>
+                    </div>
+                    <input type="range" min="1" max="100" value="10" class="lab-slider" id="input-mass">
+                </div>
+
+                <div class="lab-control-group">
+                    <div class="lab-label">
+                        <span>Initial Velocity ($v_i$)</span>
+                        <span id="val-vi">0 m/s</span>
+                    </div>
+                    <input type="range" min="0" max="50" value="0" class="lab-slider" id="input-vi">
+                </div>
+
+                <div class="lab-control-group">
+                    <div class="lab-label">
+                        <span>Final Velocity ($v_f$)</span>
+                        <span id="val-vf">20 m/s</span>
+                    </div>
+                    <input type="range" min="0" max="50" value="20" class="lab-slider" id="input-vf">
+                </div>
+
+                <div class="lab-result">
+                    <div style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-muted);">Net Work Done ($W_{net}$)</div>
+                    <div class="lab-result-value" id="lab-result">2000 J</div>
+                </div>
+                
+                <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+                    $$ W_{net} = \frac{1}{2} m (v_f^2 - v_i^2) $$
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================================
+        // DATA STRUCTURE (Simulating Parsed Content)
+        // ==========================================================
+        const textbookData = [
+            {
+                id: 'intro',
+                type: 'card',
+                title: 'Introduction',
+                content: `
+                    <p>The Work-Energy Theorem is a fundamental principle in classical mechanics. It provides a powerful relationship between the <strong>concepts of forces</strong> (Newton's Laws) and the <strong>concept of energy</strong>.</p>
+                    <p>Essentially, it tells us that when you push or pull an object (do work), you change its speed (kinetic energy).</p>
+                `
+            },
+            {
+                id: 'definition',
+                type: 'card',
+                title: 'Definition',
+                content: `
+                    <p>Before stating the theorem, let's briefly define the two key components:</p>
+                    <ul>
+                        <li><strong>Work ($W$):</strong> Work is done when a force causes displacement. It is a scalar quantity.</li>
+                        <li><strong>Kinetic Energy ($K$):</strong> The energy possessed by an object due to its motion.</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'formula',
+                type: 'formula-card',
+                title: 'The Work-Energy Theorem',
+                data: {
+                    latex: 'W_{net} = \\Delta K = \\frac{1}{2}mv_f^2 - \\frac{1}{2}mv_i^2',
+                    context: 'This equation states that the net work done on an object equals the change in its kinetic energy.',
+                    variables: [
+                        { symbol: 'W_{net}', meaning: 'Net work done by all forces', unit: 'Joules (J)' },
+                        { symbol: '\\Delta K', meaning: 'Change in kinetic energy', unit: 'Joules (J)' },
+                        { symbol: 'm', meaning: 'Mass of the object', unit: 'Kilograms (kg)' },
+                        { symbol: 'v_f', meaning: 'Final velocity', unit: 'Meters per second (m/s)' },
+                        { symbol: 'v_i', meaning: 'Initial velocity', unit: 'Meters per second (m/s)' }
+                    ]
+                }
+            },
+            {
+                id: 'derivation',
+                type: 'card',
+                title: 'Derivation',
+                content: `
+                    <p>We can derive this theorem starting from Newton's Second Law and the equations of motion.</p>
+                    <p><strong>1. Start with Newton's Second Law:</strong></p>
+                    $$ F = ma $$
+                    <p><strong>2. Calculate Work for constant force:</strong></p>
+                    $$ W = F \\cdot d \\cos(\\theta) $$
+                    <p>Assuming force and displacement are in the same direction ($\\theta = 0$):</p>
+                    $$ W = Fd $$
+                    <p><strong>3. Substitute $F = ma$:</strong></p>
+                    $$ W = mad $$
+                    <p><strong>4. Use the kinematic equation for velocity squared:</strong></p>
+                    $$ v_f^2 = v_i^2 + 2ad $$
+                    <p>Rearrange for $ad$:</p>
+                    $$ ad = \\frac{v_f^2 - v_i^2}{2} $$
+                    <p><strong>5. Substitute $ad$ back into the work equation:</strong></p>
+                    $$ W = m \\left( \\frac{v_f^2 - v_i^2}{2} \\right) $$
+                    <p><strong>6. Final Result:</strong></p>
+                    $$ W = \\frac{1}{2}mv_f^2 - \\frac{1}{2}mv_i^2 $$
+                `
+            },
+            {
+                id: 'variables',
+                type: 'table-card',
+                title: 'Variable Breakdown',
+                data: [
+                    { variable: 'W', name: 'Net Work', description: 'Total energy transferred to/from the object.', unit: 'Joule (J) = N·m' },
+                    { variable: 'K', name: 'Kinetic Energy', description: 'Energy of motion ($K = \\frac{1}{2}mv^2$).', unit: 'Joule (J)' },
+                    { variable: 'm', name: 'Mass', description: 'Measure of inertia.', unit: 'Kilogram (kg)' },
+                    { variable: 'v', name: 'Velocity', description: 'Speed with direction.', unit: 'm/s' }
+                ]
+            },
+            {
+                id: 'applications',
+                type: 'card',
+                title: 'Applications & Key Notes',
+                content: `
+                    <ul>
+                        <li><strong>Braking Vehicles:</strong> The friction force does negative work to reduce the kinetic energy to zero.</li>
+                        <li><strong>Acceleration:</strong> An engine does positive work to increase the kinetic energy of a car.</li>
+                        <li><strong>Scalar Nature:</strong> Since energy and work are scalars, we don't need to worry about vector directions, only magnitudes (mostly).</li>
+                        <li><strong>Path Independence:</strong> The change in kinetic energy depends only on initial and final speeds, not the path taken.</li>
+                    </ul>
+                `
+            }
+        ];
+
+        // ==========================================================
+        // RENDERING ENGINE
+        // ==========================================================
+        const contentContainer = document.getElementById('textbook-content');
+
+        function renderTextbook() {
+            textbookData.forEach(section => {
+                let cardHTML = '';
+
+                if (section.type === 'card') {
+                    cardHTML = `
+                        <div class="card" id="${section.id}">
+                            <div class="card-header">
+                                <h2 class="card-title">${section.title}</h2>
+                            </div>
+                            <div class="card-body">
+                                ${section.content}
+                            </div>
+                        </div>
+                    `;
+                } 
+                else if (section.type === 'formula-card') {
+                    // Extract formula data for the "Formula Lab"
+                    const formulaId = `formula-${section.id}`;
+                    const explainId = `explain-${section.id}`;
+                    
+                    cardHTML = `
+                        <div class="card formula-card" id="${section.id}">
+                            <div class="card-header">
+                                <h2 class="card-title">${section.title}</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="formula-display" id="${formulaId}">
+                                    ${section.data.latex}
+                                </div>
+                                <div class="formula-actions">
+                                    <button class="btn btn-outline" onclick="toggleExplanation('${explainId}')">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                                        Explain Formula
+                                    </button>
+                                    <button class="btn btn-primary" onclick="openLab()">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                        Open Formula Lab
+                                    </button>
+                                </div>
+                                <div class="explanation-box" id="${explainId}">
+                                    <strong>Context:</strong> ${section.data.context}
+                                    <br><br>
+                                    <strong>Variables:</strong>
+                                    <ul>
+                                        ${section.data.variables.map(v => `<li><strong>${v.symbol}</strong>: ${v.meaning} (${v.unit})</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                else if (section.type === 'table-card') {
+                    const rows = section.data.map(row => `
+                        <tr>
+                            <td><strong>${row.variable}</strong></td>
+                            <td>${row.name}</td>
+                            <td>${row.description}</td>
+                            <td>${row.unit}</td>
+                        </tr>
+                    `).join('');
+
+                    cardHTML = `
+                        <div class="card" id="${section.id}">
+                            <div class="card-header">
+                                <h2 class="card-title">${section.title}</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Symbol</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>SI Unit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${rows}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                contentContainer.innerHTML += cardHTML;
+            });
+            
+            // Re-trigger KaTeX rendering for the new content
+            if (typeof renderMathInElement === 'function') {
+                renderMathInElement(contentContainer);
+            }
+        }
+
+        // ==========================================================
+        // INTERACTION LOGIC
+        // ==========================================================
+
+        // Toggle Explanation
+        window.toggleExplanation = function(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('visible')) {
+                el.classList.remove('visible');
+            } else {
+                el.classList.add('visible');
+            }
+        };
+
+        // Formula Lab Logic
+        const labModal = document.getElementById('lab-modal');
+        const closeLabBtn = document.getElementById('close-lab');
+        
+        // Inputs
+        const inputMass = document.getElementById('input-mass');
+        const inputVi = document.getElementById('input-vi');
+        const inputVf = document.getElementById('input-vf');
+
+        // Labels
+        const valMass = document.getElementById('val-mass');
+        const valVi = document.getElementById('val-vi');
+        const valVf = document.getElementById('val-vf');
+        
+        // Result
+        const labResult = document.getElementById('lab-result');
+
+        function updateLab() {
+            const m = parseFloat(inputMass.value);
+            const vi = parseFloat(inputVi.value);
+            const vf = parseFloat(inputVf.value);
+
+            // Update Labels
+            valMass.textContent = `${m} kg`;
+            valVi.textContent = `${vi} m/s`;
+            valVf.textContent = `${vf} m/s`;
+
+            // Calculate Work: W = 0.5 * m * (vf^2 - vi^2)
+            const work = 0.5 * m * (Math.pow(vf, 2) - Math.pow(vi, 2));
+            
+            // Format Result
+            labResult.textContent = `${work.toFixed(1)} J`;
+            
+            // Visual feedback for negative work
+            if (work < 0) {
+                labResult.style.color = '#dc2626'; // Red for negative work (energy removed)
+            } else {
+                labResult.style.color = '#2563eb'; // Blue for positive work
+            }
+        }
+
+        window.openLab = function() {
+            labModal.classList.add('open');
+            updateLab(); // Ensure calculation is fresh
+        };
+
+        function closeLab() {
+            labModal.classList.remove('open');
+        }
+
+        closeLabBtn.addEventListener('click', closeLab);
+        labModal.addEventListener('click', (e) => {
+            if (e.target === labModal) closeLab();
+        });
+
+        // Attach listeners to sliders
+        [inputMass, inputVi, inputVf].forEach(input => {
+            input.addEventListener('input', updateLab);
+        });
+
+        // Navigation Active State
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('.card');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize
+        renderTextbook();
+
+    </script>
+</body>
+</html>
+```

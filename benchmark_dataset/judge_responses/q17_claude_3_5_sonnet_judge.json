@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 17,
+  "question": "State and derive the work-energy theorem.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nThe Work-Energy Theorem states that the net work performed by all forces acting on a body is equal to the net change in the kinetic energy of that body over the same tracking interval.\n\n---\n\n## Formula\n\nThe mathematical theorem statement is written as:\n\n$$W_{\\text{net}} = \\Delta K = K_f - K_i$$\n\nWhere:\n* $W_{\\text{net}}$ represents the total work scalar sum\n* $\\Delta K$ represents the net change in kinetic energy\n* $K_f$ represents the final kinetic energy ($\\frac{1}{2}mv^2$)\n* $K_i$ represents the initial kinetic energy ($\\frac{1}{2}mu^2$)\n\n---\n\n## Derivations\n\nConsider a body of constant mass $m$ moving along a straight track under the influence of a uniform net force $F$.\n\nThe constant acceleration ($a$) produced in the body is given by the kinematic relation:\n$$v^2 = u^2 + 2as$$\n\nIsolate the acceleration-displacement product term ($as$):\n$$as = \\frac{v^2 - u^2}{2}$$\n\nAccording to Newton's Second Law, the net force acting on the object is:\n$$F = ma$$\n\nThe mechanical work performed by this force during displacement ($s$) is defined as:\n$$W = F \\cdot s$$\n\nSubstitute the force expression ($ma$) directly into the work equation:\n$$W = (ma) \\cdot s = m(as)$$\n\nNow, substitute the kinematic product expression for ($as$) into the equation:\n$$W = m \\left(\\frac{v^2 - u^2}{2}\\right)$$\n\nDistribute the mass parameter across both tracking velocity terms:\n$$W = \\frac{1}{2}mv^2 - \\frac{1}{2}mu^2$$\n\nExpress the right-hand terms as their specific kinetic energy states ($K_f$ and $K_i$):\n$$W = K_f - K_i = \\Delta K$$\n\nThis completes the analytical derivation of the Work-Energy Theorem.\n\n---\n\n## Summary\n\nThe theorem links the mechanical work performed on a body to its resulting change in velocity, confirming that input work translates directly into a kinetic energy gain or loss.",
+  "candidate_response": "I'll render this as a structured interactive textbook experience.\n\n```json\n{\n  \"type\": \"textbook_response\",\n  \"topic\": \"Work-Energy Theorem\",\n  \"subject\": \"Classical Mechanics\"\n}\n```\n\n---\n\n**RENDERING: Work-Energy Theorem — Interactive Textbook**\n\n---\n\n## 📘 Statement\n\n> **The net work done on an object equals the change in its kinetic energy.**\n\n$$W_{\\text{net}} = \\Delta KE = \\frac{1}{2}mv_f^2 - \\frac{1}{2}mv_i^2$$\n\n---\n\n## 🔑 Key Definitions\n\n| Term | Symbol | Definition |\n|------|--------|------------|\n| Work | $W$ | Energy transferred by a force over displacement |\n| Kinetic Energy | $KE$ | Energy due to motion: $\\frac{1}{2}mv^2$ |\n| Net Work | $W_{\\text{net}}$ | Total work done by **all** forces |\n| Mass | $m$ | Inertia of the object (kg) |\n| Velocity | $v$ | Speed of the object (m/s) |\n\n---\n\n## 📐 Derivation\n\n### Step 1 — Start with Newton's Second Law\n\n$$F_{\\text{net}} = ma$$\n\n### Step 2 — Express acceleration using kinematics\n\nFrom $v_f^2 = v_i^2 + 2as$, solve for $as$:\n\n$$as = \\frac{v_f^2 - v_i^2}{2}$$\n\n### Step 3 — Define Work\n\nWork done by net force over displacement $s$:\n\n$$W_{\\text{net}} = F_{\\text{net}} \\cdot s = ma \\cdot s$$\n\n### Step 4 — Substitute\n\n$$W_{\\text{net}} = m \\cdot (as) = m \\cdot \\frac{v_f^2 - v_i^2}{2}$$\n\n$$\\boxed{W_{\\text{net}} = \\frac{1}{2}mv_f^2 - \\frac{1}{2}mv_i^2}$$\n\n---\n\n## 🔬 Calculus-Based Derivation (Rigorous)\n\nFor variable forces, work is:\n\n$$W_{\\text{net}} = \\int_{x_i}^{x_f} F_{\\text{net}}\\, dx$$\n\nApply Newton's second law $F = ma = m\\dfrac{dv}{dt}$, and use the chain rule:\n\n$$\\frac{dv}{dt} = \\frac{dv}{dx}\\cdot\\frac{dx}{dt} = v\\frac{dv}{dx}$$\n\nSo:\n\n$$W_{\\text{net}} = \\int_{x_i}^{x_f} m\\,v\\,\\frac{dv}{dx}\\,dx = \\int_{v_i}^{v_f} mv\\,dv$$\n\n$$W_{\\text{net}} = m \\cdot \\frac{v^2}{2}\\Bigg|_{v_i}^{v_f}$$\n\n$$\\boxed{W_{\\text{net}} = \\frac{1}{2}mv_f^2 - \\frac{1}{2}mv_i^2}$$\n\n---\n\n## ⚡ Important Notes\n\n- Only **net work** (by all forces combined) equals $\\Delta KE$\n- If $W_{\\text{net}} > 0$ → object **speeds up**\n- If $W_{\\text{net}} < 0$ → object **slows down**\n- If $W_{\\text{net}} = 0$ → **no change** in speed (e.g. circular motion)\n- The theorem holds for **variable forces** (calculus form)\n- It is a **scalar** equation — direction doesn't appear explicitly\n\n---\n\n## 📊 Sign Convention Summary\n\n| Condition | $W_{\\text{net}}$ | Effect |\n|-----------|-----------------|--------|\n| Force and displacement in same direction | $+$ | KE increases |\n| Force and displacement in opposite direction | $-$ | KE decreases |\n| Force perpendicular to displacement | $0$ | KE unchanged |\n\n---\n\n## 🧪 Quick Example\n\nA 2 kg block accelerates from rest to 6 m/s. Find net work done.\n\n$$W_{\\text{net}} = \\frac{1}{2}(2)(6)^2 - \\frac{1}{2}(2)(0)^2 = 36 - 0 = \\boxed{36 \\text{ J}}$$",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively teaches the concept of the work-energy theorem. The use of interactive textbook formatting, clear definitions, and step-by-step derivations enhances the educational value. The response covers both the basic and calculus-based derivations, providing a comprehensive understanding of the theorem. The only minor suggestion for improvement is to consider adding more examples or applications of the work-energy theorem to further illustrate its practical significance. Overall, the response demonstrates a strong command of the subject matter and presents it in a clear, engaging manner.",
+  "candidate_token_usage": {
+    "promptTokens": 433,
+    "completionTokens": 1133,
+    "totalTokens": 1566
+  },
+  "candidate_latency_ms": 19762,
+  "candidate_cost_usd": 0.002699,
+  "judge_token_usage": {
+    "promptTokens": 1874,
+    "completionTokens": 172,
+    "totalTokens": 2046
+  },
+  "judge_latency_ms": 3070,
+  "judge_cost_usd": 0.0015372,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:27:35.872Z"
+}

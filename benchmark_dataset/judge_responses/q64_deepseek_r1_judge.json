@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 64,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'spring_stretched' peak limit event.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on an elastic deformation threshold benchmark.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe spring joint reached its maximum length extension threshold (`spring_stretched`) at the outer limit of its oscillation path.\n\n### WHAT CHANGED\nThe velocity vector dropped to zero, and the inward acceleration vector reached its maximum value.\n\n### SIMPLE WHY\nAt maximum extension, all kinetic energy has converted into elastic potential energy, creating a powerful inward restoring force.\n\n### WHAT TO NOTICE\nWatch how the block pauses for a fraction of a second at this outer limit before changing direction and accelerating backward.",
+  "candidate_response": "**Runtime Overlay Response: Spring Stretched (Peak Limit Event)**\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**🔍 Quick Definition**  \nA spring reaches its *peak limit* when stretched beyond the elastic deformation range, entering plastic deformation where Hooke's Law no longer applies.\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**📜 Main Formula**  \n**Hooke's Law (Pre-Limit):**  \n$$ F = -kx $$  \n\n**Peak Limit Condition:**  \n$$ x > x_{\\text{elastic}} $$  \n\n**Key Variables**  \n| Symbol | Quantity | SI Unit | Critical Value |  \n|--------|----------|---------|----------------|  \n| *F* | Restoring force | N | Varies |  \n| *k* | Spring constant | N/m | Material-dependent |  \n| *x* | Displacement | m | **Critical:** x_elastic |  \n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**⚠️ Key Consequences**  \n1. **Permanent deformation** - Spring won't return to original length  \n2. **Hysteresis** - Altered force-displacement relationship  \n3. **Energy dissipation** - Work done isn't fully recoverable  \n\n**Real-World Impact**  \n- Suspension system failure  \n- Mattress spring breakdown  \n- Mechanical watch inaccuracy  \n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**🛠️ Formula Lab**  \n```spring-sandbox  \n[Interactive Simulation]  \nControls:  \n- Adjust spring constant (50-500 N/m)  \n- Drag displacement slider (0-150% of x_elastic)  \n\nVisualization:  \n- Real-time force calculation  \n- Color-coded strain indicators  \n- Elastic/plastic transition marker  \n```  \n\n**🔬 Experimental Observations**  \n| Load Condition | Spring Behavior |  \n|----------------|-----------------|  \n| x < x_elastic | Returns to original length |  \n| x = x_elastic | Maximum elastic stretch |  \n| x > x_elastic | Permanent deformation occurs |  \n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n**💡 Expert Insight**  \n*\"The elastic limit isn't just about force - it's about energy storage capacity. Beyond this point, the spring becomes a mechanical fuse.\"* - Materials Engineering Principle\n\n[🔄 Reset Simulation] | [📊 Show Stress-Strain Curve] | [❓ Why This Matters]",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 6,
+    "quality": 8,
+    "educational": 7,
+    "overall_average": "7.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": true,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response lacks semantic alignment with the gold reference answer, focusing instead on the elastic limit of a spring rather than the 'spring_stretched' peak limit event. The introduction of Hooke's Law and the discussion of plastic deformation are relevant but not directly applicable to the event described. The response includes fabricated concepts, such as the 'peak limit condition' equation and the 'Formula Lab' simulation, which are not supported by the original question or the gold reference answer. The use of tables, formulas, and interactive elements, while visually appealing, does not compensate for the lack of accuracy and relevance to the question. To improve, the candidate should focus on directly addressing the 'spring_stretched' event, including the conversion of kinetic energy to elastic potential energy, the maximum inward acceleration, and the pause in motion at the outer limit of the oscillation path. Additionally, the response should adhere more closely to the structure and content of the gold reference answer.",
+  "candidate_token_usage": {
+    "promptTokens": 371,
+    "completionTokens": 961,
+    "totalTokens": 1332
+  },
+  "candidate_latency_ms": 18617,
+  "candidate_cost_usd": 0.00230864,
+  "judge_token_usage": {
+    "promptTokens": 1021,
+    "completionTokens": 251,
+    "totalTokens": 1272
+  },
+  "judge_latency_ms": 6188,
+  "judge_cost_usd": 0.001215,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:04:32.733Z"
+}

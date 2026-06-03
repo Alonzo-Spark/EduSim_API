@@ -1,0 +1,132 @@
+<thinking>
+The user is asking about why astronauts experience weightlessness in space. I need to render this as a structured UI with cards, formula cards, and proper sections - not like a markdown document.
+
+Let me think about the content and structure:
+
+1. Quick Definition/Introduction
+2. Common Misconception
+3. The Real Reason (Free Fall concept)
+4. Formula Card (gravitational force, centripetal acceleration)
+5. Key Concepts
+6. Applications/Examples
+7. Important Notes
+
+Let me structure this properly as UI blocks.
+
+For formulas:
+- Gravitational force: F = GMm/r²
+- Orbital velocity: v = √(GM/r)
+- The concept that g at orbital altitude is still significant
+
+Let me write this out as structured React-like component descriptions that will render as cards.
+</thinking>
+
+# Why Do Astronauts Experience Weightlessness?
+
+---
+
+## 🔵 Quick Definition
+
+> **Weightlessness** (or *microgravity*) is the sensation of having no apparent weight — not because gravity is absent, but because the astronaut and their surroundings are **falling together** at the same rate.
+
+---
+
+## ⚠️ Common Misconception
+
+| What People Think | What's Actually True |
+|---|---|
+| "There's no gravity in space" | Gravity still acts strongly at orbital altitude |
+| "Astronauts float because they escaped Earth's pull" | Earth's gravity at the ISS is ~90% of surface gravity |
+| "Weightlessness = zero gravity" | Weightlessness = **free fall**, not zero gravity |
+
+---
+
+## 🧲 How Strong Is Gravity at the ISS?
+
+The ISS orbits at ~400 km altitude. Gravitational acceleration there:
+
+$$g' = \frac{GM_E}{(R_E + h)^2}$$
+
+| Variable | Meaning | Value |
+|---|---|---|
+| $G$ | Gravitational constant | $6.674 \times 10^{-11}\ \text{N m}^2\text{kg}^{-2}$ |
+| $M_E$ | Mass of Earth | $5.97 \times 10^{24}\ \text{kg}$ |
+| $R_E$ | Earth's radius | $6,371\ \text{km}$ |
+| $h$ | ISS altitude | $\approx 400\ \text{km}$ |
+
+**Result:** $g' \approx 8.7\ \text{m/s}^2$ — that's **88% of surface gravity**. Gravity is very much present.
+
+---
+
+## 🌍 The Real Reason — Perpetual Free Fall
+
+The ISS is in a state of **continuous free fall** toward Earth.
+
+$$\underbrace{v_{orbital}}_{\text{forward speed}} = \sqrt{\frac{GM_E}{R_E + h}} \approx 7,660\ \text{m/s}$$
+
+> The station moves forward so fast that **as it falls, Earth curves away beneath it** at exactly the same rate.
+
+```
+      → → → → →
+    ↓          Earth curves ↓
+      → → → → →
+```
+
+The astronaut and the station **fall at identical rates** — so relative to each other, there is no force felt. This is weightlessness.
+
+---
+
+## 🔑 Key Concepts
+
+**Apparent Weight**
+> What a scale reads. In free fall, a scale reads **zero** — even though gravity is pulling you down.
+
+$$W_{apparent} = m(g - a_{fall})$$
+
+When $a_{fall} = g$, apparent weight $= 0$.
+
+---
+
+**Inertial vs Gravitational Effects**
+> Einstein's *Equivalence Principle* states that free fall and being in deep space (truly far from gravity) are **locally indistinguishable**.
+
+---
+
+## 🧪 Everyday Analogy
+
+| Situation | What You Feel |
+|---|---|
+| Standing on Earth | Normal weight — ground pushes up |
+| Elevator cable snaps | Momentary weightlessness — free fall |
+| Skydiver before parachute opens | Weightless sensation |
+| Astronaut in orbit | Continuous free fall = continuous weightlessness |
+
+---
+
+## 🏥 Effects on the Human Body
+
+| System | Effect of Long-term Weightlessness |
+|---|---|
+| Muscles | Atrophy — muscles weaken without load |
+| Bones | Density decreases (~1% per month) |
+| Cardiovascular | Fluid shifts toward the head |
+| Vision | Intracranial pressure can affect eyesight |
+| Balance | Vestibular system becomes confused |
+
+---
+
+## 💡 Important Note
+
+> True **zero gravity** only exists infinitely far from all masses — which is nowhere in the observable universe. What we call "weightlessness" is always **free fall**, not the absence of gravity.
+
+---
+
+## 📌 Summary
+
+```
+Gravity at ISS altitude  →  Still ~88% of surface gravity
+Orbital speed            →  ~7,660 m/s forward
+Result                   →  Continuous free fall
+Sensation                →  Weightlessness (apparent weight = 0)
+Cause                    →  Astronaut + station fall at identical rate
+```

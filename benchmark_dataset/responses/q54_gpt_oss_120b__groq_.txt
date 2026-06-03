@@ -1,0 +1,184 @@
+┌───────────────────────────────────────────────┐
+│ Introduction                                      │
+│                                                   │
+│ In orbital mechanics a planet (or any satellite) │
+│ stays in a stable circular orbit only when its    │
+│ tangential (orbital) velocity exactly matches the │
+│ circular speed for its distance from the central  │
+│ body.  If that speed is reduced, the orbit can no │
+│ longer remain circular.  The planet will begin to │
+│ “fall” toward the central mass, tracing an         │
+│ elliptical path whose closest approach (periapsis)│
+│ is at the point where the speed was lowered.      │
+│                                                   │
+│ This card sets the stage for the quantitative     │
+│ analysis that follows.                           │
+└───────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Definition                                        │
+│                                                   │
+│ **Circular orbital speed** – the exact tangential │
+│ velocity a body must have to maintain a circular  │
+│ orbit at a given radius *r* around a mass *M*.    │
+│                                                   │
+│ When the actual tangential speed *v* is **<** the │
+│ circular speed, the orbit becomes elliptical and │
+│ the body will move inward until another equilibrium│
+│ (or a collision) is reached.                     │
+└───────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Key Concepts                                      │
+│                                                   │
+│ • **Angular momentum** is conserved in the absence│
+│   of external torques.                            │
+│ • **Mechanical energy** determines the shape of the│
+│   orbit (bound vs. unbound).                      │
+│ • **Vis‑viva equation** links speed, radius, and  │
+│   semi‑major axis.                                │
+│ • Reducing *v* while keeping *r* fixed lowers the │
+│   total energy → the orbit’s semi‑major axis      │
+│   shrinks, turning a circle into an ellipse.      │
+│                                                   │
+│ These ideas combine to explain what happens when  │
+│ the planet’s speed drops below the circular value.│
+└───────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Main Formula                                      │
+│                                                   │
+│   Circular Orbital Speed                           │
+│                                                   │
+│        v_c = √(GM / r)                             │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]        │
+└───────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Main Formula                                      │
+│                                                   │
+│   Vis‑Viva Equation                               │
+│                                                   │
+│        v² = GM ( 2/r – 1/a )                      │
+│                                                   │
+│   where *a* is the semi‑major axis of the orbit. │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]        │
+└───────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Orbital Behavior (v < v_c)                       │
+│                                                   │
+│ 1. **Immediate effect** – At the instant the      │
+│    tangential speed is reduced to *v* < *v_c*, the│
+│    centripetal force required for a circle (mv²/│
+│    r) is now smaller than the gravitational pull  │
+│    (GMm/r²).  The excess gravity pulls the planet │
+│    inward.                                        │
+│                                                   │
+│ 2. **Energy change** – The specific mechanical     │
+│    energy ε = v²/2 – GM/r becomes more negative   │
+│    (since v² drops).  A more negative ε means a   │
+│    tighter (smaller *a*) bound orbit.            │
+│                                                   │
+│ 3. **New orbit shape** – Conservation of angular   │
+│    momentum L = mvr forces the trajectory to be  │
+│    an ellipse with the current radius *r* as the  │
+│    **periapsis** (closest point).  The semi‑major │
+│    axis *a* can be found from the vis‑viva       │
+│    equation solved for *a*:                      │
+│                                                   │
+│        a = 1 / ( 2/r – v²/GM )                    │
+│                                                   │
+│ 4. **Future evolution** – The planet will swing   │
+│    out to an **apoapsis** (farthest point) where   │
+│    its speed is lowest, then fall back toward peri│
+│    apsis, repeating the elliptical cycle. If the │
+│    speed is reduced dramatically (well below v_c)│
+│    the ellipse can become very elongated, and the │
+│    periapsis may lie inside the planet’s atmosphere│
+│    or surface, leading to a collision.           │
+│                                                   │
+│ 5. **Special case – v = 0** – If the tangential   │
+│    component is completely removed, the body begins│
+│    a radial free‑fall straight toward the central │
+│    mass.                                          │
+└───────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Speed vs. Orbital Outcome                         │
+│                                                   │
+│ ┌─────────────────────┬───────────────────────┐ │
+│ │ Tangential Speed    │ Resulting Orbit       │ │
+│ ├─────────────────────┼───────────────────────┤ │
+│ │ v = v_c             │ Circular (stable)     │ │
+│ │ v slightly < v_c    │ Slightly elliptical,  │ │
+│ │                     │ periapsis = current r│ │
+│ │ v ≈ 0.7 v_c         │ Moderately elliptical │ │
+│ │                     │ (significant radial   │ │
+│ │                     │ excursion)            │ │
+│ │ v ≈ 0.4 v_c         │ Highly elongated ellipse││
+│ │                     │ periapsis deep inside │ │
+│ │                     │ atmosphere or surface │ │
+│ │ v → 0               │ Pure radial fall      │ │
+│ └─────────────────────┴───────────────────────┘ │
+│                                                   │
+│ The table is responsive; on narrow screens it     │
+│ stacks vertically.                               │
+└───────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Summary                                           │
+│                                                   │
+│ • Circular speed *v_c* = √(GM/r) is the exact      │
+│   requirement for a stable circle.               │
+│ • Reducing the tangential speed below *v_c*       │
+│   makes the specific orbital energy more negative,│
+│   forcing the orbit to become elliptical with the│
+│   current radius as periapsis.                    │
+│ • The vis‑viva equation gives the new semi‑major   │
+│   axis *a* and predicts the apoapsis distance.    │
+│ • Extreme reductions can lead to a radial plunge,│
+│   or even impact with the central body.           │
+│                                                   │
+│ Understanding these relationships lets us predict│
+│ how spacecraft maneuvers (e.g., retro‑burns)      │
+│ modify orbits, and why natural bodies that lose   │
+│ speed (e.g., atmospheric drag) spiral inward.     │
+└───────────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│ Suggested Questions                               │
+│                                                   │
+│ 1. If a satellite at 7000 km altitude reduces its │
+│    speed by 10 %, calculate its new periapsis and │
+│    apoapsis using the vis‑viva equation.         │
+│ 2. How does atmospheric drag mimic a continuous   │
+│    reduction in tangential velocity?             │
+│ 3. What happens to angular momentum if an external │
+│    torque is applied during the speed reduction? │
+│ 4. Compare the energy change for a 5 % speed drop │
+│    versus a 5 % increase.                         │
+│ 5. Design a retro‑burn maneuver that places a      │
+│    spacecraft into a desired elliptical orbit.   │
+│                                                   │
+│ Explore each question in the “Formula Lab” to     │
+│ see step‑by‑step calculations.                    │
+└───────────────────────────────────────────────────┘

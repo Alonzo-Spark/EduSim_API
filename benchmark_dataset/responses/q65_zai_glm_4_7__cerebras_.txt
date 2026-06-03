@@ -1,0 +1,60 @@
+```json
+{
+  "event": "orbit_started",
+  "timestamp": "2023-10-27T10:00:00Z",
+  "status": "active",
+  "data": {
+    "centralBody": {
+      "name": "Kepler-186f",
+      "type": "Exoplanet",
+      "mass": "1.2 Earths",
+      "radius": "1.1 Earths"
+    },
+    "orbit": {
+      "altitude": "400 km",
+      "eccentricity": "0.0167",
+      "inclination": "0.5°",
+      "period": "92.68 minutes",
+      "velocity": "7.67 km/s"
+    }
+  },
+  "visuals": {
+    "showPath": true,
+    "highlightBody": true,
+    "addTrail": true
+  },
+  "ui": {
+    "toast": {
+      "message": "Orbit established around Kepler-186f.",
+      "type": "success",
+      "duration": 3000
+    },
+    "card": {
+      "type": "orbit_info_card",
+      "title": "Orbit Stabilized",
+      "content": [
+        {
+          "type": "text",
+          "text": "You have successfully entered a stable orbit around **Kepler-186f**. Your current velocity is sufficient to maintain this trajectory."
+        },
+        {
+          "type": "formula_card",
+          "title": "Orbital Velocity",
+          "formula": "v = \\sqrt{\\frac{GM}{r}}",
+          "variables": [
+            { "symbol": "v", "description": "Orbital Velocity" },
+            { "symbol": "G", "description": "Gravitational Constant" },
+            { "symbol": "M", "description": "Mass of the Central Body" },
+            { "symbol": "r", "description": "Distance from the Center of the Body" }
+          ]
+        }
+      ],
+      "actions": [
+        { "label": "Adjust Orbit", "action": "open_orbit_editor" },
+        { "label": "De-orbit", "action": "initiate_deorbit" },
+        { "label": "View Telemetry", "action": "show_telemetry" }
+      ]
+    }
+  }
+}
+```

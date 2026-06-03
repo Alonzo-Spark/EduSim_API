@@ -1,0 +1,126 @@
+To derive the relation \( s = ut + \frac{1}{2}at^2 \) (displacement under constant acceleration), we start with fundamental kinematic definitions and use **integration** or **graphical methods**. Below is a step-by-step derivation:
+
+---
+
+### **Step 1: Define Acceleration**
+Acceleration (\( a \)) is the rate of change of velocity (\( v \)) with time (\( t \)):  
+\[
+a = \frac{dv}{dt}
+\]  
+Rearrange to express \( dv \):  
+\[
+dv = a  dt
+\]
+
+---
+
+### **Step 2: Integrate to Find Velocity**
+Integrate both sides from initial velocity \( u \) (at \( t = 0 \)) to final velocity \( v \) (at \( t = t \)):  
+\[
+\int_{u}^{v} dv = \int_{0}^{t} a  dt
+\]  
+Since acceleration \( a \) is constant:  
+\[
+v - u = a \cdot t
+\]  
+\[
+\boxed{v = u + at} \quad \text{(Equation 1)}
+\]
+
+---
+
+### **Step 3: Define Velocity**
+Velocity (\( v \)) is the rate of change of displacement (\( s \)) with time:  
+\[
+v = \frac{ds}{dt}
+\]  
+Substitute \( v \) from Equation 1:  
+\[
+\frac{ds}{dt} = u + at
+\]  
+Rearrange to express \( ds \):  
+\[
+ds = (u + at)  dt
+\]
+
+---
+
+### **Step 4: Integrate to Find Displacement**
+Integrate both sides from initial displacement \( 0 \) (at \( t = 0 \)) to final displacement \( s \) (at \( t = t \)):  
+\[
+\int_{0}^{s} ds = \int_{0}^{t} (u + at)  dt
+\]  
+\[
+s = \int_{0}^{t} u  dt + \int_{0}^{t} at  dt
+\]  
+\[
+s = u \left[ t \right]_{0}^{t} + a \left[ \frac{t^2}{2} \right]_{0}^{t}
+\]  
+\[
+s = u(t - 0) + a \left( \frac{t^2}{2} - 0 \right)
+\]  
+\[
+\boxed{s = ut + \frac{1}{2}at^2} \quad \text{(Derived!)}
+\]
+
+---
+
+### **Graphical Derivation (Area under Velocity-Time Graph)**
+Consider a velocity-time graph for constant acceleration:  
+- Initial velocity \( = u \)  
+- Final velocity \( = v = u + at \)  
+- Slope \( = \) acceleration \( a \)  
+- **Displacement \( s \) = Area under the graph**  
+
+The area is a trapezium:  
+\[
+\text{Area} = \frac{1}{2} \times (\text{Sum of parallel sides}) \times \text{Height}
+\]  
+\[
+s = \frac{1}{2} \times (u + v) \times t
+\]  
+Substitute \( v = u + at \):  
+\[
+s = \frac{1}{2} \times (u + u + at) \times t = \frac{1}{2} \times (2u + at) \times t = ut + \frac{1}{2}at^2
+\]  
+
+---
+
+### **Key Notes**
+1. **Assumptions**:  
+   - Acceleration \( a \) is constant.  
+   - Motion is along a straight line.  
+   - Initial displacement is \( 0 \) (if not, replace \( s \) with \( s - s_0 \)).  
+
+2. **When to Use**:  
+   This equation relates displacement (\( s \)), initial velocity (\( u \)), acceleration (\( a \)), and time (\( t \)), **without needing final velocity \( v \)**.  
+
+3. **Applications**:  
+   - Projectile motion  
+   - Free-fall problems  
+   - Braking distance calculations  
+
+---
+
+### **Practice Questions**
+1. A car starts from rest (\( u = 0 \)) and accelerates at \( 3  \text{m/s}^2 \). How far does it travel in \( 5  \text{s} \)?  
+   \[
+   \text{Answer: } s = 0 \cdot 5 + \frac{1}{2}(3)(5)^2 = 37.5  \text{m}
+   \]  
+
+2. An object is thrown upward with \( u = 20  \text{m/s} \) and acceleration \( a = -10  \text{m/s}^2 \) (gravity). Find its displacement after \( 2  \text{s} \).  
+   \[
+   \text{Answer: } s = (20)(2) + \frac{1}{2}(-10)(2)^2 = 40 - 20 = 20  \text{m}
+   \]  
+
+---
+
+### **Formula Lab**
+Explore the equation interactively:  
+```python
+def displacement(u, a, t):
+    return u*t + 0.5*a*t**2
+
+# Example: u=2 m/s, a=4 m/s², t=3 s
+print(displacement(2, 4, 3))  # Output: 2*3 + 0.5*4*9 = 6 + 18 = 24 m
+```

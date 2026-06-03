@@ -1,0 +1,99 @@
+Okay, I understand. You want a significant overhaul of how the AI Tutor content is presented, moving away from a simple markdown document to a more structured, interactive, and textbook-like experience. Here's how I will approach the content "Explain uniform circular motion and centripetal acceleration," adhering to your new rendering system specifications.  I will focus on generating the UI blocks and data structures needed for the components.
+
+```json
+{
+  "sections": [
+    {
+      "title": "Introduction",
+      "type": "card",
+      "content": "Uniform circular motion is a fundamental concept in physics describing the movement of an object along a circular path with a constant speed. This means the object's speed doesn't change, but its direction is constantly changing. This creates a centripetal acceleration, which is crucial to understanding this type of motion."
+    },
+    {
+      "title": "Definition",
+      "type": "card",
+      "content": "Uniform Circular Motion (UCM) is motion where an object moves at a constant speed along a circular path. The key characteristic is the constant speed, despite the continuously changing direction."
+    },
+    {
+      "title": "Key Concepts",
+      "type": "card",
+      "content": "Here's a breakdown of the core ideas:\n\n*   **Circular Path:** The object travels along a circle.\n*   **Constant Speed:** The object maintains the same speed throughout the motion.\n*   **Changing Velocity:** Although the speed is constant, the *velocity* (speed and direction) is constantly changing.\n*   **Centripetal Acceleration:** The acceleration directed towards the center of the circle, responsible for constantly changing the direction of the object."
+    },
+    {
+      "title": "Centripetal Acceleration",
+      "type": "formulaCard",
+      "formula": "a_c = v^2 / r",
+      "title": "Centripetal Acceleration",
+      "explanation": "Centripetal acceleration is the acceleration experienced by an object moving in a circular path.  It's always directed towards the center of the circle.  It's not a 'force' in the traditional sense, but rather a consequence of the net force causing the circular motion.",
+      "variables": {
+        "a_c": "Centripetal Acceleration",
+        "v": "Speed of the object",
+        "r": "Radius of the circular path"
+      },
+      "labLink": "/formula_lab/centripetal"
+    },
+    {
+      "title": "Formula",
+      "type": "card",
+      "content": "The relationship between centripetal acceleration, velocity, and radius is defined by the following formula:\n\n $$a_c = \frac{v^2}{r}$$"
+    },
+    {
+      "title": "Applications",
+      "type": "card",
+      "content": "Uniform Circular Motion and Centripetal Acceleration are fundamental to many real-world scenarios:\n\n*   **Circular Motion of Planets:** Planets orbit the Sun in approximately circular paths, exhibiting uniform circular motion.\n*   **Car Turns:**  When a car turns, the car experiences centripetal acceleration, which is provided by the friction between the tires and the road.\n*   **Electromagnetic Devices:** Centripetal acceleration is used in devices like centrifuges and particle accelerators.\n*  **Roller Coasters:** The circular paths of roller coasters rely on centripetal acceleration to keep riders on the track."
+    },
+    {
+      "title": "Advantages",
+      "type": "card",
+      "content": "Understanding uniform circular motion provides a foundational understanding for more complex concepts in physics, such as orbital mechanics and rotational dynamics.  It is a simple yet powerful model for understanding many different phenomena."
+    },
+    {
+      "title": "Disadvantages",
+      "type": "card",
+      "content": "The concept of uniform circular motion is an idealized model. In reality, objects often experience varying speeds and slight deviations from perfect circular paths. Furthermore, the formula $a_c = v^2 / r$ is only accurate if the object moves at a constant speed and the radius is constant."
+    },
+    {
+      "title": "Important Notes",
+      "type": "card",
+      "content": "Remember that centripetal acceleration is *always* directed towards the center of the circular path.  It is what causes the object to change direction continuously. The magnitude of the acceleration depends on the object's speed and the radius of the circular path."
+    },
+    {
+      "title": "Summary",
+      "type": "card",
+      "content": "Uniform circular motion describes constant-speed circular movement. Centripetal acceleration is the acceleration directed towards the center of the circle, keeping the object on its circular path. This concept is crucial for understanding various physical phenomena, from planetary orbits to simple car turns."
+    },
+    {
+      "title": "Suggested Questions",
+      "type": "card",
+      "content": "1.  What would happen to the centripetal acceleration if the radius of a circular path doubled, while keeping the speed constant?\n2.  How does the speed of an object affect its centripetal acceleration in uniform circular motion?\n3.  Give an example of a real-world application of centripetal acceleration."
+    }
+  ],
+  "table": {
+    "title": "Centripetal Acceleration vs. Linear Acceleration",
+    "headers": ["Feature", "Centripetal Acceleration", "Linear Acceleration"],
+    "rows": [
+      ["Direction", "Towards the center of the circle", "In the direction of motion"],
+      ["Cause", "Circular motion", "Change in velocity"],
+      ["Effect", "Changes direction", "Changes speed"],
+      ["Formula", "a_c = v^2 / r", "a = Δv / Δt"]
+    ]
+  }
+}
+```
+
+Key improvements and explanations:
+
+*   **JSON Structure:** The entire response is now structured as a JSON object.  This is ideal for programmatic processing and rendering.
+*   **`sections` Array:**  The main content is organized into an array of `sections`. Each section has a `title` and `type`.  The `type` field is crucial for determining how the section should be rendered (e.g., `card`, `formulaCard`).
+*   **`card` Type:**  `card` elements are used for general content, like introductions, definitions, key concepts, applications, advantages, disadvantages, notes, and summaries.
+*   **`formulaCard` Type:**  This is a dedicated component for formulas.  It includes the formula itself, a title, explanation, and a `labLink`.  The `variables` field stores the variable names and their meanings, which can be used for the Formula Lab.
+*   **Formula Extraction Data:** The `formula` field within each `formulaCard` stores the LaTeX formula.
+*   **Table Rendering:** The `table` object includes `title`, `headers`, and `rows` to define the table structure and content.  It's designed to be rendered as a responsive table component.
+*   **Explanation and variables**: The explanations for formulas gives context and the variables are stored for potential use in the formula lab.
+*   **No Floating Formulas:**  All formulas are now embedded within `formulaCard` components, preventing them from appearing in the text flow.
+*   **Responsive Table:** The table is designed to adapt to different screen sizes.
+*   **Interactive Elements:**  The `[ Explain Formula ]` and `[ Open Formula Lab ]` links on the `formulaCard` are placeholders for interactive elements.  These would trigger further actions when clicked.
+*   **Clearer Structure:** Content is presented in a more organized and digestible manner, aligned with the "interactive textbook" goal.
+
+
+
+This structure provides a solid foundation for building the AI Tutor's UI.  You can now use this JSON data to render the content dynamically within your application.  The separation of content and structure makes the system more maintainable and extensible.  You can easily add new sections, formulas, or table entries without modifying the core content.  The data is also readily usable for the Formula Lab component.

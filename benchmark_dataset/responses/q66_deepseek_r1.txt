@@ -1,0 +1,89 @@
+Here's a structured breakdown of the bounce boundary reflection event handling system:
+
+┌───────────────────────────┐
+│ Quick Definition         │
+│                          │
+│ Boundary reflection      │
+│ occurs when moving       │
+│ objects invert velocity  │
+│ components upon          │
+│ collision with           │
+│ environment edges.       │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Key Physics Principle    │
+│                          │
+│ Perfect elastic collision│
+│ with conservation of:    │
+│ - Momentum               │
+│ - Kinetic energy         │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Main Formula             │
+│                          │
+│ For horizontal boundary: │
+│   v'ₓ = vₓ               │
+│   v'ᵧ = -vᵧ              │
+│                          │
+│ [Δ Velocity Components]  │
+└───────────────────────────┘
+
+**Runtime Process Flow:**
+1. Collision Detection
+2. Surface Normal Calculation
+3. Velocity Vector Update
+4. Position Correction
+5. Event Logging
+
+```javascript
+// Sample Collision Response Code
+function handleBoundaryCollision(obj, bounds) {
+  const response = {
+    collisionTime: performance.now(),
+    position: {...obj.position},
+    previousVelocity: {...obj.velocity},
+    boundary: detectCollisionSide(obj, bounds)
+  };
+
+  // Velocity inversion based on boundary side
+  if (response.boundary === 'top' || response.boundary === 'bottom') {
+    obj.velocity.y *= -1 * obj.restitution;
+  } else {
+    obj.velocity.x *= -1 * obj.restitution;
+  }
+
+  // Position correction to prevent tunneling
+  constrainPosition(obj, bounds);
+  
+  return response;
+}
+```
+
+┌───────────────────────────┐
+│ Overlay Visualization     │
+│                           │
+│ 1. Impact point marker    │
+│ 2. Velocity vector arrows │
+│ 3. Collision normal line  │
+│ 4. Energy loss indicator  │
+└───────────────────────────┘
+
+**Key Parameters:**
+- Restitution coefficient (0.8-1.0)
+- Boundary padding
+- Velocity threshold
+- Impact timeout duration
+
+┌───────────────────────────┐
+│ Common Debug Scenarios   │
+│                           │
+│ 1. Tunneling through thin│
+│    objects               │
+│ 2. Multiple collisions   │
+│    in single frame       │
+│ 3. Corner collisions     │
+└───────────────────────────┘
+
+Would you like to explore any particular aspect in more depth through our Formula Lab or Visual Simulation Sandbox?

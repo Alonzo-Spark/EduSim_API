@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 10,
+  "question": "Differentiate between scalar and vector quantities with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nPhysical quantities in classical mechanics are categorized into two structural classes based on their directional dependence properties.\n\nA scalar quantity is a physical property that is completely described by its magnitude (a numerical value with its matching measurement unit) without any directional tracking context.\n\nA vector quantity is a physical property that requires both a defined magnitude and a clear spatial direction descriptor to be fully specified.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Scalar Quantities | Vector Quantities |\n| --- | --- | --- |\n| **Components** | Possess magnitude descriptors exclusively. | Require both magnitude and direction vectors. |\n| **Mathematical Logic** | Combine via basic algebraic addition. | Require vector addition laws (triangle law). |\n| **Graphic Profile** | Represented simply by static numbers. | Represented graphically by directed straight arrows. |\n\n---\n\n## Real-world Examples\n\n* **Scalar Class:** Speed ($50 \\text{ km/h}$), mass ($10 \\text{ kg}$), temperature ($37^\\circ\\text{C}$), and time interval ($12 \\text{ s}$).\n* **Vector Class:** Velocity ($50 \\text{ km/h due North}$), weight ($98 \\text{ N downward}$), and force ($15 \\text{ N applied East}$).\n\n---\n\n## Summary\n\nScalars maintain total independence from spatial alignment changes, while vectors update their identity if either their magnitude scales or their orientation axes shift.",
+  "candidate_response": "### 📘 Physics Module: Physical Quantities\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Quick Definition**                                             │\n│                                                                  │\n│ Physics uses two primary types of quantities to describe the     │\n│ physical world based on whether they require direction to be     │\n│ fully understood: **Scalars** and **Vectors**.                  │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Key Concepts: Scalar Quantities**                              │\n│                                                                  │\n│ A **Scalar** quantity is defined entirely by its **magnitude**   │\n│ (size or numerical value) and a unit.                            │\n│                                                                  │\n│ • **Algebra:** Follows simple arithmetic rules (2kg + 2kg = 4kg).│\n│ • **Change:** Changes only when magnitude changes.               │\n│ • **Examples:** Mass, Time, Temperature, Energy, Speed, Distance.│\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Key Concepts: Vector Quantities**                              │\n│                                                                  │\n│ A **Vector** quantity is defined by both **magnitude** and       │\n│ **direction**.                                                   │\n│                                                                  │\n│ • **Representation:** Shown by an arrow ($\\vec{A}$).             │\n│ • **Algebra:** Requires vector addition (Head-to-Tail rule).     │\n│ • **Change:** Changes if magnitude, direction, or both change.   │\n│ • **Examples:** Force, Velocity, Acceleration, Momentum, Weight. │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Main Formula: Vector Representation**                          │\n│                                                                  │\n│ $$\\vec{V} = |V| \\cdot \\hat{u}$$                                  │\n│                                                                  │\n│ **[ Explain Formula ]**                                          │\n│ $\\vec{V}$ is the vector, $|V|$ is the magnitude (scalar part),   │\n│ and $\\hat{u}$ is the unit vector indicating direction.           │\n│                                                                  │\n│ **[ Open Formula Lab ]**                                         │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Comparative Analysis**                                         │\n│                                                                  │\n│ | Feature | Scalar Quantity | Vector Quantity |                  │\n│ | :--- | :--- | :--- |                                           │\n│ | **Requirement** | Magnitude only | Magnitude and Direction |      │\n│ | **Dimension** | One-dimensional | Multi-dimensional |           │\n│ | **Notation** | Ordinary letter ($m$) | Arrow over letter ($\\vec{F}$) |│\n│ | **Resultant** | Simple Sum | Vector Sum |                      │\n│                                                                  │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Important Notes: The \"Direction\" Trap**                        │\n│                                                                  │\n│ Not every quantity with direction is a vector. For example,      │\n│ **Electric Current** has direction but is a **Scalar** because   │\n│ it does not follow the laws of vector addition (it follows      │\n│ Kirchhoff's Junction Law).                                       │\n└──────────────────────────────────────────────────────────────────┘\n\n┌──────────────────────────────────────────────────────────────────┐\n│ **Suggested Questions**                                          │\n│                                                                  │\n│ 1. Why is Pressure considered a scalar despite having a force?   │\n│ 2. How do you calculate the resultant of two vectors at an angle?│\n│ 3. Can a vector have a magnitude of zero?                        │\n└──────────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly differentiates between scalar and vector quantities, provides relevant examples, and includes a comparative analysis. The use of tables, formulas, and explanations enhances the clarity and readability of the response. However, minor improvements could be made, such as adding more real-world examples to illustrate the concepts and providing additional practice questions to reinforce understanding. Overall, the response demonstrates a strong grasp of the subject matter and presents it in a clear and engaging manner.",
+  "candidate_token_usage": {
+    "promptTokens": 380,
+    "completionTokens": 792,
+    "totalTokens": 1172
+  },
+  "candidate_latency_ms": 5772,
+  "candidate_cost_usd": 0.002566,
+  "judge_token_usage": {
+    "promptTokens": 1555,
+    "completionTokens": 163,
+    "totalTokens": 1718
+  },
+  "judge_latency_ms": 2481,
+  "judge_cost_usd": 0.0013241999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:12:40.893Z"
+}

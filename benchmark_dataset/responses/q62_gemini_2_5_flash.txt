@@ -1,0 +1,202 @@
+I can help you craft a detailed sandbox overlay response for an 'object_attached' event on a flying pendulum bob. To make this as effective and comprehensive as possible, let's consider the key aspects that such an event would trigger in a simulation environment.
+
+Here's a structured approach, broken down into sections, to generate that runtime overlay response:
+
+---
+
+## Sandbox Overlay Response: Object Attached to Flying Pendulum Bob
+
+**Event Type:** `object_attached`
+**Target Object:** `flying_pendulum_bob_01` (or specific ID)
+**Attached Object:** `attached_object_01` (or specific ID)
+**Timestamp:** `[CURRENT_SIMULATION_TIMESTAMP]`
+
+---
+
+### 1. Quick Notification
+
+This is the immediate, non-intrusive feedback to the user that something has happened.
+
+┌───────────────────────────┐
+│ **Event Notification**    │
+│                           │
+│ Object `attached_object_01` has │
+│ been successfully attached to   │
+│ `flying_pendulum_bob_01`.     │
+└───────────────────────────┘
+
+### 2. System State Update
+
+This section provides crucial, immediate data about the change in the system's physical properties.
+
+┌───────────────────────────┐
+│ **System State Update**   │
+│                           │
+│ **Pendulum Bob Properties (Post-Attachment):** │
+│ *   **Mass:** `[NEW_BOB_MASS]` kg (was `[OLD_BOB_MASS]` kg)  │
+│ *   **Inertia Tensor:** `[NEW_INERTIA_TENSOR]` (3x3 Matrix)   │
+│ *   **Center of Mass (Local):** `[NEW_COM_LOCAL_X, Y, Z]` m  │
+│ *   **Center of Mass (World):** `[NEW_COM_WORLD_X, Y, Z]` m  │
+│                                                            │
+│ **Attached Object Properties:**                            │
+│ *   **Mass:** `[ATTACHED_OBJECT_MASS]` kg                  │
+│ *   **Relative Position (to Bob COM):** `[RELATIVE_POS_X, Y, Z]` m │
+│ *   **Relative Orientation:** `[RELATIVE_QUAT_W, X, Y, Z]` │
+│                                                            │
+│ **Connection Details:**                                    │
+│ *   **Joint Type:** `Rigid` (assuming rigid attachment)    │
+│ *   **Strength:** `Infinite` (assuming unbreakable)        │
+│ *   **Break Threshold:** `N/A`                             │
+└───────────────────────────┘
+
+### 3. Key Concepts Affected
+
+This card highlights the theoretical implications of the attachment, guiding the user's understanding.
+
+┌───────────────────────────┐
+│ **Key Concepts Affected** │
+│                           │
+│ The attachment of an object to │
+│ the pendulum bob significantly │
+│ alters its **moment of inertia**, │
+│ **center of mass**, and total │
+│ **mass**. These changes will │
+│ directly impact:               │
+│                                │
+│ *   **Period of Oscillation:** │
+│     (See Formula Card below)   │
+│ *   **Angular Momentum:**      │
+│     The system's angular momentum │
+│     will conserve, but its distribution │
+│     and response to external torques │
+│     will change.               │
+│ *   **Stability:** Potential shifts │
+│     in equilibrium points or dynamic │
+│     stability.                 │
+│ *   **Kinetic & Potential Energy:** │
+│     Total energy will be conserved │
+│     (assuming no external work), but │
+│     the distribution between kinetic │
+│     and potential energy at various │
+│     points in the oscillation will │
+│     be affected by the new mass and │
+│     COM.                       │
+└───────────────────────────┘
+
+### 4. Main Formula: Period of a Compound Pendulum
+
+Since the attachment effectively turns the simple pendulum bob into a compound pendulum, this is the most relevant formula.
+
+┌───────────────────────────┐
+│ **Main Formula: Period of a Compound Pendulum** │
+│                                                 │
+│ The period ($T$) of a compound pendulum (like our │
+│ bob with an attached object) is given by:       │
+│                                                 │
+│ $$                                              │
+│ T = 2\pi \sqrt{\frac{I}{mgL}}                   │
+│ $$                                              │
+│                                                 │
+│ [ Explain Formula ]                             │
+│ [ Open Formula Lab ]                            │
+└───────────────────────────┘
+
+### 5. Explain Formula (Expanded from Button)
+
+Clicking "Explain Formula" would reveal this detail:
+
+┌───────────────────────────┐
+│ **Formula Explanation**   │
+│                           │
+│ The formula for the period of a compound pendulum: │
+│                                                 │
+│ $$ T = 2\pi \sqrt{\frac{I}{mgL}} $$             │
+│                                                 │
+│ Where:                                          │
+│ *   $T$: The period of one complete oscillation (in seconds). │
+│ *   $I$: The moment of inertia of the entire pendulum system │
+│     (bob + attached object) about the pivot point (in kg·m²). │
+│     This is calculated using the parallel axis theorem if the │
+│     moment of inertia about the center of mass is known.    │
+│ *   $m$: The total mass of the pendulum system (bob + attached object) (in kg). │
+│ *   $g$: The acceleration due to gravity (typically 9.81 m/s²). │
+│ *   $L$: The distance from the pivot point to the **new center of mass** │
+│     of the entire pendulum system (in meters).  │
+│                                                 │
+│ **Impact of Attachment:** The attachment changes $I$, $m$, and $L$, │
+│ thus directly altering the pendulum's period.   │
+└───────────────────────────┘
+
+### 6. Open Formula Lab (Functionality)
+
+Clicking "Open Formula Lab" would launch an interactive tool:
+
+┌───────────────────────────┐
+│ **Formula Lab: Compound Pendulum Period** │
+│                                           │
+│ **Current System Values:**                │
+│ *   `I` (Moment of Inertia): `[CURRENT_I]` kg·m² │
+│ *   `m` (Total Mass): `[CURRENT_M]` kg      │
+│ *   `L` (Pivot to COM Distance): `[CURRENT_L]` m │
+│ *   `g` (Gravity): `[CURRENT_G]` m/s²       │
+│                                           │
+│ **Calculated Period (T):** `[CALCULATED_T]` s │
+│                                           │
+│ **Adjust Parameters (Drag sliders or input values):** │
+│ [ Slider for I ]  [ Input for I ]         │
+│ [ Slider for m ]  [ Input for m ]         │
+│ [ Slider for L ]  [ Input for L ]         │
+│                                           │
+│ **Predicted Period:** `[PREDICTED_T]` s   │
+│                                           │
+│ [ Reset to Current State ] [ Apply Changes to Simulation (if applicable) ] │
+└───────────────────────────┘
+
+### 7. Simulation Predictions
+
+This section offers immediate, actionable predictions based on the new state.
+
+┌───────────────────────────┐
+│ **Simulation Predictions**  │
+│                           │
+│ Given the new mass and inertia distribution: │
+│                                           │
+│ *   **Expected Period:** `[CALCULATED_T]` seconds │
+│     (This is based on the compound pendulum formula). │
+│ *   **Expected Amplitude Decay Rate:** Likely to `[INCREASE/DECREASE/REMAIN_SIMILAR]` │
+│     due to `[REASON_E.G._INCREASED_DRAG_FOR_LARGER_OBJECT_OR_UNCHANGED_FOR_SMALL_MASS]`. │
+│ *   **Swing Behavior:** The bob's trajectory and angular velocity profile │
+│     will adapt to the new inertial properties, potentially exhibiting │
+│     `[MORE/LESS]` responsiveness to external forces/initial conditions. │
+└───────────────────────────┘
+
+### 8. Suggested Actions / Next Steps
+
+Guidance for the user on what they might want to do next.
+
+┌───────────────────────────┐
+│ **Suggested Actions**     │
+│                           │
+│ *   **Observe Oscillation:** Allow the pendulum to swing and compare │
+│     the observed period with the predicted value. │
+│ *   **Adjust Initial Conditions:** Experiment with different release │
+│     angles or initial velocities to see the effect on the new system. │
+│ *   **Attach More Objects:** Explore how multiple attachments further │
+│     alter the pendulum's dynamics. │
+│ *   **Analyze Energy:** Open the "Energy Monitor" to visualize how │
+│     kinetic and potential energy are distributed in the new system. │
+│ *   **Undo Attachment:** Use the "Undo Last Action" feature if this │
+│     was an unintended attachment. │
+└───────────────────────────┘
+
+---
+
+**Implementation Notes for the AI Tutor:**
+
+*   **Dynamic Value Injection:** All bracketed values `[LIKE_THIS]` should be dynamically populated from the simulation's current state.
+*   **Context Sensitivity:** The "Amplitude Decay Rate" and "Swing Behavior" predictions should be intelligent, perhaps based on the attached object's size, shape, and mass relative to the bob.
+*   **Formula Extraction:** Ensure the LaTeX for the compound pendulum period is correctly extracted and stored for the Formula Lab.
+*   **Interactive Elements:** The `[ Explain Formula ]` and `[ Open Formula Lab ]` buttons should trigger the display of their respective detailed cards. Sliders in the Formula Lab should update `[PREDICTED_T]` in real-time.
+*   **Visual Cues:** Consider a subtle visual highlight on the pendulum bob in the main simulation window to draw attention to the change.
+
+This structured overlay provides immediate, relevant, and interactive feedback, transforming a simple event into a rich learning opportunity.

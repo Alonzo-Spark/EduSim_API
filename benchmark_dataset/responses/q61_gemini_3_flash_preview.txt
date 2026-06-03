@@ -1,0 +1,79 @@
+```json
+{
+  "layout": "interactive-textbook",
+  "sections": [
+    {
+      "type": "Introduction",
+      "title": "Spring-Mass Connection",
+      "content": "A spring-mass system is a fundamental harmonic oscillator. When an anchor point is linked to a mass via a spring, the system converts potential energy into kinetic energy through restorative forces."
+    },
+    {
+      "type": "Definition",
+      "title": "Hooke's Law",
+      "content": "The restorative force exerted by a spring is directly proportional to the displacement from its equilibrium position, acting in the opposite direction of the displacement."
+    },
+    {
+      "type": "FormulaCard",
+      "title": "Restorative Force (Vector)",
+      "formula": "\\vec{F}_s = -k \\Delta \\vec{x}",
+      "variables": [
+        {"symbol": "F_s", "description": "Restorative force exerted by the spring"},
+        {"symbol": "k", "description": "Spring constant (stiffness) in N/m"},
+        {"symbol": "\\Delta x", "description": "Displacement from equilibrium position"}
+      ],
+      "context": "This formula determines the acceleration applied to the mass at any given timestamp in the simulation."
+    },
+    {
+      "type": "KeyConcepts",
+      "title": "System Parameters",
+      "concepts": [
+        {
+          "term": "Stiffness (k)",
+          "definition": "Determines how 'tight' the spring is. Higher values result in faster oscillations."
+        },
+        {
+          "term": "Damping (c)",
+          "definition": "The friction factor that dissipates energy, eventually bringing the mass to rest."
+        },
+        {
+          "term": "Rest Length (L)",
+          "definition": "The natural length of the spring where no force is applied to the mass."
+        }
+      ]
+    },
+    {
+      "type": "FormulaCard",
+      "title": "Equation of Motion",
+      "formula": "m\\frac{d^2x}{dt^2} + c\\frac{dx}{dt} + kx = 0",
+      "variables": [
+        {"symbol": "m", "description": "Mass of the object"},
+        {"symbol": "c", "description": "Damping coefficient"},
+        {"symbol": "x", "description": "Position relative to equilibrium"}
+      ],
+      "context": "Used by the physics engine to calculate the 'runtime overlay' trajectory of the mass."
+    },
+    {
+      "type": "Table",
+      "title": "Simulation States",
+      "headers": ["State", "Condition", "Behavior"],
+      "rows": [
+        ["Equilibrium", "Extension = L", "Net force is zero; no acceleration."],
+        ["Compression", "Extension < L", "Spring pushes the mass away from the anchor."],
+        ["Extension", "Extension > L", "Spring pulls the mass toward the anchor."]
+      ]
+    },
+    {
+      "type": "ImportantNotes",
+      "content": "In a digital sandbox, 'spring_connected' events often initialize a constraint solver. Ensure the 'Anchor' object is set to static (mass = ∞) to prevent the spring from pulling the foundation toward the object."
+    },
+    {
+      "type": "SuggestedQuestions",
+      "questions": [
+        "How does doubling the mass affect the oscillation frequency?",
+        "What happens to the system if the damping coefficient is set to zero?",
+        "How is the potential energy of the spring calculated at maximum extension?"
+      ]
+    }
+  ]
+}
+```

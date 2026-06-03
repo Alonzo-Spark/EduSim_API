@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 45,
+  "question": "What is electrostatic shielding?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectrostatic shielding is the physical phenomenon where a specific region of space is isolated from the influence of external electric fields. This shielding is achieved by enclosing the region within a hollow conducting shell, creating a Faraday cage.\n\n---\n\n## Operating Principle\n\n* **Zero Cavity Field:** When an external electric field is applied to a conductor, its free electrons redistribute along the outer surface to cancel out the field internally, ensuring the net electric field inside the cavity remains exactly zero.\n\n---\n\n## Formula\n\nThe mathematical field constraint inside a hollow conductor:\n\n$$E_{\\text{internal}} = 0$$\n\n---\n\n## Real-world Examples\n\n* **Car in a Lightning Storm:** A car acts as an electrostatic shield; if struck by lightning, the charge travels along the conductive outer metal body to the ground, leaving the passengers inside unharmed.\n* **Coaxial Electronics Cables:** Critical signal wires are wrapped in a braided metal mesh shield to protect data transfers from external electrical interference.\n\n---\n\n## Summary\n\nElectrostatic shielding uses a conducting shell to isolate an internal space from external electric fields, as charges redistribute along the outer surface to keep the internal field at zero.",
+  "candidate_response": "Electrostatic shielding is a phenomenon in which an external electric field is blocked or diverted by a conductor, preventing the field from penetrating a certain region. This effect is widely used to protect sensitive electronic components from external electrical interference.\n\n### Key Concepts\n\n*   **Conductor:** A material that contains free charges (like electrons) that can move freely under the influence of an electric field.\n*   **Electric Field:** A region around an electrically charged particle or object in which a charged object would experience a force.\n*   **Electrostatic Equilibrium:** A state in which there is no net motion of charge within a conductor. In this state, the electric field inside the conductor is zero.\n\n### How it Works\n\nWhen a conductor is placed in an external electric field, the free charges within the conductor redistribute themselves.\n\n1.  **Charge Redistribution:** The external electric field exerts forces on the free charges in the conductor. Positive charges move in the direction of the electric field, and negative charges move in the opposite direction.\n2.  **Induced Field:** This charge redistribution creates an *induced electric field* within the conductor.\n3.  **Cancellation:** The induced electric field is equal in magnitude and opposite in direction to the external electric field *inside the conductor*. As a result, the net electric field inside the conductor becomes zero.\n4.  **Shielding Effect:** Since the electric field inside the conductor is zero, any region enclosed by the conductor is shielded from the external electric field.\n\n### Important Notes\n\n*   Electrostatic shielding works regardless of whether the conductor is grounded or not. However, grounding can help dissipate any induced charges to the earth, preventing charge buildup.\n*   The shielding effect is valid for both static and time-varying electric fields, as long as the frequency of the time-varying field is not too high (at very high frequencies, electromagnetic shielding considerations, which involve magnetic fields, become more prominent).\n*   The shape of the conductor doesn't have to be perfectly spherical, though a closed conducting surface (like a Faraday cage) provides the most effective shielding.\n\n### Applications\n\n*   **Faraday Cage:** A common example of electrostatic shielding is a Faraday cage, which is an enclosure made of a conducting material. It protects its contents from external electric fields.\n*   **Coaxial Cables:** These cables use an outer conducting shield to protect the inner conductor from external electrical interference and to prevent the signal from radiating outwards.\n*   **Protection of Electronic Devices:** Sensitive electronic circuits are often housed in metal casings to shield them from external electromagnetic interference.\n*   **Lightning Protection:** Tall buildings often have lightning rods connected to the ground. While not a direct \"shielding\" in the sense of enclosing, the principle of guiding charge away is related to charge distribution on conductors. A car acts as a Faraday cage during a lightning strike, protecting its occupants.\n\n### Summary\n\n| Feature                 | Description                                                                                             |\n| :---------------------- | :------------------------------------------------------------------------------------------------------ |\n| **Principle**           | Redistribution of free charges in a conductor to cancel an external electric field inside the conductor. |\n| **Result**              | Zero electric field inside the conducting enclosure.                                                    |\n| **Materials**           | Conductors (e.g., metals).                                                                              |\n| **Effectiveness**       | Highly effective for static and low-frequency electric fields.                                          |\n| **Common Examples**     | Faraday cage, coaxial cables, metal casings for electronics.                                            |",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of electrostatic shielding, accurately covering key concepts such as charge redistribution, induced fields, and the shielding effect. The response is well-structured, readable, and effectively teaches the concept. Minor points of improvement could include more concise summaries and slightly more detailed explanations of real-world applications, but overall, the response is of high quality and effectively communicates the principles of electrostatic shielding.",
+  "candidate_token_usage": {
+    "promptTokens": 375,
+    "completionTokens": 727,
+    "totalTokens": 1102
+  },
+  "candidate_latency_ms": 6017,
+  "candidate_cost_usd": 0.00193,
+  "judge_token_usage": {
+    "promptTokens": 1357,
+    "completionTokens": 142,
+    "totalTokens": 1499
+  },
+  "judge_latency_ms": 4471,
+  "judge_cost_usd": 0.001155,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:41:43.734Z"
+}

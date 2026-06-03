@@ -1,0 +1,167 @@
+```html
+<div class="interactive-textbook">
+
+  <div class="section-card">
+    <div class="section-title">Introduction</div>
+    <div class="section-content">
+      Let's explore the behavior of a spring oscillator and how its motion changes when we alter the spring's stiffness. The stiffness constant, often denoted by *k*, is a crucial property that dictates how much force is required to stretch or compress a spring.
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">Key Concepts</div>
+    <div class="section-content">
+      A spring oscillator is a simple harmonic oscillator where a mass is attached to a spring. The system oscillates back and forth around an equilibrium position. Several key concepts govern its behavior:
+      <ul>
+        <li>**Stiffness Constant (k):** Measures the spring's resistance to deformation. A higher *k* means a stiffer spring.</li>
+        <li>**Mass (m):** The mass attached to the spring.</li>
+        <li>**Angular Frequency (ω):**  Determines the rate of oscillation.</li>
+        <li>**Period (T):** The time it takes for one complete oscillation.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="formula-card">
+    <div class="formula-title">Angular Frequency</div>
+    <div class="formula-content">
+      $$
+      \omega = \sqrt{\frac{k}{m}}
+      $$
+    </div>
+    <div class="formula-buttons">
+      <button class="formula-button">Explain Formula</button>
+      <button class="formula-button">Open Formula Lab</button>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">Effect of Doubling Stiffness</div>
+    <div class="section-content">
+      When the stiffness constant (*k*) of a spring is doubled while keeping the mass (*m*) constant, the angular frequency (ω) changes.  Let's see how.
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">Analysis</div>
+    <div class="section-content">
+      If we double *k* (to 2*k*), the new angular frequency (ω') becomes:
+    </div>
+  </div>
+
+  <div class="formula-card">
+    <div class="formula-title">New Angular Frequency</div>
+    <div class="formula-content">
+      $$
+      \omega' = \sqrt{\frac{2k}{m}} = \sqrt{2} \cdot \sqrt{\frac{k}{m}} = \sqrt{2} \cdot \omega
+      $$
+    </div>
+    <div class="formula-buttons">
+      <button class="formula-button">Explain Formula</button>
+      <button class="formula-button">Open Formula Lab</button>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">Implications</div>
+    <div class="section-content">
+      <ul>
+        <li>**Increased Angular Frequency:** The angular frequency increases by a factor of the square root of 2 (approximately 1.414). This means the oscillator will oscillate faster.</li>
+        <li>**Decreased Period:** The period (T) of oscillation is inversely proportional to the angular frequency ($T = \frac{2\pi}{\omega}$). Therefore, doubling the stiffness constant will *decrease* the period. The new period (T') will be $T' = \frac{T}{\sqrt{2}}$. The oscillator will complete one cycle in less time.</li>
+        <li>**Higher Frequency:**  The frequency of oscillation (f), which is also proportional to angular frequency, will increase.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">Visual Outcome</div>
+    <div class="section-content">
+      Visually, the mass will move back and forth more rapidly. The amplitude of the oscillation *might* change depending on the initial conditions and energy of the system, but the *rate* of oscillation will definitely increase.
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">Summary</div>
+    <div class="section-content">
+      Doubling the stiffness constant of a spring oscillator leads to a higher angular frequency, a shorter period, and a faster oscillation rate. The mass will oscillate back and forth more quickly.
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">Suggested Questions</div>
+    <div class="section-content">
+      <ul>
+        <li>How does changing the mass affect the spring oscillator's behavior?</li>
+        <li>What happens to the total energy of the system if the stiffness is doubled?</li>
+        <li>Can you describe the relationship between potential energy and kinetic energy in a spring oscillator?</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<style>
+.interactive-textbook {
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.section-content {
+  line-height: 1.6;
+}
+
+.formula-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+
+.formula-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.formula-content {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.formula-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.formula-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+</style>
+```

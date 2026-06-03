@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 44,
+  "question": "Explain the working principle of a capacitor.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nA capacitor is an electrical component designed to store potential energy in an electric field by accumulating opposite charges on two closely spaced, insulated conducting plates.\n\n---\n\n## Working Mechanism\n\n* **Charge Separation:** When connected to a voltage source, electrons accumulate on one plate, giving it a negative charge, while electrons leave the opposite plate, leaving it positively charged.\n* **Electric Field Storage:** This charge separation creates a stable electric field between the plates, storing energy even after the voltage source is disconnected.\n\n---\n\n## Formula\n\nThe relationship governing charge storage capacity is:\n\n$$Q = CV$$\n\nFor a basic parallel-plate capacitor layout:\n\n$$C = \\frac{\\varepsilon_0 A}{d}$$\n\nWhere:\n* $Q$ represents the total stored charge magnitude\n* $C$ represents the capacitance value measured in Farads ($\\text{F}$)\n* $V$ represents the applied voltage across the plates\n* $A$ represents the area of overlapping plates\n* $d$ represents the distance separating the plates\n\n---\n\n## Summary\n\nCapacitors store electrical energy by holding opposite charges on isolated plates, creating an internal electric field with a storage capacity that scales with plate area and proximity.",
+  "candidate_response": "### Working Principle of a Capacitor\n\nA capacitor is a passive electronic component that stores electrical energy in an electric field. Its operation relies on **charge separation** between two conductive surfaces. Here's a structured breakdown:\n\n---\n\n#### 🧠 **Core Mechanism**\n1. **Physical Structure**:\n   - Two conductive plates (electrodes) separated by an insulating material (dielectric).\n   - Plates accumulate equal but opposite charges when voltage is applied.\n\n2. **Charging Process**:\n   - When connected to a voltage source (e.g., a battery):\n     - Electrons flow from the negative terminal to one plate.\n     - Electrons are drawn from the opposite plate to the positive terminal.\n   - Result: Positive charge (+Q) on one plate, negative charge (-Q) on the other.\n\n3. **Dielectric Role**:\n   - Prevents direct current flow between plates.\n   - Polarizes under electric field, enhancing charge storage capacity.\n\n---\n\n#### ⚡ **Key Concepts**\n| Concept          | Symbol | Description                                  |\n|------------------|--------|----------------------------------------------|\n| **Capacitance**  | *C*    | Charge storage ability (unit: **Farad, F**). |\n| **Charge**       | *Q*    | Stored charge (unit: **Coulomb, C**).        |\n| **Voltage**      | *V*    | Potential difference across plates.          |\n| **Energy**       | *U*    | Energy stored in the electric field.         |\n\n---\n\n#### 🧮 **Fundamental Formulas**\n```math\n\\boxed{\n\\begin{array}{c}\n\\textbf{Charge Storage} \\\\\n\\\\\nQ = C \\cdot V \\\\\n\\\\\n\\textit{(Charge = Capacitance × Voltage)}\n\\end{array}\n}\n```\n```math\n\\boxed{\n\\begin{array}{c}\n\\textbf{Stored Energy} \\\\\n\\\\\nU = \\dfrac{1}{2} C V^2 = \\dfrac{1}{2} Q V \\\\\n\\\\\n\\textit{(Energy in Joules)}\n\\end{array}\n}\n```\n```math\n\\boxed{\n\\begin{array}{c}\n\\textbf{Capacitance} \\\\\n\\\\\nC = \\dfrac{\\varepsilon A}{d} \\\\\n\\\\\n\\varepsilon = \\kappa \\varepsilon_0 \\\\\n\\end{array}\n}\n```\n- **A**: Plate area  \n- **d**: Distance between plates  \n- **ε**: Permittivity of dielectric  \n- **κ**: Dielectric constant  \n- **ε₀**: Vacuum permittivity (8.85×10⁻¹² F/m)  \n\n---\n\n#### 🔁 **Dynamic Behavior**\n- **Charging**:\n  - Current flows initially (plates accumulate charge).\n  - Current drops to zero once voltage equals source voltage.\n- **Discharging**:\n  - Stored charge releases through a connected circuit.\n  - Voltage decays exponentially to zero.\n\n**Time Constant (τ)**:\n```math\n\\tau = R C\n```\n- **R**: Resistance in circuit (Ω)  \n- **C**: Capacitance (F)  \n- Defines charging/discharging speed (e.g., 63% charge in *τ* seconds).\n\n---\n\n#### 🛠️ **Applications**\n- **Energy Storage**: Camera flashes, defibrillators.\n- **Filtering**: Smoothing power supplies (remove voltage ripples).\n- **Timing Circuits**: RC oscillators (e.g., blinkers, timers).\n- **Coupling/Decoupling**: Pass AC signals while blocking DC.\n\n---\n\n#### ⚖️ **Advantages vs. Limitations**\n| **Pros**                          | **Cons**                          |\n|-----------------------------------|-----------------------------------|\n| Fast charge/discharge cycles      | Lower energy density than batteries |\n| High efficiency (>95%)            | Voltage limits (dielectric breakdown) |\n| Long lifespan (no moving parts)   | Self-discharge over time          |\n| Minimal heat generation           | Polarity sensitivity (electrolytics) |\n\n---\n\n#### 💎 **Key Insight**\nA capacitor **stores energy electrostatically**—unlike batteries (chemical storage). It acts as a \"charge reservoir\" that:\n- Resists **instantaneous voltage changes** (stabilizes circuits).\n- Blocks DC while passing AC (**capacitive reactance**).\n\n> 🔍 **Think of it like a water tank**:  \n> - *Voltage* = Water pressure  \n> - *Charge* = Water volume  \n> - *Capacitance* = Tank size  \n> - *Dielectric* = Tank material strength  \n\nLet me know if you'd like to explore simulations, real-world examples, or calculations!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the working principle of a capacitor, including charge separation, electric field storage, and the relationship between charge, capacitance, and voltage. The use of formulas, such as Q = CV and C = εA/d, is accurate and well-explained. The response is well-structured, readable, and effectively conveys complex concepts in an easy-to-understand manner. The inclusion of analogies, such as the water tank example, enhances the pedagogical effectiveness of the response. However, there are some minor areas for improvement, such as the use of inconsistent notation (e.g., ε vs. ε₀) and the lack of explicit definition for some variables (e.g., κ). Overall, the response is of high quality and effectively teaches the concept of capacitors.",
+  "candidate_token_usage": {
+    "promptTokens": 359,
+    "completionTokens": 1406,
+    "totalTokens": 1765
+  },
+  "candidate_latency_ms": 54553,
+  "candidate_cost_usd": 0.00327659,
+  "judge_token_usage": {
+    "promptTokens": 1668,
+    "completionTokens": 225,
+    "totalTokens": 1893
+  },
+  "judge_latency_ms": 7717,
+  "judge_cost_usd": 0.0015408000000000002,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:39:52.076Z"
+}

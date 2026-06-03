@@ -1,0 +1,776 @@
+Here is the complete, self-contained HTML file. It transforms the physics content into an interactive "Textbook" experience with dedicated Formula Cards, a fully functional "Formula Lab" (simulation), and structured UI blocks as requested.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Physics: Motion in a Plane</title>
+    
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .card-icon {
+            background: #eff6ff;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .card-content {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+        }
+
+        .formula-display {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            font-size: 1.2rem;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-explain {
+            background: white;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-explain:hover {
+            background: #f1f5f9;
+        }
+
+        .btn-lab {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-lab:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Explanation Panel (Hidden by default) */
+        .explanation-panel {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #eff6ff;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .explanation-panel.active {
+            display: block;
+        }
+
+        /* Table Styling */
+        .responsive-table {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Characteristics Grid */
+        .characteristics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .character-item {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .character-item strong {
+            display: block;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        /* MODAL / FORMULA LAB */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .lab-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .canvas-wrapper {
+            width: 100%;
+            height: 400px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1.5rem;
+            align-items: end;
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .formula-actions {
+                grid-template-columns: 1fr;
+            }
+            .controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Motion in a Plane</h1>
+            <div class="subtitle">Interactive Physics Module</div>
+        </header>
+
+        <!-- Definition Section -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">D</div>
+                <div class="card-title">Quick Definition</div>
+            </div>
+            <div class="card-content">
+                <p><strong>Projectile Motion</strong> is a form of motion experienced by an object or particle (a projectile) that is projected near the Earth's surface and moves along a curved path under the action of gravity only.</p>
+                <br>
+                <p>This curved path is called a <strong>parabola</strong>, and the only force acting upon the projectile (assuming air resistance is negligible) is gravity, which acts downwards.</p>
+            </div>
+        </article>
+
+        <!-- Characteristics Section -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">K</div>
+                <div class="card-title">Key Characteristics</div>
+            </div>
+            <div class="card-content">
+                <div class="characteristics-grid">
+                    <div class="character-item">
+                        <strong>2D Motion</strong>
+                        It occurs in two dimensions (usually x and y axes).
+                    </div>
+                    <div class="character-item">
+                        <strong>Constant Velocity (X)</strong>
+                        The horizontal velocity remains constant because there is no acceleration in the horizontal direction.
+                    </div>
+                    <div class="character-item">
+                        <strong>Uniform Acceleration (Y)</strong>
+                        The vertical motion is affected by gravity ($g \approx 9.8 \, m/s^2$).
+                    </div>
+                    <div class="character-item">
+                        <strong>Independent Axes</strong>
+                        Horizontal and vertical motions are independent of each other.
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Formula Cards Section -->
+        <section>
+            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem; color: var(--text-main);">Core Equations</h2>
+
+            <!-- Formula 1: Path Equation -->
+            <div class="card formula-card" 
+                 data-formula="y = x \tan \theta - \frac{g x^2}{2 u^2 \cos^2 \theta}" 
+                 data-variables="y (height), x (distance), \theta (angle), g (gravity), u (velocity)">
+                <div class="card-header" style="border:none; padding-bottom:0; margin-bottom:0.5rem;">
+                    <div class="card-title" style="font-size: 1rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em;">Trajectory Equation</div>
+                </div>
+                <div class="formula-display">
+                    $$ y = x \tan \theta - \frac{g x^2}{2 u^2 \cos^2 \theta} $$
+                </div>
+                <div class="formula-actions">
+                    <button class="btn btn-explain" onclick="toggleExplanation(this)">
+                        <span>ℹ️ Explain Formula</span>
+                    </button>
+                    <button class="btn btn-lab" onclick="openLab('trajectory')">
+                        <span>🧪 Open Formula Lab</span>
+                    </button>
+                </div>
+                <div class="explanation-panel">
+                    <strong>Breakdown:</strong> This equation describes the exact path (y vs x) of the projectile. It shows that the path is parabolic because of the $x^2$ term. The first term ($x \tan \theta$) represents the straight-line path if there were no gravity, while the second term subtracts the drop due to gravity over distance.
+                </div>
+            </div>
+
+            <!-- Formula 2: Time of Flight -->
+            <div class="card formula-card" 
+                 data-formula="T = \frac{2u \sin \theta}{g}" 
+                 data-variables="T (total time), u (velocity), \theta (angle), g (gravity)">
+                <div class="card-header" style="border:none; padding-bottom:0; margin-bottom:0.5rem;">
+                    <div class="card-title" style="font-size: 1rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em;">Time of Flight</div>
+                </div>
+                <div class="formula-display">
+                    $$ T = \frac{2u \sin \theta}{g} $$
+                </div>
+                <div class="formula-actions">
+                    <button class="btn btn-explain" onclick="toggleExplanation(this)">
+                        <span>ℹ️ Explain Formula</span>
+                    </button>
+                    <button class="btn btn-lab" onclick="openLab('time')">
+                        <span>🧪 Open Formula Lab</span>
+                    </button>
+                </div>
+                <div class="explanation-panel">
+                    <strong>Breakdown:</strong> This calculates the total time the projectile stays in the air. It is derived by calculating the time it takes to reach the maximum height ($u \sin \theta / g$) and multiplying by 2 (as the time going up equals the time coming down).
+                </div>
+            </div>
+
+            <!-- Formula 3: Maximum Height -->
+            <div class="card formula-card" 
+                 data-formula="H = \frac{u^2 \sin^2 \theta}{2g}" 
+                 data-variables="H (max height), u (velocity), \theta (angle), g (gravity)">
+                <div class="card-header" style="border:none; padding-bottom:0; margin-bottom:0.5rem;">
+                    <div class="card-title" style="font-size: 1rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em;">Maximum Height</div>
+                </div>
+                <div class="formula-display">
+                    $$ H = \frac{u^2 \sin^2 \theta}{2g} $$
+                </div>
+                <div class="formula-actions">
+                    <button class="btn btn-explain" onclick="toggleExplanation(this)">
+                        <span>ℹ️ Explain Formula</span>
+                    </button>
+                    <button class="btn btn-lab" onclick="openLab('height')">
+                        <span>🧪 Open Formula Lab</span>
+                    </button>
+                </div>
+                <div class="explanation-panel">
+                    <strong>Breakdown:</strong> This gives the highest vertical point reached. At the peak, the vertical velocity is zero. Using the kinematic equation $v^2 = u^2 - 2as$, we set final velocity $v=0$ and solve for displacement $s$ (which is $H$).
+                </div>
+            </div>
+
+            <!-- Formula 4: Horizontal Range -->
+            <div class="card formula-card" 
+                 data-formula="R = \frac{u^2 \sin 2\theta}{g}" 
+                 data-variables="R (distance), u (velocity), \theta (angle), g (gravity)">
+                <div class="card-header" style="border:none; padding-bottom:0; margin-bottom:0.5rem;">
+                    <div class="card-title" style="font-size: 1rem; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em;">Horizontal Range</div>
+                </div>
+                <div class="formula-display">
+                    $$ R = \frac{u^2 \sin 2\theta}{g} $$
+                </div>
+                <div class="formula-actions">
+                    <button class="btn btn-explain" onclick="toggleExplanation(this)">
+                        <span>ℹ️ Explain Formula</span>
+                    </button>
+                    <button class="btn btn-lab" onclick="openLab('range')">
+                        <span>🧪 Open Formula Lab</span>
+                    </button>
+                </div>
+                <div class="explanation-panel">
+                    <strong>Breakdown:</strong> This is the total horizontal distance covered. It is the product of horizontal velocity ($u \cos \theta$) and total time ($T$). Note the $\sin 2\theta$ term, which implies the range is maximum when $\theta = 45^\circ$.
+                </div>
+            </div>
+        </section>
+
+        <!-- Important Notes / Summary -->
+        <article class="card">
+            <div class="card-header">
+                <div class="card-icon">N</div>
+                <div class="card-title">Important Notes</div>
+            </div>
+            <div class="card-content">
+                <ul style="padding-left: 1.2rem;">
+                    <li style="margin-bottom: 0.5rem;">For complementary angles (e.g., $30^\circ$ and $60^\circ$), the range achieved is the same, though the maximum height and time of flight differ.</li>
+                    <li style="margin-bottom: 0.5rem;">At the highest point, the vertical velocity is zero, but the horizontal velocity remains $u \cos \theta$.</li>
+                    <li>The angle of projection determines the shape of the parabola: steeper angles result in tall, narrow arcs; shallow angles result in wide, flat arcs.</li>
+                </ul>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- Formula Lab Modal -->
+    <div class="modal-overlay" id="labModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeLab()">×</button>
+            <h2 style="margin-bottom: 1rem;">Projectile Lab</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">Adjust the angle and initial velocity to see how the trajectory changes.</p>
+            
+            <div class="lab-container">
+                <div class="canvas-wrapper">
+                    <canvas id="simCanvas"></canvas>
+                </div>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="angleRange">Angle: <span id="angleVal">45</span>°</label>
+                        <input type="range" id="angleRange" min="0" max="90" value="45">
+                    </div>
+                    <div class="control-group">
+                        <label for="velocityRange">Velocity: <span id="velocityVal">50</span> m/s</label>
+                        <input type="range" id="velocityRange" min="10" max="100" value="50">
+                    </div>
+                    <button class="btn btn-lab" onclick="runSimulation()">▶ Fire Projectile</button>
+                </div>
+
+                <div class="responsive-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Total Time (T)</td>
+                                <td id="resTime">0.00 s</td>
+                            </tr>
+                            <tr>
+                                <td>Max Height (H)</td>
+                                <td id="resHeight">0.00 m</td>
+                            </tr>
+                            <tr>
+                                <td>Range (R)</td>
+                                <td id="resRange">0.00 m</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KaTeX JS -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ]
+        });">
+    </script>
+
+    <!-- Application Logic -->
+    <script>
+        // --- Interaction Logic ---
+
+        function toggleExplanation(btn) {
+            const card = btn.closest('.card');
+            const panel = card.querySelector('.explanation-panel');
+            const icon = btn.querySelector('span');
+            
+            if (panel.classList.contains('active')) {
+                panel.classList.remove('active');
+                icon.innerText = "ℹ️ Explain Formula";
+            } else {
+                // Close others
+                document.querySelectorAll('.explanation-panel').forEach(p => p.classList.remove('active'));
+                document.querySelectorAll('.btn-explain span').forEach(s => s.innerText = "ℹ️ Explain Formula");
+                
+                panel.classList.add('active');
+                icon.innerText = "🔽 Hide Explanation";
+            }
+        }
+
+        // --- Formula Lab / Simulation Logic ---
+
+        const modal = document.getElementById('labModal');
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+        const angleInput = document.getElementById('angleRange');
+        const velocityInput = document.getElementById('velocityRange');
+        
+        // Simulation State
+        let animationId = null;
+        let projectile = { x: 0, y: 0, vx: 0, vy: 0, active: false };
+        let scale = 1; // pixels per meter
+        const g = 9.81;
+        
+        // Resize canvas to fit container
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            drawScene();
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        function openLab(focusMode) {
+            modal.classList.add('active');
+            resizeCanvas();
+            
+            // Pre-set values based on context if needed, for now just default
+            runSimulation(); 
+        }
+
+        function closeLab() {
+            modal.classList.remove('active');
+            if (animationId) cancelAnimationFrame(animationId);
+            projectile.active = false;
+        }
+
+        // Update slider labels
+        angleInput.addEventListener('input', (e) => {
+            document.getElementById('angleVal').innerText = e.target.value;
+            runSimulation();
+        });
+        velocityInput.addEventListener('input', (e) => {
+            document.getElementById('velocityVal').innerText = e.target.value;
+            runSimulation();
+        });
+
+        function calculatePhysics(u, thetaDeg) {
+            const thetaRad = thetaDeg * (Math.PI / 180);
+            const T = (2 * u * Math.sin(thetaRad)) / g;
+            const H = (u * u * Math.sin(thetaRad) * Math.sin(thetaRad)) / (2 * g);
+            const R = (u * u * Math.sin(2 * thetaRad)) / g;
+            return { T, H, R, thetaRad };
+        }
+
+        function updateTable(u, thetaDeg) {
+            const { T, H, R } = calculatePhysics(u, thetaDeg);
+            document.getElementById('resTime').innerText = T.toFixed(2) + " s";
+            document.getElementById('resHeight').innerText = H.toFixed(2) + " m";
+            document.getElementById('resRange').innerText = R.toFixed(2) + " m";
+        }
+
+        function runSimulation() {
+            if (animationId) cancelAnimationFrame(animationId);
+            
+            const u = parseFloat(velocityInput.value);
+            const thetaDeg = parseFloat(angleInput.value);
+            const thetaRad = thetaDeg * (Math.PI / 180);
+            
+            // Update Table
+            updateTable(u, thetaDeg);
+
+            // Calculate theoretical max to scale the view
+            const { H, R } = calculatePhysics(u, thetaDeg);
+            
+            // Auto-scale logic: fit range and height with padding
+            const scaleX = (canvas.width - 40) / R;
+            const scaleY = (canvas.height - 40) / H;
+            scale = Math.min(scaleX, scaleY, 10); // Limit max zoom
+            
+            // Initialize Projectile
+            projectile.x = 0;
+            projectile.y = 0;
+            projectile.vx = u * Math.cos(thetaRad);
+            projectile.vy = u * Math.sin(thetaRad);
+            projectile.active = true;
+            projectile.path = [{x:0, y:0}]; // Store path for drawing
+            
+            const startTime = performance.now();
+            const timeScale = 0.05; // Slow down simulation for visual clarity
+
+            function animate(time) {
+                if (!projectile.active) return;
+                
+                const dt = (time - startTime) * 0.001 * 5; // speed multiplier
+                
+                // Physics update (Euler integration is fine for visualization)
+                const t = dt; 
+                const nextX = u * Math.cos(thetaRad) * t;
+                const nextY = (u * Math.sin(thetaRad) * t) - (0.5 * g * t * t);
+
+                if (nextY < 0) {
+                    projectile.active = false;
+                    projectile.x = nextX;
+                    projectile.y = 0;
+                } else {
+                    projectile.x = nextX;
+                    projectile.y = nextY;
+                    projectile.path.push({x: nextX, y: nextY});
+                    animationId = requestAnimationFrame(animate);
+                }
+                
+                drawScene();
+            }
+            
+            animationId = requestAnimationFrame(animate);
+        }
+
+        function drawScene() {
+            // Clear
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Coordinate system transform (Origin at bottom-left)
+            ctx.save();
+            ctx.translate(20, canvas.height - 20); 
+            
+            // Draw Axes
+            ctx.beginPath();
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 2;
+            // X Axis
+            ctx.moveTo(0, 0);
+            ctx.lineTo(canvas.width - 20, 0);
+            // Y Axis
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -(canvas.height - 20));
+            ctx.stroke();
+
+            // Draw Parabolic Path (Ghost line for full trajectory)
+            const u = parseFloat(velocityInput.value);
+            const thetaDeg = parseFloat(angleInput.value);
+            const thetaRad = thetaDeg * (Math.PI / 180);
+            const { R, H } = calculatePhysics(u, thetaDeg);
+            
+            ctx.beginPath();
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.setLineDash([5, 5]);
+            ctx.moveTo(0, 0);
+            
+            for(let x = 0; x <= R; x += R/50) {
+                const t = x / (u * Math.cos(thetaRad));
+                const y = (u * Math.sin(thetaRad) * t) - (0.5 * g * t * t);
+                ctx.lineTo(x * scale, -y * scale);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Draw Actual Path Traveled
+            if (projectile.path.length > 1) {
+                ctx.beginPath();
+                ctx.strokeStyle = '#3b82f6';
+                ctx.lineWidth = 3;
+                ctx.moveTo(0, 0);
+                for (let p of projectile.path) {
+                    ctx.lineTo(p.x * scale, -p.y * scale);
+                }
+                ctx.stroke();
+            }
+
+            // Draw Projectile Ball
+            const drawX = projectile.x * scale;
+            const drawY = -projectile.y * scale;
+            
+            ctx.beginPath();
+            ctx.fillStyle = '#ef4444';
+            ctx.arc(drawX, drawY, 6, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Draw Cannon (Visual only)
+            ctx.beginPath();
+            ctx.strokeStyle = '#64748b';
+            ctx.lineWidth = 4;
+            ctx.moveTo(0, 0);
+            const barrelLen = 30;
+            ctx.lineTo(barrelLen * Math.cos(thetaRad), -barrelLen * Math.sin(thetaRad));
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        // Initialize KaTeX rendering listener
+        document.addEventListener("DOMContentLoaded", () => {
+            // KaTeX auto-render is handled by the onload attribute in the script tag
+            resizeCanvas();
+        });
+
+    </script>
+</body>
+</html>
+```

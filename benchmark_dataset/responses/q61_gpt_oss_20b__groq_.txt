@@ -1,0 +1,20 @@
+```json
+{
+  "type": "overlay",
+  "event": "spring_connected",
+  "anchor": {
+    "id": "anchor_001",
+    "position": [0.0, 0.0, 0.0]
+  },
+  "mass": {
+    "id": "mass_001",
+    "position": [0.0, -1.0, 0.0]
+  },
+  "spring": {
+    "k": 150.0,           // N/m
+    "rest_length": 0.5,   // meters
+    "damping": 0.05       // Ns/m
+  },
+  "message": "Spring successfully connected between anchor_001 and mass_001. Simulation ready to run."
+}
+```

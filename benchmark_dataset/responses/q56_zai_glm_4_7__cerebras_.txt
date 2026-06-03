@@ -1,0 +1,130 @@
+```html
+<!-- UI BLOCK: INTRODUCTION CARD -->
+<div class="textbook-card">
+  <h2 class="card-header">Introduction</h2>
+  <div class="card-content">
+    <p>When two rigid bodies collide, the outcome isn't just determined by their mass and velocity. A critical property called the <strong>Coefficient of Restitution</strong> (often denoted as <em>e</em>) dictates how "bouncy" the interaction is. By adjusting this single value, we can simulate anything from a steel ball bearing bouncing off a floor to a ball of clay sticking to the wall.</p>
+  </div>
+</div>
+
+<!-- UI BLOCK: DEFINITION CARD -->
+<div class="textbook-card">
+  <h2 class="card-header">Quick Definition</h2>
+  <div class="card-content">
+    <p>The Coefficient of Restitution (<strong>e</strong>) is a dimensionless number that represents the ratio of the relative velocity of separation to the relative velocity of approach between two objects after they collide.</p>
+    <p>In simpler terms, it measures the elasticity of the collision.</p>
+  </div>
+</div>
+
+<!-- UI BLOCK: FORMULA CARD -->
+<div class="formula-card">
+  <div class="card-header">Main Formula</div>
+  <div class="formula-display">
+    $$ e = \frac{|v_{2f} - v_{1f}|}{|v_{1i} - v_{2i}|} $$
+  </div>
+  <div class="formula-actions">
+    <button class="action-btn">[ Explain Formula ]</button>
+    <button class="action-btn">[ Open Formula Lab ]</button>
+  </div>
+</div>
+
+<!-- UI BLOCK: KEY CONCEPTS CARD -->
+<div class="textbook-card">
+  <h2 class="card-header">Key Concepts</h2>
+  <div class="card-content">
+    <ul>
+      <li><strong>Approach Velocity:</strong> The speed at which the objects move toward each other before impact.</li>
+      <li><strong>Separation Velocity:</strong> The speed at which the objects move away from each other after impact.</li>
+      <li><strong>Energy Conservation:</strong> A higher restitution value implies less kinetic energy is lost during the collision.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- UI BLOCK: TABLE CARD -->
+<div class="textbook-card">
+  <h2 class="card-header">Restitution Values & Behavior</h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Coefficient (<em>e</em>)</th>
+          <th>Collision Type</th>
+          <th>Bounce Behavior</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>e = 1</strong></td>
+          <td>Perfectly Elastic</td>
+          <td>Maximum bounce. No kinetic energy lost. Objects rebound at the same speed they hit.</td>
+          <td>Superball (idealized)</td>
+        </tr>
+        <tr>
+          <td><strong>0 < e < 1</strong></td>
+          <td>Real-world / Inelastic</td>
+          <td>Partial bounce. Some energy is converted to heat/deformation. Rebound speed is less than impact speed.</td>
+          <td>Tennis ball, Basketball</td>
+        </tr>
+        <tr>
+          <td><strong>e = 0</strong></td>
+          <td>Perfectly Plastic</td>
+          <td>No bounce. Objects stick together and move with a common velocity. Maximum energy loss.</td>
+          <td>Modeling clay, Car crash</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- UI BLOCK: IMPORTANT NOTES CARD -->
+<div class="textbook-card">
+  <h2 class="card-header">Important Notes</h2>
+  <div class="card-content">
+    <p><strong>Direction Matters:</strong> Velocities are vectors. In the 1D formula, absolute values are used to ensure the coefficient remains positive regardless of direction.</p>
+    <p><strong>Material Dependency:</strong> Restitution is an intrinsic property of the materials involved (e.g., wood vs. rubber). It is not usually a constant for an object regardless of what it hits; a rubber ball has a different 'e' against steel than it does against mud.</p>
+  </div>
+</div>
+
+<!-- UI BLOCK: SUMMARY CARD -->
+<div class="textbook-card">
+  <h2 class="card-header">Summary</h2>
+  <div class="card-content">
+    <p>Changing the restitution value directly scales the "bounciness" of a physics simulation.</p>
+    <ul>
+      <li>Increase <em>e</em> towards 1.0 to make collisions lively and energetic.</li>
+      <li>Decrease <em>e</em> towards 0.0 to make collisions feel heavy, dead, or sticky.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- UI BLOCK: SUGGESTED QUESTIONS CARD -->
+<div class="textbook-card">
+  <h2 class="card-header">Suggested Questions</h2>
+  <div class="card-content">
+    <ol>
+      <li>What happens to the total kinetic energy of the system when restitution is set to 0.5?</li>
+      <li>Can the coefficient of restitution ever be greater than 1? What would that imply physically?</li>
+      <li>How does gravity affect the calculation of the coefficient of restitution for a bouncing ball?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- SYSTEM DATA: FORMULA EXTRACTION -->
+<script type="application/json" id="formula-lab-data">
+[
+  {
+    "formula": "e = \\frac{|v_{2f} - v_{1f}|}{|v_{1i} - v_{2i}|}",
+    "title": "Coefficient of Restitution",
+    "surroundingContext": "The Coefficient of Restitution (e) is the ratio of relative velocity after collision to relative velocity before collision.",
+    "variables": [
+      { "symbol": "e", "meaning": "Coefficient of Restitution (dimensionless)" },
+      { "symbol": "v_{2f}", "meaning": "Final velocity of object 2" },
+      { "symbol": "v_{1f}", "meaning": "Final velocity of object 1" },
+      { "symbol": "v_{1i}", "meaning": "Initial velocity of object 1" },
+      { "symbol": "v_{2i}", "meaning": "Initial velocity of object 2" }
+    ]
+  }
+]
+</script>
+```

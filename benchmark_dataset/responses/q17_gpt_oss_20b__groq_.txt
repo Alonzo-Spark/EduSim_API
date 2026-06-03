@@ -1,0 +1,146 @@
+┌───────────────────────────────────────────────────────┐
+│ **Introduction**                                       │
+│                                                       │
+│ The work‑energy theorem is a cornerstone of classical   │
+│ mechanics. It links the mechanical work done on a         │
+│ particle to the change in its kinetic energy. This       │
+│ relationship is fundamental for analyzing systems where │
+│ forces act over a distance.                               │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Definition**                                         │
+│                                                       │
+│ *The work‑energy theorem states that the net work     │
+│ performed by all forces on a particle equals the       │
+│ change in its kinetic energy.*                         │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Key Concepts**                                       │
+│                                                       │
+│ • **Work** is the dot product of force and displacement│
+│   integrated over a path: \(W=\int \mathbf{F}\!\cdot\!d\mathbf{x}\).│
+│ • **Kinetic energy** of a particle of mass \(m\) and    │
+│   speed \(v\) is \(K=\tfrac{1}{2}mv^{2}\).              │
+│ • **Net work** considers all forces (conservative and   │
+│   non‑conservative).                                    │
+│ • The theorem applies to point masses and rigid bodies  │
+│   when rotational kinetic energy is negligible.        │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Characteristics**                                    │
+│                                                       │
+│ • Relates a scalar quantity (work) to a scalar change │
+│   (kinetic energy).                                    │
+│ • Independent of the path taken, provided the forces │
+│   are known.                                           │
+│ • Provides a powerful tool for energy conservation in │
+│   systems where potential energy changes are difficult│
+│   to compute directly.                                 │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Main Formula**                                       │
+│                                                       │
+│     $$W = \Delta K = K_{f} - K_{i}$$                   │
+│                                                       │
+│ [ Explain Formula ]                                   │
+│ [ Open Formula Lab ]                                  │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Derivation**                                         │
+│                                                       │
+│ 1. Work done by a force over a displacement:          │
+│    \(W=\int \mathbf{F}\!\cdot\!d\mathbf{x}\).          │
+│ 2. Newton’s second law gives \(\mathbf{F}=m\mathbf{a}\).│
+│ 3. Substitute and use \(\mathbf{a}=d\mathbf{v}/dt\) and │
+│    \(d\mathbf{x}= \mathbf{v}\,dt\):                    │
+│    \(W=\int m\,\mathbf{v}\!\cdot\!d\mathbf{v}\).      │
+│ 4. Integrate: \(W= m\int v\,dv = \tfrac{1}{2}m v^{2}\Big|_{i}^{f}\).│
+│ 5. Hence \(W=\Delta K\).                               │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Kinetic Energy Formula**                             │
+│                                                       │
+│     $$K = \tfrac{1}{2}mv^{2}$$                        │
+│                                                       │
+│ [ Explain Formula ]                                   │
+│ [ Open Formula Lab ]                                  │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Work Integral Formula**                              │
+│                                                       │
+│     $$W = \int \mathbf{F}\!\cdot\!d\mathbf{x}$$        │
+│                                                       │
+│ [ Explain Formula ]                                   │
+│ [ Open Formula Lab ]                                  │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Applications**                                       │
+│                                                       │
+│ • Determining final speeds of projectiles.            │
+│ • Calculating work done by friction or air resistance│
+│   on moving objects.                                   │
+│ • Energy budgeting in engineering systems.            │
+│ • Analyzing collisions and explosions.                │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Advantages**                                         │
+│                                                       │
+│ • Simplifies dynamic problems by converting forces   │
+│   into energy changes.                                │
+│ • Avoids solving differential equations directly.    │
+│ • Works for both conservative and non‑conservative    │
+│   forces.                                             │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Disadvantages**                                      │
+│                                                       │
+│ • Requires knowledge of force distribution over the   │
+│   path; not always trivial.                           │
+│ • Neglects rotational kinetic energy unless added.   │
+│ • Cannot directly provide time‑dependent solutions.   │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Important Notes**                                    │
+│                                                       │
+│ • The theorem holds in inertial reference frames.     │
+│ • For systems with variable mass, an extended form   │
+│   of the theorem must be used.                        │
+│ • Energy conservation requires accounting for all    │
+│   forms of energy (kinetic, potential, thermal, etc.).│
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Summary**                                            │
+│                                                       │
+│ The work‑energy theorem provides a direct link between │
+│ the mechanical work performed on a particle and the    │
+│ resultant change in its kinetic energy. It is a       │
+│ versatile tool in physics and engineering for solving │
+│ problems where forces act over distances.             │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ **Suggested Questions**                                │
+│                                                       │
+│ 1. A 2 kg block slides 5 m across a rough surface with a │
+│    constant force of 10 N. Compute the work done and the │
+│    final speed of the block.                            │
+│ 2. A projectile is launched upward with an initial speed│
+│    of 20 m/s. Determine its maximum height using the    │
+│    work‑energy theorem.                                 │
+│ 3. Explain why the work‑energy theorem fails for a     │
+│    system where mass is not constant (e.g., a rocket). │
+│ 4. Derive the expression for kinetic energy starting from │
+│    the definition of work.                              │
+└───────────────────────────────────────────────────────┘

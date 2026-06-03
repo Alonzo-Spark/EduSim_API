@@ -1,0 +1,93 @@
+┌───────────────────────────┐  
+│ **Key Concept**           │  
+│ Parallel Resistance       │  
+└───────────────────────────┘  
+
+When resistors are connected in **parallel**, they share the same voltage across each resistor, but the current divides among the branches.  
+
+To derive the **equivalent resistance** \( R_{eq} \) of resistors in parallel, we apply **Ohm’s Law** and **Kirchhoff’s Current Law (KCL)**.
+
+---
+
+**Step 1: Apply Kirchhoff’s Current Law (KCL)**  
+At the junction, the total current \( I \) entering is equal to the sum of the currents leaving through each resistor:
+
+\[
+I = I_1 + I_2 + I_3 + \cdots + I_n
+\]
+
+---
+
+**Step 2: Use Ohm’s Law**  
+Each current through a resistor is given by:
+
+\[
+I_1 = \frac{V}{R_1},\quad I_2 = \frac{V}{R_2},\quad I_3 = \frac{V}{R_3},\quad \dots,\quad I_n = \frac{V}{R_n}
+\]
+
+Substitute into KCL equation:
+
+\[
+I = \frac{V}{R_1} + \frac{V}{R_2} + \frac{V}{R_3} + \cdots + \frac{V}{R_n}
+\]
+
+Factor out voltage \( V \) (same across all resistors in parallel):
+
+\[
+I = V \left( \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \cdots + \frac{1}{R_n} \right)
+\]
+
+---
+
+**Step 3: Express in terms of equivalent resistance**  
+By definition, the total current \( I = \frac{V}{R_{eq}} \). Substitute:
+
+\[
+\frac{V}{R_{eq}} = V \left( \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \cdots + \frac{1}{R_n} \right)
+\]
+
+Divide both sides by \( V \) (assuming \( V \neq 0 \)):
+
+\[
+\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} + \cdots + \frac{1}{R_n}
+\]
+
+---
+
+┌───────────────────────────┐  
+│ **Main Formula**          │  
+│                           │  
+│   \[                     │  
+│   \frac{1}{R_{eq}} =     │  
+│   \sum_{i=1}^{n}          │  
+│   \frac{1}{R_i}           │  
+│   \]                     │  
+│                           │  
+│ [ Explain Formula ]       │  
+│ [ Open Formula Lab ]      │  
+└───────────────────────────┘  
+
+This is the general expression for **equivalent resistance in parallel combination**.
+
+---
+
+**Special Case: Two Resistors in Parallel**
+
+\[
+R_{eq} = \frac{R_1 R_2}{R_1 + R_2}
+\]
+
+---
+
+┌───────────────────────────┐  
+│ **Important Notes**       │  
+│                           │  
+• The equivalent resistance \( R_{eq} \) is **always less than** the smallest individual resistor.  
+• Adding more resistors in parallel **decreases** total resistance.  
+• Voltage is the **same** across all parallel branches.  
+• Current **splits** inversely proportional to resistance.  
+└───────────────────────────┘  
+
+---
+
+Would you like to explore a numerical example or simulate this in the Formula Lab?

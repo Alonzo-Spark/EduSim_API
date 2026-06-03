@@ -1,0 +1,74 @@
+### 🔬 Interactive Physics Lab: Scaling Friction
+
+This sandbox explores the transition from a **Kinetic Friction** environment to a **Galilean Ideal** (zero friction) state.
+
+---
+
+### 📘 Introduction
+When the coefficient of friction ($\mu$) scales toward zero, we move from **Applied Mechanics** into the realm of **Newton’s First Law**. In this limit, the internal "roughness" of the surfaces (asperities) no longer resists motion, transforming the system into a perpetual motion model.
+
+---
+
+### 🔲 Quick Definition
+**Kinetic Friction ($f_k$):** The force acting between moving surfaces. It always acts in the direction opposite to the motion of the object.
+
+---
+
+### 🧪 Formula Card: Kinetic Friction
+┌──────────────────────────────────────────────────────────┐
+│ **Main Formula: The Friction Limit**                     │
+│                                                          │
+│ $$f_k = \mu_k \cdot N$$                                  │
+│                                                          │
+│ **Variables:**                                           │
+│ $\mu_k$: Coefficient of Kinetic Friction                  │
+│ $N$: Normal Force ($m \cdot g$ on flat ground)           │
+│                                                          │
+│ [ 🔬 Open Formula Lab: Adjust $\mu$ ]                    │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### 📉 Key Concepts: The Scaling Effect
+
+As $\mu \to 0$, three specific physical transformations occur:
+
+| Parameter | High Friction ($\mu > 0.5$) | Zero Friction ($\mu = 0$) |
+| :--- | :--- | :--- |
+| **Acceleration** | Negative (Deceleration) | Zero ($a = 0$) |
+| **Velocity** | Approaches 0 rapidly | Constant ($v = \text{constant}$) |
+| **Energy** | Converted to Heat ($Q$) | Kinetic Energy is conserved |
+| **Distance** | Finite stopping distance | Infinite ($\infty$) |
+
+---
+
+### 📐 Formula Card: Work-Energy Theorem
+┌──────────────────────────────────────────────────────────┐
+│ **Main Formula: Stopping Distance**                      │
+│                                                          │
+│ $$d = \frac{v^2}{2\mu g}$$                               │
+│                                                          │
+│ **Observation:**                                         │
+│ As $\mu$ approaches the denominator's limit of 0,        │
+│ the stopping distance $d$ approaches infinity.           │
+│                                                          │
+│ [ 🛠️ Simulation: Set $\mu$ to 0.001 ]                     │
+└──────────────────────────────────────────────────────────┘
+
+---
+
+### ⚠️ Important Notes
+*   **The "Heat Sink" Effect:** In real-world friction, mechanical energy is lost to the environment as thermal energy. At $\mu = 0$, the surface becomes a "perfect" thermal insulator in terms of work-to-heat conversion.
+*   **The Normal Force Paradox:** Even if the block weighs 1,000kg (huge $N$), if $\mu = 0$, the friction force remains exactly $0$. Weight becomes irrelevant to horizontal motion.
+
+---
+
+### 🏁 Summary
+Scaling friction to zero removes the **external force** required to change an object's state of motion. The block transitions from a "decelerating projectile" to an "inertial reference frame," maintaining its velocity indefinitely according to the Law of Inertia.
+
+---
+
+### ❓ Suggested Questions
+1.  **Mass Independence:** Why does the block's mass not affect its stopping distance if $\mu$ is constant?
+2.  **Static vs. Kinetic:** What happens to the "starting force" (Static Friction) as the coefficient scales to zero?
+3.  **Air Resistance:** In a zero-friction sandbox, would air resistance ($\frac{1}{2}\rho v^2 C_d A$) become the new dominant force?

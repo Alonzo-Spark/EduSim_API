@@ -1,0 +1,97 @@
+┌───────────────────────────────────────────────────────┐
+│ Introduction                                            │
+│                                                         │
+│ In electric circuits, resistors are often connected   │
+│ in parallel to share the same voltage across each      │
+│ element while the total current divides among them.    │
+│ Understanding the equivalent resistance of a parallel │
+│ network simplifies analysis and design.                │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Definition                                              │
+│                                                         │
+│ A **parallel combination** of resistors consists of    │
+│ two or more resistors whose terminals are joined to the │
+│ same two nodes. The voltage across each resistor is      │
+│ identical, while the currents through them add to the   │
+│ total circuit current.                                  │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Key Concepts                                            │
+│                                                         │
+│ • **Same Voltage** – All resistors in parallel experience│
+│   the same potential difference.                        │
+│ • **Current Division** – The total current splits into   │
+│   branches inversely proportional to their resistances.│
+│ • **Conductance** – It is often convenient to work with │
+│   conductance \(G = 1/R\).                               │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Derivation Steps                                        │
+│                                                         │
+│ 1. Let the resistors be \(R_1, R_2, \dots , R_n\).      │
+│ 2. The voltage across each resistor is \(V\).           │
+│ 3. By Ohm’s law, the current through each resistor is   │
+│    \(I_i = V / R_i\).                                   │
+│ 4. The total current supplied by the source is the sum  │
+│    of the branch currents:                              │
+│    \[ I_{\text{total}} = \sum_{i=1}^{n} I_i = V \sum_{i=1}^{n} \frac{1}{R_i} \]│
+│ 5. Define the equivalent resistance \(R_{\text{eq}}\)   │
+│    such that \(I_{\text{total}} = V / R_{\text{eq}}\). │
+│ 6. Equate the two expressions for \(I_{\text{total}}\):│
+│    \[ \frac{V}{R_{\text{eq}}} = V \sum_{i=1}^{n} \frac{1}{R_i} \]│
+│ 7. Cancel \(V\) (non‑zero) and solve for \(R_{\text{eq}}\):│
+│    \[ \boxed{\displaystyle \frac{1}{R_{\text{eq}}} = \sum_{i=1}^{n} \frac{1}{R_i}} \]│
+│    For two resistors this reduces to                    │
+│    \[ R_{\text{eq}} = \frac{R_1 R_2}{R_1 + R_2} \]      │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Main Formula                                            │
+│                                                         │
+│            \[ \frac{1}{R_{\text{eq}}} = \sum_{i=1}^{n} \frac{1}{R_i} \]│
+│                                                         │
+│ [ Explain Formula ]   [ Open Formula Lab ]              │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Example Table                                           │
+│                                                         │
+│ ┌─────────────────────┬───────────────────────┬───────┐ │
+│ │ Resistor (Ω)        │ Value                 │       │ │
+│ ├─────────────────────┼───────────────────────┼───────┤ │
+│ │ R₁                  │ 100                   │       │ │
+│ │ R₂                  │ 200                   │       │ │
+│ │ R₃                  │ 300                   │       │ │
+│ └─────────────────────┴───────────────────────┴───────┘ │
+│                                                         │
+│ Using the formula:                                      │
+│ \[ \frac{1}{R_{\text{eq}}}= \frac{1}{100}+\frac{1}{200}+\frac{1}{300} \]│
+│ \[ R_{\text{eq}} \approx 54.5\ \Omega \]                │
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Summary                                                 │
+│                                                         │
+│ • Parallel resistors share the same voltage.           │
+│ • Their conductances add: \( \displaystyle \frac{1}{R_{\text{eq}}}= \sum \frac{1}{R_i}\).│
+│ • The equivalent resistance is always less than the    │
+│   smallest individual resistor.                         │
+│ • For two resistors, \(R_{\text{eq}} = \frac{R_1R_2}{R_1+R_2}\).│
+└───────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────┐
+│ Suggested Questions                                     │
+│                                                         │
+│ 1. How does the equivalent resistance change if a       │
+│    resistor is added to an existing parallel network? │
+│ 2. Why is the equivalent resistance always lower than   │
+│    any single branch resistance?                        │
+│ 3. Derive the formula for three resistors in parallel   │
+│    using the conductance approach.                      │
+│ 4. If two resistors of 150 Ω each are in parallel, what  │
+│    is the equivalent resistance?                        │
+└───────────────────────────────────────────────────────┘

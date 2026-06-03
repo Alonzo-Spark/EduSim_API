@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "zai-glm-4.7 (Cerebras)",
+  "question_id": 61,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'spring_connected' event linking a anchor to a mass.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a structural connection update within the workspace.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nA new elastic joint constraint (`spring_connected`) was created, linking the static pin anchor `p1` to the moving circular mass `c1`.\n\n### WHAT CHANGED\nThe free-floating mass was brought under a positional constraint, causing it to pull backward as it moved away from the anchor point.\n\n### SIMPLE WHY\nThe newly initialized spring joint applies an elastic restoring force that pulls the mass back toward the anchor whenever the constraint is stretched.\n\n### WHAT TO NOTICE\nWatch how the distance between the anchor and the mass determines the strength of the restoring force vector.",
+  "candidate_response": "```json\n{\n  \"event\": \"spring_connected\",\n  \"timestamp\": 1689345678,\n  \"overlay_content\": {\n    \"title\": \"Physics Engine Update\",\n    \"blocks\": [\n      {\n        \"type\": \"card\",\n        \"style\": \"introduction\",\n        \"title\": \"Connection Established\",\n        \"content\": \"The anchor point has successfully linked to the mass. The system is now constrained and ready for oscillation.\"\n      },\n      {\n        \"type\": \"card\",\n        \"style\": \"definition\",\n        \"title\": \"System Definition\",\n        \"content\": \"The connection creates a **Spring-Mass System**. The mass is no longer free-moving; it is now subject to a restoring force that attempts to return it to the spring's equilibrium position.\"\n      },\n      {\n        \"type\": \"formula_card\",\n        \"title\": \"Hooke's Law\",\n        \"rendered_formula\": \"$$F = -k(x - L_0)$$\",\n        \"lab_data\": {\n          \"formula\": \"F = -k(x - L_0)\",\n          \"title\": \"Hooke's Law\",\n          \"surroundingContext\": \"Calculates the immediate restoring force exerted by the spring the moment it connects.\",\n          \"variables\": [\n            {\n              \"symbol\": \"F\",\n              \"name\": \"Restoring Force\",\n              \"description\": \"The force pulling the mass back toward equilibrium.\"\n            },\n            {\n              \"symbol\": \"k\",\n              \"name\": \"Spring Constant\",\n              \"description\": \"A measure of the spring's stiffness.\"\n            },\n            {\n              \"symbol\": \"x\",\n              \"name\": \"Current Length\",\n              \"description\": \"The current length of the spring.\"\n            },\n            {\n              \"symbol\": \"L_0\",\n              \"name\": \"Rest Length\",\n              \"description\": \"The natural length of the spring when no force is applied.\"\n            }\n          ]\n        }\n      },\n      {\n        \"type\": \"card\",\n        \"style\": \"table_container\",\n        \"title\": \"Variable Reference\",\n        \"table\": {\n          \"headers\": [\"Symbol\", \"Quantity\", \"SI Unit\"],\n          \"rows\": [\n            [\"$F$\", \"Force\", \"Newton (N)\"],\n            [\"$k$\", \"Spring Constant\", \"N/m\"],\n            [\"$x$\", \"Position\", \"Meter (m)\"],\n            [\"$L_0$\", \"Rest Length\", \"Meter (m)\"]\n          ]\n        }\n      },\n      {\n        \"type\": \"card\",\n        \"style\": \"key_concepts\",\n        \"title\": \"Key Concepts\",\n        \"content\": [\n          {\n            \"term\": \"Restoring Force\",\n            \"definition\": \"Always directed opposite to the displacement.\"\n          },\n          {\n            \"term\": \"Equilibrium\",\n            \"definition\": \"The state where the net force is zero ($x = L_0$).\"\n          }\n        ]\n      }\n    ]\n  }\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the spring-connected event, accurately describing the establishment of a spring-mass system and the application of Hooke's Law. The use of JSON formatting enhances the readability and structure of the response. However, to further improve, consider adding more visual aids or diagrams to illustrate the concepts, particularly for beginner-friendly explanations. Additionally, the 'key_concepts' section could be expanded to include more terms and definitions relevant to the topic, such as 'damping' or 'resonance.' The formula card and variable reference table are well-organized and effectively communicate the necessary information. Overall, the response is well-structured, accurate, and educational, but could benefit from additional multimedia elements and expanded conceptual coverage to enhance pedagogical effectiveness.",
+  "candidate_token_usage": {
+    "promptTokens": 369,
+    "completionTokens": 3089,
+    "totalTokens": 3458
+  },
+  "candidate_latency_ms": 4866,
+  "candidate_cost_usd": 0.006547,
+  "judge_token_usage": {
+    "promptTokens": 1187,
+    "completionTokens": 215,
+    "totalTokens": 1402
+  },
+  "judge_latency_ms": 5684,
+  "judge_cost_usd": 0.0012282,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:54:12.669Z"
+}

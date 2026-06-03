@@ -1,0 +1,175 @@
+<thinking>
+The user wants a derivation of the time period of a simple pendulum. I need to render this as structured UI blocks - cards, formula cards, etc. rather than plain markdown.
+
+Let me think about the content first:
+
+**Simple Pendulum - Time Period Derivation**
+
+A simple pendulum consists of a bob of mass m suspended by a massless, inextensible string of length L from a fixed point.
+
+**Setup:**
+- When displaced by angle θ from equilibrium, restoring force acts
+- For small angles, sin θ ≈ θ
+
+**Forces:**
+- Weight mg acts downward
+- Tension T acts along string
+- Restoring force = -mg sin θ (tangential)
+
+**Equation of Motion:**
+F = -mg sin θ
+
+For small angles (θ < 15°):
+sin θ ≈ θ = x/L
+
+So F = -mg(x/L) = -(mg/L)x
+
+This is SHM since F ∝ -x
+
+Comparing with F = -kx:
+k = mg/L
+
+ω² = k/m = g/L
+ω = √(g/L)
+
+T = 2π/ω = 2π√(L/g)
+
+Now let me structure this as proper UI blocks/cards.
+
+I need to render this as React-like component descriptions or structured HTML-like blocks. Since I'm outputting text/markdown that gets rendered, I should use the card system described.
+
+Let me think about how to present this in the structured UI block format. Since I'm an AI outputting text that gets rendered by a frontend system, I should output structured content that the frontend can parse into cards.
+
+But wait - I'm just an AI assistant. I'll render this using rich markdown with clear visual structure, card-like formatting, and proper component descriptions. The system seems to expect me to output structured content.
+
+Let me output this in a way that represents the card/block system described in the system prompt. I'll use HTML-style divs or a structured format.
+
+Actually, looking at the system prompt more carefully, it seems like this is a frontend system where I should output structured JSON or component-like markup that the frontend renders. But since I'm a text-based AI, I'll output the content in the structured format that the system expects.
+
+Let me create the structured output with proper cards, formula cards, etc.
+
+I'll format this as structured blocks that can be rendered as cards.
+</thinking>
+
+```json
+{
+  "type": "lesson",
+  "title": "Time Period of a Simple Pendulum",
+  "subtitle": "Step-by-step derivation from first principles",
+  "blocks": [
+    {
+      "type": "definition-card",
+      "title": "What is a Simple Pendulum?",
+      "content": "A simple pendulum is an idealized system consisting of a **point mass** (bob) of mass *m* suspended from a **fixed support** by a massless, inextensible string of length *L*, free to oscillate in a vertical plane.",
+      "icon": "pendulum"
+    },
+    {
+      "type": "diagram-card",
+      "title": "Setup & Free Body Diagram",
+      "description": "When the bob is displaced by angle θ from the mean position, two forces act on it.",
+      "diagram": "pendulum_fbd",
+      "labels": [
+        { "symbol": "L", "desc": "Length of string" },
+        { "symbol": "θ", "desc": "Angular displacement" },
+        { "symbol": "mg", "desc": "Weight (downward)" },
+        { "symbol": "T", "desc": "Tension (along string)" },
+        { "symbol": "mg sinθ", "desc": "Restoring force (tangential)" },
+        { "symbol": "mg cosθ", "desc": "Balanced by Tension" }
+      ]
+    },
+    {
+      "type": "derivation-stepper",
+      "title": "Derivation",
+      "steps": [
+        {
+          "step": 1,
+          "heading": "Identify the Restoring Force",
+          "body": "The component of gravity along the direction of motion (tangential) acts as the restoring force, always directed toward the mean position.",
+          "formula": { "display": "F = -mg\\sin\\theta", "inline": true },
+          "note": "The negative sign indicates the force opposes displacement."
+        },
+        {
+          "step": 2,
+          "heading": "Apply the Small Angle Approximation",
+          "body": "For small oscillations (θ < 15°), we use the approximation:",
+          "formula": { "display": "\\sin\\theta \\approx \\theta \\approx \\frac{x}{L}", "inline": true },
+          "note": "Here x is the arc length displacement. This is valid when θ is in radians."
+        },
+        {
+          "step": 3,
+          "heading": "Rewrite the Force Equation",
+          "body": "Substituting the small angle approximation:",
+          "formula": { "display": "F = -mg \\cdot \\frac{x}{L} = -\\left(\\frac{mg}{L}\\right)x", "inline": true },
+          "highlight": "Since F ∝ −x, this is Simple Harmonic Motion (SHM)."
+        },
+        {
+          "step": 4,
+          "heading": "Compare with Standard SHM",
+          "body": "The standard form of SHM is F = −kx. Comparing:",
+          "formula": { "display": "k = \\frac{mg}{L}", "inline": true }
+        },
+        {
+          "step": 5,
+          "heading": "Find Angular Frequency ω",
+          "body": "For SHM, angular frequency is given by ω² = k/m:",
+          "formula": { "display": "\\omega^2 = \\frac{k}{m} = \\frac{mg/L}{m} = \\frac{g}{L}", "inline": true },
+          "formula2": { "display": "\\omega = \\sqrt{\\frac{g}{L}}", "inline": true }
+        },
+        {
+          "step": 6,
+          "heading": "Calculate Time Period T",
+          "body": "Using the relation T = 2π/ω:",
+          "formula": { "display": "T = \\frac{2\\pi}{\\omega} = \\frac{2\\pi}{\\sqrt{g/L}}", "inline": true }
+        }
+      ]
+    },
+    {
+      "type": "formula-card",
+      "title": "Final Result — Time Period",
+      "formula": "T = 2\\pi\\sqrt{\\dfrac{L}{g}}",
+      "variables": [
+        { "symbol": "T", "meaning": "Time period", "unit": "seconds (s)" },
+        { "symbol": "L", "meaning": "Effective length of pendulum", "unit": "metres (m)" },
+        { "symbol": "g", "meaning": "Acceleration due to gravity", "unit": "m/s²" },
+        { "symbol": "\\pi", "meaning": "Mathematical constant ≈ 3.14159", "unit": "—" }
+      ],
+      "actions": ["Explain Formula", "Open Formula Lab"]
+    },
+    {
+      "type": "table-card",
+      "title": "Key Observations from T = 2π√(L/g)",
+      "columns": ["Factor", "Effect on Time Period", "Reason"],
+      "rows": [
+        ["Length L increases", "T increases", "T ∝ √L"],
+        ["Gravity g increases", "T decreases", "T ∝ 1/√g"],
+        ["Mass m changes", "No effect on T", "m cancels out in derivation"],
+        ["Amplitude increases (small)", "No effect on T", "Small angle approx. holds"],
+        ["Taken to Moon (g smaller)", "T increases", "Lower g → longer period"]
+      ]
+    },
+    {
+      "type": "important-note-card",
+      "title": "Conditions for This Derivation to Hold",
+      "points": [
+        "The string must be **massless and inextensible**.",
+        "The bob must be a **point mass**.",
+        "Oscillations must be of **small amplitude** (θ < 15°) so that sin θ ≈ θ.",
+        "No **air resistance** or friction is considered.",
+        "The support must be **perfectly rigid and fixed**."
+      ]
+    },
+    {
+      "type": "summary-card",
+      "title": "Derivation at a Glance",
+      "steps": [
+        "Restoring force → F = −mg sin θ",
+        "Small angle approx → sin θ ≈ θ = x/L",
+        "Proves SHM → F = −(mg/L)x",
+        "Spring constant → k = mg/L",
+        "Angular frequency → ω = √(g/L)",
+        "Time period → T = 2π√(L/g)"
+      ]
+    }
+  ]
+}
+```

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 56,
+  "question": "Live Sandbox: Explain how changing restitution alters the collision bounce between two rigid bodies.",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nTwo solid spheres are aligned to collide head-on in the center of the canvas. We can adjust the restitution parameter slider ($\\text{e}$) to observe how the collision interaction updates.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nWhen restitution is set to maximum, the spheres bounce apart aggressively without losing any speed. If we lower the value to zero, they stick together upon impact and move forward as a single combined mass.\n\n### ✦ WHY IT HAPPENS\nRestitution defines the elasticity of a collision. A value of $1.0$ represents a perfectly elastic collision where kinetic energy is conserved. A value of $0.0$ represents a perfectly inelastic collision where the bodies maximize their kinetic energy loss by sticking together.\n\n### ✦ WHAT TO NOTICE\nObserve the mechanical energy indicators. At a restitution of $1.0$, total kinetic energy remains identical before and after impact. At $0.0$, the energy meter drops sharply during the collision.\n\n### ✦ FORMULA\nThe coefficient of restitution relation is written as:\n\n$$e = \\frac{v_2 - v_1}{u_1 - u_2}$$\n\n* $e = 1$ matches perfectly elastic kinetic energy retention.\n* $e = 0$ matches perfectly inelastic shared tracking.\n\n### ✦ DEEPER UNDERSTANDING\nRestitution controls how much kinetic energy is preserved as mechanical motion versus how much is converted into deformation, heat, or internal work during an impact.\n\n### ✦ TRY THIS\n1. Run an impact with **Restitution slider set to 1.0** and observe the energetic recoil behavior.\n2. Shift the **Restitution value** to `0.0` to see the two masses latch together into a unified mass.",
+  "candidate_response": "┌───────────────────────────┐  \n│ **Interactive Sandbox**   │  \n│ *Physics Playground*      │  \n└───────────────────────────┘  \n\n### **Introduction**  \nWelcome to the **Collision Restitution Sandbox**, where you can explore how the **coefficient of restitution (e)** affects how rigid bodies bounce during a collision.  \n\nAdjust the restitution value and observe real-time changes in bounce behavior between two colliding spheres.  \n\n---\n\n### **Key Concept: What Is Restitution?**  \n\n┌───────────────────────────┐  \n│ **Quick Definition**      │  \n│                           │  \n│ The **coefficient of    │  \n│ restitution (e)** measures│  \n│ how \"bouncy\" a collision │  \n│ is. It determines the    │  \n│ ratio of relative speed   │  \n│ after and before impact. │  \n└───────────────────────────┘  \n\n- **e = 0**: No bounce (perfectly inelastic)  \n- **e = 1**: Perfect bounce (perfectly elastic)  \n- **0 < e < 1**: Partial bounce (realistic materials)  \n\n---\n\n### **Main Formula**  \n\n┌───────────────────────────┐  \n│ **Collision Restitution** │  \n│                           │  \n│ $$                        │  \n│ e = \\frac{v_{2f} - v_{1f}}│  \n│ {v_{1i} - v_{2i}}         │  \n$$                        │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n**Variables**:  \n- \\( e \\): Coefficient of restitution  \n- \\( v_{1i}, v_{2i} \\): Initial velocities of objects 1 and 2  \n- \\( v_{1f}, v_{2f} \\): Final velocities after collision  \n\n> 🔍 *The higher the `e`, the more kinetic energy is preserved during the bounce.*\n\n---\n\n### **Interactive Simulation Guide**  \n\n🔧 **Controls**:  \n- **Slider**: Adjust `e` from 0.0 to 1.0  \n- **Play/Pause**: Run or freeze the collision  \n- **Reset**: Return objects to starting positions  \n\n🎯 **Scenario**:  \nTwo identical spheres approach each other with equal speed.  \n- Initial velocity: \\( v_1 = +5\\, \\text{m/s},\\ v_2 = -5\\, \\text{m/s} \\)  \n- Mass: \\( 1\\, \\text{kg} \\) each  \n- Collision: Head-on, frictionless  \n\n---\n\n### **Behavior by Restitution Level**  \n\n┌─────────────────────────────────────────────────────┐  \n│ **Restitution Effects on Bounce**                   │  \n├───────────────┬─────────────────────────────────────┤  \n│ **e = 0.0**   │ Objects **stick together** after    │  \n│ (Clay-like)   │ impact. No separation. Final speed: │  \n│               │ both move at 0 m/s (center of mass).│  \n├───────────────┼─────────────────────────────────────┤  \n│ **e = 0.5**   │ **Partial rebound**. Objects bounce │  \n│ (Rubber ball) │ weakly. Final speeds reduced by half │  \n│               │ relative to initial separation.     │  \n├───────────────┼─────────────────────────────────────┤  \n│ **e = 1.0**   │ **Perfect rebound**. Objects reverse│  \n│ (Superball)   │ velocities completely. Total kinetic│  \n│               │ energy is conserved.                │  \n└─────────────────────────────────────────────────────┘  \n\n> 📈 **Trend**: As `e` increases →  \n> - Greater separation speed after collision  \n> - More kinetic energy retained  \n> - \"Bouncier\" interaction  \n\n---\n\n### **Applications in Real-World Design**  \n\n🔧 **Engineering & Game Physics**:  \n- **Low `e`**: Car crumple zones (absorb energy)  \n- **High `e`**: Tennis balls, basketballs (maximize bounce)  \n- **Simulations**: Video games use tuned `e` values for realism  \n\n---\n\n### **Important Notes**  \n⚠️ Restitution **only affects the normal (impact) direction**.  \n⚠️ Values >1.0 are unphysical (would create energy).  \n⚠️ Real materials vary:  \n   - Steel on steel: ~0.9  \n   - Wood on wood: ~0.5  \n   - Putty on wall: ~0.1  \n\n---\n\n### **Suggested Questions to Explore**  \n1. What happens when one object is stationary?  \n2. How does mass ratio interact with restitution?  \n3. Can restitution ever be greater than 1? Why or why not?  \n4. If `e = 0.8`, how much kinetic energy is lost?  \n\n---\n\n🔄 **Try It Now**:  \nSlide `e` from 0 → 1 and watch the final velocities update in real time.  \n\n👉 *Use the Formula Lab to derive final speeds for any `e` value.*  \n\n┌───────────────────────────┐  \n│ [ Launch Sandbox ]        │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the concept of restitution and its effects on collisions. The explanation is clear, and the formula is correctly presented. The use of examples and interactive elements enhances the educational value. However, there are some minor formatting issues and a few sentences could be rephrased for better clarity. Overall, the response is well-structured and effectively conveys the key concepts. To further improve, consider adding more visual aids and providing additional examples to illustrate the practical applications of restitution in real-world scenarios.",
+  "candidate_token_usage": {
+    "promptTokens": 362,
+    "completionTokens": 1111,
+    "totalTokens": 1473
+  },
+  "candidate_latency_ms": 17285,
+  "candidate_cost_usd": 0.002584,
+  "judge_token_usage": {
+    "promptTokens": 1920,
+    "completionTokens": 166,
+    "totalTokens": 2086
+  },
+  "judge_latency_ms": 3595,
+  "judge_cost_usd": 0.0015504,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:26:05.730Z"
+}

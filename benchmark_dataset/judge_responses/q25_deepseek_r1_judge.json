@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 25,
+  "question": "Why do astronauts experience weightlessness in space?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWeightlessness is the sensation of having no weight, experienced when there is an absence of contact forces or support reactions acting on the body. \n\nIn orbit, this state is called microgravity, occurring because the spacecraft and its occupants are in a continuous state of free fall.\n\n---\n\n## The Free Fall Mechanism\n\n* **Continuous Trajectory Fall:** A spacecraft in orbit accelerates toward the Earth due to gravity, but its high forward speed matches the curve of the planet, causing it to fall around the Earth indefinitely.\n* **Zero Normal Force Interaction:** Because both the astronaut and the spacecraft fall together at the exact same rate, there is no floor pushing upward against the astronaut's feet, creating a sensation of weightlessness.\n\n---\n\n## Formula\n\nThe apparent weight relationship inside an accelerating capsule frame:\n\n$$N = m(g - a)$$\n\nWhen in a stable free-fall orbit, the downward acceleration matches gravity ($a = g$):\n\n$$N = m(g - g) = 0$$\n\nWhere:\n* $N$ represents the normal contact reaction force\n* $m$ represents the astronaut's mass\n* $g$ represents the local acceleration due to gravity\n* $a$ represents the centripetal orbital acceleration of the vehicle\n\n---\n\n## Summary\n\nAstronauts retain nearly all of their gravitational weight in low orbit, but they experience weightlessness because they are in a state of continuous free fall alongside their spacecraft, removing all upward contact forces.",
+  "candidate_response": "Astronauts experience **apparent weightlessness** in space due to **continuous free-fall motion**, not because gravity disappears. Here's a structured breakdown:\n\n---\n\n### 🚀 Quick Definition  \n**Weightlessness in space** occurs when astronauts and their spacecraft are both accelerating toward Earth at the same rate due to gravity, resulting in **no normal force** (the force you feel as \"weight\" on Earth).\n\n---\n\n### 🔍 Key Physics Explained  \n1. **Gravity Still Exists**:  \n   - At the ISS's orbit (~400 km up), gravity is **90%** of Earth's surface strength.  \n   - Without orbital motion, the ISS would fall to Earth in minutes.\n\n2. **Orbital Motion = Controlled Falling**:  \n   - The spacecraft moves sideways so fast that Earth's curvature \"drops away\" beneath it as it falls.  \n   - Example: Throw a ball horizontally; it arcs toward Earth. At ~28,000 km/h (orbital speed), the arc matches Earth’s curvature → perpetual free-fall.\n\n---\n\n### ⚖️ Physics of Apparent Weightlessness  \nWhen **acceleration due to gravity** is the **only force** acting:  \n- Astronauts and the spacecraft accelerate at **identical rates** (\\(g = \\frac{GM}{r^2}\\)).  \n- No compression occurs between them → **zero perceived weight**.\n\n---\n\n### 🌌 Formula: Orbital Motion & \"Weightlessness\"\n$$\n\\vec{F_g} = \\frac{GMm}{r^2} \\quad \\text{(Gravity)}  \n\\quad \\text{and} \\quad  \na = \\frac{v^2}{r} \\quad \\text{(Centripetal acceleration)}\n$$\n\n**Balance for stable orbit**:  \n$$\\frac{GM}{r^2} = \\frac{v^2}{r} \\implies v = \\sqrt{\\frac{GM}{r}}$$  \nAt this speed, gravity provides *exactly* the centripetal force needed for circular motion → **free-fall condition**.\n\n| **Variable** | **Meaning**                          | **Value in ISS Orbit**      |\n|--------------|--------------------------------------|-----------------------------|\n| \\(G\\)        | Gravitational constant               | \\(6.67 \\times 10^{-11} \\text{N·m}^2/\\text{kg}^2\\) |\n| \\(M\\)        | Earth's mass                         | \\(5.97 \\times 10^{24} \\text{kg}\\) |\n| \\(r\\)        | Distance from Earth's center         | \\(\\approx 6,770 \\text{ km}\\) (Earth radius + 400 km) |\n| \\(v\\)        | Orbital velocity                     | \\(\\approx 7.66 \\text{ km/s}\\) |\n\n---\n\n### 🌍 Real-World Examples  \n1. **International Space Station (ISS)**:  \n   - Orbits Earth every 90 min, in constant free-fall.  \n   - Astronauts float because they’re falling at the **same rate** as the ISS.\n\n2. **\"Vomit Comet\" Aircraft**:  \n   - Parabolic flights create **20-30 seconds of weightlessness** by matching free-fall acceleration.\n\n3. **Suborbital vs. Orbital**:  \n   - Blue Origin passengers feel weightlessness only when engines cut off (free-fall), but soon re-enter atmosphere.  \n   - ISS astronauts experience it **continuously** due to stable orbit.\n\n---\n\n### ❌ Common Misconceptions  \n| **Myth**                          | **Reality**                                  |\n|-----------------------------------|---------------------------------------------|\n| \"There's no gravity in space.\"    | Gravity exists everywhere; it weakens but never vanishes. |\n| \"Astronauts float due to vacuum.\" | Vacuum doesn’t cause floating; **motion** does. |\n| \"Only happens far from Earth.\"    | Occurs at any altitude if in free-fall (e.g., skydiving). |\n\n---\n\n### 💎 Key Insight  \n**Weightlessness ≠ absence of gravity**. It’s the **equivalence** of acceleration due to gravity with the motion of the reference frame (Einstein's principle). On the ISS, **falling forever** feels like floating.\n\n> 🔭 **Think of it like this**: Imagine an elevator in free-fall. You’d float inside it—just like astronauts in their \"falling\" spacecraft!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the concept of weightlessness in space, accurately explaining the principles of continuous free-fall motion, the role of gravity, and the physics behind orbital motion. The response is well-structured, easy to follow, and effectively uses formulas and examples to illustrate key points. The use of real-world examples, such as the International Space Station and the 'Vomit Comet' aircraft, helps to clarify the concept of weightlessness. The response also addresses common misconceptions about gravity and weightlessness, providing a clear and concise explanation of the differences. The only area for improvement is in the depth of explanation of the formula for apparent weightlessness, which could be further elaborated upon. Overall, the response is of high quality, accurate, and effective in teaching the concept of weightlessness in space.",
+  "candidate_token_usage": {
+    "promptTokens": 360,
+    "completionTokens": 1345,
+    "totalTokens": 1705
+  },
+  "candidate_latency_ms": 58472,
+  "candidate_cost_usd": 0.00314355,
+  "judge_token_usage": {
+    "promptTokens": 1651,
+    "completionTokens": 225,
+    "totalTokens": 1876
+  },
+  "judge_latency_ms": 6822,
+  "judge_cost_usd": 0.0015306,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:47:57.962Z"
+}

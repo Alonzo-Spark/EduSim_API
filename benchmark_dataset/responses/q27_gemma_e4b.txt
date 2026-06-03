@@ -1,0 +1,226 @@
+Okay, I understand. You want a completely revamped rendering system for the AI Tutor, moving away from a standard markdown look and towards an interactive textbook feel. This involves structured UI blocks, section cards, dedicated formula cards with explanation and lab options, and improved table rendering. Here's how I'll apply these changes to the requested content about Pascal's Law:
+
+=========================================================
+NEW RENDERING SYSTEM
+=========================================================
+
+Instead of rendering markdown sequentially:
+
+# Heading
+Paragraph
+
+## Formula
+
+$$F=ma$$
+
+Table
+
+Convert content into structured UI blocks.
+
+=========================================================
+
+## Section Detection
+
+Detected section: **Definition**
+
+┌───────────────────────────┐
+│ **Definition**          │
+│                           │
+│ Pascal's Law states that...│
+│                           │
+└───────────────────────────┘
+
+## Section Detection
+Detected section: **Key Concepts**
+
+┌───────────────────────────┐
+│ **Key Concepts**         │
+│                           │
+│ Pressure is transmitted... │
+│ equally in all directions │
+│ in a confined fluid.      │
+│                           │
+└───────────────────────────┘
+
+## Section Detection
+Detected section: **Formula**
+
+┌───────────────────────────┐
+│ **Main Formula**         │
+│                           │
+│     $P = \frac{F}{A}$     │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+## Section Detection
+Detected section: **Applications**
+
+┌───────────────────────────┐
+│ **Applications**        │
+│                           │
+│ Hydraulic lifts, brakes,  │
+│ presses, and many more!   │
+│                           │
+└───────────────────────────┘
+
+## Section Detection
+Detected section: **Advantages**
+
+┌───────────────────────────┐
+│ **Advantages**           │
+│                           │
+│ Simple, reliable, and     │
+│ powerful force amplification│
+│                           │
+└───────────────────────────┘
+
+## Section Detection
+Detected section: **Disadvantages**
+
+┌───────────────────────────┐
+│ **Disadvantages**        │
+│                           │
+│ Requires a confined fluid  │
+│ and may be bulky          │
+│                           │
+└───────────────────────────┘
+
+## Section Detection
+Detected section: **Important Notes**
+
+┌───────────────────────────┐
+│ **Important Notes**       │
+│                           │
+│  Pascal's Law applies to   │
+│  static pressure and does  │
+│  not account for dynamic  │
+│  pressure changes.         │
+│                           │
+└───────────────────────────┘
+
+## Section Detection
+Detected section: **Summary**
+
+┌───────────────────────────┐
+│ **Summary**              │
+│                           │
+│ Pascal's Law is fundamental│
+│ to understanding fluid     │
+│ pressure and its          │
+│ applications in various   │
+│ technologies.            │
+│                           │
+└───────────────────────────┘
+
+## Section Detection
+Detected section: **Suggested Questions**
+
+┌───────────────────────────┐
+│ **Suggested Questions**   │
+│                           │
+│ 1. How does Pascal's Law   │
+│    relate to hydraulic    │
+│    systems?               │
+│ 2. What are the limitations │
+│    of Pascal's Law?       │
+│                           │
+└───────────────────────────┘
+
+=========================================================
+
+## Pascal's Law and its Applications
+
+**Definition**
+
+Pascal's Law states that pressure is transmitted equally in all directions throughout a confined fluid. This means that if you apply pressure to one point in a fluid, that pressure is felt at every other point in the fluid.
+
+**Key Concepts**
+
+*   **Pressure:** Force per unit area (P = F/A).
+*   **Confined Fluid:** A fluid that is enclosed and cannot change volume freely.
+*   **Transmission:** The propagation of pressure changes throughout the fluid.
+
+**Formula**
+
+Pascal's Law can be expressed mathematically as:
+
+$$P = \frac{F}{A}$$
+
+Where:
+
+*   P = Pressure
+*   F = Force
+*   A = Area
+
+**Main Formula**
+
+$$P = \frac{F}{A}$$
+
+**(Click to Explain Formula)**  (This would link to a detailed explanation of the formula's components and implications, perhaps with an animation)
+**(Click to Open Formula Lab)** (This would open a simulation or interactive tool allowing users to manipulate force and area to see the effect on pressure)
+
+
+
+**Applications**
+
+Pascal's Law has numerous practical applications:
+
+*   **Hydraulic Lifts:**  Hydraulic jacks use Pascal's Law to amplify force. A small force applied to a small piston creates a larger pressure, which is transmitted to a larger piston, lifting heavy objects.
+*   **Hydraulic Brakes:** In vehicles, hydraulic brakes use Pascal's Law to transmit the force applied to the brake pedal to the brake pads, stopping the wheels.
+*   **Hydraulic Presses:** Used for shaping and molding materials, hydraulic presses leverage the pressure created by Pascal's Law.
+*   **Water Towers:** The pressure in a water tower is maintained by Pascal's Law, ensuring consistent water supply.
+*   **Submarines:**  Submarines use ballast tanks and Pascal´s law to control their depth.
+
+**Advantages**
+
+*   **Force Amplification:**  Pascal's Law allows for the amplification of force, enabling the lifting of heavy objects with relatively small effort.
+*   **Reliability:** Hydraulic systems are generally very reliable with minimal moving parts.
+*   **Versatility:**  Applications are diverse, ranging from simple jacks to complex industrial machinery.
+
+**Disadvantages**
+
+*   **Requires a Confined Fluid:**  Pascal's Law relies on a confined fluid; it will not work with open systems.
+*   **Potential for Leaks:**  Leaks in the system can significantly reduce the effectiveness of the hydraulic system.
+*   **Bulky Components:** Hydraulic systems can be bulky and heavy, especially for large-scale applications.
+
+**Important Notes**
+
+*   Pascal's Law applies to static pressure. It doesn't fully account for dynamic pressure changes (pressure changes due to fluid motion).
+*   The fluid must be incompressible to ensure accurate pressure transmission.
+*   The effectiveness of a hydraulic system depends on the ratio of the areas of the pistons.
+
+**Suggested Questions**
+
+1.  How does Pascal's Law relate to hydraulic systems? Explain with an example.
+2.  What are the limitations of Pascal's Law?  Under what conditions might it not apply?
+3.  Describe a real-world application of Pascal's Law that you have observed.
+4.  How would the pressure change if the area of the piston in a hydraulic system is doubled while the force remains the same?
+
+=========================================================
+
+**Formula Extraction Implementation Notes (for future use)**
+
+*   The code will parse the markdown and identify all `$$...$$` blocks.
+*   For each block, the following information will be extracted:
+    *   `formula`: The LaTeX code inside the block (e.g., `P = \frac{F}{A}`).
+    *   `title`:  The heading immediately preceding the formula block (if any). If no heading exists, the code will default to "Main Formula".
+    *   `surroundingContext`: The paragraph(s) immediately surrounding the formula block.
+    *   `variables`:  A list of all variables used in the formula (e.g., `["P", "F", "A"]`).
+*   This information will be stored in a data structure (e.g., a list of dictionaries) for later use in the Formula Lab component.
+
+
+
+**Key improvements over a plain Markdown document:**
+
+*   **Clear Structure:** Sections are clearly delineated using cards, making it easy for the user to navigate.
+*   **Interactive Elements:**  The "Explain Formula" and "Open Formula Lab" links add interactivity.
+*   **Formula-Centric Design:** Dedicated Formula Cards highlight the importance of the formulas.
+*   **No Floating Formulas:** Formulas are embedded within the appropriate section.
+*   **Structured Data for Formula Lab:**  The formula extraction process provides organized data for future interactive features.
+*   **Textbook-Like Feel:** The overall layout and use of cards create a more engaging and educational experience.
+
+
+
+This revised structure provides a much better user experience, aligning with your goal of creating an interactive textbook-like AI Tutor.  I've focused on creating a structured and visually appealing presentation of the content, prioritizing clarity and usability.  Let me know if you would like me to elaborate on any of these aspects or implement additional features!

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 62,
+  "question": "Sandbox Overlay: Generate runtime overlay response for an 'object_attached' event on a flying pendulum bob.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on a structural mass addition during runtime operations.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nAn auxiliary mass payload component (`object_attached`) was welded directly onto the swinging pendulum bob asset mid-motion.\n\n### WHAT CHANGED\nThe total mass parameter of the swinging body doubled instantly, while its velocity vector experienced a temporary drop to conserve momentum.\n\n### SIMPLE WHY\nAdding mass increases the system's total inertia, requiring an immediate adjustment in velocity to keep the momentum vector balanced.\n\n### WHAT TO NOTICE\nNotice that despite the increased weight, the pendulum continues to follow its original swing timing because the period is independent of mass.",
+  "candidate_response": "```json\n{\n  \"event_type\": \"object_attached\",\n  \"target\": \"pendulum_bob\",\n  \"status\": \"simulation_active\",\n  \"ui_layout\": \"interactive_textbook\",\n  \"blocks\": [\n    {\n      \"type\": \"header_card\",\n      \"content\": {\n        \"title\": \"System Dynamics: Attached Mass Pendulum\",\n        \"subtitle\": \"Kinematics & Conservation Laws\",\n        \"badge\": \"Physics Lab 4.2\"\n      }\n    },\n    {\n      \"type\": \"quick_definition\",\n      \"title\": \"State Change Detected\",\n      \"content\": \"An object has been attached to the pendulum bob. This increases the total mass $M$ of the oscillating system, affecting the momentum and energy distribution while maintaining the period $T$ (assuming small angle approximation).\"\n    },\n    {\n      \"type\": \"formula_card\",\n      \"content\": {\n        \"title\": \"Modified Conservation of Momentum\",\n        \"formula\": \"m_1 \\\\vec{v}_1 = (m_1 + m_2) \\\\vec{v}_f\",\n        \"explanation\": \"Since the attachment occurred during flight, the inelastic collision requires that linear momentum is conserved at the instant of contact.\",\n        \"variables\": [\n          {\"symbol\": \"m_1\", \"desc\": \"Original Bob Mass\"},\n          {\"symbol\": \"m_2\", \"desc\": \"Attached Object Mass\"},\n          {\"symbol\": \"v_f\", \"desc\": \"New Resultant Velocity\"}\n        ],\n        \"lab_link\": \"open_momentum_analyzer\"\n      }\n    },\n    {\n      \"type\": \"key_concepts\",\n      \"concepts\": [\n        {\n          \"term\": \"Center of Mass Shift\",\n          \"description\": \"The effective length $L$ may change if the attachment point is not at the geometric center.\"\n        },\n        {\n          \"term\": \"Inelastic Collision\",\n          \"description\": \"Kinetic energy is not conserved during the attachment; some energy is lost to heat/deformation.\"\n        }\n      ]\n    },\n    {\n      \"type\": \"formula_card\",\n      \"content\": {\n        \"title\": \"Period of Oscillation\",\n        \"formula\": \"T = 2\\\\pi \\\\sqrt{\\\\frac{L}{g}}\",\n        \"explanation\": \"Note that mass $m$ does not appear in the ideal period formula. The timing remains constant unless the string length $L$ is altered.\",\n        \"variables\": [\n          {\"symbol\": \"T\", \"desc\": \"Period\"},\n          {\"symbol\": \"L\", \"desc\": \"String Length\"},\n          {\"symbol\": \"g\", \"desc\": \"Gravitational Acceleration\"}\n        ],\n        \"lab_link\": \"open_period_calculator\"\n      }\n    },\n    {\n      \"type\": \"data_table\",\n      \"title\": \"System Parameters Update\",\n      \"headers\": [\"Parameter\", \"Pre-Attachment\", \"Post-Attachment\"],\n      \"rows\": [\n        [\"Total Mass\", \"0.5 kg\", \"0.85 kg\"],\n        [\"Velocity (v)\", \"2.4 m/s\", \"1.41 m/s\"],\n        [\"Kinetic Energy\", \"1.44 J\", \"0.84 J\"],\n        [\"Max Angle (θ)\", \"15°\", \"9.2°\"]\n      ]\n    },\n    {\n      \"type\": \"suggested_questions\",\n      \"questions\": [\n        \"How would the damping ratio change with the increased surface area?\",\n        \"Calculate the energy lost to the system during the attachment event.\",\n        \"Does the tension in the string increase or decrease at the lowest point?\"\n      ]\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concepts involved in the 'object_attached' event on a flying pendulum bob. The JSON object is well-structured and easy to follow, with clear explanations and relevant formulas. However, to improve the educational score, the response could benefit from more beginner-friendly language and additional visual aids to illustrate the concepts. For example, a diagram showing the before and after states of the pendulum bob could help to clarify the changes in mass and velocity. Additionally, the response could provide more guidance on how to apply the formulas and concepts to real-world problems. Overall, the response is accurate, well-organized, and effective in conveying the physics principles, but could be improved with more pedagogical considerations.",
+  "candidate_token_usage": {
+    "promptTokens": 391,
+    "completionTokens": 855,
+    "totalTokens": 1246
+  },
+  "candidate_latency_ms": 5939,
+  "candidate_cost_usd": 0.0027605,
+  "judge_token_usage": {
+    "promptTokens": 1348,
+    "completionTokens": 209,
+    "totalTokens": 1557
+  },
+  "judge_latency_ms": 10448,
+  "judge_cost_usd": 0.0013103999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:58:54.804Z"
+}

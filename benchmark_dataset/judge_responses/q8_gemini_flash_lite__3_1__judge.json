@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 8,
+  "question": "A ball is projected at an angle of 45° with velocity 20 m/s. Find its range.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Projectile Tracking\n\n### Problem\nA ball is projected at an angle of $45^\\circ$ with a velocity of $20 \\text{ m/s}$. Find its horizontal range.\n\n### Given\n* Initial launch velocity ($u$) = $20 \\text{ m/s}$\n* Projection angle ($\\theta$) = $45^\\circ$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$R = \\frac{u^2 \\sin(2\\theta)}{g}$$\n\n### Substitution\n$$R = \\frac{(20)^2 \\times \\sin(2 \\times 45^\\circ)}{9.8}$$\n\n### Calculation\n$$R = \\frac{400 \\times \\sin(90^\\circ)}{9.8}$$\n\nSince $\\sin(90^\\circ) = 1$:\n$$R = \\frac{400 \\times 1}{9.8}$$\n\n$$R = 40.82 \\text{ m}$$\n\n### Final Answer\n**Horizontal Range ($R$) = $40.82 \\text{ m}$**\n\n### Interpretation\nThis means the ball travels a total horizontal ground shortcut distance of $40.82 \\text{ meters}$ away from its initial launch spot before striking the earth baseline.",
+  "candidate_response": "Here's the breakdown of the problem, rendered as an interactive textbook:\n\n┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ We'll calculate the range │\n│ of a projectile launched  │\n│ at an angle.              │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ *   Projectile Motion     │\n│ *   Angle of Projection   │\n│ *   Initial Velocity      │\n│ *   Range                 │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     $$R = \\frac{v_0^2 \\sin(2\\theta)}{g}$$     │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Variables                 │\n│                           │\n│ *  \\(R\\): Range (m)       │\n│ *  \\(v_0\\): Initial      │\n│   velocity (m/s)         │\n│ *  \\(\\theta\\): Launch      │\n│   angle (degrees)        │\n│ *  \\(g\\): Acceleration   │\n│   due to gravity (9.8    │\n│   m/s²)                  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Solution                  │\n│                           │\n│ Given:                    │\n│ * \\(v_0 = 20\\) m/s        │\n│ * \\(\\theta = 45^\\circ\\)   │\n│ * \\(g = 9.8\\) m/s²        │\n│                           │\n│ Applying the formula:     │\n│                           │\n│ $$R = \\frac{(20)^2 \\sin(2 \\cdot 45^\\circ)}{9.8}$$\n│                           │\n│ $$R = \\frac{400 \\sin(90^\\circ)}{9.8}$$\n│                           │\n│ $$R = \\frac{400}{9.8}$$   │\n│                           │\n│ $$R \\approx 40.82 \\text{ m}$$   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Answer                    │\n│                           │\n│ The range of the ball is  │\n│ approximately 40.82 m.   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions       │\n│                           │\n│ 1.  What happens to the   │\n│     range if the angle    │\n│     changes?              │\n│ 2.  How does air          │\n│     resistance affect the │\n│     range?                │\n│ 3.  At what angle is the  │\n│     range maximized?      │\n└───────────────────────────┘\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the physics concept, correctly applying the formula for projectile range. The step-by-step solution is clear and well-structured. However, the quality score is slightly reduced due to the unconventional use of ASCII art for section headers, which may not be suitable for all audiences. The educational score is high due to the response's clarity, beginner-friendliness, and inclusion of suggested questions for further exploration. To improve, consider using standard formatting for section headers and providing additional explanations for key concepts, such as the significance of the angle of projection and the effect of air resistance.",
+  "candidate_token_usage": {
+    "promptTokens": 395,
+    "completionTokens": 642,
+    "totalTokens": 1037
+  },
+  "candidate_latency_ms": 4064,
+  "candidate_cost_usd": 0.00191115,
+  "judge_token_usage": {
+    "promptTokens": 1382,
+    "completionTokens": 181,
+    "totalTokens": 1563
+  },
+  "judge_latency_ms": 5263,
+  "judge_cost_usd": 0.0012636,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:07:44.534Z"
+}

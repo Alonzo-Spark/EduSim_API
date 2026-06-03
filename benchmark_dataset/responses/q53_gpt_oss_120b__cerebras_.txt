@@ -1,0 +1,140 @@
+┌───────────────────────────────────────┐  
+│               Introduction              │  
+│───────────────────────────────────────│  
+│ In this sandbox we explore how the       │  
+│ **stiffness constant** ( *k* ) of a       │  
+│ spring‑mass oscillator influences its   │  
+│ motion.  By **doubling** *k* we will see   │  
+│ the change in the *shape* and *speed*   │  
+│ of the oscillation.                       │  
+└───────────────────────────────────────┘  
+
+┌───────────────────────────────────────┐  
+│               Quick Definition          │  
+│───────────────────────────────────────│  
+│ A **spring oscillator** consists of a    │  
+│ mass *m* attached to a spring with        │  
+│ stiffness *k*.  When displaced, it       │  
+│ executes simple harmonic motion (SHM).   │  
+└───────────────────────────────────────┘  
+
+┌───────────────────────────────────────┐  
+│               Key Concepts               │  
+│───────────────────────────────────────│  
+│ • **Stiffness (k)** – force needed per    │  
+│   unit extension (N m⁻¹).                 │  
+│ • **Mass (m)** – the inertial element.    │  
+│ • **Angular frequency (ω)** –            │  
+│   √(k/m) (rad s⁻¹).                       │  
+│ • **Period (T)** – 2π/ω (s).               │  
+│ • **Amplitude (A)** – maximum displacement│  
+│   (set by initial energy).                │  
+└───────────────────────────────────────┘  
+
+┌───────────────────────────────────────┐  
+│               Main Formula               │  
+│───────────────────────────────────────│  
+│            ω = √(k / m)                  │  
+│                                           │  
+│  • *ω* – angular frequency (rad s⁻¹)       │  
+│  • *k* – spring stiffness (N m⁻¹)          │  
+│  • *m* – mass (kg)                        │  
+│                                           │  
+│ [ Explain Formula ]   [ Open Formula Lab ]│  
+└───────────────────────────────────────┘  
+
+┌───────────────────────────────────────┐  
+│               Visual Explanation         │  
+│───────────────────────────────────────│  
+│ When *k* is **doubled** (k → 2k):        │  
+│                                           │  
+│ • **Frequency** ↑  →  ω' = √(2k/m) = √2·ω │  
+│   → period T' = T/√2 (oscillation **faster**)│  
+│ • **Amplitude** stays the same if the    │  
+│   initial energy is unchanged (energy   │  
+│   → ½ k A², so larger *k* gives same A). │  
+│ • The **curve** looks “tighter” – more   │  
+│   cycles per unit time.                  │  
+│                                           │  
+│ Imagine a sinusoidal animation:         │  
+│   - Original: 1 Hz (blue)                │  
+│   - Doubled k: ≈1.41 Hz (red) – tighter   │  
+│                                           │  
+│ The sandbox updates the animation in real│  
+│ time as you toggle the *k* slider.       │  
+└───────────────────────────────────────┘  
+
+┌───────────────────────────────────────┐  
+│               Simulation Sandbox          │  
+│───────────────────────────────────────│  
+│ [▶️  Play]   [⏸ Pause]   [⏹ Reset]       │  
+│                                           │  
+│ **Controls**                              │  
+│ • *Mass (m)* – 0.5 kg to 5 kg (step 0.1)   │  
+│ • *Stiffness (k)* – 10 N/m to 200 N/m     │  
+│   (use the **Double k** button to ×2)    │  
+│ • *Initial displacement* – 0 cm to 10 cm │  
+│                                           │  
+│ **Visualization**                         │  
+│ • Real‑time plot of *x(t)*                │  
+│ • Phase‑space (x vs. v)                  │  
+│ • Frequency meter (Hz)                   │  
+│                                           │  
+│ **Try it!**                               │  
+│ 1. Set *k* = 50 N/m, *m* = 1 kg.          │  
+│ 2. Press **Play** – note the period.     │  
+│ 3. Click **Double k** – watch the period │  
+│    shrink to 1/√2 of the original.       │  
+│                                           │  
+│ (The sandbox is a live HTML5/Canvas demo.│  
+│  Code is available on the side panel.)  │  
+└───────────────────────────────────────┘  
+
+┌───────────────────────────────────────┐  
+│               Comparison Table            │  
+│───────────────────────────────────────│  
+│ ┌─────────────────────┬─────────────────┐ │  
+│ │ Parameter           │ Before → After │ │  
+│ ├─────────────────────┼─────────────────┤ │  
+│ │ Stiffness *k*       │ 50 N/m → 100 N/m│ │  
+│ │ Angular frequency   │ ω = √(50) ≈7.07│ │  
+│ │                     │ ω' = √(100)≈10 │ │  
+│ │                     │ → ↑ 41 %       │ │  
+│ │ Period *T*          │ 2π/7.07≈0.89 s │ │
+│ │                     │ 2π/10≈0.63 s   │ │
+│ │                     │ → ↓ 29 %       │ │
+│ │ Amplitude *A*       │ unchanged (energy│ │
+│ │                     │ constant)      │ │
+│ └─────────────────────┴─────────────────┘ │  
+│                                           │  
+│ [Download Data]   [Export Plot]          │  
+└───────────────────────────────────────┘  
+
+┌───────────────────────────────────────┐  
+│               Summary                     │  
+│───────────────────────────────────────│  
+│ • Doubling the spring stiffness **increases**│  
+│   the angular frequency by √2.            │  
+│ • The period shortens to 1/√2 of its       │  
+│   original value.                         │  
+│ • Amplitude (for fixed energy) stays the   │  
+│   same, but the system feels “stiffer”.   │  
+│ • The sandbox lets you see these changes   │  
+│   instantly.                               │  
+└───────────────────────────────────────┘  
+
+┌───────────────────────────────────────┐  
+│               Suggested Questions        │  
+│───────────────────────────────────────│  
+│ 1. If the mass is also doubled while *k*   │  
+│    is doubled, how does the frequency change?│  
+│ 2. How would the energy stored in the spring│  
+│    compare before and after the change?   │  
+│ 3. What happens to the phase‑space plot when │  
+│    *k* is increased?                       │  
+│ 4. If you keep the period constant, what      │  
+│    adjustment to *m* is required when *k*   │  
+│    doubles?                                 │  
+│                                             │  
+│ **Try answering them in the sandbox!**      │  
+└───────────────────────────────────────┘  

@@ -1,0 +1,164 @@
+┌───────────────────────────────────────┐
+│               Introduction              │
+│                                       │
+│ In a physics sandbox, the **spring_connected**   │
+│ event creates a dynamic link between a fixed   │
+│ anchor point and a movable mass using a        │
+│ spring. This overlay describes what the        │
+│ runtime should do when the event is fired,     │
+│ enabling real‑time simulation of spring‑mass   │
+│ systems.                                        │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                Definition                │
+│                                       │
+│ **spring_connected** (anchor, mass,      │
+│ springParams)** – an event that attaches   │
+│ a mass object to a static anchor via a     │
+│ linear spring defined by its stiffness      │
+│ `k` and rest length `ℓ₀`. The event supplies │
+│ the identifiers of the anchor and the mass │
+│ together with the spring parameters.        │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│               Key Concepts               │
+│                                       │
+│ • **Anchor** – a point with a fixed world   │
+│   position (xₐ, yₐ).                         │
+│ • **Mass** – a dynamic body with mass `m`    │
+│   and state (position, velocity).            │
+│ • **Spring** – characterized by stiffness   │
+│   `k` (N/m) and rest length `ℓ₀` (m).        │
+│ • **Force** – computed by Hooke’s law and   │
+│   applied to the mass each simulation step. │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                Formula Card               │
+│                                           │
+│ Main Formula                               │
+│                                           │
+│   \[ \mathbf{F} = -k \, (\mathbf{x} - \mathbf{x}_0) \]   │
+│                                           │
+│ [ Explain Formula ]   [ Open Formula Lab ] │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│               Formula Details            │
+│                                           │
+│ • `k` – spring stiffness (N·m⁻¹)          │
+│ • `\mathbf{x}` – current vector from anchor│
+│   to mass ( x, y )                           │
+│ • `\mathbf{x}_0` – rest‑length vector; its │
+│   magnitude equals `ℓ₀` and direction is   │
+│   the line joining anchor to mass at rest. │
+│ • The negative sign ensures the force       │
+│   pulls the mass toward the anchor.          │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                Applications               │
+│                                           │
+│ • Real‑time animation of oscillating        │
+│   masses (e.g., pendulums, car suspensions).│
+│ • Interactive physics education tools.      │
+│ • Game mechanics for stretchy ropes or      │
+│   bungee cords.                              │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                Advantages                 │
+│                                           │
+│ • Simple linear model – cheap to compute   │
+│   each frame.                               │
+│ • Easy to extend with damping or          │
+│   nonlinear springs.                       │
+│ • Works with existing physics engines      │
+│   that accept force callbacks.              │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                Disadvantages              │
+│                                           │
+│ • Only accurate for small deformations;   │
+│   real springs may exhibit hysteresis.    │
+│ • No built‑in handling of collisions       │
+│   between the spring and other objects.   │
+│ • Requires careful time‑step selection to │
+│   avoid numerical instability.            │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│               Important Notes             │
+│                                           │
+│ 1. **Units** – Keep SI units consistent:   │
+│    meters (m), kilograms (kg), seconds (s).│
+│ 2. **Zero‑length springs** – If `ℓ₀ = 0`,   │
+│    the force becomes proportional to the  │
+│    distance vector itself.                 │
+│ 3. **Damping** – To prevent endless        │
+│    oscillation, add a velocity‑dependent   │
+│    term `-c·v`.                             │
+│ 4. **Event Payload** – The sandbox should │
+│    receive a JSON payload, e.g.:           │
+│                                            │
+│    {                                       │
+│      "anchorId": "A1",                     │
+│      "massId": "M5",                       │
+│      "spring": { "k": 120, "restLength":0.5 }│
+│    }                                       │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                Runtime Overlay            │
+│                                           │
+│ When the **spring_connected** event fires:│
+│                                           │
+│ 1. **Lookup** the anchor and mass objects   │
+│    by their IDs.                           │
+│ 2. **Create** a SpringComponent attached   │
+│    to the mass, storing `k` and `ℓ₀`.      │
+│ 3. **Register** a per‑frame callback that │
+│    computes the displacement **d** =       │
+│    (mass.position – anchor.position).     │
+│ 4. **Apply** the Hooke force `F = -k·(‖d‖-ℓ₀)·(d/‖d‖)` │
+│    to the mass's force accumulator.        │
+│ 5. **Optionally** add damping `F_d = -c·v`. │
+│ 6. **Update** the visual spring line       │
+│    between anchor and mass for rendering. │
+│                                           │
+│ The overlay must run after the physics      │
+│ engine’s integration step to keep the visual│
+│ spring in sync with the computed positions.│
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                 Summary                   │
+│                                           │
+│ • The **spring_connected** event links a   │
+│   static anchor to a dynamic mass via a    │
+│   linear spring.                           │
+│ • Hooke’s law provides the core force       │
+│   calculation.                              │
+│ • Implementation steps are lookup, create,│
+│   register callback, apply force, and draw.│
+│ • Extendable with damping, non‑linear      │
+│   springs, and collision handling.          │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│           Suggested Questions             │
+│                                           │
+│ 1. How does adding a damping coefficient `c`│
+│    change the system’s energy over time?   │
+│ 2. What numerical integration method (Euler,│
+│    Verlet, RK4) best preserves stability for│
+│    this spring‑mass system?                │
+│ 3. How would you modify the overlay to      │
+│    support multiple springs attached to the │
+│    same mass?                               │
+│ 4. In what scenarios would a non‑linear     │
+│    spring model be more appropriate?       │
+└───────────────────────────────────────┘

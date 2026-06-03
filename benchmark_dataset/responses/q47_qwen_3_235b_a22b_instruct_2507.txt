@@ -1,0 +1,135 @@
+┌───────────────────────────┐
+│ Quick Definition          │
+│                           │
+│ When resistors are        │
+│ connected end-to-end in a │
+│ single path, they are in   │
+│ series. The total or       │
+│ equivalent resistance is   │
+│ the sum of all individual  │
+│ resistances.               │
+└───────────────────────────┘
+
+---
+
+┌───────────────────────────┐
+│ Key Concept                │
+│                           │
+│ In a series combination,   │
+│ the same current flows     │
+│ through each resistor, but │
+│ the voltage across each    │
+│ may differ.                │
+└───────────────────────────┘
+
+---
+
+┌───────────────────────────┐
+│ Main Formula              │
+│                           │
+│   $$R_{eq} = R_1 + R_2 +   │
+│   R_3 + \dots + R_n$$      │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+---
+
+### Derivation
+
+Consider three resistors $ R_1 $, $ R_2 $, and $ R_3 $ connected in series with a battery of voltage $ V $.
+
+Let the current flowing through the circuit be $ I $.
+
+- Since the resistors are in series, the **same current $ I $** flows through each resistor.
+- Let the voltage drops across $ R_1 $, $ R_2 $, and $ R_3 $ be $ V_1 $, $ V_2 $, and $ V_3 $ respectively.
+
+Using **Ohm’s Law**:
+
+$$
+V_1 = I R_1,\quad V_2 = I R_2,\quad V_3 = I R_3
+$$
+
+The total voltage supplied by the battery is equal to the sum of the individual voltage drops:
+
+$$
+V = V_1 + V_2 + V_3
+$$
+
+Substitute using Ohm’s Law:
+
+$$
+V = I R_1 + I R_2 + I R_3
+$$
+
+Factor out $ I $:
+
+$$
+V = I (R_1 + R_2 + R_3)
+$$
+
+Now, if we replace the series combination with a **single equivalent resistor** $ R_{eq} $, then by Ohm’s Law:
+
+$$
+V = I R_{eq}
+$$
+
+Comparing both equations:
+
+$$
+I R_{eq} = I (R_1 + R_2 + R_3)
+$$
+
+Cancel $ I $ from both sides:
+
+$$
+R_{eq} = R_1 + R_2 + R_3
+$$
+
+---
+
+### General Result
+
+For $ n $ resistors in series:
+
+$$
+R_{eq} = R_1 + R_2 + R_3 + \cdots + R_n
+$$
+
+This shows that **resistances in series add up linearly**.
+
+---
+
+┌───────────────────────────┐
+│ Important Notes           │
+│                           │
+│ • Current is same across  │
+│   all resistors.           │
+│ • Voltage divides          │
+│   proportionally to        │
+│   resistance.              │
+│ • Equivalent resistance is │
+│   always greater than any  │
+│   individual resistance.   │
+└───────────────────────────┘
+
+---
+
+✅ **Summary**
+
+The equivalent resistance of resistors in series is the sum of all individual resistances:
+
+$$
+R_{eq} = \sum_{i=1}^{n} R_i
+$$
+
+This principle is fundamental in circuit analysis and design.
+
+---
+
+🧠 **Suggested Questions**
+- Why is current constant in a series combination?
+- How does voltage divide across resistors in series?
+- What happens to $ R_{eq} $ if one resistor is removed?
+- Can resistors in series be interchanged without affecting $ R_{eq} $?

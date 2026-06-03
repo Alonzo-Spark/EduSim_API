@@ -1,0 +1,742 @@
+Here is the interactive textbook page explaining thermal expansion. It includes structured UI cards, a dedicated formula system, and a functional "Formula Lab" for simulation.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Physics: Thermal Expansion</title>
+    
+    <!-- KaTeX for Mathematics -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #64748b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent-formula: #f1f5f9;
+            --accent-formula-border: #cbd5e1;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Inter, system-ui, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 4rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Card System */
+        .topic-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            background-color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card-icon {
+            color: var(--primary);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Typography within cards */
+        p {
+            margin-bottom: 1rem;
+        }
+
+        strong {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        /* Microscopic Animation Area */
+        .simulation-box {
+            background: #0f172a;
+            height: 150px;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .atom {
+            width: 12px;
+            height: 12px;
+            background-color: var(--success);
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 10px var(--success);
+            transition: transform 0.5s ease;
+        }
+        
+        .bond {
+            height: 2px;
+            background: rgba(255,255,255,0.2);
+            position: absolute;
+            transform-origin: left center;
+        }
+
+        .controls {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #f1f5f9;
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        input[type="range"] {
+            flex-grow: 1;
+            cursor: pointer;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: #fff;
+            border-left: 5px solid var(--primary);
+        }
+
+        .formula-display {
+            background: var(--accent-formula);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border: 1px solid var(--accent-formula-border);
+        }
+
+        .formula-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: #eff6ff;
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        /* Formula Lab Specifics */
+        .lab-visualizer {
+            height: 200px;
+            background: #e2e8f0;
+            position: relative;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            overflow: hidden;
+        }
+
+        .lab-ruler {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: repeating-linear-gradient(
+                90deg,
+                #94a3b8,
+                #94a3b8 1px,
+                transparent 1px,
+                transparent 20px
+            );
+        }
+
+        .rod-container {
+            height: 40px;
+            background: linear-gradient(180deg, #ef4444, #b91c1c);
+            width: 100px; /* Base width */
+            border-radius: 4px;
+            position: relative;
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .rod-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #b91c1c;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .lab-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .lab-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 6px;
+            color: #166534;
+            font-weight: 600;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Thermal Expansion</h1>
+            <p class="subtitle">Interactive Physics Module</p>
+        </header>
+
+        <!-- Section: Introduction -->
+        <section class="topic-card">
+            <div class="card-header">
+                <i class="fa-solid fa-circle-info card-icon"></i>
+                <h2>Introduction</h2>
+            </div>
+            <div class="card-body">
+                <p>
+                    When a metal rod is heated, its length increases. This phenomenon is known as <strong>thermal expansion</strong>. 
+                    It occurs because particles in a substance vibrate faster and move further apart as temperature rises.
+                </p>
+                <p>
+                    To visualize this, imagine a solid lattice of atoms connected by "springs." As heat energy is added, the atoms vibrate more vigorously, effectively increasing the average distance between them.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section: Microscopic View (Interactive) -->
+        <section class="topic-card">
+            <div class="card-header">
+                <i class="fa-solid fa-microscope card-icon"></i>
+                <h2>Microscopic View</h2>
+            </div>
+            <div class="card-body">
+                <p>Observe how the atoms vibrate more intensely as heat increases.</p>
+                
+                <div class="simulation-box" id="atomBox">
+                    <!-- Atoms generated by JS -->
+                </div>
+
+                <div class="controls">
+                    <label for="heatSlider">Heat (Temperature):</label>
+                    <input type="range" id="heatSlider" min="1" max="10" value="1">
+                    <span id="heatLabel">Low</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Formula -->
+        <section class="topic-card formula-card" id="mainFormulaCard">
+            <div class="card-header">
+                <i class="fa-solid fa-square-root-variable card-icon"></i>
+                <h2>Linear Expansion Formula</h2>
+            </div>
+            <div class="card-body">
+                <p>The change in length ($\Delta L$) is proportional to the original length ($L_0$) and the change in temperature ($\Delta T$).</p>
+                
+                <!-- Formula Display -->
+                <div class="formula-display" id="formulaRender">
+                    $$ \Delta L = \alpha L_0 \Delta T $$
+                </div>
+
+                <!-- Formula Actions -->
+                <div class="formula-actions">
+                    <button class="btn btn-outline" onclick="openExplanation()">
+                        <i class="fa-solid fa-book-open"></i> Explain Formula
+                    </button>
+                    <button class="btn btn-primary" onclick="openFormulaLab()">
+                        <i class="fa-solid fa-flask"></i> Open Formula Lab
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Coefficients Table -->
+        <section class="topic-card">
+            <div class="card-header">
+                <i class="fa-solid fa-table card-icon"></i>
+                <h2>Material Properties</h2>
+            </div>
+            <div class="card-body">
+                <p>Different materials expand at different rates. This rate is defined by the coefficient of linear expansion ($\alpha$).</p>
+                
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Material</th>
+                                <th>Coefficient ($\alpha$) in $1/^{\circ}C$</th>
+                                <th>Expansion Behavior</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Aluminum</td>
+                                <td>$23 \times 10^{-6}$</td>
+                                <td>High expansion (used in thermostats)</td>
+                            </tr>
+                            <tr>
+                                <td>Copper</td>
+                                <td>$17 \times 10^{-6}$</td>
+                                <td>Moderate expansion</td>
+                            </tr>
+                            <tr>
+                                <td>Steel</td>
+                                <td>$12 \times 10^{-6}$</td>
+                                <td>Low expansion (used in construction)</td>
+                            </tr>
+                            <tr>
+                                <td>Pyrex Glass</td>
+                                <td>$3 \times 10^{-6}$</td>
+                                <td>Very low expansion (heat resistant)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal: Explain Formula -->
+    <div class="modal-overlay" id="explainModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Formula Breakdown</h3>
+                <button class="modal-close" onclick="closeModals()">&times;</button>
+            </div>
+            <div class="card-body" style="padding: 0;">
+                <p>The formula for linear thermal expansion is:</p>
+                <div class="formula-display" style="padding: 1rem; font-size: 1.2rem;">
+                    $$ \Delta L = \alpha L_0 \Delta T $$
+                </div>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><strong>$\Delta L$</strong>: The change in length (how much it grew or shrank).</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>$\alpha$ (Alpha)</strong>: The coefficient of linear expansion (a material constant).</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>$L_0$</strong>: The original length of the object before temperature change.</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>$\Delta T$</strong>: The change in temperature ($T_{final} - T_{initial}$).</li>
+                </ul>
+                <div style="background: #fffbeb; padding: 1rem; border-radius: 6px; border: 1px solid #fcd34d; margin-top: 1rem;">
+                    <i class="fa-solid fa-lightbulb" style="color: #d97706;"></i> 
+                    <strong>Note:</strong> Since $\alpha$ is very small for metals, we need a large $\Delta T$ or very long $L_0$ to see visible changes with the naked eye.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Formula Lab -->
+    <div class="modal-overlay" id="labModal">
+        <div class="modal" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3>Formula Lab <small style="font-size: 0.8rem; color: #64748b; font-weight: normal;">Interactive Simulation</small></h3>
+                <button class="modal-close" onclick="closeModals()">&times;</button>
+            </div>
+            <div class="card-body" style="padding: 0;">
+                <p>Adjust the parameters to see how the rod expands.</p>
+                
+                <div class="lab-visualizer">
+                    <div class="rod-container" id="labRod">
+                        <div class="rod-label" id="rodLabel">100 cm</div>
+                    </div>
+                    <div class="lab-ruler"></div>
+                </div>
+
+                <div class="lab-inputs">
+                    <div class="input-group">
+                        <label>Material ($\alpha$)</label>
+                        <select id="labMaterial" onchange="calculateLab()">
+                            <option value="23e-6">Aluminum ($23 \times 10^{-6}$)</option>
+                            <option value="17e-6">Copper ($17 \times 10^{-6}$)</option>
+                            <option value="12e-6" selected>Steel ($12 \times 10^{-6}$)</option>
+                            <option value="3e-6">Pyrex ($3 \times 10^{-6}$)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Initial Length ($L_0$) [m]</label>
+                        <input type="number" id="labL0" value="1.0" step="0.1" min="0.1" oninput="calculateLab()">
+                    </div>
+                    <div class="input-group">
+                        <label>Temp Change ($\Delta T$) [°C]</label>
+                        <input type="number" id="labDT" value="100" step="10" oninput="calculateLab()">
+                    </div>
+                </div>
+
+                <div class="lab-result" id="labResult">
+                    Calculated Expansion: 0.00 cm
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. KaTeX Initialization
+        // ==========================================
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+
+            // Initialize Formula Extraction
+            extractFormulas();
+            
+            // Initialize Atom Simulation
+            initAtomSimulation();
+        });
+
+        // ==========================================
+        // 2. Formula Extraction System
+        // ==========================================
+        let extractedFormulaData = {};
+
+        function extractFormulas() {
+            // In a real app, this would parse complex markdown. 
+            // Here, we extract from our structured UI block.
+            const formulaCard = document.getElementById('mainFormulaCard');
+            
+            // We retrieve the raw LaTeX from a data attribute or by parsing the text content
+            // For this robust demo, we define the context based on the DOM structure.
+            const formulaContent = "\\Delta L = \\alpha L_0 \\Delta T";
+            
+            extractedFormulaData = {
+                formula: formulaContent,
+                title: "Linear Expansion Formula",
+                variables: {
+                    "ΔL": "Change in Length",
+                    "α": "Coefficient of Linear Expansion",
+                    "L₀": "Initial Length",
+                    "ΔT": "Change in Temperature"
+                },
+                surroundingContext: "The change in length is proportional to original length and temperature change."
+            };
+
+            console.log("Formula Extracted:", extractedFormulaData);
+        }
+
+        // ==========================================
+        // 3. Interactive Modal System
+        // ==========================================
+        function openExplanation() {
+            document.getElementById('explainModal').classList.add('active');
+        }
+
+        function openFormulaLab() {
+            document.getElementById('labModal').classList.add('active');
+            calculateLab(); // Initial calculation
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.modal-overlay').forEach(el => el.classList.remove('active'));
+        }
+
+        // Close modal on click outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModals();
+            }
+        }
+
+        // ==========================================
+        // 4. Formula Lab Logic
+        // ==========================================
+        function calculateLab() {
+            const alpha = parseFloat(document.getElementById('labMaterial').value);
+            const L0 = parseFloat(document.getElementById('labL0').value);
+            const DT = parseFloat(document.getElementById('labDT').value);
+
+            // Calculate Delta L: ΔL = α * L0 * ΔT
+            const deltaL = alpha * L0 * DT;
+            
+            // Update Text Result
+            const resultDiv = document.getElementById('labResult');
+            resultDiv.innerHTML = `Expansion ($\\Delta L$): ${deltaL.toFixed(4)} m (${(deltaL*100).toFixed(2)} cm)`;
+            
+            // Re-render math inside the result if needed (simple text here is fine, but if we used latex...)
+            renderMathInElement(resultDiv);
+
+            // Visual Update (Exaggerated for visibility)
+            // We assume 100px in the visualizer represents L0
+            // We want to visualize the *expansion* part exaggeratedly so the user sees it grow.
+            const visualScale = 2000; // Exaggeration factor for the animation
+            const baseWidth = 100; 
+            const expansionPx = deltaL * visualScale; 
+            
+            const rod = document.getElementById('labRod');
+            const newWidth = baseWidth + expansionPx;
+            
+            // Limit max width to prevent breaking layout
+            rod.style.width = `${Math.min(newWidth, 350)}px`;
+            
+            // Update label
+            document.getElementById('rodLabel').innerText = `${L0}m + ${(deltaL*100).toFixed(2)}cm`;
+        }
+
+        // ==========================================
+        // 5. Microscopic Atom Simulation
+        // ==========================================
+        function initAtomSimulation() {
+            const container = document.getElementById('atomBox');
+            const slider = document.getElementById('heatSlider');
+            const label = document.getElementById('heatLabel');
+            
+            // Create atoms
+            const numAtoms = 8;
+            const atoms = [];
+            
+            for(let i=0; i<numAtoms; i++) {
+                const atom = document.createElement('div');
+                atom.className = 'atom';
+                // Distribute horizontally centered
+                const leftPos = 20 + (i * (60 / (numAtoms-1))); 
+                atom.style.left = `${leftPos}%`;
+                atom.style.top = '50%';
+                
+                // Store initial position
+                atom.dataset.baseLeft = leftPos;
+                atom.dataset.baseTop = 50;
+                
+                container.appendChild(atom);
+                atoms.push(atom);
+            }
+
+            slider.addEventListener('input', (e) => {
+                const heat = parseInt(e.target.value);
+                
+                // Update Label
+                if(heat < 4) label.innerText = "Low";
+                else if(heat < 8) label.innerText = "Medium";
+                else label.innerText = "High";
+
+                // Animate Atoms
+                atoms.forEach((atom, index) => {
+                    // Vibration amplitude increases with heat
+                    const amplitude = heat * 1.5; 
+                    
+                    // Random jitter
+                    const randomX = (Math.random() - 0.5) * amplitude;
+                    const randomY = (Math.random() - 0.5) * amplitude;
+                    
+                    // Expansion: Atoms push slightly apart
+                    const expansion = (heat - 1) * 0.5; // Slight shift right
+                    
+                    atom.style.transform = `translate(${randomX + expansion}px, ${randomY}px)`;
+                    
+                    // Color shift from green (cool) to red (hot)
+                    const r = Math.min(255, 16 + (heat * 25));
+                    const g = Math.max(0, 185 - (heat * 20));
+                    const b = Math.max(0, 129 - (heat * 15));
+                    atom.style.backgroundColor = `rgb(${r},${g},${b})`;
+                    atom.style.boxShadow = `0 0 ${5 + heat}px rgb(${r},${g},${b})`;
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+```

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 42,
+  "question": "Define electric field and electric potential.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectric field and electric potential describe how a distribution of electric charge influences the surrounding space.\n\nAn electric field is a vector field surrounding a charged particle, representing the electrostatic force experienced per unit positive charge placed at that point.\n\nAn electric potential is a scalar field representing the electrostatic potential energy per unit charge at a specific point relative to a reference location.\n\n---\n\n## Characteristics\n\n* **Vector vs. Scalar:** The electric field is a vector quantity that points in the direction a positive test charge would move. Electric potential is a scalar quantity measuring energy states.\n\n---\n\n## Formula\n\nThe mathematical definitions for electric field ($E$) and potential ($V$) are written as:\n\n$$E = \\frac{F}{q}$$\n\n$$V = \\frac{W}{q}$$\n\nWhere:\n* $E$ represents the electric field vector intensity\n* $V$ represents the electric potential scalar value\n* $F$ represents the electrostatic force vector\n* $W$ represents the work performed moving a charge from infinity\n* $q$ represents the magnitude of the test charge\n\n---\n\n## Summary\n\nThe electric field measures the electrostatic force vector per unit charge, whereas electric potential tracks the energy scalar state per unit charge.",
+  "candidate_response": "### Electric Field and Electric Potential\n\n#### Quick Definitions  \n┌───────────────────────────────────┐  \n│ **Electric Field (E)**            │  \n│ Region around a charged particle  │  \n│ where forces act on other charges │  \n│ *Units:* N/C or V/m               │  \n└───────────────────────────────────┘  \n\n┌───────────────────────────────────┐  \n│ **Electric Potential (V)**        │  \n│ Potential energy per unit charge  │  \n│ at a point in an electric field   │  \n│ *Units:* Volts (V)                │  \n└───────────────────────────────────┘  \n\n---\n\n#### Key Concepts  \n**1. Electric Field**  \n- **Definition:** Vector field representing force per unit charge  \n- **Direction:** Points *away* from (+) charges, *toward* (-) charges  \n- **Formula for Point Charge:**  \n  $$\n  \\vec{E} = \\frac{1}{4\\pi\\epsilon_0} \\frac{q}{r^2} \\hat{r}\n  $$  \n  <details>  \n  <summary>**Formula Explanation**</summary>  \n  - \\( \\epsilon_0 \\): Permittivity of free space (\\(8.85 \\times 10^{-12} \\, \\text{C}^2/\\text{N·m}^2\\))  \n  - \\( q \\): Source charge  \n  - \\( r \\): Distance from charge  \n  - \\( \\hat{r} \\): Unit vector direction  \n  </details>  \n\n**2. Electric Potential**  \n- **Definition:** Scalar field representing work needed to move a unit positive charge from infinity to a point  \n- **Zero Reference:** Defined as \\( V = 0 \\) at infinity  \n- **Formula for Point Charge:**  \n  $$\n  V = \\frac{1}{4\\pi\\epsilon_0} \\frac{q}{r}\n  $$  \n  <details>  \n  <summary>**Formula Explanation**</summary>  \n  - Same constants as electric field  \n  - Note the \\( \\frac{1}{r} \\) dependence (vs. \\( \\frac{1}{r^2} \\) for E-field)  \n  </details>  \n\n---\n\n#### Relationship Between E and V  \n┌───────────────────────────────┐  \n│ **Fundamental Connection**    │  \n│ \\( \\vec{E} = -\\nabla V \\)     │  \n│ *Where \\( \\nabla \\) is the*   │  \n│ *gradient operator*           │  \n└───────────────────────────────┘  \n\n**Key Implications:**  \n1. E-field points downhill along the steepest decrease of V  \n2. Equipotential surfaces (V = constant) are perpendicular to E-field lines  \n3. Potential difference between two points:  \n   $$\n   \\Delta V = -\\int_a^b \\vec{E} \\cdot d\\vec{l}\n   $$  \n\n---\n\n#### Comparative Summary  \n| Property              | Electric Field (\\(\\vec{E}\\))       | Electric Potential (\\(V\\))       |  \n|-----------------------|------------------------------------|----------------------------------|  \n| **Nature**            | Vector (magnitude + direction)     | Scalar (magnitude only)          |  \n| **Source**            | Charges                            | Charges *or* changing B-fields   |  \n| **Dependence**        | \\( \\frac{1}{r^2} \\) (point charge)| \\( \\frac{1}{r} \\) (point charge) |  \n| **Zero Location**     | Can be zero at points ≠ infinity   | Always zero at infinity          |  \n| **Measurable Effect** | Force on test charge (\\( \\vec{F} = q\\vec{E} \\)) | Work per unit charge             |  \n\n---\n\n#### Practical Applications  \n- **Capacitors:** \\( E = \\frac{V}{d} \\) (uniform field between plates)  \n- **Electronics:** Potential differences drive current  \n- **Bioelectricity:** Nerve signals propagate via voltage gradients  \n\n---\n\n#### Common Misconceptions  \n⚠️ **Myth:** \"Potential is just another name for field strength.\"  \n✅ **Reality:** Potential is energy-related, while field is force-related.  \n- Example: E-field can be zero where V is nonzero (e.g., center of charged ring).  \n\n---\n\n### Interactive Formula Lab  \nExplore how \\( q \\), \\( r \\), and \\( \\epsilon_0 \\) affect E and V:  \n$$ E = \\frac{1}{4\\pi\\epsilon_0} \\frac{|q|}{r^2} \\quad \\quad V = \\frac{1}{4\\pi\\epsilon_0} \\frac{q}{r} $$  \n\n| Variable  | Effect on E-field | Effect on V-potential |  \n|-----------|-------------------|-----------------------|  \n| **q ↑**   | Increases         | Increases (sign matters) |  \n| **r ↑**   | Decreases sharply | Decreases gradually   |  \n| **ε₀ ↓**  | Increases         | Increases             |  \n\n---\n\n**Summary Insight:**  \n> The electric field (\\(\\vec{E}\\)) tells charges *how to move*, while the potential (\\(V\\)) tells them *where to go*. Together, they describe electromagnetism's fundamental forces.  \n\n### Test Your Understanding  \n1. Why can equipotential surfaces never intersect?  \n2. Calculate \\( V \\) 3m from a +2μC charge.  \n3. If \\( \\vec{E} = 0 \\) at a point, must \\( V = 0 \\) there? Explain.  \n\n*(Answers revealed via hover/tap in interactive modules)*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of electric field and electric potential, providing accurate definitions, formulas, and explanations. The use of tables, diagrams, and interactive elements enhances the readability and educational value of the response. However, minor improvements could be made in formatting and organization to further enhance clarity. Overall, the response effectively conveys complex concepts in a clear and beginner-friendly manner, making it an excellent educational resource.",
+  "candidate_token_usage": {
+    "promptTokens": 358,
+    "completionTokens": 1332,
+    "totalTokens": 1690
+  },
+  "candidate_latency_ms": 55367,
+  "candidate_cost_usd": 0.00311398,
+  "judge_token_usage": {
+    "promptTokens": 1895,
+    "completionTokens": 144,
+    "totalTokens": 2039
+  },
+  "judge_latency_ms": 3451,
+  "judge_cost_usd": 0.0014826,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:35:00.473Z"
+}

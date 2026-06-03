@@ -1,0 +1,163 @@
+┌───────────────────────────────────────┐
+│ Introduction                           │
+│                                       │
+│ Bernoulli’s theorem is a cornerstone  │
+│ of fluid dynamics. It relates the     │
+│ pressure, velocity, and elevation of  │
+│ a fluid flowing in a streamline. When │
+│ friction and other energy losses are   │
+│ negligible, the sum of these energy    │
+│ terms remains constant along the flow.│
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Definition                             │
+│                                       │
+│ **Bernoulli’s theorem** (or Bernoulli’s│
+│ equation) states that for an incompress│
+│ ible, non‑viscous fluid moving along a │
+│ streamline, the total mechanical energy │
+│ per unit volume is conserved.          │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Key Concepts                           │
+│                                       │
+│ • **Streamline** – a path that is      │
+│   tangent to the fluid velocity at every│
+│   point.                               │
+│ • **Incompressible flow** – density ρ  │
+│   remains constant.                    │
+│ • **Non‑viscous (ideal) flow** – no   │
+│   internal friction; energy loss is   │
+│   only due to pressure or elevation    │
+│   changes.                             │
+│ • **Conservation of energy** – the sum │
+│   of pressure, kinetic, and potential │
+│   energy per unit volume is constant. │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Characteristics                        │
+│                                       │
+│ • Applies to steady (time‑independent)│
+│   flow.                                │
+│ • Valid only along a single streamline │
+│   unless the flow is irrotational.    │
+│ • Assumes no energy added or removed   │
+│   by pumps, turbines, or friction.    │
+│ • Works for liquids and gases when    │
+│   density variations are small.       │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Main Formula                            │
+│                                          │
+│   P + ½ ρ v² + ρ g h = constant          │
+│                                          │
+│ [ Explain Formula ]                     │
+│ [ Open Formula Lab ]                    │
+└───────────────────────────────────────┘
+*Formula Card Details*  
+{
+  "formula": "P + \\frac{1}{2}\\rho v^{2} + \\rho g h = C",
+  "title": "Bernoulli Equation",
+  "surroundingContext": "Relates pressure (P), velocity (v), density (ρ), gravity (g), and elevation (h) for ideal fluid flow.",
+  "variables": {
+    "P": "static pressure (Pa)",
+    "ρ": "fluid density (kg·m⁻³)",
+    "v": "flow speed (m·s⁻¹)",
+    "g": "acceleration due to gravity (9.81 m·s⁻²)",
+    "h": "height above a reference level (m)",
+    "C": "constant for a given streamline"
+  }
+}
+
+┌───────────────────────────────────────┐
+│ Applications                            │
+│                                          │
+│ Bernoulli’s theorem is used to analyze │
+│ and design many engineering systems.   │
+│ Below are common practical examples.   │
+│                                          │
+│   ┌───────────────────────────────────┐ │
+│   │ Table: Typical Applications        │ │
+│   │-----------------------------------│ │
+│   │ Domain      │ Situation          │ │
+│   │             │                    │ │
+│   │ Pipe flow   │ Flow in a horizontal│ │
+│   │             │ pipe (water, oil) │ │
+│   │ Venturi     │ Flow‑measurement   │ │
+│   │ meter       │ device (air, water)│ │
+│   │ Aircraft    │ Lift on a wing     │ │
+│   │ wing        │ (airplane)        │ │
+│   │-----------------------------------│ │
+│   │ *Key variables*: v, P, ρ, h       │ │
+│   └───────────────────────────────────┘ │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Advantages                              │
+│                                          │
+│ • Provides a quick, analytical way to  │
+│   relate pressure, speed, and height.   │
+│ • Requires only local measurements,      │
+│   no need for complex instrumentation. │
+│ • Forms the basis for many fluid‑flow   │
+│   devices (venturi meters, orifice      │
+│   plates, Pitot tubes).                 │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Disadvantages                           │
+│                                          │
+│ • Assumes ideal (non‑viscous) flow; real│
+│   fluids experience friction, causing   │
+│   energy loss.                           │
+│ • Not valid for turbulent or highly     │
+│   compressible flows.                   │
+│ • Must be applied along a single         │
+│   streamline; mixing streams require    │
+│   more sophisticated analysis.          │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Important Notes                         │
+│                                          │
+│ • When a pump adds energy, the constant │
+│   becomes **C + work**; when a turbine   │
+│   extracts energy, subtract work.       │
+│ • For compressible gases, the density   │
+│   term varies; an extended Bernoulli     │
+│   form includes the specific enthalpy. │
+│ • Always check the underlying assumptions│
+│   before applying the equation.         │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Summary                                 │
+│                                          │
+│ Bernoulli’s theorem links pressure,      │
+│ kinetic, and potential energy in an     │
+│ ideal fluid. Its simple algebraic form   │
+│ makes it a powerful tool for quick       │
+│ analysis of fluid systems, provided the │
+│ assumptions of incompressibility and    │
+│ inviscid flow hold.                       │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│ Suggested Questions                     │
+│                                          │
+│ 1. How does Bernoulli’s equation change   │
+│    when a pump adds energy to the flow?   │
+│ 2. Why does a venturi meter cause a       │
+│    pressure drop?                         │
+│ 3. What errors arise if the fluid is      │
+│    compressible?                          │
+│ 4. Derive the relationship between lift   │
+│    and velocity over an airfoil using      │
+│    Bernoulli’s principle.                │
+│ 5. Compare Bernoulli’s theorem with the   │
+│    Navier‑Stokes equations.               │
+└───────────────────────────────────────┘

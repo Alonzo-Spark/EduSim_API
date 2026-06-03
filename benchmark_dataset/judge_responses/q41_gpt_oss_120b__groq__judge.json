@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 41,
+  "question": "Electrostatics: State Coulomb’s law.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nCoulomb's Law states that the electrostatic force of attraction or repulsion between two stationary point charges is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance separating them.\n\n---\n\n## Characteristics\n\n* **Action-Reaction Interaction:** The forces exerted by the charges on each other are equal in magnitude and opposite in direction, acting along the straight line connecting them.\n* **Charge Dependency:** Like charges repel each other, whereas opposite charges experience a mutual attraction force.\n\n---\n\n## Formula\n\nThe mathematical equation for the electrostatic force:\n\n$$F = k_e \\frac{|q_1 q_2|}{r^2}$$\n\nIn a vacuum, the proportionality constant ($k_e$) is expressed as:\n\n$$k_e = \\frac{1}{4\\pi\\varepsilon_0} \\approx 8.988 \\times 10^9 \\text{ N}\\cdot\\text{m}^2/\\text{C}^2$$\n\nWhere:\n* $F$ represents the electrostatic force magnitude\n* $q_1, q_2$ represent the magnitudes of the point charges\n* $r$ represents the distance separating the two charges\n* $\\varepsilon_0$ represents the permittivity of free space ($8.854 \\times 10^{-12} \\text{ C}^2/\\text{N}\\cdot\\text{m}^2$)\n\n---\n\n## Summary\n\nCoulomb's Law describes the electrostatic force between charges, showing that it increases with charge magnitude but decreases according to an inverse-square relationship with distance.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│ Introduction                           │\n│                                       │\n│ Electrostatics studies the forces    │\n│ between stationary electric charges. │\n│ One of its fundamental principles is │\n│ Coulomb’s law, which quantifies the   │\n│ interaction between two point charges.│\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Definition                             │\n│                                       │\n│ **Coulomb’s law** states that the      │\n│ magnitude of the electrostatic force   │\n│ between two point charges is directly │\n│ proportional to the product of the    │\n│ absolute values of the charges and     │\n│ inversely proportional to the square  │\n│ of the distance separating them.       │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Coulomb’s Law (Formula)                │\n│                                       │\n│ $$                                   │\n│ F = k \\frac{|q_1 q_2|}{r^{2}}        │\n│ $$                                   │\n│                                       │\n│ [ Explain Formula ]   [ Open Formula Lab ] │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Variables                              │\n│                                       │\n│ • **F** – Electrostatic force (N)      │\n│ • **k** – Coulomb’s constant            │\n│   \\(k \\approx 8.9875 \\times 10^{9}\\ \\text{N·m²/C²}\\) │\n│ • **q₁, q₂** – Point charges (C)        │\n│ • **r** – Distance between charges (m) │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Applications                           │\n│                                       │\n│ • Predicting forces in atoms and      │\n│   molecules                           │\n│ • Designing capacitors and electro‑   │\n│   static devices                      │\n│ • Understanding phenomena such as     │\n│   lightning and triboelectric charging│\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Summary                                │\n│                                       │\n│ • Coulomb’s law gives the quantitative│\n│   relationship for electrostatic      │\n│   attraction or repulsion.            │\n│ • Force ∝ (product of charges) /      │\n│   (distance)².                         │\n│ • The constant \\(k\\) ties the equation │\n│   to the SI system.                    │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Suggested Questions                    │\n│                                       │\n│ 1. How does the force change if the     │\n│    distance between two charges is     │\n│    halved?                             │\n│ 2. What is the direction of the force   │\n│    when the charges have opposite signs?│\n│ 3. How would you experimentally       │\n│    determine the value of \\(k\\)?       │\n│ 4. Why is the absolute value used for   │\n│    the product \\(q_1 q_2\\) in the       │\n│    formula?                             │\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately covers Coulomb's Law, including its definition, formula, and applications. The structure and formatting are clear and readable, making it easy to follow and understand. However, there are a few minor issues: the value of Coulomb's constant is slightly off (8.9875 vs 8.988), and some sections, such as 'Introduction' and 'Summary', could be more detailed. Additionally, the 'Applications' section, while relevant, feels a bit disconnected from the rest of the explanation. The 'Suggested Questions' section is a nice touch for educational purposes, encouraging further exploration and understanding. Overall, the response is well-structured, accurate, and educational, but could benefit from minor adjustments for completeness and precision.",
+  "candidate_token_usage": {
+    "promptTokens": 428,
+    "completionTokens": 1046,
+    "totalTokens": 1474
+  },
+  "candidate_latency_ms": 3177,
+  "candidate_cost_usd": 0.0006918,
+  "judge_token_usage": {
+    "promptTokens": 1476,
+    "completionTokens": 211,
+    "totalTokens": 1687
+  },
+  "judge_latency_ms": 2865,
+  "judge_cost_usd": 0.001392,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:32:56.911Z"
+}

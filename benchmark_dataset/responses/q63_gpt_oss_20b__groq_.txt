@@ -1,0 +1,56 @@
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                     **Friction Changed Event**                               │
+│                                                                               │
+│ *Platform:* Braking Track Platform                                            │
+│ *Event:* `friction_changed`                                                   │
+│ *New Coefficient (μ):* 0.85                                                   │
+│ *Impact:* Braking force increases, reducing stopping distance and time.      │
+│ *Immediate Action:* System recalculates braking profiles and updates sensor   │
+│   alerts.                                                                     │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                          **Main Formula**                                      │
+│                                                                               │
+│     $$ F = μ \cdot N $$                                                      │
+│                                                                               │
+│ *Where:*                                                                     │
+│ • `F` – Braking force (N)                                                    │
+│ • `μ` – Friction coefficient (dimensionless)                                 │
+│ • `N` – Normal force (N)                                                     │
+│                                                                               │
+│ [ Explain Formula ]   [ Open Formula Lab ]                                   │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                     **Braking Distance vs. Friction Coefficient**              │
+│                                                                               │
+│ | Friction Coefficient (μ) | Braking Distance (m) | Δ Distance (%) |          │
+│ |---------------------------|-----------------------|----------------|          │
+│ | 0.70                      | 120                   | +0%            |          │
+│ | 0.75                      | 105                   | -12.5%         |          │
+│ | 0.80                      | 95                    | -20%           |          │
+│ | 0.85                      | 85                    | -29.2%         |          │
+│ | 0.90                      | 75                    | -37.5%         |          │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                           **Key Considerations**                              │
+│                                                                               │
+│ • **Safety Margin:** Ensure braking distance remains within safe limits for   │
+│   all train speeds.                                                          │
+│ • **Sensor Calibration:** Recalibrate wheel‑to‑track sensors after μ change. │
+│ • **Dynamic Load:** Account for variations in train mass and load distribution │
+│   when recomputing braking force.                                            │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│                              **Suggested Questions**                           │
+│                                                                               │
+│ 1. How does the new μ value affect the stopping distance at 80 km/h?         │
+│ 2. What is the required normal force `N` for a 200 t train on this track?    │
+│ 3. How can we adjust the braking system to maintain a 5 % safety margin?     │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘

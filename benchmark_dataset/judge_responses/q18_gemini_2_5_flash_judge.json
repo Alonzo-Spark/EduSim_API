@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 18,
+  "question": "A body of mass 5 kg is lifted to a height of 10 m. Calculate potential energy.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Potential Energy Assessment\n\n### Problem\nA body of mass $5 \\text{ kg}$ is lifted vertically to a height of $10 \\text{ m}$. Calculate its gravitational potential energy.\n\n### Given\n* Mass of the body ($m$) = $5 \\text{ kg}$\n* Vertical height ($h$) = $10 \\text{ m}$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$U = mgh$$\n\n### Substitution\n$$U = 5 \\times 9.8 \\times 10$$\n\n### Calculation\n$$U = 49 \\times 10$$\n\n$$U = 490 \\text{ J}$$\n\n### Final Answer\n**Potential Energy ($U$) = $490 \\text{ J}$**\n\n### Interpretation\nThis indicates that lifting the object stores $490 \\text{ Joules}$ of mechanical energy within the gravity field, which can convert back into kinetic energy if the object is released.",
+  "candidate_response": "## Potential Energy\n\nHere's how we calculate the potential energy of the body:\n\n### Quick Definition\n\nPotential energy is the energy an object possesses due to its position or state. In the context of gravity, it's the energy stored in an object due to its height above a reference point.\n\n### Main Formula\n\n$$PE = mgh$$\n\n<br/>\n\n**[ Explain Formula ]**\n\n**[ Open Formula Lab ]**\n\nWhere:\n*   $PE$ is the potential energy (measured in Joules, J)\n*   $m$ is the mass of the object (measured in kilograms, kg)\n*   $g$ is the acceleration due to gravity (approximately $9.8 \\text{ m/s}^2$ on Earth)\n*   $h$ is the height above the reference point (measured in meters, m)\n\n### Given Values\n\n| Quantity                      | Symbol | Value                |\n| :---------------------------- | :----- | :------------------- |\n| Mass of the body              | $m$    | $5 \\text{ kg}$       |\n| Height                        | $h$    | $10 \\text{ m}$       |\n| Acceleration due to gravity   | $g$    | $9.8 \\text{ m/s}^2$  |\n\n### Calculation\n\nWe can now substitute the given values into the potential energy formula:\n\n$$PE = mgh$$\n$$PE = (5 \\text{ kg}) \\times (9.8 \\text{ m/s}^2) \\times (10 \\text{ m})$$\n$$PE = 490 \\text{ J}$$\n\n### Result\n\nThe potential energy of the body is $490 \\text{ Joules}$.\n\n### Important Notes\n\n*   The reference point for height is crucial. Potential energy is relative to this chosen point. If the body were lifted from a different starting height, its potential energy relative to the ground would change.\n*   This calculation assumes we are on Earth, where the acceleration due to gravity is approximately $9.8 \\text{ m/s}^2$. On other planets or in space, the value of $g$ would be different.\n\n### Suggested Questions\n\n*   How would the potential energy change if the mass of the body were doubled?\n*   What if the body was lifted to half the height?\n*   Can potential energy be negative? Explain.",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of potential energy, correctly applies the formula PE = mgh, and provides a clear and structured calculation. The use of a table to present given values and the inclusion of important notes and suggested questions enhance the educational value of the response. However, minor improvements could be made in formatting and readability, such as using a consistent spacing between sections and considering the use of diagrams or illustrations to further clarify the concept. Overall, the response is accurate, well-structured, and effective in teaching the concept of potential energy.",
+  "candidate_token_usage": {
+    "promptTokens": 392,
+    "completionTokens": 514,
+    "totalTokens": 906
+  },
+  "candidate_latency_ms": 3410,
+  "candidate_cost_usd": 0.0014026,
+  "judge_token_usage": {
+    "promptTokens": 1149,
+    "completionTokens": 172,
+    "totalTokens": 1321
+  },
+  "judge_latency_ms": 4810,
+  "judge_cost_usd": 0.0011022,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:29:12.211Z"
+}

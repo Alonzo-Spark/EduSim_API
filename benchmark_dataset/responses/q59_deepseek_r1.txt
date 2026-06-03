@@ -1,0 +1,74 @@
+For a head-on elastic collision between two objects of equal mass, the overlay response would display the following key information in a structured physics overlay format:
+
+### Quick Definition
+**Elastic Collision**: A collision where both momentum and kinetic energy are conserved. For equal masses, objects exchange velocities.
+
+---
+
+### Key Formula
+**Velocity Exchange Formula**:
+$$\vec{v}_{1f} = \vec{v}_{2i}$$
+$$\vec{v}_{2f} = \vec{v}_{1i}$$
+- **Variables**:
+  - $\vec{v}_{1i}$: Initial velocity of Object 1
+  - $\vec{v}_{2i}$: Initial velocity of Object 2
+  - $\vec{v}_{1f}$: Final velocity of Object 1
+  - $\vec{v}_{2f}$: Final velocity of Object 2
+
+---
+
+### Conservation Laws
+| **Quantity**         | **Before Collision** | **After Collision** | **Conserved?** |
+|-----------------------|----------------------|---------------------|----------------|
+| **Momentum**          | $m\vec{v}_{1i} + m\vec{v}_{2i}$ | $m\vec{v}_{1f} + m\vec{v}_{2f}$ | ✅ Yes         |
+| **Kinetic Energy**    | $\frac{1}{2}m{v}_{1i}^2 + \frac{1}{2}m{v}_{2i}^2$ | $\frac{1}{2}m{v}_{1f}^2 + \frac{1}{2}m{v}_{2f}^2$ | ✅ Yes |
+
+---
+
+### Visualization
+**Before Collision**:
+```
+Object 1  →→→ [v₁ᵢ]  
+Object 2  →→→ [v₂ᵢ]  
+```
+**After Collision**:
+```
+Object 1  →→→ [v₂ᵢ]  
+Object 2  →→→ [v₁ᵢ]  
+```
+*(Arrows indicate direction/speed)*
+
+---
+
+### Critical Notes
+1. **Mass Independence**:  
+   Outcome depends only on initial velocities, not mass (since $m_1 = m_2$).
+2. **1D Limitation**:  
+   Applies only to head-on collisions in one dimension.
+3. **Real-World Exception**:  
+   Perfect velocity exchange assumes zero energy loss (ideal conditions).
+
+---
+
+### Example Calculation
+**Scenario**:  
+- Object 1: $v_{1i} = +5 \text{ m/s}$  
+- Object 2: $v_{2i} = -3 \text{ m/s}$  
+
+**Results**:  
+- Object 1 final velocity: $v_{1f} = -3 \text{ m/s}$  
+- Object 2 final velocity: $v_{2f} = +5 \text{ m/s}$  
+
+---
+
+### Suggested Questions
+1. What happens if masses are unequal?  
+   → *Explore mass asymmetry in collisions*
+2. How do off-center collisions affect results?  
+   → *Analyze 2D collisions and angular momentum*
+3. Why is kinetic energy conserved here but not in inelastic collisions?  
+   → *Compare elastic/inelastic energy transfer*
+
+---
+
+**Sandbox Tip**: Adjust initial velocities in your simulation to see velocity exchange in real-time!

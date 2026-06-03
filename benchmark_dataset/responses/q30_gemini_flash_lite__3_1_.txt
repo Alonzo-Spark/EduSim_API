@@ -1,0 +1,243 @@
+Okay, let's transform this explanation of Bernoulli's theorem into an interactive textbook-style lesson.
+
+```markdown
+# Bernoulli's Theorem
+
+## Introduction
+
+Bernoulli's theorem is a fundamental principle in fluid dynamics that describes the relationship between the pressure, velocity, and elevation of a fluid in motion. It's a cornerstone concept for understanding how fluids behave in various scenarios, from airplane wings to the flow of blood in our bodies.
+
+## Definition
+
+Bernoulli's theorem states that for an inviscid flow of a non-conducting fluid, an increase in the speed of the fluid occurs simultaneously with a decrease in pressure or a decrease in the fluid's potential energy.
+
+## Key Concepts
+
+*   **Pressure (P):** The force exerted by the fluid per unit area.
+*   **Velocity (v):** The speed of the fluid.
+*   **Elevation (h):** The height of the fluid above a reference point.
+*   **Density (ρ):** The mass of the fluid per unit volume.
+
+## Formula
+
+The mathematical expression of Bernoulli's theorem is:
+
+$$
+P + \frac{1}{2}\rho v^2 + \rho g h = \text{constant}
+$$
+
+where:
+
+*   *P* is the pressure of the fluid.
+*   *ρ* is the density of the fluid.
+*   *v* is the velocity of the fluid.
+*   *g* is the acceleration due to gravity.
+*   *h* is the elevation of the fluid.
+
+## Applications
+
+Bernoulli's theorem has a wide range of applications:
+
+*   **Airplane Wings:** The curved shape of an airplane wing causes air to travel a longer distance over the top surface than the bottom. This results in lower pressure above the wing and higher pressure below, creating lift.
+*   **Venturi Meter:** A device used to measure the flow rate of a fluid in a pipe. It works by constricting the flow, which increases the velocity and decreases the pressure, allowing for flow rate calculation.
+*   **Atomizers:** Devices that use a stream of air to create a fine spray of liquid, such as in perfume bottles or spray paint.
+*   **Carburetors:** Used in older internal combustion engines to mix air and fuel.
+*   **Sports:** Curveballs in baseball and the Magnus effect in other sports.
+
+## Advantages
+
+*   Provides a fundamental understanding of fluid behavior.
+*   Applicable to a wide range of engineering and scientific problems.
+*   Relatively simple to apply in ideal scenarios.
+
+## Disadvantages
+
+*   The theorem is based on ideal assumptions (inviscid, incompressible flow), which may not always hold true in real-world situations.
+*   Can be complex to apply in non-ideal scenarios.
+
+## Important Notes
+
+*   Bernoulli's theorem applies to steady flow, where the fluid properties at any point do not change with time.
+*   The theorem is a statement of the conservation of energy for a fluid.
+*   Friction and turbulence are not considered in the ideal form of Bernoulli's theorem.
+
+## Summary
+
+Bernoulli's theorem is a crucial principle in fluid dynamics that describes the relationship between pressure, velocity, and elevation in a fluid. It has numerous applications in various fields and provides a fundamental understanding of fluid behavior.
+
+## Suggested Questions
+
+*   Explain how Bernoulli's theorem is used in the design of airplane wings.
+*   Describe the working principle of a Venturi meter.
+*   What are the limitations of Bernoulli's theorem?
+*   How does the Magnus effect relate to Bernoulli's theorem?
+```
+
+Now, let's render this with the new UI blocks:
+
+```html
+<div class="interactive-textbook">
+
+  <!-- Introduction Card -->
+  <div class="card">
+    <div class="card-header">
+      Introduction
+    </div>
+    <div class="card-body">
+      Bernoulli's theorem is a fundamental principle in fluid dynamics that describes the relationship between the pressure, velocity, and elevation of a fluid in motion. It's a cornerstone concept for understanding how fluids behave in various scenarios, from airplane wings to the flow of blood in our bodies.
+    </div>
+  </div>
+
+  <!-- Definition Card -->
+  <div class="card">
+    <div class="card-header">
+      Definition
+    </div>
+    <div class="card-body">
+      Bernoulli's theorem states that for an inviscid flow of a non-conducting fluid, an increase in the speed of the fluid occurs simultaneously with a decrease in pressure or a decrease in the fluid's potential energy.
+    </div>
+  </div>
+
+  <!-- Key Concepts Card -->
+  <div class="card">
+    <div class="card-header">
+      Key Concepts
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><b>Pressure (P):</b> The force exerted by the fluid per unit area.</li>
+        <li><b>Velocity (v):</b> The speed of the fluid.</li>
+        <li><b>Elevation (h):</b> The height of the fluid above a reference point.</li>
+        <li><b>Density (ρ):</b> The mass of the fluid per unit volume.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Formula Card -->
+  <div class="formula-card">
+    <div class="card-header">
+      Main Formula
+    </div>
+    <div class="card-body">
+      $$P + \frac{1}{2}\rho v^2 + \rho g h = \text{constant}$$
+      <div class="formula-explanation">
+        where:
+        <ul>
+          <li>*P* is the pressure of the fluid.</li>
+          <li>*ρ* is the density of the fluid.</li>
+          <li>*v* is the velocity of the fluid.</li>
+          <li>*g* is the acceleration due to gravity.</li>
+          <li>*h* is the elevation of the fluid.</li>
+        </ul>
+      </div>
+      <div class="formula-actions">
+        <button class="btn btn-primary">Explain Formula</button>
+        <button class="btn btn-secondary">Open Formula Lab</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Applications Card -->
+  <div class="card">
+    <div class="card-header">
+      Applications
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><b>Airplane Wings:</b> The curved shape of an airplane wing causes air to travel a longer distance over the top surface than the bottom. This results in lower pressure above the wing and higher pressure below, creating lift.</li>
+        <li><b>Venturi Meter:</b> A device used to measure the flow rate of a fluid in a pipe. It works by constricting the flow, which increases the velocity and decreases the pressure, allowing for flow rate calculation.</li>
+        <li><b>Atomizers:</b> Devices that use a stream of air to create a fine spray of liquid, such as in perfume bottles or spray paint.</li>
+        <li><b>Carburetors:</b> Used in older internal combustion engines to mix air and fuel.</li>
+        <li><b>Sports:</b> Curveballs in baseball and the Magnus effect in other sports.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Advantages Card -->
+  <div class="card">
+    <div class="card-header">
+      Advantages
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>Provides a fundamental understanding of fluid behavior.</li>
+        <li>Applicable to a wide range of engineering and scientific problems.</li>
+        <li>Relatively simple to apply in ideal scenarios.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Disadvantages Card -->
+  <div class="card">
+    <div class="card-header">
+      Disadvantages
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>The theorem is based on ideal assumptions (inviscid, incompressible flow), which may not always hold true in real-world situations.</li>
+        <li>Can be complex to apply in non-ideal scenarios.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Important Notes Card -->
+  <div class="card">
+    <div class="card-header">
+      Important Notes
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>Bernoulli's theorem applies to steady flow, where the fluid properties at any point do not change with time.</li>
+        <li>The theorem is a statement of the conservation of energy for a fluid.</li>
+        <li>Friction and turbulence are not considered in the ideal form of Bernoulli's theorem.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Summary Card -->
+  <div class="card">
+    <div class="card-header">
+      Summary
+    </div>
+    <div class="card-body">
+      Bernoulli's theorem is a crucial principle in fluid dynamics that describes the relationship between pressure, velocity, and elevation in a fluid. It has numerous applications in various fields and provides a fundamental understanding of fluid behavior.
+    </div>
+  </div>
+
+  <!-- Suggested Questions Card -->
+  <div class="card">
+    <div class="card-header">
+      Suggested Questions
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>Explain how Bernoulli's theorem is used in the design of airplane wings.</li>
+        <li>Describe the working principle of a Venturi meter.</li>
+        <li>What are the limitations of Bernoulli's theorem?</li>
+        <li>How does the Magnus effect relate to Bernoulli's theorem?</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+```
+
+Key improvements and explanations:
+
+*   **Card-Based Layout:**  Each section is now a distinct card, visually separating the content.  This is a core requirement.
+*   **Formula Card:** The formula is in its own card, with "Explain Formula" and "Open Formula Lab" buttons as requested.  The surrounding context is included within the formula card itself.
+*   **Structure:** Uses HTML to create the cards, with semantic class names for easy styling.
+*   **No Markdown Rendering:** The markdown is *converted* into the UI elements, not rendered sequentially.  This is the key to the new system.
+*   **Formula Extraction (Conceptual):**  The `formula-card` component suggests how you'd handle the extracted formula details and the associated actions.  In a real implementation, you'd parse the markdown *once* to extract the formulas and their context, and then use that data to populate the UI.
+*   **Clear Sectioning:** The markdown sections are directly mapped to card headers.
+*   **Clean Output:** The output is structured HTML, ready for styling.
+
+To make this fully functional, I'd need to:
+
+1.  **Implement the Card Styling:**  CSS to style the cards, headers, and buttons.
+2.  **Implement Formula Lab:**  The "Open Formula Lab" button would link to an interactive formula exploration tool (this is beyond this response but is the *goal*).
+3.  **Implement "Explain Formula":**  This would expand the explanation of the formula, potentially with interactive elements.
+4.  **Implement Markdown Parsing:**  A parser to convert the original markdown into this structured format. This is the core of the new system and will require extracting the formulas and context.
+5.  **Add interactivity:** Implement the suggested questions and create interactions within the cards.
+
+This revised response directly addresses the prompt's requirements, creating a structured, interactive textbook-like experience.  It moves away from a simple markdown rendering and toward a component-based UI.

@@ -1,0 +1,144 @@
+Okay, I understand. You're aiming for a more interactive and visually appealing "textbook" style output, moving away from the typical ChatGPT-like markdown presentation. Here's how I will implement the changes based on your detailed specifications. I will focus on structured UI blocks, section detection, dedicated FormulaCards, and improved table rendering.
+
+I will be using a combination of parsing and rendering logic to achieve this.  I will leverage the extracted formula information to create interactive "Explain Formula" and "Open Formula Lab" buttons. I will also prioritize using cards to represent various sections and formulas.
+
+Here's a breakdown of how I'll handle the example you provided, and how I'll approach future content:
+
+**Example: "Explain resonance with examples."**
+
+I will render this as a card with the following structure:
+
+┌───────────────────────────┐
+│ Resonance Explanation     │
+│                           │
+│ Resonance occurs when...   │
+│ ... (detailed explanation)  │
+│                           │
+└───────────────────────────┘
+
+**Here's how I'll apply this to the content you gave me:**
+
+=========================================================
+NEW RENDERING SYSTEM
+=========================================================
+
+Instead of rendering markdown sequentially:
+
+# Heading
+Paragraph
+
+## Formula
+
+$$F=ma$$
+
+Table
+
+Convert content into structured UI blocks.
+
+=========================================================
+
+SECTION DETECTION
+=========================================================
+
+Detect sections automatically:
+
+Introduction
+Definition
+Key Concepts
+Characteristics
+Formula
+Applications
+Advantages
+Disadvantages
+Important Notes
+Summary
+Suggested Questions
+
+Render each section as a card.
+
+Example:
+
+┌───────────────────────────┐
+│ Quick Definition          │
+│                           │
+│ Photosynthesis is ...     │
+└───────────────────────────┘
+
+=========================================================
+
+FORMULA CARD SYSTEM
+=========================================================
+
+Whenever a display formula exists:
+
+$$
+...
+$$
+
+Render:
+
+┌───────────────────────────┐
+│ Main Formula              │
+│                           │
+│     Rendered Formula      │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+Do not leave formulas floating in text.
+
+Every formula must become a dedicated FormulaCard component.
+
+=========================================================
+
+FORMULA EXTRACTION
+=========================================================
+
+During markdown parsing:
+
+Extract all display LaTeX blocks.
+
+Store:
+
+{
+ formula,
+ title,
+ surroundingContext,
+ variables
+}
+
+Use this for Formula Lab.
+
+Do not parse again later.
+
+=========================================================
+
+TABLE RENDERING
+=========================================================
+
+Markdown tables must render as:
+
+Card
+  -> Responsive table
+
+Explain resonance with examples.
+
+**Implementation Details and Considerations:**
+
+1.  **Parsing:** I will use a robust markdown parser (like `markdown` in Python) to extract content.
+2.  **Section Detection:**  I will use a keyword-based approach to identify sections.  I will look for the specified section headings (e.g., "Introduction", "Definition") and render them as cards.
+3.  **Formula Detection & Extraction:** I'll use regular expressions to identify LaTeX formula blocks (enclosed in `$$...$$`).  The extracted formula will be stored in the `formula` field of the extracted data. The surrounding context will be stored in `surroundingContext`.
+4.  **FormulaCard Rendering:**  When a formula is detected, a `FormulaCard` component will be generated, displaying the formula and the "Explain Formula" and "Open Formula Lab" buttons.
+5.  **Table Rendering:**  Markdown tables will be converted to HTML tables, styled as cards. I'll ensure the tables are responsive to different screen sizes.
+6.  **Card Generation:**  I will use HTML and CSS to create the card layouts.  The cards will be styled to give a textbook-like feel.
+7. **Interactive Buttons:** The "Explain Formula" and "Open Formula Lab" buttons will be clickable. These will trigger JavaScript functions to display explanations and open the Formula Lab, respectively. (Note: The actual implementation of these functions will depend on the overall system architecture).
+
+**Next Steps:**
+
+Please provide the content you want me to process. I will then apply these rules and generate the structured output.  I will also give you the HTML generated so you can review it.  I'm ready to begin!  Just paste the markdown content here.
+
+**Important Note:**  Since I am an LLM, I can't *actually* execute the "Open Formula Lab" or "Explain Formula" functions.  I'll indicate where those actions would occur with associated HTML elements. The true interactivity requires a front-end implementation.
+
+
+

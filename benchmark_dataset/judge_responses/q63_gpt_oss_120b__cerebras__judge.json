@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 63,
+  "question": "Sandbox Overlay: Generate runtime overlay response for a 'friction_changed' event on a braking track platform.",
+  "gold_answer": "# Introduction\n\n---\n\n## Event Telemetry Report\n\nThe simulation engine has triggered a real-time event notification based on surface property updates.\n\n---\n\n## Real-Time Sandbox Overlay Feed\n\n### WHAT HAPPENED\nThe surface friction coefficient (`friction_changed`) along the lower track platform was increased by the user.\n\n### WHAT CHANGED\nThe sliding block experienced a sharp increase in backward deceleration, causing its forward velocity vector to drop rapidly.\n\n### SIMPLE WHY\nA higher friction coefficient increases the kinetic resistive force, accelerating the rate at which kinetic energy converts into heat.\n\n### WHAT TO NOTICE\nObserve the acceleration indicator pointing backward, showing how the increased friction quickly brings the block to a halt.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│ Introduction                           │\n│                                       │\n│ This overlay is triggered whenever the   │\n│ friction coefficient of a braking track │\n│ platform changes (e.g., due to rain,  │\n│ oil spill, or wear). It provides real‑ │\n│ time data, impact analysis, and actionable │\n│ recommendations for operators and   │\n│ automated control systems.           │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Event Payload                          │\n│                                       │\n│ ──► Timestamp        : 2026‑06‑01 14:23:07 UTC │\n│ ──► Platform ID      : BRK‑T01                     │\n│ ──► Previous μ       : 0.85 (dry steel)            │\n│ ──► New μ            : 0.55 (wet)                  │\n│ ──► Temperature      : 22 °C                       │\n│ ──► Weather          : Light rain                  │\n│ ──► Affected Trains : Train‑A, Train‑B            │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Impact Analysis                        │\n│                                       │\n│ • Braking distance increases by ~30 % │\n│ • Estimated stop‑distance for Train‑A │\n│   (speed 80 km/h) will grow from  ≈ 45 m │\n│   to  ≈ 58 m.                         │\n│ • Schedule delay risk: up to 2 min per │\n│   affected train.                    │\n│ • Safety margin reduced; risk of      │\n│   overshoot on short platforms.      │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Main Formula                           │\n│                                       │\n│   d = \\frac{v^{2}}{2 μ g}               │\n│                                       │\n│   • d  – braking distance (m)          │\n│   • v  – train speed (m·s⁻¹)            │\n│   • μ  – friction coefficient          │\n│   • g  – gravitational acceleration (9.81 │\n│          m·s⁻²)                        │\n│                                       │\n│ [ Explain Formula ]                    │\n│ [ Open Formula Lab ]                   │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Recommended Actions                    │\n│                                       │\n│ 1️⃣ Adjust braking curves in the       │\n│    control system to use the new μ.   │\n│ 2️⃣ Deploy additional sand/grit       │\n│    dispensers on the platform.       │\n│ 3️⃣ Issue a temporary speed limit of  │\n│    70 km/h for the affected track.    │\n│ 4️⃣ Notify dispatch to re‑evaluate    │\n│    headway for downstream trains.    │\n│ 5️⃣ Schedule a maintenance inspection │\n│    of the rail surface within 24 h.   │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Overlay UI Mockup                      │\n│                                       │\n│ ┌─────────────────────────────────────┐ │\n│ │ 🚨 Friction Changed – Platform BRK‑T01 │ │\n│ │---------------------------------------│ │\n│ │ New μ : 0.55 (wet)                     │ │\n│ │ Δ Braking Distance : +30 %              │ │\n│ │ Affected Trains : Train‑A, Train‑B      │ │\n│ │ Recommended Speed : 70 km/h            │ │\n│ │ [Apply Speed Limit]  [Open Control]    │ │\n│ └─────────────────────────────────────┘ │\n│                                       │\n│ • Real‑time graph of μ vs. time (last 10 │\n│   minutes) displayed below the card.   │\n│ • Clicking “Open Control” jumps to the │\n│   braking‑curve editor with μ pre‑filled│\n│   for immediate deployment.            │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Summary                                 │\n│                                       │\n│ • Friction drop detected (0.85 → 0.55).│\n│ • Braking distance ↑ ~30 %.            │\n│ • Immediate UI overlay informs crew,  │\n│   adjusts control parameters, and      │\n│   suggests mitigation steps.           │\n│ • Formula & calculations are logged for│\n│   audit and future predictive models. │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Suggested Questions                     │\n│                                       │\n│ 1️⃣ How does the new μ affect stopping   │\n│    distance for different speeds?       │\n│ 2️⃣ What is the impact on headway for   │\n│    a 5‑minute schedule?                 │\n│ 3️⃣ How can automated sand dispensers be│\n│    optimized for varying weather?       │\n│ 4️⃣ What thresholds should trigger a   │\n│    full platform shutdown?              │\n│ 5️⃣ How to integrate this overlay into │\n│    the existing SCADA dashboard?       │\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of friction and its impact on braking distance. The use of a formula to calculate braking distance is accurate, and the explanation of how the new friction coefficient affects stopping distance is clear. The response is well-structured and easy to follow, with a clear introduction, event payload, impact analysis, and recommended actions. However, the educational score is slightly lower due to the assumption of prior knowledge of certain concepts, such as the formula for braking distance. To improve, the response could include a brief explanation of the formula and its derivation, making it more accessible to beginners. Additionally, the use of real-time data and graphs could be further emphasized to enhance the educational value of the response.",
+  "candidate_token_usage": {
+    "promptTokens": 438,
+    "completionTokens": 1494,
+    "totalTokens": 1932
+  },
+  "candidate_latency_ms": 1624,
+  "candidate_cost_usd": 0.0009621,
+  "judge_token_usage": {
+    "promptTokens": 1766,
+    "completionTokens": 206,
+    "totalTokens": 1972
+  },
+  "judge_latency_ms": 6571,
+  "judge_cost_usd": 0.0015539999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T11:03:00.559Z"
+}

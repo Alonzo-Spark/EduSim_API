@@ -1,0 +1,83 @@
+```json
+{
+  "event_type": "object_attached",
+  "target": "pendulum_bob",
+  "status": "simulation_active",
+  "ui_layout": "interactive_textbook",
+  "blocks": [
+    {
+      "type": "header_card",
+      "content": {
+        "title": "System Dynamics: Attached Mass Pendulum",
+        "subtitle": "Kinematics & Conservation Laws",
+        "badge": "Physics Lab 4.2"
+      }
+    },
+    {
+      "type": "quick_definition",
+      "title": "State Change Detected",
+      "content": "An object has been attached to the pendulum bob. This increases the total mass $M$ of the oscillating system, affecting the momentum and energy distribution while maintaining the period $T$ (assuming small angle approximation)."
+    },
+    {
+      "type": "formula_card",
+      "content": {
+        "title": "Modified Conservation of Momentum",
+        "formula": "m_1 \\vec{v}_1 = (m_1 + m_2) \\vec{v}_f",
+        "explanation": "Since the attachment occurred during flight, the inelastic collision requires that linear momentum is conserved at the instant of contact.",
+        "variables": [
+          {"symbol": "m_1", "desc": "Original Bob Mass"},
+          {"symbol": "m_2", "desc": "Attached Object Mass"},
+          {"symbol": "v_f", "desc": "New Resultant Velocity"}
+        ],
+        "lab_link": "open_momentum_analyzer"
+      }
+    },
+    {
+      "type": "key_concepts",
+      "concepts": [
+        {
+          "term": "Center of Mass Shift",
+          "description": "The effective length $L$ may change if the attachment point is not at the geometric center."
+        },
+        {
+          "term": "Inelastic Collision",
+          "description": "Kinetic energy is not conserved during the attachment; some energy is lost to heat/deformation."
+        }
+      ]
+    },
+    {
+      "type": "formula_card",
+      "content": {
+        "title": "Period of Oscillation",
+        "formula": "T = 2\\pi \\sqrt{\\frac{L}{g}}",
+        "explanation": "Note that mass $m$ does not appear in the ideal period formula. The timing remains constant unless the string length $L$ is altered.",
+        "variables": [
+          {"symbol": "T", "desc": "Period"},
+          {"symbol": "L", "desc": "String Length"},
+          {"symbol": "g", "desc": "Gravitational Acceleration"}
+        ],
+        "lab_link": "open_period_calculator"
+      }
+    },
+    {
+      "type": "data_table",
+      "title": "System Parameters Update",
+      "headers": ["Parameter", "Pre-Attachment", "Post-Attachment"],
+      "rows": [
+        ["Total Mass", "0.5 kg", "0.85 kg"],
+        ["Velocity (v)", "2.4 m/s", "1.41 m/s"],
+        ["Kinetic Energy", "1.44 J", "0.84 J"],
+        ["Max Angle (θ)", "15°", "9.2°"]
+      ]
+    },
+    {
+      "type": "suggested_questions",
+      "questions": [
+        "How would the damping ratio change with the increased surface area?",
+        "Calculate the energy lost to the system during the attachment event.",
+        "Does the tension in the string increase or decrease at the lowest point?"
+      ]
+    }
+  ]
+}
+```

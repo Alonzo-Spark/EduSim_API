@@ -1,0 +1,97 @@
+### **Chapter: Mechanics & Energetics**
+# The Work-Energy Theorem
+
+---
+
+| Section | Content Type |
+| :--- | :--- |
+| **Topic** | Work-Energy Theorem |
+| **Focus** | Relation between Net Work and Kinetic Energy |
+| **Complexity** | Intermediate Physics |
+
+---
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Quick Definition**                                                     │
+│                                                                          │
+│ The **Work-Energy Theorem** states that the net work done by the sum of  │
+│ all forces acting on an object is equal to the change in its kinetic     │
+│ energy.                                                                  │
+└──────────────────────────────────────────────────────────────────────────┘
+
+### **Key Concepts**
+*   **Net Work ($W_{net}$):** The total work done by all external forces (conservative and non-conservative).
+*   **Kinetic Energy ($K$):** The energy an object possesses due to its motion.
+*   **Scalar Nature:** Work and Energy are both scalars, meaning direction is not considered, only magnitude.
+
+---
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Main Formula**                                                         │
+│                                                                          │
+│ $$ W_{net} = \Delta K = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2 $$         │
+│                                                                          │
+│ **[ Explain Formula ]**                                                  │
+│ This equation shows that work is the mechanism by which energy is        │
+│ transferred into or out of a system's motion.                            │
+│                                                                          │
+│ **[ Open Formula Lab ]**                                                 │
+│ *   $W_{net}$: Total Work (Joules)                                       │
+│ *   $m$: Mass (kg)                                                       │
+│ *   $v_f$: Final Velocity (m/s)                                          │
+│ *   $v_i$: Initial Velocity (m/s)                                        │
+└──────────────────────────────────────────────────────────────────────────┘
+
+---
+
+### **Derivation (Constant Force)**
+
+We derive the theorem using Newton’s Second Law and Kinematic equations for a constant force acting in the direction of displacement.
+
+1.  **Start with Newton's Second Law:**
+    $$ F = ma $$
+
+2.  **Use the 3rd Equation of Motion (Kinematics):**
+    $$ v_f^2 = v_i^2 + 2as $$
+    *Rearranging for acceleration ($a$):*
+    $$ a = \frac{v_f^2 - v_i^2}{2s} $$
+
+3.  **Substitute acceleration into the Force equation:**
+    $$ F = m \left( \frac{v_f^2 - v_i^2}{2s} \right) $$
+
+4.  **Calculate Work ($W = F \cdot s$):**
+    $$ W = \left[ m \left( \frac{v_f^2 - v_i^2}{2s} \right) \right] \cdot s $$
+    *The displacement ($s$) cancels out.*
+
+5.  **Final Result:**
+    $$ W = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2 $$
+
+---
+
+### **Important Notes**
+*   **Positive Work:** If $W_{net} > 0$, the kinetic energy increases (the object speeds up).
+*   **Negative Work:** If $W_{net} < 0$, the kinetic energy decreases (the object slows down).
+*   **Zero Work:** If the force is perpendicular to the displacement (e.g., centripetal force), no work is done and speed remains constant.
+
+---
+
+### **Comparison Table: Work vs. Kinetic Energy**
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│ **Comparison Matrix**                                                    │
+│                                                                          │
+| Feature | Work ($W$) | Kinetic Energy ($K$) |
+| :--- | :--- | :--- |
+| **Definition** | Transfer of energy via force | Energy of motion |
+| **Unit** | Joules (J) | Joules (J) |
+| **Dependence** | Depends on Force and Distance | Depends on Mass and Velocity |
+| **Type** | Process Variable | State Variable |
+└──────────────────────────────────────────────────────────────────────────┘
+
+---
+
+### **Suggested Questions**
+
+1.  **Conceptual:** A car doubles its speed. By what factor does its kinetic energy increase, and how much more work is required to stop it?
+2.  **Calculation:** A 1500kg car travels at 10 m/s. If a constant braking force of 3000N is applied, calculate the distance it travels before coming to a stop using the Work-Energy Theorem.
+3.  **Advanced:** How does the theorem apply when the force is not constant (Variable Force)? *(Hint: Integration of $F \cdot dx$)*.

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini Flash Lite (3.1)",
+  "question_id": 25,
+  "question": "Why do astronauts experience weightlessness in space?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWeightlessness is the sensation of having no weight, experienced when there is an absence of contact forces or support reactions acting on the body. \n\nIn orbit, this state is called microgravity, occurring because the spacecraft and its occupants are in a continuous state of free fall.\n\n---\n\n## The Free Fall Mechanism\n\n* **Continuous Trajectory Fall:** A spacecraft in orbit accelerates toward the Earth due to gravity, but its high forward speed matches the curve of the planet, causing it to fall around the Earth indefinitely.\n* **Zero Normal Force Interaction:** Because both the astronaut and the spacecraft fall together at the exact same rate, there is no floor pushing upward against the astronaut's feet, creating a sensation of weightlessness.\n\n---\n\n## Formula\n\nThe apparent weight relationship inside an accelerating capsule frame:\n\n$$N = m(g - a)$$\n\nWhen in a stable free-fall orbit, the downward acceleration matches gravity ($a = g$):\n\n$$N = m(g - g) = 0$$\n\nWhere:\n* $N$ represents the normal contact reaction force\n* $m$ represents the astronaut's mass\n* $g$ represents the local acceleration due to gravity\n* $a$ represents the centripetal orbital acceleration of the vehicle\n\n---\n\n## Summary\n\nAstronauts retain nearly all of their gravitational weight in low orbit, but they experience weightlessness because they are in a state of continuous free fall alongside their spacecraft, removing all upward contact forces.",
+  "candidate_response": "Let's explore why astronauts feel weightless in space!\n\n┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ Astronauts in orbit appear│\n│ to float, experiencing   │\n│ weightlessness. But why?  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ *   **Gravity:** The force│\n│     that pulls objects    │\n│     towards each other.   │\n│ *   **Freefall:** The     │\n│     state of falling     │\n│     under gravity's       │\n│     influence.            │\n│ *   **Orbit:** A          │\n│     continuous freefall   │\n│     around a celestial    │\n│     body.                 │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ The Illusion of Weightlessness │\n│                           │\n│ Astronauts are in a state│\n│ of continuous freefall    │\n│ around the Earth.  They   │\n│ are constantly falling    │\n│ towards Earth, but they   │\n│ also have a sideways      │\n│ velocity that prevents    │\n│ them from colliding with  │\n│ the Earth.                │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ The Role of Gravity       │\n│                           │\n│ Gravity is still acting   │\n│ on the astronaut and the  │\n│ spacecraft. The          │\n│ weightlessness is not     │\n│ caused by a lack of       │\n│ gravity, but rather a     │\n│ constant state of freefall.│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Formula: Orbital Velocity │\n│                           │\n│ The orbital velocity      │\n│ required to maintain an   │\n│ orbit around a celestial  │\n│ body like Earth can be    │\n│ calculated using the      │\n│ following formula:        │\n│                           │\n│     Rendered Formula      │\n│                           │\n│ $$v = \\sqrt{\\frac{GM}{r}}$$\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Formula Explanation       │\n│                           │\n│ The formula for orbital   │\n│ velocity,  v,  is derived│\n│ from the balance between │\n│ the gravitational force   │\n│ and the centripetal       │\n│ acceleration.  Where:     │\n│                           │\n│ *   G is the gravitational│\n│     constant.             │\n│ *   M is the mass of the  │\n│     Earth.                │\n│ *   r is the distance     │\n│     from the center of    │\n│     the Earth.            │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ *   Weightlessness is not │\n│     the absence of        │\n│     gravity.              │\n│ *   It's the sensation of│\n│     being in freefall.    │\n│ *   Astronauts and the    │\n│     spacecraft are       │\n│     falling at the same   │\n│     rate.                 │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                   │\n│                           │\n│ Astronauts experience     │\n│ weightlessness because    │\n│ they are in a state of   │\n│ continuous freefall while │\n│ orbiting Earth.  Gravity  │\n│ is still present, but the│\n│ balance of forces creates│\n│ the sensation of          │\n│ weightlessness.           │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions       │\n│                           │\n│ *   What would happen if   │\n│     an astronaut jumped   │\n│     inside the            │\n│     International Space   │\n│     Station?              │\n│ *   How does the speed of │\n│     an object affect its  │\n│     orbit?                │\n│ *   Why can't weightlessness│\n│     be experienced on     │\n│     Earth?                │\n└───────────────────────────┘\n",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is generally accurate and well-structured, but there are some areas for improvement. The introduction and summary sections are clear and concise, but the key concepts section could be more detailed. The formula for orbital velocity is correctly presented, but it is not directly relevant to the question of why astronauts experience weightlessness. The response could benefit from a more explicit explanation of the relationship between free fall and weightlessness, as well as the role of normal force in creating the sensation of weight. Additionally, the suggested questions section is a nice touch, but it could be more closely tied to the main topic. Overall, the response is well-organized and easy to follow, but could benefit from more depth and clarity in certain areas.",
+  "candidate_token_usage": {
+    "promptTokens": 379,
+    "completionTokens": 940,
+    "totalTokens": 1319
+  },
+  "candidate_latency_ms": 6247,
+  "candidate_cost_usd": 0.00270855,
+  "judge_token_usage": {
+    "promptTokens": 1696,
+    "completionTokens": 206,
+    "totalTokens": 1902
+  },
+  "judge_latency_ms": 854,
+  "judge_cost_usd": 0.0015119999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:47:57.875Z"
+}

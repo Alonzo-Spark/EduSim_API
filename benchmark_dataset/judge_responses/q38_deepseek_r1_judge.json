@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 38,
+  "question": "Explain resonance with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nResonance is a physical phenomenon that occurs when a periodic driving force is applied to an oscillatory system at a frequency that matches its natural frequency of vibration, causing a significant increase in the system's amplitude.\n\n---\n\n## Mechanism\n\n* **Frequency Matching:** When the external driving frequency matches the system's natural frequency, energy transfers efficiently, causing the system's structural amplitude to grow larger over time.\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Enhances signal amplification in wireless radios and acoustic instruments. | Can cause structural failure in mechanical systems, bridges, or buildings. |\n\n---\n\n## Real-world Examples\n\n* **Playground Swing:** Pushing a child on a swing at the exact moment the swing reaches its peak height increases the amplitude with minimal effort.\n* **Acoustic Wine Glass:** A singer matching their vocal pitch to the natural resonant frequency of a crystal wine glass can cause it to shatter as the vibrations become too large.\n* **Radio Tuning Circuit:** Adjusting a radio's electrical frequency to match an incoming broadcast wave amplifies that specific signal while filtering out others.\n\n---\n\n## Summary\n\nResonance occurs when a driving force matches a system's natural frequency, maximizing energy transfer and significantly amplifying the vibration scale.",
+  "candidate_response": "### Resonance: Explanation with Examples\n\n#### 🔍 Quick Definition  \n**Resonance** occurs when a system is driven by an external force at its **natural frequency**, causing it to oscillate with **maximum amplitude**. This happens due to constructive interference between applied force and the system's inherent vibrations.\n\n---\n\n#### ⚙️ Key Concepts  \n1. **Natural Frequency**:  \n   The frequency at which a system oscillates freely when disturbed.  \n2. **Driving Force**:  \n   External periodic force applied to the system.  \n3. **Amplification**:  \n   Energy transfer peaks when driving force matches natural frequency.  \n4. **Damping**:  \n   Resistance that reduces oscillation amplitude (e.g., friction).\n\n---\n\n#### 📊 Characteristics of Resonance  \n| Property | Description |  \n|----------|-------------|  \n| **Frequency Match** | Driving frequency = Natural frequency |  \n| **Peak Amplitude** | Oscillations reach maximum height |  \n| **Energy Transfer** | Most efficient energy absorption |  \n| **Phase Shift** | Driving force & motion align perfectly |  \n\n---\n\n#### 🧪 Formula Card: Resonant Frequency  \n<div class=\"bg-gray-100 p-4 rounded-lg shadow-sm flex flex-col items-center my-4\">\n  <div class=\"text-lg font-bold mb-2\">Resonant Frequency Formula</div>\n  $$ f_0 = \\frac{1}{2\\pi} \\sqrt{\\frac{k}{m}} $$\n  <div class=\"mt-2 flex space-x-3\">\n    <button class=\"bg-blue-500 text-white px-3 py-1 rounded text-sm\">Explain Formula</button>\n    <button class=\"bg-green-500 text-white px-3 py-1 rounded text-sm\">Open Formula Lab</button>\n  </div>\n</div>  \n\n- **\\(f_0\\)**: Resonant frequency (Hz)  \n- **\\(k\\)**: Stiffness constant (N/m)  \n- **\\(m\\)**: Mass (kg)  \n\n---\n\n#### 🌟 Real-World Examples  \n\n**1. 🎻 Violin String**  \n- **System**: Stretched string  \n- **Resonance**: When bowed at natural frequency  \n- **Effect**: String vibrates strongly, producing loud sound  \n- **Math**: \\( f_0 \\propto \\sqrt{\\text{tension}/\\text{mass per length}} \\)  \n\n**2. 🌉 Tacoma Narrows Bridge (1940)**  \n- **System**: Suspension bridge  \n- **Resonance**: Wind gusts matched bridge's natural frequency  \n- **Effect**: Violent oscillations leading to collapse  \n- **Lesson**: Engineers now design bridges with tuned mass dampers  \n\n**3. 📻 Radio Tuner Circuit**  \n- **System**: LC circuit (inductor + capacitor)  \n- **Resonance**: When incoming radio frequency = circuit's \\( f_0 \\)  \n- **Effect**: Selective amplification of desired station  \n- **Formula**: \\( f_0 = \\frac{1}{2\\pi\\sqrt{LC}} \\)  \n\n**4. 🌀 MRI Machine**  \n- **System**: Hydrogen nuclei in magnetic field  \n- **Resonance**: Nuclei absorb RF energy at Larmor frequency  \n- **Effect**: Emits signals for medical imaging  \n\n---\n\n#### ⚠️ Important Notes  \n- **Constructive vs. Destructive**:  \n  Resonance is constructive interference over cycles.  \n- **Damping Control**:  \n  Critical in preventing destructive resonance (e.g., building dampers during earthquakes).  \n- **Q-Factor**:  \n  Measures resonance sharpness: \\( Q = \\frac{f_0}{\\Delta f} \\) (higher Q = sharper peak).  \n\n---\n\n#### 💡 Why Resonance Matters  \n| Field | Application |  \n|-------|-------------|  \n| **Music** | Instrument soundboards amplify vibrations |  \n| **Medicine** | MRI scanners use nuclear magnetic resonance |  \n| **Engineering** | Antenna design for signal reception |  \n| **Chemistry** | IR spectroscopy identifies molecular bonds |  \n\n```mermaid\ngraph LR\nA[Driving Force] -->|Frequency ω| B[System]\nB --> C{ω = ω₀?}\nC -->|Yes| D[Max Amplitude]\nC -->|No| E[Normal Oscillation]\n```\n\n> **Fun Fact**: The famous wineglass shattering by opera singers uses resonance - vocal vibrations match the glass's natural frequency!",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of resonance, including its definition, mechanism, advantages, disadvantages, and real-world examples. The use of formulas, such as the resonant frequency formula, is accurate and well-explained. The response is well-structured, readable, and effectively teaches the concept of resonance. The inclusion of various examples, such as the violin string, Tacoma Narrows Bridge, and radio tuner circuit, helps to illustrate the concept and make it more accessible to beginners. The use of visual aids, such as the graph and formula card, enhances the presentation and facilitates understanding. However, there are some minor areas for improvement, such as providing more detailed explanations for some of the examples and considering additional real-world applications. Overall, the response is of high quality and effectively communicates the concept of resonance.",
+  "candidate_token_usage": {
+    "promptTokens": 356,
+    "completionTokens": 3598,
+    "totalTokens": 3954
+  },
+  "candidate_latency_ms": 143361,
+  "candidate_cost_usd": 0.00807542,
+  "judge_token_usage": {
+    "promptTokens": 1618,
+    "completionTokens": 224,
+    "totalTokens": 1842
+  },
+  "judge_latency_ms": 6616,
+  "judge_cost_usd": 0.0015084,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:26:41.782Z"
+}

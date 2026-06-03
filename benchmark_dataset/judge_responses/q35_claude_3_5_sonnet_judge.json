@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Claude 3.5 Sonnet",
+  "question_id": 35,
+  "question": "Define latent heat and explain change of state.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nLatent heat is the thermal energy absorbed or released by a substance during a phase change that occurs at a constant, unchanging temperature.\n\nA change of state refers to the transition of matter between solid, liquid, and gaseous phases as internal molecular bonds break or form.\n\n---\n\n## Types of Latent Heat\n\n* **Latent Heat of Fusion:** The heat energy required to transition a substance from a solid to a liquid phase at its melting point.\n* **Latent Heat of Vaporization:** The heat energy required to transition a substance from a liquid to a gaseous phase at its boiling point.\n\n---\n\n## Formula\n\nThe phase change heat transfer equation is written as:\n\n$$Q = mL$$\n\nWhere:\n* $Q$ represents the heat energy transferred during the phase change\n* $m$ represents the total mass of the substance undergoing transformation\n* $L$ represents the specific latent heat constant for that substance\n\n---\n\n## Summary\n\nLatent heat drives phase changes at a constant temperature by breaking or forming molecular bonds rather than changing the system's kinetic temperature.",
+  "candidate_response": "# Latent Heat & Change of State\n\nLet me render this as structured UI blocks for you.\n\n---\n\n## 📘 Quick Definition\n\n> **Latent Heat** is the heat energy absorbed or released by a substance during a change of state, *without any change in temperature*.\n\nThe word **\"latent\"** comes from Latin meaning **hidden** — because the energy is hidden inside the substance, not visible as a temperature rise.\n\n---\n\n## 🔄 What is Change of State?\n\nMatter exists in **three states**. When energy is supplied or removed, matter transitions between them:\n\n| Transition | Process | Energy |\n|---|---|---|\n| Solid → Liquid | **Melting** | Absorbed |\n| Liquid → Solid | **Freezing** | Released |\n| Liquid → Gas | **Vaporisation** | Absorbed |\n| Gas → Liquid | **Condensation** | Released |\n| Solid → Gas | **Sublimation** | Absorbed |\n| Gas → Solid | **Deposition** | Released |\n\n---\n\n## ⚗️ Why Does Temperature Stay Constant?\n\nDuring a change of state, supplied energy is used to **break intermolecular bonds** — not to increase kinetic energy of particles.\n\nSince **temperature measures average kinetic energy**, and kinetic energy isn't changing during the state transition, **temperature stays flat**.\n\nThis is why a **heating curve** shows flat plateaus at melting and boiling points.\n\n---\n\n## 📐 Formula Card — Latent Heat\n\n$$\nQ = mL\n$$\n\n| Symbol | Meaning | SI Unit |\n|---|---|---|\n| $Q$ | Heat energy absorbed or released | Joules (J) |\n| $m$ | Mass of the substance | Kilograms (kg) |\n| $L$ | Specific Latent Heat | J kg⁻¹ |\n\n---\n\n## 🔬 Two Types of Latent Heat\n\n### 1. Specific Latent Heat of Fusion ($L_f$)\nHeat needed to convert **1 kg of solid to liquid** at constant temperature.\n\n$$\nL_f \\text{ of water} = 3.34 \\times 10^5 \\ \\text{J kg}^{-1}\n$$\n\n---\n\n### 2. Specific Latent Heat of Vaporisation ($L_v$)\nHeat needed to convert **1 kg of liquid to gas** at constant temperature.\n\n$$\nL_v \\text{ of water} = 2.26 \\times 10^6 \\ \\text{J kg}^{-1}\n$$\n\n> 💡 Notice $L_v \\gg L_f$ — it takes **much more energy** to vaporise than to melt, because all intermolecular bonds must be fully broken during vaporisation.\n\n---\n\n## 📈 Heating Curve\n\n```\nTemp\n |                              ___________\n |                    _________/\n |          _________/\n |_________/\n |\n └──────────────────────────────────────── Heat supplied\n   ^        ^         ^        ^\n  Solid  Melting   Liquid  Boiling\n        plateau           plateau\n```\n\nThe **flat sections** are where latent heat is being absorbed — state is changing, temperature is not.\n\n---\n\n## 💡 Real-World Applications\n\n| Application | Explanation |\n|---|---|\n| **Sweating** | Sweat evaporates, absorbing latent heat from skin, cooling the body |\n| **Ice packs** | Ice melts absorbing heat, keeping injuries cold |\n| **Steam burns** | Steam releases large $L_v$ on skin — more dangerous than boiling water |\n| **Refrigerators** | Refrigerant liquid evaporates inside, absorbing heat from food |\n\n---\n\n## ✅ Key Takeaways\n\n- Latent heat = energy for **bond breaking/forming**, not temperature change\n- Formula: $Q = mL$\n- Two types: **Fusion** (melting) and **Vaporisation** (boiling)\n- $L_v > L_f$ always, because vaporisation requires complete separation of molecules\n- Temperature is **constant** during any change of state\n\n---\n\n> 🧠 **Suggested Practice:** A 2 kg block of ice at 0°C is melted completely. How much heat is required? *(Use $L_f = 3.34 \\times 10^5$ J kg⁻¹)*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of latent heat and change of state, with accurate definitions, formulas, and explanations. The use of structured UI blocks, tables, and diagrams enhances readability and presentation quality. The response effectively covers key concepts, including latent heat of fusion and vaporization, and provides real-world applications. Minor suggestions for improvement include adding more detailed explanations for certain concepts, such as the physical meaning of specific latent heat constants, and considering additional visual aids to further illustrate complex ideas. Overall, the response is well-organized, clear, and effective in teaching the subject matter.",
+  "candidate_token_usage": {
+    "promptTokens": 434,
+    "completionTokens": 1067,
+    "totalTokens": 1501
+  },
+  "candidate_latency_ms": 22642,
+  "candidate_cost_usd": 0.002568,
+  "judge_token_usage": {
+    "promptTokens": 1533,
+    "completionTokens": 178,
+    "totalTokens": 1711
+  },
+  "judge_latency_ms": 3017,
+  "judge_cost_usd": 0.0013469999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:12:54.054Z"
+}

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 18,
+  "question": "A body of mass 5 kg is lifted to a height of 10 m. Calculate potential energy.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Potential Energy Assessment\n\n### Problem\nA body of mass $5 \\text{ kg}$ is lifted vertically to a height of $10 \\text{ m}$. Calculate its gravitational potential energy.\n\n### Given\n* Mass of the body ($m$) = $5 \\text{ kg}$\n* Vertical height ($h$) = $10 \\text{ m}$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$U = mgh$$\n\n### Substitution\n$$U = 5 \\times 9.8 \\times 10$$\n\n### Calculation\n$$U = 49 \\times 10$$\n\n$$U = 490 \\text{ J}$$\n\n### Final Answer\n**Potential Energy ($U$) = $490 \\text{ J}$**\n\n### Interpretation\nThis indicates that lifting the object stores $490 \\text{ Joules}$ of mechanical energy within the gravity field, which can convert back into kinetic energy if the object is released.",
+  "candidate_response": "┌───────────────────────────────────────────────────────────────────────────────┐\n│ **Introduction**                                                               │\n│                                                                               │\n│ In physics, *potential energy* is the energy that an object possesses due to │\n│ its position in a force field, such as gravity. When an object is raised to   │\n│ a higher altitude, it stores gravitational potential energy that can be      │\n│ converted into kinetic energy when it falls.                                  │\n└───────────────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────────────┐\n│ **Definition**                                                                 │\n│                                                                               │\n│ The gravitational potential energy (PE) of a mass *m* at height *h* above    │\n│ the reference level is given by the product of its mass, the gravitational  │\n│ acceleration, and the height:                                               │\n│                                                                               │\n│ \\[\n│ PE = m g h\n│ \\]                                                                            │\n│                                                                               │\n│ where:                                                                        │\n│ • *m* – mass (kg)                                                            │\n│ • *g* – acceleration due to gravity (≈ 9.81 m s⁻² on Earth)                  │\n│ • *h* – height above the reference point (m)                                 │\n└───────────────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────────────┐\n│ **Main Formula**                                                               │\n│                                                                               │\n│     \\[\n│     PE = m g h\n│     \\]                                                                        │\n│                                                                               │\n│ [ Explain Formula ]  [ Open Formula Lab ]                                     │\n└───────────────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────────────┐\n│ **Calculation**                                                                │\n│                                                                               │\n│ • Mass, *m* = 5 kg                                                            │\n│ • Height, *h* = 10 m                                                          │\n│ • Gravitational acceleration, *g* ≈ 9.81 m s⁻²                                 │\n│                                                                               │\n│ Plugging into the formula:                                                   │\n│                                                                               │\n│ \\[\n│ PE = (5 \\text{kg})(9.81 \\text{m/s}^2)(10 \\text{m}) = 490.5 \\text{J}\n│ \\]                                                                            │\n│                                                                               │\n│ Thus the body possesses **≈ 490 J** of gravitational potential energy.         │\n└───────────────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────────────┐\n│ **Summary**                                                                    │\n│                                                                               │\n│ A 5 kg mass lifted to 10 m gains about 490 J of gravitational potential energy │\n│ (using *g* = 9.81 m s⁻²). This energy can be released as kinetic energy if   │\n│ the mass is allowed to fall.                                                 │\n└───────────────────────────────────────────────────────────────────────────────┘\n\n┌───────────────────────────────────────────────────────────────────────────────┐\n│ **Suggested Questions**                                                       │\n│                                                                               │\n│ 1. What would be the potential energy if the same mass were lifted to 20 m?   │\n│ 2. If the body is dropped from the 10 m height, how much kinetic energy will│\n│    it have just before hitting the ground?                                   │\n│ 3. How does changing the mass affect the potential energy for a fixed height?│\n│ 4. If the acceleration due to gravity were 12 m s⁻², what would the potential│\n│    energy be at 10 m?                                                         │\n└───────────────────────────────────────────────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and educational. It correctly defines gravitational potential energy, provides the correct formula, and applies it to the given problem. The response also includes additional information and suggested questions, which enhances its educational value. However, the candidate uses an approximate value of g (9.81 m/s^2) instead of the exact value given in the gold reference answer (9.8 m/s^2), resulting in a slight discrepancy in the calculated potential energy (490.5 J vs 490 J). To improve, the candidate should ensure that they use the exact values given in the problem statement.",
+  "candidate_token_usage": {
+    "promptTokens": 438,
+    "completionTokens": 1304,
+    "totalTokens": 1742
+  },
+  "candidate_latency_ms": 2400,
+  "candidate_cost_usd": 0.00042405,
+  "judge_token_usage": {
+    "promptTokens": 1476,
+    "completionTokens": 188,
+    "totalTokens": 1664
+  },
+  "judge_latency_ms": 5024,
+  "judge_cost_usd": 0.0013368,
+  "retry_count": 2,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:29:12.192Z"
+}

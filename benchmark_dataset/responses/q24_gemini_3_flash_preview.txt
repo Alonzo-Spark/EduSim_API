@@ -1,0 +1,55 @@
+```json
+{
+  "action": "render_ui",
+  "layout": "interactive_textbook",
+  "sections": [
+    {
+      "type": "Introduction",
+      "content": "To find the gravitational force between two objects, we apply **Newton's Law of Universal Gravitation**. This law states that every particle attracts every other particle in the universe with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers."
+    },
+    {
+      "type": "Formula",
+      "data": {
+        "title": "Newton's Law of Gravitation",
+        "formula": "F = G \\frac{m_1 m_2}{r^2}",
+        "variables": [
+          { "symbol": "F", "description": "Gravitational Force (Newtons)" },
+          { "symbol": "G", "description": "Gravitational Constant (6.674 \\times 10^{-11} \\, Nm^2/kg^2)" },
+          { "symbol": "m_1, m_2", "description": "Masses of the objects (kg)" },
+          { "symbol": "r", "description": "Distance between centers (m)" }
+        ],
+        "context": "This formula calculates the mutual attraction between two point masses."
+      }
+    },
+    {
+      "type": "Key Concepts",
+      "content": "### Given Parameters\n| Parameter | Value |\n| :--- | :--- |\n| Mass 1 ($m_1$) | $5 \\, \\text{kg}$ |\n| Mass 2 ($m_2$) | $5 \\, \\text{kg}$ |\n| Distance ($r$) | $2 \\, \\text{m}$ |\n| Constant ($G$) | $6.674 \\times 10^{-11} \\, \\text{Nm}^2/\\text{kg}^2$ |"
+    },
+    {
+      "type": "Step-by-Step Calculation",
+      "content": "1. **Identify the values**: $m_1 = 5$, $m_2 = 5$, $r = 2$.\n2. **Square the distance**: $r^2 = 2^2 = 4$.\n3. **Multiply the masses**: $m_1 \\times m_2 = 25$.\n4. **Substitute into the formula**: \n\n$$F = (6.674 \\times 10^{-11}) \\times \\frac{25}{4}$$"
+    },
+    {
+      "type": "Formula",
+      "data": {
+        "title": "Final Result Calculation",
+        "formula": "F = 4.17125 \\times 10^{-10} \\, \\text{N}",
+        "variables": [],
+        "context": "The resulting force is extremely small because the masses are small compared to planetary scales."
+      }
+    },
+    {
+      "type": "Important Notes",
+      "content": "- **Weak Force**: Notice the exponent is $10^{-10}$. Gravity is the weakest of the four fundamental forces.\n- **Inverse Square Law**: If you doubled the distance to 4m, the force would decrease by a factor of 4 (becoming 1/4th of the original)."
+    },
+    {
+      "type": "Suggested Questions",
+      "questions": [
+        "How would the force change if one mass was doubled?",
+        "What happens to the force if the distance is halved?",
+        "Why don't we feel this force between everyday objects?"
+      ]
+    }
+  ]
+}
+```

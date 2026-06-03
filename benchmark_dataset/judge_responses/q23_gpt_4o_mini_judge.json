@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 23,
+  "question": "Explain the difference between mass and weight.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nMass and weight are distinct physical parameters that describe different structural qualities of matter.\n\nMass is a measure of the total quantity of matter contained within an object and reflects its inherent inertial resistance to acceleration.\n\nWeight is the gravitational force vector exerted on an object by a massive central body, such as the Earth.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Mass | Weight |\n| --- | --- | --- |\n| **Quantity Type** | Scalar property (Magnitude only). | Vector property (Magnitude and direction). |\n| **Location Factor** | Invariant; remains identical across all locations in the universe. | Variable; changes depending on the local gravitational acceleration field. |\n| **Measurement Instrument** | Measured using a balance scale. | Measured using a calibrated spring scale. |\n| **SI System Unit** | Kilogram ($\\text{kg}$). | Newton ($\\text{N}$). |\n\n---\n\n## Real-world Example\n\nAn astronaut has a mass of $60 \\text{ kg}$ on Earth.\n* **On Earth's Surface:** Their mass is $60 \\text{ kg}$, and their weight force is approximately $$60 \\times 9.8 = 588 \\text{ N}$$.\n* **On Moon's Surface:** Their mass remains exactly $60 \\text{ kg}$, but their weight drops to one-sixth of its Earth value ($98 \\text{ N}$) because the Moon's local gravitational pull is weaker.\n\n---\n\n## Summary\n\nMass is an unchanging scalar property intrinsic to an object, whereas weight is a variable vector force that scales with the strength of the surrounding gravitational field.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Mass is the measure of    │\n│ the amount of matter in   │\n│ an object, while weight   │\n│ is the force exerted on   │\n│ that object due to gravity.│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ - **Mass**: Measured in   │\n│   kilograms (kg) or grams │\n│   (g). It is a scalar     │\n│   quantity and does not   │\n│   change regardless of    │\n│   location.               │\n│                           │\n│ - **Weight**: Measured in │\n│   newtons (N) or pounds   │\n│   (lb). It is a vector    │\n│   quantity that depends on │\n│   the local gravitational  │\n│   field strength.         │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics           │\n│                           │\n│ - Mass is constant,       │\n│   whereas weight varies    │\n│   with gravity.           │\n│ - Mass is a measure of    │\n│   inertia, while weight is │\n│   a measure of force.     │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     $$W = mg$$           │\n│                           │\n│ Where:                   │\n│ - \\(W\\) = weight (N)     │\n│ - \\(m\\) = mass (kg)      │\n│ - \\(g\\) = acceleration due│\n│   to gravity (9.81 m/s²) │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Applications              │\n│                           │\n│ - Understanding the       │\n│   difference is crucial in │\n│   physics, engineering,    │\n│   and various scientific   │\n│   applications, such as    │\n│   calculating forces and   │\n│   designing structures.    │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ - On Earth, weight is     │\n│   directly proportional to │\n│   mass. However, on other  │\n│   planets, the weight of   │\n│   an object will differ    │\n│   due to varying gravitational│\n│   forces.                 │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                   │\n│                           │\n│ Mass is a measure of the  │\n│ amount of matter in an    │\n│ object, while weight is    │\n│ the force acting on that   │\n│ object due to gravity.     │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions        │\n│                           │\n│ 1. How does weight change  │\n│    on different planets?   │\n│ 2. Why do we use different  │\n│    units for mass and weight?│\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the difference between mass and weight, accurately conveying key concepts and formulas. The use of a structured format with clear headings and concise explanations enhances readability. However, minor improvements could be made in the quality score by refining the layout for better visual appeal and flow. The educational score is high due to the clarity and effectiveness of the explanations provided, making the content accessible to beginners. No hallucinations or fabricated concepts were detected.",
+  "candidate_token_usage": {
+    "promptTokens": 362,
+    "completionTokens": 742,
+    "totalTokens": 1104
+  },
+  "candidate_latency_ms": 11072,
+  "candidate_cost_usd": 0.0004995,
+  "judge_token_usage": {
+    "promptTokens": 1489,
+    "completionTokens": 151,
+    "totalTokens": 1640
+  },
+  "judge_latency_ms": 6464,
+  "judge_cost_usd": 0.0012557999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:44:01.335Z"
+}

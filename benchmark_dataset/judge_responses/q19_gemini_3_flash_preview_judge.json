@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 19,
+  "question": "Define kinetic energy and derive its expression.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nKinetic energy is the capacity of an object to perform mechanical work by virtue of its state of motion. Every moving mass possesses kinetic energy, which scales relative to its mass and speed.\n\n---\n\n## Formula\n\nThe classical expression for kinetic energy is stated as:\n\n$$K = \\frac{1}{2}mv^2$$\n\nWhere:\n* $K$ represents the kinetic energy scalar value\n* $m$ represents the total mass of the object\n* $v$ represents the magnitude of its velocity vector\n\n---\n\n## Derivations\n\nConsider a body of mass $m$ initially resting at a standstill on a frictionless horizontal plane.\n\nLet its initial velocity be zero:\n$$u = 0$$\n\nLet a constant net horizontal force $F$ act on the body, displacing it through a straight distance $s$. The work performed by this force during displacement transfers energy to the body, appearing completely as kinetic energy ($K$):\n$$K = W = F \\cdot s$$\n\nFrom Newton's Second Law, the force parameter can be written as:\n$$F = ma$$\n\nSubstitute this force expression directly into the work tracking template:\n$$K = (ma) \\cdot s = m(as)$$\n\nUsing the kinematic relation linking velocity components across distance $s$:\n$$v^2 = u^2 + 2as$$\n\nSince the object started from rest ($u = 0$), the equation simplifies to:\n$$v^2 = 0 + 2as$$\n\n$$as = \\frac{v^2}{2}$$\n\nSubstitute this ($as$) expression back into our kinetic energy equation:\n$$K = m \\left(\\frac{v^2}{2}\\right)$$\n\nRearrange the expression into its final form:\n$$K = \\frac{1}{2}mv^2$$\n\nThis completes the mechanical derivation of the kinetic energy equation.\n\n---\n\n## Summary\n\nKinetic energy represents the work required to accelerate a mass from rest to a specific velocity, climbing linearly with mass but quadratically with velocity.",
+  "candidate_response": ":::section{title=\"Introduction\"}\nKinetic energy is the energy possessed by an object due to its **motion**. Every moving object, from a celestial body to a subatomic particle, carries this form of energy. The faster an object moves or the more massive it is, the greater its kinetic energy.\n:::\n\n:::section{title=\"Quick Definition\"}\n**Kinetic Energy ($E_k$)** is defined as the work needed to accelerate a body of a given mass from rest to its stated velocity. Having gained this energy during its acceleration, the body maintains this kinetic energy unless its speed changes.\n:::\n\n:::section{title=\"Formula Card\"}\n### Main Kinetic Energy Equation\n\n$$\nK.E. = \\frac{1}{2}mv^2\n$$\n\n**Variables:**\n*   **$m$**: Mass of the object (measured in $kg$)\n*   **$v$**: Velocity of the object (measured in $m/s$)\n*   **$K.E.$**: Kinetic Energy (measured in Joules, $J$)\n\n[ Explaining the Relationship: Energy scales linearly with mass but quadratically with velocity. Doubling the speed quadruples the energy. ]\n:::\n\n:::section{title=\"Derivation of Expression\"}\nTo derive the expression for Kinetic Energy, we calculate the **Work Done** ($W$) by a constant force ($F$) in displacing an object from rest to a velocity $v$.\n\n1.  **From Newton's Second Law:**\n    $$F = ma$$\n2.  **From the Work-Energy Theorem:**\n    $$W = F \\cdot s$$\n    Substituting $F$: $W = (ma)s$\n3.  **Using the Third Equation of Motion:**\n    $$v^2 = u^2 + 2as$$\n    Since the object starts from rest, $u = 0$:\n    $$v^2 = 2as \\implies s = \\frac{v^2}{2a}$$\n4.  **Substituting $s$ back into the Work equation:**\n    $$W = ma \\left( \\frac{v^2}{2a} \\right)$$\n    The '$a$' cancels out:\n    $$W = \\frac{1}{2}mv^2$$\n5.  **Conclusion:**\n    Since the work done is stored as kinetic energy:\n    $$E_k = \\frac{1}{2}mv^2$$\n:::\n\n:::section{title=\"Characteristics\"}\n| Property | Description |\n| :--- | :--- |\n| **Scalar Nature** | Kinetic energy has magnitude but no direction. |\n| **Always Positive** | Since $m$ is positive and $v^2$ is always positive, $E_k$ cannot be negative. |\n| **Frame Dependent** | The value of $E_k$ depends on the observer's frame of reference. |\n| **SI Unit** | Joule ($J$), where $1 J = 1 kg \\cdot m^2/s^2$. |\n:::\n\n:::section{title=\"Important Notes\"}\n> [!IMPORTANT]\n> **The Work-Energy Theorem:** The net work done on an object is equal to the change in its kinetic energy ($W_{net} = \\Delta K.E.$). This is the fundamental principle used to solve most dynamics problems involving energy.\n:::\n\n:::section{title=\"Suggested Questions\"}\n*   How does the kinetic energy of an object change if its velocity is tripled?\n*   Can an object have negative kinetic energy? Explain.\n*   Derive the relationship between Kinetic Energy ($K.E.$) and Linear Momentum ($p$).\n:::",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a high level of accuracy, quality, and educational value. It correctly defines kinetic energy, derives its expression, and provides a clear explanation of the concept. The response is well-structured, easy to follow, and includes relevant examples and formulas. The use of sections and subsections enhances readability, and the inclusion of a 'Characteristics' table and 'Important Notes' section adds depth to the explanation. The only area for improvement is in providing more practice questions or exercises to reinforce the concept, but overall, the response is excellent.",
+  "candidate_token_usage": {
+    "promptTokens": 378,
+    "completionTokens": 787,
+    "totalTokens": 1165
+  },
+  "candidate_latency_ms": 5879,
+  "candidate_cost_usd": 0.00255,
+  "judge_token_usage": {
+    "promptTokens": 1637,
+    "completionTokens": 172,
+    "totalTokens": 1809
+  },
+  "judge_latency_ms": 3509,
+  "judge_cost_usd": 0.001395,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:33:08.894Z"
+}

@@ -1,0 +1,71 @@
+To derive the expression for the maximum height (\(h_{\text{max}}\)) of a projectile, we analyze its vertical motion under constant gravitational acceleration. Here's the step-by-step derivation:
+
+### Key Assumptions
+- Projectile launched with **initial velocity** \(v_0\) at angle \(\theta\) to the horizontal.
+- **Acceleration due to gravity** (\(g\)) acts downward.
+- Air resistance is negligible.
+
+---
+
+### Step-by-Step Derivation
+
+1. **Initial Velocity Components**:
+   - Vertical component: \(v_{0y} = v_0 \sin \theta\)
+   - Horizontal component: \(v_{0x} = v_0 \cos \theta\)
+
+2. **Condition for Maximum Height**:
+   - At maximum height, the **vertical velocity** (\(v_y\)) becomes **zero**.
+   - This occurs when the projectile stops rising and begins to fall.
+
+3. **Kinematic Equation for Vertical Motion**:
+   - Use the equation: \(v_y^2 = v_{0y}^2 + 2a_y \Delta y\)
+   - Here:
+     - \(v_y = 0\) (at max height),
+     - \(v_{0y} = v_0 \sin \theta\),
+     - \(a_y = -g\) (acceleration opposes upward motion),
+     - \(\Delta y = h_{\text{max}}\) (vertical displacement).
+
+4. **Substitute Values**:
+   \[
+   0 = (v_0 \sin \theta)^2 + 2(-g)h_{\text{max}}
+   \]
+   \[
+   0 = v_0^2 \sin^2 \theta - 2g h_{\text{max}}
+   \]
+
+5. **Solve for \(h_{\text{max}}\)**:
+   \[
+   2g h_{\text{max}} = v_0^2 \sin^2 \theta
+   \]
+   \[
+   \boxed{h_{\text{max}} = \frac{v_0^2 \sin^2 \theta}{2g}}
+   \]
+
+---
+
+### Key Insight
+- **Dependence on \(\theta\)**: Maximum height increases with \(\sin \theta\).  
+  - **Maximum value** when \(\theta = 90^\circ\) (vertical projection):  
+  \[
+  h_{\text{max}} = \frac{v_0^2}{2g}
+  \]
+  - **Zero height** when \(\theta = 0^\circ\) (horizontal projection).
+
+---
+
+### Summary
+| Parameter | Formula |
+|-----------|---------|
+| **Maximum Height** | \(h_{\text{max}} = \dfrac{v_0^2 \sin^2 \theta}{2g}\) |
+
+### Practical Applications
+1. Calculating launch angles for reaching specific heights (e.g., sports, artillery).
+2. Designing ramps or trajectories in engineering projects.
+3. Modeling atmospheric particle motion.
+
+---
+
+### Suggested Practice Problems
+1. A ball is thrown at \(30^\circ\) with \(v_0 = 20 \ \text{m/s}\). Find \(h_{\text{max}}\) (\(g = 10 \ \text{m/s}^2\)).
+2. Derive the time taken to reach maximum height.
+3. How does \(h_{\text{max}}\) change if \(\theta\) increases from \(0^\circ\) to \(90^\circ\)?

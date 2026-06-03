@@ -1,0 +1,104 @@
+Okay, I understand.  You want a significant overhaul of the AI Tutor's presentation to move away from a plain Markdown document and towards an interactive textbook experience. The key components are:
+
+1. **Structured UI Blocks:**  Breaking content into distinct, visually separated blocks.
+2. **Section Cards:**  Each section (Introduction, Definition, etc.) rendered as a card.
+3. **Formula Cards:**  Displaying LaTeX formulas within dedicated cards with explanation and lab links.
+4. **Formula Extraction:**  Efficiently extracting formula information for future use (Formula Lab).
+5. **Responsive Table Rendering:**  Tables rendered as cards with responsive design.
+
+Here's a breakdown of how this system will work and how I will apply it, along with examples.  I will focus on translating the provided instructions into actionable steps.
+
+**Core Principles:**
+
+*   **No Floating Formulas:** All LaTeX formulas will be enclosed within FormulaCards.
+*   **Card-Based Layout:**  The primary visual element will be cards, providing clear separation and organization.
+*   **Context Preservation:**  The surrounding text of a formula will be stored to provide context within the FormulaCard.
+*   **Efficiency:**  Formula extraction will be done only once to reduce processing time.
+
+**Implementation Strategy:**
+
+1.  **Markdown Parsing & Section Detection:** I will parse the input Markdown and identify sections based on the headings (`#`, `##`, etc.) you've provided.
+2.  **Card Creation:**  Each section will be rendered as a card.
+3.  **Formula Handling:**  LaTeX formulas will trigger the creation of a FormulaCard.  The `formula`, `title`, `surroundingContext`, and `variables` will be extracted.
+4.  **Table Handling:** Tables will be wrapped in TableCards.
+5.  **Output Generation:** The output will be structured to generate a visual representation of these cards, suitable for a web-based interactive textbook.
+
+**Example - Applying the System**
+
+Let's take a snippet of Markdown and apply the new system:
+
+```markdown
+# Electric Force
+
+## Definition
+
+The electric force between two charged particles is a fundamental force in physics. It is described by Coulomb's Law.
+
+## Formula
+
+$$F = k \frac{|q_1 q_2|}{r^2}$$
+
+## Key Concepts
+
+*   Charge
+*   Distance
+*   Coulomb's Constant
+
+## Applications
+
+Electric forces are responsible for many phenomena, including chemical bonding and the behavior of electrons in circuits.
+```
+
+**Expected Output (Conceptual - this would be rendered with HTML/CSS):**
+
+```
+┌───────────────────────────┐
+│ Electric Force             │
+│                           │
+│ The electric force between  │
+│ two charged particles is a  │
+│ fundamental force in physics│
+│ It is described by Coulomb's│
+│ Law.                       │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Key Concepts              │
+│                           │
+│ * Charge                   │
+│ * Distance                │
+│ * Coulomb's Constant      │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Formula                   │
+│                           │
+│     F = k  |q₁ q₂| / r²     │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+```
+
+**Explanation of the Example:**
+
+*   The top-level heading `# Electric Force` becomes a section card.
+*   The `## Definition` becomes a section card.
+*   The `$$F = k \frac{|q_1 q_2|}{r^2}$$` becomes a `FormulaCard`.  The surrounding text ("The electric force between two charged particles is a fundamental force in physics. It is described by Coulomb's Law.") is stored as `surroundingContext`.
+*   The `## Key Concepts` becomes a section card.
+*   The `## Applications` becomes a section card.
+
+**Formula Extraction Details**
+
+The `FormulaCard` will contain these fields:
+
+*   `formula`: The LaTeX string (e.g., `F = k \frac{|q_1 q_2|}{r^2}`).
+*   `title`: The section heading (e.g., "Formula").
+*   `surroundingContext`: The text immediately before the formula.
+*   `variables`: A list of variables in the formula (e.g., `["F", "k", "q1", "q2", "r"]`).  This will be crucial for the Formula Lab.
+
+**Next Steps:**
+
+I will now apply this system to any provided Markdown.  Please provide your content, and I will generate the structured output using the card-based layout and FormulaCard system. I will focus on correctly identifying and formatting formulas. I will also ensure that the sections are properly separated into cards. I will store the formula information for the future use in the Formula Lab.
+
+I am ready when you are! Please paste in the Markdown you want me to process.  I will provide the output with the described card-based structure.  I will also provide example code snippets (in a hypothetical language for rendering the cards - think HTML/CSS) so you can see how this would be visually implemented.

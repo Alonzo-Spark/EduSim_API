@@ -1,0 +1,84 @@
+┌──────────────────────────────────────┐  
+│ **Runtime Overlay Response**         │  
+└──────────────────────────────────────┘  
+
+**Event Type:** `orbit_started`  
+**State:** Stable Loop Trigger  
+**Runtime Mode:** Sandbox Overlay  
+**Timestamp:** `2025-04-05T10:32:15.007Z`  
+**Execution Context:** Isolated Security Domain (ISD-9)  
+
+---
+
+┌──────────────────────────────────────┐  
+│ **Overlay Directive**                │  
+└──────────────────────────────────────┘  
+
+```json
+{
+  "overlay_id": "orb-stable-001",
+  "trigger": "orbit_started",
+  "lifecycle": "stable_loop",
+  "action": "apply_dynamic_overlay",
+  "payload": {
+    "visual": {
+      "type": "trajectory_heatmap",
+      "intensity": 0.82,
+      "phase_sync": true,
+      "reference_frame": "inertial",
+      "opacity_curve": "ease-out-cubic"
+    },
+    "data": {
+      "source": "telemetry_stream_orb_7A",
+      "buffer_window": "120s",
+      "resolution": "high",
+      "include_harmonics": true
+    },
+    "controls": {
+      "allow_user_override": true,
+      "input_map": [
+        {
+          "input": "knob_3",
+          "parameter": "phase_offset",
+          "range": [-180, 180],
+          "unit": "degrees"
+        }
+      ]
+    }
+  },
+  "permissions": {
+    "access_level": "overlay.sandboxed",
+    "allowed_modules": [
+      "renderer/orbit-v3",
+      "data/buffer_proxy",
+      "input/haptic_feedback"
+    ],
+    "timeout": 30000
+  }
+}
+```
+
+---
+
+┌──────────────────────────────────────┐  
+│ **Execution Status**                 │  
+└──────────────────────────────────────┘  
+
+- ✅ Overlay schema validated  
+- ✅ Security constraints applied  
+- ⏳ Rendering engine initializing  
+- 🔄 Awaiting phase-locked data sync  
+- 🟡 User input binding pending  
+
+---
+
+**Next Steps:**  
+1. Confirm overlay injection into primary HUD layer  
+2. Monitor phase coherence for first 5 orbital cycles  
+3. Log state transition to `orbit_overlay_active`  
+
+**Sandbox Exit Condition:**  
+`phase_drift > 7.2° || user_override || timeout`  
+
+---
+*Overlay managed under Sandbox Policy SP-9.4.1 — Dynamic Runtime Layers*

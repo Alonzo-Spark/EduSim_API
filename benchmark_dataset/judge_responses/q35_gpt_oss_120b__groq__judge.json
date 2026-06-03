@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Groq)",
+  "question_id": 35,
+  "question": "Define latent heat and explain change of state.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nLatent heat is the thermal energy absorbed or released by a substance during a phase change that occurs at a constant, unchanging temperature.\n\nA change of state refers to the transition of matter between solid, liquid, and gaseous phases as internal molecular bonds break or form.\n\n---\n\n## Types of Latent Heat\n\n* **Latent Heat of Fusion:** The heat energy required to transition a substance from a solid to a liquid phase at its melting point.\n* **Latent Heat of Vaporization:** The heat energy required to transition a substance from a liquid to a gaseous phase at its boiling point.\n\n---\n\n## Formula\n\nThe phase change heat transfer equation is written as:\n\n$$Q = mL$$\n\nWhere:\n* $Q$ represents the heat energy transferred during the phase change\n* $m$ represents the total mass of the substance undergoing transformation\n* $L$ represents the specific latent heat constant for that substance\n\n---\n\n## Summary\n\nLatent heat drives phase changes at a constant temperature by breaking or forming molecular bonds rather than changing the system's kinetic temperature.",
+  "candidate_response": "┌─────────────────────────────┐\n│ Definition                   │\n│                               │\n│ Latent heat is the amount of │\n│ heat energy absorbed or      │\n│ released by a substance       │\n│ during a change of state      │\n│ without a change in           │\n│ temperature.                  │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Key Concepts                  │\n│                               │\n│ - Phase change occurs at      │\n│   constant temperature.      │\n│ - Energy goes into breaking   │\n│   forming intermolecular      │\n│   bonds.                      │\n│ - No temperature rise until   │\n│   transition complete.        │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Main Formula                  │\n│                               │\n│ Q = mL                        │\n│                               │\n│ Q: heat transferred (J)       │\n│ m: mass (kg)                  │\n│ L: latent heat (J / kg)       │\n│                               │\n│ [ Explain Formula ]           │\n│ [ Open Formula Lab ]          │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Applications                  │\n│                               │\n│ - Melting ice (L_fus = 334 kJ/│\n│   kg)                         │\n│ - Boiling water (L_vap =      │\n│   2260 kJ/kg)                 │\n│ - Condensation of steam       │\n│ - Sublimation of dry ice      │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Important Notes               │\n│                               │\n│ • Latent heat depends on the  │\n│   substance and on the type   │\n│   of phase change.            │\n│ • During a change of state,   │\n│   temperature remains        │\n│   constant despite heat input.│\n│ • The same amount of heat     │\n│   causes different temperature│\n│   changes for different phases│\n│   because energy is used to   │\n│   alter molecular arrangement.│\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Summary                       │\n│                               │\n│ Latent heat is the energy     │\n│ required for a substance to   │\n│ change its phase without      │\n│ changing temperature. The    │\n│ relationship Q = mL links the│\n│ heat transferred to the mass │\n│ of material and its specific  │\n│ latent heat. Phase changes    │\n│ occur at fixed temperatures, │\n│ with energy going into breaking│\n│ or forming intermolecular     │\n│ bonds.                         │\n└─────────────────────────────┘\n\n┌─────────────────────────────┐\n│ Suggested Questions           │\n│                               │\n│ 1. What is the difference     │\n│    between latent heat of     │\n│    fusion and latent heat of  │\n│    vaporization?              │\n│ 2. Why does temperature stay  │\n│    constant during melting?   │\n│ 3. How would you calculate the│\n│    heat required to melt 2 kg │\n│    of ice?                    │\n│ 4. Explain how latent heat is │\n│    utilized in refrigeration.│\n│ 5. What would happen if a     │\n│    substance were heated past  │\n│    its boiling point without  │\n│    allowing phase change?     │\n└─────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of latent heat and change of state, with accurate definitions, formulas, and explanations. The use of tables and sections enhances readability. However, some minor improvements could be made, such as providing more detailed explanations for the formulas and including more examples to illustrate the concepts. Additionally, the suggested questions could be more comprehensive and challenging. Overall, the response is well-structured, clear, and effective in teaching the topic.",
+  "candidate_token_usage": {
+    "promptTokens": 426,
+    "completionTokens": 1963,
+    "totalTokens": 2389
+  },
+  "candidate_latency_ms": 7137,
+  "candidate_cost_usd": 0.0012417,
+  "judge_token_usage": {
+    "promptTokens": 1426,
+    "completionTokens": 150,
+    "totalTokens": 1576
+  },
+  "judge_latency_ms": 5522,
+  "judge_cost_usd": 0.0012155999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:12:54.011Z"
+}

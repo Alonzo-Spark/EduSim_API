@@ -1,0 +1,593 @@
+Here is the complete, self-contained HTML file designed as an interactive textbook module.
+
+It includes the structured UI blocks, the dedicated Formula Card system with a functional "Formula Lab" (Ohm's Law Simulator), and responsive tables, all styled to look like a modern educational application.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Electricity: Ohm's Law</title>
+    
+    <!-- KaTeX for Mathematical Rendering -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <style>
+        :root {
+            /* Color Palette - Interactive Textbook Theme */
+            --primary: #4F46E5;       /* Indigo */
+            --primary-light: #EEF2FF;
+            --secondary: #0EA5E9;     /* Sky Blue */
+            --accent: #F59E0B;        /* Amber for highlights */
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --bg-body: #F3F4F6;
+            --bg-card: #FFFFFF;
+            --border: #E5E7EB;
+            --success: #10B981;
+            --danger: #EF4444;
+            
+            /* Spacing & Radius */
+            --radius-lg: 16px;
+            --radius-md: 8px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: --bg-body;
+            background: linear-gradient(135deg, #F3F4F6 0%, #E0E7FF 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        /* Layout Container */
+        .textbook-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Section Headers inside Cards */
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.75rem;
+        }
+
+        .card-icon {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Typography within content */
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Highlighted Term */
+        .term {
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--primary-light);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: linear-gradient(to bottom right, #ffffff, #f9fafb);
+            border-top: 4px solid var(--primary);
+            text-align: center;
+        }
+
+        .formula-display {
+            font-size: 2.5rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--bg-body);
+            border-radius: var(--radius-md);
+            border: 1px dashed var(--border);
+        }
+
+        .formula-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Interactive Lab Section (Hidden by default) */
+        #lab-container {
+            display: none; /* Hidden until toggled */
+            margin-top: 2rem;
+            background: #1e293b;
+            color: white;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lab-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .lab-readout {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            font-family: monospace;
+            font-size: 1.2rem;
+        }
+
+        .readout-item span {
+            display: block;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        /* Table Styling */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: #f9fafb;
+        }
+
+        /* Limitation Tags */
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .tag-warn { background: #FEF3C7; color: #D97706; }
+        .tag-info { background: #DBEAFE; color: #2563EB; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .card { padding: 1.5rem; }
+            .lab-controls { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="textbook-container">
+        
+        <header>
+            <h1>Current Electricity</h1>
+            <div class="subtitle">Chapter Module: Ohm's Law & Limitations</div>
+        </header>
+
+        <!-- Card 1: Introduction / Definition -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">1</div>
+                <div class="card-title">Quick Definition</div>
+            </div>
+            <article>
+                <p>
+                    <strong>Ohm's Law</strong> is a fundamental principle in electrical engineering. It states that the current flowing through a conductor between two points is directly proportional to the voltage across the two points, provided the physical conditions (like temperature) remain constant.
+                </p>
+                <p>
+                    In simpler terms, if you increase the voltage (push), more current (flow) will move through the circuit, assuming the resistance (friction) stays the same.
+                </p>
+            </article>
+        </section>
+
+        <!-- Card 2: Formula Card System -->
+        <section class="card formula-card">
+            <div class="card-header" style="justify-content: center; border-bottom: none; margin-bottom: 0;">
+                <div class="card-title" style="color: var(--primary);">Main Formula</div>
+            </div>
+            
+            <!-- Rendered Formula -->
+            <div class="formula-display" id="main-formula">
+                $$ V = IR $$
+            </div>
+
+            <p style="color: var(--text-muted); margin-bottom: 2rem;">
+                The relationship between Voltage, Current, and Resistance.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="formula-actions">
+                <button class="btn-outline" onclick="toggleExplanation()">Explain Formula</button>
+                <button class="btn-primary" onclick="toggleLab()">Open Formula Lab</button>
+            </div>
+
+            <!-- Hidden Explanation Panel -->
+            <div id="explanation-panel" style="display: none; text-align: left; margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem;">
+                <h4 style="margin-bottom: 1rem;">Variable Breakdown:</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 0.5rem;"><strong>V</strong> = Voltage (Potential Difference) measured in Volts (V)</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>I</strong> = Current measured in Amperes (A)</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>R</strong> = Resistance measured in Ohms (Ω)</li>
+                </ul>
+                <p style="font-size: 0.9rem; background: var(--primary-light); padding: 1rem; border-radius: 8px;">
+                    <strong>Mnemonic:</strong> The "VIR" triangle. Cover the variable you want to find to see the calculation.
+                    <br>• Cover V → I × R
+                    <br>• Cover I → V / R
+                    <br>• Cover R → V / I
+                </p>
+            </div>
+
+            <!-- Interactive Lab (Simulated) -->
+            <div id="lab-container">
+                <h4 style="margin-bottom: 1rem; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.5rem;">Ohm's Law Simulator</h4>
+                
+                <div class="lab-controls">
+                    <div class="control-group">
+                        <label>Voltage (V): <span id="val-v">10</span>V</label>
+                        <input type="range" id="input-voltage" min="0" max="240" value="10" oninput="calculateOhm()">
+                    </div>
+                    <div class="control-group">
+                        <label>Resistance (R): <span id="val-r">5</span>Ω</label>
+                        <input type="range" id="input-resistance" min="1" max="100" value="5" oninput="calculateOhm()">
+                    </div>
+                </div>
+
+                <div class="lab-readout">
+                    <div class="readout-item">
+                        <span>Resulting Current (I)</span>
+                        <div id="result-current" style="color: var(--accent); font-weight: bold;">2.00 A</div>
+                    </div>
+                    <div class="readout-item">
+                        <span>Power (P = VI)</span>
+                        <div id="result-power" style="color: var(--secondary);">20.00 W</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card 3: Characteristics / Key Concepts -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">2</div>
+                <div class="card-title">Key Characteristics</div>
+            </div>
+            <p>For a conductor that obeys Ohm's Law (Ohmic conductor), the following holds true:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <div style="background: var(--bg-body); padding: 1rem; border-radius: var(--radius-md);">
+                    <strong style="display: block; margin-bottom: 0.5rem; color: var(--primary);">V-I Graph</strong>
+                    The plot of Voltage (V) vs Current (I) is a straight line passing through the origin.
+                </div>
+                <div style="background: var(--bg-body); padding: 1rem; border-radius: var(--radius-md);">
+                    <strong style="display: block; margin-bottom: 0.5rem; color: var(--primary);">Slope</strong>
+                    The slope of the V-I graph gives the resistance (R) of the conductor.
+                </div>
+                <div style="background: var(--bg-body); padding: 1rem; border-radius: var(--radius-md);">
+                    <strong style="display: block; margin-bottom: 0.5rem; color: var(--primary);">Constancy</strong>
+                    The ratio V/I remains constant for a given temperature.
+                </div>
+            </div>
+        </section>
+
+        <!-- Card 4: Limitations Table -->
+        <section class="card">
+            <div class="card-header">
+                <div class="card-icon">3</div>
+                <div class="card-title">Limitations of Ohm's Law</div>
+            </div>
+            <p>Ohm's Law is not a universal law of physics. It fails for many materials and under certain physical conditions. These are called <span class="term">Non-Ohmic</span> materials.</p>
+            
+            <br>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">Device/Material</th>
+                            <th style="width: 35%;">Reason for Failure</th>
+                            <th style="width: 35%;">V-I Graph Behavior</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Semiconductor Diodes</strong>
+                                <br><span class="tag tag-info">Valve Action</span>
+                            </td>
+                            <td>Current flows only in one direction (forward bias). In reverse bias, resistance is extremely high until breakdown voltage.</td>
+                            <td>Exponential curve in forward bias; flat in reverse.</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Filament Lamps</strong>
+                                <br><span class="tag tag-warn">Heat Dependent</span>
+                            </td>
+                            <td>As voltage increases, temperature rises, causing the filament's resistance to increase significantly.</td>
+                            <td>Curve that flattens out as current increases (non-linear).</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Electrolytes</strong>
+                                <br><span class="tag tag-info">Chemical Changes</span>
+                            </td>
+                            <td>Chemical reactions occur at electrodes, and the resistance changes with the rate of flow and concentration.</td>
+                            <td>Non-linear, may vary with electrode type.</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Gases</strong>
+                                <br><span class="tag tag-warn">Ionization</span>
+                            </td>
+                            <td>At low voltage, gases are insulators. At high voltage, they ionize and conduct (breakdown).</td>
+                            <td>Sharp rise in current after a certain voltage threshold.</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Transistors</strong>
+                                <br><span class="tag tag-info">Active Components</span>
+                            </td>
+                            <td>Current flow depends on multiple factors (base current, gate voltage), not just the voltage across the terminals.</td>
+                            <td>Complex characteristic curves.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Card 5: Summary -->
+        <section class="card" style="background-color: var(--primary-light); border-color: var(--primary);">
+            <div class="card-header" style="border-bottom-color: rgba(79, 70, 229, 0.2);">
+                <div class="card-title" style="color: var(--primary);">Chapter Summary</div>
+            </div>
+            <ul style="color: var(--text-main);">
+                <li>Ohm's Law states <strong>V = IR</strong> for constant temperature.</li>
+                <li>Metals at constant temperature generally obey Ohm's Law (Ohmic conductors).</li>
+                <li>Ohm's Law fails for semiconductors, electrolytes, gases, and devices where temperature changes with current (Non-ohmic conductors).</li>
+                <li>Always check the V-I graph: A straight line through the origin means Ohm's Law applies.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Interactive Physics Module &copy; 2023 | Designed for Static Web Showcase</p>
+    </footer>
+
+    <script>
+        // 1. Render LaTeX using KaTeX
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+
+        // 2. Formula Card Interactivity
+        
+        // Toggle Explanation Panel
+        function toggleExplanation() {
+            const panel = document.getElementById('explanation-panel');
+            const btn = event.target;
+            
+            if (panel.style.display === 'none') {
+                panel.style.display = 'block';
+                btn.textContent = 'Hide Explanation';
+                btn.style.borderColor = 'var(--primary)';
+                btn.style.color = 'var(--primary)';
+            } else {
+                panel.style.display = 'none';
+                btn.textContent = 'Explain Formula';
+                btn.style.borderColor = 'var(--border)';
+                btn.style.color = 'var(--text-main)';
+            }
+        }
+
+        // Toggle Lab Container
+        function toggleLab() {
+            const lab = document.getElementById('lab-container');
+            const btn = event.target;
+            
+            if (lab.style.display === 'none') {
+                lab.style.display = 'block';
+                btn.textContent = 'Close Formula Lab';
+                btn.classList.replace('btn-primary', 'btn-outline');
+            } else {
+                lab.style.display = 'none';
+                btn.textContent = 'Open Formula Lab';
+                btn.classList.replace('btn-outline', 'btn-primary');
+            }
+        }
+
+        // 3. Formula Lab Logic (Ohm's Law Calculator)
+        function calculateOhm() {
+            // Get inputs
+            const voltage = parseFloat(document.getElementById('input-voltage').value);
+            const resistance = parseFloat(document.getElementById('input-resistance').value);
+
+            // Update Labels
+            document.getElementById('val-v').textContent = voltage;
+            document.getElementById('val-r').textContent = resistance;
+
+            // Calculate I = V / R
+            let current = voltage / resistance;
+            
+            // Calculate Power P = VI
+            let power = voltage * current;
+
+            // Update Display
+            document.getElementById('result-current').textContent = current.toFixed(2) + " A";
+            document.getElementById('result-power').textContent = power.toFixed(2) + " W";
+        }
+
+        // Initialize calculator on load just in case
+        calculateOhm();
+    </script>
+</body>
+</html>
+```

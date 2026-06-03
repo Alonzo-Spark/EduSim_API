@@ -1,0 +1,114 @@
+### Electric Field and Electric Potential
+
+#### Quick Definitions  
+┌───────────────────────────────────┐  
+│ **Electric Field (E)**            │  
+│ Region around a charged particle  │  
+│ where forces act on other charges │  
+│ *Units:* N/C or V/m               │  
+└───────────────────────────────────┘  
+
+┌───────────────────────────────────┐  
+│ **Electric Potential (V)**        │  
+│ Potential energy per unit charge  │  
+│ at a point in an electric field   │  
+│ *Units:* Volts (V)                │  
+└───────────────────────────────────┘  
+
+---
+
+#### Key Concepts  
+**1. Electric Field**  
+- **Definition:** Vector field representing force per unit charge  
+- **Direction:** Points *away* from (+) charges, *toward* (-) charges  
+- **Formula for Point Charge:**  
+  $$
+  \vec{E} = \frac{1}{4\pi\epsilon_0} \frac{q}{r^2} \hat{r}
+  $$  
+  <details>  
+  <summary>**Formula Explanation**</summary>  
+  - \( \epsilon_0 \): Permittivity of free space (\(8.85 \times 10^{-12} \, \text{C}^2/\text{N·m}^2\))  
+  - \( q \): Source charge  
+  - \( r \): Distance from charge  
+  - \( \hat{r} \): Unit vector direction  
+  </details>  
+
+**2. Electric Potential**  
+- **Definition:** Scalar field representing work needed to move a unit positive charge from infinity to a point  
+- **Zero Reference:** Defined as \( V = 0 \) at infinity  
+- **Formula for Point Charge:**  
+  $$
+  V = \frac{1}{4\pi\epsilon_0} \frac{q}{r}
+  $$  
+  <details>  
+  <summary>**Formula Explanation**</summary>  
+  - Same constants as electric field  
+  - Note the \( \frac{1}{r} \) dependence (vs. \( \frac{1}{r^2} \) for E-field)  
+  </details>  
+
+---
+
+#### Relationship Between E and V  
+┌───────────────────────────────┐  
+│ **Fundamental Connection**    │  
+│ \( \vec{E} = -\nabla V \)     │  
+│ *Where \( \nabla \) is the*   │  
+│ *gradient operator*           │  
+└───────────────────────────────┘  
+
+**Key Implications:**  
+1. E-field points downhill along the steepest decrease of V  
+2. Equipotential surfaces (V = constant) are perpendicular to E-field lines  
+3. Potential difference between two points:  
+   $$
+   \Delta V = -\int_a^b \vec{E} \cdot d\vec{l}
+   $$  
+
+---
+
+#### Comparative Summary  
+| Property              | Electric Field (\(\vec{E}\))       | Electric Potential (\(V\))       |  
+|-----------------------|------------------------------------|----------------------------------|  
+| **Nature**            | Vector (magnitude + direction)     | Scalar (magnitude only)          |  
+| **Source**            | Charges                            | Charges *or* changing B-fields   |  
+| **Dependence**        | \( \frac{1}{r^2} \) (point charge)| \( \frac{1}{r} \) (point charge) |  
+| **Zero Location**     | Can be zero at points ≠ infinity   | Always zero at infinity          |  
+| **Measurable Effect** | Force on test charge (\( \vec{F} = q\vec{E} \)) | Work per unit charge             |  
+
+---
+
+#### Practical Applications  
+- **Capacitors:** \( E = \frac{V}{d} \) (uniform field between plates)  
+- **Electronics:** Potential differences drive current  
+- **Bioelectricity:** Nerve signals propagate via voltage gradients  
+
+---
+
+#### Common Misconceptions  
+⚠️ **Myth:** "Potential is just another name for field strength."  
+✅ **Reality:** Potential is energy-related, while field is force-related.  
+- Example: E-field can be zero where V is nonzero (e.g., center of charged ring).  
+
+---
+
+### Interactive Formula Lab  
+Explore how \( q \), \( r \), and \( \epsilon_0 \) affect E and V:  
+$$ E = \frac{1}{4\pi\epsilon_0} \frac{|q|}{r^2} \quad \quad V = \frac{1}{4\pi\epsilon_0} \frac{q}{r} $$  
+
+| Variable  | Effect on E-field | Effect on V-potential |  
+|-----------|-------------------|-----------------------|  
+| **q ↑**   | Increases         | Increases (sign matters) |  
+| **r ↑**   | Decreases sharply | Decreases gradually   |  
+| **ε₀ ↓**  | Increases         | Increases             |  
+
+---
+
+**Summary Insight:**  
+> The electric field (\(\vec{E}\)) tells charges *how to move*, while the potential (\(V\)) tells them *where to go*. Together, they describe electromagnetism's fundamental forces.  
+
+### Test Your Understanding  
+1. Why can equipotential surfaces never intersect?  
+2. Calculate \( V \) 3m from a +2μC charge.  
+3. If \( \vec{E} = 0 \) at a point, must \( V = 0 \) there? Explain.  
+
+*(Answers revealed via hover/tap in interactive modules)*

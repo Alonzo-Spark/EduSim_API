@@ -1,0 +1,161 @@
+┌───────────────────────────────────────┐
+│               Introduction              │
+│                                           │
+│ In a physics sandbox you can adjust the   │
+│ “gravity preset scaling” – a multiplier   │
+│ that changes the effective strength of   │
+│ gravity for the whole scene. This        │
+│ scaling directly influences how fast a   │
+│ block slides down an inclined plane and  │
+│ therefore determines the distance (range)│
+│ it will travel before coming to rest.     │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                Definition                │
+│                                           │
+│ • **Inclined Plane** – a flat surface    │
+│   tilted at an angle θ with respect to the│
+│   horizontal.                             │
+│ • **Gravity Preset Scaling (k)** – a     │
+│   dimension‑less factor that multiplies   │
+│   the standard Earth gravity (g ≈ 9.81 m/s│
+│  ²). The effective gravity becomes k·g.    │
+│ • **Range (s)** – the linear distance the │
+│   block travels along the plane.           │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│               Key Concepts               │
+│                                           │
+│ 1. **Effective Acceleration**            │
+│    a = k·g·sinθ                           │
+│                                           │
+│ 2. **Kinematic Relation**                │
+│    s = ½ a t²   (starting from rest)      │
+│                                           │
+│ 3. **Time of Travel**                    │
+│    t = √(2s / a)                          │
+│                                           │
+│ 4. **Friction (optional)** – if kinetic │
+│    friction µₖ is present, the net       │
+│    acceleration becomes a = k·g·sinθ –    │
+│    µₖ·k·g·cosθ.                           │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                 Formula                  │
+│                                           │
+│ ┌─────────────────────────────────────┐ │
+│ │ Main Formula                         │ │
+│ │                                     │ │
+│ │   s = ½ (k·g·sinθ) t²                │ │
+│ │                                     │ │
+│ │   (or, eliminating t:               │ │
+│ │   s = v₀² / (2·k·g·sinθ)   if v₀ ≠ 0)│ │
+│ │                                     │ │
+│ │ [ Explain Formula ]                 │ │
+│ │ [ Open Formula Lab ]                 │ │
+│ └─────────────────────────────────────┘ │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│               Applications               │
+│                                           │
+│ • Game developers use gravity scaling to │
+│   tweak how “floaty” or “heavy” objects │
+│   feel without changing the visual      │
+│   angle of the terrain.                  │
+│ • Physics education tools let students  │
+│   explore the impact of g on motion.     │
+│ • Engineering simulations for ramps      │
+│   can quickly assess safety margins.     │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                Advantages                │
+│                                           │
+│ • One‑click global adjustment of gravity │
+│   speeds up prototyping.                 │
+│ • Keeps the geometric setup (θ) unchanged│
+│   while varying dynamics.                │
+│ • Enables “slow‑motion” or “fast‑forward”│
+│   modes for debugging.                   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│               Disadvantages              │
+│                                           │
+│ • Over‑scaling can break realism (e.g., │
+│   objects may slide faster than any      │
+│   physical material would allow).        │
+│ • If friction is not scaled together,    │
+│   the motion may become non‑intuitive.   │
+│ • Extreme values may cause numerical     │
+│   instability in the physics engine.     │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│               Important Notes            │
+│                                           │
+│ • Always keep the units consistent: k is │
+│   unit‑less, g in m/s², θ in radians (or   │
+│   convert degrees to radians).           │
+│ • When using a physics sandbox, the      │
+│   “gravity preset” often affects both     │
+│   vertical and horizontal components –   │
+│   the formula above already accounts for │
+│   the vertical component through sinθ.    │
+│ • If the sandbox provides a “time step” │
+│   parameter, you can compute s directly   │
+│   per frame: Δs = ½ a Δt².                 │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                  Summary                 │
+│                                           │
+│ • Gravity scaling (k) multiplies the      │
+│   standard acceleration, giving a net     │
+│   plane acceleration a = k·g·sinθ.        │
+│ • The range traveled from rest after time │
+│   t is s = ½ a t².                         │
+│ • Larger k → larger a → longer distance   │
+│   in the same amount of time, and vice   │
+│   versa.                                  │
+│ • Adjust k to tune the “feel” of motion   │
+│   without altering the plane geometry.   │
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│            Suggested Questions           │
+│                                           │
+│ 1. How does increasing the angle θ affect │
+│    the range if k is fixed?               │
+│ 2. What happens to the range when a       │
+│    kinetic‑friction coefficient µₖ is     │
+│    introduced?                             │
+│ 3. If you double the gravity scaling, how │
+│    much faster does the block reach a given│
+│    distance?                               │
+│ 4. Design a sandbox experiment: set k = 0.5│
+│    and k = 2.0, keep θ = 30°, and plot s   │
+│    versus time. What trends do you observe?│
+└───────────────────────────────────────┘
+
+┌───────────────────────────────────────┐
+│                Live Sandbox               │
+│                                           │
+│ Use the controls below to explore how     │
+│ gravity scaling changes the block’s travel│
+│ distance on an inclined plane.            │
+│                                           │
+│ [ Gravity Scale: 0.5 ⬎ 1.0 ⬎ 2.0 ]          │
+│ [ Incline Angle (°): 15 ⬎ 30 ⬎ 45 ]       │
+│ [ Friction µₖ: 0 ⬎ 0.2 ⬎ 0.5 ]              │
+│                                           │
+│ Press **Run Simulation** to see the block │
+│ slide and the distance readout update in   │
+│ real time.                                 │
+│                                           │
+│ [ Run Simulation ]   [ Reset ]            │
+└───────────────────────────────────────┘

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 56,
+  "question": "Live Sandbox: Explain how changing restitution alters the collision bounce between two rigid bodies.",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nTwo solid spheres are aligned to collide head-on in the center of the canvas. We can adjust the restitution parameter slider ($\\text{e}$) to observe how the collision interaction updates.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nWhen restitution is set to maximum, the spheres bounce apart aggressively without losing any speed. If we lower the value to zero, they stick together upon impact and move forward as a single combined mass.\n\n### ✦ WHY IT HAPPENS\nRestitution defines the elasticity of a collision. A value of $1.0$ represents a perfectly elastic collision where kinetic energy is conserved. A value of $0.0$ represents a perfectly inelastic collision where the bodies maximize their kinetic energy loss by sticking together.\n\n### ✦ WHAT TO NOTICE\nObserve the mechanical energy indicators. At a restitution of $1.0$, total kinetic energy remains identical before and after impact. At $0.0$, the energy meter drops sharply during the collision.\n\n### ✦ FORMULA\nThe coefficient of restitution relation is written as:\n\n$$e = \\frac{v_2 - v_1}{u_1 - u_2}$$\n\n* $e = 1$ matches perfectly elastic kinetic energy retention.\n* $e = 0$ matches perfectly inelastic shared tracking.\n\n### ✦ DEEPER UNDERSTANDING\nRestitution controls how much kinetic energy is preserved as mechanical motion versus how much is converted into deformation, heat, or internal work during an impact.\n\n### ✦ TRY THIS\n1. Run an impact with **Restitution slider set to 1.0** and observe the energetic recoil behavior.\n2. Shift the **Restitution value** to `0.0` to see the two masses latch together into a unified mass.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Coefficient of restitution measures how elastic a collision is. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ 1. **Restitution Coefficient (e)**: A number between 0 and 1 that indicates how much kinetic energy remains after a collision.  │\n│ 2. **Elastic Collision**: Occurs when e = 1; objects bounce back with no loss of kinetic energy.  │\n│ 3. **Inelastic Collision**: Occurs when e = 0; objects stick together and kinetic energy is lost.  │\n│ 4. **Partially Elastic Collision**: Occurs when 0 < e < 1; some kinetic energy is lost, but the objects do not stick together.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics           │\n│                           │\n│ - Higher restitution values lead to bouncier collisions.  │\n│ - Lower restitution values result in more energy loss and less bounce.  │\n│ - The nature of the materials affects the restitution coefficient.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Formula                   │\n│                           │\n│ Coefficient of Restitution:  │\n│ $$ e = \\frac{v_{after}}{v_{before}} $$  │\n│                           │\n│ where:                   │\n│ - \\( v_{after} \\) is the relative velocity after collision.  │\n│ - \\( v_{before} \\) is the relative velocity before collision.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Main Formula              │\n│                           │\n│     Rendered Formula      │\n│                           │\n│ $$ e = \\frac{v_{after}}{v_{before}} $$ │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Applications              │\n│                           │\n│ - Sports: Understanding how balls bounce.  │\n│ - Engineering: Designing shock absorbers.  │\n│ - Automotive: Crash simulations and safety features.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Advantages                │\n│                           │\n│ - Predicts collision outcomes effectively.  │\n│ - Helps in material selection for desired bounce properties.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Disadvantages             │\n│                           │\n│ - Real-world factors can complicate predictions (e.g., friction, deformation).  │\n│ - Requires precise measurements for accuracy.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes           │\n│                           │\n│ - Restitution is affected by factors like surface texture and impact speed.  │\n│ - Not all collisions are perfectly elastic or inelastic; many fall in between.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                  │\n│                           │\n│ The coefficient of restitution is crucial for understanding collision dynamics between rigid bodies. It determines how much kinetic energy is conserved in a collision, influencing the bounce behavior significantly. Higher values signify more elastic collisions, while lower values denote inelastic behavior.  │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions       │\n│                           │\n│ 1. How does the restitution coefficient vary between different materials?  │\n│ 2. Can you think of real-world examples where restitution plays a critical role?  │\n│ 3. How does changing the angle of impact affect the restitution outcome?  │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concept of restitution and its impact on collision dynamics. The use of tables and clear definitions enhances readability. However, there are a few areas that require improvement. Firstly, the formula provided for the coefficient of restitution is slightly simplified and does not fully capture the complexity of the concept as presented in the gold reference answer. The candidate response could benefit from a more detailed explanation of how restitution affects the conservation of kinetic energy and the conversion into other forms of energy during a collision. Additionally, while the response mentions various applications and advantages of understanding restitution, it could further elaborate on these points with specific examples to enhance pedagogical effectiveness. Lastly, the suggested questions at the end are a good starting point for encouraging further exploration, but they could be more directly tied to the concepts discussed to reinforce learning. Overall, the response is well-structured and informative, but could benefit from more nuanced explanations and examples to elevate its educational value.",
+  "candidate_token_usage": {
+    "promptTokens": 370,
+    "completionTokens": 869,
+    "totalTokens": 1239
+  },
+  "candidate_latency_ms": 11248,
+  "candidate_cost_usd": 0.0005769,
+  "judge_token_usage": {
+    "promptTokens": 1663,
+    "completionTokens": 252,
+    "totalTokens": 1915
+  },
+  "judge_latency_ms": 5167,
+  "judge_cost_usd": 0.0016025999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:26:05.679Z"
+}

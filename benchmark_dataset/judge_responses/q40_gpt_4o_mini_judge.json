@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 40,
+  "question": "Differentiate between transverse and longitudinal waves.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nWaves are classified into two primary structural types based on how the particles of the medium vibrate relative to the direction of the wave's energy travel.\n\nA transverse wave is a wave in which the particles of the medium oscillate perpendicular to the direction of wave propagation.\n\nA longitudinal wave is a wave in which the particles of the medium oscillate parallel to the direction of wave propagation.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Transverse Waves | Longitudinal Waves |\n| --- | --- | --- |\n| **Structure** | Forms alternating crests (peaks) and troughs (valleys). | Forms alternating compressions (high density) and rarefactions (low density). |\n| **Medium Context** | Can travel through solids and liquid surfaces, but not gases. | Can travel through solids, liquids, and gases. |\n| **Polarization** | Can be polarized. | Cannot be polarized. |\n\n---\n\n## Real-world Examples\n\n* **Transverse Waves:** Light waves, radio waves, seismic S-waves, and surface ripples on a pond.\n* **Longitudinal Waves:** Sound waves traveling through air, seismic P-waves, and ultrasound tracking pulses.\n\n---\n\n## Summary\n\nTransverse waves produce variations perpendicular to their direction of travel, whereas longitudinal waves create pressure pulses that run parallel to their path.",
+  "candidate_response": "┌───────────────────────────┐\n│ Introduction              │\n│                           │\n│ Waves are disturbances that │\n│ transfer energy through a  │\n│ medium or space. They can  │\n│ be classified into two     │\n│ main types: transverse and │\n│ longitudinal waves.        │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Transverse waves are waves  │\n│ in which the motion of the   │\n│ medium is perpendicular to   │\n│ the direction of the wave.   │\n│ Longitudinal waves are waves  │\n│ in which the motion of the    │\n│ medium is parallel to the     │\n│ direction of the wave.       │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ - In transverse waves,     │\n│   particle displacement    │\n│   occurs up and down or    │\n│   side to side, creating   │\n│   crests and troughs.      │\n│ - In longitudinal waves,    │\n│   particle displacement is  │\n│   back and forth, forming   │\n│   compressions and rarefactions. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics           │\n│                           │\n│ Transverse Waves:         │\n│ - Can travel through solids│\n│ - Examples: light waves,  │\n│   waves on a string       │\n│                           │\n│ Longitudinal Waves:       │\n│ - Can travel through solids,│\n│   liquids, and gases      │\n│ - Examples: sound waves    │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                  │\n│                           │\n│ Transverse and longitudinal waves differ primarily in how the medium's particles move in relation to the wave's direction. Transverse waves move perpendicularly, while longitudinal waves move parallel to the direction of wave propagation. Understanding these differences is crucial in fields such as physics and engineering. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions       │\n│                           │\n│ 1. What are some real-world │\n│    examples of transverse   │\n│    and longitudinal waves?  │\n│ 2. How do the properties of │\n│    these waves affect their  │\n│    applications?           │\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately differentiates between transverse and longitudinal waves, covering key concepts such as particle displacement, crests and troughs, compressions and rarefactions, and examples of each type. The layout is well-structured and readable. However, the response could be improved by including a comparison matrix like the gold reference answer to succinctly summarize the differences. Additionally, the suggested questions at the end, while educational, do not directly contribute to the differentiation between the two wave types and could be integrated more seamlessly into the explanatory text. Overall, the response effectively teaches the basics of transverse and longitudinal waves but lacks a bit in depth and direct comparison.",
+  "candidate_token_usage": {
+    "promptTokens": 362,
+    "completionTokens": 561,
+    "totalTokens": 923
+  },
+  "candidate_latency_ms": 6425,
+  "candidate_cost_usd": 0.0003909,
+  "judge_token_usage": {
+    "promptTokens": 1236,
+    "completionTokens": 192,
+    "totalTokens": 1428
+  },
+  "judge_latency_ms": 5321,
+  "judge_cost_usd": 0.0012024,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:30:53.430Z"
+}

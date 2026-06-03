@@ -1,0 +1,126 @@
+┌───────────────────────────────────────────────┐
+│               Bounce Boundary Reflection Event│
+│───────────────────────────────────────────────│
+│ **What Happens?**                               │
+│ When a moving object (particle, sprite, etc.)   │
+│ reaches a solid boundary, its velocity vector   │
+│ is reflected off the surface, preserving speed │
+│ but changing direction according to the surface│
+│ normal.                                         │
+│                                                 │
+│ **Key Data Provided by the Sandbox Engine**    │
+│ • `contactPoint` – (x, y) coordinates where the │
+│   collision occurred.                           │
+│ • `normal` – Unit normal vector of the boundary │
+│   at the contact point.                         │
+│ • `incomingVelocity` – Velocity vector before   │
+│   impact.                                       │
+│ • `outgoingVelocity` – Velocity vector after    │
+│   reflection (computed by the engine).         │
+│ • `timeStamp` – Simulation time of the event.   │
+│                                                 │
+│ **Why It Matters**                              │
+│ • Enables visual debugging of collision handling│
+│ • Drives gameplay effects (e.g., bounce sounds,│
+│   particle trails).                             │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                 Mathematical Model             │
+│───────────────────────────────────────────────│
+│ **Reflection Formula**                          │
+│                                                   │
+│   $$\mathbf{v}_{\text{out}} = \mathbf{v}_{\text{in}} - 2(\mathbf{v}_{\text{in}}\cdot\mathbf{n})\mathbf{n}$$ │
+│                                                   │
+│ *Explanation*                                    │
+│ • `\mathbf{v}_{in}` – Incoming velocity vector.  │
+│ • `\mathbf{n}` – Unit normal of the boundary.   │
+│ • `\cdot` – Dot product.                         │
+│ • The term `2(\mathbf{v}_{in}\cdot\mathbf{n})\mathbf{n}`  │
+│   subtracts the component of `\mathbf{v}_{in}`   │
+│   that is parallel to the normal, effectively   │
+│   mirroring the vector across the surface.       │
+│                                                   │
+│ [ Explain Formula ]   [ Open Formula Lab ]       │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                 Overlay UI Elements            │
+│───────────────────────────────────────────────│
+│ **Visual Components**                           │
+│ 1️⃣ **Contact Point Marker** – Small red circle  │
+│    placed at `contactPoint`.                    │
+│ 2️⃣ **Normal Arrow** – Blue arrow pointing       │
+│    outward from the surface, length = 1 unit.  │
+│ 3️⃣ **Incoming Velocity Arrow** – Orange arrow  │
+│    originating at `contactPoint`, scaled to    │
+│    speed magnitude.                             │
+│ 4️⃣ **Outgoing Velocity Arrow** – Green arrow   │
+│    same origin, showing the reflected direction.│
+│                                                 │
+│ **Textual Annotations**                         │
+│ • “Collision @ t = `timeStamp`”                 │
+│ • Numeric display of speed before/after:       │
+│   `|v_in| = …`, `|v_out| = …`                    │
+│                                                 │
+│ **Interactive Controls**                       │
+│ • **▶ Play/Pause** – Step through the exact      │
+│   moment of bounce.                             │
+│ • **⟳ Replay** – Re‑trigger the same event with │
+│   optional parameter tweaks (e.g., friction). │
+│ • **⚙ Settings** – Toggle which arrows are      │
+│   visible, adjust arrow scaling, enable/disable │
+│   label overlays.                               │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Implementation Snippet           │
+│───────────────────────────────────────────────│
+│ ```javascript                                      │
+│ // Assume `event` is the bounce event payload   │
+│ const { contactPoint, normal, incomingVelocity, timeStamp } = event; │
+│                                                          │
+│ // Compute outgoing velocity (engine already did)      │
+│ const dot = incomingVelocity.x * normal.x +           │
+│             incomingVelocity.y * normal.y;            │
+│ const outgoingVelocity = {                            │
+│   x: incomingVelocity.x - 2 * dot * normal.x,         │
+│   y: incomingVelocity.y - 2 * dot * normal.y          │
+│ };                                                    │
+│                                                          │
+│ // Render overlay (pseudo‑code)                         │
+│ overlay.clear();                                       │
+│ overlay.drawCircle(contactPoint, { radius: 5, color: 'red' }); │
+│ overlay.drawArrow(contactPoint, normal, { color: 'blue', length: 30 }); │
+│ overlay.drawArrow(contactPoint, incomingVelocity, { color: 'orange', length: 30 }); │
+│ overlay.drawArrow(contactPoint, outgoingVelocity, { color: 'green', length: 30 }); │
+│ overlay.addLabel(`t = ${timeStamp.toFixed(2)}`, { x: contactPoint.x, y: contactPoint.y - 10 }); │
+│ ```                                                │
+│                                                   │
+│ *Adapt the drawing primitives to your UI library │
+│ (Canvas, WebGL, Unity, etc.).*                    │
+└───────────────────────────────────────────────┘
+
+
+
+┌───────────────────────────────────────────────┐
+│                Suggested Questions              │
+│───────────────────────────────────────────────│
+│ 1️⃣ Why does the speed magnitude stay the same after │
+│    reflection (ignoring friction)?                 │
+│ 2️⃣ How would you modify the formula to include a   │
+│    coefficient of restitution `e`?                 │
+│ 3️⃣ What visual cues would you add to indicate      │
+│    energy loss if `e < 1`?                         │
+│ 4️⃣ How can you detect which side of a polygon the │
+│    normal belongs to in a 2‑D engine?              │
+│                                                   │
+│ *Explore these to deepen your understanding of   │
+│ collision response.*                               │
+└───────────────────────────────────────────────┘

@@ -1,0 +1,145 @@
+┌─────────────────────────────────────────────┐
+│ 🔬 Live Physics Sandbox                    │
+│ *Interactive Investigation*                │
+└─────────────────────────────────────────────┘
+
+### 🧭 Introduction
+
+In this sandbox, we explore how **gravity preset scaling**—a simulation parameter that adjusts the effective strength of gravitational acceleration—affects the **range** (horizontal distance traveled) of a block sliding down an inclined plane and launching off its end.
+
+This scenario combines **inclined plane motion**, **projectile launch**, and **scaled gravity** to study kinematic sensitivity.
+
+---
+
+### 📐 Key Concepts
+
+┌───────────────────────────┐
+│ Quick Definition          │
+│                           │
+│ **Gravity Preset Scaling**│
+│ adjusts the effective     │
+│ value of gravitational    │
+│ acceleration (g) in a     │
+│ simulation or model.      │
+│ e.g., Scale = 0.5 → g =   │
+│ 4.9 m/s² instead of 9.8.  │
+└───────────────────────────┘
+
+┌───────────────────────────┐
+│ Key Variables             │
+│                           │
+│ - **θ**: Incline angle    │
+│ - **L**: Length of ramp   │
+│ - **h**: Height at base   │
+│ - **g' = s·g**: Scaled g  │
+│    (s = scale factor)     │
+│ - **Range**: Horizontal   │
+│   distance after launch   │
+└───────────────────────────┘
+
+---
+
+### 🧮 Formula
+
+$$
+g' = s \cdot g
+$$
+
+$$
+v = \sqrt{2 g' L \sin\theta}
+$$
+
+$$
+\text{Range} = v \cos\theta \cdot t_{\text{flight}}, \quad t_{\text{flight}} = \frac{v \sin\theta + \sqrt{(v \sin\theta)^2 + 2g'h}}{g'}
+$$
+
+┌───────────────────────────┐
+│ Main Formula              │
+│                           │
+│ $$                        │
+│ \text{Range} \propto     │
+│ \sqrt{s}                  │
+$$                        │
+│                           │
+│ [ Explain Formula ]       │
+│ [ Open Formula Lab ]      │
+└───────────────────────────┘
+
+> 💡 The final range scales approximately with **√s**, since velocity depends on √(g') and flight time also scales with 1/√(g') — but combined, the dominant effect is **√s**.
+
+---
+
+### 📊 Behavior Summary (Table)
+
+| Gravity Scale (s) | Effective g (m/s²) | Exit Speed | Flight Time | Range (approx) |
+|-------------------|--------------------|----------|-------------|----------------|
+| 0.25              | 2.45               | Low      | Long        | Medium         |
+| 0.5               | 4.9                | Medium   | Medium      | ↑ Increasing   |
+| 1.0 (normal)      | 9.8                | High     | Shorter     | Max?           |
+| 2.0               | 19.6               | Very High| Very Short  | ↓ Decreasing   |
+
+> 📌 **Surprise Insight**: Maximum range may occur at **intermediate gravity scaling**, depending on ramp height and angle.
+
+---
+
+### 🔍 Characteristics
+
+- 🔹 Lower **g-scale** → slower acceleration → lower launch speed
+- 🔹 But lower **g** → longer air time → more horizontal travel
+- 🔹 Trade-off creates **non-linear range curve**
+- 🔹 Optimal **s** exists when horizontal velocity and flight time are balanced
+
+---
+
+### 🧪 Applications
+
+- Video game physics tuning
+- Robotics ramp design in low-gravity environments
+- Educational simulations (Moon vs Earth ramps)
+- Space mission lander testing (e.g., Mars gravity = ~0.38g)
+
+---
+
+### ⚠️ Important Notes
+
+- Assumes **no friction** on ramp
+- Assumes **instant transition** from ramp to free flight
+- Air resistance neglected
+- Launch point height **h > 0** required for asymmetric flight
+
+---
+
+### ❓ Suggested Questions
+
+1. What gravity scale maximizes range for a 30° ramp of length 2m at 1m height?
+2. If gravity is halved, does the block go farther? Why or why not?
+3. How would friction change the optimal scaling?
+4. Can you derive the exact Range(s) function?
+
+---
+
+### ▶️ Try It Yourself (Sandbox Mode)
+
+🔧 **Adjust these parameters**:
+
+- Gravity scale: `s = 1.0` [← Drag to adjust: 0.1 → 5.0]
+- Ramp angle: `θ = 30°`
+- Ramp length: `L = 2.0 m`
+- Height: `h = 1.0 m`
+
+🧠 **Prediction**: If you **reduce gravity by half**, will the range increase or decrease?
+
+👉 **Answer**: It *might increase*, because although the launch speed drops by √0.5 ≈ 0.71, the flight time increases more than √2 ≈ 1.41 due to reduced downward pull — so horizontal distance can actually **increase** for low ramps.
+
+---
+
+### 📘 Summary
+
+- Gravity scaling **nonlinearly affects** range
+- Range ∝ √s roughly, but **not monotonic**
+- There exists an **optimal gravity level** for maximum range
+- Simulations must balance **exit velocity** and **flight duration**
+
+Ready to test in the **Formula Lab**?
+
+[ 🔗 Open Interactive Gravity Ramp Simulator ]

@@ -1,0 +1,126 @@
+## Understanding Capacitors
+
+A capacitor is an electronic component that stores electrical energy in an electric field. It's a fundamental building block in countless electronic circuits, from simple filters to complex power supplies.
+
+***
+
+### Quick Definition
+
+A capacitor is a passive two-terminal electrical component used to store energy electrostatically in an electric field.
+
+***
+
+### Key Components
+
+A basic capacitor consists of two main parts:
+
+*   **Two Conductive Plates:** These are typically made of metal and are responsible for collecting charge.
+*   **Dielectric Material:** An insulating material placed between the two conductive plates. This material does not conduct electricity but plays a crucial role in enhancing the capacitor's ability to store charge.
+
+***
+
+### Working Principle
+
+The operation of a capacitor can be understood through the following steps:
+
+1.  **Connection to a Voltage Source:** When a capacitor is connected to a DC voltage source (like a battery), one plate becomes connected to the positive terminal and the other to the negative terminal.
+2.  **Charge Accumulation:**
+    *   Electrons from the positive terminal of the battery are drawn away from the plate connected to it, leaving that plate with a net positive charge.
+    *   Simultaneously, electrons from the negative terminal of the battery are pushed onto the other plate, giving it a net negative charge.
+3.  **Electric Field Formation:** Due to the accumulation of opposite charges on the two plates, an electric field is established in the dielectric material between them. This electric field stores the electrical energy.
+4.  **Voltage Build-up:** As more charge accumulates on the plates, the voltage across the capacitor increases, opposing the voltage of the source.
+5.  **Charging Completion:** The charging process continues until the voltage across the capacitor becomes equal to the voltage of the source. At this point, the flow of current stops, and the capacitor is fully charged, holding a stored amount of electrical energy.
+6.  **Discharging:** If the voltage source is removed and a conductive path is provided between the capacitor's plates (e.g., by connecting a resistor), the stored electrons on the negatively charged plate will flow through the path to the positively charged plate to neutralize the charge difference. This flow of electrons constitutes a discharge current, and the stored energy is released.
+
+***
+
+### Main Formula
+
+$$
+Q = CV
+$$
+
+<details>
+<summary>Explain Formula</summary>
+This formula relates the charge stored in a capacitor to its capacitance and the voltage across it.
+<ul>
+    <li>$Q$ represents the **charge** stored on one of the capacitor plates, measured in Coulombs (C).</li>
+    <li>$C$ represents the **capacitance** of the capacitor, a measure of its ability to store charge, measured in Farads (F).</li>
+    <li>$V$ represents the **voltage** across the capacitor, measured in Volts (V).</li>
+</ul>
+</details>
+
+<button>Open Formula Lab</button>
+
+***
+
+### Factors Affecting Capacitance
+
+The ability of a capacitor to store charge, known as its capacitance ($C$), is determined by several physical characteristics:
+
+*   **Area of the Plates ($A$):** Larger plate area allows for more charge to accumulate, thus increasing capacitance.
+*   **Distance Between Plates ($d$):** Smaller distances between plates result in a stronger electric field for a given voltage, leading to higher capacitance.
+*   **Dielectric Constant ($\epsilon_r$):** The type of dielectric material used significantly impacts capacitance. Materials with higher dielectric constants can support a stronger electric field and thus store more charge.
+
+These factors are summarized in the formula for parallel plate capacitors:
+
+$$
+C = \frac{\epsilon_r \epsilon_0 A}{d}
+$$
+
+<details>
+<summary>Explain Formula</summary>
+This formula calculates the capacitance of a parallel plate capacitor.
+<ul>
+    <li>$C$ is the **capacitance** in Farads (F).</li>
+    <li>$\epsilon_r$ is the **relative permittivity** (dielectric constant) of the dielectric material (dimensionless).</li>
+    <li>$\epsilon_0$ is the **permittivity of free space**, a fundamental physical constant approximately equal to $8.854 \times 10^{-12}$ F/m.</li>
+    <li>$A$ is the **area** of one of the plates in square meters ($m^2$).</li>
+    <li>$d$ is the **distance** between the plates in meters (m).</li>
+</ul>
+</details>
+
+<button>Open Formula Lab</button>
+
+***
+
+### Energy Stored in a Capacitor
+
+The energy ($E$) stored in a charged capacitor is given by:
+
+$$
+E = \frac{1}{2}CV^2
+$$
+
+<details>
+<summary>Explain Formula</summary>
+This formula calculates the electrical energy stored within a capacitor's electric field.
+<ul>
+    <li>$E$ is the **energy stored** in Joules (J).</li>
+    <li>$C$ is the **capacitance** in Farads (F).</li>
+    <li>$V$ is the **voltage** across the capacitor in Volts (V).</li>
+</ul>
+</details>
+
+<button>Open Formula Lab</button>
+
+***
+
+### Applications
+
+Capacitors are ubiquitous in electronics and have a wide range of applications:
+
+| Application                  | Description                                                                                                                                                                                                    |
+| :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Energy Storage**           | Used in camera flashes, defibrillators, and power supplies to store and release energy quickly.                                                                                                                |
+| **Filtering/Smoothing**      | In power supplies, they smooth out pulsating DC by absorbing ripples, providing a steady output voltage.                                                                                                        |
+| **Timing Circuits**          | Combined with resistors (RC circuits), they can create time delays, used in oscillators and timers.                                                                                                            |
+| **Coupling/Decoupling**      | **Coupling:** Block DC while allowing AC signals to pass between stages of an amplifier. **Decoupling:** Bypass unwanted high-frequency noise from power supply lines to ground, ensuring stable operation. |
+| **Frequency Selection**      | In radio tuners and filters, they can select or reject specific frequencies.                                                                                                                                   |
+| **Motor Starting**           | Provide a phase shift for the auxiliary winding in single-phase AC motors to create a rotating magnetic field, enabling the motor to start.                                                                    |
+
+***
+
+### Summary
+
+A capacitor stores electrical energy by accumulating opposite charges on two conductive plates separated by a dielectric material. This process creates an electric field that holds the energy. Its ability to store charge (capacitance) depends on the plate area, the distance between plates, and the dielectric material. Capacitors are vital components in modern electronics, performing functions like energy storage, filtering, timing, and frequency selection.

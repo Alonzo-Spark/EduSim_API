@@ -1,0 +1,29 @@
+```json
+{
+  "runtime_overlay": {
+    "event_type": "spring_stretched",
+    "severity": "peak_limit",
+    "trigger_time": "2023-11-29T14:22:15.782Z",
+    "duration_ms": 127,
+    "source_component": "physics.spring_system",
+    "impacted_entities": [
+      "object_A",
+      "object_B"
+    ],
+    "parameters": {
+      "rest_length": "0.5 m",
+      "current_length": "1.8 m",
+      "elastic_limit": "1.5 m",
+      "force_applied": "420 N",
+      "yield_threshold_exceeded": true
+    },
+    "action_taken": "clamped_displacement",
+    "suggested_follow_up": [
+      "Inspect material stress levels",
+      "Adjust damping ratio",
+      "Review spring constant calibration"
+    ],
+    "debug_hint": "Event triggered due to extension beyond 150% of rest length. Consider enabling soft limits or increasing stiffness."
+  }
+}
+```

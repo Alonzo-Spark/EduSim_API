@@ -1,0 +1,260 @@
+Here's the full interactive breakdown:
+
+---
+
+<div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid #e94560;">
+
+<h1 style="color: #e94560; font-size: 2rem; margin: 0 0 8px 0; font-weight: 800; letter-spacing: -0.5px;">⚡ Series Resistance</h1>
+<p style="color: #a8b2d8; margin: 0; font-size: 1.05rem;">Deriving the Equivalent Resistance for Resistors in Series</p>
+
+</div>
+
+---
+
+## 🔷 What is a Series Combination?
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-left: 4px solid #58a6ff; border-radius: 12px; padding: 24px; margin-bottom: 20px;">
+
+<p style="color: #e6edf3; font-size: 1rem; line-height: 1.8; margin: 0;">
+Resistors are said to be connected in <strong style="color: #58a6ff;">series</strong> when they are joined <strong style="color: #58a6ff;">end-to-end</strong> in a single path, so that the <strong style="color: #ffa657;">same current</strong> flows through each resistor, one after the other.
+</p>
+
+</div>
+
+---
+
+## 🔷 Circuit Diagram
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-radius: 12px; padding: 28px; margin-bottom: 20px; text-align: center;">
+
+<div style="font-family: 'Courier New', monospace; font-size: 1rem; color: #79c0ff; line-height: 2.2;">
+
+<div style="color: #8b949e; font-size: 0.85rem; margin-bottom: 16px;">[ Circuit Layout ]</div>
+
+```
+ +──────[R₁]──────[R₂]──────[R₃]──────+
+ |                                      |
+[V]                                    [ ]
+ |                                      |
+ +──────────────────────────────────────+
+```
+
+</div>
+
+<div style="display: flex; justify-content: center; gap: 32px; margin-top: 20px; flex-wrap: wrap;">
+  <div style="background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 12px 20px; text-align: center;">
+    <div style="color: #ffa657; font-size: 1.3rem; font-weight: 700;">V</div>
+    <div style="color: #8b949e; font-size: 0.8rem;">Total Voltage</div>
+  </div>
+  <div style="background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 12px 20px; text-align: center;">
+    <div style="color: #79c0ff; font-size: 1.3rem; font-weight: 700;">I</div>
+    <div style="color: #8b949e; font-size: 0.8rem;">Same Current</div>
+  </div>
+  <div style="background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 12px 20px; text-align: center;">
+    <div style="color: #3fb950; font-size: 1.3rem; font-weight: 700;">R₁, R₂, R₃</div>
+    <div style="color: #8b949e; font-size: 0.8rem;">Individual Resistors</div>
+  </div>
+</div>
+
+</div>
+
+---
+
+## 🔷 Key Assumptions Before Derivation
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-top: 3px solid #58a6ff; border-radius: 12px; padding: 20px;">
+  <div style="font-size: 1.5rem; margin-bottom: 8px;">🔁</div>
+  <div style="color: #58a6ff; font-weight: 700; margin-bottom: 6px;">Same Current</div>
+  <div style="color: #8b949e; font-size: 0.9rem;">Current <strong style="color: #e6edf3;">I</strong> is identical through every resistor — no branching occurs.</div>
+</div>
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-top: 3px solid #ffa657; border-radius: 12px; padding: 20px;">
+  <div style="font-size: 1.5rem; margin-bottom: 8px;">⚡</div>
+  <div style="color: #ffa657; font-weight: 700; margin-bottom: 6px;">Voltage Splits</div>
+  <div style="color: #8b949e; font-size: 0.9rem;">Total voltage <strong style="color: #e6edf3;">V</strong> is distributed across each resistor as a drop.</div>
+</div>
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-top: 3px solid #3fb950; border-radius: 12px; padding: 20px;">
+  <div style="font-size: 1.5rem; margin-bottom: 8px;">🔋</div>
+  <div style="color: #3fb950; font-weight: 700; margin-bottom: 6px;">Conservation</div>
+  <div style="color: #8b949e; font-size: 0.9rem;">By Kirchhoff's Voltage Law, all drops must sum to the source voltage.</div>
+</div>
+
+</div>
+
+---
+
+## 🔷 Step-by-Step Derivation
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-radius: 12px; overflow: hidden; margin-bottom: 24px;">
+
+<!-- Step 1 -->
+<div style="padding: 24px; border-bottom: 1px solid #21262d;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #58a6ff; color: #0d1117; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0;">1</div>
+    <div style="color: #58a6ff; font-weight: 700; font-size: 1.05rem;">Apply Ohm's Law to Each Resistor</div>
+  </div>
+  <p style="color: #8b949e; margin: 0 0 16px 44px; font-size: 0.95rem;">Since the same current <strong style="color: #79c0ff;">I</strong> passes through each resistor, the voltage drop across each is:</p>
+  <div style="background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 20px; margin-left: 44px; text-align: center;">
+
+$$V_1 = IR_1, \quad V_2 = IR_2, \quad V_3 = IR_3$$
+
+  </div>
+</div>
+
+<!-- Step 2 -->
+<div style="padding: 24px; border-bottom: 1px solid #21262d;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #ffa657; color: #0d1117; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0;">2</div>
+    <div style="color: #ffa657; font-weight: 700; font-size: 1.05rem;">Apply Kirchhoff's Voltage Law (KVL)</div>
+  </div>
+  <p style="color: #8b949e; margin: 0 0 16px 44px; font-size: 0.95rem;">The total voltage across the combination equals the sum of individual voltage drops:</p>
+  <div style="background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 20px; margin-left: 44px; text-align: center;">
+
+$$V = V_1 + V_2 + V_3$$
+
+  </div>
+</div>
+
+<!-- Step 3 -->
+<div style="padding: 24px; border-bottom: 1px solid #21262d;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #3fb950; color: #0d1117; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0;">3</div>
+    <div style="color: #3fb950; font-weight: 700; font-size: 1.05rem;">Substitute the Ohm's Law Expressions</div>
+  </div>
+  <p style="color: #8b949e; margin: 0 0 16px 44px; font-size: 0.95rem;">Replace each voltage drop with its Ohm's Law equivalent:</p>
+  <div style="background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 20px; margin-left: 44px; text-align: center;">
+
+$$V = IR_1 + IR_2 + IR_3$$
+
+  </div>
+</div>
+
+<!-- Step 4 -->
+<div style="padding: 24px; border-bottom: 1px solid #21262d;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #bc8cff; color: #0d1117; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0;">4</div>
+    <div style="color: #bc8cff; font-weight: 700; font-size: 1.05rem;">Factor Out the Common Current</div>
+  </div>
+  <p style="color: #8b949e; margin: 0 0 16px 44px; font-size: 0.95rem;">Since <strong style="color: #79c0ff;">I</strong> is the same throughout, factor it out:</p>
+  <div style="background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 20px; margin-left: 44px; text-align: center;">
+
+$$V = I(R_1 + R_2 + R_3)$$
+
+  </div>
+</div>
+
+<!-- Step 5 -->
+<div style="padding: 24px;">
+  <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+    <div style="background: #e94560; color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0;">5</div>
+    <div style="color: #e94560; font-weight: 700; font-size: 1.05rem;">Compare with Equivalent Circuit</div>
+  </div>
+  <p style="color: #8b949e; margin: 0 0 16px 44px; font-size: 0.95rem;">For a single equivalent resistor <strong style="color: #e94560;">R_eq</strong> replacing the combination, Ohm's Law gives:</p>
+  <div style="background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 20px; margin-left: 44px; text-align: center;">
+
+$$V = I \cdot R_{eq}$$
+
+  </div>
+  <p style="color: #8b949e; margin: 16px 0 0 44px; font-size: 0.95rem;">Comparing both expressions → <strong style="color: #3fb950;">I·R_eq = I(R₁ + R₂ + R₃)</strong>, and since I ≠ 0, we cancel it.</p>
+</div>
+
+</div>
+
+---
+
+## 🔷 Final Result — Formula Card
+
+<div style="background: linear-gradient(135deg, #0d1117, #161b22); border: 2px solid #e94560; border-radius: 16px; padding: 32px; margin-bottom: 24px; text-align: center; box-shadow: 0 0 30px rgba(233, 69, 96, 0.15);">
+
+<div style="color: #8b949e; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;">✦ Equivalent Resistance — Series ✦</div>
+
+$$\boxed{R_{eq} = R_1 + R_2 + R_3 + \cdots + R_n}$$
+
+<div style="display: flex; justify-content: center; gap: 24px; margin-top: 24px; flex-wrap: wrap;">
+  <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 12px 18px;">
+    <span style="color: #e94560; font-weight: 700;">R_eq</span> <span style="color: #8b949e; font-size: 0.85rem;">→ Equivalent resistance (Ω)</span>
+  </div>
+  <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 12px 18px;">
+    <span style="color: #79c0ff; font-weight: 700;">R₁, R₂ …</span> <span style="color: #8b949e; font-size: 0.85rem;">→ Individual resistances (Ω)</span>
+  </div>
+  <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 12px 18px;">
+    <span style="color: #3fb950; font-weight: 700;">n</span> <span style="color: #8b949e; font-size: 0.85rem;">→ Total number of resistors</span>
+  </div>
+</div>
+
+</div>
+
+---
+
+## 🔷 Key Characteristics of Series Combination
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-radius: 12px; overflow: hidden; margin-bottom: 24px;">
+
+<table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
+<thead>
+<tr style="background: #161b22;">
+<th style="padding: 14px 20px; text-align: left; color: #58a6ff; font-weight: 700; border-bottom: 2px solid #30363d;">Property</th>
+<th style="padding: 14px 20px; text-align: left; color: #58a6ff; font-weight: 700; border-bottom: 2px solid #30363d;">Behaviour</th>
+<th style="padding: 14px 20px; text-align: left; color: #58a6ff; font-weight: 700; border-bottom: 2px solid #30363d;">Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid #21262d;">
+<td style="padding: 14px 20px; color: #ffa657; font-weight: 600;">Current (I)</td>
+<td style="padding: 14px 20px; color: #e6edf3;">Same through all resistors</td>
+<td style="padding: 14px 20px; color: #8b949e;">Single unbranched path</td>
+</tr>
+<tr style="background: #0a0e14; border-bottom: 1px solid #21262d;">
+<td style="padding: 14px 20px; color: #ffa657; font-weight: 600;">Voltage (V)</td>
+<td style="padding: 14px 20px; color: #e6edf3;">Divides across resistors</td>
+<td style="padding: 14px 20px; color: #8b949e;">KVL — energy conservation</td>
+</tr>
+<tr style="border-bottom: 1px solid #21262d;">
+<td style="padding: 14px 20px; color: #ffa657; font-weight: 600;">R_eq vs each R</td>
+<td style="padding: 14px 20px; color: #e6edf3;">R_eq is always greater</td>
+<td style="padding: 14px 20px; color: #8b949e;">Adding positive values increases total</td>
+</tr>
+<tr style="background: #0a0e14;">
+<td style="padding: 14px 20px; color: #ffa657; font-weight: 600;">Failure Effect</td>
+<td style="padding: 14px 20px; color: #e6edf3;">Entire circuit breaks</td>
+<td style="padding: 14px 20px; color: #8b949e;">Only one path — break stops all current</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+---
+
+## 🔷 Quick Summary
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 8px;">
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-radius: 12px; padding: 20px; text-align: center;">
+  <div style="font-size: 2rem; margin-bottom: 8px;">🔗</div>
+  <div style="color: #58a6ff; font-weight: 700; margin-bottom: 6px;">End-to-end connection</div>
+  <div style="color: #8b949e; font-size: 0.85rem;">Resistors joined in one single loop</div>
+</div>
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-radius: 12px; padding: 20px; text-align: center;">
+  <div style="font-size: 2rem; margin-bottom: 8px;">➕</div>
+  <div style="color: #3fb950; font-weight: 700; margin-bottom: 6px;">Simple Addition</div>
+  <div style="color: #8b949e; font-size: 0.85rem;">R_eq = R₁ + R₂ + R₃ + …</div>
+</div>
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-radius: 12px; padding: 20px; text-align: center;">
+  <div style="font-size: 2rem; margin-bottom: 8px;">📈</div>
+  <div style="color: #ffa657; font-weight: 700; margin-bottom: 6px;">Always Increases</div>
+  <div style="color: #8b949e; font-size: 0.85rem;">R_eq is always larger than any single resistor</div>
+</div>
+
+<div style="background: #0d1117; border: 1px solid #30363d; border-radius: 12px; padding: 20px; text-align: center;">
+  <div style="font-size: 2rem; margin-bottom: 8px;">⚠️</div>
+  <div style="color: #e94560; font-weight: 700; margin-bottom: 6px;">Single Point Failure</div>
+  <div style="color: #8b949e; font-size: 0.85rem;">One break stops the entire circuit</div>
+</div>
+
+</div>

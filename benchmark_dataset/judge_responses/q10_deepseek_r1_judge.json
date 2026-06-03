@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "DeepSeek R1",
+  "question_id": 10,
+  "question": "Differentiate between scalar and vector quantities with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nPhysical quantities in classical mechanics are categorized into two structural classes based on their directional dependence properties.\n\nA scalar quantity is a physical property that is completely described by its magnitude (a numerical value with its matching measurement unit) without any directional tracking context.\n\nA vector quantity is a physical property that requires both a defined magnitude and a clear spatial direction descriptor to be fully specified.\n\n---\n\n## Comparison Matrix\n\n| Characteristics | Scalar Quantities | Vector Quantities |\n| --- | --- | --- |\n| **Components** | Possess magnitude descriptors exclusively. | Require both magnitude and direction vectors. |\n| **Mathematical Logic** | Combine via basic algebraic addition. | Require vector addition laws (triangle law). |\n| **Graphic Profile** | Represented simply by static numbers. | Represented graphically by directed straight arrows. |\n\n---\n\n## Real-world Examples\n\n* **Scalar Class:** Speed ($50 \\text{ km/h}$), mass ($10 \\text{ kg}$), temperature ($37^\\circ\\text{C}$), and time interval ($12 \\text{ s}$).\n* **Vector Class:** Velocity ($50 \\text{ km/h due North}$), weight ($98 \\text{ N downward}$), and force ($15 \\text{ N applied East}$).\n\n---\n\n## Summary\n\nScalars maintain total independence from spatial alignment changes, while vectors update their identity if either their magnitude scales or their orientation axes shift.",
+  "candidate_response": "### Scalar vs. Vector Quantities  \nPhysics distinguishes quantities by whether they include direction. Here's a clear breakdown:  \n\n#### 🟥 **Scalar Quantities**  \n- **Definition**: Fully described by **magnitude only** (a number + unit).  \n- **Examples**:  \n  - Mass: `5 kg` (no direction).  \n  - Temperature: `25°C` (only how hot/cold).  \n  - Time: `10 seconds` (duration).  \n  - Distance: `100 m` (path length, ignoring direction).  \n- **Math**: Scalars follow ordinary algebra.  \n  > Example: `3 kg + 4 kg = 7 kg`  \n\n#### 🟦 **Vector Quantities**  \n- **Definition**: Described by **magnitude + direction**.  \n- **Examples**:  \n  - Displacement: `100 m North` (direction matters).  \n  - Force: `20 N downward` (e.g., gravity).  \n  - Velocity: `60 km/h East` (speed + direction).  \n  - Acceleration: `9.8 m/s² downward`.  \n- **Math**: Vectors require vector algebra.  \n  > Example: Moving `3 m East` + `4 m North` → Resultant displacement = `5 m Northeast`.  \n\n---\n\n### Key Differences  \n| **Aspect**          | **Scalar**                          | **Vector**                          |  \n|----------------------|-------------------------------------|-------------------------------------|  \n| **Direction**        | ❌ Not required                     | ✅ Required                         |  \n| **Representation**   | Number + unit (e.g., `50 J`)        | Arrow (e.g., `→` for force)         |  \n| **Addition**         | Arithmetic sum (`5 + 3 = 8`)        | Geometric (tip-to-tail method)      |  \n| **Dependence**       | Independent of coordinates          | Changes with coordinate system      |  \n| **Examples**         | Mass, time, energy, density         | Velocity, force, momentum, torque   |  \n\n---\n\n### ⚠️ Common Pitfalls  \n1. **Speed vs. Velocity**:  \n   - Speed (scalar): `60 km/h`.  \n   - Velocity (vector): `60 km/h North`.  \n2. **Distance vs. Displacement**:  \n   - Distance (scalar): Total path length (e.g., `500 m`).  \n   - Displacement (vector): Straight-line from start to end (e.g., `50 m East`).  \n\n---\n\n### Summary  \n| **Type**     | **Defining Trait** | **Physics Impact**          |  \n|--------------|--------------------|-----------------------------|  \n| **Scalar**   | Magnitude only     | Describes \"how much\"        |  \n| **Vector**   | Magnitude + direction | Describes \"how much + where\" |  \n\n> 🔍 **Test Yourself**:  \n> - Is *electric charge* scalar or vector? (Ans: Scalar — no direction).  \n> - Is *weight* scalar or vector? (Ans: Vector — it acts downward).  \n\nLet me know if you’d like to explore vector operations or real-world applications! 🚀",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately differentiates between scalar and vector quantities, providing clear definitions, examples, and comparisons. The layout is well-formatted, readable, and effectively presents the information. The response is beginner-friendly, pedagogically effective, and clear in its teaching. However, minor improvements could be made, such as adding more visual aids or diagrams to enhance understanding. Overall, the response demonstrates a strong understanding of the concepts and effectively communicates them.",
+  "candidate_token_usage": {
+    "promptTokens": 361,
+    "completionTokens": 850,
+    "totalTokens": 1211
+  },
+  "candidate_latency_ms": 38056,
+  "candidate_cost_usd": 0.00206005,
+  "judge_token_usage": {
+    "promptTokens": 1382,
+    "completionTokens": 149,
+    "totalTokens": 1531
+  },
+  "judge_latency_ms": 4708,
+  "judge_cost_usd": 0.0011868,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:12:40.916Z"
+}

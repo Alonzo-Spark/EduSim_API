@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 2.5 Flash",
+  "question_id": 8,
+  "question": "A ball is projected at an angle of 45° with velocity 20 m/s. Find its range.",
+  "gold_answer": "# Solved Numerical\n\n---\n\n## Projectile Tracking\n\n### Problem\nA ball is projected at an angle of $45^\\circ$ with a velocity of $20 \\text{ m/s}$. Find its horizontal range.\n\n### Given\n* Initial launch velocity ($u$) = $20 \\text{ m/s}$\n* Projection angle ($\\theta$) = $45^\\circ$\n* Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n### Formula\n$$R = \\frac{u^2 \\sin(2\\theta)}{g}$$\n\n### Substitution\n$$R = \\frac{(20)^2 \\times \\sin(2 \\times 45^\\circ)}{9.8}$$\n\n### Calculation\n$$R = \\frac{400 \\times \\sin(90^\\circ)}{9.8}$$\n\nSince $\\sin(90^\\circ) = 1$:\n$$R = \\frac{400 \\times 1}{9.8}$$\n\n$$R = 40.82 \\text{ m}$$\n\n### Final Answer\n**Horizontal Range ($R$) = $40.82 \\text{ m}$**\n\n### Interpretation\nThis means the ball travels a total horizontal ground shortcut distance of $40.82 \\text{ meters}$ away from its initial launch spot before striking the earth baseline.",
+  "candidate_response": "Here's a breakdown of how to find the range of a projectile, presented in an interactive textbook format.\n\n***\n\n### Quick Definition\n\nThe **range** of a projectile is the horizontal distance it travels from its launch point until it returns to the same horizontal level.\n\n***\n\n### Key Concepts\n\nFor projectile motion, we typically analyze the horizontal and vertical components of motion independently.\n\n*   **Initial Velocity Components:**\n    *   Horizontal component ($V_x$): $V_0 \\cos(\\theta)$\n    *   Vertical component ($V_y$): $V_0 \\sin(\\theta)$\n*   **Horizontal Motion:**\n    *   Constant velocity (assuming no air resistance).\n    *   Distance = Velocity $\\times$ Time ($R = V_x \\times T$)\n*   **Vertical Motion:**\n    *   Affected by gravity (constant downward acceleration, $g \\approx 9.8 \\text{ m/s}^2$).\n    *   Symmetrical motion (time to reach maximum height equals time to fall back down).\n\n***\n\n### Main Formula\n\nThe range ($R$) of a projectile launched from a flat surface can be calculated using the following formula:\n\n$$\nR = \\frac{V_0^2 \\sin(2\\theta)}{g}\n$$\n\n<details>\n<summary>Explain Formula</summary>\nThis formula combines the horizontal velocity, the total time of flight, and the effects of gravity into a single expression for the range.\n<ul>\n    <li>$R$: The horizontal range of the projectile (in meters).</li>\n    <li>$V_0$: The initial velocity of the projectile (in meters per second).</li>\n    <li>$\\theta$: The launch angle with respect to the horizontal (in degrees or radians, ensure your calculator is in the correct mode).</li>\n    <li>$g$: The acceleration due to gravity (approximately $9.8 \\text{ m/s}^2$).</li>\n</ul>\n</details>\n<button onclick=\"openFormulaLab('R = (V_0^2 * sin(2*theta)) / g')\">Open Formula Lab</button>\n\n***\n\n### Problem Solution\n\nLet's apply the formula to the given problem.\n\n**Given:**\n*   Initial velocity ($V_0$) = $20 \\text{ m/s}$\n*   Launch angle ($\\theta$) = $45^\\circ$\n*   Acceleration due to gravity ($g$) = $9.8 \\text{ m/s}^2$\n\n**Calculation Steps:**\n\n1.  **Substitute the values into the range formula:**\n    $$\n    R = \\frac{(20 \\text{ m/s})^2 \\sin(2 \\times 45^\\circ)}{9.8 \\text{ m/s}^2}\n    $$\n\n2.  **Calculate $2\\theta$:**\n    $$\n    2 \\times 45^\\circ = 90^\\circ\n    $$\n\n3.  **Find $\\sin(90^\\circ)$:**\n    $$\n    \\sin(90^\\circ) = 1\n    $$\n\n4.  **Calculate $V_0^2$:**\n    $$\n    (20 \\text{ m/s})^2 = 400 \\text{ m}^2/\\text{s}^2\n    $$\n\n5.  **Substitute these values back into the formula:**\n    $$\n    R = \\frac{400 \\text{ m}^2/\\text{s}^2 \\times 1}{9.8 \\text{ m/s}^2}\n    $$\n\n6.  **Calculate the final range:**\n    $$\n    R \\approx 40.82 \\text{ meters}\n    $$\n\nTherefore, the range of the ball is approximately **40.82 meters**.\n\n***\n\n### Important Notes\n\n*   This formula for range assumes the projectile lands at the same height from which it was launched.\n*   Air resistance is neglected in this calculation, which is a common simplification in introductory physics problems. In reality, air resistance would reduce the actual range.\n*   The maximum range for a given initial velocity occurs at a launch angle of $45^\\circ$.\n\n***\n\n### Suggested Questions\n\n*   How would the range change if the launch angle was $30^\\circ$ instead of $45^\\circ$?\n*   What if the ball was launched from a cliff? How would that affect the calculation?\n*   How does gravity on the Moon (approximately $1.62 \\text{ m/s}^2$) affect the range of the same projectile?",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response is highly accurate, well-structured, and effectively educational. It correctly applies the formula for the range of a projectile and provides a clear step-by-step solution to the problem. The use of interactive elements, such as the 'Open Formula Lab' button, and the inclusion of important notes and suggested questions, enhance the educational value of the response. However, there are some minor formatting issues and the response could benefit from more concise language in some sections. Overall, the response demonstrates a strong understanding of the physics concepts and effectively communicates them to the reader.",
+  "candidate_token_usage": {
+    "promptTokens": 395,
+    "completionTokens": 994,
+    "totalTokens": 1389
+  },
+  "candidate_latency_ms": 5813,
+  "candidate_cost_usd": 0.0026035,
+  "judge_token_usage": {
+    "promptTokens": 1688,
+    "completionTokens": 173,
+    "totalTokens": 1861
+  },
+  "judge_latency_ms": 3232,
+  "judge_cost_usd": 0.0014279999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T07:07:44.509Z"
+}

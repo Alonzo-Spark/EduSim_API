@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "zai-glm-4.7 (Cerebras)",
+  "question_id": 45,
+  "question": "What is electrostatic shielding?",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nElectrostatic shielding is the physical phenomenon where a specific region of space is isolated from the influence of external electric fields. This shielding is achieved by enclosing the region within a hollow conducting shell, creating a Faraday cage.\n\n---\n\n## Operating Principle\n\n* **Zero Cavity Field:** When an external electric field is applied to a conductor, its free electrons redistribute along the outer surface to cancel out the field internally, ensuring the net electric field inside the cavity remains exactly zero.\n\n---\n\n## Formula\n\nThe mathematical field constraint inside a hollow conductor:\n\n$$E_{\\text{internal}} = 0$$\n\n---\n\n## Real-world Examples\n\n* **Car in a Lightning Storm:** A car acts as an electrostatic shield; if struck by lightning, the charge travels along the conductive outer metal body to the ground, leaving the passengers inside unharmed.\n* **Coaxial Electronics Cables:** Critical signal wires are wrapped in a braided metal mesh shield to protect data transfers from external electrical interference.\n\n---\n\n## Summary\n\nElectrostatic shielding uses a conducting shell to isolate an internal space from external electric fields, as charges redistribute along the outer surface to keep the internal field at zero.",
+  "candidate_response": "```json\n{\n  \"meta\": {\n    \"topic\": \"Electrostatic Shielding\",\n    \"extractedFormulas\": [\n      {\n        \"id\": \"gauss-law\",\n        \"formula\": \"\\\\oint \\\\mathbf{E} \\\\cdot d\\\\mathbf{A} = \\\\frac{Q_{\\\\text{enc}}}{\\\\epsilon_0}\",\n        \"title\": \"Gauss's Law\",\n        \"variables\": [\n          {\"symbol\": \"\\\\mathbf{E}\", \"meaning\": \"Electric Field\"},\n          {\"symbol\": \"d\\\\mathbf{A}\", \"meaning\": \"Differential Area Vector\"},\n          {\"symbol\": \"Q_{\\\\text{enc}}\", \"meaning\": \"Enclosed Charge\"},\n          {\"symbol\": \"\\\\epsilon_0\", \"meaning\": \"Vacuum Permittivity\"}\n        ]\n      }\n    ]\n  },\n  \"ui_blocks\": [\n    {\n      \"type\": \"card\",\n      \"title\": \"Quick Definition\",\n      \"content\": \"<p><strong>Electrostatic shielding</strong> is the phenomenon observed when a conductor (hollow or solid) blocks the effects of an external electric field. Inside the cavity of a conductor, the electric field is zero, regardless of the strength of the external field.</p>\"\n    },\n    {\n      \"type\": \"card\",\n      \"title\": \"How It Works\",\n      \"content\": \"<ul><li><strong>Charge Redistribution:</strong> When an external electric field is applied, free electrons in the conductor move instantly.</li><li><strong>Induced Field:</strong> This movement creates an induced electric field that opposes the external field.</li><li><strong>Equilibrium:</strong> The two fields cancel each other perfectly inside the conductor, resulting in a net electric field of zero.</li></ul>\"\n    },\n    {\n      \"type\": \"formula_card\",\n      \"title\": \"Underlying Principle\",\n      \"formula_id\": \"gauss-law\",\n      \"rendered_latex\": \"$$\\\\oint \\\\mathbf{E} \\\\cdot d\\\\mathbf{A} = \\\\frac{Q_{\\\\text{enc}}}{\\\\epsilon_0}$$\",\n      \"actions\": [\n        \"[ Explain Formula ]\",\n        \"[ Open Formula Lab ]\"\n      ]\n    },\n    {\n      \"type\": \"card\",\n      \"title\": \"Real-World Applications\",\n      \"content\": {\n        \"table\": {\n          \"headers\": [\"Application\", \"Description\"],\n          \"rows\": [\n            [\"Faraday Cage\", \"A room or enclosure made of conducting mesh that blocks external static and non-static electric fields.\"],\n            [\"Coaxial Cables\", \"The outer braided shield protects the inner signal carrier from external electrical noise.\"],\n            [\"Cars & Airplanes\", \"During a lightning storm, the metal body acts as a shield, keeping the passengers safe inside.\"],\n            [\"Microwave Ovens\", \"The metal mesh on the door prevents the high-frequency electromagnetic waves from escaping.\"],\n            [\"Electronic Shielding\", \"Sensitive components are wrapped in foil to prevent interference.\"]]\n        }\n      }\n    },\n    {\n      \"type\": \"card\",\n      \"title\": \"Important Notes\",\n      \"content\": \"<ul><li>⚠️ <strong>Static vs. Dynamic:</strong> This shielding is perfect for <em>electrostatic</em> fields. For changing electromagnetic fields (like radio waves), the shield's effectiveness depends on the thickness and frequency.</li><li>⚠️ <strong>No Field Inside:</strong> The electric field inside the material of the conductor is zero in electrostatic equilibrium.</li><li>⚠️ <strong>Mesh Size:</strong> For shielding against high-frequency waves, the holes in the mesh must be significantly smaller than the wavelength.</li></ul>\"\n    },\n    {\n      \"type\": \"card\",\n      \"title\": \"Suggested Questions\",\n      \"content\": \"<ol><li>Why are you safe inside a car during a thunderstorm?</li><li>Does electrostatic shielding work with non-conducting materials?</li><li>How does the thickness of a conductor affect its shielding ability against low-frequency magnetic fields?</li></ol>\"\n    }\n  ]\n}\n```",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of electrostatic shielding, accurately covering its definition, operating principle, and real-world applications. The inclusion of Gauss's Law and its explanation adds depth to the response. The structured format using JSON cards enhances readability and presentation. However, minor improvements could include explicitly stating the formula for the internal electric field as zero, as mentioned in the Gold Answer, and providing more detailed explanations for some of the real-world applications. Overall, the response is well-structured, accurate, and educational, making it highly effective for learning about electrostatic shielding.",
+  "candidate_token_usage": {
+    "promptTokens": 353,
+    "completionTokens": 2300,
+    "totalTokens": 2653
+  },
+  "candidate_latency_ms": 4164,
+  "candidate_cost_usd": 0.004953,
+  "judge_token_usage": {
+    "promptTokens": 1544,
+    "completionTokens": 174,
+    "totalTokens": 1718
+  },
+  "judge_latency_ms": 6939,
+  "judge_cost_usd": 0.001344,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:41:43.768Z"
+}

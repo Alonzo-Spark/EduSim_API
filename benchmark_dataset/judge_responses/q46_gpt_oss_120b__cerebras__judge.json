@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-120b (Cerebras)",
+  "question_id": 46,
+  "question": "Current Electricity: State Ohm’s law and explain its limitations.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nOhm's Law states that the electric current flowing through a conductor is directly proportional to the potential difference applied across its ends, provided all physical conditions, such as temperature, remain completely constant.\n\n---\n\n## Limitations of the Law\n\n* **Temperature Dependency:** As current increases, temperature often rises due to Joule heating, which changes the material's resistance and causes the relationship to become non-linear.\n* **Non-Ohmic Devices:** The law does not apply to semiconductor components like diodes or transistors, where current does not scale linearly with voltage.\n\n---\n\n## Formula\n\nThe mathematical relation is stated as:\n\n$$V = IR$$\n\nWhere:\n* $V$ represents the potential difference (voltage) across the conductor\n* $I$ represents the electric current flowing through it\n* $R$ represents the electrical resistance of the material\n\n---\n\n## Summary\n\nOhm's Law defines a linear relationship between voltage and current ($V=IR$), but it is limited to materials that maintain a stable temperature and does not apply to non-ohmic semiconductor devices.",
+  "candidate_response": "┌───────────────────────────────────────┐\n│ Introduction                           │\n│                                       │\n│ In the study of current electricity,   │\n│ the relationship between voltage,      │\n│ current, and resistance is a          │\n│ cornerstone for analysing circuits.  │\n│ Understanding its scope and limits    │\n│ is essential for accurate design and   │\n│ troubleshooting.                       │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Definition                             │\n│                                       │\n│ **Ohm’s Law** states that the electric │\n│ current flowing through a conductor   │\n│ is directly proportional to the       │\n│ applied voltage, provided the          │\n│ temperature and material remain        │\n│ constant.                               │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Main Formula                           │\n│                                       │\n│   $$V = I\\,R$$                         │\n│                                       │\n│ [ Explain Formula ]                    │\n│ [ Open Formula Lab ]                   │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Variables                               │\n│                                       │\n│ • **V** – Voltage (volts, V)           │\n│ • **I** – Current (amperes, A)         │\n│ • **R** – Resistance (ohms, Ω)         │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Limitations                            │\n│                                       │\n│ 1. **Temperature Dependence** –       │\n│    Resistance changes with temperature│\n│    (most conductors increase).         │\n│ 2. **Non‑Ohmic Materials** –          │\n│    Semiconductors, diodes, transistors│\n│    do not obey a linear V‑I relation. │\n│ 3. **High‑Field Effects** –            │\n│    At very high electric fields,      │\n│    carriers gain energy and the       │\n│    relationship becomes non‑linear.   │\n│ 4. **Contact & Interface Resistance** │\n│    Real connections add extra resistance│\n│    that may vary with current.         │\n│ 5. **Frequency Dependence** –          │\n│    At AC or very fast transients,     │\n│    inductive and capacitive reactance │\n│    dominate, breaking the simple law. │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Applications                           │\n│                                       │\n│ • Designing resistive circuits         │\n│ • Calculating power (P = V·I)           │\n│ • Sizing conductors and protective      │\n│   devices                               │\n│ • Teaching fundamental circuit theory │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Summary                                 │\n│                                       │\n│ Ohm’s law (V = I R) provides a simple   │\n│ linear link between voltage, current,   │\n│ and resistance, but it holds only under │\n│ constant temperature, low‑field, and    │\n│ linear‑material conditions. Real‑world  │\n│ components often deviate, requiring      │\n│ more complex models.                     │\n└───────────────────────────────────────┘\n\n┌───────────────────────────────────────┐\n│ Suggested Questions                     │\n│                                       │\n│ 1. How does temperature affect the       │\n│    resistance of a copper wire?          │\n│ 2. Why do diodes not follow Ohm’s law?   │\n│ 3. What happens to Ohm’s law at very high│\n│    frequencies?                          │\n│ 4. How would you modify the formula for   │\n│    a resistor with a temperature coefficient?│\n│ 5. Design a simple circuit that demonstrates│\n│    the limits of Ohm’s law.               │\n└───────────────────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of Ohm's Law, including its definition, formula, and limitations. The response is well-structured and easy to follow, with clear explanations and examples. However, the quality score is slightly lower due to the unconventional use of ASCII art tables, which may not be suitable for all audiences. Additionally, some of the suggested questions could be more directly related to the topic of Ohm's Law. Overall, the response is accurate, educational, and well-presented, with minor suggestions for improvement.",
+  "candidate_token_usage": {
+    "promptTokens": 430,
+    "completionTokens": 1280,
+    "totalTokens": 1710
+  },
+  "candidate_latency_ms": 1170,
+  "candidate_cost_usd": 0.0008325,
+  "judge_token_usage": {
+    "promptTokens": 1520,
+    "completionTokens": 166,
+    "totalTokens": 1686
+  },
+  "judge_latency_ms": 3871,
+  "judge_cost_usd": 0.0013104,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:45:16.694Z"
+}

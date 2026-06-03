@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 46,
+  "question": "Current Electricity: State Ohm’s law and explain its limitations.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nOhm's Law states that the electric current flowing through a conductor is directly proportional to the potential difference applied across its ends, provided all physical conditions, such as temperature, remain completely constant.\n\n---\n\n## Limitations of the Law\n\n* **Temperature Dependency:** As current increases, temperature often rises due to Joule heating, which changes the material's resistance and causes the relationship to become non-linear.\n* **Non-Ohmic Devices:** The law does not apply to semiconductor components like diodes or transistors, where current does not scale linearly with voltage.\n\n---\n\n## Formula\n\nThe mathematical relation is stated as:\n\n$$V = IR$$\n\nWhere:\n* $V$ represents the potential difference (voltage) across the conductor\n* $I$ represents the electric current flowing through it\n* $R$ represents the electrical resistance of the material\n\n---\n\n## Summary\n\nOhm's Law defines a linear relationship between voltage and current ($V=IR$), but it is limited to materials that maintain a stable temperature and does not apply to non-ohmic semiconductor devices.",
+  "candidate_response": "┌───────────────────────────┐  \n│ Introduction              │  \n│                           │  \n│ Current electricity deals │  \n│ with the flow of electric  │  \n│ charge through a conductor. │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Ohm's Law                 │  \n│                           │  \n│ Ohm's Law states that the │  \n│ current (I) flowing through │  \n│ a conductor between two    │  \n│ points is directly         │  \n│ proportional to the       │  \n│ voltage (V) across the    │  \n│ two points and inversely   │  \n│ proportional to the       │  \n│ resistance (R) of the     │  \n│ conductor. This can be    │  \n│ expressed mathematically as:  │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Main Formula              │  \n│                           │  \n│     $$ V = I \\cdot R $$   │  \n│                           │  \n│ [ Explain Formula ]       │  \n│ [ Open Formula Lab ]      │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Limitations of Ohm's Law  │  \n│                           │  \n│ 1. **Non-linear materials**: Ohm's law is applicable only for materials that have a constant resistance. Non-linear components like diodes and transistors do not follow Ohm's law.  │  \n│                           │  \n│ 2. **Temperature dependence**: Resistance can change with temperature, affecting the linear relationship between voltage and current.  │  \n│                           │  \n│ 3. **High frequencies**: At very high frequencies, the behavior of materials can deviate from Ohm's law due to factors like skin effect and capacitance. │  \n│                           │  \n│ 4. **Complex materials**: In certain materials, such as superconductors or alloys, Ohm's law does not hold true under certain conditions. │  \n└───────────────────────────┘  \n\n┌───────────────────────────┐  \n│ Important Notes           │  \n│                           │  \n│ Understanding the limits  │  \n│ of Ohm's law is crucial   │  \n│ for designing and         │  \n│ analyzing electrical       │  \n│ circuits, especially when  │  \n│ working with non-linear    │  \n│ components.               │  \n└───────────────────────────┘  ",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response accurately states Ohm's Law and its limitations, including temperature dependency and non-ohmic devices. The mathematical formula is correctly presented as V = I * R. The response also provides additional limitations not mentioned in the gold reference answer, such as high frequencies and complex materials, which are correct but not required. The layout and formatting are clear and readable, although the use of boxes and labels is unconventional. The educational value is high, as the response provides a clear explanation of the law and its limitations, making it suitable for beginners. However, the quality score is not perfect due to the unconventional formatting. To improve, consider using standard formatting and focusing on the required information.",
+  "candidate_token_usage": {
+    "promptTokens": 367,
+    "completionTokens": 509,
+    "totalTokens": 876
+  },
+  "candidate_latency_ms": 6832,
+  "candidate_cost_usd": 0.00036045,
+  "judge_token_usage": {
+    "promptTokens": 1129,
+    "completionTokens": 198,
+    "totalTokens": 1327
+  },
+  "judge_latency_ms": 5368,
+  "judge_cost_usd": 0.0011526,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:45:16.702Z"
+}

@@ -1,0 +1,98 @@
+### Ohm's Law: Core Principles and Limitations  
+
+#### ⚡ Quick Definition  
+Ohm's Law states that the electric current (\(I\)) flowing through a conductor is **directly proportional** to the voltage (\(V\)) applied across it and **inversely proportional** to its resistance (\(R\)), provided physical conditions (e.g., temperature) remain constant.  
+
+---
+
+#### 📜 Statement of Ohm's Law  
+> **"The current through a conductor between two points is directly proportional to the voltage across the two points and inversely proportional to the resistance between them."**  
+
+---
+
+#### 🧮 Formula Card: Ohm's Law  
+<div class="formula-card">  
+  <div class="formula-header">  
+    <span class="formula-title">Ohm's Law Equation</span>  
+  </div>  
+  <div class="formula-content">  
+    \[ \boxed{V = I \times R} \]  
+  </div>  
+  <div class="formula-variables">  
+    <div class="variable">  
+      <div class="symbol">\(V\)</div>  
+      <div class="meaning">Voltage (volts)</div>  
+    </div>  
+    <div class="variable">  
+      <div class="symbol">\(I\)</div>  
+      <div class="meaning">Current (amperes)</div>  
+    </div>  
+    <div class="variable">  
+      <div class="symbol">\(R\)</div>  
+      <div class="meaning">Resistance (ohms)</div>  
+    </div>  
+  </div>  
+  <div class="formula-actions">  
+    <button class="explain-btn">Explain Formula</button>  
+    <button class="lab-btn">Open Formula Lab</button>  
+  </div>  
+</div>  
+
+---
+
+#### ⚠️ Limitations of Ohm's Law  
+Ohm's Law is **not universal**. It fails for components where resistance varies with external factors:  
+
+| **Scenario**               | **Behavior**                                                                 | **Examples**                          |  
+|----------------------------|-----------------------------------------------------------------------------|---------------------------------------|  
+| **Non-Ohmic Materials**    | Resistance changes with voltage/current; \(V\) vs. \(I\) graph is non-linear | Diodes, Transistors, Semiconductors   |  
+| **Temperature Changes**    | Heating alters resistance (e.g., filament bulbs)                            | Incandescent bulbs, Thermistors       |  
+| **High Voltage/Current**  | Excessive energy breaks down material properties                            | Insulators under breakdown voltage    |  
+| **AC at High Frequency**   | Skin effect, capacitance, inductance dominate                               | RF circuits, Transmission lines       |  
+
+---
+
+#### 🔑 Key Characteristics of Ohmic vs. Non-Ohmic Conductors  
+| **Property**           | **Ohmic Conductors**                  | **Non-Ohmic Conductors**             |  
+|------------------------|---------------------------------------|---------------------------------------|  
+| **\(V-I\) Graph**      | Straight line through origin          | Curve (e.g., exponential, parabolic)  |  
+| **Resistance**         | Constant (\(R = \frac{V}{I}\))        | Variable (depends on \(V\), \(I\))    |  
+| **Examples**           | Copper, Aluminum, Resistors           | LEDs, Transistors, Vacuum tubes       |  
+
+---
+
+#### 💡 Applications  
+- **Circuit Design:** Calculate voltage, current, or resistance in DC circuits.  
+- **Power Management:** Determine power dissipation (\(P = I^2 R\)).  
+- **Sensor Calibration:** Standardize resistive sensors (e.g., strain gauges).  
+
+---
+
+#### ⚖️ Advantages & Disadvantages  
+| **Advantages**                     | **Disadvantages**                          |  
+|------------------------------------|-------------------------------------------|  
+| Simplicity for DC analysis         | Only valid for ohmic materials            |  
+| Foundation for circuit laws (e.g., Kirchhoff) | Fails under dynamic conditions (AC, temp shifts) |  
+
+---
+
+#### 📝 Important Notes  
+1. **Ohmic Materials:** Metals obey Ohm's Law only if temperature is constant.  
+2. **Non-Linearity:** Semiconductors exhibit exponential \(V-I\) relationships (e.g., Shockley diode equation).  
+3. **Dynamic Resistance:** Defined as \(r = \frac{dV}{dI}\), not \(V/I\).  
+
+---
+
+#### 🔍 Summary  
+- **Core Principle:** \(V = IR\) for ohmic conductors under stable conditions.  
+- **Fails When:** Resistance depends on \(V\), \(I\), temperature, or frequency.  
+- **Real-World Use:** Primarily for idealized resistors and DC analysis.  
+
+---
+
+#### ❓ Suggested Questions  
+1. Why does an LED not obey Ohm's Law?  
+2. How does temperature affect the resistance of a copper wire?  
+3. Calculate the current through a \(10\ \Omega\) resistor at \(5\ \text{V}\). Verify Ohm's Law.  
+
+Let me know which topic you'd like to explore next!

@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 44,
+  "question": "Explain the working principle of a capacitor.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nA capacitor is an electrical component designed to store potential energy in an electric field by accumulating opposite charges on two closely spaced, insulated conducting plates.\n\n---\n\n## Working Mechanism\n\n* **Charge Separation:** When connected to a voltage source, electrons accumulate on one plate, giving it a negative charge, while electrons leave the opposite plate, leaving it positively charged.\n* **Electric Field Storage:** This charge separation creates a stable electric field between the plates, storing energy even after the voltage source is disconnected.\n\n---\n\n## Formula\n\nThe relationship governing charge storage capacity is:\n\n$$Q = CV$$\n\nFor a basic parallel-plate capacitor layout:\n\n$$C = \\frac{\\varepsilon_0 A}{d}$$\n\nWhere:\n* $Q$ represents the total stored charge magnitude\n* $C$ represents the capacitance value measured in Farads ($\\text{F}$)\n* $V$ represents the applied voltage across the plates\n* $A$ represents the area of overlapping plates\n* $d$ represents the distance separating the plates\n\n---\n\n## Summary\n\nCapacitors store electrical energy by holding opposite charges on isolated plates, creating an internal electric field with a storage capacity that scales with plate area and proximity.",
+  "candidate_response": "### 📘 CHAPTER: ELECTROSTATICS\n# Understanding the Capacitor: Theory & Mechanics\n\n---\n\n┌──────────────────────────────────────────────────────────┐\n│ **Quick Definition**                                     │\n│                                                          │\n│ A **Capacitor** is a passive electronic component that   │\n│ stores electrical energy in an **electric field**. It    │\n│ acts like a temporary battery that can charge and        │\n│ discharge almost instantaneously.                        │\n└──────────────────────────────────────────────────────────┘\n\n### 🧩 The Working Principle\nA capacitor works on the principle that the capacitance of a conductor is increased when an earthed conductor is placed near it.\n\n1.  **Charge Accumulation:** When connected to a DC source, electrons flow to one plate (making it negative) and are pulled away from the other (making it positive).\n2.  **Electric Field Creation:** The potential difference between the plates creates an internal electric field.\n3.  **Dielectric Polarization:** The insulating material (dielectric) between the plates polarizes, opposing the electric field and allowing the plates to hold more charge at the same voltage.\n4.  **Saturation:** The flow stops when the potential difference across the plates equals the battery voltage.\n\n---\n\n┌──────────────────────────────────────────────────────────┐\n│ **Main Formula: Capacitance**                            │\n│                                                          │\n│                 $$C = \\frac{Q}{V}$$                      │\n│                                                          │\n│ **[ Explain Formula ]**                                  │\n│ C is Capacitance (Farads), Q is Charge (Coulombs),       │\n│ and V is Potential Difference (Volts).                   │\n│                                                          │\n│ **[ Open Formula Lab ]**                                 │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n### 📊 Physical Characteristics\nThe ability to store charge depends on the physical construction of the device.\n\n| Factor | Relationship | Effect on Capacitance |\n| :--- | :--- | :--- |\n| **Plate Area (A)** | Direct ($$C \\propto A$$) | Larger area = More space for charges |\n| **Distance (d)** | Inverse ($$C \\propto 1/d$$) | Closer plates = Stronger attraction |\n| **Dielectric ($\\epsilon$)** | Direct ($$C \\propto \\epsilon$$) | Better insulator = Higher storage |\n\n---\n\n┌──────────────────────────────────────────────────────────┐\n│ **Physical Design Formula**                              │\n│                                                          │\n│             $$C = \\epsilon_0 \\epsilon_r \\frac{A}{d}$$    │\n│                                                          │\n│ **[ Explain Formula ]**                                  │\n│ Relates capacitance to the permittivity of space,        │\n│ plate area, and the distance between plates.             │\n│                                                          │\n│ **[ Open Formula Lab ]**                                 │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n### 🚀 Applications & Use Cases\n*   **Energy Storage:** Providing bursts of power for camera flashes.\n*   **Filtering:** Removing \"noise\" from power supplies by smoothing voltage ripples.\n*   **Tuning:** Selecting specific frequencies in radio receivers.\n*   **Timing:** Used with resistors to create delay circuits (RC circuits).\n\n---\n\n┌──────────────────────────────────────────────────────────┐\n│ **Important Notes**                                      │\n│                                                          │\n│ ⚠️ **DC vs AC:** A capacitor blocks Direct Current (DC)  │\n│ once fully charged but allows Alternating Current (AC)   │\n│ to pass through via constant charging/discharging.       │\n└──────────────────────────────────────────────────────────┘\n\n---\n\n### 📝 Suggested Questions\n1.  *How does inserting a dielectric material change the capacitance of a parallel plate capacitor?*\n2.  *Why does a capacitor block DC after it is fully charged?*\n3.  *Calculate the charge stored in a 10μF capacitor connected to a 12V battery.*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 8,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.33"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the working principle of a capacitor, including charge accumulation, electric field creation, and dielectric polarization. The use of formulas, such as C = Q/V and C = ε0 * εr * A/d, is accurate and well-explained. The response also provides a clear and concise summary of the physical characteristics that affect capacitance, including plate area, distance, and dielectric material. Additionally, the candidate provides relevant examples of capacitor applications and use cases. However, there are some minor areas for improvement, such as providing more detailed explanations of certain concepts, like the relationship between capacitance and dielectric material. Furthermore, some of the sections, such as the 'Important Notes' and 'Suggested Questions', could be more tightly integrated into the main body of the response to improve overall flow and coherence. Overall, the response is well-structured, easy to follow, and effectively communicates the key concepts related to capacitors.",
+  "candidate_token_usage": {
+    "promptTokens": 378,
+    "completionTokens": 835,
+    "totalTokens": 1213
+  },
+  "candidate_latency_ms": 6041,
+  "candidate_cost_usd": 0.002694,
+  "judge_token_usage": {
+    "promptTokens": 1508,
+    "completionTokens": 257,
+    "totalTokens": 1765
+  },
+  "judge_latency_ms": 11142,
+  "judge_cost_usd": 0.0015216,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:39:52.060Z"
+}

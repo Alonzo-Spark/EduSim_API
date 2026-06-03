@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "gpt-oss-20b (Groq)",
+  "question_id": 47,
+  "question": "Derive the expression for equivalent resistance in series combination.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nA series combination is a circuit configuration where resistors are connected end-to-end in a single path, ensuring that the same electric current flows through each component sequentially.\n\n---\n\n## Formula\n\nThe total equivalent resistance for a series circuit is:\n\n$$R_{\\text{eq}} = R_1 + R_2 + R_3$$\n\nWhere:\n* $R_{\\text{eq}}$ represents the net total circuit resistance\n* $R_1, R_2, R_3$ represent the individual resistor values\n\n---\n\n## Derivations\n\nConsider three resistors with values $R_1$, $R_2$, and $R_3$ connected in a series chain across a voltage source $V$.\n\nBecause there is only one path for the electrons to follow, the current ($I$) passing through each resistor is identical:\n$$I_1 = I_2 = I_3 = I$$\n\nThe total applied voltage ($V$) divides across the resistors, equal to the sum of the individual voltage drops:\n$$V = V_1 + V_2 + V_3$$\n\nApplying Ohm's Law ($V = IR$) to each individual resistor component:\n$$V_1 = I R_1$$\n\n$$V_2 = I R_2$$\n\n$$V_3 = I R_3$$\n\nSubstitute these individual voltage drop expressions into the total voltage equation:\n$$V = I R_1 + I R_2 + I R_3$$\n\nFactor out the common current parameter ($I$) from the terms:\n$$V = I(R_1 + R_2 + R_3)$$\n\nIf we replace the entire chain with a single equivalent resistor ($R_{\\text{eq}}$), the total voltage is $V = I R_{\\text{eq}}$. Equating these expressions:\n$$I R_{\\text{eq}} = I(R_1 + R_2 + R_3)$$\n\nDivide both sides by the current parameter ($I$) to yield the final relation:\n$$R_{\\text{eq}} = R_1 + R_2 + R_3$$\n\nThis completes the derivation for series equivalent resistance.\n\n---\n\n## Summary\n\nResistors in series share the same current, causing their voltage drops to add up. This results in an equivalent resistance equal to the sum of the individual resistances.",
+  "candidate_response": "<failed>",
+  "judge_model": "N/A",
+  "scores": {
+    "accuracy": 0,
+    "quality": 0,
+    "educational": 0,
+    "overall_average": "0.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "Model generation failed: OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "candidate_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "candidate_latency_ms": 103,
+  "candidate_cost_usd": 0,
+  "judge_token_usage": {
+    "promptTokens": 0,
+    "completionTokens": 0,
+    "totalTokens": 0
+  },
+  "judge_latency_ms": 0,
+  "judge_cost_usd": 0,
+  "retry_count": 2,
+  "success": false,
+  "error": "OpenRouter HTTP 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"openai/gpt-oss-20b is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Groq\"}},\"user_id\":\"user_3DNxbBbJg70Y8qRQxHAydS2iArL\"}",
+  "timestamp": "2026-06-01T09:47:36.650Z"
+}

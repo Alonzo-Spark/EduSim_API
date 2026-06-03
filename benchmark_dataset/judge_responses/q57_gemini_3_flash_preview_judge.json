@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "Gemini 3 Flash Preview",
+  "question_id": 57,
+  "question": "Live Sandbox: Describe the visual effect of increasing the driven frequency in a forced harmonic oscillator.",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nA spring-mass system is driven by an external motor that applies a periodic pushing force. We can adjust the driving frequency slider to observe how it interacts with the system's natural frequency.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nAs the driving frequency approaches the natural frequency of the spring, the amplitude of the oscillations grows larger. If the driving frequency is increased past this point, the motions become uncoordinated and the amplitude drops off significantly.\n\n### ✦ WHY IT HAPPENS\nMatching frequencies creates a condition called resonance, where the external force always pushes in the direction of the block's motion, transferring energy efficiently. If the driving frequency is too high, the force often opposes the motion, canceling out its own energy transfer.\n\n### ✦ WHAT TO NOTICE\nWatch the amplitude tracking envelope. Note how it peaks at a specific frequency match and falls off when the driving motor runs too fast.\n\n### ✦ FORMULA\nThe steady-state amplitude of a driven harmonic oscillator is given by:\n\n$$A = \\frac{F_0/m}{\\sqrt{(\\omega_0^2 - \\omega^2)^2 + (b\\omega/m)^2}}$$\n\n* $\\omega$ represents the external driving frequency parameter.\n* $\\omega_0$ represents the natural frequency of the system ($\\sqrt{k/m}$).\n* The amplitude ($A$) reaches its maximum when $\\omega \\approx \\omega_0$.\n\n### ✦ DEEPER UNDERSTANDING\nResonance depends on timing. When the driving force is synchronized with the system's natural timing, it builds up energy over multiple cycles, creating large-scale oscillations.\n\n### ✦ TRY THIS\n1. Slowly increase the **Driver frequency control** until you hit the peak resonant vibration amplitude.\n2. Turn the **Frequency slider** past the peak and observe the system return to small, uncoordinated movements.",
+  "candidate_response": "### Interactive Lesson: Forced Harmonic Oscillators\n\n:::section{title=\"Introduction\"}\nIn a forced harmonic oscillator, an external periodic force $F(t) = F_0 \\cos(\\omega t)$ is applied to a system. Unlike free oscillation, the system eventually settles into a **Steady State** where it vibrates at the frequency of the driving force, not its own natural frequency.\n:::\n\n:::section{title=\"The Formula Lab\"}\n$$\nA(\\omega) = \\frac{F_0/m}{\\sqrt{(\\omega_0^2 - \\omega^2)^2 + (2\\gamma\\omega)^2}}\n$$\n\n**Variables:**\n*   $A$: Amplitude of oscillation\n*   $\\omega$: Driving frequency (The \"Input\")\n*   $\\omega_0$: Natural frequency of the system\n*   $\\gamma$: Damping coefficient (friction/resistance)\n\n[ 🔬 **Open Formula Lab: Adjust $\\omega$ to see Amplitude response** ]\n:::\n\n:::section{title=\"Visual Effects of Increasing Frequency\"}\nAs you turn the frequency dial from zero to high frequencies, the system passes through three distinct visual phases:\n\n| Phase | Frequency Range | Visual Behavior |\n| :--- | :--- | :--- |\n| **1. Low Frequency** | $\\omega \\ll \\omega_0$ | The mass follows the driver almost perfectly. Motion is slow and in-phase. |\n| **2. Resonance** | $\\omega \\approx \\omega_0$ | **Maximum Displacement.** The oscillations become violent and reach peak amplitude. |\n| **3. High Frequency** | $\\omega \\gg \\omega_0$ | The mass barely moves. It cannot keep up with the rapid changes of the driver. |\n:::\n\n:::section{title=\"Key Concept: Phase Shift\"}\nIncreasing the frequency doesn't just change the size of the movement; it changes the **timing**.\n\n*   **At low frequencies:** The mass moves *with* the pusher (In phase).\n*   **At resonance:** The mass lags by $90^\\circ$ ($\\pi/2$).\n*   **At high frequencies:** The mass moves *opposite* to the pusher (Out of phase).\n:::\n\n:::section{title=\"Summary Card\"}\n**The \"Inertia\" Effect:**\nAs $\\omega$ increases beyond resonance, the visual amplitude drops toward zero. This is because the system's mass has **inertia**; it takes time to accelerate. If the force flips direction too fast, the mass simply stutters in place, unable to complete a full swing.\n:::\n\n:::section{title=\"Suggested Questions\"}\n1.  **What happens to the amplitude if we increase damping ($\\gamma$) during resonance?**\n2.  **Why does the phase shift reach exactly $180^\\circ$ at infinite frequency?**\n3.  **How does the energy transfer change as $\\omega$ passes $\\omega_0$?**\n:::",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 8,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of the concepts related to forced harmonic oscillators, including resonance, phase shift, and the effects of increasing the driving frequency. The use of formulas, such as the steady-state amplitude equation, is accurate and well-explained. The response is well-structured and easy to follow, with clear headings and sections that enhance readability. However, to further improve the educational score, the candidate could consider adding more interactive elements or visual aids to help beginners understand the complex concepts. Additionally, some of the sections, such as the 'Summary Card' and 'Suggested Questions', could be more tightly integrated into the main body of the response to improve flow. Overall, the response is of high quality and effectively conveys the key concepts related to forced harmonic oscillators.",
+  "candidate_token_usage": {
+    "promptTokens": 388,
+    "completionTokens": 627,
+    "totalTokens": 1015
+  },
+  "candidate_latency_ms": 5698,
+  "candidate_cost_usd": 0.002075,
+  "judge_token_usage": {
+    "promptTokens": 1428,
+    "completionTokens": 220,
+    "totalTokens": 1648
+  },
+  "judge_latency_ms": 19214,
+  "judge_cost_usd": 0.0013847999999999998,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:29:31.044Z"
+}

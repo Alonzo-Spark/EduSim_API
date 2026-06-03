@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "GPT-4o-mini",
+  "question_id": 38,
+  "question": "Explain resonance with examples.",
+  "gold_answer": "# Introduction\n\n---\n\n## Definition\n\nResonance is a physical phenomenon that occurs when a periodic driving force is applied to an oscillatory system at a frequency that matches its natural frequency of vibration, causing a significant increase in the system's amplitude.\n\n---\n\n## Mechanism\n\n* **Frequency Matching:** When the external driving frequency matches the system's natural frequency, energy transfers efficiently, causing the system's structural amplitude to grow larger over time.\n\n---\n\n## Advantages and Disadvantages\n\n| Advantages | Disadvantages |\n| --- | --- |\n| Enhances signal amplification in wireless radios and acoustic instruments. | Can cause structural failure in mechanical systems, bridges, or buildings. |\n\n---\n\n## Real-world Examples\n\n* **Playground Swing:** Pushing a child on a swing at the exact moment the swing reaches its peak height increases the amplitude with minimal effort.\n* **Acoustic Wine Glass:** A singer matching their vocal pitch to the natural resonant frequency of a crystal wine glass can cause it to shatter as the vibrations become too large.\n* **Radio Tuning Circuit:** Adjusting a radio's electrical frequency to match an incoming broadcast wave amplifies that specific signal while filtering out others.\n\n---\n\n## Summary\n\nResonance occurs when a driving force matches a system's natural frequency, maximizing energy transfer and significantly amplifying the vibration scale.",
+  "candidate_response": "┌───────────────────────────┐\n│ Quick Definition          │\n│                           │\n│ Resonance is the phenomenon │\n│ where a system vibrates with │\n│ greater amplitude at certain  │\n│ frequencies, known as the     │\n│ system's natural frequencies. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Key Concepts              │\n│                           │\n│ - **Natural Frequency**:   │\n│   The frequency at which a  │\n│   system tends to oscillate  │\n│   in the absence of any      │\n│   driving force.             │\n│ - **Driving Frequency**:    │\n│   The frequency of an external│\n│   force applied to the system.│\n│ - **Amplitude**:            │\n│   The maximum extent of         │\n│   vibration or displacement.     │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Characteristics          │\n│                           │\n│ - Increased amplitude at   │\n│   specific frequencies.     │\n│ - Can lead to destructive  │\n│   interference if not controlled.│\n│ - Common in various systems,│\n│   including mechanical,     │\n│   electrical, and acoustic. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Examples                 │\n│                           │\n│ 1. **Swinging**: A child  │\n│    on a swing can be pushed│\n│    at the right intervals,  │\n│    causing the swing to go │\n│    higher with each push.   │\n│ 2. **Bridges**: The Tacoma │\n│    Narrows Bridge famously  │\n│    collapsed due to resonance│\n│    when wind matched the    │\n│    bridge's natural frequency.│\n│ 3. **Musical Instruments**:│\n│    A guitar string vibrates │\n│    at its natural frequency  │\n│    when plucked, producing   │\n│    a specific musical note. │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Important Notes          │\n│                           │\n│ - Resonance can be both    │\n│   beneficial (e.g., in musical│\n│   instruments) and harmful (e.g.,│\n│   in structures).           │\n│ - Damping can reduce the effects│\n│   of resonance in various systems.│\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Summary                  │\n│                           │\n│ Resonance is a fundamental │\n│ concept in physics that explains│\n│ how systems respond to external│\n│ forces. Understanding resonance│\n│ is crucial in various fields, │\n│ from engineering to music.   │\n└───────────────────────────┘\n\n┌───────────────────────────┐\n│ Suggested Questions       │\n│                           │\n│ 1. What are some real-world │\n│    applications of resonance? │\n│ 2. How can resonance be controlled?│\n│ 3. What role does damping play in resonance?│\n└───────────────────────────┘",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 8,
+    "educational": 9,
+    "overall_average": "8.67"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": false,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a strong understanding of resonance, including its definition, key concepts, characteristics, and examples. The use of a structured format with clear headings and concise descriptions enhances readability. However, there are a few areas for improvement. Firstly, the response could benefit from more detailed explanations of the mechanisms behind resonance, such as frequency matching and energy transfer. Additionally, the section on 'Important Notes' touches on the concept of damping but does not fully explore its role in reducing the effects of resonance. Lastly, while the 'Suggested Questions' section is a nice touch, it feels somewhat disconnected from the rest of the response and could be integrated more seamlessly. Overall, the response is well-structured, accurate, and educational, but could benefit from further elaboration on key concepts and more cohesive integration of all sections.",
+  "candidate_token_usage": {
+    "promptTokens": 359,
+    "completionTokens": 703,
+    "totalTokens": 1062
+  },
+  "candidate_latency_ms": 9073,
+  "candidate_cost_usd": 0.00047565,
+  "judge_token_usage": {
+    "promptTokens": 1363,
+    "completionTokens": 224,
+    "totalTokens": 1587
+  },
+  "judge_latency_ms": 6066,
+  "judge_cost_usd": 0.0013553999999999999,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T09:26:41.739Z"
+}

@@ -1,0 +1,551 @@
+<div class="tutor-response">
+
+# Scalar vs Vector Quantities
+
+<div class="section-grid">
+
+<div class="concept-card full-width">
+<div class="card-header intro-header">
+<span class="card-icon">📖</span>
+<span class="card-title">Overview</span>
+</div>
+<div class="card-body">
+Physical quantities in physics are classified into two fundamental categories based on whether they require a <strong>direction</strong> to be fully described. Understanding this distinction is foundational to all of classical mechanics.
+</div>
+</div>
+
+</div>
+
+---
+
+<div class="section-grid two-col">
+
+<div class="concept-card">
+<div class="card-header scalar-header">
+<span class="card-icon">🔢</span>
+<span class="card-title">Scalar Quantity</span>
+</div>
+<div class="card-body">
+<p>A quantity that is <strong>completely described by magnitude alone</strong> — no direction is needed.</p>
+
+<div class="property-list">
+<div class="property-item">
+<span class="property-label">Representation</span>
+<span class="property-value">Simple number with unit</span>
+</div>
+<div class="property-item">
+<span class="property-label">Direction</span>
+<span class="property-value">❌ Not required</span>
+</div>
+<div class="property-item">
+<span class="property-label">Algebra</span>
+<span class="property-value">Ordinary arithmetic</span>
+</div>
+</div>
+
+<div class="example-box scalar-example">
+<div class="example-title">Examples</div>
+<div class="example-tags">
+<span class="tag">Mass — 5 kg</span>
+<span class="tag">Temperature — 37°C</span>
+<span class="tag">Speed — 60 km/h</span>
+<span class="tag">Energy — 200 J</span>
+<span class="tag">Time — 10 s</span>
+<span class="tag">Distance — 100 m</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="concept-card">
+<div class="card-header vector-header">
+<span class="card-icon">➡️</span>
+<span class="card-title">Vector Quantity</span>
+</div>
+<div class="card-body">
+<p>A quantity that requires both <strong>magnitude AND direction</strong> for complete description.</p>
+
+<div class="property-list">
+<div class="property-item">
+<span class="property-label">Representation</span>
+<span class="property-value">Arrow or bold symbol <strong>F</strong></span>
+</div>
+<div class="property-item">
+<span class="property-label">Direction</span>
+<span class="property-value">✅ Essential</span>
+</div>
+<div class="property-item">
+<span class="property-label">Algebra</span>
+<span class="property-value">Vector addition rules</span>
+</div>
+</div>
+
+<div class="example-box vector-example">
+<div class="example-title">Examples</div>
+<div class="example-tags">
+<span class="tag">Force — 10 N East</span>
+<span class="tag">Velocity — 60 km/h North</span>
+<span class="tag">Displacement — 5 m upward</span>
+<span class="tag">Acceleration — 9.8 m/s² down</span>
+<span class="tag">Momentum — 20 kg·m/s</span>
+<span class="tag">Electric Field</span>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+---
+
+<div class="formula-card">
+<div class="formula-card-header">
+<span class="formula-icon">📐</span>
+<span class="formula-title">Vector Magnitude Formula</span>
+</div>
+<div class="formula-body">
+<div class="formula-display">
+
+$$|\vec{A}| = \sqrt{A_x^2 + A_y^2 + A_z^2}$$
+
+</div>
+<div class="formula-legend">
+<div class="legend-row">
+<span class="legend-symbol">$$|\vec{A}|$$</span>
+<span class="legend-desc">Magnitude (scalar value) of vector <strong>A</strong></span>
+</div>
+<div class="legend-row">
+<span class="legend-symbol">$$A_x, A_y, A_z$$</span>
+<span class="legend-desc">Components along x, y, z axes</span>
+</div>
+</div>
+<div class="formula-note">
+💡 Notice: the result of this formula is a <em>scalar</em> — magnitude has no direction.
+</div>
+</div>
+</div>
+
+---
+
+<div class="concept-card full-width">
+<div class="card-header key-header">
+<span class="card-icon">⚡</span>
+<span class="card-title">Key Conceptual Difference — Speed vs Velocity</span>
+</div>
+<div class="card-body">
+<div class="comparison-scenario">
+<div class="scenario-box">
+<div class="scenario-label scalar-label">SCALAR</div>
+<div class="scenario-content">
+<strong>Speed = 60 km/h</strong><br/>
+Tells you <em>how fast</em> — nothing more.
+</div>
+</div>
+<div class="scenario-arrow">≠</div>
+<div class="scenario-box">
+<div class="scenario-label vector-label">VECTOR</div>
+<div class="scenario-content">
+<strong>Velocity = 60 km/h North</strong><br/>
+Tells you <em>how fast</em> AND <em>where to</em>.
+</div>
+</div>
+</div>
+<p class="scenario-note">A car going East at 60 km/h and a car going West at 60 km/h have the <strong>same speed</strong> but <strong>opposite velocities</strong>.</p>
+</div>
+</div>
+
+---
+
+<div class="table-card">
+<div class="card-header table-header">
+<span class="card-icon">📊</span>
+<span class="card-title">Comparison Table</span>
+</div>
+<div class="table-wrapper">
+<table class="styled-table">
+<thead>
+<tr>
+<th>Property</th>
+<th>Scalar</th>
+<th>Vector</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Definition</td>
+<td>Magnitude only</td>
+<td>Magnitude + Direction</td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>A</td>
+<td><strong>A</strong> or Ā</td>
+</tr>
+<tr>
+<td>Addition Rule</td>
+<td>Simple arithmetic</td>
+<td>Triangle / Parallelogram law</td>
+</tr>
+<tr>
+<td>Division</td>
+<td>Always possible</td>
+<td>Not defined between vectors</td>
+</tr>
+<tr>
+<td>Effect of direction</td>
+<td>No effect</td>
+<td>Completely changes the quantity</td>
+</tr>
+<tr>
+<td>Example pair</td>
+<td>Distance</td>
+<td>Displacement</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+---
+
+<div class="section-grid two-col">
+
+<div class="concept-card">
+<div class="card-header note-header">
+<span class="card-icon">📝</span>
+<span class="card-title">Important Note</span>
+</div>
+<div class="card-body">
+<p>Some quantities appear similar but belong to different categories:</p>
+<ul class="styled-list">
+<li><strong>Distance</strong> (scalar) vs <strong>Displacement</strong> (vector)</li>
+<li><strong>Speed</strong> (scalar) vs <strong>Velocity</strong> (vector)</li>
+<li><strong>Mass</strong> (scalar) vs <strong>Weight</strong> (vector)</li>
+<li><strong>Energy</strong> (scalar) vs <strong>Force</strong> (vector)</li>
+</ul>
+</div>
+</div>
+
+<div class="concept-card">
+<div class="card-header summary-header">
+<span class="card-icon">✅</span>
+<span class="card-title">Quick Memory Rule</span>
+</div>
+<div class="card-body">
+<div class="memory-rule">
+<div class="rule-box">
+<span class="rule-icon">🔢</span>
+<div>
+<strong>Scalar</strong><br/>
+Ask: <em>"How much?"</em><br/>
+One number answers it fully.
+</div>
+</div>
+<div class="rule-box">
+<span class="rule-icon">➡️</span>
+<div>
+<strong>Vector</strong><br/>
+Ask: <em>"How much AND which way?"</em><br/>
+Direction is non-negotiable.
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<style>
+.tutor-response {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8px;
+  color: #1a1a2e;
+}
+
+.section-grid {
+  display: grid;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.two-col {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 640px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* === CARDS === */
+.concept-card, .formula-card, .table-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  background: #ffffff;
+  border: 1px solid #e8ecf0;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+.card-icon { font-size: 1.1rem; }
+.card-title { font-size: 1rem; }
+
+.card-body {
+  padding: 16px 18px;
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+
+/* Header Colors */
+.intro-header   { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+.scalar-header  { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; }
+.vector-header  { background: linear-gradient(135deg, #fc4a1a, #f7b733); color: white; }
+.key-header     { background: linear-gradient(135deg, #4776E6, #8E54E9); color: white; }
+.table-header   { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; }
+.note-header    { background: linear-gradient(135deg, #f093fb, #f5576c); color: white; }
+.summary-header { background: linear-gradient(135deg, #0f9b58, #00bf8f); color: white; }
+.formula-card-header { background: linear-gradient(135deg, #2c3e50, #4ca1af); color: white; }
+
+/* === PROPERTY LIST === */
+.property-list {
+  background: #f8f9ff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 12px 0;
+}
+
+.property-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px dashed #e0e4ef;
+  font-size: 0.88rem;
+}
+
+.property-item:last-child { border-bottom: none; }
+.property-label { color: #666; font-weight: 500; }
+.property-value { font-weight: 600; color: #1a1a2e; }
+
+/* === EXAMPLE BOXES === */
+.example-box {
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 12px;
+}
+
+.scalar-example { background: #e8fdf5; border-left: 4px solid #11998e; }
+.vector-example { background: #fff4e6; border-left: 4px solid #fc4a1a; }
+
+.example-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.example-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* === FORMULA CARD === */
+.formula-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  font-weight: 700;
+}
+
+.formula-icon { font-size: 1.1rem; }
+.formula-title { font-size: 1rem; }
+
+.formula-body {
+  padding: 20px 24px;
+}
+
+.formula-display {
+  background: #0f1923;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+}
+
+.formula-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.88rem;
+}
+
+.legend-symbol {
+  min-width: 110px;
+  background: #f0f4ff;
+  border-radius: 6px;
+  padding: 4px 8px;
+  text-align: center;
+  font-family: monospace;
+}
+
+.legend-desc { color: #444; }
+
+.formula-note {
+  background: #fffbea;
+  border-left: 4px solid #f0c040;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  color: #5a4500;
+}
+
+/* === COMPARISON SCENARIO === */
+.comparison-scenario {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+
+.scenario-box {
+  flex: 1;
+  min-width: 160px;
+  border-radius: 10px;
+  padding: 14px;
+  background: #f8f9ff;
+  border: 1px solid #e0e4ef;
+}
+
+.scenario-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  padding: 2px 8px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.scalar-label { background: #d4f8ec; color: #0a6e4e; }
+.vector-label { background: #fde8d8; color: #8b2500; }
+
+.scenario-arrow {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #cc3333;
+}
+
+.scenario-note {
+  background: #f0f4ff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  margin-top: 10px;
+  color: #333;
+}
+
+/* === TABLE === */
+.table-wrapper {
+  overflow-x: auto;
+  padding: 0 4px 4px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.styled-table th {
+  background: #1a1a2e;
+  color: white;
+  padding: 11px 14px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.styled-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #eef0f5;
+  color: #333;
+}
+
+.styled-table tr:nth-child(even) td { background: #f8f9ff; }
+.styled-table tr:hover td { background: #eef2ff; transition: background 0.2s; }
+
+/* === STYLED LIST === */
+.styled-list {
+  padding-left: 18px;
+  margin: 8px 0;
+}
+
+.styled-list li {
+  padding: 4px 0;
+  font-size: 0.9rem;
+}
+
+/* === MEMORY RULE === */
+.memory-rule {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rule-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #f8f9ff;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.rule-icon { font-size: 1.4rem; }
+
+hr {
+  border: none;
+  border-top: 1px solid #eef0f5;
+  margin: 8px 0;
+}
+</style>

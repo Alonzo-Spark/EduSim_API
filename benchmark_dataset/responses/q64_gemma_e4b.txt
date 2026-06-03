@@ -1,0 +1,119 @@
+Okay, I understand. You want a significant overhaul of the AI Tutor's rendering to move away from a simple markdown document and towards a more structured, interactive textbook-like experience. Here's a detailed plan outlining how I will implement the new rendering system, incorporating your requirements for section detection, formula cards, formula extraction, and table rendering. I'll also address the sandbox overlay prompt.
+
+**Core Principles:**
+
+*   **Structured UI Blocks:**  Instead of sequential markdown, content will be broken down into distinct UI components.
+*   **Card-Based Layout:** Sections and formulas will be encapsulated within cards for visual organization.
+*   **Formula Card Focus:**  Display formulas will be rendered as Formula Cards, providing a dedicated space for the formula, explanation, and interactive elements.
+*   **Formula Extraction & Storage:**  LaTeX formulas will be extracted and stored for later use (Formula Lab).
+*   **Responsive Tables:**  Markdown tables will be rendered as responsive tables within a card.
+*   **Avoid Floating Formulas:**  No more formulas embedded directly within paragraphs.
+
+**Implementation Steps:**
+
+1.  **Markdown Parsing and Structure Detection:**
+    *   I'll use a markdown parser to process the input text.
+    *   **Section Detection:** I'll implement logic to automatically detect sections based on common headings (e.g., `# Introduction`, `## Key Concepts`, `### Applications`).  I'll also include a fallback to a predefined section list if no headings are found.  A dictionary will map section headings to card types.
+    *   **Formula Extraction:** I'll use regular expressions or a more robust LaTeX parsing library to identify all `$$...$$` display LaTeX blocks. I'll extract the formula string and surrounding context (a few sentences before and after the formula).  I will also identify variables within the formula.
+    *   **Table Extraction:** I'll use a library like `tabulate` or a custom parser to convert Markdown tables into a structured data format suitable for rendering as a card.
+
+2.  **UI Component Generation:**
+    *   Based on the detected section type, I'll generate the appropriate card component.
+    *   **Section Cards:**  Each section will be rendered as a card with a title and content.
+    *   **Formula Cards:** Each formula will be rendered as a Formula Card, containing the formula, a placeholder for the rendered formula (using MathJax or similar), and buttons for "Explain Formula" and "Open Formula Lab."  The `surroundingContext` will be used to provide context to the formula.
+    *   **Table Cards:** Tables will be rendered as cards. The table will be formatted with CSS to ensure responsiveness.
+    *   **Text Cards:**  Paragraphs and other text will be rendered as standard text cards.
+
+3.  **Rendering and Output:**
+    *   I'll use a templating engine (e.g., Jinja2, Handlebars) to assemble the UI components into a final HTML output.
+    *   MathJax or a similar library will be used to render the LaTeX formulas within the Formula Cards.
+    *   CSS will be used to style the cards and create a clean, textbook-like layout.
+
+**Card Structure Examples (as per your specification):**
+
+*   **Quick Definition Card:**
+    ```html
+    <div class="card">
+      <div class="card-header">Quick Definition</div>
+      <div class="card-body">
+        <p>Photosynthesis is...</p>
+      </div>
+    </div>
+    ```
+
+*   **Formula Card:**
+    ```html
+    <div class="card">
+      <div class="card-header">Main Formula</div>
+      <div class="card-body">
+        <p>
+          <strong>Formula:</strong>
+          <div class="formula-display">
+            $$F=ma$$
+          </div>
+        </p>
+        <p>
+          <strong>Context:</strong>
+          <div class="context"> ... surrounding context ... </div>
+        </p>
+        <div class="buttons">
+          <button>Explain Formula</button>
+          <button>Open Formula Lab</button>
+        </div>
+      </div>
+    </div>
+    ```
+
+*   **Table Card:**
+    ```html
+    <div class="card">
+      <div class="card-header">Data Table</div>
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Header 1</th>
+              <th>Header 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Data 1</td>
+              <td>Data 2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    ```
+
+**Formula Extraction Details:**
+
+The `formula` field in the extracted data will contain the LaTeX string. The `title` field will contain a short, user-defined title for the formula (if available in the markdown).  `surroundingContext` will be a string containing a few sentences before and after the formula. `variables` will be a list of the variables found in the formula.
+
+**Sandbox Overlay (Spring Stretched Peak Limit):**
+
+I will create a dedicated card for the sandbox overlay.  This card will:
+
+*   Have a header: "Sandbox Overlay: Spring Stretched Peak Limit"
+*   Contain a text area where the runtime overlay response will be displayed.
+*   Include a button to trigger the overlay generation.
+*   The response will be dynamically generated based on the input parameters (peak limit, spring properties, etc.).  This will require some backend integration or a pre-defined response template.  I will need more details on the variables and expected output of the sandbox.
+
+**Technology Stack:**
+
+*   **Python:** For parsing, logic, and generating the HTML output.
+*   **Markdown Parser:** `markdown` library or similar.
+*   **LaTeX Parser:**  `sympy` or a dedicated LaTeX parsing library.
+*   **Templating Engine:** Jinja2.
+*   **MathJax:** For rendering LaTeX formulas.
+*   **CSS:** For styling.
+
+**To proceed, I need the following:**
+
+1.  **Example Markdown Content:**  A representative sample of the markdown text you'll be feeding into the system.
+2.  **Predefined Section List:** A list of the section headings you want to automatically detect.
+3.  **Details of the Sandbox Overlay:**  The expected input parameters, the logic for generating the overlay response, and the format of the response.
+4.  **Any Specific Styling Preferences:**  Any particular colors, fonts, or layout elements you'd like to use.
+
+I'll start with a small test case and iterate based on your feedback.  This is a complex undertaking, but I'm confident in delivering a solution that meets your requirements. Let me know when you're ready to provide the necessary information.

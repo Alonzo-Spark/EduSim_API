@@ -1,0 +1,133 @@
+┌───────────────────────────────────────────────────────────────┐
+│ **Introduction**                                               │
+│                                                               │
+│ In an electrical network, resistors can be connected in many  │
+│ ways.  When several resistors are attached to the same two     │
+│ nodes, they are said to be in *parallel*.  Parallel circuits   │
+│ are common in household wiring, electronic circuits, and      │
+│ power distribution systems.  This section introduces the      │
+│ concept of parallel resistance and why it behaves differently │
+│ from series resistance.                                       │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Definition**                                                 │
+│                                                               │
+│ A set of resistors \(R_1, R_2, \dots, R_n\) are in parallel   │
+│ if each resistor connects the same two nodes, so that the     │
+│ voltage across every resistor is identical.  The equivalent   │
+│ resistance \(R_{\text{eq}}\) is the resistance that would      │
+│ produce the same total current for a given applied voltage.   │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Key Concepts**                                               │
+│                                                               │
+│ • The voltage across each parallel resistor is the same.      │
+│ • The total current is the sum of the currents through each   │
+│   resistor.                                                   │
+│ • Parallel resistors provide multiple paths for current,      │
+│   reducing the overall resistance.                            │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Derivation**                                                 │
+│                                                               │
+│ 1.  Since the voltage across each resistor is identical, we   │
+│     can write the current through resistor \(i\) as              │
+│     \(\displaystyle I_i = \frac{V}{R_i}\).                      │
+│     (Formula Card below)                                      │
+│                                                               │
+│ 2.  The total current entering the parallel network is the sum │
+│     of individual currents:                                    │
+│     \(\displaystyle I_{\text{tot}} = \sum_{i=1}^{n} I_i\).      │
+│     (Formula Card below)                                      │
+│                                                               │
+│ 3.  Substituting the expression for \(I_i\) gives              │
+│     \(\displaystyle I_{\text{tot}} = V \sum_{i=1}^{n}\frac{1}{R_i}\). │
+│     (Formula Card below)                                      │
+│                                                               │
+│ 4.  By definition, \(R_{\text{eq}} = \frac{V}{I_{\text{tot}}}\).│
+│     Substituting \(I_{\text{tot}}\) yields                    │
+│     \(\displaystyle \frac{1}{R_{\text{eq}}} = \sum_{i=1}^{n}\frac{1}{R_i}\). │
+│     (Formula Card below)                                      │
+│                                                               │
+│ 5.  Inverting both sides gives the final equivalent resistance:│
+│     \(\displaystyle R_{\text{eq}} = \frac{1}{\displaystyle \sum_{i=1}^{n}\frac{1}{R_i}}\). │
+│     (Formula Card below)                                      │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Formula Card – Current through a Parallel Resistor**         │
+│                                                               │
+│ $$ I_i = \frac{V}{R_i} $$                                     │
+│                                                               │
+│ [ Explain Formula ]  [ Open Formula Lab ]                     │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Formula Card – Total Current in Parallel**                  │
+│                                                               │
+│ $$ I_{\text{tot}} = \sum_{i=1}^{n} I_i $$                     │
+│                                                               │
+│ [ Explain Formula ]  [ Open Formula Lab ]                     │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Formula Card – Total Current in Terms of Voltages**         │
+│                                                               │
+│ $$ I_{\text{tot}} = V \sum_{i=1}^{n}\frac{1}{R_i} $$           │
+│                                                               │
+│ [ Explain Formula ]  [ Open Formula Lab ]                     │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Formula Card – Equivalent Resistance (Standard Form)**     │
+│                                                               │
+│ $$ \frac{1}{R_{\text{eq}}} = \sum_{i=1}^{n}\frac{1}{R_i} $$   │
+│                                                               │
+│ [ Explain Formula ]  [ Open Formula Lab ]                     │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Formula Card – Equivalent Resistance (Product–Sum Form)**   │
+│                                                               │
+│ $$ R_{\text{eq}} = \frac{R_1 R_2 \dots R_n}
+│ \displaystyle\sum_{i=1}^{n}\prod_{\substack{j=1\\ j\neq i}}^{n} R_j $$ │
+│                                                               │
+│ [ Explain Formula ]  [ Open Formula Lab ]                     │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Important Notes**                                            │
+│                                                               │
+│ • Adding more resistors in parallel always decreases the      │
+│   equivalent resistance.                                      │
+│ • If any resistor is zero ohms (short), the equivalent       │
+│   resistance becomes zero.                                     │
+│ • If any resistor is infinite ohms (open), it does not       │
+│   affect the equivalent resistance.                           │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Summary**                                                    │
+│                                                               │
+│ The equivalent resistance of resistors connected in parallel  │
+│ is found by taking the reciprocal of the sum of the reciprocals│
+│ of each resistor.  This reflects the fact that current has     │
+│ multiple pathways, thereby lowering the overall resistance.   │
+└───────────────────────────────────────────────────────────────┘
+
+┌───────────────────────────────────────────────────────────────┐
+│ **Suggested Questions**                                        │
+│                                                               │
+│ 1.  Derive the equivalent resistance for a parallel network   │
+│     containing three resistors of 10 Ω, 20 Ω, and 30 Ω.        │
+│ 2.  Explain why adding a resistor in parallel always reduces  │
+│     the total resistance.                                      │
+│ 3.  What happens to the equivalent resistance if one of the   │
+│     resistors is a short circuit?                              │
+│ 4.  Compare the equivalent resistance of two resistors in      │
+│     parallel with the equivalent resistance of the same two   │
+│     resistors in series.                                       │
+└───────────────────────────────────────────────────────────────┘

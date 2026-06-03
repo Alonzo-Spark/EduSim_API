@@ -1,0 +1,182 @@
+# Bernoulli’s Theorem and Its Applications
+
+---
+
+## Introduction
+
+Bernoulli’s theorem is a cornerstone of fluid dynamics, providing a relationship between pressure, velocity, and elevation in a moving fluid. It is derived from the principle of conservation of energy and applies to ideal fluids—those that are incompressible, non-viscous, and undergoing steady flow along a streamline.
+
+This principle has far-reaching implications in engineering, aerodynamics, hydraulics, and everyday phenomena.
+
+---
+
+## Quick Definition
+
+**Bernoulli’s Theorem** states that for an ideal fluid in steady flow, the sum of pressure energy, kinetic energy, and potential energy per unit volume remains constant along a streamline.
+
+---
+
+## Key Concepts
+
+- Applies to **ideal fluids**: incompressible, inviscid (no viscosity), steady flow.
+- Based on **conservation of mechanical energy**.
+- Valid along a single **streamline** (not necessarily between different streamlines).
+- Assumes **no energy loss** due to friction or heat transfer.
+
+---
+
+## Main Formula
+
+$$
+P + \frac{1}{2} \rho v^2 + \rho g h = \text{constant}
+$$
+
+<div class="formula-card">
+  <div class="formula-header">Bernoulli’s Equation</div>
+  <div class="formula-body">
+    $$
+    P + \frac{1}{2} \rho v^2 + \rho g h = \text{constant}
+    $$
+  </div>
+  <div class="formula-actions">
+    <button onclick="explainFormula()">Explain Formula</button>
+    <button onclick="openFormulaLab()">Open Formula Lab</button>
+  </div>
+</div>
+
+Where:  
+- $ P $ = static pressure (Pa)  
+- $ \rho $ = density of the fluid (kg/m³)  
+- $ v $ = velocity of the fluid (m/s)  
+- $ g $ = acceleration due to gravity (9.81 m/s²)  
+- $ h $ = height above a reference level (m)  
+
+Each term represents energy per unit volume:
+- $ P $: **pressure energy**
+- $ \frac{1}{2} \rho v^2 $: **kinetic energy**
+- $ \rho g h $: **potential energy**
+
+---
+
+## Characteristics
+
+| Feature | Description |
+|--------|-------------|
+| **Applicability** | Incompressible, non-viscous fluids in steady flow |
+| **Flow Type** | Along a streamline |
+| **Energy Conservation** | Mechanical energy is conserved |
+| **Assumptions** | No turbulence, no energy losses, constant density |
+
+---
+
+## How It Works: Energy Trade-Off
+
+Bernoulli’s principle illustrates a trade-off between pressure and speed:
+
+> When the speed of a fluid increases, its pressure decreases—and vice versa.
+
+This can be observed when:
+- Fluid flows through a constricted pipe (Venturi effect)
+- Air moves faster over the top of an airplane wing
+
+---
+
+## Applications
+
+### 1. **Aerodynamics – Lift on an Airplane Wing**
+
+<div class="application-card">
+  <h3>Lift Generation</h3>
+  <p>Airplane wings are shaped so that air travels faster over the curved upper surface than the lower one. According to Bernoulli’s principle, this creates lower pressure above the wing and higher pressure below, resulting in upward lift.</p>
+</div>
+
+> ⚠️ Note: While Bernoulli’s principle contributes to lift, Newton’s third law (deflection of airflow downward) also plays a major role.
+
+---
+
+### 2. **Venturi Meter**
+
+<div class="application-card">
+  <h3>Measuring Fluid Flow Rate</h3>
+  <p>A Venturi meter narrows a pipe, increasing fluid velocity and decreasing pressure. By measuring the pressure difference between wide and narrow sections, the flow rate can be calculated using Bernoulli’s equation.</p>
+</div>
+
+---
+
+### 3. **Spray Nozzles and Atomizers**
+
+<div class="application-card">
+  <h3>Perfume Sprayers, Carburetors</h3>
+  <p>When air moves quickly over the opening of a tube dipped in liquid, the reduced pressure draws the liquid up and sprays it as fine droplets.</p>
+</div>
+
+---
+
+### 4. **Bunsen Burner</div>
+
+<div class="application-card">
+  <h3>Gas-Air Mixing</h3>
+  <p>Fast-moving gas from the nozzle reduces pressure in the stem, drawing in air for combustion. This mixing is enhanced by Bernoulli’s principle.</p>
+</div>
+
+---
+
+### 5. **Curved Ball in Sports**
+
+<div class="application-card">
+  <h3>Swing Bowling, Curveballs</h3>
+  <p>When a ball spins, one side moves with the airflow and the other against it. This speed difference creates a pressure imbalance, causing the ball to curve mid-flight (Magnus effect, related to Bernoulli).</p>
+</div>
+
+---
+
+## Advantages
+
+- Provides a simple yet powerful tool for analyzing fluid behavior.
+- Enables design of efficient systems like nozzles, diffusers, and flow meters.
+- Helps explain natural and engineered phenomena without complex simulations.
+
+---
+
+## Limitations and Disadvantages
+
+| Limitation | Explanation |
+|----------|-------------|
+| **Ideal Fluid Assumption** | Real fluids have viscosity, leading to energy losses not accounted for |
+| **Steady Flow Only** | Not valid for turbulent or unsteady flows |
+| **Along One Streamline** | Constant value only holds along the same streamline |
+| **Incompressible Flow** | Less accurate for high-speed gases (compressibility matters) |
+
+---
+
+## Important Notes
+
+- Bernoulli’s equation is **not a new law**, but a restatement of energy conservation for fluids.
+- It works best when **frictional losses are negligible**.
+- The **continuity equation** $ A_1 v_1 = A_2 v_2 $ is often used alongside Bernoulli’s equation to relate changes in area and velocity.
+
+---
+
+## Summary
+
+Bernoulli’s theorem describes how pressure, velocity, and elevation are interrelated in a flowing fluid. As fluid velocity increases, its pressure decreases—enabling technologies from aircraft to spray bottles. While based on idealized assumptions, it remains a vital tool in fluid mechanics and engineering design.
+
+---
+
+## Suggested Questions for Practice
+
+1. Water flows through a horizontal pipe that narrows from 10 cm to 5 cm in diameter. If the speed in the wider section is 2 m/s, what is the speed in the narrower section? Use Bernoulli’s principle to find the pressure difference.
+
+2. Explain why two boats moving parallel to each other tend to collide.
+
+3. Derive Torricelli’s law for efflux speed from a tank using Bernoulli’s equation.
+
+4. Why does a shower curtain pull inward when the water is turned on?
+
+5. Can Bernoulli’s principle explain flight alone? Justify your answer.
+
+---
+
+<div class="card">
+  <strong>Interactive Tip:</strong> Try adjusting velocity and height in the Formula Lab to see how pressure changes in real time!
+</div>

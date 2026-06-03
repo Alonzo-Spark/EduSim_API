@@ -1,0 +1,38 @@
+{
+  "model_evaluated": "qwen-3-235b-a22b-instruct-2507",
+  "question_id": 57,
+  "question": "Live Sandbox: Describe the visual effect of increasing the driven frequency in a forced harmonic oscillator.",
+  "gold_answer": "# Introduction\n\n---\n\n## Interactive Observation\n\nA spring-mass system is driven by an external motor that applies a periodic pushing force. We can adjust the driving frequency slider to observe how it interacts with the system's natural frequency.\n\n---\n\n## Live Sandbox Tutor Sidebar\n\n### ✦ LIVE EXPLANATION\nAs the driving frequency approaches the natural frequency of the spring, the amplitude of the oscillations grows larger. If the driving frequency is increased past this point, the motions become uncoordinated and the amplitude drops off significantly.\n\n### ✦ WHY IT HAPPENS\nMatching frequencies creates a condition called resonance, where the external force always pushes in the direction of the block's motion, transferring energy efficiently. If the driving frequency is too high, the force often opposes the motion, canceling out its own energy transfer.\n\n### ✦ WHAT TO NOTICE\nWatch the amplitude tracking envelope. Note how it peaks at a specific frequency match and falls off when the driving motor runs too fast.\n\n### ✦ FORMULA\nThe steady-state amplitude of a driven harmonic oscillator is given by:\n\n$$A = \\frac{F_0/m}{\\sqrt{(\\omega_0^2 - \\omega^2)^2 + (b\\omega/m)^2}}$$\n\n* $\\omega$ represents the external driving frequency parameter.\n* $\\omega_0$ represents the natural frequency of the system ($\\sqrt{k/m}$).\n* The amplitude ($A$) reaches its maximum when $\\omega \\approx \\omega_0$.\n\n### ✦ DEEPER UNDERSTANDING\nResonance depends on timing. When the driving force is synchronized with the system's natural timing, it builds up energy over multiple cycles, creating large-scale oscillations.\n\n### ✦ TRY THIS\n1. Slowly increase the **Driver frequency control** until you hit the peak resonant vibration amplitude.\n2. Turn the **Frequency slider** past the peak and observe the system return to small, uncoordinated movements.",
+  "candidate_response": "┌───────────────────────────┐\n│ Interactive Physics Lab   │\n│ Forced Harmonic Oscillator│\n└───────────────────────────┘\n\n### 🔄 System Setup\n\nA **forced harmonic oscillator** consists of:\n- A mass on a spring (natural frequency $ \\omega_0 $)\n- A damping force (friction/resistance)\n- An external driving force with adjustable frequency $ \\omega $\n\nThe equation of motion is:\n\n$$\nm\\frac{d^2x}{dt^2} + b\\frac{dx}{dt} + kx = F_0 \\cos(\\omega t)\n$$\n\n---\n\n┌───────────────────────────┐\n│ Key Concept               │\n│                           │\n│ As driven frequency       │\n│ increases, the system     │\n│ responds with changing    │\n│ amplitude and phase.      │\n└───────────────────────────┘\n\n---\n\n### 👁️ Visual Effect of Increasing Driven Frequency\n\nDrag the slider below in your mind (or imagine a live simulation):\n\n#### 🟦 Low Driven Frequency ($ \\omega \\ll \\omega_0 $)\n- The driving force changes **very slowly**\n- The mass moves **in phase** with the driver\n- **Amplitude is moderate**, follows static response\n- Motion looks smooth and synchronized\n\n> 🎯 *Visual:* Mass gently rocks back and forth, keeping perfect time with the slow push.\n\n---\n\n#### 🟨 Near Resonance ($ \\omega \\approx \\omega_0 $)\n- Driven frequency approaches natural frequency\n- **Amplitude peaks dramatically**\n- System absorbs maximum energy\n- **Phase lag** of about $ 90^\\circ $ develops\n\n> ⚠️ *Visual:* Oscillations grow larger and larger—possibly violent if damping is low. Like pushing a swing at just the right time.\n\n---\n\n#### 🟥 High Driven Frequency ($ \\omega \\gg \\omega_0 $)\n- Driver oscillates much faster than system can respond\n- **Amplitude drops sharply**\n- Mass barely moves—“can’t keep up”\n- **Phase opposition**: mass moves *opposite* to the driver\n\n> 🎯 *Visual:* Rapid shaking, but the mass just quivers slightly, lagging behind by nearly half a cycle.\n\n---\n\n┌───────────────────────────┐\n│ Formula Card              │\n│                           │\n│ $$                        │\n│ x(t) = A \\cos(\\omega t -  │\n│ \\phi)                     │\n│ $$                        │\n│                           │\n│ [ Explain Formula ]       │\n│ [ Open Formula Lab ]      │\n└───────────────────────────┘\n\nWhere:\n- $ A = \\frac{F_0/m}{\\sqrt{(\\omega_0^2 - \\omega^2)^2 + (b\\omega/m)^2}} $ → amplitude depends on $ \\omega $\n- $ \\phi $ = phase difference between driver and response\n\n---\n\n┌───────────────────────────┐\n│ Resonance Behavior Table  │\n└───────────────────────────┘\n\n| Driven Freq $ \\omega $ | Amplitude | Phase Lag | Visual Response         |\n|------------------------|-----------|-----------|--------------------------|\n| $ \\ll \\omega_0 $       | Moderate  | ~0°       | Smooth, in-step motion   |\n| $ \\approx \\omega_0 $   | Maximum   | ~90°      | Large, energetic swings  |\n| $ \\gg \\omega_0 $       | Small     | ~180°     | Weak, out-of-sync jitter |\n\n---\n\n💡 **Note:** Damping controls how sharp the resonance peak is. Lower damping → taller, narrower peak.\n\n---\n\n### 🧠 Suggested Questions for Exploration\n- What happens to the resonance peak when damping increases?\n- Why does the phase shift from 0° to 180° as frequency increases?\n- How would this behavior appear in a car's suspension system?\n\nReady to simulate?  \n➡️ *Adjust $ \\omega $ and watch amplitude peak at resonance.*",
+  "judge_model": "meta-llama/llama-3.3-70b-instruct",
+  "scores": {
+    "accuracy": 9,
+    "quality": 9,
+    "educational": 9,
+    "overall_average": "9.00"
+  },
+  "boolean_validations": {
+    "hallucination_detected": false,
+    "valid_json": true,
+    "valid_svg": false
+  },
+  "feedback": "The candidate response demonstrates a thorough understanding of the forced harmonic oscillator, accurately describing the visual effects of increasing the driven frequency. The use of formulas, such as the equation of motion and the amplitude formula, is correct and well-explained. The response is well-structured, readable, and effectively teaches the concept of resonance. The inclusion of a resonance behavior table and suggested questions for exploration enhances the educational value. The only area for improvement is in providing more detailed explanations for the phase lag and its relationship to the driven frequency. Overall, the response is of high quality, accurate, and effective in teaching the concept.",
+  "candidate_token_usage": {
+    "promptTokens": 364,
+    "completionTokens": 850,
+    "totalTokens": 1214
+  },
+  "candidate_latency_ms": 11269,
+  "candidate_cost_usd": 0.002064,
+  "judge_token_usage": {
+    "promptTokens": 1656,
+    "completionTokens": 183,
+    "totalTokens": 1839
+  },
+  "judge_latency_ms": 19320,
+  "judge_cost_usd": 0.0014328,
+  "retry_count": 0,
+  "success": true,
+  "error": null,
+  "timestamp": "2026-06-01T10:29:31.050Z"
+}

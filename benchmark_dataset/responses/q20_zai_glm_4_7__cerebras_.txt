@@ -1,0 +1,796 @@
+Here is the interactive textbook module for the **Conservation of Mechanical Energy**.
+
+This solution implements your specific requirements:
+1.  **Structured UI Blocks:** Content is rendered as distinct cards (Introduction, Definition, Formula, etc.).
+2.  **Formula Card System:** LaTeX formulas are extracted and placed in dedicated interactive cards.
+3.  **Formula Lab:** A fully functional 2D physics simulation where you can manipulate a pendulum to visualize the energy exchange in real-time.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Module: Conservation of Mechanical Energy</title>
+    
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #475569;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 4rem;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Card System */
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.75rem;
+        }
+
+        .card-icon {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+            background: #eff6ff;
+            color: var(--primary);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .card-content {
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+
+        /* Formula Card Specifics */
+        .formula-card {
+            background: #fffbeb;
+            border-color: #fcd34d;
+        }
+
+        .formula-display {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.25rem;
+            margin: 1rem 0;
+            border: 1px solid #fde68a;
+            overflow-x: auto;
+        }
+
+        .formula-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--bg-body);
+            border-color: var(--text-muted);
+        }
+
+        .explanation-box {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            display: none; /* Hidden by default */
+            border-left: 3px solid var(--accent-warning);
+        }
+
+        .explanation-box.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Formula Lab Modal */
+        dialog {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            padding: 0;
+            max-width: 900px;
+            width: 95%;
+            margin: auto;
+            background: var(--bg-card);
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+        }
+
+        .lab-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lab-content {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .lab-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .canvas-container {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            height: 400px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        .lab-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-group label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .stats-panel {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .stat-bar-container {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .stat-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .stat-bar.ke { background: var(--accent-success); }
+        .stat-bar.pe { background: var(--accent-warning); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Conservation of Mechanical Energy</h1>
+        <div class="subtitle">Physics 101 • Interactive Textbook</div>
+    </header>
+
+    <main id="content-area">
+        <!-- Content will be injected here by JavaScript -->
+    </main>
+</div>
+
+<!-- Formula Lab Modal -->
+<dialog id="formula-lab">
+    <div class="lab-header">
+        <div class="card-title">Formula Lab: Pendulum Simulation</div>
+        <button class="close-modal" id="close-lab">&times;</button>
+    </div>
+    <div class="lab-content">
+        <div class="canvas-container">
+            <canvas id="simCanvas"></canvas>
+        </div>
+        <div class="lab-controls">
+            <div class="stats-panel">
+                <div class="stat-row">
+                    <span>Total Energy (E)</span>
+                    <span id="val-total">0 J</span>
+                </div>
+                <div class="stat-row">
+                    <span>Potential Energy (PE)</span>
+                    <span id="val-pe">0 J</span>
+                </div>
+                <div class="stat-bar-container">
+                    <div class="stat-bar pe" id="bar-pe"></div>
+                </div>
+                <div class="stat-row">
+                    <span>Kinetic Energy (KE)</span>
+                    <span id="val-ke">0 J</span>
+                </div>
+                <div class="stat-bar-container">
+                    <div class="stat-bar ke" id="bar-ke"></div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Mass (m) <span id="lbl-mass">2.0 kg</span></label>
+                <input type="range" id="inp-mass" min="0.5" max="10" step="0.1" value="2.0">
+            </div>
+
+            <div class="control-group">
+                <label>Length (L) <span id="lbl-length">1.5 m</span></label>
+                <input type="range" id="inp-length" min="0.5" max="3" step="0.1" value="1.5">
+            </div>
+
+            <div class="control-group">
+                <label>Gravity (g) <span id="lbl-gravity">9.8 m/s²</span></label>
+                <input type="range" id="inp-gravity" min="1.6" max="20" step="0.1" value="9.8">
+            </div>
+            
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+                <strong>Note:</strong> Drag the pendulum bob to start. Observe how PE converts to KE and back, while Total Energy remains constant (ignoring friction).
+            </p>
+        </div>
+    </div>
+</dialog>
+
+<script>
+    // 1. Data Structure (Simulating Extraction Phase)
+    const courseContent = [
+        {
+            type: 'section',
+            title: 'Quick Definition',
+            icon: '📖',
+            content: `
+                <p>The <strong>Law of Conservation of Mechanical Energy</strong> states that the total mechanical energy in a closed system (isolated from external non-conservative forces like friction) remains constant.</p>
+                <br>
+                <p>This means energy cannot be created or destroyed, only transformed from one form to another—specifically, between <strong>Kinetic Energy</strong> (motion) and <strong>Potential Energy</strong> (position).</p>
+            `
+        },
+        {
+            type: 'formula',
+            id: 'formula-main',
+            latex: 'E_{mech} = KE + PE = \\text{constant}',
+            title: 'The Conservation Equation',
+            variables: [
+                { symbol: 'E_{mech}', meaning: 'Total Mechanical Energy' },
+                { symbol: 'KE', meaning: 'Kinetic Energy' },
+                { symbol: 'PE', meaning: 'Potential Energy' }
+            ],
+            explanation: `
+                <p>This equation is the heart of the concept. It tells us that if you add the energy of motion ($KE$) and the energy of position ($PE$) at any point in time, the sum will always be the same number.</p>
+                <p>Mathematically, this implies:</p>
+                $$ \\Delta KE + \\Delta PE = 0 $$
+                <p>Any gain in kinetic energy must be accompanied by an equal loss in potential energy, and vice versa.</p>
+            `
+        },
+        {
+            type: 'section',
+            title: 'Key Concepts',
+            icon: '🔑',
+            content: `
+                <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <li><strong>Kinetic Energy (KE):</strong> The energy an object possesses due to its motion. Depends on mass and velocity ($KE = \\frac{1}{2}mv^2$).</li>
+                    <li><strong>Potential Energy (PE):</strong> Stored energy based on position. In gravity fields, it depends on mass, height, and gravity ($PE = mgh$).</li>
+                    <li><strong>Conservative Forces:</strong> Forces (like gravity) where the work done does not depend on the path taken.</li>
+                    <li><strong>Isolated System:</strong> For the law to hold perfectly, there should be no air resistance or friction.</li>
+                </ul>
+            `
+        },
+        {
+            type: 'formula',
+            id: 'formula-expansion',
+            latex: '\\frac{1}{2}mv_1^2 + mgh_1 = \\frac{1}{2}mv_2^2 + mgh_2',
+            title: 'Detailed Energy Balance',
+            variables: [],
+            explanation: `
+                <p>This is the practical form used to solve problems. It equates the total energy at state 1 (point 1) to the total energy at state 2 (point 2).</p>
+                <ul style="padding-left: 1.2rem; margin-top: 0.5rem;">
+                    <li><strong>v</strong>: Velocity</li>
+                    <li><strong>h</strong>: Height relative to a reference point</li>
+                    <li><strong>m</strong>: Mass (which cancels out if it doesn't change)</li>
+                </ul>
+            `
+        },
+        {
+            type: 'section',
+            title: 'Example: Free-Falling Ball',
+            icon: '🎾',
+            content: `
+                <p>Imagine a 2kg ball dropped from a height of 10 meters. Let's look at the energy at the top, halfway down, and just before impact (ignoring air resistance).</p>
+                <br>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Position</th>
+                                <th>Height (h)</th>
+                                <th>Velocity (v)</th>
+                                <th>PE (Joules)</th>
+                                <th>KE (Joules)</th>
+                                <th>Total (Joules)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Top</td>
+                                <td>10 m</td>
+                                <td>0 m/s</td>
+                                <td>196 J</td>
+                                <td>0 J</td>
+                                <td><strong>196 J</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Middle</td>
+                                <td>5 m</td>
+                                <td>9.9 m/s</td>
+                                <td>98 J</td>
+                                <td>98 J</td>
+                                <td><strong>196 J</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Bottom</td>
+                                <td>0 m</td>
+                                <td>14 m/s</td>
+                                <td>0 J</td>
+                                <td>196 J</td>
+                                <td><strong>196 J</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `
+        },
+        {
+            type: 'section',
+            title: 'Important Notes',
+            icon: '⚠️',
+            content: `
+                <p>In the real world, mechanical energy is rarely perfectly conserved because of <strong>non-conservative forces</strong> like friction and air resistance. These forces convert mechanical energy into thermal energy (heat) and sound.</p>
+                <br>
+                <p>However, assuming conservation is an excellent approximation for many physics problems involving roller coasters, pendulums, and orbits.</p>
+            `
+        }
+    ];
+
+    // 2. Rendering System
+    const contentArea = document.getElementById('content-area');
+
+    function renderContent() {
+        courseContent.forEach(block => {
+            if (block.type === 'section') {
+                createSectionCard(block);
+            } else if (block.type === 'formula') {
+                createFormulaCard(block);
+            }
+        });
+
+        // Render Math after DOM is ready
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });
+    }
+
+    function createSectionCard(block) {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+            <div class="card-header">
+                <div class="card-icon">${block.icon}</div>
+                <h2 class="card-title">${block.title}</h2>
+            </div>
+            <div class="card-content">
+                ${block.content}
+            </div>
+        `;
+        contentArea.appendChild(card);
+    }
+
+    function createFormulaCard(block) {
+        const card = document.createElement('article');
+        card.className = 'card formula-card';
+        card.innerHTML = `
+            <div class="card-header" style="border-bottom-color: #fde68a;">
+                <div class="card-icon" style="background: #fff; color: #d97706;">📐</div>
+                <h2 class="card-title">${block.title}</h2>
+            </div>
+            <div class="formula-display">
+                $$${block.latex}$$
+            </div>
+            <div class="formula-actions">
+                <button class="btn btn-outline" onclick="toggleExplanation('${block.id}')">
+                    Explain Formula
+                </button>
+                <button class="btn btn-primary" onclick="openFormulaLab()">
+                    ⚡ Open Formula Lab
+                </button>
+            </div>
+            <div id="explain-${block.id}" class="explanation-box">
+                ${block.explanation}
+            </div>
+        `;
+        contentArea.appendChild(card);
+    }
+
+    // 3. Interaction Logic
+    window.toggleExplanation = function(id) {
+        const el = document.getElementById(`explain-${id}`);
+        el.classList.toggle('active');
+    };
+
+    // 4. Formula Lab (Simulation Logic)
+    const labDialog = document.getElementById('formula-lab');
+    const closeLabBtn = document.getElementById('close-lab');
+    
+    // Simulation State
+    const sim = {
+        m: 2.0,
+        L: 1.5,
+        g: 9.8,
+        angle: Math.PI / 4, // Initial angle (45 degrees)
+        velocity: 0,
+        dragging: false,
+        originX: 0,
+        originY: 0,
+        scale: 100 // pixels per meter
+    };
+
+    // Canvas Setup
+    const canvas = document.getElementById('simCanvas');
+    const ctx = canvas.getContext('2d');
+    let animationFrame;
+
+    function resizeCanvas() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        sim.originX = canvas.width / 2;
+        sim.originY = 50;
+    }
+
+    window.openFormulaLab = function() {
+        labDialog.showModal();
+        resizeCanvas();
+        if (!animationFrame) animate();
+    };
+
+    closeLabBtn.addEventListener('click', () => {
+        labDialog.close();
+    });
+
+    // Lab Controls
+    const inpMass = document.getElementById('inp-mass');
+    const inpLen = document.getElementById('inp-length');
+    const inpGrav = document.getElementById('inp-gravity');
+
+    function updateParams() {
+        sim.m = parseFloat(inpMass.value);
+        sim.L = parseFloat(inpLen.value);
+        sim.g = parseFloat(inpGrav.value);
+
+        document.getElementById('lbl-mass').textContent = sim.m.toFixed(1) + ' kg';
+        document.getElementById('lbl-length').textContent = sim.L.toFixed(1) + ' m';
+        document.getElementById('lbl-gravity').textContent = sim.g.toFixed(1) + ' m/s²';
+    }
+
+    [inpMass, inpLen, inpGrav].forEach(el => el.addEventListener('input', updateParams));
+
+    // Physics Engine
+    function updatePhysics(dt) {
+        if (sim.dragging) {
+            sim.velocity = 0;
+            return;
+        }
+
+        // Simple Pendulum Equation: angular acceleration = -(g/L) * sin(theta)
+        const acceleration = -(sim.g / sim.L) * Math.sin(sim.angle);
+        
+        // Semi-implicit Euler integration
+        sim.velocity += acceleration * dt;
+        sim.angle += sim.velocity * dt;
+
+        // Damping (air resistance approximation for stability)
+        sim.velocity *= 0.999; 
+    }
+
+    // Drawing Engine
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Calculate bob position
+        const bobX = sim.originX + Math.sin(sim.angle) * sim.L * sim.scale;
+        const bobY = sim.originY + Math.cos(sim.angle) * sim.L * sim.scale;
+
+        // Draw Pivot
+        ctx.beginPath();
+        ctx.arc(sim.originX, sim.originY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#64748b';
+        ctx.fill();
+
+        // Draw String
+        ctx.beginPath();
+        ctx.moveTo(sim.originX, sim.originY);
+        ctx.lineTo(bobX, bobY);
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Draw Bob
+        ctx.beginPath();
+        ctx.arc(bobX, bobY, 15 + sim.m * 2, 0, Math.PI * 2); // Size varies slightly with mass
+        ctx.fillStyle = '#2563eb';
+        ctx.fill();
+        ctx.strokeStyle = '#1e40af';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Update UI Stats
+        updateStats();
+    }
+
+    function updateStats() {
+        // Height relative to lowest point (h = L - Lcos(theta))
+        const h = sim.L * (1 - Math.cos(sim.angle));
+        
+        // PE = mgh
+        const pe = sim.m * sim.g * h;
+        
+        // KE = 0.5 * m * (v_linear)^2
+        // v_linear = L * angular_velocity
+        const v_linear = sim.L * sim.velocity;
+        const ke = 0.5 * sim.m * v_linear * v_linear;
+        
+        const total = pe + ke;
+
+        // Update DOM
+        document.getElementById('val-pe').textContent = pe.toFixed(1) + ' J';
+        document.getElementById('val-ke').textContent = ke.toFixed(1) + ' J';
+        document.getElementById('val-total').textContent = total.toFixed(1) + ' J';
+
+        // Update Bars
+        const maxEnergy = total > 0.1 ? total : 1; // Prevent division by zero
+        document.getElementById('bar-pe').style.width = (pe / maxEnergy * 100) + '%';
+        document.getElementById('bar-ke').style.width = (ke / maxEnergy * 100) + '%';
+    }
+
+    let lastTime = 0;
+    function animate(timestamp) {
+        if (!lastTime) lastTime = timestamp;
+        const dt = Math.min((timestamp - lastTime) / 1000, 0.05); // Cap dt for stability
+        lastTime = timestamp;
+
+        updatePhysics(dt);
+        draw();
+
+        if (labDialog.open) {
+            animationFrame = requestAnimationFrame(animate);
+        } else {
+            animationFrame = null;
+        }
+    }
+
+    // Mouse Interaction for Lab
+    canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        const bobX = sim.originX + Math.sin(sim.angle) * sim.L * sim.scale;
+        const bobY = sim.originY + Math.cos(sim.angle) * sim.L * sim.scale;
+
+        const dist = Math.hypot(mouseX - bobX, mouseY - bobY);
+        if (dist < 30) {
+            sim.dragging = true;
+            sim.velocity = 0;
+        }
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (sim.dragging && labDialog.open) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            const dx = mouseX - sim.originX;
+            const dy = mouseY - sim.originY;
+            sim.angle = Math.atan2(dx, dy);
+        }
+    });
+
+    window.addEventListener('mouseup', () => {
+        sim.dragging = false;
+    });
+
+    // Initialize
+    renderContent();
+
+</script>
+</body>
+</html>
+```

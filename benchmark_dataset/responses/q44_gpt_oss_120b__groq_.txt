@@ -1,0 +1,140 @@
+┌──────────────────────────────────────────────────────────────────────┐
+│ Introduction                                                          │
+│                                                                      │
+│ A capacitor is a passive electrical component that stores energy   │
+│ in the form of an electric field. It consists of two conductive      │
+│ plates separated by an insulating material called a dielectric.     │
+│ When a voltage is applied across the plates, opposite charges       │
+│ accumulate on each plate, creating a potential difference and an     │
+│ electric field in the dielectric. This stored energy can be          │
+│ released back into a circuit when needed.                           │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Definition                                                            │
+│                                                                      │
+│ A capacitor is a device that **stores electrical charge** and       │
+│ **releases it on demand**, characterized by its ability to            │
+│ **hold a specific amount of charge per unit voltage**.              │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Structure                                                             │
+│                                                                      │
+│ • **Two conductive plates** (often metal)                           │
+│ • **Dielectric material** between them (air, paper, ceramic, etc.)   │
+│ • **Terminals** that connect the plates to the external circuit       │
+│                                                                      │
+│ The dielectric determines the capacitor’s voltage rating and        │
+│ influences its size and performance.                                 │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Working Principle                                                     │
+│                                                                      │
+│ 1. **Charging** – When a voltage source is connected, electrons     │
+│    are pulled from one plate and pushed onto the other, creating a   │
+│    separation of charge.                                             │
+│ 2. **Electric Field** – The separated charges produce an electric     │
+│    field across the dielectric, storing energy as **electrostatic   │
+│    potential energy**.                                               │
+│ 3. **Discharging** – When the circuit is completed, the stored       │
+│    energy drives current as the charges recombine, delivering power │
+│    to the load.                                                      │
+│                                                                      │
+│ The ability to **quickly absorb and release energy** makes           │
+│ capacitors essential for smoothing voltage, filtering signals, and   │
+│ providing short‑term power bursts.                                   │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Key Concepts                                                          │
+│                                                                      │
+│ • **Capacitance (C)** – Measure of a capacitor’s ability to store     │
+│   charge, expressed in farads (F).                                   │
+│ • **Charge (Q)** – Quantity of electric charge on a plate.            │
+│ • **Voltage (V)** – Potential difference between the plates.          │
+│ • **Dielectric Constant (κ)** – Property of the dielectric that      │
+│   increases capacitance relative to vacuum.                         │
+│ • **Energy (U)** – Energy stored: \(U = \tfrac{1}{2}CV^{2}\).         │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Main Formula                                                          │
+│                                                                      │
+│                     C = \frac{Q}{V}                                 │
+│                                                                      │
+│ [ Explain Formula ]   [ Open Formula Lab ]                           │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Applications                                                          │
+│                                                                      │
+│ • **Power‑factor correction** – Improves efficiency in AC systems.   │
+│ • **Signal filtering** – Blocks DC while allowing AC (high‑pass,    │
+│   low‑pass, band‑pass filters).                                      │
+│ • **Energy storage** – Provides burst power for flash units,       │
+│   defibrillators, and pulse circuits.                               │
+│ • **Timing circuits** – Works with resistors to create RC delays.   │
+│ • **Coupling/decoupling** – Isolates DC bias between circuit stages.│
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Advantages                                                            │
+│                                                                      │
+│ • Fast charge/discharge cycles                                        │
+│ • Simple construction and low cost                                    │
+│ • No moving parts – high reliability                                   │
+│ • Can operate over a wide temperature range                           │
+│ • Useful for both AC and DC applications                               │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Disadvantages                                                         │
+│                                                                      │
+│ • Limited energy density compared to batteries                        │
+│ • Voltage rating constrained by dielectric breakdown                  │
+│ • Leakage current can cause self‑discharge over time                 │
+│ • Physical size grows quickly for high capacitance values            │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Important Notes                                                       │
+│                                                                      │
+│ • **Polarity matters** for electrolytic capacitors – reverse          │
+│   connection can cause failure.                                      │
+│ • **Dielectric loss** (tan δ) indicates how much energy is            │
+│   dissipated as heat; low loss dielectrics are preferred for RF.     │
+│ • **Temperature coefficient** affects capacitance; some dielectrics │
+│   increase, others decrease with temperature.                        │
+│ • **Series and parallel combinations** follow simple rules:          │
+│   - Series: 1/C_total = Σ 1/C_i                                        │
+│   - Parallel: C_total = Σ C_i                                          │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Summary                                                               │
+│                                                                      │
+│ A capacitor stores energy by separating charge on two plates with a │
+│ dielectric in between. Its core parameter, capacitance (C = Q/V),   │
+│ dictates how much charge it can hold for a given voltage.           │
+│ Understanding dielectric properties, voltage rating, and leakage   │
+│ current is essential for selecting the right type for a specific    │
+│ application, whether it’s filtering, timing, or providing short‑     │
+│ term power bursts.                                                   │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ Suggested Questions                                                   │
+│                                                                      │
+│ 1. How does the dielectric constant affect the capacitance of a      │
+│    parallel‑plate capacitor?                                         │
+│ 2. Why are electrolytic capacitors polarized, and what happens if     │
+│    they are connected backwards?                                     │
+│ 3. Compare the energy storage capabilities of a capacitor versus a   │
+│    battery.                                                          │
+│ 4. How would you calculate the total capacitance of a mixed series‑   │
+│    parallel network?                                                │
+│ 5. What factors determine the maximum voltage a capacitor can safely │
+│    handle?                                                          │
+└──────────────────────────────────────────────────────────────────────┘
