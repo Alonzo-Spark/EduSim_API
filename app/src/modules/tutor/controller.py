@@ -13,6 +13,7 @@ class TutorQueryRequest(BaseModel):
     chapter: str | None = None
     topic: str | None = None
     history: list[ChatMessage] | None = None
+    session_id: str | None = None
 
 async def analyze_tutor_controller(request: TutorQueryRequest, student_profile: dict | None = None):
     try:

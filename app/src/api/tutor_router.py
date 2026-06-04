@@ -120,9 +120,13 @@ async def analyze_query(
         sessions = repo.list_tutor_sessions(user.id)
         
         session_id = None
-        if sessions:
-            session_id = uuid.UUID(sessions[0]["id"])
-        else:
+        if request.session_id:
+            try:
+                session_id = uuid.UUID(request.session_id)
+            except Exception:
+                pass
+        
+        if not session_id:
             session_id = uuid.uuid4()
         
         # 1. Extract the topic
@@ -209,6 +213,7 @@ async def analyze_query(
             if isinstance(response, dict):
                 response["success"] = True
                 response["message"] = "Learning summary saved successfully"
+                response["session_id"] = str(session_id)
                 
             # Queue profile update in background
             if explanation and "Error:" not in explanation:
@@ -315,9 +320,13 @@ async def explain_sim(
             sessions = repo.list_tutor_sessions(user.id)
             
             session_id = None
-            if sessions:
-                session_id = uuid.UUID(sessions[0]["id"])
-            else:
+            if request.session_id:
+                try:
+                    session_id = uuid.UUID(request.session_id)
+                except Exception:
+                    pass
+            
+            if not session_id:
                 session_id = uuid.uuid4()
                 
             explanation = data.get("explanation") or data.get("ai_explanation") or ""
@@ -339,7 +348,7 @@ async def explain_sim(
                 user_record = ChatHistory(
                     user_id=user.id,
                     session_id=session_id,
-                    session_type="tutor",
+                    session_type="explain_sim",
                     role="user",
                     topic=topic,
                     content=request.query,
@@ -355,7 +364,7 @@ async def explain_sim(
                 assistant_record = ChatHistory(
                     user_id=user.id,
                     session_id=session_id,
-                    session_type="tutor",
+                    session_type="explain_sim",
                     role="assistant",
                     topic=topic,
                     content=explanation,
@@ -404,6 +413,7 @@ async def explain_sim(
                 if isinstance(response, dict):
                     response["success"] = True
                     response["message"] = "Learning summary saved successfully"
+                    response["session_id"] = str(session_id)
                 
             except Exception as e:
                 db.rollback()

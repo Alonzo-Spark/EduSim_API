@@ -880,3 +880,70 @@ def delete_simulation_history(
         db.rollback()
         from fastapi.responses import JSONResponse
         return JSONResponse(status_code=500, content={"success": False, "message": "Failed to delete history."})
+
+
+@persistence_router.get("/tutor/sessions")
+def load_tutor_sessions_endpoint(
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db),
+):
+    user = require_user(authorization, db)
+    from app.src.repositories.persistence_repository import PersistenceRepository
+    repo = PersistenceRepository(db)
+    sessions = repo.list_tutor_sessions(user.id)
+    return {"success": True, "sessions": sessions}
+
+
+@persistence_router.get("/tutor/session/{session_id}")
+def load_tutor_session_messages_endpoint(
+    session_id: str,
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db),
+):
+    user = require_user(authorization, db)
+    try:
+        sid = uuid.UUID(session_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid session_id UUID format")
+        
+    from app.src.repositories.persistence_repository import PersistenceRepository
+    repo = PersistenceRepository(db)
+    messages = repo.get_tutor_messages(sid)
+    
+    first_msg = db.query(ChatHistory).filter(ChatHistory.session_id == sid, ChatHistory.user_id == user.id).order_by(ChatHistory.created_at.asc()).first()
+    if not first_msg:
+        raise HTTPException(status_code=404, detail="Session not found")
+        
+    meta = first_msg.metadata_json or {}
+    return {
+        "success": True,
+        "session": {
+            "id": str(sid),
+            "topic": first_msg.topic or meta.get("topic") or "General Physics",
+            "created_at": first_msg.created_at.isoformat() if hasattr(first_msg.created_at, "isoformat") else str(first_msg.created_at),
+            "messages": messages
+        }
+    }
+
+
+@persistence_router.delete("/tutor/session/{session_id}")
+def delete_tutor_session_endpoint(
+    session_id: str,
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db),
+):
+    user = require_user(authorization, db)
+    try:
+        sid = uuid.UUID(session_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid session_id UUID format")
+        
+    try:
+        deleted = db.query(ChatHistory).filter(ChatHistory.session_id == sid, ChatHistory.user_id == user.id, ChatHistory.session_type == "tutor").delete()
+        db.commit()
+        print("[Database] Tutor session deleted in the database")
+        return {"success": True, "message": "History deleted successfully.", "deleted_count": deleted}
+    except Exception as e:
+        db.rollback()
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=500, content={"success": False, "message": "Failed to delete history."})
