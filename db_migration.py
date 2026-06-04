@@ -10,6 +10,7 @@ from app.src.models.persistence import (
     SimulationHistory,
     UserSetting,
     UserSession,
+    StudentProfile,
 )
 from app.src.utils.curriculum_loader import populate_curriculum
 

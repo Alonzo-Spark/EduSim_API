@@ -60,9 +60,9 @@ class VectorStoreManager:
                         self._indices[subject] = index
                         self._metadata[subject] = metadata
                         
-                        # Create retriever closure (k=3 for fast retrieval)
+                        # Create retriever closure (k=5 for richer context retrieval)
                         self._retrievers[subject] = get_retriever(
-                            index, metadata, self._embeddings_model, k=3
+                            index, metadata, self._embeddings_model, k=5
                         )
                         loaded_subjects.append(subject)
                     except Exception as e:

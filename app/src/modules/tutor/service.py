@@ -26,6 +26,129 @@ _curriculum_data = None
 _curriculum_index = None
 
 
+async def _summarize_chat_history_async(turns_to_summarize: list[dict[str, str]]) -> str:
+    """Summarizes conversation history using the OpenRouter LLM."""
+    if not turns_to_summarize:
+        return ""
+    
+    # Format turns as text
+    history_text = ""
+    for msg in turns_to_summarize:
+        role = "Student" if msg["role"] == "user" else "Tutor"
+        history_text += f"{role}: {msg['content']}\n"
+        
+    prompt = f"""
+    Please generate a very concise summary (2 sentences maximum) of the following educational conversation history.
+    Focus on:
+    1. The physics concepts/formulas discussed.
+    2. Any specific student achievements or active misconceptions identified.
+    3. Keep it brief and objective.
+    
+    Conversation:
+    {history_text}
+    """
+    try:
+        from app.src.modules.legacy_rag.generator import generate_llm_text_async
+        summary = await generate_llm_text_async(
+            prompt,
+            temperature=0.2,
+            max_output_tokens=150,
+            system_prompt="You are a helpful education summarizer."
+        )
+        return summary.strip() if summary else ""
+    except Exception as e:
+        print(f"[Summarizer Error] Failed to generate history summary: {e}")
+        return ""
+
+
+async def analyze_and_update_profile_task(db_session_factory, user_id, query: str, response_text: str):
+    """
+    Background task to analyze the latest chat turn and update the student profile in the database.
+    """
+    from app.src.repositories.student_repository import StudentRepository
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async
+    import uuid
+    
+    if isinstance(user_id, str):
+        user_id = uuid.UUID(user_id)
+        
+    db = db_session_factory()
+    try:
+        profile = StudentRepository.get_or_create_profile(db, user_id)
+        
+        prompt = f"""
+        Analyze the latest student query and tutor explanation.
+        Determine if we should update the student's profile status:
+        1. Has the student mastered a new physics concept? (Add to mastered list).
+        2. Has the student displayed or corrected a misconception?
+           - If they made a physics mistake, add the misconception summary (e.g. "confuses mass and weight").
+           - If the explanation corrected their misconception and they acknowledged/understood it, remove it from the list.
+        3. Should their skill level change (beginner, intermediate, advanced)?
+        
+        Current Profile:
+        - Level: {profile.skill_level}
+        - Mastered: {profile.mastered_topics}
+        - Misconceptions: {profile.misconceptions}
+        
+        Latest Interaction:
+        Student: {query}
+        Tutor: {response_text}
+        
+        Return ONLY a JSON block with:
+        {{
+            "skill_level": "new_level or null",
+            "add_mastered": ["topic1"] or [],
+            "add_misconception": "new_misconception" or null,
+            "remove_misconception": "misconception_to_remove" or null
+        }}
+        """
+        
+        res = await generate_llm_text_async(
+            prompt,
+            temperature=0.1,
+            max_output_tokens=150,
+            system_prompt="You are a student profile analysis assistant. Output JSON only."
+        )
+        
+        if res and "Error" not in res:
+            import json
+            import re
+            cleaned = res.replace("```json", "").replace("```", "").strip()
+            json_match = re.search(r'\{.*\}', cleaned, re.DOTALL)
+            if json_match:
+                data = json.loads(json_match.group())
+                
+                skill_level = data.get("skill_level")
+                new_level = skill_level if skill_level and skill_level != "null" else None
+                
+                mastered_topics = list(profile.mastered_topics)
+                for topic in data.get("add_mastered", []):
+                    if topic not in mastered_topics:
+                        mastered_topics.append(topic)
+                        
+                misconceptions = list(profile.misconceptions)
+                add_m = data.get("add_misconception")
+                if add_m and add_m != "null" and add_m not in misconceptions:
+                    misconceptions.append(add_m)
+                    
+                rem_m = data.get("remove_misconception")
+                if rem_m and rem_m != "null" and rem_m in misconceptions:
+                    misconceptions.remove(rem_m)
+                    
+                StudentRepository.update_profile(
+                    db,
+                    user_id,
+                    skill_level=new_level,
+                    mastered_topics=mastered_topics,
+                    misconceptions=misconceptions
+                )
+                print(f"[Profile Update] Successfully updated student profile for user: {user_id}")
+    except Exception as e:
+        print(f"[Profile Update Error] Failed to update profile: {e}")
+    finally:
+        db.close()
+
+
 def _empty_tutor_payload(message: str):
     return {
         "title": "Generation Failed",
@@ -47,7 +170,7 @@ def get_rag_components(subject: str = None):
     retriever = vector_store.get_retriever(subject)
     return retriever
 
-async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
+async def analyze_with_llm_async(query: str, context: str, history: list[dict[str, str]] | None = None) -> Dict[str, Any]:
     system_prompt = (
         "You are an intelligent physics tutor. Analyze the query and textbook context to determine scientific properties and design a custom interactive physics sandbox simulation that demonstrates, explores, or proves the concept in the query (e.g., if they ask about Newton's Second Law, design a block-impulse collision system; if they ask about simple harmonic motion, design a spring oscillator; if they ask about gravity, design a falling-mass setup; if they ask about orbits, design planetary radial motion; etc.). The goal is to ALWAYS design an interactive, playable sandbox layout demonstrating their query.\n"
         "1. Determine 'queryType': 'concept', 'formula', or 'mixed'.\n"
@@ -85,7 +208,8 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
         response_text = await generate_llm_text_async(
             final_prompt=user_prompt,
             temperature=0.1,
-            system_prompt=system_prompt
+            system_prompt=system_prompt,
+            history=history,
         )
         if not response_text or "Error:" in response_text:
             return _empty_tutor_payload("AI failed to extract concepts.")
@@ -112,10 +236,10 @@ async def analyze_with_llm_async(query: str, context: str) -> Dict[str, Any]:
         return _empty_tutor_payload(f"AI error: {str(e)}")
 
 
-async def generate_explanation_async(query: str, context: str, fallback_mode: bool = False) -> str:
+async def generate_explanation_async(query: str, context: str, fallback_mode: bool = False, history: list[dict[str, str]] | None = None) -> str:
     from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt, NEW_RENDERING_SYSTEM
     prompt = get_tutor_prompt(context, query, fallback_mode)
-    res = await generate_llm_text_async(prompt, temperature=0.3, system_prompt=NEW_RENDERING_SYSTEM)
+    res = await generate_llm_text_async(prompt, temperature=0.3, system_prompt=NEW_RENDERING_SYSTEM, history=history)
     
     if not res:
         return "Failed to generate explanation."
@@ -129,12 +253,93 @@ async def generate_explanation_async(query: str, context: str, fallback_mode: bo
     return res
 
 
-async def analyze_tutor_query(query: str) -> Dict[str, Any]:
+async def analyze_tutor_query(
+    query: str,
+    history: list[dict[str, str]] | None = None,
+    subject: str | None = None,
+    chapter: str | None = None,
+    topic: str | None = None,
+    student_profile: dict | None = None
+) -> Dict[str, Any]:
     request_started = time.perf_counter()
     
+    dependent_pronouns = re.compile(
+        r"\b(it|its|this|that|these|those|they|them|their|theirs)\b", 
+        re.IGNORECASE
+    )
+    has_dependent_pronoun = bool(dependent_pronouns.search(query)) and len(query.split()) < 7
+    has_no_history = not history or not any(msg["role"] == "user" for msg in history)
+    has_no_context = not topic and not chapter
+    
+    if has_dependent_pronoun and has_no_history and has_no_context:
+        clarification_msg = (
+            "I'm not sure which physics concept or formula you are referring to since we don't have "
+            "an active topic selected or any conversation history.\n\n"
+            "Could you please specify which topic or equation you'd like to explore? "
+            "(e.g., Ohm's Law, Newton's Second Law, Simple Pendulum, etc.)"
+        )
+        return {
+            "title": "Clarification Needed",
+            "description": query,
+            "formula": "",
+            "related_concepts": [],
+            "related_formulas": [],
+            "ai_explanation": clarification_msg,
+            "sources": [],
+            "queryType": "concept",
+            "concepts": [],
+            "formulas": [],
+            "explanation": clarification_msg,
+            "ragContent": [],
+            "simulation_guide": {"is_buildable": False},
+        }
+
+    # Dynamic History Summarization
+    history_summary = ""
+    if history and len(history) > 16:
+        turns_to_summarize = history[:-6]
+        history = history[-6:]
+        history_summary = await _summarize_chat_history_async(turns_to_summarize)
+        
+    # Format Student Profile context if provided
+    profile_context = ""
+    if student_profile:
+        profile_context = (
+            f"[STUDENT PROFILE]\n"
+            f"- Skill Level: {student_profile.get('skill_level', 'beginner')}\n"
+            f"- Mastered Topics: {', '.join(student_profile.get('mastered_topics', [])) or 'None'}\n"
+            f"- Active Misconceptions: {', '.join(student_profile.get('misconceptions', [])) or 'None'}\n\n"
+        )
+
+    # Enrich the RAG search query with history or active topic context
+    search_query = query
+    resolved_by_history = False
+    if history:
+        pronoun_pattern = re.compile(
+            r"\b(it|its|this|that|these|those|they|them|he|she|him|her|their|theirs|here|there|why|how)\b", 
+            re.IGNORECASE
+        )
+        if pronoun_pattern.search(query):
+            last_user_msg = next((msg["content"] for msg in reversed(history) if msg["role"] == "user"), "")
+            if last_user_msg:
+                search_query = f"{last_user_msg} {query}"
+                resolved_by_history = True
+                
+    if not resolved_by_history:
+        context_hints = []
+        if topic:
+            context_hints.append(topic)
+        elif chapter:
+            context_hints.append(chapter)
+            
+        if context_hints:
+            hints_str = " ".join(context_hints)
+            if hints_str.lower() not in query.lower():
+                search_query = f"{hints_str} {query}"
+            
     # 1. Subject Routing & RAG Retrieval
-    subject = detect_subject(query)
-    retriever = get_rag_components(subject)
+    target_subject = subject if subject else detect_subject(search_query)
+    retriever = get_rag_components(target_subject)
     
     rag_content = []
     context = ""
@@ -142,30 +347,36 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
     
     valid_docs = []
     if retriever:
-        docs = retriever(query)
+        docs = retriever(search_query)
         valid_docs = [doc for doc in docs if doc.get('score', 0) > 0.35]
         
     fallback_mode = not bool(valid_docs)
     
     if not fallback_mode:
-        for doc in valid_docs[:3]: # Optimized to 3
+        for doc in valid_docs[:5]: # Optimized to 5
             source = os.path.basename(doc.get("source", "Textbook"))
             content = re.sub(r'\s+', ' ', doc.get("text", "")).strip()
-            if len(content) > 400: content = content[:400] + "..."
             rag_content.append({"title": source, "content": content})
             context += f"{content}\n\n"
             
     retrieval_time = time.perf_counter() - retrieval_start
-    print(f"[RAG] {retrieval_time:.2f}s (Subject: {subject})")
+    print(f"[RAG] {retrieval_time:.2f}s (Subject: {target_subject})")
     
     if not context.strip():
         context = "No textbook context available."
 
+    # Build full context by prepending memory and profile state
+    full_context = context
+    if history_summary:
+        full_context = f"[CONVERSATION MEMORY]\nPreviously: {history_summary}\n\n{full_context}"
+    if profile_context:
+        full_context = f"{profile_context}{full_context}"
+
     # 2. Async Parallel Execution
     llm_start = time.perf_counter()
     
-    structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
-    explanation_task = asyncio.create_task(generate_explanation_async(query, context, fallback_mode))
+    structured_task = asyncio.create_task(analyze_with_llm_async(query, full_context, history=history))
+    explanation_task = asyncio.create_task(generate_explanation_async(query, full_context, fallback_mode, history=history))
     
     structured, rag_explanation = await asyncio.gather(structured_task, explanation_task)
     
@@ -196,9 +407,12 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
     }
 
 
-async def explain_simulation_query(query: str) -> Dict[str, Any]:
+async def explain_simulation_query(query: str, history: list[dict[str, str]] | None = None) -> Dict[str, Any]:
     request_started = time.perf_counter()
     
+    if history:
+        history = history[-16:]
+        
     # Direct prompt to LLM (No RAG!)
     from app.src.modules.legacy_rag.generator import generate_llm_text_async, TUTOR_SYSTEM_PROMPT
     
@@ -210,8 +424,8 @@ async def explain_simulation_query(query: str) -> Dict[str, Any]:
     # Generate structured explanation
     llm_start = time.perf_counter()
     
-    structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
-    explanation_task = asyncio.create_task(generate_llm_text_async(prompt, temperature=0.3, system_prompt=TUTOR_SYSTEM_PROMPT))
+    structured_task = asyncio.create_task(analyze_with_llm_async(query, context, history=history))
+    explanation_task = asyncio.create_task(generate_llm_text_async(prompt, temperature=0.3, system_prompt=TUTOR_SYSTEM_PROMPT, history=history))
     
     structured, rag_explanation = await asyncio.gather(structured_task, explanation_task)
     
@@ -244,30 +458,116 @@ async def explain_simulation_query(query: str) -> Dict[str, Any]:
     }
 
 
-async def analyze_tutor_query_stream(query: str):
+async def analyze_tutor_query_stream(
+    query: str,
+    history: list[dict[str, str]] | None = None,
+    subject: str | None = None,
+    chapter: str | None = None,
+    topic: str | None = None,
+    student_profile: dict | None = None,
+    user_id: Any | None = None,
+    db_session_factory: Any | None = None
+):
     """
     Streaming SSE generator for ultra-fast first token.
     """
     request_started = time.perf_counter()
     
-    subject = detect_subject(query)
-    retriever = get_rag_components(subject)
+    dependent_pronouns = re.compile(
+        r"\b(it|its|this|that|these|those|they|them|their|theirs)\b", 
+        re.IGNORECASE
+    )
+    has_dependent_pronoun = bool(dependent_pronouns.search(query)) and len(query.split()) < 7
+    has_no_history = not history or not any(msg["role"] == "user" for msg in history)
+    has_no_context = not topic and not chapter
+    
+    if has_dependent_pronoun and has_no_history and has_no_context:
+        clarification_msg = (
+            "I'm not sure which physics concept or formula you are referring to since we don't have "
+            "an active topic selected or any conversation history.\n\n"
+            "Could you please specify which topic or equation you'd like to explore? "
+            "(e.g., Ohm's Law, Newton's Second Law, Simple Pendulum, etc.)"
+        )
+        yield f"data: {json.dumps({'ragContent': []})}\n\n"
+        yield f"data: {json.dumps({'content': clarification_msg})}\n\n"
+        structured_payload = {
+            "title": "Clarification Needed",
+            "description": query,
+            "formula": "",
+            "related_concepts": [],
+            "related_formulas": [],
+            "ai_explanation": clarification_msg,
+            "sources": [],
+            "queryType": "concept",
+            "concepts": [],
+            "formulas": [],
+            "explanation": clarification_msg,
+            "ragContent": [],
+        }
+        yield f"data: {json.dumps({'structured': structured_payload})}\n\n"
+        yield "data: [DONE]\n\n"
+        return
+
+    # Dynamic History Summarization
+    history_summary = ""
+    if history and len(history) > 16:
+        turns_to_summarize = history[:-6]
+        history = history[-6:]
+        history_summary = await _summarize_chat_history_async(turns_to_summarize)
+        
+    # Format Student Profile context if provided
+    profile_context = ""
+    if student_profile:
+        profile_context = (
+            f"[STUDENT PROFILE]\n"
+            f"- Skill Level: {student_profile.get('skill_level', 'beginner')}\n"
+            f"- Mastered Topics: {', '.join(student_profile.get('mastered_topics', [])) or 'None'}\n"
+            f"- Active Misconceptions: {', '.join(student_profile.get('misconceptions', [])) or 'None'}\n\n"
+        )
+
+    # Enrich the RAG search query with history or active topic context
+    search_query = query
+    resolved_by_history = False
+    if history:
+        pronoun_pattern = re.compile(
+            r"\b(it|its|this|that|these|those|they|them|he|she|him|her|their|theirs|here|there|why|how)\b", 
+            re.IGNORECASE
+        )
+        if pronoun_pattern.search(query):
+            last_user_msg = next((msg["content"] for msg in reversed(history) if msg["role"] == "user"), "")
+            if last_user_msg:
+                search_query = f"{last_user_msg} {query}"
+                resolved_by_history = True
+                
+    if not resolved_by_history:
+        context_hints = []
+        if topic:
+            context_hints.append(topic)
+        elif chapter:
+            context_hints.append(chapter)
+            
+        if context_hints:
+            hints_str = " ".join(context_hints)
+            if hints_str.lower() not in query.lower():
+                search_query = f"{hints_str} {query}"
+            
+    target_subject = subject if subject else detect_subject(search_query)
+    retriever = get_rag_components(target_subject)
     
     rag_content = []
     context = ""
     valid_docs = []
     
     if retriever:
-        docs = retriever(query)
+        docs = retriever(search_query)
         valid_docs = [doc for doc in docs if doc.get('score', 0) > 0.35]
         
     fallback_mode = not bool(valid_docs)
     
     if not fallback_mode:
-        for doc in valid_docs[:3]:
+        for doc in valid_docs[:5]: # Optimized to 5
             source = os.path.basename(doc.get("source", "Textbook"))
             content = re.sub(r'\s+', ' ', doc.get("text", "")).strip()
-            if len(content) > 400: content = content[:400] + "..."
             rag_content.append({"title": source, "content": content})
             context += f"{content}\n\n"
             
@@ -284,20 +584,48 @@ async def analyze_tutor_query_stream(query: str):
         )
         yield f"data: {json.dumps({'content': warning_msg})}\n\n"
     
+    # Build full context by prepending memory and profile state
+    full_context = context
+    if history_summary:
+        full_context = f"[CONVERSATION MEMORY]\nPreviously: {history_summary}\n\n{full_context}"
+    if profile_context:
+        full_context = f"{profile_context}{full_context}"
+
     # Start structured task
-    structured_task = asyncio.create_task(analyze_with_llm_async(query, context))
+    structured_task = asyncio.create_task(analyze_with_llm_async(query, full_context, history=history))
     
     # Stream explanation text
     from app.src.modules.legacy_rag.generator import generate_llm_stream_async, get_tutor_prompt
-    prompt = get_tutor_prompt(context, query, fallback_mode)
+    prompt = get_tutor_prompt(full_context, query, fallback_mode)
     
-    async for chunk in generate_llm_stream_async(prompt):
+    accumulated_text = ""
+    async for chunk in generate_llm_stream_async(prompt, history=history):
+        if chunk.startswith("data: "):
+            data_str = chunk[6:]
+            try:
+                data = json.loads(data_str)
+                content = data.get("content", "")
+                if content:
+                    accumulated_text += content
+            except Exception:
+                pass
         yield chunk
         
     # Wait for structured data to finish
     structured = await structured_task
     yield f"data: {json.dumps({'structured': structured})}\n\n"
     
+    # Trigger background profile update task if parameters are supplied
+    if user_id and db_session_factory and accumulated_text:
+        asyncio.create_task(
+            analyze_and_update_profile_task(
+                db_session_factory,
+                user_id,
+                query,
+                accumulated_text
+            )
+        )
+
     yield "data: [DONE]\n\n"
 
 

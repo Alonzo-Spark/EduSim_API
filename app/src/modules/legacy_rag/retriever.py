@@ -71,13 +71,13 @@ def get_retriever(index, metadata, embeddings_model, k=5):
             # NO RESULTS
             # =====================================================
             if not results:
-                print("\n⚠️ No strong matches found.")
+                print("\n[WARNING] No strong matches found.")
 
             return results
 
         except Exception as e:
 
-            print(f"\n❌ Error retrieving documents: {e}")
+            print(f"\n[ERROR] Error retrieving documents: {e}")
 
             return []
 
