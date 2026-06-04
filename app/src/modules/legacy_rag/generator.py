@@ -483,7 +483,7 @@ def generate_llm_text(
     )
 
 
-def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None = None) -> bool:
+def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None = None, history: list[dict[str, str]] | None = None) -> bool:
     if not text:
         return False
     trimmed = text.strip()
@@ -517,6 +517,10 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
         # Short responses are complete as long as they end with standard punctuation
         return trimmed[-1] in [".", "?", "!", '"', "*", "$", "}", ")"]
 
+    # For any long response, as long as it ends with proper punctuation, it is complete
+    if len(trimmed) > 1000 and trimmed[-1] in [".", "?", "!", '"', "*", "$", "}", ")"]:
+        return True
+
     # Textbook curriculum generation requires structural completeness markers
     is_simulation = (
         "simulation" in prompt.lower() or
@@ -533,9 +537,21 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
         ))
     )
 
+    # Conversational follow-ups (history is present) should not enforce textbook structure
+    if history and len(history) > 0:
+        is_textbook_generation = False
+
     if is_textbook_generation:
-        if "Summary" not in text and "Suggested Questions" not in text:
-            return False
+        structure_part = prompt
+        if "REQUIRED RESPONSE STRUCTURE" in prompt:
+            structure_part = prompt.split("REQUIRED RESPONSE STRUCTURE")[-1]
+            
+        expects_summary = "Summary" in structure_part
+        expects_questions = "Suggested Questions" in structure_part
+        
+        if expects_summary and expects_questions:
+            if "Summary" not in text and "Suggested Questions" not in text:
+                return False
 
     # For non-textbook responses (simulation, short answers, etc.), be lenient
     if len(trimmed) > 1000:
@@ -571,7 +587,7 @@ def generate_openrouter_text(
                 history=history,
             )
             if result:
-                if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt):
+                if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt, history=history):
                     _log_model_success(model_name)
                     return result
                 else:
@@ -628,7 +644,7 @@ async def generate_openrouter_text_async(
                 history=history,
             )
             if result:
-                if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt):
+                if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt, history=history):
                     _log_model_success(model_name)
                     return result
                 else:
