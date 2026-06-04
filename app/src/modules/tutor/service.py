@@ -129,6 +129,63 @@ async def generate_explanation_async(query: str, context: str, fallback_mode: bo
     return res
 
 
+async def analyze_concepts_with_llm_async(query: str, context: str) -> Dict[str, Any]:
+    system_prompt = (
+        "You are an intelligent physics tutor. Analyze the query and textbook context to determine scientific properties.\n"
+        "1. Determine 'queryType': 'concept', 'formula', or 'mixed'.\n"
+        "2. Extract 'concepts': list of simple, concise topic names (e.g. ['Gravity', 'Orbital Velocity', 'Centripetal Force']). Do NOT output nested dictionaries.\n"
+        "3. Extract 'formulas': [{formula, name, topic, meaning}]. Include fundamental ones if omitted in text.\n"
+        "4. Generate a brief 'explanation': a short summary string of the physics concepts.\n"
+        "Return ONLY valid, parseable JSON matching the requested schema."
+    )
+    user_prompt = f"Context:\n{context}\n\nQuery:\n{query}"
+    
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async
+    try:
+        response_text = await generate_llm_text_async(
+            final_prompt=user_prompt,
+            temperature=0.1,
+            system_prompt=system_prompt
+        )
+        if not response_text or "Error:" in response_text:
+            return {
+                "queryType": "concept",
+                "concepts": [],
+                "formulas": [],
+                "explanation": "AI failed to extract concepts."
+            }
+            
+        cleaned = response_text.replace("```json", "").replace("```", "").strip()
+        json_match = re.search(r'\{.*\}', cleaned, re.DOTALL)
+        if json_match:
+            try:
+                parsed = json.loads(json_match.group())
+                related_concepts = _dedupe_related_topics(parsed.get("concepts", []), max_items=_MAX_RELATED_TOPICS)
+                return {
+                    **parsed,
+                    "title": parsed.get("title", "AI Tutor"),
+                    "formula": parsed.get("formula", ""),
+                    "related_concepts": related_concepts,
+                    "related_formulas": parsed.get("formulas", []),
+                    "explanation": parsed.get("explanation", ""),
+                }
+            except json.JSONDecodeError:
+                pass
+        return {
+            "queryType": "concept",
+            "concepts": [],
+            "formulas": [],
+            "explanation": "Invalid JSON returned."
+        }
+    except Exception as e:
+        return {
+            "queryType": "concept",
+            "concepts": [],
+            "formulas": [],
+            "explanation": f"AI error: {str(e)}"
+        }
+
+
 async def analyze_tutor_query(query: str) -> Dict[str, Any]:
     request_started = time.perf_counter()
     
@@ -192,7 +249,6 @@ async def analyze_tutor_query(query: str) -> Dict[str, Any]:
         "formulas": formulas,
         "explanation": rag_explanation,
         "ragContent": rag_content,
-        "simulation_guide": structured.get("simulation_guide", {"is_buildable": False}),
     }
 
 
@@ -951,3 +1007,34 @@ def get_topic_content(subject: str, class_name: str, chapter: str, topic: Option
             pass
 
     return response
+
+
+async def generate_tutor_guide(query: str) -> Dict[str, Any]:
+    # 1. Subject Routing & RAG Retrieval
+    subject = detect_subject(query)
+    retriever = get_rag_components(subject)
+    
+    context = ""
+    valid_docs = []
+    if retriever:
+        docs = retriever(query)
+        valid_docs = [doc for doc in docs if doc.get('score', 0) > 0.35]
+        
+    fallback_mode = not bool(valid_docs)
+    
+    if not fallback_mode:
+        for doc in valid_docs[:3]:
+            content = re.sub(r'\s+', ' ', doc.get("text", "")).strip()
+            if len(content) > 400: content = content[:400] + "..."
+            context += f"{content}\n\n"
+            
+    if not context.strip():
+        context = "No textbook context available."
+
+    # Call only the structured analyzer to get simulation_guide
+    structured = await analyze_with_llm_async(query, context)
+    return {
+        "title": structured.get("title", "Simulation Guide"),
+        "simulation_guide": structured.get("simulation_guide", {"is_buildable": False}),
+    }
+

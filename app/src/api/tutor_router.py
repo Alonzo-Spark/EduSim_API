@@ -181,6 +181,53 @@ async def analyze_query(
     return response
 
 
+@tutor_router.post("/guide")
+async def get_tutor_guide(
+    request: TutorQueryRequest,
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db),
+):
+    """
+    Analyzes a physics query to construct only the simulation guide/instructions (saving tokens).
+    """
+    from app.src.modules.tutor.service import generate_tutor_guide
+    from fastapi import HTTPException
+    
+    try:
+        response = await generate_tutor_guide(request.query)
+        user = resolve_user_from_authorization(authorization, db)
+        if user:
+            concepts = request.topic or request.query
+            if len(concepts) > 100:
+                concepts = concepts[:97] + "..."
+            
+            record_activity(
+                db,
+                user=user,
+                domain="tutor",
+                action="guide",
+                entity_type="query",
+                entity_id=request.query[:120],
+                source="/api/tutor/guide",
+                metadata={"topic": concepts},
+            )
+            try:
+                db.commit()
+            except Exception as e:
+                db.rollback()
+                print(f"Exception during save guide activity: {repr(e)}")
+                
+        return {
+            "success": True,
+            "data": response
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Tutor Guide Generation Error: {str(e)}"
+        )
+
+
 @tutor_router.post("/explain-sim")
 async def explain_sim(
     request: TutorQueryRequest,
