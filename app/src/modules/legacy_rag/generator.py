@@ -3,31 +3,40 @@ import re
 from typing import Any, Dict, Optional
 
 import httpx
+from pathlib import Path
 from app.src.config.models import (
     OPENROUTER_API_KEY,
     OPENROUTER_URL,
     get_model_chain,
 )
 
+# Load prompt templates
+def _load_prompt_template(filename: str) -> str:
+    """Read a prompt template from the prompt_templates directory."""
+    base_path = Path(__file__).parent / "prompt_templates" / filename
+    return base_path.read_text(encoding="utf-8")
+
+ULTIMATE_TUTOR_PROMPT = _load_prompt_template("ultimate_tutor_prompt.txt")
 # =========================================================
 # NEW RENDERING SYSTEM (Sent to LLM)
 # =========================================================
 NEW_RENDERING_SYSTEM = r'''
-The KaTeX rendering, markdown lists, and table styling are fully working. The frontend has a high-fidelity interactive rendering engine that automatically detects key Markdown headings and converts them into gorgeous, animated React cards, interactive tables, and tabs.
+You are an advanced Educational Content Synthesizer. Your output is consumed directly by a high-fidelity interactive frontend rendering engine. The engine automatically parses semantic Markdown headings and converts them into gorgeous, animated React cards, interactive tables, and mathematical dashboards.
 
-To ensure a premium, modern textbook-like UI, you must adhere to the following clean Markdown constraints:
-
-=========================================================
-STRICT FORMATTING CONSTRAINTS
-=========================================================
-1. DO NOT output any ASCII-art borders, frames, or box-drawing characters (e.g. `┌`, `└`, `│`, `─`, or `┌───────────────────────────┐`).
-2. DO NOT output mock action button links in brackets (e.g. `[ Explain Formula ]` or `[ Open Formula Lab ]`).
-3. Output standard, clean, valid GitHub Flavored Markdown (GFM). The frontend parser will dynamically construct modern, interactive React cards, formula cards, and interactive tables directly from your semantic markdown.
+To ensure a premium, modern textbook-like UI, you must adhere strictly to the following constraints:
 
 =========================================================
-SECTION DETECTION
+1. STRICT FORMATTING CONSTRAINTS
 =========================================================
-Organize your response using standard Markdown H1 headings (`# Heading Name`). Use the exact heading names below so that the frontend router can automatically group them into interactive accordion tabs:
+* DO NOT output any ASCII-art borders, frames, or box-drawing characters (e.g., `┌`, `└`, `│`, `─`, or `┌───────────────────────────┐`).
+* DO NOT output mock action button links in brackets (e.g., `[ Explain Formula ]` or `[ Open Formula Lab ]`).
+* Output standard, clean, valid GitHub Flavored Markdown (GFM). 
+* Use bolding and formatting sparingly. Remaining content should be clean, professional textbook-style prose.
+
+=========================================================
+2. ADAPTIVE STRUCTURE (INTENT-BASED HEADINGS)
+=========================================================
+The orchestrator will inject a target structure based on the query intent. You must strictly align your headings to the structure provided.
 
 # Definition
 # Key Points
@@ -40,41 +49,22 @@ Organize your response using standard Markdown H1 headings (`# Heading Name`). U
 # Summary
 # Suggested Questions
 
-=========================================================
-FORMULA SYSTEM
-=========================================================
-When presenting a mathematical formula, place it under a `# Formula` heading. 
-Render the formula using standard, clear LaTeX wrapped in `$$ ... $$` block syntax on a new line:
-
-$$
-F_{net} = ma
-$$
-
-Directly below the math block, list the variables in a standard bulleted list under a "Where:" line:
-
-Where:
-* $F_{net}$ represents the net force acting on the object (measured in Newtons, N).
-* $m$ represents the mass of the object (measured in kilograms, kg).
-* $a$ represents the acceleration of the object (measured in meters per second squared, m/s²).
-
-Do not leave formulas floating in plain paragraph text. Do not wrap them in box-drawing characters. The frontend automatically translates this clean syntax into a dedicated, interactive, and high-fidelity interactive React FormulaCard component.
+CRITICAL ADAPTIVITY RULES:
+* OMIT HEADINGS: If a section does not apply to the topic (e.g., there is no formula/derivation for a purely qualitative concept), DO NOT output that heading. Omit the section entirely to prevent hallucinations.
+* NO PLACEHOLDERS: Never write placeholder text (e.g., "N/A" or "None") under any heading. Either write a complete, high-quality section, or omit the heading.
 
 =========================================================
-LISTS AND BULLET POINTS
+3. INTERACTIVE COMPONENT MAPPING (WRITE FOR THE UI)
 =========================================================
-For key points, characteristics, and bullet lists, always keep the property/item name and its description on the SAME bullet point. NEVER split a term/name and its description into separate consecutive bullet points:
-* **Good:** `* **Universal Attraction:** Gravity is an attractive force, meaning it always pulls objects together.`
-* **Bad:** 
-  `* **Universal Attraction:**`
-  `* Gravity is an attractive force, meaning it always pulls objects together.`
+Your markdown elements map directly to React components. Write content that maximizes their interactivity:
 
-=========================================================
-COMPARISONS (ADVANTAGES & DISADVANTAGES)
-=========================================================
-1. Always present Advantages and Disadvantages under two separate H1 headings: `# Advantages` and `# Disadvantages`.
-2. Do NOT use markdown tables or pipe characters (`|`) for advantages and disadvantages. Instead, list the points under each heading as a standard bulleted list.
-3. Keep the title/name of each point in bold and its description on the same bullet line (e.g. `* **Property/Point:** Detailed description here.`).
-4. The frontend will automatically detect these two adjacent sections and display them in a stunning, side-by-side green/red comparison card component!
+* Heading 1 (`# Heading Name`) ──> Becomes a standalone, expandable Accordion Card. Keep card content focused and punchy.
+* Advantages & Disadvantages ──> Under consecutive `# Advantages` and `# Disadvantages` headings, list points in a standard bulleted list with the term in bold (e.g., `* **Pro:** Description`). The UI automatically places them side-by-side in a stunning green/red Comparison Card. Do not use Markdown tables here.
+* Comparison Tables (Differences) ──> Under a `# Differences` or `# Differences Table` heading, use a standard Markdown table:
+  ```markdown
+  | Feature | Concept A | Concept B |
+  |---|---|---|
+
 '''
 
 # =========================================================
@@ -402,6 +392,7 @@ def _generate_openrouter_text(
     temperature: float,
     max_tokens: int,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
+    history: list[dict[str, str]] | None = None,
 ):
     if not OPENROUTER_API_KEY:
         _log_model_failure(model_name, "missing API key")
@@ -409,17 +400,18 @@ def _generate_openrouter_text(
 
     try:
         with httpx.Client(timeout=httpx.Timeout(60.0, connect=10.0)) as client:
+            messages = (history or []) + [
+                {
+                    "role": "user",
+                    "content": _format_prompt(prompt, system_prompt),
+                }
+            ]
             response = client.post(
                 OPENROUTER_URL,
                 headers=_openrouter_headers(),
                 json={
                     "model": model_name,
-                    "messages": [
-                        {
-                            "role": "user",
-                            "content": _format_prompt(prompt, system_prompt),
-                        }
-                    ],
+                    "messages": messages,
                     "temperature": temperature,
                     "max_tokens": max_tokens,
                 },
@@ -440,6 +432,7 @@ async def _generate_openrouter_text_async(
     temperature: float,
     max_tokens: int,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
+    history: list[dict[str, str]] | None = None,
 ):
     if not OPENROUTER_API_KEY:
         _log_model_failure(model_name, "missing API key")
@@ -447,17 +440,18 @@ async def _generate_openrouter_text_async(
 
     try:
         async with httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0)) as client:
+            messages = (history or []) + [
+                {
+                    "role": "user",
+                    "content": _format_prompt(prompt, system_prompt),
+                }
+            ]
             response = await client.post(
                 OPENROUTER_URL,
                 headers=_openrouter_headers(),
                 json={
                     "model": model_name,
-                    "messages": [
-                        {
-                            "role": "user",
-                            "content": _format_prompt(prompt, system_prompt),
-                        }
-                    ],
+                    "messages": messages,
                     "temperature": temperature,
                     "max_tokens": max_tokens,
                 },
@@ -477,6 +471,7 @@ def generate_llm_text(
     temperature: float = 0.3,
     max_output_tokens: int = 2500,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
+    history: list[dict[str, str]] | None = None,
 ):
     final_prompt = final_prompt.strip()
     return generate_openrouter_text(
@@ -484,6 +479,7 @@ def generate_llm_text(
         temperature=temperature,
         max_output_tokens=max_output_tokens,
         system_prompt=system_prompt,
+        history=history,
     )
 
 
@@ -556,6 +552,7 @@ def generate_openrouter_text(
     temperature: float = 0.3,
     max_output_tokens: int = 2500,
     system_prompt: str | None = None,
+    history: list[dict[str, str]] | None = None,
 ):
     models = get_model_chain()
     best_fallback = None
@@ -571,6 +568,7 @@ def generate_openrouter_text(
                 current_temp,
                 current_max,
                 system_prompt=system_prompt,
+                history=history,
             )
             if result:
                 if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt):
@@ -594,6 +592,7 @@ async def generate_llm_text_async(
     temperature: float = 0.3,
     max_output_tokens: int = 2500,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
+    history: list[dict[str, str]] | None = None,
 ):
     final_prompt = final_prompt.strip()
     return await generate_openrouter_text_async(
@@ -601,6 +600,7 @@ async def generate_llm_text_async(
         temperature=temperature,
         max_output_tokens=max_output_tokens,
         system_prompt=system_prompt,
+        history=history,
     )
 
 
@@ -609,6 +609,7 @@ async def generate_openrouter_text_async(
     temperature: float = 0.3,
     max_output_tokens: int = 2500,
     system_prompt: str | None = None,
+    history: list[dict[str, str]] | None = None,
 ):
     models = get_model_chain()
     best_fallback = None
@@ -624,6 +625,7 @@ async def generate_openrouter_text_async(
                 current_temp,
                 current_max,
                 system_prompt=system_prompt,
+                history=history,
             )
             if result:
                 if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt):
@@ -646,6 +648,7 @@ async def generate_llm_stream_async(
     final_prompt: str,
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
+    history: list[dict[str, str]] | None = None,
 ):
     final_prompt = final_prompt.strip()
     if not OPENROUTER_API_KEY:
@@ -658,18 +661,19 @@ async def generate_llm_stream_async(
         _log_model_attempt(model_name, fallback=index > 0)
         try:
             async with httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0)) as client:
+                messages = (history or []) + [
+                    {
+                        "role": "user",
+                        "content": _format_prompt(final_prompt, NEW_RENDERING_SYSTEM),
+                    }
+                ]
                 async with client.stream(
                     "POST",
                     OPENROUTER_URL,
                     headers=_openrouter_headers(),
                     json={
                         "model": model_name,
-                        "messages": [
-                            {
-                                "role": "user",
-                                "content": _format_prompt(final_prompt, NEW_RENDERING_SYSTEM),
-                            }
-                        ],
+                        "messages": messages,
                         "temperature": temperature,
                         "max_tokens": max_output_tokens,
                         "stream": True,

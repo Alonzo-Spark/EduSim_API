@@ -153,3 +153,13 @@ class UserSession(Base, TimestampMixin):
     expires_at = Column(DateTime(timezone=True), nullable=True)
     is_active = Column(Boolean, default=True, nullable=False)
     metadata_json = Column(JSON, nullable=True)
+
+
+class StudentProfile(Base, TimestampMixin):
+    __tablename__ = "student_profiles"
+
+    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    skill_level = Column(String(50), default="beginner", nullable=False)
+    mastered_topics = Column(JSON, default=list, nullable=False)
+    misconceptions = Column(JSON, default=list, nullable=False)
+    metadata_json = Column(JSON, nullable=True)
