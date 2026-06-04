@@ -120,9 +120,13 @@ async def analyze_query(
         sessions = repo.list_tutor_sessions(user.id)
         
         session_id = None
-        if sessions:
-            session_id = uuid.UUID(sessions[0]["id"])
-        else:
+        if request.session_id:
+            try:
+                session_id = uuid.UUID(request.session_id)
+            except Exception:
+                pass
+        
+        if not session_id:
             session_id = uuid.uuid4()
         
         # 1. Extract the topic
@@ -209,6 +213,7 @@ async def analyze_query(
             if isinstance(response, dict):
                 response["success"] = True
                 response["message"] = "Learning summary saved successfully"
+                response["session_id"] = str(session_id)
                 
             # Queue profile update in background
             if explanation and "Error:" not in explanation:
@@ -304,10 +309,118 @@ async def explain_sim(
         if request.history:
             history_dicts = [{"role": msg.role, "content": msg.content} for msg in request.history]
         data = await explain_simulation_query(request.query, history=history_dicts)
-        return {
+        response = {
             "success": True,
             "data": data
         }
+        user = resolve_user_from_authorization(authorization, db)
+        if user:
+            from app.src.repositories.persistence_repository import PersistenceRepository
+            repo = PersistenceRepository(db)
+            sessions = repo.list_tutor_sessions(user.id)
+            
+            session_id = None
+            if request.session_id:
+                try:
+                    session_id = uuid.UUID(request.session_id)
+                except Exception:
+                    pass
+            
+            if not session_id:
+                session_id = uuid.uuid4()
+                
+            explanation = data.get("explanation") or data.get("ai_explanation") or ""
+            
+            # 1. Extract topic
+            topic = request.query
+            if len(topic) > 100:
+                topic = topic[:97] + "..."
+                
+            if "Error:" in explanation:
+                print("[DB SAVE SKIPPED] Tutor generation failed")
+                return response
+                
+            # 2. Generate a concise educational summary
+            summary = await generate_learning_summary(explanation)
+            
+            # 3. Save the summary and explanation into chat_history
+            try:
+                user_record = ChatHistory(
+                    user_id=user.id,
+                    session_id=session_id,
+                    session_type="explain_sim",
+                    role="user",
+                    topic=topic,
+                    content=request.query,
+                    summary=summary,
+                    metadata_json={
+                        "class_name": request.class_name,
+                        "subject": request.subject,
+                        "chapter": request.chapter,
+                        "topic": request.topic
+                    }
+                )
+                
+                assistant_record = ChatHistory(
+                    user_id=user.id,
+                    session_id=session_id,
+                    session_type="explain_sim",
+                    role="assistant",
+                    topic=topic,
+                    content=explanation,
+                    summary=None,
+                    metadata_json={
+                        "class_name": request.class_name,
+                        "subject": request.subject,
+                        "chapter": request.chapter,
+                        "topic": request.topic
+                    }
+                )
+                
+                print("--- PERSISTENCE LOG ---")
+                print(f"user_id: {user.id}")
+                print(f"session_id: {session_id}")
+                print(f"topic: {topic}")
+                print(f"summary length: {len(summary) if summary else 0}")
+                
+                print("Before db.add()")
+                db.add(user_record)
+                db.add(assistant_record)
+                print("After db.add()")
+                
+                record_activity(
+                    db,
+                    user=user,
+                    domain="tutor",
+                    action="explain-sim",
+                    entity_type="query",
+                    entity_id=request.query[:120],
+                    source="/api/tutor/explain-sim",
+                )
+
+                print("Before db.commit()")
+                db.commit()
+                print("After db.commit()")
+                
+                print("Before db.refresh()")
+                db.refresh(user_record)
+                db.refresh(assistant_record)
+                print("After db.refresh()")
+                
+                print(f"INSERTED RECORD ID: {user_record.id}")
+                print("-----------------------")
+                
+                if isinstance(response, dict):
+                    response["success"] = True
+                    response["message"] = "Learning summary saved successfully"
+                    response["session_id"] = str(session_id)
+                
+            except Exception as e:
+                db.rollback()
+                print(f"Exception during save: {repr(e)}")
+                from fastapi.responses import JSONResponse
+                return JSONResponse(status_code=500, content={"success": False, "message": "Failed to save learning summary."})
+        return response
     except Exception as e:
         raise HTTPException(
             status_code=500,

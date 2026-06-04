@@ -100,7 +100,7 @@ class PersistenceRepository:
                 sessions_map[sid] = {
                     "id": sid,
                     "user_id": str(msg.user_id),
-                    "topic": meta.get("topic"),
+                    "topic": msg.topic or meta.get("topic") or "General Physics",
                     "subject": meta.get("subject"),
                     "class_name": meta.get("class_name"),
                     "chapter": meta.get("chapter"),
