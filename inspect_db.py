@@ -1,7 +1,7 @@
 import os
 from sqlalchemy import create_engine, inspect
 
-DATABASE_URL = "postgresql://postgres:admin123@localhost:5432/edusim"
+DATABASE_URL = "postgresql://postgres:Rith439@localhost:5432/edusim"
 engine = create_engine(DATABASE_URL)
 inspector = inspect(engine)
 

@@ -97,9 +97,9 @@ async def analyze_query(
         # 2. Generate a concise educational summary
         summary = await generate_learning_summary(explanation)
         
-        # 3. Save the summary into chat_history
+        # 3. Save the summary and explanation into chat_history
         try:
-            summary_record = ChatHistory(
+            user_record = ChatHistory(
                 user_id=user.id,
                 session_id=session_id,
                 session_type="tutor",
@@ -115,6 +115,22 @@ async def analyze_query(
                 }
             )
             
+            assistant_record = ChatHistory(
+                user_id=user.id,
+                session_id=session_id,
+                session_type="tutor",
+                role="assistant",
+                topic=topic,
+                content=explanation,
+                summary=None,
+                metadata_json={
+                    "class_name": request.class_name,
+                    "subject": request.subject,
+                    "chapter": request.chapter,
+                    "topic": request.topic
+                }
+            )
+            
             print("--- PERSISTENCE LOG ---")
             print(f"user_id: {user.id}")
             print(f"session_id: {session_id}")
@@ -122,7 +138,8 @@ async def analyze_query(
             print(f"summary length: {len(summary) if summary else 0}")
             
             print("Before db.add()")
-            db.add(summary_record)
+            db.add(user_record)
+            db.add(assistant_record)
             print("After db.add()")
             
             record_activity(
@@ -141,10 +158,11 @@ async def analyze_query(
             print("After db.commit()")
             
             print("Before db.refresh()")
-            db.refresh(summary_record)
+            db.refresh(user_record)
+            db.refresh(assistant_record)
             print("After db.refresh()")
             
-            print(f"INSERTED RECORD ID: {summary_record.id}")
+            print(f"INSERTED RECORD ID: {user_record.id}")
             print("-----------------------")
             
             if isinstance(response, dict):
@@ -206,9 +224,9 @@ async def explain_sim(
             # 2. Generate a concise educational summary
             summary = await generate_learning_summary(explanation)
             
-            # 3. Save the summary into chat_history
+            # 3. Save the summary and explanation into chat_history
             try:
-                summary_record = ChatHistory(
+                user_record = ChatHistory(
                     user_id=user.id,
                     session_id=session_id,
                     session_type="tutor",
@@ -224,6 +242,22 @@ async def explain_sim(
                     }
                 )
                 
+                assistant_record = ChatHistory(
+                    user_id=user.id,
+                    session_id=session_id,
+                    session_type="tutor",
+                    role="assistant",
+                    topic=topic,
+                    content=explanation,
+                    summary=None,
+                    metadata_json={
+                        "class_name": request.class_name,
+                        "subject": request.subject,
+                        "chapter": request.chapter,
+                        "topic": request.topic
+                    }
+                )
+                
                 print("--- PERSISTENCE LOG ---")
                 print(f"user_id: {user.id}")
                 print(f"session_id: {session_id}")
@@ -231,7 +265,8 @@ async def explain_sim(
                 print(f"summary length: {len(summary) if summary else 0}")
                 
                 print("Before db.add()")
-                db.add(summary_record)
+                db.add(user_record)
+                db.add(assistant_record)
                 print("After db.add()")
                 
                 record_activity(
@@ -249,10 +284,11 @@ async def explain_sim(
                 print("After db.commit()")
                 
                 print("Before db.refresh()")
-                db.refresh(summary_record)
+                db.refresh(user_record)
+                db.refresh(assistant_record)
                 print("After db.refresh()")
                 
-                print(f"INSERTED RECORD ID: {summary_record.id}")
+                print(f"INSERTED RECORD ID: {user_record.id}")
                 print("-----------------------")
                 
                 if isinstance(response, dict):
