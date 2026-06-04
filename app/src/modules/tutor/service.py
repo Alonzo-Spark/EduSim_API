@@ -377,9 +377,26 @@ async def analyze_tutor_query(
             re.IGNORECASE
         )
         if pronoun_pattern.search(query):
-            last_user_msg = next((msg["content"] for msg in reversed(history) if msg["role"] == "user"), "")
-            if last_user_msg:
-                search_query = f"{last_user_msg} {query}"
+            # Scan history in reverse for the most recent user query that does NOT contain dependent pronouns
+            context_query = ""
+            for msg in reversed(history):
+                if isinstance(msg, dict) and msg.get("role") == "user":
+                    content = msg.get("content", "")
+                    if content and not pronoun_pattern.search(content):
+                        context_query = content
+                        break
+            
+            # If we didn't find one without pronouns, fallback to the first user message in history
+            if not context_query:
+                for msg in history:
+                    if isinstance(msg, dict) and msg.get("role") == "user":
+                        content = msg.get("content", "")
+                        if content:
+                            context_query = content
+                            break
+                            
+            if context_query:
+                search_query = f"{context_query} {query}"
                 resolved_by_history = True
                 
     if not resolved_by_history:
