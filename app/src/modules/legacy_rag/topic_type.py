@@ -27,7 +27,7 @@ def get_dynamic_sections(topic_type: str) -> str:
     base_structure = """
 # Introduction
 
-## Definition & Key Concepts
+## Definition
 """
     
     applications_structure = """

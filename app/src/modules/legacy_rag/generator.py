@@ -65,6 +65,8 @@ Your markdown elements map directly to React components. Write content that maxi
   ```markdown
   | Feature | Concept A | Concept B |
   |---|---|---|
+  ```
+* Characteristics & Properties ──> Under `## Key Properties` or `# Characteristics`, list each characteristic/property as a bullet point (e.g., `* **Property Name:** Description`). Do NOT write them as plain paragraphs.
 
 '''
 
@@ -592,7 +594,7 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
 def generate_openrouter_text(
     prompt: str,
     temperature: float = 0.3,
-    max_output_tokens: int = 2500,
+    max_output_tokens: int = 4096,
     system_prompt: str | None = None,
     history: list[dict[str, str]] | None = None,
 ):
@@ -755,6 +757,67 @@ async def generate_llm_stream_async(
     yield f"data: {json.dumps({'error': 'All OpenRouter models failed'})}\n\n"
 
 
+def is_topic_change(query: str, history: list[dict[str, str]] | None) -> bool:
+    if not history:
+        return False
+        
+    # Stop words to filter out completely
+    stop_words = {
+        'what', 'is', 'why', 'how', 'the', 'a', 'an', 'and', 'or', 'but', 'if', 'then', 
+        'else', 'to', 'for', 'of', 'in', 'on', 'at', 'by', 'with', 'about', 'against', 
+        'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 
+        'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 
+        'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 
+        'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 
+        'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 
+        't', 'can', 'will', 'just', 'don', 'should', 'now', 'give', 'me', 'us', 'tell',
+        'explain', 'describe', 'list', 'show', 'write', 'define', 'meaning', 'concept',
+        'topic', 'please', 'we', 'go', 'back', 'its'
+    }
+    
+    # Generic question words that represent intents rather than topics
+    generic_query_words = {
+        'formula', 'formulas', 'equation', 'equations', 'numerical', 'numericals', 
+        'example', 'examples', 'definition', 'definitions', 'diagram', 'diagrams', 
+        'advantages', 'disadvantages', 'pros', 'cons', 'difference', 'differences', 
+        'compare', 'contrast', 'relationship', 'relations', 'working', 'process', 
+        'explain', 'explanation', 'detail', 'details', 'more', 'less', 'why', 'how', 
+        'show', 'list', 'tell', 'wt', 'what', 'define', 'meaning', 'illustration'
+    }
+    
+    def extract_keywords(text: str):
+        words = re.findall(r'\b[a-z]{3,}\b', text.lower())
+        return {w for w in words if w not in stop_words}
+        
+    current_keywords = extract_keywords(query)
+    if not current_keywords:
+        return False
+        
+    # If the remaining keywords are all generic, it is not a topic change
+    non_generic = current_keywords - generic_query_words
+    if not non_generic:
+        return False
+        
+    # Extract last 2 user messages
+    user_messages = [msg.get("content", "") for msg in history if msg.get("role") == "user"]
+    if not user_messages:
+        return False
+        
+    history_text = " ".join(user_messages[-2:])
+    history_keywords = extract_keywords(history_text)
+    
+    overlap = non_generic.intersection(history_keywords)
+    if not overlap:
+        # Check if pronouns are present in query to reference previous topic
+        pronouns = {'it', 'its', 'this', 'that', 'they', 'them', 'these', 'those', 'he', 'she', 'his', 'her'}
+        query_words = set(re.findall(r'\b[a-z]+\b', query.lower()))
+        if query_words.intersection(pronouns):
+            return False
+        return True
+        
+    return False
+
+
 # =========================================================
 # PREMIUM EDUCATIONAL RESPONSE GENERATOR
 # =========================================================
@@ -769,13 +832,15 @@ def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False, h
     intent = detect_query_intent(question)
 
     is_follow_up = history and any(msg.get("role") == "user" for msg in history)
+    if is_follow_up and is_topic_change(question, history):
+        is_follow_up = False
 
     if is_follow_up:
         if intent == "definition":
             dynamic_structure = """
 # Introduction
 
-## Definition & Key Concepts
+## Definition
 """
         elif intent == "formula":
             dynamic_structure = """
@@ -852,6 +917,7 @@ TEXTBOOK CONTEXT
 STRICT FOLLOW-UP CONSTRAINTS:
 =========================================================
 This is a follow-up chat message. To maintain extreme conciseness and target the user's specific query, you MUST ONLY output the section(s) listed under the REQUIRED RESPONSE STRUCTURE. Do NOT output any other H1 or H2 headings. Keep your response focused entirely on the requested section.
+Additionally, when writing explanations (e.g., under "## Explanation"), you MUST present the content in a neat, concise bulleted list (using * or -). The number of bullet points should scale dynamically based on the complexity of the query: keep it brief (2-3 concise points) for simple questions, and allow more points for complex, multi-faceted queries so the explanation remains comprehensive yet focused.
 """
         follow_up_final_override = f"""
 =========================================================
@@ -860,6 +926,7 @@ CRITICAL FOLLOW-UP RULE:
 You are in follow-up mode. You MUST NOT generate any other H1 sections or cards. Generate ONLY the single H1 section:
 {dynamic_structure.strip().splitlines()[0]}
 Do NOT repeat the H2 sub-heading more than once. Write exactly one H1 section with its content.
+If the subheading is "## Explanation", you MUST write the entire explanation as a neat, concise bulleted list (using * or -). The length and number of bullet points MUST scale dynamically based on the complexity of the query (e.g., 2-3 short points for simpler questions, and more points for complex queries). Do NOT write it as a long, continuous paragraph.
 """
 
     if is_simulation:
@@ -1007,6 +1074,13 @@ between major sections.
 24. NEVER stack mathematical fractions or equations vertically on separate single-character lines (e.g. numerator on line 1, denominator on line 3). ALWAYS use proper LaTeX syntax like \\frac{{a}}{{b}} and wrap it inside $$ ... $$ or $ ... $ (e.g. Write $$\\frac{{1}}{{f}} = \\frac{{1}}{{v}} - \\frac{{1}}{{u}}$$).
 
 25. NEVER write plain text on the same line as display math delimiters ($$). Always start a new paragraph on a new line for any text explanation that follows a formula.
+
+26. All characteristics and properties (e.g., under ## Key Properties or ## Characteristics) MUST be presented as a clear, concise bulleted list (using * or -). Do NOT write them as paragraphs.
+
+27. The `# Introduction` card MUST always be detailed, comprehensive, and highly structured. Under the `# Introduction` header, you MUST include:
+    - A subheading `## Definition` containing a detailed, clear overview paragraph explaining the physical concept in simple, premium academic terms.
+    - Directly below the overview paragraph (still within the `## Definition` section, and with NO other subheading), you MUST include a clean, concise bulleted list (using * or -) detailing 2-3 key aspects or features of the definition. Bold the name of each aspect (e.g., `* **Aspect Name:** Brief description.`).
+    - You MUST NOT generate any subheading like `## Key Concepts`, `## Core Pillars`, or `## Key Aspects` inside the `# Introduction` card. All contents of this card must reside under the single `## Definition` subheading.
 
 {context_section}
 
