@@ -1,15 +1,20 @@
 from services.formula_service import FormulaService
-import json
 
-formulas = [
-    "F = ma",
-    "F = 10 \\times 5",
-    "F = 50",
-    "Q = 0.5 \\times 600",
-    "17 = 170",
-    "V = IR"
-]
+def test():
+    raw_formulas = [
+        "F = G \\frac{m_1 m_2}{r^2}",
+        "F_g = G \\frac{m_1 m_2}{d^2}",
+        "F = G * m1 * m2 / r^2"
+    ]
+    for rf in raw_formulas:
+        print(f"Raw: {rf}")
+        try:
+            canon, count, derived = FormulaService._canonicalize_formula(rf)
+            print(f"  Canonical: {canon}")
+            print(f"  Count: {count}")
+            print(f"  Derived: {derived}")
+        except Exception as e:
+            print(f"  Error: {e}")
 
-for f in formulas:
-    canon_sym, symbol_count = FormulaService._canonicalize_formula(f)
-    print(f"Formula: {f} -> count: {symbol_count}, canon: {canon_sym}")
+if __name__ == "__main__":
+    test()

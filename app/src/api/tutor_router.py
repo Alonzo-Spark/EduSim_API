@@ -125,7 +125,7 @@ async def analyze_query(
                 session_id = uuid.UUID(request.session_id)
             except Exception:
                 pass
-        
+                
         if not session_id:
             session_id = uuid.uuid4()
         

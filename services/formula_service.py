@@ -11,7 +11,6 @@ from app.src.models.formula_models import FormulaLabResponse, FormulaVariable, F
 FORMULA_GROUP_CACHE = {}
 
 
-# A basic registry for generic mapping
 FORMULA_REGISTRY = {
     "F=ma": {
         "title": "Newton's Second Law",
@@ -118,7 +117,13 @@ class FormulaService:
             for target in symbols:
                 sols = sympy.solve(expr, target)
                 if sols:
-                    derived_expressions[target.name] = str(sols[0]).replace(" ", "").replace("**", "^")
+                    sol = sols[0]
+                    if len(sols) > 1:
+                        # Prefer positive solutions or solutions without leading minus
+                        pos_sols = [s for s in sols if not str(s).strip().startswith("-")]
+                        if pos_sols:
+                            sol = pos_sols[0]
+                    derived_expressions[target.name] = str(sol).replace(" ", "").replace("**", "^")
 
             target = symbols[0]
             solutions = sympy.solve(expr, target)
@@ -315,6 +320,7 @@ class FormulaService:
         canon_form = cache_data.get("canonical_form", canon_form_str)
         primary_form = cache_data.get("primary_formula", formula)
         derived_forms = cache_data.get("derived_forms", [])
+        derived_expressions = canon_res[2] if (isinstance(canon_res, tuple) and len(canon_res) > 2) else {}
         
         # Check registry
         for key, def_ in FORMULA_REGISTRY.items():
@@ -341,6 +347,7 @@ class FormulaService:
                     canonical_form=canon_form,
                     primary_formula=primary_form,
                     derived_forms=derived_forms,
+                    derived_expressions=derived_expressions,
                     description=def_["description"],
                     variables=controls,
                     controls=controls,
@@ -394,6 +401,7 @@ Do NOT include markdown block markers, output raw JSON.'''
                     canonical_form=canon_form,
                     primary_formula=primary_form,
                     derived_forms=derived_forms,
+                    derived_expressions=derived_expressions,
                     description=data.get("description", "A mathematical expression."),
                     purpose=data.get("purpose", ""),
                     applications=data.get("applications", []),

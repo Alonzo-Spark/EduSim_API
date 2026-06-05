@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Optional
 from sqlalchemy.orm import Session
-from sqlalchemy import func
+from sqlalchemy import func, select
 
 from app.src.models.persistence import (
     Subject,
@@ -75,26 +75,21 @@ class PersistenceRepository:
 
     # --- Tutor Sessions & Messages ---
     def list_tutor_sessions(self, user_id):
-        # Retrieve unique session_ids for user with type tutor
-        subquery = (
-            self.db.query(ChatHistory.session_id)
-            .filter(ChatHistory.user_id == user_id, ChatHistory.session_type == "tutor")
-            .group_by(ChatHistory.session_id)
-            .subquery()
-        )
-        
-        # Get the first message of each session to extract metadata
-        first_messages = (
+        # Retrieve all tutor messages for the user ordered by creation time (oldest first)
+        messages = (
             self.db.query(ChatHistory)
-            .filter(ChatHistory.session_id.in_(subquery))
+            .filter(ChatHistory.user_id == user_id, ChatHistory.session_type == "tutor")
             .order_by(ChatHistory.created_at.asc())
             .all()
         )
         
-        # Deduplicate and build session dictionary
         sessions_map = {}
-        for msg in first_messages:
+        session_last_active = {}
+        
+        for msg in messages:
             sid = str(msg.session_id)
+            # The first message we encounter for a session is the oldest (first) message,
+            # which we use to populate metadata and the session's topic.
             if sid not in sessions_map:
                 meta = msg.metadata_json or {}
                 sessions_map[sid] = {
@@ -115,7 +110,13 @@ class PersistenceRepository:
                     "is_active": meta.get("is_active", True),
                     "deleted_at": None,
                 }
-        return list(sessions_map.values())
+            # Track the latest message timestamp to sort by last active status
+            session_last_active[sid] = msg.created_at
+            
+        sessions_list = list(sessions_map.values())
+        # Sort sessions descending (latest activity first)
+        sessions_list.sort(key=lambda s: session_last_active[s["id"]], reverse=True)
+        return sessions_list
 
     def get_tutor_messages(self, conversation_id):
         messages = (

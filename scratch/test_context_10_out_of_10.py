@@ -93,7 +93,7 @@ async def main():
         
     print(f"Constructed artificial history length: {len(long_history)} messages.")
     
-    query_with_history = "Wait, let's go back to why acceleration due to gravity is independent of mass."
+    query_with_history = "list me out its characteristics"
     req_history = TutorQueryRequest(
         query=query_with_history,
         history=long_history

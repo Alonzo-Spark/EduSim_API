@@ -240,6 +240,58 @@ def load_tutor_history_endpoint(
     return list_tutor_history(db, user=user)
 
 
+@persistence_router.get("/tutor/sessions")
+def get_tutor_sessions_endpoint(
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db),
+):
+    user = require_user(authorization, db)
+    from app.src.repositories.persistence_repository import PersistenceRepository
+    repo = PersistenceRepository(db)
+    sessions = repo.list_tutor_sessions(user.id)
+    return {"success": True, "sessions": sessions}
+
+
+@persistence_router.get("/tutor/session/{session_id}")
+def get_tutor_session_endpoint(
+    session_id: str,
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db),
+):
+    user = require_user(authorization, db)
+    try:
+        sid = uuid.UUID(session_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid session_id UUID format")
+    
+    from app.src.services.persistence_service import get_tutor_conversation_payload
+    payload = get_tutor_conversation_payload(db, sid)
+    return {"success": True, "session": payload}
+
+
+@persistence_router.delete("/tutor/session/{session_id}")
+def delete_tutor_session_endpoint(
+    session_id: str,
+    authorization: Optional[str] = Header(None),
+    db: Session = Depends(get_db),
+):
+    user = require_user(authorization, db)
+    try:
+        sid = uuid.UUID(session_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid session_id UUID format")
+        
+    try:
+        deleted = db.query(ChatHistory).filter(ChatHistory.session_id == sid, ChatHistory.user_id == user.id).delete()
+        db.commit()
+        print("[Database] Chat history saved in the database: updated")
+        return {"success": True, "message": "History deleted successfully.", "deleted_count": deleted}
+    except Exception as e:
+        db.rollback()
+        from fastapi.responses import JSONResponse
+        return JSONResponse(status_code=500, content={"success": False, "message": "Failed to delete history."})
+
+
 @persistence_router.get("/curriculum/history")
 def load_curriculum_history_endpoint(
     authorization: Optional[str] = Header(None),

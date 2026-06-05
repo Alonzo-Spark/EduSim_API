@@ -14,7 +14,8 @@ class QuestionService:
         topic: str,
         formula: str = "",
         difficulty: str = "Medium",
-        question_type: str = "mixed"
+        question_type: str = "mixed",
+        exclude_questions: List[str] = None
     ) -> QuestionGenerationResponse:
         
         # 1. Try to fetch chunks via RAG
@@ -22,6 +23,12 @@ class QuestionService:
         chunks = RagService.search_chunks(subject, chapter, query)
         
         context_text = "\n".join([c.get("text", "") for c in chunks])
+        
+        exclude_instruction = ""
+        if exclude_questions:
+            exclude_bullets = "\n".join([f"- {q}" for q in exclude_questions if q])
+            if exclude_bullets:
+                exclude_instruction = f"\nDo NOT generate any of the following questions as they have already been shown:\n{exclude_bullets}\n"
         
         prompt = f"""You are an educational AI generating high-quality practice questions.
 Subject: {subject}
@@ -44,7 +51,7 @@ Generate EXACTLY 4 high-quality practice questions based on the provided inputs.
 Ensure questions are meaningful. Do NOT generate generic placeholders like "What is the main concept?".
 Include a mix of MCQ, numerical, conceptual, and application-based questions.
 Difficulty should match: {difficulty}. Provide step-by-step solutions in the explanation.
-
+{exclude_instruction}
 Respond STRICTLY in this JSON format, no markdown blocks:
 {{
   "questions": [

@@ -28,6 +28,7 @@ To ensure a premium, modern textbook-like UI, you must adhere strictly to the fo
 =========================================================
 1. STRICT FORMATTING CONSTRAINTS
 =========================================================
+* BE EXTREMELY CONCISE & COMPACT: To ensure maximum page responsiveness and fast generation (max 3-5 seconds), you must keep every section very brief. Write no more than 1 short paragraph (2-3 sentences) under any heading, and keep lists to 2-3 short bullet points. Avoid wordy introductions, transitions, or filler prose.
 * DO NOT output any ASCII-art borders, frames, or box-drawing characters (e.g., `┌`, `└`, `│`, `─`, or `┌───────────────────────────┐`).
 * DO NOT output mock action button links in brackets (e.g., `[ Explain Formula ]` or `[ Open Formula Lab ]`).
 * Output standard, clean, valid GitHub Flavored Markdown (GFM). 
@@ -64,6 +65,8 @@ Your markdown elements map directly to React components. Write content that maxi
   ```markdown
   | Feature | Concept A | Concept B |
   |---|---|---|
+  ```
+* Characteristics & Properties ──> Under `## Key Properties` or `# Characteristics`, list each characteristic/property as a bullet point (e.g., `* **Property Name:** Description`). Do NOT write them as plain paragraphs.
 
 '''
 
@@ -386,6 +389,28 @@ def _log_model_success(model_name: str):
     print(f"[LLM] Response generated successfully ({model_name})")
 
 
+def clean_history_for_llm(history: list[dict[str, str]] | None) -> list[dict[str, str]]:
+    if not history:
+        return []
+    
+    cleaned = []
+    for msg in history:
+        role = msg.get("role")
+        content = msg.get("content") or ""
+        if role not in ["user", "assistant"]:
+            continue
+            
+        if cleaned and cleaned[-1]["role"] == role:
+            cleaned[-1]["content"] = (cleaned[-1]["content"] + "\n\n" + content).strip()
+        else:
+            cleaned.append({"role": role, "content": content.strip()})
+            
+    while cleaned and cleaned[0]["role"] != "user":
+        cleaned.pop(0)
+        
+    return cleaned
+
+
 def _generate_openrouter_text(
     prompt: str,
     model_name: str,
@@ -537,9 +562,9 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
         ))
     )
 
-    # Conversational follow-ups (history is present) should not enforce textbook structure
+    # Conversational follow-ups (history is present) should not trigger retry loops
     if history and len(history) > 0:
-        is_textbook_generation = False
+        return True
 
     if is_textbook_generation:
         structure_part = prompt
@@ -550,14 +575,17 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
         expects_questions = "Suggested Questions" in structure_part
         
         if expects_summary and expects_questions:
-            if "Summary" not in text and "Suggested Questions" not in text:
+            has_summary_marker = "Summary" in text or "Suggested" in text or "Question" in text or "Takeaway" in text
+            if not has_summary_marker and len(trimmed) < 400:
                 return False
 
     # For non-textbook responses (simulation, short answers, etc.), be lenient
     if len(trimmed) > 1000:
         return True
 
-    if trimmed[-1] not in [".", "?", "!", '"', "*", "$", "}", ")"]:
+    if trimmed[-1] not in [".", "?", "!", '"', "*", "$", "}", ")", "`", "]", "/"]:
+        if len(trimmed) > 300:
+            return True
         return False
 
     return True
@@ -566,10 +594,11 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
 def generate_openrouter_text(
     prompt: str,
     temperature: float = 0.3,
-    max_output_tokens: int = 2500,
+    max_output_tokens: int = 4096,
     system_prompt: str | None = None,
     history: list[dict[str, str]] | None = None,
 ):
+    history = clean_history_for_llm(history)
     models = get_model_chain()
     best_fallback = None
 
@@ -627,6 +656,7 @@ async def generate_openrouter_text_async(
     system_prompt: str | None = None,
     history: list[dict[str, str]] | None = None,
 ):
+    history = clean_history_for_llm(history)
     models = get_model_chain()
     best_fallback = None
 
@@ -727,10 +757,71 @@ async def generate_llm_stream_async(
     yield f"data: {json.dumps({'error': 'All OpenRouter models failed'})}\n\n"
 
 
+def is_topic_change(query: str, history: list[dict[str, str]] | None) -> bool:
+    if not history:
+        return False
+        
+    # Stop words to filter out completely
+    stop_words = {
+        'what', 'is', 'why', 'how', 'the', 'a', 'an', 'and', 'or', 'but', 'if', 'then', 
+        'else', 'to', 'for', 'of', 'in', 'on', 'at', 'by', 'with', 'about', 'against', 
+        'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 
+        'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 
+        'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 
+        'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 
+        'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 
+        't', 'can', 'will', 'just', 'don', 'should', 'now', 'give', 'me', 'us', 'tell',
+        'explain', 'describe', 'list', 'show', 'write', 'define', 'meaning', 'concept',
+        'topic', 'please', 'we', 'go', 'back', 'its'
+    }
+    
+    # Generic question words that represent intents rather than topics
+    generic_query_words = {
+        'formula', 'formulas', 'equation', 'equations', 'numerical', 'numericals', 
+        'example', 'examples', 'definition', 'definitions', 'diagram', 'diagrams', 
+        'advantages', 'disadvantages', 'pros', 'cons', 'difference', 'differences', 
+        'compare', 'contrast', 'relationship', 'relations', 'working', 'process', 
+        'explain', 'explanation', 'detail', 'details', 'more', 'less', 'why', 'how', 
+        'show', 'list', 'tell', 'wt', 'what', 'define', 'meaning', 'illustration'
+    }
+    
+    def extract_keywords(text: str):
+        words = re.findall(r'\b[a-z]{3,}\b', text.lower())
+        return {w for w in words if w not in stop_words}
+        
+    current_keywords = extract_keywords(query)
+    if not current_keywords:
+        return False
+        
+    # If the remaining keywords are all generic, it is not a topic change
+    non_generic = current_keywords - generic_query_words
+    if not non_generic:
+        return False
+        
+    # Extract last 2 user messages
+    user_messages = [msg.get("content", "") for msg in history if msg.get("role") == "user"]
+    if not user_messages:
+        return False
+        
+    history_text = " ".join(user_messages[-2:])
+    history_keywords = extract_keywords(history_text)
+    
+    overlap = non_generic.intersection(history_keywords)
+    if not overlap:
+        # Check if pronouns are present in query to reference previous topic
+        pronouns = {'it', 'its', 'this', 'that', 'they', 'them', 'these', 'those', 'he', 'she', 'his', 'her'}
+        query_words = set(re.findall(r'\b[a-z]+\b', query.lower()))
+        if query_words.intersection(pronouns):
+            return False
+        return True
+        
+    return False
+
+
 # =========================================================
 # PREMIUM EDUCATIONAL RESPONSE GENERATOR
 # =========================================================
-def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -> str:
+def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False, history: list[dict[str, str]] | None = None) -> str:
     from .topic_type import detect_topic_type, get_dynamic_sections
     from ..tutor.query_intent import detect_query_intent, get_intent_structure
 
@@ -738,24 +829,72 @@ def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -
     is_simulation = "physics sandbox simulation" in context.lower() or "simulation" in context.lower()
 
     topic_type = detect_topic_type(question, context)
-    topic_structure = get_dynamic_sections(topic_type)
-
     intent = detect_query_intent(question)
 
-    # =========================================================
-    # VALIDATION LOGIC: PREVENT INVALID SECTIONS
-    # =========================================================
-    if topic_type in ["history", "social_science"]:
-        # Strictly prevent formulas and calculations for history/social science
-        if intent in ["formula", "numerical"]:
-            intent = "detailed"
+    is_follow_up = history and any(msg.get("role") == "user" for msg in history)
+    if is_follow_up and is_topic_change(question, history):
+        is_follow_up = False
 
-    elif topic_type == "biology":
-        # Avoid unnecessary calculations in biology unless explicitly a formula
-        if intent == "numerical":
-            intent = "detailed"
+    if is_follow_up:
+        if intent == "definition":
+            dynamic_structure = """
+# Introduction
 
-    dynamic_structure = get_intent_structure(intent, topic_structure)
+## Definition
+"""
+        elif intent == "formula":
+            dynamic_structure = """
+# Formulas & Characteristics
+
+## Core Formulas
+"""
+        elif intent == "characteristics":
+            dynamic_structure = """
+# Formulas & Characteristics
+
+## Key Properties
+"""
+        elif intent == "numerical":
+            dynamic_structure = """
+# Practice Example
+
+## Solved Numerical
+"""
+        elif intent == "advantages" or intent == "comparison":
+            dynamic_structure = """
+# Advantages
+
+# Disadvantages
+"""
+        elif intent == "examples" or intent == "applications":
+            dynamic_structure = """
+# Applications
+
+## Everyday Applications
+"""
+        else:
+            dynamic_structure = """
+# Introduction
+
+## Explanation
+"""
+    else:
+        topic_structure = get_dynamic_sections(topic_type)
+
+        # =========================================================
+        # VALIDATION LOGIC: PREVENT INVALID SECTIONS
+        # =========================================================
+        if topic_type in ["history", "social_science"]:
+            # Strictly prevent formulas and calculations for history/social science
+            if intent in ["formula", "numerical"]:
+                intent = "detailed"
+
+        elif topic_type == "biology":
+            # Avoid unnecessary calculations in biology unless explicitly a formula
+            if intent == "numerical":
+                intent = "detailed"
+
+        dynamic_structure = get_intent_structure(intent, topic_structure)
 
     if fallback_mode:
         context_instruction = "Answer based on your general knowledge. Do NOT claim the explanation came from a textbook."
@@ -770,11 +909,33 @@ TEXTBOOK CONTEXT
 {context}
 """
 
+    follow_up_instruction = ""
+    follow_up_final_override = ""
+    if is_follow_up:
+        follow_up_instruction = """
+=========================================================
+STRICT FOLLOW-UP CONSTRAINTS:
+=========================================================
+This is a follow-up chat message. To maintain extreme conciseness and target the user's specific query, you MUST ONLY output the section(s) listed under the REQUIRED RESPONSE STRUCTURE. Do NOT output any other H1 or H2 headings. Keep your response focused entirely on the requested section.
+Additionally, when writing explanations (e.g., under "## Explanation"), you MUST present the content in a neat, concise bulleted list (using * or -). The number of bullet points should scale dynamically based on the complexity of the query: keep it brief (2-3 concise points) for simple questions, and allow more points for complex, multi-faceted queries so the explanation remains comprehensive yet focused.
+"""
+        follow_up_final_override = f"""
+=========================================================
+CRITICAL FOLLOW-UP RULE:
+=========================================================
+You are in follow-up mode. You MUST NOT generate any other H1 sections or cards. Generate ONLY the single H1 section:
+{dynamic_structure.strip().splitlines()[0]}
+Do NOT repeat the H2 sub-heading more than once. Write exactly one H1 section with its content.
+If the subheading is "## Explanation", you MUST write the entire explanation as a neat, concise bulleted list (using * or -). The length and number of bullet points MUST scale dynamically based on the complexity of the query (e.g., 2-3 short points for simpler questions, and more points for complex queries). Do NOT write it as a long, continuous paragraph.
+"""
+
     if is_simulation:
         return f"""
 You are the EduSim AI Tutor — a real-time physics tutor embedded directly inside an interactive simulation sandbox.
 
 {context_instruction}
+
+{follow_up_instruction}
 
 =========================================================
 STRICT FORMATTING RULES
@@ -795,12 +956,12 @@ ACTIVE SIMULATION STATE / EVENT INFO
 STRICT OUTPUT FORMAT RULES:
 =========================================================
 - You MUST structure your entire response using the following headers and sections:
-  ### \u2746 LIVE EXPLANATION
-  ### \u2746 WHY IT HAPPENS
-  ### \u2746 WHAT TO NOTICE
-  ### \u2746 FORMULA
-  ### \u2746 DEEPER UNDERSTANDING
-  ### \u2746 TRY THIS
+  ### ❖ LIVE EXPLANATION
+  ### ❖ WHY IT HAPPENS
+  ### ❖ WHAT TO NOTICE
+  ### ❖ FORMULA
+  ### ❖ DEEPER UNDERSTANDING
+  ### ❖ TRY THIS
 - Do NOT use other headers. Avoid robotic engine descriptions; sound like a live physics teacher.
 """
     else:
@@ -809,6 +970,8 @@ You are the EduSim AI Physics Tutor and Live Narrator.
 Analyze the following active simulation event and provide an in-depth, structured educational response.
 
 {context_instruction}
+
+{follow_up_instruction}
 
 =========================================================
 STRICT FORMATTING RULES
@@ -912,6 +1075,13 @@ between major sections.
 
 25. NEVER write plain text on the same line as display math delimiters ($$). Always start a new paragraph on a new line for any text explanation that follows a formula.
 
+26. All characteristics and properties (e.g., under ## Key Properties or ## Characteristics) MUST be presented as a clear, concise bulleted list (using * or -). Do NOT write them as paragraphs.
+
+27. The `# Introduction` card MUST always be detailed, comprehensive, and highly structured. Under the `# Introduction` header, you MUST include:
+    - A subheading `## Definition` containing a detailed, clear overview paragraph explaining the physical concept in simple, premium academic terms.
+    - Directly below the overview paragraph (still within the `## Definition` section, and with NO other subheading), you MUST include a clean, concise bulleted list (using * or -) detailing 2-3 key aspects or features of the definition. Bold the name of each aspect (e.g., `* **Aspect Name:** Brief description.`).
+    - You MUST NOT generate any subheading like `## Key Concepts`, `## Core Pillars`, or `## Key Aspects` inside the `# Introduction` card. All contents of this card must reside under the single `## Definition` subheading.
+
 {context_section}
 
 =========================================================
@@ -928,7 +1098,9 @@ You MUST structure your entire response using the following textbook structure. 
 {dynamic_structure}
 
 Ensure each section has rich, detailed, and highly educational explanation content.
-Do NOT output headers like '### \u2746 LIVE EXPLANATION' or other simulation event headers. Use the textbook H1 and H2 structure above.
+Do NOT output headers like '### ❖ LIVE EXPLANATION' or other simulation event headers. Use the textbook H1 and H2 structure above.
+
+{follow_up_final_override}
 """
 
 
