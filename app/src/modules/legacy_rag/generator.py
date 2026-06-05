@@ -28,6 +28,7 @@ To ensure a premium, modern textbook-like UI, you must adhere strictly to the fo
 =========================================================
 1. STRICT FORMATTING CONSTRAINTS
 =========================================================
+* BE EXTREMELY CONCISE & COMPACT: To ensure maximum page responsiveness and fast generation (max 3-5 seconds), you must keep every section very brief. Write no more than 1 short paragraph (2-3 sentences) under any heading, and keep lists to 2-3 short bullet points. Avoid wordy introductions, transitions, or filler prose.
 * DO NOT output any ASCII-art borders, frames, or box-drawing characters (e.g., `┌`, `└`, `│`, `─`, or `┌───────────────────────────┐`).
 * DO NOT output mock action button links in brackets (e.g., `[ Explain Formula ]` or `[ Open Formula Lab ]`).
 * Output standard, clean, valid GitHub Flavored Markdown (GFM). 
@@ -386,6 +387,28 @@ def _log_model_success(model_name: str):
     print(f"[LLM] Response generated successfully ({model_name})")
 
 
+def clean_history_for_llm(history: list[dict[str, str]] | None) -> list[dict[str, str]]:
+    if not history:
+        return []
+    
+    cleaned = []
+    for msg in history:
+        role = msg.get("role")
+        content = msg.get("content") or ""
+        if role not in ["user", "assistant"]:
+            continue
+            
+        if cleaned and cleaned[-1]["role"] == role:
+            cleaned[-1]["content"] = (cleaned[-1]["content"] + "\n\n" + content).strip()
+        else:
+            cleaned.append({"role": role, "content": content.strip()})
+            
+    while cleaned and cleaned[0]["role"] != "user":
+        cleaned.pop(0)
+        
+    return cleaned
+
+
 def _generate_openrouter_text(
     prompt: str,
     model_name: str,
@@ -537,9 +560,9 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
         ))
     )
 
-    # Conversational follow-ups (history is present) should not enforce textbook structure
+    # Conversational follow-ups (history is present) should not trigger retry loops
     if history and len(history) > 0:
-        is_textbook_generation = False
+        return True
 
     if is_textbook_generation:
         structure_part = prompt
@@ -550,14 +573,17 @@ def _is_response_complete(text: str, prompt: str = "", system_prompt: str | None
         expects_questions = "Suggested Questions" in structure_part
         
         if expects_summary and expects_questions:
-            if "Summary" not in text and "Suggested Questions" not in text:
+            has_summary_marker = "Summary" in text or "Suggested" in text or "Question" in text or "Takeaway" in text
+            if not has_summary_marker and len(trimmed) < 400:
                 return False
 
     # For non-textbook responses (simulation, short answers, etc.), be lenient
     if len(trimmed) > 1000:
         return True
 
-    if trimmed[-1] not in [".", "?", "!", '"', "*", "$", "}", ")"]:
+    if trimmed[-1] not in [".", "?", "!", '"', "*", "$", "}", ")", "`", "]", "/"]:
+        if len(trimmed) > 300:
+            return True
         return False
 
     return True
@@ -570,6 +596,7 @@ def generate_openrouter_text(
     system_prompt: str | None = None,
     history: list[dict[str, str]] | None = None,
 ):
+    history = clean_history_for_llm(history)
     models = get_model_chain()
     best_fallback = None
 
@@ -627,6 +654,7 @@ async def generate_openrouter_text_async(
     system_prompt: str | None = None,
     history: list[dict[str, str]] | None = None,
 ):
+    history = clean_history_for_llm(history)
     models = get_model_chain()
     best_fallback = None
 
@@ -730,7 +758,7 @@ async def generate_llm_stream_async(
 # =========================================================
 # PREMIUM EDUCATIONAL RESPONSE GENERATOR
 # =========================================================
-def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -> str:
+def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False, history: list[dict[str, str]] | None = None) -> str:
     from .topic_type import detect_topic_type, get_dynamic_sections
     from ..tutor.query_intent import detect_query_intent, get_intent_structure
 
@@ -738,24 +766,70 @@ def get_tutor_prompt(context: str, question: str, fallback_mode: bool = False) -
     is_simulation = "physics sandbox simulation" in context.lower() or "simulation" in context.lower()
 
     topic_type = detect_topic_type(question, context)
-    topic_structure = get_dynamic_sections(topic_type)
-
     intent = detect_query_intent(question)
 
-    # =========================================================
-    # VALIDATION LOGIC: PREVENT INVALID SECTIONS
-    # =========================================================
-    if topic_type in ["history", "social_science"]:
-        # Strictly prevent formulas and calculations for history/social science
-        if intent in ["formula", "numerical"]:
-            intent = "detailed"
+    is_follow_up = history and any(msg.get("role") == "user" for msg in history)
 
-    elif topic_type == "biology":
-        # Avoid unnecessary calculations in biology unless explicitly a formula
-        if intent == "numerical":
-            intent = "detailed"
+    if is_follow_up:
+        if intent == "definition":
+            dynamic_structure = """
+# Introduction
 
-    dynamic_structure = get_intent_structure(intent, topic_structure)
+## Definition & Key Concepts
+"""
+        elif intent == "formula":
+            dynamic_structure = """
+# Formulas & Characteristics
+
+## Core Formulas
+"""
+        elif intent == "characteristics":
+            dynamic_structure = """
+# Formulas & Characteristics
+
+## Key Properties
+"""
+        elif intent == "numerical":
+            dynamic_structure = """
+# Practice Example
+
+## Solved Numerical
+"""
+        elif intent == "advantages" or intent == "comparison":
+            dynamic_structure = """
+# Advantages
+
+# Disadvantages
+"""
+        elif intent == "examples" or intent == "applications":
+            dynamic_structure = """
+# Applications
+
+## Everyday Applications
+"""
+        else:
+            dynamic_structure = """
+# Introduction
+
+## Explanation
+"""
+    else:
+        topic_structure = get_dynamic_sections(topic_type)
+
+        # =========================================================
+        # VALIDATION LOGIC: PREVENT INVALID SECTIONS
+        # =========================================================
+        if topic_type in ["history", "social_science"]:
+            # Strictly prevent formulas and calculations for history/social science
+            if intent in ["formula", "numerical"]:
+                intent = "detailed"
+
+        elif topic_type == "biology":
+            # Avoid unnecessary calculations in biology unless explicitly a formula
+            if intent == "numerical":
+                intent = "detailed"
+
+        dynamic_structure = get_intent_structure(intent, topic_structure)
 
     if fallback_mode:
         context_instruction = "Answer based on your general knowledge. Do NOT claim the explanation came from a textbook."
@@ -770,11 +844,31 @@ TEXTBOOK CONTEXT
 {context}
 """
 
+    follow_up_instruction = ""
+    follow_up_final_override = ""
+    if is_follow_up:
+        follow_up_instruction = """
+=========================================================
+STRICT FOLLOW-UP CONSTRAINTS:
+=========================================================
+This is a follow-up chat message. To maintain extreme conciseness and target the user's specific query, you MUST ONLY output the section(s) listed under the REQUIRED RESPONSE STRUCTURE. Do NOT output any other H1 or H2 headings. Keep your response focused entirely on the requested section.
+"""
+        follow_up_final_override = f"""
+=========================================================
+CRITICAL FOLLOW-UP RULE:
+=========================================================
+You are in follow-up mode. You MUST NOT generate any other H1 sections or cards. Generate ONLY the single H1 section:
+{dynamic_structure.strip().splitlines()[0]}
+Do NOT repeat the H2 sub-heading more than once. Write exactly one H1 section with its content.
+"""
+
     if is_simulation:
         return f"""
 You are the EduSim AI Tutor — a real-time physics tutor embedded directly inside an interactive simulation sandbox.
 
 {context_instruction}
+
+{follow_up_instruction}
 
 =========================================================
 STRICT FORMATTING RULES
@@ -795,12 +889,12 @@ ACTIVE SIMULATION STATE / EVENT INFO
 STRICT OUTPUT FORMAT RULES:
 =========================================================
 - You MUST structure your entire response using the following headers and sections:
-  ### \u2746 LIVE EXPLANATION
-  ### \u2746 WHY IT HAPPENS
-  ### \u2746 WHAT TO NOTICE
-  ### \u2746 FORMULA
-  ### \u2746 DEEPER UNDERSTANDING
-  ### \u2746 TRY THIS
+  ### ❖ LIVE EXPLANATION
+  ### ❖ WHY IT HAPPENS
+  ### ❖ WHAT TO NOTICE
+  ### ❖ FORMULA
+  ### ❖ DEEPER UNDERSTANDING
+  ### ❖ TRY THIS
 - Do NOT use other headers. Avoid robotic engine descriptions; sound like a live physics teacher.
 """
     else:
@@ -809,6 +903,8 @@ You are the EduSim AI Physics Tutor and Live Narrator.
 Analyze the following active simulation event and provide an in-depth, structured educational response.
 
 {context_instruction}
+
+{follow_up_instruction}
 
 =========================================================
 STRICT FORMATTING RULES
@@ -928,7 +1024,9 @@ You MUST structure your entire response using the following textbook structure. 
 {dynamic_structure}
 
 Ensure each section has rich, detailed, and highly educational explanation content.
-Do NOT output headers like '### \u2746 LIVE EXPLANATION' or other simulation event headers. Use the textbook H1 and H2 structure above.
+Do NOT output headers like '### ❖ LIVE EXPLANATION' or other simulation event headers. Use the textbook H1 and H2 structure above.
+
+{follow_up_final_override}
 """
 
 

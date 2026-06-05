@@ -176,7 +176,7 @@ async def analyze_with_llm_async(query: str, context: str, history: list[dict[st
         "1. Determine 'queryType': 'concept', 'formula', or 'mixed'.\n"
         "2. Extract 'concepts': list of simple, concise topic names (e.g. ['Gravity', 'Orbital Velocity', 'Centripetal Force']). Do NOT output nested dictionaries.\n"
         "3. Extract 'formulas': [{formula, name, topic, meaning}]. Include fundamental ones if omitted in text.\n"
-        "4. Generate a brief 'explanation': a short summary string.\n"
+        "4. Generate a brief 'explanation': a short summary string (max 2 sentences).\n"
         "5. The 'simulation_guide' object MUST ALWAYS be included and have 'is_buildable': true.\n"
         "The 'simulation_guide' object MUST contain:\n"
         "   - 'is_buildable': true\n"
@@ -190,7 +190,7 @@ async def analyze_with_llm_async(query: str, context: str, history: list[dict[st
         "           - Step 4: 'Parameter Tuning' (Fine-tune values like gravity presets, mass, stiffness, or apply initial forces)\n"
         "           - Step 5: 'Run & Observe' (Explain how to run the simulation using the Play button and what active telemetry indicators like velocities, mechanical clock, or Kinetic Energy to inspect)\n"
         "           - Step 6: 'Physics Conclusion' (Provide a rigorous, definitive scientific summary and conclusion explaining the physical principles, equations, and outcomes proved or demonstrated by the simulation, e.g. how potential energy converts to kinetic energy, how acceleration is net force over mass, or how centripetal orbit scales with constant gravity)\n"
-        "       * 'description': Clear, beginner-friendly instructions starting with a brief scientific explanation. Explicitly mention and highlight the relevant sandbox assets (e.g., 'Circle', 'Rectangle', 'Rope', 'Spring', 'Pivot') and sandbox controllers (e.g. 'Play button', 'Gravity presets', 'Simulation Speed slider') that the user needs to use in this step. Suggest exact sizes, coordinates, mass values, and placement on the canvas. Keep workspace limits in mind (x between 100-700, y between 100-500).\n"
+        "       * 'description': Clear, beginner-friendly instructions starting with a brief scientific explanation. Keep this description extremely brief and compact (exactly 1-2 short sentences). Explicitly mention and highlight the relevant sandbox assets (e.g., 'Circle', 'Rectangle', 'Rope', 'Spring', 'Pivot') and sandbox controllers (e.g. 'Play button', 'Gravity presets', 'Simulation Speed slider') that the user needs to use in this step. Suggest exact sizes, coordinates, mass values, and placement on the canvas. Keep workspace limits in mind (x between 100-700, y between 100-500).\n"
         "       * 'icon': A relevant emoji (e.g. '🏮', '🔴', '➰', '🪐', '🚀', '🤼')\n"
         "   - 'tips': A list of 3 scientific, inquiry-based tips matching the query (e.g. ['Try changing mass to see if swing period scales', 'Increase linear gravity preset to verify acceleration increases'])\n"
         "   - 'spawn_config': A procedural physics setup object describing the simulation layout so the frontend can auto-build it! It MUST contain:\n"
@@ -238,7 +238,7 @@ async def analyze_with_llm_async(query: str, context: str, history: list[dict[st
 
 async def generate_explanation_async(query: str, context: str, fallback_mode: bool = False, history: list[dict[str, str]] | None = None) -> str:
     from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt, NEW_RENDERING_SYSTEM
-    prompt = get_tutor_prompt(context, query, fallback_mode)
+    prompt = get_tutor_prompt(context, query, fallback_mode, history=history)
     res = await generate_llm_text_async(prompt, temperature=0.3, system_prompt=NEW_RENDERING_SYSTEM, history=history)
     
     if not res:

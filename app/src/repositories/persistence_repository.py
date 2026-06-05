@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Optional
 from sqlalchemy.orm import Session
-from sqlalchemy import func
+from sqlalchemy import func, select
 
 from app.src.models.persistence import (
     Subject,
@@ -77,10 +77,9 @@ class PersistenceRepository:
     def list_tutor_sessions(self, user_id):
         # Retrieve unique session_ids for user with type tutor
         subquery = (
-            self.db.query(ChatHistory.session_id)
+            select(ChatHistory.session_id)
             .filter(ChatHistory.user_id == user_id, ChatHistory.session_type == "tutor")
             .group_by(ChatHistory.session_id)
-            .subquery()
         )
         
         # Get the first message of each session to extract metadata
@@ -100,7 +99,7 @@ class PersistenceRepository:
                 sessions_map[sid] = {
                     "id": sid,
                     "user_id": str(msg.user_id),
-                    "topic": meta.get("topic"),
+                    "topic": msg.topic or meta.get("topic") or "General Physics",
                     "subject": meta.get("subject"),
                     "class_name": meta.get("class_name"),
                     "chapter": meta.get("chapter"),

@@ -27,9 +27,25 @@ def get_dynamic_sections(topic_type: str) -> str:
     base_structure = """
 # Introduction
 
-## Definition
+## Definition & Key Concepts
+"""
+    
+    applications_structure = """
+---
 
-## Key Concepts
+# Applications
+
+## Everyday Applications
+"""
+
+    summary_structure = """
+---
+
+# Summary & Questions
+
+## Key Takeaways
+
+## Suggested Questions
 """
 
     advantages_structure = """
@@ -39,56 +55,20 @@ def get_dynamic_sections(topic_type: str) -> str:
 
 # Disadvantages
 """
-    
-    applications_structure = """
----
-
-# Applications
-
-## Real-World Applications
-
-## Industry Usage
-"""
-
-    summary_structure = """
----
-
-# Summary
-
-## Key Takeaways
-
-## Quick Revision Points
-
----
-
-# Suggested Questions
-
-1. Question 1
-2. Question 2
-3. Question 3
-"""
 
     if topic_type in ["physics"]:
         specific_structure = """
 ---
 
-# Characteristics
+# Formulas & Characteristics
 
-## Important Properties
+## Core Formulas
 
----
-
-# Mathematical Formulas
-
-## Main Formula
-
-## Formula Explanation
-
-## Derivation
+## Key Properties
 
 ---
 
-# Detailed Example
+# Practice Example
 
 ## Solved Numerical
 """
@@ -98,17 +78,15 @@ def get_dynamic_sections(topic_type: str) -> str:
         specific_structure = """
 ---
 
-# Mathematical Equations
+# Formulas & Proofs
 
-## Core Equation
-
-## Proof / Derivation
+## Core Equation & Derivation
 
 ---
 
-# Detailed Example
+# Practice Example
 
-## Step-by-Step Calculation
+## Solved Calculation
 """
         return base_structure + specific_structure + applications_structure + summary_structure
 
@@ -116,17 +94,11 @@ def get_dynamic_sections(topic_type: str) -> str:
         specific_structure = """
 ---
 
-# Chemical Properties
+# Reactions & Characteristics
 
-## Characteristics
+## Key Reaction & Formula
 
----
-
-# Chemical Reactions and Formulas
-
-## Main Reaction / Formula
-
-## Explanation
+## Properties & Hazards
 """
         return base_structure + specific_structure + advantages_structure + applications_structure + summary_structure
 
@@ -134,17 +106,9 @@ def get_dynamic_sections(topic_type: str) -> str:
         specific_structure = """
 ---
 
-# Characteristics and Processes
+# Structure & Process
 
-## Important Properties
-
-## Biological Mechanisms
-
----
-
-# Structure and Diagram Description
-
-## Components
+## Key Mechanisms & Components
 """
         return base_structure + specific_structure + advantages_structure + applications_structure + summary_structure
 
@@ -152,23 +116,11 @@ def get_dynamic_sections(topic_type: str) -> str:
         specific_structure = """
 ---
 
-# Historical Context / Background
+# Context & Significance
 
-## Timeline of Events
+## Timeline & Key Figures
 
----
-
-# Key Figures and Movements
-
-## Significant Contributions
-
----
-
-# Impact and Significance
-
-## Short-term Impact
-
-## Long-term Consequences
+## Impact & Consequences
 """
         return base_structure + specific_structure + summary_structure
 
@@ -177,10 +129,8 @@ def get_dynamic_sections(topic_type: str) -> str:
         specific_structure = """
 ---
 
-# Characteristics
+# Key Characteristics
 
-## Important Properties
-
-## Types
+## Properties & Types
 """
         return base_structure + specific_structure + advantages_structure + applications_structure + summary_structure
