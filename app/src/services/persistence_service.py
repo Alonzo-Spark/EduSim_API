@@ -174,7 +174,9 @@ def upsert_user_profile(db: Session, *, user: User, payload: dict[str, Any]) -> 
     repo._set_setting(user.id, "user_profile", profile)
     if payload.get("avatar"):
         user.avatar = payload.get("avatar")
-        db.add(user)
+    if payload.get("display_name"):
+        user.name = payload.get("display_name")
+    db.add(user)
     return profile
 
 
