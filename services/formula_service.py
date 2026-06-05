@@ -11,7 +11,6 @@ from app.src.models.formula_models import FormulaLabResponse, FormulaVariable, F
 FORMULA_GROUP_CACHE = {}
 
 
-# A basic registry for generic mapping
 FORMULA_REGISTRY = {
     "F=ma": {
         "title": "Newton's Second Law",
