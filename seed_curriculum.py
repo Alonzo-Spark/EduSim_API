@@ -29,6 +29,16 @@ def run():
             print("Output was:", result.stdout)
             return
 
+    from pathlib import Path
+    try:
+        curriculum_json_path = Path(__file__).resolve().parent / "app" / "src" / "data" / "curriculum.json"
+        print(f"Syncing curriculum to JSON: {curriculum_json_path}")
+        with open(curriculum_json_path, "w", encoding="utf-8") as f:
+            json.dump({"classes": classes_data}, f, indent=2, ensure_ascii=False)
+        print("Curriculum JSON file synced successfully!")
+    except Exception as ex:
+        print("Failed to sync curriculum JSON file:", ex)
+
     db = SessionLocal()
     try:
         class_order = 1
