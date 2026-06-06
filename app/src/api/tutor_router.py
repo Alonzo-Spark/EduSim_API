@@ -105,11 +105,31 @@ async def analyze_query(
             "mastered_topics": profile_obj.mastered_topics,
             "misconceptions": profile_obj.misconceptions
         }
+    else:
+        print("[WARN] No user resolved from auth header — chat will NOT be saved to DB!")
+        print(f"  Authorization header present: {bool(authorization)}")
+        if authorization and authorization.startswith("Bearer "):
+            token_preview = authorization.split(" ", 1)[1][:20] + "..."
+            print(f"  Token preview: {token_preview}")
+            # Check specifically WHY token failed
+            from app.src.utils.auth import decode_token as _decode
+            raw_token = authorization.split(" ", 1)[1].strip()
+            try:
+                import jwt as _jwt
+                payload = _jwt.decode(raw_token, options={"verify_exp": False, "verify_signature": False})
+                exp = payload.get("exp")
+                if exp:
+                    from datetime import datetime, timezone
+                    exp_dt = datetime.fromtimestamp(exp, tz=timezone.utc)
+                    now_dt = datetime.now(timezone.utc)
+                    print(f"  Token expired at: {exp_dt} (now: {now_dt}, delta: {now_dt - exp_dt})")
+            except Exception:
+                print("  Could not decode token for diagnostics")
         
     response = await analyze_tutor_controller(request, student_profile)
     print("--- DEBUG AUTH ---")
-    print(f"Authorization Header: {authorization}")
-    print(f"Resolved User: {user.id if user else 'NONE'}")
+    print(f"Authorization Header: {'present' if authorization else 'MISSING'}")
+    print(f"Resolved User: {user.id if user else 'NONE (NOT SAVING)'}")
     print("------------------")
     data = response.get("data", {}) if isinstance(response, dict) else {}
     explanation = data.get("explanation") or data.get("ai_explanation") or ""
