@@ -84,6 +84,68 @@ def strip_latex(s: str) -> str:
         
     return s
 
+
+def is_value_substituted(formula: str) -> bool:
+    """
+    Checks if a formula has specific substituted values, units, or scientific notation
+    which indicates it is not a standard general physics/math formula.
+    """
+    formula_lower = formula.lower()
+    
+    # 1. Check for decimal numbers that are not standard (we allow 0.5, .5, 0.25, .25)
+    decimals = re.findall(r"\d+\.\d+", formula_lower)
+    for dec in decimals:
+        if dec not in ["0.5", ".5", "0.25", ".25"]:
+            return True
+            
+    # 2. Check for scientific notation or large exponents on 10, e.g., 10^ or 10**
+    if "10^" in formula_lower or "10**" in formula_lower or "10\\times" in formula_lower:
+        return True
+        
+    # 3. Check for explicit unit words or text blocks containing units
+    unit_words = [
+        "year", "years", "month", "months", "day", "days", "hour", "hours", "minute", "minutes", "second", "seconds",
+        "meter", "meters", "sec", "sec^", "kg", "kilogram", "kilograms", "gram", "grams", "volt", "volts", "ampere", "amperes",
+        "ohm", "ohms", "joule", "joules", "watt", "watts", "newton", "newtons", "kelvin", "celsius", "fahrenheit",
+        "au", "astronomical", "unit", "units", "mars", "earth", "sun", "moon", "kg/m", "m/s", "circ", "degree", "degrees"
+    ]
+    
+    text_blocks = re.findall(r"\\text\s*\{([^}]+)\}", formula)
+    for block in text_blocks:
+        block_clean = block.strip().lower()
+        if any(w in block_clean for w in unit_words) or block_clean.isdigit():
+            return True
+            
+    # Check raw formula for standalone unit words
+    words = re.findall(r"\b[a-zA-Z]+\b", formula_lower)
+    for w in words:
+        if w in unit_words:
+            return True
+            
+    # 4. Strip out standard/allowed formula digits/numbers to see if any non-standard numbers remain
+    # Remove exponents: e.g. ^2, ^3, ^4, ^-1, ^{2}, ^{-2}, etc.
+    s = re.sub(r"\^\{?[-+]?\d+\}?", "", formula)
+    s = re.sub(r"\*\*\{?[-+]?\d+\}?", "", s)
+    
+    # Remove subscripts: e.g. _1, _2, _0, _{1}, _{2}, _{0}, _{t}
+    s = re.sub(r"_\{?\d+\}?", "", s)
+    
+    # Remove standard fractions: e.g. 1/2, 1/3, 1/4, 2/3, 4/3, 3/4, 1/8
+    s = re.sub(r"\\frac\s*\{\s*1\s*\}\s*\{\s*[2348]\s*\}", "", s)
+    s = re.sub(r"\\frac\s*\{\s*[234]\s*\}\s*\{\s*[34]\s*\}", "", s)
+    s = re.sub(r"\b[1234]\s*/\s*[2348]\b", "", s)
+    
+    # Remove simple coefficient/scaling numbers: 0, 1, 2, 3, 4, 8
+    s = re.sub(r"\b[012348]\b", "", s)
+    
+    # Check if there are any remaining digits (e.g. 90, 180, 360, 50, etc.)
+    remaining_digits = re.findall(r"\d+", s)
+    if remaining_digits:
+        return True
+            
+    return False
+
+
 class FormulaService:
     @staticmethod
     def _canonicalize_formula(formula_str: str):
@@ -280,7 +342,7 @@ class FormulaService:
                 "derived_expressions": derived_expressions
             }
             
-            if eq_type == "Formula":
+            if eq_type == "Formula" and not is_value_substituted(primary):
                 stats["valid_formulas"] += 1
                 # Cache the mappings so get_formula_details knows about derived forms
                 FORMULA_GROUP_CACHE[primary] = {
@@ -290,13 +352,8 @@ class FormulaService:
                 }
                 formulas.append(item)
             else:
-                calculation_steps.append(item)
-                if eq_type == "Substitution Step":
-                    stats["substitution_steps"] += 1
-                elif eq_type == "Final Answer":
-                    stats["final_answers"] += 1
-                elif eq_type == "Worked Example":
-                    stats["worked_examples"] += 1
+                # Completely discard/remove substituted formulas to save tokens and clean up views
+                pass
                     
         print(f"[FormulaService] Extraction Complete. Stats: {json.dumps(stats)}")
             
@@ -353,22 +410,30 @@ class FormulaService:
 Return a JSON object with:
 - title: string (e.g. "Newton's Second Law")
 - description: string
-- purpose: string (What is the primary use of this formula?)
-- applications: array of strings (Real world applications)
-- common_mistakes: array of strings (Common student mistakes when using this formula)
 - variables: array of objects with symbol, label, unit (if applicable), meaning, min (number), max (number), step (number), and defaultValue (number). Provide reasonable bounds for typical educational usage.
 - resultSymbol: string (the symbol being calculated)
 Do NOT include markdown block markers, output raw JSON.'''
         
         try:
-            llm_text = await generate_llm_text_async(prompt, temperature=0.2, max_output_tokens=1000)
+            llm_text = await generate_llm_text_async(
+                prompt,
+                temperature=0.2,
+                max_output_tokens=1000,
+                system_prompt="You are a helpful physics and math assistant that outputs JSON only.",
+                response_format={"type": "json_object"}
+            )
             if llm_text:
                 # clean up markdown backticks if any (json, python, or plain)
                 llm_text = llm_text.strip()
                 llm_text = re.sub(r"^```(?:json|text|markdown)?|```$", "", llm_text, flags=re.MULTILINE).strip()
-                # Repair single backslashes in LaTeX commands that violate JSON escaping rules
-                llm_text = re.sub(r'\\(?!n|"|u[0-9a-fA-F]{4})', r'\\\\', llm_text)
-                data = json.loads(llm_text)
+                
+                try:
+                    data = json.loads(llm_text)
+                except json.JSONDecodeError:
+                    # Repair single backslashes in LaTeX commands that violate JSON escaping rules only if direct parsing fails
+                    repaired_text = re.sub(r'\\(?!n|"|u[0-9a-fA-F]{4})', r'\\\\', llm_text)
+                    data = json.loads(repaired_text)
+                    
                 controls = []
                 anatomy = []
                 for v in data.get("variables", []):

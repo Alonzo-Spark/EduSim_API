@@ -418,6 +418,7 @@ def _generate_openrouter_text(
     max_tokens: int,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
     history: list[dict[str, str]] | None = None,
+    response_format: dict | None = None,
 ):
     if not OPENROUTER_API_KEY:
         _log_model_failure(model_name, "missing API key")
@@ -431,19 +432,29 @@ def _generate_openrouter_text(
                     "content": _format_prompt(prompt, system_prompt),
                 }
             ]
+            payload = {
+                "model": model_name,
+                "messages": messages,
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+            }
+            if response_format:
+                payload["response_format"] = response_format
+
             response = client.post(
                 OPENROUTER_URL,
                 headers=_openrouter_headers(),
-                json={
-                    "model": model_name,
-                    "messages": messages,
-                    "temperature": temperature,
-                    "max_tokens": max_tokens,
-                },
+                json=payload,
             )
 
             response.raise_for_status()
             data = response.json()
+            usage = data.get("usage")
+            if usage:
+                p_tokens = usage.get("prompt_tokens", 0)
+                c_tokens = usage.get("completion_tokens", 0)
+                t_tokens = usage.get("total_tokens", 0)
+                print(f"[OpenRouter Token Usage] Model: {model_name} | Prompt: {p_tokens} | Completion: {c_tokens} | Total: {t_tokens}")
             return _extract_openrouter_content(data)
 
     except Exception as e:
@@ -458,6 +469,7 @@ async def _generate_openrouter_text_async(
     max_tokens: int,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
     history: list[dict[str, str]] | None = None,
+    response_format: dict | None = None,
 ):
     if not OPENROUTER_API_KEY:
         _log_model_failure(model_name, "missing API key")
@@ -471,19 +483,29 @@ async def _generate_openrouter_text_async(
                     "content": _format_prompt(prompt, system_prompt),
                 }
             ]
+            payload = {
+                "model": model_name,
+                "messages": messages,
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+            }
+            if response_format:
+                payload["response_format"] = response_format
+
             response = await client.post(
                 OPENROUTER_URL,
                 headers=_openrouter_headers(),
-                json={
-                    "model": model_name,
-                    "messages": messages,
-                    "temperature": temperature,
-                    "max_tokens": max_tokens,
-                },
+                json=payload,
             )
 
             response.raise_for_status()
             data = response.json()
+            usage = data.get("usage")
+            if usage:
+                p_tokens = usage.get("prompt_tokens", 0)
+                c_tokens = usage.get("completion_tokens", 0)
+                t_tokens = usage.get("total_tokens", 0)
+                print(f"[OpenRouter Token Usage] Model: {model_name} | Prompt: {p_tokens} | Completion: {c_tokens} | Total: {t_tokens}")
             return _extract_openrouter_content(data)
 
     except Exception as e:
@@ -494,9 +516,10 @@ async def _generate_openrouter_text_async(
 def generate_llm_text(
     final_prompt: str,
     temperature: float = 0.3,
-    max_output_tokens: int = 2500,
+    max_output_tokens: int = 3000,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
     history: list[dict[str, str]] | None = None,
+    response_format: dict | None = None,
 ):
     final_prompt = final_prompt.strip()
     return generate_openrouter_text(
@@ -505,6 +528,7 @@ def generate_llm_text(
         max_output_tokens=max_output_tokens,
         system_prompt=system_prompt,
         history=history,
+        response_format=response_format,
     )
 
 
@@ -597,6 +621,7 @@ def generate_openrouter_text(
     max_output_tokens: int = 4096,
     system_prompt: str | None = None,
     history: list[dict[str, str]] | None = None,
+    response_format: dict | None = None,
 ):
     history = clean_history_for_llm(history)
     models = get_model_chain()
@@ -614,6 +639,7 @@ def generate_openrouter_text(
                 current_max,
                 system_prompt=system_prompt,
                 history=history,
+                response_format=response_format,
             )
             if result:
                 if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt, history=history):
@@ -638,6 +664,7 @@ async def generate_llm_text_async(
     max_output_tokens: int = 2500,
     system_prompt: str | None = NEW_RENDERING_SYSTEM,
     history: list[dict[str, str]] | None = None,
+    response_format: dict | None = None,
 ):
     final_prompt = final_prompt.strip()
     return await generate_openrouter_text_async(
@@ -646,6 +673,7 @@ async def generate_llm_text_async(
         max_output_tokens=max_output_tokens,
         system_prompt=system_prompt,
         history=history,
+        response_format=response_format,
     )
 
 
@@ -655,6 +683,7 @@ async def generate_openrouter_text_async(
     max_output_tokens: int = 2500,
     system_prompt: str | None = None,
     history: list[dict[str, str]] | None = None,
+    response_format: dict | None = None,
 ):
     history = clean_history_for_llm(history)
     models = get_model_chain()
@@ -672,6 +701,7 @@ async def generate_openrouter_text_async(
                 current_max,
                 system_prompt=system_prompt,
                 history=history,
+                response_format=response_format,
             )
             if result:
                 if _is_response_complete(result, prompt=prompt, system_prompt=system_prompt, history=history):
@@ -695,6 +725,7 @@ async def generate_llm_stream_async(
     temperature: float = 0.3,
     max_output_tokens: int = 1800,
     history: list[dict[str, str]] | None = None,
+    system_prompt: str | None = NEW_RENDERING_SYSTEM,
 ):
     final_prompt = final_prompt.strip()
     if not OPENROUTER_API_KEY:
@@ -710,7 +741,7 @@ async def generate_llm_stream_async(
                 messages = (history or []) + [
                     {
                         "role": "user",
-                        "content": _format_prompt(final_prompt, NEW_RENDERING_SYSTEM),
+                        "content": _format_prompt(final_prompt, system_prompt),
                     }
                 ]
                 async with client.stream(
@@ -723,6 +754,7 @@ async def generate_llm_stream_async(
                         "temperature": temperature,
                         "max_tokens": max_output_tokens,
                         "stream": True,
+                        "stream_options": {"include_usage": True},
                     },
                 ) as response:
                     response.raise_for_status()
@@ -736,6 +768,12 @@ async def generate_llm_stream_async(
 
                             try:
                                 data = json.loads(data_str)
+                                if "usage" in data and data["usage"]:
+                                    usage = data["usage"]
+                                    p_tokens = usage.get("prompt_tokens", 0)
+                                    c_tokens = usage.get("completion_tokens", 0)
+                                    t_tokens = usage.get("total_tokens", 0)
+                                    print(f"[OpenRouter Token Usage] Stream ended. Model: {model_name} | Prompt: {p_tokens} | Completion: {c_tokens} | Total: {t_tokens}")
                                 if "choices" in data and len(data["choices"]) > 0:
                                     delta = data["choices"][0].get("delta", {}).get("content", "")
                                     if delta:

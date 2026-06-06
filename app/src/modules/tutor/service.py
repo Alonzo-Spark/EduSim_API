@@ -6,7 +6,7 @@ import unicodedata
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 from app.src.modules.legacy_rag.retriever import get_retriever
-from app.src.modules.legacy_rag.generator import generate_llm_text
+from app.src.modules.legacy_rag.generator import generate_llm_text, is_topic_change
 import pickle
 import faiss
 from sentence_transformers import SentenceTransformer
@@ -76,6 +76,11 @@ async def analyze_and_update_profile_task(db_session_factory, user_id, query: st
     try:
         profile = StudentRepository.get_or_create_profile(db, user_id)
         
+        # Trim response_text to save prompt tokens
+        truncated_response = response_text
+        if len(response_text) > 800:
+            truncated_response = response_text[:800] + "..."
+            
         prompt = f"""
         Analyze the latest student query and tutor explanation.
         Determine if we should update the student's profile status:
@@ -92,7 +97,7 @@ async def analyze_and_update_profile_task(db_session_factory, user_id, query: st
         
         Latest Interaction:
         Student: {query}
-        Tutor: {response_text}
+        Tutor: {truncated_response}
         
         Return ONLY a JSON block with:
         {{
@@ -106,8 +111,9 @@ async def analyze_and_update_profile_task(db_session_factory, user_id, query: st
         res = await generate_llm_text_async(
             prompt,
             temperature=0.1,
-            max_output_tokens=150,
-            system_prompt="You are a student profile analysis assistant. Output JSON only."
+            max_output_tokens=300,
+            system_prompt="You are a student profile analysis assistant. Output JSON only.",
+            response_format={"type": "json_object"}
         )
         
         if res and "Error" not in res:
@@ -165,6 +171,43 @@ def _empty_tutor_payload(message: str):
         "ragContent": [],
         "simulation_guide": {"is_buildable": False},
     }
+
+
+async def check_query_subject_relevance(query: str) -> str:
+    """
+    Classifies a query using the LLM.
+    Returns: "academic", "conversational", or "out_of_context"
+    """
+    from app.src.modules.legacy_rag.generator import generate_llm_text_async
+    
+    system_prompt = (
+        "You are an academic query classifier. Analyze the user's query and classify it into one of these categories:\n"
+        "- \"academic\": Query is related to Science and Mathematics (specifically Physics, Chemistry, Biology, and Mathematics/Arithmetic). Examples: gravity, photosynthesis, algebra, chemical reactions, cell structure, derivatives, etc.\n"
+        "- \"conversational\": Query is a simple greeting, conversational greeting, appreciation, or question about your identity/capabilities (e.g., \"hello\", \"hi\", \"thank you\", \"who are you\").\n"
+        "- \"out_of_context\": Query is about any topic other than Science and Mathematics. This includes pop culture, history, civics, general knowledge, movies, sports, entertainment, gossip, cooking, lifestyle, personal opinions, or general trivia (e.g., \"pokemon\", \"who is president of us\", \"french revolution\", \"messi\", \"how to bake a cake\").\n\n"
+        "Return ONLY one of the following words followed by a period: \"academic.\", \"conversational.\", or \"out_of_context.\"."
+    )
+    
+    try:
+        response = await generate_llm_text_async(
+            final_prompt=f"Query: {query}",
+            temperature=0.0,
+            max_output_tokens=10,
+            system_prompt=system_prompt
+        )
+        if response:
+            cleaned = response.strip().lower()
+            if "academic" in cleaned:
+                return "academic"
+            if "conversational" in cleaned:
+                return "conversational"
+            if "out_of_context" in cleaned:
+                return "out_of_context"
+    except Exception as e:
+        print(f"[Relevance Check Error] {e}")
+        
+    return "academic"  # Fallback to academic if something fails, to avoid false refusals
+
 
 def get_rag_components(subject: str = None):
     retriever = vector_store.get_retriever(subject)
@@ -239,7 +282,13 @@ async def analyze_with_llm_async(query: str, context: str, history: list[dict[st
 async def generate_explanation_async(query: str, context: str, fallback_mode: bool = False, history: list[dict[str, str]] | None = None) -> str:
     from app.src.modules.legacy_rag.generator import generate_llm_text_async, get_tutor_prompt, NEW_RENDERING_SYSTEM
     prompt = get_tutor_prompt(context, query, fallback_mode, history=history)
-    res = await generate_llm_text_async(prompt, temperature=0.3, system_prompt=NEW_RENDERING_SYSTEM, history=history)
+    
+    is_follow_up = history and any(msg["role"] == "user" for msg in history)
+    sys_prompt = NEW_RENDERING_SYSTEM
+    if is_follow_up:
+        sys_prompt = "You are a helpful science and math tutor answering a student's follow-up question in a chat bubble. Keep your explanation clear, pedagogically sound, and friendly. Support markdown formatting and LaTeX equations using standard formatting."
+        
+    res = await generate_llm_text_async(prompt, temperature=0.3, system_prompt=sys_prompt, history=history)
     
     if not res:
         return "Failed to generate explanation."
@@ -310,6 +359,12 @@ async def analyze_concepts_with_llm_async(query: str, context: str) -> Dict[str,
         }
 
 
+def needs_simulation_generation(query: str) -> bool:
+    q = query.lower()
+    keywords = ["simulation", "sandbox", "create", "build", "run", "model", "setup", "physics scene", "canvas", "spawn", "joint", "rope", "spring", "mass", "simulate", "playground"]
+    return any(kw in q for kw in keywords)
+
+
 async def analyze_tutor_query(
     query: str,
     history: list[dict[str, str]] | None = None,
@@ -350,6 +405,32 @@ async def analyze_tutor_query(
             "ragContent": [],
             "simulation_guide": {"is_buildable": False},
         }
+
+    # Subject relevance guard rail check
+    is_follow_up = history and any(msg["role"] == "user" for msg in history)
+    is_change = is_topic_change(query, history) if is_follow_up else True
+    
+    if is_change:
+        relevance = await check_query_subject_relevance(query)
+        if relevance == "out_of_context":
+            refusal_msg = (
+                "I am your AI Tutor, designed to help you with school subjects like Physics, Chemistry, Biology, and Mathematics. "
+                "I cannot assist with out-of-context queries. Please feel free to ask any academic questions!"
+            )
+            return {
+                "title": "Out of Context",
+                "description": query,
+                "formula": "",
+                "related_concepts": [],
+                "related_formulas": [],
+                "ai_explanation": refusal_msg,
+                "sources": [],
+                "queryType": "concept",
+                "concepts": [],
+                "formulas": [],
+                "explanation": refusal_msg,
+                "ragContent": [],
+            }
 
     # Dynamic History Summarization
     history_summary = ""
@@ -413,7 +494,7 @@ async def analyze_tutor_query(
             
     # 1. Subject Routing & RAG Retrieval
     target_subject = subject if subject else detect_subject(search_query)
-    retriever = get_rag_components(target_subject)
+    retriever = get_rag_components(target_subject) if not is_follow_up else None
     
     rag_content = []
     context = ""
@@ -427,7 +508,7 @@ async def analyze_tutor_query(
     fallback_mode = not bool(valid_docs)
     
     if not fallback_mode:
-        for doc in valid_docs[:5]: # Optimized to 5
+        for doc in valid_docs[:3]: # Optimized to 3
             source = os.path.basename(doc.get("source", "Textbook"))
             content = re.sub(r'\s+', ' ', doc.get("text", "")).strip()
             rag_content.append({"title": source, "content": content})
@@ -449,10 +530,23 @@ async def analyze_tutor_query(
     # 2. Async Parallel Execution
     llm_start = time.perf_counter()
     
-    structured_task = asyncio.create_task(analyze_with_llm_async(query, full_context, history=history))
-    explanation_task = asyncio.create_task(generate_explanation_async(query, full_context, fallback_mode, history=history))
+    is_follow_up = history and any(msg["role"] == "user" for msg in history)
+    run_simulation_gen = not is_follow_up or needs_simulation_generation(query)
     
-    structured, rag_explanation = await asyncio.gather(structured_task, explanation_task)
+    if run_simulation_gen:
+        structured_task = asyncio.create_task(analyze_with_llm_async(query, full_context, history=history))
+        explanation_task = asyncio.create_task(generate_explanation_async(query, full_context, fallback_mode, history=history))
+        structured, rag_explanation = await asyncio.gather(structured_task, explanation_task)
+    else:
+        # Skip simulation analyzer to save massive tokens
+        structured = {
+            "title": "AI Tutor Response",
+            "queryType": "concept",
+            "concepts": [],
+            "formulas": [],
+            "simulation_guide": {"is_buildable": False}
+        }
+        rag_explanation = await generate_explanation_async(query, full_context, fallback_mode, history=history)
     
     llm_time = time.perf_counter() - llm_start
     print(f"[LLM] {llm_time:.2f}s")
@@ -581,6 +675,38 @@ async def analyze_tutor_query_stream(
         yield "data: [DONE]\n\n"
         return
 
+    # Subject relevance guard rail check
+    is_follow_up = history and any(msg["role"] == "user" for msg in history)
+    is_change = is_topic_change(query, history) if is_follow_up else True
+    
+    if is_change:
+        relevance = await check_query_subject_relevance(query)
+        if relevance == "out_of_context":
+            refusal_msg = (
+                "I am your AI Tutor, designed to help you with school subjects like Physics, Chemistry, Biology, and Mathematics. "
+                "I cannot assist with out-of-context queries. Please feel free to ask any academic questions!"
+            )
+            yield f"data: {json.dumps({'ragContent': []})}\n\n"
+            yield f"data: {json.dumps({'content': refusal_msg})}\n\n"
+            structured_payload = {
+                "title": "Out of Context",
+                "description": query,
+                "formula": "",
+                "related_concepts": [],
+                "related_formulas": [],
+                "ai_explanation": refusal_msg,
+                "sources": [],
+                "queryType": "concept",
+                "concepts": [],
+                "formulas": [],
+                "explanation": refusal_msg,
+                "ragContent": [],
+                "simulation_guide": {"is_buildable": False},
+            }
+            yield f"data: {json.dumps({'structured': structured_payload})}\n\n"
+            yield "data: [DONE]\n\n"
+            return
+
     # Dynamic History Summarization
     history_summary = ""
     if history and len(history) > 16:
@@ -625,7 +751,7 @@ async def analyze_tutor_query_stream(
                 search_query = f"{hints_str} {query}"
             
     target_subject = subject if subject else detect_subject(search_query)
-    retriever = get_rag_components(target_subject)
+    retriever = get_rag_components(target_subject) if not is_follow_up else None
     
     rag_content = []
     context = ""
@@ -638,7 +764,7 @@ async def analyze_tutor_query_stream(
     fallback_mode = not bool(valid_docs)
     
     if not fallback_mode:
-        for doc in valid_docs[:5]: # Optimized to 5
+        for doc in valid_docs[:3]: # Optimized to 3
             source = os.path.basename(doc.get("source", "Textbook"))
             content = re.sub(r'\s+', ' ', doc.get("text", "")).strip()
             rag_content.append({"title": source, "content": content})
@@ -664,15 +790,24 @@ async def analyze_tutor_query_stream(
     if profile_context:
         full_context = f"{profile_context}{full_context}"
 
-    # Start structured task
-    structured_task = asyncio.create_task(analyze_with_llm_async(query, full_context, history=history))
+    is_follow_up = history and any(msg["role"] == "user" for msg in history)
+    run_simulation_gen = not is_follow_up or needs_simulation_generation(query)
+
+    # Start structured task if needed
+    structured_task = None
+    if run_simulation_gen:
+        structured_task = asyncio.create_task(analyze_with_llm_async(query, full_context, history=history))
     
     # Stream explanation text
-    from app.src.modules.legacy_rag.generator import generate_llm_stream_async, get_tutor_prompt
+    from app.src.modules.legacy_rag.generator import generate_llm_stream_async, get_tutor_prompt, NEW_RENDERING_SYSTEM
     prompt = get_tutor_prompt(full_context, query, fallback_mode)
     
+    sys_prompt = NEW_RENDERING_SYSTEM
+    if is_follow_up:
+        sys_prompt = "You are a helpful science and math tutor answering a student's follow-up question in a chat bubble. Keep your explanation clear, pedagogically sound, and friendly. Support markdown formatting and LaTeX equations using standard formatting."
+    
     accumulated_text = ""
-    async for chunk in generate_llm_stream_async(prompt, history=history):
+    async for chunk in generate_llm_stream_async(prompt, history=history, system_prompt=sys_prompt):
         if chunk.startswith("data: "):
             data_str = chunk[6:]
             try:
@@ -685,7 +820,16 @@ async def analyze_tutor_query_stream(
         yield chunk
         
     # Wait for structured data to finish
-    structured = await structured_task
+    if structured_task:
+        structured = await structured_task
+    else:
+        structured = {
+            "title": "AI Tutor Response",
+            "queryType": "concept",
+            "concepts": [],
+            "formulas": [],
+            "simulation_guide": {"is_buildable": False}
+        }
     yield f"data: {json.dumps({'structured': structured})}\n\n"
     
     # Trigger background profile update task if parameters are supplied

@@ -170,6 +170,7 @@ async def parse_scene(user_input: str) -> Dict[str, Any]:
             temperature=0.1,      # deterministic
             max_output_tokens=800,
             system_prompt=None,   # no extra system prompt — JSON only
+            response_format={"type": "json_object"}
         )
 
         if not raw or "Error:" in raw:
