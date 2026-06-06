@@ -85,6 +85,7 @@ class UserResponse(BaseModel):
     mobile_number: Optional[str] = None
     is_email_verified: bool
     is_mobile_verified: bool
+    created_at: Optional[datetime] = None
 
     class Config:
         from_attributes = True
