@@ -58,6 +58,8 @@ async def analyze_query_stream(
     
     user = resolve_user_from_authorization(authorization, db)
     student_profile = None
+    session_id = None
+    
     if user:
         from app.src.repositories.student_repository import StudentRepository
         profile_obj = StudentRepository.get_or_create_profile(db, user.id)
@@ -66,6 +68,14 @@ async def analyze_query_stream(
             "mastered_topics": profile_obj.mastered_topics,
             "misconceptions": profile_obj.misconceptions
         }
+        
+        if request.session_id:
+            try:
+                session_id = uuid.UUID(request.session_id)
+            except Exception:
+                pass
+        if not session_id:
+            session_id = uuid.uuid4()
         
     history_dicts = None
     if request.history:
@@ -79,6 +89,8 @@ async def analyze_query_stream(
             topic=request.topic,
             student_profile=student_profile,
             user_id=user.id if user else None,
+            session_id=session_id,
+            class_name=request.class_name,
             db_session_factory=SessionLocal
         ),
         media_type="text/event-stream"
