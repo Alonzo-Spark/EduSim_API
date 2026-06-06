@@ -531,95 +531,6 @@ async def explain_simulation_query(query: str, history: list[dict[str, str]] | N
     }
 
 
-async def save_stream_chat_history_task(
-    db_session_factory,
-    user_id,
-    session_id,
-    query: str,
-    explanation: str,
-    concepts: list[str],
-    class_name: str | None,
-    subject: str | None,
-    chapter: str | None,
-    topic: str | None,
-):
-    import uuid
-    from app.src.models.persistence import ChatHistory
-    from app.src.services.persistence_service import record_activity
-    from app.src.models.user import User
-
-    db = db_session_factory()
-    try:
-        if isinstance(user_id, str):
-            user_id = uuid.UUID(user_id)
-        if isinstance(session_id, str):
-            session_id = uuid.UUID(session_id)
-        elif not session_id:
-            session_id = uuid.uuid4()
-
-        # Generate a truncated summary in python (0 tokens consumed!)
-        summary = explanation[:200].strip() + "..."
-
-        concept_topic = concepts[0] if concepts else query
-        if len(concept_topic) > 100:
-            concept_topic = concept_topic[:97] + "..."
-
-        user_record = ChatHistory(
-            user_id=user_id,
-            session_id=session_id,
-            session_type="tutor",
-            role="user",
-            topic=concept_topic,
-            content=query,
-            summary=summary,
-            metadata_json={
-                "class_name": class_name,
-                "subject": subject,
-                "chapter": chapter,
-                "topic": topic
-            }
-        )
-
-        assistant_record = ChatHistory(
-            user_id=user_id,
-            session_id=session_id,
-            session_type="tutor",
-            role="assistant",
-            topic=concept_topic,
-            content=explanation,
-            summary=None,
-            metadata_json={
-                "class_name": class_name,
-                "subject": subject,
-                "chapter": chapter,
-                "topic": topic
-            }
-        )
-
-        db.add(user_record)
-        db.add(assistant_record)
-
-        user_obj = db.query(User).filter(User.id == user_id).first()
-        if user_obj:
-            record_activity(
-                db,
-                user=user_obj,
-                domain="tutor",
-                action="analyze",
-                entity_type="query",
-                entity_id=query[:120],
-                source="/api/tutor/analyze-stream",
-                metadata={"topic": concept_topic},
-            )
-
-        db.commit()
-    except Exception as e:
-        db.rollback()
-        print(f"[Streaming Database Save Error]: {e}")
-    finally:
-        db.close()
-
-
 async def analyze_tutor_query_stream(
     query: str,
     history: list[dict[str, str]] | None = None,
@@ -628,8 +539,6 @@ async def analyze_tutor_query_stream(
     topic: str | None = None,
     student_profile: dict | None = None,
     user_id: Any | None = None,
-    session_id: Any | None = None,
-    class_name: str | None = None,
     db_session_factory: Any | None = None
 ):
     """
@@ -668,8 +577,6 @@ async def analyze_tutor_query_stream(
             "explanation": clarification_msg,
             "ragContent": [],
         }
-        if session_id:
-            structured_payload["session_id"] = str(session_id)
         yield f"data: {json.dumps({'structured': structured_payload})}\n\n"
         yield "data: [DONE]\n\n"
         return
@@ -779,25 +686,16 @@ async def analyze_tutor_query_stream(
         
     # Wait for structured data to finish
     structured = await structured_task
-    if session_id:
-        structured["session_id"] = str(session_id)
     yield f"data: {json.dumps({'structured': structured})}\n\n"
     
-    # Trigger background tasks
+    # Trigger background profile update task if parameters are supplied
     if user_id and db_session_factory and accumulated_text:
-        concepts = structured.get("concepts", []) if structured else []
         asyncio.create_task(
-            save_stream_chat_history_task(
+            analyze_and_update_profile_task(
                 db_session_factory,
                 user_id,
-                session_id,
                 query,
-                accumulated_text,
-                concepts,
-                class_name,
-                subject,
-                chapter,
-                topic
+                accumulated_text
             )
         )
 
