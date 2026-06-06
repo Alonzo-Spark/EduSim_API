@@ -390,9 +390,10 @@ def forgot_password(request: ForgotPasswordRequest, db: Session = Depends(get_db
     email = normalize_email(request.email)
     user = db.query(User).filter(func.lower(User.email) == email).first()
     if not user:
-        # Prevent user enumeration security leak by returning success anyway
-        return {"success": True, "message": "Password reset instructions sent."}
-        
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="No account found with this email"
+        )
     reset_token = str(uuid.uuid4())
     user.verification_token = reset_token
     db.commit()
