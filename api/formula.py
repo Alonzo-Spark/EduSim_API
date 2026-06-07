@@ -12,13 +12,14 @@ router = APIRouter()
 
 class ExtractRequest(BaseModel):
     text: str
+    query: Optional[str] = None
 
 class LabRequest(BaseModel):
     formula: str
 
 @router.post("/extract", response_model=None)
 async def extract_formulas(req: ExtractRequest):
-    result = await FormulaService.extract_formulas(req.text)
+    result = await FormulaService.extract_formulas(req.text, req.query)
     return result
 
 @router.post("/lab", response_model=FormulaLabResponse)

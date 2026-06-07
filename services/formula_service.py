@@ -3,12 +3,39 @@ import json
 import sympy
 import string
 import difflib
+import os
+import hashlib
 from typing import List, Dict, Any
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication
 from app.src.modules.legacy_rag.generator import generate_llm_text_async
 from app.src.models.formula_models import FormulaLabResponse, FormulaVariable, FormulaControl, FormulaExample
 
 FORMULA_GROUP_CACHE = {}
+
+CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+CACHE_FILE = os.path.join(CACHE_DIR, "formula_extraction_cache.json")
+
+def load_persistent_cache() -> Dict[str, Any]:
+    if os.path.exists(CACHE_FILE):
+        try:
+            with open(CACHE_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
+def save_persistent_cache(cache: Dict[str, Any]):
+    try:
+        os.makedirs(CACHE_DIR, exist_ok=True)
+        with open(CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(cache, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"[Cache] Error saving persistent cache: {e}")
+
+def get_cache_key(text: str, query: str = None) -> str:
+    key_str = f"q:{query or ''}|t:{text or ''}"
+    return hashlib.md5(key_str.encode("utf-8")).hexdigest()
+
 
 
 FORMULA_REGISTRY = {
@@ -194,36 +221,82 @@ class FormulaService:
             return None, len(words), {}
 
     @staticmethod
-    async def extract_formulas(text: str) -> Dict[str, Any]:
-        if not text:
+    async def extract_formulas(text: str, query: str = None) -> Dict[str, Any]:
+        if not text and not query:
             return {"formulas": [], "calculation_steps": []}
             
-        formulas = []
-        
-        # Regex to match $$ ... $$ or $ ... $
-        display_regex = r"\$\$(.*?)\$\$"
-        inline_regex = r"\$([^$\n]+?)\$"
-        
+        cache_key = get_cache_key(text, query)
+        cache = load_persistent_cache()
+        if cache_key in cache:
+            print(f"[FormulaService] Serving extract_formulas from persistent cache for query: {query}")
+            cached_res = cache[cache_key]
+            for f in cached_res.get("formulas", []):
+                primary = f.get("primary_formula") or f.get("formula")
+                canon = f.get("canonical_form")
+                derived = f.get("derived_forms", [])
+                if primary:
+                    FORMULA_GROUP_CACHE[primary] = {
+                        "canonical_form": canon,
+                        "primary_formula": primary,
+                        "derived_forms": derived
+                    }
+            return cached_res
+            
         candidates = set()
+        titles_map = {} # maps candidate -> title
         
-        for match in re.finditer(display_regex, text, re.DOTALL):
-            val = match.group(1).strip()
-            # Split display blocks by newlines to get individual equations (like the frontend does!)
-            for line in val.split("\n"):
-                line_cleaned = line.strip()
-                if line_cleaned:
-                    candidates.add(line_cleaned)
-                
-        for match in re.finditer(inline_regex, text):
-            val = match.group(1).strip()
-            candidates.add(val)
-                
-        if not candidates:
-            # Fallback for plain text equations
-            for line in text.split("\n"):
-                cleaned = line.strip()
-                if cleaned and (re.search(r"[=∝→⇒⇌↔≈~]", cleaned) or re.search(r"[A-Z][a-z]?\d*\s*\+", cleaned)):
-                    candidates.add(cleaned)
+        # Let's construct a prompt to LLM to extract or generate clean formulas
+        prompt = "You are a scientific formula extractor.\n"
+        if query:
+            prompt += f"Given the search topic and some retrieved textbook text chunks, extract or provide all unique, relevant standard scientific and mathematical formulas/equations.\n"
+            prompt += f"If the textbook text does not contain clean mathematical formulas for the topic, use your general knowledge to provide the standard, canonical formulas for the topic.\n\n"
+            prompt += f"Topic: {query}\n\n"
+        else:
+            prompt += f"Extract all unique scientific and mathematical formulas/equations from the following text.\n\n"
+            
+        prompt += f"Textbook text:\n{text}\n\n"
+        prompt += """Return a JSON object containing a list of extracted formulas under the key "formulas".
+Each formula object in the list must have:
+- formula: the clean formula using standard single-letter scientific variable notation (e.g. 'f = \mu * N' or 'W = F * s' or 'E = m * c^2'). Use LaTeX or standard ASCII representation.
+- title: a short name/title for the formula (e.g. 'Frictional Force', 'Work Done by a Constant Force', 'Newton's Second Law')
+
+Do not include concrete numbers substituted (unless universal constants like 1/2 or g). Do not include sentences or text descriptions as the formula.
+Return raw JSON only, no markdown formatting."""
+
+        try:
+            llm_text = await generate_llm_text_async(
+                prompt,
+                temperature=0.1,
+                max_output_tokens=1000,
+                system_prompt="You are a helpful physics and math assistant that outputs JSON only.",
+                response_format={"type": "json_object"}
+            )
+            data = json.loads(llm_text)
+            for item in data.get("formulas", []):
+                formula_str = item.get("formula", "").strip()
+                title = item.get("title", "").strip()
+                if formula_str and title:
+                    candidates.add(formula_str)
+                    titles_map[formula_str] = title
+        except Exception as e:
+            print(f"[FormulaService] Error during LLM extraction: {e}")
+            # Fallback to regex candidate extraction if LLM fails
+            display_regex = r"\$\$(.*?)\$\$"
+            inline_regex = r"\$([^$\n]+?)\$"
+            for match in re.finditer(display_regex, text, re.DOTALL):
+                val = match.group(1).strip()
+                for line in val.split("\n"):
+                    line_cleaned = line.strip()
+                    if line_cleaned:
+                        candidates.add(line_cleaned)
+            for match in re.finditer(inline_regex, text):
+                val = match.group(1).strip()
+                candidates.add(val)
+            if not candidates:
+                for line in text.split("\n"):
+                    cleaned = line.strip()
+                    if cleaned and (re.search(r"[=∝→⇒⇌↔≈~]", cleaned) or re.search(r"[A-Z][a-z]?\d*\s*\+", cleaned)):
+                        candidates.add(cleaned)
                     
         grouped = {} # maps canonical_form -> { "primary_formula": str, "derived_forms": set }
         
@@ -329,10 +402,12 @@ class FormulaService:
             # Recalculate derived expressions for the primary formula to ensure it has them
             _, _, derived_expressions = FormulaService._canonicalize_formula(primary)
             
+            title = titles_map.get(primary, "Formula")
+            
             item = {
                 "id": f"formula-{idx}",
                 "formula": primary,
-                "title": "Formula",
+                "title": title,
                 "raw": primary,
                 "canonical_form": canon,
                 "primary_formula": primary,
@@ -357,7 +432,15 @@ class FormulaService:
                     
         print(f"[FormulaService] Extraction Complete. Stats: {json.dumps(stats)}")
             
-        return {"formulas": formulas, "calculation_steps": calculation_steps}
+        result = {"formulas": formulas, "calculation_steps": calculation_steps}
+        try:
+            cache = load_persistent_cache()
+            cache[cache_key] = result
+            save_persistent_cache(cache)
+        except Exception as e:
+            print(f"[Cache] Failed to save result to cache: {e}")
+            
+        return result
 
     @staticmethod
     async def get_formula_details(formula: str) -> FormulaLabResponse:
@@ -371,6 +454,33 @@ class FormulaService:
         canon_form = cache_data.get("canonical_form", canon_form_str)
         primary_form = cache_data.get("primary_formula", formula)
         derived_forms = cache_data.get("derived_forms", [])
+        
+        # Check cache
+        cache_key_details = f"detail:{formula}"
+        cache = load_persistent_cache()
+        if cache_key_details in cache:
+            print(f"[FormulaService] Serving get_formula_details from persistent cache for formula: {formula}")
+            cached_res = cache[cache_key_details]
+            controls = [FormulaControl(**c) for c in cached_res.get("controls", [])]
+            anatomy = [FormulaVariable(**a) for a in cached_res.get("anatomy", [])]
+            examples = [FormulaExample(**e) for e in cached_res.get("examples", [])]
+            return FormulaLabResponse(
+                id=cached_res.get("id"),
+                title=cached_res.get("title"),
+                formula=primary_form,
+                canonical_form=canon_form,
+                primary_formula=primary_form,
+                derived_forms=derived_forms,
+                description=cached_res.get("description"),
+                purpose=cached_res.get("purpose", ""),
+                applications=cached_res.get("applications", []),
+                common_mistakes=cached_res.get("common_mistakes", []),
+                variables=controls,
+                controls=controls,
+                anatomy=anatomy,
+                examples=examples,
+                resultSymbol=cached_res.get("resultSymbol", "y")
+            )
         
         # Check registry
         for key, def_ in FORMULA_REGISTRY.items():
@@ -390,7 +500,7 @@ class FormulaService:
                         unit=v["unit"]
                     ))
                 
-                return FormulaLabResponse(
+                res_obj = FormulaLabResponse(
                     id=key,
                     title=def_["title"],
                     formula=primary_form,
@@ -404,6 +514,24 @@ class FormulaService:
                     examples=[FormulaExample(title="Example", content="Standard calculation.")],
                     resultSymbol=def_["resultSymbol"]
                 )
+                try:
+                    cache = load_persistent_cache()
+                    cache[cache_key_details] = {
+                        "id": res_obj.id,
+                        "title": res_obj.title,
+                        "description": res_obj.description,
+                        "purpose": res_obj.purpose or "",
+                        "applications": res_obj.applications or [],
+                        "common_mistakes": res_obj.common_mistakes or [],
+                        "controls": [dict(c) for c in res_obj.controls],
+                        "anatomy": [dict(a) for a in res_obj.anatomy],
+                        "examples": [dict(e) for e in res_obj.examples],
+                        "resultSymbol": res_obj.resultSymbol
+                    }
+                    save_persistent_cache(cache)
+                except Exception as e:
+                    print(f"[Cache] Failed to save registry details to cache: {e}")
+                return res_obj
                 
         # LLM Fallback for unknown formula
         prompt = f'''Analyze this scientific or mathematical formula: {clean_formula}
@@ -414,6 +542,7 @@ Return a JSON object with:
 - resultSymbol: string (the symbol being calculated)
 Do NOT include markdown block markers, output raw JSON.'''
         
+        res_obj = None
         try:
             llm_text = await generate_llm_text_async(
                 prompt,
@@ -451,7 +580,7 @@ Do NOT include markdown block markers, output raw JSON.'''
                         meaning=v.get("meaning", v.get("label", "")),
                         unit=v.get("unit", "")
                     ))
-                return FormulaLabResponse(
+                res_obj = FormulaLabResponse(
                     id="dynamic-formula",
                     title=data.get("title", "Unknown Formula"),
                     formula=primary_form,
@@ -471,18 +600,39 @@ Do NOT include markdown block markers, output raw JSON.'''
         except Exception as e:
             print(f"LLM formula extraction failed: {e}")
             
-        # Absolute fallback
-        return FormulaLabResponse(
-            id="fallback",
-            title="Formula",
-            formula=primary_form,
-            canonical_form=canon_form,
-            primary_formula=primary_form,
-            derived_forms=derived_forms,
-            description="A scientific or mathematical equation.",
-            variables=[],
-            controls=[],
-            anatomy=[],
-            examples=[],
-            resultSymbol="y"
-        )
+        if not res_obj:
+            # Absolute fallback
+            res_obj = FormulaLabResponse(
+                id="fallback",
+                title="Formula",
+                formula=primary_form,
+                canonical_form=canon_form,
+                primary_formula=primary_form,
+                derived_forms=derived_forms,
+                description="A scientific or mathematical equation.",
+                variables=[],
+                controls=[],
+                anatomy=[],
+                examples=[],
+                resultSymbol="y"
+            )
+            
+        try:
+            cache = load_persistent_cache()
+            cache[cache_key_details] = {
+                "id": res_obj.id,
+                "title": res_obj.title,
+                "description": res_obj.description,
+                "purpose": res_obj.purpose or "",
+                "applications": res_obj.applications or [],
+                "common_mistakes": res_obj.common_mistakes or [],
+                "controls": [dict(c) for c in res_obj.controls],
+                "anatomy": [dict(a) for a in res_obj.anatomy],
+                "examples": [dict(e) for e in res_obj.examples],
+                "resultSymbol": res_obj.resultSymbol
+            }
+            save_persistent_cache(cache)
+        except Exception as e:
+            print(f"[Cache] Failed to save details result to cache: {e}")
+            
+        return res_obj
