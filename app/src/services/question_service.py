@@ -1,7 +1,7 @@
 import json
 import re
 from typing import List, Optional
-from services.rag_service import RagService
+from app.src.services.rag_service import RagService
 from app.src.modules.legacy_rag.generator import generate_llm_text_async
 from app.src.models.question_models import QuestionGenerationResponse, QuestionModel
 

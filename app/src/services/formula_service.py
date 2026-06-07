@@ -12,7 +12,7 @@ from app.src.models.formula_models import FormulaLabResponse, FormulaVariable, F
 
 FORMULA_GROUP_CACHE = {}
 
-CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), "data")
 CACHE_FILE = os.path.join(CACHE_DIR, "formula_extraction_cache.json")
 
 def load_persistent_cache() -> Dict[str, Any]:
@@ -257,7 +257,7 @@ class FormulaService:
         prompt += f"Textbook text:\n{text}\n\n"
         prompt += """Return a JSON object containing a list of extracted formulas under the key "formulas".
 Each formula object in the list must have:
-- formula: the clean formula using standard single-letter scientific variable notation (e.g. 'f = \mu * N' or 'W = F * s' or 'E = m * c^2'). Use LaTeX or standard ASCII representation.
+- formula: the clean formula using standard single-letter scientific variable notation (e.g. 'f = \\mu * N' or 'W = F * s' or 'E = m * c^2'). Use LaTeX or standard ASCII representation.
 - title: a short name/title for the formula (e.g. 'Frictional Force', 'Work Done by a Constant Force', 'Newton's Second Law')
 
 Do not include concrete numbers substituted (unless universal constants like 1/2 or g). Do not include sentences or text descriptions as the formula.

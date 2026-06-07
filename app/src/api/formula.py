@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from sqlalchemy.orm import Session
 
-from services.formula_service import FormulaService
+from app.src.services.formula_service import FormulaService
 from app.src.models.formula_models import FormulaLabResponse
 from app.src.config.database import get_db
 from app.src.services.persistence_service import resolve_user_from_authorization, save_formula_explanation_to_chat_history

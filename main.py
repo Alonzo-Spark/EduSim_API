@@ -20,9 +20,8 @@ from app.src.api.scene_router import scene_router
 from app.src.api.auth import auth_router
 from app.src.api.curriculum_router import router as curriculum_router
 
-from api.formula import router as generic_formula_router
-from api.rag import router as generic_rag_router
-from api.questions import router as generic_questions_router
+from app.src.api.formula import router as generic_formula_router
+from app.src.api.questions import router as generic_questions_router
 from app.src.config.database import ping_database
 
 # Configure global logging
@@ -146,13 +145,9 @@ app.include_router(
     prefix="/api/tutor"
 )
 
-# New Educational Intelligence Engine RAG router
-from app.src.rag.controller import router as edusim_rag_router
-app.include_router(edusim_rag_router)
 
 # --- Generic APIs for Formula Lab and Q&A ---
 app.include_router(generic_formula_router, prefix="/api/formula")
-app.include_router(generic_rag_router, prefix="/api/rag")
 app.include_router(generic_questions_router, prefix="/api/questions")
 app.include_router(persistence_router, prefix="/api/persistence")
 app.include_router(curriculum_router, prefix="/api")
