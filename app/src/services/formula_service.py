@@ -73,41 +73,90 @@ FORMULA_REGISTRY = {
 }
 
 def strip_latex(s: str) -> str:
+    # Replace relation operators with '='
+    s = re.sub(r"\\approx|\\propto|approx|propto|≈|∝|\\le|\\ge|\\leq|\\geq|≤|≥", "=", s)
+    # Remove function dependency notation on the LHS (e.g., theta(t) = ... -> theta = ...)
+    s = re.sub(r"([a-zA-Z_]+)\([a-zA-Z_]\)\s*=", r"\1 =", s)
+
     # Handle fraction parsing
     s = re.sub(r"\\frac\s*\{([^}]+)\}\s*\{([^}]+)\}", r"(\1)/(\2)", s)
+    
+    # Translate Greek letters and math constants
     s = re.sub(r"\\sin", "sin", s)
     s = re.sub(r"\\cos", "cos", s)
     s = re.sub(r"\\tan", "tan", s)
     s = re.sub(r"\\theta", "theta", s)
+    s = re.sub(r"\\omega", "omega", s)
+    s = re.sub(r"\\pi", "pi", s)
+    s = re.sub(r"\\phi", "phi", s)
+    s = re.sub(r"\\mu", "mu", s)
+    s = re.sub(r"\\lambda", "lambd", s) # use lambd to avoid Python keyword collision
+    s = re.sub(r"\\rho", "rho", s)
+    s = re.sub(r"\\epsilon", "epsilon", s)
+    s = re.sub(r"\\eta", "eta", s)
+    s = re.sub(r"\\tau", "tau", s)
+    s = re.sub(r"\\nu", "nu", s)
+    s = re.sub(r"\\sigma", "sigma", s)
+    s = re.sub(r"\\alpha", "alpha", s)
+    s = re.sub(r"\\beta", "beta", s)
+    s = re.sub(r"\\gamma", "gamma", s)
     s = re.sub(r"\\Delta", "Delta", s)
+    
+    # Handle square root replacement
+    s = re.sub(r"\\sqrt\s*\{([^}]+)\}", r"sqrt(\1)", s)
+    
+    # Clean subscripts in curly braces first: remove curly braces and commas/spaces
+    s = re.sub(r"_\{([^}]+)\}", lambda m: "_" + m.group(1).replace(",", "").replace(" ", ""), s)
     
     # Handle superscripts
     s = s.replace("^", "**")
     
     s = re.sub(r"\\text\s*\{([^}]*)\}", r"\1", s)
     
+    # Translate multiplication dot/cross to *
+    s = re.sub(r"\\cdot|\\times", "*", s)
+    
+    # Remove remaining formatting/helpers but KEEP \sqrt if it wasn't matched above (as fallback)
     commands = [
-        r"\\cdot", r"\\times", r"\\propto", 
-        r"\\sqrt", r"\\left", r"\\right"
+        r"\\left", r"r\\ight"
     ]
     for cmd in commands:
         s = re.sub(cmd, "", s)
         
     s = s.replace("{", "").replace("}", "")
     
-    # Implicit multiplication for adjacent single letters so mathjs and sympy can separate them
-    # Hide known words first
-    words = ['sin', 'cos', 'tan', 'theta', 'Delta', 'speed', 'distance', 'time']
-    for i, w in enumerate(words):
-        s = s.replace(w, f"__{i}__")
+    # Protect subscripts: replace all _subscripts with placeholders using non-letter symbol '#'
+    subscripts = re.findall(r"_[a-zA-Z0-9]+", s)
+    sub_placeholders = {}
+    for idx, sub in enumerate(subscripts):
+        ph = f"#{idx}#"
+        sub_placeholders[ph] = sub
+        s = s.replace(sub, ph)
+        
+    # Implicit multiplication for adjacent single letters
+    # Hide known words first (including new Greek words)
+    words = [
+        'sin', 'cos', 'tan', 'theta', 'omega', 'pi', 'phi', 'mu', 'lambd', 'rho', 
+        'epsilon', 'eta', 'tau', 'nu', 'sigma', 'alpha', 'beta', 'gamma', 'Delta', 'sqrt', 'speed', 'distance', 'time'
+    ]
+    # Use #word_{idx}# as placeholder for words to avoid any letter issues
+    word_placeholders = {}
+    for idx, w in enumerate(words):
+        ph = f"#W{idx}#"
+        word_placeholders[ph] = w
+        s = s.replace(w, ph)
         
     # Insert * between adjacent letters
     while re.search(r"([a-zA-Z])([a-zA-Z])", s):
         s = re.sub(r"([a-zA-Z])([a-zA-Z])", r"\1*\2", s)
         
     # Restore words
-    for i, w in enumerate(words):
-        s = s.replace(f"__{i}__", w)
+    for ph, w in word_placeholders.items():
+        s = s.replace(ph, w)
+        
+    # Restore subscripts
+    for ph, sub in sub_placeholders.items():
+        s = s.replace(ph, sub)
         
     return s
 
@@ -178,18 +227,24 @@ class FormulaService:
     def _canonicalize_formula(formula_str: str):
         clean = strip_latex(formula_str)
         parts = clean.split("=")
-        if len(parts) != 2:
+        if len(parts) < 2:
             return None, 0, {}
 
-        lhs, rhs = parts
+        lhs = parts[0]
+        rhs = parts[-1]
 
         try:
             transformations = (standard_transformations + (implicit_multiplication,))
-            local_dict = {char: sympy.Symbol(char) for char in string.ascii_letters}
+            # Construct symbols dynamically including subscripts
+            all_symbols = set(re.findall(r"\b[a-zA-Z_][a-zA-Z0-9_]*\b", clean))
+            # Remove known function names and constants
+            for word in ['sin', 'cos', 'tan', 'sqrt', 'pi']:
+                all_symbols.discard(word)
+                
+            local_dict = {sym: sympy.Symbol(sym) for sym in all_symbols}
+            # Add pi as sympy's pi
             local_dict.update({
-                'Q': sympy.Symbol('Q'), 'I': sympy.Symbol('I'),
-                'E': sympy.Symbol('E'), 'N': sympy.Symbol('N'),
-                'O': sympy.Symbol('O'), 'S': sympy.Symbol('S')
+                'pi': sympy.pi
             })
             
             lhs_expr = parse_expr(lhs, transformations=transformations, local_dict=local_dict)
@@ -217,7 +272,7 @@ class FormulaService:
             return str(canon_expr).replace(" ", ""), symbol_count, derived_expressions
         except Exception:
             # Fallback symbol count using simple regex (unique letters/words)
-            words = set(re.findall(r"[a-zA-Z]+", formula_str))
+            words = set(re.findall(r"[a-zA-Z_][a-zA-Z0-9_]*", formula_str))
             return None, len(words), {}
 
     @staticmethod
@@ -479,7 +534,8 @@ Return raw JSON only, no markdown formatting."""
                 controls=controls,
                 anatomy=anatomy,
                 examples=examples,
-                resultSymbol=cached_res.get("resultSymbol", "y")
+                resultSymbol=cached_res.get("resultSymbol", "y"),
+                derived_expressions=cached_res.get("derived_expressions", {})
             )
         
         # Check registry
@@ -500,6 +556,7 @@ Return raw JSON only, no markdown formatting."""
                         unit=v["unit"]
                     ))
                 
+                _, _, derived_expressions = FormulaService._canonicalize_formula(formula)
                 res_obj = FormulaLabResponse(
                     id=key,
                     title=def_["title"],
@@ -512,7 +569,8 @@ Return raw JSON only, no markdown formatting."""
                     controls=controls,
                     anatomy=anatomy,
                     examples=[FormulaExample(title="Example", content="Standard calculation.")],
-                    resultSymbol=def_["resultSymbol"]
+                    resultSymbol=def_["resultSymbol"],
+                    derived_expressions=derived_expressions
                 )
                 try:
                     cache = load_persistent_cache()
@@ -526,7 +584,8 @@ Return raw JSON only, no markdown formatting."""
                         "controls": [dict(c) for c in res_obj.controls],
                         "anatomy": [dict(a) for a in res_obj.anatomy],
                         "examples": [dict(e) for e in res_obj.examples],
-                        "resultSymbol": res_obj.resultSymbol
+                        "resultSymbol": res_obj.resultSymbol,
+                        "derived_expressions": res_obj.derived_expressions
                     }
                     save_persistent_cache(cache)
                 except Exception as e:
@@ -580,6 +639,7 @@ Do NOT include markdown block markers, output raw JSON.'''
                         meaning=v.get("meaning", v.get("label", "")),
                         unit=v.get("unit", "")
                     ))
+                _, _, derived_expressions = FormulaService._canonicalize_formula(formula)
                 res_obj = FormulaLabResponse(
                     id="dynamic-formula",
                     title=data.get("title", "Unknown Formula"),
@@ -595,13 +655,15 @@ Do NOT include markdown block markers, output raw JSON.'''
                     controls=controls,
                     anatomy=anatomy,
                     examples=[FormulaExample(title="Example", content="Dynamically generated.")],
-                    resultSymbol=data.get("resultSymbol", "y")
+                    resultSymbol=data.get("resultSymbol", "y"),
+                    derived_expressions=derived_expressions
                 )
         except Exception as e:
             print(f"LLM formula extraction failed: {e}")
             
         if not res_obj:
             # Absolute fallback
+            _, _, derived_expressions = FormulaService._canonicalize_formula(formula)
             res_obj = FormulaLabResponse(
                 id="fallback",
                 title="Formula",
@@ -614,7 +676,8 @@ Do NOT include markdown block markers, output raw JSON.'''
                 controls=[],
                 anatomy=[],
                 examples=[],
-                resultSymbol="y"
+                resultSymbol="y",
+                derived_expressions=derived_expressions
             )
             
         try:
@@ -629,7 +692,8 @@ Do NOT include markdown block markers, output raw JSON.'''
                 "controls": [dict(c) for c in res_obj.controls],
                 "anatomy": [dict(a) for a in res_obj.anatomy],
                 "examples": [dict(e) for e in res_obj.examples],
-                "resultSymbol": res_obj.resultSymbol
+                "resultSymbol": res_obj.resultSymbol,
+                "derived_expressions": res_obj.derived_expressions
             }
             save_persistent_cache(cache)
         except Exception as e:
